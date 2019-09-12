@@ -11,8 +11,8 @@ import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.DirectionUnit;
 import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.Unit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.junit.Test;
 
 /**
@@ -29,10 +29,10 @@ public class FloatMatrixUtilTest
 {
     /**
      * Test the instantiation utility function of classes.
-     * @throws ValueException on instantiation error
+     * @throws ValueRuntimeException on instantiation error
      */
     @Test
-    public final void instantiateTest() throws ValueException
+    public final void instantiateTest() throws ValueRuntimeException
     {
         float[][] a12 = new float[][] {{1.0f, 2.0f}, {3.0f, 4.0f}};
         float[][] a1020 = new float[][] {{10.0f, 20.0f}, {30.0f, 40.0f}};
@@ -93,10 +93,10 @@ public class FloatMatrixUtilTest
 
     /**
      * Test the instantiation utility function of classes for anonymous units, also for the compiler.
-     * @throws ValueException on instantiation error
+     * @throws ValueRuntimeException on instantiation error
      */
     @Test
-    public final void anonymousUnitTest() throws ValueException
+    public final void anonymousUnitTest() throws ValueRuntimeException
     {
         float[][] a12 = new float[][] {{1.0f, 2.0f}, {3.0f, 4.0f}};
         float[][] a1020 = new float[][] {{10.0f, 20.0f}, {30.0f, 40.0f}};

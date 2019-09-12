@@ -5,10 +5,10 @@ import java.io.Serializable;
 import org.djunits4.unit.AbsoluteLinearUnit;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.Absolute;
-import org.djunits4.value.FunctionsAbs;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
-import org.djunits4.value.vdouble.scalar.AbstractDoubleScalarAbs;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.function.FunctionsAbsWithRel;
+import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarAbs;
 
 /**
  * Absolute Immutable typed matrix.
@@ -29,7 +29,7 @@ import org.djunits4.value.vdouble.scalar.AbstractDoubleScalarAbs;
 abstract class AbstractDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
         A extends AbstractDoubleMatrixAbs<AU, RU, A, R, MA, S>, R extends AbstractDoubleMatrixRel<RU, R, ?, ?>,
         MA extends AbstractMutableDoubleMatrixAbs<AU, RU, A, R, MA, S>, S extends AbstractDoubleScalarAbs<AU, S, RU, ?>>
-        extends AbstractDoubleMatrix<AU, A> implements FunctionsAbs<AU, RU, A, R>, Absolute, Serializable
+        extends AbstractDoubleMatrix<AU, A> implements FunctionsAbsWithRel<AU, RU, A, R>, Absolute, Serializable
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -39,9 +39,9 @@ abstract class AbstractDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU
      * @param values double[][]; the values of the entries in the new Absolute Immutable DoubleMatrix
      * @param unit AU; the unit of the new Absolute Immutable DoubleMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
-    AbstractDoubleMatrixAbs(final double[][] values, final AU unit, final StorageType storageType) throws ValueException
+    AbstractDoubleMatrixAbs(final double[][] values, final AU unit, final StorageType storageType) throws ValueRuntimeException
     {
         super(unit, DoubleMatrixData.instantiate(ensureRectangularAndNonEmpty(values), unit.getScale(), storageType));
     }
@@ -50,9 +50,9 @@ abstract class AbstractDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU
      * Construct a new Absolute Immutable DoubleMatrix.
      * @param values S[][]; the values of the entries in the new Absolute Immutable DoubleMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    AbstractDoubleMatrixAbs(final S[][] values, final StorageType storageType) throws ValueException
+    AbstractDoubleMatrixAbs(final S[][] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(checkUnit(values), DoubleMatrixData.instantiate(values, storageType));
     }
@@ -113,7 +113,7 @@ abstract class AbstractDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings("checkstyle:designforextension")
-    public final S get(final int row, final int column) throws ValueException
+    public final S get(final int row, final int column) throws ValueRuntimeException
     {
         checkIndex(row, column);
         return instantiateScalar(getInUnit(row, column, getUnit()), getUnit());
@@ -125,21 +125,21 @@ abstract class AbstractDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU
 
     /** {@inheritDoc} */
     @Override
-    public final A plus(final R rel) throws ValueException
+    public final A plus(final R rel) throws ValueRuntimeException
     {
         return instantiateTypeAbs(this.getData().plus(rel.getData()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final A minus(final R rel) throws ValueException
+    public final A minus(final R rel) throws ValueRuntimeException
     {
         return instantiateTypeAbs(this.getData().minus(rel.getData()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final R minus(final A abs) throws ValueException
+    public final R minus(final A abs) throws ValueRuntimeException
     {
         return instantiateTypeRel(this.getData().minus(abs.getData()), getUnit().getRelativeUnit());
     }
@@ -155,10 +155,10 @@ abstract class AbstractDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU
      * @param <RU> the corresponding relative unit
      * @param <S> the scalar type
      * @return the unit of the object
-     * @throws ValueException when the array is null, has length equal to 0, or has first entry with length equal to 0
+     * @throws ValueRuntimeException when the array is null, has length equal to 0, or has first entry with length equal to 0
      */
     static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
-            S extends AbstractDoubleScalarAbs<AU, S, RU, ?>> AU checkUnit(final S[][] dsArray) throws ValueException
+            S extends AbstractDoubleScalarAbs<AU, S, RU, ?>> AU checkUnit(final S[][] dsArray) throws ValueRuntimeException
     {
         ensureRectangularAndNonEmpty(dsArray);
         return dsArray[0][0].getUnit();
@@ -170,26 +170,26 @@ abstract class AbstractDoubleMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU
      * @param <AU> the absolute unit
      * @param <RU> the corresponding relative unit
      * @param <S> the scalar type
-     * @throws ValueException when values is not rectangular, or contains no data
+     * @throws ValueRuntimeException when values is not rectangular, or contains no data
      */
     protected static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
             S extends AbstractDoubleScalarAbs<AU, S, RU, ?>> void ensureRectangularAndNonEmpty(final S[][] values)
-                    throws ValueException
+                    throws ValueRuntimeException
     {
         if (null == values)
         {
-            throw new ValueException("Cannot create a DoubleVector or MutableDoubleVector from an empty array of DoubleScalar");
+            throw new ValueRuntimeException("Cannot create a DoubleVector or MutableDoubleVector from an empty array of DoubleScalar");
         }
         if (0 == values.length || 0 == values[0].length)
         {
-            throw new ValueException("Creating DoubleVector or MutableDoubleVector: "
+            throw new ValueRuntimeException("Creating DoubleVector or MutableDoubleVector: "
                     + "Cannot determine unit for DoubleMatrix from an empty array of DoubleScalar");
         }
         for (int row = values.length; --row >= 1;)
         {
             if (values[0].length != values[row].length)
             {
-                throw new ValueException("Creating DoubleVector or MutableDoubleVector: Lengths of rows are not all the same");
+                throw new ValueRuntimeException("Creating DoubleVector or MutableDoubleVector: Lengths of rows are not all the same");
             }
         }
     }

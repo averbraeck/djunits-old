@@ -21,14 +21,15 @@ import org.djunits4.unit.si.SIPrefixes;
 import org.djunits4.unit.unitsystem.UnitSystem;
 import org.djunits4.unit.util.UNITS;
 import org.djunits4.util.ClassUtil;
-import org.djunits4.value.vdouble.scalar.AbstractDoubleScalar;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vdouble.scalar.Area;
-import org.djunits4.value.vdouble.scalar.DoubleScalar;
 import org.djunits4.value.vdouble.scalar.Length;
 import org.djunits4.value.vdouble.scalar.SIScalar;
-import org.djunits4.value.vdouble.vector.AbstractDoubleVector;
-import org.djunits4.value.vdouble.vector.DoubleVectorInterface;
+import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalar;
+import org.djunits4.value.vdouble.scalar.base.DoubleScalar;
 import org.djunits4.value.vdouble.vector.MutableDoubleVectorInterface;
+import org.djunits4.value.vdouble.vector.base.AbstractDoubleVector;
+import org.djunits4.value.vdouble.vector.base.DoubleVectorInterface;
 import org.djunits4.value.vfloat.scalar.AbstractFloatScalar;
 import org.djunits4.value.vfloat.scalar.FloatSIScalar;
 import org.djunits4.value.vfloat.scalar.FloatScalar;
@@ -61,12 +62,12 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @throws ClassNotFoundException on reflection error
      * @throws IllegalArgumentException on reflection error
      * @throws SecurityException on reflection error
-     * @throws ValueException when index out of range
+     * @throws ValueRuntimeException when index out of range
      */
     @Test
     public final void vectorOperationsTest()
             throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException,
-            NoSuchFieldException, SecurityException, IllegalArgumentException, ClassNotFoundException, ValueException
+            NoSuchFieldException, SecurityException, IllegalArgumentException, ClassNotFoundException, ValueRuntimeException
     {
         doubleOrFloatVectorOperationsTest(true); // Double precision versions
         doubleOrFloatVectorOperationsTest(false); // Float versions
@@ -83,11 +84,11 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @throws ClassNotFoundException on reflection error
      * @throws IllegalArgumentException on reflection error
      * @throws SecurityException on reflection error
-     * @throws ValueException when index out of range
+     * @throws ValueRuntimeException when index out of range
      */
     private void doubleOrFloatVectorOperationsTest(final boolean doubleType)
             throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException,
-            NoSuchFieldException, SecurityException, IllegalArgumentException, ClassNotFoundException, ValueException
+            NoSuchFieldException, SecurityException, IllegalArgumentException, ClassNotFoundException, ValueRuntimeException
     {
         final String upperVectorType = "Vector";
         final String floatPrefix = doubleType ? "" : "Float";
@@ -145,11 +146,11 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @throws NoSuchMethodException on class or method resolving error
      * @throws NoSuchFieldException on class or method resolving error
      * @throws ClassNotFoundException on reflection error
-     * @throws ValueException whhen index out of range
+     * @throws ValueRuntimeException whhen index out of range
      */
     private void testMethods(final Class<?> vectorClassAbsRel, final boolean isAbs, final boolean doubleType,
             final StorageType storageType, final boolean mutable) throws NoSuchMethodException, InstantiationException,
-            IllegalAccessException, InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueException
+            IllegalAccessException, InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueRuntimeException
     {
         // System.out.print(listMethods(vectorClassAbsRel, "multiplyBy", "\t"));
         for (Method method : vectorClassAbsRel.getMethods())
@@ -184,14 +185,14 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @throws InstantiationException on class or method resolving error
      * @throws NoSuchFieldException on class or method resolving error
      * @throws ClassNotFoundException on reflection error
-     * @throws ValueException on reflection error
+     * @throws ValueRuntimeException on reflection error
      * @throws IllegalArgumentException on reflection error
      * @throws SecurityException when index out of range
      */
     private void testMultiplyByOrDivideByMethod(final Class<?> vectorClass, final Method method, final boolean multiply,
             final boolean doubleType, final boolean abs, final StorageType storageType)
             throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException,
-            NoSuchFieldException, ClassNotFoundException, SecurityException, IllegalArgumentException, ValueException
+            NoSuchFieldException, ClassNotFoundException, SecurityException, IllegalArgumentException, ValueRuntimeException
     {
         // System.out.println(method.getName() + paramsToString(method.getParameterTypes()));
         Class<?>[] parTypes = method.getParameterTypes();
@@ -235,12 +236,12 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
         Constructor<?> constructor = vectorClass.getConstructor(double.class, getUnitClass(vectorClass));
         if (doubleType)
         {
-            DoubleScalar.Rel<?> left =
-                    (DoubleScalar.Rel<?>) constructor.newInstance(123d, getSIUnitInstance(getUnitClass(vectorClass)));
+            DoubleScalar.ImmutableRel<?> left =
+                    (DoubleScalar.ImmutableRel<?>) constructor.newInstance(123d, getSIUnitInstance(getUnitClass(vectorClass)));
             // System.out.println("constructed left: " + left);
             constructor = parameterClass.getConstructor(double.class, getUnitClass(parameterClass));
-            DoubleScalar.Rel<?> right =
-                    (DoubleScalar.Rel<?>) constructor.newInstance(456d, getSIUnitInstance(getUnitClass(parameterClass)));
+            DoubleScalar.ImmutableRel<?> right =
+                    (DoubleScalar.ImmutableRel<?>) constructor.newInstance(456d, getSIUnitInstance(getUnitClass(parameterClass)));
             // System.out.println("constructed right: " + right);
             double expectedValue = multiply ? 123d * 456 : 123d / 456;
 
@@ -248,14 +249,14 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             {
                 Method multiplyMethod = vectorClass.getDeclaredMethod("multiplyBy", new Class[] {parameterClass});
                 Object result = multiplyMethod.invoke(left, right);
-                double resultSI = ((DoubleScalar.Rel<?>) result).getSI();
+                double resultSI = ((DoubleScalar.ImmutableRel<?>) result).getSI();
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
             else
             {
                 Method divideMethod = vectorClass.getDeclaredMethod("divideBy", new Class[] {parameterClass});
                 Object result = divideMethod.invoke(left, right);
-                double resultSI = ((DoubleScalar.Rel<?>) result).getSI();
+                double resultSI = ((DoubleScalar.ImmutableRel<?>) result).getSI();
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
             SIScalar result = multiply ? DoubleScalar.multiply(left, right) : DoubleScalar.divide(left, right);
@@ -369,10 +370,10 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @param got the (DoubleVector?) object
      * @param expected double[] or float[] with expected values
      * @param precision double; maximum error of the results
-     * @throws ValueException when index out of range
+     * @throws ValueRuntimeException when index out of range
      */
     private void verifyAbsRelPrecisionAndValues(final boolean abs, final boolean doubleType, final StorageType storageType,
-            final Object got, final Object expected, final double precision) throws ValueException
+            final Object got, final Object expected, final double precision) throws ValueRuntimeException
     {
         int size = doubleType ? ((double[]) expected).length : ((float[]) expected).length;
         int refSize = doubleType ? ((double[]) expected).length : ((float[]) expected).length;
@@ -392,10 +393,10 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @param o the (DoubleScalar?) object
      * @param index int; the index of the value to return
      * @return double; the SI value
-     * @throws ValueException when index out of range
+     * @throws ValueRuntimeException when index out of range
      */
     private double verifyAbsRelPrecisionAndExtractSI(final boolean abs, final boolean doubleType, final StorageType storageType,
-            final Object o, final int index) throws ValueException
+            final Object o, final int index) throws ValueRuntimeException
     {
         double result = Double.NaN;
         if (doubleType)
@@ -451,11 +452,11 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @throws InvocationTargetException on class or method resolving error
      * @throws NoSuchFieldException on class or method resolving error
      * @throws ClassNotFoundException on class or method resolving error
-     * @throws ValueException when index out of range
+     * @throws ValueRuntimeException when index out of range
      */
     private void testConstructors(final Class<?> vectorClass, final boolean abs, final boolean doubleType,
             final boolean mutable, final StorageType storageType) throws NoSuchMethodException, InstantiationException,
-            IllegalAccessException, InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueException
+            IllegalAccessException, InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueRuntimeException
     {
         double[] doubleValue = {1.23456, 2.34567, 3.45678};
         float[] floatValue = {1.23456f, 2.34567f, 3.45678f};
@@ -590,11 +591,11 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @throws IllegalAccessException on reflection error
      * @throws IllegalArgumentException on reflection error
      * @throws InvocationTargetException on reflection error
-     * @throws ValueException when index out of range
+     * @throws ValueRuntimeException when index out of range
      */
     private Object findAndExecuteConstructor(final Class<?> vectorClass, final Object[] args, final boolean doubleType)
             throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
-            IllegalArgumentException, InvocationTargetException, ValueException
+            IllegalArgumentException, InvocationTargetException, ValueRuntimeException
     {
         Class<?>[] parameterTypes = new Class<?>[args.length];
         for (int i = 0; i < args.length; i++)
@@ -660,12 +661,12 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @throws IllegalAccessException on class or method resolving error
      * @throws IllegalArgumentException on class or method resolving error
      * @throws InvocationTargetException on class or method resolving error
-     * @throws ValueException when index out of range
+     * @throws ValueRuntimeException when index out of range
      */
     private void findAndTestConstructor(final Class<?> vectorClass, final Object[] args, final boolean abs,
             final boolean doubleType, final StorageType expectedStorageType, final Object expectedResult)
             throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
-            IllegalArgumentException, InvocationTargetException, ValueException
+            IllegalArgumentException, InvocationTargetException, ValueRuntimeException
     {
         verifyAbsRelPrecisionAndValues(abs, doubleType, expectedStorageType,
                 findAndExecuteConstructor(vectorClass, args, doubleType), expectedResult, 0.0001);
@@ -684,11 +685,11 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @throws InvocationTargetException on class or method resolving error
      * @throws NoSuchFieldException on class or method resolving error
      * @throws ClassNotFoundException on class or method resolving error
-     * @throws ValueException when index out of range
+     * @throws ValueRuntimeException when index out of range
      */
     private void testGet(final Class<?> vectorClass, final boolean abs, final boolean doubleType, final boolean mutable,
             final StorageType storageType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
-            InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueException
+            InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueRuntimeException
     {
         double[] doubleValue = {1.23456, 2.34567, 3.45678};
         float[] floatValue = {1.23456f, 2.34567f, 3.45678f};
@@ -729,11 +730,11 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @throws InvocationTargetException on class or method resolving error
      * @throws NoSuchFieldException on class or method resolving error
      * @throws ClassNotFoundException on class or method resolving error
-     * @throws ValueException when index out of range
+     * @throws ValueRuntimeException when index out of range
      */
     private void testUnaryMethods(final Class<?> vectorClass, final boolean abs, final boolean doubleType,
             final boolean mutable, final StorageType storageType) throws NoSuchMethodException, InstantiationException,
-            IllegalAccessException, InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueException
+            IllegalAccessException, InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueRuntimeException
     {
         double[] doubleValue = {1.23456, -2.34567, 3.45678};
         float[] floatValue = {1.23456f, -2.34567f, 3.45678f};
@@ -1284,7 +1285,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 }
                 catch (Exception ve)
                 {
-                    if (!(ve.getCause() instanceof ValueException))
+                    if (!(ve.getCause() instanceof ValueRuntimeException))
                     {
                         fail("Thrown exception should have been a ValueException");
                     }
@@ -1548,11 +1549,11 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * @throws InvocationTargetException on class or method resolving error
      * @throws IllegalAccessException on class or method resolving error
      * @throws InstantiationException on class or method resolving error
-     * @throws ValueException when index out of range
+     * @throws ValueRuntimeException when index out of range
      */
     private void testInterpolateMethod(final Class<?> vectorClass, final boolean abs, final boolean doubleType,
             final StorageType storageType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
-            InvocationTargetException, NoSuchFieldException, ValueException
+            InvocationTargetException, NoSuchFieldException, ValueRuntimeException
     {
         // System.out.println("class name is " + vectorClass.getName());
         Constructor<?> constructor = vectorClass.getConstructor(doubleType ? double[].class : float[].class,
@@ -1626,9 +1627,9 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
      * Various small experiments are done here. <br>
      * Prove (?) that order of items does not change in Arrays.stream(a).parallel().toArray().
      * @param args String[]; command line arguments; not used
-     * @throws ValueException when index out of range
+     * @throws ValueRuntimeException when index out of range
      */
-    public static void main(final String[] args) throws ValueException
+    public static void main(final String[] args) throws ValueRuntimeException
     {
         Length l = new Length(3, METER);
         Length w = new Length(2, METER);

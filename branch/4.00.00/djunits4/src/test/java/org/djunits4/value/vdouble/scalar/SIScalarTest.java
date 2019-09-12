@@ -21,7 +21,8 @@ import org.djunits4.unit.util.UNITS;
 import org.djunits4.unit.util.UnitException;
 import org.djunits4.unit.util.UnitRuntimeException;
 import org.djunits4.value.CLASSNAMES;
-import org.djunits4.value.vfloat.scalar.FloatSpeed;
+import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits4.value.vdouble.scalar.base.DoubleScalar;
 import org.junit.Test;
 
 /**
@@ -50,17 +51,17 @@ public class SIScalarTest
 
         ElectricalResistance ohm180 = new ElectricalResistance(180, ElectricalResistanceUnit.KILOOHM);
         ElectricalResistance ohm90 = new ElectricalResistance(90, ElectricalResistanceUnit.KILOOHM);
-        Speed pace2xAsSpeed = pace.multiplyBy(ohm180).divideBy(ohm90).reciprocal().as(Speed.ZERO);
+        Speed pace2xAsSpeed = pace.times(ohm180).divide(ohm90).reciprocal().as(SpeedUnit.SI);
         System.out.println("pace2x = " + pace2xAsSpeed);
         assertEquals("m/s", pace2xAsSpeed.getUnit().toString());
         assertEquals(2.5, pace2xAsSpeed.getSI(), 0.00001);
 
-        Speed pace2xAsSpeedMih = pace.multiplyBy(ohm180).divideBy(ohm90).reciprocal().as(Speed.ZERO, SpeedUnit.MILE_PER_HOUR);
+        Speed pace2xAsSpeedMih = pace.times(ohm180).divide(ohm90).reciprocal().as(SpeedUnit.MILE_PER_HOUR);
         System.out.println("pace2xMi/h = " + pace2xAsSpeedMih);
         assertEquals("mi/h", pace2xAsSpeedMih.getUnit().toString());
         assertEquals(2.5, pace2xAsSpeedMih.getSI(), 0.00001);
 
-        Speed speed = pace.reciprocal().as(Speed.class);
+        Speed speed = pace.reciprocal().as(SpeedUnit.SI);
         System.out.println("speed = " + speed);
         assertEquals("m/s", speed.getUnit().toString());
         assertEquals(5.0, speed.getSI(), 0.00001);
@@ -68,11 +69,8 @@ public class SIScalarTest
         assertTrue(speed.toString().endsWith("m/s"));
         assertTrue("toString with display unit contains display unit",
                 speed.toString(SpeedUnit.FOOT_PER_HOUR).indexOf("ft/h") > 0);
-        FloatSpeed fs = FloatSpeed.createSI((float) speed.si);
-        assertTrue("toString with display unit contains display unit",
-                fs.toString(SpeedUnit.FOOT_PER_HOUR).indexOf("ft/h") > 0);
 
-        Speed speedKmh = pace.reciprocal().as(Speed.class, SpeedUnit.KM_PER_HOUR);
+        Speed speedKmh = pace.reciprocal().as(SpeedUnit.KM_PER_HOUR);
         System.out.println("speedKm/h = " + speedKmh);
         assertEquals("km/h", speedKmh.getUnit().toString());
         assertEquals(5.0, speedKmh.getSI(), 0.00001);
@@ -81,7 +79,7 @@ public class SIScalarTest
 
         try
         {
-            ohm180.multiplyBy(ohm90).asSpeed();
+            ohm180.times(ohm90).asSpeed();
             fail("Translating Ohms to Speed should have failed");
         }
         catch (Exception e)
@@ -91,17 +89,7 @@ public class SIScalarTest
 
         try
         {
-            ohm180.multiplyBy(ohm90).as(Speed.ZERO);
-            fail("Translating Ohms to Speed should have failed");
-        }
-        catch (Exception e)
-        {
-            // ok!
-        }
-
-        try
-        {
-            ohm180.multiplyBy(ohm90).as(Speed.class);
+            ohm180.times(ohm90).as(SpeedUnit.SI);
             fail("Translating Ohms to Speed should have failed");
         }
         catch (Exception e)
@@ -133,12 +121,12 @@ public class SIScalarTest
                 for (Unit<?> unit2 : unitBase2.getUnitsById().values())
                 {
                     AbstractDoubleScalarRel<?, ?> scalar1 =
-                            (AbstractDoubleScalarRel<?, ?>) DoubleScalarUtil.instantiateAnonymous(12.0, unit1);
+                            (AbstractDoubleScalarRel<?, ?>) DoubleScalar.instantiateAnonymous(12.0, unit1);
                     AbstractDoubleScalarRel<?, ?> scalar2 =
-                            (AbstractDoubleScalarRel<?, ?>) DoubleScalarUtil.instantiateAnonymous(0.5, unit2);
+                            (AbstractDoubleScalarRel<?, ?>) DoubleScalar.instantiateAnonymous(0.5, unit2);
                     SIScalar scalar12a = DoubleScalar.multiply(scalar1, scalar2);
-                    SIScalar scalar12b = scalar1.multiplyBy(scalar2);
-                    SIScalar scalar12c = scalar2.multiplyBy(scalar1);
+                    SIScalar scalar12b = scalar1.times(scalar2);
+                    SIScalar scalar12c = scalar2.times(scalar1);
                     assertEquals(scalar12a.si, scalar12b.si, scalar12a.si / 10000.0);
                     assertEquals("scalar12a.getUnit(): [" + scalar12a.getUnit() + "] != scalar12b.getUnit(): ["
                             + scalar12b.getUnit() + "]", scalar12a.getUnit(), scalar12b.getUnit());
@@ -176,12 +164,12 @@ public class SIScalarTest
                 for (Unit<?> unit2 : unitBase2.getUnitsById().values())
                 {
                     AbstractDoubleScalarRel<?, ?> scalar1 =
-                            (AbstractDoubleScalarRel<?, ?>) DoubleScalarUtil.instantiateAnonymous(12.0, unit1);
+                            (AbstractDoubleScalarRel<?, ?>) DoubleScalar.instantiateAnonymous(12.0, unit1);
                     AbstractDoubleScalarRel<?, ?> scalar2 =
-                            (AbstractDoubleScalarRel<?, ?>) DoubleScalarUtil.instantiateAnonymous(0.5, unit2);
+                            (AbstractDoubleScalarRel<?, ?>) DoubleScalar.instantiateAnonymous(0.5, unit2);
                     SIScalar scalar12a = DoubleScalar.divide(scalar1, scalar2);
-                    SIScalar scalar12b = scalar1.divideBy(scalar2);
-                    SIScalar scalar12c = scalar2.divideBy(scalar1);
+                    SIScalar scalar12b = scalar1.divide(scalar2);
+                    SIScalar scalar12c = scalar2.divide(scalar1);
                     assertEquals(scalar12a.si, scalar12b.si, scalar12a.si / 10000.0);
                     assertEquals("scalar12a.getUnit(): [" + scalar12a.getUnit() + "] != scalar12b.getUnit(): ["
                             + scalar12b.getUnit() + "]", scalar12a.getUnit(), scalar12b.getUnit());
@@ -220,8 +208,8 @@ public class SIScalarTest
             for (Unit<?> unit : unitBase.getUnitsById().values())
             {
                 AbstractDoubleScalarRel<?, ?> scalar =
-                        (AbstractDoubleScalarRel<?, ?>) DoubleScalarUtil.instantiateAnonymous(12.0, unit);
-                SIScalar mult = scalar.multiplyBy(dimless);
+                        (AbstractDoubleScalarRel<?, ?>) DoubleScalar.instantiateAnonymous(12.0, unit);
+                SIScalar mult = scalar.times(dimless);
                 Method asMethod = SIScalar.class.getDeclaredMethod("as" + type);
                 AbstractDoubleScalarRel<?, ?> asScalar = (AbstractDoubleScalarRel<?, ?>) asMethod.invoke(mult);
                 assertEquals(scalar.getUnit().getStandardUnit(), asScalar.getUnit());
@@ -272,11 +260,11 @@ public class SIScalarTest
         assertEquals(pace1, pace1a);
         SIScalar pace2 = new SIScalar(2.0, paceUnit);
         assertEquals(2.0, pace2.si, 0.001);
-        SIScalar pace3 = pace1.multiplyBy(3.0);
+        SIScalar pace3 = pace1.times(3.0);
         assertEquals(3.0, pace3.si, 0.001);
         SIScalar pace5 = pace1.instantiateRel(5.0, paceUnit);
         assertEquals(5.0, pace5.si, 0.001);
-        SIScalar pace7 = SIScalar.createSI(14.0, paceUnit).divideBy(2.0);
+        SIScalar pace7 = SIScalar.createSI(14.0, paceUnit).divide(2.0);
         assertEquals(7.0, pace7.si, 0.001);
         SIScalar pace4 = SIScalar.interpolate(pace1, pace7, 0.5);
         assertEquals(4.0, pace4.si, 0.001);
@@ -329,7 +317,7 @@ public class SIScalarTest
         assertEquals(pace1, SIScalar.min(pace3, pace2, pace1));
         assertEquals(pace1, SIScalar.min(pace4, pace3, pace2, pace1));
 
-        Dimensionless dim = pace7.divideBy(pace2).asDimensionless();
+        Dimensionless dim = pace7.divide(pace2).asDimensionless();
         assertEquals(3.5, dim.si, 0.001);
     }
 

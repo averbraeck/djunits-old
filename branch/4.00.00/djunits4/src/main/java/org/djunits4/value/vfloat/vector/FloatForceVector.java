@@ -6,8 +6,8 @@ import java.util.SortedMap;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.ForceUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatForce;
 
 /**
@@ -19,7 +19,7 @@ import org.djunits4.value.vfloat.scalar.FloatForce;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.228Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class FloatForceVector extends AbstractFloatVectorRel<ForceUnit, FloatForceVector, MutableFloatForceVector, FloatForce>
 {
     /** */
@@ -30,9 +30,9 @@ public class FloatForceVector extends AbstractFloatVectorRel<ForceUnit, FloatFor
      * @param values float[]; the values of the entries in the new Relative Immutable Float FloatForceVector
      * @param unit ForceUnit; the unit of the new Relative Immutable Float FloatForceVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
-    public FloatForceVector(final float[] values, final ForceUnit unit, final StorageType storageType) throws ValueException
+    public FloatForceVector(final float[] values, final ForceUnit unit, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -42,9 +42,9 @@ public class FloatForceVector extends AbstractFloatVectorRel<ForceUnit, FloatFor
      * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float FloatForceVector
      * @param unit ForceUnit; the unit of the new Relative Immutable Float FloatForceVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
-    public FloatForceVector(final List<Float> values, final ForceUnit unit, final StorageType storageType) throws ValueException
+    public FloatForceVector(final List<Float> values, final ForceUnit unit, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -53,9 +53,9 @@ public class FloatForceVector extends AbstractFloatVectorRel<ForceUnit, FloatFor
      * Construct a new Relative Immutable Float FloatForceVector.
      * @param values FloatForce[]; the values of the entries in the new Relative Immutable Float FloatForceVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public FloatForceVector(final FloatForce[] values, final StorageType storageType) throws ValueException
+    public FloatForceVector(final FloatForce[] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -64,9 +64,9 @@ public class FloatForceVector extends AbstractFloatVectorRel<ForceUnit, FloatFor
      * Construct a new Relative Immutable Float FloatForceVector.
      * @param values List&lt;FloatForce&gt;; the values of the entries in the new Relative Immutable Float FloatForceVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public FloatForceVector(final List<FloatForce> values, final StorageType storageType) throws ValueException
+    public FloatForceVector(final List<FloatForce> values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -77,10 +77,10 @@ public class FloatForceVector extends AbstractFloatVectorRel<ForceUnit, FloatFor
      *            FloatForceVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public FloatForceVector(final SortedMap<Integer, FloatForce> values, final int length, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, length, storageType);
     }
@@ -92,10 +92,10 @@ public class FloatForceVector extends AbstractFloatVectorRel<ForceUnit, FloatFor
      * @param unit ForceUnit; the unit of the new Relative Sparse Mutable Float FloatForceVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatForceVector(final SortedMap<Integer, Float> values, final ForceUnit unit, final int length,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, length, storageType);
     }
@@ -158,7 +158,7 @@ public class FloatForceVector extends AbstractFloatVectorRel<ForceUnit, FloatFor
             {
                 array[i] = get(i);
             }
-            catch (ValueException exception)
+            catch (ValueRuntimeException exception)
             {
                 throw new RuntimeException(exception);
             }

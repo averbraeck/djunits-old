@@ -1,11 +1,11 @@
 package org.djunits4.value.vfloat.matrix;
 
 import org.djunits4.unit.Unit;
-import org.djunits4.value.MathFunctionsRel;
-import org.djunits4.value.Mutable;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
-import org.djunits4.value.ValueUtil;
+import org.djunits4.value.IsMutable;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.function.MathFunctionsRel;
+import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vfloat.FloatFunction;
 import org.djunits4.value.vfloat.FloatMathFunctions;
 import org.djunits4.value.vfloat.scalar.AbstractFloatScalarRel;
@@ -26,7 +26,7 @@ import org.djunits4.value.vfloat.scalar.AbstractFloatScalarRel;
  */
 abstract class AbstractMutableFloatMatrixRel<U extends Unit<U>, R extends AbstractFloatMatrixRel<U, R, MR, S>,
         MR extends AbstractMutableFloatMatrixRel<U, R, MR, S>, S extends AbstractFloatScalarRel<U, S>>
-        extends AbstractFloatMatrixRel<U, R, MR, S> implements Mutable, MathFunctionsRel<MR>, FloatMathFunctions<MR>
+        extends AbstractFloatMatrixRel<U, R, MR, S> implements IsMutable, MathFunctionsRel<MR>, FloatMathFunctions<MR>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -39,9 +39,9 @@ abstract class AbstractMutableFloatMatrixRel<U extends Unit<U>, R extends Abstra
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatMatrix
      * @param unit U; the unit of the new Absolute Immutable FloatMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
-    AbstractMutableFloatMatrixRel(final float[][] values, final U unit, final StorageType storageType) throws ValueException
+    AbstractMutableFloatMatrixRel(final float[][] values, final U unit, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -50,9 +50,9 @@ abstract class AbstractMutableFloatMatrixRel<U extends Unit<U>, R extends Abstra
      * Construct a new Relative Mutable FloatMatrix.
      * @param values S[][]; the values of the entries in the new Relative Immutable FloatMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    AbstractMutableFloatMatrixRel(final S[][] values, final StorageType storageType) throws ValueException
+    AbstractMutableFloatMatrixRel(final S[][] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -122,10 +122,10 @@ abstract class AbstractMutableFloatMatrixRel<U extends Unit<U>, R extends Abstra
      * Increment the value by the supplied value and return the changed matrix.
      * @param increment R; amount by which the value is incremented
      * @return the changed MutableFloatMatrix.Rel&lt;U&gt;
-     * @throws ValueException when the size of increment is not identical to the size of this
+     * @throws ValueRuntimeException when the size of increment is not identical to the size of this
      */
     @SuppressWarnings("unchecked")
-    public final MR incrementBy(final R increment) throws ValueException
+    public final MR incrementBy(final R increment) throws ValueRuntimeException
     {
         checkCopyOnWrite();
         this.data.incrementBy(increment.getData());
@@ -159,10 +159,10 @@ abstract class AbstractMutableFloatMatrixRel<U extends Unit<U>, R extends Abstra
      * Decrement the value by the supplied value and return the changed matrix.
      * @param decrement R; amount by which the value is decremented
      * @return the changed MutableFloatMatrix.Rel&lt;U&gt;
-     * @throws ValueException when the size of increment is not identical to the size of this
+     * @throws ValueRuntimeException when the size of increment is not identical to the size of this
      */
     @SuppressWarnings("unchecked")
-    public final MR decrementBy(final R decrement) throws ValueException
+    public final MR decrementBy(final R decrement) throws ValueRuntimeException
     {
         checkCopyOnWrite();
         this.data.decrementBy(decrement.getData());
@@ -196,10 +196,10 @@ abstract class AbstractMutableFloatMatrixRel<U extends Unit<U>, R extends Abstra
      * Multiply the values in the matrix by the supplied values and return the changed matrix.
      * @param factors R; amounts by which the value is multiplied
      * @return the changed MutableFloatMatrix.Rel&lt;U&gt;
-     * @throws ValueException when the size of the factors is not identical to the size of this
+     * @throws ValueRuntimeException when the size of the factors is not identical to the size of this
      */
     @SuppressWarnings("unchecked")
-    public final MR multiplyBy(final R factors) throws ValueException
+    public final MR multiplyBy(final R factors) throws ValueRuntimeException
     {
         checkCopyOnWrite();
         this.data.multiplyBy(factors.getData());
@@ -230,10 +230,10 @@ abstract class AbstractMutableFloatMatrixRel<U extends Unit<U>, R extends Abstra
      * Divide the values in the matrix by the supplied values and return the changed matrix.
      * @param factors R; amounts by which the value is divided
      * @return the changed MutableFloatMatrix.Rel&lt;U&gt;
-     * @throws ValueException when the size of the factors is not identical to the size of this
+     * @throws ValueRuntimeException when the size of the factors is not identical to the size of this
      */
     @SuppressWarnings("unchecked")
-    public final MR divideBy(final R factors) throws ValueException
+    public final MR divideBy(final R factors) throws ValueRuntimeException
     {
         checkCopyOnWrite();
         this.data.divideBy(factors.getData());
@@ -355,9 +355,9 @@ abstract class AbstractMutableFloatMatrixRel<U extends Unit<U>, R extends Abstra
      * @param row int; the row
      * @param column int; the column
      * @param valueSI float; the value, expressed in the SI unit
-     * @throws ValueException when the row/column is out of range
+     * @throws ValueRuntimeException when the row/column is out of range
      */
-    public final void setSI(final int row, final int column, final float valueSI) throws ValueException
+    public final void setSI(final int row, final int column, final float valueSI) throws ValueRuntimeException
     {
         checkIndex(row, column);
         checkCopyOnWrite();
@@ -369,9 +369,9 @@ abstract class AbstractMutableFloatMatrixRel<U extends Unit<U>, R extends Abstra
      * @param row int; the row
      * @param column int; the column
      * @param value S; the value
-     * @throws ValueException when the row/column is out of range
+     * @throws ValueRuntimeException when the row/column is out of range
      */
-    public final void set(final int row, final int column, final S value) throws ValueException
+    public final void set(final int row, final int column, final S value) throws ValueRuntimeException
     {
         setSI(row, column, value.getSI());
     }
@@ -382,23 +382,23 @@ abstract class AbstractMutableFloatMatrixRel<U extends Unit<U>, R extends Abstra
      * @param column int; the column
      * @param value float; the value, expressed in the given unit
      * @param valueUnit U; the unit of the value
-     * @throws ValueException when the row/column is out of range
+     * @throws ValueRuntimeException when the row/column is out of range
      */
-    public final void setInUnit(final int row, final int column, final float value, final U valueUnit) throws ValueException
+    public final void setInUnit(final int row, final int column, final float value, final U valueUnit) throws ValueRuntimeException
     {
         setSI(row, column, (float) ValueUtil.expressAsSIUnit(value, valueUnit));
     }
 
     /**
      * Normalize the matrix, i.e. scale the values to make the sum equal to 1.
-     * @throws ValueException when the sum of the values is zero and normalization is not possible
+     * @throws ValueRuntimeException when the sum of the values is zero and normalization is not possible
      */
-    public final void normalize() throws ValueException
+    public final void normalize() throws ValueRuntimeException
     {
         float sum = zSum();
         if (0 == sum)
         {
-            throw new ValueException("zSum is 0; cannot normalize");
+            throw new ValueRuntimeException("zSum is 0; cannot normalize");
         }
         checkCopyOnWrite();
         this.data.divideBy(sum);

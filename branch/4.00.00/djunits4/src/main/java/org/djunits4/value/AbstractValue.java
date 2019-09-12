@@ -5,8 +5,7 @@ import java.io.Serializable;
 import org.djunits4.unit.Unit;
 
 /**
- * AbstractValue is a class to help construct Matrix, Complex, and Vector but it does not extend java.lang.Number. The Scalar
- * class <i>does</i> extend Number, and implements the same interfaces from Value.
+ * AbstractValue is a class to help construct Scalar, Vector, and Matrix classes.
  * <p>
  * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
@@ -14,8 +13,9 @@ import org.djunits4.unit.Unit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  * @param <U> the Unit of the value(s) in this AbstractValue. Used for setting, getting and displaying the value(s)
+ * @param <T> the value type for this unit
  */
-public abstract class AbstractValue<U extends Unit<U>> implements Value<U>, Serializable
+public abstract class AbstractValue<U extends Unit<U>, T extends Value<U, T>> implements Value<U, T>, Serializable
 {
     /**  */
     private static final long serialVersionUID = 20150626L;
@@ -37,23 +37,6 @@ public abstract class AbstractValue<U extends Unit<U>> implements Value<U>, Seri
     public final U getUnit()
     {
         return this.unit;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final double expressAsSIUnit(final double value)
-    {
-        return ValueUtil.expressAsSIUnit(value, this.unit);
-    }
-
-    /**
-     * Convert a value in SI standard unit into the unit of this AbstractValue.
-     * @param value double; the value in the standard SI unit
-     * @return double; the value in the unit as specified for this AbstractValue
-     */
-    protected final double expressAsSpecifiedUnit(final double value)
-    {
-        return ValueUtil.expressAsUnit(value, this.unit);
     }
 
     /** {@inheritDoc} */

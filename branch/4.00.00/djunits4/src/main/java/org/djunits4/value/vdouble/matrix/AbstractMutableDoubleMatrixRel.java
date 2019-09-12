@@ -1,14 +1,14 @@
 package org.djunits4.value.vdouble.matrix;
 
 import org.djunits4.unit.Unit;
-import org.djunits4.value.MathFunctionsRel;
-import org.djunits4.value.Mutable;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
-import org.djunits4.value.ValueUtil;
+import org.djunits4.value.IsMutable;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.function.MathFunctionsRel;
+import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vdouble.DoubleFunction;
-import org.djunits4.value.vdouble.DoubleMathFunctions;
-import org.djunits4.value.vdouble.scalar.AbstractDoubleScalarRel;
+import org.djunits4.value.vdouble.DoubleFunctionsAll;
+import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 
 /**
  * Relative Mutable typed Matrix.
@@ -26,7 +26,7 @@ import org.djunits4.value.vdouble.scalar.AbstractDoubleScalarRel;
  */
 abstract class AbstractMutableDoubleMatrixRel<U extends Unit<U>, R extends AbstractDoubleMatrixRel<U, R, MR, S>,
         MR extends AbstractMutableDoubleMatrixRel<U, R, MR, S>, S extends AbstractDoubleScalarRel<U, S>>
-        extends AbstractDoubleMatrixRel<U, R, MR, S> implements Mutable, MathFunctionsRel<MR>, DoubleMathFunctions<MR>
+        extends AbstractDoubleMatrixRel<U, R, MR, S> implements IsMutable, MathFunctionsRel<MR>, DoubleFunctionsAll<MR>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -39,9 +39,9 @@ abstract class AbstractMutableDoubleMatrixRel<U extends Unit<U>, R extends Abstr
      * @param values double[][]; the values of the entries in the new Relative Immutable DoubleMatrix
      * @param unit U; the unit of the new Absolute Immutable DoubleMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
-    AbstractMutableDoubleMatrixRel(final double[][] values, final U unit, final StorageType storageType) throws ValueException
+    AbstractMutableDoubleMatrixRel(final double[][] values, final U unit, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -50,9 +50,9 @@ abstract class AbstractMutableDoubleMatrixRel<U extends Unit<U>, R extends Abstr
      * Construct a new Relative Mutable DoubleMatrix.
      * @param values S[][]; the values of the entries in the new Relative Immutable DoubleMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    AbstractMutableDoubleMatrixRel(final S[][] values, final StorageType storageType) throws ValueException
+    AbstractMutableDoubleMatrixRel(final S[][] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -122,10 +122,10 @@ abstract class AbstractMutableDoubleMatrixRel<U extends Unit<U>, R extends Abstr
      * Increment the value by the supplied value and return the changed matrix.
      * @param increment R; amount by which the value is incremented
      * @return the changed MutableDoubleMatrix.Rel&lt;U&gt;
-     * @throws ValueException when the size of increment is not identical to the size of this
+     * @throws ValueRuntimeException when the size of increment is not identical to the size of this
      */
     @SuppressWarnings("unchecked")
-    public final MR incrementBy(final R increment) throws ValueException
+    public final MR incrementBy(final R increment) throws ValueRuntimeException
     {
         checkCopyOnWrite();
         this.data.incrementBy(increment.getData());
@@ -159,10 +159,10 @@ abstract class AbstractMutableDoubleMatrixRel<U extends Unit<U>, R extends Abstr
      * Decrement the value by the supplied value and return the changed matrix.
      * @param decrement R; amount by which the value is decremented
      * @return the changed MutableDoubleMatrix.Rel&lt;U&gt;
-     * @throws ValueException when the size of increment is not identical to the size of this
+     * @throws ValueRuntimeException when the size of increment is not identical to the size of this
      */
     @SuppressWarnings("unchecked")
-    public final MR decrementBy(final R decrement) throws ValueException
+    public final MR decrementBy(final R decrement) throws ValueRuntimeException
     {
         checkCopyOnWrite();
         this.data.decrementBy(decrement.getData());
@@ -196,10 +196,10 @@ abstract class AbstractMutableDoubleMatrixRel<U extends Unit<U>, R extends Abstr
      * Multiply the values in the matrix by the supplied values and return the changed matrix.
      * @param factors R; amounts by which the value is multiplied
      * @return the changed MutableDoubleMatrix.Rel&lt;U&gt;
-     * @throws ValueException when the size of the factors is not identical to the size of this
+     * @throws ValueRuntimeException when the size of the factors is not identical to the size of this
      */
     @SuppressWarnings("unchecked")
-    public final MR multiplyBy(final R factors) throws ValueException
+    public final MR multiplyBy(final R factors) throws ValueRuntimeException
     {
         checkCopyOnWrite();
         this.data.multiplyBy(factors.getData());
@@ -213,13 +213,13 @@ abstract class AbstractMutableDoubleMatrixRel<U extends Unit<U>, R extends Abstr
      */
     public final MR multiplyBy(final S factor)
     {
-        return multiplyBy(factor.getSI());
+        return times(factor.getSI());
     }
 
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public final MR multiplyBy(final double factor)
+    public final MR times(final double factor)
     {
         checkCopyOnWrite();
         this.data.multiplyBy(factor);
@@ -230,10 +230,10 @@ abstract class AbstractMutableDoubleMatrixRel<U extends Unit<U>, R extends Abstr
      * Divide the values in the matrix by the supplied values and return the changed matrix.
      * @param factors R; amounts by which the value is divided
      * @return the changed MutableDoubleMatrix.Rel&lt;U&gt;
-     * @throws ValueException when the size of the factors is not identical to the size of this
+     * @throws ValueRuntimeException when the size of the factors is not identical to the size of this
      */
     @SuppressWarnings("unchecked")
-    public final MR divideBy(final R factors) throws ValueException
+    public final MR divideBy(final R factors) throws ValueRuntimeException
     {
         checkCopyOnWrite();
         this.data.divideBy(factors.getData());
@@ -243,7 +243,7 @@ abstract class AbstractMutableDoubleMatrixRel<U extends Unit<U>, R extends Abstr
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings({"checkstyle:designforextension", "unchecked"})
-    public MR divideBy(final double divisor)
+    public MR divide(final double divisor)
     {
         this.data.divideBy(divisor);
         return (MR) this;
@@ -256,7 +256,7 @@ abstract class AbstractMutableDoubleMatrixRel<U extends Unit<U>, R extends Abstr
      */
     public final MR divideBy(final S divisor)
     {
-        return divideBy(divisor.getSI());
+        return divide(divisor.getSI());
     }
 
     /**********************************************************************************/
@@ -274,12 +274,12 @@ abstract class AbstractMutableDoubleMatrixRel<U extends Unit<U>, R extends Abstr
         checkCopyOnWrite();
         if (this.data instanceof DoubleMatrixDataDense)
         {
-            ((DoubleMatrixDataDense) this.data).assign(doubleFunction);
+            ((DoubleMatrixDataDense) this.data).apply(doubleFunction);
         }
         else
         {
             DoubleMatrixDataDense dvdd = ((DoubleMatrixDataSparse) this.data).toDense();
-            dvdd.assign(doubleFunction);
+            dvdd.apply(doubleFunction);
             this.data = dvdd.toSparse();
         }
     }
@@ -289,7 +289,7 @@ abstract class AbstractMutableDoubleMatrixRel<U extends Unit<U>, R extends Abstr
     @Override
     public final MR abs()
     {
-        assign(DoubleMathFunctions.ABS);
+        apply(DoubleFunctionsAll.ABS);
         return (MR) this;
     }
 
@@ -298,7 +298,7 @@ abstract class AbstractMutableDoubleMatrixRel<U extends Unit<U>, R extends Abstr
     @SuppressWarnings("unchecked")
     public final MR ceil()
     {
-        assign(DoubleMathFunctions.CEIL);
+        apply(DoubleFunctionsAll.CEIL);
         return (MR) this;
     }
 
@@ -307,7 +307,7 @@ abstract class AbstractMutableDoubleMatrixRel<U extends Unit<U>, R extends Abstr
     @SuppressWarnings("unchecked")
     public final MR floor()
     {
-        assign(DoubleMathFunctions.FLOOR);
+        apply(DoubleFunctionsAll.FLOOR);
         return (MR) this;
     }
 
@@ -316,7 +316,7 @@ abstract class AbstractMutableDoubleMatrixRel<U extends Unit<U>, R extends Abstr
     @SuppressWarnings("unchecked")
     public final MR neg()
     {
-        assign(DoubleMathFunctions.NEG);
+        apply(DoubleFunctionsAll.NEG);
         return (MR) this;
     }
 
@@ -325,7 +325,7 @@ abstract class AbstractMutableDoubleMatrixRel<U extends Unit<U>, R extends Abstr
     @SuppressWarnings("unchecked")
     public final MR rint()
     {
-        assign(DoubleMathFunctions.RINT);
+        apply(DoubleFunctionsAll.RINT);
         return (MR) this;
     }
 
@@ -334,7 +334,7 @@ abstract class AbstractMutableDoubleMatrixRel<U extends Unit<U>, R extends Abstr
     @SuppressWarnings("unchecked")
     public final MR round()
     {
-        assign(DoubleMathFunctions.ROUND);
+        apply(DoubleFunctionsAll.ROUND);
         return (MR) this;
     }
 
@@ -355,9 +355,9 @@ abstract class AbstractMutableDoubleMatrixRel<U extends Unit<U>, R extends Abstr
      * @param row int; the row
      * @param column int; the column
      * @param valueSI double; the value, expressed in the SI unit
-     * @throws ValueException when the row/column is out of range
+     * @throws ValueRuntimeException when the row/column is out of range
      */
-    public final void setSI(final int row, final int column, final double valueSI) throws ValueException
+    public final void setSI(final int row, final int column, final double valueSI) throws ValueRuntimeException
     {
         checkIndex(row, column);
         checkCopyOnWrite();
@@ -369,9 +369,9 @@ abstract class AbstractMutableDoubleMatrixRel<U extends Unit<U>, R extends Abstr
      * @param row int; the row
      * @param column int; the column
      * @param value S; the value
-     * @throws ValueException when the row/column is out of range
+     * @throws ValueRuntimeException when the row/column is out of range
      */
-    public final void set(final int row, final int column, final S value) throws ValueException
+    public final void set(final int row, final int column, final S value) throws ValueRuntimeException
     {
         setSI(row, column, value.getSI());
     }
@@ -382,23 +382,23 @@ abstract class AbstractMutableDoubleMatrixRel<U extends Unit<U>, R extends Abstr
      * @param column int; the column
      * @param value double; the value, expressed in the given unit
      * @param valueUnit U; the unit of the value
-     * @throws ValueException when the row/column is out of range
+     * @throws ValueRuntimeException when the row/column is out of range
      */
-    public final void setInUnit(final int row, final int column, final double value, final U valueUnit) throws ValueException
+    public final void setInUnit(final int row, final int column, final double value, final U valueUnit) throws ValueRuntimeException
     {
         setSI(row, column, ValueUtil.expressAsSIUnit(value, valueUnit));
     }
 
     /**
      * Normalize the matrix, i.e. scale the values to make the sum equal to 1.
-     * @throws ValueException when the sum of the values is zero and normalization is not possible
+     * @throws ValueRuntimeException when the sum of the values is zero and normalization is not possible
      */
-    public final void normalize() throws ValueException
+    public final void normalize() throws ValueRuntimeException
     {
         double sum = zSum();
         if (0 == sum)
         {
-            throw new ValueException("zSum is 0; cannot normalize");
+            throw new ValueRuntimeException("zSum is 0; cannot normalize");
         }
         checkCopyOnWrite();
         this.data.divideBy(sum);

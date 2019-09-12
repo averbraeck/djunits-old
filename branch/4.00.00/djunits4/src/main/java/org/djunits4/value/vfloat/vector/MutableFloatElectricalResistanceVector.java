@@ -6,8 +6,8 @@ import java.util.SortedMap;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.ElectricalResistanceUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatElectricalResistance;
 
 /**
@@ -19,7 +19,7 @@ import org.djunits4.value.vfloat.scalar.FloatElectricalResistance;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.243Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class MutableFloatElectricalResistanceVector extends AbstractMutableFloatVectorRel<ElectricalResistanceUnit,
         FloatElectricalResistanceVector, MutableFloatElectricalResistanceVector, FloatElectricalResistance>
 {
@@ -31,10 +31,10 @@ public class MutableFloatElectricalResistanceVector extends AbstractMutableFloat
      * @param values float[]; the values of the entries in the new Relative Immutable Float ElectricalResistanceVector
      * @param unit ElectricalResistanceUnit; the unit of the new Relative Immutable Float ElectricalResistanceVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public MutableFloatElectricalResistanceVector(final float[] values, final ElectricalResistanceUnit unit,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -44,10 +44,10 @@ public class MutableFloatElectricalResistanceVector extends AbstractMutableFloat
      * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float ElectricalResistanceVector
      * @param unit ElectricalResistanceUnit; the unit of the new Relative Immutable Float ElectricalResistanceVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public MutableFloatElectricalResistanceVector(final List<Float> values, final ElectricalResistanceUnit unit,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -57,10 +57,10 @@ public class MutableFloatElectricalResistanceVector extends AbstractMutableFloat
      * @param values FloatElectricalResistance[]; the values of the entries in the new Relative Immutable Float
      *            ElectricalResistanceVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public MutableFloatElectricalResistanceVector(final FloatElectricalResistance[] values, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -70,10 +70,10 @@ public class MutableFloatElectricalResistanceVector extends AbstractMutableFloat
      * @param values List&lt;FloatElectricalResistance&gt;; the values of the entries in the new Relative Immutable Float
      *            ElectricalResistanceVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public MutableFloatElectricalResistanceVector(final List<FloatElectricalResistance> values, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -84,10 +84,10 @@ public class MutableFloatElectricalResistanceVector extends AbstractMutableFloat
      *            Mutable Float ElectricalResistanceVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public MutableFloatElectricalResistanceVector(final SortedMap<Integer, FloatElectricalResistance> values, final int length,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, length, storageType);
     }
@@ -99,10 +99,10 @@ public class MutableFloatElectricalResistanceVector extends AbstractMutableFloat
      * @param unit ElectricalResistanceUnit; the unit of the new Relative Sparse Mutable Float ElectricalResistanceVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public MutableFloatElectricalResistanceVector(final SortedMap<Integer, Float> values, final ElectricalResistanceUnit unit,
-            final int length, final StorageType storageType) throws ValueException
+            final int length, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, length, storageType);
     }
@@ -169,7 +169,7 @@ public class MutableFloatElectricalResistanceVector extends AbstractMutableFloat
             {
                 array[i] = get(i);
             }
-            catch (ValueException exception)
+            catch (ValueRuntimeException exception)
             {
                 throw new RuntimeException(exception);
             }

@@ -1,7 +1,7 @@
 package org.djunits4.value.vfloat.matrix;
 
 import org.djunits4.unit.Unit;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.vfloat.scalar.AbstractFloatScalar;
 
 /**
@@ -29,7 +29,7 @@ public interface FloatMatrixInterface<U extends Unit<U>>
     int columns();
 
     /**
-     * Count the number of cells that have a non-zero value (ignores tolerance).
+     * Count the number of cells that have a non-zero value.
      * @return int; the number of cells having non-zero value
      */
     int cardinality();
@@ -39,29 +39,29 @@ public interface FloatMatrixInterface<U extends Unit<U>>
      * @param row int; row of the value to retrieve
      * @param column int; column of the value to retrieve
      * @return the value as a DoubleScalar
-     * @throws ValueException in case row or column is out of bounds
+     * @throws ValueRuntimeException in case row or column is out of bounds
      */
-    AbstractFloatScalar<U, ?> get(int row, int column) throws ValueException;
+    AbstractFloatScalar<U, ?> get(int row, int column) throws ValueRuntimeException;
 
     /**
      * Retrieve the value stored at a specified row and column in the standard SI unit.
      * @param row int; row of the value to retrieve
      * @param column int; column of the value to retrieve
      * @return float; value at position row, column in the standard SI unit
-     * @throws ValueException when row or column out of range (row &lt; 0 or row &gt;= rows() or column &lt; 0 or column &gt;=
+     * @throws ValueRuntimeException when row or column out of range (row &lt; 0 or row &gt;= rows() or column &lt; 0 or column &gt;=
      *             columns())
      */
-    float getSI(int row, int column) throws ValueException;
+    float getSI(int row, int column) throws ValueRuntimeException;
 
     /**
      * Retrieve the value stored at a specified row and column in the original unit.
      * @param row int; row of the value to retrieve
      * @param column int; column of the value to retrieve
      * @return float; value at position row, column in the original unit
-     * @throws ValueException when row or column out of range (row &lt; 0 or row &gt;= rows() or column &lt; 0 or column &gt;=
+     * @throws ValueRuntimeException when row or column out of range (row &lt; 0 or row &gt;= rows() or column &lt; 0 or column &gt;=
      *             columns())
      */
-    float getInUnit(int row, int column) throws ValueException;
+    float getInUnit(int row, int column) throws ValueRuntimeException;
 
     /**
      * Retrieve the value stored at a specified row and column converted into a specified unit.
@@ -69,10 +69,10 @@ public interface FloatMatrixInterface<U extends Unit<U>>
      * @param column int; column of the value to retrieve
      * @param targetUnit U; the unit for the result
      * @return float; value at position row, column converted into the specified unit
-     * @throws ValueException when row or column out of range (row &lt; 0 or row &gt;= rows() or column &lt; 0 or column &gt;=
+     * @throws ValueRuntimeException when row or column out of range (row &lt; 0 or row &gt;= rows() or column &lt; 0 or column &gt;=
      *             columns())
      */
-    float getInUnit(int row, int column, U targetUnit) throws ValueException;
+    float getInUnit(int row, int column, U targetUnit) throws ValueRuntimeException;
 
     /**
      * Compute the sum of all values of this matrix.
@@ -83,9 +83,9 @@ public interface FloatMatrixInterface<U extends Unit<U>>
     /**
      * Compute the determinant of the matrix.
      * @return float; the determinant of the matrix
-     * @throws ValueException when matrix is neither sparse, nor dense, or not square
+     * @throws ValueRuntimeException when matrix is neither sparse, nor dense, or not square
      */
-    float determinant() throws ValueException;
+    float determinant() throws ValueRuntimeException;
 
     /**
      * Create a dense float[][] array filled with the values in the standard SI unit.

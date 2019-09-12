@@ -2,9 +2,9 @@ package org.djunits4.value.vfloat.scalar;
 
 import org.djunits4.unit.Unit;
 import org.djunits4.value.Absolute;
-import org.djunits4.value.Scalar;
-import org.djunits4.value.ValueUtil;
+import org.djunits4.value.AbstractScalar;
 import org.djunits4.value.formatter.Format;
+import org.djunits4.value.util.ValueUtil;
 
 /**
  * The most basic abstract class for the FloatScalar.
@@ -18,7 +18,7 @@ import org.djunits4.value.formatter.Format;
  * @param <U> the unit
  * @param <T> the type
  */
-public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScalar<U, T>> extends Scalar<U>
+public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScalar<U, T>> extends AbstractScalar<U>
         implements FloatScalarInterface, Comparable<T>
 {
     /** */
@@ -171,7 +171,7 @@ public class AbstractFloatScalar<U extends Unit<U>, T extends AbstractFloatScala
     @Override
     public final float getInUnit()
     {
-        return (float) expressAsSpecifiedUnit(getSI());
+        return (float) ValueUtil.expressAsUnit(getSI(), getUnit());
     }
 
     /**

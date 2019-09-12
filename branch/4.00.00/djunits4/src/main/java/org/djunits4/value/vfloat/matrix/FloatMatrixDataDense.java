@@ -2,8 +2,8 @@ package org.djunits4.value.vfloat.matrix;
 
 import java.util.stream.IntStream;
 
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.FloatFunction;
 
 /**
@@ -25,14 +25,14 @@ public class FloatMatrixDataDense extends FloatMatrixData
      * @param matrixSI float[]; the data to store
      * @param rows int; the number of rows
      * @param cols int; the number of columns
-     * @throws ValueException in case <tt>rows * cols != matrixSI.length</tt>
+     * @throws ValueRuntimeException in case <tt>rows * cols != matrixSI.length</tt>
      */
-    public FloatMatrixDataDense(final float[] matrixSI, final int rows, final int cols) throws ValueException
+    public FloatMatrixDataDense(final float[] matrixSI, final int rows, final int cols) throws ValueRuntimeException
     {
         super(StorageType.DENSE);
         if (rows * cols != matrixSI.length)
         {
-            throw new ValueException("FloatMatrixDataDense constructor, rows * cols != matrixSI.length");
+            throw new ValueRuntimeException("FloatMatrixDataDense constructor, rows * cols != matrixSI.length");
         }
         this.matrixSI = new float[matrixSI.length];
         System.arraycopy(matrixSI, 0, this.matrixSI, 0, matrixSI.length);
@@ -43,14 +43,14 @@ public class FloatMatrixDataDense extends FloatMatrixData
     /**
      * Create a matrix with dense data.
      * @param matrixSI float[][]; the data to store
-     * @throws ValueException in case matrix is ragged
+     * @throws ValueRuntimeException in case matrix is ragged
      */
-    public FloatMatrixDataDense(final float[][] matrixSI) throws ValueException
+    public FloatMatrixDataDense(final float[][] matrixSI) throws ValueRuntimeException
     {
         super(StorageType.DENSE);
         if (matrixSI == null || matrixSI.length == 0)
         {
-            throw new ValueException("FloatMatrixDataDense constructor, matrixSI == null || matrixSI.length == 0");
+            throw new ValueRuntimeException("FloatMatrixDataDense constructor, matrixSI == null || matrixSI.length == 0");
         }
         this.rows = matrixSI.length;
         this.cols = matrixSI[0].length;
@@ -60,7 +60,7 @@ public class FloatMatrixDataDense extends FloatMatrixData
             float[] row = matrixSI[r];
             if (row.length != this.cols)
             {
-                throw new ValueException("FloatMatrixDataDense constructor, ragged matrix");
+                throw new ValueRuntimeException("FloatMatrixDataDense constructor, ragged matrix");
             }
             System.arraycopy(row, 0, this.matrixSI, r * this.cols, row.length);
         }
@@ -154,7 +154,7 @@ public class FloatMatrixDataDense extends FloatMatrixData
         {
             return new FloatMatrixDataDense(getDenseMatrixSI());
         }
-        catch (ValueException exception)
+        catch (ValueRuntimeException exception)
         {
             throw new RuntimeException(exception); // should not happen -- original is not ragged...
         }
@@ -162,7 +162,7 @@ public class FloatMatrixDataDense extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final void incrementBy(final FloatMatrixData right) throws ValueException
+    public final void incrementBy(final FloatMatrixData right) throws ValueRuntimeException
     {
         IntStream.range(0, this.rows).parallel().forEach(
                 r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] += right.getSI(r, c)));
@@ -177,7 +177,7 @@ public class FloatMatrixDataDense extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final void decrementBy(final FloatMatrixData right) throws ValueException
+    public final void decrementBy(final FloatMatrixData right) throws ValueRuntimeException
     {
         IntStream.range(0, this.rows).parallel().forEach(
                 r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] -= right.getSI(r, c)));
@@ -192,7 +192,7 @@ public class FloatMatrixDataDense extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final void multiplyBy(final FloatMatrixData right) throws ValueException
+    public final void multiplyBy(final FloatMatrixData right) throws ValueRuntimeException
     {
         IntStream.range(0, this.rows).parallel().forEach(
                 r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] *= right.getSI(r, c)));
@@ -207,7 +207,7 @@ public class FloatMatrixDataDense extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final void divideBy(final FloatMatrixData right) throws ValueException
+    public final void divideBy(final FloatMatrixData right) throws ValueRuntimeException
     {
         IntStream.range(0, this.rows).parallel().forEach(
                 r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] /= right.getSI(r, c)));

@@ -6,8 +6,8 @@ import java.util.SortedMap;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.ElectricalCapacitanceUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatElectricalCapacitance;
 
 /**
@@ -19,7 +19,7 @@ import org.djunits4.value.vfloat.scalar.FloatElectricalCapacitance;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.243Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class MutableFloatElectricalCapacitanceVector extends AbstractMutableFloatVectorRel<ElectricalCapacitanceUnit,
         FloatElectricalCapacitanceVector, MutableFloatElectricalCapacitanceVector, FloatElectricalCapacitance>
 {
@@ -31,10 +31,10 @@ public class MutableFloatElectricalCapacitanceVector extends AbstractMutableFloa
      * @param values float[]; the values of the entries in the new Relative Immutable Float ElectricalCapacitanceVector
      * @param unit ElectricalCapacitanceUnit; the unit of the new Relative Immutable Float ElectricalCapacitanceVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public MutableFloatElectricalCapacitanceVector(final float[] values, final ElectricalCapacitanceUnit unit,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -45,10 +45,10 @@ public class MutableFloatElectricalCapacitanceVector extends AbstractMutableFloa
      *            ElectricalCapacitanceVector
      * @param unit ElectricalCapacitanceUnit; the unit of the new Relative Immutable Float ElectricalCapacitanceVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public MutableFloatElectricalCapacitanceVector(final List<Float> values, final ElectricalCapacitanceUnit unit,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -58,10 +58,10 @@ public class MutableFloatElectricalCapacitanceVector extends AbstractMutableFloa
      * @param values FloatElectricalCapacitance[]; the values of the entries in the new Relative Immutable Float
      *            ElectricalCapacitanceVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public MutableFloatElectricalCapacitanceVector(final FloatElectricalCapacitance[] values, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -71,10 +71,10 @@ public class MutableFloatElectricalCapacitanceVector extends AbstractMutableFloa
      * @param values List&lt;FloatElectricalCapacitance&gt;; the values of the entries in the new Relative Immutable Float
      *            ElectricalCapacitanceVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public MutableFloatElectricalCapacitanceVector(final List<FloatElectricalCapacitance> values, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -85,10 +85,10 @@ public class MutableFloatElectricalCapacitanceVector extends AbstractMutableFloa
      *            Mutable Float ElectricalCapacitanceVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public MutableFloatElectricalCapacitanceVector(final SortedMap<Integer, FloatElectricalCapacitance> values,
-            final int length, final StorageType storageType) throws ValueException
+            final int length, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, length, storageType);
     }
@@ -100,10 +100,10 @@ public class MutableFloatElectricalCapacitanceVector extends AbstractMutableFloa
      * @param unit ElectricalCapacitanceUnit; the unit of the new Relative Sparse Mutable Float ElectricalCapacitanceVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public MutableFloatElectricalCapacitanceVector(final SortedMap<Integer, Float> values, final ElectricalCapacitanceUnit unit,
-            final int length, final StorageType storageType) throws ValueException
+            final int length, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, length, storageType);
     }
@@ -170,7 +170,7 @@ public class MutableFloatElectricalCapacitanceVector extends AbstractMutableFloa
             {
                 array[i] = get(i);
             }
-            catch (ValueException exception)
+            catch (ValueRuntimeException exception)
             {
                 throw new RuntimeException(exception);
             }

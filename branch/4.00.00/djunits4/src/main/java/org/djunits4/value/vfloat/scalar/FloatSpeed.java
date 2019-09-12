@@ -24,7 +24,7 @@ import org.djunits4.unit.SpeedUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.149Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 {
     /** */

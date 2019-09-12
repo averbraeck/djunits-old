@@ -3,8 +3,8 @@ package org.djunits4.value.vfloat.scalar;
 import org.djunits4.unit.AbsoluteLinearUnit;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.Absolute;
-import org.djunits4.value.MathFunctionsAbs;
-import org.djunits4.value.ValueUtil;
+import org.djunits4.value.function.MathFunctionsAbs;
+import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vfloat.FloatMathFunctions;
 
 /**

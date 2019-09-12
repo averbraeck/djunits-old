@@ -7,8 +7,8 @@ import javax.annotation.Generated;
 
 import org.djunits4.unit.DurationUnit;
 import org.djunits4.unit.TimeUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatTime;
 
 /**
@@ -20,7 +20,7 @@ import org.djunits4.value.vfloat.scalar.FloatTime;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.197Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class FloatTimeVector extends
         AbstractFloatVectorAbs<TimeUnit, DurationUnit, FloatTimeVector, FloatDurationVector, MutableFloatTimeVector, FloatTime>
 {
@@ -32,9 +32,9 @@ public class FloatTimeVector extends
      * @param values float[]; the values of the entries in the new Absolute Immutable FloatTimeVector
      * @param unit TimeUnit; the unit of the new Absolute Immutable FloatTimeVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
-    public FloatTimeVector(final float[] values, final TimeUnit unit, final StorageType storageType) throws ValueException
+    public FloatTimeVector(final float[] values, final TimeUnit unit, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -44,9 +44,9 @@ public class FloatTimeVector extends
      * @param values List&lt;Float&gt;; the values of the entries in the new Absolute Immutable FloatTimeVector
      * @param unit TimeUnit; the unit of the new Absolute Immutable FloatTimeVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
-    public FloatTimeVector(final List<Float> values, final TimeUnit unit, final StorageType storageType) throws ValueException
+    public FloatTimeVector(final List<Float> values, final TimeUnit unit, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -55,9 +55,9 @@ public class FloatTimeVector extends
      * Construct a new Absolute Immutable FloatTimeVector.
      * @param values FloatTime[]; the values of the entries in the new Absolute Immutable FloatTimeVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public FloatTimeVector(final FloatTime[] values, final StorageType storageType) throws ValueException
+    public FloatTimeVector(final FloatTime[] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -66,9 +66,9 @@ public class FloatTimeVector extends
      * Construct a new Absolute Immutable FloatTimeVector.
      * @param values List&lt;FloatTime&gt;; the values of the entries in the new Absolute Immutable FloatTimeVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public FloatTimeVector(final List<FloatTime> values, final StorageType storageType) throws ValueException
+    public FloatTimeVector(final List<FloatTime> values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -79,10 +79,10 @@ public class FloatTimeVector extends
      *            FloatTimeVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public FloatTimeVector(final SortedMap<Integer, FloatTime> values, final int length, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, length, storageType);
     }
@@ -94,10 +94,10 @@ public class FloatTimeVector extends
      * @param unit TimeUnit; the unit of the new Absolute Sparse Mutable FloatTimeVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatTimeVector(final SortedMap<Integer, Float> values, final TimeUnit unit, final int length,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, length, storageType);
     }
@@ -168,7 +168,7 @@ public class FloatTimeVector extends
             {
                 array[i] = get(i);
             }
-            catch (ValueException exception)
+            catch (ValueRuntimeException exception)
             {
                 throw new RuntimeException(exception);
             }

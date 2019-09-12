@@ -6,8 +6,8 @@ import java.util.SortedMap;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.PowerUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatPower;
 
 /**
@@ -19,7 +19,7 @@ import org.djunits4.value.vfloat.scalar.FloatPower;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.243Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class MutableFloatPowerVector
         extends AbstractMutableFloatVectorRel<PowerUnit, FloatPowerVector, MutableFloatPowerVector, FloatPower>
 {
@@ -31,10 +31,10 @@ public class MutableFloatPowerVector
      * @param values float[]; the values of the entries in the new Relative Immutable Float PowerVector
      * @param unit PowerUnit; the unit of the new Relative Immutable Float PowerVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public MutableFloatPowerVector(final float[] values, final PowerUnit unit, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -44,10 +44,10 @@ public class MutableFloatPowerVector
      * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float PowerVector
      * @param unit PowerUnit; the unit of the new Relative Immutable Float PowerVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public MutableFloatPowerVector(final List<Float> values, final PowerUnit unit, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -56,9 +56,9 @@ public class MutableFloatPowerVector
      * Construct a new Relative Immutable Float PowerVector.
      * @param values FloatPower[]; the values of the entries in the new Relative Immutable Float PowerVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public MutableFloatPowerVector(final FloatPower[] values, final StorageType storageType) throws ValueException
+    public MutableFloatPowerVector(final FloatPower[] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -67,9 +67,9 @@ public class MutableFloatPowerVector
      * Construct a new Relative Immutable Float PowerVector.
      * @param values List&lt;FloatPower&gt;; the values of the entries in the new Relative Immutable Float PowerVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public MutableFloatPowerVector(final List<FloatPower> values, final StorageType storageType) throws ValueException
+    public MutableFloatPowerVector(final List<FloatPower> values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -80,10 +80,10 @@ public class MutableFloatPowerVector
      *            PowerVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public MutableFloatPowerVector(final SortedMap<Integer, FloatPower> values, final int length, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, length, storageType);
     }
@@ -95,10 +95,10 @@ public class MutableFloatPowerVector
      * @param unit PowerUnit; the unit of the new Relative Sparse Mutable Float PowerVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public MutableFloatPowerVector(final SortedMap<Integer, Float> values, final PowerUnit unit, final int length,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, length, storageType);
     }
@@ -161,7 +161,7 @@ public class MutableFloatPowerVector
             {
                 array[i] = get(i);
             }
-            catch (ValueException exception)
+            catch (ValueRuntimeException exception)
             {
                 throw new RuntimeException(exception);
             }

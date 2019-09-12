@@ -1,7 +1,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessVector acos()
+    public final DimensionlessVector acos()
     {
         assign(DoubleMathFunctions.ACOS);
         return this;
@@ -9,7 +9,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessVector asin()
+    public final DimensionlessVector asin()
     {
         assign(DoubleMathFunctions.ASIN);
         return this;
@@ -17,7 +17,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessVector atan()
+    public final DimensionlessVector atan()
     {
         assign(DoubleMathFunctions.ATAN);
         return this;
@@ -25,7 +25,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessVector cbrt()
+    public final DimensionlessVector cbrt()
     {
         assign(DoubleMathFunctions.CBRT);
         return this;
@@ -33,7 +33,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessVector cos()
+    public final DimensionlessVector cos()
     {
         assign(DoubleMathFunctions.COS);
         return this;
@@ -41,7 +41,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessVector cosh()
+    public final DimensionlessVector cosh()
     {
         assign(DoubleMathFunctions.COSH);
         return this;
@@ -49,7 +49,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessVector exp()
+    public final DimensionlessVector exp()
     {
         assign(DoubleMathFunctions.EXP);
         return this;
@@ -57,7 +57,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessVector expm1()
+    public final DimensionlessVector expm1()
     {
         assign(DoubleMathFunctions.EXPM1);
         return this;
@@ -65,7 +65,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessVector log()
+    public final DimensionlessVector log()
     {
         assign(DoubleMathFunctions.LOG);
         return this;
@@ -73,7 +73,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessVector log10()
+    public final DimensionlessVector log10()
     {
         assign(DoubleMathFunctions.LOG10);
         return this;
@@ -81,7 +81,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessVector log1p()
+    public final DimensionlessVector log1p()
     {
         assign(DoubleMathFunctions.LOG1P);
         return this;
@@ -89,7 +89,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessVector pow(final double x)
+    public final DimensionlessVector pow(final double x)
     {
         assign(DoubleMathFunctions.POW((float) x));
         return this;
@@ -97,7 +97,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessVector signum()
+    public final DimensionlessVector signum()
     {
         assign(DoubleMathFunctions.SIGNUM);
         return this;
@@ -105,7 +105,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessVector sin()
+    public final DimensionlessVector sin()
     {
         assign(DoubleMathFunctions.SIN);
         return this;
@@ -113,7 +113,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessVector sinh()
+    public final DimensionlessVector sinh()
     {
         assign(DoubleMathFunctions.SINH);
         return this;
@@ -121,7 +121,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessVector sqrt()
+    public final DimensionlessVector sqrt()
     {
         assign(DoubleMathFunctions.SQRT);
         return this;
@@ -129,7 +129,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessVector tan()
+    public final DimensionlessVector tan()
     {
         assign(DoubleMathFunctions.TAN);
         return this;
@@ -137,7 +137,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessVector tanh()
+    public final DimensionlessVector tanh()
     {
         assign(DoubleMathFunctions.TANH);
         return this;
@@ -145,7 +145,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessVector inv()
+    public final DimensionlessVector inv()
     {
         assign(DoubleMathFunctions.INV);
         return this;

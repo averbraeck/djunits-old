@@ -6,8 +6,8 @@ import java.util.SortedMap;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.CatalyticActivityUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatCatalyticActivity;
 
 /**
@@ -19,7 +19,7 @@ import org.djunits4.value.vfloat.scalar.FloatCatalyticActivity;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.212Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class FloatCatalyticActivityVector extends AbstractFloatVectorRel<CatalyticActivityUnit, FloatCatalyticActivityVector,
         MutableFloatCatalyticActivityVector, FloatCatalyticActivity>
 {
@@ -31,10 +31,10 @@ public class FloatCatalyticActivityVector extends AbstractFloatVectorRel<Catalyt
      * @param values float[]; the values of the entries in the new Relative Immutable Float FloatCatalyticActivityVector
      * @param unit CatalyticActivityUnit; the unit of the new Relative Immutable Float FloatCatalyticActivityVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatCatalyticActivityVector(final float[] values, final CatalyticActivityUnit unit, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -45,10 +45,10 @@ public class FloatCatalyticActivityVector extends AbstractFloatVectorRel<Catalyt
      *            FloatCatalyticActivityVector
      * @param unit CatalyticActivityUnit; the unit of the new Relative Immutable Float FloatCatalyticActivityVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatCatalyticActivityVector(final List<Float> values, final CatalyticActivityUnit unit,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -58,10 +58,10 @@ public class FloatCatalyticActivityVector extends AbstractFloatVectorRel<Catalyt
      * @param values FloatCatalyticActivity[]; the values of the entries in the new Relative Immutable Float
      *            FloatCatalyticActivityVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public FloatCatalyticActivityVector(final FloatCatalyticActivity[] values, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -71,10 +71,10 @@ public class FloatCatalyticActivityVector extends AbstractFloatVectorRel<Catalyt
      * @param values List&lt;FloatCatalyticActivity&gt;; the values of the entries in the new Relative Immutable Float
      *            FloatCatalyticActivityVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public FloatCatalyticActivityVector(final List<FloatCatalyticActivity> values, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -85,10 +85,10 @@ public class FloatCatalyticActivityVector extends AbstractFloatVectorRel<Catalyt
      *            Mutable Float FloatCatalyticActivityVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public FloatCatalyticActivityVector(final SortedMap<Integer, FloatCatalyticActivity> values, final int length,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, length, storageType);
     }
@@ -100,10 +100,10 @@ public class FloatCatalyticActivityVector extends AbstractFloatVectorRel<Catalyt
      * @param unit CatalyticActivityUnit; the unit of the new Relative Sparse Mutable Float FloatCatalyticActivityVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatCatalyticActivityVector(final SortedMap<Integer, Float> values, final CatalyticActivityUnit unit,
-            final int length, final StorageType storageType) throws ValueException
+            final int length, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, length, storageType);
     }
@@ -167,7 +167,7 @@ public class FloatCatalyticActivityVector extends AbstractFloatVectorRel<Catalyt
             {
                 array[i] = get(i);
             }
-            catch (ValueException exception)
+            catch (ValueRuntimeException exception)
             {
                 throw new RuntimeException(exception);
             }

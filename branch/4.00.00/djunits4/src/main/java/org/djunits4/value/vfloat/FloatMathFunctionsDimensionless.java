@@ -1,6 +1,6 @@
 package org.djunits4.value.vfloat;
 
-import org.djunits4.value.MathFunctionsDimensionless;
+import org.djunits4.value.function.DimensionlessFunctions;
 
 /**
  * <p>
@@ -12,7 +12,7 @@ import org.djunits4.value.MathFunctionsDimensionless;
  * @author <a href="https://www.transport.citg.tudelft.nl">Wouter Schakel</a>
  * @param <T> the return type
  */
-public interface FloatMathFunctionsDimensionless<T> extends MathFunctionsDimensionless<T>
+public interface FloatMathFunctionsDimensionless<T> extends DimensionlessFunctions<T>
 {
     /**
      * Execute a function on a cell by cell basis. Note: because many functions have to act on zero cells or can generate cells

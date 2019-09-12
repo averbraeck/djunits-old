@@ -10,9 +10,9 @@ import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.PositionUnit;
 import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.Unit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
-import org.djunits4.value.vdouble.scalar.DoubleScalar;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.scalar.base.DoubleScalar;
 import org.junit.Test;
 
 /**
@@ -71,7 +71,7 @@ public class DoubleMatrixDenseTest
                 {
                     assertEquals("Value should match", reference[row][column], dm.getInUnit(row, column), precision);
                 }
-                catch (ValueException exception)
+                catch (ValueRuntimeException exception)
                 {
                     fail("Unexpected exception");
                 }
@@ -119,7 +119,7 @@ public class DoubleMatrixDenseTest
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Immutable"));
             assertTrue("toString contains \"Dense\"", result.contains("Dense"));
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -143,7 +143,7 @@ public class DoubleMatrixDenseTest
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Mutable"));
             assertTrue("toString contains \"Dense\"", result.contains("Dense"));
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -212,7 +212,7 @@ public class DoubleMatrixDenseTest
             }
             assertEquals("zSum should be sum of all values", sum, temperatureDM.zSum(), 0.001);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -259,7 +259,7 @@ public class DoubleMatrixDenseTest
             checkContentsAndType(mdm, value, 0.001, tempUnit, true);
             assertEquals("value should be about -273", -273, mmdm.getInUnit(0, 0, tempUnit), 0.2);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -278,7 +278,7 @@ public class DoubleMatrixDenseTest
         assertTrue("Equal to itself", dm.equals(dm));
         assertFalse("Not equal to null", dm.equals(null));
         assertFalse("Not equal to some other kind of object; e.g. a String", dm.equals(new String("abc")));
-        DoubleScalar.Rel<LengthUnit> dmCounterPart = new DoubleScalar.Rel<LengthUnit>(value, lengthUnit);
+        DoubleScalar.ImmutableRel<LengthUnit> dmCounterPart = new DoubleScalar.ImmutableRel<LengthUnit>(value, lengthUnit);
         assertFalse("Not equal if one Absolute and other Relative", dm.equals(dmCounterPart));
         DoubleScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit> dmWrongBaseUnit =
                 new DoubleScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, AbsoluteTemperatureUnit.KELVIN);
@@ -347,7 +347,7 @@ public class DoubleMatrixDenseTest
                     }
                 });
             }
-            catch (ValueException ve)
+            catch (ValueRuntimeException ve)
             {
                 fail("Caught unexpected ValueException: " + ve.toString());
             }
@@ -366,8 +366,8 @@ public class DoubleMatrixDenseTest
             double[][] rightValue = data(3, 5, false, 234.5);
             DoubleMatrix.Abs<PositionUnit, LengthUnit> left =
                     new DoubleMatrix.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.Rel<LengthUnit> right =
-                    new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            DoubleMatrix.ImmutableRel<LengthUnit> right =
+                    new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             DoubleMatrix.Abs<?, ?> result = DoubleMatrix.plus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -378,7 +378,7 @@ public class DoubleMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -396,8 +396,8 @@ public class DoubleMatrixDenseTest
             double[][] rightValue = data(3, 5, false, 234.5);
             DoubleMatrix.Abs<PositionUnit, LengthUnit> left =
                     new DoubleMatrix.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.Rel<LengthUnit> right =
-                    new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            DoubleMatrix.ImmutableRel<LengthUnit> right =
+                    new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             DoubleMatrix.Abs<?, ?> result = DoubleMatrix.minus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -408,7 +408,7 @@ public class DoubleMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -426,8 +426,8 @@ public class DoubleMatrixDenseTest
             double[][] rightValue = data(3, 5, false, 234.5);
             DoubleMatrix.Abs<PositionUnit, LengthUnit> left =
                     new DoubleMatrix.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.Rel<LengthUnit> right =
-                    new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            DoubleMatrix.ImmutableRel<LengthUnit> right =
+                    new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
             DoubleMatrix.Abs<?, ?> result = DoubleMatrix.plus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -438,7 +438,7 @@ public class DoubleMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -456,8 +456,8 @@ public class DoubleMatrixDenseTest
             double[][] rightValue = data(3, 5, false, 234.5);
             DoubleMatrix.Abs<PositionUnit, LengthUnit> left =
                     new DoubleMatrix.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.Rel<LengthUnit> right =
-                    new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            DoubleMatrix.ImmutableRel<LengthUnit> right =
+                    new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
             DoubleMatrix.Abs<?, ?> result = DoubleMatrix.minus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -468,7 +468,7 @@ public class DoubleMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -488,7 +488,7 @@ public class DoubleMatrixDenseTest
                     AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT, StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -502,7 +502,7 @@ public class DoubleMatrixDenseTest
                     StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -516,7 +516,7 @@ public class DoubleMatrixDenseTest
                     StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -529,7 +529,7 @@ public class DoubleMatrixDenseTest
                     StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -544,14 +544,14 @@ public class DoubleMatrixDenseTest
                 matrix = new DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(in,
                         AbsoluteTemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
             }
-            catch (ValueException ve)
+            catch (ValueRuntimeException ve)
             {
                 fail("Caught unexpected exception: " + ve.toString());
             }
             matrix.determinant();
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -573,7 +573,7 @@ public class DoubleMatrixDenseTest
                             StorageType.DENSE);
             assertEquals("Determinant should be 15", 15, matrix.determinant(), 0.001);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             if (ve.toString().contains("Matrix must be sparse"))
             {
@@ -594,14 +594,14 @@ public class DoubleMatrixDenseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             double[][] value = data(3, 5, false, 38.0);
-            DoubleMatrix.Rel<TemperatureUnit> dm = new DoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            DoubleMatrix.ImmutableRel<TemperatureUnit> dm = new DoubleMatrix.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             String result = dm.toString(true, true);
             assertTrue("toString result contains \" Rel \"", result.contains(" Rel "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Immutable"));
             assertTrue("toString contains \"Dense\"", result.contains("Dense"));
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -617,15 +617,15 @@ public class DoubleMatrixDenseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             double[][] value = data(3, 5, false, 38.0);
-            MutableDoubleMatrix.Rel<TemperatureUnit> dm =
-                    new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            MutableDoubleMatrix.ImmutableRel<TemperatureUnit> dm =
+                    new MutableDoubleMatrix.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             String result = dm.toString(true, true);
             assertTrue("toString result contains \" Rel \"", result.contains(" Rel "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
             assertTrue("toString result starts with \"Mutable \"", result.startsWith("Mutable"));
             assertTrue("toString contains \"Dense\"", result.contains("Dense"));
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -642,42 +642,42 @@ public class DoubleMatrixDenseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
             double[][] value = data(3, 5, false, 38.0);
-            DoubleMatrix.Rel<TemperatureUnit> temperatureDM =
-                    new DoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            DoubleMatrix.ImmutableRel<TemperatureUnit> temperatureDM =
+                    new DoubleMatrix.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             checkContentsAndType(temperatureDM, value, 0.001, tempUnit, false);
             assertEquals("Value in SI is equivalent in Kelvin", 38.0, temperatureDM.getSI(0, 0), 0.05);
             assertEquals("Value in Fahrenheit", 38.0 * 9.0 / 5.0,
                     temperatureDM.getInUnit(0, 0, TemperatureUnit.DEGREE_FAHRENHEIT), 0.1);
             compareMatrix(value, temperatureDM.getValuesInUnit());
-            MutableDoubleMatrix.Rel<TemperatureUnit> mdm =
-                    new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            MutableDoubleMatrix.ImmutableRel<TemperatureUnit> mdm =
+                    new MutableDoubleMatrix.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             checkContentsAndType(mdm, value, 0.001, tempUnit, false);
-            DoubleMatrix.Rel<TemperatureUnit> temperature2DM = new DoubleMatrix.Rel<TemperatureUnit>(
+            DoubleMatrix.ImmutableRel<TemperatureUnit> temperature2DM = new DoubleMatrix.ImmutableRel<TemperatureUnit>(
                     temperatureDM.getValuesSI(), TemperatureUnit.KELVIN, StorageType.DENSE);
             assertTrue("temperature2DM should be equal to temperatureDM", temperature2DM.equals(temperatureDM));
             assertTrue("Value is Relative", temperatureDM.isRelative());
             assertFalse("Value is not Absolute", temperatureDM.isAbsolute());
-            temperatureDM = new DoubleMatrix.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN, StorageType.DENSE);
+            temperatureDM = new DoubleMatrix.ImmutableRel<TemperatureUnit>(value, TemperatureUnit.KELVIN, StorageType.DENSE);
             checkContentsAndType(temperatureDM, value, 0.001, TemperatureUnit.KELVIN, false);
             compareMatrix(value, temperatureDM.getValuesSI());
-            DoubleScalar.Rel<TemperatureUnit>[][] scalar = new DoubleScalar.Rel[value.length][];
+            DoubleScalar.ImmutableRel<TemperatureUnit>[][] scalar = new DoubleScalar.ImmutableRel[value.length][];
             for (int row = 0; row < value.length; row++)
             {
-                scalar[row] = new DoubleScalar.Rel[value[row].length];
+                scalar[row] = new DoubleScalar.ImmutableRel[value[row].length];
                 for (int column = 0; column < value[row].length; column++)
                 {
                     scalar[row][column] =
-                            new DoubleScalar.Rel<TemperatureUnit>(value[row][column], TemperatureUnit.DEGREE_CELSIUS);
+                            new DoubleScalar.ImmutableRel<TemperatureUnit>(value[row][column], TemperatureUnit.DEGREE_CELSIUS);
                 }
             }
-            temperatureDM = new DoubleMatrix.Rel<TemperatureUnit>(scalar, StorageType.DENSE);
+            temperatureDM = new DoubleMatrix.ImmutableRel<TemperatureUnit>(scalar, StorageType.DENSE);
             checkContentsAndType(temperatureDM, value, 0.001, tempUnit, false);
             assertEquals("All cells != 0; cardinality should equal number of cells", value.length * value[0].length,
                     temperatureDM.cardinality());
             double sum = 0;
             for (int row = 0; row < value.length; row++)
             {
-                scalar[row] = new DoubleScalar.Rel[value[row].length];
+                scalar[row] = new DoubleScalar.ImmutableRel[value[row].length];
                 for (int column = 0; column < value[row].length; column++)
                 {
                     sum += temperatureDM.getSI(row, column);
@@ -685,7 +685,7 @@ public class DoubleMatrixDenseTest
             }
             assertEquals("zSum should be sum of all values", sum, temperatureDM.zSum(), 0.001);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -703,15 +703,15 @@ public class DoubleMatrixDenseTest
             double[][] value = data(3, 5, false, 38.0);
             double[][] value2 = data(3, 5, false, 38.0);
             value2[0][0] = 12345;
-            DoubleMatrix.Rel<TemperatureUnit> dm = new DoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            DoubleMatrix.Rel<TemperatureUnit> dmCopy = dm;
-            MutableDoubleMatrix.Rel<TemperatureUnit> mdm = dm.mutable();
+            DoubleMatrix.ImmutableRel<TemperatureUnit> dm = new DoubleMatrix.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            DoubleMatrix.ImmutableRel<TemperatureUnit> dmCopy = dm;
+            MutableDoubleMatrix.ImmutableRel<TemperatureUnit> mdm = dm.mutable();
             checkContentsAndType(dm, value, 0.001, tempUnit, false);
             checkContentsAndType(mdm, value, 0.001, tempUnit, false);
             checkContentsAndType(dmCopy, value, 0.001, tempUnit, false);
-            MutableDoubleMatrix.Rel<TemperatureUnit> mdmCopy = mdm.copy();
+            MutableDoubleMatrix.ImmutableRel<TemperatureUnit> mdmCopy = mdm.copy();
             checkContentsAndType(mdmCopy, value, 0.001, tempUnit, false);
-            MutableDoubleMatrix.Rel<TemperatureUnit> mmdm = mdm.mutable();
+            MutableDoubleMatrix.ImmutableRel<TemperatureUnit> mmdm = mdm.mutable();
             checkContentsAndType(mmdm, value, 0.001, tempUnit, false);
             assertEquals("hashCode is independent on mutability", dm.hashCode(), mdm.hashCode());
             // Modify mdm
@@ -720,7 +720,7 @@ public class DoubleMatrixDenseTest
             checkContentsAndType(mdm, value2, 0.01, tempUnit, false);
             checkContentsAndType(mdmCopy, value, 0.001, tempUnit, false);
             checkContentsAndType(mmdm, value, 0.001, tempUnit, false);
-            DoubleMatrix.Rel<TemperatureUnit> idm = mdm.immutable();
+            DoubleMatrix.ImmutableRel<TemperatureUnit> idm = mdm.immutable();
             assertTrue("Different value extremely likely results in different hashCode", dm.hashCode() != mdm.hashCode());
             // Restore value of mdm
             mdm.setSI(0, 0, dm.getSI(0, 0));
@@ -729,10 +729,10 @@ public class DoubleMatrixDenseTest
             checkContentsAndType(mmdm, value, 0.001, tempUnit, false);
             mmdm.setSI(0, 0, 0);
             checkContentsAndType(mdm, value, 0.001, tempUnit, false);
-            mdm.set(0, 0, new DoubleScalar.Rel<TemperatureUnit>(value2[0][0], TemperatureUnit.KELVIN));
+            mdm.set(0, 0, new DoubleScalar.ImmutableRel<TemperatureUnit>(value2[0][0], TemperatureUnit.KELVIN));
             checkContentsAndType(mdm, value2, 0.01, tempUnit, false);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -747,21 +747,21 @@ public class DoubleMatrixDenseTest
         LengthUnit lengthUnit = LengthUnit.METER;
         PositionUnit positionUnit = PositionUnit.DEFAULT;
         double value = 38.0;
-        DoubleScalar.Rel<LengthUnit> dm = new DoubleScalar.Rel<LengthUnit>(value, lengthUnit);
+        DoubleScalar.ImmutableRel<LengthUnit> dm = new DoubleScalar.ImmutableRel<LengthUnit>(value, lengthUnit);
         assertTrue("Equal to itself", dm.equals(dm));
         assertFalse("Not equal to null", dm.equals(null));
         assertFalse("Not equal to some other kind of object; e.g. a String", dm.equals(new String("abc")));
         DoubleScalar.Abs<PositionUnit, LengthUnit> dmCounterPart =
                 new DoubleScalar.Abs<PositionUnit, LengthUnit>(value, positionUnit);
         assertFalse("Not equal if one Absolute and other Relative", dm.equals(dmCounterPart));
-        DoubleScalar.Rel<TemperatureUnit> dmWrongBaseUnit =
-                new DoubleScalar.Rel<TemperatureUnit>(value, TemperatureUnit.KELVIN);
+        DoubleScalar.ImmutableRel<TemperatureUnit> dmWrongBaseUnit =
+                new DoubleScalar.ImmutableRel<TemperatureUnit>(value, TemperatureUnit.KELVIN);
         assertEquals("The underlying SI values are the same", dm.getSI(), dmWrongBaseUnit.getSI(), 0.0001);
         assertFalse("Not equals because the standard SI unit differs", dm.equals(dmWrongBaseUnit));
-        DoubleScalar.Rel<LengthUnit> dmCompatibleUnit = new DoubleScalar.Rel<LengthUnit>(38000.0, LengthUnit.MILLIMETER);
+        DoubleScalar.ImmutableRel<LengthUnit> dmCompatibleUnit = new DoubleScalar.ImmutableRel<LengthUnit>(38000.0, LengthUnit.MILLIMETER);
         assertFalse("Units are different", dm.getUnit().equals(dmCompatibleUnit.getUnit()));
         assertTrue("equals returns true", dm.equals(dmCompatibleUnit));
-        DoubleScalar.Rel<LengthUnit> dmDifferentValue = new DoubleScalar.Rel<LengthUnit>(123.456, LengthUnit.MILLIMETER);
+        DoubleScalar.ImmutableRel<LengthUnit> dmDifferentValue = new DoubleScalar.ImmutableRel<LengthUnit>(123.456, LengthUnit.MILLIMETER);
         assertFalse("Different value makes equals return false", dm.equals(dmDifferentValue));
     }
 
@@ -775,10 +775,10 @@ public class DoubleMatrixDenseTest
         for (double seedValue : seedValues)
         {
             double[][] input = data(3, 5, false, seedValue);
-            MutableDoubleMatrix.Rel<LengthUnit> dm;
+            MutableDoubleMatrix.ImmutableRel<LengthUnit> dm;
             try
             {
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm = new MutableDoubleMatrix.ImmutableRel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
                 dm.abs();
                 MathTester.tester(input, "abs", dm, 0.001, new DoubleToDouble()
                 {
@@ -788,8 +788,8 @@ public class DoubleMatrixDenseTest
                         return Math.abs(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm = new MutableDoubleMatrix.ImmutableRel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm = new MutableDoubleMatrix.ImmutableRel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
                 dm.ceil();
                 MathTester.tester(input, "ceil", dm, 0.001, new DoubleToDouble()
                 {
@@ -799,7 +799,7 @@ public class DoubleMatrixDenseTest
                         return Math.ceil(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm = new MutableDoubleMatrix.ImmutableRel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
                 dm.floor();
                 MathTester.tester(input, "floor", dm, 0.001, new DoubleToDouble()
                 {
@@ -809,7 +809,7 @@ public class DoubleMatrixDenseTest
                         return Math.floor(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm = new MutableDoubleMatrix.ImmutableRel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
                 dm.rint();
                 MathTester.tester(input, "rint", dm, 0.001, new DoubleToDouble()
                 {
@@ -819,7 +819,7 @@ public class DoubleMatrixDenseTest
                         return Math.rint(d);
                     }
                 });
-                dm = new MutableDoubleMatrix.Rel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
+                dm = new MutableDoubleMatrix.ImmutableRel<LengthUnit>(input, LengthUnit.METER, StorageType.DENSE);
                 dm.round();
                 MathTester.tester(input, "round", dm, 0.001, new DoubleToDouble()
                 {
@@ -830,7 +830,7 @@ public class DoubleMatrixDenseTest
                     }
                 });
             }
-            catch (ValueException ve)
+            catch (ValueRuntimeException ve)
             {
                 fail("Caught unexpected ValueException: " + ve.toString());
             }
@@ -847,10 +847,10 @@ public class DoubleMatrixDenseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Rel<LengthUnit> left = new DoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.Rel<LengthUnit> right =
-                    new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.Rel<?> result = DoubleMatrix.plus(left, right);
+            DoubleMatrix.ImmutableRel<LengthUnit> left = new DoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            DoubleMatrix.ImmutableRel<LengthUnit> right =
+                    new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            DoubleMatrix.ImmutableRel<?> result = DoubleMatrix.plus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
@@ -860,7 +860,7 @@ public class DoubleMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -876,10 +876,10 @@ public class DoubleMatrixDenseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Rel<LengthUnit> left = new DoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.Rel<LengthUnit> right =
-                    new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.Rel<?> result = DoubleMatrix.minus(left, right);
+            DoubleMatrix.ImmutableRel<LengthUnit> left = new DoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            DoubleMatrix.ImmutableRel<LengthUnit> right =
+                    new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            DoubleMatrix.ImmutableRel<?> result = DoubleMatrix.minus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
@@ -889,7 +889,7 @@ public class DoubleMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -905,10 +905,10 @@ public class DoubleMatrixDenseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Rel<LengthUnit> left = new DoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.Rel<LengthUnit> right =
-                    new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.Rel<?> result = DoubleMatrix.times(left, right);
+            DoubleMatrix.ImmutableRel<LengthUnit> left = new DoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            DoubleMatrix.ImmutableRel<LengthUnit> right =
+                    new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            DoubleMatrix.ImmutableRel<?> result = DoubleMatrix.times(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
@@ -918,7 +918,7 @@ public class DoubleMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -934,10 +934,10 @@ public class DoubleMatrixDenseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Rel<LengthUnit> left = new DoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.Rel<LengthUnit> right =
-                    new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
-            DoubleMatrix.Rel<?> result = DoubleMatrix.plus(left, right);
+            DoubleMatrix.ImmutableRel<LengthUnit> left = new DoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            DoubleMatrix.ImmutableRel<LengthUnit> right =
+                    new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            DoubleMatrix.ImmutableRel<?> result = DoubleMatrix.plus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
@@ -947,7 +947,7 @@ public class DoubleMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -963,10 +963,10 @@ public class DoubleMatrixDenseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Rel<LengthUnit> left = new DoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.Rel<LengthUnit> right =
-                    new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
-            DoubleMatrix.Rel<?> result = DoubleMatrix.minus(left, right);
+            DoubleMatrix.ImmutableRel<LengthUnit> left = new DoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            DoubleMatrix.ImmutableRel<LengthUnit> right =
+                    new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            DoubleMatrix.ImmutableRel<?> result = DoubleMatrix.minus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
@@ -976,7 +976,7 @@ public class DoubleMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -992,10 +992,10 @@ public class DoubleMatrixDenseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Rel<LengthUnit> left = new DoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.Rel<LengthUnit> right =
-                    new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
-            DoubleMatrix.Rel<?> result = DoubleMatrix.times(left, right);
+            DoubleMatrix.ImmutableRel<LengthUnit> left = new DoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            DoubleMatrix.ImmutableRel<LengthUnit> right =
+                    new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            DoubleMatrix.ImmutableRel<?> result = DoubleMatrix.times(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
@@ -1005,7 +1005,7 @@ public class DoubleMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -1021,10 +1021,10 @@ public class DoubleMatrixDenseTest
         try
         {
             // null array
-            new DoubleMatrix.Rel<TemperatureUnit>((double[][]) null, TemperatureUnit.DEGREE_FAHRENHEIT, StorageType.DENSE);
+            new DoubleMatrix.ImmutableRel<TemperatureUnit>((double[][]) null, TemperatureUnit.DEGREE_FAHRENHEIT, StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -1034,10 +1034,10 @@ public class DoubleMatrixDenseTest
             // Matrix with null on first row
             double[][] in = data(3, 5, false, 12.3);
             in[0] = null;
-            new DoubleMatrix.Rel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
+            new DoubleMatrix.ImmutableRel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -1047,10 +1047,10 @@ public class DoubleMatrixDenseTest
             // Matrix with null on last row
             double[][] in = data(3, 5, false, 12.3);
             in[in.length - 1] = null;
-            new DoubleMatrix.Rel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
+            new DoubleMatrix.ImmutableRel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -1059,10 +1059,10 @@ public class DoubleMatrixDenseTest
         {
             // Non-rectangular array
             double[][] in = data(3, 5, true, 12.3);
-            new DoubleMatrix.Rel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
+            new DoubleMatrix.ImmutableRel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -1071,19 +1071,19 @@ public class DoubleMatrixDenseTest
         double[][] in = data(3, 5, false, 12.3);
         try
         {
-            DoubleMatrix.Rel<TemperatureUnit> matrix = null;
+            DoubleMatrix.ImmutableRel<TemperatureUnit> matrix = null;
             try
             {
-                matrix = new DoubleMatrix.Rel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
+                matrix = new DoubleMatrix.ImmutableRel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
             }
-            catch (ValueException ve)
+            catch (ValueRuntimeException ve)
             {
                 fail("Caught unexpected exception: " + ve.toString());
             }
             matrix.determinant();
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -1100,11 +1100,11 @@ public class DoubleMatrixDenseTest
         try
         {
             double[][] values = {{1, 2, 3}, {3, 5, 7}, {5, 10, 0}};
-            DoubleMatrix.Rel<TemperatureUnit> matrix =
-                    new DoubleMatrix.Rel<TemperatureUnit>(values, TemperatureUnit.KELVIN, StorageType.DENSE);
+            DoubleMatrix.ImmutableRel<TemperatureUnit> matrix =
+                    new DoubleMatrix.ImmutableRel<TemperatureUnit>(values, TemperatureUnit.KELVIN, StorageType.DENSE);
             assertEquals("Determinant should be 15", 15, matrix.determinant(), 0.001);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             if (ve.toString().contains("Matrix must be sparse"))
             {
@@ -1125,11 +1125,11 @@ public class DoubleMatrixDenseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            MutableDoubleMatrix.Rel<LengthUnit> left =
-                    new MutableDoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-            MutableDoubleMatrix.Rel<LengthUnit> referenceLeft = left.copy();
-            DoubleMatrix.Rel<LengthUnit> right =
-                    new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            MutableDoubleMatrix.ImmutableRel<LengthUnit> left =
+                    new MutableDoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            MutableDoubleMatrix.ImmutableRel<LengthUnit> referenceLeft = left.copy();
+            DoubleMatrix.ImmutableRel<LengthUnit> right =
+                    new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             left.incrementBy(right);
             for (int row = 0; row < leftValue.length; row++)
             {
@@ -1139,8 +1139,8 @@ public class DoubleMatrixDenseTest
                             referenceLeft.getSI(row, col) + right.getSI(row, col), left.getSI(row, col), 0.001);
                 }
             }
-            left = new MutableDoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-            right = new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            left = new MutableDoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            right = new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
             left.incrementBy(right);
             for (int row = 0; row < leftValue.length; row++)
             {
@@ -1151,7 +1151,7 @@ public class DoubleMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -1167,11 +1167,11 @@ public class DoubleMatrixDenseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            MutableDoubleMatrix.Rel<LengthUnit> left =
-                    new MutableDoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-            MutableDoubleMatrix.Rel<LengthUnit> referenceLeft = left.copy();
-            DoubleMatrix.Rel<LengthUnit> right =
-                    new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            MutableDoubleMatrix.ImmutableRel<LengthUnit> left =
+                    new MutableDoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            MutableDoubleMatrix.ImmutableRel<LengthUnit> referenceLeft = left.copy();
+            DoubleMatrix.ImmutableRel<LengthUnit> right =
+                    new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             left.decrementBy(right);
             for (int row = 0; row < leftValue.length; row++)
             {
@@ -1181,8 +1181,8 @@ public class DoubleMatrixDenseTest
                             referenceLeft.getSI(row, col) - right.getSI(row, col), left.getSI(row, col), 0.001);
                 }
             }
-            left = new MutableDoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-            right = new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            left = new MutableDoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            right = new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
             left.decrementBy(right);
             for (int row = 0; row < leftValue.length; row++)
             {
@@ -1193,7 +1193,7 @@ public class DoubleMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -1229,12 +1229,12 @@ public class DoubleMatrixDenseTest
                     leftValue[29][48] = Float.NaN;
                     leftValue[29][47] = Float.NaN;
                 }
-                MutableDoubleMatrix.Rel<LengthUnit> left =
-                        new MutableDoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-                MutableDoubleMatrix.Rel<LengthUnit> referenceLeft = left.copy();
-                DoubleMatrix.Rel<LengthUnit> right =
-                        new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
-                left.multiplyBy(right);
+                MutableDoubleMatrix.ImmutableRel<LengthUnit> left =
+                        new MutableDoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+                MutableDoubleMatrix.ImmutableRel<LengthUnit> referenceLeft = left.copy();
+                DoubleMatrix.ImmutableRel<LengthUnit> right =
+                        new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+                left.times(right);
                 for (int row = 0; row < leftValue.length; row++)
                 {
                     for (int col = 0; col < leftValue[row].length; col++)
@@ -1243,9 +1243,9 @@ public class DoubleMatrixDenseTest
                                 referenceLeft.getSI(row, col) * right.getSI(row, col), left.getSI(row, col), 0.001);
                     }
                 }
-                left = new MutableDoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-                right = new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
-                left.multiplyBy(right);
+                left = new MutableDoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+                right = new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+                left.times(right);
                 for (int row = 0; row < leftValue.length; row++)
                 {
                     for (int col = 0; col < leftValue[row].length; col++)
@@ -1256,7 +1256,7 @@ public class DoubleMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -1292,12 +1292,12 @@ public class DoubleMatrixDenseTest
                     leftValue[29][48] = Float.NaN;
                     leftValue[29][47] = Float.NaN;
                 }
-                MutableDoubleMatrix.Rel<LengthUnit> left =
-                        new MutableDoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-                MutableDoubleMatrix.Rel<LengthUnit> referenceLeft = left.copy();
-                DoubleMatrix.Rel<LengthUnit> right =
-                        new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
-                left.divideBy(right);
+                MutableDoubleMatrix.ImmutableRel<LengthUnit> left =
+                        new MutableDoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+                MutableDoubleMatrix.ImmutableRel<LengthUnit> referenceLeft = left.copy();
+                DoubleMatrix.ImmutableRel<LengthUnit> right =
+                        new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+                left.divide(right);
                 for (int row = 0; row < leftValue.length; row++)
                 {
                     for (int col = 0; col < leftValue[row].length; col++)
@@ -1318,9 +1318,9 @@ public class DoubleMatrixDenseTest
                         }
                     }
                 }
-                left = new MutableDoubleMatrix.Rel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-                right = new DoubleMatrix.Rel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
-                left.divideBy(right);
+                left = new MutableDoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+                right = new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+                left.divide(right);
                 for (int row = 0; row < leftValue.length; row++)
                 {
                     for (int col = 0; col < leftValue[row].length; col++)
@@ -1343,7 +1343,7 @@ public class DoubleMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -1360,8 +1360,8 @@ public class DoubleMatrixDenseTest
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
             double[][] value = data(3, 5, false, 38.0);
             double modifier = 8.76;
-            MutableDoubleMatrix.Rel<TemperatureUnit> testMatrix =
-                    new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            MutableDoubleMatrix.ImmutableRel<TemperatureUnit> testMatrix =
+                    new MutableDoubleMatrix.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             testMatrix.incrementBy(modifier);
             for (int row = 0; row < value.length; row++)
             {
@@ -1371,8 +1371,8 @@ public class DoubleMatrixDenseTest
                             testMatrix.getSI(row, col), 0.001);
                 }
             }
-            testMatrix = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            DoubleScalar.Rel<TemperatureUnit> modifierScalar = new DoubleScalar.Rel<>(modifier, TemperatureUnit.DEGREE_CELSIUS);
+            testMatrix = new MutableDoubleMatrix.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            DoubleScalar.ImmutableRel<TemperatureUnit> modifierScalar = new DoubleScalar.ImmutableRel<>(modifier, TemperatureUnit.DEGREE_CELSIUS);
             testMatrix.incrementBy(modifierScalar);
             for (int row = 0; row < value.length; row++)
             {
@@ -1382,7 +1382,7 @@ public class DoubleMatrixDenseTest
                             testMatrix.getInUnit(row, col), 0.01);
                 }
             }
-            testMatrix = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix = new MutableDoubleMatrix.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             testMatrix.incrementBy(Double.NaN);
             for (int row = 0; row < value.length; row++)
             {
@@ -1391,7 +1391,7 @@ public class DoubleMatrixDenseTest
                     assertTrue("incremented value should be NaN", Double.isNaN(testMatrix.getInUnit(row, col)));
                 }
             }
-            testMatrix = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix = new MutableDoubleMatrix.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             testMatrix.decrementBy(modifier);
             for (int row = 0; row < value.length; row++)
             {
@@ -1401,7 +1401,7 @@ public class DoubleMatrixDenseTest
                             testMatrix.getSI(row, col), 0.001);
                 }
             }
-            testMatrix = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix = new MutableDoubleMatrix.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             testMatrix.decrementBy(modifierScalar);
             for (int row = 0; row < value.length; row++)
             {
@@ -1411,7 +1411,7 @@ public class DoubleMatrixDenseTest
                             testMatrix.getInUnit(row, col), 0.01);
                 }
             }
-            testMatrix = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix = new MutableDoubleMatrix.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             testMatrix.decrementBy(Double.NaN);
             for (int row = 0; row < value.length; row++)
             {
@@ -1420,8 +1420,8 @@ public class DoubleMatrixDenseTest
                     assertTrue("incremented value should be NaN", Double.isNaN(testMatrix.getInUnit(row, col)));
                 }
             }
-            testMatrix = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            testMatrix.multiplyBy(modifier);
+            testMatrix = new MutableDoubleMatrix.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix.times(modifier);
             for (int row = 0; row < value.length; row++)
             {
                 for (int col = 0; col < value[row].length; col++)
@@ -1430,8 +1430,8 @@ public class DoubleMatrixDenseTest
                             testMatrix.getSI(row, col), 0.001);
                 }
             }
-            testMatrix = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            testMatrix.multiplyBy(Double.NaN);
+            testMatrix = new MutableDoubleMatrix.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix.times(Double.NaN);
             for (int row = 0; row < value.length; row++)
             {
                 for (int col = 0; col < value[row].length; col++)
@@ -1439,8 +1439,8 @@ public class DoubleMatrixDenseTest
                     assertTrue("incremented value should be NaN", Double.isNaN(testMatrix.getInUnit(row, col)));
                 }
             }
-            testMatrix = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            testMatrix.divideBy(modifier);
+            testMatrix = new MutableDoubleMatrix.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix.divide(modifier);
             for (int row = 0; row < value.length; row++)
             {
                 for (int col = 0; col < value[row].length; col++)
@@ -1449,8 +1449,8 @@ public class DoubleMatrixDenseTest
                             testMatrix.getSI(row, col), 0.001);
                 }
             }
-            testMatrix = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            testMatrix.divideBy(Float.NaN);
+            testMatrix = new MutableDoubleMatrix.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix.divide(Float.NaN);
             for (int row = 0; row < value.length; row++)
             {
                 for (int col = 0; col < value[row].length; col++)
@@ -1458,7 +1458,7 @@ public class DoubleMatrixDenseTest
                     assertTrue("incremented value should be NaN", Double.isNaN(testMatrix.getInUnit(row, col)));
                 }
             }
-            testMatrix = new MutableDoubleMatrix.Rel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            testMatrix = new MutableDoubleMatrix.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             testMatrix.neg();
             for (int row = 0; row < value.length; row++)
             {
@@ -1468,7 +1468,7 @@ public class DoubleMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -1508,7 +1508,7 @@ public class DoubleMatrixDenseTest
                     {
                         got = actualResult.getSI(i, j);
                     }
-                    catch (ValueException ve)
+                    catch (ValueRuntimeException ve)
                     {
                         fail("Caught unexpected exception: " + ve.toString());
                     }

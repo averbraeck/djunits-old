@@ -1,7 +1,7 @@
 package org.djunits4.value.vfloat.vector;
 
 import org.djunits4.unit.Unit;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
 
 /**
  * Interface for the Immutable and Mutable FloatVector classes.
@@ -22,7 +22,7 @@ public interface FloatVectorInterface<U extends Unit<U>>
     int size();
 
     /**
-     * Count the number of cells that have a non-zero value (ignores tolerance).
+     * Count the number of cells that have a non-zero value.
      * @return int; the number of cells having non-zero value
      */
     int cardinality();
@@ -31,26 +31,26 @@ public interface FloatVectorInterface<U extends Unit<U>>
      * Retrieve the value stored at a specified position in the standard SI unit.
      * @param index int; index of the value to retrieve
      * @return float; value at position index in the standard SI unit
-     * @throws ValueException when index out of range (index &lt; 0 or index &gt;= size())
+     * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
      */
-    float getSI(int index) throws ValueException;
+    float getSI(int index) throws ValueRuntimeException;
 
     /**
      * Retrieve the value stored at a specified position in the original unit.
      * @param index int; index of the value to retrieve
      * @return float; value at position index in the original unit
-     * @throws ValueException when index out of range (index &lt; 0 or index &gt;= size())
+     * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
      */
-    float getInUnit(int index) throws ValueException;
+    float getInUnit(int index) throws ValueRuntimeException;
 
     /**
      * Retrieve the value stored at a specified position converted into a specified unit.
      * @param index int; index of the value to retrieve
      * @param targetUnit U; the unit for the result
      * @return float; value at position index converted into the specified unit
-     * @throws ValueException when index out of range (index &lt; 0 or index &gt;= size())
+     * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
      */
-    float getInUnit(int index, U targetUnit) throws ValueException;
+    float getInUnit(int index, U targetUnit) throws ValueRuntimeException;
 
     /**
      * Create and return a mutable version of this vector.

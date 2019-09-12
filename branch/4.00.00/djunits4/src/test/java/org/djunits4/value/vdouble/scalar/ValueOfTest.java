@@ -10,14 +10,14 @@ import org.djunits4.unit.AreaUnit;
 import org.djunits4.unit.SIUnit;
 import org.djunits4.unit.si.SIDimensions;
 import org.djunits4.unit.util.UnitException;
-import org.djunits4.value.Scalar;
+import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
 import org.junit.Test;
 
 /**
  * ValueOfTest.java.
  * <p>
  * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="http://djunits.org/docs/license.html">DJUNITS License</a>
+ * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
@@ -29,7 +29,7 @@ public class ValueOfTest
      * @param value the value to enter
      * @param unitString the unit String to use
      */
-    private void legal(Class<? extends Scalar<?>> scalarClass, double value, String unitString)
+    private void legal(Class<? extends DoubleScalarInterface<?>> scalarClass, double value, String unitString)
     {
         try
         {
@@ -47,7 +47,7 @@ public class ValueOfTest
      * @param scalarClass the scalar class
      * @param text the text to parse
      */
-    private void legal(Class<? extends Scalar<?>> scalarClass, String text)
+    private void legal(Class<? extends DoubleScalarInterface<?>> scalarClass, String text)
     {
         try
         {
@@ -66,7 +66,7 @@ public class ValueOfTest
      * @param value the value to enter
      * @param unitString the unit String to use
      */
-    private void illegal(Class<? extends Scalar<?>> scalarClass, double value, String unitString)
+    private void illegal(Class<? extends DoubleScalarInterface<?>> scalarClass, double value, String unitString)
     {
         try
         {
@@ -89,7 +89,7 @@ public class ValueOfTest
      * @param scalarClass the scalar class
      * @param text the text to parse
      */
-    private void illegal(Class<? extends Scalar<?>> scalarClass, String text)
+    private void illegal(Class<? extends DoubleScalarInterface<?>> scalarClass, String text)
     {
         try
         {

@@ -29,6 +29,9 @@ public class GenerateDJUNIT
     /** The output folder of the writer -- will be written in Eclipse project-root/generated-code/org/djunits folder. */
     private static final String generatedCodeRelativePath = "/generated-code/org/djunits/";
 
+    /** the generation time. */
+    private static String generationTime;
+
     /**
      * The calculated absolute output path (root of the executable or Jar file). In case of an Eclipse run, ../../ is added to
      * the path to place the results in the root of the project, rather than in target/classes.
@@ -244,7 +247,7 @@ public class GenerateDJUNIT
 
         // @Generated
         java = java.replace("@Generated(value = \"GenerateDJUNIT\")",
-                "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + Instant.now().toString() + "\")");
+                "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + generationTime + "\")");
 
         return java;
     }
@@ -328,7 +331,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%TYPE%", type.toUpperCase());
             if (java.contains("class Dimensionless"))
             {
-                java = java.replace("%DIMLESS%", " implements MathFunctionsDimensionless<Dimensionless>");
+                java = java.replace("%DIMLESS%", "implements DimensionlessFunctions<DimensionlessUnit, Dimensionless>");
                 URL dimlessURL = URLResource.getResource("/" + relativePath + "DimlessFunctions.java");
                 String dimlessFunctions = new String(Files.readAllBytes(Paths.get(dimlessURL.toURI())));
                 int pos = java.indexOf("%FORMULAS%");
@@ -397,7 +400,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%TYPE%", type.toUpperCase());
             if (java.contains("class FloatDimensionless"))
             {
-                java = java.replace("%DIMLESS%", " implements MathFunctionsDimensionless<FloatDimensionless>");
+                java = java.replace("%DIMLESS%", " implements DimensionlessFunctions<DimensionlessUnit, FloatDimensionless>");
                 URL dimlessURL = URLResource.getResource("/" + relativePath + "DimlessFunctions.java");
                 String dimlessFunctions = new String(Files.readAllBytes(Paths.get(dimlessURL.toURI())));
                 int pos = java.indexOf("%FORMULAS%");
@@ -479,24 +482,6 @@ public class GenerateDJUNIT
                 out.close();
                 System.out.println("built: " + absoluteRootPath + relativePath + type[i] + "Vector.java");
             }
-
-            vectorURL = URLResource.getResource("/" + relativePath
-                    + ((i == 0) ? "MUTABLE_DOUBLE_VECTOR_AR_ABS.java" : "MUTABLE_DOUBLE_VECTOR_AR_REL.java"));
-            vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
-
-            for (String type[] : typesAbsRel)
-            {
-                File outPath = new File(absoluteRootPath + relativePath);
-                outPath.mkdirs();
-                PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + type[i] + "Vector.java");
-                String java = new String(vectorJava);
-                java = replaceAbsRel(java, type);
-                java = formulasVector(java, "MutableDoubleVector => " + type[i], "Mutable");
-                java = replace(java, type[i]);
-                out.print(java);
-                out.close();
-                System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type[i] + "Vector.java");
-            }
         }
     }
 
@@ -520,39 +505,21 @@ public class GenerateDJUNIT
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = formulasVector(java, "DoubleVector => " + type, "");
-            java = replace(java, type);
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + type + "Vector.java");
-        }
-
-        vectorURL = URLResource.getResource("/" + relativePath + "MUTABLE_DOUBLE_VECTOR_REL.java");
-        vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
-
-        for (String type : typesRel)
-        {
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + type + "Vector.java");
-            String java = new String(vectorJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            if (java.contains("class MutableDimensionlessVector"))
+            if (java.contains("class DimensionlessVector"))
             {
-                java = java.replace("%DIMLESS%", " implements MathFunctionsDimensionless<MutableDimensionlessVector>");
+                java = java.replace("%DIMLESS%", 
+                        " implements DoubleMathFunctions, DimensionlessFunctions<DimensionlessUnit, DimensionlessVector>");
                 URL dimlessURL = URLResource.getResource("/" + relativePath + "DimlessFunctions.java");
                 String dimlessFunctions = new String(Files.readAllBytes(Paths.get(dimlessURL.toURI())));
                 int pos = java.indexOf("%FORMULAS%");
                 java = java.substring(0, pos - 1) + dimlessFunctions + java.substring(pos, java.length() - 1);
             }
             java = java.replace("%DIMLESS%", "");
-            java = formulasVector(java, "MutableDoubleVector => " + type, "Mutable");
+            java = formulasVector(java, "DoubleVector => " + type, "");
             java = replace(java, type);
             out.print(java);
             out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type + "Vector.java");
+            System.out.println("built: " + absoluteRootPath + relativePath + type + "Vector.java");
         }
     }
 
@@ -939,7 +906,9 @@ public class GenerateDJUNIT
         URL siScalarURL = URLResource.getResource("/" + relativePath + "SISCALAR.java");
         String siJava = new String(Files.readAllBytes(Paths.get(siScalarURL.toURI())));
         siJava = siJava.replace("@Generated(value = \"GenerateDJUNIT\")",
-                "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + Instant.now().toString() + "\")");
+                "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + generationTime + "\")");
+        String asJava = new String(
+                Files.readAllBytes(Paths.get(URLResource.getResource("/" + relativePath + "SISCALAR_AS.java").toURI())));
 
         List<String> allRelTypes = new ArrayList<>(typesRel);
         for (String[] arType : typesAbsRel)
@@ -951,31 +920,7 @@ public class GenerateDJUNIT
         for (String type : allRelTypes)
         {
             String lc = type.toLowerCase();
-            // @formatter:off
-            asMethods += 
-                "    /**\n" + 
-                "     * Return the current scalar as a " + lc + ".\n" + 
-                "     * @return " + type + "; the current scalar as a " + lc + "\n" + 
-                "     */\n" + 
-                "    public final " + type + " as" + type + "()\n" + 
-                "    {\n" + 
-                "        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(" + type + "Unit.BASE.getSiDimensions())),\n" + 
-                "                UnitRuntimeException.class, \"cannot cast %s to " + type + "\", this.toString());\n" + 
-                "        return new " + type + "(getSI(), " + type + "Unit.SI);\n" + 
-                "    }\n" + 
-                "\n" + 
-                "    /**\n" + 
-                "     * Return the current scalar as a " + lc + ", and provide a display unit.\n" + 
-                "     * @param displayUnit the unit in which the value will be displayed\n" + 
-                "     * @return " + type + "; the current scalar as a " + lc + "\n" + 
-                "     */\n" + 
-                "    public final " + type + " as" + type + "(final " + type + "Unit displayUnit)\n" + 
-                "    {\n" + 
-                "        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(" + type + "Unit.BASE.getSiDimensions())),\n" + 
-                "                UnitRuntimeException.class, \"cannot cast %s to " + type + "\", this.toString());\n" + 
-                "        return new " + type + "(getSI(), displayUnit); // do not translate -- we have the SI value right here\n" + 
-                "    }\n";
-            // @formatter:on
+            asMethods += asJava.replaceAll("%Type%", type).replaceAll("%type%", lc);
         }
 
         File outPath = new File(absoluteRootPath + relativePath);
@@ -998,7 +943,9 @@ public class GenerateDJUNIT
         URL siScalarURL = URLResource.getResource("/" + relativePath + "FLOATSISCALAR.java");
         String siJava = new String(Files.readAllBytes(Paths.get(siScalarURL.toURI())));
         siJava = siJava.replace("@Generated(value = \"GenerateDJUNIT\")",
-                "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + Instant.now().toString() + "\")");
+                "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + generationTime + "\")");
+        String asJava = new String(
+                Files.readAllBytes(Paths.get(URLResource.getResource("/" + relativePath + "FLOATSISCALAR_AS.java").toURI())));
 
         List<String> allRelTypes = new ArrayList<>(typesRel);
         for (String[] arType : typesAbsRel)
@@ -1010,32 +957,7 @@ public class GenerateDJUNIT
         for (String type : allRelTypes)
         {
             String lc = type.toLowerCase();
-            String ftype = "Float" + type;
-            // @formatter:off
-            asMethods += 
-                "    /**\n" + 
-                "     * Return the current scalar as a " + lc + ".\n" + 
-                "     * @return " + ftype + "; the current scalar as a " + lc + "\n" + 
-                "     */\n" + 
-                "    public final " + ftype + " as" + type + "()\n" + 
-                "    {\n" + 
-                "        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(" + type + "Unit.BASE.getSiDimensions())),\n" + 
-                "                UnitRuntimeException.class, \"cannot cast %s to " + ftype + "\", this.toString());\n" + 
-                "        return new " + ftype + "(getSI(), " + type + "Unit.SI);\n" + 
-                "    }\n" + 
-                "\n" + 
-                "    /**\n" + 
-                "     * Return the current scalar as a " + lc + ", and provide a display unit.\n" + 
-                "     * @param displayUnit the unit in which the value will be displayed\n" + 
-                "     * @return " + ftype + "; the current scalar as a " + lc + "\n" + 
-                "     */\n" + 
-                "    public final " + ftype + " as" + type + "(final " + type + "Unit displayUnit)\n" + 
-                "    {\n" + 
-                "        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(" + type + "Unit.BASE.getSiDimensions())),\n" + 
-                "                UnitRuntimeException.class, \"cannot cast %s to " + ftype + "\", this.toString());\n" + 
-                "        return new " + ftype + "(getSI(), displayUnit); // do not translate -- we have the SI value right here\n" + 
-                "    }\n";
-            // @formatter:on
+            asMethods += asJava.replaceAll("%Type%", type).replaceAll("%type%", lc);
         }
 
         File outPath = new File(absoluteRootPath + relativePath);
@@ -1045,6 +967,84 @@ public class GenerateDJUNIT
         out.print(java);
         out.close();
         System.out.println("built: " + absoluteRootPath + relativePath + "FloatSIScalar.java");
+    }
+
+    /****************************************************************************************************************/
+    /********************************************* SIVECTOR *********************************************************/
+    /****************************************************************************************************************/
+
+    /**
+     * Generate SIVector.java in value.vdouble.vector.
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on the file system
+     */
+    private static void generateSIVector() throws IOException, URISyntaxException
+    {
+        String relativePath = "value/vdouble/vector/";
+        URL siVectorURL = URLResource.getResource("/" + relativePath + "SIVECTOR.java");
+        String siJava = new String(Files.readAllBytes(Paths.get(siVectorURL.toURI())));
+        siJava = siJava.replace("@Generated(value = \"GenerateDJUNIT\")",
+                "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + generationTime + "\")");
+        String asJava = new String(
+                Files.readAllBytes(Paths.get(URLResource.getResource("/" + relativePath + "SIVECTOR_AS.java").toURI())));
+
+        List<String> allRelTypes = new ArrayList<>(typesRel);
+        for (String[] arType : typesAbsRel)
+        {
+            allRelTypes.add(arType[1]);
+        }
+
+        String asMethods = "";
+        for (String type : allRelTypes)
+        {
+            String lc = type.toLowerCase();
+            asMethods += asJava.replaceAll("%Type%", type).replaceAll("%type%", lc);
+        }
+
+        File outPath = new File(absoluteRootPath + relativePath);
+        outPath.mkdirs();
+        PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "SIVector.java");
+        String java = siJava.replace("%%ASMETHODS%%", asMethods);
+        out.print(java);
+        out.close();
+        System.out.println("built: " + absoluteRootPath + relativePath + "SIVector.java");
+    }
+
+    /**
+     * Generate SIVector.java in value.vfloat.vector.
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on the file system
+     */
+    private static void generateFloatSIVector() throws IOException, URISyntaxException
+    {
+        String relativePath = "value/vfloat/vector/";
+        URL siVectorURL = URLResource.getResource("/" + relativePath + "FLOATSIVECTOR.java");
+        String siJava = new String(Files.readAllBytes(Paths.get(siVectorURL.toURI())));
+        siJava = siJava.replace("@Generated(value = \"GenerateDJUNIT\")",
+                "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + generationTime + "\")");
+        String asJava = new String(
+                Files.readAllBytes(Paths.get(URLResource.getResource("/" + relativePath + "FLOATSIVECTOR_AS.java").toURI())));
+
+        List<String> allRelTypes = new ArrayList<>(typesRel);
+        for (String[] arType : typesAbsRel)
+        {
+            allRelTypes.add(arType[1]);
+        }
+
+        String asMethods = "";
+        for (String type : allRelTypes)
+        {
+            String lc = type.toLowerCase();
+            asMethods += asJava.replaceAll("%Type%", type).replaceAll("%type%", lc);
+        }
+
+        File outPath = new File(absoluteRootPath + relativePath);
+        outPath.mkdirs();
+        PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "FloatSIVector.java");
+        String java = siJava.replace("%%ASMETHODS%%", asMethods);
+        out.print(java);
+        out.close();
+        System.out.println("built: " + absoluteRootPath + relativePath + "FloatSIVector.java");
     }
 
     /****************************************************************************************************************/
@@ -1125,6 +1125,8 @@ public class GenerateDJUNIT
      */
     public static void main(String[] args) throws IOException, URISyntaxException
     {
+        generationTime = Instant.now().toString();
+
         makeAndCleanAbsolutePath();
         readAbsRelTypes();
         readRelTypes();
@@ -1148,6 +1150,9 @@ public class GenerateDJUNIT
 
         generateSIScalar();
         generateFloatSIScalar();
-    }
+
+        generateSIVector();
+        generateFloatSIVector();
+}
 
 }

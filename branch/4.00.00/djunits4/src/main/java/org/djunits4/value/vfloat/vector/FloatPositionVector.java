@@ -7,8 +7,8 @@ import javax.annotation.Generated;
 
 import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.PositionUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatPosition;
 
 /**
@@ -20,7 +20,7 @@ import org.djunits4.value.vfloat.scalar.FloatPosition;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.197Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class FloatPositionVector extends AbstractFloatVectorAbs<PositionUnit, LengthUnit, FloatPositionVector,
         FloatLengthVector, MutableFloatPositionVector, FloatPosition>
 {
@@ -32,10 +32,10 @@ public class FloatPositionVector extends AbstractFloatVectorAbs<PositionUnit, Le
      * @param values float[]; the values of the entries in the new Absolute Immutable FloatPositionVector
      * @param unit PositionUnit; the unit of the new Absolute Immutable FloatPositionVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatPositionVector(final float[] values, final PositionUnit unit, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -45,10 +45,10 @@ public class FloatPositionVector extends AbstractFloatVectorAbs<PositionUnit, Le
      * @param values List&lt;Float&gt;; the values of the entries in the new Absolute Immutable FloatPositionVector
      * @param unit PositionUnit; the unit of the new Absolute Immutable FloatPositionVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatPositionVector(final List<Float> values, final PositionUnit unit, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -57,9 +57,9 @@ public class FloatPositionVector extends AbstractFloatVectorAbs<PositionUnit, Le
      * Construct a new Absolute Immutable FloatPositionVector.
      * @param values FloatPosition[]; the values of the entries in the new Absolute Immutable FloatPositionVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public FloatPositionVector(final FloatPosition[] values, final StorageType storageType) throws ValueException
+    public FloatPositionVector(final FloatPosition[] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -68,9 +68,9 @@ public class FloatPositionVector extends AbstractFloatVectorAbs<PositionUnit, Le
      * Construct a new Absolute Immutable FloatPositionVector.
      * @param values List&lt;FloatPosition&gt;; the values of the entries in the new Absolute Immutable FloatPositionVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public FloatPositionVector(final List<FloatPosition> values, final StorageType storageType) throws ValueException
+    public FloatPositionVector(final List<FloatPosition> values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -81,10 +81,10 @@ public class FloatPositionVector extends AbstractFloatVectorAbs<PositionUnit, Le
      *            FloatPositionVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public FloatPositionVector(final SortedMap<Integer, FloatPosition> values, final int length, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, length, storageType);
     }
@@ -96,10 +96,10 @@ public class FloatPositionVector extends AbstractFloatVectorAbs<PositionUnit, Le
      * @param unit PositionUnit; the unit of the new Absolute Sparse Mutable FloatPositionVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatPositionVector(final SortedMap<Integer, Float> values, final PositionUnit unit, final int length,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, length, storageType);
     }
@@ -170,7 +170,7 @@ public class FloatPositionVector extends AbstractFloatVectorAbs<PositionUnit, Le
             {
                 array[i] = get(i);
             }
-            catch (ValueException exception)
+            catch (ValueRuntimeException exception)
             {
                 throw new RuntimeException(exception);
             }

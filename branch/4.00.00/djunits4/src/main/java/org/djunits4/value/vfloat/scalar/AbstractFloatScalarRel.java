@@ -1,9 +1,9 @@
 package org.djunits4.value.vfloat.scalar;
 
 import org.djunits4.unit.Unit;
-import org.djunits4.value.MathFunctionsRel;
 import org.djunits4.value.Relative;
-import org.djunits4.value.ValueUtil;
+import org.djunits4.value.function.MathFunctionsRel;
+import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vfloat.FloatMathFunctions;
 
 /**

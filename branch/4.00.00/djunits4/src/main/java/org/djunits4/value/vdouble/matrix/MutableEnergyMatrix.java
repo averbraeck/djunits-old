@@ -3,8 +3,8 @@ package org.djunits4.value.vdouble.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.EnergyUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vdouble.scalar.Energy;
 
 /**
@@ -16,7 +16,7 @@ import org.djunits4.value.vdouble.scalar.Energy;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.275Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-06T11:09:13.414Z")
 public class MutableEnergyMatrix extends AbstractMutableDoubleMatrixRel<EnergyUnit, EnergyMatrix, MutableEnergyMatrix, Energy>
 {
     /** */
@@ -27,10 +27,10 @@ public class MutableEnergyMatrix extends AbstractMutableDoubleMatrixRel<EnergyUn
      * @param values double[][]; the values of the entries in the new Relative Immutable Double EnergyMatrix
      * @param unit EnergyUnit; the unit of the new Relative Immutable Double EnergyMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public MutableEnergyMatrix(final double[][] values, final EnergyUnit unit, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -39,9 +39,9 @@ public class MutableEnergyMatrix extends AbstractMutableDoubleMatrixRel<EnergyUn
      * Construct a new Relative Immutable Double EnergyMatrix.
      * @param values %TypeAbs%[][]; the values of the entries in the new Relative Immutable Double EnergyMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public MutableEnergyMatrix(final Energy[][] values, final StorageType storageType) throws ValueException
+    public MutableEnergyMatrix(final Energy[][] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }

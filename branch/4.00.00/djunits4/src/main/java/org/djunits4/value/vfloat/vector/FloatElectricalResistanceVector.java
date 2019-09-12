@@ -6,8 +6,8 @@ import java.util.SortedMap;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.ElectricalResistanceUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatElectricalResistance;
 
 /**
@@ -19,7 +19,7 @@ import org.djunits4.value.vfloat.scalar.FloatElectricalResistance;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.228Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class FloatElectricalResistanceVector extends AbstractFloatVectorRel<ElectricalResistanceUnit,
         FloatElectricalResistanceVector, MutableFloatElectricalResistanceVector, FloatElectricalResistance>
 {
@@ -31,10 +31,10 @@ public class FloatElectricalResistanceVector extends AbstractFloatVectorRel<Elec
      * @param values float[]; the values of the entries in the new Relative Immutable Float FloatElectricalResistanceVector
      * @param unit ElectricalResistanceUnit; the unit of the new Relative Immutable Float FloatElectricalResistanceVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatElectricalResistanceVector(final float[] values, final ElectricalResistanceUnit unit,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -45,10 +45,10 @@ public class FloatElectricalResistanceVector extends AbstractFloatVectorRel<Elec
      *            FloatElectricalResistanceVector
      * @param unit ElectricalResistanceUnit; the unit of the new Relative Immutable Float FloatElectricalResistanceVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatElectricalResistanceVector(final List<Float> values, final ElectricalResistanceUnit unit,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -58,10 +58,10 @@ public class FloatElectricalResistanceVector extends AbstractFloatVectorRel<Elec
      * @param values FloatElectricalResistance[]; the values of the entries in the new Relative Immutable Float
      *            FloatElectricalResistanceVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public FloatElectricalResistanceVector(final FloatElectricalResistance[] values, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -71,10 +71,10 @@ public class FloatElectricalResistanceVector extends AbstractFloatVectorRel<Elec
      * @param values List&lt;FloatElectricalResistance&gt;; the values of the entries in the new Relative Immutable Float
      *            FloatElectricalResistanceVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public FloatElectricalResistanceVector(final List<FloatElectricalResistance> values, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -85,10 +85,10 @@ public class FloatElectricalResistanceVector extends AbstractFloatVectorRel<Elec
      *            Mutable Float FloatElectricalResistanceVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public FloatElectricalResistanceVector(final SortedMap<Integer, FloatElectricalResistance> values, final int length,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, length, storageType);
     }
@@ -100,10 +100,10 @@ public class FloatElectricalResistanceVector extends AbstractFloatVectorRel<Elec
      * @param unit ElectricalResistanceUnit; the unit of the new Relative Sparse Mutable Float FloatElectricalResistanceVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatElectricalResistanceVector(final SortedMap<Integer, Float> values, final ElectricalResistanceUnit unit,
-            final int length, final StorageType storageType) throws ValueException
+            final int length, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, length, storageType);
     }
@@ -168,7 +168,7 @@ public class FloatElectricalResistanceVector extends AbstractFloatVectorRel<Elec
             {
                 array[i] = get(i);
             }
-            catch (ValueException exception)
+            catch (ValueRuntimeException exception)
             {
                 throw new RuntimeException(exception);
             }

@@ -3,8 +3,8 @@ package org.djunits4.value.vfloat.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.ElectricalCapacitanceUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatElectricalCapacitance;
 
 /**
@@ -16,7 +16,7 @@ import org.djunits4.value.vfloat.scalar.FloatElectricalCapacitance;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.297Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class MutableFloatElectricalCapacitanceMatrix extends AbstractMutableFloatMatrixRel<ElectricalCapacitanceUnit,
         FloatElectricalCapacitanceMatrix, MutableFloatElectricalCapacitanceMatrix, FloatElectricalCapacitance>
 {
@@ -28,10 +28,10 @@ public class MutableFloatElectricalCapacitanceMatrix extends AbstractMutableFloa
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatElectricalCapacitanceMatrix
      * @param unit ElectricalCapacitanceUnit; the unit of the new Relative Immutable FloatElectricalCapacitanceMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public MutableFloatElectricalCapacitanceMatrix(final float[][] values, final ElectricalCapacitanceUnit unit,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -41,10 +41,10 @@ public class MutableFloatElectricalCapacitanceMatrix extends AbstractMutableFloa
      * @param values FloatElectricalCapacitance[][]; the values of the entries in the new Relative Immutable Float
      *            FloatElectricalCapacitanceMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public MutableFloatElectricalCapacitanceMatrix(final FloatElectricalCapacitance[][] values, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, storageType);
     }

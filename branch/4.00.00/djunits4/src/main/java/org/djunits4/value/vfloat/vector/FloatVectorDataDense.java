@@ -2,8 +2,8 @@ package org.djunits4.value.vfloat.vector;
 
 import java.util.stream.IntStream;
 
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.FloatFunction;
 
 /**
@@ -86,7 +86,7 @@ public class FloatVectorDataDense extends FloatVectorData
 
     /** {@inheritDoc} */
     @Override
-    public final void incrementBy(final FloatVectorData right) throws ValueException
+    public final void incrementBy(final FloatVectorData right) throws ValueRuntimeException
     {
         IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] += right.getSI(i));
     }
@@ -100,7 +100,7 @@ public class FloatVectorDataDense extends FloatVectorData
 
     /** {@inheritDoc} */
     @Override
-    public final void decrementBy(final FloatVectorData right) throws ValueException
+    public final void decrementBy(final FloatVectorData right) throws ValueRuntimeException
     {
         IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] -= right.getSI(i));
     }
@@ -114,7 +114,7 @@ public class FloatVectorDataDense extends FloatVectorData
 
     /** {@inheritDoc} */
     @Override
-    public final void multiplyBy(final FloatVectorData right) throws ValueException
+    public final void multiplyBy(final FloatVectorData right) throws ValueRuntimeException
     {
         IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] *= right.getSI(i));
     }
@@ -128,7 +128,7 @@ public class FloatVectorDataDense extends FloatVectorData
 
     /** {@inheritDoc} */
     @Override
-    public final void divideBy(final FloatVectorData right) throws ValueException
+    public final void divideBy(final FloatVectorData right) throws ValueRuntimeException
     {
         IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] /= right.getSI(i));
     }

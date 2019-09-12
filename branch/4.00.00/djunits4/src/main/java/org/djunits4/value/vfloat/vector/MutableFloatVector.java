@@ -5,8 +5,8 @@ import java.util.SortedMap;
 
 import org.djunits4.unit.AbsoluteLinearUnit;
 import org.djunits4.unit.Unit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatScalar;
 
 /**
@@ -36,9 +36,9 @@ public abstract class MutableFloatVector
          * @param values float[]; the values of the entries in the new Absolute Mutable FloatVector
          * @param unit AU; the unit of the new Absolute Mutable FloatVector
          * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
+         * @throws ValueRuntimeException when values is null
          */
-        public Abs(final float[] values, final AU unit, final StorageType storageType) throws ValueException
+        public Abs(final float[] values, final AU unit, final StorageType storageType) throws ValueRuntimeException
         {
             super(values, unit, storageType);
         }
@@ -48,9 +48,9 @@ public abstract class MutableFloatVector
          * @param values List&lt;Float&gt;; the values of the entries in the new Absolute Mutable FloatVector
          * @param unit AU; the unit of the new Absolute Mutable FloatVector
          * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
+         * @throws ValueRuntimeException when values is null
          */
-        public Abs(final List<Float> values, final AU unit, final StorageType storageType) throws ValueException
+        public Abs(final List<Float> values, final AU unit, final StorageType storageType) throws ValueRuntimeException
         {
             super(values, unit, storageType);
         }
@@ -59,9 +59,9 @@ public abstract class MutableFloatVector
          * Construct a new Absolute Mutable FloatVector.
          * @param values FloatScalar.Abs&lt;AU, RU&gt;[]; the values of the entries in the new Absolute Mutable FloatVector
          * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
+         * @throws ValueRuntimeException when values has zero entries
          */
-        public Abs(final FloatScalar.Abs<AU, RU>[] values, final StorageType storageType) throws ValueException
+        public Abs(final FloatScalar.Abs<AU, RU>[] values, final StorageType storageType) throws ValueRuntimeException
         {
             super(values, storageType);
         }
@@ -71,9 +71,9 @@ public abstract class MutableFloatVector
          * @param values List&lt;FloatScalar.Abs&lt;AU, RU&gt;&gt;; the values of the entries in the new Absolute Mutable
          *            FloatVector
          * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
+         * @throws ValueRuntimeException when values has zero entries
          */
-        public Abs(final List<FloatScalar.Abs<AU, RU>> values, final StorageType storageType) throws ValueException
+        public Abs(final List<FloatScalar.Abs<AU, RU>> values, final StorageType storageType) throws ValueRuntimeException
         {
             super(values, storageType);
         }
@@ -84,10 +84,10 @@ public abstract class MutableFloatVector
          *            Sparse Mutable FloatVector
          * @param length int; the size of the vector
          * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
+         * @throws ValueRuntimeException when values has zero entries
          */
         public Abs(final SortedMap<Integer, FloatScalar.Abs<AU, RU>> values, final int length, final StorageType storageType)
-                throws ValueException
+                throws ValueRuntimeException
         {
             super(values, length, storageType);
         }
@@ -99,10 +99,10 @@ public abstract class MutableFloatVector
          * @param unit AU; the unit of the new Absolute Sparse Mutable FloatVector
          * @param length int; the size of the vector
          * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
+         * @throws ValueRuntimeException when values is null
          */
         public Abs(final SortedMap<Integer, Float> values, final AU unit, final int length, final StorageType storageType)
-                throws ValueException
+                throws ValueRuntimeException
         {
             super(values, unit, length, storageType);
         }
@@ -177,9 +177,9 @@ public abstract class MutableFloatVector
          * @param values float[]; the values of the entries in the new Relative Mutable FloatVector
          * @param unit U; the unit of the new Relative Mutable FloatVector
          * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
+         * @throws ValueRuntimeException when values is null
          */
-        public Rel(final float[] values, final U unit, final StorageType storageType) throws ValueException
+        public Rel(final float[] values, final U unit, final StorageType storageType) throws ValueRuntimeException
         {
             super(values, unit, storageType);
         }
@@ -189,9 +189,9 @@ public abstract class MutableFloatVector
          * @param values List&lt;Float&gt;; the values of the entries in the new Relative Mutable FloatVector
          * @param unit U; the unit of the new Relative Mutable FloatVector
          * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
+         * @throws ValueRuntimeException when values is null
          */
-        public Rel(final List<Float> values, final U unit, final StorageType storageType) throws ValueException
+        public Rel(final List<Float> values, final U unit, final StorageType storageType) throws ValueRuntimeException
         {
             super(values, unit, storageType);
         }
@@ -200,9 +200,9 @@ public abstract class MutableFloatVector
          * Construct a new Relative Mutable FloatVector.
          * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Mutable FloatVector
          * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
+         * @throws ValueRuntimeException when values has zero entries
          */
-        public Rel(final FloatScalar.Rel<U>[] values, final StorageType storageType) throws ValueException
+        public Rel(final FloatScalar.Rel<U>[] values, final StorageType storageType) throws ValueRuntimeException
         {
             super(values, storageType);
         }
@@ -211,9 +211,9 @@ public abstract class MutableFloatVector
          * Construct a new Relative Mutable FloatVector.
          * @param values List&lt;FloatScalar.Rel&lt;U&gt;&gt;; the values of the entries in the new Relative Mutable FloatVector
          * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
+         * @throws ValueRuntimeException when values has zero entries
          */
-        public Rel(final List<FloatScalar.Rel<U>> values, final StorageType storageType) throws ValueException
+        public Rel(final List<FloatScalar.Rel<U>> values, final StorageType storageType) throws ValueRuntimeException
         {
             super(values, storageType);
         }
@@ -224,10 +224,10 @@ public abstract class MutableFloatVector
          *            Sparse Mutable FloatVector
          * @param length int; the size of the vector
          * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
+         * @throws ValueRuntimeException when values has zero entries
          */
         public Rel(final SortedMap<Integer, FloatScalar.Rel<U>> values, final int length, final StorageType storageType)
-                throws ValueException
+                throws ValueRuntimeException
         {
             super(values, length, storageType);
         }
@@ -239,10 +239,10 @@ public abstract class MutableFloatVector
          * @param unit U; the unit of the new Relative Sparse Mutable FloatVector
          * @param length int; the size of the vector
          * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
+         * @throws ValueRuntimeException when values is null
          */
         public Rel(final SortedMap<Integer, Float> values, final U unit, final int length, final StorageType storageType)
-                throws ValueException
+                throws ValueRuntimeException
         {
             super(values, unit, length, storageType);
         }

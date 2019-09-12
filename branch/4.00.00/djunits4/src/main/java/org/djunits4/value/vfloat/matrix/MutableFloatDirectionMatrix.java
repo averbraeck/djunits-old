@@ -4,8 +4,8 @@ import javax.annotation.Generated;
 
 import org.djunits4.unit.AngleUnit;
 import org.djunits4.unit.DirectionUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatDirection;
 
 /**
@@ -17,7 +17,7 @@ import org.djunits4.value.vfloat.scalar.FloatDirection;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.275Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class MutableFloatDirectionMatrix extends AbstractMutableFloatMatrixAbs<DirectionUnit, AngleUnit, FloatDirectionMatrix,
         FloatAngleMatrix, MutableFloatDirectionMatrix, FloatDirection>
 {
@@ -29,10 +29,10 @@ public class MutableFloatDirectionMatrix extends AbstractMutableFloatMatrixAbs<D
      * @param values float[][]; the values of the entries in the new Absolute Mutable FloatDirectionMatrix
      * @param unit DirectionUnit; the unit of the new Absolute Mutable FloatDirectionMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public MutableFloatDirectionMatrix(final float[][] values, final DirectionUnit unit, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -41,9 +41,9 @@ public class MutableFloatDirectionMatrix extends AbstractMutableFloatMatrixAbs<D
      * Construct a new Absolute Mutable FloatDirectionMatrix.
      * @param values FloatDirection[][]; the values of the entries in the new Absolute Mutable FloatDirectionMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public MutableFloatDirectionMatrix(final FloatDirection[][] values, final StorageType storageType) throws ValueException
+    public MutableFloatDirectionMatrix(final FloatDirection[][] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }

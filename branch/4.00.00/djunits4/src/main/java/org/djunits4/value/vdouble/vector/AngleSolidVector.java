@@ -1,17 +1,14 @@
 package org.djunits4.value.vdouble.vector;
 
-import java.util.List;
-import java.util.SortedMap;
-
 import javax.annotation.Generated;
 
 import org.djunits4.unit.AngleSolidUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
 import org.djunits4.value.vdouble.scalar.AngleSolid;
+import org.djunits4.value.vdouble.vector.base.AbstractDoubleVectorRel;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Double AngleSolidVector, a vector of values with a AngleSolidUnit.
+ * Double AngleSolidVector, a vector of values with a AngleSolidUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,154 +16,28 @@ import org.djunits4.value.vdouble.scalar.AngleSolid;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.165Z")
-public class AngleSolidVector
-        extends AbstractDoubleVectorRel<AngleSolidUnit, AngleSolidVector, MutableAngleSolidVector, AngleSolid>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T08:19:03.301Z")
+public class AngleSolidVector extends AbstractDoubleVectorRel<AngleSolidUnit, AngleSolid, AngleSolidVector>
+
 {
     /** */
-    private static final long serialVersionUID = 20151109L;
+    private static final long serialVersionUID = 20190905L;
 
     /**
-     * Construct a new Relative Immutable Double AngleSolidVector.
-     * @param values double[]; the values of the entries in the new Relative Immutable Double AngleSolidVector
-     * @param unit AngleSolidUnit; the unit of the new Relative Immutable Double AngleSolidVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public AngleSolidVector(final double[] values, final AngleSolidUnit unit, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double AngleSolidVector.
-     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double AngleSolidVector
-     * @param unit AngleSolidUnit; the unit of the new Relative Immutable Double AngleSolidVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public AngleSolidVector(final List<Double> values, final AngleSolidUnit unit, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double AngleSolidVector.
-     * @param values AngleSolid[]; the values of the entries in the new Relative Immutable Double AngleSolidVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public AngleSolidVector(final AngleSolid[] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double AngleSolidVector.
-     * @param values List&lt;AngleSolid&gt;; the values of the entries in the new Relative Immutable Double AngleSolidVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public AngleSolidVector(final List<AngleSolid> values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double AngleSolidVector.
-     * @param values SortedMap&lt;Integer, AngleSolid&gt;; the values of the entries in the new Relative Sparse Mutable Double
-     *            AngleSolidVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public AngleSolidVector(final SortedMap<Integer, AngleSolid> values, final int length, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double AngleSolidVector.
-     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
-     *            AngleSolidVector
-     * @param unit AngleSolidUnit; the unit of the new Relative Sparse Mutable Double AngleSolidVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public AngleSolidVector(final SortedMap<Integer, Double> values, final AngleSolidUnit unit, final int length,
-            final StorageType storageType) throws ValueException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
+     * Construct an AngleSolidVector from an internal data object.
      * @param data DoubleVectorData; an internal data object
      * @param unit AngleSolidUnit; the unit
      */
-    AngleSolidVector(final DoubleVectorData data, final AngleSolidUnit unit)
+    public AngleSolidVector(final DoubleVectorData data, final AngleSolidUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final AngleSolidVector instantiateType(final DoubleVectorData dvd, final AngleSolidUnit unit)
+    public Class<AngleSolid> getScalarClass()
     {
-        return new AngleSolidVector(dvd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableAngleSolidVector instantiateMutableType(final DoubleVectorData dvd, final AngleSolidUnit unit)
-    {
-        return new MutableAngleSolidVector(dvd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final AngleSolid instantiateScalar(final double value, final AngleSolidUnit unit)
-    {
-        return new AngleSolid(value, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final AngleSolidVector toDense()
-    {
-        return this.data.isDense() ? (AngleSolidVector) this : instantiateType(this.data.toDense(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final AngleSolidVector toSparse()
-    {
-        return this.data.isSparse() ? (AngleSolidVector) this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Return an array of AngleSolid Scalars from this vector.
-     * @return AngleSolid[]; an array of AngleSolid Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public AngleSolid[] toArray()
-    {
-        AngleSolid[] array = new AngleSolid[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
+        return AngleSolid.class;
     }
 
 }

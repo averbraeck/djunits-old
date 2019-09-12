@@ -89,10 +89,10 @@ public final class FloatScalarUtil
     }
 
     /**
-     * Instantiate the FloatScalar based on its unit.
+     * Instantiate the DoubleScalar based on its unit.
      * @param si float; the value in SI units
      * @param displayUnit U; the unit in which the value is expressed
-     * @return S; an instantiated FloatScalar with the value expressed in the unit
+     * @return S; an instantiated DoubleScalar with the value expressed in the unit
      * @param <U> the unit
      * @param <S> the return type
      */
@@ -107,15 +107,14 @@ public final class FloatScalarUtil
      * <b>Note</b> that it is possible to make mistakes with anonymous units.
      * @param si float; the value in SI units
      * @param displayUnit Unit&lt;?&gt;; the unit in which the value is expressed
-     * @return an instantiated FloatScalar with the value expressed in the unit
+     * @return S; an instantiated FloatScalar with the value expressed in the unit
      * @param <S> the return type
      */
     @SuppressWarnings({"unchecked"})
     public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>> S instantiateAnonymousSI(final float si,
             final Unit<?> displayUnit)
     {
-        S value;
-        value = (S) instantiateAnonymous(si, displayUnit.getStandardUnit());
+        S value = (S) instantiateAnonymous(si, displayUnit.getStandardUnit());
         value.setDisplayUnit((U) displayUnit);
         return value;
     }

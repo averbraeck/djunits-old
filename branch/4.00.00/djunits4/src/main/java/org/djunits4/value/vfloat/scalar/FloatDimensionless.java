@@ -30,7 +30,7 @@ import org.djunits4.unit.SpeedUnit;
 import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.TorqueUnit;
 import org.djunits4.unit.VolumeUnit;
-import org.djunits4.value.MathFunctionsDimensionless;
+import org.djunits4.value.function.DimensionlessFunctions;
 
 /**
  * Easy access methods for the FloatDimensionless FloatScalar, which is relative by definition.
@@ -41,9 +41,9 @@ import org.djunits4.value.MathFunctionsDimensionless;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.134Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit, FloatDimensionless>
-        implements MathFunctionsDimensionless<FloatDimensionless>
+        implements DimensionlessFunctions<FloatDimensionless>
 {
     /** */
     private static final long serialVersionUID = 20150901L;

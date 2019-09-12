@@ -4,8 +4,8 @@ import javax.annotation.Generated;
 
 import org.djunits4.unit.AbsoluteTemperatureUnit;
 import org.djunits4.unit.TemperatureUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vdouble.scalar.AbsoluteTemperature;
 
 /**
@@ -17,7 +17,7 @@ import org.djunits4.value.vdouble.scalar.AbsoluteTemperature;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.243Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-06T11:09:13.414Z")
 public class AbsoluteTemperatureMatrix extends AbstractDoubleMatrixAbs<AbsoluteTemperatureUnit, TemperatureUnit,
         AbsoluteTemperatureMatrix, TemperatureMatrix, MutableAbsoluteTemperatureMatrix, AbsoluteTemperature>
 {
@@ -29,10 +29,10 @@ public class AbsoluteTemperatureMatrix extends AbstractDoubleMatrixAbs<AbsoluteT
      * @param values double[][]; the values of the entries in the new Absolute Immutable Double TemperatureMatrix
      * @param unit AbsoluteTemperatureUnit; the unit of the new Absolute Immutable Double TemperatureMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public AbsoluteTemperatureMatrix(final double[][] values, final AbsoluteTemperatureUnit unit, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -41,9 +41,9 @@ public class AbsoluteTemperatureMatrix extends AbstractDoubleMatrixAbs<AbsoluteT
      * Construct a new Absolute Immutable Double TemperatureMatrix.
      * @param values AbsoluteTemperature[][]; the values of the entries in the new Absolute Immutable Double TemperatureMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public AbsoluteTemperatureMatrix(final AbsoluteTemperature[][] values, final StorageType storageType) throws ValueException
+    public AbsoluteTemperatureMatrix(final AbsoluteTemperature[][] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }

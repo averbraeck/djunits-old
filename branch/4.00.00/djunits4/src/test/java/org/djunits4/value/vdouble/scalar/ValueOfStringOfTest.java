@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
 import org.djunits4.unit.DurationUnit;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.CLASSNAMES;
-import org.djunits4.value.Scalar;
+import org.djunits4.value.AbstractScalar;
 import org.junit.Test;
 
 /**
@@ -33,8 +33,8 @@ public class ValueOfStringOfTest
     public final void durationValueOfTest()
     {
         Duration duration = new Duration(10.0, DurationUnit.MINUTE);
-        assertEquals("10.0 min", Scalar.stringOf(duration));
-        assertEquals(duration, Duration.valueOf(Scalar.stringOf(duration)));
+        assertEquals("10.0 min", AbstractScalar.stringOf(duration));
+        assertEquals(duration, Duration.valueOf(AbstractScalar.stringOf(duration)));
     }
 
     /**
@@ -67,10 +67,10 @@ public class ValueOfStringOfTest
             {
                 fail("Method createSI not found for Scalar class " + classPath);
             }
-            Scalar<?> scalarSI = null;
+            AbstractScalar<?> scalarSI = null;
             try
             {
-                scalarSI = (Scalar<?>) createSIMethod.invoke(scalarClass, new Double(10.0));
+                scalarSI = (AbstractScalar<?>) createSIMethod.invoke(scalarClass, new Double(10.0));
             }
             catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
             {
@@ -94,10 +94,10 @@ public class ValueOfStringOfTest
             // loop over all the unit types
             for (Unit<?> unit : unitSI.getUnitBase().getUnitsById().values())
             {
-                Scalar<?> scalarUnit = null;
+                AbstractScalar<?> scalarUnit = null;
                 try
                 {
-                    scalarUnit = (Scalar<?>) constructScalar.newInstance(new Double(1.0), unit);
+                    scalarUnit = (AbstractScalar<?>) constructScalar.newInstance(new Double(1.0), unit);
                 }
                 catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
                         | InstantiationException exception)
@@ -119,7 +119,7 @@ public class ValueOfStringOfTest
                 }
                 try
                 {
-                    scalarString = Scalar.textualStringOfDefaultLocale(scalarUnit);
+                    scalarString = AbstractScalar.textualStringOfDefaultLocale(scalarUnit);
                 }
                 catch (Exception e)
                 {
@@ -137,11 +137,11 @@ public class ValueOfStringOfTest
                 {
                     fail("Method 'valueOf' not found for Scalar class " + classPath);
                 }
-                Scalar<?> value = null;
+                AbstractScalar<?> value = null;
                 try
                 {
                     System.out.println("Calling " + scalarClass.getName() + ".valueOf(" + scalarString + ")");
-                    value = (Scalar<?>) valueOfMethod.invoke(scalarClass, scalarString);
+                    value = (AbstractScalar<?>) valueOfMethod.invoke(scalarClass, scalarString);
                 }
                 catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
                 {
@@ -167,11 +167,11 @@ public class ValueOfStringOfTest
                 {
                     fail("Method 'of' not found for Scalar class " + classPath);
                 }
-                Scalar<?> ofValue = null;
+                AbstractScalar<?> ofValue = null;
                 try
                 {
                     System.out.println("Calling " + scalarClass.getName() + ".of(" + scalarString + ")");
-                    ofValue = (Scalar<?>) ofMethod.invoke(scalarClass, 1.0, unit.getDefaultTextualAbbreviation());
+                    ofValue = (AbstractScalar<?>) ofMethod.invoke(scalarClass, 1.0, unit.getDefaultTextualAbbreviation());
                 }
                 catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
                 {

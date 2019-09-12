@@ -10,7 +10,12 @@ import javax.annotation.Generated;
 import org.djunits4.unit.*;
 import org.djunits4.unit.si.SIDimensions;
 import org.djunits4.unit.util.UnitRuntimeException;
-import org.djunits4.value.ValueUtil;
+import org.djunits4.value.vdouble.scalar.*;
+import org.djunits4.unit.si.SIDimensions;
+import org.djunits4.unit.util.UnitRuntimeException;
+import org.djunits4.value.util.ValueUtil;
+import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits4.value.vdouble.scalar.base.DoubleScalar;
 
 /**
  * Easy access methods for the generic Relative SI DoubleScalar.
@@ -152,7 +157,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
     {
         Throw.whenNull(text, "Error parsing SIScalar: unitString is null");
         Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing SIScalar: empty unitString");
-        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
@@ -209,80 +214,19 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
     /**********************************************************************************/
 
     /**
-     * Return the current scalar transformed to a scalar in the same scalar type as the example. Of course the SI dimensionality
-     * has to match, otherwise the scalar cannot be transformed.
-     * @param example K; an example object that serves as the 'template', e.g. Speed.ZERO
+     * Return the current scalar transformed to a scalar in the given unit. Of course the SI dimensionality has to match,
+     * otherwise the scalar cannot be transformed. The compiler will check the alignment between the return value and the unit.
+     * @param displayUnit KU; the unit in which the scalar needs to be expressed
      * @return K; the scalar that has been transformed into the right scalar type and unit
      */
-    public final <KU extends Unit<KU>, K extends AbstractDoubleScalarRel<KU, K>> K as(final K example)
+    public final <KU extends Unit<KU>, K extends AbstractDoubleScalarRel<KU, K>> K as(final KU displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(example.getUnit().getUnitBase().getSiDimensions())),
-                UnitRuntimeException.class, "cannot cast %s to %s", this.toString(), example.toString());
-        return example.instantiateRel(this.si, example.getUnit().getUnitBase().getStandardUnit());
-    }
-
-    /**
-     * Return the current scalar transformed to a scalar in the same scalar type as the example. Of course the SI dimensionality
-     * has to match, otherwise the scalar cannot be transformed.
-     * @param example K; an example object that serves as the 'template', e.g. Speed.ZERO
-     * @param displayUnit KU; the unit in which the value will be displayed
-     * @return K; the scalar that has been transformed into the right scalar type and unit
-     */
-    public final <KU extends Unit<KU>, K extends AbstractDoubleScalarRel<KU, K>> K as(final K example, final KU displayUnit)
-    {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(example.getUnit().getUnitBase().getSiDimensions())),
-                UnitRuntimeException.class, "cannot cast %s to %s", this.toString(), example.toString());
-        return example.instantiateRel(ValueUtil.expressAsUnit(this.si, displayUnit), displayUnit);
-    }
-
-    /**
-     * Return the current scalar transformed to a scalar in the given class type. Of course the SI dimensionality has to match,
-     * otherwise the scalar cannot be transformed.
-     * @param returnClass Class&lt;K&gt;; the class of the scalar to be constructed
-     * @return K; the scalar that has been transformed into the right scalar type and unit
-     */
-    @SuppressWarnings("unchecked")
-    public final <KU extends Unit<KU>, K extends AbstractDoubleScalarRel<KU, K>> K as(final Class<K> returnClass)
-    {
-        try
-        {
-            Method createSI = returnClass.getMethod("createSI", double.class);
-            K result = (K) createSI.invoke(returnClass, this.si);
-            Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(result.getUnit().getUnitBase().getSiDimensions())),
-                    UnitRuntimeException.class, "cannot cast %s to %s", this.toString(), result.toString());
-            return result;
-        }
-        catch (InvocationTargetException | NoSuchMethodException | SecurityException | IllegalAccessException
-                | IllegalArgumentException exception)
-        {
-            throw new UnitRuntimeException(exception);
-        }
-    }
-
-    /**
-     * Return the current scalar transformed to a scalar in the given class type. Of course the SI dimensionality has to match,
-     * otherwise the scalar cannot be transformed.
-     * @param returnClass Class&lt;K&gt;; the class of the scalar to be constructed
-     * @param displayUnit KU; the unit in which the value will be displayed
-     * @return K; the scalar that has been transformed into the right scalar type and unit
-     */
-    @SuppressWarnings("unchecked")
-    public final <KU extends Unit<KU>, K extends AbstractDoubleScalarRel<KU, K>> K as(Class<K> returnClass,
-            final KU displayUnit)
-    {
-        try
-        {
-            Method createSI = returnClass.getMethod("createSI", double.class);
-            K result = (K) createSI.invoke(returnClass, this.si);
-            Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(result.getUnit().getUnitBase().getSiDimensions())),
-                    UnitRuntimeException.class, "cannot cast %s to %s", this.toString(), result.toString());
-            return result.instantiateRel(ValueUtil.expressAsUnit(this.si, displayUnit), displayUnit);
-        }
-        catch (InvocationTargetException | NoSuchMethodException | SecurityException | IllegalAccessException
-                | IllegalArgumentException exception)
-        {
-            throw new UnitRuntimeException(exception);
-        }
+        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(displayUnit.getUnitBase().getSiDimensions())),
+                UnitRuntimeException.class, "SIScalar with unit %s cannot be converted to a scalar with unit %s", getUnit(),
+                displayUnit);
+        K result = DoubleScalar.instantiate(this.si, displayUnit.getStandardUnit());
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     %%ASMETHODS%%

@@ -6,8 +6,8 @@ import java.util.SortedMap;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.MagneticFluxDensityUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatMagneticFluxDensity;
 
 /**
@@ -19,7 +19,7 @@ import org.djunits4.value.vfloat.scalar.FloatMagneticFluxDensity;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.228Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class FloatMagneticFluxDensityVector extends AbstractFloatVectorRel<MagneticFluxDensityUnit,
         FloatMagneticFluxDensityVector, MutableFloatMagneticFluxDensityVector, FloatMagneticFluxDensity>
 {
@@ -31,10 +31,10 @@ public class FloatMagneticFluxDensityVector extends AbstractFloatVectorRel<Magne
      * @param values float[]; the values of the entries in the new Relative Immutable Float FloatMagneticFluxDensityVector
      * @param unit MagneticFluxDensityUnit; the unit of the new Relative Immutable Float FloatMagneticFluxDensityVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatMagneticFluxDensityVector(final float[] values, final MagneticFluxDensityUnit unit,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -45,10 +45,10 @@ public class FloatMagneticFluxDensityVector extends AbstractFloatVectorRel<Magne
      *            FloatMagneticFluxDensityVector
      * @param unit MagneticFluxDensityUnit; the unit of the new Relative Immutable Float FloatMagneticFluxDensityVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatMagneticFluxDensityVector(final List<Float> values, final MagneticFluxDensityUnit unit,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -58,10 +58,10 @@ public class FloatMagneticFluxDensityVector extends AbstractFloatVectorRel<Magne
      * @param values FloatMagneticFluxDensity[]; the values of the entries in the new Relative Immutable Float
      *            FloatMagneticFluxDensityVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public FloatMagneticFluxDensityVector(final FloatMagneticFluxDensity[] values, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -71,10 +71,10 @@ public class FloatMagneticFluxDensityVector extends AbstractFloatVectorRel<Magne
      * @param values List&lt;FloatMagneticFluxDensity&gt;; the values of the entries in the new Relative Immutable Float
      *            FloatMagneticFluxDensityVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public FloatMagneticFluxDensityVector(final List<FloatMagneticFluxDensity> values, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -85,10 +85,10 @@ public class FloatMagneticFluxDensityVector extends AbstractFloatVectorRel<Magne
      *            Mutable Float FloatMagneticFluxDensityVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public FloatMagneticFluxDensityVector(final SortedMap<Integer, FloatMagneticFluxDensity> values, final int length,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, length, storageType);
     }
@@ -100,10 +100,10 @@ public class FloatMagneticFluxDensityVector extends AbstractFloatVectorRel<Magne
      * @param unit MagneticFluxDensityUnit; the unit of the new Relative Sparse Mutable Float FloatMagneticFluxDensityVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatMagneticFluxDensityVector(final SortedMap<Integer, Float> values, final MagneticFluxDensityUnit unit,
-            final int length, final StorageType storageType) throws ValueException
+            final int length, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, length, storageType);
     }
@@ -168,7 +168,7 @@ public class FloatMagneticFluxDensityVector extends AbstractFloatVectorRel<Magne
             {
                 array[i] = get(i);
             }
-            catch (ValueException exception)
+            catch (ValueRuntimeException exception)
             {
                 throw new RuntimeException(exception);
             }

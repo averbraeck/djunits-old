@@ -8,6 +8,8 @@ import org.djunits4.Throw;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.ElectricalPotentialUnit;
 import org.djunits4.unit.ElectricalResistanceUnit;
+import org.djunits4.value.util.ValueUtil;
+import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 
 /**
  * Easy access methods for the ElectricalResistance DoubleScalar, which is relative by definition.
@@ -18,7 +20,7 @@ import org.djunits4.unit.ElectricalResistanceUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.096Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T08:03:09.298Z")
 public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResistanceUnit, ElectricalResistance>
 {
     /** */
@@ -176,7 +178,7 @@ public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResi
     {
         Throw.whenNull(text, "Error parsing ElectricalResistance: unitString is null");
         Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing ElectricalResistance: empty unitString");
-        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();

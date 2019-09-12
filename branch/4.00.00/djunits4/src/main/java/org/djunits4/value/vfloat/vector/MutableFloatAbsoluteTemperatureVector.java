@@ -7,8 +7,8 @@ import javax.annotation.Generated;
 
 import org.djunits4.unit.AbsoluteTemperatureUnit;
 import org.djunits4.unit.TemperatureUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatAbsoluteTemperature;
 
 /**
@@ -20,7 +20,7 @@ import org.djunits4.value.vfloat.scalar.FloatAbsoluteTemperature;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.212Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class MutableFloatAbsoluteTemperatureVector
         extends AbstractMutableFloatVectorAbs<AbsoluteTemperatureUnit, TemperatureUnit, FloatAbsoluteTemperatureVector,
                 FloatTemperatureVector, MutableFloatAbsoluteTemperatureVector, FloatAbsoluteTemperature>
@@ -33,10 +33,10 @@ public class MutableFloatAbsoluteTemperatureVector
      * @param values float[]; the values of the entries in the new Absolute Mutable FloatAbsoluteTemperatureVector
      * @param unit AbsoluteTemperatureUnit; the unit of the new Absolute Mutable FloatAbsoluteTemperatureVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public MutableFloatAbsoluteTemperatureVector(final float[] values, final AbsoluteTemperatureUnit unit,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -46,10 +46,10 @@ public class MutableFloatAbsoluteTemperatureVector
      * @param values List&lt;Float&gt;; the values of the entries in the new Absolute Mutable FloatAbsoluteTemperatureVector
      * @param unit AbsoluteTemperatureUnit; the unit of the new Absolute Mutable FloatAbsoluteTemperatureVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public MutableFloatAbsoluteTemperatureVector(final List<Float> values, final AbsoluteTemperatureUnit unit,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -59,10 +59,10 @@ public class MutableFloatAbsoluteTemperatureVector
      * @param values FloatAbsoluteTemperature[]; the values of the entries in the new Absolute Mutable
      *            FloatAbsoluteTemperatureVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public MutableFloatAbsoluteTemperatureVector(final FloatAbsoluteTemperature[] values, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -72,10 +72,10 @@ public class MutableFloatAbsoluteTemperatureVector
      * @param values List&lt;FloatAbsoluteTemperature&gt;; the values of the entries in the new Absolute Mutable
      *            FloatAbsoluteTemperatureVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public MutableFloatAbsoluteTemperatureVector(final List<FloatAbsoluteTemperature> values, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -86,10 +86,10 @@ public class MutableFloatAbsoluteTemperatureVector
      *            Mutable FloatAbsoluteTemperatureVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public MutableFloatAbsoluteTemperatureVector(final SortedMap<Integer, FloatAbsoluteTemperature> values, final int length,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, length, storageType);
     }
@@ -101,10 +101,10 @@ public class MutableFloatAbsoluteTemperatureVector
      * @param unit AbsoluteTemperatureUnit; the unit of the new Absolute Sparse Mutable FloatAbsoluteTemperatureVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public MutableFloatAbsoluteTemperatureVector(final SortedMap<Integer, Float> values, final AbsoluteTemperatureUnit unit,
-            final int length, final StorageType storageType) throws ValueException
+            final int length, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, length, storageType);
     }
@@ -179,7 +179,7 @@ public class MutableFloatAbsoluteTemperatureVector
             {
                 array[i] = get(i);
             }
-            catch (ValueException exception)
+            catch (ValueRuntimeException exception)
             {
                 throw new RuntimeException(exception);
             }

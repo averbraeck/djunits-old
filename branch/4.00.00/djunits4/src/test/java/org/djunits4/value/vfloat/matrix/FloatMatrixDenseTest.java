@@ -10,8 +10,8 @@ import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.PositionUnit;
 import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.Unit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatScalar;
 import org.junit.Test;
 
@@ -71,7 +71,7 @@ public class FloatMatrixDenseTest
                 {
                     assertEquals("Value should match", reference[row][column], dm.getInUnit(row, column), precision);
                 }
-                catch (ValueException exception)
+                catch (ValueRuntimeException exception)
                 {
                     fail("Unexpected exception");
                 }
@@ -119,7 +119,7 @@ public class FloatMatrixDenseTest
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Immutable"));
             assertTrue("toString contains \"Dense\"", result.contains("Dense"));
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -143,7 +143,7 @@ public class FloatMatrixDenseTest
             assertTrue("toString result starts with \"Mutable \"", result.startsWith("Mutable"));
             assertTrue("toString contains \"Dense\"", result.contains("Dense"));
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -212,7 +212,7 @@ public class FloatMatrixDenseTest
             }
             assertEquals("zSum should be sum of all values", sum, temperatureFM.zSum(), 0.001);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -259,7 +259,7 @@ public class FloatMatrixDenseTest
             checkContentsAndType(mdm, value, 0.001, tempUnit, true);
             assertEquals("value should be about -273", -273, mmdm.getInUnit(0, 0, tempUnit), 0.2);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -347,7 +347,7 @@ public class FloatMatrixDenseTest
                     }
                 });
             }
-            catch (ValueException ve)
+            catch (ValueRuntimeException ve)
             {
                 fail("Caught unexpected ValueException: " + ve.toString());
             }
@@ -377,7 +377,7 @@ public class FloatMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -406,7 +406,7 @@ public class FloatMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -436,7 +436,7 @@ public class FloatMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -466,7 +466,7 @@ public class FloatMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -486,7 +486,7 @@ public class FloatMatrixDenseTest
                     AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT, StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -500,7 +500,7 @@ public class FloatMatrixDenseTest
                     StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -514,7 +514,7 @@ public class FloatMatrixDenseTest
                     StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -527,7 +527,7 @@ public class FloatMatrixDenseTest
                     StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -542,14 +542,14 @@ public class FloatMatrixDenseTest
                 matrix = new FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(in,
                         AbsoluteTemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
             }
-            catch (ValueException ve)
+            catch (ValueRuntimeException ve)
             {
                 fail("Caught unexpected exception: " + ve.toString());
             }
             matrix.determinant();
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -571,7 +571,7 @@ public class FloatMatrixDenseTest
                             StorageType.DENSE);
             assertEquals("Determinant should be 15", 15, matrix.determinant(), 0.001);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             if (ve.toString().contains("Matrix must be sparse"))
             {
@@ -599,7 +599,7 @@ public class FloatMatrixDenseTest
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Immutable"));
             assertTrue("toString contains \"Dense\"", result.contains("Dense"));
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -623,7 +623,7 @@ public class FloatMatrixDenseTest
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Mutable"));
             assertTrue("toString contains \"Dense\"", result.contains("Dense"));
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -683,7 +683,7 @@ public class FloatMatrixDenseTest
             }
             assertEquals("zSum should be sum of all values", sum, temperatureFM.zSum(), 0.001);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -730,7 +730,7 @@ public class FloatMatrixDenseTest
             mdm.set(0, 0, new FloatScalar.Rel<TemperatureUnit>(value2[0][0], TemperatureUnit.KELVIN));
             checkContentsAndType(mdm, value2, 0.01, tempUnit, false);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -826,7 +826,7 @@ public class FloatMatrixDenseTest
                     }
                 });
             }
-            catch (ValueException ve)
+            catch (ValueRuntimeException ve)
             {
                 fail("Caught unexpected ValueException: " + ve.toString());
             }
@@ -855,7 +855,7 @@ public class FloatMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -883,7 +883,7 @@ public class FloatMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -911,7 +911,7 @@ public class FloatMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -940,7 +940,7 @@ public class FloatMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -969,7 +969,7 @@ public class FloatMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -998,7 +998,7 @@ public class FloatMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -1017,7 +1017,7 @@ public class FloatMatrixDenseTest
             new FloatMatrix.Rel<TemperatureUnit>((float[][]) null, TemperatureUnit.DEGREE_FAHRENHEIT, StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -1030,7 +1030,7 @@ public class FloatMatrixDenseTest
             new FloatMatrix.Rel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -1043,7 +1043,7 @@ public class FloatMatrixDenseTest
             new FloatMatrix.Rel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -1055,7 +1055,7 @@ public class FloatMatrixDenseTest
             new FloatMatrix.Rel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -1069,14 +1069,14 @@ public class FloatMatrixDenseTest
             {
                 matrix = new FloatMatrix.Rel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
             }
-            catch (ValueException ve)
+            catch (ValueRuntimeException ve)
             {
                 fail("Caught unexpected exception: " + ve.toString());
             }
             matrix.determinant();
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -1097,7 +1097,7 @@ public class FloatMatrixDenseTest
                     new FloatMatrix.Rel<TemperatureUnit>(values, TemperatureUnit.KELVIN, StorageType.DENSE);
             assertEquals("Determinant should be 15", 15, matrix.determinant(), 0.001);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             if (ve.toString().contains("Matrix must be sparse"))
             {
@@ -1143,7 +1143,7 @@ public class FloatMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -1184,7 +1184,7 @@ public class FloatMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -1247,7 +1247,7 @@ public class FloatMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -1334,7 +1334,7 @@ public class FloatMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -1459,7 +1459,7 @@ public class FloatMatrixDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -1499,7 +1499,7 @@ public class FloatMatrixDenseTest
                     {
                         got = actualResult.getSI(i, j);
                     }
-                    catch (ValueException ve)
+                    catch (ValueRuntimeException ve)
                     {
                         fail("Caught unexpected exception: " + ve.toString());
                     }

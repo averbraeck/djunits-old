@@ -6,8 +6,8 @@ import java.util.SortedMap;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.VolumeUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatVolume;
 
 /**
@@ -19,7 +19,7 @@ import org.djunits4.value.vfloat.scalar.FloatVolume;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.228Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class FloatVolumeVector
         extends AbstractFloatVectorRel<VolumeUnit, FloatVolumeVector, MutableFloatVolumeVector, FloatVolume>
 {
@@ -31,9 +31,9 @@ public class FloatVolumeVector
      * @param values float[]; the values of the entries in the new Relative Immutable Float FloatVolumeVector
      * @param unit VolumeUnit; the unit of the new Relative Immutable Float FloatVolumeVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
-    public FloatVolumeVector(final float[] values, final VolumeUnit unit, final StorageType storageType) throws ValueException
+    public FloatVolumeVector(final float[] values, final VolumeUnit unit, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -43,10 +43,10 @@ public class FloatVolumeVector
      * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float FloatVolumeVector
      * @param unit VolumeUnit; the unit of the new Relative Immutable Float FloatVolumeVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatVolumeVector(final List<Float> values, final VolumeUnit unit, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -55,9 +55,9 @@ public class FloatVolumeVector
      * Construct a new Relative Immutable Float FloatVolumeVector.
      * @param values FloatVolume[]; the values of the entries in the new Relative Immutable Float FloatVolumeVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public FloatVolumeVector(final FloatVolume[] values, final StorageType storageType) throws ValueException
+    public FloatVolumeVector(final FloatVolume[] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -66,9 +66,9 @@ public class FloatVolumeVector
      * Construct a new Relative Immutable Float FloatVolumeVector.
      * @param values List&lt;FloatVolume&gt;; the values of the entries in the new Relative Immutable Float FloatVolumeVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public FloatVolumeVector(final List<FloatVolume> values, final StorageType storageType) throws ValueException
+    public FloatVolumeVector(final List<FloatVolume> values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -79,10 +79,10 @@ public class FloatVolumeVector
      *            FloatVolumeVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public FloatVolumeVector(final SortedMap<Integer, FloatVolume> values, final int length, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, length, storageType);
     }
@@ -94,10 +94,10 @@ public class FloatVolumeVector
      * @param unit VolumeUnit; the unit of the new Relative Sparse Mutable Float FloatVolumeVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatVolumeVector(final SortedMap<Integer, Float> values, final VolumeUnit unit, final int length,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, length, storageType);
     }
@@ -160,7 +160,7 @@ public class FloatVolumeVector
             {
                 array[i] = get(i);
             }
-            catch (ValueException exception)
+            catch (ValueRuntimeException exception)
             {
                 throw new RuntimeException(exception);
             }

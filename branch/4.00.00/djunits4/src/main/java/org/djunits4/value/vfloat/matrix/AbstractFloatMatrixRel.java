@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 import org.djunits4.unit.Unit;
 import org.djunits4.value.Relative;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.AbstractFloatScalarRel;
 
 /**
@@ -34,9 +34,9 @@ abstract class AbstractFloatMatrixRel<U extends Unit<U>, R extends AbstractFloat
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatMatrix
      * @param unit U; the unit of the new Relative Immutable FloatMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
-    AbstractFloatMatrixRel(final float[][] values, final U unit, final StorageType storageType) throws ValueException
+    AbstractFloatMatrixRel(final float[][] values, final U unit, final StorageType storageType) throws ValueRuntimeException
     {
         super(unit, FloatMatrixData.instantiate(ensureRectangularAndNonEmpty(values), unit.getScale(), storageType));
     }
@@ -45,9 +45,9 @@ abstract class AbstractFloatMatrixRel<U extends Unit<U>, R extends AbstractFloat
      * Construct a new Relative Immutable FloatMatrix.
      * @param values S[][]; the values of the entries in the new Relative Immutable FloatMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    AbstractFloatMatrixRel(final S[][] values, final StorageType storageType) throws ValueException
+    AbstractFloatMatrixRel(final S[][] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(checkUnit(values), FloatMatrixData.instantiate(values, storageType));
     }
@@ -100,7 +100,7 @@ abstract class AbstractFloatMatrixRel<U extends Unit<U>, R extends AbstractFloat
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings("checkstyle:designforextension")
-    public final S get(final int row, final int column) throws ValueException
+    public final S get(final int row, final int column) throws ValueRuntimeException
     {
         checkIndex(row, column);
         return instantiateScalar(getInUnit(row, column, getUnit()), getUnit());
@@ -116,9 +116,9 @@ abstract class AbstractFloatMatrixRel<U extends Unit<U>, R extends AbstractFloat
      * result is a dense matrix or matrix.
      * @param rel R; the right operand
      * @return the addition of this matrix and the operand
-     * @throws ValueException in case this matrix or matrix and the operand have a different size
+     * @throws ValueRuntimeException in case this matrix or matrix and the operand have a different size
      */
-    public final R plus(final R rel) throws ValueException
+    public final R plus(final R rel) throws ValueRuntimeException
     {
         return instantiateType(this.getData().plus(rel.getData()), getUnit());
     }
@@ -129,9 +129,9 @@ abstract class AbstractFloatMatrixRel<U extends Unit<U>, R extends AbstractFloat
      * the result is a dense matrix or matrix.
      * @param rel R; the right operand
      * @return the subtraction of this matrix and the operand
-     * @throws ValueException in case this matrix or matrix and the operand have a different size
+     * @throws ValueRuntimeException in case this matrix or matrix and the operand have a different size
      */
-    public final R minus(final R rel) throws ValueException
+    public final R minus(final R rel) throws ValueRuntimeException
     {
         return instantiateType(this.getData().minus(rel.getData()), getUnit());
     }
@@ -142,9 +142,9 @@ abstract class AbstractFloatMatrixRel<U extends Unit<U>, R extends AbstractFloat
      * the result is a sparse matrix or matrix.
      * @param rel R; the right operand
      * @return the multiplication of this matrix and the operand
-     * @throws ValueException in case this matrix or matrix and the operand have a different size
+     * @throws ValueRuntimeException in case this matrix or matrix and the operand have a different size
      */
-    public final R times(final R rel) throws ValueException
+    public final R times(final R rel) throws ValueRuntimeException
     {
         return instantiateType(this.getData().times(rel.getData()), getUnit());
     }
@@ -155,9 +155,9 @@ abstract class AbstractFloatMatrixRel<U extends Unit<U>, R extends AbstractFloat
      * is a sparse matrix or matrix.
      * @param rel R; the right operand
      * @return the division of this matrix and the operand
-     * @throws ValueException in case this matrix or matrix and the operand have a different size
+     * @throws ValueRuntimeException in case this matrix or matrix and the operand have a different size
      */
-    public final R divide(final R rel) throws ValueException
+    public final R divide(final R rel) throws ValueRuntimeException
     {
         return instantiateType(this.getData().divide(rel.getData()), getUnit());
     }
@@ -172,9 +172,9 @@ abstract class AbstractFloatMatrixRel<U extends Unit<U>, R extends AbstractFloat
      * @param <U> the unit
      * @param <S> the scalar type
      * @return the unit of the object
-     * @throws ValueException when the array is null, has length equal to 0, or has first entry with length equal to 0
+     * @throws ValueRuntimeException when the array is null, has length equal to 0, or has first entry with length equal to 0
      */
-    static <U extends Unit<U>, S extends AbstractFloatScalarRel<U, S>> U checkUnit(final S[][] dsArray) throws ValueException
+    static <U extends Unit<U>, S extends AbstractFloatScalarRel<U, S>> U checkUnit(final S[][] dsArray) throws ValueRuntimeException
     {
         ensureRectangularAndNonEmpty(dsArray);
         return dsArray[0][0].getUnit();
@@ -185,25 +185,25 @@ abstract class AbstractFloatMatrixRel<U extends Unit<U>, R extends AbstractFloat
      * @param values S[][]; the 2D array to check
      * @param <U> the unit
      * @param <S> the scalar type
-     * @throws ValueException when values is not rectangular, or contains no data
+     * @throws ValueRuntimeException when values is not rectangular, or contains no data
      */
     protected static <U extends Unit<U>,
-            S extends AbstractFloatScalarRel<U, S>> void ensureRectangularAndNonEmpty(final S[][] values) throws ValueException
+            S extends AbstractFloatScalarRel<U, S>> void ensureRectangularAndNonEmpty(final S[][] values) throws ValueRuntimeException
     {
         if (null == values)
         {
-            throw new ValueException("Cannot create a FloatVector or MutableFloatVector from an empty array of FloatScalar");
+            throw new ValueRuntimeException("Cannot create a FloatVector or MutableFloatVector from an empty array of FloatScalar");
         }
         if (0 == values.length || 0 == values[0].length)
         {
-            throw new ValueException("Creating FloatVector or MutableFloatVector: "
+            throw new ValueRuntimeException("Creating FloatVector or MutableFloatVector: "
                     + "Cannot determine unit for FloatMatrix from an empty array of FloatScalar");
         }
         for (int row = values.length; --row >= 1;)
         {
             if (values[0].length != values[row].length)
             {
-                throw new ValueException("Creating FloatVector or MutableFloatVector: Lengths of rows are not all the same");
+                throw new ValueRuntimeException("Creating FloatVector or MutableFloatVector: Lengths of rows are not all the same");
             }
         }
     }

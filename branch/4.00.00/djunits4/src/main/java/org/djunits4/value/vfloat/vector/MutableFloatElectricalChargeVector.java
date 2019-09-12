@@ -6,8 +6,8 @@ import java.util.SortedMap;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.ElectricalChargeUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatElectricalCharge;
 
 /**
@@ -19,7 +19,7 @@ import org.djunits4.value.vfloat.scalar.FloatElectricalCharge;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.243Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class MutableFloatElectricalChargeVector extends AbstractMutableFloatVectorRel<ElectricalChargeUnit,
         FloatElectricalChargeVector, MutableFloatElectricalChargeVector, FloatElectricalCharge>
 {
@@ -31,10 +31,10 @@ public class MutableFloatElectricalChargeVector extends AbstractMutableFloatVect
      * @param values float[]; the values of the entries in the new Relative Immutable Float ElectricalChargeVector
      * @param unit ElectricalChargeUnit; the unit of the new Relative Immutable Float ElectricalChargeVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public MutableFloatElectricalChargeVector(final float[] values, final ElectricalChargeUnit unit,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -44,10 +44,10 @@ public class MutableFloatElectricalChargeVector extends AbstractMutableFloatVect
      * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float ElectricalChargeVector
      * @param unit ElectricalChargeUnit; the unit of the new Relative Immutable Float ElectricalChargeVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public MutableFloatElectricalChargeVector(final List<Float> values, final ElectricalChargeUnit unit,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -57,10 +57,10 @@ public class MutableFloatElectricalChargeVector extends AbstractMutableFloatVect
      * @param values FloatElectricalCharge[]; the values of the entries in the new Relative Immutable Float
      *            ElectricalChargeVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public MutableFloatElectricalChargeVector(final FloatElectricalCharge[] values, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -70,10 +70,10 @@ public class MutableFloatElectricalChargeVector extends AbstractMutableFloatVect
      * @param values List&lt;FloatElectricalCharge&gt;; the values of the entries in the new Relative Immutable Float
      *            ElectricalChargeVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public MutableFloatElectricalChargeVector(final List<FloatElectricalCharge> values, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -84,10 +84,10 @@ public class MutableFloatElectricalChargeVector extends AbstractMutableFloatVect
      *            Mutable Float ElectricalChargeVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public MutableFloatElectricalChargeVector(final SortedMap<Integer, FloatElectricalCharge> values, final int length,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, length, storageType);
     }
@@ -99,10 +99,10 @@ public class MutableFloatElectricalChargeVector extends AbstractMutableFloatVect
      * @param unit ElectricalChargeUnit; the unit of the new Relative Sparse Mutable Float ElectricalChargeVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public MutableFloatElectricalChargeVector(final SortedMap<Integer, Float> values, final ElectricalChargeUnit unit,
-            final int length, final StorageType storageType) throws ValueException
+            final int length, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, length, storageType);
     }
@@ -168,7 +168,7 @@ public class MutableFloatElectricalChargeVector extends AbstractMutableFloatVect
             {
                 array[i] = get(i);
             }
-            catch (ValueException exception)
+            catch (ValueRuntimeException exception)
             {
                 throw new RuntimeException(exception);
             }

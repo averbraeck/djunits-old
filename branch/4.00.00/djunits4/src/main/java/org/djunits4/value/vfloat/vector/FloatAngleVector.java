@@ -6,8 +6,8 @@ import java.util.SortedMap;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.AngleUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatAngle;
 
 /**
@@ -19,7 +19,7 @@ import org.djunits4.value.vfloat.scalar.FloatAngle;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.212Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class FloatAngleVector extends AbstractFloatVectorRel<AngleUnit, FloatAngleVector, MutableFloatAngleVector, FloatAngle>
 {
     /** */
@@ -30,9 +30,9 @@ public class FloatAngleVector extends AbstractFloatVectorRel<AngleUnit, FloatAng
      * @param values float[]; the values of the entries in the new Relative Immutable FloatAngleVector
      * @param unit AngleUnit; the unit of the new Relative Immutable FloatAngleVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
-    public FloatAngleVector(final float[] values, final AngleUnit unit, final StorageType storageType) throws ValueException
+    public FloatAngleVector(final float[] values, final AngleUnit unit, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -42,9 +42,9 @@ public class FloatAngleVector extends AbstractFloatVectorRel<AngleUnit, FloatAng
      * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable FloatAngleVector
      * @param unit AngleUnit; the unit of the new Relative Immutable FloatAngleVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
-    public FloatAngleVector(final List<Float> values, final AngleUnit unit, final StorageType storageType) throws ValueException
+    public FloatAngleVector(final List<Float> values, final AngleUnit unit, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -53,9 +53,9 @@ public class FloatAngleVector extends AbstractFloatVectorRel<AngleUnit, FloatAng
      * Construct a new Relative Immutable FloatAngleVector.
      * @param values FloatAngle[]; the values of the entries in the new Relative Immutable FloatAngleVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public FloatAngleVector(final FloatAngle[] values, final StorageType storageType) throws ValueException
+    public FloatAngleVector(final FloatAngle[] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -64,9 +64,9 @@ public class FloatAngleVector extends AbstractFloatVectorRel<AngleUnit, FloatAng
      * Construct a new Relative Immutable FloatAngleVector.
      * @param values List&lt;FloatAngle&gt;; the values of the entries in the new Relative Immutable FloatAngleVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public FloatAngleVector(final List<FloatAngle> values, final StorageType storageType) throws ValueException
+    public FloatAngleVector(final List<FloatAngle> values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -77,10 +77,10 @@ public class FloatAngleVector extends AbstractFloatVectorRel<AngleUnit, FloatAng
      *            FloatAngleVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public FloatAngleVector(final SortedMap<Integer, FloatAngle> values, final int length, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, length, storageType);
     }
@@ -92,10 +92,10 @@ public class FloatAngleVector extends AbstractFloatVectorRel<AngleUnit, FloatAng
      * @param unit AngleUnit; the unit of the new Relative Sparse Mutable FloatAngleVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatAngleVector(final SortedMap<Integer, Float> values, final AngleUnit unit, final int length,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, length, storageType);
     }
@@ -159,7 +159,7 @@ public class FloatAngleVector extends AbstractFloatVectorRel<AngleUnit, FloatAng
             {
                 array[i] = get(i);
             }
-            catch (ValueException exception)
+            catch (ValueRuntimeException exception)
             {
                 throw new RuntimeException(exception);
             }

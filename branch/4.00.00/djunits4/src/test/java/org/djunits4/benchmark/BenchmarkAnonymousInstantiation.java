@@ -42,7 +42,6 @@ import org.djunits4.unit.VolumeUnit;
 import org.djunits4.unit.util.UnitException;
 import org.djunits4.unit.util.UnitRuntimeException;
 import org.djunits4.value.vdouble.scalar.AbsoluteTemperature;
-import org.djunits4.value.vdouble.scalar.AbstractDoubleScalar;
 import org.djunits4.value.vdouble.scalar.Acceleration;
 import org.djunits4.value.vdouble.scalar.Angle;
 import org.djunits4.value.vdouble.scalar.AngleSolid;
@@ -72,6 +71,7 @@ import org.djunits4.value.vdouble.scalar.Temperature;
 import org.djunits4.value.vdouble.scalar.Time;
 import org.djunits4.value.vdouble.scalar.Torque;
 import org.djunits4.value.vdouble.scalar.Volume;
+import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalar;
 
 /**
  * BenschmarkAnonymousInstantiation.java.

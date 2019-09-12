@@ -7,9 +7,6 @@ import java.util.Locale;
 
 import org.djunits4.locale.DefaultLocale;
 import org.djunits4.unit.unitsystem.UnitSystem;
-import org.djunits4.value.AngleUtil;
-import org.djunits4.value.vdouble.scalar.DoubleScalar;
-import org.djunits4.value.vfloat.scalar.FloatScalar;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -90,65 +87,6 @@ public class DirectionUnitTest extends AbstractUnitTest<DirectionUnit>
         assertTrue("Can create a new DirectionUnit", null != myAPU);
         checkUnitValueNameAndAbbreviation(myAPU, Math.PI / 2.0 - Math.PI / 180.0, 0.0001, "compass", "cDN");
         DirectionUnit.BASE.unregister(myAPU);
-    }
-
-    /**
-     * Check normalize for all data types.
-     * @param input double; value to normalize
-     */
-    private void checkDoubleNormalize(final double input)
-    {
-        double margin = 0.00000000001;
-        double expected = input;
-        while (expected > 0)
-        {
-            expected -= 2 * Math.PI;
-        }
-        while (expected < 0)
-        {
-            expected += 2 * Math.PI;
-        }
-        assertEquals("double normalize", expected, AngleUtil.normalize(input), margin);
-        DoubleScalar.Abs<DirectionUnit, AngleUnit> dsr = new DoubleScalar.Abs<>(input, DirectionUnit.EAST_RADIAN);
-        assertEquals("DoubleScalar.Abs normalize", expected, AngleUtil.normalize(dsr).getSI(), margin);
-    }
-
-    /**
-     * Check normalize for all data types.
-     * @param input double; value to normalize
-     */
-    private void checkFloatNormalize(final float input)
-    {
-        double margin = 0.00001;
-        float expected = input;
-        while (expected > 0)
-        {
-            expected -= 2 * Math.PI;
-        }
-        while (expected < 0)
-        {
-            expected += 2 * Math.PI;
-        }
-        assertEquals("float normalize", expected, AngleUtil.normalize(input), margin);
-        FloatScalar.Abs<DirectionUnit, AngleUnit> dsr = new FloatScalar.Abs<>(input, DirectionUnit.EAST_RADIAN);
-        assertEquals("FloatScalar.Abs normalize", expected, AngleUtil.normalize(dsr).getSI(), margin);
-    }
-
-    /**
-     * Verify that the normalizations work as intended.
-     */
-    @Test
-    public final void normalizations()
-    {
-        for (int i = -100; i <= 100; i++)
-        {
-            double doubleValue = i * Math.PI / 10;
-            checkDoubleNormalize(doubleValue - i * Math.ulp(doubleValue));
-            checkDoubleNormalize(doubleValue + i * Math.ulp(doubleValue));
-            float floatValue = (float) (i * Math.PI / 10);
-            checkFloatNormalize(floatValue - i * Math.ulp(floatValue));
-            checkFloatNormalize(floatValue + i * Math.ulp(floatValue));
-        }
     }
 
     /**

@@ -10,8 +10,8 @@ import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.PositionUnit;
 import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.Unit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatScalar;
 import org.junit.Test;
 
@@ -77,7 +77,7 @@ public class FloatMatrixSparseTest
                 {
                     assertEquals("Value should match", reference[row][column], dm.getInUnit(row, column), precision);
                 }
-                catch (ValueException exception)
+                catch (ValueRuntimeException exception)
                 {
                     fail("Unexpected exception");
                 }
@@ -106,7 +106,7 @@ public class FloatMatrixSparseTest
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Immutable"));
             assertTrue("toString contains \"Sparse\"", result.contains("Sparse"));
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -130,7 +130,7 @@ public class FloatMatrixSparseTest
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Mutable"));
             assertTrue("toString contains \"Sparse\"", result.contains("Sparse"));
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -199,7 +199,7 @@ public class FloatMatrixSparseTest
             }
             assertEquals("zSum should be sum of all values", sum, temperatureFM.zSum(), 20.0);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -246,7 +246,7 @@ public class FloatMatrixSparseTest
             checkContentsAndType(mdm, value, 0.001, tempUnit, true);
             assertEquals("value should be about -273", -273, mmdm.getInUnit(0, 0, tempUnit), 0.2);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -334,7 +334,7 @@ public class FloatMatrixSparseTest
                     }
                 });
             }
-            catch (ValueException ve)
+            catch (ValueRuntimeException ve)
             {
                 fail("Caught unexpected ValueException: " + ve.toString());
             }
@@ -364,7 +364,7 @@ public class FloatMatrixSparseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -393,7 +393,7 @@ public class FloatMatrixSparseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -423,7 +423,7 @@ public class FloatMatrixSparseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -453,7 +453,7 @@ public class FloatMatrixSparseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -473,7 +473,7 @@ public class FloatMatrixSparseTest
                     AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT, StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -487,7 +487,7 @@ public class FloatMatrixSparseTest
                     StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -501,7 +501,7 @@ public class FloatMatrixSparseTest
                     StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -514,7 +514,7 @@ public class FloatMatrixSparseTest
                     StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -529,14 +529,14 @@ public class FloatMatrixSparseTest
                 matrix = new FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(in,
                         AbsoluteTemperatureUnit.DEGREE_CELSIUS, StorageType.SPARSE);
             }
-            catch (ValueException ve)
+            catch (ValueRuntimeException ve)
             {
                 fail("Caught unexpected exception: " + ve.toString());
             }
             matrix.determinant();
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -558,7 +558,7 @@ public class FloatMatrixSparseTest
                             StorageType.SPARSE);
             assertEquals("Determinant should be 15", 15, matrix.determinant(), 0.001);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             if (ve.toString().contains("Matrix must be sparse"))
             {
@@ -586,7 +586,7 @@ public class FloatMatrixSparseTest
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Immutable"));
             assertTrue("toString contains \"Sparse\"", result.contains("Sparse"));
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -610,7 +610,7 @@ public class FloatMatrixSparseTest
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Mutable"));
             assertTrue("toString contains \"Sparse\"", result.contains("Sparse"));
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -680,7 +680,7 @@ public class FloatMatrixSparseTest
             }
             assertEquals("zSum should be sum of all values", sum, temperatureFM.zSum(), 0.001);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -725,7 +725,7 @@ public class FloatMatrixSparseTest
             mmdm.setSI(0, 0, 0);
             checkContentsAndType(mfm, value, 0.001, tempUnit, false);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -822,7 +822,7 @@ public class FloatMatrixSparseTest
                     }
                 });
             }
-            catch (ValueException ve)
+            catch (ValueRuntimeException ve)
             {
                 fail("Caught unexpected ValueException: " + ve.toString());
             }
@@ -851,7 +851,7 @@ public class FloatMatrixSparseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -879,7 +879,7 @@ public class FloatMatrixSparseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -907,7 +907,7 @@ public class FloatMatrixSparseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -936,7 +936,7 @@ public class FloatMatrixSparseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -965,7 +965,7 @@ public class FloatMatrixSparseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -994,7 +994,7 @@ public class FloatMatrixSparseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -1013,7 +1013,7 @@ public class FloatMatrixSparseTest
             new FloatMatrix.Rel<TemperatureUnit>((float[][]) null, TemperatureUnit.DEGREE_FAHRENHEIT, StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -1026,7 +1026,7 @@ public class FloatMatrixSparseTest
             new FloatMatrix.Rel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -1039,7 +1039,7 @@ public class FloatMatrixSparseTest
             new FloatMatrix.Rel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -1051,7 +1051,7 @@ public class FloatMatrixSparseTest
             new FloatMatrix.Rel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -1065,14 +1065,14 @@ public class FloatMatrixSparseTest
             {
                 matrix = new FloatMatrix.Rel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.SPARSE);
             }
-            catch (ValueException ve)
+            catch (ValueRuntimeException ve)
             {
                 fail("Caught unexpected exception: " + ve.toString());
             }
             matrix.determinant();
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -1093,7 +1093,7 @@ public class FloatMatrixSparseTest
                     new FloatMatrix.Rel<TemperatureUnit>(values, TemperatureUnit.KELVIN, StorageType.SPARSE);
             assertEquals("Determinant should be 15", 15, matrix.determinant(), 0.001);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             if (ve.toString().contains("Matrix must be sparse"))
             {
@@ -1143,7 +1143,7 @@ public class FloatMatrixSparseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -1188,7 +1188,7 @@ public class FloatMatrixSparseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -1254,7 +1254,7 @@ public class FloatMatrixSparseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -1344,7 +1344,7 @@ public class FloatMatrixSparseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -1439,7 +1439,7 @@ public class FloatMatrixSparseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -1479,7 +1479,7 @@ public class FloatMatrixSparseTest
                     {
                         got = actualResult.getSI(i, j);
                     }
-                    catch (ValueException ve)
+                    catch (ValueRuntimeException ve)
                     {
                         fail("Caught unexpected exception: " + ve.toString());
                     }

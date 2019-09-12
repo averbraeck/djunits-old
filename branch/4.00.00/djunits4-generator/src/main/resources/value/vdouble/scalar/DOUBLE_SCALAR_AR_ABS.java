@@ -6,6 +6,8 @@ import javax.annotation.Generated;
 
 import org.djunits4.Throw;
 import org.djunits4.unit.*;
+import org.djunits4.value.util.ValueUtil;
+import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarAbs;
 
 /**
  * Easy access methods for the Absolute %TypeAbs% DoubleScalar.
@@ -158,7 +160,7 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
     {
         Throw.whenNull(text, "Error parsing %TypeAbs%: unitString is null");
         Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing %TypeAbs%: empty unitString");
-        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();

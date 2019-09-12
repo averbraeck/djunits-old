@@ -10,8 +10,8 @@ import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.PositionUnit;
 import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.Unit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatScalar;
 import org.junit.Test;
 
@@ -62,7 +62,7 @@ public class FloatVectorDenseTest
             {
                 assertEquals("Value should match", reference[index], dv.getInUnit(index), precision);
             }
-            catch (ValueException exception)
+            catch (ValueRuntimeException exception)
             {
                 fail("Unexpected exception");
             }
@@ -104,7 +104,7 @@ public class FloatVectorDenseTest
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Immutable"));
             assertTrue("toString contains \"Dense\"", result.contains("Dense"));
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -128,7 +128,7 @@ public class FloatVectorDenseTest
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Mutable"));
             assertTrue("toString contains \"Dense\"", result.contains("Dense"));
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -188,7 +188,7 @@ public class FloatVectorDenseTest
             }
             assertEquals("zSum should be sum of all values", sum, temperatureFV.zSum(), 0.001);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -235,7 +235,7 @@ public class FloatVectorDenseTest
             checkContentsAndType(mdv, value, 0.001, tempUnit, true);
             assertEquals("value should be about -273", -273, mmdv.getInUnit(0, tempUnit), 0.2);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -323,7 +323,7 @@ public class FloatVectorDenseTest
                     }
                 });
             }
-            catch (ValueException ve)
+            catch (ValueRuntimeException ve)
             {
                 fail("Caught unexpected ValueException: " + ve.toString());
             }
@@ -350,7 +350,7 @@ public class FloatVectorDenseTest
                         result.getSI(i), 0.001);
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -376,7 +376,7 @@ public class FloatVectorDenseTest
                         result.getSI(i), 0.001);
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -403,7 +403,7 @@ public class FloatVectorDenseTest
                         result.getSI(i), 0.001);
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -430,7 +430,7 @@ public class FloatVectorDenseTest
                         result.getSI(i), 0.001);
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -450,7 +450,7 @@ public class FloatVectorDenseTest
                     AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT, StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -475,7 +475,7 @@ public class FloatVectorDenseTest
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Immutable"));
             assertTrue("toString contains \"Dense\"", result.contains("Dense"));
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -499,7 +499,7 @@ public class FloatVectorDenseTest
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Mutable"));
             assertTrue("toString contains \"Dense\"", result.contains("Dense"));
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -549,7 +549,7 @@ public class FloatVectorDenseTest
             }
             assertEquals("zSum should be sum of all values", sum, temperatureFV.zSum(), 0.001);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -596,7 +596,7 @@ public class FloatVectorDenseTest
             mdv.set(0, new FloatScalar.Rel<TemperatureUnit>(value2[0], TemperatureUnit.KELVIN));
             checkContentsAndType(mdv, value2, 0.01, tempUnit, false);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -692,7 +692,7 @@ public class FloatVectorDenseTest
                     }
                 });
             }
-            catch (ValueException ve)
+            catch (ValueRuntimeException ve)
             {
                 fail("Caught unexpected ValueException: " + ve.toString());
             }
@@ -718,7 +718,7 @@ public class FloatVectorDenseTest
                         result.getSI(i), 0.001);
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -743,7 +743,7 @@ public class FloatVectorDenseTest
                         result.getSI(i), 0.001);
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -768,7 +768,7 @@ public class FloatVectorDenseTest
                         result.getSI(i), 0.001);
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -794,7 +794,7 @@ public class FloatVectorDenseTest
                         result.getSI(i), 0.001);
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -820,7 +820,7 @@ public class FloatVectorDenseTest
                         result.getSI(i), 0.001);
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -846,7 +846,7 @@ public class FloatVectorDenseTest
                         result.getSI(i), 0.001);
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -865,7 +865,7 @@ public class FloatVectorDenseTest
             new FloatVector.Rel<TemperatureUnit>((float[]) null, TemperatureUnit.DEGREE_FAHRENHEIT, StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -902,7 +902,7 @@ public class FloatVectorDenseTest
                         left.getSI(i), 0.001);
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -937,7 +937,7 @@ public class FloatVectorDenseTest
                         referenceLeft.getSI(i) - right.getSI(i), left.getSI(i), 0.001);
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -994,7 +994,7 @@ public class FloatVectorDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -1075,7 +1075,7 @@ public class FloatVectorDenseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -1161,7 +1161,7 @@ public class FloatVectorDenseTest
                 assertEquals("value should be negated", -value[index], testVector.getInUnit(index), 0.001);
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -1199,7 +1199,7 @@ public class FloatVectorDenseTest
                 {
                     got = actualResult.getSI(i);
                 }
-                catch (ValueException ve)
+                catch (ValueRuntimeException ve)
                 {
                     fail("Caught unexpected exception: " + ve.toString());
                 }

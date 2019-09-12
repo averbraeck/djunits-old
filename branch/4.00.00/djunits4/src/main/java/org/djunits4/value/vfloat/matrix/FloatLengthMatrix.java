@@ -3,8 +3,8 @@ package org.djunits4.value.vfloat.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.LengthUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatLength;
 
 /**
@@ -16,7 +16,7 @@ import org.djunits4.value.vfloat.scalar.FloatLength;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.290Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class FloatLengthMatrix
         extends AbstractFloatMatrixRel<LengthUnit, FloatLengthMatrix, MutableFloatLengthMatrix, FloatLength>
 {
@@ -28,9 +28,9 @@ public class FloatLengthMatrix
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatLengthMatrix
      * @param unit LengthUnit; the unit of the new Relative Immutable FloatLengthMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
-    public FloatLengthMatrix(final float[][] values, final LengthUnit unit, final StorageType storageType) throws ValueException
+    public FloatLengthMatrix(final float[][] values, final LengthUnit unit, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -39,9 +39,9 @@ public class FloatLengthMatrix
      * Construct a new Relative Immutable FloatLengthMatrix.
      * @param values FloatLength[][]; the values of the entries in the new Relative Immutable FloatLengthMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public FloatLengthMatrix(final FloatLength[][] values, final StorageType storageType) throws ValueException
+    public FloatLengthMatrix(final FloatLength[][] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }

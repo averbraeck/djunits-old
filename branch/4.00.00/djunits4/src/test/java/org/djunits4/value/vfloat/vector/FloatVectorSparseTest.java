@@ -10,8 +10,8 @@ import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.PositionUnit;
 import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.Unit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatScalar;
 import org.junit.Test;
 
@@ -62,7 +62,7 @@ public class FloatVectorSparseTest
             {
                 assertEquals("Value should match", reference[index], dv.getInUnit(index), precision);
             }
-            catch (ValueException exception)
+            catch (ValueRuntimeException exception)
             {
                 fail("Unexpected exception");
             }
@@ -90,7 +90,7 @@ public class FloatVectorSparseTest
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Immutable"));
             assertTrue("toString contains \"Sparse\"", result.contains("Sparse"));
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -114,7 +114,7 @@ public class FloatVectorSparseTest
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Mutable"));
             assertTrue("toString contains \"Sparse\"", result.contains("Sparse"));
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -174,7 +174,7 @@ public class FloatVectorSparseTest
             }
             assertEquals("zSum should be sum of all values", sum, temperatureDV.zSum(), 0.1);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -221,7 +221,7 @@ public class FloatVectorSparseTest
             checkContentsAndType(mdv, value, 0.001, tempUnit, true);
             assertEquals("value should be about -273", -273, mmdv.getInUnit(0, tempUnit), 0.2);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -309,7 +309,7 @@ public class FloatVectorSparseTest
                     }
                 });
             }
-            catch (ValueException ve)
+            catch (ValueRuntimeException ve)
             {
                 fail("Caught unexpected ValueException: " + ve.toString());
             }
@@ -336,7 +336,7 @@ public class FloatVectorSparseTest
                         result.getSI(i), 0.001);
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -362,7 +362,7 @@ public class FloatVectorSparseTest
                         result.getSI(i), 0.001);
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -388,7 +388,7 @@ public class FloatVectorSparseTest
                         result.getSI(i), 0.001);
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -414,7 +414,7 @@ public class FloatVectorSparseTest
                         result.getSI(i), 0.001);
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -434,7 +434,7 @@ public class FloatVectorSparseTest
                     AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT, StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -459,7 +459,7 @@ public class FloatVectorSparseTest
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Immutable"));
             assertTrue("toString contains \"Sparse\"", result.contains("Sparse"));
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -483,7 +483,7 @@ public class FloatVectorSparseTest
             assertTrue("toString result starts with \"Immutable \"", result.startsWith("Mutable"));
             assertTrue("toString contains \"Sparse\"", result.contains("Sparse"));
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -541,7 +541,7 @@ public class FloatVectorSparseTest
             }
             assertEquals("zSum should be sum of all values", sum, temperatureFV.zSum(), 0.001);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -586,7 +586,7 @@ public class FloatVectorSparseTest
             mmdv.setSI(0, 0);
             checkContentsAndType(mdv, value, 0.001, tempUnit, false);
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected exception: " + ve.toString());
         }
@@ -682,7 +682,7 @@ public class FloatVectorSparseTest
                     }
                 });
             }
-            catch (ValueException ve)
+            catch (ValueRuntimeException ve)
             {
                 fail("Caught unexpected ValueException: " + ve.toString());
             }
@@ -708,7 +708,7 @@ public class FloatVectorSparseTest
                         result.getSI(i), 0.001);
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -733,7 +733,7 @@ public class FloatVectorSparseTest
                         result.getSI(i), 0.001);
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -758,7 +758,7 @@ public class FloatVectorSparseTest
                         result.getSI(i), 0.001);
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -783,7 +783,7 @@ public class FloatVectorSparseTest
                         result.getSI(i), 0.001);
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -808,7 +808,7 @@ public class FloatVectorSparseTest
                         result.getSI(i), 0.001);
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -833,7 +833,7 @@ public class FloatVectorSparseTest
                         result.getSI(i), 0.001);
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -852,7 +852,7 @@ public class FloatVectorSparseTest
             new FloatVector.Rel<TemperatureUnit>((float[]) null, TemperatureUnit.DEGREE_FAHRENHEIT, StorageType.SPARSE);
             fail("Preceding code should have thrown a ValueException");
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             // Ignore (exception was expected)
             junk++;
@@ -893,7 +893,7 @@ public class FloatVectorSparseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -932,7 +932,7 @@ public class FloatVectorSparseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -992,7 +992,7 @@ public class FloatVectorSparseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -1076,7 +1076,7 @@ public class FloatVectorSparseTest
                 }
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -1143,7 +1143,7 @@ public class FloatVectorSparseTest
                 assertTrue("divided value should be NaN", Float.isNaN(testVector.getInUnit(index)));
             }
         }
-        catch (ValueException ve)
+        catch (ValueRuntimeException ve)
         {
             fail("Caught unexpected ValueException: " + ve.toString());
         }
@@ -1181,7 +1181,7 @@ public class FloatVectorSparseTest
                 {
                     got = actualResult.getSI(i);
                 }
-                catch (ValueException ve)
+                catch (ValueRuntimeException ve)
                 {
                     fail("Caught unexpected exception: " + ve.toString());
                 }

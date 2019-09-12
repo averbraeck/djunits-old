@@ -3,8 +3,8 @@ package org.djunits4.value.vdouble.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.VolumeUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vdouble.scalar.Volume;
 
 /**
@@ -16,7 +16,7 @@ import org.djunits4.value.vdouble.scalar.Volume;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.275Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-06T11:09:13.414Z")
 public class VolumeMatrix extends AbstractDoubleMatrixRel<VolumeUnit, VolumeMatrix, MutableVolumeMatrix, Volume>
 {
     /** */
@@ -27,9 +27,9 @@ public class VolumeMatrix extends AbstractDoubleMatrixRel<VolumeUnit, VolumeMatr
      * @param values double[][]; the values of the entries in the new Relative Immutable Double VolumeMatrix
      * @param unit VolumeUnit; the unit of the new Relative Immutable Double VolumeMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
-    public VolumeMatrix(final double[][] values, final VolumeUnit unit, final StorageType storageType) throws ValueException
+    public VolumeMatrix(final double[][] values, final VolumeUnit unit, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -38,9 +38,9 @@ public class VolumeMatrix extends AbstractDoubleMatrixRel<VolumeUnit, VolumeMatr
      * Construct a new Relative Immutable Double VolumeMatrix.
      * @param values Volume[][]; the values of the entries in the new Relative Immutable Double VolumeMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public VolumeMatrix(final Volume[][] values, final StorageType storageType) throws ValueException
+    public VolumeMatrix(final Volume[][] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }

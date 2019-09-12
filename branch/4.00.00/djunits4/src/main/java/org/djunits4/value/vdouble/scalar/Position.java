@@ -7,6 +7,8 @@ import javax.annotation.Generated;
 import org.djunits4.Throw;
 import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.PositionUnit;
+import org.djunits4.value.util.ValueUtil;
+import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarAbs;
 
 /**
  * Easy access methods for the Absolute Position DoubleScalar.
@@ -18,7 +20,7 @@ import org.djunits4.unit.PositionUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.069Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T08:03:09.298Z")
 public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, LengthUnit, Length>
 {
     /** */
@@ -157,7 +159,7 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
     {
         Throw.whenNull(text, "Error parsing Position: unitString is null");
         Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Position: empty unitString");
-        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();

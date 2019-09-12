@@ -6,8 +6,8 @@ import java.util.SortedMap;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.LengthUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatLength;
 
 /**
@@ -19,7 +19,7 @@ import org.djunits4.value.vfloat.scalar.FloatLength;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.212Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class FloatLengthVector
         extends AbstractFloatVectorRel<LengthUnit, FloatLengthVector, MutableFloatLengthVector, FloatLength>
 {
@@ -31,9 +31,9 @@ public class FloatLengthVector
      * @param values float[]; the values of the entries in the new Relative Immutable FloatLengthVector
      * @param unit LengthUnit; the unit of the new Relative Immutable FloatLengthVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
-    public FloatLengthVector(final float[] values, final LengthUnit unit, final StorageType storageType) throws ValueException
+    public FloatLengthVector(final float[] values, final LengthUnit unit, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -43,10 +43,10 @@ public class FloatLengthVector
      * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable FloatLengthVector
      * @param unit LengthUnit; the unit of the new Relative Immutable FloatLengthVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatLengthVector(final List<Float> values, final LengthUnit unit, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -55,9 +55,9 @@ public class FloatLengthVector
      * Construct a new Relative Immutable FloatLengthVector.
      * @param values FloatLength[]; the values of the entries in the new Relative Immutable FloatLengthVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public FloatLengthVector(final FloatLength[] values, final StorageType storageType) throws ValueException
+    public FloatLengthVector(final FloatLength[] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -66,9 +66,9 @@ public class FloatLengthVector
      * Construct a new Relative Immutable FloatLengthVector.
      * @param values List&lt;FloatLength&gt;; the values of the entries in the new Relative Immutable FloatLengthVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public FloatLengthVector(final List<FloatLength> values, final StorageType storageType) throws ValueException
+    public FloatLengthVector(final List<FloatLength> values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -79,10 +79,10 @@ public class FloatLengthVector
      *            FloatLengthVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public FloatLengthVector(final SortedMap<Integer, FloatLength> values, final int length, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, length, storageType);
     }
@@ -94,10 +94,10 @@ public class FloatLengthVector
      * @param unit LengthUnit; the unit of the new Relative Sparse Mutable FloatLengthVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatLengthVector(final SortedMap<Integer, Float> values, final LengthUnit unit, final int length,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, length, storageType);
     }
@@ -161,7 +161,7 @@ public class FloatLengthVector
             {
                 array[i] = get(i);
             }
-            catch (ValueException exception)
+            catch (ValueRuntimeException exception)
             {
                 throw new RuntimeException(exception);
             }

@@ -5,11 +5,11 @@ import java.util.SortedMap;
 
 import org.djunits4.unit.AbsoluteLinearUnit;
 import org.djunits4.unit.Unit;
-import org.djunits4.value.MathFunctionsAbs;
-import org.djunits4.value.Mutable;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
-import org.djunits4.value.ValueUtil;
+import org.djunits4.value.IsMutable;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.function.MathFunctionsAbs;
+import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vfloat.FloatFunction;
 import org.djunits4.value.vfloat.FloatMathFunctions;
 import org.djunits4.value.vfloat.scalar.AbstractFloatScalarAbs;
@@ -34,7 +34,7 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
         A extends AbstractFloatVectorAbs<AU, RU, A, R, MA, S>, R extends AbstractFloatVectorRel<RU, R, ?, ?>,
         MA extends AbstractMutableFloatVectorAbs<AU, RU, A, R, MA, S>, S extends AbstractFloatScalarAbs<AU, S, RU, ?>>
         extends AbstractFloatVectorAbs<AU, RU, A, R, MA, S>
-        implements Mutable, MathFunctionsAbs<MA>, FloatMathFunctions<MA>, MutableFloatVectorInterface<AU>
+        implements IsMutable, MathFunctionsAbs<MA>, FloatMathFunctions<MA>, MutableFloatVectorInterface<AU>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -47,9 +47,9 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
      * @param values float[]; the values of the entries in the new Absolute Mutable FloatVector
      * @param unit AU; the unit of the new Absolute Mutable FloatVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
-    AbstractMutableFloatVectorAbs(final float[] values, final AU unit, final StorageType storageType) throws ValueException
+    AbstractMutableFloatVectorAbs(final float[] values, final AU unit, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -59,9 +59,9 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
      * @param values List&lt;Float&gt;; the values of the entries in the new Absolute Mutable FloatVector
      * @param unit AU; the unit of the new Absolute Mutable FloatVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
-    AbstractMutableFloatVectorAbs(final List<Float> values, final AU unit, final StorageType storageType) throws ValueException
+    AbstractMutableFloatVectorAbs(final List<Float> values, final AU unit, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -70,9 +70,9 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
      * Construct a new Absolute Mutable FloatVector.
      * @param values S[]; the values of the entries in the new Absolute Mutable FloatVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    AbstractMutableFloatVectorAbs(final S[] values, final StorageType storageType) throws ValueException
+    AbstractMutableFloatVectorAbs(final S[] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -81,9 +81,9 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
      * Construct a new Absolute Mutable FloatVector.
      * @param values List&lt;S&gt;; the values of the entries in the new Absolute Mutable FloatVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    AbstractMutableFloatVectorAbs(final List<S> values, final StorageType storageType) throws ValueException
+    AbstractMutableFloatVectorAbs(final List<S> values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -93,10 +93,10 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
      * @param values SortedMap&lt;Integer, S&gt;; the values of the entries in the new Absolute Sparse Mutable FloatVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     AbstractMutableFloatVectorAbs(final SortedMap<Integer, S> values, final int length, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, length, storageType);
     }
@@ -107,10 +107,10 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
      * @param unit AU; the unit of the new Absolute Sparse Mutable FloatVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     AbstractMutableFloatVectorAbs(final SortedMap<Integer, Float> values, final AU unit, final int length,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, length, storageType);
     }
@@ -181,10 +181,10 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
      * Increment the value by the supplied value and return the changed vector.
      * @param increment R; amount by which the value is incremented
      * @return the changed MutableFloatVector.Rel&lt;U&gt;
-     * @throws ValueException when the size of increment is not identical to the size of this
+     * @throws ValueRuntimeException when the size of increment is not identical to the size of this
      */
     @SuppressWarnings("unchecked")
-    public final MA incrementBy(final R increment) throws ValueException
+    public final MA incrementBy(final R increment) throws ValueRuntimeException
     {
         checkCopyOnWrite();
         this.data.incrementBy(increment.getData());
@@ -218,10 +218,10 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
      * Decrement the value by the supplied value and return the changed vector.
      * @param decrement R; amount by which the value is decremented
      * @return the changed MutableFloatVector.Rel&lt;U&gt;
-     * @throws ValueException when the size of increment is not identical to the size of this
+     * @throws ValueRuntimeException when the size of increment is not identical to the size of this
      */
     @SuppressWarnings("unchecked")
-    public final MA decrementBy(final R decrement) throws ValueException
+    public final MA decrementBy(final R decrement) throws ValueRuntimeException
     {
         checkCopyOnWrite();
         this.data.decrementBy(decrement.getData());
@@ -274,10 +274,10 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
      * Multiply the values in the vector by the supplied values and return the changed vector.
      * @param factors R; amounts by which the value is multiplied
      * @return the changed MutableFloatVector.Rel&lt;U&gt;
-     * @throws ValueException when the size of the factors is not identical to the size of this
+     * @throws ValueRuntimeException when the size of the factors is not identical to the size of this
      */
     @SuppressWarnings("unchecked")
-    public final MA multiplyBy(final R factors) throws ValueException
+    public final MA multiplyBy(final R factors) throws ValueRuntimeException
     {
         checkCopyOnWrite();
         this.data.multiplyBy(factors.getData());
@@ -361,9 +361,9 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
      * Replace the value at index by the supplied value which is expressed in the standard SI unit.
      * @param index int; index of the value to replace
      * @param valueSI float; the value to store (expressed in the standard SI unit)
-     * @throws ValueException when index out of range (index &lt; 0 or index &gt;= size())
+     * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
      */
-    public final void setSI(final int index, final float valueSI) throws ValueException
+    public final void setSI(final int index, final float valueSI) throws ValueRuntimeException
     {
         checkIndex(index);
         checkCopyOnWrite();
@@ -374,9 +374,9 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
      * Replace the value at index by the supplied value which is in a compatible unit.
      * @param index int; index of the value to replace
      * @param value S; the strongly typed value to store
-     * @throws ValueException when index out of range (index &lt; 0 or index &gt;= size())
+     * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
      */
-    public final void set(final int index, final S value) throws ValueException
+    public final void set(final int index, final S value) throws ValueRuntimeException
     {
         setSI(index, value.getSI());
     }
@@ -386,23 +386,23 @@ abstract class AbstractMutableFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, R
      * @param index int; index of the value to replace
      * @param value float; the value to store (which is expressed in valueUnit)
      * @param valueUnit AU; unit of the supplied value
-     * @throws ValueException when index out of range (index &lt; 0 or index &gt;= size())
+     * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
      */
-    public final void setInUnit(final int index, final float value, final AU valueUnit) throws ValueException
+    public final void setInUnit(final int index, final float value, final AU valueUnit) throws ValueRuntimeException
     {
         setSI(index, (float) ValueUtil.expressAsSIUnit(value, valueUnit));
     }
 
     /**
      * Normalize the vector, i.e. scale the values to make the sum equal to 1.
-     * @throws ValueException when the sum of the values is zero and normalization is not possible
+     * @throws ValueRuntimeException when the sum of the values is zero and normalization is not possible
      */
-    public final void normalize() throws ValueException
+    public final void normalize() throws ValueRuntimeException
     {
         float sum = zSum();
         if (0 == sum)
         {
-            throw new ValueException("zSum is 0; cannot normalize");
+            throw new ValueRuntimeException("zSum is 0; cannot normalize");
         }
         checkCopyOnWrite();
         this.data.divideBy(sum);

@@ -8,8 +8,8 @@ import java.util.Map;
 import org.djunits4.unit.SIUnit;
 import org.djunits4.unit.Unit;
 import org.djunits4.unit.util.UnitRuntimeException;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 
 /**
  * Class to instantiate any FloatMatrix based on the provided unit.
@@ -40,10 +40,10 @@ public final class FloatMatrixUtil
      * @return S; an instantiated FloatMatrix with the value expressed in the unit
      * @param <U> the unit
      * @param <S> the return type
-     * @throws ValueException on vector init error
+     * @throws ValueRuntimeException on vector init error
      */
     public static <U extends Unit<U>, S extends AbstractFloatMatrix<U, S>> S instantiate(final float[][] value, final U unit,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         return instantiateAnonymous(value, unit, storageType);
     }
@@ -57,11 +57,11 @@ public final class FloatMatrixUtil
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return S; an instantiated FloatMatrix with the value expressed in the unit
      * @param <S> the return type
-     * @throws ValueException on vector init error
+     * @throws ValueRuntimeException on vector init error
      */
     @SuppressWarnings("unchecked")
     public static <S extends AbstractFloatMatrix<?, S>> S instantiateAnonymous(final float[][] value, final Unit<?> unit,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         try
         {
@@ -103,12 +103,12 @@ public final class FloatMatrixUtil
      * @param displayUnit U; the unit in which the value is expressed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return S; an instantiated FloatMatrix with the value expressed in the unit
-     * @throws ValueException on vector init error
+     * @throws ValueRuntimeException on vector init error
      * @param <U> the unit
      * @param <S> the return type
      */
     public static <U extends Unit<U>, S extends AbstractFloatMatrix<U, S>> S instantiateSI(final float[][] si,
-            final U displayUnit, final StorageType storageType) throws ValueException
+            final U displayUnit, final StorageType storageType) throws ValueRuntimeException
     {
         return instantiateAnonymousSI(si, displayUnit, storageType);
     }
@@ -121,12 +121,12 @@ public final class FloatMatrixUtil
      * @param displayUnit Unit&lt;?&gt;; the unit in which the value is expressed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return S; an instantiated FloatMatrix with the value expressed in the unit
-     * @throws ValueException on vector init error
+     * @throws ValueRuntimeException on vector init error
      * @param <S> the return type
      */
     @SuppressWarnings({"unchecked", "checkstyle:needbraces", "rawtypes"})
     public static <S extends AbstractFloatMatrix<?, S>> S instantiateAnonymousSI(final float[][] si, final Unit<?> displayUnit,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         S value = (S) instantiateAnonymous(si, displayUnit.getStandardUnit(), storageType);
         ((AbstractFloatMatrix) value).setDisplayUnit((Unit) displayUnit);

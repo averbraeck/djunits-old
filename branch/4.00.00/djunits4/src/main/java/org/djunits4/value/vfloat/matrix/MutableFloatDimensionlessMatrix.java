@@ -3,9 +3,9 @@ package org.djunits4.value.vfloat.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.DimensionlessUnit;
-import org.djunits4.value.MathFunctionsDimensionless;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.function.DimensionlessFunctions;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.FloatMathFunctions;
 import org.djunits4.value.vfloat.scalar.FloatDimensionless;
 
@@ -18,10 +18,10 @@ import org.djunits4.value.vfloat.scalar.FloatDimensionless;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.297Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class MutableFloatDimensionlessMatrix extends AbstractMutableFloatMatrixRel<DimensionlessUnit, FloatDimensionlessMatrix,
         MutableFloatDimensionlessMatrix, FloatDimensionless>
-        implements MathFunctionsDimensionless<MutableFloatDimensionlessMatrix>
+        implements DimensionlessFunctions<MutableFloatDimensionlessMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -31,10 +31,10 @@ public class MutableFloatDimensionlessMatrix extends AbstractMutableFloatMatrixR
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatDimensionlessMatrix
      * @param unit DimensionlessUnit; the unit of the new Relative Immutable FloatDimensionlessMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public MutableFloatDimensionlessMatrix(final float[][] values, final DimensionlessUnit unit, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -44,10 +44,10 @@ public class MutableFloatDimensionlessMatrix extends AbstractMutableFloatMatrixR
      * @param values FloatDimensionless[][]; the values of the entries in the new Relative Immutable Float
      *            FloatDimensionlessMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public MutableFloatDimensionlessMatrix(final FloatDimensionless[][] values, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, storageType);
     }

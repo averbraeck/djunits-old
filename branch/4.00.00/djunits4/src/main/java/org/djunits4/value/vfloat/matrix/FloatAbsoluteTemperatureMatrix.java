@@ -4,8 +4,8 @@ import javax.annotation.Generated;
 
 import org.djunits4.unit.AbsoluteTemperatureUnit;
 import org.djunits4.unit.TemperatureUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatAbsoluteTemperature;
 
 /**
@@ -17,7 +17,7 @@ import org.djunits4.value.vfloat.scalar.FloatAbsoluteTemperature;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.275Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class FloatAbsoluteTemperatureMatrix extends AbstractFloatMatrixAbs<AbsoluteTemperatureUnit, TemperatureUnit,
         FloatAbsoluteTemperatureMatrix, FloatTemperatureMatrix, MutableFloatAbsoluteTemperatureMatrix, FloatAbsoluteTemperature>
 {
@@ -29,10 +29,10 @@ public class FloatAbsoluteTemperatureMatrix extends AbstractFloatMatrixAbs<Absol
      * @param values float[][]; the values of the entries in the new Absolute Immutable FloatAbsoluteTemperatureMatrix
      * @param unit AbsoluteTemperatureUnit; the unit of the new Absolute Immutable FloatAbsoluteTemperatureMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatAbsoluteTemperatureMatrix(final float[][] values, final AbsoluteTemperatureUnit unit,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -42,10 +42,10 @@ public class FloatAbsoluteTemperatureMatrix extends AbstractFloatMatrixAbs<Absol
      * @param values FloatAbsoluteTemperature[][]; the values of the entries in the new Absolute Immutable
      *            FloatAbsoluteTemperatureMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public FloatAbsoluteTemperatureMatrix(final FloatAbsoluteTemperature[][] values, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, storageType);
     }

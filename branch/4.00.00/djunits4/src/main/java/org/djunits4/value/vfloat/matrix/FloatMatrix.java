@@ -2,8 +2,8 @@ package org.djunits4.value.vfloat.matrix;
 
 import org.djunits4.unit.AbsoluteLinearUnit;
 import org.djunits4.unit.Unit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatScalar;
 
 /**
@@ -33,9 +33,9 @@ public abstract class FloatMatrix
          * @param values float[][]; the values of the entries in the new Absolute Immutable FloatMatrix
          * @param unit AU; the unit of the new Absolute Immutable FloatMatrix
          * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
+         * @throws ValueRuntimeException when values is null
          */
-        public Abs(final float[][] values, final AU unit, final StorageType storageType) throws ValueException
+        public Abs(final float[][] values, final AU unit, final StorageType storageType) throws ValueRuntimeException
         {
             super(values, unit, storageType);
         }
@@ -44,9 +44,9 @@ public abstract class FloatMatrix
          * Construct a new Absolute Immutable FloatMatrix.
          * @param values FloatScalar.Abs&lt;AU, RU&gt;[][]; the values of the entries in the new Absolute Immutable FloatMatrix
          * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
+         * @throws ValueRuntimeException when values has zero entries
          */
-        public Abs(final FloatScalar.Abs<AU, RU>[][] values, final StorageType storageType) throws ValueException
+        public Abs(final FloatScalar.Abs<AU, RU>[][] values, final StorageType storageType) throws ValueRuntimeException
         {
             super(values, storageType);
         }
@@ -121,9 +121,9 @@ public abstract class FloatMatrix
          * @param values float[][]; the values of the entries in the new Relative Immutable FloatMatrix
          * @param unit U; the unit of the new Relative Immutable FloatMatrix
          * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
+         * @throws ValueRuntimeException when values is null
          */
-        public Rel(final float[][] values, final U unit, final StorageType storageType) throws ValueException
+        public Rel(final float[][] values, final U unit, final StorageType storageType) throws ValueRuntimeException
         {
             super(values, unit, storageType);
         }
@@ -132,9 +132,9 @@ public abstract class FloatMatrix
          * Construct a new Relative Immutable FloatMatrix.
          * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable FloatMatrix
          * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
+         * @throws ValueRuntimeException when values has zero entries
          */
-        public Rel(final FloatScalar.Rel<U>[][] values, final StorageType storageType) throws ValueException
+        public Rel(final FloatScalar.Rel<U>[][] values, final StorageType storageType) throws ValueRuntimeException
         {
             super(values, storageType);
         }
@@ -198,10 +198,10 @@ public abstract class FloatMatrix
      * @param <AU> the absolute unit
      * @param <RU> the corresponding relative unit
      * @return the sum of the two matrices
-     * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
+     * @throws ValueRuntimeException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
      */
     static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>> FloatMatrix.Abs<AU, RU> plus(
-            final FloatMatrix.Abs<AU, RU> left, final FloatMatrix.Rel<RU> right) throws ValueException
+            final FloatMatrix.Abs<AU, RU> left, final FloatMatrix.Rel<RU> right) throws ValueRuntimeException
     {
         return left.mutable().plus(right);
     }
@@ -212,10 +212,10 @@ public abstract class FloatMatrix
      * @param right FloatMatrix.Rel&lt;U&gt;; the second matrix
      * @param <U> the relative unit
      * @return the sum of the two matrices
-     * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
+     * @throws ValueRuntimeException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
      */
     static <U extends Unit<U>> FloatMatrix.Rel<U> plus(final FloatMatrix.Rel<U> left, final FloatMatrix.Rel<U> right)
-            throws ValueException
+            throws ValueRuntimeException
     {
         return left.mutable().plus(right);
     }
@@ -227,10 +227,10 @@ public abstract class FloatMatrix
      * @param <AU> the absolute unit
      * @param <RU> the corresponding relative unit
      * @return the difference of the two matrices
-     * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
+     * @throws ValueRuntimeException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
      */
     static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>> FloatMatrix.Abs<AU, RU> minus(
-            final FloatMatrix.Abs<AU, RU> left, final FloatMatrix.Rel<RU> right) throws ValueException
+            final FloatMatrix.Abs<AU, RU> left, final FloatMatrix.Rel<RU> right) throws ValueRuntimeException
     {
         return left.mutable().minus(right);
     }
@@ -242,10 +242,10 @@ public abstract class FloatMatrix
      * @param <AU> the absolute unit
      * @param <RU> the corresponding relative unit
      * @return the difference of the two matrices
-     * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
+     * @throws ValueRuntimeException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
      */
     static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>> FloatMatrix.Rel<RU> minus(
-            final FloatMatrix.Abs<AU, RU> left, final FloatMatrix.Abs<AU, RU> right) throws ValueException
+            final FloatMatrix.Abs<AU, RU> left, final FloatMatrix.Abs<AU, RU> right) throws ValueRuntimeException
     {
         return left.mutable().minus(right);
     }
@@ -256,10 +256,10 @@ public abstract class FloatMatrix
      * @param right FloatMatrix.Rel&lt;U&gt;; the second matrix
      * @param <U> the unit
      * @return the difference of the two matrices
-     * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
+     * @throws ValueRuntimeException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
      */
     static <U extends Unit<U>> FloatMatrix.Rel<U> minus(final FloatMatrix.Rel<U> left, final FloatMatrix.Rel<U> right)
-            throws ValueException
+            throws ValueRuntimeException
     {
         return left.mutable().minus(right);
     }
@@ -271,10 +271,10 @@ public abstract class FloatMatrix
      * @param right FloatMatrix.Rel&lt;U&gt;; the second matrix
      * @param <U> the unit
      * @return the cell-by-cell multiplication of the two matrices
-     * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
+     * @throws ValueRuntimeException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
      */
     static <U extends Unit<U>> FloatMatrix.Rel<U> times(final FloatMatrix.Rel<U> left, final FloatMatrix.Rel<U> right)
-            throws ValueException
+            throws ValueRuntimeException
     {
         return left.mutable().times(right);
     }
@@ -286,10 +286,10 @@ public abstract class FloatMatrix
      * @param right FloatMatrix.Rel&lt;U&gt;; the second matrix
      * @param <U> the unit
      * @return the cell-by-cell division of the two matrices
-     * @throws ValueException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
+     * @throws ValueRuntimeException when the two matrices have unequal size, or when one of the matrices is null or not well-formed
      */
     static <U extends Unit<U>> FloatMatrix.Rel<U> divide(final FloatMatrix.Rel<U> left, final FloatMatrix.Rel<U> right)
-            throws ValueException
+            throws ValueRuntimeException
     {
         return left.mutable().divide(right);
     }

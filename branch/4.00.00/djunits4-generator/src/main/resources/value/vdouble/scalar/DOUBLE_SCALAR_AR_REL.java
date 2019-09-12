@@ -6,6 +6,8 @@ import javax.annotation.Generated;
 
 import org.djunits4.Throw;
 import org.djunits4.unit.*;
+import org.djunits4.value.util.ValueUtil;
+import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
 
 /**
  * Easy access methods for the Relative %TypeRel% DoubleScalar.
@@ -18,7 +20,7 @@ import org.djunits4.unit.*;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "GenerateDJUNIT")
-public class %TypeRel% extends AbstractDoubleScalarRel<%TypeRelUnit%, %TypeRel%>
+public class %TypeRel% extends AbstractDoubleScalarRelWithAbs<%TypeAbsUnit%, %TypeAbs%, %TypeRelUnit%, %TypeRel%>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -71,12 +73,8 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeRelUnit%, %TypeRel%>
         return new %TypeRel%(value, unit);
     }
 
-    /**
-     * Construct a new Absolute Immutable DoubleScalar of the right type. Each extending class must implement this method.
-     * @param value double; the double value
-     * @param unit %TypeAbsUnit%; the unit
-     * @return %TypeAbs%; a new absolute instance of the DoubleScalar of the right type
-     */
+    /** {@inheritDoc} */
+    @Override
     public final %TypeAbs% instantiateAbs(final double value, final %TypeAbsUnit% unit)
     {
         return new %TypeAbs%(value, unit);
@@ -105,11 +103,8 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeRelUnit%, %TypeRel%>
             .getUnit());
     }
     
-    /**
-     * Relative scalar plus Absolute scalar = Absolute scalar.
-     * @param v %TypAbs%; the value to add
-     * @return %TypeAbs%; sum of this value and v as a new object
-     */
+    /** {@inheritDoc} */
+    @Override
     public final %TypeAbs% plus(final %TypeAbs% v)
     {
         %TypeAbsUnit% targetUnit = v.getUnit();
@@ -191,7 +186,7 @@ public class %TypeRel% extends AbstractDoubleScalarRel<%TypeRelUnit%, %TypeRel%>
     {
         Throw.whenNull(text, "Error parsing %TypeRel%: unitString is null");
         Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing %TypeRel%: empty unitString");
-        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();

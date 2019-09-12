@@ -6,8 +6,8 @@ import java.util.SortedMap;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.FlowMassUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatFlowMass;
 
 /**
@@ -19,7 +19,7 @@ import org.djunits4.value.vfloat.scalar.FloatFlowMass;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.228Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class FloatFlowMassVector
         extends AbstractFloatVectorRel<FlowMassUnit, FloatFlowMassVector, MutableFloatFlowMassVector, FloatFlowMass>
 {
@@ -31,10 +31,10 @@ public class FloatFlowMassVector
      * @param values float[]; the values of the entries in the new Relative Immutable Float FloatFlowMassVector
      * @param unit FlowMassUnit; the unit of the new Relative Immutable Float FloatFlowMassVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatFlowMassVector(final float[] values, final FlowMassUnit unit, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -44,10 +44,10 @@ public class FloatFlowMassVector
      * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float FloatFlowMassVector
      * @param unit FlowMassUnit; the unit of the new Relative Immutable Float FloatFlowMassVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatFlowMassVector(final List<Float> values, final FlowMassUnit unit, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -56,9 +56,9 @@ public class FloatFlowMassVector
      * Construct a new Relative Immutable Float FloatFlowMassVector.
      * @param values FloatFlowMass[]; the values of the entries in the new Relative Immutable Float FloatFlowMassVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public FloatFlowMassVector(final FloatFlowMass[] values, final StorageType storageType) throws ValueException
+    public FloatFlowMassVector(final FloatFlowMass[] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -68,9 +68,9 @@ public class FloatFlowMassVector
      * @param values List&lt;FloatFlowMass&gt;; the values of the entries in the new Relative Immutable Float
      *            FloatFlowMassVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public FloatFlowMassVector(final List<FloatFlowMass> values, final StorageType storageType) throws ValueException
+    public FloatFlowMassVector(final List<FloatFlowMass> values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -81,10 +81,10 @@ public class FloatFlowMassVector
      *            FloatFlowMassVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public FloatFlowMassVector(final SortedMap<Integer, FloatFlowMass> values, final int length, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, length, storageType);
     }
@@ -96,10 +96,10 @@ public class FloatFlowMassVector
      * @param unit FlowMassUnit; the unit of the new Relative Sparse Mutable Float FloatFlowMassVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatFlowMassVector(final SortedMap<Integer, Float> values, final FlowMassUnit unit, final int length,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, length, storageType);
     }
@@ -162,7 +162,7 @@ public class FloatFlowMassVector
             {
                 array[i] = get(i);
             }
-            catch (ValueException exception)
+            catch (ValueRuntimeException exception)
             {
                 throw new RuntimeException(exception);
             }

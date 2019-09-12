@@ -3,8 +3,8 @@ package org.djunits4.value.vfloat.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.DensityUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatDensity;
 
 /**
@@ -16,7 +16,7 @@ import org.djunits4.value.vfloat.scalar.FloatDensity;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.297Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class FloatDensityMatrix
         extends AbstractFloatMatrixRel<DensityUnit, FloatDensityMatrix, MutableFloatDensityMatrix, FloatDensity>
 {
@@ -28,10 +28,10 @@ public class FloatDensityMatrix
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatDensityMatrix
      * @param unit DensityUnit; the unit of the new Relative Immutable FloatDensityMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatDensityMatrix(final float[][] values, final DensityUnit unit, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -40,9 +40,9 @@ public class FloatDensityMatrix
      * Construct a new Relative Immutable FloatDensityMatrix.
      * @param values FloatDensity; the values of the entries in the new Relative Immutable FloatDensityMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public FloatDensityMatrix(final FloatDensity[][] values, final StorageType storageType) throws ValueException
+    public FloatDensityMatrix(final FloatDensity[][] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }

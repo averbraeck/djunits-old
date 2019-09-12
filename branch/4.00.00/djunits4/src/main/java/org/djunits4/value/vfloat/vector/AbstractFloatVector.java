@@ -3,11 +3,11 @@ package org.djunits4.value.vfloat.vector;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.Absolute;
 import org.djunits4.value.AbstractValue;
-import org.djunits4.value.Mutable;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
-import org.djunits4.value.ValueUtil;
+import org.djunits4.value.IsMutable;
+import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.formatter.Format;
+import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vfloat.scalar.AbstractFloatScalar;
 
 /**
@@ -65,9 +65,9 @@ public abstract class AbstractFloatVector<U extends Unit<U>, T extends AbstractF
      * Retrieve a value from the vector.
      * @param index int; the index to retrieve the value at
      * @return the value as a FloatScalar
-     * @throws ValueException in case index is out of bounds
+     * @throws ValueRuntimeException in case index is out of bounds
      */
-    public abstract AbstractFloatScalar<U, ?> get(int index) throws ValueException;
+    public abstract AbstractFloatScalar<U, ?> get(int index) throws ValueRuntimeException;
 
     /** {@inheritDoc} */
     @Override
@@ -105,19 +105,19 @@ public abstract class AbstractFloatVector<U extends Unit<U>, T extends AbstractF
     /**
      * Check that a provided index is valid.
      * @param index int; the value to check
-     * @throws ValueException when index is invalid
+     * @throws ValueRuntimeException when index is invalid
      */
-    protected final void checkIndex(final int index) throws ValueException
+    protected final void checkIndex(final int index) throws ValueRuntimeException
     {
         if (index < 0 || index >= size())
         {
-            throw new ValueException("index out of range (valid range is 0.." + (size() - 1) + ", got " + index + ")");
+            throw new ValueRuntimeException("index out of range (valid range is 0.." + (size() - 1) + ", got " + index + ")");
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public final float getSI(final int index) throws ValueException
+    public final float getSI(final int index) throws ValueRuntimeException
     {
         checkIndex(index);
         return this.data.getSI(index);
@@ -125,14 +125,14 @@ public abstract class AbstractFloatVector<U extends Unit<U>, T extends AbstractF
 
     /** {@inheritDoc} */
     @Override
-    public final float getInUnit(final int index) throws ValueException
+    public final float getInUnit(final int index) throws ValueRuntimeException
     {
         return (float) expressAsSpecifiedUnit(getSI(index));
     }
 
     /** {@inheritDoc} */
     @Override
-    public final float getInUnit(final int index, final U targetUnit) throws ValueException
+    public final float getInUnit(final int index, final U targetUnit) throws ValueRuntimeException
     {
         return (float) ValueUtil.expressAsUnit(getSI(index), targetUnit);
     }
@@ -181,7 +181,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, T extends AbstractF
         {
             String ar = this instanceof Absolute ? "Abs " : "Rel ";
             String ds = this.data.isDense() ? "Dense  " : this.data.isSparse() ? "Sparse " : "?????? ";
-            if (this instanceof Mutable)
+            if (this instanceof IsMutable)
             {
                 buf.append("Mutable   " + ar + ds);
             }
@@ -198,7 +198,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, T extends AbstractF
                 float d = (float) ValueUtil.expressAsUnit(getSI(i), displayUnit);
                 buf.append(" " + Format.format(d));
             }
-            catch (ValueException ve)
+            catch (ValueRuntimeException ve)
             {
                 buf.append(" " + "********************".substring(0, Format.DEFAULTSIZE));
             }
@@ -214,30 +214,30 @@ public abstract class AbstractFloatVector<U extends Unit<U>, T extends AbstractF
     /**
      * Centralized size equality check.
      * @param other AbstractFloatVector&lt;U, ?&gt;; other FloatVector
-     * @throws ValueException when other is null, or vectors have unequal size
+     * @throws ValueRuntimeException when other is null, or vectors have unequal size
      */
-    protected final void checkSize(final AbstractFloatVector<U, ?> other) throws ValueException
+    protected final void checkSize(final AbstractFloatVector<U, ?> other) throws ValueRuntimeException
     {
         if (null == other)
         {
-            throw new ValueException("other is null");
+            throw new ValueRuntimeException("other is null");
         }
         if (size() != other.size())
         {
-            throw new ValueException("The vectors have different sizes: " + size() + " != " + other.size());
+            throw new ValueRuntimeException("The vectors have different sizes: " + size() + " != " + other.size());
         }
     }
 
     /**
      * Centralized size equality check.
      * @param other float[]; array of float
-     * @throws ValueException when vectors have unequal size
+     * @throws ValueRuntimeException when vectors have unequal size
      */
-    protected final void checkSize(final float[] other) throws ValueException
+    protected final void checkSize(final float[] other) throws ValueRuntimeException
     {
         if (size() != other.length)
         {
-            throw new ValueException("The vector and the array have different sizes: " + size() + " != " + other.length);
+            throw new ValueRuntimeException("The vector and the array have different sizes: " + size() + " != " + other.length);
         }
     }
 

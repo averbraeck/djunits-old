@@ -2,11 +2,11 @@ package org.djunits4.value.vfloat.matrix;
 
 import org.djunits4.unit.AbsoluteLinearUnit;
 import org.djunits4.unit.Unit;
-import org.djunits4.value.MathFunctionsAbs;
-import org.djunits4.value.Mutable;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
-import org.djunits4.value.ValueUtil;
+import org.djunits4.value.IsMutable;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.function.MathFunctionsAbs;
+import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vfloat.FloatFunction;
 import org.djunits4.value.vfloat.FloatMathFunctions;
 import org.djunits4.value.vfloat.scalar.AbstractFloatScalarAbs;
@@ -30,7 +30,7 @@ import org.djunits4.value.vfloat.scalar.AbstractFloatScalarAbs;
 abstract class AbstractMutableFloatMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
         A extends AbstractFloatMatrixAbs<AU, RU, A, R, MA, S>, R extends AbstractFloatMatrixRel<RU, R, ?, ?>,
         MA extends AbstractMutableFloatMatrixAbs<AU, RU, A, R, MA, S>, S extends AbstractFloatScalarAbs<AU, S, RU, ?>>
-        extends AbstractFloatMatrixAbs<AU, RU, A, R, MA, S> implements Mutable, MathFunctionsAbs<MA>, FloatMathFunctions<MA>
+        extends AbstractFloatMatrixAbs<AU, RU, A, R, MA, S> implements IsMutable, MathFunctionsAbs<MA>, FloatMathFunctions<MA>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -43,9 +43,9 @@ abstract class AbstractMutableFloatMatrixAbs<AU extends AbsoluteLinearUnit<AU, R
      * @param values float[][]; the values of the entries in the new Absolute Immutable FloatMatrix
      * @param unit AU; the unit of the new Absolute Immutable FloatMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
-    AbstractMutableFloatMatrixAbs(final float[][] values, final AU unit, final StorageType storageType) throws ValueException
+    AbstractMutableFloatMatrixAbs(final float[][] values, final AU unit, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -54,9 +54,9 @@ abstract class AbstractMutableFloatMatrixAbs<AU extends AbsoluteLinearUnit<AU, R
      * Construct a new Absolute Mutable FloatMatrix.
      * @param values S[][]; the values of the entries in the new Absolute Immutable FloatMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    AbstractMutableFloatMatrixAbs(final S[][] values, final StorageType storageType) throws ValueException
+    AbstractMutableFloatMatrixAbs(final S[][] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -126,10 +126,10 @@ abstract class AbstractMutableFloatMatrixAbs<AU extends AbsoluteLinearUnit<AU, R
      * Increment the value by the supplied value and return the changed matrix.
      * @param increment R; amount by which the value is incremented
      * @return the changed MutableFloatMatrix.Rel&lt;U&gt;
-     * @throws ValueException when the size of increment is not identical to the size of this
+     * @throws ValueRuntimeException when the size of increment is not identical to the size of this
      */
     @SuppressWarnings("unchecked")
-    public final MA incrementBy(final R increment) throws ValueException
+    public final MA incrementBy(final R increment) throws ValueRuntimeException
     {
         checkCopyOnWrite();
         this.data.incrementBy(increment.getData());
@@ -163,10 +163,10 @@ abstract class AbstractMutableFloatMatrixAbs<AU extends AbsoluteLinearUnit<AU, R
      * Decrement the value by the supplied value and return the changed matrix.
      * @param decrement R; amount by which the value is decremented
      * @return the changed MutableFloatMatrix.Rel&lt;U&gt;
-     * @throws ValueException when the size of increment is not identical to the size of this
+     * @throws ValueRuntimeException when the size of increment is not identical to the size of this
      */
     @SuppressWarnings("unchecked")
-    public final MA decrementBy(final R decrement) throws ValueException
+    public final MA decrementBy(final R decrement) throws ValueRuntimeException
     {
         checkCopyOnWrite();
         this.data.decrementBy(decrement.getData());
@@ -219,10 +219,10 @@ abstract class AbstractMutableFloatMatrixAbs<AU extends AbsoluteLinearUnit<AU, R
      * Multiply the values in the matrix by the supplied values and return the changed matrix.
      * @param factors R; amounts by which the value is multiplied
      * @return the changed MutableFloatMatrix.Rel&lt;U&gt;
-     * @throws ValueException when the size of the factors is not identical to the size of this
+     * @throws ValueRuntimeException when the size of the factors is not identical to the size of this
      */
     @SuppressWarnings("unchecked")
-    public final MA multiplyBy(final R factors) throws ValueException
+    public final MA multiplyBy(final R factors) throws ValueRuntimeException
     {
         checkCopyOnWrite();
         this.data.multiplyBy(factors.getData());
@@ -307,9 +307,9 @@ abstract class AbstractMutableFloatMatrixAbs<AU extends AbsoluteLinearUnit<AU, R
      * @param row int; the row
      * @param column int; the column
      * @param valueSI float; the value, expressed in the SI unit
-     * @throws ValueException when the row/column is out of range
+     * @throws ValueRuntimeException when the row/column is out of range
      */
-    public final void setSI(final int row, final int column, final float valueSI) throws ValueException
+    public final void setSI(final int row, final int column, final float valueSI) throws ValueRuntimeException
     {
         checkIndex(row, column);
         checkCopyOnWrite();
@@ -321,9 +321,9 @@ abstract class AbstractMutableFloatMatrixAbs<AU extends AbsoluteLinearUnit<AU, R
      * @param row int; the row
      * @param column int; the column
      * @param value S; the value
-     * @throws ValueException when the row/column is out of range
+     * @throws ValueRuntimeException when the row/column is out of range
      */
-    public final void set(final int row, final int column, final S value) throws ValueException
+    public final void set(final int row, final int column, final S value) throws ValueRuntimeException
     {
         setSI(row, column, value.getSI());
     }
@@ -334,23 +334,23 @@ abstract class AbstractMutableFloatMatrixAbs<AU extends AbsoluteLinearUnit<AU, R
      * @param column int; the column
      * @param value float; the value, expressed in the given unit
      * @param valueUnit AU; the unit of the value
-     * @throws ValueException when the row/column is out of range
+     * @throws ValueRuntimeException when the row/column is out of range
      */
-    public final void setInUnit(final int row, final int column, final float value, final AU valueUnit) throws ValueException
+    public final void setInUnit(final int row, final int column, final float value, final AU valueUnit) throws ValueRuntimeException
     {
         setSI(row, column, (float) ValueUtil.expressAsSIUnit(value, valueUnit));
     }
 
     /**
      * Normalize the matrix, i.e. scale the values to make the sum equal to 1.
-     * @throws ValueException when the sum of the values is zero and normalization is not possible
+     * @throws ValueRuntimeException when the sum of the values is zero and normalization is not possible
      */
-    public final void normalize() throws ValueException
+    public final void normalize() throws ValueRuntimeException
     {
         float sum = zSum();
         if (0 == sum)
         {
-            throw new ValueException("zSum is 0; cannot normalize");
+            throw new ValueRuntimeException("zSum is 0; cannot normalize");
         }
         checkCopyOnWrite();
         this.data.divideBy(sum);

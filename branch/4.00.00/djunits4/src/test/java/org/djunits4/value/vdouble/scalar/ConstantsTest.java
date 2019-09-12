@@ -2,6 +2,7 @@ package org.djunits4.value.vdouble.scalar;
 
 import static org.junit.Assert.assertEquals;
 
+import org.djunits4.value.vdouble.scalar.base.Constants;
 import org.junit.Test;
 
 /**

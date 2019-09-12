@@ -3,8 +3,8 @@ package org.djunits4.value.vfloat.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.AmountOfSubstanceUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatAmountOfSubstance;
 
 /**
@@ -16,7 +16,7 @@ import org.djunits4.value.vfloat.scalar.FloatAmountOfSubstance;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.290Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class FloatAmountOfSubstanceMatrix extends AbstractFloatMatrixRel<AmountOfSubstanceUnit, FloatAmountOfSubstanceMatrix,
         MutableFloatAmountOfSubstanceMatrix, FloatAmountOfSubstance>
 {
@@ -28,10 +28,10 @@ public class FloatAmountOfSubstanceMatrix extends AbstractFloatMatrixRel<AmountO
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatAmountOfSubstanceMatrix
      * @param unit AmountOfSubstanceUnit; the unit of the new Relative Immutable FloatAmountOfSubstanceMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatAmountOfSubstanceMatrix(final float[][] values, final AmountOfSubstanceUnit unit, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -41,10 +41,10 @@ public class FloatAmountOfSubstanceMatrix extends AbstractFloatMatrixRel<AmountO
      * @param values FloatAmountOfSubstance; the values of the entries in the new Relative Immutable
      *            FloatAmountOfSubstanceMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public FloatAmountOfSubstanceMatrix(final FloatAmountOfSubstance[][] values, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, storageType);
     }

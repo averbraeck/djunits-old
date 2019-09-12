@@ -1,7 +1,7 @@
 package org.djunits4.value.vfloat.vector;
 
 import org.djunits4.unit.Unit;
-import org.djunits4.value.Mutable;
+import org.djunits4.value.IsMutable;
 
 /**
  * <p>
@@ -13,7 +13,7 @@ import org.djunits4.value.Mutable;
  * @author <a href="https://www.transport.citg.tudelft.nl">Wouter Schakel</a>
  * @param <U> the unit
  */
-public interface MutableFloatVectorInterface<U extends Unit<U>> extends FloatVectorInterface<U>, Mutable
+public interface MutableFloatVectorInterface<U extends Unit<U>> extends FloatVectorInterface<U>, IsMutable
 {
     /**
      * return an immutable version of this vector.

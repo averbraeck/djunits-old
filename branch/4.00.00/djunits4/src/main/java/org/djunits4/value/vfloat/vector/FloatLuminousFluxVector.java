@@ -6,8 +6,8 @@ import java.util.SortedMap;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.LuminousFluxUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatLuminousFlux;
 
 /**
@@ -19,7 +19,7 @@ import org.djunits4.value.vfloat.scalar.FloatLuminousFlux;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.228Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class FloatLuminousFluxVector extends
         AbstractFloatVectorRel<LuminousFluxUnit, FloatLuminousFluxVector, MutableFloatLuminousFluxVector, FloatLuminousFlux>
 {
@@ -31,10 +31,10 @@ public class FloatLuminousFluxVector extends
      * @param values float[]; the values of the entries in the new Relative Immutable Float FloatLuminousFluxVector
      * @param unit LuminousFluxUnit; the unit of the new Relative Immutable Float FloatLuminousFluxVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatLuminousFluxVector(final float[] values, final LuminousFluxUnit unit, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -44,10 +44,10 @@ public class FloatLuminousFluxVector extends
      * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float FloatLuminousFluxVector
      * @param unit LuminousFluxUnit; the unit of the new Relative Immutable Float FloatLuminousFluxVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatLuminousFluxVector(final List<Float> values, final LuminousFluxUnit unit, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -56,9 +56,9 @@ public class FloatLuminousFluxVector extends
      * Construct a new Relative Immutable Float FloatLuminousFluxVector.
      * @param values FloatLuminousFlux[]; the values of the entries in the new Relative Immutable Float FloatLuminousFluxVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public FloatLuminousFluxVector(final FloatLuminousFlux[] values, final StorageType storageType) throws ValueException
+    public FloatLuminousFluxVector(final FloatLuminousFlux[] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -68,9 +68,9 @@ public class FloatLuminousFluxVector extends
      * @param values List&lt;FloatLuminousFlux&gt;; the values of the entries in the new Relative Immutable Float
      *            FloatLuminousFluxVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public FloatLuminousFluxVector(final List<FloatLuminousFlux> values, final StorageType storageType) throws ValueException
+    public FloatLuminousFluxVector(final List<FloatLuminousFlux> values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -81,10 +81,10 @@ public class FloatLuminousFluxVector extends
      *            Float FloatLuminousFluxVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public FloatLuminousFluxVector(final SortedMap<Integer, FloatLuminousFlux> values, final int length,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, length, storageType);
     }
@@ -96,10 +96,10 @@ public class FloatLuminousFluxVector extends
      * @param unit LuminousFluxUnit; the unit of the new Relative Sparse Mutable Float FloatLuminousFluxVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatLuminousFluxVector(final SortedMap<Integer, Float> values, final LuminousFluxUnit unit, final int length,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, length, storageType);
     }
@@ -163,7 +163,7 @@ public class FloatLuminousFluxVector extends
             {
                 array[i] = get(i);
             }
-            catch (ValueException exception)
+            catch (ValueRuntimeException exception)
             {
                 throw new RuntimeException(exception);
             }

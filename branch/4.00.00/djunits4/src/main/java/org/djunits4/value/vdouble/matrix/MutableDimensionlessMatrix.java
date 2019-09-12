@@ -3,10 +3,10 @@ package org.djunits4.value.vdouble.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.DimensionlessUnit;
-import org.djunits4.value.MathFunctionsDimensionless;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
-import org.djunits4.value.vdouble.DoubleMathFunctions;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.function.DimensionlessFunctions;
+import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.DoubleFunctionsDimensionless;
 import org.djunits4.value.vdouble.scalar.Dimensionless;
 
 /**
@@ -18,10 +18,10 @@ import org.djunits4.value.vdouble.scalar.Dimensionless;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.275Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-06T11:09:13.414Z")
 public class MutableDimensionlessMatrix extends
         AbstractMutableDoubleMatrixRel<DimensionlessUnit, DimensionlessMatrix, MutableDimensionlessMatrix, Dimensionless>
-        implements MathFunctionsDimensionless<MutableDimensionlessMatrix>
+        implements DimensionlessFunctions<MutableDimensionlessMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -31,10 +31,10 @@ public class MutableDimensionlessMatrix extends
      * @param values double[][]; the values of the entries in the new Relative Immutable Double DimensionlessMatrix
      * @param unit DimensionlessUnit; the unit of the new Relative Immutable Double DimensionlessMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public MutableDimensionlessMatrix(final double[][] values, final DimensionlessUnit unit, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -43,9 +43,10 @@ public class MutableDimensionlessMatrix extends
      * Construct a new Relative Immutable Double DimensionlessMatrix.
      * @param values %TypeAbs%[][]; the values of the entries in the new Relative Immutable Double DimensionlessMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public MutableDimensionlessMatrix(final Dimensionless[][] values, final StorageType storageType) throws ValueException
+    public MutableDimensionlessMatrix(final Dimensionless[][] values, final StorageType storageType)
+            throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -98,7 +99,7 @@ public class MutableDimensionlessMatrix extends
     @Override
     public final MutableDimensionlessMatrix acos()
     {
-        assign(DoubleMathFunctions.ACOS);
+        apply(DoubleFunctionsDimensionless.ACOS);
         return this;
     }
 
@@ -106,7 +107,7 @@ public class MutableDimensionlessMatrix extends
     @Override
     public final MutableDimensionlessMatrix asin()
     {
-        assign(DoubleMathFunctions.ASIN);
+        apply(DoubleFunctionsDimensionless.ASIN);
         return this;
     }
 
@@ -114,7 +115,7 @@ public class MutableDimensionlessMatrix extends
     @Override
     public final MutableDimensionlessMatrix atan()
     {
-        assign(DoubleMathFunctions.ATAN);
+        apply(DoubleFunctionsDimensionless.ATAN);
         return this;
     }
 
@@ -122,7 +123,7 @@ public class MutableDimensionlessMatrix extends
     @Override
     public final MutableDimensionlessMatrix cbrt()
     {
-        assign(DoubleMathFunctions.CBRT);
+        apply(DoubleFunctionsDimensionless.CBRT);
         return this;
     }
 
@@ -130,7 +131,7 @@ public class MutableDimensionlessMatrix extends
     @Override
     public final MutableDimensionlessMatrix cos()
     {
-        assign(DoubleMathFunctions.COS);
+        apply(DoubleFunctionsDimensionless.COS);
         return this;
     }
 
@@ -138,7 +139,7 @@ public class MutableDimensionlessMatrix extends
     @Override
     public final MutableDimensionlessMatrix cosh()
     {
-        assign(DoubleMathFunctions.COSH);
+        apply(DoubleFunctionsDimensionless.COSH);
         return this;
     }
 
@@ -146,7 +147,7 @@ public class MutableDimensionlessMatrix extends
     @Override
     public final MutableDimensionlessMatrix exp()
     {
-        assign(DoubleMathFunctions.EXP);
+        apply(DoubleFunctionsDimensionless.EXP);
         return this;
     }
 
@@ -154,7 +155,7 @@ public class MutableDimensionlessMatrix extends
     @Override
     public final MutableDimensionlessMatrix expm1()
     {
-        assign(DoubleMathFunctions.EXPM1);
+        apply(DoubleFunctionsDimensionless.EXPM1);
         return this;
     }
 
@@ -162,7 +163,7 @@ public class MutableDimensionlessMatrix extends
     @Override
     public final MutableDimensionlessMatrix log()
     {
-        assign(DoubleMathFunctions.LOG);
+        apply(DoubleFunctionsDimensionless.LOG);
         return this;
     }
 
@@ -170,7 +171,7 @@ public class MutableDimensionlessMatrix extends
     @Override
     public final MutableDimensionlessMatrix log10()
     {
-        assign(DoubleMathFunctions.LOG10);
+        apply(DoubleFunctionsDimensionless.LOG10);
         return this;
     }
 
@@ -178,7 +179,7 @@ public class MutableDimensionlessMatrix extends
     @Override
     public final MutableDimensionlessMatrix log1p()
     {
-        assign(DoubleMathFunctions.LOG1P);
+        apply(DoubleFunctionsDimensionless.LOG1P);
         return this;
     }
 
@@ -186,7 +187,7 @@ public class MutableDimensionlessMatrix extends
     @Override
     public final MutableDimensionlessMatrix pow(final double x)
     {
-        assign(DoubleMathFunctions.POW((float) x));
+        apply(DoubleFunctionsDimensionless.POW((float) x));
         return this;
     }
 
@@ -194,7 +195,7 @@ public class MutableDimensionlessMatrix extends
     @Override
     public final MutableDimensionlessMatrix signum()
     {
-        assign(DoubleMathFunctions.SIGNUM);
+        apply(DoubleFunctionsDimensionless.SIGNUM);
         return this;
     }
 
@@ -202,7 +203,7 @@ public class MutableDimensionlessMatrix extends
     @Override
     public final MutableDimensionlessMatrix sin()
     {
-        assign(DoubleMathFunctions.SIN);
+        apply(DoubleFunctionsDimensionless.SIN);
         return this;
     }
 
@@ -210,7 +211,7 @@ public class MutableDimensionlessMatrix extends
     @Override
     public final MutableDimensionlessMatrix sinh()
     {
-        assign(DoubleMathFunctions.SINH);
+        apply(DoubleFunctionsDimensionless.SINH);
         return this;
     }
 
@@ -218,7 +219,7 @@ public class MutableDimensionlessMatrix extends
     @Override
     public final MutableDimensionlessMatrix sqrt()
     {
-        assign(DoubleMathFunctions.SQRT);
+        apply(DoubleFunctionsDimensionless.SQRT);
         return this;
     }
 
@@ -226,7 +227,7 @@ public class MutableDimensionlessMatrix extends
     @Override
     public final MutableDimensionlessMatrix tan()
     {
-        assign(DoubleMathFunctions.TAN);
+        apply(DoubleFunctionsDimensionless.TAN);
         return this;
     }
 
@@ -234,7 +235,7 @@ public class MutableDimensionlessMatrix extends
     @Override
     public final MutableDimensionlessMatrix tanh()
     {
-        assign(DoubleMathFunctions.TANH);
+        apply(DoubleFunctionsDimensionless.TANH);
         return this;
     }
 
@@ -242,7 +243,7 @@ public class MutableDimensionlessMatrix extends
     @Override
     public final MutableDimensionlessMatrix inv()
     {
-        assign(DoubleMathFunctions.INV);
+        apply(DoubleFunctionsDimensionless.INV);
         return this;
     }
 

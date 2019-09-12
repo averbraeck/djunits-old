@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.stream.IntStream;
 
 import org.djunits4.unit.scale.Scale;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatScalarInterface;
 
 /**
@@ -58,14 +58,14 @@ abstract class FloatMatrixData implements Serializable
      * @param scale Scale; the scale of the unit to use for conversion to SI
      * @param storageType StorageType; the data type to use
      * @return the FloatMatrixData with the right data type
-     * @throws ValueException when values are null, or storageType is null
+     * @throws ValueRuntimeException when values are null, or storageType is null
      */
     public static FloatMatrixData instantiate(final float[][] values, final Scale scale, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         if (values == null || values.length == 0 || values[0].length == 0)
         {
-            throw new ValueException("FloatMatrixData.instantiate: float[][] values is null or "
+            throw new ValueRuntimeException("FloatMatrixData.instantiate: float[][] values is null or "
                     + "values.length == 0 or values[0].length == 0");
         }
 
@@ -87,7 +87,7 @@ abstract class FloatMatrixData implements Serializable
                 return FloatMatrixDataSparse.instantiate(matrixSI);
 
             default:
-                throw new ValueException("Unknown data type in FloatMatrixData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown data type in FloatMatrixData.instantiate: " + storageType);
         }
     }
 
@@ -96,19 +96,19 @@ abstract class FloatMatrixData implements Serializable
      * @param values FloatScalarInterface[][]; the values to store
      * @param storageType StorageType; the data type to use
      * @return the FloatMatrixData with the right data type
-     * @throws ValueException when values is null, or storageType is null
+     * @throws ValueRuntimeException when values is null, or storageType is null
      */
     public static FloatMatrixData instantiate(final FloatScalarInterface[][] values, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         if (values == null)
         {
-            throw new ValueException("FloatMatrixData.instantiate: FloatScalar[] values is null");
+            throw new ValueRuntimeException("FloatMatrixData.instantiate: FloatScalar[] values is null");
         }
 
         if (values == null || values.length == 0 || values[0].length == 0)
         {
-            throw new ValueException("FloatMatrixData.instantiate: FloatScalar[][] values is null or "
+            throw new ValueRuntimeException("FloatMatrixData.instantiate: FloatScalar[][] values is null or "
                     + "values.length == 0 or values[0].length == 0");
         }
 
@@ -130,7 +130,7 @@ abstract class FloatMatrixData implements Serializable
                 return FloatMatrixDataSparse.instantiate(matrixSI);
 
             default:
-                throw new ValueException("Unknown data type in FloatMatrixData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown data type in FloatMatrixData.instantiate: " + storageType);
         }
     }
 
@@ -259,13 +259,13 @@ abstract class FloatMatrixData implements Serializable
     /**
      * Check the sizes of this data object and the other data object.
      * @param other FloatMatrixData; the other data object
-     * @throws ValueException if matrices have different lengths
+     * @throws ValueRuntimeException if matrices have different lengths
      */
-    private void checkSizes(final FloatMatrixData other) throws ValueException
+    private void checkSizes(final FloatMatrixData other) throws ValueRuntimeException
     {
         if (this.rows() != other.rows() || this.cols() != other.cols())
         {
-            throw new ValueException("Two data objects used in a FloatMatrix operation do not have the same size");
+            throw new ValueRuntimeException("Two data objects used in a FloatMatrix operation do not have the same size");
         }
     }
 
@@ -278,9 +278,9 @@ abstract class FloatMatrixData implements Serializable
      * matrix is returned.
      * @param right FloatMatrixData; the other data object to add
      * @return the sum of this data object and the other data object
-     * @throws ValueException if matrices have different lengths
+     * @throws ValueRuntimeException if matrices have different lengths
      */
-    public FloatMatrixData plus(final FloatMatrixData right) throws ValueException
+    public FloatMatrixData plus(final FloatMatrixData right) throws ValueRuntimeException
     {
         checkSizes(right);
         float[] dm = new float[this.rows * this.cols];
@@ -296,9 +296,9 @@ abstract class FloatMatrixData implements Serializable
     /**
      * Add a matrix to this matrix on a cell-by-cell basis. The type of matrix (sparse, dense) stays the same.
      * @param right FloatMatrixData; the other data object to add
-     * @throws ValueException if matrices have different lengths
+     * @throws ValueRuntimeException if matrices have different lengths
      */
-    public abstract void incrementBy(FloatMatrixData right) throws ValueException;
+    public abstract void incrementBy(FloatMatrixData right) throws ValueRuntimeException;
 
     /**
      * Add a number to this matrix on a cell-by-cell basis.
@@ -311,9 +311,9 @@ abstract class FloatMatrixData implements Serializable
      * dense matrix is returned.
      * @param right FloatMatrixData; the other data object to subtract
      * @return the sum of this data object and the other data object
-     * @throws ValueException if matrices have different lengths
+     * @throws ValueRuntimeException if matrices have different lengths
      */
-    public FloatMatrixData minus(final FloatMatrixData right) throws ValueException
+    public FloatMatrixData minus(final FloatMatrixData right) throws ValueRuntimeException
     {
         checkSizes(right);
         float[] dm = new float[this.rows * this.cols];
@@ -329,9 +329,9 @@ abstract class FloatMatrixData implements Serializable
     /**
      * Subtract a matrix from this matrix on a cell-by-cell basis. The type of matrix (sparse, dense) stays the same.
      * @param right FloatMatrixData; the other data object to subtract
-     * @throws ValueException if matrices have different lengths
+     * @throws ValueRuntimeException if matrices have different lengths
      */
-    public abstract void decrementBy(FloatMatrixData right) throws ValueException;
+    public abstract void decrementBy(FloatMatrixData right) throws ValueRuntimeException;
 
     /**
      * Subtract a number from this matrix on a cell-by-cell basis.
@@ -344,9 +344,9 @@ abstract class FloatMatrixData implements Serializable
      * matrix is returned.
      * @param right FloatMatrixData; the other data object to multiply with
      * @return the sum of this data object and the other data object
-     * @throws ValueException if matrices have different sizes
+     * @throws ValueRuntimeException if matrices have different sizes
      */
-    public FloatMatrixData times(final FloatMatrixData right) throws ValueException
+    public FloatMatrixData times(final FloatMatrixData right) throws ValueRuntimeException
     {
         checkSizes(right);
         float[] dm = new float[this.rows * this.cols];
@@ -363,9 +363,9 @@ abstract class FloatMatrixData implements Serializable
      * Multiply a matrix with the values of another matrix on a cell-by-cell basis. The type of matrix (sparse, dense) stays the
      * same.
      * @param right FloatMatrixData; the other data object to multiply with
-     * @throws ValueException if matrices have different sizes
+     * @throws ValueRuntimeException if matrices have different sizes
      */
-    public abstract void multiplyBy(FloatMatrixData right) throws ValueException;
+    public abstract void multiplyBy(FloatMatrixData right) throws ValueRuntimeException;
 
     /**
      * Multiply the values of this matrix with a number on a cell-by-cell basis.
@@ -378,9 +378,9 @@ abstract class FloatMatrixData implements Serializable
      * matrix is returned.
      * @param right FloatMatrixData; the other data object to divide by
      * @return the sum of this data object and the other data object
-     * @throws ValueException if matrices have different sizes
+     * @throws ValueRuntimeException if matrices have different sizes
      */
-    public FloatMatrixData divide(final FloatMatrixData right) throws ValueException
+    public FloatMatrixData divide(final FloatMatrixData right) throws ValueRuntimeException
     {
         checkSizes(right);
         float[] dm = new float[this.rows * this.cols];
@@ -397,9 +397,9 @@ abstract class FloatMatrixData implements Serializable
      * Divide the values of a matrix by the values of another matrix on a cell-by-cell basis. The type of matrix (sparse, dense)
      * stays the same.
      * @param right FloatMatrixData; the other data object to divide by
-     * @throws ValueException if matrices have different sizes
+     * @throws ValueRuntimeException if matrices have different sizes
      */
-    public abstract void divideBy(FloatMatrixData right) throws ValueException;
+    public abstract void divideBy(FloatMatrixData right) throws ValueRuntimeException;
 
     /**
      * Divide the values of this matrix by a number on a cell-by-cell basis.

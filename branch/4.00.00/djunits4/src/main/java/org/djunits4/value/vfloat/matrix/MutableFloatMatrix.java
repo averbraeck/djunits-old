@@ -2,10 +2,10 @@ package org.djunits4.value.vfloat.matrix;
 
 import org.djunits4.unit.AbsoluteLinearUnit;
 import org.djunits4.unit.Unit;
-import org.djunits4.value.MathFunctionsAbs;
-import org.djunits4.value.MathFunctionsRel;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.function.MathFunctionsAbs;
+import org.djunits4.value.function.MathFunctionsRel;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.FloatMathFunctions;
 import org.djunits4.value.vfloat.scalar.FloatScalar;
 
@@ -38,9 +38,9 @@ public abstract class MutableFloatMatrix
          * @param values float[][]; the values of the entries in the new Absolute Mutable FloatMatrix
          * @param unit AU; the unit of the new Absolute Mutable FloatMatrix
          * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
+         * @throws ValueRuntimeException when values is null
          */
-        public Abs(final float[][] values, final AU unit, final StorageType storageType) throws ValueException
+        public Abs(final float[][] values, final AU unit, final StorageType storageType) throws ValueRuntimeException
         {
             super(values, unit, storageType);
         }
@@ -49,9 +49,9 @@ public abstract class MutableFloatMatrix
          * Construct a new Absolute Mutable FloatMatrix.
          * @param values FloatScalar.Abs&lt;AU, RU&gt;[][]; the values of the entries in the new Absolute Mutable FloatMatrix
          * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
+         * @throws ValueRuntimeException when values has zero entries
          */
-        public Abs(final FloatScalar.Abs<AU, RU>[][] values, final StorageType storageType) throws ValueException
+        public Abs(final FloatScalar.Abs<AU, RU>[][] values, final StorageType storageType) throws ValueRuntimeException
         {
             super(values, storageType);
         }
@@ -127,9 +127,9 @@ public abstract class MutableFloatMatrix
          * @param values float[][]; the values of the entries in the new Relative Mutable FloatMatrix
          * @param unit U; the unit of the new Relative Mutable FloatMatrix
          * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values is null
+         * @throws ValueRuntimeException when values is null
          */
-        public Rel(final float[][] values, final U unit, final StorageType storageType) throws ValueException
+        public Rel(final float[][] values, final U unit, final StorageType storageType) throws ValueRuntimeException
         {
             super(values, unit, storageType);
         }
@@ -138,9 +138,9 @@ public abstract class MutableFloatMatrix
          * Construct a new Relative Mutable FloatMatrix.
          * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Mutable FloatMatrix
          * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-         * @throws ValueException when values has zero entries
+         * @throws ValueRuntimeException when values has zero entries
          */
-        public Rel(final FloatScalar.Rel<U>[][] values, final StorageType storageType) throws ValueException
+        public Rel(final FloatScalar.Rel<U>[][] values, final StorageType storageType) throws ValueRuntimeException
         {
             super(values, storageType);
         }

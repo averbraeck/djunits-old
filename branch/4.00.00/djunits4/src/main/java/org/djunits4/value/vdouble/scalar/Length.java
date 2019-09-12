@@ -14,6 +14,8 @@ import org.djunits4.unit.LinearDensityUnit;
 import org.djunits4.unit.PositionUnit;
 import org.djunits4.unit.SpeedUnit;
 import org.djunits4.unit.VolumeUnit;
+import org.djunits4.value.util.ValueUtil;
+import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
 
 /**
  * Easy access methods for the Relative Length DoubleScalar.
@@ -25,8 +27,8 @@ import org.djunits4.unit.VolumeUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.069Z")
-public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T08:03:09.298Z")
+public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Position, LengthUnit, Length>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -79,12 +81,8 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
         return new Length(value, unit);
     }
 
-    /**
-     * Construct a new Absolute Immutable DoubleScalar of the right type. Each extending class must implement this method.
-     * @param value double; the double value
-     * @param unit PositionUnit; the unit
-     * @return Position; a new absolute instance of the DoubleScalar of the right type
-     */
+    /** {@inheritDoc} */
+    @Override
     public final Position instantiateAbs(final double value, final PositionUnit unit)
     {
         return new Position(value, unit);
@@ -112,11 +110,8 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
         return new Length(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
-    /**
-     * Relative scalar plus Absolute scalar = Absolute scalar.
-     * @param v %TypAbs%; the value to add
-     * @return Position; sum of this value and v as a new object
-     */
+    /** {@inheritDoc} */
+    @Override
     public final Position plus(final Position v)
     {
         PositionUnit targetUnit = v.getUnit();
@@ -198,7 +193,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
     {
         Throw.whenNull(text, "Error parsing Length: unitString is null");
         Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Length: empty unitString");
-        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();

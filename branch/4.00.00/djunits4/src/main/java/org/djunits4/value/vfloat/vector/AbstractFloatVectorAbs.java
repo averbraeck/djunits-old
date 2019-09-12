@@ -9,9 +9,9 @@ import java.util.SortedMap;
 import org.djunits4.unit.AbsoluteLinearUnit;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.Absolute;
-import org.djunits4.value.FunctionsAbs;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.function.FunctionsAbsWithRel;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.AbstractFloatScalarAbs;
 
 /**
@@ -33,7 +33,7 @@ import org.djunits4.value.vfloat.scalar.AbstractFloatScalarAbs;
 abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
         A extends AbstractFloatVectorAbs<AU, RU, A, R, MA, S>, R extends AbstractFloatVectorRel<RU, R, ?, ?>,
         MA extends AbstractMutableFloatVectorAbs<AU, RU, A, R, MA, S>, S extends AbstractFloatScalarAbs<AU, S, RU, ?>>
-        extends AbstractFloatVector<AU, A> implements FunctionsAbs<AU, RU, A, R>, Absolute, Serializable, Iterable<S>
+        extends AbstractFloatVector<AU, A> implements FunctionsAbsWithRel<AU, RU, A, R>, Absolute, Serializable, Iterable<S>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -43,9 +43,9 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
      * @param values float[]; the values of the entries in the new Absolute Immutable FloatVector
      * @param unit AU; the unit of the new Absolute Immutable FloatVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
-    AbstractFloatVectorAbs(final float[] values, final AU unit, final StorageType storageType) throws ValueException
+    AbstractFloatVectorAbs(final float[] values, final AU unit, final StorageType storageType) throws ValueRuntimeException
     {
         super(unit, FloatVectorData.instantiate(values, unit.getScale(), storageType));
     }
@@ -55,9 +55,9 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
      * @param values List&lt;Float&gt;; the values of the entries in the new Absolute Immutable FloatVector
      * @param unit AU; the unit of the new Absolute Immutable FloatVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
-    AbstractFloatVectorAbs(final List<Float> values, final AU unit, final StorageType storageType) throws ValueException
+    AbstractFloatVectorAbs(final List<Float> values, final AU unit, final StorageType storageType) throws ValueRuntimeException
     {
         super(unit, FloatVectorData.instantiate(values, unit.getScale(), storageType));
     }
@@ -66,9 +66,9 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
      * Construct a new Absolute Immutable FloatVector.
      * @param values S[]; the values of the entries in the new Absolute Immutable FloatVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    AbstractFloatVectorAbs(final S[] values, final StorageType storageType) throws ValueException
+    AbstractFloatVectorAbs(final S[] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(checkUnit(values), FloatVectorData.instantiate(values, storageType));
     }
@@ -77,9 +77,9 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
      * Construct a new Absolute Immutable FloatVector.
      * @param values List&lt;S&gt;; the values of the entries in the new Absolute Immutable FloatVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    AbstractFloatVectorAbs(final List<S> values, final StorageType storageType) throws ValueException
+    AbstractFloatVectorAbs(final List<S> values, final StorageType storageType) throws ValueRuntimeException
     {
         super(checkUnit(values), FloatVectorData.instantiateLD(values, storageType));
     }
@@ -89,10 +89,10 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
      * @param values SortedMap&lt;Integer, S&gt;; the values of the entries in the new Absolute Sparse Mutable FloatVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     AbstractFloatVectorAbs(final SortedMap<Integer, S> values, final int length, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(checkUnit(values), FloatVectorData.instantiateMD(values, length, storageType));
     }
@@ -103,10 +103,10 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
      * @param unit AU; the unit of the new Absolute Sparse Mutable FloatVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     AbstractFloatVectorAbs(final SortedMap<Integer, Float> values, final AU unit, final int length,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(unit, FloatVectorData.instantiate(values, length, unit.getScale(), storageType));
     }
@@ -167,7 +167,7 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
 
     /** {@inheritDoc} */
     @Override
-    public S get(final int index) throws ValueException
+    public S get(final int index) throws ValueRuntimeException
     {
         return instantiateScalar(getInUnit(index, getUnit()), getUnit());
     }
@@ -178,21 +178,21 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
 
     /** {@inheritDoc} */
     @Override
-    public final A plus(final R rel) throws ValueException
+    public final A plus(final R rel) throws ValueRuntimeException
     {
         return instantiateTypeAbs(this.getData().plus(rel.getData()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public A minus(final R rel) throws ValueException
+    public A minus(final R rel) throws ValueRuntimeException
     {
         return instantiateTypeAbs(this.getData().minus(rel.getData()), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public R minus(final A abs) throws ValueException
+    public R minus(final A abs) throws ValueRuntimeException
     {
         return instantiateTypeRel(this.getData().minus(abs.getData()), getUnit().getRelativeUnit());
     }
@@ -208,16 +208,16 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
      * @param <RU> the corresponding relative unit
      * @param <S> the scalar type
      * @return AU; the unit of the object
-     * @throws ValueException when the array has length equal to 0
+     * @throws ValueRuntimeException when the array has length equal to 0
      */
     static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
-            S extends AbstractFloatScalarAbs<AU, S, RU, ?>> AU checkUnit(final S[] dsArray) throws ValueException
+            S extends AbstractFloatScalarAbs<AU, S, RU, ?>> AU checkUnit(final S[] dsArray) throws ValueRuntimeException
     {
         if (dsArray != null && dsArray.length > 0)
         {
             return dsArray[0].getUnit();
         }
-        throw new ValueException("Cannot create a FloatVector or MutableFloatVector from a null or empty array of FloatScalar");
+        throw new ValueRuntimeException("Cannot create a FloatVector or MutableFloatVector from a null or empty array of FloatScalar");
     }
 
     /**
@@ -227,16 +227,16 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
      * @param <RU> the corresponding relative unit
      * @param <S> the scalar in the list
      * @return AU the unit of the object
-     * @throws ValueException when the array has length equal to 0
+     * @throws ValueRuntimeException when the array has length equal to 0
      */
     static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
-            S extends AbstractFloatScalarAbs<AU, S, RU, ?>> AU checkUnit(final List<S> dsList) throws ValueException
+            S extends AbstractFloatScalarAbs<AU, S, RU, ?>> AU checkUnit(final List<S> dsList) throws ValueRuntimeException
     {
         if (dsList != null && dsList.size() > 0)
         {
             return dsList.get(0).getUnit();
         }
-        throw new ValueException("Cannot create a FloatVector or MutableFloatVector from a null or empty list of FloatScalar");
+        throw new ValueRuntimeException("Cannot create a FloatVector or MutableFloatVector from a null or empty list of FloatScalar");
     }
 
     /**
@@ -246,17 +246,17 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
      * @param <RU> the corresponding relative unit
      * @param <S> the scalar in the list
      * @return SortedMap&lt;Integer, S&gt;; the provided Map
-     * @throws ValueException when the Map is null or has size equal to 0
+     * @throws ValueRuntimeException when the Map is null or has size equal to 0
      */
     static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
             S extends AbstractFloatScalarAbs<AU, S, RU, ?>> AU checkUnit(final SortedMap<Integer, S> dsMap)
-                    throws ValueException
+                    throws ValueRuntimeException
     {
         if (dsMap != null && dsMap.size() > 0)
         {
             return dsMap.get(dsMap.firstKey()).getUnit();
         }
-        throw new ValueException("Cannot create a FloatVector or MutableFloatVector from a null or empty Map of FloatScalar");
+        throw new ValueRuntimeException("Cannot create a FloatVector or MutableFloatVector from a null or empty Map of FloatScalar");
     }
 
     /* ============================================================================================ */
@@ -304,7 +304,7 @@ abstract class AbstractFloatVectorAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
                 this.cursor = i + 1;
                 return next;
             }
-            catch (ValueException exception)
+            catch (ValueRuntimeException exception)
             {
                 throw new RuntimeException(exception);
             }

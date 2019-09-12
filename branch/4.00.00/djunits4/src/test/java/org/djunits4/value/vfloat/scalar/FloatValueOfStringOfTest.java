@@ -12,7 +12,7 @@ import org.djunits4.unit.DurationUnit;
 import org.djunits4.unit.Unit;
 import org.djunits4.unit.VolumeUnit;
 import org.djunits4.value.CLASSNAMES;
-import org.djunits4.value.Scalar;
+import org.djunits4.value.AbstractScalar;
 import org.junit.Test;
 
 /**
@@ -35,8 +35,8 @@ public class FloatValueOfStringOfTest
     public final void durationValueOfTest()
     {
         FloatDuration floatDuration = new FloatDuration(10.0f, DurationUnit.MINUTE);
-        assertEquals("10.0 min", Scalar.stringOf(floatDuration));
-        assertEquals(floatDuration, FloatDuration.valueOf(Scalar.stringOf(floatDuration)));
+        assertEquals("10.0 min", AbstractScalar.stringOf(floatDuration));
+        assertEquals(floatDuration, FloatDuration.valueOf(AbstractScalar.stringOf(floatDuration)));
     }
 
     /**
@@ -69,10 +69,10 @@ public class FloatValueOfStringOfTest
             {
                 fail("Method createSI not found for Scalar class " + classPath);
             }
-            Scalar<?> scalarSI = null;
+            AbstractScalar<?> scalarSI = null;
             try
             {
-                scalarSI = (Scalar<?>) createSIMethod.invoke(scalarClass, new Float(10.0));
+                scalarSI = (AbstractScalar<?>) createSIMethod.invoke(scalarClass, new Float(10.0));
             }
             catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
             {
@@ -98,10 +98,10 @@ public class FloatValueOfStringOfTest
             {
                 if (unit.equals(VolumeUnit.CUBIC_LIGHTYEAR) || unit.equals(VolumeUnit.CUBIC_PARSEC))
                     continue; // does not fit in a float...
-                Scalar<?> scalarUnit = null;
+                AbstractScalar<?> scalarUnit = null;
                 try
                 {
-                    scalarUnit = (Scalar<?>) constructScalar.newInstance(new Float(1.0), unit);
+                    scalarUnit = (AbstractScalar<?>) constructScalar.newInstance(new Float(1.0), unit);
                 }
                 catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
                         | InstantiationException exception)
@@ -123,7 +123,7 @@ public class FloatValueOfStringOfTest
                 }
                 try
                 {
-                    scalarString = Scalar.textualStringOfDefaultLocale(scalarUnit);
+                    scalarString = AbstractScalar.textualStringOfDefaultLocale(scalarUnit);
                 }
                 catch (Exception e)
                 {
@@ -144,11 +144,11 @@ public class FloatValueOfStringOfTest
                 {
                     fail("Method valueOf not found for Scalar class " + classPath);
                 }
-                Scalar<?> value = null;
+                AbstractScalar<?> value = null;
                 try
                 {
                     System.out.println("Calling " + scalarClass.getName() + ".valueOf(" + scalarString + ")");
-                    value = (Scalar<?>) valueOfMethod.invoke(scalarClass, scalarString);
+                    value = (AbstractScalar<?>) valueOfMethod.invoke(scalarClass, scalarString);
                 }
                 catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
                 {
@@ -174,11 +174,11 @@ public class FloatValueOfStringOfTest
                 {
                     fail("Method 'of' not found for Scalar class " + classPath);
                 }
-                Scalar<?> ofValue = null;
+                AbstractScalar<?> ofValue = null;
                 try
                 {
                     System.out.println("Calling " + scalarClass.getName() + ".of(" + scalarString + ")");
-                    ofValue = (Scalar<?>) ofMethod.invoke(scalarClass, 1.0f, unit.getDefaultTextualAbbreviation());
+                    ofValue = (AbstractScalar<?>) ofMethod.invoke(scalarClass, 1.0f, unit.getDefaultTextualAbbreviation());
                 }
                 catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
                 {

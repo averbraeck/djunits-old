@@ -6,8 +6,8 @@ import java.util.SortedMap;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.AbsorbedDoseUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatAbsorbedDose;
 
 /**
@@ -19,7 +19,7 @@ import org.djunits4.value.vfloat.scalar.FloatAbsorbedDose;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.228Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class MutableFloatAbsorbedDoseVector extends AbstractMutableFloatVectorRel<AbsorbedDoseUnit, FloatAbsorbedDoseVector,
         MutableFloatAbsorbedDoseVector, FloatAbsorbedDose>
 {
@@ -31,10 +31,10 @@ public class MutableFloatAbsorbedDoseVector extends AbstractMutableFloatVectorRe
      * @param values float[]; the values of the entries in the new Relative Immutable Float AbsorbedDoseVector
      * @param unit AbsorbedDoseUnit; the unit of the new Relative Immutable Float AbsorbedDoseVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public MutableFloatAbsorbedDoseVector(final float[] values, final AbsorbedDoseUnit unit, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -44,10 +44,10 @@ public class MutableFloatAbsorbedDoseVector extends AbstractMutableFloatVectorRe
      * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float AbsorbedDoseVector
      * @param unit AbsorbedDoseUnit; the unit of the new Relative Immutable Float AbsorbedDoseVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public MutableFloatAbsorbedDoseVector(final List<Float> values, final AbsorbedDoseUnit unit, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -56,9 +56,9 @@ public class MutableFloatAbsorbedDoseVector extends AbstractMutableFloatVectorRe
      * Construct a new Relative Immutable Float AbsorbedDoseVector.
      * @param values FloatAbsorbedDose[]; the values of the entries in the new Relative Immutable Float AbsorbedDoseVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public MutableFloatAbsorbedDoseVector(final FloatAbsorbedDose[] values, final StorageType storageType) throws ValueException
+    public MutableFloatAbsorbedDoseVector(final FloatAbsorbedDose[] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -68,10 +68,10 @@ public class MutableFloatAbsorbedDoseVector extends AbstractMutableFloatVectorRe
      * @param values List&lt;FloatAbsorbedDose&gt;; the values of the entries in the new Relative Immutable Float
      *            AbsorbedDoseVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public MutableFloatAbsorbedDoseVector(final List<FloatAbsorbedDose> values, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, storageType);
     }
@@ -82,10 +82,10 @@ public class MutableFloatAbsorbedDoseVector extends AbstractMutableFloatVectorRe
      *            Float AbsorbedDoseVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     public MutableFloatAbsorbedDoseVector(final SortedMap<Integer, FloatAbsorbedDose> values, final int length,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, length, storageType);
     }
@@ -97,10 +97,10 @@ public class MutableFloatAbsorbedDoseVector extends AbstractMutableFloatVectorRe
      * @param unit AbsorbedDoseUnit; the unit of the new Relative Sparse Mutable Float AbsorbedDoseVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public MutableFloatAbsorbedDoseVector(final SortedMap<Integer, Float> values, final AbsorbedDoseUnit unit, final int length,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(values, unit, length, storageType);
     }
@@ -166,7 +166,7 @@ public class MutableFloatAbsorbedDoseVector extends AbstractMutableFloatVectorRe
             {
                 array[i] = get(i);
             }
-            catch (ValueException exception)
+            catch (ValueRuntimeException exception)
             {
                 throw new RuntimeException(exception);
             }

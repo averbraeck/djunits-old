@@ -3,8 +3,8 @@ package org.djunits4.value.vfloat.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.FrequencyUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatFrequency;
 
 /**
@@ -16,7 +16,7 @@ import org.djunits4.value.vfloat.scalar.FloatFrequency;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.312Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class MutableFloatFrequencyMatrix
         extends AbstractMutableFloatMatrixRel<FrequencyUnit, FloatFrequencyMatrix, MutableFloatFrequencyMatrix, FloatFrequency>
 {
@@ -28,10 +28,10 @@ public class MutableFloatFrequencyMatrix
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatFrequencyMatrix
      * @param unit FrequencyUnit; the unit of the new Relative Immutable FloatFrequencyMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public MutableFloatFrequencyMatrix(final float[][] values, final FrequencyUnit unit, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -40,9 +40,9 @@ public class MutableFloatFrequencyMatrix
      * Construct a new Relative Immutable FloatFrequencyMatrix.
      * @param values FloatFrequency[][]; the values of the entries in the new Relative Immutable Float FloatFrequencyMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public MutableFloatFrequencyMatrix(final FloatFrequency[][] values, final StorageType storageType) throws ValueException
+    public MutableFloatFrequencyMatrix(final FloatFrequency[][] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }

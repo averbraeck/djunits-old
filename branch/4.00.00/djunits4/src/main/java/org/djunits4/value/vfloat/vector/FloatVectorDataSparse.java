@@ -3,8 +3,8 @@ package org.djunits4.value.vfloat.vector;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 
 /**
  * Stores sparse data for a FloatVector and carries out basic operations.
@@ -142,7 +142,7 @@ public class FloatVectorDataSparse extends FloatVectorData
 
     /** {@inheritDoc} */
     @Override
-    public final void incrementBy(final FloatVectorData right) throws ValueException
+    public final void incrementBy(final FloatVectorData right) throws ValueRuntimeException
     {
         int maxLength =
                 (right.isSparse() ? this.indices.length + ((FloatVectorDataSparse) right).indices.length : right.size());
@@ -253,7 +253,7 @@ public class FloatVectorDataSparse extends FloatVectorData
 
     /** {@inheritDoc} */
     @Override
-    public final void decrementBy(final FloatVectorData right) throws ValueException
+    public final void decrementBy(final FloatVectorData right) throws ValueRuntimeException
     {
         int maxLength =
                 (right.isSparse() ? this.indices.length + ((FloatVectorDataSparse) right).indices.length : right.size());
@@ -364,7 +364,7 @@ public class FloatVectorDataSparse extends FloatVectorData
 
     /** {@inheritDoc} */
     @Override
-    public final void multiplyBy(final FloatVectorData right) throws ValueException
+    public final void multiplyBy(final FloatVectorData right) throws ValueRuntimeException
     {
         int maxLength =
                 (right.isSparse() ? this.indices.length + ((FloatVectorDataSparse) right).indices.length : right.size());
@@ -487,7 +487,7 @@ public class FloatVectorDataSparse extends FloatVectorData
 
     /** {@inheritDoc} */
     @Override
-    public final void divideBy(final FloatVectorData right) throws ValueException
+    public final void divideBy(final FloatVectorData right) throws ValueRuntimeException
     {
         int maxLength = size();
         float[] tempVectorSI = new float[maxLength];

@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 
 /**
  * Stores sparse data for a FloatMatrix and carries out basic operations.
@@ -50,14 +50,14 @@ public class FloatMatrixDataSparse extends FloatMatrixData
      * @param denseSI float[]; the dense data to store
      * @param rows int; the number of rows
      * @param cols int; the number of columns
-     * @throws ValueException in case size is incorrect
+     * @throws ValueRuntimeException in case size is incorrect
      */
-    public FloatMatrixDataSparse(final float[] denseSI, final int rows, final int cols) throws ValueException
+    public FloatMatrixDataSparse(final float[] denseSI, final int rows, final int cols) throws ValueRuntimeException
     {
         super(StorageType.SPARSE);
         if (denseSI == null || denseSI.length == 0)
         {
-            throw new ValueException("FloatMatrixDataSparse constructor, denseSI == null || denseSI.length == 0");
+            throw new ValueRuntimeException("FloatMatrixDataSparse constructor, denseSI == null || denseSI.length == 0");
         }
 
         this.length = nonZero(denseSI);
@@ -71,14 +71,14 @@ public class FloatMatrixDataSparse extends FloatMatrixData
     /**
      * Create a matrix with sparse data.
      * @param dataSI float[][]; the data to store
-     * @throws ValueException in case matrix is ragged
+     * @throws ValueRuntimeException in case matrix is ragged
      */
-    public FloatMatrixDataSparse(final float[][] dataSI) throws ValueException
+    public FloatMatrixDataSparse(final float[][] dataSI) throws ValueRuntimeException
     {
         super(StorageType.SPARSE);
         if (dataSI == null || dataSI.length == 0)
         {
-            throw new ValueException("FloatMatrixDataSparse constructor, matrixSI == null || matrixSI.length == 0");
+            throw new ValueRuntimeException("FloatMatrixDataSparse constructor, matrixSI == null || matrixSI.length == 0");
         }
 
         this.length = nonZero(dataSI);
@@ -95,10 +95,10 @@ public class FloatMatrixDataSparse extends FloatMatrixData
      * @param data float[][]; the input data
      * @param matrixSI float[]; the matrix data to write
      * @param indices long[]; the indices to write
-     * @throws ValueException in case matrix is ragged
+     * @throws ValueRuntimeException in case matrix is ragged
      */
     @SuppressWarnings("checkstyle:finalparameters")
-    private static void fill(final float[][] data, float[] matrixSI, long[] indices) throws ValueException
+    private static void fill(final float[][] data, float[] matrixSI, long[] indices) throws ValueRuntimeException
     {
         int rows = data.length;
         int cols = data[0].length;
@@ -108,7 +108,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
             float[] row = data[r];
             if (row.length != cols)
             {
-                throw new ValueException("Matrix is ragged");
+                throw new ValueRuntimeException("Matrix is ragged");
             }
             for (int c = 0; c < cols; c++)
             {
@@ -158,7 +158,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
         {
             return new FloatMatrixDataDense(denseSI, this.rows, this.cols);
         }
-        catch (ValueException exception)
+        catch (ValueRuntimeException exception)
         {
             throw new RuntimeException(exception); // cannot happen -- denseSI has the right size
         }
@@ -228,9 +228,9 @@ public class FloatMatrixDataSparse extends FloatMatrixData
      * Instantiate a FloatMatrixDataSparse from an array.
      * @param valuesSI float[][]; the (SI) values to store
      * @return the FloatMatrixDataSparse
-     * @throws ValueException in case matrix is ragged
+     * @throws ValueRuntimeException in case matrix is ragged
      */
-    public static FloatMatrixDataSparse instantiate(final float[][] valuesSI) throws ValueException
+    public static FloatMatrixDataSparse instantiate(final float[][] valuesSI) throws ValueRuntimeException
     {
         int length = nonZero(valuesSI);
         final int rows = valuesSI.length;
@@ -273,7 +273,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final void incrementBy(final FloatMatrixData right) throws ValueException
+    public final void incrementBy(final FloatMatrixData right) throws ValueRuntimeException
     {
         int newLength = 0;
         for (int r = 0; r < rows(); r++)
@@ -349,7 +349,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final void decrementBy(final FloatMatrixData right) throws ValueException
+    public final void decrementBy(final FloatMatrixData right) throws ValueRuntimeException
     {
         int newLength = 0;
         for (int r = 0; r < rows(); r++)
@@ -425,7 +425,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final void multiplyBy(final FloatMatrixData right) throws ValueException
+    public final void multiplyBy(final FloatMatrixData right) throws ValueRuntimeException
     {
         int newLength = 0;
         for (int r = 0; r < rows(); r++)
@@ -501,7 +501,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final void divideBy(final FloatMatrixData right) throws ValueException
+    public final void divideBy(final FloatMatrixData right) throws ValueRuntimeException
     {
         int newLength = 0;
         for (int r = 0; r < rows(); r++)

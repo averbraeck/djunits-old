@@ -7,8 +7,8 @@ import java.util.SortedMap;
 import java.util.stream.IntStream;
 
 import org.djunits4.unit.scale.Scale;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatScalarInterface;
 
 /**
@@ -52,14 +52,14 @@ abstract class FloatVectorData implements Serializable
      * @param scale Scale; the scale of the unit to use for conversion to SI
      * @param storageType StorageType; the data type to use
      * @return FloatVectorData; the FloatVectorData with the right data type
-     * @throws ValueException when values are null, or storageType is null
+     * @throws ValueRuntimeException when values are null, or storageType is null
      */
     public static FloatVectorData instantiate(final float[] values, final Scale scale, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         if (values == null)
         {
-            throw new ValueException("FloatVectorData.instantiate: float[] values is null");
+            throw new ValueRuntimeException("FloatVectorData.instantiate: float[] values is null");
         }
 
         float[] valuesSI = new float[values.length];
@@ -74,7 +74,7 @@ abstract class FloatVectorData implements Serializable
                 return FloatVectorDataSparse.instantiate(valuesSI);
 
             default:
-                throw new ValueException("Unknown data type in FloatVectorData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown data type in FloatVectorData.instantiate: " + storageType);
         }
     }
 
@@ -84,14 +84,14 @@ abstract class FloatVectorData implements Serializable
      * @param scale Scale; the scale of the unit to use for conversion to SI
      * @param storageType StorageType; the data type to use
      * @return FloatVectorData; the FloatVectorData with the right data type
-     * @throws ValueException when list is null, or storageType is null
+     * @throws ValueRuntimeException when list is null, or storageType is null
      */
     public static FloatVectorData instantiate(final List<Float> values, final Scale scale, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         if (values == null)
         {
-            throw new ValueException("FloatVectorData.instantiate: List<Float> values is null");
+            throw new ValueRuntimeException("FloatVectorData.instantiate: List<Float> values is null");
         }
 
         float[] valuesSI = new float[values.size()];
@@ -106,7 +106,7 @@ abstract class FloatVectorData implements Serializable
                 return FloatVectorDataSparse.instantiate(valuesSI);
 
             default:
-                throw new ValueException("Unknown data type in FloatVectorData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown data type in FloatVectorData.instantiate: " + storageType);
         }
     }
 
@@ -115,14 +115,14 @@ abstract class FloatVectorData implements Serializable
      * @param values FloatScalarInterface[]; the values to store
      * @param storageType StorageType; the data type to use
      * @return FloatVectorData; the FloatVectorData with the right data type
-     * @throws ValueException when values is null, or storageType is null
+     * @throws ValueRuntimeException when values is null, or storageType is null
      */
     public static FloatVectorData instantiate(final FloatScalarInterface[] values, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         if (values == null)
         {
-            throw new ValueException("FloatVectorData.instantiate: FloatScalar[] values is null");
+            throw new ValueRuntimeException("FloatVectorData.instantiate: FloatScalar[] values is null");
         }
 
         float[] valuesSI = new float[values.length];
@@ -137,7 +137,7 @@ abstract class FloatVectorData implements Serializable
                 return FloatVectorDataSparse.instantiate(valuesSI);
 
             default:
-                throw new ValueException("Unknown data type in FloatVectorData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown data type in FloatVectorData.instantiate: " + storageType);
         }
     }
 
@@ -146,14 +146,14 @@ abstract class FloatVectorData implements Serializable
      * @param values List&lt;? extends FloatScalarInterface&gt;; the FloatScalar values to store
      * @param storageType StorageType; the data type to use
      * @return FloatVectorData; the FloatVectorData with the right data type
-     * @throws ValueException when values is null, or storageType is null
+     * @throws ValueRuntimeException when values is null, or storageType is null
      */
     public static FloatVectorData instantiateLD(final List<? extends FloatScalarInterface> values,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         if (values == null)
         {
-            throw new ValueException("FloatVectorData.instantiate: values list is null");
+            throw new ValueRuntimeException("FloatVectorData.instantiate: values list is null");
         }
 
         float[] valuesSI = new float[values.size()];
@@ -168,7 +168,7 @@ abstract class FloatVectorData implements Serializable
                 return FloatVectorDataSparse.instantiate(valuesSI);
 
             default:
-                throw new ValueException("Unknown data type in FloatVectorData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown data type in FloatVectorData.instantiate: " + storageType);
         }
     }
 
@@ -179,14 +179,14 @@ abstract class FloatVectorData implements Serializable
      * @param storageType StorageType; the data type to use
      * @param <S> the scalar type to use
      * @return FloatVectorData; the FloatVectorData with the right data type
-     * @throws ValueException when values is null, or storageType is null
+     * @throws ValueRuntimeException when values is null, or storageType is null
      */
     public static <S extends FloatScalarInterface> FloatVectorData instantiateMD(final SortedMap<Integer, S> values,
-            final int length, final StorageType storageType) throws ValueException
+            final int length, final StorageType storageType) throws ValueRuntimeException
     {
         if (values == null)
         {
-            throw new ValueException("FloatVectorData.instantiate: values map is null");
+            throw new ValueRuntimeException("FloatVectorData.instantiate: values map is null");
         }
 
         switch (storageType)
@@ -208,7 +208,7 @@ abstract class FloatVectorData implements Serializable
             }
 
             default:
-                throw new ValueException("Unknown data type in FloatVectorData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown data type in FloatVectorData.instantiate: " + storageType);
         }
     }
 
@@ -219,14 +219,14 @@ abstract class FloatVectorData implements Serializable
      * @param scale Scale; the scale of the unit to use for conversion to SI
      * @param storageType StorageType; the data type to use
      * @return FloatVectorData; the FloatVectorData with the right data type
-     * @throws ValueException when values is null, or storageType is null
+     * @throws ValueRuntimeException when values is null, or storageType is null
      */
     public static FloatVectorData instantiate(final SortedMap<Integer, Float> values, final int length, final Scale scale,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         if (values == null)
         {
-            throw new ValueException("FloatVectorData.instantiate: values map is null");
+            throw new ValueRuntimeException("FloatVectorData.instantiate: values map is null");
         }
 
         switch (storageType)
@@ -249,7 +249,7 @@ abstract class FloatVectorData implements Serializable
             }
 
             default:
-                throw new ValueException("Unknown data type in FloatVectorData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown data type in FloatVectorData.instantiate: " + storageType);
         }
     }
 
@@ -358,13 +358,13 @@ abstract class FloatVectorData implements Serializable
     /**
      * Check the sizes of this data object and the other data object.
      * @param other FloatVectorData; the other data object
-     * @throws ValueException if vectors have different lengths
+     * @throws ValueRuntimeException if vectors have different lengths
      */
-    private void checkSizes(final FloatVectorData other) throws ValueException
+    private void checkSizes(final FloatVectorData other) throws ValueRuntimeException
     {
         if (this.size() != other.size())
         {
-            throw new ValueException("Two data objects used in a FloatVector operation do not have the same size");
+            throw new ValueRuntimeException("Two data objects used in a FloatVector operation do not have the same size");
         }
     }
 
@@ -377,9 +377,9 @@ abstract class FloatVectorData implements Serializable
      * vector is returned.
      * @param right FloatVectorData; the other data object to add
      * @return FloatVectorData; the sum of this data object and the other data object
-     * @throws ValueException if vectors have different lengths
+     * @throws ValueRuntimeException if vectors have different lengths
      */
-    public FloatVectorData plus(final FloatVectorData right) throws ValueException
+    public FloatVectorData plus(final FloatVectorData right) throws ValueRuntimeException
     {
         checkSizes(right);
         float[] dv = new float[size()];
@@ -395,9 +395,9 @@ abstract class FloatVectorData implements Serializable
     /**
      * Add a vector to this vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the same.
      * @param right FloatVectorData; the other data object to add
-     * @throws ValueException if vectors have different lengths
+     * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract void incrementBy(FloatVectorData right) throws ValueException;
+    public abstract void incrementBy(FloatVectorData right) throws ValueRuntimeException;
 
     /**
      * Add a number to this vector on a cell-by-cell basis.
@@ -410,9 +410,9 @@ abstract class FloatVectorData implements Serializable
      * vector is returned.
      * @param right FloatVectorData; the other data object to subtract
      * @return FloatVectorData; the difference of this data object and the other data object
-     * @throws ValueException if vectors have different lengths
+     * @throws ValueRuntimeException if vectors have different lengths
      */
-    public FloatVectorData minus(final FloatVectorData right) throws ValueException
+    public FloatVectorData minus(final FloatVectorData right) throws ValueRuntimeException
     {
         checkSizes(right);
         float[] dv = new float[size()];
@@ -427,9 +427,9 @@ abstract class FloatVectorData implements Serializable
     /**
      * Subtract a vector from this vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the same.
      * @param right FloatVectorData; the other data object to subtract
-     * @throws ValueException if vectors have different lengths
+     * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract void decrementBy(FloatVectorData right) throws ValueException;
+    public abstract void decrementBy(FloatVectorData right) throws ValueRuntimeException;
 
     /**
      * Subtract a number from this vector on a cell-by-cell basis.
@@ -442,9 +442,9 @@ abstract class FloatVectorData implements Serializable
      * vector is returned.
      * @param right FloatVectorData; the other data object to multiply with
      * @return FloatVectorData; the product of this data object and the other data object
-     * @throws ValueException if vectors have different lengths
+     * @throws ValueRuntimeException if vectors have different lengths
      */
-    public FloatVectorData times(final FloatVectorData right) throws ValueException
+    public FloatVectorData times(final FloatVectorData right) throws ValueRuntimeException
     {
         checkSizes(right);
         float[] dv = new float[size()];
@@ -460,9 +460,9 @@ abstract class FloatVectorData implements Serializable
      * Multiply a vector with the values of another vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the
      * same.
      * @param right FloatVectorData; the other data object to multiply with
-     * @throws ValueException if vectors have different lengths
+     * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract void multiplyBy(FloatVectorData right) throws ValueException;
+    public abstract void multiplyBy(FloatVectorData right) throws ValueRuntimeException;
 
     /**
      * Multiply the values of this vector with a number on a cell-by-cell basis.
@@ -475,9 +475,9 @@ abstract class FloatVectorData implements Serializable
      * vector is returned.
      * @param right FloatVectorData; the other data object to divide by
      * @return FloatVectorData; the division of this data object and the other data object
-     * @throws ValueException if vectors have different lengths
+     * @throws ValueRuntimeException if vectors have different lengths
      */
-    public FloatVectorData divide(final FloatVectorData right) throws ValueException
+    public FloatVectorData divide(final FloatVectorData right) throws ValueRuntimeException
     {
         checkSizes(right);
         float[] dv = new float[size()];
@@ -493,9 +493,9 @@ abstract class FloatVectorData implements Serializable
      * Divide the values of a vector by the values of another vector on a cell-by-cell basis. The type of vector (sparse, dense)
      * stays the same.
      * @param right FloatVectorData; the other data object to divide by
-     * @throws ValueException if vectors have different lengths
+     * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract void divideBy(FloatVectorData right) throws ValueException;
+    public abstract void divideBy(FloatVectorData right) throws ValueRuntimeException;
 
     /**
      * Divide the values of this vector by a number on a cell-by-cell basis.

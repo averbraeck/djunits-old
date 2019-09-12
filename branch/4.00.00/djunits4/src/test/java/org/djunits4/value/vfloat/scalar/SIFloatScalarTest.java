@@ -49,25 +49,25 @@ public class SIFloatScalarTest
 
         FloatElectricalResistance ohm180 = new FloatElectricalResistance(180.0f, ElectricalResistanceUnit.KILOOHM);
         FloatElectricalResistance ohm90 = new FloatElectricalResistance(90.0f, ElectricalResistanceUnit.KILOOHM);
-        FloatSpeed pace2xAsFloatSpeed = pace.multiplyBy(ohm180).divideBy(ohm90).reciprocal().as(FloatSpeed.ZERO);
+        FloatSpeed pace2xAsFloatSpeed = pace.multiplyBy(ohm180).divideBy(ohm90).reciprocal().as(SpeedUnit.SI);
         System.out.println("pace2x = " + pace2xAsFloatSpeed);
         assertEquals("m/s", pace2xAsFloatSpeed.getUnit().toString());
         assertEquals(2.5, pace2xAsFloatSpeed.getSI(), 0.00001);
 
         FloatSpeed pace2xAsFloatSpeedMih =
-                pace.multiplyBy(ohm180).divideBy(ohm90).reciprocal().as(FloatSpeed.ZERO, SpeedUnit.MILE_PER_HOUR);
+                pace.multiplyBy(ohm180).divideBy(ohm90).reciprocal().as(SpeedUnit.MILE_PER_HOUR);
         System.out.println("pace2xMi/h = " + pace2xAsFloatSpeedMih);
         assertEquals("mi/h", pace2xAsFloatSpeedMih.getUnit().toString());
         assertEquals(2.5, pace2xAsFloatSpeedMih.getSI(), 0.00001);
 
-        FloatSpeed speed = pace.reciprocal().as(FloatSpeed.class);
+        FloatSpeed speed = pace.reciprocal().as(SpeedUnit.SI);
         System.out.println("speed = " + speed);
         assertEquals("m/s", speed.getUnit().toString());
         assertEquals(5.0, speed.getSI(), 0.00001);
         assertTrue(speed.toString().startsWith("5.000"));
         assertTrue(speed.toString().endsWith("m/s"));
 
-        FloatSpeed speedKmh = pace.reciprocal().as(FloatSpeed.class, SpeedUnit.KM_PER_HOUR);
+        FloatSpeed speedKmh = pace.reciprocal().as(SpeedUnit.KM_PER_HOUR);
         System.out.println("speedKm/h = " + speedKmh);
         assertEquals("km/h", speedKmh.getUnit().toString());
         assertEquals(5.0, speedKmh.getSI(), 0.00001);
@@ -86,17 +86,7 @@ public class SIFloatScalarTest
 
         try
         {
-            ohm180.multiplyBy(ohm90).as(FloatSpeed.ZERO);
-            fail("Translating Ohms to FloatSpeed should have failed");
-        }
-        catch (Exception e)
-        {
-            // ok!
-        }
-
-        try
-        {
-            ohm180.multiplyBy(ohm90).as(FloatSpeed.class);
+            ohm180.multiplyBy(ohm90).as(SpeedUnit.SI);
             fail("Translating Ohms to FloatSpeed should have failed");
         }
         catch (Exception e)

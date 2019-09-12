@@ -25,20 +25,20 @@ public class ValueExceptionTest
     public final void valueExceptionTest()
     {
         String message = "MessageString";
-        Exception e = new ValueException(message);
+        Exception e = new ValueRuntimeException(message);
         assertTrue("Exception should not be null", null != e);
         assertEquals("message should be our message", message, e.getMessage());
         assertEquals("cause should be null", null, e.getCause());
-        e = new ValueException();
+        e = new ValueRuntimeException();
         assertTrue("Exception should not be null", null != e);
         assertEquals("cause should be null", null, e.getCause());
         String causeString = "CauseString";
         Throwable cause = new Throwable(causeString);
-        e = new ValueException(cause);
+        e = new ValueRuntimeException(cause);
         assertTrue("Exception should not be null", null != e);
         assertEquals("cause should not be our cause", cause, e.getCause());
         assertEquals("cause description should be our cause string", causeString, e.getCause().getMessage());
-        e = new ValueException(message, cause);
+        e = new ValueRuntimeException(message, cause);
         assertTrue("Exception should not be null", null != e);
         assertEquals("message should be our message", message, e.getMessage());
         assertEquals("cause should not be our cause", cause, e.getCause());
@@ -47,7 +47,7 @@ public class ValueExceptionTest
         {
             for (boolean writableStackTrace : new boolean[] {true, false})
             {
-                e = new ValueException(message, cause, enableSuppression, writableStackTrace);
+                e = new ValueRuntimeException(message, cause, enableSuppression, writableStackTrace);
                 assertTrue("Exception should not be null", null != e);
                 assertEquals("message should be our message", message, e.getMessage());
                 assertEquals("cause should not be our cause", cause, e.getCause());

@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.*;
+import org.djunits4.Throw;
 
 /**
  * Easy access methods for the Float%TypeAbs% FloatScalar.

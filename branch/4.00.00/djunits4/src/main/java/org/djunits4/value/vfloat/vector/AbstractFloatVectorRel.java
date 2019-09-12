@@ -8,8 +8,8 @@ import java.util.SortedMap;
 
 import org.djunits4.unit.Unit;
 import org.djunits4.value.Relative;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.AbstractFloatScalarRel;
 
 /**
@@ -38,9 +38,9 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * @param values float[]; the values of the entries in the new Relative Immutable FloatVector
      * @param unit U; the unit of the new Relative Immutable FloatVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
-    AbstractFloatVectorRel(final float[] values, final U unit, final StorageType storageType) throws ValueException
+    AbstractFloatVectorRel(final float[] values, final U unit, final StorageType storageType) throws ValueRuntimeException
     {
         super(unit, FloatVectorData.instantiate(values, unit.getScale(), storageType));
     }
@@ -50,9 +50,9 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable FloatVector
      * @param unit U; the unit of the new Relative Immutable FloatVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
-    AbstractFloatVectorRel(final List<Float> values, final U unit, final StorageType storageType) throws ValueException
+    AbstractFloatVectorRel(final List<Float> values, final U unit, final StorageType storageType) throws ValueRuntimeException
     {
         super(unit, FloatVectorData.instantiate(values, unit.getScale(), storageType));
     }
@@ -61,9 +61,9 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * Construct a new Relative Immutable FloatVector.
      * @param values S[]; the values of the entries in the new Relative Immutable FloatVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    AbstractFloatVectorRel(final S[] values, final StorageType storageType) throws ValueException
+    AbstractFloatVectorRel(final S[] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(checkUnit(values), FloatVectorData.instantiate(values, storageType));
     }
@@ -72,9 +72,9 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * Construct a new Relative Immutable FloatVector.
      * @param values List&lt;S&gt;; the values of the entries in the new Relative Immutable FloatVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    AbstractFloatVectorRel(final List<S> values, final StorageType storageType) throws ValueException
+    AbstractFloatVectorRel(final List<S> values, final StorageType storageType) throws ValueRuntimeException
     {
         super(checkUnit(values), FloatVectorData.instantiateLD(values, storageType));
     }
@@ -84,10 +84,10 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * @param values SortedMap&lt;Integer, S&gt;; the values of the entries in the new Relative Sparse Mutable FloatVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
     AbstractFloatVectorRel(final SortedMap<Integer, S> values, final int length, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(checkUnit(values), FloatVectorData.instantiateMD(values, length, storageType));
     }
@@ -98,10 +98,10 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * @param unit U; the unit of the new Relative Sparse Mutable FloatVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     AbstractFloatVectorRel(final SortedMap<Integer, Float> values, final U unit, final int length,
-            final StorageType storageType) throws ValueException
+            final StorageType storageType) throws ValueRuntimeException
     {
         super(unit, FloatVectorData.instantiate(values, length, unit.getScale(), storageType));
     }
@@ -154,7 +154,7 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
 
     /** {@inheritDoc} */
     @Override
-    public S get(final int index) throws ValueException
+    public S get(final int index) throws ValueRuntimeException
     {
         return instantiateScalar(getInUnit(index, getUnit()), getUnit());
     }
@@ -169,9 +169,9 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * result is a dense vector or matrix.
      * @param rel R; the right operand
      * @return R; the addition of this vector and the operand
-     * @throws ValueException in case this vector or matrix and the operand have a different size
+     * @throws ValueRuntimeException in case this vector or matrix and the operand have a different size
      */
-    public final R plus(final R rel) throws ValueException
+    public final R plus(final R rel) throws ValueRuntimeException
     {
         return instantiateType(this.getData().plus(rel.getData()), getUnit());
     }
@@ -182,9 +182,9 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * the result is a dense vector or matrix.
      * @param rel R; the right operand
      * @return R; the subtraction of this vector and the operand
-     * @throws ValueException in case this vector or matrix and the operand have a different size
+     * @throws ValueRuntimeException in case this vector or matrix and the operand have a different size
      */
-    public final R minus(final R rel) throws ValueException
+    public final R minus(final R rel) throws ValueRuntimeException
     {
         return instantiateType(this.getData().minus(rel.getData()), getUnit());
     }
@@ -195,9 +195,9 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * the result is a sparse vector or matrix.
      * @param rel R; the right operand
      * @return R; the multiplication of this vector and the operand
-     * @throws ValueException in case this vector or matrix and the operand have a different size
+     * @throws ValueRuntimeException in case this vector or matrix and the operand have a different size
      */
-    public final R times(final R rel) throws ValueException
+    public final R times(final R rel) throws ValueRuntimeException
     {
         return instantiateType(this.getData().times(rel.getData()), getUnit());
     }
@@ -208,9 +208,9 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * is a sparse vector or matrix.
      * @param rel R; the right operand
      * @return R; the division of this vector and the operand
-     * @throws ValueException in case this vector or matrix and the operand have a different size
+     * @throws ValueRuntimeException in case this vector or matrix and the operand have a different size
      */
-    public final R divide(final R rel) throws ValueException
+    public final R divide(final R rel) throws ValueRuntimeException
     {
         return instantiateType(this.getData().divide(rel.getData()), getUnit());
     }
@@ -225,16 +225,16 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * @param <U> the unit
      * @param <S> the scalar type
      * @return U; the unit of the object
-     * @throws ValueException when the array has length equal to 0
+     * @throws ValueRuntimeException when the array has length equal to 0
      */
     static <U extends Unit<U>, S extends AbstractFloatScalarRel<U, S>> U checkUnit(final AbstractFloatScalarRel<U, S>[] dsArray)
-            throws ValueException
+            throws ValueRuntimeException
     {
         if (dsArray != null && dsArray.length > 0)
         {
             return dsArray[0].getUnit();
         }
-        throw new ValueException("Cannot create a FloatVector or MutableFloatVector from a null or empty array of FloatScalar");
+        throw new ValueRuntimeException("Cannot create a FloatVector or MutableFloatVector from a null or empty array of FloatScalar");
     }
 
     /**
@@ -243,15 +243,15 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * @param <U> the unit
      * @param <S> the scalar in the list
      * @return U; the unit of the object
-     * @throws ValueException when the array has length equal to 0
+     * @throws ValueRuntimeException when the array has length equal to 0
      */
-    static <U extends Unit<U>, S extends AbstractFloatScalarRel<U, S>> U checkUnit(final List<S> dsList) throws ValueException
+    static <U extends Unit<U>, S extends AbstractFloatScalarRel<U, S>> U checkUnit(final List<S> dsList) throws ValueRuntimeException
     {
         if (dsList != null && dsList.size() > 0)
         {
             return dsList.get(0).getUnit();
         }
-        throw new ValueException("Cannot create a FloatVector or MutableFloatVector from a null or empty list of FloatScalar");
+        throw new ValueRuntimeException("Cannot create a FloatVector or MutableFloatVector from a null or empty list of FloatScalar");
     }
 
     /**
@@ -260,16 +260,16 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
      * @param <U> Unit; the unit of the FloatScalar list
      * @param <S> the scalar in the list
      * @return Map&lt;Integer, S&gt;; the provided Map
-     * @throws ValueException when the Map is null or has size equal to 0
+     * @throws ValueRuntimeException when the Map is null or has size equal to 0
      */
     static <U extends Unit<U>, S extends AbstractFloatScalarRel<U, S>> U checkUnit(final SortedMap<Integer, S> dsMap)
-            throws ValueException
+            throws ValueRuntimeException
     {
         if (dsMap != null && dsMap.size() > 0)
         {
             return dsMap.get(dsMap.firstKey()).getUnit();
         }
-        throw new ValueException("Cannot create a FloatVector or MutableFloatVector from a null or empty Map of FloatScalar");
+        throw new ValueRuntimeException("Cannot create a FloatVector or MutableFloatVector from a null or empty Map of FloatScalar");
     }
 
     /* ============================================================================================ */
@@ -317,7 +317,7 @@ abstract class AbstractFloatVectorRel<U extends Unit<U>, R extends AbstractFloat
                 this.cursor = i + 1;
                 return next;
             }
-            catch (ValueException exception)
+            catch (ValueRuntimeException exception)
             {
                 throw new RuntimeException(exception);
             }

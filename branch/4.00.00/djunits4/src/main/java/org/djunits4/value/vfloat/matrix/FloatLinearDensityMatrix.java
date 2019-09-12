@@ -3,8 +3,8 @@ package org.djunits4.value.vfloat.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.LinearDensityUnit;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatLinearDensity;
 
 /**
@@ -16,7 +16,7 @@ import org.djunits4.value.vfloat.scalar.FloatLinearDensity;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-03T23:30:17.297Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
 public class FloatLinearDensityMatrix extends
         AbstractFloatMatrixRel<LinearDensityUnit, FloatLinearDensityMatrix, MutableFloatLinearDensityMatrix, FloatLinearDensity>
 {
@@ -28,10 +28,10 @@ public class FloatLinearDensityMatrix extends
      * @param values float[][]; the values of the entries in the new Relative Immutable FloatLinearDensityMatrix
      * @param unit LinearDensityUnit; the unit of the new Relative Immutable FloatLinearDensityMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @throws ValueRuntimeException when values is null
      */
     public FloatLinearDensityMatrix(final float[][] values, final LinearDensityUnit unit, final StorageType storageType)
-            throws ValueException
+            throws ValueRuntimeException
     {
         super(values, unit, storageType);
     }
@@ -40,9 +40,9 @@ public class FloatLinearDensityMatrix extends
      * Construct a new Relative Immutable FloatLinearDensityMatrix.
      * @param values FloatLinearDensity; the values of the entries in the new Relative Immutable FloatLinearDensityMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
+     * @throws ValueRuntimeException when values has zero entries
      */
-    public FloatLinearDensityMatrix(final FloatLinearDensity[][] values, final StorageType storageType) throws ValueException
+    public FloatLinearDensityMatrix(final FloatLinearDensity[][] values, final StorageType storageType) throws ValueRuntimeException
     {
         super(values, storageType);
     }

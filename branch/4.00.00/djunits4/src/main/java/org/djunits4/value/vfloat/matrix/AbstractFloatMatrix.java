@@ -3,11 +3,11 @@ package org.djunits4.value.vfloat.matrix;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.Absolute;
 import org.djunits4.value.AbstractValue;
-import org.djunits4.value.Mutable;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
-import org.djunits4.value.ValueUtil;
+import org.djunits4.value.IsMutable;
+import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.formatter.Format;
+import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.util.ValueUtil;
 import org.ojalgo.matrix.PrimitiveMatrix;
 
 /**
@@ -106,7 +106,7 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, T extends AbstractF
 
     /** {@inheritDoc} */
     @Override
-    public final float getSI(final int row, final int column) throws ValueException
+    public final float getSI(final int row, final int column) throws ValueRuntimeException
     {
         checkIndex(row, column);
         return this.data.getSI(row, column);
@@ -114,14 +114,14 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, T extends AbstractF
 
     /** {@inheritDoc} */
     @Override
-    public final float getInUnit(final int row, final int column) throws ValueException
+    public final float getInUnit(final int row, final int column) throws ValueRuntimeException
     {
         return (float) expressAsSpecifiedUnit(getSI(row, column));
     }
 
     /** {@inheritDoc} */
     @Override
-    public final float getInUnit(final int row, final int column, final U targetUnit) throws ValueException
+    public final float getInUnit(final int row, final int column, final U targetUnit) throws ValueRuntimeException
     {
         return (float) ValueUtil.expressAsUnit(getSI(row, column), targetUnit);
     }
@@ -170,7 +170,7 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, T extends AbstractF
         {
             String ab = this instanceof Absolute ? "Abs " : "Rel ";
             String ds = this.data.isDense() ? "Dense  " : this.data.isSparse() ? "Sparse " : "?????? ";
-            if (this instanceof Mutable)
+            if (this instanceof IsMutable)
             {
                 buf.append("Mutable   " + ab + ds);
             }
@@ -189,7 +189,7 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, T extends AbstractF
                     float d = (float) ValueUtil.expressAsUnit(getSI(row, column), displayUnit);
                     buf.append(" " + Format.format(d));
                 }
-                catch (ValueException ve)
+                catch (ValueRuntimeException ve)
                 {
                     buf.append(" " + "********************".substring(0, Format.DEFAULTSIZE));
                 }
@@ -207,23 +207,23 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, T extends AbstractF
      * Check that a 2D array of float is not null,not empty and not jagged; i.e. all rows have the same length.
      * @param values float[][]; the 2D array to check
      * @return the values in case the method is used in a constructor
-     * @throws ValueException when <code>values</code> is null, empty, or jagged
+     * @throws ValueRuntimeException when <code>values</code> is null, empty, or jagged
      */
-    protected static float[][] ensureRectangularAndNonEmpty(final float[][] values) throws ValueException
+    protected static float[][] ensureRectangularAndNonEmpty(final float[][] values) throws ValueRuntimeException
     {
         if (null == values)
         {
-            throw new ValueException("Cannot create a FloatVector or MutableFloatVector from a null array of float[][]");
+            throw new ValueRuntimeException("Cannot create a FloatVector or MutableFloatVector from a null array of float[][]");
         }
         if (values.length > 0 && null == values[0])
         {
-            throw new ValueException("Creating FloatVector or MutableFloatVector: Row 0 is null");
+            throw new ValueRuntimeException("Creating FloatVector or MutableFloatVector: Row 0 is null");
         }
         for (int row = values.length; --row >= 1;)
         {
             if (null == values[row] || values[0].length != values[row].length)
             {
-                throw new ValueException("Creating FloatVector or MutableFloatVector: Lengths of rows are not all the same");
+                throw new ValueRuntimeException("Creating FloatVector or MutableFloatVector: Lengths of rows are not all the same");
             }
         }
         return values;
@@ -232,17 +232,17 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, T extends AbstractF
     /**
      * Centralized size equality check.
      * @param other AbstractFloatMatrixRel&lt;?, ?, ?, ?&gt;; other FloatMatrix
-     * @throws ValueException when other is null, or matrices have unequal size
+     * @throws ValueRuntimeException when other is null, or matrices have unequal size
      */
-    protected final void checkSize(final AbstractFloatMatrixRel<?, ?, ?, ?> other) throws ValueException
+    protected final void checkSize(final AbstractFloatMatrixRel<?, ?, ?, ?> other) throws ValueRuntimeException
     {
         if (null == other)
         {
-            throw new ValueException("other is null");
+            throw new ValueRuntimeException("other is null");
         }
         if (rows() != other.rows() || columns() != other.columns())
         {
-            throw new ValueException("The matrices have different sizes: " + rows() + "x" + columns() + " != " + other.rows()
+            throw new ValueRuntimeException("The matrices have different sizes: " + rows() + "x" + columns() + " != " + other.rows()
                     + "x" + other.columns());
         }
     }
@@ -250,15 +250,15 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, T extends AbstractF
     /**
      * Centralized size equality check.
      * @param other float[][]; array of float
-     * @throws ValueException when matrices have unequal size
+     * @throws ValueRuntimeException when matrices have unequal size
      */
-    protected final void checkSize(final float[][] other) throws ValueException
+    protected final void checkSize(final float[][] other) throws ValueRuntimeException
     {
         ensureRectangularAndNonEmpty(other);
         final int otherColumns = other[0].length;
         if (rows() != other.length || columns() != otherColumns)
         {
-            throw new ValueException("The matrix and the array have different sizes: " + rows() + "x" + columns() + " != "
+            throw new ValueRuntimeException("The matrix and the array have different sizes: " + rows() + "x" + columns() + " != "
                     + other.length + "x" + otherColumns);
         }
     }
@@ -267,20 +267,20 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, T extends AbstractF
      * Check that provided row and column indices are valid.
      * @param row int; the row value to check
      * @param column int; the column value to check
-     * @throws ValueException when row or column is invalid
+     * @throws ValueRuntimeException when row or column is invalid
      */
-    protected final void checkIndex(final int row, final int column) throws ValueException
+    protected final void checkIndex(final int row, final int column) throws ValueRuntimeException
     {
         if (row < 0 || row >= rows() || column < 0 || column >= columns())
         {
-            throw new ValueException("index out of range (valid range is 0.." + (rows() - 1) + ", 0.." + (columns() - 1)
+            throw new ValueRuntimeException("index out of range (valid range is 0.." + (rows() - 1) + ", 0.." + (columns() - 1)
                     + ", got " + row + ", " + column + ")");
         }
     }
 
     /** {@inheritDoc} */
     @Override
-    public final float determinant() throws ValueException
+    public final float determinant() throws ValueRuntimeException
     {
         try
         {
@@ -294,7 +294,7 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, T extends AbstractF
         }
         catch (IllegalArgumentException exception)
         {
-            throw new ValueException(exception); // Matrix must be square
+            throw new ValueRuntimeException(exception); // Matrix must be square
         }
     }
 
