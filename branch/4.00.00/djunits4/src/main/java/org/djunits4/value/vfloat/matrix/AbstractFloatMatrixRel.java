@@ -176,7 +176,7 @@ abstract class AbstractFloatMatrixRel<U extends Unit<U>, R extends AbstractFloat
      */
     static <U extends Unit<U>, S extends AbstractFloatScalarRel<U, S>> U checkUnit(final S[][] dsArray) throws ValueRuntimeException
     {
-        ensureRectangularAndNonEmpty(dsArray);
+        checkRectangularAndNonEmpty(dsArray);
         return dsArray[0][0].getUnit();
     }
 

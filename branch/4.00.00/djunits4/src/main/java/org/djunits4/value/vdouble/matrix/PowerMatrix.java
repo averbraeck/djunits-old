@@ -3,9 +3,10 @@ package org.djunits4.value.vdouble.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.PowerUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
+import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.Power;
+import org.djunits4.value.vdouble.vector.PowerVector;
 
 /**
  * Immutable Double PowerMatrix, a matrix of values with a PowerUnit.
@@ -16,77 +17,34 @@ import org.djunits4.value.vdouble.scalar.Power;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-06T11:09:13.414Z")
-public class PowerMatrix extends AbstractDoubleMatrixRel<PowerUnit, PowerMatrix, MutablePowerMatrix, Power>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+public class PowerMatrix extends AbstractDoubleMatrixRel<PowerUnit, Power, PowerVector, PowerMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Double PowerMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double PowerMatrix
-     * @param unit PowerUnit; the unit of the new Relative Immutable Double PowerMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public PowerMatrix(final double[][] values, final PowerUnit unit, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double PowerMatrix.
-     * @param values Power[][]; the values of the entries in the new Relative Immutable Double PowerMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public PowerMatrix(final Power[][] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data DoubleMatrixData; an internal data object
      * @param unit PowerUnit; the unit
      */
-    PowerMatrix(final DoubleMatrixData data, final PowerUnit unit)
+    public PowerMatrix(final DoubleMatrixData data, final PowerUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final PowerMatrix toDense()
+    public Class<Power> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return Power.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final PowerMatrix toSparse()
+    public Class<PowerVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final PowerMatrix instantiateType(final DoubleMatrixData dmd, final PowerUnit unit)
-    {
-        return new PowerMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutablePowerMatrix instantiateMutableType(final DoubleMatrixData dmd, final PowerUnit unit)
-    {
-        return new MutablePowerMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final Power instantiateScalar(final double value, final PowerUnit unit)
-    {
-        return new Power(value, unit);
+        return PowerVector.class;
     }
 
 }

@@ -3,9 +3,10 @@ package org.djunits4.value.vdouble.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.ForceUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
+import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.Force;
+import org.djunits4.value.vdouble.vector.ForceVector;
 
 /**
  * Immutable Double ForceMatrix, a matrix of values with a ForceUnit.
@@ -16,77 +17,34 @@ import org.djunits4.value.vdouble.scalar.Force;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-06T11:09:13.414Z")
-public class ForceMatrix extends AbstractDoubleMatrixRel<ForceUnit, ForceMatrix, MutableForceMatrix, Force>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+public class ForceMatrix extends AbstractDoubleMatrixRel<ForceUnit, Force, ForceVector, ForceMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Double ForceMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double ForceMatrix
-     * @param unit ForceUnit; the unit of the new Relative Immutable Double ForceMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public ForceMatrix(final double[][] values, final ForceUnit unit, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double ForceMatrix.
-     * @param values Force[][]; the values of the entries in the new Relative Immutable Double ForceMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public ForceMatrix(final Force[][] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data DoubleMatrixData; an internal data object
      * @param unit ForceUnit; the unit
      */
-    ForceMatrix(final DoubleMatrixData data, final ForceUnit unit)
+    public ForceMatrix(final DoubleMatrixData data, final ForceUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final ForceMatrix toDense()
+    public Class<Force> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return Force.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final ForceMatrix toSparse()
+    public Class<ForceVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final ForceMatrix instantiateType(final DoubleMatrixData dmd, final ForceUnit unit)
-    {
-        return new ForceMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableForceMatrix instantiateMutableType(final DoubleMatrixData dmd, final ForceUnit unit)
-    {
-        return new MutableForceMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final Force instantiateScalar(final double value, final ForceUnit unit)
-    {
-        return new Force(value, unit);
+        return ForceVector.class;
     }
 
 }

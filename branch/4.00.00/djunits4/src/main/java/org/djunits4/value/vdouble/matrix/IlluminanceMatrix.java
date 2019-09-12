@@ -3,9 +3,10 @@ package org.djunits4.value.vdouble.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.IlluminanceUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
+import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.Illuminance;
+import org.djunits4.value.vdouble.vector.IlluminanceVector;
 
 /**
  * Immutable Double IlluminanceMatrix, a matrix of values with a IlluminanceUnit.
@@ -16,79 +17,35 @@ import org.djunits4.value.vdouble.scalar.Illuminance;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-06T11:09:13.414Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
 public class IlluminanceMatrix
-        extends AbstractDoubleMatrixRel<IlluminanceUnit, IlluminanceMatrix, MutableIlluminanceMatrix, Illuminance>
+        extends AbstractDoubleMatrixRel<IlluminanceUnit, Illuminance, IlluminanceVector, IlluminanceMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Double IlluminanceMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double IlluminanceMatrix
-     * @param unit IlluminanceUnit; the unit of the new Relative Immutable Double IlluminanceMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public IlluminanceMatrix(final double[][] values, final IlluminanceUnit unit, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double IlluminanceMatrix.
-     * @param values Illuminance[][]; the values of the entries in the new Relative Immutable Double IlluminanceMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public IlluminanceMatrix(final Illuminance[][] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data DoubleMatrixData; an internal data object
      * @param unit IlluminanceUnit; the unit
      */
-    IlluminanceMatrix(final DoubleMatrixData data, final IlluminanceUnit unit)
+    public IlluminanceMatrix(final DoubleMatrixData data, final IlluminanceUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final IlluminanceMatrix toDense()
+    public Class<Illuminance> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return Illuminance.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final IlluminanceMatrix toSparse()
+    public Class<IlluminanceVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final IlluminanceMatrix instantiateType(final DoubleMatrixData dmd, final IlluminanceUnit unit)
-    {
-        return new IlluminanceMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableIlluminanceMatrix instantiateMutableType(final DoubleMatrixData dmd, final IlluminanceUnit unit)
-    {
-        return new MutableIlluminanceMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final Illuminance instantiateScalar(final double value, final IlluminanceUnit unit)
-    {
-        return new Illuminance(value, unit);
+        return IlluminanceVector.class;
     }
 
 }

@@ -3,9 +3,10 @@ package org.djunits4.value.vdouble.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.FlowVolumeUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
+import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.FlowVolume;
+import org.djunits4.value.vdouble.vector.FlowVolumeVector;
 
 /**
  * Immutable Double FlowVolumeMatrix, a matrix of values with a FlowVolumeUnit.
@@ -16,79 +17,34 @@ import org.djunits4.value.vdouble.scalar.FlowVolume;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-06T11:09:13.414Z")
-public class FlowVolumeMatrix
-        extends AbstractDoubleMatrixRel<FlowVolumeUnit, FlowVolumeMatrix, MutableFlowVolumeMatrix, FlowVolume>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+public class FlowVolumeMatrix extends AbstractDoubleMatrixRel<FlowVolumeUnit, FlowVolume, FlowVolumeVector, FlowVolumeMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Double FlowVolumeMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double FlowVolumeMatrix
-     * @param unit FlowVolumeUnit; the unit of the new Relative Immutable Double FlowVolumeMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FlowVolumeMatrix(final double[][] values, final FlowVolumeUnit unit, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double FlowVolumeMatrix.
-     * @param values FlowVolume[][]; the values of the entries in the new Relative Immutable Double FlowVolumeMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FlowVolumeMatrix(final FlowVolume[][] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data DoubleMatrixData; an internal data object
      * @param unit FlowVolumeUnit; the unit
      */
-    FlowVolumeMatrix(final DoubleMatrixData data, final FlowVolumeUnit unit)
+    public FlowVolumeMatrix(final DoubleMatrixData data, final FlowVolumeUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FlowVolumeMatrix toDense()
+    public Class<FlowVolume> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return FlowVolume.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FlowVolumeMatrix toSparse()
+    public Class<FlowVolumeVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FlowVolumeMatrix instantiateType(final DoubleMatrixData dmd, final FlowVolumeUnit unit)
-    {
-        return new FlowVolumeMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableFlowVolumeMatrix instantiateMutableType(final DoubleMatrixData dmd, final FlowVolumeUnit unit)
-    {
-        return new MutableFlowVolumeMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FlowVolume instantiateScalar(final double value, final FlowVolumeUnit unit)
-    {
-        return new FlowVolume(value, unit);
+        return FlowVolumeVector.class;
     }
 
 }

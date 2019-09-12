@@ -3,9 +3,10 @@ package org.djunits4.value.vdouble.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.TorqueUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
+import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.Torque;
+import org.djunits4.value.vdouble.vector.TorqueVector;
 
 /**
  * Immutable Double TorqueMatrix, a matrix of values with a TorqueUnit.
@@ -16,77 +17,34 @@ import org.djunits4.value.vdouble.scalar.Torque;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-06T11:09:13.414Z")
-public class TorqueMatrix extends AbstractDoubleMatrixRel<TorqueUnit, TorqueMatrix, MutableTorqueMatrix, Torque>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+public class TorqueMatrix extends AbstractDoubleMatrixRel<TorqueUnit, Torque, TorqueVector, TorqueMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Double TorqueMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double TorqueMatrix
-     * @param unit TorqueUnit; the unit of the new Relative Immutable Double TorqueMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public TorqueMatrix(final double[][] values, final TorqueUnit unit, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double TorqueMatrix.
-     * @param values Torque[][]; the values of the entries in the new Relative Immutable Double TorqueMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public TorqueMatrix(final Torque[][] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data DoubleMatrixData; an internal data object
      * @param unit TorqueUnit; the unit
      */
-    TorqueMatrix(final DoubleMatrixData data, final TorqueUnit unit)
+    public TorqueMatrix(final DoubleMatrixData data, final TorqueUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final TorqueMatrix toDense()
+    public Class<Torque> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return Torque.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final TorqueMatrix toSparse()
+    public Class<TorqueVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final TorqueMatrix instantiateType(final DoubleMatrixData dmd, final TorqueUnit unit)
-    {
-        return new TorqueMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableTorqueMatrix instantiateMutableType(final DoubleMatrixData dmd, final TorqueUnit unit)
-    {
-        return new MutableTorqueMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final Torque instantiateScalar(final double value, final TorqueUnit unit)
-    {
-        return new Torque(value, unit);
+        return TorqueVector.class;
     }
 
 }

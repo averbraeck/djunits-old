@@ -3,9 +3,10 @@ package org.djunits4.value.vdouble.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.SpeedUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
+import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.Speed;
+import org.djunits4.value.vdouble.vector.SpeedVector;
 
 /**
  * Immutable Double SpeedMatrix, a matrix of values with a SpeedUnit.
@@ -16,77 +17,34 @@ import org.djunits4.value.vdouble.scalar.Speed;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-06T11:09:13.414Z")
-public class SpeedMatrix extends AbstractDoubleMatrixRel<SpeedUnit, SpeedMatrix, MutableSpeedMatrix, Speed>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+public class SpeedMatrix extends AbstractDoubleMatrixRel<SpeedUnit, Speed, SpeedVector, SpeedMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Double SpeedMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double SpeedMatrix
-     * @param unit SpeedUnit; the unit of the new Relative Immutable Double SpeedMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public SpeedMatrix(final double[][] values, final SpeedUnit unit, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double SpeedMatrix.
-     * @param values Speed[][]; the values of the entries in the new Relative Immutable Double SpeedMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public SpeedMatrix(final Speed[][] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data DoubleMatrixData; an internal data object
      * @param unit SpeedUnit; the unit
      */
-    SpeedMatrix(final DoubleMatrixData data, final SpeedUnit unit)
+    public SpeedMatrix(final DoubleMatrixData data, final SpeedUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final SpeedMatrix toDense()
+    public Class<Speed> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return Speed.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final SpeedMatrix toSparse()
+    public Class<SpeedVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final SpeedMatrix instantiateType(final DoubleMatrixData dmd, final SpeedUnit unit)
-    {
-        return new SpeedMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableSpeedMatrix instantiateMutableType(final DoubleMatrixData dmd, final SpeedUnit unit)
-    {
-        return new MutableSpeedMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final Speed instantiateScalar(final double value, final SpeedUnit unit)
-    {
-        return new Speed(value, unit);
+        return SpeedVector.class;
     }
 
 }

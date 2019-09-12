@@ -161,7 +161,7 @@ abstract class AbstractFloatMatrixAbs<AU extends AbsoluteLinearUnit<AU, RU>, RU 
     static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
             S extends AbstractFloatScalarAbs<AU, S, RU, ?>> AU checkUnit(final S[][] dsArray) throws ValueRuntimeException
     {
-        ensureRectangularAndNonEmpty(dsArray);
+        checkRectangularAndNonEmpty(dsArray);
         return dsArray[0][0].getUnit();
     }
 

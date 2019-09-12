@@ -3,9 +3,10 @@ package org.djunits4.value.vdouble.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.LinearDensityUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
+import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.LinearDensity;
+import org.djunits4.value.vdouble.vector.LinearDensityVector;
 
 /**
  * Immutable Double LinearDensityMatrix, a matrix of values with a LinearDensityUnit.
@@ -16,79 +17,35 @@ import org.djunits4.value.vdouble.scalar.LinearDensity;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-06T11:09:13.414Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
 public class LinearDensityMatrix
-        extends AbstractDoubleMatrixRel<LinearDensityUnit, LinearDensityMatrix, MutableLinearDensityMatrix, LinearDensity>
+        extends AbstractDoubleMatrixRel<LinearDensityUnit, LinearDensity, LinearDensityVector, LinearDensityMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Double LinearDensityMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double LinearDensityMatrix
-     * @param unit LinearDensityUnit; the unit of the new Relative Immutable Double LinearDensityMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public LinearDensityMatrix(final double[][] values, final LinearDensityUnit unit, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double LinearDensityMatrix.
-     * @param values LinearDensity[][]; the values of the entries in the new Relative Immutable Double LinearDensityMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public LinearDensityMatrix(final LinearDensity[][] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data DoubleMatrixData; an internal data object
      * @param unit LinearDensityUnit; the unit
      */
-    LinearDensityMatrix(final DoubleMatrixData data, final LinearDensityUnit unit)
+    public LinearDensityMatrix(final DoubleMatrixData data, final LinearDensityUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final LinearDensityMatrix toDense()
+    public Class<LinearDensity> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return LinearDensity.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final LinearDensityMatrix toSparse()
+    public Class<LinearDensityVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final LinearDensityMatrix instantiateType(final DoubleMatrixData dmd, final LinearDensityUnit unit)
-    {
-        return new LinearDensityMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableLinearDensityMatrix instantiateMutableType(final DoubleMatrixData dmd, final LinearDensityUnit unit)
-    {
-        return new MutableLinearDensityMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final LinearDensity instantiateScalar(final double value, final LinearDensityUnit unit)
-    {
-        return new LinearDensity(value, unit);
+        return LinearDensityVector.class;
     }
 
 }

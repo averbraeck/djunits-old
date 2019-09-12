@@ -3,9 +3,10 @@ package org.djunits4.value.vdouble.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.LuminousFluxUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
+import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.LuminousFlux;
+import org.djunits4.value.vdouble.vector.LuminousFluxVector;
 
 /**
  * Immutable Double LuminousFluxMatrix, a matrix of values with a LuminousFluxUnit.
@@ -16,79 +17,35 @@ import org.djunits4.value.vdouble.scalar.LuminousFlux;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-06T11:09:13.414Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
 public class LuminousFluxMatrix
-        extends AbstractDoubleMatrixRel<LuminousFluxUnit, LuminousFluxMatrix, MutableLuminousFluxMatrix, LuminousFlux>
+        extends AbstractDoubleMatrixRel<LuminousFluxUnit, LuminousFlux, LuminousFluxVector, LuminousFluxMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Double LuminousFluxMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double LuminousFluxMatrix
-     * @param unit LuminousFluxUnit; the unit of the new Relative Immutable Double LuminousFluxMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public LuminousFluxMatrix(final double[][] values, final LuminousFluxUnit unit, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double LuminousFluxMatrix.
-     * @param values LuminousFlux[][]; the values of the entries in the new Relative Immutable Double LuminousFluxMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public LuminousFluxMatrix(final LuminousFlux[][] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data DoubleMatrixData; an internal data object
      * @param unit LuminousFluxUnit; the unit
      */
-    LuminousFluxMatrix(final DoubleMatrixData data, final LuminousFluxUnit unit)
+    public LuminousFluxMatrix(final DoubleMatrixData data, final LuminousFluxUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final LuminousFluxMatrix toDense()
+    public Class<LuminousFlux> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return LuminousFlux.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final LuminousFluxMatrix toSparse()
+    public Class<LuminousFluxVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final LuminousFluxMatrix instantiateType(final DoubleMatrixData dmd, final LuminousFluxUnit unit)
-    {
-        return new LuminousFluxMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableLuminousFluxMatrix instantiateMutableType(final DoubleMatrixData dmd, final LuminousFluxUnit unit)
-    {
-        return new MutableLuminousFluxMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final LuminousFlux instantiateScalar(final double value, final LuminousFluxUnit unit)
-    {
-        return new LuminousFlux(value, unit);
+        return LuminousFluxVector.class;
     }
 
 }

@@ -3,9 +3,13 @@ package org.djunits4.value.vdouble.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.DurationUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.unit.TimeUnit;
+import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRelWithAbs;
+import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.Duration;
+import org.djunits4.value.vdouble.scalar.Time;
+import org.djunits4.value.vdouble.vector.DurationVector;
+import org.djunits4.value.vdouble.vector.TimeVector;
 
 /**
  * Immutable Duration Matrix.
@@ -16,78 +20,34 @@ import org.djunits4.value.vdouble.scalar.Duration;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-06T11:09:13.414Z")
-public class DurationMatrix extends AbstractDoubleMatrixRel<DurationUnit, DurationMatrix, MutableDurationMatrix, Duration>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+public class DurationMatrix extends AbstractDoubleMatrixRelWithAbs<TimeUnit, Time, TimeVector, TimeMatrix, DurationUnit,
+        Duration, DurationVector, DurationMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
 
     /**
-     * Construct a new Relative Immutable Double DurationMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double DurationMatrix
-     * @param unit DurationUnit; the unit of the new Relative Immutable Double DurationMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public DurationMatrix(final double[][] values, final DurationUnit unit, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double DurationMatrix.
-     * @param values Duration[][]; the values of the entries in the new Relative Immutable Double DurationMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public DurationMatrix(final Duration[][] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double DurationMatrix.
      * @param data DoubleMatrixData; an internal data object
      * @param unit DurationUnit; the unit
      */
-    DurationMatrix(final DoubleMatrixData data, final DurationUnit unit)
+    public DurationMatrix(final DoubleMatrixData data, final DurationUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final DurationMatrix toDense()
+    public Class<Duration> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return Duration.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final DurationMatrix toSparse()
+    public Class<DurationVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final DurationMatrix instantiateType(final DoubleMatrixData dmd, final DurationUnit unit)
-    {
-        return new DurationMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableDurationMatrix instantiateMutableType(final DoubleMatrixData dmd, final DurationUnit unit)
-    {
-        return new MutableDurationMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final Duration instantiateScalar(final double value, final DurationUnit unit)
-    {
-        return new Duration(value, unit);
+        return DurationVector.class;
     }
 
 }

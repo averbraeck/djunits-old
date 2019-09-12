@@ -3,9 +3,10 @@ package org.djunits4.value.vdouble.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.ElectricalCapacitanceUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
+import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.ElectricalCapacitance;
+import org.djunits4.value.vdouble.vector.ElectricalCapacitanceVector;
 
 /**
  * Immutable Double ElectricalCapacitanceMatrix, a matrix of values with a ElectricalCapacitanceUnit.
@@ -16,83 +17,35 @@ import org.djunits4.value.vdouble.scalar.ElectricalCapacitance;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-06T11:09:13.414Z")
-public class ElectricalCapacitanceMatrix extends AbstractDoubleMatrixRel<ElectricalCapacitanceUnit, ElectricalCapacitanceMatrix,
-        MutableElectricalCapacitanceMatrix, ElectricalCapacitance>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+public class ElectricalCapacitanceMatrix extends AbstractDoubleMatrixRel<ElectricalCapacitanceUnit, ElectricalCapacitance,
+        ElectricalCapacitanceVector, ElectricalCapacitanceMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Double ElectricalCapacitanceMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double ElectricalCapacitanceMatrix
-     * @param unit ElectricalCapacitanceUnit; the unit of the new Relative Immutable Double ElectricalCapacitanceMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public ElectricalCapacitanceMatrix(final double[][] values, final ElectricalCapacitanceUnit unit,
-            final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double ElectricalCapacitanceMatrix.
-     * @param values ElectricalCapacitance[][]; the values of the entries in the new Relative Immutable Double
-     *            ElectricalCapacitanceMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public ElectricalCapacitanceMatrix(final ElectricalCapacitance[][] values, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data DoubleMatrixData; an internal data object
      * @param unit ElectricalCapacitanceUnit; the unit
      */
-    ElectricalCapacitanceMatrix(final DoubleMatrixData data, final ElectricalCapacitanceUnit unit)
+    public ElectricalCapacitanceMatrix(final DoubleMatrixData data, final ElectricalCapacitanceUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final ElectricalCapacitanceMatrix toDense()
+    public Class<ElectricalCapacitance> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return ElectricalCapacitance.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final ElectricalCapacitanceMatrix toSparse()
+    public Class<ElectricalCapacitanceVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final ElectricalCapacitanceMatrix instantiateType(final DoubleMatrixData dmd,
-            final ElectricalCapacitanceUnit unit)
-    {
-        return new ElectricalCapacitanceMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableElectricalCapacitanceMatrix instantiateMutableType(final DoubleMatrixData dmd,
-            final ElectricalCapacitanceUnit unit)
-    {
-        return new MutableElectricalCapacitanceMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final ElectricalCapacitance instantiateScalar(final double value, final ElectricalCapacitanceUnit unit)
-    {
-        return new ElectricalCapacitance(value, unit);
+        return ElectricalCapacitanceVector.class;
     }
 
 }

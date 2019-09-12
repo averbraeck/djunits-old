@@ -3,9 +3,10 @@ package org.djunits4.value.vdouble.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.VolumeUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
+import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.Volume;
+import org.djunits4.value.vdouble.vector.VolumeVector;
 
 /**
  * Immutable Double VolumeMatrix, a matrix of values with a VolumeUnit.
@@ -16,77 +17,34 @@ import org.djunits4.value.vdouble.scalar.Volume;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-06T11:09:13.414Z")
-public class VolumeMatrix extends AbstractDoubleMatrixRel<VolumeUnit, VolumeMatrix, MutableVolumeMatrix, Volume>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+public class VolumeMatrix extends AbstractDoubleMatrixRel<VolumeUnit, Volume, VolumeVector, VolumeMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Double VolumeMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double VolumeMatrix
-     * @param unit VolumeUnit; the unit of the new Relative Immutable Double VolumeMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public VolumeMatrix(final double[][] values, final VolumeUnit unit, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double VolumeMatrix.
-     * @param values Volume[][]; the values of the entries in the new Relative Immutable Double VolumeMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public VolumeMatrix(final Volume[][] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data DoubleMatrixData; an internal data object
      * @param unit VolumeUnit; the unit
      */
-    VolumeMatrix(final DoubleMatrixData data, final VolumeUnit unit)
+    public VolumeMatrix(final DoubleMatrixData data, final VolumeUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final VolumeMatrix toDense()
+    public Class<Volume> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return Volume.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final VolumeMatrix toSparse()
+    public Class<VolumeVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final VolumeMatrix instantiateType(final DoubleMatrixData dmd, final VolumeUnit unit)
-    {
-        return new VolumeMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableVolumeMatrix instantiateMutableType(final DoubleMatrixData dmd, final VolumeUnit unit)
-    {
-        return new MutableVolumeMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final Volume instantiateScalar(final double value, final VolumeUnit unit)
-    {
-        return new Volume(value, unit);
+        return VolumeVector.class;
     }
 
 }

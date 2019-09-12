@@ -3,9 +3,10 @@ package org.djunits4.value.vdouble.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.ElectricalCurrentUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
+import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.ElectricalCurrent;
+import org.djunits4.value.vdouble.vector.ElectricalCurrentVector;
 
 /**
  * Immutable Double ElectricalCurrentMatrix, a matrix of values with a ElectricalCurrentUnit.
@@ -16,81 +17,35 @@ import org.djunits4.value.vdouble.scalar.ElectricalCurrent;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-06T11:09:13.414Z")
-public class ElectricalCurrentMatrix extends AbstractDoubleMatrixRel<ElectricalCurrentUnit, ElectricalCurrentMatrix,
-        MutableElectricalCurrentMatrix, ElectricalCurrent>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+public class ElectricalCurrentMatrix extends
+        AbstractDoubleMatrixRel<ElectricalCurrentUnit, ElectricalCurrent, ElectricalCurrentVector, ElectricalCurrentMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Double ElectricalCurrentMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double ElectricalCurrentMatrix
-     * @param unit ElectricalCurrentUnit; the unit of the new Relative Immutable Double ElectricalCurrentMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public ElectricalCurrentMatrix(final double[][] values, final ElectricalCurrentUnit unit, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double ElectricalCurrentMatrix.
-     * @param values ElectricalCurrent[][]; the values of the entries in the new Relative Immutable Double
-     *            ElectricalCurrentMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public ElectricalCurrentMatrix(final ElectricalCurrent[][] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data DoubleMatrixData; an internal data object
      * @param unit ElectricalCurrentUnit; the unit
      */
-    ElectricalCurrentMatrix(final DoubleMatrixData data, final ElectricalCurrentUnit unit)
+    public ElectricalCurrentMatrix(final DoubleMatrixData data, final ElectricalCurrentUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final ElectricalCurrentMatrix toDense()
+    public Class<ElectricalCurrent> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return ElectricalCurrent.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final ElectricalCurrentMatrix toSparse()
+    public Class<ElectricalCurrentVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final ElectricalCurrentMatrix instantiateType(final DoubleMatrixData dmd, final ElectricalCurrentUnit unit)
-    {
-        return new ElectricalCurrentMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableElectricalCurrentMatrix instantiateMutableType(final DoubleMatrixData dmd,
-            final ElectricalCurrentUnit unit)
-    {
-        return new MutableElectricalCurrentMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final ElectricalCurrent instantiateScalar(final double value, final ElectricalCurrentUnit unit)
-    {
-        return new ElectricalCurrent(value, unit);
+        return ElectricalCurrentVector.class;
     }
 
 }

@@ -65,7 +65,7 @@ public class DoubleMatrixDenseTest
         assertTrue("DoubleMatrix should not be null", null != dm);
         for (int row = dm.rows(); --row >= 0;)
         {
-            for (int column = dm.columns(); --column >= 0;)
+            for (int column = dm.cols(); --column >= 0;)
             {
                 try
                 {

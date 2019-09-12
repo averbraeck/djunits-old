@@ -3,9 +3,10 @@ package org.djunits4.value.vdouble.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.AbsorbedDoseUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
+import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.AbsorbedDose;
+import org.djunits4.value.vdouble.vector.AbsorbedDoseVector;
 
 /**
  * Immutable Double AbsorbedDoseMatrix, a matrix of values with a AbsorbedDoseUnit.
@@ -16,79 +17,35 @@ import org.djunits4.value.vdouble.scalar.AbsorbedDose;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-06T11:09:13.414Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
 public class AbsorbedDoseMatrix
-        extends AbstractDoubleMatrixRel<AbsorbedDoseUnit, AbsorbedDoseMatrix, MutableAbsorbedDoseMatrix, AbsorbedDose>
+        extends AbstractDoubleMatrixRel<AbsorbedDoseUnit, AbsorbedDose, AbsorbedDoseVector, AbsorbedDoseMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Double AbsorbedDoseMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double AbsorbedDoseMatrix
-     * @param unit AbsorbedDoseUnit; the unit of the new Relative Immutable Double AbsorbedDoseMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public AbsorbedDoseMatrix(final double[][] values, final AbsorbedDoseUnit unit, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double AbsorbedDoseMatrix.
-     * @param values AbsorbedDose[][]; the values of the entries in the new Relative Immutable Double AbsorbedDoseMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public AbsorbedDoseMatrix(final AbsorbedDose[][] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data DoubleMatrixData; an internal data object
      * @param unit AbsorbedDoseUnit; the unit
      */
-    AbsorbedDoseMatrix(final DoubleMatrixData data, final AbsorbedDoseUnit unit)
+    public AbsorbedDoseMatrix(final DoubleMatrixData data, final AbsorbedDoseUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final AbsorbedDoseMatrix toDense()
+    public Class<AbsorbedDose> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return AbsorbedDose.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final AbsorbedDoseMatrix toSparse()
+    public Class<AbsorbedDoseVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final AbsorbedDoseMatrix instantiateType(final DoubleMatrixData dmd, final AbsorbedDoseUnit unit)
-    {
-        return new AbsorbedDoseMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableAbsorbedDoseMatrix instantiateMutableType(final DoubleMatrixData dmd, final AbsorbedDoseUnit unit)
-    {
-        return new MutableAbsorbedDoseMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final AbsorbedDose instantiateScalar(final double value, final AbsorbedDoseUnit unit)
-    {
-        return new AbsorbedDose(value, unit);
+        return AbsorbedDoseVector.class;
     }
 
 }

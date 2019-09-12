@@ -1,7 +1,6 @@
 package org.djunits4.value.vdouble.matrix.base;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.lang.reflect.Array;
 
 import org.djunits4.Throw;
 import org.djunits4.unit.Unit;
@@ -13,12 +12,14 @@ import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vdouble.function.DoubleFunction;
 import org.djunits4.value.vdouble.function.DoubleMathFunctions;
-import org.djunits4.value.vdouble.matrix.DoubleMatrix;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixDataDense;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixDataSparse;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalar;
-import org.djunits4.value.vdouble.vector.base.DoubleVectorInterface;
+import org.djunits4.value.vdouble.scalar.base.DoubleScalar;
+import org.djunits4.value.vdouble.vector.base.AbstractDoubleVector;
+import org.djunits4.value.vdouble.vector.base.DoubleVector;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 import org.ojalgo.matrix.PrimitiveMatrix;
 
 /**
@@ -32,11 +33,11 @@ import org.ojalgo.matrix.PrimitiveMatrix;
  * @author <a href="https://www.transport.citg.tudelft.nl">Wouter Schakel</a>
  * @param <U> the unit
  * @param <S> the scalar with unit U
- * @param <V> the matrix type belonging to the matrix type
+ * @param <V> the vector type belonging to the matrix type
  * @param <M> the generic matrix type
  */
 public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
-        V extends DoubleVectorInterface<U, S, V>, M extends AbstractDoubleMatrix<U, S, V, M>> extends AbstractValue<U, M>
+        V extends AbstractDoubleVector<U, S, V>, M extends AbstractDoubleMatrix<U, S, V, M>> extends AbstractValue<U, M>
         implements DoubleMatrixInterface<U, S, V, M>
 {
     /** */
@@ -81,9 +82,11 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
 
     /**
      * Check the copyOnWrite flag and, if it is set, make a deep copy of the data and clear the flag.
+     * @throws ValueRuntimeException if the matrix is immutable
      */
     protected final void checkCopyOnWrite()
     {
+        Throw.when(!this.mutable, ValueRuntimeException.class, "Immutable Matrix cannot be modified");
         if (isCopyOnWrite())
         {
             this.data = this.data.copy();
@@ -119,28 +122,41 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
     }
 
     /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
     @Override
     public M immutable()
     {
-        setMutable(false);
-        return (M) this;
+        if (this.mutable)
+        {
+            setCopyOnWrite(true);
+        }
+        M result = DoubleMatrix.instantiate(this.data, getUnit().getStandardUnit());
+        result.setDisplayUnit(getUnit());
+        result.setCopyOnWrite(false);
+        result.setMutable(false);
+        return result;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public M mutable()
+    {
+        if (this.mutable)
+        {
+            setCopyOnWrite(true);
+        }
+        M result = DoubleMatrix.instantiate(this.data, getUnit().getStandardUnit());
+        result.setDisplayUnit(getUnit());
+        result.setCopyOnWrite(true);
+        result.setMutable(true);
+        return result;
     }
 
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public M mutable()
+    protected AbstractDoubleMatrix<U, S, V, M> clone() throws CloneNotSupportedException
     {
-        setMutable(true);
-        return (M) this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected Object clone() throws CloneNotSupportedException
-    {
-        return super.clone();
+        return (AbstractDoubleMatrix<U, S, V, M>) super.clone();
     }
 
     /**
@@ -152,13 +168,67 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
         this.mutable = mutable;
     }
 
-    /**
-     * Return the StorageType (DENSE, SPARSE, etc.) for the stored Matrix.
-     * @return the StorageType (DENSE, SPARSE, etc.) for the stored Matrix
-     */
-    public final StorageType getStorageType()
+    /** {@inheritDoc} */
+    @Override
+    public double getSI(int row, int column) throws ValueRuntimeException
     {
-        return this.data.getStorageType();
+        checkIndex(row, column);
+        return this.data.getSI(row, column);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public double getInUnit(int row, int column) throws ValueRuntimeException
+    {
+        checkIndex(row, column);
+        return ValueUtil.expressAsUnit(this.data.getSI(row, column), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public double getInUnit(int row, int column, U targetUnit) throws ValueRuntimeException
+    {
+        checkIndex(row, column);
+        return ValueUtil.expressAsUnit(this.data.getSI(row, column), targetUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public double[] getRowSI(int row) throws ValueRuntimeException
+    {
+        checkRowIndex(row);
+        double[] result = new double[this.data.cols()];
+        for (int col = 0; col < result.length; col++)
+        {
+            result[col] = this.data.getSI(row, col);
+        }
+        return result;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public double[] getColumnSI(int column) throws ValueRuntimeException
+    {
+        checkColumnIndex(column);
+        double[] result = new double[this.data.rows()];
+        for (int row = 0; row < result.length; row++)
+        {
+            result[row] = this.data.getSI(row, column);
+        }
+        return result;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public double[] getDiagonalSI() throws ValueRuntimeException
+    {
+        checkSquare();
+        double[] result = new double[this.data.rows()];
+        for (int row = 0; row < result.length; row++)
+        {
+            result[row] = this.data.getSI(row, row);
+        }
+        return result;
     }
 
     /** {@inheritDoc} */
@@ -180,11 +250,11 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
     public final double[][] getValuesInUnit(final U targetUnit)
     {
         double[][] values = getValuesSI();
-        for (int row = rows(); --row >= 0;)
+        for (int i = values.length; --i >= 0;)
         {
-            for (int column = columns(); --column >= 0;)
+            for (int j = values[i].length; --j >= 0;)
             {
-                values[row][column] = ValueUtil.expressAsUnit(values[row][column], targetUnit);
+                values[i][j] = ValueUtil.expressAsUnit(values[i][j], targetUnit);
             }
         }
         return values;
@@ -192,38 +262,34 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
 
     /** {@inheritDoc} */
     @Override
-    public final int rows()
+    public int rows()
     {
         return this.data.rows();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final int columns()
+    public int cols()
     {
         return this.data.cols();
     }
 
     /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
     @Override
-    public final double getSI(final int row, final int column) throws ValueRuntimeException
+    public S[][] getScalars()
     {
-        checkIndex(row, column);
-        return this.data.getSI(row, column);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final double getInUnit(final int row, final int column) throws ValueRuntimeException
-    {
-        return expressAsSpecifiedUnit(getSI(row, column));
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final double getInUnit(final int row, final int column, final U targetUnit) throws ValueRuntimeException
-    {
-        return ValueUtil.expressAsUnit(getSI(row, column), targetUnit);
+        S[][] array = (S[][]) Array.newInstance(getScalarClass(), rows());
+        for (int i = 0; i < rows(); i++)
+        {
+            S[] row = (S[]) Array.newInstance(getScalarClass(), cols());
+            array[i] = row;
+            for (int j = 0; j < cols(); j++)
+            {
+                row[j] = get(i, j);
+            }
+        }
+        return array;
     }
 
     /** {@inheritDoc} */
@@ -242,160 +308,89 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
 
     /** {@inheritDoc} */
     @Override
-    public final String toString()
+    public S get(final int row, final int column) throws ValueRuntimeException
     {
-        return toString(getUnit(), false, true);
+        checkIndex(row, column);
+        return DoubleScalar.instantiateSI(getSI(row, column), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final String toString(final U displayUnit)
+    public V getRow(final int row) throws ValueRuntimeException
     {
-        return toString(displayUnit, false, true);
+        checkRowIndex(row);
+        DoubleVectorData dvd =
+                DoubleVectorData.instantiate(getRowSI(row), getUnit().getStandardUnit().getScale(), getStorageType());
+        V result = DoubleVector.instantiate(dvd, getUnit().getStandardUnit());
+        result.setDisplayUnit(getUnit());
+        return result;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final String toString(final boolean verbose, final boolean withUnit)
+    public V getColumn(final int column) throws ValueRuntimeException
     {
-        return toString(getUnit(), verbose, withUnit);
+        checkColumnIndex(column);
+        DoubleVectorData dvd =
+                DoubleVectorData.instantiate(getColumnSI(column), getUnit().getStandardUnit().getScale(), getStorageType());
+        V result = DoubleVector.instantiate(dvd, getUnit().getStandardUnit());
+        result.setDisplayUnit(getUnit());
+        return result;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final String toString(final U displayUnit, final boolean verbose, final boolean withUnit)
+    public V getDiagonal() throws ValueRuntimeException
     {
-        StringBuffer buf = new StringBuffer();
-        if (verbose)
+        checkSquare();
+        DoubleVectorData dvd =
+                DoubleVectorData.instantiate(getDiagonalSI(), getUnit().getStandardUnit().getScale(), getStorageType());
+        V result = DoubleVector.instantiate(dvd, getUnit().getStandardUnit());
+        result.setDisplayUnit(getUnit());
+        return result;
+
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public S[] getRowScalars(int row) throws ValueRuntimeException
+    {
+        checkRowIndex(row);
+        S[] array = (S[]) Array.newInstance(getScalarClass(), cols());
+        for (int col = 0; col < cols(); col++)
         {
-            String ab = this instanceof Absolute ? "Abs " : "Rel ";
-            String ds = this.data.isDense() ? "Dense  " : this.data.isSparse() ? "Sparse " : "?????? ";
-            if (this instanceof IsMutable)
-            {
-                buf.append("Mutable   " + ab + ds);
-            }
-            else
-            {
-                buf.append("Immutable " + ab + ds);
-            }
+            array[col] = get(row, col);
         }
+        return array;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public S[] getColumnScalars(int col) throws ValueRuntimeException
+    {
+        checkColumnIndex(col);
+        S[] array = (S[]) Array.newInstance(getScalarClass(), rows());
         for (int row = 0; row < rows(); row++)
         {
-            buf.append("\r\n\t");
-            for (int column = 0; column < columns(); column++)
-            {
-                try
-                {
-                    double d = ValueUtil.expressAsUnit(getSI(row, column), displayUnit);
-                    buf.append(" " + Format.format(d));
-                }
-                catch (ValueRuntimeException ve)
-                {
-                    buf.append(" " + "********************".substring(0, Format.DEFAULTSIZE));
-                }
-            }
+            array[row] = get(row, col);
         }
-        buf.append("\n");
-        if (withUnit)
-        {
-            buf.append(displayUnit.getDefaultDisplayAbbreviation());
-        }
-        return buf.toString();
-    }
-
-    /**
-     * Centralized size equality check.
-     * @param other AbstractDoubleMatrixRel&lt;?, ?, ?, ?&gt;; other DoubleMatrix
-     * @throws ValueRuntimeException when other is null, or matrices have unequal size
-     */
-    protected final void checkSize(final AbstractDoubleMatrixRel<?, ?, ?, ?> other) throws ValueRuntimeException
-    {
-        if (null == other)
-        {
-            throw new ValueRuntimeException("other is null");
-        }
-        if (rows() != other.rows() || columns() != other.columns())
-        {
-            throw new ValueRuntimeException("The matrices have different sizes: " + rows() + "x" + columns() + " != " + other.rows()
-                    + "x" + other.columns());
-        }
-    }
-
-    /**
-     * Check that a 2D array of double is not null, not empty and not jagged; i.e. all rows have the same length.
-     * @param values double[][]; the 2D array to check
-     * @return the values in case the method is used in a constructor
-     * @throws ValueRuntimeException when <code>values</code> is null, empty, or jagged
-     */
-    protected static double[][] ensureRectangularAndNonEmpty(final double[][] values) throws ValueRuntimeException
-    {
-        if (null == values)
-        {
-            throw new ValueRuntimeException("Cannot create a DoubleVector or MutableDoubleVector from a null array of double[][]");
-        }
-        if (values.length > 0 && null == values[0])
-        {
-            throw new ValueRuntimeException("Creating DoubleVector or MutableDoubleVector: Row 0 is null");
-        }
-        for (int row = values.length; --row >= 1;)
-        {
-            if (null == values[row] || values[0].length != values[row].length)
-            {
-                throw new ValueRuntimeException("Creating DoubleVector or MutableDoubleVector: Lengths of rows are not all the same");
-            }
-        }
-        return values;
-    }
-
-    /**
-     * Centralized size equality check.
-     * @param other double[][]; array of double
-     * @throws ValueRuntimeException when matrices have unequal size
-     */
-    protected final void checkSize(final double[][] other) throws ValueRuntimeException
-    {
-        ensureRectangularAndNonEmpty(other);
-        final int otherColumns = other[0].length;
-        if (rows() != other.length || columns() != otherColumns)
-        {
-            throw new ValueRuntimeException("The matrix and the array have different sizes: " + rows() + "x" + columns() + " != "
-                    + other.length + "x" + otherColumns);
-        }
-    }
-
-    /**
-     * Check that provided row and column indices are valid.
-     * @param row int; the row value to check
-     * @param column int; the column value to check
-     * @throws ValueRuntimeException when row or column is invalid
-     */
-    protected final void checkIndex(final int row, final int column) throws ValueRuntimeException
-    {
-        if (row < 0 || row >= rows() || column < 0 || column >= columns())
-        {
-            throw new ValueRuntimeException("index out of range (valid range is 0.." + (rows() - 1) + ", 0.." + (columns() - 1)
-                    + ", got " + row + ", " + column + ")");
-        }
+        return array;
     }
 
     /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
     @Override
-    public final double determinant() throws ValueRuntimeException
+    public S[] getDiagonalScalars() throws ValueRuntimeException
     {
-        try
+        checkSquare();
+        S[] array = (S[]) Array.newInstance(getScalarClass(), rows());
+        for (int row = 0; row < rows(); row++)
         {
-            final PrimitiveMatrix.Factory matrixFactory = PrimitiveMatrix.FACTORY;
-            final PrimitiveMatrix m = matrixFactory.rows(this.data.getDenseMatrixSI());
-            if (!m.isSquare())
-            {
-                throw new IllegalArgumentException("Matrix is not square -- determinant cannot be calculated.");
-            }
-            return m.getDeterminant().doubleValue();
+            array[row] = get(row, row);
         }
-        catch (IllegalArgumentException exception)
-        {
-            throw new ValueRuntimeException(exception); // Matrix must be square
-        }
+        return array;
     }
 
     /** {@inheritDoc} */
@@ -501,11 +496,31 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
+    public M incrementBy(final S increment)
+    {
+        checkCopyOnWrite();
+        assign(DoubleMathFunctions.INC(increment.si));
+        return (M) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public M decrementBy(final S decrement)
+    {
+        checkCopyOnWrite();
+        assign(DoubleMathFunctions.DEC(decrement.si));
+        return (M) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
     public final M abs()
     {
-        M result = isMutable() ? (M) this : copy();
-        result.assign(DoubleMathFunctions.ABS);
-        return result;
+        checkCopyOnWrite();
+        assign(DoubleMathFunctions.ABS);
+        return (M) this;
     }
 
     /** {@inheritDoc} */
@@ -513,9 +528,9 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
     @SuppressWarnings("unchecked")
     public final M ceil()
     {
-        M result = isMutable() ? (M) this : copy();
-        result.assign(DoubleMathFunctions.CEIL);
-        return result;
+        checkCopyOnWrite();
+        assign(DoubleMathFunctions.CEIL);
+        return (M) this;
     }
 
     /** {@inheritDoc} */
@@ -523,9 +538,9 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
     @SuppressWarnings("unchecked")
     public final M floor()
     {
-        M result = isMutable() ? (M) this : copy();
-        result.assign(DoubleMathFunctions.FLOOR);
-        return result;
+        checkCopyOnWrite();
+        assign(DoubleMathFunctions.FLOOR);
+        return (M) this;
     }
 
     /** {@inheritDoc} */
@@ -533,9 +548,9 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
     @SuppressWarnings("unchecked")
     public final M neg()
     {
-        M result = isMutable() ? (M) this : copy();
-        result.assign(DoubleMathFunctions.NEG);
-        return result;
+        checkCopyOnWrite();
+        assign(DoubleMathFunctions.NEG);
+        return (M) this;
     }
 
     /** {@inheritDoc} */
@@ -543,22 +558,205 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
     @SuppressWarnings("unchecked")
     public final M rint()
     {
-        M result = isMutable() ? (M) this : copy();
-        result.assign(DoubleMathFunctions.RINT);
-        return result;
+        checkCopyOnWrite();
+        assign(DoubleMathFunctions.RINT);
+        return (M) this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final String toString()
+    {
+        return toString(getUnit(), false, true);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final String toString(final U displayUnit)
+    {
+        return toString(displayUnit, false, true);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final String toString(final boolean verbose, final boolean withUnit)
+    {
+        return toString(getUnit(), verbose, withUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final String toString(final U displayUnit, final boolean verbose, final boolean withUnit)
+    {
+        StringBuffer buf = new StringBuffer();
+        if (verbose)
+        {
+            String ab = this instanceof Absolute ? "Abs " : "Rel ";
+            String ds = this.data.isDense() ? "Dense  " : this.data.isSparse() ? "Sparse " : "?????? ";
+            if (this.mutable)
+            {
+                buf.append("Mutable   " + ab + ds);
+            }
+            else
+            {
+                buf.append("Immutable " + ab + ds);
+            }
+        }
+        for (int row = 0; row < rows(); row++)
+        {
+            buf.append("\r\n\t");
+            for (int col = 0; col < cols(); col++)
+            {
+                try
+                {
+                    double d = ValueUtil.expressAsUnit(getSI(row, col), displayUnit);
+                    buf.append(" " + Format.format(d));
+                }
+                catch (ValueRuntimeException ve)
+                {
+                    buf.append(" " + "********************".substring(0, Format.DEFAULTSIZE));
+                }
+            }
+        }
+        buf.append("\n");
+        if (withUnit)
+        {
+            buf.append(displayUnit.getDefaultDisplayAbbreviation());
+        }
+        return buf.toString();
     }
 
     /**
      * Centralized size equality check.
-     * @param other AbstractDoubleMatrix&lt;U, ?&gt;; other DoubleMatrix
-     * @throws NullPointerException when other matrix is null
-     * @throws ValueRuntimeException when matrixs have unequal size
+     * @param other AbstractDoubleMatrixRel&lt;?, ?, ?, ?&gt;; other DoubleMatrix
+     * @throws ValueRuntimeException when other is null, or matrices have unequal size
      */
-    protected final void checkSize(final DoubleMatrixInterface<?, ?, ?, ?> other) throws ValueRuntimeException
+    protected final void checkSize(final AbstractDoubleMatrix<?, ?, ?, ?> other) throws ValueRuntimeException
     {
-        Throw.whenNull(other, "Other matrix is null");
-        Throw.when(size() != other.size(), ValueRuntimeException.class, "The matrixs have different sizes: %d != %d", size(),
-                other.size());
+        if (null == other)
+        {
+            throw new ValueRuntimeException("other is null");
+        }
+        if (rows() != other.rows() || cols() != other.cols())
+        {
+            throw new ValueRuntimeException(
+                    "The matrices have different sizes: " + rows() + "x" + cols() + " != " + other.rows() + "x" + other.cols());
+        }
+    }
+
+    /**
+     * Check that a 2D array of double is not null, not empty and not jagged; i.e. all rows have the same length.
+     * @param values double[][]; the 2D array to check
+     * @return the values in case the method is used in a constructor
+     * @throws ValueRuntimeException when <code>values</code> is null, empty, or jagged
+     */
+    protected static double[][] checkRectangularAndNonEmpty(final double[][] values) throws ValueRuntimeException
+    {
+        if (null == values)
+        {
+            throw new ValueRuntimeException(
+                    "Cannot create a DoubleVector or MutableDoubleVector from a null array of double[][]");
+        }
+        if (values.length > 0 && null == values[0])
+        {
+            throw new ValueRuntimeException("Creating DoubleVector or MutableDoubleVector: Row 0 is null");
+        }
+        for (int row = values.length; --row >= 1;)
+        {
+            if (null == values[row] || values[0].length != values[row].length)
+            {
+                throw new ValueRuntimeException(
+                        "Creating DoubleVector or MutableDoubleVector: Lengths of rows are not all the same");
+            }
+        }
+        return values;
+    }
+
+    /**
+     * Centralized size equality check.
+     * @param other double[][]; array of double
+     * @throws ValueRuntimeException when matrices have unequal size
+     */
+    protected final void checkSize(final double[][] other) throws ValueRuntimeException
+    {
+        checkRectangularAndNonEmpty(other);
+        final int otherCols = other[0].length;
+        if (rows() != other.length || cols() != otherCols)
+        {
+            throw new ValueRuntimeException("The matrix and the array have different sizes: " + rows() + "x" + cols() + " != "
+                    + other.length + "x" + otherCols);
+        }
+    }
+
+    /**
+     * Check that provided row and column indices are valid.
+     * @param row int; the row value to check
+     * @param col int; the column value to check
+     * @throws ValueRuntimeException when row or column is invalid
+     */
+    protected final void checkIndex(final int row, final int col) throws ValueRuntimeException
+    {
+        if (row < 0 || row >= rows() || col < 0 || col >= cols())
+        {
+            throw new ValueRuntimeException("index out of range (valid range is 0.." + (rows() - 1) + ", 0.." + (cols() - 1)
+                    + ", got " + row + ", " + col + ")");
+        }
+    }
+
+    /**
+     * Check that provided row index is valid.
+     * @param row int; the row value to check
+     * @throws ValueRuntimeException when row is invalid
+     */
+    protected final void checkRowIndex(final int row) throws ValueRuntimeException
+    {
+        if (row < 0 || row >= rows())
+        {
+            throw new ValueRuntimeException("row index out of range (valid range is 0.." + (rows() - 1) + ", got " + row + ")");
+        }
+    }
+
+    /**
+     * Check that provided column index is valid.
+     * @param col int; the column value to check
+     * @throws ValueRuntimeException when row is invalid
+     */
+    protected final void checkColumnIndex(final int col) throws ValueRuntimeException
+    {
+        if (col < 0 || col >= cols())
+        {
+            throw new ValueRuntimeException(
+                    "column index out of range (valid range is 0.." + (cols() - 1) + ", got " + col + ")");
+        }
+    }
+
+    /**
+     * Check that the matrix is square.
+     * @throws ValueRuntimeException when matrix is not square
+     */
+    protected final void checkSquare() throws ValueRuntimeException
+    {
+        Throw.when(rows() != cols(), ValueRuntimeException.class, "Matrix is not square, rows=%d, cols=%d", rows(), cols());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final double determinant() throws ValueRuntimeException
+    {
+        try
+        {
+            final PrimitiveMatrix.Factory matrixFactory = PrimitiveMatrix.FACTORY;
+            final PrimitiveMatrix m = matrixFactory.rows(this.data.getDenseMatrixSI());
+            if (!m.isSquare())
+            {
+                throw new IllegalArgumentException("Matrix is not square -- determinant cannot be calculated.");
+            }
+            return m.getDeterminant().doubleValue();
+        }
+        catch (IllegalArgumentException exception)
+        {
+            throw new ValueRuntimeException(exception); // Matrix must be square
+        }
     }
 
     /** {@inheritDoc} */
@@ -595,62 +793,4 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
             return false;
         return true;
     }
-
-    /* ============================================================================================ */
-    /* =============================== ITERATOR METHODS AND CLASS ================================= */
-    /* ============================================================================================ */
-
-    /** {@inheritDoc} */
-    @Override
-    public Iterator<S> iterator()
-    {
-        return new Itr();
-    }
-
-    /**
-     * The iterator class is loosely based in AbstractList.Itr. It does not throw a ConcurrentModificationException, because the
-     * size of the matrix does not change. Normal (non-mutable) matrixs cannot change their size, nor their content. The only
-     * thing for the MutableMatrix that can change is its content, not its length.
-     */
-    protected class Itr implements Iterator<S>
-    {
-        /** index of next element to return. */
-        private int cursor = 0;
-
-        /** {@inheritDoc} */
-        @Override
-        public boolean hasNext()
-        {
-            return this.cursor != size();
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public S next()
-        {
-            if (this.cursor >= size())
-            {
-                throw new NoSuchElementException();
-            }
-            try
-            {
-                int i = this.cursor;
-                S next = get(i);
-                this.cursor = i + 1;
-                return next;
-            }
-            catch (ValueRuntimeException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-
-        /** {@inheritDoc} */
-        @Override
-        public void remove()
-        {
-            throw new RuntimeException("Remove function cannot be applied on fixed-size DJUNITS Matrix");
-        }
-    }
-
 }

@@ -36,13 +36,25 @@ public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
      * Retrieve the number of columns of the matrix.
      * @return int; the number of columns of the matrix
      */
-    int columns();
+    int cols();
 
     /**
      * Count the number of cells that have a non-zero value.
      * @return int; the number of cells having non-zero value
      */
     int cardinality();
+
+    /**
+     * Return the class of the corresponding scalar.
+     * @return Class&lt;S&gt;; the class of the corresponding scalar
+     */
+    Class<S> getScalarClass();
+
+    /**
+     * Return the class of the corresponding vector.
+     * @return Class&lt;V&gt;; the class of the corresponding vector
+     */
+    Class<V> getVectorClass();
 
     /**
      * Retrieve a value from the matrix.
@@ -104,6 +116,22 @@ public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
      * @throws ValueRuntimeException in case the matrix is not square
      */
     S[] getDiagonalScalars() throws ValueRuntimeException;
+
+    /**
+     * Increment all values of this matrix by the increment. This only works if the matrix is mutable.
+     * @param increment S; the scalar by which to increment all values
+     * @return M; this modified matrix
+     * @throws ValueRuntimeException in case the matrix is immutable
+     */
+    M incrementBy(S increment);
+
+    /**
+     * Decrement all values of this matrix by the decrement. This only works if the matrix is mutable.
+     * @param decrement S; the scalar by which to decrement all values
+     * @return V; this modified matrix
+     * @throws ValueRuntimeException in case the matrix is immutable
+     */
+    M decrementBy(S decrement);
 
     /**
      * Return the StorageType (DENSE, SPARSE, etc.) for the stored matrix.
@@ -175,6 +203,22 @@ public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
          * @throws ValueRuntimeException in case this matrix and the operand have a different size
          */
         RM minus(RM decrement) throws ValueRuntimeException;
+
+        /**
+         * Multiply all values of this matrix by the multiplier. This only works if the matrix is mutable.
+         * @param multiplier double; the factor by which to multiply all values
+         * @return V; this modified matrix
+         * @throws ValueRuntimeException in case the matrix is immutable
+         */
+        RM multiplyBy(double multiplier);
+
+        /**
+         * Divide all values of this matrix by the divisor. This only works if the matrix is mutable.
+         * @param divisor double; the value by which to divide all values
+         * @return V; this modified matrix
+         * @throws ValueRuntimeException in case the matrix is immutable
+         */
+        RM divideBy(double divisor);
     }
 
     /**

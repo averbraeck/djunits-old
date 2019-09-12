@@ -3,9 +3,13 @@ package org.djunits4.value.vdouble.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.LengthUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.unit.PositionUnit;
+import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRelWithAbs;
+import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.Length;
+import org.djunits4.value.vdouble.scalar.Position;
+import org.djunits4.value.vdouble.vector.LengthVector;
+import org.djunits4.value.vdouble.vector.PositionVector;
 
 /**
  * Immutable Length Matrix.
@@ -16,78 +20,34 @@ import org.djunits4.value.vdouble.scalar.Length;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-06T11:09:13.414Z")
-public class LengthMatrix extends AbstractDoubleMatrixRel<LengthUnit, LengthMatrix, MutableLengthMatrix, Length>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+public class LengthMatrix extends AbstractDoubleMatrixRelWithAbs<PositionUnit, Position, PositionVector, PositionMatrix,
+        LengthUnit, Length, LengthVector, LengthMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
 
     /**
-     * Construct a new Relative Immutable Double LengthMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double LengthMatrix
-     * @param unit LengthUnit; the unit of the new Relative Immutable Double LengthMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public LengthMatrix(final double[][] values, final LengthUnit unit, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double LengthMatrix.
-     * @param values Length[][]; the values of the entries in the new Relative Immutable Double LengthMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public LengthMatrix(final Length[][] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double LengthMatrix.
      * @param data DoubleMatrixData; an internal data object
      * @param unit LengthUnit; the unit
      */
-    LengthMatrix(final DoubleMatrixData data, final LengthUnit unit)
+    public LengthMatrix(final DoubleMatrixData data, final LengthUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final LengthMatrix toDense()
+    public Class<Length> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return Length.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final LengthMatrix toSparse()
+    public Class<LengthVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final LengthMatrix instantiateType(final DoubleMatrixData dmd, final LengthUnit unit)
-    {
-        return new LengthMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableLengthMatrix instantiateMutableType(final DoubleMatrixData dmd, final LengthUnit unit)
-    {
-        return new MutableLengthMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final Length instantiateScalar(final double value, final LengthUnit unit)
-    {
-        return new Length(value, unit);
+        return LengthVector.class;
     }
 
 }

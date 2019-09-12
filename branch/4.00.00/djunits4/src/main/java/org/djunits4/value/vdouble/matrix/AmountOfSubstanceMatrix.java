@@ -3,9 +3,10 @@ package org.djunits4.value.vdouble.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.AmountOfSubstanceUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
+import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.AmountOfSubstance;
+import org.djunits4.value.vdouble.vector.AmountOfSubstanceVector;
 
 /**
  * Immutable Double AmountOfSubstanceMatrix, a matrix of values with a AmountOfSubstanceUnit.
@@ -16,81 +17,35 @@ import org.djunits4.value.vdouble.scalar.AmountOfSubstance;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-06T11:09:13.414Z")
-public class AmountOfSubstanceMatrix extends AbstractDoubleMatrixRel<AmountOfSubstanceUnit, AmountOfSubstanceMatrix,
-        MutableAmountOfSubstanceMatrix, AmountOfSubstance>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+public class AmountOfSubstanceMatrix extends
+        AbstractDoubleMatrixRel<AmountOfSubstanceUnit, AmountOfSubstance, AmountOfSubstanceVector, AmountOfSubstanceMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Double AmountOfSubstanceMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double AmountOfSubstanceMatrix
-     * @param unit AmountOfSubstanceUnit; the unit of the new Relative Immutable Double AmountOfSubstanceMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public AmountOfSubstanceMatrix(final double[][] values, final AmountOfSubstanceUnit unit, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double AmountOfSubstanceMatrix.
-     * @param values AmountOfSubstance[][]; the values of the entries in the new Relative Immutable Double
-     *            AmountOfSubstanceMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public AmountOfSubstanceMatrix(final AmountOfSubstance[][] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data DoubleMatrixData; an internal data object
      * @param unit AmountOfSubstanceUnit; the unit
      */
-    AmountOfSubstanceMatrix(final DoubleMatrixData data, final AmountOfSubstanceUnit unit)
+    public AmountOfSubstanceMatrix(final DoubleMatrixData data, final AmountOfSubstanceUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final AmountOfSubstanceMatrix toDense()
+    public Class<AmountOfSubstance> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return AmountOfSubstance.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final AmountOfSubstanceMatrix toSparse()
+    public Class<AmountOfSubstanceVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final AmountOfSubstanceMatrix instantiateType(final DoubleMatrixData dmd, final AmountOfSubstanceUnit unit)
-    {
-        return new AmountOfSubstanceMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableAmountOfSubstanceMatrix instantiateMutableType(final DoubleMatrixData dmd,
-            final AmountOfSubstanceUnit unit)
-    {
-        return new MutableAmountOfSubstanceMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final AmountOfSubstance instantiateScalar(final double value, final AmountOfSubstanceUnit unit)
-    {
-        return new AmountOfSubstance(value, unit);
+        return AmountOfSubstanceVector.class;
     }
 
 }

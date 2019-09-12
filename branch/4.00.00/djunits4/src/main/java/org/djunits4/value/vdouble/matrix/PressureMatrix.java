@@ -3,9 +3,10 @@ package org.djunits4.value.vdouble.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.PressureUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
+import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.Pressure;
+import org.djunits4.value.vdouble.vector.PressureVector;
 
 /**
  * Immutable Double PressureMatrix, a matrix of values with a PressureUnit.
@@ -16,77 +17,34 @@ import org.djunits4.value.vdouble.scalar.Pressure;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-06T11:09:13.414Z")
-public class PressureMatrix extends AbstractDoubleMatrixRel<PressureUnit, PressureMatrix, MutablePressureMatrix, Pressure>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+public class PressureMatrix extends AbstractDoubleMatrixRel<PressureUnit, Pressure, PressureVector, PressureMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Double PressureMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double PressureMatrix
-     * @param unit PressureUnit; the unit of the new Relative Immutable Double PressureMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public PressureMatrix(final double[][] values, final PressureUnit unit, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double PressureMatrix.
-     * @param values Pressure[][]; the values of the entries in the new Relative Immutable Double PressureMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public PressureMatrix(final Pressure[][] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data DoubleMatrixData; an internal data object
      * @param unit PressureUnit; the unit
      */
-    PressureMatrix(final DoubleMatrixData data, final PressureUnit unit)
+    public PressureMatrix(final DoubleMatrixData data, final PressureUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final PressureMatrix toDense()
+    public Class<Pressure> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return Pressure.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final PressureMatrix toSparse()
+    public Class<PressureVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final PressureMatrix instantiateType(final DoubleMatrixData dmd, final PressureUnit unit)
-    {
-        return new PressureMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutablePressureMatrix instantiateMutableType(final DoubleMatrixData dmd, final PressureUnit unit)
-    {
-        return new MutablePressureMatrix(dmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final Pressure instantiateScalar(final double value, final PressureUnit unit)
-    {
-        return new Pressure(value, unit);
+        return PressureVector.class;
     }
 
 }
