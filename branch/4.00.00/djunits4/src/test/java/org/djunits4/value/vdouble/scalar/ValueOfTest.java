@@ -29,7 +29,7 @@ public class ValueOfTest
      * @param value the value to enter
      * @param unitString the unit String to use
      */
-    private void legal(Class<? extends DoubleScalarInterface<?>> scalarClass, double value, String unitString)
+    private void legal(Class<? extends DoubleScalarInterface<?, ?>> scalarClass, double value, String unitString)
     {
         try
         {
@@ -47,7 +47,7 @@ public class ValueOfTest
      * @param scalarClass the scalar class
      * @param text the text to parse
      */
-    private void legal(Class<? extends DoubleScalarInterface<?>> scalarClass, String text)
+    private void legal(Class<? extends DoubleScalarInterface<?, ?>> scalarClass, String text)
     {
         try
         {
@@ -66,7 +66,7 @@ public class ValueOfTest
      * @param value the value to enter
      * @param unitString the unit String to use
      */
-    private void illegal(Class<? extends DoubleScalarInterface<?>> scalarClass, double value, String unitString)
+    private void illegal(Class<? extends DoubleScalarInterface<?, ?>> scalarClass, double value, String unitString)
     {
         try
         {
@@ -89,7 +89,7 @@ public class ValueOfTest
      * @param scalarClass the scalar class
      * @param text the text to parse
      */
-    private void illegal(Class<? extends DoubleScalarInterface<?>> scalarClass, String text)
+    private void illegal(Class<? extends DoubleScalarInterface<?, ?>> scalarClass, String text)
     {
         try
         {
