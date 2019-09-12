@@ -3,12 +3,13 @@ package org.djunits4.value.vfloat.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.AbsorbedDoseUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
+import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatAbsorbedDose;
+import org.djunits4.value.vfloat.vector.FloatAbsorbedDoseVector;
 
 /**
- * Immutable FloatAbsorbedDoseMatrix, a matrix of values with a AbsorbedDoseUnit.
+ * Immutable FloatFloatAbsorbedDoseMatrix, a matrix of values with a AbsorbedDoseUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -16,80 +17,35 @@ import org.djunits4.value.vfloat.scalar.FloatAbsorbedDose;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
-public class FloatAbsorbedDoseMatrix extends
-        AbstractFloatMatrixRel<AbsorbedDoseUnit, FloatAbsorbedDoseMatrix, MutableFloatAbsorbedDoseMatrix, FloatAbsorbedDose>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+public class FloatAbsorbedDoseMatrix
+        extends AbstractFloatMatrixRel<AbsorbedDoseUnit, FloatAbsorbedDose, FloatAbsorbedDoseVector, FloatAbsorbedDoseMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatAbsorbedDoseMatrix.
-     * @param values float[][]; the values of the entries in the new Relative Immutable FloatAbsorbedDoseMatrix
-     * @param unit AbsorbedDoseUnit; the unit of the new Relative Immutable FloatAbsorbedDoseMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatAbsorbedDoseMatrix(final float[][] values, final AbsorbedDoseUnit unit, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatAbsorbedDoseMatrix.
-     * @param values FloatAbsorbedDose; the values of the entries in the new Relative Immutable FloatAbsorbedDoseMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatAbsorbedDoseMatrix(final FloatAbsorbedDose[][] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data FloatMatrixData; an internal data object
      * @param unit AbsorbedDoseUnit; the unit
      */
-    FloatAbsorbedDoseMatrix(final FloatMatrixData data, final AbsorbedDoseUnit unit)
+    public FloatAbsorbedDoseMatrix(final FloatMatrixData data, final AbsorbedDoseUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatAbsorbedDoseMatrix toDense()
+    public Class<FloatAbsorbedDose> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return FloatAbsorbedDose.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatAbsorbedDoseMatrix toSparse()
+    public Class<FloatAbsorbedDoseVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatAbsorbedDoseMatrix instantiateType(final FloatMatrixData fmd, final AbsorbedDoseUnit unit)
-    {
-        return new FloatAbsorbedDoseMatrix(fmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableFloatAbsorbedDoseMatrix instantiateMutableType(final FloatMatrixData fmd,
-            final AbsorbedDoseUnit unit)
-    {
-        return new MutableFloatAbsorbedDoseMatrix(fmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatAbsorbedDose instantiateScalar(final float value, final AbsorbedDoseUnit unit)
-    {
-        return new FloatAbsorbedDose(value, unit);
+        return FloatAbsorbedDoseVector.class;
     }
 
 }

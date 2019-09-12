@@ -4,9 +4,12 @@ import javax.annotation.Generated;
 
 import org.djunits4.unit.AngleUnit;
 import org.djunits4.unit.DirectionUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixAbs;
+import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
+import org.djunits4.value.vfloat.scalar.FloatAngle;
 import org.djunits4.value.vfloat.scalar.FloatDirection;
+import org.djunits4.value.vfloat.vector.FloatAngleVector;
+import org.djunits4.value.vfloat.vector.FloatDirectionVector;
 
 /**
  * Immutable FloatDirection Matrix.
@@ -17,87 +20,34 @@ import org.djunits4.value.vfloat.scalar.FloatDirection;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
-public class FloatDirectionMatrix extends AbstractFloatMatrixAbs<DirectionUnit, AngleUnit, FloatDirectionMatrix,
-        FloatAngleMatrix, MutableFloatDirectionMatrix, FloatDirection>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+public class FloatDirectionMatrix extends AbstractFloatMatrixAbs<DirectionUnit, FloatDirection, FloatDirectionVector,
+        FloatDirectionMatrix, AngleUnit, FloatAngle, FloatAngleVector, FloatAngleMatrix>
 {
     /** */
-    private static final long serialVersionUID = 20151003L;
+    private static final long serialVersionUID = 20151006L;
 
     /**
-     * Construct a new Absolute Immutable FloatDirectionMatrix.
-     * @param values float[][]; the values of the entries in the new Absolute Immutable FloatDirectionMatrix
-     * @param unit DirectionUnit; the unit of the new Absolute Immutable FloatDirectionMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatDirectionMatrix(final float[][] values, final DirectionUnit unit, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable FloatDirectionMatrix.
-     * @param values FloatDirection[][]; the values of the entries in the new Absolute Immutable FloatDirectionMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatDirectionMatrix(final FloatDirection[][] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable FloatDirectionMatrix.
      * @param data FloatMatrixData; an internal data object
      * @param unit DirectionUnit; the unit
      */
-    FloatDirectionMatrix(final FloatMatrixData data, final DirectionUnit unit)
+    public FloatDirectionMatrix(final FloatMatrixData data, final DirectionUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatDirectionMatrix toDense()
+    public Class<FloatDirection> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateTypeAbs(this.data.toDense(), getUnit());
+        return FloatDirection.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatDirectionMatrix toSparse()
+    public Class<FloatDirectionVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateTypeAbs(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatDirectionMatrix instantiateTypeAbs(final FloatMatrixData fmd, final DirectionUnit unit)
-    {
-        return new FloatDirectionMatrix(fmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatAngleMatrix instantiateTypeRel(final FloatMatrixData fmd, final AngleUnit unit)
-    {
-        return new FloatAngleMatrix(fmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableFloatDirectionMatrix instantiateMutableType(final FloatMatrixData fmd, final DirectionUnit unit)
-    {
-        return new MutableFloatDirectionMatrix(fmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatDirection instantiateScalar(final float value, final DirectionUnit unit)
-    {
-        return new FloatDirection(value, unit);
+        return FloatDirectionVector.class;
     }
 
 }

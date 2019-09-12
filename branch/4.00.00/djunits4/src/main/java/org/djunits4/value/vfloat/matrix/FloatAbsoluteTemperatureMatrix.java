@@ -4,9 +4,12 @@ import javax.annotation.Generated;
 
 import org.djunits4.unit.AbsoluteTemperatureUnit;
 import org.djunits4.unit.TemperatureUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixAbs;
+import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatAbsoluteTemperature;
+import org.djunits4.value.vfloat.scalar.FloatTemperature;
+import org.djunits4.value.vfloat.vector.FloatAbsoluteTemperatureVector;
+import org.djunits4.value.vfloat.vector.FloatTemperatureVector;
 
 /**
  * Immutable FloatAbsoluteTemperature Matrix.
@@ -17,91 +20,36 @@ import org.djunits4.value.vfloat.scalar.FloatAbsoluteTemperature;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
-public class FloatAbsoluteTemperatureMatrix extends AbstractFloatMatrixAbs<AbsoluteTemperatureUnit, TemperatureUnit,
-        FloatAbsoluteTemperatureMatrix, FloatTemperatureMatrix, MutableFloatAbsoluteTemperatureMatrix, FloatAbsoluteTemperature>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+public class FloatAbsoluteTemperatureMatrix extends
+        AbstractFloatMatrixAbs<AbsoluteTemperatureUnit, FloatAbsoluteTemperature, FloatAbsoluteTemperatureVector,
+                FloatAbsoluteTemperatureMatrix, TemperatureUnit, FloatTemperature, FloatTemperatureVector,
+                FloatTemperatureMatrix>
 {
     /** */
-    private static final long serialVersionUID = 20151003L;
+    private static final long serialVersionUID = 20151006L;
 
     /**
-     * Construct a new Absolute Immutable FloatAbsoluteTemperatureMatrix.
-     * @param values float[][]; the values of the entries in the new Absolute Immutable FloatAbsoluteTemperatureMatrix
-     * @param unit AbsoluteTemperatureUnit; the unit of the new Absolute Immutable FloatAbsoluteTemperatureMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatAbsoluteTemperatureMatrix(final float[][] values, final AbsoluteTemperatureUnit unit,
-            final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable FloatAbsoluteTemperatureMatrix.
-     * @param values FloatAbsoluteTemperature[][]; the values of the entries in the new Absolute Immutable
-     *            FloatAbsoluteTemperatureMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatAbsoluteTemperatureMatrix(final FloatAbsoluteTemperature[][] values, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable FloatAbsoluteTemperatureMatrix.
      * @param data FloatMatrixData; an internal data object
      * @param unit AbsoluteTemperatureUnit; the unit
      */
-    FloatAbsoluteTemperatureMatrix(final FloatMatrixData data, final AbsoluteTemperatureUnit unit)
+    public FloatAbsoluteTemperatureMatrix(final FloatMatrixData data, final AbsoluteTemperatureUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatAbsoluteTemperatureMatrix toDense()
+    public Class<FloatAbsoluteTemperature> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateTypeAbs(this.data.toDense(), getUnit());
+        return FloatAbsoluteTemperature.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatAbsoluteTemperatureMatrix toSparse()
+    public Class<FloatAbsoluteTemperatureVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateTypeAbs(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatAbsoluteTemperatureMatrix instantiateTypeAbs(final FloatMatrixData fmd,
-            final AbsoluteTemperatureUnit unit)
-    {
-        return new FloatAbsoluteTemperatureMatrix(fmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatTemperatureMatrix instantiateTypeRel(final FloatMatrixData fmd, final TemperatureUnit unit)
-    {
-        return new FloatTemperatureMatrix(fmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableFloatAbsoluteTemperatureMatrix instantiateMutableType(final FloatMatrixData fmd,
-            final AbsoluteTemperatureUnit unit)
-    {
-        return new MutableFloatAbsoluteTemperatureMatrix(fmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatAbsoluteTemperature instantiateScalar(final float value, final AbsoluteTemperatureUnit unit)
-    {
-        return new FloatAbsoluteTemperature(value, unit);
+        return FloatAbsoluteTemperatureVector.class;
     }
 
 }

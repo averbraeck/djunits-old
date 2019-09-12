@@ -3,9 +3,13 @@ package org.djunits4.value.vfloat.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.LengthUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.unit.PositionUnit;
+import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRelWithAbs;
+import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatLength;
+import org.djunits4.value.vfloat.scalar.FloatPosition;
+import org.djunits4.value.vfloat.vector.FloatLengthVector;
+import org.djunits4.value.vfloat.vector.FloatPositionVector;
 
 /**
  * Immutable FloatLength Matrix.
@@ -16,79 +20,34 @@ import org.djunits4.value.vfloat.scalar.FloatLength;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
-public class FloatLengthMatrix
-        extends AbstractFloatMatrixRel<LengthUnit, FloatLengthMatrix, MutableFloatLengthMatrix, FloatLength>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+public class FloatLengthMatrix extends AbstractFloatMatrixRelWithAbs<PositionUnit, FloatPosition, FloatPositionVector,
+        FloatPositionMatrix, LengthUnit, FloatLength, FloatLengthVector, FloatLengthMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
 
     /**
-     * Construct a new Relative Immutable FloatLengthMatrix.
-     * @param values float[][]; the values of the entries in the new Relative Immutable FloatLengthMatrix
-     * @param unit LengthUnit; the unit of the new Relative Immutable FloatLengthMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatLengthMatrix(final float[][] values, final LengthUnit unit, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatLengthMatrix.
-     * @param values FloatLength[][]; the values of the entries in the new Relative Immutable FloatLengthMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatLengthMatrix(final FloatLength[][] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatLengthMatrix.
      * @param data FloatMatrixData; an internal data object
      * @param unit LengthUnit; the unit
      */
-    FloatLengthMatrix(final FloatMatrixData data, final LengthUnit unit)
+    public FloatLengthMatrix(final FloatMatrixData data, final LengthUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatLengthMatrix toDense()
+    public Class<FloatLength> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return FloatLength.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatLengthMatrix toSparse()
+    public Class<FloatLengthVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatLengthMatrix instantiateType(final FloatMatrixData fmd, final LengthUnit unit)
-    {
-        return new FloatLengthMatrix(fmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableFloatLengthMatrix instantiateMutableType(final FloatMatrixData fmd, final LengthUnit unit)
-    {
-        return new MutableFloatLengthMatrix(fmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatLength instantiateScalar(final float value, final LengthUnit unit)
-    {
-        return new FloatLength(value, unit);
+        return FloatLengthVector.class;
     }
 
 }

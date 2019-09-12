@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 import org.djunits4.unit.scale.Scale;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
-import org.djunits4.value.vfloat.scalar.FloatScalarInterface;
+import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
 
 /**
  * Stores the data for a FloatMatrix and carries out basic operations.
@@ -18,12 +18,12 @@ import org.djunits4.value.vfloat.scalar.FloatScalarInterface;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-abstract class FloatMatrixData implements Serializable
+public abstract class FloatMatrixData implements Serializable
 {
     /** */
     private static final long serialVersionUID = 1L;
 
-    /** the internal storage of the Matrix; can be sparse or dense. */
+    /** the internal storage of the Matrix; can be sparse or dense. The data is stored in an array. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected float[] matrixSI;
 
@@ -42,7 +42,7 @@ abstract class FloatMatrixData implements Serializable
      * Construct a new DoubleMatrixData store.
      * @param storageType StorageType; the data type
      */
-    FloatMatrixData(final StorageType storageType)
+    public FloatMatrixData(final StorageType storageType)
     {
         super();
         this.storageType = storageType;
@@ -98,7 +98,7 @@ abstract class FloatMatrixData implements Serializable
      * @return the FloatMatrixData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
      */
-    public static FloatMatrixData instantiate(final FloatScalarInterface[][] values, final StorageType storageType)
+    public static FloatMatrixData instantiate(final FloatScalarInterface<?, ?>[][] values, final StorageType storageType)
             throws ValueRuntimeException
     {
         if (values == null)

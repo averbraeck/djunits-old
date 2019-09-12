@@ -27,7 +27,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T16:38:21.610Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:09:56.231Z")
 public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, FloatPosition, LengthUnit, FloatLength>
 {
     /** */
@@ -101,12 +101,8 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
         return new FloatLength(value, LengthUnit.SI);
     }
 
-    /**
-     * Construct a new Absolute Immutable FloatScalar of the right type. Each extending class must implement this method.
-     * @param value float; the float value
-     * @param unit PositionUnit; the unit
-     * @return FloatPosition; a new absolute instance of the FloatScalar of the right type
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatPosition instantiateAbs(final float value, final PositionUnit unit)
     {
         return new FloatPosition(value, unit);
@@ -124,11 +120,8 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
         return new FloatLength(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
-    /**
-     * Relative scalar plus Absolute scalar = Absolute scalar.
-     * @param v FloatPosition; ; the value to add
-     * @return FloatPosition; sum of this value and v as a new object
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatPosition plus(final FloatPosition v)
     {
         PositionUnit targetUnit = v.getUnit();

@@ -1,5 +1,5 @@
 /**
- * package-info.java.
+ * Interfaces, abstract classes and utilities for DoubleMatrix.
  * <p>
  * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.

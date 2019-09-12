@@ -111,8 +111,8 @@ public class DoubleMatrixDenseTest
         {
             AbsoluteTemperatureUnit tempUnit = AbsoluteTemperatureUnit.KELVIN;
             double[][] value = data(3, 5, false, 38.0);
-            DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> dm =
-                    new DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> dm =
+                    new FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             String result = dm.toString(true, true);
             assertTrue("toString result contains \" Abs \"", result.contains(" Abs "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
@@ -160,8 +160,8 @@ public class DoubleMatrixDenseTest
         {
             AbsoluteTemperatureUnit tempUnit = AbsoluteTemperatureUnit.DEGREE_CELSIUS;
             double[][] value = data(3, 5, false, 38.0);
-            DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> temperatureDM =
-                    new DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> temperatureDM =
+                    new FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             checkContentsAndType(temperatureDM, value, 0.001, tempUnit, true);
             assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDM.getSI(0, 0), 0.05);
             assertEquals("Value in Fahrenheit", 100.4, temperatureDM.getInUnit(0, 0, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT),
@@ -177,13 +177,13 @@ public class DoubleMatrixDenseTest
             value[0][0] = safe; // Restore
             mdm.set(0, 0, temperatureDM.get(0, 0));
             checkContentsAndType(mdm, value, 0.001, tempUnit, true);
-            DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> temperature2DM =
-                    new DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(temperatureDM.getValuesSI(),
+            FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> temperature2DM =
+                    new FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(temperatureDM.getValuesSI(),
                             AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
             assertTrue("temperature2DM should be equal to temperatureDM", temperature2DM.equals(temperatureDM));
             assertTrue("Value is Absolute", temperatureDM.isAbsolute());
             assertFalse("Value is not Relative", temperatureDM.isRelative());
-            temperatureDM = new DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value,
+            temperatureDM = new FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value,
                     AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
             checkContentsAndType(temperatureDM, value, 0.001, AbsoluteTemperatureUnit.KELVIN, true);
             compareMatrix(value, temperatureDM.getValuesSI());
@@ -197,7 +197,7 @@ public class DoubleMatrixDenseTest
                             AbsoluteTemperatureUnit.DEGREE_CELSIUS);
                 }
             }
-            temperatureDM = new DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(scalar, StorageType.DENSE);
+            temperatureDM = new FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(scalar, StorageType.DENSE);
             checkContentsAndType(temperatureDM, value, 0.001, tempUnit, true);
             assertEquals("All cells != 0; cardinality should equal number of cells", value.length * value[0].length,
                     temperatureDM.cardinality());
@@ -230,9 +230,9 @@ public class DoubleMatrixDenseTest
             double[][] value = data(3, 5, false, 38.0);
             double[][] value2 = data(3, 5, false, 38.0);
             value2[0][0] = 12345;
-            DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> dm =
-                    new DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> dmCopy = dm;
+            FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> dm =
+                    new FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> dmCopy = dm;
             MutableDoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> mdm = dm.mutable();
             checkContentsAndType(dm, value, 0.001, tempUnit, true);
             checkContentsAndType(mdm, value, 0.001, tempUnit, true);
@@ -248,7 +248,7 @@ public class DoubleMatrixDenseTest
             checkContentsAndType(mdm, value2, 0.01, tempUnit, true);
             checkContentsAndType(mdmCopy, value, 0.001, tempUnit, true);
             checkContentsAndType(mmdm, value, 0.001, tempUnit, true);
-            DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> idm = mdm.immutable();
+            FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> idm = mdm.immutable();
             assertTrue("Different value extremely likely results in different hashCode", dm.hashCode() != mdm.hashCode());
             // Restore value of mdm
             mdm.setSI(0, 0, dm.getSI(0, 0));
@@ -364,11 +364,11 @@ public class DoubleMatrixDenseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Abs<PositionUnit, LengthUnit> left =
-                    new DoubleMatrix.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.ImmutableRel<LengthUnit> right =
-                    new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.Abs<?, ?> result = DoubleMatrix.plus(left, right);
+            FloatMatrix.Abs<PositionUnit, LengthUnit> left =
+                    new FloatMatrix.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.DENSE);
+            FloatMatrix.ImmutableRel<LengthUnit> right =
+                    new FloatMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.Abs<?, ?> result = FloatMatrix.plus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
@@ -394,11 +394,11 @@ public class DoubleMatrixDenseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Abs<PositionUnit, LengthUnit> left =
-                    new DoubleMatrix.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.ImmutableRel<LengthUnit> right =
-                    new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.Abs<?, ?> result = DoubleMatrix.minus(left, right);
+            FloatMatrix.Abs<PositionUnit, LengthUnit> left =
+                    new FloatMatrix.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.DENSE);
+            FloatMatrix.ImmutableRel<LengthUnit> right =
+                    new FloatMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.Abs<?, ?> result = FloatMatrix.minus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
@@ -424,11 +424,11 @@ public class DoubleMatrixDenseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Abs<PositionUnit, LengthUnit> left =
-                    new DoubleMatrix.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.ImmutableRel<LengthUnit> right =
-                    new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
-            DoubleMatrix.Abs<?, ?> result = DoubleMatrix.plus(left, right);
+            FloatMatrix.Abs<PositionUnit, LengthUnit> left =
+                    new FloatMatrix.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.DENSE);
+            FloatMatrix.ImmutableRel<LengthUnit> right =
+                    new FloatMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            FloatMatrix.Abs<?, ?> result = FloatMatrix.plus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
@@ -454,11 +454,11 @@ public class DoubleMatrixDenseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.Abs<PositionUnit, LengthUnit> left =
-                    new DoubleMatrix.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.ImmutableRel<LengthUnit> right =
-                    new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
-            DoubleMatrix.Abs<?, ?> result = DoubleMatrix.minus(left, right);
+            FloatMatrix.Abs<PositionUnit, LengthUnit> left =
+                    new FloatMatrix.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.DENSE);
+            FloatMatrix.ImmutableRel<LengthUnit> right =
+                    new FloatMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            FloatMatrix.Abs<?, ?> result = FloatMatrix.minus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
@@ -484,7 +484,7 @@ public class DoubleMatrixDenseTest
         try
         {
             // null array
-            new DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>((double[][]) null,
+            new FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>((double[][]) null,
                     AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT, StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
@@ -498,7 +498,7 @@ public class DoubleMatrixDenseTest
             // Matrix with null on first row
             double[][] in = data(3, 5, false, 12.3);
             in[0] = null;
-            new DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(in, AbsoluteTemperatureUnit.DEGREE_CELSIUS,
+            new FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(in, AbsoluteTemperatureUnit.DEGREE_CELSIUS,
                     StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
@@ -512,7 +512,7 @@ public class DoubleMatrixDenseTest
             // Matrix with null on last row
             double[][] in = data(3, 5, false, 12.3);
             in[in.length - 1] = null;
-            new DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(in, AbsoluteTemperatureUnit.DEGREE_CELSIUS,
+            new FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(in, AbsoluteTemperatureUnit.DEGREE_CELSIUS,
                     StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
@@ -525,7 +525,7 @@ public class DoubleMatrixDenseTest
         {
             // Non-rectangular array
             double[][] in = data(3, 5, true, 12.3);
-            new DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(in, AbsoluteTemperatureUnit.DEGREE_CELSIUS,
+            new FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(in, AbsoluteTemperatureUnit.DEGREE_CELSIUS,
                     StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
@@ -538,10 +538,10 @@ public class DoubleMatrixDenseTest
         double[][] in = data(3, 5, false, 12.3);
         try
         {
-            DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> matrix = null;
+            FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> matrix = null;
             try
             {
-                matrix = new DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(in,
+                matrix = new FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(in,
                         AbsoluteTemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
             }
             catch (ValueRuntimeException ve)
@@ -568,8 +568,8 @@ public class DoubleMatrixDenseTest
         try
         {
             double[][] values = {{1, 2, 3}, {3, 5, 7}, {5, 10, 0}};
-            DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> matrix =
-                    new DoubleMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(values, AbsoluteTemperatureUnit.KELVIN,
+            FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit> matrix =
+                    new FloatMatrix.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(values, AbsoluteTemperatureUnit.KELVIN,
                             StorageType.DENSE);
             assertEquals("Determinant should be 15", 15, matrix.determinant(), 0.001);
         }
@@ -594,7 +594,7 @@ public class DoubleMatrixDenseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             double[][] value = data(3, 5, false, 38.0);
-            DoubleMatrix.ImmutableRel<TemperatureUnit> dm = new DoubleMatrix.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            FloatMatrix.ImmutableRel<TemperatureUnit> dm = new FloatMatrix.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             String result = dm.toString(true, true);
             assertTrue("toString result contains \" Rel \"", result.contains(" Rel "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
@@ -642,8 +642,8 @@ public class DoubleMatrixDenseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
             double[][] value = data(3, 5, false, 38.0);
-            DoubleMatrix.ImmutableRel<TemperatureUnit> temperatureDM =
-                    new DoubleMatrix.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            FloatMatrix.ImmutableRel<TemperatureUnit> temperatureDM =
+                    new FloatMatrix.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             checkContentsAndType(temperatureDM, value, 0.001, tempUnit, false);
             assertEquals("Value in SI is equivalent in Kelvin", 38.0, temperatureDM.getSI(0, 0), 0.05);
             assertEquals("Value in Fahrenheit", 38.0 * 9.0 / 5.0,
@@ -652,12 +652,12 @@ public class DoubleMatrixDenseTest
             MutableDoubleMatrix.ImmutableRel<TemperatureUnit> mdm =
                     new MutableDoubleMatrix.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             checkContentsAndType(mdm, value, 0.001, tempUnit, false);
-            DoubleMatrix.ImmutableRel<TemperatureUnit> temperature2DM = new DoubleMatrix.ImmutableRel<TemperatureUnit>(
+            FloatMatrix.ImmutableRel<TemperatureUnit> temperature2DM = new FloatMatrix.ImmutableRel<TemperatureUnit>(
                     temperatureDM.getValuesSI(), TemperatureUnit.KELVIN, StorageType.DENSE);
             assertTrue("temperature2DM should be equal to temperatureDM", temperature2DM.equals(temperatureDM));
             assertTrue("Value is Relative", temperatureDM.isRelative());
             assertFalse("Value is not Absolute", temperatureDM.isAbsolute());
-            temperatureDM = new DoubleMatrix.ImmutableRel<TemperatureUnit>(value, TemperatureUnit.KELVIN, StorageType.DENSE);
+            temperatureDM = new FloatMatrix.ImmutableRel<TemperatureUnit>(value, TemperatureUnit.KELVIN, StorageType.DENSE);
             checkContentsAndType(temperatureDM, value, 0.001, TemperatureUnit.KELVIN, false);
             compareMatrix(value, temperatureDM.getValuesSI());
             FloatScalar.ImmutableRel<TemperatureUnit>[][] scalar = new FloatScalar.ImmutableRel[value.length][];
@@ -670,7 +670,7 @@ public class DoubleMatrixDenseTest
                             new FloatScalar.ImmutableRel<TemperatureUnit>(value[row][column], TemperatureUnit.DEGREE_CELSIUS);
                 }
             }
-            temperatureDM = new DoubleMatrix.ImmutableRel<TemperatureUnit>(scalar, StorageType.DENSE);
+            temperatureDM = new FloatMatrix.ImmutableRel<TemperatureUnit>(scalar, StorageType.DENSE);
             checkContentsAndType(temperatureDM, value, 0.001, tempUnit, false);
             assertEquals("All cells != 0; cardinality should equal number of cells", value.length * value[0].length,
                     temperatureDM.cardinality());
@@ -703,8 +703,8 @@ public class DoubleMatrixDenseTest
             double[][] value = data(3, 5, false, 38.0);
             double[][] value2 = data(3, 5, false, 38.0);
             value2[0][0] = 12345;
-            DoubleMatrix.ImmutableRel<TemperatureUnit> dm = new DoubleMatrix.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            DoubleMatrix.ImmutableRel<TemperatureUnit> dmCopy = dm;
+            FloatMatrix.ImmutableRel<TemperatureUnit> dm = new FloatMatrix.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            FloatMatrix.ImmutableRel<TemperatureUnit> dmCopy = dm;
             MutableDoubleMatrix.ImmutableRel<TemperatureUnit> mdm = dm.mutable();
             checkContentsAndType(dm, value, 0.001, tempUnit, false);
             checkContentsAndType(mdm, value, 0.001, tempUnit, false);
@@ -720,7 +720,7 @@ public class DoubleMatrixDenseTest
             checkContentsAndType(mdm, value2, 0.01, tempUnit, false);
             checkContentsAndType(mdmCopy, value, 0.001, tempUnit, false);
             checkContentsAndType(mmdm, value, 0.001, tempUnit, false);
-            DoubleMatrix.ImmutableRel<TemperatureUnit> idm = mdm.immutable();
+            FloatMatrix.ImmutableRel<TemperatureUnit> idm = mdm.immutable();
             assertTrue("Different value extremely likely results in different hashCode", dm.hashCode() != mdm.hashCode());
             // Restore value of mdm
             mdm.setSI(0, 0, dm.getSI(0, 0));
@@ -847,10 +847,10 @@ public class DoubleMatrixDenseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.ImmutableRel<LengthUnit> left = new DoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.ImmutableRel<LengthUnit> right =
-                    new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.ImmutableRel<?> result = DoubleMatrix.plus(left, right);
+            FloatMatrix.ImmutableRel<LengthUnit> left = new FloatMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.ImmutableRel<LengthUnit> right =
+                    new FloatMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.ImmutableRel<?> result = FloatMatrix.plus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
@@ -876,10 +876,10 @@ public class DoubleMatrixDenseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.ImmutableRel<LengthUnit> left = new DoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.ImmutableRel<LengthUnit> right =
-                    new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.ImmutableRel<?> result = DoubleMatrix.minus(left, right);
+            FloatMatrix.ImmutableRel<LengthUnit> left = new FloatMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.ImmutableRel<LengthUnit> right =
+                    new FloatMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.ImmutableRel<?> result = FloatMatrix.minus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
@@ -905,10 +905,10 @@ public class DoubleMatrixDenseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.ImmutableRel<LengthUnit> left = new DoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.ImmutableRel<LengthUnit> right =
-                    new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.ImmutableRel<?> result = DoubleMatrix.times(left, right);
+            FloatMatrix.ImmutableRel<LengthUnit> left = new FloatMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.ImmutableRel<LengthUnit> right =
+                    new FloatMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.ImmutableRel<?> result = FloatMatrix.times(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
@@ -934,10 +934,10 @@ public class DoubleMatrixDenseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.ImmutableRel<LengthUnit> left = new DoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.ImmutableRel<LengthUnit> right =
-                    new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
-            DoubleMatrix.ImmutableRel<?> result = DoubleMatrix.plus(left, right);
+            FloatMatrix.ImmutableRel<LengthUnit> left = new FloatMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.ImmutableRel<LengthUnit> right =
+                    new FloatMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            FloatMatrix.ImmutableRel<?> result = FloatMatrix.plus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
@@ -963,10 +963,10 @@ public class DoubleMatrixDenseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.ImmutableRel<LengthUnit> left = new DoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.ImmutableRel<LengthUnit> right =
-                    new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
-            DoubleMatrix.ImmutableRel<?> result = DoubleMatrix.minus(left, right);
+            FloatMatrix.ImmutableRel<LengthUnit> left = new FloatMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.ImmutableRel<LengthUnit> right =
+                    new FloatMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            FloatMatrix.ImmutableRel<?> result = FloatMatrix.minus(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
@@ -992,10 +992,10 @@ public class DoubleMatrixDenseTest
         {
             double[][] leftValue = data(3, 5, false, 123.4);
             double[][] rightValue = data(3, 5, false, 234.5);
-            DoubleMatrix.ImmutableRel<LengthUnit> left = new DoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleMatrix.ImmutableRel<LengthUnit> right =
-                    new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
-            DoubleMatrix.ImmutableRel<?> result = DoubleMatrix.times(left, right);
+            FloatMatrix.ImmutableRel<LengthUnit> left = new FloatMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.ImmutableRel<LengthUnit> right =
+                    new FloatMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            FloatMatrix.ImmutableRel<?> result = FloatMatrix.times(left, right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 for (int j = 0; j < leftValue[i].length; j++)
@@ -1021,7 +1021,7 @@ public class DoubleMatrixDenseTest
         try
         {
             // null array
-            new DoubleMatrix.ImmutableRel<TemperatureUnit>((double[][]) null, TemperatureUnit.DEGREE_FAHRENHEIT, StorageType.DENSE);
+            new FloatMatrix.ImmutableRel<TemperatureUnit>((double[][]) null, TemperatureUnit.DEGREE_FAHRENHEIT, StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueRuntimeException ve)
@@ -1034,7 +1034,7 @@ public class DoubleMatrixDenseTest
             // Matrix with null on first row
             double[][] in = data(3, 5, false, 12.3);
             in[0] = null;
-            new DoubleMatrix.ImmutableRel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
+            new FloatMatrix.ImmutableRel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueRuntimeException ve)
@@ -1047,7 +1047,7 @@ public class DoubleMatrixDenseTest
             // Matrix with null on last row
             double[][] in = data(3, 5, false, 12.3);
             in[in.length - 1] = null;
-            new DoubleMatrix.ImmutableRel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
+            new FloatMatrix.ImmutableRel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueRuntimeException ve)
@@ -1059,7 +1059,7 @@ public class DoubleMatrixDenseTest
         {
             // Non-rectangular array
             double[][] in = data(3, 5, true, 12.3);
-            new DoubleMatrix.ImmutableRel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
+            new FloatMatrix.ImmutableRel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueRuntimeException ve)
@@ -1071,10 +1071,10 @@ public class DoubleMatrixDenseTest
         double[][] in = data(3, 5, false, 12.3);
         try
         {
-            DoubleMatrix.ImmutableRel<TemperatureUnit> matrix = null;
+            FloatMatrix.ImmutableRel<TemperatureUnit> matrix = null;
             try
             {
-                matrix = new DoubleMatrix.ImmutableRel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
+                matrix = new FloatMatrix.ImmutableRel<TemperatureUnit>(in, TemperatureUnit.DEGREE_CELSIUS, StorageType.DENSE);
             }
             catch (ValueRuntimeException ve)
             {
@@ -1100,8 +1100,8 @@ public class DoubleMatrixDenseTest
         try
         {
             double[][] values = {{1, 2, 3}, {3, 5, 7}, {5, 10, 0}};
-            DoubleMatrix.ImmutableRel<TemperatureUnit> matrix =
-                    new DoubleMatrix.ImmutableRel<TemperatureUnit>(values, TemperatureUnit.KELVIN, StorageType.DENSE);
+            FloatMatrix.ImmutableRel<TemperatureUnit> matrix =
+                    new FloatMatrix.ImmutableRel<TemperatureUnit>(values, TemperatureUnit.KELVIN, StorageType.DENSE);
             assertEquals("Determinant should be 15", 15, matrix.determinant(), 0.001);
         }
         catch (ValueRuntimeException ve)
@@ -1128,8 +1128,8 @@ public class DoubleMatrixDenseTest
             MutableDoubleMatrix.ImmutableRel<LengthUnit> left =
                     new MutableDoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
             MutableDoubleMatrix.ImmutableRel<LengthUnit> referenceLeft = left.copy();
-            DoubleMatrix.ImmutableRel<LengthUnit> right =
-                    new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.ImmutableRel<LengthUnit> right =
+                    new FloatMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             left.incrementBy(right);
             for (int row = 0; row < leftValue.length; row++)
             {
@@ -1140,7 +1140,7 @@ public class DoubleMatrixDenseTest
                 }
             }
             left = new MutableDoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-            right = new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            right = new FloatMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
             left.incrementBy(right);
             for (int row = 0; row < leftValue.length; row++)
             {
@@ -1170,8 +1170,8 @@ public class DoubleMatrixDenseTest
             MutableDoubleMatrix.ImmutableRel<LengthUnit> left =
                     new MutableDoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
             MutableDoubleMatrix.ImmutableRel<LengthUnit> referenceLeft = left.copy();
-            DoubleMatrix.ImmutableRel<LengthUnit> right =
-                    new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatMatrix.ImmutableRel<LengthUnit> right =
+                    new FloatMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             left.decrementBy(right);
             for (int row = 0; row < leftValue.length; row++)
             {
@@ -1182,7 +1182,7 @@ public class DoubleMatrixDenseTest
                 }
             }
             left = new MutableDoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-            right = new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            right = new FloatMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
             left.decrementBy(right);
             for (int row = 0; row < leftValue.length; row++)
             {
@@ -1232,8 +1232,8 @@ public class DoubleMatrixDenseTest
                 MutableDoubleMatrix.ImmutableRel<LengthUnit> left =
                         new MutableDoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
                 MutableDoubleMatrix.ImmutableRel<LengthUnit> referenceLeft = left.copy();
-                DoubleMatrix.ImmutableRel<LengthUnit> right =
-                        new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+                FloatMatrix.ImmutableRel<LengthUnit> right =
+                        new FloatMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
                 left.times(right);
                 for (int row = 0; row < leftValue.length; row++)
                 {
@@ -1244,7 +1244,7 @@ public class DoubleMatrixDenseTest
                     }
                 }
                 left = new MutableDoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-                right = new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+                right = new FloatMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
                 left.times(right);
                 for (int row = 0; row < leftValue.length; row++)
                 {
@@ -1295,8 +1295,8 @@ public class DoubleMatrixDenseTest
                 MutableDoubleMatrix.ImmutableRel<LengthUnit> left =
                         new MutableDoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
                 MutableDoubleMatrix.ImmutableRel<LengthUnit> referenceLeft = left.copy();
-                DoubleMatrix.ImmutableRel<LengthUnit> right =
-                        new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+                FloatMatrix.ImmutableRel<LengthUnit> right =
+                        new FloatMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
                 left.divide(right);
                 for (int row = 0; row < leftValue.length; row++)
                 {
@@ -1319,7 +1319,7 @@ public class DoubleMatrixDenseTest
                     }
                 }
                 left = new MutableDoubleMatrix.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-                right = new DoubleMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+                right = new FloatMatrix.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
                 left.divide(right);
                 for (int row = 0; row < leftValue.length; row++)
                 {

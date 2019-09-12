@@ -3,12 +3,13 @@ package org.djunits4.value.vfloat.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.ElectricalConductanceUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
+import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatElectricalConductance;
+import org.djunits4.value.vfloat.vector.FloatElectricalConductanceVector;
 
 /**
- * Immutable FloatElectricalConductanceMatrix, a matrix of values with a ElectricalConductanceUnit.
+ * Immutable FloatFloatElectricalConductanceMatrix, a matrix of values with a ElectricalConductanceUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -16,83 +17,35 @@ import org.djunits4.value.vfloat.scalar.FloatElectricalConductance;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
 public class FloatElectricalConductanceMatrix extends AbstractFloatMatrixRel<ElectricalConductanceUnit,
-        FloatElectricalConductanceMatrix, MutableFloatElectricalConductanceMatrix, FloatElectricalConductance>
+        FloatElectricalConductance, FloatElectricalConductanceVector, FloatElectricalConductanceMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatElectricalConductanceMatrix.
-     * @param values float[][]; the values of the entries in the new Relative Immutable FloatElectricalConductanceMatrix
-     * @param unit ElectricalConductanceUnit; the unit of the new Relative Immutable FloatElectricalConductanceMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatElectricalConductanceMatrix(final float[][] values, final ElectricalConductanceUnit unit,
-            final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatElectricalConductanceMatrix.
-     * @param values FloatElectricalConductance; the values of the entries in the new Relative Immutable
-     *            FloatElectricalConductanceMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatElectricalConductanceMatrix(final FloatElectricalConductance[][] values, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data FloatMatrixData; an internal data object
      * @param unit ElectricalConductanceUnit; the unit
      */
-    FloatElectricalConductanceMatrix(final FloatMatrixData data, final ElectricalConductanceUnit unit)
+    public FloatElectricalConductanceMatrix(final FloatMatrixData data, final ElectricalConductanceUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatElectricalConductanceMatrix toDense()
+    public Class<FloatElectricalConductance> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return FloatElectricalConductance.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatElectricalConductanceMatrix toSparse()
+    public Class<FloatElectricalConductanceVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatElectricalConductanceMatrix instantiateType(final FloatMatrixData fmd,
-            final ElectricalConductanceUnit unit)
-    {
-        return new FloatElectricalConductanceMatrix(fmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableFloatElectricalConductanceMatrix instantiateMutableType(final FloatMatrixData fmd,
-            final ElectricalConductanceUnit unit)
-    {
-        return new MutableFloatElectricalConductanceMatrix(fmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatElectricalConductance instantiateScalar(final float value, final ElectricalConductanceUnit unit)
-    {
-        return new FloatElectricalConductance(value, unit);
+        return FloatElectricalConductanceVector.class;
     }
 
 }

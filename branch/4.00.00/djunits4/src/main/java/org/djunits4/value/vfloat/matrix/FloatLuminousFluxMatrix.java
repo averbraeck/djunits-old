@@ -3,12 +3,13 @@ package org.djunits4.value.vfloat.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.LuminousFluxUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
+import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatLuminousFlux;
+import org.djunits4.value.vfloat.vector.FloatLuminousFluxVector;
 
 /**
- * Immutable FloatLuminousFluxMatrix, a matrix of values with a LuminousFluxUnit.
+ * Immutable FloatFloatLuminousFluxMatrix, a matrix of values with a LuminousFluxUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -16,80 +17,35 @@ import org.djunits4.value.vfloat.scalar.FloatLuminousFlux;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
-public class FloatLuminousFluxMatrix extends
-        AbstractFloatMatrixRel<LuminousFluxUnit, FloatLuminousFluxMatrix, MutableFloatLuminousFluxMatrix, FloatLuminousFlux>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+public class FloatLuminousFluxMatrix
+        extends AbstractFloatMatrixRel<LuminousFluxUnit, FloatLuminousFlux, FloatLuminousFluxVector, FloatLuminousFluxMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatLuminousFluxMatrix.
-     * @param values float[][]; the values of the entries in the new Relative Immutable FloatLuminousFluxMatrix
-     * @param unit LuminousFluxUnit; the unit of the new Relative Immutable FloatLuminousFluxMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatLuminousFluxMatrix(final float[][] values, final LuminousFluxUnit unit, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatLuminousFluxMatrix.
-     * @param values FloatLuminousFlux; the values of the entries in the new Relative Immutable FloatLuminousFluxMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatLuminousFluxMatrix(final FloatLuminousFlux[][] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data FloatMatrixData; an internal data object
      * @param unit LuminousFluxUnit; the unit
      */
-    FloatLuminousFluxMatrix(final FloatMatrixData data, final LuminousFluxUnit unit)
+    public FloatLuminousFluxMatrix(final FloatMatrixData data, final LuminousFluxUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatLuminousFluxMatrix toDense()
+    public Class<FloatLuminousFlux> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return FloatLuminousFlux.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatLuminousFluxMatrix toSparse()
+    public Class<FloatLuminousFluxVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatLuminousFluxMatrix instantiateType(final FloatMatrixData fmd, final LuminousFluxUnit unit)
-    {
-        return new FloatLuminousFluxMatrix(fmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableFloatLuminousFluxMatrix instantiateMutableType(final FloatMatrixData fmd,
-            final LuminousFluxUnit unit)
-    {
-        return new MutableFloatLuminousFluxMatrix(fmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatLuminousFlux instantiateScalar(final float value, final LuminousFluxUnit unit)
-    {
-        return new FloatLuminousFlux(value, unit);
+        return FloatLuminousFluxVector.class;
     }
 
 }

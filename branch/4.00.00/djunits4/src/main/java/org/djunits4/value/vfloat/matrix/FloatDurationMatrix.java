@@ -3,9 +3,13 @@ package org.djunits4.value.vfloat.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.DurationUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.unit.TimeUnit;
+import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRelWithAbs;
+import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatDuration;
+import org.djunits4.value.vfloat.scalar.FloatTime;
+import org.djunits4.value.vfloat.vector.FloatDurationVector;
+import org.djunits4.value.vfloat.vector.FloatTimeVector;
 
 /**
  * Immutable FloatDuration Matrix.
@@ -16,80 +20,34 @@ import org.djunits4.value.vfloat.scalar.FloatDuration;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
-public class FloatDurationMatrix
-        extends AbstractFloatMatrixRel<DurationUnit, FloatDurationMatrix, MutableFloatDurationMatrix, FloatDuration>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+public class FloatDurationMatrix extends AbstractFloatMatrixRelWithAbs<TimeUnit, FloatTime, FloatTimeVector, FloatTimeMatrix,
+        DurationUnit, FloatDuration, FloatDurationVector, FloatDurationMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
 
     /**
-     * Construct a new Relative Immutable FloatDurationMatrix.
-     * @param values float[][]; the values of the entries in the new Relative Immutable FloatDurationMatrix
-     * @param unit DurationUnit; the unit of the new Relative Immutable FloatDurationMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatDurationMatrix(final float[][] values, final DurationUnit unit, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatDurationMatrix.
-     * @param values FloatDuration[][]; the values of the entries in the new Relative Immutable FloatDurationMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatDurationMatrix(final FloatDuration[][] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatDurationMatrix.
      * @param data FloatMatrixData; an internal data object
      * @param unit DurationUnit; the unit
      */
-    FloatDurationMatrix(final FloatMatrixData data, final DurationUnit unit)
+    public FloatDurationMatrix(final FloatMatrixData data, final DurationUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatDurationMatrix toDense()
+    public Class<FloatDuration> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return FloatDuration.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatDurationMatrix toSparse()
+    public Class<FloatDurationVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatDurationMatrix instantiateType(final FloatMatrixData fmd, final DurationUnit unit)
-    {
-        return new FloatDurationMatrix(fmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableFloatDurationMatrix instantiateMutableType(final FloatMatrixData fmd, final DurationUnit unit)
-    {
-        return new MutableFloatDurationMatrix(fmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatDuration instantiateScalar(final float value, final DurationUnit unit)
-    {
-        return new FloatDuration(value, unit);
+        return FloatDurationVector.class;
     }
 
 }

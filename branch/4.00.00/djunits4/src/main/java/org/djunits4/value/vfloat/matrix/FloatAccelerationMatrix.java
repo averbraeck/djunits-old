@@ -3,12 +3,13 @@ package org.djunits4.value.vfloat.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.AccelerationUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
+import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatAcceleration;
+import org.djunits4.value.vfloat.vector.FloatAccelerationVector;
 
 /**
- * Immutable FloatAccelerationMatrix, a matrix of values with a AccelerationUnit.
+ * Immutable FloatFloatAccelerationMatrix, a matrix of values with a AccelerationUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -16,80 +17,35 @@ import org.djunits4.value.vfloat.scalar.FloatAcceleration;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
-public class FloatAccelerationMatrix extends
-        AbstractFloatMatrixRel<AccelerationUnit, FloatAccelerationMatrix, MutableFloatAccelerationMatrix, FloatAcceleration>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+public class FloatAccelerationMatrix
+        extends AbstractFloatMatrixRel<AccelerationUnit, FloatAcceleration, FloatAccelerationVector, FloatAccelerationMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatAccelerationMatrix.
-     * @param values float[][]; the values of the entries in the new Relative Immutable FloatAccelerationMatrix
-     * @param unit AccelerationUnit; the unit of the new Relative Immutable FloatAccelerationMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatAccelerationMatrix(final float[][] values, final AccelerationUnit unit, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatAccelerationMatrix.
-     * @param values FloatAcceleration; the values of the entries in the new Relative Immutable FloatAccelerationMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatAccelerationMatrix(final FloatAcceleration[][] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data FloatMatrixData; an internal data object
      * @param unit AccelerationUnit; the unit
      */
-    FloatAccelerationMatrix(final FloatMatrixData data, final AccelerationUnit unit)
+    public FloatAccelerationMatrix(final FloatMatrixData data, final AccelerationUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatAccelerationMatrix toDense()
+    public Class<FloatAcceleration> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return FloatAcceleration.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatAccelerationMatrix toSparse()
+    public Class<FloatAccelerationVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatAccelerationMatrix instantiateType(final FloatMatrixData fmd, final AccelerationUnit unit)
-    {
-        return new FloatAccelerationMatrix(fmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableFloatAccelerationMatrix instantiateMutableType(final FloatMatrixData fmd,
-            final AccelerationUnit unit)
-    {
-        return new MutableFloatAccelerationMatrix(fmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatAcceleration instantiateScalar(final float value, final AccelerationUnit unit)
-    {
-        return new FloatAcceleration(value, unit);
+        return FloatAccelerationVector.class;
     }
 
 }

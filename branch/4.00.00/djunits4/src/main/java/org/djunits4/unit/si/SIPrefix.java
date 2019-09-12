@@ -99,8 +99,8 @@ public class SIPrefix implements Serializable
     @Override
     public String toString()
     {
-        return "SIPrefix [defaultTextualPrefix=" + defaultTextualPrefix + ", defaultDisplayPrefix=" + defaultDisplayPrefix
-                + ", prefixName=" + prefixName + ", factor=" + factor + "]";
+        return "SIPrefix [defaultTextualPrefix=" + this.defaultTextualPrefix + ", defaultDisplayPrefix="
+                + this.defaultDisplayPrefix + ", prefixName=" + this.prefixName + ", factor=" + this.factor + "]";
     }
 
 }

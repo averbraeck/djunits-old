@@ -27,7 +27,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T16:38:21.610Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:09:56.231Z")
 public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, FloatTime, DurationUnit, FloatDuration>
 {
     /** */
@@ -101,12 +101,8 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
         return new FloatDuration(value, DurationUnit.SI);
     }
 
-    /**
-     * Construct a new Absolute Immutable FloatScalar of the right type. Each extending class must implement this method.
-     * @param value float; the float value
-     * @param unit TimeUnit; the unit
-     * @return FloatTime; a new absolute instance of the FloatScalar of the right type
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatTime instantiateAbs(final float value, final TimeUnit unit)
     {
         return new FloatTime(value, unit);
@@ -124,11 +120,8 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
         return new FloatDuration(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
-    /**
-     * Relative scalar plus Absolute scalar = Absolute scalar.
-     * @param v FloatTime; ; the value to add
-     * @return FloatTime; sum of this value and v as a new object
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatTime plus(final FloatTime v)
     {
         TimeUnit targetUnit = v.getUnit();

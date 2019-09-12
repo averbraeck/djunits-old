@@ -21,7 +21,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T16:38:21.610Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:09:56.231Z")
 public class FloatAngle extends AbstractFloatScalarRelWithAbs<DirectionUnit, FloatDirection, AngleUnit, FloatAngle>
 {
     /** */
@@ -95,12 +95,8 @@ public class FloatAngle extends AbstractFloatScalarRelWithAbs<DirectionUnit, Flo
         return new FloatAngle(value, AngleUnit.SI);
     }
 
-    /**
-     * Construct a new Absolute Immutable FloatScalar of the right type. Each extending class must implement this method.
-     * @param value float; the float value
-     * @param unit DirectionUnit; the unit
-     * @return FloatDirection; a new absolute instance of the FloatScalar of the right type
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatDirection instantiateAbs(final float value, final DirectionUnit unit)
     {
         return new FloatDirection(value, unit);
@@ -118,11 +114,8 @@ public class FloatAngle extends AbstractFloatScalarRelWithAbs<DirectionUnit, Flo
         return new FloatAngle(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
-    /**
-     * Relative scalar plus Absolute scalar = Absolute scalar.
-     * @param v FloatDirection; ; the value to add
-     * @return FloatDirection; sum of this value and v as a new object
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatDirection plus(final FloatDirection v)
     {
         DirectionUnit targetUnit = v.getUnit();

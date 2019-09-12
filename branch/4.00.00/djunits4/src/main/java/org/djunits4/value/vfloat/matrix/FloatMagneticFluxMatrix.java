@@ -3,12 +3,13 @@ package org.djunits4.value.vfloat.matrix;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.MagneticFluxUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
+import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatMagneticFlux;
+import org.djunits4.value.vfloat.vector.FloatMagneticFluxVector;
 
 /**
- * Immutable FloatMagneticFluxMatrix, a matrix of values with a MagneticFluxUnit.
+ * Immutable FloatFloatMagneticFluxMatrix, a matrix of values with a MagneticFluxUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -16,80 +17,35 @@ import org.djunits4.value.vfloat.scalar.FloatMagneticFlux;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
-public class FloatMagneticFluxMatrix extends
-        AbstractFloatMatrixRel<MagneticFluxUnit, FloatMagneticFluxMatrix, MutableFloatMagneticFluxMatrix, FloatMagneticFlux>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+public class FloatMagneticFluxMatrix
+        extends AbstractFloatMatrixRel<MagneticFluxUnit, FloatMagneticFlux, FloatMagneticFluxVector, FloatMagneticFluxMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatMagneticFluxMatrix.
-     * @param values float[][]; the values of the entries in the new Relative Immutable FloatMagneticFluxMatrix
-     * @param unit MagneticFluxUnit; the unit of the new Relative Immutable FloatMagneticFluxMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatMagneticFluxMatrix(final float[][] values, final MagneticFluxUnit unit, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatMagneticFluxMatrix.
-     * @param values FloatMagneticFlux; the values of the entries in the new Relative Immutable FloatMagneticFluxMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatMagneticFluxMatrix(final FloatMagneticFlux[][] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data FloatMatrixData; an internal data object
      * @param unit MagneticFluxUnit; the unit
      */
-    FloatMagneticFluxMatrix(final FloatMatrixData data, final MagneticFluxUnit unit)
+    public FloatMagneticFluxMatrix(final FloatMatrixData data, final MagneticFluxUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatMagneticFluxMatrix toDense()
+    public Class<FloatMagneticFlux> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return FloatMagneticFlux.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatMagneticFluxMatrix toSparse()
+    public Class<FloatMagneticFluxVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatMagneticFluxMatrix instantiateType(final FloatMatrixData fmd, final MagneticFluxUnit unit)
-    {
-        return new FloatMagneticFluxMatrix(fmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableFloatMagneticFluxMatrix instantiateMutableType(final FloatMatrixData fmd,
-            final MagneticFluxUnit unit)
-    {
-        return new MutableFloatMagneticFluxMatrix(fmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatMagneticFlux instantiateScalar(final float value, final MagneticFluxUnit unit)
-    {
-        return new FloatMagneticFlux(value, unit);
+        return FloatMagneticFluxVector.class;
     }
 
 }

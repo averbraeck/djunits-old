@@ -21,7 +21,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T16:38:21.610Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:09:56.231Z")
 public class FloatTemperature extends
         AbstractFloatScalarRelWithAbs<AbsoluteTemperatureUnit, FloatAbsoluteTemperature, TemperatureUnit, FloatTemperature>
 {
@@ -96,12 +96,8 @@ public class FloatTemperature extends
         return new FloatTemperature(value, TemperatureUnit.SI);
     }
 
-    /**
-     * Construct a new Absolute Immutable FloatScalar of the right type. Each extending class must implement this method.
-     * @param value float; the float value
-     * @param unit AbsoluteTemperatureUnit; the unit
-     * @return FloatAbsoluteTemperature; a new absolute instance of the FloatScalar of the right type
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatAbsoluteTemperature instantiateAbs(final float value, final AbsoluteTemperatureUnit unit)
     {
         return new FloatAbsoluteTemperature(value, unit);
@@ -119,11 +115,8 @@ public class FloatTemperature extends
         return new FloatTemperature(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
     }
 
-    /**
-     * Relative scalar plus Absolute scalar = Absolute scalar.
-     * @param v FloatAbsoluteTemperature; ; the value to add
-     * @return FloatAbsoluteTemperature; sum of this value and v as a new object
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatAbsoluteTemperature plus(final FloatAbsoluteTemperature v)
     {
         AbsoluteTemperatureUnit targetUnit = v.getUnit();

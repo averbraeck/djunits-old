@@ -4,9 +4,12 @@ import javax.annotation.Generated;
 
 import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.PositionUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixAbs;
+import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
+import org.djunits4.value.vfloat.scalar.FloatLength;
 import org.djunits4.value.vfloat.scalar.FloatPosition;
+import org.djunits4.value.vfloat.vector.FloatLengthVector;
+import org.djunits4.value.vfloat.vector.FloatPositionVector;
 
 /**
  * Immutable FloatPosition Matrix.
@@ -17,87 +20,34 @@ import org.djunits4.value.vfloat.scalar.FloatPosition;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
-public class FloatPositionMatrix extends AbstractFloatMatrixAbs<PositionUnit, LengthUnit, FloatPositionMatrix,
-        FloatLengthMatrix, MutableFloatPositionMatrix, FloatPosition>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+public class FloatPositionMatrix extends AbstractFloatMatrixAbs<PositionUnit, FloatPosition, FloatPositionVector,
+        FloatPositionMatrix, LengthUnit, FloatLength, FloatLengthVector, FloatLengthMatrix>
 {
     /** */
-    private static final long serialVersionUID = 20151003L;
+    private static final long serialVersionUID = 20151006L;
 
     /**
-     * Construct a new Absolute Immutable FloatPositionMatrix.
-     * @param values float[][]; the values of the entries in the new Absolute Immutable FloatPositionMatrix
-     * @param unit PositionUnit; the unit of the new Absolute Immutable FloatPositionMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatPositionMatrix(final float[][] values, final PositionUnit unit, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable FloatPositionMatrix.
-     * @param values FloatPosition[][]; the values of the entries in the new Absolute Immutable FloatPositionMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatPositionMatrix(final FloatPosition[][] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable FloatPositionMatrix.
      * @param data FloatMatrixData; an internal data object
      * @param unit PositionUnit; the unit
      */
-    FloatPositionMatrix(final FloatMatrixData data, final PositionUnit unit)
+    public FloatPositionMatrix(final FloatMatrixData data, final PositionUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatPositionMatrix toDense()
+    public Class<FloatPosition> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateTypeAbs(this.data.toDense(), getUnit());
+        return FloatPosition.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatPositionMatrix toSparse()
+    public Class<FloatPositionVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateTypeAbs(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatPositionMatrix instantiateTypeAbs(final FloatMatrixData fmd, final PositionUnit unit)
-    {
-        return new FloatPositionMatrix(fmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatLengthMatrix instantiateTypeRel(final FloatMatrixData fmd, final LengthUnit unit)
-    {
-        return new FloatLengthMatrix(fmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableFloatPositionMatrix instantiateMutableType(final FloatMatrixData fmd, final PositionUnit unit)
-    {
-        return new MutableFloatPositionMatrix(fmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatPosition instantiateScalar(final float value, final PositionUnit unit)
-    {
-        return new FloatPosition(value, unit);
+        return FloatPositionVector.class;
     }
 
 }
