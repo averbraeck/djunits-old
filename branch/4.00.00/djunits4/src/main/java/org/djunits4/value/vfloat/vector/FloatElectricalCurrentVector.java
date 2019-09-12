@@ -1,14 +1,11 @@
 package org.djunits4.value.vfloat.vector;
 
-import java.util.List;
-import java.util.SortedMap;
-
 import javax.annotation.Generated;
 
 import org.djunits4.unit.ElectricalCurrentUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatElectricalCurrent;
+import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorRel;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable Float FloatElectricalCurrentVector, a vector of values with a ElectricalCurrentUnit.
@@ -19,160 +16,29 @@ import org.djunits4.value.vfloat.scalar.FloatElectricalCurrent;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
-public class FloatElectricalCurrentVector extends AbstractFloatVectorRel<ElectricalCurrentUnit, FloatElectricalCurrentVector,
-        MutableFloatElectricalCurrentVector, FloatElectricalCurrent>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T13:56:12.916Z")
+public class FloatElectricalCurrentVector
+        extends AbstractFloatVectorRel<ElectricalCurrentUnit, FloatElectricalCurrent, FloatElectricalCurrentVector>
+
 {
     /** */
-    private static final long serialVersionUID = 20151109L;
+    private static final long serialVersionUID = 20190905L;
 
     /**
-     * Construct a new Relative Immutable Float FloatElectricalCurrentVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable Float FloatElectricalCurrentVector
-     * @param unit ElectricalCurrentUnit; the unit of the new Relative Immutable Float FloatElectricalCurrentVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatElectricalCurrentVector(final float[] values, final ElectricalCurrentUnit unit, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatElectricalCurrentVector.
-     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float
-     *            FloatElectricalCurrentVector
-     * @param unit ElectricalCurrentUnit; the unit of the new Relative Immutable Float FloatElectricalCurrentVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatElectricalCurrentVector(final List<Float> values, final ElectricalCurrentUnit unit,
-            final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatElectricalCurrentVector.
-     * @param values FloatElectricalCurrent[]; the values of the entries in the new Relative Immutable Float
-     *            FloatElectricalCurrentVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatElectricalCurrentVector(final FloatElectricalCurrent[] values, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatElectricalCurrentVector.
-     * @param values List&lt;FloatElectricalCurrent&gt;; the values of the entries in the new Relative Immutable Float
-     *            FloatElectricalCurrentVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatElectricalCurrentVector(final List<FloatElectricalCurrent> values, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatElectricalCurrentVector.
-     * @param values SortedMap&lt;Integer, FloatElectricalCurrent&gt;; the values of the entries in the new Relative Sparse
-     *            Mutable Float FloatElectricalCurrentVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatElectricalCurrentVector(final SortedMap<Integer, FloatElectricalCurrent> values, final int length,
-            final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatElectricalCurrentVector.
-     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
-     *            FloatElectricalCurrentVector
-     * @param unit ElectricalCurrentUnit; the unit of the new Relative Sparse Mutable Float FloatElectricalCurrentVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatElectricalCurrentVector(final SortedMap<Integer, Float> values, final ElectricalCurrentUnit unit,
-            final int length, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
+     * Construct an FloatElectricalCurrentVector from an internal data object.
      * @param data FloatVectorData; an internal data object
-     * @param unit the unit
+     * @param unit ElectricalCurrentUnit; the unit
      */
-    FloatElectricalCurrentVector(final FloatVectorData data, final ElectricalCurrentUnit unit)
+    public FloatElectricalCurrentVector(final FloatVectorData data, final ElectricalCurrentUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatElectricalCurrentVector instantiateType(final FloatVectorData dvd, final ElectricalCurrentUnit unit)
+    public Class<FloatElectricalCurrent> getScalarClass()
     {
-        return new FloatElectricalCurrentVector(dvd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableFloatElectricalCurrentVector instantiateMutableType(final FloatVectorData dvd,
-            final ElectricalCurrentUnit unit)
-    {
-        return new MutableFloatElectricalCurrentVector(dvd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatElectricalCurrent instantiateScalar(final float value, final ElectricalCurrentUnit unit)
-    {
-        return new FloatElectricalCurrent(value, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatElectricalCurrentVector toDense()
-    {
-        return this.data.isDense() ? (FloatElectricalCurrentVector) this : instantiateType(this.data.toDense(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatElectricalCurrentVector toSparse()
-    {
-        return this.data.isSparse() ? (FloatElectricalCurrentVector) this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Return an array of FloatElectricalCurrent Scalars from this vector.
-     * @return FloatElectricalCurrent[]; an array of FloatElectricalCurrent Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public FloatElectricalCurrent[] toArray()
-    {
-        FloatElectricalCurrent[] array = new FloatElectricalCurrent[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueRuntimeException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
+        return FloatElectricalCurrent.class;
     }
 
 }

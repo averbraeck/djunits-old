@@ -1,14 +1,11 @@
 package org.djunits4.value.vfloat.vector;
 
-import java.util.List;
-import java.util.SortedMap;
-
 import javax.annotation.Generated;
 
 import org.djunits4.unit.IlluminanceUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatIlluminance;
+import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorRel;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable Float FloatIlluminanceVector, a vector of values with a IlluminanceUnit.
@@ -19,155 +16,28 @@ import org.djunits4.value.vfloat.scalar.FloatIlluminance;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
-public class FloatIlluminanceVector
-        extends AbstractFloatVectorRel<IlluminanceUnit, FloatIlluminanceVector, MutableFloatIlluminanceVector, FloatIlluminance>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T13:56:12.916Z")
+public class FloatIlluminanceVector extends AbstractFloatVectorRel<IlluminanceUnit, FloatIlluminance, FloatIlluminanceVector>
+
 {
     /** */
-    private static final long serialVersionUID = 20151109L;
+    private static final long serialVersionUID = 20190905L;
 
     /**
-     * Construct a new Relative Immutable Float FloatIlluminanceVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable Float FloatIlluminanceVector
-     * @param unit IlluminanceUnit; the unit of the new Relative Immutable Float FloatIlluminanceVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatIlluminanceVector(final float[] values, final IlluminanceUnit unit, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatIlluminanceVector.
-     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float FloatIlluminanceVector
-     * @param unit IlluminanceUnit; the unit of the new Relative Immutable Float FloatIlluminanceVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatIlluminanceVector(final List<Float> values, final IlluminanceUnit unit, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatIlluminanceVector.
-     * @param values FloatIlluminance[]; the values of the entries in the new Relative Immutable Float FloatIlluminanceVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatIlluminanceVector(final FloatIlluminance[] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatIlluminanceVector.
-     * @param values List&lt;FloatIlluminance&gt;; the values of the entries in the new Relative Immutable Float
-     *            FloatIlluminanceVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatIlluminanceVector(final List<FloatIlluminance> values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatIlluminanceVector.
-     * @param values SortedMap&lt;Integer, FloatIlluminance&gt;; the values of the entries in the new Relative Sparse Mutable
-     *            Float FloatIlluminanceVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatIlluminanceVector(final SortedMap<Integer, FloatIlluminance> values, final int length,
-            final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatIlluminanceVector.
-     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
-     *            FloatIlluminanceVector
-     * @param unit IlluminanceUnit; the unit of the new Relative Sparse Mutable Float FloatIlluminanceVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatIlluminanceVector(final SortedMap<Integer, Float> values, final IlluminanceUnit unit, final int length,
-            final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
+     * Construct an FloatIlluminanceVector from an internal data object.
      * @param data FloatVectorData; an internal data object
-     * @param unit the unit
+     * @param unit IlluminanceUnit; the unit
      */
-    FloatIlluminanceVector(final FloatVectorData data, final IlluminanceUnit unit)
+    public FloatIlluminanceVector(final FloatVectorData data, final IlluminanceUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatIlluminanceVector instantiateType(final FloatVectorData dvd, final IlluminanceUnit unit)
+    public Class<FloatIlluminance> getScalarClass()
     {
-        return new FloatIlluminanceVector(dvd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableFloatIlluminanceVector instantiateMutableType(final FloatVectorData dvd, final IlluminanceUnit unit)
-    {
-        return new MutableFloatIlluminanceVector(dvd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatIlluminance instantiateScalar(final float value, final IlluminanceUnit unit)
-    {
-        return new FloatIlluminance(value, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatIlluminanceVector toDense()
-    {
-        return this.data.isDense() ? (FloatIlluminanceVector) this : instantiateType(this.data.toDense(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatIlluminanceVector toSparse()
-    {
-        return this.data.isSparse() ? (FloatIlluminanceVector) this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Return an array of FloatIlluminance Scalars from this vector.
-     * @return FloatIlluminance[]; an array of FloatIlluminance Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public FloatIlluminance[] toArray()
-    {
-        FloatIlluminance[] array = new FloatIlluminance[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueRuntimeException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
+        return FloatIlluminance.class;
     }
 
 }

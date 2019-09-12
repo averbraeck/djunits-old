@@ -1,14 +1,11 @@
 package org.djunits4.value.vfloat.vector;
 
-import java.util.List;
-import java.util.SortedMap;
-
 import javax.annotation.Generated;
 
 import org.djunits4.unit.AngleSolidUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatAngleSolid;
+import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorRel;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable Float FloatAngleSolidVector, a vector of values with a AngleSolidUnit.
@@ -19,155 +16,28 @@ import org.djunits4.value.vfloat.scalar.FloatAngleSolid;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
-public class FloatAngleSolidVector
-        extends AbstractFloatVectorRel<AngleSolidUnit, FloatAngleSolidVector, MutableFloatAngleSolidVector, FloatAngleSolid>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T13:56:12.916Z")
+public class FloatAngleSolidVector extends AbstractFloatVectorRel<AngleSolidUnit, FloatAngleSolid, FloatAngleSolidVector>
+
 {
     /** */
-    private static final long serialVersionUID = 20151109L;
+    private static final long serialVersionUID = 20190905L;
 
     /**
-     * Construct a new Relative Immutable Float FloatAngleSolidVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable Float FloatAngleSolidVector
-     * @param unit AngleSolidUnit; the unit of the new Relative Immutable Float FloatAngleSolidVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatAngleSolidVector(final float[] values, final AngleSolidUnit unit, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatAngleSolidVector.
-     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float FloatAngleSolidVector
-     * @param unit AngleSolidUnit; the unit of the new Relative Immutable Float FloatAngleSolidVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatAngleSolidVector(final List<Float> values, final AngleSolidUnit unit, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatAngleSolidVector.
-     * @param values FloatAngleSolid[]; the values of the entries in the new Relative Immutable Float FloatAngleSolidVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatAngleSolidVector(final FloatAngleSolid[] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatAngleSolidVector.
-     * @param values List&lt;FloatAngleSolid&gt;; the values of the entries in the new Relative Immutable Float
-     *            FloatAngleSolidVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatAngleSolidVector(final List<FloatAngleSolid> values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatAngleSolidVector.
-     * @param values SortedMap&lt;Integer, FloatAngleSolid&gt;; the values of the entries in the new Relative Sparse Mutable
-     *            Float FloatAngleSolidVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatAngleSolidVector(final SortedMap<Integer, FloatAngleSolid> values, final int length,
-            final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatAngleSolidVector.
-     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
-     *            FloatAngleSolidVector
-     * @param unit AngleSolidUnit; the unit of the new Relative Sparse Mutable Float FloatAngleSolidVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatAngleSolidVector(final SortedMap<Integer, Float> values, final AngleSolidUnit unit, final int length,
-            final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
+     * Construct an FloatAngleSolidVector from an internal data object.
      * @param data FloatVectorData; an internal data object
-     * @param unit the unit
+     * @param unit AngleSolidUnit; the unit
      */
-    FloatAngleSolidVector(final FloatVectorData data, final AngleSolidUnit unit)
+    public FloatAngleSolidVector(final FloatVectorData data, final AngleSolidUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatAngleSolidVector instantiateType(final FloatVectorData dvd, final AngleSolidUnit unit)
+    public Class<FloatAngleSolid> getScalarClass()
     {
-        return new FloatAngleSolidVector(dvd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableFloatAngleSolidVector instantiateMutableType(final FloatVectorData dvd, final AngleSolidUnit unit)
-    {
-        return new MutableFloatAngleSolidVector(dvd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatAngleSolid instantiateScalar(final float value, final AngleSolidUnit unit)
-    {
-        return new FloatAngleSolid(value, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatAngleSolidVector toDense()
-    {
-        return this.data.isDense() ? (FloatAngleSolidVector) this : instantiateType(this.data.toDense(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatAngleSolidVector toSparse()
-    {
-        return this.data.isSparse() ? (FloatAngleSolidVector) this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Return an array of FloatAngleSolid Scalars from this vector.
-     * @return FloatAngleSolid[]; an array of FloatAngleSolid Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public FloatAngleSolid[] toArray()
-    {
-        FloatAngleSolid[] array = new FloatAngleSolid[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueRuntimeException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
+        return FloatAngleSolid.class;
     }
 
 }

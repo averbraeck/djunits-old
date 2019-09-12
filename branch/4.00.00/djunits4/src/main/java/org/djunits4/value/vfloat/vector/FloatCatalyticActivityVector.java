@@ -1,14 +1,11 @@
 package org.djunits4.value.vfloat.vector;
 
-import java.util.List;
-import java.util.SortedMap;
-
 import javax.annotation.Generated;
 
 import org.djunits4.unit.CatalyticActivityUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatCatalyticActivity;
+import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorRel;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable Float FloatCatalyticActivityVector, a vector of values with a CatalyticActivityUnit.
@@ -19,160 +16,29 @@ import org.djunits4.value.vfloat.scalar.FloatCatalyticActivity;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
-public class FloatCatalyticActivityVector extends AbstractFloatVectorRel<CatalyticActivityUnit, FloatCatalyticActivityVector,
-        MutableFloatCatalyticActivityVector, FloatCatalyticActivity>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T13:56:12.916Z")
+public class FloatCatalyticActivityVector
+        extends AbstractFloatVectorRel<CatalyticActivityUnit, FloatCatalyticActivity, FloatCatalyticActivityVector>
+
 {
     /** */
-    private static final long serialVersionUID = 20151109L;
+    private static final long serialVersionUID = 20190905L;
 
     /**
-     * Construct a new Relative Immutable Float FloatCatalyticActivityVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable Float FloatCatalyticActivityVector
-     * @param unit CatalyticActivityUnit; the unit of the new Relative Immutable Float FloatCatalyticActivityVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatCatalyticActivityVector(final float[] values, final CatalyticActivityUnit unit, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatCatalyticActivityVector.
-     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float
-     *            FloatCatalyticActivityVector
-     * @param unit CatalyticActivityUnit; the unit of the new Relative Immutable Float FloatCatalyticActivityVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatCatalyticActivityVector(final List<Float> values, final CatalyticActivityUnit unit,
-            final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatCatalyticActivityVector.
-     * @param values FloatCatalyticActivity[]; the values of the entries in the new Relative Immutable Float
-     *            FloatCatalyticActivityVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatCatalyticActivityVector(final FloatCatalyticActivity[] values, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatCatalyticActivityVector.
-     * @param values List&lt;FloatCatalyticActivity&gt;; the values of the entries in the new Relative Immutable Float
-     *            FloatCatalyticActivityVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatCatalyticActivityVector(final List<FloatCatalyticActivity> values, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatCatalyticActivityVector.
-     * @param values SortedMap&lt;Integer, FloatCatalyticActivity&gt;; the values of the entries in the new Relative Sparse
-     *            Mutable Float FloatCatalyticActivityVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatCatalyticActivityVector(final SortedMap<Integer, FloatCatalyticActivity> values, final int length,
-            final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatCatalyticActivityVector.
-     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
-     *            FloatCatalyticActivityVector
-     * @param unit CatalyticActivityUnit; the unit of the new Relative Sparse Mutable Float FloatCatalyticActivityVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatCatalyticActivityVector(final SortedMap<Integer, Float> values, final CatalyticActivityUnit unit,
-            final int length, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
+     * Construct an FloatCatalyticActivityVector from an internal data object.
      * @param data FloatVectorData; an internal data object
-     * @param unit the unit
+     * @param unit CatalyticActivityUnit; the unit
      */
-    FloatCatalyticActivityVector(final FloatVectorData data, final CatalyticActivityUnit unit)
+    public FloatCatalyticActivityVector(final FloatVectorData data, final CatalyticActivityUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatCatalyticActivityVector instantiateType(final FloatVectorData dvd, final CatalyticActivityUnit unit)
+    public Class<FloatCatalyticActivity> getScalarClass()
     {
-        return new FloatCatalyticActivityVector(dvd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableFloatCatalyticActivityVector instantiateMutableType(final FloatVectorData dvd,
-            final CatalyticActivityUnit unit)
-    {
-        return new MutableFloatCatalyticActivityVector(dvd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatCatalyticActivity instantiateScalar(final float value, final CatalyticActivityUnit unit)
-    {
-        return new FloatCatalyticActivity(value, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatCatalyticActivityVector toDense()
-    {
-        return this.data.isDense() ? (FloatCatalyticActivityVector) this : instantiateType(this.data.toDense(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatCatalyticActivityVector toSparse()
-    {
-        return this.data.isSparse() ? (FloatCatalyticActivityVector) this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Return an array of FloatCatalyticActivity Scalars from this vector.
-     * @return FloatCatalyticActivity[]; an array of FloatCatalyticActivity Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public FloatCatalyticActivity[] toArray()
-    {
-        FloatCatalyticActivity[] array = new FloatCatalyticActivity[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueRuntimeException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
+        return FloatCatalyticActivity.class;
     }
 
 }

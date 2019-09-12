@@ -1,4 +1,4 @@
-package org.djunits4.value.vfloat.vector;
+package org.djunits4.value.vfloat.vector.data;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 import org.djunits4.unit.scale.Scale;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
-import org.djunits4.value.vfloat.scalar.FloatScalarInterface;
+import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
 
 /**
  * Stores the data for a FloatVector and carries out basic operations.
@@ -20,7 +20,7 @@ import org.djunits4.value.vfloat.scalar.FloatScalarInterface;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-abstract class FloatVectorData implements Serializable
+public abstract class FloatVectorData implements Serializable
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -117,7 +117,7 @@ abstract class FloatVectorData implements Serializable
      * @return FloatVectorData; the FloatVectorData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
      */
-    public static FloatVectorData instantiate(final FloatScalarInterface[] values, final StorageType storageType)
+    public static FloatVectorData instantiate(final FloatScalarInterface<?, ?>[] values, final StorageType storageType)
             throws ValueRuntimeException
     {
         if (values == null)
@@ -148,7 +148,7 @@ abstract class FloatVectorData implements Serializable
      * @return FloatVectorData; the FloatVectorData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
      */
-    public static FloatVectorData instantiateLD(final List<? extends FloatScalarInterface> values,
+    public static FloatVectorData instantiateLD(final List<? extends FloatScalarInterface<?, ?>> values,
             final StorageType storageType) throws ValueRuntimeException
     {
         if (values == null)
@@ -181,7 +181,7 @@ abstract class FloatVectorData implements Serializable
      * @return FloatVectorData; the FloatVectorData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
      */
-    public static <S extends FloatScalarInterface> FloatVectorData instantiateMD(final SortedMap<Integer, S> values,
+    public static <S extends FloatScalarInterface<?, ?>> FloatVectorData instantiateMD(final SortedMap<Integer, S> values,
             final int length, final StorageType storageType) throws ValueRuntimeException
     {
         if (values == null)

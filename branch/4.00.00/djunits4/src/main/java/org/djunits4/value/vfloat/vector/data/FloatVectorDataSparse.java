@@ -1,4 +1,4 @@
-package org.djunits4.value.vfloat.vector;
+package org.djunits4.value.vfloat.vector.data;
 
 import java.util.Arrays;
 import java.util.stream.IntStream;

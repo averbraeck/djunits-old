@@ -1,10 +1,12 @@
-package org.djunits4.value.vfloat.vector;
+package org.djunits4.value.vfloat.vector.base;
 
 import org.djunits4.unit.Unit;
 import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.base.Scalar;
+import org.djunits4.value.base.Vector;
 
 /**
- * Interface for the Immutable and Mutable FloatVector classes.
+ * Interface for the FloatVector classes, specifically defining the methods that deal with float values.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -12,21 +14,12 @@ import org.djunits4.value.ValueRuntimeException;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  * @param <U> the unit
+ * @param <S> the generic scalar type belonging to U
+ * @param <V> the generic vector type
  */
-public interface FloatVectorInterface<U extends Unit<U>>
+public interface FloatVectorInterface<U extends Unit<U>, S extends Scalar<U, S>, V extends FloatVectorInterface<U, S, V>>
+        extends Vector<U, S, V>
 {
-    /**
-     * Retrieve the size of the vector.
-     * @return int; the size of the vector
-     */
-    int size();
-
-    /**
-     * Count the number of cells that have a non-zero value.
-     * @return int; the number of cells having non-zero value
-     */
-    int cardinality();
-
     /**
      * Retrieve the value stored at a specified position in the standard SI unit.
      * @param index int; index of the value to retrieve
@@ -53,24 +46,6 @@ public interface FloatVectorInterface<U extends Unit<U>>
     float getInUnit(int index, U targetUnit) throws ValueRuntimeException;
 
     /**
-     * Create and return a mutable version of this vector.
-     * @return MutableFloatVectorInterface&lt;U&gt;; a mutable version of this vector
-     */
-    MutableFloatVectorInterface<U> mutable();
-
-    /**
-     * Create and return a sparse version of this vector.
-     * @return FloatVectorInterface&lt;U&gt;; a sparse version of this vector
-     */
-    FloatVectorInterface<U> toSparse();
-
-    /**
-     * Create and return a dense version of this vector.
-     * @return DoubleVectorInterface&lt;U&gt;; a dense version of this vector
-     */
-    FloatVectorInterface<U> toDense();
-
-    /**
      * Compute the sum of all values of this vector.
      * @return float; the sum of all values of this vector
      */
@@ -94,36 +69,4 @@ public interface FloatVectorInterface<U extends Unit<U>>
      * @return float[]; the values converted into the specified unit
      */
     float[] getValuesInUnit(U targetUnit);
-
-    /**
-     * Concise description of this DoubleVectorInterface.
-     * @return a String with the Vector, non-verbose, with the unit attached.
-     */
-    @Override
-    String toString();
-
-    /**
-     * Somewhat verbose description of this FloatVectorInterface with the values expressed in the specified unit.
-     * @param displayUnit U; the unit into which the values are converted for display
-     * @return String; printable string with the vector contents expressed in the specified unit
-     */
-    String toString(U displayUnit);
-
-    /**
-     * Somewhat verbose description of this FloatVector with optional type and unit information.
-     * @param verbose boolean; if true; include type info; if false; exclude type info
-     * @param withUnit boolean; if true; include the unit; of false; exclude the unit
-     * @return String; printable string with the vector contents
-     */
-    String toString(boolean verbose, boolean withUnit);
-
-    /**
-     * Somewhat verbose description of this FloatVector with the values expressed in the specified unit.
-     * @param displayUnit U; the unit into which the values are converted for display
-     * @param verbose boolean; if true; include type info; if false; exclude type info
-     * @param withUnit boolean; if true; include the unit; of false; exclude the unit
-     * @return String; printable string with the vector contents
-     */
-    String toString(U displayUnit, boolean verbose, boolean withUnit);
-
 }

@@ -1,15 +1,13 @@
 package org.djunits4.value.vfloat.vector;
 
-import java.util.List;
-import java.util.SortedMap;
-
 import javax.annotation.Generated;
 
 import org.djunits4.unit.AngleUnit;
 import org.djunits4.unit.DirectionUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vfloat.scalar.FloatAngle;
 import org.djunits4.value.vfloat.scalar.FloatDirection;
+import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorAbs;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Absolute FloatDirection Vector.
@@ -20,162 +18,30 @@ import org.djunits4.value.vfloat.scalar.FloatDirection;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
-public class FloatDirectionVector extends AbstractFloatVectorAbs<DirectionUnit, AngleUnit, FloatDirectionVector,
-        FloatAngleVector, MutableFloatDirectionVector, FloatDirection>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T13:56:12.916Z")
+public class FloatDirectionVector extends
+        AbstractFloatVectorAbs<DirectionUnit, FloatDirection, FloatDirectionVector, AngleUnit, FloatAngle, FloatAngleVector>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
 
     /**
-     * Construct a new Absolute Immutable FloatDirectionVector.
-     * @param values float[]; the values of the entries in the new Absolute Immutable FloatDirectionVector
-     * @param unit DirectionUnit; the unit of the new Absolute Immutable FloatDirectionVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatDirectionVector(final float[] values, final DirectionUnit unit, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable FloatDirectionVector.
-     * @param values List&lt;Float&gt;; the values of the entries in the new Absolute Immutable FloatDirectionVector
-     * @param unit DirectionUnit; the unit of the new Absolute Immutable FloatDirectionVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatDirectionVector(final List<Float> values, final DirectionUnit unit, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable FloatDirectionVector.
-     * @param values FloatDirection[]; the values of the entries in the new Absolute Immutable FloatDirectionVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatDirectionVector(final FloatDirection[] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable FloatDirectionVector.
-     * @param values List&lt;FloatDirection&gt;; the values of the entries in the new Absolute Immutable FloatDirectionVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatDirectionVector(final List<FloatDirection> values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable FloatDirectionVector.
-     * @param values SortedMap&lt;Integer, FloatDirection&gt;; the values of the entries in the new Absolute Sparse Mutable
-     *            FloatDirectionVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatDirectionVector(final SortedMap<Integer, FloatDirection> values, final int length,
-            final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable FloatDirectionVector.
-     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Absolute Sparse Mutable
-     *            FloatDirectionVector
-     * @param unit DirectionUnit; the unit of the new Absolute Sparse Mutable FloatDirectionVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatDirectionVector(final SortedMap<Integer, Float> values, final DirectionUnit unit, final int length,
-            final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable FloatDirectionVector.
+     * Construct a new Absative Immutable FloatDirectionVector.
      * @param data FloatVectorData; an internal data object
      * @param unit DirectionUnit; the unit
      */
-    FloatDirectionVector(final FloatVectorData data, final DirectionUnit unit)
+    public FloatDirectionVector(final FloatVectorData data, final DirectionUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatDirectionVector instantiateTypeAbs(final FloatVectorData dvd, final DirectionUnit unit)
-    {
-        return new FloatDirectionVector(dvd, unit);
-    }
+    public Class<FloatDirection>
 
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatAngleVector instantiateTypeRel(final FloatVectorData dvd, final AngleUnit unit)
+            getScalarClass()
     {
-        return new FloatAngleVector(dvd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableFloatDirectionVector instantiateMutableType(final FloatVectorData dvd, final DirectionUnit unit)
-    {
-        return new MutableFloatDirectionVector(dvd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatDirection instantiateScalar(final float value, final DirectionUnit unit)
-    {
-        return new FloatDirection(value, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatDirectionVector toDense()
-    {
-        return this.data.isDense() ? (FloatDirectionVector) this : instantiateTypeAbs(this.data.toDense(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatDirectionVector toSparse()
-    {
-        return this.data.isSparse() ? (FloatDirectionVector) this : instantiateTypeAbs(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Return an array of FloatDirection Scalars from this vector.
-     * @return FloatDirection[]; an array of FloatDirection Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public FloatDirection[] toArray()
-    {
-        FloatDirection[] array = new FloatDirection[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueRuntimeException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
+        return FloatDirection.class;
     }
 
 }

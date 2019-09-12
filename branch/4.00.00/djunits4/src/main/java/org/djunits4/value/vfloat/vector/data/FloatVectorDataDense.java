@@ -1,10 +1,10 @@
-package org.djunits4.value.vfloat.vector;
+package org.djunits4.value.vfloat.vector.data;
 
 import java.util.stream.IntStream;
 
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
-import org.djunits4.value.vfloat.FloatFunction;
+import org.djunits4.value.vfloat.function.FloatFunction;
 
 /**
  * Stores dense data for a FloatVector and carries out basic operations.

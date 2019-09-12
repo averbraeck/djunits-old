@@ -1,14 +1,11 @@
 package org.djunits4.value.vfloat.vector;
 
-import java.util.List;
-import java.util.SortedMap;
-
 import javax.annotation.Generated;
 
 import org.djunits4.unit.ElectricalConductanceUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatElectricalConductance;
+import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorRel;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable Float FloatElectricalConductanceVector, a vector of values with a ElectricalConductanceUnit.
@@ -19,162 +16,29 @@ import org.djunits4.value.vfloat.scalar.FloatElectricalConductance;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
-public class FloatElectricalConductanceVector extends AbstractFloatVectorRel<ElectricalConductanceUnit,
-        FloatElectricalConductanceVector, MutableFloatElectricalConductanceVector, FloatElectricalConductance>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T13:56:12.916Z")
+public class FloatElectricalConductanceVector
+        extends AbstractFloatVectorRel<ElectricalConductanceUnit, FloatElectricalConductance, FloatElectricalConductanceVector>
+
 {
     /** */
-    private static final long serialVersionUID = 20151109L;
+    private static final long serialVersionUID = 20190905L;
 
     /**
-     * Construct a new Relative Immutable Float FloatElectricalConductanceVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable Float FloatElectricalConductanceVector
-     * @param unit ElectricalConductanceUnit; the unit of the new Relative Immutable Float FloatElectricalConductanceVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatElectricalConductanceVector(final float[] values, final ElectricalConductanceUnit unit,
-            final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatElectricalConductanceVector.
-     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float
-     *            FloatElectricalConductanceVector
-     * @param unit ElectricalConductanceUnit; the unit of the new Relative Immutable Float FloatElectricalConductanceVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatElectricalConductanceVector(final List<Float> values, final ElectricalConductanceUnit unit,
-            final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatElectricalConductanceVector.
-     * @param values FloatElectricalConductance[]; the values of the entries in the new Relative Immutable Float
-     *            FloatElectricalConductanceVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatElectricalConductanceVector(final FloatElectricalConductance[] values, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatElectricalConductanceVector.
-     * @param values List&lt;FloatElectricalConductance&gt;; the values of the entries in the new Relative Immutable Float
-     *            FloatElectricalConductanceVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatElectricalConductanceVector(final List<FloatElectricalConductance> values, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatElectricalConductanceVector.
-     * @param values SortedMap&lt;Integer, FloatElectricalConductance&gt;; the values of the entries in the new Relative Sparse
-     *            Mutable Float FloatElectricalConductanceVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatElectricalConductanceVector(final SortedMap<Integer, FloatElectricalConductance> values, final int length,
-            final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatElectricalConductanceVector.
-     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
-     *            FloatElectricalConductanceVector
-     * @param unit ElectricalConductanceUnit; the unit of the new Relative Sparse Mutable Float FloatElectricalConductanceVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatElectricalConductanceVector(final SortedMap<Integer, Float> values, final ElectricalConductanceUnit unit,
-            final int length, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
+     * Construct an FloatElectricalConductanceVector from an internal data object.
      * @param data FloatVectorData; an internal data object
-     * @param unit the unit
+     * @param unit ElectricalConductanceUnit; the unit
      */
-    FloatElectricalConductanceVector(final FloatVectorData data, final ElectricalConductanceUnit unit)
+    public FloatElectricalConductanceVector(final FloatVectorData data, final ElectricalConductanceUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatElectricalConductanceVector instantiateType(final FloatVectorData dvd,
-            final ElectricalConductanceUnit unit)
+    public Class<FloatElectricalConductance> getScalarClass()
     {
-        return new FloatElectricalConductanceVector(dvd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableFloatElectricalConductanceVector instantiateMutableType(final FloatVectorData dvd,
-            final ElectricalConductanceUnit unit)
-    {
-        return new MutableFloatElectricalConductanceVector(dvd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatElectricalConductance instantiateScalar(final float value, final ElectricalConductanceUnit unit)
-    {
-        return new FloatElectricalConductance(value, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatElectricalConductanceVector toDense()
-    {
-        return this.data.isDense() ? (FloatElectricalConductanceVector) this : instantiateType(this.data.toDense(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatElectricalConductanceVector toSparse()
-    {
-        return this.data.isSparse() ? (FloatElectricalConductanceVector) this
-                : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Return an array of FloatElectricalConductance Scalars from this vector.
-     * @return FloatElectricalConductance[]; an array of FloatElectricalConductance Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public FloatElectricalConductance[] toArray()
-    {
-        FloatElectricalConductance[] array = new FloatElectricalConductance[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueRuntimeException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
+        return FloatElectricalConductance.class;
     }
 
 }

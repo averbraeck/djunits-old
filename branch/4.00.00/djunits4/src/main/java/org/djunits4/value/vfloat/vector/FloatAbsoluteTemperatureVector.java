@@ -1,15 +1,13 @@
 package org.djunits4.value.vfloat.vector;
 
-import java.util.List;
-import java.util.SortedMap;
-
 import javax.annotation.Generated;
 
 import org.djunits4.unit.AbsoluteTemperatureUnit;
 import org.djunits4.unit.TemperatureUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatAbsoluteTemperature;
+import org.djunits4.value.vfloat.scalar.FloatTemperature;
+import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorAbs;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Absolute FloatAbsoluteTemperature Vector.
@@ -20,169 +18,30 @@ import org.djunits4.value.vfloat.scalar.FloatAbsoluteTemperature;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
-public class FloatAbsoluteTemperatureVector extends AbstractFloatVectorAbs<AbsoluteTemperatureUnit, TemperatureUnit,
-        FloatAbsoluteTemperatureVector, FloatTemperatureVector, MutableFloatAbsoluteTemperatureVector, FloatAbsoluteTemperature>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T13:56:12.916Z")
+public class FloatAbsoluteTemperatureVector extends AbstractFloatVectorAbs<AbsoluteTemperatureUnit, FloatAbsoluteTemperature,
+        FloatAbsoluteTemperatureVector, TemperatureUnit, FloatTemperature, FloatTemperatureVector>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
 
     /**
-     * Construct a new Absolute Immutable FloatAbsoluteTemperatureVector.
-     * @param values float[]; the values of the entries in the new Absolute Immutable FloatAbsoluteTemperatureVector
-     * @param unit AbsoluteTemperatureUnit; the unit of the new Absolute Immutable FloatAbsoluteTemperatureVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatAbsoluteTemperatureVector(final float[] values, final AbsoluteTemperatureUnit unit,
-            final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable FloatAbsoluteTemperatureVector.
-     * @param values List&lt;Float&gt;; the values of the entries in the new Absolute Immutable FloatAbsoluteTemperatureVector
-     * @param unit AbsoluteTemperatureUnit; the unit of the new Absolute Immutable FloatAbsoluteTemperatureVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatAbsoluteTemperatureVector(final List<Float> values, final AbsoluteTemperatureUnit unit,
-            final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable FloatAbsoluteTemperatureVector.
-     * @param values FloatAbsoluteTemperature[]; the values of the entries in the new Absolute Immutable
-     *            FloatAbsoluteTemperatureVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatAbsoluteTemperatureVector(final FloatAbsoluteTemperature[] values, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable FloatAbsoluteTemperatureVector.
-     * @param values List&lt;FloatAbsoluteTemperature&gt;; the values of the entries in the new Absolute Immutable
-     *            FloatAbsoluteTemperatureVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatAbsoluteTemperatureVector(final List<FloatAbsoluteTemperature> values, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable FloatAbsoluteTemperatureVector.
-     * @param values SortedMap&lt;Integer, FloatAbsoluteTemperature&gt;; the values of the entries in the new Absolute Sparse
-     *            Mutable FloatAbsoluteTemperatureVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatAbsoluteTemperatureVector(final SortedMap<Integer, FloatAbsoluteTemperature> values, final int length,
-            final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable FloatAbsoluteTemperatureVector.
-     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Absolute Sparse Mutable
-     *            FloatAbsoluteTemperatureVector
-     * @param unit AbsoluteTemperatureUnit; the unit of the new Absolute Sparse Mutable FloatAbsoluteTemperatureVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatAbsoluteTemperatureVector(final SortedMap<Integer, Float> values, final AbsoluteTemperatureUnit unit,
-            final int length, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable FloatAbsoluteTemperatureVector.
+     * Construct a new Absative Immutable FloatAbsoluteTemperatureVector.
      * @param data FloatVectorData; an internal data object
      * @param unit AbsoluteTemperatureUnit; the unit
      */
-    FloatAbsoluteTemperatureVector(final FloatVectorData data, final AbsoluteTemperatureUnit unit)
+    public FloatAbsoluteTemperatureVector(final FloatVectorData data, final AbsoluteTemperatureUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatAbsoluteTemperatureVector instantiateTypeAbs(final FloatVectorData dvd,
-            final AbsoluteTemperatureUnit unit)
-    {
-        return new FloatAbsoluteTemperatureVector(dvd, unit);
-    }
+    public Class<FloatAbsoluteTemperature>
 
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatTemperatureVector instantiateTypeRel(final FloatVectorData dvd, final TemperatureUnit unit)
+            getScalarClass()
     {
-        return new FloatTemperatureVector(dvd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableFloatAbsoluteTemperatureVector instantiateMutableType(final FloatVectorData dvd,
-            final AbsoluteTemperatureUnit unit)
-    {
-        return new MutableFloatAbsoluteTemperatureVector(dvd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatAbsoluteTemperature instantiateScalar(final float value, final AbsoluteTemperatureUnit unit)
-    {
-        return new FloatAbsoluteTemperature(value, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatAbsoluteTemperatureVector toDense()
-    {
-        return this.data.isDense() ? (FloatAbsoluteTemperatureVector) this : instantiateTypeAbs(this.data.toDense(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatAbsoluteTemperatureVector toSparse()
-    {
-        return this.data.isSparse() ? (FloatAbsoluteTemperatureVector) this
-                : instantiateTypeAbs(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Return an array of FloatAbsoluteTemperature Scalars from this vector.
-     * @return FloatAbsoluteTemperature[]; an array of FloatAbsoluteTemperature Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public FloatAbsoluteTemperature[] toArray()
-    {
-        FloatAbsoluteTemperature[] array = new FloatAbsoluteTemperature[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueRuntimeException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
+        return FloatAbsoluteTemperature.class;
     }
 
 }

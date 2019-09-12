@@ -1,14 +1,13 @@
 package org.djunits4.value.vfloat.vector;
 
-import java.util.List;
-import java.util.SortedMap;
-
 import javax.annotation.Generated;
 
 import org.djunits4.unit.DurationUnit;
-import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
+import org.djunits4.unit.TimeUnit;
 import org.djunits4.value.vfloat.scalar.FloatDuration;
+import org.djunits4.value.vfloat.scalar.FloatTime;
+import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorRelWithAbs;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Relative FloatDuration Vector.
@@ -19,155 +18,28 @@ import org.djunits4.value.vfloat.scalar.FloatDuration;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
-public class FloatDurationVector
-        extends AbstractFloatVectorRel<DurationUnit, FloatDurationVector, MutableFloatDurationVector, FloatDuration>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T13:56:12.916Z")
+public class FloatDurationVector extends
+        AbstractFloatVectorRelWithAbs<TimeUnit, FloatTime, FloatTimeVector, DurationUnit, FloatDuration, FloatDurationVector>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
 
     /**
      * Construct a new Relative Immutable FloatDurationVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable FloatDurationVector
-     * @param unit DurationUnit; the unit of the new Relative Immutable FloatDurationVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatDurationVector(final float[] values, final DurationUnit unit, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatDurationVector.
-     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable FloatDurationVector
-     * @param unit DurationUnit; the unit of the new Relative Immutable FloatDurationVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatDurationVector(final List<Float> values, final DurationUnit unit, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatDurationVector.
-     * @param values FloatDuration[]; the values of the entries in the new Relative Immutable FloatDurationVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatDurationVector(final FloatDuration[] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatDurationVector.
-     * @param values List&lt;FloatDuration&gt;; the values of the entries in the new Relative Immutable FloatDurationVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatDurationVector(final List<FloatDuration> values, final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatDurationVector.
-     * @param values SortedMap&lt;Integer, FloatDuration&gt;; the values of the entries in the new Relative Sparse Mutable
-     *            FloatDurationVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public FloatDurationVector(final SortedMap<Integer, FloatDuration> values, final int length, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatDurationVector.
-     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable
-     *            FloatDurationVector
-     * @param unit DurationUnit; the unit of the new Relative Sparse Mutable FloatDurationVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueRuntimeException when values is null
-     */
-    public FloatDurationVector(final SortedMap<Integer, Float> values, final DurationUnit unit, final int length,
-            final StorageType storageType) throws ValueRuntimeException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatDurationVector.
      * @param data FloatVectorData; an internal data object
      * @param unit DurationUnit; the unit
      */
-    FloatDurationVector(final FloatVectorData data, final DurationUnit unit)
+    public FloatDurationVector(final FloatVectorData data, final DurationUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatDurationVector instantiateType(final FloatVectorData dvd, final DurationUnit unit)
+    public Class<FloatDuration> getScalarClass()
     {
-        return new FloatDurationVector(dvd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableFloatDurationVector instantiateMutableType(final FloatVectorData dvd, final DurationUnit unit)
-    {
-        return new MutableFloatDurationVector(dvd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatDuration instantiateScalar(final float value, final DurationUnit unit)
-    {
-        return new FloatDuration(value, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatDurationVector toDense()
-    {
-        return this.data.isDense() ? (FloatDurationVector) this : instantiateType(this.data.toDense(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatDurationVector toSparse()
-    {
-        return this.data.isSparse() ? (FloatDurationVector) this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Return an array of FloatDuration Scalars from this vector.
-     * @return FloatDuration[]; an array of FloatDuration Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public FloatDuration[] toArray()
-    {
-        FloatDuration[] array = new FloatDuration[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueRuntimeException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
+        return FloatDuration.class;
     }
 
 }
