@@ -1,5 +1,6 @@
 package org.djunits4.unit.util;
 
+import org.djunits4.unit.AbsoluteTemperatureUnit;
 import org.djunits4.unit.AbsorbedDoseUnit;
 import org.djunits4.unit.AccelerationUnit;
 import org.djunits4.unit.AmountOfSubstanceUnit;
@@ -9,6 +10,7 @@ import org.djunits4.unit.AreaUnit;
 import org.djunits4.unit.CatalyticActivityUnit;
 import org.djunits4.unit.DensityUnit;
 import org.djunits4.unit.DimensionlessUnit;
+import org.djunits4.unit.DirectionUnit;
 import org.djunits4.unit.DurationUnit;
 import org.djunits4.unit.ElectricalCapacitanceUnit;
 import org.djunits4.unit.ElectricalChargeUnit;
@@ -31,11 +33,13 @@ import org.djunits4.unit.LuminousIntensityUnit;
 import org.djunits4.unit.MagneticFluxDensityUnit;
 import org.djunits4.unit.MagneticFluxUnit;
 import org.djunits4.unit.MassUnit;
+import org.djunits4.unit.PositionUnit;
 import org.djunits4.unit.PowerUnit;
 import org.djunits4.unit.PressureUnit;
 import org.djunits4.unit.RadioActivityUnit;
 import org.djunits4.unit.SpeedUnit;
 import org.djunits4.unit.TemperatureUnit;
+import org.djunits4.unit.TimeUnit;
 import org.djunits4.unit.TorqueUnit;
 import org.djunits4.unit.VolumeUnit;
 
@@ -62,6 +66,12 @@ import org.djunits4.unit.VolumeUnit;
 public interface UNITS
 {
     // @formatter:off
+    
+    /****************************************************************************************************************/
+    /******************************************** ABSOLUTE TEMPERATURE **********************************************/
+    /****************************************************************************************************************/
+
+    AbsoluteTemperatureUnit KELVIN_ABS          = AbsoluteTemperatureUnit.KELVIN;
     
     /****************************************************************************************************************/
     /*********************************** ABSORBED DOSE (OF IONIZING RADIATION) **************************************/
@@ -150,6 +160,12 @@ public interface UNITS
 
     DimensionlessUnit UNIT                      = DimensionlessUnit.SI;
 
+    /****************************************************************************************************************/
+    /************************************************* DIRECTION ****************************************************/
+    /****************************************************************************************************************/
+
+    DirectionUnit EAST_RADIAN                   = DirectionUnit.EAST_RADIAN;
+    
     /****************************************************************************************************************/
     /************************************************** DURATION ****************************************************/
     /****************************************************************************************************************/
@@ -439,6 +455,12 @@ public interface UNITS
     MassUnit MASS_GIGAELECTRONVOLT              = MassUnit.GIGAELECTRONVOLT;
 
     /****************************************************************************************************************/
+    /************************************************** POSITION ****************************************************/
+    /****************************************************************************************************************/
+
+    PositionUnit METER_ABS                      = PositionUnit.METER;
+    
+    /****************************************************************************************************************/
     /*************************************************** POWER  *****************************************************/
     /****************************************************************************************************************/
 
@@ -514,6 +536,12 @@ public interface UNITS
     TemperatureUnit DEGREE_RANKINE              = TemperatureUnit.DEGREE_RANKINE;
     TemperatureUnit DEGREE_REAUMUR              = TemperatureUnit.DEGREE_REAUMUR;
 
+    /****************************************************************************************************************/
+    /**************************************************** TIME ******************************************************/
+    /****************************************************************************************************************/
+
+    TimeUnit SECOND_ABS                         = TimeUnit.BASE_SECOND;
+    
     /****************************************************************************************************************/
     /*************************************************** TORQUE *****************************************************/
     /****************************************************************************************************************/
