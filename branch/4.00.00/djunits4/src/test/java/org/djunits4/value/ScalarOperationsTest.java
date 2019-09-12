@@ -19,11 +19,11 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarAbs;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 import org.djunits4.value.vdouble.scalar.base.DoubleScalar;
 import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
-import org.djunits4.value.vfloat.scalar.AbstractFloatScalar;
-import org.djunits4.value.vfloat.scalar.AbstractFloatScalarAbs;
-import org.djunits4.value.vfloat.scalar.AbstractFloatScalarRel;
-import org.djunits4.value.vfloat.scalar.FloatScalar;
-import org.djunits4.value.vfloat.scalar.FloatScalarInterface;
+import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalar;
+import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarAbs;
+import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
+import org.djunits4.value.vfloat.scalar.base.FloatScalar;
+import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
 import org.junit.Assert;
 import org.junit.Test;
 
