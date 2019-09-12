@@ -4,9 +4,10 @@ import java.util.regex.Matcher;
 
 import javax.annotation.Generated;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.*;
 import org.djunits4.value.util.ValueUtil;
-import org.djunits4.Throw;
+import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
 
 /**
  * Easy access methods for the Float%TypeRel% FloatScalar.
@@ -92,12 +93,8 @@ public class Float%TypeRel% extends AbstractFloatScalarRelWithAbs<%TypeAbsUnit%,
         return new Float%TypeRel%(value, %TypeRelUnit%.SI);
     }
 
-    /**
-     * Construct a new Absolute Immutable FloatScalar of the right type. Each extending class must implement this method.
-     * @param value float; the float value
-     * @param unit %TypeAbsUnit%; the unit
-     * @return Float%TypeAbs%; a new absolute instance of the FloatScalar of the right type
-     */
+    /** {@inheritDoc} */
+    @Override
     public final Float%TypeAbs% instantiateAbs(final float value, final %TypeAbsUnit% unit)
     {
         return new Float%TypeAbs%(value, unit);
@@ -116,11 +113,8 @@ public class Float%TypeRel% extends AbstractFloatScalarRelWithAbs<%TypeAbsUnit%,
             .getUnit());
     }
     
-    /**
-     * Relative scalar plus Absolute scalar = Absolute scalar.
-     * @param v Float%TypeAbs%; ; the value to add
-     * @return Float%TypeAbs%; sum of this value and v as a new object
-     */
+    /** {@inheritDoc} */
+    @Override
     public final Float%TypeAbs% plus(final Float%TypeAbs% v)
     {
         %TypeAbsUnit% targetUnit = v.getUnit();

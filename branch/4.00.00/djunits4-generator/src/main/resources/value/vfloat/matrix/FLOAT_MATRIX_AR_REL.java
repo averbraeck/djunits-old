@@ -6,9 +6,10 @@ import java.util.SortedMap;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.*;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.vfloat.matrix.base.*;
+import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.*;
+import org.djunits4.value.vfloat.vector.*;
 
 /**
  * Immutable Float%TypeRel% Matrix.

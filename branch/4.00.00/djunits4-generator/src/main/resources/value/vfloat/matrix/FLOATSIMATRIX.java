@@ -6,7 +6,7 @@ import java.util.SortedMap;
 import javax.annotation.Generated;
 
 import org.djunits4.Throw;
-import org.djunits4.unit.AreaUnit;
+import org.djunits4.unit.*;
 import org.djunits4.unit.SIUnit;
 import org.djunits4.unit.Unit;
 import org.djunits4.unit.si.SIDimensions;
@@ -15,7 +15,8 @@ import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.*;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
-import org.djunits4.value.vfloat.vector.SIVector;
+import org.djunits4.value.vfloat.vector.*;
+import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorRel;
 import org.djunits4.value.vfloat.matrix.*;
 import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.base.FloatMatrix;

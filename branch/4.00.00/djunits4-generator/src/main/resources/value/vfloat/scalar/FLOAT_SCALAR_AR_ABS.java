@@ -4,9 +4,10 @@ import java.util.regex.Matcher;
 
 import javax.annotation.Generated;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.*;
 import org.djunits4.value.util.ValueUtil;
-import org.djunits4.Throw;
+import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarAbs;
 
 /**
  * Easy access methods for the Float%TypeAbs% FloatScalar.

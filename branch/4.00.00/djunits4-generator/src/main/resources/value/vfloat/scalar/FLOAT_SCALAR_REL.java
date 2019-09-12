@@ -7,8 +7,11 @@ import org.djunits4.value.util.ValueUtil;
 
 import javax.annotation.Generated;
 
-import org.djunits4.unit.*;
 import org.djunits4.Throw;
+import org.djunits4.unit.*;
+import org.djunits4.value.function.DimensionlessFunctions;
+import org.djunits4.value.util.ValueUtil;
+import org.djunits4.value.vfloat.scalar.base.*;
 
 /**
  * Easy access methods for the Float%Type% FloatScalar, which is relative by definition.
