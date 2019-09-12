@@ -1,5 +1,7 @@
 package org.djunits4.value.vdouble.scalar;
 
+import static org.junit.Assert.assertEquals;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
@@ -10,6 +12,9 @@ import org.djunits4.unit.base.UnitTypes;
 import org.djunits4.unit.util.UNITS;
 import org.djunits4.value.CLASSNAMES;
 import org.djunits4.value.base.Scalar;
+import org.djunits4.value.vdouble.scalar.base.DoubleScalar;
+import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
+import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
 import org.junit.Test;
 
 /**
@@ -37,29 +42,29 @@ public class ScalarConstructorsTest implements UNITS
 
         for (String className : CLASSNAMES.ALL_NODIM)
         {
-            for (boolean doubleType : new boolean[] { true, false })
-            {
-                String doubleOrFloat = doubleType ? "double" : "float";
-                String scalarClassName =
-                        "org.djunits4.value.v" + doubleOrFloat + ".scalar." + (doubleType ? "" : "Float") + className;
-                Class<?> scalarClass = Class.forName(scalarClassName);
-                UnitBase<?> unitBase = UnitTypes.INSTANCE.getUnitBase(className + "Unit");
-                Unit<?> standardUnit = unitBase.getStandardUnit();
-                Constructor<?> constructor =
-                        scalarClass.getConstructor(doubleType ? double.class : float.class, standardUnit.getClass());
-                Object[] args = new Object[] { null, standardUnit };
-                if (doubleType)
-                {
-                    args[0] = 123.456d;
-                }
-                else
-                {
-                    args[0] = 12.34f;
-                }
-                Scalar<?, ?> scalar =
-                        (Scalar<?, ?>) constructor.newInstance(args);
-                System.out.println(scalar);
-            }
+            UnitBase<?> unitBase = UnitTypes.INSTANCE.getUnitBase(className + "Unit");
+            // double
+            String scalarClassName = "org.djunits4.value.vdouble.scalar." + className;
+            Class<?> scalarClass = Class.forName(scalarClassName);
+            Unit<?> standardUnit = unitBase.getStandardUnit();
+            Constructor<?> constructor = scalarClass.getConstructor(double.class, standardUnit.getClass());
+            double testValue = 123.456d;
+            Object[] args = new Object[] { testValue, standardUnit };
+            DoubleScalarInterface<?, ?> doubleScalar = (DoubleScalarInterface<?, ?>) constructor.newInstance(args);
+            System.out.println(doubleScalar);
+            assertEquals("Value must match", testValue, doubleScalar.getSI(), 0.1);
+            assertEquals("Unit must match", standardUnit, doubleScalar.getUnit());
+            // float
+            scalarClassName = "org.djunits4.value.vfloat.scalar.Float" + className;
+            scalarClass = Class.forName(scalarClassName);
+            float floatTestValue = 12.34f;
+            args[0] = floatTestValue;
+            constructor = scalarClass.getConstructor(float.class, standardUnit.getClass());
+            args = new Object[] { floatTestValue, standardUnit };
+            FloatScalarInterface<?, ?> floatScalar = (FloatScalarInterface<?, ?>) constructor.newInstance(args);
+            System.out.println(doubleScalar);
+            assertEquals("Value must match", floatTestValue, floatScalar.getSI(), 0.1);
+            assertEquals("Unit must match", standardUnit, floatScalar.getUnit());
         }
     }
 }
