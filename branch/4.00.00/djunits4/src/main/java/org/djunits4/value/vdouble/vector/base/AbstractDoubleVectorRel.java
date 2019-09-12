@@ -52,6 +52,26 @@ public abstract class AbstractDoubleVectorRel<U extends Unit<U>, S extends Abstr
         return DoubleVector.instantiate(this.getData().minus(rel.getData()), getUnit());
     }
 
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public RV multiplyBy(final double multiplier)
+    {
+        checkCopyOnWrite();
+        this.data.multiplyBy(multiplier);
+        return (RV) this;
+    }
+
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public RV divideBy(final double divisor)
+    {
+        checkCopyOnWrite();
+        this.data.divideBy(divisor);
+        return (RV) this;
+    }
+
     /**
      * Multiply a Relative value with this Relative value for a vector or matrix. The multiplication is done value by value and
      * store the result in a new Relative value. If both operands are dense, the result is a dense vector or matrix, otherwise
