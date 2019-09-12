@@ -1,11 +1,9 @@
-package org.djunits4.value.vfloat.scalar;
+package org.djunits4.value.vfloat.scalar.base;
 
 import org.djunits4.unit.AbsoluteLinearUnit;
 import org.djunits4.unit.Unit;
-import org.djunits4.value.Absolute;
-import org.djunits4.value.function.MathFunctionsAbs;
+import org.djunits4.value.base.Scalar;
 import org.djunits4.value.util.ValueUtil;
-import org.djunits4.value.vfloat.FloatMathFunctions;
 
 /**
  * The typed, abstract FloatScalarAbs class that forms the basis of all FloatScalar definitions and extensions.<br>
@@ -17,14 +15,15 @@ import org.djunits4.value.vfloat.FloatMathFunctions;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  * @author <a href="https://www.transport.citg.tudelft.nl">Wouter Schakel</a>
- * @param <AU> Absolute unit
- * @param <RU> Relative unit
- * @param <A> the absolute class for reference
- * @param <R> the relative class for reference
+ * @param <AU> the absolute unit
+ * @param <A> the Absolute class for reference purposes
+ * @param <RU> the relative unit
+ * @param <R> the Relative class for reference purposes
  */
 public abstract class AbstractFloatScalarAbs<AU extends AbsoluteLinearUnit<AU, RU>,
-        A extends AbstractFloatScalarAbs<AU, A, RU, R>, RU extends Unit<RU>, R extends AbstractFloatScalarRel<RU, R>>
-        extends AbstractFloatScalar<AU, A> implements Absolute, MathFunctionsAbs<A>, FloatMathFunctions<A>
+        A extends AbstractFloatScalarAbs<AU, A, RU, R>, RU extends Unit<RU>,
+        R extends AbstractFloatScalarRelWithAbs<AU, A, RU, R>> extends AbstractFloatScalar<AU, A>
+        implements Scalar.Abs<AU, A, RU, R>
 {
     /**  */
     private static final long serialVersionUID = 20150626L;
@@ -64,43 +63,67 @@ public abstract class AbstractFloatScalarAbs<AU extends AbsoluteLinearUnit<AU, R
      */
     public abstract R instantiateRel(float value, RU unit);
 
-    /**
-     * Increment the value by the supplied value and return the result using the current unit of the Absolute value.
-     * @param increment R, a relative typed FloatScalar; amount by which the value is incremented
-     * @return Absolute FloatScalar
-     */
+    /** {@inheritDoc} */
+    @Override
+    public A copy()
+    {
+        A result = instantiateAbs(getSI(), getUnit().getStandardUnit());
+        result.setDisplayUnit(getUnit());
+        return result;
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public final A plus(final R increment)
     {
         AU targetUnit = getUnit();
         return instantiateAbs(getInUnit() + increment.getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 
-    /**
-     * Decrement the value by the supplied value and return the result using the current unit of the Absolute value.
-     * @param decrement R, a relative typed FloatScalar; amount by which the value is decremented
-     * @return Absolute FloatScalar
-     */
+    /** {@inheritDoc} */
+    @Override
     public final A minus(final R decrement)
     {
         AU targetUnit = getUnit();
         return instantiateAbs(getInUnit() - decrement.getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 
-    /**
-     * Decrement the value by the supplied value and return the result using the relative unit belonging to the unit of the
-     * Absolute value.
-     * @param decrement A, an absolute typed FloatScalar; amount by which the value is decremented
-     * @return Relative FloatScalar
-     */
+    /** {@inheritDoc} */
+    @Override
     public final R minus(final A decrement)
     {
         RU targetUnit = getUnit().getRelativeUnit();
         return instantiateRel(getInUnit() - decrement.getInUnit(getUnit()), targetUnit);
     }
 
+    /**
+     * Interpolate between two values.
+     * @param zero A; the low value
+     * @param one A; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @return a Scalar at the ratio between
+     * @param <AU> the absolute unit
+     * @param <A> the Absolute class for reference purposes
+     * @param <RU> the relative unit
+     * @param <R> the Relative class for reference purposes
+     */
+    public static <AU extends AbsoluteLinearUnit<AU, RU>, A extends AbstractFloatScalarAbs<AU, A, RU, R>, RU extends Unit<RU>,
+            R extends AbstractFloatScalarRelWithAbs<AU, A, RU, R>> A interpolate(final A zero, final A one, final float ratio)
+    {
+        return zero.instantiateAbs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+    }
+
     /**********************************************************************************/
     /********************************** MATH METHODS **********************************/
     /**********************************************************************************/
+
+    /** {@inheritDoc} */
+    @Override
+    @SuppressWarnings("checkstyle:designforextension")
+    public A abs()
+    {
+        return instantiateAbs(Math.abs(getInUnit()), getUnit());
+    }
 
     /** {@inheritDoc} */
     @Override
@@ -121,6 +144,14 @@ public abstract class AbstractFloatScalarAbs<AU extends AbsoluteLinearUnit<AU, R
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings("checkstyle:designforextension")
+    public A neg()
+    {
+        return instantiateAbs(-getInUnit(), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    @SuppressWarnings("checkstyle:designforextension")
     public A rint()
     {
         return instantiateAbs((float) Math.rint(getInUnit()), getUnit());
@@ -129,15 +160,23 @@ public abstract class AbstractFloatScalarAbs<AU extends AbsoluteLinearUnit<AU, R
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings("checkstyle:designforextension")
-    public A round()
+    public A times(final double constant)
     {
-        return instantiateAbs(Math.round(getInUnit()), getUnit());
+        return instantiateAbs((float) (getInUnit() * constant), getUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings("checkstyle:designforextension")
-    public A multiplyBy(final float constant)
+    public A divide(final double constant)
+    {
+        return instantiateAbs((float) (getInUnit() / constant), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    @SuppressWarnings("checkstyle:designforextension")
+    public A times(final float constant)
     {
         return instantiateAbs(getInUnit() * constant, getUnit());
     }
@@ -145,7 +184,7 @@ public abstract class AbstractFloatScalarAbs<AU extends AbsoluteLinearUnit<AU, R
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings("checkstyle:designforextension")
-    public A divideBy(final float constant)
+    public A divide(final float constant)
     {
         return instantiateAbs(getInUnit() / constant, getUnit());
     }

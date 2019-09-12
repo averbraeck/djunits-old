@@ -14,6 +14,8 @@ import org.djunits4.unit.FrequencyUnit;
 import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.PowerUnit;
 import org.djunits4.unit.SpeedUnit;
+import org.djunits4.value.util.ValueUtil;
+import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
 
 /**
  * Easy access methods for the FloatSpeed FloatScalar, which is relative by definition.
@@ -24,7 +26,7 @@ import org.djunits4.unit.SpeedUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T11:49:35.279Z")
 public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 {
     /** */
@@ -185,7 +187,7 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
     {
         Throw.whenNull(text, "Error parsing FloatSpeed: unitString is null");
         Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatSpeed: empty unitString");
-        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();

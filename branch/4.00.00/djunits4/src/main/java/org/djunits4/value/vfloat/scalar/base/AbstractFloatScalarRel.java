@@ -1,10 +1,11 @@
-package org.djunits4.value.vfloat.scalar;
+package org.djunits4.value.vfloat.scalar.base;
 
 import org.djunits4.unit.Unit;
-import org.djunits4.value.Relative;
-import org.djunits4.value.function.MathFunctionsRel;
+import org.djunits4.value.base.Scalar;
 import org.djunits4.value.util.ValueUtil;
-import org.djunits4.value.vfloat.FloatMathFunctions;
+import org.djunits4.value.vdouble.scalar.SIScalar;
+import org.djunits4.value.vfloat.scalar.FloatDimensionless;
+import org.djunits4.value.vfloat.scalar.FloatSIScalar;
 
 /**
  * The typed, abstract FloatScalarRel class that forms the basis of all FloatScalar definitions and extensions.<br>
@@ -17,10 +18,10 @@ import org.djunits4.value.vfloat.FloatMathFunctions;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  * @author <a href="https://www.transport.citg.tudelft.nl">Wouter Schakel</a>
  * @param <U> the unit
- * @param <R> the relative class for reference
+ * @param <R> the Relative class for reference purposes
  */
 public abstract class AbstractFloatScalarRel<U extends Unit<U>, R extends AbstractFloatScalarRel<U, R>>
-        extends AbstractFloatScalar<U, R> implements Relative, MathFunctionsRel<R>, FloatMathFunctions<R>
+        extends AbstractFloatScalar<U, R> implements Scalar.Rel<U, R>
 {
     /**  */
     private static final long serialVersionUID = 20150626L;
@@ -52,12 +53,17 @@ public abstract class AbstractFloatScalarRel<U extends Unit<U>, R extends Abstra
      */
     public abstract R instantiateRel(float value, U unit);
 
-    /**
-     * Increment the value by the supplied value and return the result. If the units are equal, the result is expressed in that
-     * unit. If the units are unequal, the result is expressed in the standard (often SI) unit.
-     * @param increment R, a relative typed FloatScalar; amount by which the value is incremented
-     * @return Absolute FloatScalar
-     */
+    /** {@inheritDoc} */
+    @Override
+    public R copy()
+    {
+        R result = instantiateRel(getSI(), getUnit().getStandardUnit());
+        result.setDisplayUnit(getUnit());
+        return result;
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public final R plus(final R increment)
     {
         if (getUnit().isBaseSIUnit())
@@ -68,12 +74,8 @@ public abstract class AbstractFloatScalarRel<U extends Unit<U>, R extends Abstra
                 : instantiateRel(this.getSI() + increment.getSI(), getUnit().getStandardUnit());
     }
 
-    /**
-     * Decrement the value by the supplied value and return the result. If the units are equal, the result is expressed in that
-     * unit. If the units are unequal, the result is expressed in the standard (often SI) unit.
-     * @param decrement R, a relative typed FloatScalar; amount by which the value is decremented
-     * @return Relative FloatScalar
-     */
+    /** {@inheritDoc} */
+    @Override
     public final R minus(final R decrement)
     {
         if (getUnit().isBaseSIUnit())
@@ -85,11 +87,26 @@ public abstract class AbstractFloatScalarRel<U extends Unit<U>, R extends Abstra
     }
 
     /**
+     * Interpolate between two values.
+     * @param zero R; the low value
+     * @param one R; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @return a Scalar at the ratio between
+     * @param <U> the unit
+     * @param <R> the Relative class for reference purposes
+     */
+    public static <U extends Unit<U>, R extends AbstractFloatScalarRel<U, R>> R interpolate(final R zero, final R one,
+            final float ratio)
+    {
+        return zero.instantiateRel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+    }
+
+    /**
      * Multiply this scalar by another scalar and create a new scalar.
      * @param otherScalar AbstractFloatScalarRel&lt;?, ?&gt;; the value by which this scalar is multiplied
      * @return FloatScalar&lt;?&gt;; a new scalar instance with correct SI dimensions
      */
-    public FloatSIScalar multiplyBy(AbstractFloatScalarRel<?, ?> otherScalar)
+    public FloatSIScalar times(AbstractFloatScalarRel<?, ?> otherScalar)
     {
         return FloatScalar.multiply(this, otherScalar);
     }
@@ -108,7 +125,7 @@ public abstract class AbstractFloatScalarRel<U extends Unit<U>, R extends Abstra
      * @param otherScalar AbstractFloatScalarRel&lt;?, ?&gt;; the value by which this scalar is divided
      * @return FloatScalar&lt;?&gt;; a new scalar instance with correct SI dimensions
      */
-    public FloatSIScalar divideBy(AbstractFloatScalarRel<?, ?> otherScalar)
+    public FloatSIScalar divide(AbstractFloatScalarRel<?, ?> otherScalar)
     {
         return FloatScalar.divide(this, otherScalar);
     }
@@ -152,14 +169,6 @@ public abstract class AbstractFloatScalarRel<U extends Unit<U>, R extends Abstra
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings("checkstyle:designforextension")
-    public R round()
-    {
-        return instantiateRel(Math.round(getInUnit()), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    @SuppressWarnings("checkstyle:designforextension")
     public R neg()
     {
         return instantiateRel(-getInUnit(), getUnit());
@@ -168,7 +177,23 @@ public abstract class AbstractFloatScalarRel<U extends Unit<U>, R extends Abstra
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings("checkstyle:designforextension")
-    public R multiplyBy(final float constant)
+    public R times(final double constant)
+    {
+        return instantiateRel((float) (getInUnit() * constant), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    @SuppressWarnings("checkstyle:designforextension")
+    public R divide(final double constant)
+    {
+        return instantiateRel((float) (getInUnit() / constant), getUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    @SuppressWarnings("checkstyle:designforextension")
+    public R times(final float constant)
     {
         return instantiateRel(getInUnit() * constant, getUnit());
     }
@@ -176,7 +201,7 @@ public abstract class AbstractFloatScalarRel<U extends Unit<U>, R extends Abstra
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings("checkstyle:designforextension")
-    public R divideBy(final float constant)
+    public R divide(final float constant)
     {
         return instantiateRel(getInUnit() / constant, getUnit());
     }

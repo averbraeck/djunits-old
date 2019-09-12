@@ -7,6 +7,8 @@ import javax.annotation.Generated;
 import org.djunits4.Throw;
 import org.djunits4.unit.AbsoluteTemperatureUnit;
 import org.djunits4.unit.TemperatureUnit;
+import org.djunits4.value.util.ValueUtil;
+import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarAbs;
 
 /**
  * Easy access methods for the FloatAbsoluteTemperature FloatScalar.
@@ -18,7 +20,7 @@ import org.djunits4.unit.TemperatureUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T11:49:35.279Z")
 public class FloatAbsoluteTemperature
         extends AbstractFloatScalarAbs<AbsoluteTemperatureUnit, FloatAbsoluteTemperature, TemperatureUnit, FloatTemperature>
 {
@@ -173,7 +175,7 @@ public class FloatAbsoluteTemperature
         Throw.whenNull(text, "Error parsing FloatAbsoluteTemperature: unitString is null");
         Throw.when(text.length() == 0, IllegalArgumentException.class,
                 "Error parsing FloatAbsoluteTemperature: empty unitString");
-        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();

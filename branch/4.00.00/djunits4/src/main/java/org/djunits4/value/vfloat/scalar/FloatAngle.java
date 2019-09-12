@@ -8,6 +8,8 @@ import org.djunits4.Throw;
 import org.djunits4.unit.AngleUnit;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.DirectionUnit;
+import org.djunits4.value.util.ValueUtil;
+import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
 
 /**
  * Easy access methods for the FloatAngle FloatScalar.
@@ -19,8 +21,8 @@ import org.djunits4.unit.DirectionUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
-public class FloatAngle extends AbstractFloatScalarRel<AngleUnit, FloatAngle>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T11:49:35.279Z")
+public class FloatAngle extends AbstractFloatScalarRelWithAbs<DirectionUnit, FloatDirection, AngleUnit, FloatAngle>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -202,7 +204,7 @@ public class FloatAngle extends AbstractFloatScalarRel<AngleUnit, FloatAngle>
     {
         Throw.whenNull(text, "Error parsing FloatAngle: unitString is null");
         Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatAngle: empty unitString");
-        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();

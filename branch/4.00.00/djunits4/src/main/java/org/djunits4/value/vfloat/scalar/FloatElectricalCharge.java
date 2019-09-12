@@ -9,6 +9,8 @@ import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.DurationUnit;
 import org.djunits4.unit.ElectricalChargeUnit;
 import org.djunits4.unit.ElectricalCurrentUnit;
+import org.djunits4.value.util.ValueUtil;
+import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
 
 /**
  * Easy access methods for the FloatElectricalCharge FloatScalar, which is relative by definition.
@@ -19,7 +21,7 @@ import org.djunits4.unit.ElectricalCurrentUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T11:49:35.279Z")
 public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChargeUnit, FloatElectricalCharge>
 {
     /** */
@@ -188,7 +190,7 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
     {
         Throw.whenNull(text, "Error parsing FloatElectricalCharge: unitString is null");
         Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatElectricalCharge: empty unitString");
-        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();

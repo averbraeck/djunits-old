@@ -12,6 +12,8 @@ import org.djunits4.unit.ForceUnit;
 import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.PowerUnit;
 import org.djunits4.unit.PressureUnit;
+import org.djunits4.value.util.ValueUtil;
+import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
 
 /**
  * Easy access methods for the FloatEnergy FloatScalar, which is relative by definition.
@@ -22,7 +24,7 @@ import org.djunits4.unit.PressureUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-05T12:36:36.406Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T11:49:35.279Z")
 public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
 {
     /** */
@@ -183,7 +185,7 @@ public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
     {
         Throw.whenNull(text, "Error parsing FloatEnergy: unitString is null");
         Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatEnergy: empty unitString");
-        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();

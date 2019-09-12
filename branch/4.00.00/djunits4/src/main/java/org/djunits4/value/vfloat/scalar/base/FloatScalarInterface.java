@@ -1,4 +1,7 @@
-package org.djunits4.value.vfloat.scalar;
+package org.djunits4.value.vfloat.scalar.base;
+
+import org.djunits4.unit.Unit;
+import org.djunits4.value.base.Scalar;
 
 /**
  * Float scalar functions.
@@ -9,8 +12,10 @@ package org.djunits4.value.vfloat.scalar;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  * @author <a href="https://www.transport.citg.tudelft.nl">Wouter Schakel</a>
+ * @param <U> the unit for which this is the interface
+ * @param <S> the scalar type belonging to the unit
  */
-public interface FloatScalarInterface
+public interface FloatScalarInterface<U extends Unit<U>, S extends FloatScalarInterface<U, S>> extends Scalar<U, S>
 {
     /**
      * Retrieve the value in the underlying SI unit.
@@ -20,8 +25,15 @@ public interface FloatScalarInterface
 
     /**
      * Retrieve the value in the original unit.
-     * @return double
+     * @return float
      */
     float getInUnit();
+
+    /**
+     * Retrieve the value converted into some specified unit.
+     * @param targetUnit U; the unit to convert the value into
+     * @return float
+     */
+    float getInUnit(U targetUnit);
 
 }
