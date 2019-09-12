@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.*;
+import org.djunits4.value.util.ValueUtil;
 import org.djunits4.Throw;
 
 /**
@@ -168,7 +169,7 @@ public class Float%TypeAbs% extends AbstractFloatScalarAbs<%TypeAbsUnit%, Float%
     {
         Throw.whenNull(text, "Error parsing Float%TypeAbs%: unitString is null");
         Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Float%TypeAbs%: empty unitString");
-        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();

@@ -3,6 +3,8 @@ package org.djunits4.value.vfloat.scalar;
 import java.util.regex.Matcher;
 
 import org.djunits4.value.Relative;
+import org.djunits4.value.util.ValueUtil;
+
 import javax.annotation.Generated;
 
 import org.djunits4.unit.*;
@@ -179,7 +181,7 @@ public class Float%Type% extends AbstractFloatScalarRel<%Type%Unit, Float%Type%>
     {
         Throw.whenNull(text, "Error parsing Float%Type%: unitString is null");
         Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Float%Type%: empty unitString");
-        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();

@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.*;
+import org.djunits4.value.util.ValueUtil;
 import org.djunits4.Throw;
 
 /**
@@ -18,7 +19,7 @@ import org.djunits4.Throw;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "GenerateDJUNIT")
-public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%TypeRel%>
+public class Float%TypeRel% extends AbstractFloatScalarRelWithAbs<%TypeAbsUnit%, Float%TypeAbs%, %TypeRelUnit%, Float%TypeRel%>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -201,7 +202,7 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%
     {
         Throw.whenNull(text, "Error parsing Float%TypeRel%: unitString is null");
         Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Float%TypeRel%: empty unitString");
-        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();

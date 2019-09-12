@@ -555,25 +555,6 @@ public class GenerateDJUNIT
                 out.close();
                 System.out.println("built: " + absoluteRootPath + relativePath + fType + "Vector.java");
             }
-
-            vectorURL = URLResource.getResource(
-                    "/" + relativePath + ((i == 0) ? "MUTABLE_FLOAT_VECTOR_AR_ABS.java" : "MUTABLE_FLOAT_VECTOR_AR_REL.java"));
-            vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
-
-            for (String type[] : typesAbsRel)
-            {
-                String fType = "Float" + type[i];
-                File outPath = new File(absoluteRootPath + relativePath);
-                outPath.mkdirs();
-                PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + fType + "Vector.java");
-                String java = new String(vectorJava);
-                java = replaceAbsRel(java, type);
-                java = formulasVector(java, "MutableFloatVector => " + fType, "Mutable");
-                java = replace(java, type[i]);
-                out.print(java);
-                out.close();
-                System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + fType + "Vector.java");
-            }
         }
     }
 
@@ -598,40 +579,20 @@ public class GenerateDJUNIT
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = formulasVector(java, "FloatVector => " + fType, "");
-            java = replace(java, type);
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + fType + "Vector.java");
-        }
-
-        vectorURL = URLResource.getResource("/" + relativePath + "MUTABLE_FLOAT_VECTOR_REL.java");
-        vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
-
-        for (String type : typesRel)
-        {
-            String fType = "Float" + type;
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + fType + "Vector.java");
-            String java = new String(vectorJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            if (java.contains("class MutableFloatDimensionlessVector"))
+            if (java.contains("class FloatDimensionlessVector"))
             {
-                java = java.replace("%DIMLESS%", " implements MathFunctionsDimensionless<MutableFloatDimensionlessVector>");
+                java = java.replace("%DIMLESS%", " implements DimensionlessFunctions<DimensionlessUnit, FloatDimensionlessVector>");
                 URL dimlessURL = URLResource.getResource("/" + relativePath + "DimlessFunctions.java");
                 String dimlessFunctions = new String(Files.readAllBytes(Paths.get(dimlessURL.toURI())));
                 int pos = java.indexOf("%FORMULAS%");
                 java = java.substring(0, pos - 1) + dimlessFunctions + java.substring(pos, java.length() - 1);
             }
             java = java.replace("%DIMLESS%", "");
-            java = formulasVector(java, "MutableFloatVector => " + fType, "Mutable");
+            java = formulasVector(java, "FloatVector => " + fType, "");
             java = replace(java, type);
             out.print(java);
             out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + fType + "Vector.java");
+            System.out.println("built: " + absoluteRootPath + relativePath + fType + "Vector.java");
         }
     }
 
@@ -702,24 +663,6 @@ public class GenerateDJUNIT
                 out.close();
                 System.out.println("built: " + absoluteRootPath + relativePath + type[i] + "Matrix.java");
             }
-
-            matrixURL = URLResource.getResource("/" + relativePath
-                    + ((i == 0) ? "MUTABLE_DOUBLE_MATRIX_AR_ABS.java" : "MUTABLE_DOUBLE_MATRIX_AR_REL.java"));
-            matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
-
-            for (String[] type : typesAbsRel)
-            {
-                File outPath = new File(absoluteRootPath + relativePath);
-                outPath.mkdirs();
-                PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + type[i] + "Matrix.java");
-                String java = new String(matrixJava);
-                java = replaceAbsRel(java, type);
-                java = formulasMatrix(java, "MutableDoubleMatrix => " + type[i], "Mutable");
-                java = replace(java, type[i]);
-                out.print(java);
-                out.close();
-                System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type[i] + "Matrix.java");
-            }
         }
     }
 
@@ -743,26 +686,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = formulasMatrix(java, "DoubleMatrix => " + type, "");
-            java = replace(java, type);
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + type + "Matrix.java");
-        }
-
-        matrixURL = URLResource.getResource("/" + relativePath + "MUTABLE_DOUBLE_MATRIX_REL.java");
-        matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
-
-        for (String type : typesRel)
-        {
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + type + "Matrix.java");
-            String java = new String(matrixJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            if (java.contains("class MutableDimensionlessMatrix"))
+            if (java.contains("class DimensionlessMatrix"))
             {
                 java = java.replace("%DIMLESS%", " implements MathFunctionsDimensionless<MutableDimensionlessMatrix>");
                 URL dimlessURL = URLResource.getResource("/" + relativePath + "DimlessFunctions.java");
@@ -771,11 +695,11 @@ public class GenerateDJUNIT
                 java = java.substring(0, pos - 1) + dimlessFunctions + java.substring(pos, java.length() - 1);
             }
             java = java.replace("%DIMLESS%", "");
-            java = formulasMatrix(java, "MutableDoubleMatrix => " + type, "Mutable");
+           java = formulasMatrix(java, "DoubleMatrix => " + type, "");
             java = replace(java, type);
             out.print(java);
             out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type + "Matrix.java");
+            System.out.println("built: " + absoluteRootPath + relativePath + type + "Matrix.java");
         }
     }
 
@@ -811,25 +735,6 @@ public class GenerateDJUNIT
                 out.close();
                 System.out.println("built: " + absoluteRootPath + relativePath + fType + "Matrix.java");
             }
-
-            matrixURL = URLResource.getResource(
-                    "/" + relativePath + ((i == 0) ? "MUTABLE_FLOAT_MATRIX_AR_ABS.java" : "MUTABLE_FLOAT_MATRIX_AR_REL.java"));
-            matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
-
-            for (String type[] : typesAbsRel)
-            {
-                String fType = "Float" + type[i];
-                File outPath = new File(absoluteRootPath + relativePath);
-                outPath.mkdirs();
-                PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + fType + "Matrix.java");
-                String java = new String(matrixJava);
-                java = replaceAbsRel(java, type);
-                java = formulasMatrix(java, "MutableFloatMatrix => " + fType, "Mutable");
-                java = replace(java, type[i]);
-                out.print(java);
-                out.close();
-                System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + fType + "Matrix.java");
-            }
         }
     }
 
@@ -854,27 +759,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = formulasMatrix(java, "FloatMatrix => " + fType, "");
-            java = replace(java, type);
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + fType + "Matrix.java");
-        }
-
-        matrixURL = URLResource.getResource("/" + relativePath + "MUTABLE_FLOAT_MATRIX_REL.java");
-        matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
-
-        for (String type : typesRel)
-        {
-            String fType = "Float" + type;
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + fType + "Matrix.java");
-            String java = new String(matrixJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            if (java.contains("class MutableFloatDimensionlessMatrix"))
+            if (java.contains("class FloatDimensionlessMatrix"))
             {
                 java = java.replace("%DIMLESS%", " implements MathFunctionsDimensionless<MutableFloatDimensionlessMatrix>");
                 URL dimlessURL = URLResource.getResource("/" + relativePath + "DimlessFunctions.java");
@@ -883,11 +768,11 @@ public class GenerateDJUNIT
                 java = java.substring(0, pos - 1) + dimlessFunctions + java.substring(pos, java.length() - 1);
             }
             java = java.replace("%DIMLESS%", "");
-            java = formulasMatrix(java, "MutableFloatMatrix => " + fType, "Mutable");
+            java = formulasMatrix(java, "FloatMatrix => " + fType, "");
             java = replace(java, type);
             out.print(java);
             out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + fType + "Matrix.java");
+            System.out.println("built: " + absoluteRootPath + relativePath + fType + "Matrix.java");
         }
     }
 

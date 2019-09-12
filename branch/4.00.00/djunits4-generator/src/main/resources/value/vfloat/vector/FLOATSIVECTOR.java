@@ -13,6 +13,7 @@ import org.djunits4.unit.si.SIDimensions;
 import org.djunits4.unit.util.UnitRuntimeException;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.scalar.SIScalar;
 import org.djunits4.value.vfloat.scalar.*;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
 import org.djunits4.value.vfloat.vector.*;
@@ -31,17 +32,17 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "GenerateDJUNIT")
-public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, SIScalar, FloatSIVector>
+public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar, FloatSIVector>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
     /**
-     * Construct a new Relative FloatSIVector.
-     * @param values float[]; the values of the entries in the new Relative FloatSIVector
-     * @param unit SIUnit; the unit of the new Relative FloatSIVector
+     * Construct a new Relative Float SIVector.
+     * @param values float[]; the values of the entries in the new Relative Float SIVector
+     * @param unit SIUnit; the unit of the new Relative Float SIVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @return FloatSIVector; the FloatSIVector of the given unit
+     * @return SIVector; the SIVector of the given unit
      * @throws ValueRuntimeException when values is null
      */
     public static FloatSIVector create(final float[] values, final SIUnit unit, final StorageType storageType)
@@ -51,11 +52,11 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, SIScalar, Floa
     }
 
     /**
-     * Construct a new Relative FloatSIVector.
-     * @param values List&lt;Float&gt;; the values of the entries in the new Relative FloatSIVector
-     * @param unit SIUnit; the unit of the new Relative FloatSIVector
+     * Construct a new Relative Float SIVector.
+     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Float SIVector
+     * @param unit SIUnit; the unit of the new Relative Float SIVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @return FloatSIVector; the FloatSIVector of the given unit
+     * @return SIVector; the SIVector of the given unit
      * @throws ValueRuntimeException when values is null
      */
     public static FloatSIVector create(final List<Float> values, final SIUnit unit, final StorageType storageType)
@@ -65,13 +66,12 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, SIScalar, Floa
     }
 
     /**
-     * Construct a new Relative FloatSIVector.
-     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse 
-     *            FloatSIVector
-     * @param unit SIUnit; the unit of the new Relative Sparse FloatSIVector
+     * Construct a new Relative Float SIVector.
+     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Float SIVector
+     * @param unit SIUnit; the unit of the new Relative Sparse Float SIVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @return FloatSIVector; the FloatSIVector of the given unit
+     * @return SIVector; the SIVector of the given unit
      * @throws ValueRuntimeException when values is null
      */
     public static FloatSIVector create(final SortedMap<Integer, Float> values, final SIUnit unit, final int length,
@@ -89,43 +89,28 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, SIScalar, Floa
         super(data, unit);
     }
 
-    /**
-     * Return an array of SIScalar Scalars from this vector.
-     * @return SIScalar[]; an array of SIScalar Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public SIScalar[] toArray()
+    /** {@inheritDoc} */
+    @Override
+    public Class<FloatSIScalar> getScalarClass()
     {
-        SIScalar[] array = new SIScalar[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueRuntimeException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
+        return FloatSIScalar.class;
     }
 
     /**
-     * Returns an FloatSIVector based on an array of values and the textual representation of the unit.
+     * Returns an SIVector based on an array of values and the textual representation of the unit.
      * @param value float[]; the values to use
      * @param unitString String; the textual representation of the unit
      * @param storageType StorageType; the storage type to use
-     * @return FloatSIVector; the vector representation of the values in their unit
+     * @return SIVector; the vector representation of the values in their unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
      * @throws NullPointerException when the unitString argument is null
      */
     public static FloatSIVector of(final float[] value, final String unitString, final StorageType storageType)
     {
-        Throw.whenNull(value, "Error parsing FloatSIVector: value is null");
-        Throw.whenNull(unitString, "Error parsing FloatSIVector: unitString is null");
+        Throw.whenNull(value, "Error parsing SIVector: value is null");
+        Throw.whenNull(unitString, "Error parsing SIVector: unitString is null");
         Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatSIVector: empty unitString");
-        Throw.whenNull(storageType, "Error parsing FloatSIVector: storageType is null");
+        Throw.whenNull(storageType, "Error parsing SIVector: storageType is null");
         try
         {
             SIUnit unit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(unitString));
@@ -138,24 +123,24 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, SIScalar, Floa
         {
             throw new IllegalArgumentException("Error parsing SIUnit from " + unitString, exception);
         }
-        throw new IllegalArgumentException("Error parsing FloatSIVector with unit " + unitString);
+        throw new IllegalArgumentException("Error parsing SIVector with unit " + unitString);
     }
 
     /**
-     * Returns an FloatSIVector based on an array of values and the textual representation of the unit.
+     * Returns an SIVector based on an array of values and the textual representation of the unit.
      * @param valueList List&lt;Float&gt;; the values to use
      * @param unitString String; the textual representation of the unit
      * @param storageType StorageType; the storage type to use
-     * @return FloatSIVector; the vector representation of the values in their unit
+     * @return SIVector; the vector representation of the values in their unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
      * @throws NullPointerException when the unitString argument is null
      */
     public static FloatSIVector of(final List<Float> valueList, final String unitString, final StorageType storageType)
     {
-        Throw.whenNull(valueList, "Error parsing FloatSIVector: valueList is null");
-        Throw.whenNull(unitString, "Error parsing FloatSIVector: unitString is null");
+        Throw.whenNull(valueList, "Error parsing SIVector: valueList is null");
+        Throw.whenNull(unitString, "Error parsing SIVector: unitString is null");
         Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatSIVector: empty unitString");
-        Throw.whenNull(storageType, "Error parsing FloatSIVector: storageType is null");
+        Throw.whenNull(storageType, "Error parsing SIVector: storageType is null");
         try
         {
             SIUnit unit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(unitString));
@@ -168,26 +153,26 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, SIScalar, Floa
         {
             throw new IllegalArgumentException("Error parsing SIUnit from " + unitString, exception);
         }
-        throw new IllegalArgumentException("Error parsing FloatSIVector with unit " + unitString);
+        throw new IllegalArgumentException("Error parsing SIVector with unit " + unitString);
     }
 
     /**
-     * Returns an FloatSIVector based on a (sparse) map of values and the textual representation of the unit.
+     * Returns an SIVector based on a (sparse) map of values and the textual representation of the unit.
      * @param valueMap SortedMap&lt;Integer, Float&gt;; the values to use
      * @param unitString String; the textual representation of the unit
      * @param length int; the size of the vector
      * @param storageType StorageType; the storage type to use
-     * @return FloatSIVector; the vector representation of the values in their unit
+     * @return SIVector; the vector representation of the values in their unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
      * @throws NullPointerException when the unitString argument is null
      */
     public static FloatSIVector of(final SortedMap<Integer, Float> valueMap, final String unitString, final int length,
             final StorageType storageType)
     {
-        Throw.whenNull(valueMap, "Error parsing FloatSIVector: valueMap is null");
-        Throw.whenNull(unitString, "Error parsing FloatSIVector: unitString is null");
+        Throw.whenNull(valueMap, "Error parsing SIVector: valueMap is null");
+        Throw.whenNull(unitString, "Error parsing SIVector: unitString is null");
         Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatSIVector: empty unitString");
-        Throw.whenNull(storageType, "Error parsing FloatSIVector: storageType is null");
+        Throw.whenNull(storageType, "Error parsing SIVector: storageType is null");
         try
         {
             SIUnit unit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(unitString));
@@ -200,7 +185,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, SIScalar, Floa
         {
             throw new IllegalArgumentException("Error parsing SIUnit from " + unitString, exception);
         }
-        throw new IllegalArgumentException("Error parsing FloatSIVector with unit " + unitString);
+        throw new IllegalArgumentException("Error parsing SIVector with unit " + unitString);
     }
 
     /**********************************************************************************/
@@ -217,8 +202,8 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, SIScalar, Floa
             V extends AbstractFloatVectorRel<U, S, V>> V as(final U displayUnit)
     {
         Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(displayUnit.getUnitBase().getSiDimensions())),
-                UnitRuntimeException.class, "FloatSIVector with unit %s cannot be converted to a vector with unit %s",
-                getUnit(), displayUnit);
+                UnitRuntimeException.class, "SIVector with unit %s cannot be converted to a FloatVector with unit %s", getUnit(),
+                displayUnit);
         V result = FloatVector.instantiate(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
         return result;
