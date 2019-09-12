@@ -189,6 +189,7 @@ public abstract class AbstractFloatScalar<U extends Unit<U>, S extends AbstractF
         buf.append(Format.format(d));
         if (withUnit)
         {
+            buf.append(" "); // Insert one space as prescribed by SI writing conventions
             buf.append(displayUnit.getDefaultDisplayAbbreviation());
         }
         return buf.toString();
