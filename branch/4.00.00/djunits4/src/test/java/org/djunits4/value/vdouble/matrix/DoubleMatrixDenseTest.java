@@ -12,7 +12,9 @@ import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
-import org.djunits4.value.vdouble.scalar.base.DoubleScalar;
+import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrix;
+import org.djunits4.value.vfloat.matrix.base.FloatMatrix;
+import org.djunits4.value.vfloat.scalar.base.FloatScalar;
 import org.junit.Test;
 
 /**
@@ -59,7 +61,7 @@ public class DoubleMatrixDenseTest
      * @param u Unit&lt;?&gt;; the expected type
      * @param expectAbsolute boolean; if true; dm should be Absolute; if false; dm should be Relative
      */
-    private static void checkContentsAndType(final AbstractDoubleMatrix<?, ?> dm, final double[][] reference,
+    private static void checkContentsAndType(final AbstractDoubleMatrix<?, ?, ?, ?> dm, final double[][] reference,
             final double precision, final Unit<?> u, final boolean expectAbsolute)
     {
         assertTrue("DoubleMatrix should not be null", null != dm);
@@ -1496,7 +1498,7 @@ public class DoubleMatrixDenseTest
          * @param function DoubleToDouble; encapsulated function that converts one inputValue to an outputValue
          */
         public static void tester(final double[][] inputValues, final String operation,
-                final AbstractDoubleMatrix<?, ?> actualResult, final double precision, final DoubleToDouble function)
+                final AbstractDoubleMatrix<?, ?, ?, ?> actualResult, final double precision, final DoubleToDouble function)
         {
             for (int i = 0; i < inputValues.length; i++)
             {

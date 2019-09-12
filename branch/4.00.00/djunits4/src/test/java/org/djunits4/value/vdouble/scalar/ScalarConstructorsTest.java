@@ -1,6 +1,7 @@
 package org.djunits4.value.vdouble.scalar;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -11,8 +12,6 @@ import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.base.UnitTypes;
 import org.djunits4.unit.util.UNITS;
 import org.djunits4.value.CLASSNAMES;
-import org.djunits4.value.base.Scalar;
-import org.djunits4.value.vdouble.scalar.base.DoubleScalar;
 import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
 import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
 import org.junit.Test;
@@ -39,6 +38,8 @@ public class ScalarConstructorsTest implements UNITS
     {
         // Force loading of all classes
         LengthUnit length = UNITS.METER;
+        if (length == null)
+            fail();
 
         for (String className : CLASSNAMES.ALL_NODIM)
         {

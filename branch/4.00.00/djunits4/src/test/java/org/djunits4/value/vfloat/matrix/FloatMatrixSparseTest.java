@@ -12,7 +12,9 @@ import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
-import org.djunits4.value.vfloat.scalar.FloatScalar;
+import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrix;
+import org.djunits4.value.vfloat.matrix.base.FloatMatrix;
+import org.djunits4.value.vfloat.scalar.base.FloatScalar;
 import org.junit.Test;
 
 /**
@@ -65,7 +67,7 @@ public class FloatMatrixSparseTest
      * @param u Unit&lt;?&gt;; the expected type
      * @param expectAbsolute boolean; if true; dm should be Absolute; if false; dm should be Relative
      */
-    private static void checkContentsAndType(final AbstractFloatMatrix<?, ?> dm, final float[][] reference,
+    private static void checkContentsAndType(final AbstractFloatMatrix<?, ?, ?, ?> dm, final float[][] reference,
             final double precision, final Unit<?> u, final boolean expectAbsolute)
     {
         assertTrue("FloatMatrix should not be null", null != dm);
@@ -1467,7 +1469,7 @@ public class FloatMatrixSparseTest
          * @param function FloatToFloat; encapsulated function that converts one inputValue to an outputValue
          */
         public static void tester(final float[][] inputValues, final String operation,
-                final AbstractFloatMatrix<?, ?> actualResult, final double precision, final FloatToFloat function)
+                final AbstractFloatMatrix<?, ?, ?, ?> actualResult, final double precision, final FloatToFloat function)
         {
             for (int i = 0; i < inputValues.length; i++)
             {

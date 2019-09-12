@@ -12,9 +12,9 @@ import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
-import org.djunits4.value.vdouble.scalar.base.DoubleScalar;
 import org.djunits4.value.vdouble.vector.base.AbstractDoubleVector;
-import org.djunits4.value.vdouble.vector.base.DoubleVector;
+import org.djunits4.value.vfloat.scalar.base.FloatScalar;
+import org.djunits4.value.vfloat.vector.base.FloatVector;
 import org.junit.Test;
 
 /**
@@ -56,7 +56,7 @@ public class DoubleVectorSparseTest
      * @param u Unit&lt;?&gt;; the expected type
      * @param expectAbsolute boolean; if true; dv should be Absolute; if false; dv should be Relative
      */
-    private static void checkContentsAndType(final AbstractDoubleVector<?, ?> dv, final double[] reference,
+    private static void checkContentsAndType(final AbstractDoubleVector<?, ?, ?> dv, final double[] reference,
             final double precision, final Unit<?> u, final boolean expectAbsolute)
     {
         assertTrue("DoubleVector should not be null", null != dv);
@@ -1028,7 +1028,7 @@ public class DoubleVectorSparseTest
          * @param function DoubleToDouble; encapsulated function that converts one inputValue to an outputValue
          */
         public static void tester(final double[] inputValues, final String operation,
-                final AbstractDoubleVector<?, ?> actualResult, final double precision, final DoubleToDouble function)
+                final AbstractDoubleVector<?, ?, ?> actualResult, final double precision, final DoubleToDouble function)
         {
             for (int i = 0; i < inputValues.length; i++)
             {

@@ -9,6 +9,8 @@ import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.PositionUnit;
 import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.Unit;
+import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalar;
+import org.djunits4.value.vfloat.scalar.base.FloatScalar;
 import org.junit.Test;
 
 /**

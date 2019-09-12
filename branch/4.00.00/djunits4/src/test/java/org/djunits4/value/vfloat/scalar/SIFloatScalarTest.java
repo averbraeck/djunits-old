@@ -21,6 +21,8 @@ import org.djunits4.unit.util.UNITS;
 import org.djunits4.unit.util.UnitException;
 import org.djunits4.unit.util.UnitRuntimeException;
 import org.djunits4.value.CLASSNAMES;
+import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
+import org.djunits4.value.vfloat.scalar.base.FloatScalar;
 import org.junit.Test;
 
 /**

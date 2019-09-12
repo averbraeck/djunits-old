@@ -11,6 +11,7 @@ import org.djunits4.unit.DurationUnit;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.CLASSNAMES;
 import org.djunits4.value.base.Scalar;
+import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
 import org.junit.Test;
 
 /**
@@ -94,10 +95,11 @@ public class ValueOfStringOfTest
             // loop over all the unit types
             for (Unit<?> unit : unitSI.getUnitBase().getUnitsById().values())
             {
-                Scalar<?, ?> scalar = null;
+                DoubleScalarInterface<?, ?> scalar = null;
                 try
                 {
-                    scalar = (Scalar<?, ?>) constructScalar.newInstance(new Double(1.0), unit);
+                    scalar = (DoubleScalarInterface<?, ?>) constructScalar.newInstance(new Double(1.0), unit);
+                    assertEquals(1.0, scalar.getInUnit(), 0.01);
                 }
                 catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
                         | InstantiationException exception)

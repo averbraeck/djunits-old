@@ -12,7 +12,9 @@ import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
-import org.djunits4.value.vfloat.scalar.FloatScalar;
+import org.djunits4.value.vfloat.scalar.base.FloatScalar;
+import org.djunits4.value.vfloat.vector.base.AbstractFloatVector;
+import org.djunits4.value.vfloat.vector.base.FloatVector;
 import org.junit.Test;
 
 /**
@@ -52,7 +54,7 @@ public class FloatVectorDenseTest
      * @param u Unit&lt;?&gt;; the expected type
      * @param expectAbsolute boolean; if true; dv should be Absolute; if false; dv should be Relative
      */
-    private static void checkContentsAndType(final AbstractFloatVector<?, ?> dv, final float[] reference,
+    private static void checkContentsAndType(final AbstractFloatVector<?, ?, ?> dv, final float[] reference,
             final double precision, final Unit<?> u, final boolean expectAbsolute)
     {
         assertTrue("FloatVector should not be null", null != dv);
@@ -1189,7 +1191,7 @@ public class FloatVectorDenseTest
          * @param function FloatToFloat; encapsulated function that converts one inputValue to an outputValue
          */
         public static void tester(final float[] inputValues, final String operation,
-                final AbstractFloatVector<?, ?> actualResult, final double precision, final FloatToFloat function)
+                final AbstractFloatVector<?, ?, ?> actualResult, final double precision, final FloatToFloat function)
         {
             for (int i = 0; i < inputValues.length; i++)
             {

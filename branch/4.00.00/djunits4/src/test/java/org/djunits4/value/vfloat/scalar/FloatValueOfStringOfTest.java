@@ -11,8 +11,8 @@ import java.lang.reflect.Method;
 import org.djunits4.unit.DurationUnit;
 import org.djunits4.unit.Unit;
 import org.djunits4.unit.VolumeUnit;
-import org.djunits4.value.CLASSNAMES;
 import org.djunits4.value.AbstractScalar;
+import org.djunits4.value.CLASSNAMES;
 import org.junit.Test;
 
 /**

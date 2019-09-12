@@ -18,18 +18,20 @@ import org.djunits4.unit.unitsystem.UnitSystem;
 import org.djunits4.unit.util.UNITS;
 import org.djunits4.util.ClassUtil;
 import org.djunits4.value.storage.StorageType;
-import org.djunits4.value.vdouble.matrix.AbstractDoubleMatrix;
-import org.djunits4.value.vdouble.matrix.DoubleMatrixInterface;
+import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrix;
+import org.djunits4.value.vdouble.matrix.base.DoubleMatrixInterface;
 import org.djunits4.value.vdouble.scalar.Area;
 import org.djunits4.value.vdouble.scalar.Length;
 import org.djunits4.value.vdouble.scalar.SIScalar;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalar;
+import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 import org.djunits4.value.vdouble.scalar.base.DoubleScalar;
-import org.djunits4.value.vfloat.matrix.AbstractFloatMatrix;
-import org.djunits4.value.vfloat.matrix.FloatMatrixInterface;
-import org.djunits4.value.vfloat.scalar.AbstractFloatScalar;
+import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrix;
+import org.djunits4.value.vfloat.matrix.base.FloatMatrixInterface;
 import org.djunits4.value.vfloat.scalar.FloatSIScalar;
-import org.djunits4.value.vfloat.scalar.FloatScalar;
+import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalar;
+import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
+import org.djunits4.value.vfloat.scalar.base.FloatScalar;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -87,8 +89,6 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
         final String upperMatrixType = "Matrix";
         final String floatPrefix = doubleType ? "" : "Float";
         String doubleOrFloat = doubleType ? "double" : "float";
-        for (boolean mutable : new boolean[] {false, true})
-        {
             for (StorageType storageType : StorageType.values())
             {
                 // get the interfaces such as org.djunits4.value.vdouble.matrix.Time
@@ -96,19 +96,19 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 {
                     String matrixNameAbs = CLASSNAMES.ABS[i];
                     Class<?> matrixClassAbs = null;
-                    String classNameAbs = "org.djunits4.value.v" + doubleOrFloat + ".matrix." + (mutable ? "Mutable" : "")
+                    String classNameAbs = "org.djunits4.value.v" + doubleOrFloat + ".matrix." 
                             + floatPrefix + matrixNameAbs + upperMatrixType;
                     System.out.println("Looking up class " + classNameAbs);
                     matrixClassAbs = Class.forName(classNameAbs);
                     Class<?> matrixClassRel = null;
 
                     String matrixNameRel = CLASSNAMES.ABS_REL[i];
-                    String classNameRel = "org.djunits4.value.v" + doubleOrFloat + ".matrix." + (mutable ? "Mutable" : "")
+                    String classNameRel = "org.djunits4.value.v" + doubleOrFloat + ".matrix." 
                             + floatPrefix + matrixNameRel + upperMatrixType;
                     matrixClassRel = Class.forName(classNameRel);
 
-                    testMethods(matrixClassAbs, true, doubleType, storageType, mutable);
-                    testMethods(matrixClassRel, false, doubleType, storageType, mutable);
+                    testMethods(matrixClassAbs, true, doubleType, storageType);
+                    testMethods(matrixClassRel, false, doubleType, storageType);
                     // testAbsRelConversion(matrixClass, true, doubleType, StorageType.DENSE);
                     // testAbsRelConversion(matrixClass, true, doubleType, StorageType.SPARSE);
                 }
@@ -116,13 +116,12 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 for (String matrixName : CLASSNAMES.REL)
                 {
                     String matrixClassName = (doubleType ? "" : "Float") + matrixName;
-                    String fullClassName = "org.djunits4.value.v" + doubleOrFloat + ".matrix." + (mutable ? "Mutable" : "")
+                    String fullClassName = "org.djunits4.value.v" + doubleOrFloat + ".matrix." 
                             + matrixClassName + "Matrix";
                     Class<?> matrixClass = null;
                     matrixClass = Class.forName(fullClassName);
-                    testMethods(matrixClass, false, doubleType, storageType, mutable);
+                    testMethods(matrixClass, false, doubleType, storageType);
                 }
-            }
         }
     }
 
@@ -133,17 +132,16 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
      * @param isAbs boolean; if true; the matrixClassAbsRel must be absolute; if false; the matrixClassAbsRel must be Relative
      * @param doubleType boolean; if true; perform tests on DoubleScalar; if false perform tests on FloatScalar
      * @param storageType StorageType; DENSE or SPARSE
-     * @param mutable boolean; if true; the matrixClass should be mutable; if false; the matrixClass should not be mutable
      * @throws InvocationTargetException on class or method resolving error
      * @throws IllegalAccessException on class or method resolving error
      * @throws InstantiationException on class or method resolving error
      * @throws NoSuchMethodException on class or method resolving error
      * @throws NoSuchFieldException on class or method resolving error
      * @throws ClassNotFoundException on reflection error
-     * @throws ValueRuntimeException whhen index out of range
+     * @throws ValueRuntimeException when index out of range
      */
     private void testMethods(final Class<?> matrixClassAbsRel, final boolean isAbs, final boolean doubleType,
-            final StorageType storageType, final boolean mutable) throws NoSuchMethodException, InstantiationException,
+            final StorageType storageType) throws NoSuchMethodException, InstantiationException,
             IllegalAccessException, InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueRuntimeException
     {
         // System.out.print(listMethods(matrixClassAbsRel, "multiplyBy", "\t"));
@@ -159,9 +157,9 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 testMultiplyByOrDivideByMethod(matrixClassAbsRel, method, false, doubleType, isAbs, storageType);
             }
         }
-        testConstructors(matrixClassAbsRel, isAbs, doubleType, mutable, storageType);
-        testGet(matrixClassAbsRel, isAbs, doubleType, mutable, storageType);
-        testUnaryMethods(matrixClassAbsRel, isAbs, doubleType, mutable, storageType);
+        testConstructors(matrixClassAbsRel, isAbs, doubleType, storageType);
+        testGet(matrixClassAbsRel, isAbs, doubleType, storageType);
+        testUnaryMethods(matrixClassAbsRel, isAbs, doubleType, storageType);
         testInterpolateMethod(matrixClassAbsRel, isAbs, doubleType, storageType);
     }
 
@@ -230,12 +228,12 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
         Constructor<?> constructor = matrixClass.getConstructor(double.class, getUnitClass(matrixClass));
         if (doubleType)
         {
-            FloatScalar.ImmutableRel<?> left =
-                    (FloatScalar.ImmutableRel<?>) constructor.newInstance(123d, getSIUnitInstance(getUnitClass(matrixClass)));
+            AbstractDoubleScalarRel<?, ?> left =
+                    (AbstractDoubleScalarRel<?, ?>) constructor.newInstance(123d, getSIUnitInstance(getUnitClass(matrixClass)));
             // System.out.println("constructed left: " + left);
             constructor = parameterClass.getConstructor(double.class, getUnitClass(parameterClass));
-            FloatScalar.ImmutableRel<?> right =
-                    (FloatScalar.ImmutableRel<?>) constructor.newInstance(456d, getSIUnitInstance(getUnitClass(parameterClass)));
+            AbstractDoubleScalarRel<?, ?> right =
+                    (AbstractDoubleScalarRel<?, ?>) constructor.newInstance(456d, getSIUnitInstance(getUnitClass(parameterClass)));
             // System.out.println("constructed right: " + right);
             double expectedValue = multiply ? 123d * 456 : 123d / 456;
 
@@ -243,14 +241,14 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             {
                 Method multiplyMethod = matrixClass.getDeclaredMethod("multiplyBy", new Class[] {parameterClass});
                 Object result = multiplyMethod.invoke(left, right);
-                double resultSI = ((FloatScalar.ImmutableRel<?>) result).getSI();
+                double resultSI = ((AbstractFloatScalarRel<?, ?>) result).getSI();
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
             else
             {
                 Method divideMethod = matrixClass.getDeclaredMethod("divideBy", new Class[] {parameterClass});
                 Object result = divideMethod.invoke(left, right);
-                double resultSI = ((FloatScalar.ImmutableRel<?>) result).getSI();
+                double resultSI = ((AbstractFloatScalarRel<?, ?>) result).getSI();
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
             SIScalar result = multiply ? DoubleScalar.multiply(left, right) : DoubleScalar.divide(left, right);
@@ -260,12 +258,12 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
         }
         else
         {
-            FloatScalar.Rel<?> left =
-                    (FloatScalar.Rel<?>) constructor.newInstance(123f, getSIUnitInstance(getUnitClass(matrixClass)));
+            AbstractFloatScalarRel<?, ?> left =
+                    (AbstractFloatScalarRel<?, ?>) constructor.newInstance(123f, getSIUnitInstance(getUnitClass(matrixClass)));
             // System.out.println("constructed left: " + left);
             constructor = parameterClass.getConstructor(double.class, getUnitClass(parameterClass));
-            FloatScalar.Rel<?> right =
-                    (FloatScalar.Rel<?>) constructor.newInstance(456f, getSIUnitInstance(getUnitClass(parameterClass)));
+            AbstractFloatScalarRel<?, ?> right =
+                    (AbstractFloatScalarRel<?, ?>) constructor.newInstance(456f, getSIUnitInstance(getUnitClass(parameterClass)));
             // System.out.println("constructed right: " + right);
             float expectedValue = multiply ? 123f * 456 : 123f / 456;
 
@@ -273,14 +271,14 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             {
                 Method multiplyMethod = matrixClass.getDeclaredMethod("multiplyBy", new Class[] {parameterClass});
                 Object result = multiplyMethod.invoke(left, right);
-                double resultSI = ((FloatScalar.Rel<?>) result).getSI();
+                double resultSI = ((AbstractFloatScalarRel<?, ?>) result).getSI();
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
             else
             {
                 Method divideMethod = matrixClass.getDeclaredMethod("divideBy", new Class[] {parameterClass});
                 Object result = divideMethod.invoke(left, right);
-                float resultSI = ((FloatScalar.Rel<?>) result).getSI();
+                float resultSI = ((AbstractFloatScalarRel<?, ?>) result).getSI();
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
             FloatSIScalar result = multiply ? FloatScalar.multiply(left, right) : FloatScalar.divide(left, right);
@@ -405,7 +403,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             {
                 fail("object is not a DoubleMatrix");
             }
-            AbstractDoubleMatrix<?, ?> dv = (AbstractDoubleMatrix<?, ?>) o;
+            AbstractDoubleMatrix<?, ?, ?, ?> dv = (AbstractDoubleMatrix<?, ?, ?, ?>) o;
             result = dv.getSI(row, col);
             assertEquals("StorageType", storageType, dv.getStorageType());
         }
@@ -415,7 +413,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             {
                 fail("object is not a FloatMatrix");
             }
-            AbstractFloatMatrix<?, ?> fv = (AbstractFloatMatrix<?, ?>) o;
+            AbstractFloatMatrix<?, ?, ?, ?> fv = (AbstractFloatMatrix<?, ?, ?, ?>) o;
             result = fv.getSI(row, col);
             assertEquals("StorageType", storageType, fv.getStorageType());
         }
@@ -444,7 +442,6 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
      * @param matrixClass the class to test
      * @param abs boolean; if true; test Absolute class; if false; test the Relative class
      * @param doubleType boolean; if true; perform tests on DoubleScalar; if false; perform tests on FloatScalar
-     * @param mutable boolean; if true; perform test for mutable version; if false; perform test for non-mutable version
      * @param storageType StorageType; Dense or Sparse
      * @throws NoSuchMethodException on class or method resolving error
      * @throws InstantiationException on class or method resolving error
@@ -455,7 +452,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
      * @throws ValueRuntimeException when index out of range
      */
     private void testConstructors(final Class<?> matrixClass, final boolean abs, final boolean doubleType,
-            final boolean mutable, final StorageType storageType) throws NoSuchMethodException, InstantiationException,
+            final StorageType storageType) throws NoSuchMethodException, InstantiationException,
             IllegalAccessException, InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueRuntimeException
     {
         double[][] doubleValue = {{1.23456, 2.34567, 3.45678}, {4.56789, 5.67890, 6.78901}};
@@ -626,7 +623,6 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
      * @param matrixClass the class to test
      * @param abs boolean; if true; the absolute version is tested; if false; the relative version is tested
      * @param doubleType boolean; if true; perform tests on DoubleScalar; if false; perform tests on FloatScalar
-     * @param mutable boolean; if true; perform test for mutable version; if false; perform test for non-mutable version
      * @param storageType StorageType; Dense or Sparse
      * @throws NoSuchMethodException on class or method resolving error
      * @throws InstantiationException on class or method resolving error
@@ -636,7 +632,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
      * @throws ClassNotFoundException on class or method resolving error
      * @throws ValueRuntimeException when index out of range
      */
-    private void testGet(final Class<?> matrixClass, final boolean abs, final boolean doubleType, final boolean mutable,
+    private void testGet(final Class<?> matrixClass, final boolean abs, final boolean doubleType,
             final StorageType storageType) throws NoSuchMethodException, InstantiationException, IllegalAccessException,
             InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueRuntimeException
     {
@@ -647,7 +643,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                 new Object[] {value, getSIUnitInstance(getUnitClass(matrixClass)), storageType}, doubleType);
         if (doubleType)
         {
-            AbstractDoubleMatrix<?, ?> dv = (AbstractDoubleMatrix<?, ?>) matrix;
+            AbstractDoubleMatrix<?, ?, ?, ?> dv = (AbstractDoubleMatrix<?, ?, ?, ?>) matrix;
             for (int row = 0; row < doubleValue.length; row++)
             {
                 for (int col = 0; col < doubleValue[row].length; col++)
@@ -660,7 +656,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
         }
         else
         {
-            AbstractFloatMatrix<?, ?> fv = (AbstractFloatMatrix<?, ?>) matrix;
+            AbstractFloatMatrix<?, ?, ?, ?> fv = (AbstractFloatMatrix<?, ?, ?, ?>) matrix;
             for (int row = 0; row < floatValue.length; row++)
             {
                 for (int col = 0; col < doubleValue[row].length; col++)
@@ -677,7 +673,6 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
      * @param matrixClass the class to test
      * @param abs abs or rel class
      * @param doubleType boolean; if true; perform tests on DoubleScalar; if false; perform tests on FloatScalar
-     * @param mutable boolean; if true; perform test for mutable version; if false; perform test for non-mutable version
      * @param storageType StorageType; Dense or Sparse
      * @throws NoSuchMethodException on class or method resolving error
      * @throws InstantiationException on class or method resolving error
@@ -688,9 +683,10 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
      * @throws ValueRuntimeException when index out of range
      */
     private void testUnaryMethods(final Class<?> matrixClass, final boolean abs, final boolean doubleType,
-            final boolean mutable, final StorageType storageType) throws NoSuchMethodException, InstantiationException,
+            final StorageType storageType) throws NoSuchMethodException, InstantiationException,
             IllegalAccessException, InvocationTargetException, NoSuchFieldException, ClassNotFoundException, ValueRuntimeException
     {
+        final boolean mutable = false; // lok for difference between mutable and non-mutable functions
         double[][] doubleValue = {{1.23456, 2.34567, 3.45678}, {4.56789, 5.67890, 6.78901}};
         float[][] floatValue = {{1.23456f, 2.34567f, 3.45678f}, {4.56789f, 5.67890f, 6.78901f}};
         Object value = doubleType ? doubleValue : floatValue;
@@ -699,17 +695,17 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
         Object result;
         if (doubleType)
         {
-            result = ((DoubleMatrixInterface<?>) left).toSparse();
+            result = ((DoubleMatrixInterface<?, ?, ?, ?>) left).toSparse();
             verifyAbsRelPrecisionAndValues(abs, doubleType, StorageType.SPARSE, result, value, 0.0001);
-            result = ((DoubleMatrixInterface<?>) left).toDense();
+            result = ((DoubleMatrixInterface<?, ?, ?, ?>) left).toDense();
             verifyAbsRelPrecisionAndValues(abs, doubleType, StorageType.DENSE, result, value, 0.0001);
             // TODO not complete; see VectorOperationsTest
         }
         else
         {
-            result = ((FloatMatrixInterface<?>) left).toSparse();
+            result = ((FloatMatrixInterface<?, ?, ?, ?>) left).toSparse();
             verifyAbsRelPrecisionAndValues(abs, doubleType, StorageType.SPARSE, result, value, 0.0001);
-            result = ((FloatMatrixInterface<?>) left).toDense();
+            result = ((FloatMatrixInterface<?, ?, ?, ?>) left).toDense();
             verifyAbsRelPrecisionAndValues(abs, doubleType, StorageType.DENSE, result, value, 0.0001);
             // TODO not complete; see VectorOperationsTest
         }
@@ -1501,14 +1497,14 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
         if (doubleType)
         {
             double[][] zeroValue = {{1.23456, 2.45678}, {3.5678, 4.8765}};
-            // AbstractDoubleMatrix<?, ?> zero =
+            // AbstractDoubleMatrix<?, ?, ?, ?> zero =
             // abs ? (DoubleMatrix.Abs<?>) constructor.newInstance(zeroValue,
             // getSIUnitInstance(getUnitClass(matrixClass)), storageType) : (DoubleMatrix.Rel<?>) constructor
             // .newInstance(zeroValue, getSIUnitInstance(getUnitClass(matrixClass)), storageType);
-            AbstractDoubleMatrix<?, ?> zero = (AbstractDoubleMatrix<?, ?>) constructor.newInstance(zeroValue,
+            AbstractDoubleMatrix<?, ?, ?, ?> zero = (AbstractDoubleMatrix<?, ?, ?, ?>) constructor.newInstance(zeroValue,
                     getSIUnitInstance(getUnitClass(matrixClass)), storageType);
             double[][] oneValue = {{3.45678, 4.678901}, {8.654, 9.35}};
-            AbstractDoubleMatrix<?, ?> one = (AbstractDoubleMatrix<?, ?>) constructor.newInstance(oneValue,
+            AbstractDoubleMatrix<?, ?, ?, ?> one = (AbstractDoubleMatrix<?, ?, ?, ?>) constructor.newInstance(oneValue,
                     getSIUnitInstance(getUnitClass(matrixClass)), storageType);
             for (double ratio : new double[] {-5, -1, 0, 0.3, 1, 2, 10})
             {
@@ -1541,10 +1537,10 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
         else
         {
             float[][] zeroValue = {{1.23456f, 2.45678f}, {4.654f, 987.2f}};
-            AbstractFloatMatrix<?, ?> zero = (AbstractFloatMatrix<?, ?>) constructor.newInstance(zeroValue,
+            AbstractFloatMatrix<?, ?, ?, ?> zero = (AbstractFloatMatrix<?, ?, ?, ?>) constructor.newInstance(zeroValue,
                     getSIUnitInstance(getUnitClass(matrixClass)), storageType);
             float[][] oneValue = {{3.45678f, 4.678901f}, {2.222f, 3.333f}};
-            AbstractFloatMatrix<?, ?> one = (AbstractFloatMatrix<?, ?>) constructor.newInstance(oneValue,
+            AbstractFloatMatrix<?, ?, ?, ?> one = (AbstractFloatMatrix<?, ?, ?, ?>) constructor.newInstance(oneValue,
                     getSIUnitInstance(getUnitClass(matrixClass)), storageType);
             for (float ratio : new float[] {-5, -1, 0, 0.3f, 1, 2, 10})
             {

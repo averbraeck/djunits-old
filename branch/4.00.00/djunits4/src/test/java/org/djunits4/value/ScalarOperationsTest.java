@@ -496,11 +496,6 @@ public class ScalarOperationsTest
         result = rint.invoke(left);
         assertEquals("Result of operation", Math.rint(value), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result), 0.01);
 
-        Method round = ClassUtil.resolveMethod(scalarClass, "round", new Class[] {});
-        result = round.invoke(left);
-        assertEquals("Result of operation", Math.round(value), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
-                0.01);
-
         if (!abs)
         {
             Method methodAbs = ClassUtil.resolveMethod(scalarClass, "abs", new Class[] {});
@@ -649,13 +644,13 @@ public class ScalarOperationsTest
         if (!abs)
         {
             Method multiplyBy =
-                    ClassUtil.resolveMethod(scalarClass, "multiplyBy", new Class[] {doubleType ? double.class : float.class});
+                    ClassUtil.resolveMethod(scalarClass, "times", new Class[] {doubleType ? double.class : float.class});
             result = doubleType ? multiplyBy.invoke(left, Math.PI) : multiplyBy.invoke(left, (float) Math.PI);
             assertEquals("Result of operation", Math.PI * value, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                     0.01);
 
             Method divideBy =
-                    ClassUtil.resolveMethod(scalarClass, "divideBy", new Class[] {doubleType ? double.class : float.class});
+                    ClassUtil.resolveMethod(scalarClass, "divide", new Class[] {doubleType ? double.class : float.class});
             result = doubleType ? divideBy.invoke(left, Math.PI) : divideBy.invoke(left, (float) Math.PI);
             assertEquals("Result of operation", value / Math.PI, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                     0.01);
