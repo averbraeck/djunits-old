@@ -20,78 +20,33 @@ import org.djunits4.value.vfloat.scalar.*;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "GenerateDJUNIT")
-public class Float%TypeRel%Matrix extends AbstractFloatMatrixRel<%TypeRelUnit%, Float%TypeRel%Matrix, MutableFloat%TypeRel%Matrix, Float%TypeRel%>
+public class Float%TypeRel%Matrix extends AbstractFloatMatrixRelWithAbs<%TypeAbsUnit%, Float%TypeAbs%, Float%TypeAbs%Vector, Float%TypeAbs%Matrix,
+%TypeRelUnit%, Float%TypeRel%, Float%TypeRel%Vector, Float%TypeRel%Matrix>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
-
+    
     /**
-     * Construct a new Relative Immutable Float%TypeRel%Matrix.
-     * @param values float[][]; the values of the entries in the new Relative Immutable Float%TypeRel%Matrix
-     * @param unit %TypeRelUnit%; the unit of the new Relative Immutable Float%TypeRel%Matrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public Float%TypeRel%Matrix(final float[][] values, final %TypeRelUnit% unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float%TypeRel%Matrix.
-     * @param values Float%TypeRel%[][]; the values of the entries in the new Relative Immutable Float%TypeRel%Matrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public Float%TypeRel%Matrix(final Float%TypeRel%[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float%TypeRel%Matrix.
      * @param data FloatMatrixData; an internal data object
-     * @param unit %TypeRelUnit%; the unit
+     * @param unit %TypeRel%Unit; the unit
      */
-    Float%TypeRel%Matrix(final FloatMatrixData data, final %TypeRelUnit% unit)
+    public Float%TypeRel%Matrix(final FloatMatrixData data, final %TypeRel%Unit unit)
     {
         super(data, unit);
     }
-
+    
     /** {@inheritDoc} */
     @Override
-    public final Float%TypeRel%Matrix toDense()
+    public Class<Float%TypeRel%> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return Float%TypeRel%.class;
     }
-
+    
     /** {@inheritDoc} */
     @Override
-    public final Float%TypeRel%Matrix toSparse()
+    public Class<Float%TypeRel%Vector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final Float%TypeRel%Matrix instantiateType(final FloatMatrixData fmd, final %TypeRelUnit% unit)
-    {
-        return new Float%TypeRel%Matrix(fmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final MutableFloat%TypeRel%Matrix
-        instantiateMutableType(final FloatMatrixData fmd, final %TypeRelUnit% unit)
-    {
-        return new MutableFloat%TypeRel%Matrix(fmd, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final Float%TypeRel% instantiateScalar(final float value, final %TypeRelUnit% unit)
-    {
-        return new Float%TypeRel%(value, unit);
+        return Float%TypeRel%Vector.class;
     }
         
 %FORMULAS%%TypeRel%%

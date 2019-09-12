@@ -52,7 +52,7 @@
 /Duration=ElectricalCurrent
 /ElectricalCurrent=Duration
 
-%ElectricalCondictance
+%ElectricalConductance
 
 %ElectricalCurrent
 /ElectricalCurrent=Dimensionless

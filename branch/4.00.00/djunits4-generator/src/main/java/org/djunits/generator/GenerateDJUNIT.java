@@ -507,7 +507,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%TYPE%", type.toUpperCase());
             if (java.contains("class DimensionlessVector"))
             {
-                java = java.replace("%DIMLESS%", 
+                java = java.replace("%DIMLESS%",
                         " implements DoubleMathFunctions, DimensionlessFunctions<DimensionlessUnit, DimensionlessVector>");
                 URL dimlessURL = URLResource.getResource("/" + relativePath + "DimlessFunctions.java");
                 String dimlessFunctions = new String(Files.readAllBytes(Paths.get(dimlessURL.toURI())));
@@ -581,7 +581,8 @@ public class GenerateDJUNIT
             java = java.replaceAll("%TYPE%", type.toUpperCase());
             if (java.contains("class FloatDimensionlessVector"))
             {
-                java = java.replace("%DIMLESS%", " implements DimensionlessFunctions<DimensionlessUnit, FloatDimensionlessVector>");
+                java = java.replace("%DIMLESS%",
+                        " implements DimensionlessFunctions<DimensionlessUnit, FloatDimensionlessVector>");
                 URL dimlessURL = URLResource.getResource("/" + relativePath + "DimlessFunctions.java");
                 String dimlessFunctions = new String(Files.readAllBytes(Paths.get(dimlessURL.toURI())));
                 int pos = java.indexOf("%FORMULAS%");
@@ -688,14 +689,14 @@ public class GenerateDJUNIT
             java = java.replaceAll("%TYPE%", type.toUpperCase());
             if (java.contains("class DimensionlessMatrix"))
             {
-                java = java.replace("%DIMLESS%", " implements MathFunctionsDimensionless<MutableDimensionlessMatrix>");
+                java = java.replace("%DIMLESS%", " implements DimensionlessFunctions<DimensionlessUnit, DimensionlessMatrix>");
                 URL dimlessURL = URLResource.getResource("/" + relativePath + "DimlessFunctions.java");
                 String dimlessFunctions = new String(Files.readAllBytes(Paths.get(dimlessURL.toURI())));
                 int pos = java.indexOf("%FORMULAS%");
                 java = java.substring(0, pos - 1) + dimlessFunctions + java.substring(pos, java.length() - 1);
             }
             java = java.replace("%DIMLESS%", "");
-           java = formulasMatrix(java, "DoubleMatrix => " + type, "");
+            java = formulasMatrix(java, "DoubleMatrix => " + type, "");
             java = replace(java, type);
             out.print(java);
             out.close();
@@ -761,7 +762,8 @@ public class GenerateDJUNIT
             java = java.replaceAll("%TYPE%", type.toUpperCase());
             if (java.contains("class FloatDimensionlessMatrix"))
             {
-                java = java.replace("%DIMLESS%", " implements MathFunctionsDimensionless<MutableFloatDimensionlessMatrix>");
+                java = java.replace("%DIMLESS%",
+                        " implements DimensionlessFunctions<DimensionlessUnit, FloatDimensionlessMatrix>");
                 URL dimlessURL = URLResource.getResource("/" + relativePath + "DimlessFunctions.java");
                 String dimlessFunctions = new String(Files.readAllBytes(Paths.get(dimlessURL.toURI())));
                 int pos = java.indexOf("%FORMULAS%");
@@ -933,6 +935,84 @@ public class GenerateDJUNIT
     }
 
     /****************************************************************************************************************/
+    /********************************************* SIMATRIX *********************************************************/
+    /****************************************************************************************************************/
+
+    /**
+     * Generate SIMatrix.java in value.vdouble.matrix.
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on the file system
+     */
+    private static void generateSIMatrix() throws IOException, URISyntaxException
+    {
+        String relativePath = "value/vdouble/matrix/";
+        URL siMatrixURL = URLResource.getResource("/" + relativePath + "SIMATRIX.java");
+        String siJava = new String(Files.readAllBytes(Paths.get(siMatrixURL.toURI())));
+        siJava = siJava.replace("@Generated(value = \"GenerateDJUNIT\")",
+                "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + generationTime + "\")");
+        String asJava = new String(
+                Files.readAllBytes(Paths.get(URLResource.getResource("/" + relativePath + "SIMATRIX_AS.java").toURI())));
+
+        List<String> allRelTypes = new ArrayList<>(typesRel);
+        for (String[] arType : typesAbsRel)
+        {
+            allRelTypes.add(arType[1]);
+        }
+
+        String asMethods = "";
+        for (String type : allRelTypes)
+        {
+            String lc = type.toLowerCase();
+            asMethods += asJava.replaceAll("%Type%", type).replaceAll("%type%", lc);
+        }
+
+        File outPath = new File(absoluteRootPath + relativePath);
+        outPath.mkdirs();
+        PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "SIMatrix.java");
+        String java = siJava.replace("%%ASMETHODS%%", asMethods);
+        out.print(java);
+        out.close();
+        System.out.println("built: " + absoluteRootPath + relativePath + "SIMatrix.java");
+    }
+
+    /**
+     * Generate SIMatrix.java in value.vfloat.matrix.
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on the file system
+     */
+    private static void generateFloatSIMatrix() throws IOException, URISyntaxException
+    {
+        String relativePath = "value/vfloat/matrix/";
+        URL siMatrixURL = URLResource.getResource("/" + relativePath + "FLOATSIMATRIX.java");
+        String siJava = new String(Files.readAllBytes(Paths.get(siMatrixURL.toURI())));
+        siJava = siJava.replace("@Generated(value = \"GenerateDJUNIT\")",
+                "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + generationTime + "\")");
+        String asJava = new String(
+                Files.readAllBytes(Paths.get(URLResource.getResource("/" + relativePath + "FLOATSIMATRIX_AS.java").toURI())));
+
+        List<String> allRelTypes = new ArrayList<>(typesRel);
+        for (String[] arType : typesAbsRel)
+        {
+            allRelTypes.add(arType[1]);
+        }
+
+        String asMethods = "";
+        for (String type : allRelTypes)
+        {
+            String lc = type.toLowerCase();
+            asMethods += asJava.replaceAll("%Type%", type).replaceAll("%type%", lc);
+        }
+
+        File outPath = new File(absoluteRootPath + relativePath);
+        outPath.mkdirs();
+        PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "FloatSIMatrix.java");
+        String java = siJava.replace("%%ASMETHODS%%", asMethods);
+        out.print(java);
+        out.close();
+        System.out.println("built: " + absoluteRootPath + relativePath + "FloatSIMatrix.java");
+    }
+
+    /****************************************************************************************************************/
     /********************************************* GENERIC **********************************************************/
     /****************************************************************************************************************/
 
@@ -1038,6 +1118,9 @@ public class GenerateDJUNIT
 
         generateSIVector();
         generateFloatSIVector();
-}
+
+        generateSIMatrix();
+        generateFloatSIMatrix();
+    }
 
 }
