@@ -98,8 +98,8 @@ public class DoubleVectorDenseTest
         {
             AbsoluteTemperatureUnit tempUnit = AbsoluteTemperatureUnit.KELVIN;
             double[] value = data(3, 38.0);
-            DoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> dv =
-                    new DoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> dv =
+                    new FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             String result = dv.toString(true, true);
             assertTrue("toString result contains \" Abs \"", result.contains(" Abs "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
@@ -147,8 +147,8 @@ public class DoubleVectorDenseTest
         {
             AbsoluteTemperatureUnit tempUnit = AbsoluteTemperatureUnit.DEGREE_CELSIUS;
             double[] value = data(3, 38.0);
-            DoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> temperatureDV =
-                    new DoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> temperatureDV =
+                    new FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             checkContentsAndType(temperatureDV, value, 0.001, tempUnit, true);
             assertEquals("Value in SI is equivalent in Kelvin", 311.15, temperatureDV.getSI(0), 0.05);
             assertEquals("Value in Fahrenheit", 100.4, temperatureDV.getInUnit(0, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT),
@@ -164,23 +164,23 @@ public class DoubleVectorDenseTest
             value[0] = safe; // Restore
             mdv.set(0, temperatureDV.get(0));
             checkContentsAndType(mdv, value, 0.001, tempUnit, true);
-            DoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> temperature2DV =
-                    new DoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(temperatureDV.getValuesSI(),
+            FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> temperature2DV =
+                    new FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(temperatureDV.getValuesSI(),
                             AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
             assertTrue("temperature2DV should be equal to temperatureDV", temperature2DV.equals(temperatureDV));
             assertTrue("Value is Absolute", temperatureDV.isAbsolute());
             assertFalse("Value is not Relative", temperatureDV.isRelative());
-            temperatureDV = new DoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value,
+            temperatureDV = new FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value,
                     AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
             checkContentsAndType(temperatureDV, value, 0.001, AbsoluteTemperatureUnit.KELVIN, true);
             compareArray(value, temperatureDV.getValuesSI());
-            DoubleScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit>[] scalar = new DoubleScalar.Abs[value.length];
+            FloatScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit>[] scalar = new FloatScalar.Abs[value.length];
             for (int index = 0; index < value.length; index++)
             {
-                scalar[index] = new DoubleScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value[index],
+                scalar[index] = new FloatScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value[index],
                         AbsoluteTemperatureUnit.DEGREE_CELSIUS);
             }
-            temperatureDV = new DoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(scalar, StorageType.DENSE);
+            temperatureDV = new FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(scalar, StorageType.DENSE);
             checkContentsAndType(temperatureDV, value, 0.001, tempUnit, true);
             assertEquals("All cells != 0; cardinality should equal number of cells", value.length, temperatureDV.cardinality());
             double sum = 0;
@@ -208,9 +208,9 @@ public class DoubleVectorDenseTest
             double[] value = data(3, 38.0);
             double[] value2 = data(3, 38.0);
             value2[0] = 12345;
-            DoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> dv =
-                    new DoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            DoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> dvCopy = dv;
+            FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> dv =
+                    new FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> dvCopy = dv;
             MutableDoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> mdv = dv.mutable();
             checkContentsAndType(dv, value, 0.001, tempUnit, true);
             checkContentsAndType(mdv, value, 0.001, tempUnit, true);
@@ -226,7 +226,7 @@ public class DoubleVectorDenseTest
             checkContentsAndType(mdv, value2, 0.01, tempUnit, true);
             checkContentsAndType(mdvCopy, value, 0.001, tempUnit, true);
             checkContentsAndType(mmdv, value, 0.001, tempUnit, true);
-            DoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> idv = mdv.immutable();
+            FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> idv = mdv.immutable();
             assertTrue("Different value extremely likely results in different hashCode", dv.hashCode() != mdv.hashCode());
             // Restore value of mdv
             mdv.setSI(0, dv.getSI(0));
@@ -252,22 +252,22 @@ public class DoubleVectorDenseTest
         LengthUnit lengthUnit = LengthUnit.METER;
         PositionUnit positionUnit = PositionUnit.DEFAULT;
         double value = 38.0;
-        DoubleScalar.Abs<PositionUnit, LengthUnit> dv = new DoubleScalar.Abs<PositionUnit, LengthUnit>(value, positionUnit);
+        FloatScalar.Abs<PositionUnit, LengthUnit> dv = new FloatScalar.Abs<PositionUnit, LengthUnit>(value, positionUnit);
         assertTrue("Equal to itself", dv.equals(dv));
         assertFalse("Not equal to null", dv.equals(null));
         assertFalse("Not equal to some other kind of object; e.g. a String", dv.equals(new String("abc")));
-        DoubleScalar.ImmutableRel<LengthUnit> dvCounterPart = new DoubleScalar.ImmutableRel<LengthUnit>(value, lengthUnit);
+        FloatScalar.ImmutableRel<LengthUnit> dvCounterPart = new FloatScalar.ImmutableRel<LengthUnit>(value, lengthUnit);
         assertFalse("Not equal if one Absolute and other Relative", dv.equals(dvCounterPart));
-        DoubleScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit> dvWrongBaseUnit =
-                new DoubleScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, AbsoluteTemperatureUnit.KELVIN);
+        FloatScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit> dvWrongBaseUnit =
+                new FloatScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, AbsoluteTemperatureUnit.KELVIN);
         assertEquals("The underlying SI values are the same", dv.getSI(), dvWrongBaseUnit.getSI(), 0.0001);
         assertFalse("Not equals because the standard SI unit differs", dv.equals(dvWrongBaseUnit));
-        DoubleScalar.Abs<PositionUnit, LengthUnit> dvCompatibleUnit =
-                new DoubleScalar.Abs<PositionUnit, LengthUnit>(38000.0, PositionUnit.MILLIMETER);
+        FloatScalar.Abs<PositionUnit, LengthUnit> dvCompatibleUnit =
+                new FloatScalar.Abs<PositionUnit, LengthUnit>(38000.0, PositionUnit.MILLIMETER);
         assertFalse("Units are different", dv.getUnit().equals(dvCompatibleUnit.getUnit()));
         assertTrue("equals returns true", dv.equals(dvCompatibleUnit));
-        DoubleScalar.Abs<PositionUnit, LengthUnit> dvDifferentValue =
-                new DoubleScalar.Abs<PositionUnit, LengthUnit>(123.456, PositionUnit.MILLIMETER);
+        FloatScalar.Abs<PositionUnit, LengthUnit> dvDifferentValue =
+                new FloatScalar.Abs<PositionUnit, LengthUnit>(123.456, PositionUnit.MILLIMETER);
         assertFalse("Different value makes equals return false", dv.equals(dvDifferentValue));
     }
 
@@ -342,11 +342,11 @@ public class DoubleVectorDenseTest
         {
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
-            DoubleVector.Abs<PositionUnit, LengthUnit> left =
-                    new DoubleVector.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.DENSE);
-            DoubleVector.ImmutableRel<LengthUnit> right =
-                    new DoubleVector.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleVector.Abs<?, ?> result = left.plus(right);
+            FloatVector.Abs<PositionUnit, LengthUnit> left =
+                    new FloatVector.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.DENSE);
+            FloatVector.ImmutableRel<LengthUnit> right =
+                    new FloatVector.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatVector.Abs<?, ?> result = left.plus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI plus of contributing elements", left.getSI(i) + right.getSI(i),
@@ -369,11 +369,11 @@ public class DoubleVectorDenseTest
         {
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
-            DoubleVector.Abs<PositionUnit, LengthUnit> left =
-                    new DoubleVector.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.DENSE);
-            DoubleVector.ImmutableRel<LengthUnit> right =
-                    new DoubleVector.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleVector.Abs<?, ?> result = left.minus(right);
+            FloatVector.Abs<PositionUnit, LengthUnit> left =
+                    new FloatVector.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.DENSE);
+            FloatVector.ImmutableRel<LengthUnit> right =
+                    new FloatVector.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatVector.Abs<?, ?> result = left.minus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i) - right.getSI(i),
@@ -396,11 +396,11 @@ public class DoubleVectorDenseTest
         {
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
-            DoubleVector.Abs<PositionUnit, LengthUnit> left =
-                    new DoubleVector.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.DENSE);
-            DoubleVector.ImmutableRel<LengthUnit> right =
-                    new DoubleVector.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
-            DoubleVector.Abs<?, ?> result = left.plus(right);
+            FloatVector.Abs<PositionUnit, LengthUnit> left =
+                    new FloatVector.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.DENSE);
+            FloatVector.ImmutableRel<LengthUnit> right =
+                    new FloatVector.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            FloatVector.Abs<?, ?> result = left.plus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI plus of contributing elements", left.getSI(i) + right.getSI(i),
@@ -423,11 +423,11 @@ public class DoubleVectorDenseTest
         {
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
-            DoubleVector.Abs<PositionUnit, LengthUnit> left =
-                    new DoubleVector.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.DENSE);
-            DoubleVector.ImmutableRel<LengthUnit> right =
-                    new DoubleVector.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
-            DoubleVector.Abs<?, ?> result = left.minus(right);
+            FloatVector.Abs<PositionUnit, LengthUnit> left =
+                    new FloatVector.Abs<PositionUnit, LengthUnit>(leftValue, PositionUnit.MILE, StorageType.DENSE);
+            FloatVector.ImmutableRel<LengthUnit> right =
+                    new FloatVector.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            FloatVector.Abs<?, ?> result = left.minus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i) - right.getSI(i),
@@ -450,7 +450,7 @@ public class DoubleVectorDenseTest
         try
         {
             // null array
-            new DoubleVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>((double[]) null,
+            new FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>((double[]) null,
                     AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT, StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
@@ -472,7 +472,7 @@ public class DoubleVectorDenseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.KELVIN;
             double[] value = data(3, 38.0);
-            DoubleVector.ImmutableRel<TemperatureUnit> dv = new DoubleVector.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            FloatVector.ImmutableRel<TemperatureUnit> dv = new FloatVector.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             String result = dv.toString(true, true);
             assertTrue("toString result contains \" Rel \"", result.contains(" Rel "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
@@ -520,8 +520,8 @@ public class DoubleVectorDenseTest
         {
             TemperatureUnit tempUnit = TemperatureUnit.DEGREE_CELSIUS;
             double[] value = data(3, 38.0);
-            DoubleVector.ImmutableRel<TemperatureUnit> temperatureDV =
-                    new DoubleVector.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            FloatVector.ImmutableRel<TemperatureUnit> temperatureDV =
+                    new FloatVector.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             checkContentsAndType(temperatureDV, value, 0.001, tempUnit, false);
             assertEquals("Value in SI is equivalent in Kelvin", 38.0, temperatureDV.getSI(0), 0.05);
             assertEquals("Value in Fahrenheit", 38.0 * 9.0 / 5.0, temperatureDV.getInUnit(0, TemperatureUnit.DEGREE_FAHRENHEIT),
@@ -530,20 +530,20 @@ public class DoubleVectorDenseTest
             MutableDoubleVector.ImmutableRel<TemperatureUnit> mdv =
                     new MutableDoubleVector.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
             checkContentsAndType(mdv, value, 0.001, tempUnit, false);
-            DoubleVector.ImmutableRel<TemperatureUnit> temperature2DV = new DoubleVector.ImmutableRel<TemperatureUnit>(
+            FloatVector.ImmutableRel<TemperatureUnit> temperature2DV = new FloatVector.ImmutableRel<TemperatureUnit>(
                     temperatureDV.getValuesSI(), TemperatureUnit.KELVIN, StorageType.DENSE);
             assertTrue("temperature2DV should be equal to temperatureDV", temperature2DV.equals(temperatureDV));
             assertTrue("Value is Relative", temperatureDV.isRelative());
             assertFalse("Value is not Absolute", temperatureDV.isAbsolute());
-            temperatureDV = new DoubleVector.ImmutableRel<TemperatureUnit>(value, TemperatureUnit.KELVIN, StorageType.DENSE);
+            temperatureDV = new FloatVector.ImmutableRel<TemperatureUnit>(value, TemperatureUnit.KELVIN, StorageType.DENSE);
             checkContentsAndType(temperatureDV, value, 0.001, TemperatureUnit.KELVIN, false);
             compareArray(value, temperatureDV.getValuesSI());
-            DoubleScalar.ImmutableRel<TemperatureUnit>[] scalar = new DoubleScalar.ImmutableRel[value.length];
+            FloatScalar.ImmutableRel<TemperatureUnit>[] scalar = new FloatScalar.ImmutableRel[value.length];
             for (int index = 0; index < value.length; index++)
             {
-                scalar[index] = new DoubleScalar.ImmutableRel<TemperatureUnit>(value[index], TemperatureUnit.DEGREE_CELSIUS);
+                scalar[index] = new FloatScalar.ImmutableRel<TemperatureUnit>(value[index], TemperatureUnit.DEGREE_CELSIUS);
             }
-            temperatureDV = new DoubleVector.ImmutableRel<TemperatureUnit>(scalar, StorageType.DENSE);
+            temperatureDV = new FloatVector.ImmutableRel<TemperatureUnit>(scalar, StorageType.DENSE);
             checkContentsAndType(temperatureDV, value, 0.001, tempUnit, false);
             assertEquals("All cells != 0; cardinality should equal number of cells", value.length, temperatureDV.cardinality());
             double sum = 0;
@@ -571,8 +571,8 @@ public class DoubleVectorDenseTest
             double[] value = data(3, 38.0);
             double[] value2 = data(3, 38.0);
             value2[0] = 12345;
-            DoubleVector.ImmutableRel<TemperatureUnit> dv = new DoubleVector.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            DoubleVector.ImmutableRel<TemperatureUnit> dvCopy = dv;
+            FloatVector.ImmutableRel<TemperatureUnit> dv = new FloatVector.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
+            FloatVector.ImmutableRel<TemperatureUnit> dvCopy = dv;
             MutableDoubleVector.ImmutableRel<TemperatureUnit> mdv = dv.mutable();
             checkContentsAndType(dv, value, 0.001, tempUnit, false);
             checkContentsAndType(mdv, value, 0.001, tempUnit, false);
@@ -588,7 +588,7 @@ public class DoubleVectorDenseTest
             checkContentsAndType(mdv, value2, 0.01, tempUnit, false);
             checkContentsAndType(mdvCopy, value, 0.001, tempUnit, false);
             checkContentsAndType(mmdv, value, 0.001, tempUnit, false);
-            DoubleVector.ImmutableRel<TemperatureUnit> idv = mdv.immutable();
+            FloatVector.ImmutableRel<TemperatureUnit> idv = mdv.immutable();
             assertTrue("Different value extremely likely results in different hashCode", dv.hashCode() != mdv.hashCode());
             // Restore value of mdv
             mdv.setSI(0, dv.getSI(0));
@@ -597,7 +597,7 @@ public class DoubleVectorDenseTest
             checkContentsAndType(mmdv, value, 0.001, tempUnit, false);
             mmdv.setSI(0, 0);
             checkContentsAndType(mdv, value, 0.001, tempUnit, false);
-            mdv.set(0, new DoubleScalar.ImmutableRel<TemperatureUnit>(value2[0], TemperatureUnit.KELVIN));
+            mdv.set(0, new FloatScalar.ImmutableRel<TemperatureUnit>(value2[0], TemperatureUnit.KELVIN));
             checkContentsAndType(mdv, value2, 0.01, tempUnit, false);
         }
         catch (ValueRuntimeException ve)
@@ -615,21 +615,21 @@ public class DoubleVectorDenseTest
         LengthUnit lengthUnit = LengthUnit.METER;
         PositionUnit positionUnit = PositionUnit.DEFAULT;
         double value = 38.0;
-        DoubleScalar.ImmutableRel<LengthUnit> dv = new DoubleScalar.ImmutableRel<LengthUnit>(value, lengthUnit);
+        FloatScalar.ImmutableRel<LengthUnit> dv = new FloatScalar.ImmutableRel<LengthUnit>(value, lengthUnit);
         assertTrue("Equal to itself", dv.equals(dv));
         assertFalse("Not equal to null", dv.equals(null));
         assertFalse("Not equal to some other kind of object; e.g. a String", dv.equals(new String("abc")));
-        DoubleScalar.Abs<PositionUnit, LengthUnit> dvCounterPart =
-                new DoubleScalar.Abs<PositionUnit, LengthUnit>(value, positionUnit);
+        FloatScalar.Abs<PositionUnit, LengthUnit> dvCounterPart =
+                new FloatScalar.Abs<PositionUnit, LengthUnit>(value, positionUnit);
         assertFalse("Not equal if one Absolute and other Relative", dv.equals(dvCounterPart));
-        DoubleScalar.ImmutableRel<TemperatureUnit> dvWrongBaseUnit =
-                new DoubleScalar.ImmutableRel<TemperatureUnit>(value, TemperatureUnit.KELVIN);
+        FloatScalar.ImmutableRel<TemperatureUnit> dvWrongBaseUnit =
+                new FloatScalar.ImmutableRel<TemperatureUnit>(value, TemperatureUnit.KELVIN);
         assertEquals("The underlying SI values are the same", dv.getSI(), dvWrongBaseUnit.getSI(), 0.0001);
         assertFalse("Not equals because the standard SI unit differs", dv.equals(dvWrongBaseUnit));
-        DoubleScalar.ImmutableRel<LengthUnit> dvCompatibleUnit = new DoubleScalar.ImmutableRel<LengthUnit>(38000.0, LengthUnit.MILLIMETER);
+        FloatScalar.ImmutableRel<LengthUnit> dvCompatibleUnit = new FloatScalar.ImmutableRel<LengthUnit>(38000.0, LengthUnit.MILLIMETER);
         assertFalse("Units are different", dv.getUnit().equals(dvCompatibleUnit.getUnit()));
         assertTrue("equals returns true", dv.equals(dvCompatibleUnit));
-        DoubleScalar.ImmutableRel<LengthUnit> dvDifferentValue = new DoubleScalar.ImmutableRel<LengthUnit>(123.456, LengthUnit.MILLIMETER);
+        FloatScalar.ImmutableRel<LengthUnit> dvDifferentValue = new FloatScalar.ImmutableRel<LengthUnit>(123.456, LengthUnit.MILLIMETER);
         assertFalse("Different value makes equals return false", dv.equals(dvDifferentValue));
     }
 
@@ -714,10 +714,10 @@ public class DoubleVectorDenseTest
         {
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
-            DoubleVector.ImmutableRel<LengthUnit> left = new DoubleVector.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleVector.ImmutableRel<LengthUnit> right =
-                    new DoubleVector.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleVector.ImmutableRel<?> result = left.plus(right);
+            FloatVector.ImmutableRel<LengthUnit> left = new FloatVector.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatVector.ImmutableRel<LengthUnit> right =
+                    new FloatVector.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatVector.ImmutableRel<?> result = left.plus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI plus of contributing elements", left.getSI(i) + right.getSI(i),
@@ -740,10 +740,10 @@ public class DoubleVectorDenseTest
         {
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
-            DoubleVector.ImmutableRel<LengthUnit> left = new DoubleVector.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleVector.ImmutableRel<LengthUnit> right =
-                    new DoubleVector.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleVector.ImmutableRel<?> result = left.minus(right);
+            FloatVector.ImmutableRel<LengthUnit> left = new FloatVector.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatVector.ImmutableRel<LengthUnit> right =
+                    new FloatVector.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatVector.ImmutableRel<?> result = left.minus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i) - right.getSI(i),
@@ -766,10 +766,10 @@ public class DoubleVectorDenseTest
         {
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
-            DoubleVector.ImmutableRel<LengthUnit> left = new DoubleVector.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleVector.ImmutableRel<LengthUnit> right =
-                    new DoubleVector.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
-            DoubleVector.ImmutableRel<?> result = left.plus(right);
+            FloatVector.ImmutableRel<LengthUnit> left = new FloatVector.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatVector.ImmutableRel<LengthUnit> right =
+                    new FloatVector.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            FloatVector.ImmutableRel<?> result = left.plus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI plus of contributing elements", left.getSI(i) + right.getSI(i),
@@ -792,10 +792,10 @@ public class DoubleVectorDenseTest
         {
             double[] leftValue = data(3, 123.4);
             double[] rightValue = data(3, 234.5);
-            DoubleVector.ImmutableRel<LengthUnit> left = new DoubleVector.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-            DoubleVector.ImmutableRel<LengthUnit> right =
-                    new DoubleVector.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
-            DoubleVector.ImmutableRel<?> result = left.minus(right);
+            FloatVector.ImmutableRel<LengthUnit> left = new FloatVector.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatVector.ImmutableRel<LengthUnit> right =
+                    new FloatVector.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            FloatVector.ImmutableRel<?> result = left.minus(right);
             for (int i = 0; i < leftValue.length; i++)
             {
                 assertEquals("value of element should be SI minus of contributing elements", left.getSI(i) - right.getSI(i),
@@ -818,7 +818,7 @@ public class DoubleVectorDenseTest
         try
         {
             // null array
-            new DoubleVector.ImmutableRel<TemperatureUnit>((double[]) null, TemperatureUnit.DEGREE_FAHRENHEIT, StorageType.DENSE);
+            new FloatVector.ImmutableRel<TemperatureUnit>((double[]) null, TemperatureUnit.DEGREE_FAHRENHEIT, StorageType.DENSE);
             fail("Preceding code should have thrown a ValueException");
         }
         catch (ValueRuntimeException ve)
@@ -842,8 +842,8 @@ public class DoubleVectorDenseTest
             MutableDoubleVector.ImmutableRel<LengthUnit> left =
                     new MutableDoubleVector.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
             MutableDoubleVector.ImmutableRel<LengthUnit> referenceLeft = left.copy();
-            DoubleVector.ImmutableRel<LengthUnit> right =
-                    new DoubleVector.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatVector.ImmutableRel<LengthUnit> right =
+                    new FloatVector.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             left.incrementBy(right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -851,7 +851,7 @@ public class DoubleVectorDenseTest
                         left.getSI(i), 0.001);
             }
             left = new MutableDoubleVector.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-            right = new DoubleVector.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            right = new FloatVector.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
             left.incrementBy(right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -878,8 +878,8 @@ public class DoubleVectorDenseTest
             MutableDoubleVector.ImmutableRel<LengthUnit> left =
                     new MutableDoubleVector.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
             MutableDoubleVector.ImmutableRel<LengthUnit> referenceLeft = left.copy();
-            DoubleVector.ImmutableRel<LengthUnit> right =
-                    new DoubleVector.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
+            FloatVector.ImmutableRel<LengthUnit> right =
+                    new FloatVector.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.DENSE);
             left.decrementBy(right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -887,7 +887,7 @@ public class DoubleVectorDenseTest
                         referenceLeft.getSI(i) - right.getSI(i), left.getSI(i), 0.001);
             }
             left = new MutableDoubleVector.ImmutableRel<LengthUnit>(leftValue, LengthUnit.MILE, StorageType.DENSE);
-            right = new DoubleVector.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
+            right = new FloatVector.ImmutableRel<LengthUnit>(rightValue, LengthUnit.MILE, StorageType.SPARSE);
             left.decrementBy(right);
             for (int i = 0; i < leftValue.length; i++)
             {
@@ -920,7 +920,7 @@ public class DoubleVectorDenseTest
                 assertEquals("incremented value should match", value[index] + modifier, testVector.getInUnit(index), 0.01);
             }
             testVector = new MutableDoubleVector.ImmutableRel<TemperatureUnit>(value, tempUnit, StorageType.DENSE);
-            DoubleScalar.ImmutableRel<TemperatureUnit> modifierScalar = new DoubleScalar.ImmutableRel<>(modifier, TemperatureUnit.DEGREE_CELSIUS);
+            FloatScalar.ImmutableRel<TemperatureUnit> modifierScalar = new FloatScalar.ImmutableRel<>(modifier, TemperatureUnit.DEGREE_CELSIUS);
             testVector.incrementBy(modifierScalar);
             for (int index = 0; index < value.length; index++)
             {

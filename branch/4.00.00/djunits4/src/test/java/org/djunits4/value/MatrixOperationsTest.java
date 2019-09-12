@@ -230,12 +230,12 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
         Constructor<?> constructor = matrixClass.getConstructor(double.class, getUnitClass(matrixClass));
         if (doubleType)
         {
-            DoubleScalar.ImmutableRel<?> left =
-                    (DoubleScalar.ImmutableRel<?>) constructor.newInstance(123d, getSIUnitInstance(getUnitClass(matrixClass)));
+            FloatScalar.ImmutableRel<?> left =
+                    (FloatScalar.ImmutableRel<?>) constructor.newInstance(123d, getSIUnitInstance(getUnitClass(matrixClass)));
             // System.out.println("constructed left: " + left);
             constructor = parameterClass.getConstructor(double.class, getUnitClass(parameterClass));
-            DoubleScalar.ImmutableRel<?> right =
-                    (DoubleScalar.ImmutableRel<?>) constructor.newInstance(456d, getSIUnitInstance(getUnitClass(parameterClass)));
+            FloatScalar.ImmutableRel<?> right =
+                    (FloatScalar.ImmutableRel<?>) constructor.newInstance(456d, getSIUnitInstance(getUnitClass(parameterClass)));
             // System.out.println("constructed right: " + right);
             double expectedValue = multiply ? 123d * 456 : 123d / 456;
 
@@ -243,14 +243,14 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             {
                 Method multiplyMethod = matrixClass.getDeclaredMethod("multiplyBy", new Class[] {parameterClass});
                 Object result = multiplyMethod.invoke(left, right);
-                double resultSI = ((DoubleScalar.ImmutableRel<?>) result).getSI();
+                double resultSI = ((FloatScalar.ImmutableRel<?>) result).getSI();
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
             else
             {
                 Method divideMethod = matrixClass.getDeclaredMethod("divideBy", new Class[] {parameterClass});
                 Object result = divideMethod.invoke(left, right);
-                double resultSI = ((DoubleScalar.ImmutableRel<?>) result).getSI();
+                double resultSI = ((FloatScalar.ImmutableRel<?>) result).getSI();
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
             SIScalar result = multiply ? DoubleScalar.multiply(left, right) : DoubleScalar.divide(left, right);

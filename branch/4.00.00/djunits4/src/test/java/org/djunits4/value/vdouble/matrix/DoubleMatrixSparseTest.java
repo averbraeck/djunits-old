@@ -174,13 +174,13 @@ public class DoubleMatrixSparseTest
                     AbsoluteTemperatureUnit.KELVIN, StorageType.SPARSE);
             checkContentsAndType(temperatureDM, value, 0.001, AbsoluteTemperatureUnit.KELVIN, true);
             DoubleMatrixDenseTest.compareMatrix(value, temperatureDM.getValuesSI());
-            DoubleScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit>[][] scalar = new DoubleScalar.Abs[value.length][];
+            FloatScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit>[][] scalar = new FloatScalar.Abs[value.length][];
             for (int row = 0; row < value.length; row++)
             {
-                scalar[row] = new DoubleScalar.Abs[value[row].length];
+                scalar[row] = new FloatScalar.Abs[value[row].length];
                 for (int column = 0; column < value[row].length; column++)
                 {
-                    scalar[row][column] = new DoubleScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value[row][column],
+                    scalar[row][column] = new FloatScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value[row][column],
                             AbsoluteTemperatureUnit.DEGREE_CELSIUS);
                 }
             }
@@ -191,7 +191,7 @@ public class DoubleMatrixSparseTest
             double sum = 0;
             for (int row = 0; row < value.length; row++)
             {
-                scalar[row] = new DoubleScalar.Abs[value[row].length];
+                scalar[row] = new FloatScalar.Abs[value[row].length];
                 for (int column = 0; column < value[row].length; column++)
                 {
                     sum += temperatureDM.getSI(row, column);
@@ -261,22 +261,22 @@ public class DoubleMatrixSparseTest
         LengthUnit lengthUnit = LengthUnit.METER;
         PositionUnit positionUnit = PositionUnit.DEFAULT;
         double value = 38.0;
-        DoubleScalar.Abs<PositionUnit, LengthUnit> dm = new DoubleScalar.Abs<PositionUnit, LengthUnit>(value, positionUnit);
+        FloatScalar.Abs<PositionUnit, LengthUnit> dm = new FloatScalar.Abs<PositionUnit, LengthUnit>(value, positionUnit);
         assertTrue("Equal to itself", dm.equals(dm));
         assertFalse("Not equal to null", dm.equals(null));
         assertFalse("Not equal to some other kind of object; e.g. a String", dm.equals(new String("abc")));
-        DoubleScalar.ImmutableRel<LengthUnit> dmCounterPart = new DoubleScalar.ImmutableRel<LengthUnit>(value, lengthUnit);
+        FloatScalar.ImmutableRel<LengthUnit> dmCounterPart = new FloatScalar.ImmutableRel<LengthUnit>(value, lengthUnit);
         assertFalse("Not equal if one Absolute and other Relative", dm.equals(dmCounterPart));
-        DoubleScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit> dmWrongBaseUnit =
-                new DoubleScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, AbsoluteTemperatureUnit.KELVIN);
+        FloatScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit> dmWrongBaseUnit =
+                new FloatScalar.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, AbsoluteTemperatureUnit.KELVIN);
         assertEquals("The underlying SI values are the same", dm.getSI(), dmWrongBaseUnit.getSI(), 0.0001);
         assertFalse("Not equals because the standard SI unit differs", dm.equals(dmWrongBaseUnit));
-        DoubleScalar.Abs<PositionUnit, LengthUnit> dmCompatibleUnit =
-                new DoubleScalar.Abs<PositionUnit, LengthUnit>(38000.0, PositionUnit.MILLIMETER);
+        FloatScalar.Abs<PositionUnit, LengthUnit> dmCompatibleUnit =
+                new FloatScalar.Abs<PositionUnit, LengthUnit>(38000.0, PositionUnit.MILLIMETER);
         assertFalse("Units are different", dm.getUnit().equals(dmCompatibleUnit.getUnit()));
         assertTrue("equals returns true", dm.equals(dmCompatibleUnit));
-        DoubleScalar.Abs<PositionUnit, LengthUnit> dmDifferentValue =
-                new DoubleScalar.Abs<PositionUnit, LengthUnit>(123.456, PositionUnit.MILLIMETER);
+        FloatScalar.Abs<PositionUnit, LengthUnit> dmDifferentValue =
+                new FloatScalar.Abs<PositionUnit, LengthUnit>(123.456, PositionUnit.MILLIMETER);
         assertFalse("Different value makes equals return false", dm.equals(dmDifferentValue));
     }
 
@@ -647,14 +647,14 @@ public class DoubleMatrixSparseTest
             temperatureDM = new DoubleMatrix.ImmutableRel<TemperatureUnit>(value, TemperatureUnit.KELVIN, StorageType.SPARSE);
             checkContentsAndType(temperatureDM, value, 0.001, TemperatureUnit.KELVIN, false);
             DoubleMatrixDenseTest.compareMatrix(value, temperatureDM.getValuesSI());
-            DoubleScalar.ImmutableRel<TemperatureUnit>[][] scalar = new DoubleScalar.ImmutableRel[value.length][];
+            FloatScalar.ImmutableRel<TemperatureUnit>[][] scalar = new FloatScalar.ImmutableRel[value.length][];
             for (int row = 0; row < value.length; row++)
             {
-                scalar[row] = new DoubleScalar.ImmutableRel[value[row].length];
+                scalar[row] = new FloatScalar.ImmutableRel[value[row].length];
                 for (int column = 0; column < value[row].length; column++)
                 {
                     scalar[row][column] =
-                            new DoubleScalar.ImmutableRel<TemperatureUnit>(value[row][column], TemperatureUnit.DEGREE_CELSIUS);
+                            new FloatScalar.ImmutableRel<TemperatureUnit>(value[row][column], TemperatureUnit.DEGREE_CELSIUS);
                 }
             }
             temperatureDM = new DoubleMatrix.ImmutableRel<TemperatureUnit>(scalar, StorageType.SPARSE);
@@ -674,7 +674,7 @@ public class DoubleMatrixSparseTest
             double sum = 0;
             for (int row = 0; row < value.length; row++)
             {
-                scalar[row] = new DoubleScalar.ImmutableRel[value[row].length];
+                scalar[row] = new FloatScalar.ImmutableRel[value[row].length];
                 for (int column = 0; column < value[row].length; column++)
                 {
                     sum += temperatureDM.getSI(row, column);
@@ -742,21 +742,21 @@ public class DoubleMatrixSparseTest
         LengthUnit lengthUnit = LengthUnit.METER;
         PositionUnit positionUnit = PositionUnit.DEFAULT;
         double value = 38.0;
-        DoubleScalar.ImmutableRel<LengthUnit> dm = new DoubleScalar.ImmutableRel<LengthUnit>(value, lengthUnit);
+        FloatScalar.ImmutableRel<LengthUnit> dm = new FloatScalar.ImmutableRel<LengthUnit>(value, lengthUnit);
         assertTrue("Equal to itself", dm.equals(dm));
         assertFalse("Not equal to null", dm.equals(null));
         assertFalse("Not equal to some other kind of object; e.g. a String", dm.equals(new String("abc")));
-        DoubleScalar.Abs<PositionUnit, LengthUnit> dmCounterPart =
-                new DoubleScalar.Abs<PositionUnit, LengthUnit>(value, positionUnit);
+        FloatScalar.Abs<PositionUnit, LengthUnit> dmCounterPart =
+                new FloatScalar.Abs<PositionUnit, LengthUnit>(value, positionUnit);
         assertFalse("Not equal if one Absolute and other Relative", dm.equals(dmCounterPart));
-        DoubleScalar.ImmutableRel<TemperatureUnit> dmWrongBaseUnit =
-                new DoubleScalar.ImmutableRel<TemperatureUnit>(value, TemperatureUnit.KELVIN);
+        FloatScalar.ImmutableRel<TemperatureUnit> dmWrongBaseUnit =
+                new FloatScalar.ImmutableRel<TemperatureUnit>(value, TemperatureUnit.KELVIN);
         assertEquals("The underlying SI values are the same", dm.getSI(), dmWrongBaseUnit.getSI(), 0.0001);
         assertFalse("Not equals because the standard SI unit differs", dm.equals(dmWrongBaseUnit));
-        DoubleScalar.ImmutableRel<LengthUnit> dmCompatibleUnit = new DoubleScalar.ImmutableRel<LengthUnit>(38000.0, LengthUnit.MILLIMETER);
+        FloatScalar.ImmutableRel<LengthUnit> dmCompatibleUnit = new FloatScalar.ImmutableRel<LengthUnit>(38000.0, LengthUnit.MILLIMETER);
         assertFalse("Units are different", dm.getUnit().equals(dmCompatibleUnit.getUnit()));
         assertTrue("equals returns true", dm.equals(dmCompatibleUnit));
-        DoubleScalar.ImmutableRel<LengthUnit> dmDifferentValue = new DoubleScalar.ImmutableRel<LengthUnit>(123.456, LengthUnit.MILLIMETER);
+        FloatScalar.ImmutableRel<LengthUnit> dmDifferentValue = new FloatScalar.ImmutableRel<LengthUnit>(123.456, LengthUnit.MILLIMETER);
         assertFalse("Different value makes equals return false", dm.equals(dmDifferentValue));
     }
 

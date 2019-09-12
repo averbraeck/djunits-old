@@ -5,8 +5,8 @@ import org.djunits4.unit.Unit;
 import org.djunits4.value.base.Scalar;
 
 /**
- * The typed, abstract FloatScalarRelWithAbs class that forms the basis of the relative FloatScalars suck as Duration that
- * have an absolute equivalent such as Time.
+ * The typed, abstract FloatScalarRelWithAbs class that forms the basis of the relative FloatScalars suck as Duration that have
+ * an absolute equivalent such as Time.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.

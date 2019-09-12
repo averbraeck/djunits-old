@@ -50,7 +50,6 @@ import org.djunits4.unit.si.SIDimensions;
 import org.djunits4.unit.util.UnitRuntimeException;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
-import org.djunits4.value.vdouble.scalar.SIScalar;
 import org.djunits4.value.vfloat.scalar.FloatSIScalar;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
 import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorRel;
@@ -67,7 +66,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T13:56:12.916Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T16:38:21.610Z")
 public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar, FloatSIVector>
 {
     /** */

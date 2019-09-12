@@ -3,7 +3,6 @@ package org.djunits4.value.vfloat.scalar.base;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.base.Scalar;
 import org.djunits4.value.util.ValueUtil;
-import org.djunits4.value.vdouble.scalar.SIScalar;
 import org.djunits4.value.vfloat.scalar.FloatDimensionless;
 import org.djunits4.value.vfloat.scalar.FloatSIScalar;
 
