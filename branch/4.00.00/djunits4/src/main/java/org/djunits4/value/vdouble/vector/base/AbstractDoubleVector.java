@@ -50,7 +50,7 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     private boolean mutable = false;
 
     /**
-     * Construct a new DoubleVector.
+     * Construct a new AbstractDoubleVector.
      * @param data DoubleVectorData; an internal data object
      * @param unit U; the unit
      */
