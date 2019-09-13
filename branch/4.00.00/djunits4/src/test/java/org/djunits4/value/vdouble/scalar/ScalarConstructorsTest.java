@@ -17,7 +17,7 @@ import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
 import org.junit.Test;
 
 /**
- * Test the scalar contructors.
+ * Test the scalar constructors.
  */
 public class ScalarConstructorsTest implements UNITS
 {
@@ -39,7 +39,9 @@ public class ScalarConstructorsTest implements UNITS
         // Force loading of all classes
         LengthUnit length = UNITS.METER;
         if (length == null)
+        {
             fail();
+        }
 
         for (String className : CLASSNAMES.ALL_NODIM)
         {
@@ -55,17 +57,27 @@ public class ScalarConstructorsTest implements UNITS
             System.out.println(doubleScalar);
             assertEquals("Value must match", testValue, doubleScalar.getSI(), 0.1);
             assertEquals("Unit must match", standardUnit, doubleScalar.getUnit());
+            constructor = scalarClass.getConstructor(doubleScalar.getClass());
+            args = new Object[] { doubleScalar };
+            DoubleScalarInterface<?, ?> secondaryDoubleScalar = (DoubleScalarInterface<?, ?>) constructor.newInstance(args);
+            assertEquals("Value must match", testValue, secondaryDoubleScalar.getSI(), 0.1);
+            assertEquals("Unit must match", standardUnit, secondaryDoubleScalar.getUnit());
             // float
             scalarClassName = "org.djunits4.value.vfloat.scalar.Float" + className;
             scalarClass = Class.forName(scalarClassName);
             float floatTestValue = 12.34f;
-            args[0] = floatTestValue;
+            args = new Object[] { floatTestValue, standardUnit };
             constructor = scalarClass.getConstructor(float.class, standardUnit.getClass());
             args = new Object[] { floatTestValue, standardUnit };
             FloatScalarInterface<?, ?> floatScalar = (FloatScalarInterface<?, ?>) constructor.newInstance(args);
-            System.out.println(doubleScalar);
+            System.out.println(floatScalar);
             assertEquals("Value must match", floatTestValue, floatScalar.getSI(), 0.1);
             assertEquals("Unit must match", standardUnit, floatScalar.getUnit());
+            constructor = scalarClass.getConstructor(floatScalar.getClass());
+            args = new Object[] { floatScalar };
+            FloatScalarInterface<?, ?> secondaryFloatScalar = (FloatScalarInterface<?, ?>) constructor.newInstance(args);
+            assertEquals("Value must match", floatTestValue, secondaryFloatScalar.getSI(), 0.1);
+            assertEquals("Unit must match", standardUnit, secondaryFloatScalar.getUnit());
         }
     }
 }
