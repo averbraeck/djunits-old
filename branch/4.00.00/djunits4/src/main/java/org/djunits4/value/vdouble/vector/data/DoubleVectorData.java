@@ -3,7 +3,7 @@ package org.djunits4.value.vdouble.vector.data;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
-import java.util.SortedMap;
+import java.util.Map;
 import java.util.stream.IntStream;
 
 import org.djunits4.unit.Unit;
@@ -42,7 +42,6 @@ public abstract class DoubleVectorData implements Serializable
      */
     DoubleVectorData(final StorageType storageType)
     {
-        super();
         this.storageType = storageType;
     }
 
@@ -187,14 +186,14 @@ public abstract class DoubleVectorData implements Serializable
 
     /**
      * Instantiate a DoubleVectorData with the right data type.
-     * @param values SortedMap&lt;Integer,Double&gt;; the DoubleScalar values to store
+     * @param values Map&lt;Integer,Double&gt;; the DoubleScalar values to store
      * @param length int; the length of the vector to pad with 0 after last entry in map
      * @param scale Scale; the scale of the unit to use for conversion to SI
      * @param storageType StorageType; the data type to use
      * @return DoubleVectorData; the DoubleVectorData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
      */
-    public static DoubleVectorData instantiate(final SortedMap<Integer, Double> values, final int length, final Scale scale,
+    public static DoubleVectorData instantiate(final Map<Integer, Double> values, final int length, final Scale scale,
             final StorageType storageType) throws ValueRuntimeException
     {
         if (values == null)
@@ -206,8 +205,15 @@ public abstract class DoubleVectorData implements Serializable
         {
             case DENSE:
             {
-                double[] valuesSI = values.keySet().parallelStream()
-                        .mapToDouble(index -> scale.toStandardUnit(values.get(index))).toArray();
+                double[] valuesSI = new double[length];
+                // FIXME: rewrite using lambda stuff and parallelism
+                for (Integer i : values.keySet() )
+                {
+                    valuesSI[i] = scale.toStandardUnit(values.get(i));
+                }
+                // Code below was VERY wrong:
+                //double[] valuesSI = values.keySet().parallelStream()
+                //        .mapToDouble(index -> scale.toStandardUnit(values.get(index))).toArray();
                 return new DoubleVectorDataDense(valuesSI);
             }
 

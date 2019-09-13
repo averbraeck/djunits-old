@@ -28,15 +28,6 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorDataSparse;
  */
 public final class DoubleVector
 {
-    /** The cache to make the lookup of the constructor for a Vector belonging to a unit faster. */
-    private static Map<Unit<?>, Constructor<? extends AbstractDoubleVector<?, ?, ?>>> CACHE_ARRAY = new HashMap<>();
-
-    /** The cache to make the lookup of the constructor for a Vector belonging to a unit faster. */
-    private static Map<Unit<?>, Constructor<? extends AbstractDoubleVector<?, ?, ?>>> CACHE_LIST = new HashMap<>();
-
-    /** The cache to make the lookup of the constructor for a Vector belonging to a unit faster. */
-    private static Map<Unit<?>, Constructor<? extends AbstractDoubleVector<?, ?, ?>>> CACHE_MAP = new HashMap<>();
-
     /** The cache to make the lookup of the constructor for a Immutable Vector belonging to a unit faster. */
     private static Map<Unit<?>, Constructor<? extends AbstractDoubleVector<?, ?, ?>>> CACHE_DATA = new HashMap<>();
 
@@ -111,42 +102,11 @@ public final class DoubleVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated DoubleVector with the values expressed in their unit
      */
-    @SuppressWarnings("unchecked")
     public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
             V extends AbstractDoubleVector<U, S, V>> V instantiateAnonymous(final double[] values, final Unit<?> unit,
                     final StorageType storageType)
     {
-        try
-        {
-            Constructor<? extends AbstractDoubleVector<?, ?, ?>> vectorConstructor = CACHE_ARRAY.get(unit);
-            if (vectorConstructor == null)
-            {
-                if (!unit.getClass().getSimpleName().endsWith("Unit"))
-                {
-                    throw new ClassNotFoundException("Unit " + unit.getClass().getSimpleName()
-                            + " name does not end with 'Unit'. Cannot find corresponding vector");
-                }
-                Class<? extends AbstractDoubleVector<?, ?, ?>> vectorClass;
-                if (unit instanceof SIUnit)
-                {
-                    throw new UnitRuntimeException("Cannot instantiate AbstractDoubleVector of unit " + unit.toString());
-                }
-                else
-                {
-                    vectorClass = (Class<AbstractDoubleVector<?, ?, ?>>) Class.forName("org.djunits4.value.vdouble.vector."
-                            + unit.getClass().getSimpleName().replace("Unit", "") + "Vector");
-                }
-                vectorConstructor = vectorClass.getDeclaredConstructor(double[].class, unit.getClass(), StorageType.class);
-                CACHE_ARRAY.put(unit, vectorConstructor);
-            }
-            return (V) vectorConstructor.newInstance(values, unit, storageType);
-        }
-        catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-                | IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
-        {
-            throw new UnitRuntimeException("Cannot instantiate AbstractDoubleVector of unit " + unit.toString() + ". Reason: "
-                    + exception.getMessage());
-        }
+        return instantiateAnonymous(DoubleVectorData.instantiate(values, unit.getScale(), storageType), unit);
     }
 
     /**
@@ -158,42 +118,11 @@ public final class DoubleVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated DoubleVector with the values expressed in their unit
      */
-    @SuppressWarnings("unchecked")
     public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
             V extends AbstractDoubleVector<U, S, V>> V instantiateAnonymous(final List<Double> valueList, final Unit<?> unit,
                     final StorageType storageType)
     {
-        try
-        {
-            Constructor<? extends AbstractDoubleVector<?, ?, ?>> vectorConstructor = CACHE_LIST.get(unit);
-            if (vectorConstructor == null)
-            {
-                if (!unit.getClass().getSimpleName().endsWith("Unit"))
-                {
-                    throw new ClassNotFoundException("Unit " + unit.getClass().getSimpleName()
-                            + " name does not end with 'Unit'. Cannot find corresponding vector");
-                }
-                Class<? extends AbstractDoubleVector<?, ?, ?>> vectorClass;
-                if (unit instanceof SIUnit)
-                {
-                    throw new UnitRuntimeException("Cannot instantiate AbstractDoubleVector of unit " + unit.toString());
-                }
-                else
-                {
-                    vectorClass = (Class<AbstractDoubleVector<?, ?, ?>>) Class.forName("org.djunits4.value.vdouble.vector."
-                            + unit.getClass().getSimpleName().replace("Unit", "") + "Vector");
-                }
-                vectorConstructor = vectorClass.getDeclaredConstructor(List.class, unit.getClass(), StorageType.class);
-                CACHE_LIST.put(unit, vectorConstructor);
-            }
-            return (V) vectorConstructor.newInstance(valueList, unit, storageType);
-        }
-        catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-                | IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
-        {
-            throw new UnitRuntimeException("Cannot instantiate AbstractDoubleVector of unit " + unit.toString() + ". Reason: "
-                    + exception.getMessage());
-        }
+        return instantiateAnonymous(DoubleVectorData.instantiate(valueList, unit.getScale(), storageType), unit);
     }
 
     /**
@@ -206,43 +135,11 @@ public final class DoubleVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated DoubleVector with the values expressed in their unit
      */
-    @SuppressWarnings("unchecked")
     public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
             V extends AbstractDoubleVector<U, S, V>> V instantiateAnonymous(final Map<Integer, Double> valueMap,
                     final Unit<?> unit, final int length, final StorageType storageType)
     {
-        try
-        {
-            Constructor<? extends AbstractDoubleVector<?, ?, ?>> vectorConstructor = CACHE_MAP.get(unit);
-            if (vectorConstructor == null)
-            {
-                if (!unit.getClass().getSimpleName().endsWith("Unit"))
-                {
-                    throw new ClassNotFoundException("Unit " + unit.getClass().getSimpleName()
-                            + " name does not end with 'Unit'. Cannot find corresponding vector");
-                }
-                Class<? extends AbstractDoubleVector<?, ?, ?>> vectorClass;
-                if (unit instanceof SIUnit)
-                {
-                    throw new UnitRuntimeException("Cannot instantiate AbstractDoubleVector of unit " + unit.toString());
-                }
-                else
-                {
-                    vectorClass = (Class<AbstractDoubleVector<?, ?, ?>>) Class.forName("org.djunits4.value.vdouble.vector."
-                            + unit.getClass().getSimpleName().replace("Unit", "") + "Vector");
-                }
-                vectorConstructor =
-                        vectorClass.getDeclaredConstructor(List.class, unit.getClass(), int.class, StorageType.class);
-                CACHE_MAP.put(unit, vectorConstructor);
-            }
-            return (V) vectorConstructor.newInstance(valueMap, unit, length, storageType);
-        }
-        catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-                | IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
-        {
-            throw new UnitRuntimeException("Cannot instantiate AbstractDoubleVector of unit " + unit.toString() + ". Reason: "
-                    + exception.getMessage());
-        }
+        return instantiateAnonymous(DoubleVectorData.instantiate(valueMap, length, unit.getScale(), storageType), unit);
     }
 
     /**
@@ -298,9 +195,8 @@ public final class DoubleVector
      * @return Vector of the specified unit
      * @throws ValueRuntimeException when values is null
      */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
-            V extends AbstractDoubleVector<U, S, V>> V create(final double[] values, final U unit,
-                    final StorageType storageType) throws ValueRuntimeException
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>> V create(
+            final double[] values, final U unit, final StorageType storageType) throws ValueRuntimeException
     {
         return instantiate(DoubleVectorData.instantiate(values, unit.getScale(), storageType), unit);
     }
@@ -313,9 +209,8 @@ public final class DoubleVector
      * @return Vector of the specified unit
      * @throws ValueRuntimeException when values is null
      */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
-            V extends AbstractDoubleVector<U, S, V>> V create(final List<Double> values, final U unit,
-                    final StorageType storageType) throws ValueRuntimeException
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>> V create(
+            final List<Double> values, final U unit, final StorageType storageType) throws ValueRuntimeException
     {
         return instantiate(DoubleVectorData.instantiate(values, unit.getScale(), storageType), unit);
     }
@@ -327,9 +222,8 @@ public final class DoubleVector
      * @return Vector of the specified unit
      * @throws ValueRuntimeException when values has zero entries
      */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
-            V extends AbstractDoubleVector<U, S, V>> V create(final S[] values, final StorageType storageType)
-                    throws ValueRuntimeException
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>> V create(
+            final S[] values, final StorageType storageType) throws ValueRuntimeException
     {
         U unit = values[0].getUnit();
         return instantiate(DoubleVectorData.instantiate(values, storageType), unit);
@@ -342,9 +236,8 @@ public final class DoubleVector
      * @return Vector of the specified unit
      * @throws ValueRuntimeException when values has zero entries
      */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
-            V extends AbstractDoubleVector<U, S, V>> V create(final List<S> valueList, final StorageType storageType)
-                    throws ValueRuntimeException
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>> V create(
+            final List<S> valueList, final StorageType storageType) throws ValueRuntimeException
     {
         U unit = valueList.get(0).getUnit();
         switch (storageType)
@@ -389,9 +282,8 @@ public final class DoubleVector
      * @return Vector of the specified unit
      * @throws ValueRuntimeException when values has zero entries
      */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
-            V extends AbstractDoubleVector<U, S, V>> V create(final SortedMap<Integer, S> valueMap, final int length,
-                    final StorageType storageType) throws ValueRuntimeException
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>> V create(
+            final SortedMap<Integer, S> valueMap, final int length, final StorageType storageType) throws ValueRuntimeException
     {
         U unit = valueMap.values().iterator().next().getUnit();
         switch (storageType)
@@ -429,17 +321,16 @@ public final class DoubleVector
 
     /**
      * Construct a new Relative Immutable Double Vector.
-     * @param valueMap SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
-     *            Vector
+     * @param valueMap Map&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double Vector
      * @param unit Unit; the unit of the new Relative Sparse Mutable Double Vector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @return Vector of the specified unit
      * @throws ValueRuntimeException when values is null
      */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
-            V extends AbstractDoubleVector<U, S, V>> V create(final SortedMap<Integer, Double> valueMap, final U unit,
-                    final int length, final StorageType storageType) throws ValueRuntimeException
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>> V create(
+            final Map<Integer, Double> valueMap, final U unit, final int length, final StorageType storageType)
+            throws ValueRuntimeException
     {
         switch (storageType)
         {
@@ -484,4 +375,5 @@ public final class DoubleVector
                 throw new ValueRuntimeException("Unknown data type in DoubleVectorData.instantiate: " + storageType);
         }
     }
+
 }
