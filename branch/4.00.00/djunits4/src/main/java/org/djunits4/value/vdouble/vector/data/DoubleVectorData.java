@@ -206,14 +206,7 @@ public abstract class DoubleVectorData implements Serializable
             case DENSE:
             {
                 double[] valuesSI = new double[length];
-                // FIXME: rewrite using lambda stuff and parallelism
-                for (Integer i : values.keySet() )
-                {
-                    valuesSI[i] = scale.toStandardUnit(values.get(i));
-                }
-                // Code below was VERY wrong:
-                //double[] valuesSI = values.keySet().parallelStream()
-                //        .mapToDouble(index -> scale.toStandardUnit(values.get(index))).toArray();
+                values.entrySet().parallelStream().forEach(entry -> valuesSI[entry.getKey()] = entry.getValue());
                 return new DoubleVectorDataDense(valuesSI);
             }
 
