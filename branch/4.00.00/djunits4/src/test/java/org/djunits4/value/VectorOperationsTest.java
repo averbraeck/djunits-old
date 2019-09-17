@@ -96,9 +96,9 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
         for (StorageType storageType : StorageType.values())
         {
             // get the interfaces such as org.djunits4.value.vdouble.vector.Time
-            for (int i = 0; i < CLASSNAMES.ABS.length; i++)
+            for (int i = 0; i < CLASSNAMES.ABS_LIST.size(); i++)
             {
-                String vectorNameAbs = CLASSNAMES.ABS[i];
+                String vectorNameAbs = CLASSNAMES.ABS_LIST.get(i);
                 Class<?> vectorClassAbs = null;
                 String classNameAbs =
                         "org.djunits4.value.v" + doubleOrFloat + ".vector." + floatPrefix + vectorNameAbs + upperVectorType;
@@ -106,7 +106,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 vectorClassAbs = Class.forName(classNameAbs);
                 Class<?> vectorClassRel = null;
 
-                String vectorNameRel = CLASSNAMES.ABS_REL[i];
+                String vectorNameRel = CLASSNAMES.REL_WITH_ABS_LIST.get(i);
                 String classNameRel =
                         "org.djunits4.value.v" + doubleOrFloat + ".vector." + floatPrefix + vectorNameRel + upperVectorType;
                 vectorClassRel = Class.forName(classNameRel);
@@ -117,7 +117,7 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
                 // testAbsRelConversion(vectorClass, true, doubleType, StorageType.SPARSE);
             }
             // get the interfaces such as org.djunits4.value.vXXXX.vector.Area
-            for (String vectorName : CLASSNAMES.REL)
+            for (String vectorName : CLASSNAMES.REL_LIST)
             {
                 String vectorClassName = (doubleType ? "" : "Float") + vectorName;
                 String fullClassName = "org.djunits4.value.v" + doubleOrFloat + ".vector." + vectorClassName + "Vector";
@@ -1411,9 +1411,9 @@ public class VectorOperationsTest<TypedDoubleVectorAbs> implements UNITS
             if (abs)
             {
                 String className = vectorClass.getName();
-                for (int i = 0; i < CLASSNAMES.ABS.length; i++)
+                for (int i = 0; i < CLASSNAMES.ABS_LIST.size(); i++)
                 {
-                    className = className.replaceAll(CLASSNAMES.ABS[i], CLASSNAMES.ABS_REL[i]);
+                    className = className.replaceAll(CLASSNAMES.ABS_LIST.get(i), CLASSNAMES.REL_WITH_ABS_LIST.get(i));
                 }
                 Class<?> relClass = Class.forName(className);
                 compatibleRel = findAndExecuteConstructor(relClass, new Object[] {value, newUnit, storageType}, doubleType);

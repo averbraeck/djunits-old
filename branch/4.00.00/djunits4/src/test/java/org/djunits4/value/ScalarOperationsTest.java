@@ -77,10 +77,10 @@ public class ScalarOperationsTest
         final String upperType = doubleType ? "Double" : "Float";
         final String type = upperType.toLowerCase();
         // get the interfaces such as org.djunits4.value.vdouble.scalar.Time
-        for (int i = 0; i < CLASSNAMES.ABS.length; i++)
+        for (int i = 0; i < CLASSNAMES.ABS_LIST.size(); i++)
         {
-            String scalarNameAbs = CLASSNAMES.ABS[i];
-            String scalarNameRel = CLASSNAMES.ABS_REL[i];
+            String scalarNameAbs = CLASSNAMES.ABS_LIST.get(i);
+            String scalarNameRel = CLASSNAMES.REL_WITH_ABS_LIST.get(i);
             String scalarClassNameAbs = doubleType ? scalarNameAbs : "Float" + scalarNameAbs;
             String scalarClassNameRel = doubleType ? scalarNameRel : "Float" + scalarNameRel;
             Class<?> scalarClassAbs = null;
@@ -109,7 +109,7 @@ public class ScalarOperationsTest
         }
 
         // get the interfaces such as org.djunits4.value.vXXXX.scalar.Area
-        for (String scalarName : CLASSNAMES.REL)
+        for (String scalarName : CLASSNAMES.REL_LIST)
         {
             String scalarClassName = doubleType ? scalarName : "Float" + scalarName;
             Class<?> scalarClassRel = null;

@@ -44,7 +44,7 @@ public class ValueOfStringOfTest
     @Test
     public final void valueOfDoubleTest()
     {
-        for (String className : CLASSNAMES.ALL_NODIM)
+        for (String className : CLASSNAMES.ALL_NODIM_LIST)
         {
             // get the class
             Class<?> scalarClass = null;

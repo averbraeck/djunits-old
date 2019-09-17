@@ -108,13 +108,13 @@ public class SIScalarTest
         // load all classes
         assertEquals("m", UNITS.METER.getId());
 
-        for (String type1 : CLASSNAMES.REL)
+        for (String type1 : CLASSNAMES.REL_LIST)
         {
             UnitBase<?> unitBase1 = UnitTypes.INSTANCE.getUnitBase(type1 + "Unit");
             System.out.println("multiply: " + type1 + "Unit");
             SIDimensions siDim1 = unitBase1.getSiDimensions();
             Unit<?> unit1 = unitBase1.getUnitsById().values().iterator().next();
-            for (String type2 : CLASSNAMES.REL)
+            for (String type2 : CLASSNAMES.REL_LIST)
             {
                 UnitBase<?> unitBase2 = UnitTypes.INSTANCE.getUnitBase(type2 + "Unit");
                 SIDimensions siDim2 = unitBase2.getSiDimensions();
@@ -151,13 +151,13 @@ public class SIScalarTest
         // load all classes
         assertEquals("m", UNITS.METER.getId());
 
-        for (String type1 : CLASSNAMES.REL)
+        for (String type1 : CLASSNAMES.REL_LIST)
         {
             UnitBase<?> unitBase1 = UnitTypes.INSTANCE.getUnitBase(type1 + "Unit");
             System.out.println("divide: " + type1 + "Unit");
             SIDimensions siDim1 = unitBase1.getSiDimensions();
             Unit<?> unit1 = unitBase1.getUnitsById().values().iterator().next();
-            for (String type2 : CLASSNAMES.REL)
+            for (String type2 : CLASSNAMES.REL_LIST)
             {
                 UnitBase<?> unitBase2 = UnitTypes.INSTANCE.getUnitBase(type2 + "Unit");
                 SIDimensions siDim2 = unitBase2.getSiDimensions();
@@ -201,7 +201,7 @@ public class SIScalarTest
         assertEquals("m", UNITS.METER.getId());
 
         AbstractDoubleScalarRel<?, ?> dimless = new Dimensionless(1.0, DimensionlessUnit.SI);
-        for (String type : CLASSNAMES.REL)
+        for (String type : CLASSNAMES.REL_LIST)
         {
             Class.forName("org.djunits4.unit." + type + "Unit");
             UnitBase<?> unitBase = UnitTypes.INSTANCE.getUnitBase(type + "Unit");

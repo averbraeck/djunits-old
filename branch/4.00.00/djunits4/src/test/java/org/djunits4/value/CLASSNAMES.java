@@ -1,5 +1,10 @@
 package org.djunits4.value;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * CLASSNAMES.java.
  * <p>
@@ -10,26 +15,51 @@ package org.djunits4.value;
  */
 public class CLASSNAMES
 {
-    /** The classes that are absolute/relative (name = class name). Do not check Dimensionless. */
-    public static final String[] ALL_NODIM = new String[] {"AbsoluteTemperature", "Direction", "Position", "Time",
-            "Temperature", "Angle", "Length", "Duration", "AbsorbedDose", "Acceleration", "AmountOfSubstance", "AngleSolid",
-            "Area", "CatalyticActivity", "Density", "Dimensionless", "ElectricalCapacitance", "ElectricalCharge",
+    /** The classes that are absolute (name = class name). */
+    private static final String[] ABS = new String[] {"AbsoluteTemperature", "Direction", "Position", "Time"};
+
+    /** List of absolute classes. */
+    public static final List<String> ABS_LIST;
+
+    /** The relative classes that mirror the absolute ones (name = class name). */
+    private static final String[] REL_WITH_ABS = new String[] {"Temperature", "Angle", "Length", "Duration"};
+
+    /** List of relative-with-absolute classes. */
+    public static final List<String> REL_WITH_ABS_LIST;
+
+    /** The classes that are just relative (name = class name). */
+    private static final String[] REL = new String[] {"AbsorbedDose", "Acceleration", "AmountOfSubstance", "AngleSolid", "Area",
+            "CatalyticActivity", "Density", "Dimensionless", "ElectricalCapacitance", "ElectricalCharge",
             "ElectricalConductance", "ElectricalCurrent", "ElectricalInductance", "ElectricalPotential", "ElectricalResistance",
             "Energy", "EquivalentDose", "FlowMass", "FlowVolume", "Force", "Frequency", "Illuminance", "LinearDensity",
             "LuminousFlux", "LuminousIntensity", "MagneticFluxDensity", "MagneticFlux", "Mass", "Power", "Pressure",
             "RadioActivity", "Speed", "Torque", "Volume"};
 
-    /** The classes that are absolute (name = class name). */
-    public static final String[] ABS = new String[] {"AbsoluteTemperature", "Direction", "Position", "Time"};
+    /** List of relative classes, except SI. */
+    public static final List<String> REL_LIST;
 
-    /** The relative classes that mirror the absolute ones (name = class name). */
-    public static final String[] ABS_REL = new String[] {"Temperature", "Angle", "Length", "Duration"};
+    /** List of all relative classes, except SI. */
+    public static final List<String> REL_ALL_LIST;
+    
+    /** List of all classes, except SI. */
+    public static final List<String> ALL_LIST;
+    
+    /** List of all classes, except Dimensionless and SI. */
+    public static final List<String> ALL_NODIM_LIST;
+    
+    static
+    {
+        ABS_LIST = Arrays.asList(ABS);
+        REL_WITH_ABS_LIST = Arrays.asList(REL_WITH_ABS);
+        REL_LIST = Arrays.asList(REL);
+        List<String> ral = new ArrayList<>(Arrays.asList(REL));
+        ral.addAll(REL_WITH_ABS_LIST);
+        REL_ALL_LIST = Collections.unmodifiableList(ral);
+        List<String> all = new ArrayList<>(REL_ALL_LIST);
+        all.addAll(ABS_LIST);
+        ALL_LIST = Collections.unmodifiableList(new ArrayList<>(all));
+        all.remove("Dimensionless");
+        ALL_NODIM_LIST = Collections.unmodifiableList(new ArrayList<>(all));
+    }
 
-    /** The classes that are just relative (name = class name). */
-    public static final String[] REL = new String[] {"Temperature", "Angle", "Length", "Duration", "AbsorbedDose",
-            "Acceleration", "AmountOfSubstance", "AngleSolid", "Area", "CatalyticActivity", "Density", "Dimensionless",
-            "ElectricalCapacitance", "ElectricalCharge", "ElectricalConductance", "ElectricalCurrent", "ElectricalInductance",
-            "ElectricalPotential", "ElectricalResistance", "Energy", "EquivalentDose", "FlowMass", "FlowVolume", "Force",
-            "Frequency", "Illuminance", "LinearDensity", "LuminousFlux", "LuminousIntensity", "MagneticFluxDensity",
-            "MagneticFlux", "Mass", "Power", "Pressure", "RadioActivity", "Speed", "Torque", "Volume"};
 }

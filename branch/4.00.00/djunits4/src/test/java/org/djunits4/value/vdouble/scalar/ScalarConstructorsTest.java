@@ -43,7 +43,7 @@ public class ScalarConstructorsTest implements UNITS
             fail();
         }
 
-        for (String className : CLASSNAMES.ALL_NODIM)
+        for (String className : CLASSNAMES.ALL_NODIM_LIST)
         {
             UnitBase<?> unitBase = UnitTypes.INSTANCE.getUnitBase(className + "Unit");
             // double

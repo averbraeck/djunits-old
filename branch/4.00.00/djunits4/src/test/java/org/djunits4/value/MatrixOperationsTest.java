@@ -92,9 +92,9 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             for (StorageType storageType : StorageType.values())
             {
                 // get the interfaces such as org.djunits4.value.vdouble.matrix.Time
-                for (int i = 0; i < CLASSNAMES.ABS.length; i++)
+                for (int i = 0; i < CLASSNAMES.ABS_LIST.size(); i++)
                 {
-                    String matrixNameAbs = CLASSNAMES.ABS[i];
+                    String matrixNameAbs = CLASSNAMES.ABS_LIST.get(i);
                     Class<?> matrixClassAbs = null;
                     String classNameAbs = "org.djunits4.value.v" + doubleOrFloat + ".matrix." 
                             + floatPrefix + matrixNameAbs + upperMatrixType;
@@ -102,7 +102,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                     matrixClassAbs = Class.forName(classNameAbs);
                     Class<?> matrixClassRel = null;
 
-                    String matrixNameRel = CLASSNAMES.ABS_REL[i];
+                    String matrixNameRel = CLASSNAMES.REL_WITH_ABS_LIST.get(i);
                     String classNameRel = "org.djunits4.value.v" + doubleOrFloat + ".matrix." 
                             + floatPrefix + matrixNameRel + upperMatrixType;
                     matrixClassRel = Class.forName(classNameRel);
@@ -113,7 +113,7 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
                     // testAbsRelConversion(matrixClass, true, doubleType, StorageType.SPARSE);
                 }
                 // get the interfaces such as org.djunits4.value.vXXXX.matrix.Area
-                for (String matrixName : CLASSNAMES.REL)
+                for (String matrixName : CLASSNAMES.REL_LIST)
                 {
                     String matrixClassName = (doubleType ? "" : "Float") + matrixName;
                     String fullClassName = "org.djunits4.value.v" + doubleOrFloat + ".matrix." 
@@ -1367,9 +1367,9 @@ public class MatrixOperationsTest<TypedDoubleMatrixAbs> implements UNITS
             if (abs)
             {
                 String className = matrixClass.getName();
-                for (int i = 0; i < CLASSNAMES.ABS.length; i++)
+                for (int i = 0; i < CLASSNAMES.ABS_LIST.size(); i++)
                 {
-                    className = className.replaceAll(CLASSNAMES.ABS[i], CLASSNAMES.ABS_REL[i]);
+                    className = className.replaceAll(CLASSNAMES.ABS_LIST.get(i), CLASSNAMES.REL_WITH_ABS_LIST.get(i));
                 }
                 Class<?> relClass = Class.forName(className);
                 compatibleRel = findAndExecuteConstructor(relClass, new Object[] {value, newUnit, storageType}, doubleType);
