@@ -1,7 +1,6 @@
 package org.djunits4.value.vdouble.vector;
 
 import java.util.List;
-import java.util.Map;
 import java.util.SortedMap;
 
 import javax.annotation.Generated;
@@ -103,14 +102,14 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
 
     /**
      * Construct a new Relative Double SIVector.
-     * @param values Map&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Double SIVector
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Double SIVector
      * @param unit SIUnit; the unit of the new Relative Sparse Double SIVector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @return SIVector; the SIVector of the given unit
      * @throws ValueRuntimeException when values is null
      */
-    public static SIVector create(final Map<Integer, Double> values, final SIUnit unit, final int length,
+    public static SIVector create(final SortedMap<Integer, Double> values, final SIUnit unit, final int length,
             final StorageType storageType) throws ValueRuntimeException
     {
         return DoubleVector.create(values, unit, length, storageType);

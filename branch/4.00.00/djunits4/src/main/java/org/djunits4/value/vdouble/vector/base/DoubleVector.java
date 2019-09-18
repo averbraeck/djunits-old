@@ -165,11 +165,11 @@ public final class DoubleVector
                             + " name does not end with 'Unit'. Cannot find corresponding vector");
                 }
                 Class<? extends AbstractDoubleVector<?, ?, ?>> vectorClass;
-                if (unit instanceof SIUnit)
-                {
-                    throw new UnitRuntimeException("Cannot instantiate AbstractDoubleVector of unit " + unit.toString());
-                }
-                else
+                // if (unit instanceof SIUnit)
+                // {
+                // throw new UnitRuntimeException("Cannot instantiate AbstractDoubleVector of unit " + unit.toString());
+                // }
+                // else
                 {
                     vectorClass = (Class<AbstractDoubleVector<?, ?, ?>>) Class.forName("org.djunits4.value.vdouble.vector."
                             + unit.getClass().getSimpleName().replace("Unit", "") + "Vector");
@@ -321,7 +321,8 @@ public final class DoubleVector
 
     /**
      * Construct a new Relative Immutable Double Vector.
-     * @param valueMap Map&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double Vector
+     * @param valueMap SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
+     *            Vector
      * @param unit Unit; the unit of the new Relative Sparse Mutable Double Vector
      * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
@@ -329,7 +330,7 @@ public final class DoubleVector
      * @throws ValueRuntimeException when values is null
      */
     public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>> V create(
-            final Map<Integer, Double> valueMap, final U unit, final int length, final StorageType storageType)
+            final SortedMap<Integer, Double> valueMap, final U unit, final int length, final StorageType storageType)
             throws ValueRuntimeException
     {
         switch (storageType)
@@ -358,12 +359,12 @@ public final class DoubleVector
                 int[] indices = new int[non0];
                 double[] valuesSI = new double[non0];
                 int index = 0;
-                for (int i = 0; i < valueMap.size(); i++)
+                for (Integer key : valueMap.keySet())
                 {
-                    double si = zeroBasedScale ? valueMap.get(i) : scale.toStandardUnit(valueMap.get(i));
+                    double si = zeroBasedScale ? valueMap.get(key) : scale.toStandardUnit(valueMap.get(key));
                     if (si != 0.0)
                     {
-                        indices[index] = i;
+                        indices[index] = key;
                         valuesSI[index] = si;
                         index++;
                     }
