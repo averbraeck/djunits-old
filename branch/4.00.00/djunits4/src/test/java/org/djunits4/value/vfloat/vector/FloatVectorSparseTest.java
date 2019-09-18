@@ -84,8 +84,8 @@ public class FloatVectorSparseTest
         {
             AbsoluteTemperatureUnit tempUnit = AbsoluteTemperatureUnit.KELVIN;
             float[] value = data(99, 38.0f, 2, 10);
-            FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit> dv =
-                    new FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
+            FloatVector dv = FloatVector.instantiate(value, tempUnit, StorageType.SPARSE);
+                    //new FloatVector.Abs<AbsoluteTemperatureUnit, TemperatureUnit>(value, tempUnit, StorageType.SPARSE);
             String result = dv.toString(true, true);
             assertTrue("toString result contains \" Abs \"", result.contains(" Abs "));
             assertTrue("toString result contains \"K\"", result.contains("K"));
