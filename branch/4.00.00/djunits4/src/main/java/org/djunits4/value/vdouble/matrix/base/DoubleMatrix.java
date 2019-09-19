@@ -10,6 +10,7 @@ import org.djunits4.unit.Unit;
 import org.djunits4.unit.util.UnitRuntimeException;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.matrix.SIMatrix;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalar;
 import org.djunits4.value.vdouble.vector.base.AbstractDoubleVector;
@@ -102,7 +103,7 @@ public final class DoubleMatrix
                 Class<? extends AbstractDoubleMatrix<?, ?, ?, ?>> matrixClass;
                 if (unit instanceof SIUnit)
                 {
-                    throw new UnitRuntimeException("Cannot instantiate AbstractDoubleMatrix of unit " + unit.toString());
+                    matrixClass = SIMatrix.class;
                 }
                 else
                 {

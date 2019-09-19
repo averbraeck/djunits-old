@@ -14,6 +14,7 @@ import org.djunits4.unit.util.UnitRuntimeException;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalar;
+import org.djunits4.value.vdouble.vector.SIVector;
 import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 import org.djunits4.value.vdouble.vector.data.DoubleVectorDataSparse;
 
@@ -167,7 +168,7 @@ public final class DoubleVector
                 Class<? extends AbstractDoubleVector<?, ?, ?>> vectorClass;
                 if (unit instanceof SIUnit)
                 {
-                    throw new UnitRuntimeException("Cannot instantiate AbstractDoubleVector of unit " + unit.toString());
+                    vectorClass = SIVector.class;
                 }
                 else
                 {

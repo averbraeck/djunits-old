@@ -7,7 +7,6 @@ import org.djunits4.unit.AbsoluteTemperatureUnit;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.vector.base.FloatVector;
-import org.junit.Test;
 
 /**
  * Instantiate.java.

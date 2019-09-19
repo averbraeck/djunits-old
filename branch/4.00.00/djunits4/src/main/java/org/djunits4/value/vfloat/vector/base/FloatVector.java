@@ -15,6 +15,7 @@ import org.djunits4.unit.util.UnitRuntimeException;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalar;
+import org.djunits4.value.vfloat.vector.FloatSIVector;
 import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 import org.djunits4.value.vfloat.vector.data.FloatVectorDataSparse;
 
@@ -168,7 +169,7 @@ public final class FloatVector
                 Class<? extends AbstractFloatVector<?, ?, ?>> vectorClass;
                 if (unit instanceof SIUnit)
                 {
-                    throw new UnitRuntimeException("Cannot instantiate AbstractFloatVector of unit " + unit.toString());
+                    vectorClass = FloatSIVector.class;
                 }
                 else
                 {

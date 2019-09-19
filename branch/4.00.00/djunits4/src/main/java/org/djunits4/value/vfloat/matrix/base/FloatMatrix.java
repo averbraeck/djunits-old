@@ -10,6 +10,7 @@ import org.djunits4.unit.Unit;
 import org.djunits4.unit.util.UnitRuntimeException;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vfloat.matrix.FloatSIMatrix;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalar;
 import org.djunits4.value.vfloat.vector.base.AbstractFloatVector;
@@ -101,7 +102,7 @@ public final class FloatMatrix
                 Class<? extends AbstractFloatMatrix<?, ?, ?, ?>> matrixClass;
                 if (unit instanceof SIUnit)
                 {
-                    throw new UnitRuntimeException("Cannot instantiate AbstractFloatMatrix of unit " + unit.toString());
+                    matrixClass = FloatSIMatrix.class;
                 }
                 else
                 {
