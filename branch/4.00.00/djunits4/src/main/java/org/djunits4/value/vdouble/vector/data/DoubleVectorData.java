@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
 import java.util.stream.IntStream;
 
 import org.djunits4.unit.Unit;
@@ -107,38 +108,77 @@ public abstract class DoubleVectorData implements Serializable
             throw new ValueRuntimeException("DoubleVectorData.instantiate: List<Double> values is null");
         }
 
-        double[] valuesSI;
-        if (values.size() > PARALLEL_THRESHOLD)
-        {
-            if (scale.isBaseSIScale())
-            {
-                valuesSI = values.parallelStream().mapToDouble(d -> d).toArray();
-            }
-            else
-            {
-                valuesSI = values.parallelStream().mapToDouble(d -> scale.toStandardUnit(d)).toArray();
-            }
-        }
-        else
-        {
-            if (scale.isBaseSIScale())
-            {
-                valuesSI = values.stream().mapToDouble(d -> d).toArray();
-            }
-            else
-            {
-                valuesSI = values.stream().mapToDouble(d -> scale.toStandardUnit(d)).toArray();
-            }
-        }
-
         switch (storageType)
         {
             case DENSE:
+            {
+                double[] valuesSI;
+                if (values.size() > PARALLEL_THRESHOLD)
+                {
+                    if (scale.isBaseSIScale())
+                    {
+                        valuesSI = values.parallelStream().mapToDouble(d -> d).toArray();
+                    }
+                    else
+                    {
+                        valuesSI = values.parallelStream().mapToDouble(d -> scale.toStandardUnit(d)).toArray();
+                    }
+                }
+                else
+                {
+                    if (scale.isBaseSIScale())
+                    {
+                        valuesSI = values.stream().mapToDouble(d -> d).toArray();
+                    }
+                    else
+                    {
+                        valuesSI = values.stream().mapToDouble(d -> scale.toStandardUnit(d)).toArray();
+                    }
+                }
                 return new DoubleVectorDataDense(valuesSI);
+            }
 
             case SPARSE:
-                // FIXME: Memory issue. This makes a full size copy of the data and afterwards makes that sparse
-                return DoubleVectorDataSparse.instantiate(valuesSI);
+            {
+                int nonZeroCount;
+                if (values.size() > PARALLEL_THRESHOLD)
+                {
+                    if (scale.isBaseSIScale())
+                    {
+                        nonZeroCount = (int) values.parallelStream().mapToDouble(d -> d).count();
+                    }
+                    else
+                    {
+                        nonZeroCount = (int) values.parallelStream().mapToDouble(d -> scale.toStandardUnit(d)).count();
+                    }
+                }
+                else
+                {
+                    if (scale.isBaseSIScale())
+                    {
+                        nonZeroCount = (int) values.stream().mapToDouble(d -> d).count();
+                    }
+                    else
+                    {
+                        nonZeroCount = (int) values.stream().mapToDouble(d -> scale.toStandardUnit(d)).count();
+                    }
+                }
+                int[] indices = new int[nonZeroCount];
+                double[] valuesSI = new double[nonZeroCount];
+                // Counting non zeros could be done in parallel; but filling the arrays has to be done sequentially
+                int index = 0;
+                for (int i = 0; i < values.size(); i++)
+                {
+                    double d = scale.toStandardUnit(values.get(i));
+                    if (d != 0.0)
+                    {
+                        indices[index] = i;
+                        valuesSI[index] = d;
+                        index++;
+                    }
+                }
+                return new DoubleVectorDataSparse(valuesSI, indices, values.size());
+            }
 
             default:
                 throw new ValueRuntimeException("Unknown data type in DoubleVectorData.instantiate: " + storageType);
@@ -160,24 +200,49 @@ public abstract class DoubleVectorData implements Serializable
             throw new ValueRuntimeException("DoubleVectorData.instantiate: DoubleScalar[] values is null");
         }
 
-        double[] valuesSI;
-        if (values.length > PARALLEL_THRESHOLD)
-        {
-            valuesSI = Arrays.stream(values).parallel().mapToDouble(s -> s.getSI()).toArray();
-        }
-        else
-        {
-            valuesSI = Arrays.stream(values).mapToDouble(s -> s.getSI()).toArray();
-        }
-
         switch (storageType)
         {
             case DENSE:
+            {
+                double[] valuesSI;
+                if (values.length > PARALLEL_THRESHOLD)
+                {
+                    valuesSI = Arrays.stream(values).parallel().mapToDouble(s -> s.getSI()).toArray();
+                }
+                else
+                {
+                    valuesSI = Arrays.stream(values).mapToDouble(s -> s.getSI()).toArray();
+                }
                 return new DoubleVectorDataDense(valuesSI);
+            }
 
             case SPARSE:
-                // FIXME: Memory issue. This makes a full size copy of the data and afterwards makes that sparse
-                return DoubleVectorDataSparse.instantiate(valuesSI);
+            {
+                int nonZeroCount;
+                if (values.length > PARALLEL_THRESHOLD)
+                {
+                    nonZeroCount = (int) Arrays.stream(values).parallel().filter(s -> s.getSI() != 0).count();
+                }
+                else
+                {
+                    nonZeroCount = (int) Arrays.stream(values).filter(s -> s.getSI() != 0.0).count();
+                }                
+                int[] indices = new int[nonZeroCount];
+                double[] valuesSI = new double[nonZeroCount];
+                // Counting non zeros could be done in parallel; but filling the arrays has to be done sequentially
+                int index = 0;
+                for (int i = 0; i < values.length; i++)
+                {
+                    double d = values[i].si;
+                    if (d != 0.0)
+                    {
+                        indices[index] = i;
+                        valuesSI[index] = d;
+                        index++;
+                    }
+                }
+                return new DoubleVectorDataSparse(valuesSI, indices, values.length);
+            }
 
             default:
                 throw new ValueRuntimeException("Unknown data type in DoubleVectorData.instantiate: " + storageType);
@@ -199,24 +264,41 @@ public abstract class DoubleVectorData implements Serializable
             throw new ValueRuntimeException("DoubleVectorData.instantiate: List<DoubleScalar> values is null");
         }
 
-        double[] valuesSI;
-        if (valueList.size() > PARALLEL_THRESHOLD)
-        {
-            valuesSI = valueList.stream().parallel().mapToDouble(s -> s.getSI()).toArray();
-        }
-        else
-        {
-            valuesSI = valueList.stream().mapToDouble(s -> s.getSI()).toArray();
-        }
-
         switch (storageType)
         {
             case DENSE:
+            {
+                double[] valuesSI;
+                if (valueList.size() > PARALLEL_THRESHOLD)
+                {
+                    valuesSI = valueList.stream().parallel().mapToDouble(s -> s.getSI()).toArray();
+                }
+                else
+                {
+                    valuesSI = valueList.stream().mapToDouble(s -> s.getSI()).toArray();
+                }
                 return new DoubleVectorDataDense(valuesSI);
+            }
 
             case SPARSE:
-                // FIXME: Memory issue. This makes a full size copy of the data and afterwards makes that sparse
-                return DoubleVectorDataSparse.instantiate(valuesSI);
+            {
+                int nonZeroCount = (int) valueList.parallelStream().filter(s -> s.si != 0.0).count();
+                int[] indices = new int[nonZeroCount];
+                double[] valuesSI = new double[nonZeroCount];
+                // Counting non zeros could be done in parallel; but filling the arrays has to be done sequentially
+                int index = 0;
+                for (int i = 0; i < valueList.size(); i++)
+                {
+                    double d = valueList.get(i).si;
+                    if (d != 0.0)
+                    {
+                        indices[index] = i;
+                        valuesSI[index] = d;
+                        index++;
+                    }
+                }
+                return new DoubleVectorDataSparse(valuesSI, indices, valueList.size());
+            }
 
             default:
                 throw new ValueRuntimeException("Unknown data type in DoubleVectorData.instantiate: " + storageType);
@@ -225,14 +307,14 @@ public abstract class DoubleVectorData implements Serializable
 
     /**
      * Instantiate a DoubleVectorData with the right data type.
-     * @param values Map&lt;Integer,Double&gt;; the DoubleScalar values to store
+     * @param values SortedMap&lt;Integer,Double&gt;; the DoubleScalar values to store
      * @param length int; the length of the vector to pad with 0 after last entry in map
      * @param scale Scale; the scale of the unit to use for conversion to SI
      * @param storageType StorageType; the data type to use
      * @return DoubleVectorData; the DoubleVectorData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
      */
-    public static DoubleVectorData instantiate(final Map<Integer, Double> values, final int length, final Scale scale,
+    public static DoubleVectorData instantiate(final SortedMap<Integer, Double> values, final int length, final Scale scale,
             final StorageType storageType) throws ValueRuntimeException
     {
         if (values == null)
@@ -251,9 +333,44 @@ public abstract class DoubleVectorData implements Serializable
 
             case SPARSE:
             {
-                // TODO: remove zeros
-                int[] indices = values.keySet().parallelStream().mapToInt(i -> i).toArray();
-                double[] valuesSI = values.values().parallelStream().mapToDouble(d -> scale.toStandardUnit(d)).toArray();
+                int nonZeroCount;
+                if (scale.isBaseSIScale())
+                {
+                    nonZeroCount = (int) values.keySet().parallelStream().filter(d -> d != 0d).count();
+                }
+                else
+                {
+                    nonZeroCount = (int) values.keySet().parallelStream().filter(d -> scale.toStandardUnit(d) != 0d).count();
+                }
+                int[] indices = new int[nonZeroCount];
+                double[] valuesSI = new double[nonZeroCount];
+                int index = 0;
+                if (scale.isBaseSIScale())
+                {
+                    for (Integer key : values.keySet())
+                    {
+                        double value = values.get(key);
+                        if (0.0 != value)
+                        {
+                            indices[index] = key;
+                            valuesSI[index] = value;
+                            index++;
+                        }
+                    }
+                }
+                else
+                {
+                    for (Integer key : values.keySet())
+                    {
+                        double value = scale.toStandardUnit(values.get(key));
+                        if (0.0 != value)
+                        {
+                            indices[index] = key;
+                            valuesSI[index] = value;
+                            index++;
+                        }
+                    }
+                }
                 return new DoubleVectorDataSparse(valuesSI, indices, length);
             }
 
@@ -271,8 +388,7 @@ public abstract class DoubleVectorData implements Serializable
      * @throws ValueRuntimeException when values is null, or storageType is null
      */
     public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>> DoubleVectorData instantiateMap(
-            final Map<Integer, S> values, final int length, final StorageType storageType)
-            throws ValueRuntimeException
+            final Map<Integer, S> values, final int length, final StorageType storageType) throws ValueRuntimeException
     {
         if (values == null)
         {
@@ -290,9 +406,20 @@ public abstract class DoubleVectorData implements Serializable
 
             case SPARSE:
             {
-                // TODO: remove zeros
-                int[] indices = values.keySet().parallelStream().mapToInt(i -> i).toArray();
-                double[] valuesSI = values.values().parallelStream().mapToDouble(s -> s.si).toArray();
+                int nonZeroCount = (int) values.values().parallelStream().filter(s -> s.si != 0d).count();
+                int[] indices = new int[nonZeroCount];
+                double[] valuesSI = new double[nonZeroCount];
+                int index = 0;
+                for (Integer key : values.keySet())
+                {
+                    double value = values.get(key).si;
+                    if (0.0 != value)
+                    {
+                        indices[index] = key;
+                        valuesSI[index] = value;
+                        index++;
+                    }
+                }
                 return new DoubleVectorDataSparse(valuesSI, indices, length);
             }
 
