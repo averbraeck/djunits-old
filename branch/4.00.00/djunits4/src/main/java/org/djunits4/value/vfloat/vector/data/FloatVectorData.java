@@ -148,7 +148,7 @@ public abstract class FloatVectorData implements Serializable
      * @return FloatVectorData; the FloatVectorData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
      */
-    public static FloatVectorData instantiateLD(final List<? extends FloatScalarInterface<?, ?>> values,
+    public static FloatVectorData instantiateList(final List<? extends FloatScalarInterface<?, ?>> values,
             final StorageType storageType) throws ValueRuntimeException
     {
         if (values == null)
@@ -181,7 +181,7 @@ public abstract class FloatVectorData implements Serializable
      * @return FloatVectorData; the FloatVectorData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
      */
-    public static <S extends FloatScalarInterface<?, ?>> FloatVectorData instantiateMD(final SortedMap<Integer, S> values,
+    public static <S extends FloatScalarInterface<?, ?>> FloatVectorData instantiateMap(final SortedMap<Integer, S> values,
             final int length, final StorageType storageType) throws ValueRuntimeException
     {
         if (values == null)
