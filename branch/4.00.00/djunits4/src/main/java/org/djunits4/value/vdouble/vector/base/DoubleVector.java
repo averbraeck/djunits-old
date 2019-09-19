@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
 
 import org.djunits4.unit.SIUnit;
 import org.djunits4.unit.Unit;
@@ -131,7 +132,7 @@ public final class DoubleVector
      * @return V; an instantiated DoubleVector with the values expressed in their unit
      */
     public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
-            V extends AbstractDoubleVector<U, S, V>> V instantiate(final Map<Integer, Double> valueMapInUnit, final int length, final U unit,
+            V extends AbstractDoubleVector<U, S, V>> V instantiate(final SortedMap<Integer, Double> valueMapInUnit, final int length, final U unit,
                     final StorageType storageType)
     {
         return instantiateAnonymous(DoubleVectorData.instantiate(valueMapInUnit, length, unit.getScale(), storageType), unit);
@@ -146,7 +147,7 @@ public final class DoubleVector
      * @return V; an instantiated DoubleVector with the values expressed in their unit
      */
     public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
-            V extends AbstractDoubleVector<U, S, V>> V instantiateSI(final Map<Integer, Double> valueMapSI, final int length, final U displayUnit,
+            V extends AbstractDoubleVector<U, S, V>> V instantiateSI(final SortedMap<Integer, Double> valueMapSI, final int length, final U displayUnit,
                     final StorageType storageType)
     {
         return instantiateAnonymous(DoubleVectorData.instantiate(valueMapSI, length, IdentityScale.SCALE, storageType),
@@ -162,7 +163,7 @@ public final class DoubleVector
      * @return V; an instantiated DoubleVector with the values expressed in their unit
      */
     public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
-            V extends AbstractDoubleVector<U, S, V>> V instantiateMap(final Map<Integer, S> valueMap, final int length, final U displayUnit,
+            V extends AbstractDoubleVector<U, S, V>> V instantiateMap(final SortedMap<Integer, S> valueMap, final int length, final U displayUnit,
                     final StorageType storageType)
     {
         return instantiateAnonymous(DoubleVectorData.instantiateMap(valueMap, length, storageType), displayUnit);
