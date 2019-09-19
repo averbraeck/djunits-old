@@ -192,7 +192,7 @@ public abstract class DoubleVectorData implements Serializable
      * @return DoubleVectorData; the DoubleVectorData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
      */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>> DoubleVectorData instantiate(final S[] values,
+    public static <S extends AbstractDoubleScalar<?, S>> DoubleVectorData instantiate(final S[] values,
             final StorageType storageType) throws ValueRuntimeException
     {
         if (values == null)
@@ -226,7 +226,7 @@ public abstract class DoubleVectorData implements Serializable
                 else
                 {
                     nonZeroCount = (int) Arrays.stream(values).filter(s -> s.getSI() != 0.0).count();
-                }                
+                }
                 int[] indices = new int[nonZeroCount];
                 double[] valuesSI = new double[nonZeroCount];
                 // Counting non zeros could be done in parallel; but filling the arrays has to be done sequentially
@@ -256,8 +256,8 @@ public abstract class DoubleVectorData implements Serializable
      * @return DoubleVectorData; the DoubleVectorData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
      */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>> DoubleVectorData instantiateList(
-            final List<S> valueList, final StorageType storageType) throws ValueRuntimeException
+    public static <S extends AbstractDoubleScalar<?, ?>> DoubleVectorData instantiateList(final List<S> valueList,
+            final StorageType storageType) throws ValueRuntimeException
     {
         if (valueList == null)
         {
@@ -266,6 +266,7 @@ public abstract class DoubleVectorData implements Serializable
 
         switch (storageType)
         {
+            // TODO: check uniformly typed list
             case DENSE:
             {
                 double[] valuesSI;

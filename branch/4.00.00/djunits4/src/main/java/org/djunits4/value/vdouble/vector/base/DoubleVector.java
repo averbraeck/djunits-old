@@ -132,8 +132,8 @@ public final class DoubleVector
      * @return V; an instantiated DoubleVector with the values expressed in their unit
      */
     public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
-            V extends AbstractDoubleVector<U, S, V>> V instantiate(final SortedMap<Integer, Double> valueMapInUnit, final int length, final U unit,
-                    final StorageType storageType)
+            V extends AbstractDoubleVector<U, S, V>> V instantiate(final SortedMap<Integer, Double> valueMapInUnit,
+                    final int length, final U unit, final StorageType storageType)
     {
         return instantiateAnonymous(DoubleVectorData.instantiate(valueMapInUnit, length, unit.getScale(), storageType), unit);
     }
@@ -147,8 +147,8 @@ public final class DoubleVector
      * @return V; an instantiated DoubleVector with the values expressed in their unit
      */
     public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
-            V extends AbstractDoubleVector<U, S, V>> V instantiateSI(final SortedMap<Integer, Double> valueMapSI, final int length, final U displayUnit,
-                    final StorageType storageType)
+            V extends AbstractDoubleVector<U, S, V>> V instantiateSI(final SortedMap<Integer, Double> valueMapSI,
+                    final int length, final U displayUnit, final StorageType storageType)
     {
         return instantiateAnonymous(DoubleVectorData.instantiate(valueMapSI, length, IdentityScale.SCALE, storageType),
                 displayUnit);
@@ -163,8 +163,8 @@ public final class DoubleVector
      * @return V; an instantiated DoubleVector with the values expressed in their unit
      */
     public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
-            V extends AbstractDoubleVector<U, S, V>> V instantiateMap(final SortedMap<Integer, S> valueMap, final int length, final U displayUnit,
-                    final StorageType storageType)
+            V extends AbstractDoubleVector<U, S, V>> V instantiateMap(final SortedMap<Integer, S> valueMap, final int length,
+                    final U displayUnit, final StorageType storageType)
     {
         return instantiateAnonymous(DoubleVectorData.instantiateMap(valueMap, length, storageType), displayUnit);
     }
@@ -190,8 +190,31 @@ public final class DoubleVector
      * @return V; an instantiated DoubleVector with the values expressed in their unit
      */
     @SuppressWarnings("unchecked")
-    protected static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
             V extends AbstractDoubleVector<U, S, V>> V instantiateAnonymous(final DoubleVectorData values, final Unit<?> unit)
+    {
+        try
+        {
+            Constructor<? extends AbstractDoubleVector<?, ?, ?>> vectorConstructor = lookupConstructor(unit);
+            return (V) vectorConstructor.newInstance(values, unit);
+        }
+        catch (SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException exception)
+        {
+            throw new UnitRuntimeException("Cannot instantiate AbstractDoubleVector of unit " + unit.toString() + ". Reason: "
+                    + exception.getMessage());
+        }
+    }
+
+    /**
+     * Retrieve the constructor for the DoubleVector with the given (weakly typed) unit.<br>
+     * <b>Note</b> that it is possible to make mistakes with weakly typed units.
+     * @param unit Unit&lt;?&gt;; the unit for which to look up the Vector constructor
+     * @return Constructor&lt;? extends AbstractDoubleVector&lt;?, ?, ?&gt;&gt;; The constructor if it exists
+     * @throws UnitRuntimeException in case the vector constructor could not be found for the unit
+     */
+    @SuppressWarnings("unchecked")
+    protected static Constructor<? extends AbstractDoubleVector<?, ?, ?>> lookupConstructor(final Unit<?> unit)
     {
         try
         {
@@ -216,13 +239,12 @@ public final class DoubleVector
                 vectorConstructor = vectorClass.getDeclaredConstructor(DoubleVectorData.class, unit.getClass());
                 CACHE_DATA.put(unit, vectorConstructor);
             }
-            return (V) vectorConstructor.newInstance(values, unit);
+            return vectorConstructor;
         }
-        catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-                | IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
+        catch (ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalArgumentException exception)
         {
-            throw new UnitRuntimeException("Cannot instantiate AbstractDoubleVector of unit " + unit.toString() + ". Reason: "
-                    + exception.getMessage());
+            throw new UnitRuntimeException(
+                    "Cannot find vector constructor for unit " + unit.toString() + ". Reason: " + exception.getMessage());
         }
     }
 }
