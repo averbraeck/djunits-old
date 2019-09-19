@@ -25,9 +25,6 @@ import org.djunits4.value.vdouble.vector.base.AbstractDoubleVector;
  */
 public final class DoubleMatrix
 {
-    /** The cache to make the lookup of the constructor for a Matrix belonging to a unit faster. */
-    private static Map<Unit<?>, Constructor<? extends AbstractDoubleMatrix<?, ?, ?, ?>>> CACHE_ARRAY = new HashMap<>();
-
     /** The cache to make the lookup of the constructor for a Immutable Matrix belonging to a unit faster. */
     private static Map<Unit<?>, Constructor<? extends AbstractDoubleMatrix<?, ?, ?, ?>>> CACHE_DATA = new HashMap<>();
 
@@ -72,42 +69,11 @@ public final class DoubleMatrix
      * @param storageType StorageType; whether the matrix is SPARSE or DENSE
      * @return V; an instantiated DoubleMatrix with the values expressed in their unit
      */
-    @SuppressWarnings("unchecked")
     public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>,
             M extends AbstractDoubleMatrix<U, S, V, M>> M instantiateAnonymous(final double[][] values, final Unit<?> unit,
                     final StorageType storageType)
     {
-        try
-        {
-            Constructor<? extends AbstractDoubleMatrix<?, ?, ?, ?>> matrixConstructor = CACHE_ARRAY.get(unit);
-            if (matrixConstructor == null)
-            {
-                if (!unit.getClass().getSimpleName().endsWith("Unit"))
-                {
-                    throw new ClassNotFoundException("Unit " + unit.getClass().getSimpleName()
-                            + " name does not end with 'Unit'. Cannot find corresponding matrix");
-                }
-                Class<? extends AbstractDoubleMatrix<?, ?, ?, ?>> matrixClass;
-                if (unit instanceof SIUnit)
-                {
-                    throw new UnitRuntimeException("Cannot instantiate AbstractDoubleMatrix of unit " + unit.toString());
-                }
-                else
-                {
-                    matrixClass = (Class<AbstractDoubleMatrix<?, ?, ?, ?>>) Class.forName("org.djunits4.value.vdouble.matrix."
-                            + unit.getClass().getSimpleName().replace("Unit", "") + "Matrix");
-                }
-                matrixConstructor = matrixClass.getDeclaredConstructor(double[][].class, unit.getClass(), StorageType.class);
-                CACHE_ARRAY.put(unit, matrixConstructor);
-            }
-            return (M) matrixConstructor.newInstance(values, unit, storageType);
-        }
-        catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-                | IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
-        {
-            throw new UnitRuntimeException("Cannot instantiate AbstractDoubleMatrix of unit " + unit.toString() + ". Reason: "
-                    + exception.getMessage());
-        }
+        return instantiateAnonymous(DoubleMatrixData.instantiate(values, unit.getScale(), storageType), unit);
     }
 
     /**
@@ -148,8 +114,8 @@ public final class DoubleMatrix
             }
             return (M) matrixConstructor.newInstance(values, unit);
         }
-        catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-                | IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
+        catch (SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException | ClassNotFoundException | NoSuchMethodException exception)
         {
             throw new UnitRuntimeException("Cannot instantiate AbstractDoubleMatrix of unit " + unit.toString() + ". Reason: "
                     + exception.getMessage());
@@ -173,7 +139,7 @@ public final class DoubleMatrix
 
     /**
      * Construct a new Relative Immutable Double Matrix.
-     * @param values [][]; the values of the entries in the new Relative Immutable Double Matrix
+     * @param values S[][]; the values of the entries in the new Relative Immutable Double Matrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @return Matrix of the specified unit
      * @throws ValueRuntimeException when values has zero entries

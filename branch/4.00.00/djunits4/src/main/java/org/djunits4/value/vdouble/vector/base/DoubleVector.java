@@ -165,11 +165,11 @@ public final class DoubleVector
                             + " name does not end with 'Unit'. Cannot find corresponding vector");
                 }
                 Class<? extends AbstractDoubleVector<?, ?, ?>> vectorClass;
-                // if (unit instanceof SIUnit)
-                // {
-                // throw new UnitRuntimeException("Cannot instantiate AbstractDoubleVector of unit " + unit.toString());
-                // }
-                // else
+                if (unit instanceof SIUnit)
+                {
+                    throw new UnitRuntimeException("Cannot instantiate AbstractDoubleVector of unit " + unit.toString());
+                }
+                else
                 {
                     vectorClass = (Class<AbstractDoubleVector<?, ?, ?>>) Class.forName("org.djunits4.value.vdouble.vector."
                             + unit.getClass().getSimpleName().replace("Unit", "") + "Vector");

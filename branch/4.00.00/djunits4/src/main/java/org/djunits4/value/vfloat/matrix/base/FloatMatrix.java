@@ -25,9 +25,6 @@ import org.djunits4.value.vfloat.vector.base.AbstractFloatVector;
  */
 public final class FloatMatrix
 {
-    /** The cache to make the lookup of the constructor for a Matrix belonging to a unit faster. */
-    private static Map<Unit<?>, Constructor<? extends AbstractFloatMatrix<?, ?, ?, ?>>> CACHE_ARRAY = new HashMap<>();
-
     /** The cache to make the lookup of the constructor for a Immutable Matrix belonging to a unit faster. */
     private static Map<Unit<?>, Constructor<? extends AbstractFloatMatrix<?, ?, ?, ?>>> CACHE_DATA = new HashMap<>();
 
@@ -72,42 +69,11 @@ public final class FloatMatrix
      * @param storageType StorageType; whether the matrix is SPARSE or DENSE
      * @return V; an instantiated FloatMatrix with the values expressed in their unit
      */
-    @SuppressWarnings("unchecked")
     public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>, V extends AbstractFloatVector<U, S, V>,
             M extends AbstractFloatMatrix<U, S, V, M>> M instantiateAnonymous(final float[][] values, final Unit<?> unit,
                     final StorageType storageType)
     {
-        try
-        {
-            Constructor<? extends AbstractFloatMatrix<?, ?, ?, ?>> matrixConstructor = CACHE_ARRAY.get(unit);
-            if (matrixConstructor == null)
-            {
-                if (!unit.getClass().getSimpleName().endsWith("Unit"))
-                {
-                    throw new ClassNotFoundException("Unit " + unit.getClass().getSimpleName()
-                            + " name does not end with 'Unit'. Cannot find corresponding matrix");
-                }
-                Class<? extends AbstractFloatMatrix<?, ?, ?, ?>> matrixClass;
-                if (unit instanceof SIUnit)
-                {
-                    throw new UnitRuntimeException("Cannot instantiate AbstractFloatMatrix of unit " + unit.toString());
-                }
-                else
-                {
-                    matrixClass = (Class<AbstractFloatMatrix<?, ?, ?, ?>>) Class.forName("org.djunits4.value.vfloat.matrix."
-                            + unit.getClass().getSimpleName().replace("Unit", "") + "Matrix");
-                }
-                matrixConstructor = matrixClass.getDeclaredConstructor(float[][].class, unit.getClass(), StorageType.class);
-                CACHE_ARRAY.put(unit, matrixConstructor);
-            }
-            return (M) matrixConstructor.newInstance(values, unit, storageType);
-        }
-        catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-                | IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
-        {
-            throw new UnitRuntimeException("Cannot instantiate AbstractFloatMatrix of unit " + unit.toString() + ". Reason: "
-                    + exception.getMessage());
-        }
+        return instantiateAnonymous(FloatMatrixData.instantiate(values, unit.getScale(), storageType), unit);
     }
 
     /**
@@ -120,8 +86,7 @@ public final class FloatMatrix
      */
     @SuppressWarnings("unchecked")
     protected static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>, V extends AbstractFloatVector<U, S, V>,
-            M extends AbstractFloatMatrix<U, S, V, M>> M instantiateAnonymous(final FloatMatrixData values,
-                    final Unit<?> unit)
+            M extends AbstractFloatMatrix<U, S, V, M>> M instantiateAnonymous(final FloatMatrixData values, final Unit<?> unit)
     {
         try
         {
@@ -140,8 +105,9 @@ public final class FloatMatrix
                 }
                 else
                 {
-                    matrixClass = (Class<AbstractFloatMatrix<?, ?, ?, ?>>) Class.forName("org.djunits4.value.vfloat.matrix."
-                            + unit.getClass().getSimpleName().replace("Unit", "") + "Matrix");
+                    matrixClass =
+                            (Class<AbstractFloatMatrix<?, ?, ?, ?>>) Class.forName("org.djunits4.value.vfloat.matrix.Float"
+                                    + unit.getClass().getSimpleName().replace("Unit", "") + "Matrix");
                 }
                 matrixConstructor = matrixClass.getDeclaredConstructor(FloatMatrixData.class, unit.getClass());
                 CACHE_DATA.put(unit, matrixConstructor);

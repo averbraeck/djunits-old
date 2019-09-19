@@ -29,15 +29,6 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorDataSparse;
  */
 public final class FloatVector
 {
-    /** The cache to make the lookup of the constructor for a Vector belonging to a unit faster. */
-    private static Map<Unit<?>, Constructor<? extends AbstractFloatVector<?, ?, ?>>> CACHE_ARRAY = new HashMap<>();
-
-    /** The cache to make the lookup of the constructor for a Vector belonging to a unit faster. */
-    private static Map<Unit<?>, Constructor<? extends AbstractFloatVector<?, ?, ?>>> CACHE_LIST = new HashMap<>();
-
-    /** The cache to make the lookup of the constructor for a Vector belonging to a unit faster. */
-    private static Map<Unit<?>, Constructor<? extends AbstractFloatVector<?, ?, ?>>> CACHE_MAP = new HashMap<>();
-
     /** The cache to make the lookup of the constructor for a Immutable Vector belonging to a unit faster. */
     private static Map<Unit<?>, Constructor<? extends AbstractFloatVector<?, ?, ?>>> CACHE_DATA = new HashMap<>();
 
@@ -85,7 +76,7 @@ public final class FloatVector
      * @return V; an instantiated FloatVector with the values expressed in their unit
      */
     public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
-            V extends AbstractFloatVector<U, S, V>> V instantiate(final Map<Integer, Float> valueMap, final U unit,
+            V extends AbstractFloatVector<U, S, V>> V instantiate(final SortedMap<Integer, Float> valueMap, final U unit,
                     final int length, final StorageType storageType)
     {
         return instantiateAnonymous(valueMap, unit, length, storageType);
@@ -112,42 +103,11 @@ public final class FloatVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated FloatVector with the values expressed in their unit
      */
-    @SuppressWarnings("unchecked")
     public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
             V extends AbstractFloatVector<U, S, V>> V instantiateAnonymous(final float[] values, final Unit<?> unit,
                     final StorageType storageType)
     {
-        try
-        {
-            Constructor<? extends AbstractFloatVector<?, ?, ?>> vectorConstructor = CACHE_ARRAY.get(unit);
-            if (vectorConstructor == null)
-            {
-                if (!unit.getClass().getSimpleName().endsWith("Unit"))
-                {
-                    throw new ClassNotFoundException("Unit " + unit.getClass().getSimpleName()
-                            + " name does not end with 'Unit'. Cannot find corresponding vector");
-                }
-                Class<? extends AbstractFloatVector<?, ?, ?>> vectorClass;
-                if (unit instanceof SIUnit)
-                {
-                    throw new UnitRuntimeException("Cannot instantiate AbstractFloatVector of unit " + unit.toString());
-                }
-                else
-                {
-                    vectorClass = (Class<AbstractFloatVector<?, ?, ?>>) Class.forName("org.djunits4.value.vfloat.vector."
-                            + unit.getClass().getSimpleName().replace("Unit", "") + "Vector");
-                }
-                vectorConstructor = vectorClass.getDeclaredConstructor(float[].class, unit.getClass(), StorageType.class);
-                CACHE_ARRAY.put(unit, vectorConstructor);
-            }
-            return (V) vectorConstructor.newInstance(values, unit, storageType);
-        }
-        catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-                | IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
-        {
-            throw new UnitRuntimeException("Cannot instantiate AbstractFloatVector of unit " + unit.toString() + ". Reason: "
-                    + exception.getMessage());
-        }
+        return instantiateAnonymous(FloatVectorData.instantiate(values, unit.getScale(), storageType), unit);
     }
 
     /**
@@ -159,42 +119,11 @@ public final class FloatVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated FloatVector with the values expressed in their unit
      */
-    @SuppressWarnings("unchecked")
     public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
             V extends AbstractFloatVector<U, S, V>> V instantiateAnonymous(final List<Float> valueList, final Unit<?> unit,
                     final StorageType storageType)
     {
-        try
-        {
-            Constructor<? extends AbstractFloatVector<?, ?, ?>> vectorConstructor = CACHE_LIST.get(unit);
-            if (vectorConstructor == null)
-            {
-                if (!unit.getClass().getSimpleName().endsWith("Unit"))
-                {
-                    throw new ClassNotFoundException("Unit " + unit.getClass().getSimpleName()
-                            + " name does not end with 'Unit'. Cannot find corresponding vector");
-                }
-                Class<? extends AbstractFloatVector<?, ?, ?>> vectorClass;
-                if (unit instanceof SIUnit)
-                {
-                    throw new UnitRuntimeException("Cannot instantiate AbstractFloatVector of unit " + unit.toString());
-                }
-                else
-                {
-                    vectorClass = (Class<AbstractFloatVector<?, ?, ?>>) Class.forName("org.djunits4.value.vfloat.vector."
-                            + unit.getClass().getSimpleName().replace("Unit", "") + "Vector");
-                }
-                vectorConstructor = vectorClass.getDeclaredConstructor(List.class, unit.getClass(), StorageType.class);
-                CACHE_LIST.put(unit, vectorConstructor);
-            }
-            return (V) vectorConstructor.newInstance(valueList, unit, storageType);
-        }
-        catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-                | IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
-        {
-            throw new UnitRuntimeException("Cannot instantiate AbstractFloatVector of unit " + unit.toString() + ". Reason: "
-                    + exception.getMessage());
-        }
+        return instantiateAnonymous(FloatVectorData.instantiate(valueList, unit.getScale(), storageType), unit);
     }
 
     /**
@@ -207,43 +136,11 @@ public final class FloatVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated FloatVector with the values expressed in their unit
      */
-    @SuppressWarnings("unchecked")
     public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
-            V extends AbstractFloatVector<U, S, V>> V instantiateAnonymous(final Map<Integer, Float> valueMap,
+            V extends AbstractFloatVector<U, S, V>> V instantiateAnonymous(final SortedMap<Integer, Float> valueMap,
                     final Unit<?> unit, final int length, final StorageType storageType)
     {
-        try
-        {
-            Constructor<? extends AbstractFloatVector<?, ?, ?>> vectorConstructor = CACHE_MAP.get(unit);
-            if (vectorConstructor == null)
-            {
-                if (!unit.getClass().getSimpleName().endsWith("Unit"))
-                {
-                    throw new ClassNotFoundException("Unit " + unit.getClass().getSimpleName()
-                            + " name does not end with 'Unit'. Cannot find corresponding vector");
-                }
-                Class<? extends AbstractFloatVector<?, ?, ?>> vectorClass;
-                if (unit instanceof SIUnit)
-                {
-                    throw new UnitRuntimeException("Cannot instantiate AbstractFloatVector of unit " + unit.toString());
-                }
-                else
-                {
-                    vectorClass = (Class<AbstractFloatVector<?, ?, ?>>) Class.forName("org.djunits4.value.vfloat.vector."
-                            + unit.getClass().getSimpleName().replace("Unit", "") + "Vector");
-                }
-                vectorConstructor =
-                        vectorClass.getDeclaredConstructor(List.class, unit.getClass(), int.class, StorageType.class);
-                CACHE_MAP.put(unit, vectorConstructor);
-            }
-            return (V) vectorConstructor.newInstance(valueMap, unit, length, storageType);
-        }
-        catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-                | IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
-        {
-            throw new UnitRuntimeException("Cannot instantiate AbstractFloatVector of unit " + unit.toString() + ". Reason: "
-                    + exception.getMessage());
-        }
+        return instantiateAnonymous(FloatVectorData.instantiate(valueMap, length, unit.getScale(), storageType), unit);
     }
 
     /**
@@ -275,7 +172,7 @@ public final class FloatVector
                 }
                 else
                 {
-                    vectorClass = (Class<AbstractFloatVector<?, ?, ?>>) Class.forName("org.djunits4.value.vfloat.vector."
+                    vectorClass = (Class<AbstractFloatVector<?, ?, ?>>) Class.forName("org.djunits4.value.vfloat.vector.Float"
                             + unit.getClass().getSimpleName().replace("Unit", "") + "Vector");
                 }
                 vectorConstructor = vectorClass.getDeclaredConstructor(FloatVectorData.class, unit.getClass());
@@ -283,8 +180,8 @@ public final class FloatVector
             }
             return (V) vectorConstructor.newInstance(values, unit);
         }
-        catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-                | IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
+        catch (SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException | ClassNotFoundException | NoSuchMethodException exception)
         {
             throw new UnitRuntimeException("Cannot instantiate AbstractFloatVector of unit " + unit.toString() + ". Reason: "
                     + exception.getMessage());
