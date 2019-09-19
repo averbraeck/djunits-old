@@ -215,7 +215,7 @@ public class DoubleVectorConstructorsTest
             }
             for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
             {
-                SIVector siv = SIVector.create(testValues, SIUnit.of(unitBase.getSiDimensions()), storageType);
+                SIVector siv = SIVector.instantiate(testValues, SIUnit.of(unitBase.getSiDimensions()), storageType);
                 System.out.println(siv);
                 compareValues(testValues, siv.getValuesSI());
                 //assertEquals("Underlying standardUnit must match", standardUnit, siv.getUnit());

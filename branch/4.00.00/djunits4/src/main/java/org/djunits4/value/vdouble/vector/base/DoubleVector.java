@@ -5,18 +5,16 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.SortedMap;
 
 import org.djunits4.unit.SIUnit;
 import org.djunits4.unit.Unit;
-import org.djunits4.unit.scale.Scale;
+import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.util.UnitRuntimeException;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalar;
 import org.djunits4.value.vdouble.vector.SIVector;
 import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
-import org.djunits4.value.vdouble.vector.data.DoubleVectorDataSparse;
 
 /**
  * DoubleVector utility methods, e.g., for creating DoubleVectors from different types of data.
@@ -40,46 +38,134 @@ public final class DoubleVector
 
     /**
      * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler.
-     * @param values double[]; the values
-     * @param unit U; the unit in which the values are expressed
+     * @param valuesInUnit double[]; the values in the given unit
+     * @param unit U; the unit in which the values are expressed and displayed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated DoubleVector with the values expressed in their unit
      */
     public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
-            V extends AbstractDoubleVector<U, S, V>> V instantiate(final double[] values, final U unit,
+            V extends AbstractDoubleVector<U, S, V>> V instantiate(final double[] valuesInUnit, final U unit,
                     final StorageType storageType)
     {
-        return instantiateAnonymous(values, unit, storageType);
+        return instantiateAnonymous(DoubleVectorData.instantiate(valuesInUnit, unit.getScale(), storageType), unit);
     }
 
     /**
      * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler.
-     * @param valueList List&lt;Double&gt;; the values
-     * @param unit U; the unit in which the values are expressed
+     * @param valuesSI double[]; the values in the SI unit
+     * @param displayUnit U; the unit in which the values will be displayed
+     * @param storageType StorageType; whether the vector is SPARSE or DENSE
+     * @return V; an instantiated DoubleVector with the values expressed in their unit
+     */
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
+            V extends AbstractDoubleVector<U, S, V>> V instantiateSI(final double[] valuesSI, final U displayUnit,
+                    final StorageType storageType)
+    {
+        return instantiateAnonymous(DoubleVectorData.instantiate(valuesSI, IdentityScale.SCALE, storageType), displayUnit);
+    }
+
+    /**
+     * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler.
+     * @param values S[]; the values
+     * @param displayUnit U; the unit in which the values will be displayed
+     * @param storageType StorageType; whether the vector is SPARSE or DENSE
+     * @return V; an instantiated DoubleVector with the values expressed in their unit
+     */
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
+            V extends AbstractDoubleVector<U, S, V>> V instantiate(final S[] values, final U displayUnit,
+                    final StorageType storageType)
+    {
+        return instantiateAnonymous(DoubleVectorData.instantiate(values, storageType), displayUnit);
+    }
+
+    /**
+     * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler.
+     * @param valueListInUnit List&lt;Double&gt;; the values in the given unit
+     * @param unit U; the unit in which the values are expressed and displayed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated DoubleVector with the values expressed in their unit
      * @throws ValueRuntimeException on vector init error
      */
     public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
-            V extends AbstractDoubleVector<U, S, V>> V instantiate(final List<Double> valueList, final U unit,
+            V extends AbstractDoubleVector<U, S, V>> V instantiate(final List<Double> valueListInUnit, final U unit,
                     final StorageType storageType) throws ValueRuntimeException
     {
-        return instantiateAnonymous(valueList, unit, storageType);
+        return instantiateAnonymous(DoubleVectorData.instantiate(valueListInUnit, unit.getScale(), storageType), unit);
     }
 
     /**
      * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler.
-     * @param valueMap Map&lt;Integer, Double&gt;; the values
-     * @param unit U; the unit in which the values are expressed
+     * @param valueListSI List&lt;Double&gt;; the values in the SI unit
+     * @param displayUnit U; the unit in which the values will be displayed
+     * @param storageType StorageType; whether the vector is SPARSE or DENSE
+     * @return V; an instantiated DoubleVector with the values expressed in their unit
+     * @throws ValueRuntimeException on vector init error
+     */
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
+            V extends AbstractDoubleVector<U, S, V>> V instantiateSI(final List<Double> valueListSI, final U displayUnit,
+                    final StorageType storageType) throws ValueRuntimeException
+    {
+        return instantiateAnonymous(DoubleVectorData.instantiate(valueListSI, IdentityScale.SCALE, storageType), displayUnit);
+    }
+
+    /**
+     * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler.
+     * @param valueList List&lt;S&gt;; the value list
+     * @param displayUnit U; the unit in which the values will be displayed
+     * @param storageType StorageType; whether the vector is SPARSE or DENSE
+     * @return V; an instantiated DoubleVector with the values expressed in their unit
+     */
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
+            V extends AbstractDoubleVector<U, S, V>> V instantiateList(final List<S> valueList, final U displayUnit,
+                    final StorageType storageType)
+    {
+        return instantiateAnonymous(DoubleVectorData.instantiateList(valueList, storageType), displayUnit);
+    }
+
+    /**
+     * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler.
+     * @param valueMapInUnit Map&lt;Integer, Double&gt;; the values in the given unit
+     * @param length int; the size of the vector
+     * @param unit U; the unit in which the values are expressed and displayed
+     * @param storageType StorageType; whether the vector is SPARSE or DENSE
+     * @return V; an instantiated DoubleVector with the values expressed in their unit
+     */
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
+            V extends AbstractDoubleVector<U, S, V>> V instantiate(final Map<Integer, Double> valueMapInUnit, final int length, final U unit,
+                    final StorageType storageType)
+    {
+        return instantiateAnonymous(DoubleVectorData.instantiate(valueMapInUnit, length, unit.getScale(), storageType), unit);
+    }
+
+    /**
+     * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler.
+     * @param valueMapSI Map&lt;Integer, Double&gt;; the values in the SI unit
+     * @param length int; the size of the vector
+     * @param displayUnit U; the unit in which the values are displayed
+     * @param storageType StorageType; whether the vector is SPARSE or DENSE
+     * @return V; an instantiated DoubleVector with the values expressed in their unit
+     */
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
+            V extends AbstractDoubleVector<U, S, V>> V instantiateSI(final Map<Integer, Double> valueMapSI, final int length, final U displayUnit,
+                    final StorageType storageType)
+    {
+        return instantiateAnonymous(DoubleVectorData.instantiate(valueMapSI, length, IdentityScale.SCALE, storageType),
+                displayUnit);
+    }
+
+    /**
+     * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler.
+     * @param valueMap Map&lt;Integer, S&gt;; the value map
+     * @param displayUnit U; the unit in which the values will be displayed
      * @param length int; the size of the vector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated DoubleVector with the values expressed in their unit
      */
     public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
-            V extends AbstractDoubleVector<U, S, V>> V instantiate(final Map<Integer, Double> valueMap, final U unit,
-                    final int length, final StorageType storageType)
+            V extends AbstractDoubleVector<U, S, V>> V instantiateMap(final Map<Integer, S> valueMap, final int length, final U displayUnit,
+                    final StorageType storageType)
     {
-        return instantiateAnonymous(valueMap, unit, length, storageType);
+        return instantiateAnonymous(DoubleVectorData.instantiateMap(valueMap, length, storageType), displayUnit);
     }
 
     /**
@@ -92,55 +178,6 @@ public final class DoubleVector
             V extends AbstractDoubleVector<U, S, V>> V instantiate(final DoubleVectorData values, final U unit)
     {
         return instantiateAnonymous(values, unit);
-    }
-
-    /**
-     * Instantiate the DoubleVector based on its unit. Loose check for types on the compiler. This allows the unit to be
-     * specified as a Unit&lt;?&gt; type.<br>
-     * <b>Note</b> that it is possible to make mistakes with anonymous units.
-     * @param values double[]; the values
-     * @param unit Unit&lt;?&gt;; the unit in which the values are expressed
-     * @param storageType StorageType; whether the vector is SPARSE or DENSE
-     * @return V; an instantiated DoubleVector with the values expressed in their unit
-     */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
-            V extends AbstractDoubleVector<U, S, V>> V instantiateAnonymous(final double[] values, final Unit<?> unit,
-                    final StorageType storageType)
-    {
-        return instantiateAnonymous(DoubleVectorData.instantiate(values, unit.getScale(), storageType), unit);
-    }
-
-    /**
-     * Instantiate the DoubleVector based on its unit. Loose check for types on the compiler. This allows the unit to be
-     * specified as a Unit&lt;?&gt; type.<br>
-     * <b>Note</b> that it is possible to make mistakes with anonymous units.
-     * @param valueList List&lt;Double&gt;; the values
-     * @param unit Unit&lt;?&gt;; the unit in which the values are expressed
-     * @param storageType StorageType; whether the vector is SPARSE or DENSE
-     * @return V; an instantiated DoubleVector with the values expressed in their unit
-     */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
-            V extends AbstractDoubleVector<U, S, V>> V instantiateAnonymous(final List<Double> valueList, final Unit<?> unit,
-                    final StorageType storageType)
-    {
-        return instantiateAnonymous(DoubleVectorData.instantiate(valueList, unit.getScale(), storageType), unit);
-    }
-
-    /**
-     * Instantiate the DoubleVector based on its unit. Loose check for types on the compiler. This allows the unit to be
-     * specified as a Unit&lt;?&gt; type.<br>
-     * <b>Note</b> that it is possible to make mistakes with anonymous units.
-     * @param valueMap Map&lt;Integer, Double&gt;; the values
-     * @param unit Unit&lt;?&gt;; the unit in which the values are expressed
-     * @param length int; the size of the vector
-     * @param storageType StorageType; whether the vector is SPARSE or DENSE
-     * @return V; an instantiated DoubleVector with the values expressed in their unit
-     */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
-            V extends AbstractDoubleVector<U, S, V>> V instantiateAnonymous(final Map<Integer, Double> valueMap,
-                    final Unit<?> unit, final int length, final StorageType storageType)
-    {
-        return instantiateAnonymous(DoubleVectorData.instantiate(valueMap, length, unit.getScale(), storageType), unit);
     }
 
     /**
@@ -187,195 +224,4 @@ public final class DoubleVector
                     + exception.getMessage());
         }
     }
-
-    /**
-     * Construct a new Relative Immutable Double Vector.
-     * @param values double[]; the values of the entries in the new Relative Immutable Double Vector
-     * @param unit Unit; the unit of the new Relative Immutable Double Vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @return Vector of the specified unit
-     * @throws ValueRuntimeException when values is null
-     */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>> V create(
-            final double[] values, final U unit, final StorageType storageType) throws ValueRuntimeException
-    {
-        return instantiate(DoubleVectorData.instantiate(values, unit.getScale(), storageType), unit);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double Vector.
-     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double Vector
-     * @param unit Unit; the unit of the new Relative Immutable Double Vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @return Vector of the specified unit
-     * @throws ValueRuntimeException when values is null
-     */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>> V create(
-            final List<Double> values, final U unit, final StorageType storageType) throws ValueRuntimeException
-    {
-        return instantiate(DoubleVectorData.instantiate(values, unit.getScale(), storageType), unit);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double Vector.
-     * @param values []; the values of the entries in the new Relative Immutable Double Vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @return Vector of the specified unit
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>> V create(
-            final S[] values, final StorageType storageType) throws ValueRuntimeException
-    {
-        U unit = values[0].getUnit();
-        return instantiate(DoubleVectorData.instantiate(values, storageType), unit);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double Vector.
-     * @param valueList List&lt;&gt;; the values of the entries in the new Relative Immutable Double Vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @return Vector of the specified unit
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>> V create(
-            final List<S> valueList, final StorageType storageType) throws ValueRuntimeException
-    {
-        U unit = valueList.get(0).getUnit();
-        switch (storageType)
-        {
-            case DENSE:
-            {
-                double[] valuesSI = valueList.parallelStream().mapToDouble(s -> s.getSI()).toArray();
-                return create(valuesSI, unit, StorageType.DENSE);
-            }
-
-            case SPARSE:
-            {
-                int size = valueList.size();
-                int non0 = (int) valueList.parallelStream().filter(e -> e.si != 0.0).count();
-                int[] indices = new int[non0];
-                double[] values = new double[non0];
-                int index = 0;
-                for (int i = 0; i < valueList.size(); i++)
-                {
-                    double si = valueList.get(i).si;
-                    if (si != 0.0)
-                    {
-                        indices[index] = i;
-                        values[index] = si;
-                        index++;
-                    }
-                }
-                return instantiate(new DoubleVectorDataSparse(values, indices, size), unit);
-            }
-
-            default:
-                throw new ValueRuntimeException("Unknown data type in DoubleVectorData.instantiate: " + storageType);
-        }
-
-    }
-
-    /**
-     * Construct a new Relative Immutable Double Vector.
-     * @param valueMap SortedMap&lt;Integer, &gt;; the values of the entries in the new Relative Sparse Mutable Double Vector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @return Vector of the specified unit
-     * @throws ValueRuntimeException when values has zero entries
-     */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>> V create(
-            final SortedMap<Integer, S> valueMap, final int length, final StorageType storageType) throws ValueRuntimeException
-    {
-        U unit = valueMap.values().iterator().next().getUnit();
-        switch (storageType)
-        {
-            case DENSE:
-            {
-                double[] valuesSI = new double[length];
-                valueMap.keySet().parallelStream().forEach(i -> valuesSI[i] = valueMap.get(i).si);
-                return create(valuesSI, unit, StorageType.DENSE);
-            }
-
-            case SPARSE:
-            {
-                int non0 = (int) valueMap.keySet().parallelStream().filter(i -> valueMap.get(i).si != 0.0).count();
-                int[] indices = new int[non0];
-                double[] valuesSI = new double[non0];
-                int index = 0;
-                for (int i = 0; i < valueMap.size(); i++)
-                {
-                    double si = valueMap.get(i).si;
-                    if (si != 0.0)
-                    {
-                        indices[index] = i;
-                        valuesSI[index] = si;
-                        index++;
-                    }
-                }
-                return instantiate(new DoubleVectorDataSparse(valuesSI, indices, length), unit);
-            }
-
-            default:
-                throw new ValueRuntimeException("Unknown data type in DoubleVectorData.instantiate: " + storageType);
-        }
-    }
-
-    /**
-     * Construct a new Relative Immutable Double Vector.
-     * @param valueMap SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
-     *            Vector
-     * @param unit Unit; the unit of the new Relative Sparse Mutable Double Vector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @return Vector of the specified unit
-     * @throws ValueRuntimeException when values is null
-     */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>> V create(
-            final SortedMap<Integer, Double> valueMap, final U unit, final int length, final StorageType storageType)
-            throws ValueRuntimeException
-    {
-        switch (storageType)
-        {
-            case DENSE:
-            {
-                double[] values = new double[length];
-                valueMap.keySet().parallelStream().forEach(i -> values[i] = valueMap.get(i));
-                return create(values, unit, StorageType.DENSE);
-            }
-
-            case SPARSE:
-            {
-                final Scale scale = unit.getScale();
-                boolean zeroBasedScale = scale.toStandardUnit(0.0) == 0.0;
-                int non0;
-                if (zeroBasedScale)
-                {
-                    non0 = (int) valueMap.keySet().parallelStream().filter(i -> valueMap.get(i) != 0.0).count();
-                }
-                else
-                {
-                    non0 = (int) valueMap.keySet().parallelStream().filter(i -> scale.toStandardUnit(valueMap.get(i)) != 0.0)
-                            .count();
-                }
-                int[] indices = new int[non0];
-                double[] valuesSI = new double[non0];
-                int index = 0;
-                for (Integer key : valueMap.keySet())
-                {
-                    double si = zeroBasedScale ? valueMap.get(key) : scale.toStandardUnit(valueMap.get(key));
-                    if (si != 0.0)
-                    {
-                        indices[index] = key;
-                        valuesSI[index] = si;
-                        index++;
-                    }
-                }
-                return instantiate(new DoubleVectorDataSparse(valuesSI, indices, length), unit);
-            }
-
-            default:
-                throw new ValueRuntimeException("Unknown data type in DoubleVectorData.instantiate: " + storageType);
-        }
-    }
-
 }

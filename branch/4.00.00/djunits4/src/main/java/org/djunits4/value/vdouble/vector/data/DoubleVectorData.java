@@ -186,6 +186,45 @@ public abstract class DoubleVectorData implements Serializable
 
     /**
      * Instantiate a DoubleVectorData with the right data type.
+     * @param valueList List&lt;S&gt;; the values to store
+     * @param storageType StorageType; the data type to use
+     * @return DoubleVectorData; the DoubleVectorData with the right data type
+     * @throws ValueRuntimeException when values is null, or storageType is null
+     */
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>> DoubleVectorData instantiateList(
+            final List<S> valueList, final StorageType storageType) throws ValueRuntimeException
+    {
+        if (valueList == null)
+        {
+            throw new ValueRuntimeException("DoubleVectorData.instantiate: List<DoubleScalar> values is null");
+        }
+
+        double[] valuesSI;
+        if (valueList.size() > PARALLEL_THRESHOLD)
+        {
+            valuesSI = valueList.stream().parallel().mapToDouble(s -> s.getSI()).toArray();
+        }
+        else
+        {
+            valuesSI = valueList.stream().mapToDouble(s -> s.getSI()).toArray();
+        }
+
+        switch (storageType)
+        {
+            case DENSE:
+                return new DoubleVectorDataDense(valuesSI);
+
+            case SPARSE:
+                // FIXME: Memory issue. This makes a full size copy of the data and afterwards makes that sparse
+                return DoubleVectorDataSparse.instantiate(valuesSI);
+
+            default:
+                throw new ValueRuntimeException("Unknown data type in DoubleVectorData.instantiate: " + storageType);
+        }
+    }
+
+    /**
+     * Instantiate a DoubleVectorData with the right data type.
      * @param values Map&lt;Integer,Double&gt;; the DoubleScalar values to store
      * @param length int; the length of the vector to pad with 0 after last entry in map
      * @param scale Scale; the scale of the unit to use for conversion to SI
@@ -212,8 +251,48 @@ public abstract class DoubleVectorData implements Serializable
 
             case SPARSE:
             {
+                // TODO: remove zeros
                 int[] indices = values.keySet().parallelStream().mapToInt(i -> i).toArray();
                 double[] valuesSI = values.values().parallelStream().mapToDouble(d -> scale.toStandardUnit(d)).toArray();
+                return new DoubleVectorDataSparse(valuesSI, indices, length);
+            }
+
+            default:
+                throw new ValueRuntimeException("Unknown data type in DoubleVectorData.instantiate: " + storageType);
+        }
+    }
+
+    /**
+     * Instantiate a DoubleVectorData with the right data type.
+     * @param values Map&lt;Integer,S&gt;; the DoubleScalar values to store
+     * @param length int; the length of the vector to pad with 0 after last entry in map
+     * @param storageType StorageType; the data type to use
+     * @return DoubleVectorData; the DoubleVectorData with the right data type
+     * @throws ValueRuntimeException when values is null, or storageType is null
+     */
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>> DoubleVectorData instantiateMap(
+            final Map<Integer, S> values, final int length, final StorageType storageType)
+            throws ValueRuntimeException
+    {
+        if (values == null)
+        {
+            throw new ValueRuntimeException("DoubleVectorData.instantiateMap: values map is null");
+        }
+
+        switch (storageType)
+        {
+            case DENSE:
+            {
+                double[] valuesSI = new double[length];
+                values.entrySet().parallelStream().forEach(entry -> valuesSI[entry.getKey()] = entry.getValue().si);
+                return new DoubleVectorDataDense(valuesSI);
+            }
+
+            case SPARSE:
+            {
+                // TODO: remove zeros
+                int[] indices = values.keySet().parallelStream().mapToInt(i -> i).toArray();
+                double[] valuesSI = values.values().parallelStream().mapToDouble(s -> s.si).toArray();
                 return new DoubleVectorDataSparse(valuesSI, indices, length);
             }
 

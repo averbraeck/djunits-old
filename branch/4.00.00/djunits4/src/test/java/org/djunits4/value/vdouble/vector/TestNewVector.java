@@ -21,7 +21,7 @@ public class TestNewVector
 {
    public static void main(final String[] args) throws ValueRuntimeException, UnitException
    {
-       AreaVector av = DoubleVector.create(new double[] {1.5,2.1,3.9}, AreaUnit.SQUARE_METER, StorageType.DENSE);
+       AreaVector av = DoubleVector.instantiate(new double[] {1.5,2.1,3.9}, AreaUnit.SQUARE_METER, StorageType.DENSE);
        System.out.println(av);
        
        AreaVector av2 = av.mutable();
@@ -37,7 +37,7 @@ public class TestNewVector
            System.out.println("Modifying immutable throwed an exception as expected");
        }
        
-       AreaVector avimm = DoubleVector.create(new double[] {1.5,2.1,3.9}, AreaUnit.SQUARE_METER, StorageType.SPARSE);
+       AreaVector avimm = DoubleVector.instantiate(new double[] {1.5,2.1,3.9}, AreaUnit.SQUARE_METER, StorageType.SPARSE);
        System.out.println("\n" + avimm);
        
        SIVector siv = SIVector.of(new double[] {1.5,2.1,3.9}, "m2", StorageType.SPARSE);
@@ -50,7 +50,7 @@ public class TestNewVector
        SIVector siv2 = siv.times(siv);
        System.out.println("\n" + siv2);
        
-       AreaVector avnew = DoubleVector.create(new double[] {1.5,2.1,3.9}, AreaUnit.SQUARE_METER, StorageType.DENSE);
+       AreaVector avnew = DoubleVector.instantiate(new double[] {1.5,2.1,3.9}, AreaUnit.SQUARE_METER, StorageType.DENSE);
        System.out.println("\n" + avnew);
 
        Area[] aa = av.getScalars();
