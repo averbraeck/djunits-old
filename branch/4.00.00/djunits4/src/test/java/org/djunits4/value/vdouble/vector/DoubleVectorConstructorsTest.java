@@ -277,7 +277,13 @@ public class DoubleVectorConstructorsTest
             for (AbsoluteTemperatureUnit temperatureUnit : new AbsoluteTemperatureUnit[] { AbsoluteTemperatureUnit.KELVIN,
                     AbsoluteTemperatureUnit.DEGREE_CELSIUS })
             {
-                AbsoluteTemperatureVector atv = DoubleVector.instantiate(at, temperatureUnit, storageType);
+                double offset = temperatureUnit.equals(AbsoluteTemperatureUnit.KELVIN) ? 0 : 273.15;
+                AbsoluteTemperatureVector atv = DoubleVector.instantiate(testValues, temperatureUnit, storageType);
+                compareValuesWithOffset(offset, testValues, atv.getValuesSI());
+                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("cardinality", offset == 0 ? cardinality : testValues.length, atv.cardinality());
+                assertEquals("zSum", zSum + testValues.length * offset, atv.zSum(), 0.001);
+                atv = DoubleVector.instantiate(at, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
@@ -340,7 +346,7 @@ public class DoubleVectorConstructorsTest
                     v = matv.getSI(index);
                     assertEquals("initial value is returned", testValues[index] + 100, v, 0.001);
                 }
-                for (int index = testValues.length; --index >= 0; )
+                for (int index = testValues.length; --index >= 0;)
                 {
                     // read and check, change and check again
                     double v = matv.getSI(index);
@@ -364,7 +370,7 @@ public class DoubleVectorConstructorsTest
             }
         }
     }
-    
+
     /**
      * Test the SIVector class.
      * @throws UnitException if that happens uncaught; this test has failed
@@ -512,6 +518,242 @@ public class DoubleVectorConstructorsTest
     }
 
     /**
+     * Test all the exception that the constructors may throw.
+     * @throws UnitException when that happens uncaught; this test has failed
+     * @throws ValueRuntimeException when that happens uncaught; this test has failed
+     */
+    @Test
+    public void exceptionsTest() throws ValueRuntimeException, UnitException
+    {
+        double[] testValues = new double[] { 0, 123.456d, 0, 0, 234.567d, 0, 0 };
+        AbsoluteTemperature[] at = new AbsoluteTemperature[testValues.length];
+        List<AbsoluteTemperature> al = new ArrayList<>();
+        SortedMap<Integer, AbsoluteTemperature> map = new TreeMap<>();
+        for (int i = 0; i < testValues.length; i++)
+        {
+            AbsoluteTemperature value = new AbsoluteTemperature(testValues[i], AbsoluteTemperatureUnit.KELVIN);
+            at[i] = value;
+            al.add(value);
+            if (0.0 != value.si)
+            {
+                map.put(i, value);
+            }
+        }
+
+        DoubleVector.instantiate(testValues, AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
+        try
+        {
+            DoubleVector.instantiate((double[]) null, AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
+            fail("null pointer should have thrown an exception");
+        }
+        catch (ValueRuntimeException vre)
+        {
+            // Ignore expected exception
+        }
+        try
+        {
+            DoubleVector.instantiate(testValues, null, StorageType.DENSE);
+            fail("null pointer should have thrown an exception");
+        }
+        catch (NullPointerException npe)
+        {
+            // Ignore expected exception
+        }
+        try
+        {
+            DoubleVector.instantiate(testValues, AbsoluteTemperatureUnit.KELVIN, null);
+            fail("null pointer should have thrown an exception");
+        }
+        catch (NullPointerException npe)
+        {
+            // Ignore expected exception
+        }
+        DoubleVector.instantiate(at, AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
+        try
+        {
+            DoubleVector.instantiate((AbsoluteTemperature[]) null, AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
+            fail("null pointer should have thrown an exception");
+        }
+        catch (ValueRuntimeException vre)
+        {
+            // Ignore expected exception
+        }
+        try
+        {
+            DoubleVector.instantiate(at, null, StorageType.DENSE);
+            fail("null pointer should have thrown an exception");
+        }
+        catch (NullPointerException npe)
+        {
+            // Ignore expected exception
+        }
+        try
+        {
+            DoubleVector.instantiate(at, AbsoluteTemperatureUnit.KELVIN, null);
+            fail("null pointer should have thrown an exception");
+        }
+        catch (NullPointerException npe)
+        {
+            // Ignore expected exception
+        }
+        DoubleVector.instantiateList(al, AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
+        try
+        {
+            DoubleVector.instantiateList((List<AbsoluteTemperature>) null, AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
+            fail("null pointer should have thrown an exception");
+        }
+        catch (ValueRuntimeException vre)
+        {
+            // Ignore expected exception
+        }
+        try
+        {
+            DoubleVector.instantiateList(al, null, StorageType.DENSE);
+            fail("null pointer should have thrown an exception");
+        }
+        catch (NullPointerException npe)
+        {
+            // Ignore expected exception
+        }
+        try
+        {
+            DoubleVector.instantiateList(al, AbsoluteTemperatureUnit.KELVIN, null);
+            fail("null pointer should have thrown an exception");
+        }
+        catch (NullPointerException npe)
+        {
+            // Ignore expected exception
+        }
+        DoubleVector.instantiateMap(map, testValues.length, AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
+        try
+        {
+            DoubleVector.instantiateMap((SortedMap<Integer, AbsoluteTemperature>) null, testValues.length,
+                    AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
+            fail("null pointer should have thrown an exception");
+        }
+        catch (ValueRuntimeException vre)
+        {
+            // Ignore expected exception
+        }
+        try
+        {
+            DoubleVector.instantiateMap(map, testValues.length, null, StorageType.DENSE);
+            fail("null pointer should have thrown an exception");
+        }
+        catch (NullPointerException npe)
+        {
+            // Ignore expected exception
+        }
+        try
+        {
+            DoubleVector.instantiateMap(map, testValues.length, AbsoluteTemperatureUnit.KELVIN, null);
+            fail("null pointer should have thrown an exception");
+        }
+        catch (NullPointerException npe)
+        {
+            // Ignore expected exception
+        }
+        try
+        {
+            DoubleVector.instantiateMap(map, -1, AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
+            fail("negative length should have thrown an exception");
+        }
+        catch (NegativeArraySizeException nase)
+        {
+            // Ignore expected exception
+        }
+        try
+        {
+            DoubleVector.instantiateMap(map, 1, AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
+            fail("bad length should have thrown an exception");
+        }
+        catch (ArrayIndexOutOfBoundsException aeoobe)
+        {
+            // Ignore expected exception
+        }
+        map.put(-1, at[0]);
+        try
+        {
+            DoubleVector.instantiateMap(map, testValues.length, AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
+            fail("bad entry in map should have thrown an exception");
+        }
+        catch (ArrayIndexOutOfBoundsException aeoobe)
+        {
+            // Ignore expected exception
+        }
+        map.remove(-1); // Remove the offending entry
+        UnitBase<?> unitBase = UnitTypes.INSTANCE.getUnitBase("AbsoluteTemperature" + "Unit");
+        SIVector.instantiate(testValues, SIUnit.of(unitBase.getSiDimensions()), StorageType.DENSE);
+        try
+        {
+            SIVector.instantiate((double[]) null, SIUnit.of(unitBase.getSiDimensions()), StorageType.DENSE);
+            fail("null pointer should have thrown an exception");
+        }
+        catch (ValueRuntimeException vre)
+        {
+            // Ignore expected exception
+        }
+        try
+        {
+            SIVector.instantiate(testValues, null, StorageType.DENSE);
+            fail("null pointer should have thrown an exception");
+        }
+        catch (NullPointerException npe)
+        {
+            // Ignore expected exception
+        }
+        try
+        {
+            SIVector.instantiate(testValues, SIUnit.of(unitBase.getSiDimensions()), null);
+            fail("null pointer should have thrown an exception");
+        }
+        catch (NullPointerException npe)
+        {
+            // Ignore expected exception
+        }
+    }
+
+    /**
+     * Test that parallelized operations work
+     */
+    @Test
+    public void parallelTest()
+    {
+        double[] testValues = new double[4000];
+        for (int i = 0; i < testValues.length; i++)
+        {
+            testValues[i] = i % 3 != 0 ? 0 : (100.0 + i);
+        }
+        AbsoluteTemperature[] at = new AbsoluteTemperature[testValues.length];
+        List<AbsoluteTemperature> al = new ArrayList<>();
+        SortedMap<Integer, AbsoluteTemperature> map = new TreeMap<>();
+        for (int i = 0; i < testValues.length; i++)
+        {
+            AbsoluteTemperature value = new AbsoluteTemperature(testValues[i], AbsoluteTemperatureUnit.KELVIN);
+            at[i] = value;
+            al.add(value);
+            if (0.0 != value.si)
+            {
+                map.put(i, value);
+            }
+        }
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+        {
+            for (AbsoluteTemperatureUnit temperatureUnit : new AbsoluteTemperatureUnit[] { AbsoluteTemperatureUnit.KELVIN,
+                    AbsoluteTemperatureUnit.DEGREE_CELSIUS })
+            {
+                double offset = temperatureUnit.equals(AbsoluteTemperatureUnit.KELVIN) ? 0 : 273.15;
+                AbsoluteTemperatureVector atv = DoubleVector.instantiate(testValues, temperatureUnit, storageType);
+                compareValuesWithOffset(offset, testValues, atv.getValuesSI());
+                atv = DoubleVector.instantiateList(al, temperatureUnit, storageType);
+                compareValues(testValues, atv.getValuesSI());
+                atv = DoubleVector.instantiateMap(map, testValues.length, temperatureUnit, storageType);
+                compareValues(testValues, atv.getValuesSI());
+            }
+        }
+    }
+
+    /**
      * Compare two double arrays.
      * @param reference double[]; the reference values
      * @param got double[] the values that should match the reference values
@@ -522,6 +764,21 @@ public class DoubleVectorConstructorsTest
         for (int i = 0; i < reference.length; i++)
         {
             assertEquals("value at each index must match", reference[i], got[i], 0.001);
+        }
+    }
+
+    /**
+     * Compare two double arrays with offset.
+     * @param offset double; the expected difference
+     * @param reference double[]; the reference values
+     * @param got double[] the values that should match the reference values
+     */
+    public void compareValuesWithOffset(final double offset, final double[] reference, final double[] got)
+    {
+        assertEquals("length of reference must equal length of result ", reference.length, got.length);
+        for (int i = 0; i < reference.length; i++)
+        {
+            assertEquals("value at each index must match", reference[i] + offset, got[i], 0.001);
         }
     }
 
