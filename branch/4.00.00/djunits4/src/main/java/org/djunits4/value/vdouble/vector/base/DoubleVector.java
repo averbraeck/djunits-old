@@ -125,7 +125,7 @@ public final class DoubleVector
 
     /**
      * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler.
-     * @param valueMapInUnit Map&lt;Integer, Double&gt;; the values in the given unit
+     * @param valueMapInUnit SortedMap&lt;Integer, Double&gt;; the values in the given unit
      * @param length int; the size of the vector
      * @param unit U; the unit in which the values are expressed and displayed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
@@ -140,7 +140,7 @@ public final class DoubleVector
 
     /**
      * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler.
-     * @param valueMapSI Map&lt;Integer, Double&gt;; the values in the SI unit
+     * @param valueMapSI SortedMap&lt;Integer, Double&gt;; the values in the SI unit
      * @param length int; the size of the vector
      * @param displayUnit U; the unit in which the values are displayed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
