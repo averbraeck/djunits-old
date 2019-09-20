@@ -101,6 +101,24 @@ public class DoubleVectorConstructorsTest
                 assertEquals("StorageType must match", storageType, doubleVector.getStorageType());
                 try
                 {
+                    doubleVector.setSI(0, 0);
+                    fail("double vector should be immutable");
+                }
+                catch (ValueRuntimeException vre)
+                {
+                    // Ignore expected exception
+                }
+                try
+                {
+                    doubleVector.setInUnit(0, 0);
+                    fail("double vector should be immutable");
+                }
+                catch (ValueRuntimeException vre)
+                {
+                    // Ignore expected exception
+                }
+                try
+                {
                     doubleVector.ceil();
                     fail("double vector should be immutable");
                 }
@@ -109,6 +127,27 @@ public class DoubleVectorConstructorsTest
                     // Ignore expected exception
                 }
                 DoubleVectorInterface<?, ?, ?> mutable = doubleVector.mutable();
+                mutable.setSI(0, 0);
+                mutable.setInUnit(0, 0);
+                try
+                {
+                    mutable.setSI(-1, 0);
+                    fail("negative index should have thrown an excpetion");
+                }
+                catch (ValueRuntimeException vre)
+                {
+                    // Ignore expected exception
+                }
+                try
+                {
+                    mutable.setSI(testValues.length, 0);
+                    fail("negative index should have thrown an excpetion");
+                }
+                catch (ValueRuntimeException vre)
+                {
+                    // Ignore expected exception
+                }
+                mutable.setSI(testValues.length - 1, 0);
                 mutable.ceil();
                 for (int index = 0; index < testValues.length; index++)
                 {
@@ -253,16 +292,79 @@ public class DoubleVectorConstructorsTest
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
                 assertEquals("zSum", zSum, atv.zSum(), 0.001);
-                atv = DoubleVector.instantiateMap(notQuiteSparseMap, testValues.length, temperatureUnit,
-                        storageType);
+                atv = DoubleVector.instantiateMap(notQuiteSparseMap, testValues.length, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
                 assertEquals("zSum", zSum, atv.zSum(), 0.001);
+                try
+                {
+                    atv.setInUnit(0, 0, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT);
+                    fail("should have been immutable");
+                }
+                catch (ValueRuntimeException vre)
+                {
+                    // Ignore expected exception
+                }
+                AbsoluteTemperatureVector matv = atv.mutable();
+                matv.setInUnit(0, 0, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT);
+                assertEquals("Setting temp in F should have stored equivalent value in K", matv.getSI(0), 255.37, 0.01);
+                try
+                {
+                    matv.setInUnit(-1, 0, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT);
+                    fail("negative index should have thrown an exception");
+                }
+                catch (ValueRuntimeException vre)
+                {
+                    // Ignore expected exception
+                }
+                matv.setInUnit(testValues.length - 1, 0, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT);
+                try
+                {
+                    matv.setInUnit(testValues.length, 0, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT);
+                    fail("too large index should have thrown an exception");
+                }
+                catch (ValueRuntimeException vre)
+                {
+                    // Ignore expected exception
+                }
+                // More complete memory test; somewhat inspired on mats+
+                matv = atv.mutable();
+                for (int index = 0; index < testValues.length; index++)
+                {
+                    // read and check; change, read again and check again
+                    double v = matv.getSI(index);
+                    assertEquals("initial value is returned", testValues[index], v, 0.001);
+                    v += 100;
+                    matv.setSI(index, v);
+                    v = matv.getSI(index);
+                    assertEquals("initial value is returned", testValues[index] + 100, v, 0.001);
+                }
+                for (int index = testValues.length; --index >= 0; )
+                {
+                    // read and check, change and check again
+                    double v = matv.getSI(index);
+                    assertEquals("initial value is returned", testValues[index] + 100, v, 0.001);
+                    v -= 100;
+                    matv.setSI(index, v);
+                    v = matv.getSI(index);
+                    assertEquals("initial value is returned", testValues[index], v, 0.001);
+                }
+                assertEquals("Cardinality should be back to original value", cardinality, matv.cardinality());
+                for (int index = 0; index < testValues.length; index++)
+                {
+                    // read and check; change, read again and check again
+                    double v = matv.getSI(index);
+                    assertEquals("initial value is returned", testValues[index], v, 0.001);
+                    v += 100;
+                    matv.setSI(index, v);
+                    v = matv.getSI(index);
+                    assertEquals("initial value is returned", testValues[index] + 100, v, 0.001);
+                }
             }
         }
     }
-
+    
     /**
      * Test the SIVector class.
      * @throws UnitException if that happens uncaught; this test has failed

@@ -240,6 +240,28 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     }
 
     /** {@inheritDoc} */
+    @Override
+    public final void setSI(final int index, final double valueSI) throws ValueRuntimeException
+    {
+        checkIndex(index);
+        checkCopyOnWrite();
+        this.data.setSI(index, valueSI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void setInUnit(int index, double valueInUnit) throws ValueRuntimeException
+    {
+        setSI(index, ValueUtil.expressAsSIUnit(valueInUnit, getUnit()));        
+    }
+
+    @Override
+    public void setInUnit(int index, double valueInUnit, U valueUnit) throws ValueRuntimeException
+    {
+        setSI(index, ValueUtil.expressAsSIUnit(valueInUnit, valueUnit));        
+    }
+
+    /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
     public S[] getScalars()
