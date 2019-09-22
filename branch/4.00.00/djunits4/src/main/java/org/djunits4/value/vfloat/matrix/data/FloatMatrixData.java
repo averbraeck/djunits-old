@@ -2,11 +2,14 @@ package org.djunits4.value.vfloat.matrix.data;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.stream.IntStream;
 
+import org.djunits4.unit.Unit;
 import org.djunits4.unit.scale.Scale;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vfloat.matrix.base.FloatSparseValue;
 import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
 
 /**
@@ -93,13 +96,46 @@ public abstract class FloatMatrixData implements Serializable
 
     /**
      * Instantiate a FloatMatrixData with the right data type.
+     * @param values Collection&lt;FloatSparseValue&lt;U, S&gt;&gt;; the (sparse [X, Y, SI]) values to store
+     * @param rows int; the number of rows of the matrix
+     * @param cols int; the number of columns of the matrix
+     * @param storageType StorageType; the data type to use
+     * @return the FloatMatrixData with the right data type
+     * @throws ValueRuntimeException when values are null, or storageType is null
+     */
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> FloatMatrixData instantiate(
+            final Collection<FloatSparseValue<U, S>> values, final int rows, final int cols, final StorageType storageType)
+            throws ValueRuntimeException
+    {
+        if (values == null)
+        {
+            throw new ValueRuntimeException("FloatMatrixData.instantiate: values is null");
+        }
+
+        switch (storageType)
+        {
+            case DENSE:
+                float[] valuesSI = new float[rows * cols];
+                values.stream().parallel().forEach(v -> valuesSI[v.getRow() * cols + v.getColumn()] = v.getValueSI());
+                return new FloatMatrixDataDense(valuesSI, rows, cols);
+
+            case SPARSE:
+                return new FloatMatrixDataSparse(values, rows, cols);
+
+            default:
+                throw new ValueRuntimeException("Unknown data type in FloatMatrixData.instantiate: " + storageType);
+        }
+    }
+
+    /**
+     * Instantiate a FloatMatrixData with the right data type.
      * @param values FloatScalarInterface[][]; the values to store
      * @param storageType StorageType; the data type to use
      * @return the FloatMatrixData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
      */
-    public static FloatMatrixData instantiate(final FloatScalarInterface<?, ?>[][] values, final StorageType storageType)
-            throws ValueRuntimeException
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> FloatMatrixData instantiate(
+            final FloatScalarInterface<U, S>[][] values, final StorageType storageType) throws ValueRuntimeException
     {
         if (values == null)
         {

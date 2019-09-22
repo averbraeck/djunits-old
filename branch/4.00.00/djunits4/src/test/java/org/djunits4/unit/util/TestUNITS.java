@@ -5,6 +5,7 @@ import static org.junit.Assert.fail;
 
 import java.lang.reflect.Field;
 
+import org.djunits4.unit.AbsoluteLinearUnit;
 import org.djunits4.unit.Unit;
 import org.junit.Test;
 
@@ -38,6 +39,15 @@ public class TestUNITS
                 fail("constant for field " + constantField.getName() + " is null");
             assertEquals("types of fields differ for " + constantField.getName(), constant.getClass(), constantField.getType());
             if (constant.getId().contains("eV")) // used in Energy and Mass with prefix, so they differ...
+                continue;
+            if (constant.getUnitBase().getStandardUnit().getName().equals("Kelvin")
+                    && constant instanceof AbsoluteLinearUnit<?, ?>) // KELVIN_ABS etc.
+                continue;
+            if (constant.getUnitBase().getStandardUnit().getName().equals("meter")
+                    && constant instanceof AbsoluteLinearUnit<?, ?>) // METER_ABS etc.
+                continue;
+            if (constant.getUnitBase().getStandardUnit().getName().equals("second")
+                    && constant instanceof AbsoluteLinearUnit<?, ?>) // SECOND_ABS etc.
                 continue;
             // find the field with this name in the declaring class
             Field unitField = constant.getClass().getDeclaredField(constantField.getName());

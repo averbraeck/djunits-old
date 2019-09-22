@@ -2,11 +2,14 @@ package org.djunits4.value.vdouble.matrix.data;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.stream.IntStream;
 
+import org.djunits4.unit.Unit;
 import org.djunits4.unit.scale.Scale;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.matrix.base.DoubleSparseValue;
 import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
 
 /**
@@ -93,13 +96,46 @@ public abstract class DoubleMatrixData implements Serializable
 
     /**
      * Instantiate a DoubleMatrixData with the right data type.
+     * @param values Collection&lt;DoubleSparseValue&lt;U, S&gt;&gt;; the (sparse [X, Y, SI]) values to store
+     * @param rows int; the number of rows of the matrix
+     * @param cols int; the number of columns of the matrix
+     * @param storageType StorageType; the data type to use
+     * @return the DoubleMatrixData with the right data type
+     * @throws ValueRuntimeException when values are null, or storageType is null
+     */
+    public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>> DoubleMatrixData instantiate(
+            final Collection<DoubleSparseValue<U, S>> values, final int rows, final int cols, final StorageType storageType)
+            throws ValueRuntimeException
+    {
+        if (values == null)
+        {
+            throw new ValueRuntimeException("DoubleMatrixData.instantiate: values is null");
+        }
+
+        switch (storageType)
+        {
+            case DENSE:
+                double[] valuesSI = new double[rows * cols];
+                values.stream().parallel().forEach(v -> valuesSI[v.getRow() * cols + v.getColumn()] = v.getValueSI());
+                return new DoubleMatrixDataDense(valuesSI, rows, cols);
+
+            case SPARSE:
+                return new DoubleMatrixDataSparse(values, rows, cols);
+
+            default:
+                throw new ValueRuntimeException("Unknown data type in DoubleMatrixData.instantiate: " + storageType);
+        }
+    }
+
+    /**
+     * Instantiate a DoubleMatrixData with the right data type.
      * @param values DoubleScalarInterface[][]; the values to store
      * @param storageType StorageType; the data type to use
      * @return the DoubleMatrixData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
      */
-    public static DoubleMatrixData instantiate(final DoubleScalarInterface<?, ?>[][] values, final StorageType storageType)
-            throws ValueRuntimeException
+    public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>> DoubleMatrixData instantiate(
+            final DoubleScalarInterface<U, S>[][] values, final StorageType storageType) throws ValueRuntimeException
     {
         if (values == null)
         {

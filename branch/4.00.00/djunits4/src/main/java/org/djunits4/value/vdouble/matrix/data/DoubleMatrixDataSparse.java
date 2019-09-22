@@ -1,14 +1,19 @@
 package org.djunits4.value.vdouble.matrix.data;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
+import org.djunits4.unit.Unit;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.matrix.base.DoubleSparseValue;
+import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
 
 /**
- * Stores sparse data for a DoubleMatrix and carries out basic operations.
+ * Stores sparse data for a DoubleMatrix and carries out basic operations. The index in the sparse matrix data is calculated as
+ * <code>r * columns + c</code>, where r is the row number, cols is the total number of columns, and c is the column number.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -21,27 +26,21 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     /** */
     private static final long serialVersionUID = 1L;
 
-    /** the index values of the Matrix. */
+    /** the index values of the Matrix. The index is calculated as r * columns + c. */
     private long[] indices;
-
-    /** the length of the vector (padded with 0 after highest index in indices). */
-    private final int length;
 
     /**
      * Create a matrix with sparse data.
      * @param matrixSI double[]; the data to store
      * @param indices long[]; the index values of the Matrix, with &lt;tt&gt;index = row * cols + col&lt;/tt&gt;
-     * @param length int; the length of the vector (padded with 0 after highest index in indices)
      * @param rows int; the number of rows
      * @param cols int; the number of columns
      */
-    public DoubleMatrixDataSparse(final double[] matrixSI, final long[] indices, final int length, final int rows,
-            final int cols)
+    public DoubleMatrixDataSparse(final double[] matrixSI, final long[] indices, final int rows, final int cols)
     {
         super(StorageType.SPARSE);
         this.matrixSI = matrixSI;
         this.indices = indices;
-        this.length = length;
         this.rows = rows;
         this.cols = cols;
     }
@@ -61,11 +60,11 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
             throw new ValueRuntimeException("DoubleMatrixDataSparse constructor, denseSI == null || denseSI.length == 0");
         }
 
-        this.length = nonZero(denseSI);
+        int length = nonZero(denseSI);
         this.rows = rows;
         this.cols = cols;
-        this.matrixSI = new double[this.length];
-        this.indices = new long[this.length];
+        this.matrixSI = new double[length];
+        this.indices = new long[length];
         fill(denseSI, this.matrixSI, this.indices);
     }
 
@@ -82,12 +81,45 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
             throw new ValueRuntimeException("DoubleMatrixDataSparse constructor, matrixSI == null || matrixSI.length == 0");
         }
 
-        this.length = nonZero(dataSI);
+        int length = nonZero(dataSI);
         this.rows = dataSI.length;
         this.cols = dataSI[0].length;
-        this.matrixSI = new double[this.length];
-        this.indices = new long[this.length];
+        this.matrixSI = new double[length];
+        this.indices = new long[length];
         fill(dataSI, this.matrixSI, this.indices);
+    }
+
+    /**
+     * Create a matrix with sparse data.
+     * @param dataSI Collection&lt;DoubleSparseValue&lt;U, S&gt;&gt;; the sparse [X, Y, SI] values to store
+     * @param rows int; the number of rows of the matrix
+     * @param cols int; the number of columns of the matrix
+     * @throws ValueRuntimeException in case matrix is ragged
+     */
+    public <U extends Unit<U>, S extends DoubleScalarInterface<U, S>> DoubleMatrixDataSparse(
+            final Collection<DoubleSparseValue<U, S>> dataSI, final int rows, final int cols) throws ValueRuntimeException
+    {
+        super(StorageType.SPARSE);
+        if (dataSI == null || dataSI.size() == 0)
+        {
+            throw new ValueRuntimeException("DoubleMatrixDataSparse constructor, matrixSI == null || matrixSI.length == 0");
+        }
+
+        int length = (int) dataSI.stream().parallel().filter(d -> d.getValueSI() != 0.0).count();
+        this.rows = rows;
+        this.cols = cols;
+        this.matrixSI = new double[length];
+        this.indices = new long[length];
+        int index = 0;
+        for (DoubleSparseValue<U, S> data : dataSI)
+        {
+            if (data.getValueSI() != 0.0)
+            {
+                this.indices[index] = data.getRow() * this.cols + data.getColumn();
+                this.matrixSI[index] = data.getValueSI();
+                index++;
+            }
+        }
     }
 
     /**
@@ -215,7 +247,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
         System.arraycopy(this.matrixSI, 0, vCopy, 0, this.matrixSI.length);
         long[] iCopy = new long[this.indices.length];
         System.arraycopy(this.indices, 0, iCopy, 0, this.indices.length);
-        return new DoubleMatrixDataSparse(vCopy, iCopy, this.length, this.rows, this.cols);
+        return new DoubleMatrixDataSparse(vCopy, iCopy, this.rows, this.cols);
     }
 
     /**
@@ -232,7 +264,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
         double[] sparseSI = new double[length];
         long[] indices = new long[length];
         fill(valuesSI, sparseSI, indices);
-        return new DoubleMatrixDataSparse(sparseSI, indices, length, rows, cols);
+        return new DoubleMatrixDataSparse(sparseSI, indices, rows, cols);
     }
 
     /**
@@ -425,7 +457,6 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
         final int prime = 31;
         int result = super.hashCode();
         result = prime * result + Arrays.hashCode(this.indices);
-        result = prime * result + this.length;
         return result;
     }
 
@@ -442,8 +473,6 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
             return false;
         DoubleMatrixDataSparse other = (DoubleMatrixDataSparse) obj;
         if (!Arrays.equals(this.indices, other.indices))
-            return false;
-        if (this.length != other.length)
             return false;
         return true;
     }

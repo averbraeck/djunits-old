@@ -194,6 +194,36 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
 
     /** {@inheritDoc} */
     @Override
+    public void setSI(final int row, final int column, final float valueSI) throws ValueRuntimeException
+    {
+        checkIndex(row, column);
+        checkCopyOnWrite();
+        this.data.setSI(row, column, valueSI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void setInUnit(final int row, final int column, final float valueInUnit) throws ValueRuntimeException
+    {
+        setSI(row, column, (float) ValueUtil.expressAsSIUnit(valueInUnit, getUnit()));
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void setInUnit(final int row, final int column, final float valueInUnit, final U valueUnit) throws ValueRuntimeException
+    {
+        setSI(row, column, (float) ValueUtil.expressAsSIUnit(valueInUnit, valueUnit));
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void set(final int row, final int column, final S value) throws ValueRuntimeException
+    {
+        setSI(row, column, value.si);
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public float[] getRowSI(int row) throws ValueRuntimeException
     {
         checkRowIndex(row);

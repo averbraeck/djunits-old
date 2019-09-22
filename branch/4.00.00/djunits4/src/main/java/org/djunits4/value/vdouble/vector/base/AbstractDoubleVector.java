@@ -252,13 +252,21 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     @Override
     public void setInUnit(int index, double valueInUnit) throws ValueRuntimeException
     {
-        setSI(index, ValueUtil.expressAsSIUnit(valueInUnit, getUnit()));        
+        setSI(index, ValueUtil.expressAsSIUnit(valueInUnit, getUnit()));
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setInUnit(int index, double valueInUnit, U valueUnit) throws ValueRuntimeException
     {
-        setSI(index, ValueUtil.expressAsSIUnit(valueInUnit, valueUnit));        
+        setSI(index, ValueUtil.expressAsSIUnit(valueInUnit, valueUnit));
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void set(int index, S value) throws ValueRuntimeException
+    {
+        setSI(index, value.si);
     }
 
     /** {@inheritDoc} */
@@ -388,7 +396,6 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
         return divide((double) divisor);
     }
 
-    
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override

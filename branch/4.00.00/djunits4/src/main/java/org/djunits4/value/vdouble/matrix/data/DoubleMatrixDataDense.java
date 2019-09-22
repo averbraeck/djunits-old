@@ -97,7 +97,7 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
                 }
             }
         }
-        return new DoubleMatrixDataSparse(sparseSI, indices, this.matrixSI.length, this.rows, this.cols);
+        return new DoubleMatrixDataSparse(sparseSI, indices, this.rows, this.cols);
     }
 
     /** {@inheritDoc} */

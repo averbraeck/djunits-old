@@ -25,7 +25,7 @@ import org.junit.Test;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class ValueOfStringOfTest
+public class DoubleValueOfStringOfTest
 {
     /**
      * Test the Duration class for the valueOf and stringOf methods.

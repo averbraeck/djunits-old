@@ -93,8 +93,8 @@ public abstract class FloatScalar
                 }
                 else
                 {
-                    scalarClass = (Class<AbstractFloatScalar<?, ?>>) Class
-                            .forName("org.djunits4.value.vfloat.scalar." + unit.getClass().getSimpleName().replace("Unit", ""));
+                    scalarClass = (Class<AbstractFloatScalar<?, ?>>) Class.forName(
+                            "org.djunits4.value.vfloat.scalar.Float" + unit.getClass().getSimpleName().replace("Unit", ""));
                 }
                 scalarConstructor = scalarClass.getDeclaredConstructor(float.class, unit.getClass());
                 CACHE.put(unit, scalarConstructor);

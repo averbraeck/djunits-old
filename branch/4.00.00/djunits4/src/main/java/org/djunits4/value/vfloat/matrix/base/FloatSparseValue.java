@@ -1,8 +1,8 @@
-package org.djunits4.value.vdouble.matrix.base;
+package org.djunits4.value.vfloat.matrix.base;
 
 import org.djunits4.unit.Unit;
 import org.djunits4.value.util.ValueUtil;
-import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
+import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
 
 /**
  * Data point for a matrix that can be used for constructing sparse matrices.
@@ -14,7 +14,7 @@ import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
  * @param <U> the unit type of the value
  * @param <S> the scalar type of the value
  */
-public class DoubleSparseValue<U extends Unit<U>, S extends DoubleScalarInterface<U, S>>
+public class FloatSparseValue<U extends Unit<U>, S extends FloatScalarInterface<U, S>>
 {
     /** the row in the matrix. */
     private final int row;
@@ -23,7 +23,7 @@ public class DoubleSparseValue<U extends Unit<U>, S extends DoubleScalarInterfac
     private final int column;
 
     /** the value of the data point in the matrix. */
-    private final double valueSI;
+    private final float valueSI;
 
     /**
      * Create a data point for a sparse matrix.
@@ -31,7 +31,7 @@ public class DoubleSparseValue<U extends Unit<U>, S extends DoubleScalarInterfac
      * @param column the column of the sparse data point in the matrix
      * @param value the value in the given unit of the data point in the matrix
      */
-    public DoubleSparseValue(final int row, final int column, final S value)
+    public FloatSparseValue(final int row, final int column, final S value)
     {
         super();
         this.row = row;
@@ -46,12 +46,12 @@ public class DoubleSparseValue<U extends Unit<U>, S extends DoubleScalarInterfac
      * @param valueInUnit the value in the given unit of the data point in the matrix
      * @param unit the unit of the value
      */
-    public DoubleSparseValue(final int row, final int column, final double valueInUnit, final U unit)
+    public FloatSparseValue(final int row, final int column, final float valueInUnit, final U unit)
     {
         super();
         this.row = row;
         this.column = column;
-        this.valueSI = ValueUtil.expressAsSIUnit(valueInUnit, unit);
+        this.valueSI = (float) ValueUtil.expressAsSIUnit(valueInUnit, unit);
     }
 
     /**
@@ -60,7 +60,7 @@ public class DoubleSparseValue<U extends Unit<U>, S extends DoubleScalarInterfac
      * @param column the column of the sparse data point in the matrix
      * @param valueSI the SI value of the data point in the matrix
      */
-    public DoubleSparseValue(final int row, final int column, final double valueSI)
+    public FloatSparseValue(final int row, final int column, final float valueSI)
     {
         super();
         this.row = row;
@@ -87,7 +87,7 @@ public class DoubleSparseValue<U extends Unit<U>, S extends DoubleScalarInterfac
     /**
      * @return the SI value of the data point in the matrix
      */
-    public final double getValueSI()
+    public final float getValueSI()
     {
         return this.valueSI;
     }

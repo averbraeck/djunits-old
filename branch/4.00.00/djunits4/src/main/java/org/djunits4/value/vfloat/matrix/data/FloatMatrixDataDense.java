@@ -97,7 +97,7 @@ public class FloatMatrixDataDense extends FloatMatrixData
                 }
             }
         }
-        return new FloatMatrixDataSparse(sparseSI, indices, this.matrixSI.length, this.rows, this.cols);
+        return new FloatMatrixDataSparse(sparseSI, indices, this.rows, this.cols);
     }
 
     /** {@inheritDoc} */

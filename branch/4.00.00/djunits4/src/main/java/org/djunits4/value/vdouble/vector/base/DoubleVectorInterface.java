@@ -71,6 +71,14 @@ public interface DoubleVectorInterface<U extends Unit<U>, S extends Scalar<U, S>
     void setInUnit(int index, double valueInUnit, U valueUnit) throws ValueRuntimeException;
     
     /**
+     * Set the scalar value at the specified position.
+     * @param index int; the index of the value to set
+     * @param value S; the value to set
+     * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
+     */
+    void set(int index, S value) throws ValueRuntimeException;
+    
+    /**
      * Compute the sum of all values of this vector.
      * @return double; the sum of all values of this vector
      */

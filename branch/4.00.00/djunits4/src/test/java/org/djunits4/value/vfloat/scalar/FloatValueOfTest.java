@@ -1,4 +1,4 @@
-package org.djunits4.value.vdouble.scalar;
+package org.djunits4.value.vfloat.scalar;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -10,7 +10,7 @@ import org.djunits4.unit.AreaUnit;
 import org.djunits4.unit.SIUnit;
 import org.djunits4.unit.si.SIDimensions;
 import org.djunits4.unit.util.UnitException;
-import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
+import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
 import org.junit.Test;
 
 /**
@@ -21,7 +21,7 @@ import org.junit.Test;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public class ValueOfTest
+public class FloatValueOfTest
 {
     /**
      * Test legal "of" arguments
@@ -29,11 +29,11 @@ public class ValueOfTest
      * @param value the value to enter
      * @param unitString the unit String to use
      */
-    private void legal(Class<? extends DoubleScalarInterface<?, ?>> scalarClass, double value, String unitString)
+    private void legal(Class<? extends FloatScalarInterface<?, ?>> scalarClass, float value, String unitString)
     {
         try
         {
-            Method ofMethod = scalarClass.getDeclaredMethod("of", double.class, String.class);
+            Method ofMethod = scalarClass.getDeclaredMethod("of", float.class, String.class);
             ofMethod.invoke(null, value, unitString);
         }
         catch (Throwable e)
@@ -47,7 +47,7 @@ public class ValueOfTest
      * @param scalarClass the scalar class
      * @param text the text to parse
      */
-    private void legal(Class<? extends DoubleScalarInterface<?, ?>> scalarClass, String text)
+    private void legal(Class<? extends FloatScalarInterface<?, ?>> scalarClass, String text)
     {
         try
         {
@@ -66,11 +66,11 @@ public class ValueOfTest
      * @param value the value to enter
      * @param unitString the unit String to use
      */
-    private void illegal(Class<? extends DoubleScalarInterface<?, ?>> scalarClass, double value, String unitString)
+    private void illegal(Class<? extends FloatScalarInterface<?, ?>> scalarClass, float value, String unitString)
     {
         try
         {
-            Method ofMethod = scalarClass.getDeclaredMethod("of", double.class, String.class);
+            Method ofMethod = scalarClass.getDeclaredMethod("of", float.class, String.class);
             ofMethod.invoke(null, value, unitString);
             fail("Should not be able to create " + scalarClass.getSimpleName() + " with unit " + unitString);
         }
@@ -89,7 +89,7 @@ public class ValueOfTest
      * @param scalarClass the scalar class
      * @param text the text to parse
      */
-    private void illegal(Class<? extends DoubleScalarInterface<?, ?>> scalarClass, String text)
+    private void illegal(Class<? extends FloatScalarInterface<?, ?>> scalarClass, String text)
     {
         try
         {
@@ -112,47 +112,47 @@ public class ValueOfTest
      * @throws UnitException on error
      */
     @Test
-    public void testSIScalar() throws UnitException
+    public void testFloatSIScalar() throws UnitException
     {
         SIUnit m2 = SIUnit.of(new SIDimensions(0, 0, 0, 2, 0, 0, 0, 0, 0));
-        assertEquals(SIScalar.createSI(10.0, m2), SIScalar.of(10.0, "m2"));
-        assertEquals(SIScalar.createSI(10.0, m2), SIScalar.of(10.0, "m^2"));
-        assertEquals(SIScalar.createSI(10.0, m2), SIScalar.valueOf("10.0 m2"));
+        assertEquals(FloatSIScalar.createSI(10.0f, m2), FloatSIScalar.of(10.0f, "m2"));
+        assertEquals(FloatSIScalar.createSI(10.0f, m2), FloatSIScalar.of(10.0f, "m^2"));
+        assertEquals(FloatSIScalar.createSI(10.0f, m2), FloatSIScalar.valueOf("10.0 m2"));
         // test if the . in 10.0 is not removed...
-        assertEquals(SIScalar.createSI(10.0, m2), SIScalar.valueOf("10.0 m^2"));
+        assertEquals(FloatSIScalar.createSI(10.0f, m2), FloatSIScalar.valueOf("10.0 m^2"));
 
-        legal(SIScalar.class, 10.0, "m2");
-        legal(SIScalar.class, "10.0 m2");
-        illegal(SIScalar.class, 10.0, null);
-        illegal(SIScalar.class, 10.0, "");
-        illegal(SIScalar.class, null);
-        illegal(SIScalar.class, "");
-        illegal(SIScalar.class, "1.0.0 m2");
-        illegal(SIScalar.class, 10.0, "xyz");
-        illegal(SIScalar.class, "10.0 xyz");
+        legal(FloatSIScalar.class, 10.0f, "m2");
+        legal(FloatSIScalar.class, "10.0 m2");
+        illegal(FloatSIScalar.class, 10.0f, null);
+        illegal(FloatSIScalar.class, 10.0f, "");
+        illegal(FloatSIScalar.class, null);
+        illegal(FloatSIScalar.class, "");
+        illegal(FloatSIScalar.class, "1.0.0 m2");
+        illegal(FloatSIScalar.class, 10.0f, "xyz");
+        illegal(FloatSIScalar.class, "10.0 xyz");
     }
 
     /** test the valueOf and the of methods. */
     @Test
-    public void testArea()
+    public void testFloatArea()
     {
-        assertEquals(Area.createSI(10.0), Area.of(10.0, "m2"));
-        assertEquals(Area.createSI(10.0), Area.of(10.0, "m^2"));
-        assertEquals(Area.createSI(10.0), Area.valueOf("10.0 m2"));
-        assertEquals(Area.createSI(10.0), Area.valueOf("10.0 m^2")); // test if the . in 10.0 is not removed...
-        assertEquals(new Area(10.0, AreaUnit.HECTARE), Area.of(10.0, "ha"));
-        assertEquals(new Area(10.0, AreaUnit.HECTARE), Area.valueOf("10.0 ha"));
+        assertEquals(FloatArea.createSI(10.0f), FloatArea.of(10.0f, "m2"));
+        assertEquals(FloatArea.createSI(10.0f), FloatArea.of(10.0f, "m^2"));
+        assertEquals(FloatArea.createSI(10.0f), FloatArea.valueOf("10.0 m2"));
+        assertEquals(FloatArea.createSI(10.0f), FloatArea.valueOf("10.0 m^2")); // test if the . in 10.0 is not removed...
+        assertEquals(new FloatArea(10.0f, AreaUnit.HECTARE), FloatArea.of(10.0f, "ha"));
+        assertEquals(new FloatArea(10.0f, AreaUnit.HECTARE), FloatArea.valueOf("10.0 ha"));
 
-        legal(Area.class, 10.0, "m2");
-        legal(Area.class, "10.0 m2");
-        illegal(Area.class, 10.0, null);
-        illegal(Area.class, 10.0, "");
-        illegal(Area.class, null);
-        illegal(Area.class, "");
-        illegal(Area.class, "1.0.0 m2");
-        illegal(Area.class, 10.0, "xyz");
-        illegal(Area.class, "10.0 xyz");
-        illegal(Area.class, 10.0, "m5s3");
-        illegal(Area.class, "10.0 m5s3");
+        legal(FloatArea.class, 10.0f, "m2");
+        legal(FloatArea.class, "10.0 m2");
+        illegal(FloatArea.class, 10.0f, null);
+        illegal(FloatArea.class, 10.0f, "");
+        illegal(FloatArea.class, null);
+        illegal(FloatArea.class, "");
+        illegal(FloatArea.class, "1.0.0 m2");
+        illegal(FloatArea.class, 10.0f, "xyz");
+        illegal(FloatArea.class, "10.0 xyz");
+        illegal(FloatArea.class, 10.0f, "m5s3");
+        illegal(FloatArea.class, "10.0 m5s3");
     }
 }

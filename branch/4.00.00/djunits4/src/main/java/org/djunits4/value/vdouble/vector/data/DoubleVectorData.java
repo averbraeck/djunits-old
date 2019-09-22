@@ -192,7 +192,7 @@ public abstract class DoubleVectorData implements Serializable
      * @return DoubleVectorData; the DoubleVectorData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
      */
-    public static <S extends AbstractDoubleScalar<?, S>> DoubleVectorData instantiate(final S[] values,
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>> DoubleVectorData instantiate(final S[] values,
             final StorageType storageType) throws ValueRuntimeException
     {
         if (values == null)
@@ -256,8 +256,8 @@ public abstract class DoubleVectorData implements Serializable
      * @return DoubleVectorData; the DoubleVectorData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
      */
-    public static <S extends AbstractDoubleScalar<?, ?>> DoubleVectorData instantiateList(final List<S> valueList,
-            final StorageType storageType) throws ValueRuntimeException
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>> DoubleVectorData instantiateList(
+            final List<S> valueList, final StorageType storageType) throws ValueRuntimeException
     {
         if (valueList == null)
         {

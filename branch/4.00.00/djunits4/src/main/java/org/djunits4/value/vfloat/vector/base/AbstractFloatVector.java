@@ -240,6 +240,36 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     }
 
     /** {@inheritDoc} */
+    @Override
+    public final void setSI(final int index, final float valueSI) throws ValueRuntimeException
+    {
+        checkIndex(index);
+        checkCopyOnWrite();
+        this.data.setSI(index, valueSI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void setInUnit(final int index, final float valueInUnit) throws ValueRuntimeException
+    {
+        setSI(index, (float) ValueUtil.expressAsSIUnit(valueInUnit, getUnit()));        
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void setInUnit(final int index, final float valueInUnit, final U valueUnit) throws ValueRuntimeException
+    {
+        setSI(index, (float) ValueUtil.expressAsSIUnit(valueInUnit, valueUnit));        
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void set(int index, S value) throws ValueRuntimeException
+    {
+        setSI(index, value.si);
+    }
+
+    /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
     public S[] getScalars()

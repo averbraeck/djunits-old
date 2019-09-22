@@ -52,6 +52,23 @@ public final class DoubleVector
     }
 
     /**
+     * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler. The class for the vector is
+     * explicitly provided, e.g., for user-defined vector classes.
+     * @param valuesInUnit double[]; the values in the given unit
+     * @param unit U; the unit in which the values are expressed and displayed
+     * @param storageType StorageType; whether the vector is SPARSE or DENSE
+     * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
+     * @return V; an instantiated DoubleVector with the values expressed in their unit
+     */
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
+            V extends AbstractDoubleVector<U, S, V>> V instantiate(final double[] valuesInUnit, final U unit,
+                    final StorageType storageType, final Class<V> vectorClass)
+    {
+        return instantiateAnonymous(DoubleVectorData.instantiate(valuesInUnit, unit.getScale(), storageType), unit,
+                vectorClass);
+    }
+
+    /**
      * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler.
      * @param valuesSI double[]; the values in the SI unit
      * @param displayUnit U; the unit in which the values will be displayed
@@ -66,6 +83,23 @@ public final class DoubleVector
     }
 
     /**
+     * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler. The class for the vector is
+     * explicitly provided, e.g., for user-defined vector classes.
+     * @param valuesSI double[]; the values in the SI unit
+     * @param displayUnit U; the unit in which the values will be displayed
+     * @param storageType StorageType; whether the vector is SPARSE or DENSE
+     * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
+     * @return V; an instantiated DoubleVector with the values expressed in their unit
+     */
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
+            V extends AbstractDoubleVector<U, S, V>> V instantiateSI(final double[] valuesSI, final U displayUnit,
+                    final StorageType storageType, final Class<V> vectorClass)
+    {
+        return instantiateAnonymous(DoubleVectorData.instantiate(valuesSI, IdentityScale.SCALE, storageType), displayUnit,
+                vectorClass);
+    }
+
+    /**
      * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler.
      * @param values S[]; the values
      * @param displayUnit U; the unit in which the values will be displayed
@@ -77,6 +111,22 @@ public final class DoubleVector
                     final StorageType storageType)
     {
         return instantiateAnonymous(DoubleVectorData.instantiate(values, storageType), displayUnit);
+    }
+
+    /**
+     * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler. The class for the vector is
+     * explicitly provided, e.g., for user-defined vector classes.
+     * @param values S[]; the values
+     * @param displayUnit U; the unit in which the values will be displayed
+     * @param storageType StorageType; whether the vector is SPARSE or DENSE
+     * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
+     * @return V; an instantiated DoubleVector with the values expressed in their unit
+     */
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
+            V extends AbstractDoubleVector<U, S, V>> V instantiate(final S[] values, final U displayUnit,
+                    final StorageType storageType, final Class<V> vectorClass)
+    {
+        return instantiateAnonymous(DoubleVectorData.instantiate(values, storageType), displayUnit, vectorClass);
     }
 
     /**
@@ -95,6 +145,24 @@ public final class DoubleVector
     }
 
     /**
+     * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler. The class for the vector is
+     * explicitly provided, e.g., for user-defined vector classes.
+     * @param valueListInUnit List&lt;Double&gt;; the values in the given unit
+     * @param unit U; the unit in which the values are expressed and displayed
+     * @param storageType StorageType; whether the vector is SPARSE or DENSE
+     * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
+     * @return V; an instantiated DoubleVector with the values expressed in their unit
+     * @throws ValueRuntimeException on vector init error
+     */
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
+            V extends AbstractDoubleVector<U, S, V>> V instantiate(final List<Double> valueListInUnit, final U unit,
+                    final StorageType storageType, final Class<V> vectorClass) throws ValueRuntimeException
+    {
+        return instantiateAnonymous(DoubleVectorData.instantiate(valueListInUnit, unit.getScale(), storageType), unit,
+                vectorClass);
+    }
+
+    /**
      * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler.
      * @param valueListSI List&lt;Double&gt;; the values in the SI unit
      * @param displayUnit U; the unit in which the values will be displayed
@@ -107,6 +175,24 @@ public final class DoubleVector
                     final StorageType storageType) throws ValueRuntimeException
     {
         return instantiateAnonymous(DoubleVectorData.instantiate(valueListSI, IdentityScale.SCALE, storageType), displayUnit);
+    }
+
+    /**
+     * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler. The class for the vector is
+     * explicitly provided, e.g., for user-defined vector classes.
+     * @param valueListSI List&lt;Double&gt;; the values in the SI unit
+     * @param displayUnit U; the unit in which the values will be displayed
+     * @param storageType StorageType; whether the vector is SPARSE or DENSE
+     * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
+     * @return V; an instantiated DoubleVector with the values expressed in their unit
+     * @throws ValueRuntimeException on vector init error
+     */
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
+            V extends AbstractDoubleVector<U, S, V>> V instantiateSI(final List<Double> valueListSI, final U displayUnit,
+                    final StorageType storageType, final Class<V> vectorClass) throws ValueRuntimeException
+    {
+        return instantiateAnonymous(DoubleVectorData.instantiate(valueListSI, IdentityScale.SCALE, storageType), displayUnit,
+                vectorClass);
     }
 
     /**
@@ -124,6 +210,22 @@ public final class DoubleVector
     }
 
     /**
+     * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler. The class for the vector is
+     * explicitly provided, e.g., for user-defined vector classes.
+     * @param valueList List&lt;S&gt;; the value list
+     * @param displayUnit U; the unit in which the values will be displayed
+     * @param storageType StorageType; whether the vector is SPARSE or DENSE
+     * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
+     * @return V; an instantiated DoubleVector with the values expressed in their unit
+     */
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
+            V extends AbstractDoubleVector<U, S, V>> V instantiateList(final List<S> valueList, final U displayUnit,
+                    final StorageType storageType, final Class<V> vectorClass)
+    {
+        return instantiateAnonymous(DoubleVectorData.instantiateList(valueList, storageType), displayUnit, vectorClass);
+    }
+
+    /**
      * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler.
      * @param valueMapInUnit SortedMap&lt;Integer, Double&gt;; the values in the given unit
      * @param length int; the size of the vector
@@ -136,6 +238,24 @@ public final class DoubleVector
                     final int length, final U unit, final StorageType storageType)
     {
         return instantiateAnonymous(DoubleVectorData.instantiate(valueMapInUnit, length, unit.getScale(), storageType), unit);
+    }
+
+    /**
+     * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler. The class for the vector is
+     * explicitly provided, e.g., for user-defined vector classes.
+     * @param valueMapInUnit SortedMap&lt;Integer, Double&gt;; the values in the given unit
+     * @param length int; the size of the vector
+     * @param unit U; the unit in which the values are expressed and displayed
+     * @param storageType StorageType; whether the vector is SPARSE or DENSE
+     * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
+     * @return V; an instantiated DoubleVector with the values expressed in their unit
+     */
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
+            V extends AbstractDoubleVector<U, S, V>> V instantiate(final SortedMap<Integer, Double> valueMapInUnit,
+                    final int length, final U unit, final StorageType storageType, final Class<V> vectorClass)
+    {
+        return instantiateAnonymous(DoubleVectorData.instantiate(valueMapInUnit, length, unit.getScale(), storageType), unit,
+                vectorClass);
     }
 
     /**
@@ -155,6 +275,24 @@ public final class DoubleVector
     }
 
     /**
+     * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler. The class for the vector is
+     * explicitly provided, e.g., for user-defined vector classes.
+     * @param valueMapSI SortedMap&lt;Integer, Double&gt;; the values in the SI unit
+     * @param length int; the size of the vector
+     * @param displayUnit U; the unit in which the values are displayed
+     * @param storageType StorageType; whether the vector is SPARSE or DENSE
+     * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
+     * @return V; an instantiated DoubleVector with the values expressed in their unit
+     */
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
+            V extends AbstractDoubleVector<U, S, V>> V instantiateSI(final SortedMap<Integer, Double> valueMapSI,
+                    final int length, final U displayUnit, final StorageType storageType, final Class<V> vectorClass)
+    {
+        return instantiateAnonymous(DoubleVectorData.instantiate(valueMapSI, length, IdentityScale.SCALE, storageType),
+                displayUnit, vectorClass);
+    }
+
+    /**
      * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler.
      * @param valueMap Map&lt;Integer, S&gt;; the value map
      * @param displayUnit U; the unit in which the values will be displayed
@@ -170,6 +308,23 @@ public final class DoubleVector
     }
 
     /**
+     * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler. The class for the vector is
+     * explicitly provided, e.g., for user-defined vector classes.
+     * @param valueMap Map&lt;Integer, S&gt;; the value map
+     * @param displayUnit U; the unit in which the values will be displayed
+     * @param length int; the size of the vector
+     * @param storageType StorageType; whether the vector is SPARSE or DENSE
+     * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
+     * @return V; an instantiated DoubleVector with the values expressed in their unit
+     */
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
+            V extends AbstractDoubleVector<U, S, V>> V instantiateMap(final SortedMap<Integer, S> valueMap, final int length,
+                    final U displayUnit, final StorageType storageType, final Class<V> vectorClass)
+    {
+        return instantiateAnonymous(DoubleVectorData.instantiateMap(valueMap, length, storageType), displayUnit, vectorClass);
+    }
+
+    /**
      * Instantiate the Mutable DoubleVector based on its unit. Rigid check on types for the compiler.
      * @param values DoubleVectorData; the values
      * @param unit U; the unit in which the values are expressed
@@ -179,6 +334,21 @@ public final class DoubleVector
             V extends AbstractDoubleVector<U, S, V>> V instantiate(final DoubleVectorData values, final U unit)
     {
         return instantiateAnonymous(values, unit);
+    }
+
+    /**
+     * Instantiate the Mutable DoubleVector based on its unit. Rigid check on types for the compiler. The class for the vector
+     * is explicitly provided, e.g., for user-defined vector classes.
+     * @param values DoubleVectorData; the values
+     * @param unit U; the unit in which the values are expressed
+     * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
+     * @return V; an instantiated mutable DoubleVector with the values expressed in their unit
+     */
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
+            V extends AbstractDoubleVector<U, S, V>> V instantiate(final DoubleVectorData values, final U unit,
+                    final Class<V> vectorClass)
+    {
+        return instantiateAnonymous(values, unit, vectorClass);
     }
 
     /**
@@ -192,29 +362,6 @@ public final class DoubleVector
     @SuppressWarnings("unchecked")
     public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
             V extends AbstractDoubleVector<U, S, V>> V instantiateAnonymous(final DoubleVectorData values, final Unit<?> unit)
-    {
-        try
-        {
-            Constructor<? extends AbstractDoubleVector<?, ?, ?>> vectorConstructor = lookupConstructor(unit);
-            return (V) vectorConstructor.newInstance(values, unit);
-        }
-        catch (SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException
-                | InvocationTargetException exception)
-        {
-            throw new UnitRuntimeException("Cannot instantiate AbstractDoubleVector of unit " + unit.toString() + ". Reason: "
-                    + exception.getMessage());
-        }
-    }
-
-    /**
-     * Retrieve the constructor for the DoubleVector with the given (weakly typed) unit.<br>
-     * <b>Note</b> that it is possible to make mistakes with weakly typed units.
-     * @param unit Unit&lt;?&gt;; the unit for which to look up the Vector constructor
-     * @return Constructor&lt;? extends AbstractDoubleVector&lt;?, ?, ?&gt;&gt;; The constructor if it exists
-     * @throws UnitRuntimeException in case the vector constructor could not be found for the unit
-     */
-    @SuppressWarnings("unchecked")
-    protected static Constructor<? extends AbstractDoubleVector<?, ?, ?>> lookupConstructor(final Unit<?> unit)
     {
         try
         {
@@ -239,12 +386,46 @@ public final class DoubleVector
                 vectorConstructor = vectorClass.getDeclaredConstructor(DoubleVectorData.class, unit.getClass());
                 CACHE_DATA.put(unit, vectorConstructor);
             }
-            return vectorConstructor;
+            return (V) vectorConstructor.newInstance(values, unit);
         }
-        catch (ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalArgumentException exception)
+        catch (SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException | ClassNotFoundException | NoSuchMethodException exception)
         {
-            throw new UnitRuntimeException(
-                    "Cannot find vector constructor for unit " + unit.toString() + ". Reason: " + exception.getMessage());
+            throw new UnitRuntimeException("Cannot instantiate AbstractDoubleVector of unit " + unit.toString() + ". Reason: "
+                    + exception.getMessage());
+        }
+    }
+
+    /**
+     * Instantiate the Immutable DoubleVector based on its unit. Loose check for types on the compiler. This allows the unit to
+     * be specified as a Unit&lt;?&gt; type. The class for the vector is explicitly provided, e.g., for user-defined vector
+     * classes.<br>
+     * <b>Note</b> that it is possible to make mistakes with anonymous units.
+     * @param values DoubleVectorData; the values
+     * @param unit Unit&lt;?&gt;; the unit in which the values are expressed
+     * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
+     * @return V; an instantiated DoubleVector with the values expressed in their unit
+     */
+    @SuppressWarnings("unchecked")
+    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
+            V extends AbstractDoubleVector<U, S, V>> V instantiateAnonymous(final DoubleVectorData values, final Unit<?> unit,
+                    final Class<V> vectorClass)
+    {
+        try
+        {
+            Constructor<? extends AbstractDoubleVector<?, ?, ?>> vectorConstructor = CACHE_DATA.get(unit);
+            if (vectorConstructor == null)
+            {
+                vectorConstructor = vectorClass.getDeclaredConstructor(DoubleVectorData.class, unit.getClass());
+                CACHE_DATA.put(unit, vectorConstructor);
+            }
+            return (V) vectorConstructor.newInstance(values, unit);
+        }
+        catch (SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException | NoSuchMethodException exception)
+        {
+            throw new UnitRuntimeException("Cannot instantiate AbstractDoubleVector of unit " + unit.toString() + ". Reason: "
+                    + exception.getMessage());
         }
     }
 }

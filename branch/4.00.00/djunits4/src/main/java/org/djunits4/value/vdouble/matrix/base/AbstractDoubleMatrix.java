@@ -191,6 +191,36 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
         checkIndex(row, column);
         return ValueUtil.expressAsUnit(this.data.getSI(row, column), targetUnit);
     }
+    
+    /** {@inheritDoc} */
+    @Override
+    public void setSI(final int row, final int column, final double valueSI) throws ValueRuntimeException
+    {
+        checkIndex(row, column);
+        checkCopyOnWrite();
+        this.data.setSI(row, column, valueSI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void setInUnit(final int row, final int column, final double valueInUnit) throws ValueRuntimeException
+    {
+        setSI(row, column, ValueUtil.expressAsSIUnit(valueInUnit, getUnit()));
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void setInUnit(final int row, final int column, final double valueInUnit, final U valueUnit) throws ValueRuntimeException
+    {
+        setSI(row, column, ValueUtil.expressAsSIUnit(valueInUnit, valueUnit));
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void set(final int row, final int column, final S value) throws ValueRuntimeException
+    {
+        setSI(row, column, value.si);
+    }
 
     /** {@inheritDoc} */
     @Override
@@ -296,6 +326,7 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
     @Override
     public final double zSum()
     {
+        // XXX: in SI units... Not in the display unit...
         return this.data.zSum();
     }
 
