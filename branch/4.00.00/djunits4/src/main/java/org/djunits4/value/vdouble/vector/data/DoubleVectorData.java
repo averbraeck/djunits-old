@@ -160,7 +160,8 @@ public abstract class DoubleVectorData implements Serializable
                     }
                     else
                     {
-                        nonZeroCount = (int) values.stream().mapToDouble(d -> scale.toStandardUnit(d)).count();
+                        nonZeroCount = values.size()
+                                - (int) values.parallelStream().filter(d -> scale.toStandardUnit(d) == 0d).count();
                     }
                 }
                 int[] indices = new int[nonZeroCount];
@@ -328,7 +329,16 @@ public abstract class DoubleVectorData implements Serializable
             case DENSE:
             {
                 double[] valuesSI = new double[length];
-                values.entrySet().parallelStream().forEach(entry -> valuesSI[entry.getKey()] = entry.getValue());
+                if (scale.isBaseSIScale())
+                {
+                    values.entrySet().parallelStream().forEach(entry -> valuesSI[entry.getKey()] = entry.getValue());
+                }
+                else
+                {
+                    Arrays.fill(valuesSI, scale.toStandardUnit(0.0));
+                    values.entrySet().parallelStream()
+                            .forEach(entry -> valuesSI[entry.getKey()] = scale.toStandardUnit(entry.getValue()));
+                }
                 return new DoubleVectorDataDense(valuesSI);
             }
 
@@ -341,13 +351,15 @@ public abstract class DoubleVectorData implements Serializable
                 }
                 else
                 {
-                    nonZeroCount = (int) values.keySet().parallelStream().filter(d -> scale.toStandardUnit(d) != 0d).count();
+                    // Much harder, and the result is unlikely to be very sparse
+                    nonZeroCount =
+                            length - (int) values.values().parallelStream().filter(d -> scale.toStandardUnit(d) == 0d).count();
                 }
                 int[] indices = new int[nonZeroCount];
                 double[] valuesSI = new double[nonZeroCount];
-                int index = 0;
                 if (scale.isBaseSIScale())
                 {
+                    int index = 0;
                     for (Integer key : values.keySet())
                     {
                         double value = values.get(key);
@@ -361,8 +373,16 @@ public abstract class DoubleVectorData implements Serializable
                 }
                 else
                 {
+                    Arrays.fill(valuesSI, scale.toStandardUnit(0.0));
+                    int index = 0;
+                    int lastKey = 0;
                     for (Integer key : values.keySet())
                     {
+                        for (int i = lastKey; i < key; i++)
+                        {
+                            indices[index++] = i;
+                        }
+                        lastKey = key;
                         double value = scale.toStandardUnit(values.get(key));
                         if (0.0 != value)
                         {
@@ -370,6 +390,11 @@ public abstract class DoubleVectorData implements Serializable
                             valuesSI[index] = value;
                             index++;
                         }
+                        lastKey = key + 1;
+                    }
+                    while (index < indices.length)
+                    {
+                        indices[index++] = lastKey++;
                     }
                 }
                 return new DoubleVectorDataSparse(valuesSI, indices, length);
