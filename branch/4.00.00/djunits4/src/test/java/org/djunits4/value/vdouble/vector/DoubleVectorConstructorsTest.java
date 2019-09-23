@@ -23,6 +23,7 @@ import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.base.Scalar;
 import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vdouble.scalar.AbsoluteTemperature;
+import org.djunits4.value.vdouble.scalar.SIScalar;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalar;
 import org.djunits4.value.vdouble.vector.base.DoubleVector;
 import org.djunits4.value.vdouble.vector.base.DoubleVectorInterface;
@@ -419,6 +420,7 @@ public class DoubleVectorConstructorsTest
                 assertEquals("StorageType must match", storageType, siv.getStorageType());
                 assertEquals("Cardinality", cardinality, siv.cardinality());
                 assertEquals("zSum", zSum, siv.zSum(), 0.001);
+                assertEquals("getScalarClass return SIScalar", SIScalar.class, siv.getScalarClass());
                 // String scalarClassName = "org.djunits4.value.vdouble.scalar." + className;
                 // Class<?> scalarClass = Class.forName(scalarClassName);
                 // assertEquals("getScalarClass", scalarClass, siv.getScalarClass());
@@ -687,6 +689,15 @@ public class DoubleVectorConstructorsTest
         try
         {
             SIVector.instantiate((double[]) null, SIUnit.of(unitBase.getSiDimensions()), StorageType.DENSE);
+            fail("null pointer should have thrown an exception");
+        }
+        catch (ValueRuntimeException vre)
+        {
+            // Ignore expected exception
+        }
+        try
+        {
+            SIVector.instantiate((List<Double>) null, SIUnit.of(unitBase.getSiDimensions()), StorageType.DENSE);
             fail("null pointer should have thrown an exception");
         }
         catch (ValueRuntimeException vre)
