@@ -9,6 +9,7 @@ import org.djunits4.value.base.Matrix;
 import org.djunits4.value.vfloat.matrix.FloatSIMatrix;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
+import org.djunits4.value.vfloat.scalar.base.FloatScalar;
 import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorRel;
 
 /**
@@ -39,6 +40,17 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
     protected AbstractFloatMatrixRel(final FloatMatrixData data, final U unit)
     {
         super(data.copy(), unit);
+    }
+
+    /**
+     * Compute the sum of all SI values of this matrix.
+     * @return S; the sum of all values of this matrix with the same display unit as this matrix
+     */
+    public final S zSum()
+    {
+        S result = FloatScalar.instantiate(this.data.zSum(), getUnit().getStandardUnit());
+        result.setDisplayUnit(getUnit());
+        return result;
     }
 
     /** {@inheritDoc} */

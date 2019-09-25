@@ -9,6 +9,7 @@ import org.djunits4.value.base.Matrix;
 import org.djunits4.value.vdouble.matrix.SIMatrix;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits4.value.vdouble.scalar.base.DoubleScalar;
 import org.djunits4.value.vdouble.vector.base.AbstractDoubleVectorRel;
 
 /**
@@ -24,9 +25,8 @@ import org.djunits4.value.vdouble.vector.base.AbstractDoubleVectorRel;
  * @param <RM> the relative matrix type with this unit
  */
 public abstract class AbstractDoubleMatrixRel<U extends Unit<U>, S extends AbstractDoubleScalarRel<U, S>,
-        RV extends AbstractDoubleVectorRel<U, S, RV>,
-        RM extends AbstractDoubleMatrixRel<U, S, RV, RM>> extends AbstractDoubleMatrix<U, S, RV, RM>
-        implements Matrix.Rel<U, S, RV, RM>, Relative
+        RV extends AbstractDoubleVectorRel<U, S, RV>, RM extends AbstractDoubleMatrixRel<U, S, RV, RM>>
+        extends AbstractDoubleMatrix<U, S, RV, RM> implements Matrix.Rel<U, S, RV, RM>, Relative
 {
     /** */
     private static final long serialVersionUID = 20190908L;
@@ -39,6 +39,17 @@ public abstract class AbstractDoubleMatrixRel<U extends Unit<U>, S extends Abstr
     protected AbstractDoubleMatrixRel(final DoubleMatrixData data, final U unit)
     {
         super(data.copy(), unit);
+    }
+
+    /**
+     * Compute the sum of all SI values of this matrix.
+     * @return S; the sum of all SI values of this matrix with the same display unit as this matrix
+     */
+    public final S zSum()
+    {
+        S result = DoubleScalar.instantiate(this.data.zSum(), getUnit().getStandardUnit());
+        result.setDisplayUnit(getUnit());
+        return result;
     }
 
     /** {@inheritDoc} */

@@ -13,18 +13,21 @@ import java.util.TreeMap;
 import org.djunits4.unit.AbsoluteTemperatureUnit;
 import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.SIUnit;
+import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.Unit;
 import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.base.UnitTypes;
 import org.djunits4.unit.util.UNITS;
 import org.djunits4.unit.util.UnitException;
 import org.djunits4.value.CLASSNAMES;
+import org.djunits4.value.Relative;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.base.Scalar;
 import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vdouble.scalar.AbsoluteTemperature;
 import org.djunits4.value.vdouble.scalar.SIScalar;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalar;
+import org.djunits4.value.vdouble.vector.base.AbstractDoubleVectorRel;
 import org.djunits4.value.vdouble.vector.base.DoubleVector;
 import org.djunits4.value.vdouble.vector.base.DoubleVectorInterface;
 import org.junit.Test;
@@ -92,7 +95,10 @@ public class DoubleVectorConstructorsTest
                 assertEquals("Unit must match", standardUnit, doubleVector.getUnit());
                 assertEquals("StorageType must match", storageType, doubleVector.getStorageType());
                 assertEquals("Cardinality", cardinality, doubleVector.cardinality());
-                assertEquals("zSum", zSum, doubleVector.zSum(), 0.001);
+                if (doubleVector instanceof Relative)
+                {
+                    assertEquals("zSum", zSum, ((AbstractDoubleVectorRel<?, ?, ?>) doubleVector).zSum().getSI(), 0.001);
+                }
                 String scalarClassName = "org.djunits4.value.vdouble.scalar." + className;
                 Class<?> scalarClass = Class.forName(scalarClassName);
                 assertEquals("getScalarClass", scalarClass, doubleVector.getScalarClass());
@@ -252,7 +258,6 @@ public class DoubleVectorConstructorsTest
         double[] testValues = new double[] { 0, 123.456d, 0, -273.15, -273.15, 0, -273.15, 234.567d, 0, 0 };
         int cardinality = 0;
         int offsetCardinality = testValues.length;
-        double zSum = 0;
         AbsoluteTemperature[] at = new AbsoluteTemperature[testValues.length];
         List<AbsoluteTemperature> al = new ArrayList<>();
         List<Double> adl = new ArrayList<>();
@@ -268,7 +273,6 @@ public class DoubleVectorConstructorsTest
             if (0.0 != value.si)
             {
                 cardinality++;
-                zSum += value.si;
                 map.put(i, value);
                 mapd.put(i, value.si);
                 notQuiteSparseMap.put(i, value);
@@ -293,115 +297,95 @@ public class DoubleVectorConstructorsTest
                 compareValuesWithOffset(offset, testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", offset == 0 ? cardinality : offsetCardinality, atv.cardinality());
-                assertEquals("zSum", zSum + testValues.length * offset, atv.zSum(), 0.001);
                 atv = DoubleVector.instantiate(testValues, temperatureUnit, storageType, AbsoluteTemperatureVector.class);
                 compareValuesWithOffset(offset, testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", offset == 0 ? cardinality : offsetCardinality, atv.cardinality());
-                assertEquals("zSum", zSum + testValues.length * offset, atv.zSum(), 0.001);
 
                 atv = DoubleVector.instantiateSI(testValues, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
-                assertEquals("zSum", zSum, atv.zSum(), 0.001);
                 atv = DoubleVector.instantiateSI(testValues, temperatureUnit, storageType, AbsoluteTemperatureVector.class);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
-                assertEquals("zSum", zSum, atv.zSum(), 0.001);
 
                 atv = DoubleVector.instantiateSI(adl, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
-                assertEquals("zSum", zSum, atv.zSum(), 0.001);
                 atv = DoubleVector.instantiateSI(adl, temperatureUnit, storageType, AbsoluteTemperatureVector.class);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
-                assertEquals("zSum", zSum, atv.zSum(), 0.001);
 
                 atv = DoubleVector.instantiate(adl, temperatureUnit, storageType);
                 compareValuesWithOffset(offset, testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", offset == 0 ? cardinality : offsetCardinality, atv.cardinality());
-                assertEquals("zSum", zSum + testValues.length * offset, atv.zSum(), 0.001);
                 atv = DoubleVector.instantiate(adl, temperatureUnit, storageType, AbsoluteTemperatureVector.class);
                 compareValuesWithOffset(offset, testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", offset == 0 ? cardinality : offsetCardinality, atv.cardinality());
-                assertEquals("zSum", zSum + testValues.length * offset, atv.zSum(), 0.001);
 
                 atv = DoubleVector.instantiate(at, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
-                assertEquals("zSum", zSum, atv.zSum(), 0.001);
                 atv = DoubleVector.instantiate(at, temperatureUnit, storageType, AbsoluteTemperatureVector.class);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
-                assertEquals("zSum", zSum, atv.zSum(), 0.001);
 
                 atv = DoubleVector.instantiateList(al, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
-                assertEquals("zSum", zSum, atv.zSum(), 0.001);
                 atv = DoubleVector.instantiateList(al, temperatureUnit, storageType, AbsoluteTemperatureVector.class);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
-                assertEquals("zSum", zSum, atv.zSum(), 0.001);
 
                 atv = DoubleVector.instantiateMap(map, testValues.length, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
-                assertEquals("zSum", zSum, atv.zSum(), 0.001);
                 atv = DoubleVector.instantiateMap(map, testValues.length, temperatureUnit, storageType,
                         AbsoluteTemperatureVector.class);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
-                assertEquals("zSum", zSum, atv.zSum(), 0.001);
 
                 atv = DoubleVector.instantiateMap(notQuiteSparseMap, testValues.length, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
-                assertEquals("zSum", zSum, atv.zSum(), 0.001);
                 atv = DoubleVector.instantiateMap(notQuiteSparseMap, testValues.length, temperatureUnit, storageType,
                         AbsoluteTemperatureVector.class);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
-                assertEquals("zSum", zSum, atv.zSum(), 0.001);
 
                 atv = DoubleVector.instantiate(mapd, testValues.length, temperatureUnit, storageType);
                 compareValuesWithOffset(offset, testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", offset == 0 ? cardinality : offsetCardinality, atv.cardinality());
-                assertEquals("zSum", zSum + testValues.length * offset, atv.zSum(), 0.001);
                 atv = DoubleVector.instantiate(mapd, testValues.length, temperatureUnit, storageType,
                         AbsoluteTemperatureVector.class);
                 compareValuesWithOffset(offset, testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", offset == 0 ? cardinality : offsetCardinality, atv.cardinality());
-                assertEquals("zSum", zSum + testValues.length * offset, atv.zSum(), 0.001);
-                
+
                 atv = DoubleVector.instantiateSI(mapd, testValues.length, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
-                assertEquals("zSum", zSum, atv.zSum(), 0.001);
                 atv = DoubleVector.instantiateSI(mapd, testValues.length, temperatureUnit, storageType,
                         AbsoluteTemperatureVector.class);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
-                assertEquals("zSum", zSum, atv.zSum(), 0.001);
 
                 atv = DoubleVector.instantiate(testValues, temperatureUnit, storageType);
                 try
@@ -520,7 +504,7 @@ public class DoubleVectorConstructorsTest
                 // assertEquals("Underlying standardUnit must match", standardUnit, siv.getUnit());
                 assertEquals("StorageType must match", storageType, siv.getStorageType());
                 assertEquals("Cardinality", cardinality, siv.cardinality());
-                assertEquals("zSum", zSum, siv.zSum(), 0.001);
+                assertEquals("zSum", zSum, siv.zSum().getSI(), 0.001);
                 assertEquals("getScalarClass return SIScalar", SIScalar.class, siv.getScalarClass());
                 // String scalarClassName = "org.djunits4.value.vdouble.scalar." + className;
                 // Class<?> scalarClass = Class.forName(scalarClassName);
@@ -628,7 +612,7 @@ public class DoubleVectorConstructorsTest
     @Test
     public void exceptionsTest() throws ValueRuntimeException, UnitException
     {
-        double[] testValues = new double[] { 0, 123.456d, 0, 0, 234.567d, 0, 0 };
+        double[] testValues = new double[] { 0, 123.456d, 0, -273.15, -273.15, 0, -273.15, 234.567d, 0, 0 };
         AbsoluteTemperature[] at = new AbsoluteTemperature[testValues.length];
         List<AbsoluteTemperature> al = new ArrayList<>();
         SortedMap<Integer, AbsoluteTemperature> map = new TreeMap<>();
@@ -861,6 +845,37 @@ public class DoubleVectorConstructorsTest
                 compareValues(testValues, atv.getValuesSI());
                 atv = DoubleVector.instantiateMap(map, testValues.length, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
+            }
+        }
+    }
+
+    /**
+     * Test the plus and similar methods.
+     */
+    @Test
+    public void operationTest()
+    {
+        double[] testValues = new double[] { 0, 123.456d, 0, -273.15, -273.15, 0, -273.15, 234.567d, 0, 0 };
+        double[] testValues2 = new double[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        for (AbsoluteTemperatureUnit temperatureUnit : new AbsoluteTemperatureUnit[] { AbsoluteTemperatureUnit.KELVIN,
+                AbsoluteTemperatureUnit.DEGREE_CELSIUS, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT })
+        {
+            for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+            {
+                AbsoluteTemperatureVector atv = DoubleVector.instantiate(testValues, temperatureUnit, storageType);
+                for (TemperatureUnit relativeTemperatureUnit : new TemperatureUnit[] { TemperatureUnit.KELVIN,
+                        TemperatureUnit.DEGREE_CELSIUS, TemperatureUnit.DEGREE_FAHRENHEIT })
+                {
+                    for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+                    {
+                        TemperatureVector rtv = DoubleVector.instantiate(testValues2, relativeTemperatureUnit, storageType2);
+                        AbsoluteTemperatureVector sumtv = atv.plus(rtv);
+                        System.out.println("atv:" + atv);
+                        System.out.println("rtv:" + rtv);
+                        System.out.println("sum:" + sumtv);
+                        System.out.println("");
+                    }
+                }
             }
         }
     }

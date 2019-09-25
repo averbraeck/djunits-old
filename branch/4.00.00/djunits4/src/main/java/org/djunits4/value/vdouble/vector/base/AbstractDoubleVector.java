@@ -284,13 +284,6 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
 
     /** {@inheritDoc} */
     @Override
-    public final double zSum()
-    {
-        return this.data.zSum();
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final int cardinality()
     {
         return this.data.cardinality();

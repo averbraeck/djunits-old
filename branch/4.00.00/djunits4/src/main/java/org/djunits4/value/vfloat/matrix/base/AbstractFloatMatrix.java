@@ -324,13 +324,6 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
 
     /** {@inheritDoc} */
     @Override
-    public final float zSum()
-    {
-        return this.data.zSum();
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final int cardinality()
     {
         return this.data.cardinality();

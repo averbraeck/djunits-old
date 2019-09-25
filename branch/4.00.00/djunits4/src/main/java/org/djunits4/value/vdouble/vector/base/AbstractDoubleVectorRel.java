@@ -7,6 +7,7 @@ import org.djunits4.value.Relative;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.base.Vector;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits4.value.vdouble.scalar.base.DoubleScalar;
 import org.djunits4.value.vdouble.vector.SIVector;
 import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
@@ -36,6 +37,17 @@ public abstract class AbstractDoubleVectorRel<U extends Unit<U>, S extends Abstr
     protected AbstractDoubleVectorRel(final DoubleVectorData data, final U unit)
     {
         super(data.copy(), unit);
+    }
+
+    /**
+     * Compute the sum of all SI values of this vector.
+     * @return S; the sum of all SI values of this vector with the same display unit as this vector
+     */
+    public final S zSum()
+    {
+        S result = DoubleScalar.instantiate(this.data.zSum(), getUnit().getStandardUnit());
+        result.setDisplayUnit(getUnit());
+        return result;
     }
 
     /** {@inheritDoc} */

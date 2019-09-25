@@ -133,12 +133,6 @@ public interface FloatMatrixInterface<U extends Unit<U>, S extends Scalar<U, S>,
     float[][] getValuesInUnit(U targetUnit);
 
     /**
-     * Compute the sum of all values of this matrix.
-     * @return float; the sum of all values of this matrix
-     */
-    float zSum();
-
-    /**
      * Compute the determinant of the matrix.
      * @return float; the determinant of the matrix
      * @throws ValueRuntimeException when matrix is neither sparse, nor dense, or not square

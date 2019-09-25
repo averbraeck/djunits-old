@@ -79,12 +79,6 @@ public interface FloatVectorInterface<U extends Unit<U>, S extends Scalar<U, S>,
     void set(int index, S value) throws ValueRuntimeException;
     
     /**
-     * Compute the sum of all values of this vector.
-     * @return float; the sum of all values of this vector
-     */
-    float zSum();
-
-    /**
      * Create a float[] array filled with the values in the standard SI unit.
      * @return float[]; array of values in the standard SI unit
      */

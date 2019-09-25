@@ -7,6 +7,7 @@ import org.djunits4.value.Relative;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.base.Vector;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
+import org.djunits4.value.vfloat.scalar.base.FloatScalar;
 import org.djunits4.value.vfloat.vector.FloatSIVector;
 import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
@@ -36,6 +37,17 @@ public abstract class AbstractFloatVectorRel<U extends Unit<U>, S extends Abstra
     protected AbstractFloatVectorRel(final FloatVectorData data, final U unit)
     {
         super(data.copy(), unit);
+    }
+
+    /**
+     * Compute the sum of all SI values of this vector.
+     * @return S; the sum of all values of this vector with the same display unit as this vector
+     */
+    public final S zSum()
+    {
+        S result = FloatScalar.instantiate(this.data.zSum(), getUnit().getStandardUnit());
+        result.setDisplayUnit(getUnit());
+        return result;
     }
 
     /** {@inheritDoc} */

@@ -63,7 +63,6 @@ public class FloatVectorConstructorsTest
             Unit standardUnit = unitBase.getStandardUnit();
             float[] testValues = new float[] {0, 123.456f, 0, 0, 234.567f, 0, 0};
             int cardinality = 0;
-            float zSum = 0;
             List<Float> list = new ArrayList<>();
             SortedMap<Integer, Float> map = new TreeMap<>();
             SortedMap<Integer, Float> notQuiteSparseMap = new TreeMap<>();
@@ -73,7 +72,6 @@ public class FloatVectorConstructorsTest
                 if (0.0 != value)
                 {
                     cardinality++;
-                    zSum += value;
                     map.put(index, value);
                     notQuiteSparseMap.put(index, value);
                 }
@@ -91,7 +89,6 @@ public class FloatVectorConstructorsTest
                 assertEquals("Unit must match", standardUnit, floatVector.getUnit());
                 assertEquals("StorageType must match", storageType, floatVector.getStorageType());
                 assertEquals("Cardinality", cardinality, floatVector.cardinality());
-                assertEquals("zSum", zSum, floatVector.zSum(), 0.001);
                 String scalarClassName = "org.djunits4.value.vfloat.scalar.Float" + className;
                 Class<?> scalarClass = Class.forName(scalarClassName);
                 assertEquals("getScalarClass", scalarClass, floatVector.getScalarClass());
@@ -250,7 +247,6 @@ public class FloatVectorConstructorsTest
     {
         float[] testValues = new float[] {0, 123.456f, 0, 0, 234.567f, 0, 0};
         int cardinality = 0;
-        float zSum = 0;
         FloatAbsoluteTemperature[] at = new FloatAbsoluteTemperature[testValues.length];
         List<FloatAbsoluteTemperature> al = new ArrayList<>();
         SortedMap<Integer, FloatAbsoluteTemperature> map = new TreeMap<>();
@@ -263,7 +259,6 @@ public class FloatVectorConstructorsTest
             if (0.0 != value.si)
             {
                 cardinality++;
-                zSum += value.si;
                 map.put(i, value);
                 notQuiteSparseMap.put(i, value);
             }
@@ -282,27 +277,22 @@ public class FloatVectorConstructorsTest
                 compareValuesWithOffset(offset, testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", offset == 0 ? cardinality : testValues.length, atv.cardinality());
-                assertEquals("zSum", zSum + testValues.length * offset, atv.zSum(), 0.001);
                 atv = FloatVector.instantiate(at, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
-                assertEquals("zSum", zSum, atv.zSum(), 0.001);
                 atv = FloatVector.instantiateList(al, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
-                assertEquals("zSum", zSum, atv.zSum(), 0.001);
                 atv = FloatVector.instantiateMap(map, testValues.length, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
-                assertEquals("zSum", zSum, atv.zSum(), 0.001);
                 atv = FloatVector.instantiateMap(notQuiteSparseMap, testValues.length, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
-                assertEquals("zSum", zSum, atv.zSum(), 0.001);
                 try
                 {
                     atv.setInUnit(0, 0, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT);
@@ -396,7 +386,6 @@ public class FloatVectorConstructorsTest
             Unit standardUnit = unitBase.getStandardUnit();
             float[] testValues = new float[] {0, 123.456f, 0, 0, 234.567f, 0};
             int cardinality = 0;
-            float zSum = 0;
             List<Float> list = new ArrayList<>();
             SortedMap<Integer, Float> map = new TreeMap<>();
             for (int index = 0; index < testValues.length; index++)
@@ -405,7 +394,6 @@ public class FloatVectorConstructorsTest
                 if (0.0 != value)
                 {
                     cardinality++;
-                    zSum += value;
                     map.put(index, value);
                 }
                 list.add(value);
@@ -418,7 +406,6 @@ public class FloatVectorConstructorsTest
                 // assertEquals("Underlying standardUnit must match", standardUnit, siv.getUnit());
                 assertEquals("StorageType must match", storageType, siv.getStorageType());
                 assertEquals("Cardinality", cardinality, siv.cardinality());
-                assertEquals("zSum", zSum, siv.zSum(), 0.001);
                 // String scalarClassName = "org.djunits4.value.vfloat.scalar." + className;
                 // Class<?> scalarClass = Class.forName(scalarClassName);
                 // assertEquals("getScalarClass", scalarClass, siv.getScalarClass());

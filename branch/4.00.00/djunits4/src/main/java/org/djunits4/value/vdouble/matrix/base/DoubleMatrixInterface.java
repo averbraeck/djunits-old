@@ -3,7 +3,7 @@ package org.djunits4.value.vdouble.matrix.base;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.base.Matrix;
-import org.djunits4.value.base.Scalar;
+import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
 import org.djunits4.value.vdouble.vector.base.DoubleVectorInterface;
 
 /**
@@ -19,8 +19,8 @@ import org.djunits4.value.vdouble.vector.base.DoubleVectorInterface;
  * @param <V> the vector type belonging to the matrix type
  * @param <M> the generic matrix type
  */
-public interface DoubleMatrixInterface<U extends Unit<U>, S extends Scalar<U, S>, V extends DoubleVectorInterface<U, S, V>,
-        M extends DoubleMatrixInterface<U, S, V, M>> extends Matrix<U, S, V, M>
+public interface DoubleMatrixInterface<U extends Unit<U>, S extends DoubleScalarInterface<U, S>,
+        V extends DoubleVectorInterface<U, S, V>, M extends DoubleMatrixInterface<U, S, V, M>> extends Matrix<U, S, V, M>
 {
     /**
      * Retrieve the value stored at a specified row and column in the standard SI unit.
@@ -61,7 +61,7 @@ public interface DoubleMatrixInterface<U extends Unit<U>, S extends Scalar<U, S>
      * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
      */
     void setSI(int row, int column, double valueSI) throws ValueRuntimeException;
-    
+
     /**
      * Set the value, specified in the (current) display unit, at the specified position.
      * @param row int; row of the value to set
@@ -70,7 +70,7 @@ public interface DoubleMatrixInterface<U extends Unit<U>, S extends Scalar<U, S>
      * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
      */
     void setInUnit(int row, int column, double valueInUnit) throws ValueRuntimeException;
-    
+
     /**
      * Set the value, specified in the <code>valueUnit</code>, at the specified position.
      * @param row int; row of the value to set
@@ -80,7 +80,7 @@ public interface DoubleMatrixInterface<U extends Unit<U>, S extends Scalar<U, S>
      * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
      */
     void setInUnit(int row, int column, double valueInUnit, U valueUnit) throws ValueRuntimeException;
-    
+
     /**
      * Set the scalar value at the specified position.
      * @param row int; row of the value to set
@@ -89,7 +89,7 @@ public interface DoubleMatrixInterface<U extends Unit<U>, S extends Scalar<U, S>
      * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
      */
     void set(int row, int column, S value) throws ValueRuntimeException;
- 
+
     /**
      * Retrieve a row from the matrix as an array of double.
      * @param row int; row of the values to retrieve
@@ -131,12 +131,6 @@ public interface DoubleMatrixInterface<U extends Unit<U>, S extends Scalar<U, S>
      * @return double[][]; the values converted into the specified unit
      */
     double[][] getValuesInUnit(U targetUnit);
-
-    /**
-     * Compute the sum of all values of this matrix.
-     * @return double; the sum of all values of this matrix
-     */
-    double zSum();
 
     /**
      * Compute the determinant of the matrix.

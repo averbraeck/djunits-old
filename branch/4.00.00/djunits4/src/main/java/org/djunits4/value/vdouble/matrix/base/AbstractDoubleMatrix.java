@@ -324,14 +324,6 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
 
     /** {@inheritDoc} */
     @Override
-    public final double zSum()
-    {
-        // XXX: in SI units... Not in the display unit...
-        return this.data.zSum();
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final int cardinality()
     {
         return this.data.cardinality();

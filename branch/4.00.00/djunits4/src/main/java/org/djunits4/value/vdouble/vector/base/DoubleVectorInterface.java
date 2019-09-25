@@ -2,8 +2,8 @@ package org.djunits4.value.vdouble.vector.base;
 
 import org.djunits4.unit.Unit;
 import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.base.Scalar;
 import org.djunits4.value.base.Vector;
+import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
 
 /**
  * Interface for the DoubleVector classes, specifically defining the methods that deal with double values.
@@ -17,8 +17,8 @@ import org.djunits4.value.base.Vector;
  * @param <S> the generic scalar type belonging to U
  * @param <V> the generic vector type
  */
-public interface DoubleVectorInterface<U extends Unit<U>, S extends Scalar<U, S>, V extends DoubleVectorInterface<U, S, V>>
-        extends Vector<U, S, V>
+public interface DoubleVectorInterface<U extends Unit<U>, S extends DoubleScalarInterface<U, S>,
+        V extends DoubleVectorInterface<U, S, V>> extends Vector<U, S, V>
 {
     /**
      * Retrieve the value stored at a specified position in the standard SI unit.
@@ -52,7 +52,7 @@ public interface DoubleVectorInterface<U extends Unit<U>, S extends Scalar<U, S>
      * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
      */
     void setSI(int index, double valueSI) throws ValueRuntimeException;
-    
+
     /**
      * Set the value, specified in the (current) display unit, at the specified position.
      * @param index int; the index of the value to set
@@ -60,7 +60,7 @@ public interface DoubleVectorInterface<U extends Unit<U>, S extends Scalar<U, S>
      * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
      */
     void setInUnit(int index, double valueInUnit) throws ValueRuntimeException;
-    
+
     /**
      * Set the value, specified in the <code>valueUnit</code>, at the specified position.
      * @param index int; the index of the value to set
@@ -69,7 +69,7 @@ public interface DoubleVectorInterface<U extends Unit<U>, S extends Scalar<U, S>
      * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
      */
     void setInUnit(int index, double valueInUnit, U valueUnit) throws ValueRuntimeException;
-    
+
     /**
      * Set the scalar value at the specified position.
      * @param index int; the index of the value to set
@@ -77,12 +77,6 @@ public interface DoubleVectorInterface<U extends Unit<U>, S extends Scalar<U, S>
      * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
      */
     void set(int index, S value) throws ValueRuntimeException;
-    
-    /**
-     * Compute the sum of all values of this vector.
-     * @return double; the sum of all values of this vector
-     */
-    double zSum();
 
     /**
      * Create a double[] array filled with the values in the standard SI unit.
