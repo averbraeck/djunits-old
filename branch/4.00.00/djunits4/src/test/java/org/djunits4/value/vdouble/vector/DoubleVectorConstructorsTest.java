@@ -19,6 +19,8 @@ import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.Unit;
 import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.base.UnitTypes;
+import org.djunits4.unit.scale.GradeScale;
+import org.djunits4.unit.scale.Scale;
 import org.djunits4.unit.util.UNITS;
 import org.djunits4.unit.util.UnitException;
 import org.djunits4.unit.util.UnitRuntimeException;
@@ -95,7 +97,7 @@ public class DoubleVectorConstructorsTest
             {
                 DoubleVectorInterface<?, ?, ?> doubleVector = DoubleVector.instantiate(testValues, standardUnit, storageType);
                 // System.out.println(doubleVector);
-                compareValues(testValues, doubleVector.getValuesSI());
+                compareValuesWithScale(standardUnit.getScale(), testValues, doubleVector.getValuesSI());
                 assertEquals("Unit must match", standardUnit, doubleVector.getUnit());
                 assertEquals("StorageType must match", storageType, doubleVector.getStorageType());
                 assertEquals("Cardinality", cardinality, doubleVector.cardinality());
@@ -107,7 +109,7 @@ public class DoubleVectorConstructorsTest
                 Class<?> scalarClass = Class.forName(scalarClassName);
                 assertEquals("getScalarClass", scalarClass, doubleVector.getScalarClass());
                 doubleVector = DoubleVector.instantiateSI(testValues, standardUnit, storageType);
-                compareValues(testValues, doubleVector.getValuesSI());
+                compareValuesWithScale(standardUnit.getScale(), testValues, doubleVector.getValuesSI());
                 assertEquals("Unit must match", standardUnit, doubleVector.getUnit());
                 assertEquals("StorageType must match", storageType, doubleVector.getStorageType());
                 try
@@ -232,11 +234,11 @@ public class DoubleVectorConstructorsTest
                 // standardUnit);
                 doubleVector = DoubleVector.instantiate(list, standardUnit, storageType);
                 assertEquals("Unit must match", standardUnit, doubleVector.getUnit());
-                compareValues(testValues, doubleVector.getValuesSI());
+                compareValuesWithScale(standardUnit.getScale(), testValues, doubleVector.getValuesSI());
                 doubleVector = DoubleVector.instantiate(map, testValues.length, standardUnit, storageType);
-                compareValues(testValues, doubleVector.getValuesSI());
+                compareValuesWithScale(standardUnit.getScale(), testValues, doubleVector.getValuesSI());
                 doubleVector = DoubleVector.instantiate(notQuiteSparseMap, testValues.length, standardUnit, storageType);
-                compareValues(testValues, doubleVector.getValuesSI());
+                compareValuesWithScale(standardUnit.getScale(), testValues, doubleVector.getValuesSI());
                 Scalar<?, ?>[] scalarValues = doubleVector.getScalars();
                 assertEquals("length of array of scalars", testValues.length, scalarValues.length);
                 for (int i = 0; i < testValues.length; i++)
@@ -248,7 +250,7 @@ public class DoubleVectorConstructorsTest
                 // TODO get this to compile: doubleVector = DoubleVector.instantiate(scalarValues, standardUnit, storageType);
                 doubleVector = DoubleVector.instantiateSI(list, standardUnit, storageType);
                 assertEquals("Unit must match", standardUnit, doubleVector.getUnit());
-                compareValues(testValues, doubleVector.getValuesSI());
+                compareValuesWithScale(standardUnit.getScale(), testValues, doubleVector.getValuesSI());
             }
         }
     }
@@ -298,11 +300,11 @@ public class DoubleVectorConstructorsTest
                 double offset = temperatureUnit.equals(AbsoluteTemperatureUnit.KELVIN) ? 0 : 273.15;
 
                 AbsoluteTemperatureVector atv = DoubleVector.instantiate(testValues, temperatureUnit, storageType);
-                compareValuesWithOffset(offset, testValues, atv.getValuesSI());
+                compareValuesWithScale(temperatureUnit.getScale(), testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", offset == 0 ? cardinality : offsetCardinality, atv.cardinality());
                 atv = DoubleVector.instantiate(testValues, temperatureUnit, storageType, AbsoluteTemperatureVector.class);
-                compareValuesWithOffset(offset, testValues, atv.getValuesSI());
+                compareValuesWithScale(temperatureUnit.getScale(), testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", offset == 0 ? cardinality : offsetCardinality, atv.cardinality());
 
@@ -325,11 +327,11 @@ public class DoubleVectorConstructorsTest
                 assertEquals("cardinality", cardinality, atv.cardinality());
 
                 atv = DoubleVector.instantiate(adl, temperatureUnit, storageType);
-                compareValuesWithOffset(offset, testValues, atv.getValuesSI());
+                compareValuesWithScale(temperatureUnit.getScale(), testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", offset == 0 ? cardinality : offsetCardinality, atv.cardinality());
                 atv = DoubleVector.instantiate(adl, temperatureUnit, storageType, AbsoluteTemperatureVector.class);
-                compareValuesWithOffset(offset, testValues, atv.getValuesSI());
+                compareValuesWithScale(temperatureUnit.getScale(), testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", offset == 0 ? cardinality : offsetCardinality, atv.cardinality());
 
@@ -372,12 +374,12 @@ public class DoubleVectorConstructorsTest
                 assertEquals("cardinality", cardinality, atv.cardinality());
 
                 atv = DoubleVector.instantiate(mapd, testValues.length, temperatureUnit, storageType);
-                compareValuesWithOffset(offset, testValues, atv.getValuesSI());
+                compareValuesWithScale(temperatureUnit.getScale(), testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", offset == 0 ? cardinality : offsetCardinality, atv.cardinality());
                 atv = DoubleVector.instantiate(mapd, testValues.length, temperatureUnit, storageType,
                         AbsoluteTemperatureVector.class);
-                compareValuesWithOffset(offset, testValues, atv.getValuesSI());
+                compareValuesWithScale(temperatureUnit.getScale(), testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getUnit());
                 assertEquals("cardinality", offset == 0 ? cardinality : offsetCardinality, atv.cardinality());
 
@@ -842,9 +844,8 @@ public class DoubleVectorConstructorsTest
             for (AbsoluteTemperatureUnit temperatureUnit : new AbsoluteTemperatureUnit[] { AbsoluteTemperatureUnit.KELVIN,
                     AbsoluteTemperatureUnit.DEGREE_CELSIUS })
             {
-                double offset = temperatureUnit.equals(AbsoluteTemperatureUnit.KELVIN) ? 0 : 273.15;
                 AbsoluteTemperatureVector atv = DoubleVector.instantiate(testValues, temperatureUnit, storageType);
-                compareValuesWithOffset(offset, testValues, atv.getValuesSI());
+                compareValuesWithScale(temperatureUnit.getScale(), testValues, atv.getValuesSI());
                 atv = DoubleVector.instantiateList(al, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
                 atv = DoubleVector.instantiateMap(map, testValues.length, temperatureUnit, storageType);
@@ -891,13 +892,13 @@ public class DoubleVectorConstructorsTest
                         Method asMethod = SIVector.class.getDeclaredMethod("as" + type);
                         AbstractDoubleVectorRel<U, ?, ?> asScalar = (AbstractDoubleVectorRel<U, ?, ?>) asMethod.invoke(mult);
                         assertEquals(scalar.getUnit().getStandardUnit(), asScalar.getUnit());
-                        compareValuesWithFactor(unit.getScale().toStandardUnit(1.0), testValues, mult.getValuesSI());
+                        compareValuesWithScale(unit.getScale(), testValues, mult.getValuesSI());
 
                         Method asMethodDisplayUnit = SIVector.class.getDeclaredMethod("as" + type, unit.getClass());
                         AbstractDoubleVectorRel<U, ?, ?> asVectorDisplayUnit =
                                 (AbstractDoubleVectorRel<U, ?, ?>) asMethodDisplayUnit.invoke(mult, unit.getStandardUnit());
                         assertEquals(scalar.getUnit().getStandardUnit(), asVectorDisplayUnit.getUnit());
-                        compareValuesWithFactor(unit.getScale().toStandardUnit(1.0), testValues,
+                        compareValuesWithScale(unit.getScale(), testValues,
                                 asVectorDisplayUnit.getValuesSI());
 
                         // test exception for wrong 'as'
@@ -976,32 +977,23 @@ public class DoubleVectorConstructorsTest
     }
 
     /**
-     * Compare two double arrays with offset.
-     * @param offset double; the expected difference
-     * @param reference double[]; the reference values
-     * @param got double[] the values that should match the reference values
-     */
-    public void compareValuesWithOffset(final double offset, final double[] reference, final double[] got)
-    {
-        assertEquals("length of reference must equal length of result ", reference.length, got.length);
-        for (int i = 0; i < reference.length; i++)
-        {
-            assertEquals("value at each index must match", reference[i] + offset, got[i], 0.001);
-        }
-    }
-
-    /**
      * Compare two double arrays with factor.
-     * @param factor double; the expected ratio
+     * @param scale Scale; the expected ratio
      * @param reference double[]; the reference values
      * @param got double[] the values that should match the reference values
      */
-    public void compareValuesWithFactor(final double factor, final double[] reference, final double[] got)
+    public void compareValuesWithScale(final Scale scale, final double[] reference, final double[] got)
     {
         assertEquals("length of reference must equal length of result ", reference.length, got.length);
+        if (scale instanceof GradeScale)
+        {
+            return; // too difficult; for now
+        }
+        double offset = scale.toStandardUnit(0);
+        double factor = scale.toStandardUnit(1) - offset;
         for (int i = 0; i < reference.length; i++)
         {
-            assertEquals("value at each index must match", reference[i] * factor, got[i], 0.001);
+            assertEquals("value at each index must match", reference[i] * factor + offset, got[i], 0.001);
         }
     }
 
