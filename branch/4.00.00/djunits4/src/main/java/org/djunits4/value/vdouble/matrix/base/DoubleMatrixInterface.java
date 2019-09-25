@@ -138,4 +138,16 @@ public interface DoubleMatrixInterface<U extends Unit<U>, S extends DoubleScalar
      * @throws ValueRuntimeException when matrix is neither sparse, nor dense, or not square
      */
     double determinant() throws ValueRuntimeException;
+    
+    /** 
+     * Return whether the internal storage type of the vector is dense or not.
+     * @return boolean; whether the internal storage type of the vector is dense or not
+     */
+    boolean isDense();
+
+    /** 
+     * Return whether the internal storage type of the vector is sparse or not.
+     * @return boolean; whether the internal storage type of the vector is sparse or not
+     */
+    boolean isSparse();
 }

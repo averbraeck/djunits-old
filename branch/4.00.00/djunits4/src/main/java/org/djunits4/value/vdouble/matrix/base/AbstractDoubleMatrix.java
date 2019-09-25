@@ -588,6 +588,20 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
 
     /** {@inheritDoc} */
     @Override
+    public boolean isDense()
+    {
+        return this.data.isDense();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean isSparse()
+    {
+        return this.data.isSparse();
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public final String toString()
     {
         return toString(getUnit(), false, true);
