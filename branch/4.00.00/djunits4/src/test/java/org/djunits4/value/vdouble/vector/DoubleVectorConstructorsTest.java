@@ -1078,13 +1078,32 @@ public class DoubleVectorConstructorsTest
                     {
                         TemperatureVector rtv = DoubleVector.instantiate(testValues2, relativeTemperatureUnit, storageType2);
                         AbsoluteTemperatureVector sumtv = atv.plus(rtv);
-                        System.out.println("atv:" + atv);
-                        System.out.println("rtv:" + rtv);
-                        System.out.println("sum:" + sumtv);
-                        System.out.println("");
+                        compareSum(atv.getValuesInUnit(AbsoluteTemperatureUnit.KELVIN),
+                                rtv.getValuesInUnit(TemperatureUnit.KELVIN),
+                                sumtv.getValuesInUnit(AbsoluteTemperatureUnit.KELVIN));
+                        AbsoluteTemperatureVector difftv = atv.minus(rtv);
+                        compareSum(rtv.getValuesInUnit(TemperatureUnit.KELVIN),
+                                difftv.getValuesInUnit(AbsoluteTemperatureUnit.KELVIN),
+                                atv.getValuesInUnit(AbsoluteTemperatureUnit.KELVIN));
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * Check that two arrays and a sum array match.
+     * @param left double[]; the left array
+     * @param right double[]; the right array
+     * @param sum double[]; the sum array
+     */
+    public void compareSum(final double[] left, final double[] right, final double[] sum)
+    {
+        assertEquals("length of left must equal length of sum", left.length, sum.length);
+        assertEquals("length of right must equal length of sum", right.length, sum.length);
+        for (int i = 0; i < sum.length; i++)
+        {
+            assertEquals("left plus right is sum", left[i] + right[i], sum[i], 0.001);
         }
     }
 
@@ -1103,8 +1122,8 @@ public class DoubleVectorConstructorsTest
     }
 
     /**
-     * Compare two double arrays with factor.
-     * @param scale Scale; the expected ratio
+     * Compare two double arrays with factor and offset (derived from a scale).
+     * @param scale Scale; the scale
      * @param reference double[]; the reference values
      * @param got double[] the values that should match the reference values
      */
