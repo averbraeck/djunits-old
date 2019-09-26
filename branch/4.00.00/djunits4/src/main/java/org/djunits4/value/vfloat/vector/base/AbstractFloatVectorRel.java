@@ -6,6 +6,7 @@ import org.djunits4.unit.util.UnitException;
 import org.djunits4.value.Relative;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.base.Vector;
+import org.djunits4.value.vfloat.function.FloatMathFunctions;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
 import org.djunits4.value.vfloat.scalar.base.FloatScalar;
 import org.djunits4.value.vfloat.vector.FloatSIVector;
@@ -62,6 +63,64 @@ public abstract class AbstractFloatVectorRel<U extends Unit<U>, S extends Abstra
     public final RV minus(final RV rel) throws ValueRuntimeException
     {
         return FloatVector.instantiate(this.getData().minus(rel.getData()), getUnit());
+    }
+
+    /**
+     * Increment all values of this vector by the increment. This only works if the vector is mutable.
+     * @param increment S; the scalar by which to increment all values
+     * @return RV; this modified vector
+     * @throws ValueRuntimeException in case this vector is immutable
+     */
+    @SuppressWarnings("unchecked")
+    public RV incrementBy(final S increment)
+    {
+        checkCopyOnWrite();
+        assign(FloatMathFunctions.INC(increment.si));
+        return (RV) this;
+    }
+
+    /**
+     * Increment all values of this vector by the increment on a value by value basis. This only works if this vector is mutable.
+     * @param increment RV; the vector that contains the values by which to increment the corresponding values
+     * @return RV; this modified vector
+     * @throws ValueRuntimeException in case this vector is immutable
+     * @Throws ValueException when the sizes of the vectors differ, or <code>increment</code> is null
+     */
+    @SuppressWarnings("unchecked")
+    public RV incrementBy(RV increment)
+    {
+        checkCopyOnWrite();
+        this.data.incrementBy(increment.getData());
+        return (RV) this;
+    }
+
+    /**
+     * Decrement all values of this vector by the decrement. This only works if the vector is mutable.
+     * @param decrement S; the scalar by which to decrement all values
+     * @return RV; this modified vector
+     * @throws ValueRuntimeException in case this vector is immutable
+     */
+    @SuppressWarnings("unchecked")
+    public RV decrementBy(final S decrement)
+    {
+        checkCopyOnWrite();
+        assign(FloatMathFunctions.DEC(decrement.si));
+        return (RV) this;
+    }
+
+    /**
+     * Decrement all values of this vector by the decrement on a value by value basis. This only works if this vector is mutable.
+     * @param decrement RV; the vector that contains the values by which to decrement the corresponding values
+     * @return RV; this modified vector
+     * @throws ValueRuntimeException in case this vector is immutable
+     * @Throws ValueException when the sizes of the vectors differ, or <code>decrement</code> is null
+     */
+    @SuppressWarnings("unchecked")
+    public RV decrementBy(RV decrement)
+    {
+        checkCopyOnWrite();
+        this.data.decrementBy(decrement.getData());
+        return (RV) this;
     }
 
     /** {@inheritDoc} */

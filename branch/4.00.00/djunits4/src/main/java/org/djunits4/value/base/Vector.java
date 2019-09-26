@@ -59,22 +59,6 @@ public interface Vector<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
     S[] getScalars();
 
     /**
-     * Increment all values of this vector by the increment. This only works if the vector is mutable.
-     * @param increment S; the scalar by which to increment all values
-     * @return V; this modified vector
-     * @throws ValueRuntimeException in case the vector is immutable
-     */
-    V incrementBy(S increment);
-
-    /**
-     * Decrement all values of this vector by the decrement. This only works if the vector is mutable.
-     * @param decrement S; the scalar by which to decrement all values
-     * @return V; this modified vector
-     * @throws ValueRuntimeException in case the vector is immutable
-     */
-    V decrementBy(S decrement);
-
-    /**
      * Create and return an iterator over the scalars in this vector in proper sequence.
      * @return Iterator&lt;S&gt;; an iterator over the scalars in this vector in proper sequence
      */

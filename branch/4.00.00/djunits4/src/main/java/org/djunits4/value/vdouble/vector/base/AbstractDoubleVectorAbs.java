@@ -5,6 +5,7 @@ import org.djunits4.unit.Unit;
 import org.djunits4.value.Absolute;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.base.Vector;
+import org.djunits4.value.vdouble.function.DoubleMathFunctions;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarAbs;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
 import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
@@ -67,6 +68,35 @@ public abstract class AbstractDoubleVectorAbs<
     public RV minus(AV decrement) throws ValueRuntimeException
     {
         return DoubleVector.instantiate(this.getData().minus(decrement.getData()), decrement.getUnit().getRelativeUnit());
+    }
+
+    /**
+     * Decrement all values of this vector by the decrement. This only works if this vector is mutable.
+     * @param decrement R; the scalar by which to decrement all values
+     * @return AV; this modified vector
+     * @throws ValueRuntimeException in case this vector is immutable
+     */
+    @SuppressWarnings("unchecked")
+    public AV decrementBy(final R decrement)
+    {
+        checkCopyOnWrite();
+        assign(DoubleMathFunctions.DEC(decrement.si));
+        return (AV) this;
+    }
+
+    /**
+     * Decrement all values of this vector by the decrement on a value by value basis. This only works if this vector is mutable.
+     * @param decrement RV; the vector that contains the values by which to decrement the corresponding values
+     * @return AV; this modified vector
+     * @throws ValueRuntimeException in case this vector is immutable
+     * @Throws ValueException when the sizes of the vectors differ, or <code>decrement</code> is null
+     */
+    @SuppressWarnings("unchecked")
+    public AV decrementBy(RV decrement)
+    {
+        checkCopyOnWrite();
+        this.data.decrementBy(decrement.getData());
+        return (AV) this;
     }
 
 }

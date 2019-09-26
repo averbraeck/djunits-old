@@ -118,22 +118,6 @@ public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
     S[] getDiagonalScalars() throws ValueRuntimeException;
 
     /**
-     * Increment all values of this matrix by the increment. This only works if the matrix is mutable.
-     * @param increment S; the scalar by which to increment all values
-     * @return M; this modified matrix
-     * @throws ValueRuntimeException in case the matrix is immutable
-     */
-    M incrementBy(S increment);
-
-    /**
-     * Decrement all values of this matrix by the decrement. This only works if the matrix is mutable.
-     * @param decrement S; the scalar by which to decrement all values
-     * @return V; this modified matrix
-     * @throws ValueRuntimeException in case the matrix is immutable
-     */
-    M decrementBy(S decrement);
-
-    /**
      * Return the StorageType (DENSE, SPARSE, etc.) for the stored matrix.
      * @return StorageType; the storage type (DENSE, SPARSE, etc.) for the stored matrix
      */

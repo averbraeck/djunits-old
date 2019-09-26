@@ -398,26 +398,6 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public V incrementBy(final S increment)
-    {
-        checkCopyOnWrite();
-        assign(FloatMathFunctions.INC(increment.si));
-        return (V) this;
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public V decrementBy(final S decrement)
-    {
-        checkCopyOnWrite();
-        assign(FloatMathFunctions.DEC(decrement.si));
-        return (V) this;
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
     public final V abs()
     {
         checkCopyOnWrite();

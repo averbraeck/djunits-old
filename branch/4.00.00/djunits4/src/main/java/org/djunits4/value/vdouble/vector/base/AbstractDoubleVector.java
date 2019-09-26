@@ -392,26 +392,6 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public V incrementBy(final S increment)
-    {
-        checkCopyOnWrite();
-        assign(DoubleMathFunctions.INC(increment.si));
-        return (V) this;
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public V decrementBy(final S decrement)
-    {
-        checkCopyOnWrite();
-        assign(DoubleMathFunctions.DEC(decrement.si));
-        return (V) this;
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
     public final V abs()
     {
         checkCopyOnWrite();

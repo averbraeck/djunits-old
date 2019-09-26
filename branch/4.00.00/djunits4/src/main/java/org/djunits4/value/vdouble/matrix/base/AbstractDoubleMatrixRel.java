@@ -6,6 +6,7 @@ import org.djunits4.unit.util.UnitException;
 import org.djunits4.value.Relative;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.base.Matrix;
+import org.djunits4.value.vdouble.function.DoubleMathFunctions;
 import org.djunits4.value.vdouble.matrix.SIMatrix;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
@@ -64,6 +65,64 @@ public abstract class AbstractDoubleMatrixRel<U extends Unit<U>, S extends Abstr
     public final RM minus(final RM rel) throws ValueRuntimeException
     {
         return DoubleMatrix.instantiate(this.getData().minus(rel.getData()), getUnit());
+    }
+
+    /**
+     * Increment all values of this matrix by the increment. This only works if this matrix is mutable.
+     * @param increment S; the scalar by which to increment all values
+     * @return RM; this modified matrix
+     * @throws ValueRuntimeException in case this matrix is immutable
+     */
+    @SuppressWarnings("unchecked")
+    public RM incrementBy(final S increment)
+    {
+        checkCopyOnWrite();
+        assign(DoubleMathFunctions.INC(increment.si));
+        return (RM) this;
+    }
+
+    /**
+     * Increment all values of this matrix by the increment on a value by value basis. This only works if this matrix is mutable.
+     * @param increment RM; the matrix that contains the values by which to increment the corresponding values
+     * @return RM; this modified matrix
+     * @throws ValueRuntimeException in case this matrix is immutable
+     * @Throws ValueException when the sizes of the matrices differ, or <code>increment</code> is null
+     */
+    @SuppressWarnings("unchecked")
+    public RM incrementBy(RM increment)
+    {
+        checkCopyOnWrite();
+        this.data.incrementBy(increment.getData());
+        return (RM) this;
+    }
+
+    /**
+     * Decrement all values of this matrix by the decrement. This only works if this matrix is mutable.
+     * @param decrement S; the scalar by which to decrement all values
+     * @return RM; this modified matrix
+     * @throws ValueRuntimeException in case this matrix is immutable
+     */
+    @SuppressWarnings("unchecked")
+    public RM decrementBy(final S decrement)
+    {
+        checkCopyOnWrite();
+        assign(DoubleMathFunctions.DEC(decrement.si));
+        return (RM) this;
+    }
+
+    /**
+     * Decrement all values of this matrix by the decrement on a value by value basis. This only works if this matrix is mutable.
+     * @param decrement RM; the matrix that contains the values by which to decrement the corresponding values
+     * @return RM; this modified matrix
+     * @throws ValueRuntimeException in case this matrix is immutable
+     * @Throws ValueException when the sizes of the matrices differ, or <code>decrement</code> is null
+     */
+    @SuppressWarnings("unchecked")
+    public RM  decrementBy(RM decrement)
+    {
+        checkCopyOnWrite();
+        this.data.decrementBy(decrement.getData());
+        return (RM) this;
     }
 
     /** {@inheritDoc} */

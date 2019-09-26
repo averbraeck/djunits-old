@@ -154,7 +154,7 @@ public class DoubleVectorConstructorsTest
                 try
                 {
                     mutable.setSI(testValues.length, 0);
-                    fail("negative index should have thrown an exception");
+                    fail("index just above range should have thrown an exception");
                 }
                 catch (ValueRuntimeException vre)
                 {
@@ -855,7 +855,7 @@ public class DoubleVectorConstructorsTest
     }
 
     /**
-     * Test all "asXX" methods.
+     * Test most "asXX" methods.
      * @throws SecurityException on error
      * @throws NoSuchMethodException on error
      * @throws InvocationTargetException on error
@@ -866,7 +866,7 @@ public class DoubleVectorConstructorsTest
      */
     @SuppressWarnings("unchecked")
     @Test
-    public <U extends Unit<U>> void testAsAll() throws NoSuchMethodException, SecurityException, IllegalAccessException,
+    public <U extends Unit<U>> void testAsMost() throws NoSuchMethodException, SecurityException, IllegalAccessException,
             IllegalArgumentException, InvocationTargetException, ClassNotFoundException, UnitException
     {
         // load all classes
@@ -886,20 +886,19 @@ public class DoubleVectorConstructorsTest
                 {
                     for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
                     {
-                        AbstractDoubleVectorRel<U, ?, ?> scalar =
+                        AbstractDoubleVectorRel<U, ?, ?> vector =
                                 (AbstractDoubleVectorRel<U, ?, ?>) DoubleVector.instantiate(testValues, unit, storageType2);
-                        SIVector mult = scalar.times(dimless);
+                        SIVector mult = vector.times(dimless);
                         Method asMethod = SIVector.class.getDeclaredMethod("as" + type);
-                        AbstractDoubleVectorRel<U, ?, ?> asScalar = (AbstractDoubleVectorRel<U, ?, ?>) asMethod.invoke(mult);
-                        assertEquals(scalar.getUnit().getStandardUnit(), asScalar.getUnit());
+                        AbstractDoubleVectorRel<U, ?, ?> asVector = (AbstractDoubleVectorRel<U, ?, ?>) asMethod.invoke(mult);
+                        assertEquals(vector.getUnit().getStandardUnit(), asVector.getUnit());
                         compareValuesWithScale(unit.getScale(), testValues, mult.getValuesSI());
 
                         Method asMethodDisplayUnit = SIVector.class.getDeclaredMethod("as" + type, unit.getClass());
                         AbstractDoubleVectorRel<U, ?, ?> asVectorDisplayUnit =
                                 (AbstractDoubleVectorRel<U, ?, ?>) asMethodDisplayUnit.invoke(mult, unit.getStandardUnit());
-                        assertEquals(scalar.getUnit().getStandardUnit(), asVectorDisplayUnit.getUnit());
-                        compareValuesWithScale(unit.getScale(), testValues,
-                                asVectorDisplayUnit.getValuesSI());
+                        assertEquals(vector.getUnit().getStandardUnit(), asVectorDisplayUnit.getUnit());
+                        compareValuesWithScale(unit.getScale(), testValues, asVectorDisplayUnit.getValuesSI());
 
                         // test exception for wrong 'as'
                         SIVector cd4sr2 = SIVector.instantiate(testValues, SIUnit.of("cd4/sr2"), storageType2);
@@ -917,13 +916,140 @@ public class DoubleVectorConstructorsTest
                         try
                         {
                             AbstractDoubleScalarRel<?, ?> asScalarDim =
-                                    (AbstractDoubleScalarRel<?, ?>) asMethodDisplayUnit.invoke(cd4sr2, scalar.getUnit());
+                                    (AbstractDoubleScalarRel<?, ?>) asMethodDisplayUnit.invoke(cd4sr2, vector.getUnit());
                             fail("should not be able to carry out 'as'" + type + " on cd4/sr2 SI unit -- resulted in "
                                     + asScalarDim);
                         }
                         catch (InvocationTargetException | UnitRuntimeException e)
                         {
                             // ok
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Test the "asXX" methods of the remaining classes.
+     * @throws SecurityException on error
+     * @throws NoSuchMethodException on error
+     * @throws InvocationTargetException on error
+     * @throws IllegalArgumentException on error
+     * @throws IllegalAccessException on error
+     * @throws ClassNotFoundException on error
+     * @throws UnitException on error
+     */
+    @SuppressWarnings("unchecked")
+    @Test
+    public <U extends Unit<U>> void testAsRemaining() throws NoSuchMethodException, SecurityException, IllegalAccessException,
+            IllegalArgumentException, InvocationTargetException, ClassNotFoundException, UnitException
+    {
+        // load all classes
+        assertEquals("m", UNITS.METER.getId());
+
+        double[] testValues = new double[] { 0, 123.456d, 0, -273.15, -273.15, 0, -273.15, 234.567d, 0, 0 };
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+        {
+            AbstractDoubleVectorRel<?, ?, ?> dimless =
+                    (AbstractDoubleVectorRel<?, ?, ?>) DoubleVector.instantiate(new double[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+                            DimensionlessUnit.SI.getStandardUnit(), storageType);
+            for (String type : CLASSNAMES.REL_WITH_ABS_LIST)
+            {
+                Class.forName("org.djunits4.unit." + type + "Unit");
+                UnitBase<U> unitBase = (UnitBase<U>) UnitTypes.INSTANCE.getUnitBase(type + "Unit");
+                for (U unit : unitBase.getUnitsById().values())
+                {
+                    for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+                    {
+                        AbstractDoubleVectorRel<U, ?, ?> vector =
+                                (AbstractDoubleVectorRel<U, ?, ?>) DoubleVector.instantiate(testValues, unit, storageType2);
+                        SIVector mult = vector.times(dimless);
+                        Method asMethod = SIVector.class.getDeclaredMethod("as" + type);
+                        AbstractDoubleVectorRel<U, ?, ?> asVector = (AbstractDoubleVectorRel<U, ?, ?>) asMethod.invoke(mult);
+                        assertEquals(vector.getUnit().getStandardUnit(), asVector.getUnit());
+                        compareValuesWithScale(unit.getScale(), testValues, mult.getValuesSI());
+
+                        Method asMethodDisplayUnit = SIVector.class.getDeclaredMethod("as" + type, unit.getClass());
+                        AbstractDoubleVectorRel<U, ?, ?> asVectorDisplayUnit =
+                                (AbstractDoubleVectorRel<U, ?, ?>) asMethodDisplayUnit.invoke(mult, unit.getStandardUnit());
+                        assertEquals(vector.getUnit().getStandardUnit(), asVectorDisplayUnit.getUnit());
+                        compareValuesWithScale(unit.getScale(), testValues, asVectorDisplayUnit.getValuesSI());
+
+                        // test exception for wrong 'as'
+                        SIVector cd4sr2 = SIVector.instantiate(testValues, SIUnit.of("cd4/sr2"), storageType2);
+                        try
+                        {
+                            AbstractDoubleScalarRel<?, ?> asScalarDim = (AbstractDoubleScalarRel<?, ?>) asMethod.invoke(cd4sr2);
+                            fail("should not be able to carry out 'as'" + type + " on cd4/sr2 SI unit -- resulted in "
+                                    + asScalarDim);
+                        }
+                        catch (InvocationTargetException | UnitRuntimeException e)
+                        {
+                            // ok
+                        }
+
+                        try
+                        {
+                            AbstractDoubleScalarRel<?, ?> asScalarDim =
+                                    (AbstractDoubleScalarRel<?, ?>) asMethodDisplayUnit.invoke(cd4sr2, vector.getUnit());
+                            fail("should not be able to carry out 'as'" + type + " on cd4/sr2 SI unit -- resulted in "
+                                    + asScalarDim);
+                        }
+                        catch (InvocationTargetException | UnitRuntimeException e)
+                        {
+                            // ok
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Test the <code>as</code> method of the SIVector class
+     * @throws SecurityException on error
+     * @throws NoSuchMethodException on error
+     * @throws InvocationTargetException on error
+     * @throws IllegalArgumentException on error
+     * @throws IllegalAccessException on error
+     * @throws ClassNotFoundException on error
+     * @throws UnitException on error
+     */
+    @SuppressWarnings("unchecked")
+    @Test
+    public <U extends Unit<U>> void testAsUnit() throws ClassNotFoundException, NoSuchMethodException, SecurityException,
+            IllegalAccessException, IllegalArgumentException, InvocationTargetException, UnitException
+    {
+        double[] testValues = new double[] { 0, 123.456d, 0, -273.15, -273.15, 0, -273.15, 234.567d, 0, 0 };
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+        {
+            for (String type : CLASSNAMES.REL_LIST)
+            {
+                Class.forName("org.djunits4.unit." + type + "Unit");
+                UnitBase<U> unitBase = (UnitBase<U>) UnitTypes.INSTANCE.getUnitBase(type + "Unit");
+                for (U unit : unitBase.getUnitsById().values())
+                {
+                    for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, storageType })
+                    {
+                        SIUnit siUnit = SIUnit.of(unit.getUnitBase().getSiDimensions());
+                        SIVector vector = (SIVector) SIVector.instantiate(testValues, siUnit, storageType2);
+                        Method asMethod = SIVector.class.getDeclaredMethod("as", Unit.class);
+                        AbstractDoubleVectorRel<U, ?, ?> asVector =
+                                (AbstractDoubleVectorRel<U, ?, ?>) asMethod.invoke(vector, siUnit);
+                        assertEquals(vector.getUnit().getStandardUnit(), asVector.getUnit());
+                        siUnit = SIUnit.of(AbsoluteTemperatureUnit.KELVIN.getUnitBase().getSiDimensions());
+                        compareValues(testValues, asVector.getValuesSI());
+                        try
+                        {
+                            asMethod.invoke(vector, siUnit);
+                            fail("as method should not be able to cast to unrelated (absoluteTemperature) unit");
+                        }
+                        catch (InvocationTargetException ite)
+                        {
+                            Throwable cause = ite.getCause();
+                            assertEquals("cause is UnitRuntimeException", UnitRuntimeException.class, cause.getClass());
+                            // Otherwise ignore expected exception
                         }
                     }
                 }

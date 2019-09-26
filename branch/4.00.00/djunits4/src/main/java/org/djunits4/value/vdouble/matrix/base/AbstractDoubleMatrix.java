@@ -519,26 +519,6 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public M incrementBy(final S increment)
-    {
-        checkCopyOnWrite();
-        assign(DoubleMathFunctions.INC(increment.si));
-        return (M) this;
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public M decrementBy(final S decrement)
-    {
-        checkCopyOnWrite();
-        assign(DoubleMathFunctions.DEC(decrement.si));
-        return (M) this;
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
     public final M abs()
     {
         checkCopyOnWrite();
