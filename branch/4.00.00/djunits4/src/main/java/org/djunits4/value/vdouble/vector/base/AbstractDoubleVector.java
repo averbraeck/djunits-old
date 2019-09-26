@@ -108,10 +108,8 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
         this.copyOnWrite = copyOnWrite;
     }
 
-    /**
-     * Return helper flag to indicate whether the data is mutable or not.
-     * @return boolean; helper flag to indicate whether the data is mutable or not
-     */
+    /** {@inheritDoc} */
+    @Override
     public boolean isMutable()
     {
         return this.mutable;
@@ -334,13 +332,10 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
         return (V) DoubleVector.instantiate(this.data.copy(), getUnit());
     }
 
-    /**
-     * Execute a function on a cell by cell basis. Note: because many functions have to act on zero cells or can generate cells
-     * with a zero value, the functions have to be applied on a dense dataset which has to be transformed back to a sparse
-     * dataset if necessary.
-     * @param doubleFunction DoubleFunction; the function to apply
-     */
-    public final void assign(final DoubleFunction doubleFunction)
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final V assign(final DoubleFunction doubleFunction)
     {
         checkCopyOnWrite();
         if (this.data instanceof DoubleVectorDataDense)
@@ -353,6 +348,7 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
             dvdd.assign(doubleFunction);
             this.data = dvdd.toSparse();
         }
+        return (V) this;
     }
 
     /** {@inheritDoc} */

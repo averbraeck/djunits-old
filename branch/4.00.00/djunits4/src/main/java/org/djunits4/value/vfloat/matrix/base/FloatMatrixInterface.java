@@ -4,6 +4,7 @@ import org.djunits4.unit.Unit;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.base.Matrix;
 import org.djunits4.value.base.Scalar;
+import org.djunits4.value.vfloat.function.FloatFunction;
 import org.djunits4.value.vfloat.vector.base.FloatVectorInterface;
 
 /**
@@ -62,43 +63,6 @@ public interface FloatMatrixInterface<U extends Unit<U>, S extends Scalar<U, S>,
     float[] getRowSI(int row) throws ValueRuntimeException;
 
     /**
-     * Set the value, specified in the standard SI unit, at the specified position.
-     * @param row int; row of the value to set
-     * @param column int; column of the value to set
-     * @param valueSI float; the value, specified in the standard SI unit
-     * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
-     */
-    void setSI(int row, int column, float valueSI) throws ValueRuntimeException;
-    
-    /**
-     * Set the value, specified in the (current) display unit, at the specified position.
-     * @param row int; row of the value to set
-     * @param column int; column of the value to set
-     * @param valueInUnit float; the value, specified in the (current) display unit
-     * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
-     */
-    void setInUnit(int row, int column, float valueInUnit) throws ValueRuntimeException;
-    
-    /**
-     * Set the value, specified in the <code>valueUnit</code>, at the specified position.
-     * @param row int; row of the value to set
-     * @param column int; column of the value to set
-     * @param valueInUnit float; the value, specified in the (current) display unit
-     * @param valueUnit U; the unit in which the <code>valueInUnit</code> is expressed
-     * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
-     */
-    void setInUnit(int row, int column, float valueInUnit, U valueUnit) throws ValueRuntimeException;
-    
-    /**
-     * Set the scalar value at the specified position.
-     * @param row int; row of the value to set
-     * @param column int; column of the value to set
-     * @param value S; the value to set
-     * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
-     */
-    void set(int row, int column, S value) throws ValueRuntimeException;
- 
-    /**
      * Retrieve a column from the matrix as an array of float.
      * @param column int; column of the values to retrieve
      * @return S[]; the column as a float array
@@ -150,4 +114,55 @@ public interface FloatMatrixInterface<U extends Unit<U>, S extends Scalar<U, S>,
      * @return boolean; whether the internal storage type of the vector is sparse or not
      */
     boolean isSparse();
+
+    /**
+     * Return whether the data is mutable or not.
+     * @return boolean; whether the data is mutable or not
+     */
+    boolean isMutable();
+    
+    /**
+     * Set the value, specified in the standard SI unit, at the specified position.
+     * @param row int; row of the value to set
+     * @param column int; column of the value to set
+     * @param valueSI float; the value, specified in the standard SI unit
+     * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
+     */
+    void setSI(int row, int column, float valueSI) throws ValueRuntimeException;
+    
+    /**
+     * Set the value, specified in the (current) display unit, at the specified position.
+     * @param row int; row of the value to set
+     * @param column int; column of the value to set
+     * @param valueInUnit float; the value, specified in the (current) display unit
+     * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
+     */
+    void setInUnit(int row, int column, float valueInUnit) throws ValueRuntimeException;
+    
+    /**
+     * Set the value, specified in the <code>valueUnit</code>, at the specified position.
+     * @param row int; row of the value to set
+     * @param column int; column of the value to set
+     * @param valueInUnit float; the value, specified in the (current) display unit
+     * @param valueUnit U; the unit in which the <code>valueInUnit</code> is expressed
+     * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
+     */
+    void setInUnit(int row, int column, float valueInUnit, U valueUnit) throws ValueRuntimeException;
+    
+    /**
+     * Set the scalar value at the specified position.
+     * @param row int; row of the value to set
+     * @param column int; column of the value to set
+     * @param value S; the value to set
+     * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
+     */
+    void set(int row, int column, S value) throws ValueRuntimeException;
+ 
+    /**
+     * Execute a function on a cell by cell basis. Note: May be expensive when used on sparse data.
+     * @param floatFunction FloatFunction; the function to apply
+     * @return M; this updated matrix
+     */
+    M assign(final FloatFunction floatFunction);
+
 }

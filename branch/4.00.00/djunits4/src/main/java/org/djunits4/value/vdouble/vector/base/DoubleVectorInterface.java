@@ -3,6 +3,7 @@ package org.djunits4.value.vdouble.vector.base;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.base.Vector;
+import org.djunits4.value.vdouble.function.DoubleFunction;
 import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
 
 /**
@@ -46,6 +47,43 @@ public interface DoubleVectorInterface<U extends Unit<U>, S extends DoubleScalar
     double getInUnit(int index, U targetUnit) throws ValueRuntimeException;
 
     /**
+     * Create a double[] array filled with the values in the standard SI unit.
+     * @return double[]; array of values in the standard SI unit
+     */
+    double[] getValuesSI();
+
+    /**
+     * Create a double[] array filled with the values in the original unit.
+     * @return double[]; the values in the original unit
+     */
+    double[] getValuesInUnit();
+
+    /**
+     * Create a double[] array filled with the values converted into a specified unit.
+     * @param targetUnit U; the unit into which the values are converted for use
+     * @return double[]; the values converted into the specified unit
+     */
+    double[] getValuesInUnit(U targetUnit);
+    
+    /** 
+     * Return whether the internal storage type of the vector is dense or not.
+     * @return boolean; whether the internal storage type of the vector is dense or not
+     */
+    boolean isDense();
+
+    /** 
+     * Return whether the internal storage type of the vector is sparse or not.
+     * @return boolean; whether the internal storage type of the vector is sparse or not
+     */
+    boolean isSparse();
+
+    /**
+     * Return whether the data is mutable or not.
+     * @return boolean; whether the data is mutable or not
+     */
+    boolean isMutable();
+    
+    /**
      * Set the value, specified in the standard SI unit, at the specified position.
      * @param index int; the index of the value to set
      * @param valueSI double; the value, specified in the standard SI unit
@@ -79,33 +117,10 @@ public interface DoubleVectorInterface<U extends Unit<U>, S extends DoubleScalar
     void set(int index, S value) throws ValueRuntimeException;
 
     /**
-     * Create a double[] array filled with the values in the standard SI unit.
-     * @return double[]; array of values in the standard SI unit
+     * Execute a function on a cell by cell basis. Note: May be expensive when used on sparse data.
+     * @param doubleFunction DoubleFunction; the function to apply
+     * @return V; this updated vector
      */
-    double[] getValuesSI();
+    V assign(final DoubleFunction doubleFunction);
 
-    /**
-     * Create a double[] array filled with the values in the original unit.
-     * @return double[]; the values in the original unit
-     */
-    double[] getValuesInUnit();
-
-    /**
-     * Create a double[] array filled with the values converted into a specified unit.
-     * @param targetUnit U; the unit into which the values are converted for use
-     * @return double[]; the values converted into the specified unit
-     */
-    double[] getValuesInUnit(U targetUnit);
-    
-    /** 
-     * Return whether the internal storage type of the vector is dense or not.
-     * @return boolean; whether the internal storage type of the vector is dense or not
-     */
-    boolean isDense();
-
-    /** 
-     * Return whether the internal storage type of the vector is sparse or not.
-     * @return boolean; whether the internal storage type of the vector is sparse or not
-     */
-    boolean isSparse();
 }

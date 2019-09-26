@@ -3,6 +3,7 @@ package org.djunits4.value.vdouble.matrix.base;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.base.Matrix;
+import org.djunits4.value.vdouble.function.DoubleFunction;
 import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
 import org.djunits4.value.vdouble.vector.base.DoubleVectorInterface;
 
@@ -52,43 +53,6 @@ public interface DoubleMatrixInterface<U extends Unit<U>, S extends DoubleScalar
      *             &gt;= columns())
      */
     double getInUnit(int row, int column, U targetUnit) throws ValueRuntimeException;
-
-    /**
-     * Set the value, specified in the standard SI unit, at the specified position.
-     * @param row int; row of the value to set
-     * @param column int; column of the value to set
-     * @param valueSI double; the value, specified in the standard SI unit
-     * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
-     */
-    void setSI(int row, int column, double valueSI) throws ValueRuntimeException;
-
-    /**
-     * Set the value, specified in the (current) display unit, at the specified position.
-     * @param row int; row of the value to set
-     * @param column int; column of the value to set
-     * @param valueInUnit double; the value, specified in the (current) display unit
-     * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
-     */
-    void setInUnit(int row, int column, double valueInUnit) throws ValueRuntimeException;
-
-    /**
-     * Set the value, specified in the <code>valueUnit</code>, at the specified position.
-     * @param row int; row of the value to set
-     * @param column int; column of the value to set
-     * @param valueInUnit double; the value, specified in the (current) display unit
-     * @param valueUnit U; the unit in which the <code>valueInUnit</code> is expressed
-     * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
-     */
-    void setInUnit(int row, int column, double valueInUnit, U valueUnit) throws ValueRuntimeException;
-
-    /**
-     * Set the scalar value at the specified position.
-     * @param row int; row of the value to set
-     * @param column int; column of the value to set
-     * @param value S; the value to set
-     * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
-     */
-    void set(int row, int column, S value) throws ValueRuntimeException;
 
     /**
      * Retrieve a row from the matrix as an array of double.
@@ -150,4 +114,55 @@ public interface DoubleMatrixInterface<U extends Unit<U>, S extends DoubleScalar
      * @return boolean; whether the internal storage type of the vector is sparse or not
      */
     boolean isSparse();
+    
+    /**
+     * Return whether the data is mutable or not.
+     * @return boolean; whether the data is mutable or not
+     */
+    boolean isMutable();
+    
+    /**
+     * Set the value, specified in the standard SI unit, at the specified position.
+     * @param row int; row of the value to set
+     * @param column int; column of the value to set
+     * @param valueSI double; the value, specified in the standard SI unit
+     * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
+     */
+    void setSI(int row, int column, double valueSI) throws ValueRuntimeException;
+
+    /**
+     * Set the value, specified in the (current) display unit, at the specified position.
+     * @param row int; row of the value to set
+     * @param column int; column of the value to set
+     * @param valueInUnit double; the value, specified in the (current) display unit
+     * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
+     */
+    void setInUnit(int row, int column, double valueInUnit) throws ValueRuntimeException;
+
+    /**
+     * Set the value, specified in the <code>valueUnit</code>, at the specified position.
+     * @param row int; row of the value to set
+     * @param column int; column of the value to set
+     * @param valueInUnit double; the value, specified in the (current) display unit
+     * @param valueUnit U; the unit in which the <code>valueInUnit</code> is expressed
+     * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
+     */
+    void setInUnit(int row, int column, double valueInUnit, U valueUnit) throws ValueRuntimeException;
+
+    /**
+     * Set the scalar value at the specified position.
+     * @param row int; row of the value to set
+     * @param column int; column of the value to set
+     * @param value S; the value to set
+     * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
+     */
+    void set(int row, int column, S value) throws ValueRuntimeException;
+
+    /**
+     * Execute a function on a cell by cell basis. Note: May be expensive when used on sparse data.
+     * @param doubleFunction DoubleFunction; the function to apply
+     * @return M; this updated matrix
+     */
+    M assign(final DoubleFunction doubleFunction);
+
 }

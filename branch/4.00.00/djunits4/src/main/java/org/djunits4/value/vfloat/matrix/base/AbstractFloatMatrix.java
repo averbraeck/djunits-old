@@ -112,10 +112,8 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
         this.copyOnWrite = copyOnWrite;
     }
 
-    /**
-     * Return helper flag to indicate whether the data is mutable or not.
-     * @return boolean; helper flag to indicate whether the data is mutable or not
-     */
+    /** {@inheritDoc} */
+    @Override
     public boolean isMutable()
     {
         return this.mutable;
@@ -461,13 +459,10 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
         return (M) FloatMatrix.instantiate(this.data.copy(), getUnit());
     }
 
-    /**
-     * Execute a function on a cell by cell basis. Note: because many functions have to act on zero cells or can generate cells
-     * with a zero value, the functions have to be applied on a dense dataset which has to be transformed back to a sparse
-     * dataset if necessary.
-     * @param floatFunction FloatFunction; the function to apply
-     */
-    public final void assign(final FloatFunction floatFunction)
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public final M assign(final FloatFunction floatFunction)
     {
         checkCopyOnWrite();
         if (this.data instanceof FloatMatrixDataDense)
@@ -480,6 +475,7 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
             dvdd.assign(floatFunction);
             this.data = dvdd.toSparse();
         }
+        return (M) this;
     }
 
     /** {@inheritDoc} */

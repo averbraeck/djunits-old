@@ -4,6 +4,7 @@ import org.djunits4.unit.Unit;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.base.Scalar;
 import org.djunits4.value.base.Vector;
+import org.djunits4.value.vfloat.function.FloatFunction;
 
 /**
  * Interface for the FloatVector classes, specifically defining the methods that deal with float values.
@@ -46,6 +47,43 @@ public interface FloatVectorInterface<U extends Unit<U>, S extends Scalar<U, S>,
     float getInUnit(int index, U targetUnit) throws ValueRuntimeException;
 
     /**
+     * Create a float[] array filled with the values in the standard SI unit.
+     * @return float[]; array of values in the standard SI unit
+     */
+    float[] getValuesSI();
+
+    /**
+     * Create a float[] array filled with the values in the original unit.
+     * @return float[]; the values in the original unit
+     */
+    float[] getValuesInUnit();
+
+    /**
+     * Create a float[] array filled with the values converted into a specified unit.
+     * @param targetUnit U; the unit into which the values are converted for use
+     * @return float[]; the values converted into the specified unit
+     */
+    float[] getValuesInUnit(U targetUnit);
+    
+    /** 
+     * Return whether the internal storage type of the vector is dense or not.
+     * @return boolean; whether the internal storage type of the vector is dense or not
+     */
+    boolean isDense();
+
+    /** 
+     * Return whether the internal storage type of the vector is sparse or not.
+     * @return boolean; whether the internal storage type of the vector is sparse or not
+     */
+    boolean isSparse();
+    
+    /**
+     * Return whether the data is mutable or not.
+     * @return boolean; whether the data is mutable or not
+     */
+    boolean isMutable();
+    
+    /**
      * Set the value, specified in the standard SI unit, at the specified position.
      * @param index int; the index of the value to set
      * @param valueSI float; the value, specified in the standard SI unit
@@ -79,33 +117,10 @@ public interface FloatVectorInterface<U extends Unit<U>, S extends Scalar<U, S>,
     void set(int index, S value) throws ValueRuntimeException;
     
     /**
-     * Create a float[] array filled with the values in the standard SI unit.
-     * @return float[]; array of values in the standard SI unit
+     * Execute a function on a cell by cell basis. Note: May be expensive when used on sparse data.
+     * @param floatFunction FloatFunction; the function to apply
+     * @return V; this updated vector
      */
-    float[] getValuesSI();
+    V assign(final FloatFunction floatFunction);
 
-    /**
-     * Create a float[] array filled with the values in the original unit.
-     * @return float[]; the values in the original unit
-     */
-    float[] getValuesInUnit();
-
-    /**
-     * Create a float[] array filled with the values converted into a specified unit.
-     * @param targetUnit U; the unit into which the values are converted for use
-     * @return float[]; the values converted into the specified unit
-     */
-    float[] getValuesInUnit(U targetUnit);
-    
-    /** 
-     * Return whether the internal storage type of the vector is dense or not.
-     * @return boolean; whether the internal storage type of the vector is dense or not
-     */
-    boolean isDense();
-
-    /** 
-     * Return whether the internal storage type of the vector is sparse or not.
-     * @return boolean; whether the internal storage type of the vector is sparse or not
-     */
-    boolean isSparse();
 }
