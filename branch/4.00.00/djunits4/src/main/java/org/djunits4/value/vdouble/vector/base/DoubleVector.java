@@ -337,21 +337,6 @@ public final class DoubleVector
     }
 
     /**
-     * Instantiate the Mutable DoubleVector based on its unit. Rigid check on types for the compiler. The class for the vector
-     * is explicitly provided, e.g., for user-defined vector classes.
-     * @param values DoubleVectorData; the values
-     * @param unit U; the unit in which the values are expressed
-     * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
-     * @return V; an instantiated mutable DoubleVector with the values expressed in their unit
-     */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
-            V extends AbstractDoubleVector<U, S, V>> V instantiate(final DoubleVectorData values, final U unit,
-                    final Class<V> vectorClass)
-    {
-        return instantiateAnonymous(values, unit, vectorClass);
-    }
-
-    /**
      * Instantiate the Immutable DoubleVector based on its unit. Loose check for types on the compiler. This allows the unit to
      * be specified as a Unit&lt;?&gt; type.<br>
      * <b>Note</b> that it is possible to make mistakes with anonymous units.
