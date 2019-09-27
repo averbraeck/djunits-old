@@ -5,10 +5,9 @@ import java.util.Iterator;
 import org.djunits4.unit.AbsoluteLinearUnit;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.Absolute;
+import org.djunits4.value.IndexedValue;
 import org.djunits4.value.Relative;
-import org.djunits4.value.Value;
 import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
 
 /**
  * Vector to distinguish a vector from vectors and matrices. A possible way to implement this interface is:
@@ -24,25 +23,13 @@ import org.djunits4.value.storage.StorageType;
  * @param <S> the scalar type belonging to the vector type
  * @param <V> the vector type with the given unit
  */
-public interface Vector<U extends Unit<U>, S extends Scalar<U, S>, V extends Vector<U, S, V>> extends Value<U, V>
+public interface Vector<U extends Unit<U>, S extends Scalar<U, S>, V extends Vector<U, S, V>> extends IndexedValue<U, S, V>
 {
     /**
      * Retrieve the size of the vector.
      * @return int; the size of the vector
      */
     int size();
-
-    /**
-     * Count the number of cells that have a non-zero value.
-     * @return int; the number of cells having non-zero value
-     */
-    int cardinality();
-
-    /**
-     * Return the class of the corresponding scalar.
-     * @return Class&lt;S&gt;; the class of the corresponding scalar
-     */
-    Class<S> getScalarClass();
 
     /**
      * Retrieve a value from the vector.
@@ -63,38 +50,6 @@ public interface Vector<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
      * @return Iterator&lt;S&gt;; an iterator over the scalars in this vector in proper sequence
      */
     Iterator<S> iterator();
-
-    /**
-     * Return the StorageType (DENSE, SPARSE, etc.) for the stored vector.
-     * @return StorageType; the storage type (DENSE, SPARSE, etc.) for the stored vector
-     */
-    StorageType getStorageType();
-
-    /**
-     * Create and return a sparse version of this vector. When the vector data was already sparse, the current version is
-     * returned and no copy will be made of the data.
-     * @return V; a sparse version of this vector
-     */
-    V toSparse();
-
-    /**
-     * Create and return a dense version of this vector. When the vector data was already dense, the current version is returned
-     * and no copy will be made of the data.
-     * @return V; a dense version of this vector
-     */
-    V toDense();
-
-    /**
-     * Turn the immutable flag on for this vector.
-     * @return V; the vector with a raised immutable flag
-     */
-    V immutable();
-
-    /**
-     * Turn the immutable flag off for this vector.
-     * @return V; the vector with a cleared immutable flag
-     */
-    V mutable();
 
     /**
      * Methods for Relative Vector. A possible way to implement this interface is:

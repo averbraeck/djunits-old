@@ -3,10 +3,9 @@ package org.djunits4.value.base;
 import org.djunits4.unit.AbsoluteLinearUnit;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.Absolute;
+import org.djunits4.value.IndexedValue;
 import org.djunits4.value.Relative;
-import org.djunits4.value.Value;
 import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.storage.StorageType;
 
 /**
  * Matrix to distinguish a matrix from scalars and matrixs. A possible way to implement this interface is:
@@ -24,7 +23,7 @@ import org.djunits4.value.storage.StorageType;
  * @param <M> the matrix type with the given unit
  */
 public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vector<U, S, V>, M extends Matrix<U, S, V, M>>
-        extends Value<U, M>
+        extends IndexedValue<U, S, M>
 {
     /**
      * Retrieve the number of rows of the matrix.
@@ -37,18 +36,6 @@ public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
      * @return int; the number of columns of the matrix
      */
     int cols();
-
-    /**
-     * Count the number of cells that have a non-zero value.
-     * @return int; the number of cells having non-zero value
-     */
-    int cardinality();
-
-    /**
-     * Return the class of the corresponding scalar.
-     * @return Class&lt;S&gt;; the class of the corresponding scalar
-     */
-    Class<S> getScalarClass();
 
     /**
      * Return the class of the corresponding vector.
@@ -116,38 +103,6 @@ public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
      * @throws ValueRuntimeException in case the matrix is not square
      */
     S[] getDiagonalScalars() throws ValueRuntimeException;
-
-    /**
-     * Return the StorageType (DENSE, SPARSE, etc.) for the stored matrix.
-     * @return StorageType; the storage type (DENSE, SPARSE, etc.) for the stored matrix
-     */
-    StorageType getStorageType();
-
-    /**
-     * Create and return a sparse version of this matrix. When the matrix data was already sparse, the current version is
-     * returned and no copy will be made of the data.
-     * @return V; a sparse version of this matrix
-     */
-    M toSparse();
-
-    /**
-     * Create and return a dense version of this matrix. When the matrix data was already dense, the current version is returned
-     * and no copy will be made of the data.
-     * @return V; a dense version of this matrix
-     */
-    M toDense();
-
-    /**
-     * Turn the immutable flag on for this matrix.
-     * @return V; the matrix with a raised immutable flag
-     */
-    M immutable();
-
-    /**
-     * Turn the immutable flag off for this matrix.
-     * @return V; the matrix with a cleared immutable flag
-     */
-    M mutable();
 
     /**
      * Methods for Relative Matrix. A possible way to implement this interface is:
