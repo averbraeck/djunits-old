@@ -53,21 +53,21 @@ public abstract class AbstractDoubleVectorAbs<
     @Override
     public AV plus(RV increment) throws ValueRuntimeException
     {
-        return DoubleVector.instantiate(this.getData().plus(increment.getData()), getUnit());
+        return DoubleVector.instantiate(this.getData().plus(increment.getData()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public AV minus(RV decrement) throws ValueRuntimeException
     {
-        return DoubleVector.instantiate(this.getData().minus(decrement.getData()), getUnit());
+        return DoubleVector.instantiate(this.getData().minus(decrement.getData()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public RV minus(AV decrement) throws ValueRuntimeException
     {
-        return DoubleVector.instantiate(this.getData().minus(decrement.getData()), decrement.getUnit().getRelativeUnit());
+        return DoubleVector.instantiate(this.getData().minus(decrement.getData()), decrement.getDisplayUnit().getRelativeUnit());
     }
 
     /**

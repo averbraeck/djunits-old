@@ -54,12 +54,12 @@ public class DoubleScalarConstructorsTest implements UNITS
             DoubleScalarInterface<?, ?> doubleScalar = (DoubleScalarInterface<?, ?>) constructor.newInstance(args);
             System.out.println(doubleScalar);
             assertEquals("Value must match", testValue, doubleScalar.getSI(), 0.1);
-            assertEquals("Unit must match", standardUnit, doubleScalar.getUnit());
+            assertEquals("Unit must match", standardUnit, doubleScalar.getDisplayUnit());
             constructor = scalarClass.getConstructor(doubleScalar.getClass());
             args = new Object[] { doubleScalar };
             DoubleScalarInterface<?, ?> secondaryDoubleScalar = (DoubleScalarInterface<?, ?>) constructor.newInstance(args);
             assertEquals("Value must match", testValue, secondaryDoubleScalar.getSI(), 0.1);
-            assertEquals("Unit must match", standardUnit, secondaryDoubleScalar.getUnit());
+            assertEquals("Unit must match", standardUnit, secondaryDoubleScalar.getDisplayUnit());
         }
     }
 }

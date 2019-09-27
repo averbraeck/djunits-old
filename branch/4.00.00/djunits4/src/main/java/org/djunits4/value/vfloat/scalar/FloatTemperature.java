@@ -112,14 +112,14 @@ public class FloatTemperature extends
      */
     public static FloatTemperature interpolate(final FloatTemperature zero, final FloatTemperature one, final float ratio)
     {
-        return new FloatTemperature(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatTemperature(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public final FloatAbsoluteTemperature plus(final FloatAbsoluteTemperature v)
     {
-        AbsoluteTemperatureUnit targetUnit = v.getUnit();
+        AbsoluteTemperatureUnit targetUnit = v.getDisplayUnit();
         return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 

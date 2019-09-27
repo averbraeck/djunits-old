@@ -91,7 +91,7 @@ public class FloatTime extends AbstractFloatScalarAbs<TimeUnit, FloatTime, Durat
      */
     public static FloatTime interpolate(final FloatTime zero, final FloatTime one, final float ratio)
     {
-        return new FloatTime(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatTime(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

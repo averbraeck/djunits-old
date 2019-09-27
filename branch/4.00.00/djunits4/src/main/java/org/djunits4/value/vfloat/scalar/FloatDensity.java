@@ -103,7 +103,7 @@ public class FloatDensity extends AbstractFloatScalarRel<DensityUnit, FloatDensi
      */
     public static FloatDensity interpolate(final FloatDensity zero, final FloatDensity one, final float ratio)
     {
-        return new FloatDensity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatDensity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

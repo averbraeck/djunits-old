@@ -102,14 +102,14 @@ public class Temperature
      */
     public static Temperature interpolate(final Temperature zero, final Temperature one, final double ratio)
     {
-        return new Temperature(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new Temperature(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public final AbsoluteTemperature plus(final AbsoluteTemperature v)
     {
-        AbsoluteTemperatureUnit targetUnit = v.getUnit();
+        AbsoluteTemperatureUnit targetUnit = v.getDisplayUnit();
         return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 

@@ -108,7 +108,7 @@ public class FloatVolume extends AbstractFloatScalarRel<VolumeUnit, FloatVolume>
      */
     public static FloatVolume interpolate(final FloatVolume zero, final FloatVolume one, final float ratio)
     {
-        return new FloatVolume(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatVolume(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

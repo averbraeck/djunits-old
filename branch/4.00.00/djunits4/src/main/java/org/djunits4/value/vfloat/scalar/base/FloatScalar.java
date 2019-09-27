@@ -218,7 +218,7 @@ public abstract class FloatScalar
     public static FloatSIScalar multiply(final AbstractFloatScalarRel<?, ?> left, final AbstractFloatScalarRel<?, ?> right)
     {
         SIUnit targetUnit = Unit.lookupOrCreateUnitWithSIDimensions(
-                left.getUnit().getUnitBase().getSiDimensions().plus(right.getUnit().getUnitBase().getSiDimensions()));
+                left.getDisplayUnit().getUnitBase().getSiDimensions().plus(right.getDisplayUnit().getUnitBase().getSiDimensions()));
         return new FloatSIScalar(left.getSI() * right.getSI(), targetUnit);
     }
 
@@ -231,7 +231,7 @@ public abstract class FloatScalar
     public static FloatSIScalar divide(final AbstractFloatScalarRel<?, ?> left, final AbstractFloatScalarRel<?, ?> right)
     {
         SIUnit targetUnit = Unit.lookupOrCreateUnitWithSIDimensions(
-                left.getUnit().getUnitBase().getSiDimensions().minus(right.getUnit().getUnitBase().getSiDimensions()));
+                left.getDisplayUnit().getUnitBase().getSiDimensions().minus(right.getDisplayUnit().getUnitBase().getSiDimensions()));
         return new FloatSIScalar(left.getSI() / right.getSI(), targetUnit);
     }
 
@@ -247,7 +247,7 @@ public abstract class FloatScalar
     public static <U extends Unit<U>, R extends AbstractFloatScalarRel<U, R>> R interpolate(final R zero, final R one,
             final float ratio)
     {
-        return zero.instantiateRel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return zero.instantiateRel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**
@@ -265,7 +265,7 @@ public abstract class FloatScalar
             R extends AbstractFloatScalarRelWithAbs<AU, A, RU, R>,
             A extends AbstractFloatScalarAbs<AU, A, RU, R>> A interpolate(final A zero, final A one, final float ratio)
     {
-        return zero.instantiateAbs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return zero.instantiateAbs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

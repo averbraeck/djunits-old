@@ -109,8 +109,8 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
     public static FloatElectricalCharge interpolate(final FloatElectricalCharge zero, final FloatElectricalCharge one,
             final float ratio)
     {
-        return new FloatElectricalCharge(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-                zero.getUnit());
+        return new FloatElectricalCharge(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**

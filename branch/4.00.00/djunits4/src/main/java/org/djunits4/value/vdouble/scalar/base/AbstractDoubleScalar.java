@@ -49,7 +49,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, S extends Abstract
     @Override
     public final double getInUnit()
     {
-        return ValueUtil.expressAsUnit(getSI(), getUnit());
+        return ValueUtil.expressAsUnit(getSI(), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -159,7 +159,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, S extends Abstract
     @Override
     public final String toString()
     {
-        return toString(getUnit(), false, true);
+        return toString(getDisplayUnit(), false, true);
     }
 
     /** {@inheritDoc} */
@@ -173,7 +173,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, S extends Abstract
     @Override
     public final String toString(final boolean verbose, final boolean withUnit)
     {
-        return toString(getUnit(), verbose, withUnit);
+        return toString(getDisplayUnit(), verbose, withUnit);
     }
 
     /** {@inheritDoc} */
@@ -201,7 +201,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, S extends Abstract
     public int hashCode()
     {
         final int prime = 31;
-        int result = getUnit().getStandardUnit().hashCode();
+        int result = getDisplayUnit().getStandardUnit().hashCode();
         long temp;
         temp = Double.doubleToLongBits(this.getSI());
         result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -220,7 +220,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, S extends Abstract
         if (getClass() != obj.getClass())
             return false;
         AbstractDoubleScalar<U, S> other = (AbstractDoubleScalar<U, S>) obj;
-        if (!getUnit().getStandardUnit().equals(other.getUnit().getStandardUnit()))
+        if (!getDisplayUnit().getStandardUnit().equals(other.getDisplayUnit().getStandardUnit()))
             return false;
         if (Double.doubleToLongBits(this.getSI()) != Double.doubleToLongBits(other.getSI()))
             return false;

@@ -39,7 +39,7 @@ public class FloatScalarTest
     {
         assertTrue("FloatScalar should not be null", null != ds);
         assertEquals("Value should match", reference, ds.getInUnit(), precision);
-        assertEquals("Unit should be " + u.toString(), u, ds.getUnit());
+        assertEquals("Unit should be " + u.toString(), u, ds.getDisplayUnit());
         assertTrue("Should be " + (expectAbsolute ? "Absolute" : "Relative"),
                 expectAbsolute ? ds.isAbsolute() : ds.isRelative());
     }
@@ -107,7 +107,7 @@ public class FloatScalarTest
         assertEquals("The underlying SI values are the same", ds.getSI(), dsWrongBaseUnit.getSI(), 0.0001);
         assertFalse("Not equals because the standard SI unit differs", ds.equals(dsWrongBaseUnit));
         FloatPosition dsCompatibleUnit = new FloatPosition(38000.0f, PositionUnit.MILLIMETER);
-        assertFalse("Units are different", ds.getUnit().equals(dsCompatibleUnit.getUnit()));
+        assertFalse("Units are different", ds.getDisplayUnit().equals(dsCompatibleUnit.getDisplayUnit()));
         assertTrue("equals returns true", ds.equals(dsCompatibleUnit));
         FloatPosition dsDifferentValue = new FloatPosition(123.456f, PositionUnit.MILLIMETER);
         assertFalse("Different value makes equals return false", ds.equals(dsDifferentValue));
@@ -273,7 +273,7 @@ public class FloatScalarTest
         assertEquals("The underlying SI values are the same", ds.getSI(), dsWrongBaseUnit.getSI(), 0.0001);
         assertFalse("Not equals because the standard SI unit differs", ds.equals(dsWrongBaseUnit));
         FloatLength dsCompatibleUnit = new FloatLength(38000.0, LengthUnit.MILLIMETER);
-        assertFalse("Units are different", ds.getUnit().equals(dsCompatibleUnit.getUnit()));
+        assertFalse("Units are different", ds.getDisplayUnit().equals(dsCompatibleUnit.getDisplayUnit()));
         assertTrue("equals returns true", ds.equals(dsCompatibleUnit));
         FloatLength dsDifferentValue = new FloatLength(123.456, LengthUnit.MILLIMETER);
         assertFalse("Different value makes equals return false", ds.equals(dsDifferentValue));

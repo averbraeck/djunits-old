@@ -101,7 +101,7 @@ public class DoubleVectorConstructorsTest
                 DoubleVectorInterface<?, ?, ?> doubleVector = DoubleVector.instantiate(testValues, standardUnit, storageType);
                 // System.out.println(doubleVector);
                 compareValuesWithScale(standardUnit.getScale(), testValues, doubleVector.getValuesSI());
-                assertEquals("Unit must match", standardUnit, doubleVector.getUnit());
+                assertEquals("Unit must match", standardUnit, doubleVector.getDisplayUnit());
                 assertEquals("StorageType must match", storageType, doubleVector.getStorageType());
                 assertEquals("Cardinality", cardinality, doubleVector.cardinality());
                 if (doubleVector instanceof Relative)
@@ -114,7 +114,7 @@ public class DoubleVectorConstructorsTest
                 compareValues(testValues, doubleVector.getValuesInUnit());
                 doubleVector = DoubleVector.instantiateSI(testValues, standardUnit, storageType);
                 compareValuesWithScale(standardUnit.getScale(), testValues, doubleVector.getValuesSI());
-                assertEquals("Unit must match", standardUnit, doubleVector.getUnit());
+                assertEquals("Unit must match", standardUnit, doubleVector.getDisplayUnit());
                 assertEquals("StorageType must match", storageType, doubleVector.getStorageType());
                 assertFalse("double vector is immutable by default", doubleVector.isMutable());
                 try
@@ -231,7 +231,7 @@ public class DoubleVectorConstructorsTest
                 for (Iterator<?> iterator = doubleVector.iterator(); iterator.hasNext();)
                 {
                     AbstractDoubleScalar<?, ?> s = (AbstractDoubleScalar<?, ?>) iterator.next();
-                    assertEquals("unit of scalar matches", s.getUnit(), standardUnit);
+                    assertEquals("unit of scalar matches", s.getDisplayUnit(), standardUnit);
                     assertEquals("value of scalar matches", s.getInUnit(), testValues[nextIndex], 0.001);
                     nextIndex++;
                 }
@@ -239,7 +239,7 @@ public class DoubleVectorConstructorsTest
                 // DoubleVectorInterface<?, ?, ?> secondary = DoubleVector.instantiateAnonymous(doubleVector.getScalars(),
                 // standardUnit);
                 doubleVector = DoubleVector.instantiate(list, standardUnit, storageType);
-                assertEquals("Unit must match", standardUnit, doubleVector.getUnit());
+                assertEquals("Unit must match", standardUnit, doubleVector.getDisplayUnit());
                 compareValuesWithScale(standardUnit.getScale(), testValues, doubleVector.getValuesSI());
                 doubleVector = DoubleVector.instantiate(map, testValues.length, standardUnit, storageType);
                 compareValuesWithScale(standardUnit.getScale(), testValues, doubleVector.getValuesSI());
@@ -250,12 +250,12 @@ public class DoubleVectorConstructorsTest
                 for (int i = 0; i < testValues.length; i++)
                 {
                     Scalar<?, ?> s = scalarValues[i];
-                    assertEquals("unit of scalar matches", s.getUnit(), standardUnit);
+                    assertEquals("unit of scalar matches", s.getDisplayUnit(), standardUnit);
                     assertEquals("value of scalar matches", ((AbstractDoubleScalar<?, ?>) s).getSI(), testValues[i], 0.001);
                 }
                 // TODO get this to compile: doubleVector = DoubleVector.instantiate(scalarValues, standardUnit, storageType);
                 doubleVector = DoubleVector.instantiateSI(list, standardUnit, storageType);
-                assertEquals("Unit must match", standardUnit, doubleVector.getUnit());
+                assertEquals("Unit must match", standardUnit, doubleVector.getDisplayUnit());
                 compareValuesWithScale(standardUnit.getScale(), testValues, doubleVector.getValuesSI());
             }
         }
@@ -307,96 +307,96 @@ public class DoubleVectorConstructorsTest
 
                 AbsoluteTemperatureVector atv = DoubleVector.instantiate(testValues, temperatureUnit, storageType);
                 compareValuesWithScale(temperatureUnit.getScale(), testValues, atv.getValuesSI());
-                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", offset == 0 ? cardinality : offsetCardinality, atv.cardinality());
                 atv = DoubleVector.instantiate(testValues, temperatureUnit, storageType, AbsoluteTemperatureVector.class);
                 compareValuesWithScale(temperatureUnit.getScale(), testValues, atv.getValuesSI());
-                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", offset == 0 ? cardinality : offsetCardinality, atv.cardinality());
 
                 atv = DoubleVector.instantiateSI(testValues, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
-                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
                 atv = DoubleVector.instantiateSI(testValues, temperatureUnit, storageType, AbsoluteTemperatureVector.class);
                 compareValues(testValues, atv.getValuesSI());
-                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
 
                 atv = DoubleVector.instantiateSI(adl, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
-                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
                 atv = DoubleVector.instantiateSI(adl, temperatureUnit, storageType, AbsoluteTemperatureVector.class);
                 compareValues(testValues, atv.getValuesSI());
-                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
 
                 atv = DoubleVector.instantiate(adl, temperatureUnit, storageType);
                 compareValuesWithScale(temperatureUnit.getScale(), testValues, atv.getValuesSI());
-                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", offset == 0 ? cardinality : offsetCardinality, atv.cardinality());
                 atv = DoubleVector.instantiate(adl, temperatureUnit, storageType, AbsoluteTemperatureVector.class);
                 compareValuesWithScale(temperatureUnit.getScale(), testValues, atv.getValuesSI());
-                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", offset == 0 ? cardinality : offsetCardinality, atv.cardinality());
 
                 atv = DoubleVector.instantiate(at, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
-                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
                 atv = DoubleVector.instantiate(at, temperatureUnit, storageType, AbsoluteTemperatureVector.class);
                 compareValues(testValues, atv.getValuesSI());
-                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
 
                 atv = DoubleVector.instantiateList(al, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
-                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
                 atv = DoubleVector.instantiateList(al, temperatureUnit, storageType, AbsoluteTemperatureVector.class);
                 compareValues(testValues, atv.getValuesSI());
-                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
 
                 atv = DoubleVector.instantiateMap(map, testValues.length, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
-                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
                 atv = DoubleVector.instantiateMap(map, testValues.length, temperatureUnit, storageType,
                         AbsoluteTemperatureVector.class);
                 compareValues(testValues, atv.getValuesSI());
-                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
 
                 atv = DoubleVector.instantiateMap(notQuiteSparseMap, testValues.length, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
-                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
                 atv = DoubleVector.instantiateMap(notQuiteSparseMap, testValues.length, temperatureUnit, storageType,
                         AbsoluteTemperatureVector.class);
                 compareValues(testValues, atv.getValuesSI());
-                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
 
                 atv = DoubleVector.instantiate(mapd, testValues.length, temperatureUnit, storageType);
                 compareValuesWithScale(temperatureUnit.getScale(), testValues, atv.getValuesSI());
-                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", offset == 0 ? cardinality : offsetCardinality, atv.cardinality());
                 atv = DoubleVector.instantiate(mapd, testValues.length, temperatureUnit, storageType,
                         AbsoluteTemperatureVector.class);
                 compareValuesWithScale(temperatureUnit.getScale(), testValues, atv.getValuesSI());
-                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", offset == 0 ? cardinality : offsetCardinality, atv.cardinality());
 
                 atv = DoubleVector.instantiateSI(mapd, testValues.length, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
-                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
                 atv = DoubleVector.instantiateSI(mapd, testValues.length, temperatureUnit, storageType,
                         AbsoluteTemperatureVector.class);
                 compareValues(testValues, atv.getValuesSI());
-                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
 
                 atv = DoubleVector.instantiate(testValues, temperatureUnit, storageType);
@@ -553,29 +553,28 @@ public class DoubleVectorConstructorsTest
                 AbsoluteTemperatureVector dense = atv.toDense();
                 assertTrue("Should be dense", dense.isDense());
                 assertFalse("Should be not be sparse", dense.isSparse());
-                assertEquals("Unit should be same", atv.getUnit(), dense.getUnit());
+                assertEquals("Unit should be same", atv.getDisplayUnit(), dense.getDisplayUnit());
                 compareValues(dense.getValuesInUnit(), atv.getValuesInUnit());
                 assertFalse("Should be immutable", dense.isMutable());
 
                 AbsoluteTemperatureVector sparse = atv.toSparse();
                 assertTrue("Should be sparse", sparse.isSparse());
                 assertFalse("Should not be be dense", sparse.isDense());
-                assertEquals("Unit should be same", atv.getUnit(), sparse.getUnit());
+                assertEquals("Unit should be same", atv.getDisplayUnit(), sparse.getDisplayUnit());
                 compareValues(sparse.getValuesInUnit(), atv.getValuesInUnit());
                 assertFalse("Should be immutable", sparse.isMutable());
 
-                AbsoluteTemperatureVector copy = atv.copy();
+                AbsoluteTemperatureVector copy = atv.clone();
                 assertEquals("storagetype should not have changed", atv.getStorageType(), copy.getStorageType());
-                assertEquals("unit should be same", atv.getUnit(), copy.getUnit());
+                assertEquals("unit should be same", atv.getDisplayUnit(), copy.getDisplayUnit());
                 compareValues(atv.getValuesInUnit(), copy.getValuesInUnit());
                 assertFalse("copy is immutable", copy.isMutable());
 
-                copy = matv.copy();
+                copy = matv.clone();
                 assertEquals("storagetype should not have changed", matv.getStorageType(), copy.getStorageType());
-                assertEquals("unit should be same", matv.getUnit(), copy.getUnit());
+                assertEquals("unit should be same", matv.getDisplayUnit(), copy.getDisplayUnit());
                 compareValues(matv.getValuesInUnit(), copy.getValuesInUnit());
-                assertFalse("copy is immutable", copy.isMutable());
-                // FIXME should copy of a mutable be immutable?
+                assertTrue("copy is immutable", copy.isMutable());
             }
         }
     }
@@ -729,7 +728,7 @@ public class DoubleVectorConstructorsTest
                 for (iterator = siv.iterator(); iterator.hasNext();)
                 {
                     AbstractDoubleScalar<?, ?> s = (AbstractDoubleScalar<?, ?>) iterator.next();
-                    assertEquals("SIDimensions match", s.getUnit().getUnitBase().getSiDimensions(), unitBase.getSiDimensions());
+                    assertEquals("SIDimensions match", s.getDisplayUnit().getUnitBase().getSiDimensions(), unitBase.getSiDimensions());
                     assertEquals("value of scalar matches", s.getInUnit(), testValues[nextIndex], 0.001);
                     nextIndex++;
                     try
@@ -1049,13 +1048,13 @@ public class DoubleVectorConstructorsTest
                         SIVector mult = vector.times(dimless);
                         Method asMethod = SIVector.class.getDeclaredMethod("as" + type);
                         AbstractDoubleVectorRel<U, ?, ?> asVector = (AbstractDoubleVectorRel<U, ?, ?>) asMethod.invoke(mult);
-                        assertEquals(vector.getUnit().getStandardUnit(), asVector.getUnit());
+                        assertEquals(vector.getDisplayUnit().getStandardUnit(), asVector.getDisplayUnit());
                         compareValuesWithScale(unit.getScale(), testValues, mult.getValuesSI());
 
                         Method asMethodDisplayUnit = SIVector.class.getDeclaredMethod("as" + type, unit.getClass());
                         AbstractDoubleVectorRel<U, ?, ?> asVectorDisplayUnit =
                                 (AbstractDoubleVectorRel<U, ?, ?>) asMethodDisplayUnit.invoke(mult, unit.getStandardUnit());
-                        assertEquals(vector.getUnit().getStandardUnit(), asVectorDisplayUnit.getUnit());
+                        assertEquals(vector.getDisplayUnit().getStandardUnit(), asVectorDisplayUnit.getDisplayUnit());
                         compareValuesWithScale(unit.getScale(), testValues, asVectorDisplayUnit.getValuesSI());
 
                         // test exception for wrong 'as'
@@ -1074,7 +1073,7 @@ public class DoubleVectorConstructorsTest
                         try
                         {
                             AbstractDoubleScalarRel<?, ?> asScalarDim =
-                                    (AbstractDoubleScalarRel<?, ?>) asMethodDisplayUnit.invoke(cd4sr2, vector.getUnit());
+                                    (AbstractDoubleScalarRel<?, ?>) asMethodDisplayUnit.invoke(cd4sr2, vector.getDisplayUnit());
                             fail("should not be able to carry out 'as'" + type + " on cd4/sr2 SI unit -- resulted in "
                                     + asScalarDim);
                         }
@@ -1125,13 +1124,13 @@ public class DoubleVectorConstructorsTest
                         SIVector mult = vector.times(dimless);
                         Method asMethod = SIVector.class.getDeclaredMethod("as" + type);
                         AbstractDoubleVectorRel<U, ?, ?> asVector = (AbstractDoubleVectorRel<U, ?, ?>) asMethod.invoke(mult);
-                        assertEquals(vector.getUnit().getStandardUnit(), asVector.getUnit());
+                        assertEquals(vector.getDisplayUnit().getStandardUnit(), asVector.getDisplayUnit());
                         compareValuesWithScale(unit.getScale(), testValues, mult.getValuesSI());
 
                         Method asMethodDisplayUnit = SIVector.class.getDeclaredMethod("as" + type, unit.getClass());
                         AbstractDoubleVectorRel<U, ?, ?> asVectorDisplayUnit =
                                 (AbstractDoubleVectorRel<U, ?, ?>) asMethodDisplayUnit.invoke(mult, unit.getStandardUnit());
-                        assertEquals(vector.getUnit().getStandardUnit(), asVectorDisplayUnit.getUnit());
+                        assertEquals(vector.getDisplayUnit().getStandardUnit(), asVectorDisplayUnit.getDisplayUnit());
                         compareValuesWithScale(unit.getScale(), testValues, asVectorDisplayUnit.getValuesSI());
 
                         // test exception for wrong 'as'
@@ -1150,7 +1149,7 @@ public class DoubleVectorConstructorsTest
                         try
                         {
                             AbstractDoubleScalarRel<?, ?> asScalarDim =
-                                    (AbstractDoubleScalarRel<?, ?>) asMethodDisplayUnit.invoke(cd4sr2, vector.getUnit());
+                                    (AbstractDoubleScalarRel<?, ?>) asMethodDisplayUnit.invoke(cd4sr2, vector.getDisplayUnit());
                             fail("should not be able to carry out 'as'" + type + " on cd4/sr2 SI unit -- resulted in "
                                     + asScalarDim);
                         }
@@ -1195,7 +1194,7 @@ public class DoubleVectorConstructorsTest
                         Method asMethod = SIVector.class.getDeclaredMethod("as", Unit.class);
                         AbstractDoubleVectorRel<U, ?, ?> asVector =
                                 (AbstractDoubleVectorRel<U, ?, ?>) asMethod.invoke(vector, siUnit);
-                        assertEquals(vector.getUnit().getStandardUnit(), asVector.getUnit());
+                        assertEquals(vector.getDisplayUnit().getStandardUnit(), asVector.getDisplayUnit());
                         siUnit = SIUnit.of(AbsoluteTemperatureUnit.KELVIN.getUnitBase().getSiDimensions());
                         compareValues(testValues, asVector.getValuesSI());
                         try

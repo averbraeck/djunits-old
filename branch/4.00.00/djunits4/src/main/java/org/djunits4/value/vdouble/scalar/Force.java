@@ -99,7 +99,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
      */
     public static Force interpolate(final Force zero, final Force one, final double ratio)
     {
-        return new Force(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new Force(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

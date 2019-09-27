@@ -104,7 +104,7 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
      */
     public static FloatPressure interpolate(final FloatPressure zero, final FloatPressure one, final float ratio)
     {
-        return new FloatPressure(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatPressure(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

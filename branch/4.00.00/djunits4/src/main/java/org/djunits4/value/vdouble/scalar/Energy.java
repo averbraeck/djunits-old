@@ -97,7 +97,7 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
      */
     public static Energy interpolate(final Energy zero, final Energy one, final double ratio)
     {
-        return new Energy(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new Energy(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

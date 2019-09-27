@@ -98,7 +98,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
      */
     public static Torque interpolate(final Torque zero, final Torque one, final double ratio)
     {
-        return new Torque(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new Torque(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

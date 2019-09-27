@@ -99,7 +99,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
      */
     public static Speed interpolate(final Speed zero, final Speed one, final double ratio)
     {
-        return new Speed(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new Speed(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

@@ -91,7 +91,7 @@ public class LuminousFlux extends AbstractDoubleScalarRel<LuminousFluxUnit, Lumi
      */
     public static LuminousFlux interpolate(final LuminousFlux zero, final LuminousFlux one, final double ratio)
     {
-        return new LuminousFlux(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new LuminousFlux(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

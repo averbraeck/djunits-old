@@ -107,8 +107,8 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
     public static FloatElectricalCapacitance interpolate(final FloatElectricalCapacitance zero,
             final FloatElectricalCapacitance one, final float ratio)
     {
-        return new FloatElectricalCapacitance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-                zero.getUnit());
+        return new FloatElectricalCapacitance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**

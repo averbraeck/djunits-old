@@ -58,8 +58,8 @@ public abstract class AbstractFloatScalarRelWithAbs<AU extends AbsoluteLinearUni
     @Override
     public A plus(final A increment)
     {
-        A result = instantiateAbs(this.getSI() + increment.getSI(), increment.getUnit().getStandardUnit());
-        result.setDisplayUnit(increment.getUnit());
+        A result = instantiateAbs(this.getSI() + increment.getSI(), increment.getDisplayUnit().getStandardUnit());
+        result.setDisplayUnit(increment.getDisplayUnit());
         return result;
     }
 

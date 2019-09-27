@@ -97,7 +97,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
      */
     public static Area interpolate(final Area zero, final Area one, final double ratio)
     {
-        return new Area(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new Area(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

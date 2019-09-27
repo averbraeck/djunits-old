@@ -107,14 +107,14 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
      */
     public static Length interpolate(final Length zero, final Length one, final double ratio)
     {
-        return new Length(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new Length(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public final Position plus(final Position v)
     {
-        PositionUnit targetUnit = v.getUnit();
+        PositionUnit targetUnit = v.getDisplayUnit();
         return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 

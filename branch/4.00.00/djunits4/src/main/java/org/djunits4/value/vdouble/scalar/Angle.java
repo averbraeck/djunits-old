@@ -101,14 +101,14 @@ public class Angle extends AbstractDoubleScalarRelWithAbs<DirectionUnit, Directi
      */
     public static Angle interpolate(final Angle zero, final Angle one, final double ratio)
     {
-        return new Angle(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new Angle(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public final Direction plus(final Direction v)
     {
-        DirectionUnit targetUnit = v.getUnit();
+        DirectionUnit targetUnit = v.getDisplayUnit();
         return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 

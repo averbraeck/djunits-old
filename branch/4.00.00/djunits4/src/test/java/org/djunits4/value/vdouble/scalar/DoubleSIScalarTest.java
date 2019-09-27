@@ -44,7 +44,7 @@ public class DoubleSIScalarTest
         Length l = Length.valueOf("50.0 m");
         SIScalar pace = DoubleScalar.divide(d, l);
         System.out.println("pace = " + pace);
-        assertEquals("pace has as unit " + pace.getUnit().toString() + " instead of s/m", "s/m", pace.getUnit().toString());
+        assertEquals("pace has as unit " + pace.getDisplayUnit().toString() + " instead of s/m", "s/m", pace.getDisplayUnit().toString());
         assertEquals(0.2, pace.getSI(), 0.00001);
         assertTrue(pace.toString().startsWith("0.200"));
         assertTrue(pace.toString().endsWith("s/m"));
@@ -53,17 +53,17 @@ public class DoubleSIScalarTest
         ElectricalResistance ohm90 = new ElectricalResistance(90, ElectricalResistanceUnit.KILOOHM);
         Speed pace2xAsSpeed = pace.times(ohm180).divide(ohm90).reciprocal().as(SpeedUnit.SI);
         System.out.println("pace2x = " + pace2xAsSpeed);
-        assertEquals("m/s", pace2xAsSpeed.getUnit().toString());
+        assertEquals("m/s", pace2xAsSpeed.getDisplayUnit().toString());
         assertEquals(2.5, pace2xAsSpeed.getSI(), 0.00001);
 
         Speed pace2xAsSpeedMih = pace.times(ohm180).divide(ohm90).reciprocal().as(SpeedUnit.MILE_PER_HOUR);
         System.out.println("pace2xMi/h = " + pace2xAsSpeedMih);
-        assertEquals("mi/h", pace2xAsSpeedMih.getUnit().toString());
+        assertEquals("mi/h", pace2xAsSpeedMih.getDisplayUnit().toString());
         assertEquals(2.5, pace2xAsSpeedMih.getSI(), 0.00001);
 
         Speed speed = pace.reciprocal().as(SpeedUnit.SI);
         System.out.println("speed = " + speed);
-        assertEquals("m/s", speed.getUnit().toString());
+        assertEquals("m/s", speed.getDisplayUnit().toString());
         assertEquals(5.0, speed.getSI(), 0.00001);
         assertTrue(speed.toString().startsWith("5.000"));
         assertTrue(speed.toString().endsWith("m/s"));
@@ -72,7 +72,7 @@ public class DoubleSIScalarTest
 
         Speed speedKmh = pace.reciprocal().as(SpeedUnit.KM_PER_HOUR);
         System.out.println("speedKm/h = " + speedKmh);
-        assertEquals("km/h", speedKmh.getUnit().toString());
+        assertEquals("km/h", speedKmh.getDisplayUnit().toString());
         assertEquals(5.0, speedKmh.getSI(), 0.00001);
         assertTrue(speedKmh.toString().startsWith("18.000"));
         assertTrue(speedKmh.toString().endsWith("km/h"));
@@ -128,11 +128,11 @@ public class DoubleSIScalarTest
                     SIScalar scalar12b = scalar1.times(scalar2);
                     SIScalar scalar12c = scalar2.times(scalar1);
                     assertEquals(scalar12a.si, scalar12b.si, scalar12a.si / 10000.0);
-                    assertEquals("scalar12a.getUnit(): [" + scalar12a.getUnit() + "] != scalar12b.getUnit(): ["
-                            + scalar12b.getUnit() + "]", scalar12a.getUnit(), scalar12b.getUnit());
+                    assertEquals("scalar12a.getUnit(): [" + scalar12a.getDisplayUnit() + "] != scalar12b.getUnit(): ["
+                            + scalar12b.getDisplayUnit() + "]", scalar12a.getDisplayUnit(), scalar12b.getDisplayUnit());
                     assertEquals(scalar12a.si, scalar12c.si, scalar12a.si / 10000.0);
-                    assertEquals(scalar12a.getUnit(), scalar12c.getUnit());
-                    assertEquals(siDim1.plus(siDim2), scalar12a.getUnit().getUnitBase().getSiDimensions());
+                    assertEquals(scalar12a.getDisplayUnit(), scalar12c.getDisplayUnit());
+                    assertEquals(siDim1.plus(siDim2), scalar12a.getDisplayUnit().getUnitBase().getSiDimensions());
                     assertFalse(scalar12a.si == 0.0);
                     assertFalse(Double.isInfinite(scalar12a.si));
                     assertFalse(Double.isNaN(scalar12a.si));
@@ -171,10 +171,10 @@ public class DoubleSIScalarTest
                     SIScalar scalar12b = scalar1.divide(scalar2);
                     SIScalar scalar12c = scalar2.divide(scalar1);
                     assertEquals(scalar12a.si, scalar12b.si, scalar12a.si / 10000.0);
-                    assertEquals("scalar12a.getUnit(): [" + scalar12a.getUnit() + "] != scalar12b.getUnit(): ["
-                            + scalar12b.getUnit() + "]", scalar12a.getUnit(), scalar12b.getUnit());
-                    assertEquals(siDim1.minus(siDim2), scalar12b.getUnit().getUnitBase().getSiDimensions());
-                    assertEquals(siDim2.minus(siDim1), scalar12c.getUnit().getUnitBase().getSiDimensions());
+                    assertEquals("scalar12a.getUnit(): [" + scalar12a.getDisplayUnit() + "] != scalar12b.getUnit(): ["
+                            + scalar12b.getDisplayUnit() + "]", scalar12a.getDisplayUnit(), scalar12b.getDisplayUnit());
+                    assertEquals(siDim1.minus(siDim2), scalar12b.getDisplayUnit().getUnitBase().getSiDimensions());
+                    assertEquals(siDim2.minus(siDim1), scalar12c.getDisplayUnit().getUnitBase().getSiDimensions());
                     assertFalse(scalar12a.si == 0.0);
                     assertFalse(Double.isInfinite(scalar12a.si));
                     assertFalse(Double.isNaN(scalar12a.si));
@@ -212,13 +212,13 @@ public class DoubleSIScalarTest
                 SIScalar mult = scalar.times(dimless);
                 Method asMethod = SIScalar.class.getDeclaredMethod("as" + type);
                 AbstractDoubleScalarRel<?, ?> asScalar = (AbstractDoubleScalarRel<?, ?>) asMethod.invoke(mult);
-                assertEquals(scalar.getUnit().getStandardUnit(), asScalar.getUnit());
+                assertEquals(scalar.getDisplayUnit().getStandardUnit(), asScalar.getDisplayUnit());
                 assertEquals(scalar.si, asScalar.si, scalar.si / 1000.0);
 
                 Method asMethodDisplayUnit = SIScalar.class.getDeclaredMethod("as" + type, unit.getClass());
                 AbstractDoubleScalarRel<?, ?> asScalarDisplayUnit =
                         (AbstractDoubleScalarRel<?, ?>) asMethodDisplayUnit.invoke(mult, unit.getStandardUnit());
-                assertEquals(scalar.getUnit().getStandardUnit(), asScalarDisplayUnit.getUnit());
+                assertEquals(scalar.getDisplayUnit().getStandardUnit(), asScalarDisplayUnit.getDisplayUnit());
                 assertEquals(scalar.si, asScalarDisplayUnit.si, scalar.si / 1000.0);
 
                 // test exception for wrong 'as'
@@ -236,7 +236,7 @@ public class DoubleSIScalarTest
                 try
                 {
                     AbstractDoubleScalarRel<?, ?> asScalarDim =
-                            (AbstractDoubleScalarRel<?, ?>) asMethodDisplayUnit.invoke(cd4sr2, scalar.getUnit());
+                            (AbstractDoubleScalarRel<?, ?>) asMethodDisplayUnit.invoke(cd4sr2, scalar.getDisplayUnit());
                     fail("should not be able to carry out 'as'" + type + " on cd4/sr2 SI unit -- resulted in " + asScalarDim);
                 }
                 catch (InvocationTargetException | UnitRuntimeException e)

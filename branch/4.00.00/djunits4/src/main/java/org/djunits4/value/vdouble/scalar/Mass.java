@@ -97,7 +97,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
      */
     public static Mass interpolate(final Mass zero, final Mass one, final double ratio)
     {
-        return new Mass(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new Mass(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

@@ -117,14 +117,14 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
      */
     public static FloatLength interpolate(final FloatLength zero, final FloatLength one, final float ratio)
     {
-        return new FloatLength(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatLength(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public final FloatPosition plus(final FloatPosition v)
     {
-        PositionUnit targetUnit = v.getUnit();
+        PositionUnit targetUnit = v.getDisplayUnit();
         return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 

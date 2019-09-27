@@ -46,8 +46,8 @@ public abstract class AbstractFloatVectorRel<U extends Unit<U>, S extends Abstra
      */
     public final S zSum()
     {
-        S result = FloatScalar.instantiate(this.data.zSum(), getUnit().getStandardUnit());
-        result.setDisplayUnit(getUnit());
+        S result = FloatScalar.instantiate(this.data.zSum(), getDisplayUnit().getStandardUnit());
+        result.setDisplayUnit(getDisplayUnit());
         return result;
     }
 
@@ -55,14 +55,14 @@ public abstract class AbstractFloatVectorRel<U extends Unit<U>, S extends Abstra
     @Override
     public final RV plus(final RV rel) throws ValueRuntimeException
     {
-        return FloatVector.instantiate(this.getData().plus(rel.getData()), getUnit());
+        return FloatVector.instantiate(this.getData().plus(rel.getData()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public final RV minus(final RV rel) throws ValueRuntimeException
     {
-        return FloatVector.instantiate(this.getData().minus(rel.getData()), getUnit());
+        return FloatVector.instantiate(this.getData().minus(rel.getData()), getDisplayUnit());
     }
 
     /**
@@ -157,7 +157,7 @@ public abstract class AbstractFloatVectorRel<U extends Unit<U>, S extends Abstra
     {
         checkSize(rel);
         return new FloatSIVector(this.getData().times(rel.getData()),
-                SIUnit.of(getUnit().getUnitBase().getSiDimensions().plus(rel.getUnit().getUnitBase().getSiDimensions())));
+                SIUnit.of(getDisplayUnit().getUnitBase().getSiDimensions().plus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
     }
 
     /**
@@ -174,6 +174,6 @@ public abstract class AbstractFloatVectorRel<U extends Unit<U>, S extends Abstra
     {
         checkSize(rel);
         return new FloatSIVector(this.getData().divide(rel.getData()),
-                SIUnit.of(getUnit().getUnitBase().getSiDimensions().minus(rel.getUnit().getUnitBase().getSiDimensions())));
+                SIUnit.of(getDisplayUnit().getUnitBase().getSiDimensions().minus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
     }
 }

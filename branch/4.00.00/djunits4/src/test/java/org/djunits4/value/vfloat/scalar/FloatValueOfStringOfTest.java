@@ -80,7 +80,7 @@ public class FloatValueOfStringOfTest
             }
 
             // get the unit
-            Unit<?> unitSI = scalarSI.getUnit();
+            Unit<?> unitSI = scalarSI.getDisplayUnit();
 
             // get the constructor
             Constructor<?> constructScalar = null;

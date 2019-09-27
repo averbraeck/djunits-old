@@ -59,21 +59,21 @@ public abstract class AbstractDoubleMatrixAbs<
     @Override
     public AM plus(RM increment) throws ValueRuntimeException
     {
-        return DoubleMatrix.instantiate(this.getData().plus(increment.getData()), getUnit());
+        return DoubleMatrix.instantiate(this.getData().plus(increment.getData()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public AM minus(RM decrement) throws ValueRuntimeException
     {
-        return DoubleMatrix.instantiate(this.getData().minus(decrement.getData()), getUnit());
+        return DoubleMatrix.instantiate(this.getData().minus(decrement.getData()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public RM minus(AM decrement) throws ValueRuntimeException
     {
-        return DoubleMatrix.instantiate(this.getData().minus(decrement.getData()), decrement.getUnit().getRelativeUnit());
+        return DoubleMatrix.instantiate(this.getData().minus(decrement.getData()), decrement.getDisplayUnit().getRelativeUnit());
     }
 
     /**

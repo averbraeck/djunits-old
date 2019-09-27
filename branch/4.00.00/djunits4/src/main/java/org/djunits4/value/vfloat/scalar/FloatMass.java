@@ -107,7 +107,7 @@ public class FloatMass extends AbstractFloatScalarRel<MassUnit, FloatMass>
      */
     public static FloatMass interpolate(final FloatMass zero, final FloatMass one, final float ratio)
     {
-        return new FloatMass(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatMass(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

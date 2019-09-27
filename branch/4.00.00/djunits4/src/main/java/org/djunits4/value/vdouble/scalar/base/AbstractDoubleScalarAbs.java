@@ -44,7 +44,7 @@ public abstract class AbstractDoubleScalarAbs<AU extends AbsoluteLinearUnit<AU, 
      */
     public AbstractDoubleScalarAbs(final A value)
     {
-        super(value.getUnit(), value.getSI());
+        super(value.getDisplayUnit(), value.getSI());
     }
 
     /**
@@ -65,18 +65,9 @@ public abstract class AbstractDoubleScalarAbs<AU extends AbsoluteLinearUnit<AU, 
 
     /** {@inheritDoc} */
     @Override
-    public A copy()
-    {
-        A result = instantiateAbs(getSI(), getUnit().getStandardUnit());
-        result.setDisplayUnit(getUnit());
-        return result;
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final A plus(final R increment)
     {
-        AU targetUnit = getUnit();
+        AU targetUnit = getDisplayUnit();
         return instantiateAbs(getInUnit() + increment.getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 
@@ -84,7 +75,7 @@ public abstract class AbstractDoubleScalarAbs<AU extends AbsoluteLinearUnit<AU, 
     @Override
     public final A minus(final R decrement)
     {
-        AU targetUnit = getUnit();
+        AU targetUnit = getDisplayUnit();
         return instantiateAbs(getInUnit() - decrement.getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 
@@ -92,8 +83,8 @@ public abstract class AbstractDoubleScalarAbs<AU extends AbsoluteLinearUnit<AU, 
     @Override
     public final R minus(final A decrement)
     {
-        RU targetUnit = getUnit().getRelativeUnit();
-        return instantiateRel(getInUnit() - decrement.getInUnit(getUnit()), targetUnit);
+        RU targetUnit = getDisplayUnit().getRelativeUnit();
+        return instantiateRel(getInUnit() - decrement.getInUnit(getDisplayUnit()), targetUnit);
     }
 
     /**
@@ -110,7 +101,7 @@ public abstract class AbstractDoubleScalarAbs<AU extends AbsoluteLinearUnit<AU, 
     public static <AU extends AbsoluteLinearUnit<AU, RU>, A extends AbstractDoubleScalarAbs<AU, A, RU, R>, RU extends Unit<RU>,
             R extends AbstractDoubleScalarRelWithAbs<AU, A, RU, R>> A interpolate(final A zero, final A one, final double ratio)
     {
-        return zero.instantiateAbs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return zero.instantiateAbs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**********************************************************************************/
@@ -122,7 +113,7 @@ public abstract class AbstractDoubleScalarAbs<AU extends AbsoluteLinearUnit<AU, 
     @SuppressWarnings("checkstyle:designforextension")
     public A abs()
     {
-        return instantiateAbs(Math.abs(getInUnit()), getUnit());
+        return instantiateAbs(Math.abs(getInUnit()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -130,7 +121,7 @@ public abstract class AbstractDoubleScalarAbs<AU extends AbsoluteLinearUnit<AU, 
     @SuppressWarnings("checkstyle:designforextension")
     public A ceil()
     {
-        return instantiateAbs(Math.ceil(getInUnit()), getUnit());
+        return instantiateAbs(Math.ceil(getInUnit()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -138,7 +129,7 @@ public abstract class AbstractDoubleScalarAbs<AU extends AbsoluteLinearUnit<AU, 
     @SuppressWarnings("checkstyle:designforextension")
     public A floor()
     {
-        return instantiateAbs(Math.floor(getInUnit()), getUnit());
+        return instantiateAbs(Math.floor(getInUnit()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -146,7 +137,7 @@ public abstract class AbstractDoubleScalarAbs<AU extends AbsoluteLinearUnit<AU, 
     @SuppressWarnings("checkstyle:designforextension")
     public A neg()
     {
-        return instantiateAbs(-getInUnit(), getUnit());
+        return instantiateAbs(-getInUnit(), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -154,7 +145,7 @@ public abstract class AbstractDoubleScalarAbs<AU extends AbsoluteLinearUnit<AU, 
     @SuppressWarnings("checkstyle:designforextension")
     public A rint()
     {
-        return instantiateAbs(Math.rint(getInUnit()), getUnit());
+        return instantiateAbs(Math.rint(getInUnit()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -162,7 +153,7 @@ public abstract class AbstractDoubleScalarAbs<AU extends AbsoluteLinearUnit<AU, 
     @SuppressWarnings("checkstyle:designforextension")
     public A times(final double constant)
     {
-        return instantiateAbs(getInUnit() * constant, getUnit());
+        return instantiateAbs(getInUnit() * constant, getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -170,7 +161,7 @@ public abstract class AbstractDoubleScalarAbs<AU extends AbsoluteLinearUnit<AU, 
     @SuppressWarnings("checkstyle:designforextension")
     public A divide(final double constant)
     {
-        return instantiateAbs(getInUnit() / constant, getUnit());
+        return instantiateAbs(getInUnit() / constant, getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -178,7 +169,7 @@ public abstract class AbstractDoubleScalarAbs<AU extends AbsoluteLinearUnit<AU, 
     @SuppressWarnings("checkstyle:designforextension")
     public A times(final float constant)
     {
-        return instantiateAbs(getInUnit() * constant, getUnit());
+        return instantiateAbs(getInUnit() * constant, getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -186,7 +177,7 @@ public abstract class AbstractDoubleScalarAbs<AU extends AbsoluteLinearUnit<AU, 
     @SuppressWarnings("checkstyle:designforextension")
     public A divide(final float constant)
     {
-        return instantiateAbs(getInUnit() / constant, getUnit());
+        return instantiateAbs(getInUnit() / constant, getDisplayUnit());
     }
 
 }

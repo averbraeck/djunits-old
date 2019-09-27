@@ -108,7 +108,7 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
      */
     public static FloatPower interpolate(final FloatPower zero, final FloatPower one, final float ratio)
     {
-        return new FloatPower(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatPower(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

@@ -108,7 +108,7 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
      */
     public static FloatTorque interpolate(final FloatTorque zero, final FloatTorque one, final float ratio)
     {
-        return new FloatTorque(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatTorque(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

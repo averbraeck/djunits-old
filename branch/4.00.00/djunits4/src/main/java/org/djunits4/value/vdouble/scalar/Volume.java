@@ -98,7 +98,7 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
      */
     public static Volume interpolate(final Volume zero, final Volume one, final double ratio)
     {
-        return new Volume(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new Volume(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

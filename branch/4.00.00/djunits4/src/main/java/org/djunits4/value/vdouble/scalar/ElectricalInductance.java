@@ -96,7 +96,7 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
     public static ElectricalInductance interpolate(final ElectricalInductance zero, final ElectricalInductance one,
             final double ratio)
     {
-        return new ElectricalInductance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new ElectricalInductance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

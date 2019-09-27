@@ -96,8 +96,8 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
     public static ElectricalConductance interpolate(final ElectricalConductance zero, final ElectricalConductance one,
             final double ratio)
     {
-        return new ElectricalConductance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-                zero.getUnit());
+        return new ElectricalConductance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**

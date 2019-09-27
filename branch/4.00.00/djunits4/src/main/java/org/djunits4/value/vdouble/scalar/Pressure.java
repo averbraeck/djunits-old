@@ -94,7 +94,7 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
      */
     public static Pressure interpolate(final Pressure zero, final Pressure one, final double ratio)
     {
-        return new Pressure(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new Pressure(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

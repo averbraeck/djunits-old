@@ -95,7 +95,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
      */
     public static Frequency interpolate(final Frequency zero, final Frequency one, final double ratio)
     {
-        return new Frequency(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new Frequency(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

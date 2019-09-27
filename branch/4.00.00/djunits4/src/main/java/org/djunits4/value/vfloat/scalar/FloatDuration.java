@@ -117,14 +117,14 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
      */
     public static FloatDuration interpolate(final FloatDuration zero, final FloatDuration one, final float ratio)
     {
-        return new FloatDuration(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatDuration(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public final FloatTime plus(final FloatTime v)
     {
-        TimeUnit targetUnit = v.getUnit();
+        TimeUnit targetUnit = v.getDisplayUnit();
         return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 

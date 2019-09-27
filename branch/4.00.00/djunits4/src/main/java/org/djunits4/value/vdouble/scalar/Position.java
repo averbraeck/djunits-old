@@ -81,7 +81,7 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
      */
     public static Position interpolate(final Position zero, final Position one, final double ratio)
     {
-        return new Position(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new Position(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

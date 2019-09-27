@@ -52,7 +52,7 @@ public abstract class AbstractDoubleVectorRelWithAbs<
     @Override
     public AV plus(AV increment)
     {
-        return DoubleVector.instantiate(this.getData().plus(increment.getData()), increment.getUnit().getStandardUnit());
+        return DoubleVector.instantiate(this.getData().plus(increment.getData()), increment.getDisplayUnit().getStandardUnit());
     }
 
 }

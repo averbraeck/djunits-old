@@ -105,7 +105,7 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
      */
     public static FloatFrequency interpolate(final FloatFrequency zero, final FloatFrequency one, final float ratio)
     {
-        return new FloatFrequency(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatFrequency(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

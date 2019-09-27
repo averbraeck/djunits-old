@@ -41,7 +41,7 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
      */
     public AbstractDoubleScalarRel(final R value)
     {
-        super(value.getUnit(), value.getSI());
+        super(value.getDisplayUnit(), value.getSI());
     }
 
     /**
@@ -54,35 +54,26 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
 
     /** {@inheritDoc} */
     @Override
-    public R copy()
-    {
-        R result = instantiateRel(getSI(), getUnit().getStandardUnit());
-        result.setDisplayUnit(getUnit());
-        return result;
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final R plus(final R increment)
     {
-        if (getUnit().isBaseSIUnit())
+        if (getDisplayUnit().isBaseSIUnit())
         {
-            return instantiateRel(this.getSI() + increment.getSI(), getUnit().getStandardUnit());
+            return instantiateRel(this.getSI() + increment.getSI(), getDisplayUnit().getStandardUnit());
         }
-        return getUnit().equals(increment.getUnit()) ? instantiateRel(getInUnit() + increment.getInUnit(), getUnit())
-                : instantiateRel(this.getSI() + increment.getSI(), getUnit().getStandardUnit());
+        return getDisplayUnit().equals(increment.getDisplayUnit()) ? instantiateRel(getInUnit() + increment.getInUnit(), getDisplayUnit())
+                : instantiateRel(this.getSI() + increment.getSI(), getDisplayUnit().getStandardUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public final R minus(final R decrement)
     {
-        if (getUnit().isBaseSIUnit())
+        if (getDisplayUnit().isBaseSIUnit())
         {
-            return instantiateRel(this.getSI() - decrement.getSI(), getUnit().getStandardUnit());
+            return instantiateRel(this.getSI() - decrement.getSI(), getDisplayUnit().getStandardUnit());
         }
-        return getUnit().equals(decrement.getUnit()) ? instantiateRel(getInUnit() - decrement.getInUnit(), getUnit())
-                : instantiateRel(this.getSI() - decrement.getSI(), getUnit().getStandardUnit());
+        return getDisplayUnit().equals(decrement.getDisplayUnit()) ? instantiateRel(getInUnit() - decrement.getInUnit(), getDisplayUnit())
+                : instantiateRel(this.getSI() - decrement.getSI(), getDisplayUnit().getStandardUnit());
     }
 
     /**
@@ -97,7 +88,7 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
     public static <U extends Unit<U>, R extends AbstractDoubleScalarRel<U, R>> R interpolate(final R zero, final R one,
             final double ratio)
     {
-        return zero.instantiateRel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return zero.instantiateRel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**
@@ -138,7 +129,7 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
     @SuppressWarnings("checkstyle:designforextension")
     public R abs()
     {
-        return instantiateRel(Math.abs(getInUnit()), getUnit());
+        return instantiateRel(Math.abs(getInUnit()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -146,7 +137,7 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
     @SuppressWarnings("checkstyle:designforextension")
     public R ceil()
     {
-        return instantiateRel(Math.ceil(getInUnit()), getUnit());
+        return instantiateRel(Math.ceil(getInUnit()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -154,7 +145,7 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
     @SuppressWarnings("checkstyle:designforextension")
     public R floor()
     {
-        return instantiateRel(Math.floor(getInUnit()), getUnit());
+        return instantiateRel(Math.floor(getInUnit()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -162,7 +153,7 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
     @SuppressWarnings("checkstyle:designforextension")
     public R rint()
     {
-        return instantiateRel(Math.rint(getInUnit()), getUnit());
+        return instantiateRel(Math.rint(getInUnit()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -170,7 +161,7 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
     @SuppressWarnings("checkstyle:designforextension")
     public R neg()
     {
-        return instantiateRel(-getInUnit(), getUnit());
+        return instantiateRel(-getInUnit(), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -178,7 +169,7 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
     @SuppressWarnings("checkstyle:designforextension")
     public R times(final double constant)
     {
-        return instantiateRel(getInUnit() * constant, getUnit());
+        return instantiateRel(getInUnit() * constant, getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -186,7 +177,7 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
     @SuppressWarnings("checkstyle:designforextension")
     public R divide(final double constant)
     {
-        return instantiateRel(getInUnit() / constant, getUnit());
+        return instantiateRel(getInUnit() / constant, getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -194,7 +185,7 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
     @SuppressWarnings("checkstyle:designforextension")
     public R times(final float constant)
     {
-        return instantiateRel(getInUnit() * constant, getUnit());
+        return instantiateRel(getInUnit() * constant, getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -202,7 +193,7 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
     @SuppressWarnings("checkstyle:designforextension")
     public R divide(final float constant)
     {
-        return instantiateRel(getInUnit() / constant, getUnit());
+        return instantiateRel(getInUnit() / constant, getDisplayUnit());
     }
 
 }

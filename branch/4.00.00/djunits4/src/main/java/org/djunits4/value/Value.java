@@ -23,7 +23,7 @@ public interface Value<U extends Unit<U>, T extends Value<U, T>> extends ValueFu
      * Retrieve the unit of this Value.
      * @return U; the unit of this Value
      */
-    U getUnit();
+    U getDisplayUnit();
 
     /**
      * Set a new display unit for the value. Internally, the value will stay stored in the default or SI unit.
@@ -73,10 +73,4 @@ public interface Value<U extends Unit<U>, T extends Value<U, T>> extends ValueFu
      * @return String; printable string with the value contents
      */
     String toString(U displayUnit, boolean verbose, boolean withUnit);
-
-    /**
-     * Create a deep copy of this value.
-     * @return T; deep copy of this value
-     */
-    T copy();
 }

@@ -100,7 +100,7 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
     public static ElectricalPotential interpolate(final ElectricalPotential zero, final ElectricalPotential one,
             final double ratio)
     {
-        return new ElectricalPotential(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new ElectricalPotential(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

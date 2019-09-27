@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 import org.djunits4.Throw;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.Absolute;
-import org.djunits4.value.AbstractValue;
+import org.djunits4.value.AbstractIndexedValue;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.formatter.Format;
 import org.djunits4.value.storage.StorageType;
@@ -34,7 +34,8 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorDataSparse;
  * @param <V> the generic vector type
  */
 public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
-        V extends AbstractFloatVector<U, S, V>> extends AbstractValue<U, V> implements FloatVectorInterface<U, S, V>
+        V extends AbstractFloatVector<U, S, V>> extends AbstractIndexedValue<U, S, V, FloatVectorData>
+        implements FloatVectorInterface<U, S, V>
 {
     /** */
     private static final long serialVersionUID = 20161015L;
@@ -42,12 +43,6 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     /** The stored data as an object, can be sparse or dense. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected FloatVectorData data;
-
-    /** If set, any modification of the data must be preceded by replacing the data with a local copy. */
-    private boolean copyOnWrite = false;
-
-    /** helper flag to indicate whether the data is mutable or not. */
-    private boolean mutable = false;
 
     /**
      * Construct a new FloatVector.
@@ -60,10 +55,8 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
         this.data = data;
     }
 
-    /**
-     * Retrieve the data.
-     * @return the internal data -- can only be used within package and by subclasses.
-     */
+    /** {@inheritDoc} */
+    @Override
     protected final FloatVectorData getData()
     {
         return this.data;
@@ -71,95 +64,9 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
 
     /** {@inheritDoc} */
     @Override
-    public final StorageType getStorageType()
+    protected void setData(final FloatVectorData data)
     {
-        return this.data.getStorageType();
-    }
-
-    /**
-     * Check the copyOnWrite flag and, if it is set, make a deep copy of the data and clear the flag.
-     * @throws ValueRuntimeException if the vector is immutable
-     */
-    protected final void checkCopyOnWrite()
-    {
-        Throw.when(!this.mutable, ValueRuntimeException.class, "Immutable Vector cannot be modified");
-        if (isCopyOnWrite())
-        {
-            this.data = this.data.copy();
-            setCopyOnWrite(false);
-        }
-    }
-
-    /**
-     * Retrieve the value of the copyOnWrite flag.
-     * @return boolean
-     */
-    private boolean isCopyOnWrite()
-    {
-        return this.copyOnWrite;
-    }
-
-    /**
-     * Change the copyOnWrite flag.
-     * @param copyOnWrite boolean; the new value for the copyOnWrite flag
-     */
-    final void setCopyOnWrite(final boolean copyOnWrite)
-    {
-        this.copyOnWrite = copyOnWrite;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public boolean isMutable()
-    {
-        return this.mutable;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public V immutable()
-    {
-        if (this.mutable)
-        {
-            setCopyOnWrite(true);
-        }
-        V result = FloatVector.instantiate(this.data, getUnit().getStandardUnit());
-        result.setDisplayUnit(getUnit());
-        result.setCopyOnWrite(false);
-        result.setMutable(false);
-        return result;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public V mutable()
-    {
-        if (this.mutable)
-        {
-            setCopyOnWrite(true);
-        }
-        V result = FloatVector.instantiate(this.data, getUnit().getStandardUnit());
-        result.setDisplayUnit(getUnit());
-        result.setCopyOnWrite(true);
-        result.setMutable(true);
-        return result;
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    protected AbstractFloatVector<U, S, V> clone() throws CloneNotSupportedException
-    {
-        return (AbstractFloatVector<U, S, V>) super.clone();
-    }
-
-    /**
-     * Set helper flag to indicate whether the data is mutable or not.
-     * @param mutable boolean; helper flag to indicate whether the data is mutable or not
-     */
-    protected void setMutable(final boolean mutable)
-    {
-        this.mutable = mutable;
+        this.data = data;
     }
 
     /** {@inheritDoc} */
@@ -173,7 +80,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     @Override
     public final float[] getValuesInUnit()
     {
-        return getValuesInUnit(getUnit());
+        return getValuesInUnit(getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -220,14 +127,14 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     @Override
     public S get(int index) throws ValueRuntimeException
     {
-        return FloatScalar.instantiateSI(getSI(index), getUnit());
+        return FloatScalar.instantiateSI(getSI(index), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public final float getInUnit(final int index) throws ValueRuntimeException
     {
-        return (float) ValueUtil.expressAsUnit(getSI(index), getUnit());
+        return (float) ValueUtil.expressAsUnit(getSI(index), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -250,14 +157,14 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     @Override
     public void setInUnit(final int index, final float valueInUnit) throws ValueRuntimeException
     {
-        setSI(index, (float) ValueUtil.expressAsSIUnit(valueInUnit, getUnit()));        
+        setSI(index, (float) ValueUtil.expressAsSIUnit(valueInUnit, getDisplayUnit()));
     }
 
     /** {@inheritDoc} */
     @Override
     public void setInUnit(final int index, final float valueInUnit, final U valueUnit) throws ValueRuntimeException
     {
-        setSI(index, (float) ValueUtil.expressAsSIUnit(valueInUnit, valueUnit));        
+        setSI(index, (float) ValueUtil.expressAsSIUnit(valueInUnit, valueUnit));
     }
 
     /** {@inheritDoc} */
@@ -281,13 +188,6 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     }
 
     /** {@inheritDoc} */
-    @Override
-    public final int cardinality()
-    {
-        return this.data.cardinality();
-    }
-
-    /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
     public V toSparse()
@@ -296,13 +196,13 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
         if (getStorageType().equals(StorageType.SPARSE))
         {
             result = (V) this;
-            result.setDisplayUnit(getUnit());
+            result.setDisplayUnit(getDisplayUnit());
         }
         else
         {
-            result = (V) FloatVector.instantiate(this.data.toSparse(), getUnit());
+            result = (V) FloatVector.instantiate(this.data.toSparse(), getDisplayUnit());
         }
-        result.setDisplayUnit(getUnit());
+        result.setDisplayUnit(getDisplayUnit());
         return result;
     }
 
@@ -315,21 +215,13 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
         if (getStorageType().equals(StorageType.DENSE))
         {
             result = (V) this;
-            result.setDisplayUnit(getUnit());
+            result.setDisplayUnit(getDisplayUnit());
         }
         else
         {
-            result = (V) FloatVector.instantiate(this.data.toDense(), getUnit());
+            result = (V) FloatVector.instantiate(this.data.toDense(), getDisplayUnit());
         }
         return result;
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public V copy()
-    {
-        return (V) FloatVector.instantiate(this.data.copy(), getUnit());
     }
 
     /** {@inheritDoc} */
@@ -355,7 +247,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     @Override
     public V times(final double multiplier)
     {
-        V result = copy();
+        V result = clone();
         result.assign(FloatMathFunctions.MULT((float) multiplier));
         return result;
     }
@@ -364,7 +256,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     @Override
     public V divide(final double divisor)
     {
-        V result = copy();
+        V result = clone();
         result.assign(FloatMathFunctions.DIV((float) divisor));
         return result;
     }
@@ -388,7 +280,6 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     @Override
     public final V abs()
     {
-        checkCopyOnWrite();
         assign(FloatMathFunctions.ABS);
         return (V) this;
     }
@@ -398,7 +289,6 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     @SuppressWarnings("unchecked")
     public final V ceil()
     {
-        checkCopyOnWrite();
         assign(FloatMathFunctions.CEIL);
         return (V) this;
     }
@@ -408,7 +298,6 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     @SuppressWarnings("unchecked")
     public final V floor()
     {
-        checkCopyOnWrite();
         assign(FloatMathFunctions.FLOOR);
         return (V) this;
     }
@@ -418,7 +307,6 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     @SuppressWarnings("unchecked")
     public final V neg()
     {
-        checkCopyOnWrite();
         assign(FloatMathFunctions.NEG);
         return (V) this;
     }
@@ -428,30 +316,15 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     @SuppressWarnings("unchecked")
     public final V rint()
     {
-        checkCopyOnWrite();
         assign(FloatMathFunctions.RINT);
         return (V) this;
     }
 
     /** {@inheritDoc} */
     @Override
-    public boolean isDense()
-    {
-        return this.data.isDense();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public boolean isSparse()
-    {
-        return this.data.isSparse();
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final String toString()
     {
-        return toString(getUnit(), false, true);
+        return toString(getDisplayUnit(), false, true);
     }
 
     /** {@inheritDoc} */
@@ -465,7 +338,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     @Override
     public final String toString(final boolean verbose, final boolean withUnit)
     {
-        return toString(getUnit(), verbose, withUnit);
+        return toString(getDisplayUnit(), verbose, withUnit);
     }
 
     /** {@inheritDoc} */
@@ -539,7 +412,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     public int hashCode()
     {
         final int prime = 31;
-        int result = getUnit().getStandardUnit().hashCode();
+        int result = getDisplayUnit().getStandardUnit().hashCode();
         result = prime * result + ((this.data == null) ? 0 : this.data.hashCode());
         return result;
     }
@@ -556,7 +429,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
         if (getClass() != obj.getClass())
             return false;
         AbstractFloatVector<?, ?, ?> other = (AbstractFloatVector<?, ?, ?>) obj;
-        if (!getUnit().getStandardUnit().equals(other.getUnit().getStandardUnit()))
+        if (!getDisplayUnit().getStandardUnit().equals(other.getDisplayUnit().getStandardUnit()))
             return false;
         if (this.data == null)
         {

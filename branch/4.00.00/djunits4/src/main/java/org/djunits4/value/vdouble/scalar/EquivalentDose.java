@@ -91,7 +91,7 @@ public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, 
      */
     public static EquivalentDose interpolate(final EquivalentDose zero, final EquivalentDose one, final double ratio)
     {
-        return new EquivalentDose(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new EquivalentDose(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

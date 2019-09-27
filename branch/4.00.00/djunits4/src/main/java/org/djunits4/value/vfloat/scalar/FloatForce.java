@@ -109,7 +109,7 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
      */
     public static FloatForce interpolate(final FloatForce zero, final FloatForce one, final float ratio)
     {
-        return new FloatForce(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatForce(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

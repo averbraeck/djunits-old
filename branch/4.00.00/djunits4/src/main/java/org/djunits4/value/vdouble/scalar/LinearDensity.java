@@ -95,7 +95,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
      */
     public static LinearDensity interpolate(final LinearDensity zero, final LinearDensity one, final double ratio)
     {
-        return new LinearDensity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new LinearDensity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

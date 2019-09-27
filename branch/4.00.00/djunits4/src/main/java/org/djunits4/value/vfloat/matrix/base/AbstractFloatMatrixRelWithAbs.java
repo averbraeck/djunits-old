@@ -58,7 +58,7 @@ public abstract class AbstractFloatMatrixRelWithAbs<
     @Override
     public AM plus(AM increment)
     {
-        return FloatMatrix.instantiate(this.getData().plus(increment.getData()), increment.getUnit().getStandardUnit());
+        return FloatMatrix.instantiate(this.getData().plus(increment.getData()), increment.getDisplayUnit().getStandardUnit());
     }
 
 }

@@ -108,8 +108,8 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
     public static FloatElectricalResistance interpolate(final FloatElectricalResistance zero,
             final FloatElectricalResistance one, final float ratio)
     {
-        return new FloatElectricalResistance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-                zero.getUnit());
+        return new FloatElectricalResistance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**

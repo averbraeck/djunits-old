@@ -101,7 +101,7 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
      */
     public static FloatIlluminance interpolate(final FloatIlluminance zero, final FloatIlluminance one, final float ratio)
     {
-        return new FloatIlluminance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatIlluminance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

@@ -54,12 +54,12 @@ public class FloatScalarConstructorsTest implements UNITS
             FloatScalarInterface<?, ?> floatScalar = (FloatScalarInterface<?, ?>) constructor.newInstance(args);
             System.out.println(floatScalar);
             assertEquals("Value must match", testValue, floatScalar.getSI(), 0.1);
-            assertEquals("Unit must match", standardUnit, floatScalar.getUnit());
+            assertEquals("Unit must match", standardUnit, floatScalar.getDisplayUnit());
             constructor = scalarClass.getConstructor(floatScalar.getClass());
             args = new Object[] {floatScalar};
             FloatScalarInterface<?, ?> secondaryFloatScalar = (FloatScalarInterface<?, ?>) constructor.newInstance(args);
             assertEquals("Value must match", testValue, secondaryFloatScalar.getSI(), 0.1);
-            assertEquals("Unit must match", standardUnit, secondaryFloatScalar.getUnit());
+            assertEquals("Unit must match", standardUnit, secondaryFloatScalar.getDisplayUnit());
         }
     }
 }

@@ -91,7 +91,7 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
      */
     public static Illuminance interpolate(final Illuminance zero, final Illuminance one, final double ratio)
     {
-        return new Illuminance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new Illuminance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

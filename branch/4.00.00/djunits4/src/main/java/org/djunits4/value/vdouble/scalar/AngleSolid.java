@@ -92,7 +92,7 @@ public class AngleSolid extends AbstractDoubleScalarRel<AngleSolidUnit, AngleSol
      */
     public static AngleSolid interpolate(final AngleSolid zero, final AngleSolid one, final double ratio)
     {
-        return new AngleSolid(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new AngleSolid(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

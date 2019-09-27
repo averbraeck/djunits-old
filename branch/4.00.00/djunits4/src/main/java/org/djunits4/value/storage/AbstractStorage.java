@@ -9,11 +9,11 @@ package org.djunits4.value.storage;
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  * @param <T> the vector or matrix data type
  */
-public abstract class AbstractStorage<T extends AbstractStorage<T>>
+public abstract class AbstractStorage<T extends AbstractStorage<T>> implements Cloneable
 {
     /** the data type. */
     protected final StorageType storageType;
-
+    
     /**
      * Construct a new Data store.
      * @param storageType StorageType; the data type
@@ -37,7 +37,7 @@ public abstract class AbstractStorage<T extends AbstractStorage<T>>
      * Is this indexed value dense?
      * @return boolean; true if the data storage type is dense; false if the data storage type is not dense
      */
-    public boolean isDense()
+    public final boolean isDense()
     {
         return this.storageType.equals(StorageType.DENSE);
     }
@@ -46,7 +46,7 @@ public abstract class AbstractStorage<T extends AbstractStorage<T>>
      * Is this indexed value sparse?
      * @return boolean; true if the data storage type is sparse; false if the data storage type is not sparse
      */
-    public boolean isSparse()
+    public final boolean isSparse()
     {
         return this.storageType.equals(StorageType.SPARSE);
     }

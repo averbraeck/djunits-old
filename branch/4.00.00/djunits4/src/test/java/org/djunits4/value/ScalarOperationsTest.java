@@ -287,7 +287,7 @@ public class ScalarOperationsTest
                 AbstractDoubleScalarRel<?, ?> result =
                         multiply ? DoubleScalar.multiply(left, right) : DoubleScalar.divide(left, right);
                 // System.out.println("result is " + result);
-                String resultCoefficients = result.getUnit().getUnitBase().getSiDimensions().toString();
+                String resultCoefficients = result.getDisplayUnit().getUnitBase().getSiDimensions().toString();
                 assertEquals("SI coefficients of result should match expected SI coefficients", resultCoefficients, returnSI);
             }
             else
@@ -318,7 +318,7 @@ public class ScalarOperationsTest
                 AbstractFloatScalarRel<?, ?> result =
                         multiply ? FloatScalar.multiply(left, right) : FloatScalar.divide(left, right);
                 // System.out.println("result is " + result);
-                String resultCoefficients = result.getUnit().getUnitBase().getSiDimensions().toString();
+                String resultCoefficients = result.getDisplayUnit().getUnitBase().getSiDimensions().toString();
                 assertEquals("SI coefficients of result should match expected SI coefficients", resultCoefficients, returnSI);
             }
         }
@@ -612,7 +612,7 @@ public class ScalarOperationsTest
             UnitSystem unitSystem = UnitSystem.SI_DERIVED;
             Unit<?> referenceUnit;
             // Call the getUnit method of left
-            Method getUnitMethod = ClassUtil.resolveMethod(scalarClass, "getUnit");
+            Method getUnitMethod = ClassUtil.resolveMethod(scalarClass, "getDisplayUnit");
             referenceUnit = (Unit<?>) getUnitMethod.invoke(left);
             Constructor<?> unitConstructor = unitClass.getConstructor(); // empty constructor -- provide Builder
             Unit newUnit = (Unit) unitConstructor.newInstance();

@@ -91,7 +91,7 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
      */
     public static RadioActivity interpolate(final RadioActivity zero, final RadioActivity one, final double ratio)
     {
-        return new RadioActivity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new RadioActivity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

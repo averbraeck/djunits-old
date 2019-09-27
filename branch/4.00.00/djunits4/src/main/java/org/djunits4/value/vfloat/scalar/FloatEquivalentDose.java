@@ -104,7 +104,7 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
     public static FloatEquivalentDose interpolate(final FloatEquivalentDose zero, final FloatEquivalentDose one,
             final float ratio)
     {
-        return new FloatEquivalentDose(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatEquivalentDose(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

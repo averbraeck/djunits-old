@@ -91,7 +91,7 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
      */
     public static MagneticFlux interpolate(final MagneticFlux zero, final MagneticFlux one, final double ratio)
     {
-        return new MagneticFlux(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new MagneticFlux(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

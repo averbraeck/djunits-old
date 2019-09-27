@@ -96,8 +96,8 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
     public static ElectricalCapacitance interpolate(final ElectricalCapacitance zero, final ElectricalCapacitance one,
             final double ratio)
     {
-        return new ElectricalCapacitance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-                zero.getUnit());
+        return new ElectricalCapacitance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**

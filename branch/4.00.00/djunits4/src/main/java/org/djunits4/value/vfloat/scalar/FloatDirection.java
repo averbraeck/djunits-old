@@ -91,7 +91,7 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
      */
     public static FloatDirection interpolate(final FloatDirection zero, final FloatDirection one, final float ratio)
     {
-        return new FloatDirection(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatDirection(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

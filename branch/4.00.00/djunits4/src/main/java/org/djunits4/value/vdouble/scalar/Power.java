@@ -98,7 +98,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
      */
     public static Power interpolate(final Power zero, final Power one, final double ratio)
     {
-        return new Power(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new Power(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

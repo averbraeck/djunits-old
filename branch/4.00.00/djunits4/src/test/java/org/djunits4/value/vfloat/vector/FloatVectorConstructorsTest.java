@@ -86,7 +86,7 @@ public class FloatVectorConstructorsTest
                 FloatVectorInterface<?, ?, ?> floatVector = FloatVector.instantiate(testValues, standardUnit, storageType);
                 // System.out.println(floatVector);
                 compareValues(testValues, floatVector.getValuesSI());
-                assertEquals("Unit must match", standardUnit, floatVector.getUnit());
+                assertEquals("Unit must match", standardUnit, floatVector.getDisplayUnit());
                 assertEquals("StorageType must match", storageType, floatVector.getStorageType());
                 assertEquals("Cardinality", cardinality, floatVector.cardinality());
                 String scalarClassName = "org.djunits4.value.vfloat.scalar.Float" + className;
@@ -94,7 +94,7 @@ public class FloatVectorConstructorsTest
                 assertEquals("getScalarClass", scalarClass, floatVector.getScalarClass());
                 floatVector = FloatVector.instantiateSI(testValues, standardUnit, storageType);
                 compareValues(testValues, floatVector.getValuesSI());
-                assertEquals("Unit must match", standardUnit, floatVector.getUnit());
+                assertEquals("Unit must match", standardUnit, floatVector.getDisplayUnit());
                 assertEquals("StorageType must match", storageType, floatVector.getStorageType());
                 try
                 {
@@ -209,7 +209,7 @@ public class FloatVectorConstructorsTest
                 for (Iterator<?> iterator = floatVector.iterator(); iterator.hasNext();)
                 {
                     AbstractFloatScalar<?, ?> s = (AbstractFloatScalar<?, ?>) iterator.next();
-                    assertEquals("unit of scalar matches", s.getUnit(), standardUnit);
+                    assertEquals("unit of scalar matches", s.getDisplayUnit(), standardUnit);
                     assertEquals("value of scalar matches", s.getInUnit(), testValues[nextIndex], 0.001);
                     nextIndex++;
                 }
@@ -217,7 +217,7 @@ public class FloatVectorConstructorsTest
                 // FloatVectorInterface<?, ?, ?> secondary = FloatVector.instantiateAnonymous(floatVector.getScalars(),
                 // standardUnit);
                 floatVector = FloatVector.instantiate(list, standardUnit, storageType);
-                assertEquals("Unit must match", standardUnit, floatVector.getUnit());
+                assertEquals("Unit must match", standardUnit, floatVector.getDisplayUnit());
                 compareValues(testValues, floatVector.getValuesSI());
                 floatVector = FloatVector.instantiate(map, testValues.length, standardUnit, storageType);
                 compareValues(testValues, floatVector.getValuesSI());
@@ -228,12 +228,12 @@ public class FloatVectorConstructorsTest
                 for (int i = 0; i < testValues.length; i++)
                 {
                     Scalar<?, ?> s = scalarValues[i];
-                    assertEquals("unit of scalar matches", s.getUnit(), standardUnit);
+                    assertEquals("unit of scalar matches", s.getDisplayUnit(), standardUnit);
                     assertEquals("value of scalar matches", ((AbstractFloatScalar<?, ?>) s).getSI(), testValues[i], 0.001);
                 }
                 // TODO get this to compile: floatVector = FloatVector.instantiate(scalarValues, standardUnit, storageType);
                 floatVector = FloatVector.instantiateSI(list, standardUnit, storageType);
-                assertEquals("Unit must match", standardUnit, floatVector.getUnit());
+                assertEquals("Unit must match", standardUnit, floatVector.getDisplayUnit());
                 compareValues(testValues, floatVector.getValuesSI());
             }
         }
@@ -275,23 +275,23 @@ public class FloatVectorConstructorsTest
                 float offset = temperatureUnit.equals(AbsoluteTemperatureUnit.KELVIN) ? 0f : 273.15f;
                 FloatAbsoluteTemperatureVector atv = FloatVector.instantiate(testValues, temperatureUnit, storageType);
                 compareValuesWithOffset(offset, testValues, atv.getValuesSI());
-                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", offset == 0 ? cardinality : testValues.length, atv.cardinality());
                 atv = FloatVector.instantiate(at, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
-                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
                 atv = FloatVector.instantiateList(al, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
-                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
                 atv = FloatVector.instantiateMap(map, testValues.length, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
-                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
                 atv = FloatVector.instantiateMap(notQuiteSparseMap, testValues.length, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
-                assertEquals("Unit must match", temperatureUnit, atv.getUnit());
+                assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
                 try
                 {
@@ -483,7 +483,7 @@ public class FloatVectorConstructorsTest
                 for (Iterator<?> iterator = siv.iterator(); iterator.hasNext();)
                 {
                     AbstractFloatScalar<?, ?> s = (AbstractFloatScalar<?, ?>) iterator.next();
-                    assertEquals("SIDimensions match", s.getUnit().getUnitBase().getSiDimensions(), unitBase.getSiDimensions());
+                    assertEquals("SIDimensions match", s.getDisplayUnit().getUnitBase().getSiDimensions(), unitBase.getSiDimensions());
                     assertEquals("value of scalar matches", s.getInUnit(), testValues[nextIndex], 0.001);
                     nextIndex++;
                 }

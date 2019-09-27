@@ -21,29 +21,29 @@ public abstract class AbstractValue<U extends Unit<U>, T extends Value<U, T>> im
     private static final long serialVersionUID = 20150626L;
 
     /** The display unit of this AbstractValue. */
-    private U unit;
+    private U displayUnit;
 
     /**
      * Construct a new AbstractValue.
-     * @param unit U; the unit of the new AbstractValue
+     * @param displayUnit U; the unit of the new AbstractValue
      */
-    protected AbstractValue(final U unit)
+    protected AbstractValue(final U displayUnit)
     {
-        this.unit = unit;
+        this.displayUnit = displayUnit;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final U getUnit()
+    public final U getDisplayUnit()
     {
-        return this.unit;
+        return this.displayUnit;
     }
 
     /** {@inheritDoc} */
     @Override
     public void setDisplayUnit(final U newUnit)
     {
-        this.unit = newUnit;
+        this.displayUnit = newUnit;
     }
 
     /** {@inheritDoc} */

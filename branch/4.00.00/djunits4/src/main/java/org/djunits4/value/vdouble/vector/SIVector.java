@@ -236,8 +236,8 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
     public final <U extends Unit<U>, S extends AbstractDoubleScalarRel<U, S>,
             V extends AbstractDoubleVectorRel<U, S, V>> V as(final U displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(displayUnit.getUnitBase().getSiDimensions())),
-                UnitRuntimeException.class, "SIVector with unit %s cannot be converted to a vector with unit %s", getUnit(),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(displayUnit.getUnitBase().getSiDimensions())),
+                UnitRuntimeException.class, "SIVector with unit %s cannot be converted to a vector with unit %s", getDisplayUnit(),
                 displayUnit);
         V result = DoubleVector.instantiate(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -250,7 +250,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final AbsorbedDoseVector asAbsorbedDose()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(AbsorbedDoseUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AbsorbedDoseUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AbsorbedDoseVector", this.toString());
         return new AbsorbedDoseVector(this.data, AbsorbedDoseUnit.SI);
     }
@@ -262,7 +262,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final AbsorbedDoseVector asAbsorbedDose(final AbsorbedDoseUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(AbsorbedDoseUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AbsorbedDoseUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AbsorbedDoseVector", this.toString());
         AbsorbedDoseVector result = new AbsorbedDoseVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -275,7 +275,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final AccelerationVector asAcceleration()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(AccelerationUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AccelerationUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AccelerationVector", this.toString());
         return new AccelerationVector(this.data, AccelerationUnit.SI);
     }
@@ -287,7 +287,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final AccelerationVector asAcceleration(final AccelerationUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(AccelerationUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AccelerationUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AccelerationVector", this.toString());
         AccelerationVector result = new AccelerationVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -300,7 +300,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final AmountOfSubstanceVector asAmountOfSubstance()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(AmountOfSubstanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AmountOfSubstanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AmountOfSubstanceVector", this.toString());
         return new AmountOfSubstanceVector(this.data, AmountOfSubstanceUnit.SI);
     }
@@ -312,7 +312,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final AmountOfSubstanceVector asAmountOfSubstance(final AmountOfSubstanceUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(AmountOfSubstanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AmountOfSubstanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AmountOfSubstanceVector", this.toString());
         AmountOfSubstanceVector result = new AmountOfSubstanceVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -325,7 +325,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final AngleSolidVector asAngleSolid()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(AngleSolidUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AngleSolidUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AngleSolidVector", this.toString());
         return new AngleSolidVector(this.data, AngleSolidUnit.SI);
     }
@@ -337,7 +337,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final AngleSolidVector asAngleSolid(final AngleSolidUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(AngleSolidUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AngleSolidUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AngleSolidVector", this.toString());
         AngleSolidVector result = new AngleSolidVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -350,7 +350,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final AreaVector asArea()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(AreaUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AreaUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AreaVector", this.toString());
         return new AreaVector(this.data, AreaUnit.SI);
     }
@@ -362,7 +362,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final AreaVector asArea(final AreaUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(AreaUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AreaUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AreaVector", this.toString());
         AreaVector result = new AreaVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -375,7 +375,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final CatalyticActivityVector asCatalyticActivity()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(CatalyticActivityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(CatalyticActivityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to CatalyticActivityVector", this.toString());
         return new CatalyticActivityVector(this.data, CatalyticActivityUnit.SI);
     }
@@ -387,7 +387,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final CatalyticActivityVector asCatalyticActivity(final CatalyticActivityUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(CatalyticActivityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(CatalyticActivityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to CatalyticActivityVector", this.toString());
         CatalyticActivityVector result = new CatalyticActivityVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -400,7 +400,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final DensityVector asDensity()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(DensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(DensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to DensityVector", this.toString());
         return new DensityVector(this.data, DensityUnit.SI);
     }
@@ -412,7 +412,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final DensityVector asDensity(final DensityUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(DensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(DensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to DensityVector", this.toString());
         DensityVector result = new DensityVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -425,7 +425,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final DimensionlessVector asDimensionless()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(DimensionlessUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(DimensionlessUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to DimensionlessVector", this.toString());
         return new DimensionlessVector(this.data, DimensionlessUnit.SI);
     }
@@ -437,7 +437,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final DimensionlessVector asDimensionless(final DimensionlessUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(DimensionlessUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(DimensionlessUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to DimensionlessVector", this.toString());
         DimensionlessVector result = new DimensionlessVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -450,7 +450,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalCapacitanceVector asElectricalCapacitance()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalCapacitanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalCapacitanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalCapacitanceVector", this.toString());
         return new ElectricalCapacitanceVector(this.data, ElectricalCapacitanceUnit.SI);
     }
@@ -462,7 +462,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalCapacitanceVector asElectricalCapacitance(final ElectricalCapacitanceUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalCapacitanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalCapacitanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalCapacitanceVector", this.toString());
         ElectricalCapacitanceVector result = new ElectricalCapacitanceVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -475,7 +475,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalChargeVector asElectricalCharge()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalChargeUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalChargeUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalChargeVector", this.toString());
         return new ElectricalChargeVector(this.data, ElectricalChargeUnit.SI);
     }
@@ -487,7 +487,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalChargeVector asElectricalCharge(final ElectricalChargeUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalChargeUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalChargeUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalChargeVector", this.toString());
         ElectricalChargeVector result = new ElectricalChargeVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -500,7 +500,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalConductanceVector asElectricalConductance()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalConductanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalConductanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalConductanceVector", this.toString());
         return new ElectricalConductanceVector(this.data, ElectricalConductanceUnit.SI);
     }
@@ -512,7 +512,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalConductanceVector asElectricalConductance(final ElectricalConductanceUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalConductanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalConductanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalConductanceVector", this.toString());
         ElectricalConductanceVector result = new ElectricalConductanceVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -525,7 +525,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalCurrentVector asElectricalCurrent()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalCurrentUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalCurrentUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalCurrentVector", this.toString());
         return new ElectricalCurrentVector(this.data, ElectricalCurrentUnit.SI);
     }
@@ -537,7 +537,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalCurrentVector asElectricalCurrent(final ElectricalCurrentUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalCurrentUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalCurrentUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalCurrentVector", this.toString());
         ElectricalCurrentVector result = new ElectricalCurrentVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -550,7 +550,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalInductanceVector asElectricalInductance()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalInductanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalInductanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalInductanceVector", this.toString());
         return new ElectricalInductanceVector(this.data, ElectricalInductanceUnit.SI);
     }
@@ -562,7 +562,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalInductanceVector asElectricalInductance(final ElectricalInductanceUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalInductanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalInductanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalInductanceVector", this.toString());
         ElectricalInductanceVector result = new ElectricalInductanceVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -575,7 +575,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalPotentialVector asElectricalPotential()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalPotentialUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalPotentialUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalPotentialVector", this.toString());
         return new ElectricalPotentialVector(this.data, ElectricalPotentialUnit.SI);
     }
@@ -587,7 +587,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalPotentialVector asElectricalPotential(final ElectricalPotentialUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalPotentialUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalPotentialUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalPotentialVector", this.toString());
         ElectricalPotentialVector result = new ElectricalPotentialVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -600,7 +600,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalResistanceVector asElectricalResistance()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalResistanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalResistanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalResistanceVector", this.toString());
         return new ElectricalResistanceVector(this.data, ElectricalResistanceUnit.SI);
     }
@@ -612,7 +612,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalResistanceVector asElectricalResistance(final ElectricalResistanceUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ElectricalResistanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalResistanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalResistanceVector", this.toString());
         ElectricalResistanceVector result = new ElectricalResistanceVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -625,7 +625,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final EnergyVector asEnergy()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(EnergyUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(EnergyUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to EnergyVector", this.toString());
         return new EnergyVector(this.data, EnergyUnit.SI);
     }
@@ -637,7 +637,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final EnergyVector asEnergy(final EnergyUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(EnergyUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(EnergyUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to EnergyVector", this.toString());
         EnergyVector result = new EnergyVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -650,7 +650,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final EquivalentDoseVector asEquivalentDose()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(EquivalentDoseUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(EquivalentDoseUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to EquivalentDoseVector", this.toString());
         return new EquivalentDoseVector(this.data, EquivalentDoseUnit.SI);
     }
@@ -662,7 +662,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final EquivalentDoseVector asEquivalentDose(final EquivalentDoseUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(EquivalentDoseUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(EquivalentDoseUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to EquivalentDoseVector", this.toString());
         EquivalentDoseVector result = new EquivalentDoseVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -675,7 +675,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final FlowMassVector asFlowMass()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(FlowMassUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(FlowMassUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FlowMassVector", this.toString());
         return new FlowMassVector(this.data, FlowMassUnit.SI);
     }
@@ -687,7 +687,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final FlowMassVector asFlowMass(final FlowMassUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(FlowMassUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(FlowMassUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FlowMassVector", this.toString());
         FlowMassVector result = new FlowMassVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -700,7 +700,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final FlowVolumeVector asFlowVolume()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(FlowVolumeUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(FlowVolumeUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FlowVolumeVector", this.toString());
         return new FlowVolumeVector(this.data, FlowVolumeUnit.SI);
     }
@@ -712,7 +712,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final FlowVolumeVector asFlowVolume(final FlowVolumeUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(FlowVolumeUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(FlowVolumeUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FlowVolumeVector", this.toString());
         FlowVolumeVector result = new FlowVolumeVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -725,7 +725,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final ForceVector asForce()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ForceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ForceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ForceVector", this.toString());
         return new ForceVector(this.data, ForceUnit.SI);
     }
@@ -737,7 +737,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final ForceVector asForce(final ForceUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(ForceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ForceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ForceVector", this.toString());
         ForceVector result = new ForceVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -750,7 +750,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final FrequencyVector asFrequency()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(FrequencyUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(FrequencyUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FrequencyVector", this.toString());
         return new FrequencyVector(this.data, FrequencyUnit.SI);
     }
@@ -762,7 +762,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final FrequencyVector asFrequency(final FrequencyUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(FrequencyUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(FrequencyUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FrequencyVector", this.toString());
         FrequencyVector result = new FrequencyVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -775,7 +775,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final IlluminanceVector asIlluminance()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(IlluminanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(IlluminanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to IlluminanceVector", this.toString());
         return new IlluminanceVector(this.data, IlluminanceUnit.SI);
     }
@@ -787,7 +787,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final IlluminanceVector asIlluminance(final IlluminanceUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(IlluminanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(IlluminanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to IlluminanceVector", this.toString());
         IlluminanceVector result = new IlluminanceVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -800,7 +800,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final LinearDensityVector asLinearDensity()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(LinearDensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(LinearDensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to LinearDensityVector", this.toString());
         return new LinearDensityVector(this.data, LinearDensityUnit.SI);
     }
@@ -812,7 +812,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final LinearDensityVector asLinearDensity(final LinearDensityUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(LinearDensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(LinearDensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to LinearDensityVector", this.toString());
         LinearDensityVector result = new LinearDensityVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -825,7 +825,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final LuminousFluxVector asLuminousFlux()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(LuminousFluxUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(LuminousFluxUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to LuminousFluxVector", this.toString());
         return new LuminousFluxVector(this.data, LuminousFluxUnit.SI);
     }
@@ -837,7 +837,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final LuminousFluxVector asLuminousFlux(final LuminousFluxUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(LuminousFluxUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(LuminousFluxUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to LuminousFluxVector", this.toString());
         LuminousFluxVector result = new LuminousFluxVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -850,7 +850,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final LuminousIntensityVector asLuminousIntensity()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(LuminousIntensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(LuminousIntensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to LuminousIntensityVector", this.toString());
         return new LuminousIntensityVector(this.data, LuminousIntensityUnit.SI);
     }
@@ -862,7 +862,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final LuminousIntensityVector asLuminousIntensity(final LuminousIntensityUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(LuminousIntensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(LuminousIntensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to LuminousIntensityVector", this.toString());
         LuminousIntensityVector result = new LuminousIntensityVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -875,7 +875,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final MagneticFluxDensityVector asMagneticFluxDensity()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(MagneticFluxDensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(MagneticFluxDensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to MagneticFluxDensityVector", this.toString());
         return new MagneticFluxDensityVector(this.data, MagneticFluxDensityUnit.SI);
     }
@@ -887,7 +887,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final MagneticFluxDensityVector asMagneticFluxDensity(final MagneticFluxDensityUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(MagneticFluxDensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(MagneticFluxDensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to MagneticFluxDensityVector", this.toString());
         MagneticFluxDensityVector result = new MagneticFluxDensityVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -900,7 +900,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final MagneticFluxVector asMagneticFlux()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(MagneticFluxUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(MagneticFluxUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to MagneticFluxVector", this.toString());
         return new MagneticFluxVector(this.data, MagneticFluxUnit.SI);
     }
@@ -912,7 +912,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final MagneticFluxVector asMagneticFlux(final MagneticFluxUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(MagneticFluxUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(MagneticFluxUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to MagneticFluxVector", this.toString());
         MagneticFluxVector result = new MagneticFluxVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -925,7 +925,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final MassVector asMass()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(MassUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(MassUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to MassVector", this.toString());
         return new MassVector(this.data, MassUnit.SI);
     }
@@ -937,7 +937,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final MassVector asMass(final MassUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(MassUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(MassUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to MassVector", this.toString());
         MassVector result = new MassVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -950,7 +950,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final PowerVector asPower()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(PowerUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(PowerUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to PowerVector", this.toString());
         return new PowerVector(this.data, PowerUnit.SI);
     }
@@ -962,7 +962,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final PowerVector asPower(final PowerUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(PowerUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(PowerUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to PowerVector", this.toString());
         PowerVector result = new PowerVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -975,7 +975,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final PressureVector asPressure()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(PressureUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(PressureUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to PressureVector", this.toString());
         return new PressureVector(this.data, PressureUnit.SI);
     }
@@ -987,7 +987,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final PressureVector asPressure(final PressureUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(PressureUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(PressureUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to PressureVector", this.toString());
         PressureVector result = new PressureVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -1000,7 +1000,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final RadioActivityVector asRadioActivity()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(RadioActivityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(RadioActivityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to RadioActivityVector", this.toString());
         return new RadioActivityVector(this.data, RadioActivityUnit.SI);
     }
@@ -1012,7 +1012,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final RadioActivityVector asRadioActivity(final RadioActivityUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(RadioActivityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(RadioActivityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to RadioActivityVector", this.toString());
         RadioActivityVector result = new RadioActivityVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -1025,7 +1025,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final SpeedVector asSpeed()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(SpeedUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(SpeedUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to SpeedVector", this.toString());
         return new SpeedVector(this.data, SpeedUnit.SI);
     }
@@ -1037,7 +1037,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final SpeedVector asSpeed(final SpeedUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(SpeedUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(SpeedUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to SpeedVector", this.toString());
         SpeedVector result = new SpeedVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -1050,7 +1050,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final TorqueVector asTorque()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(TorqueUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(TorqueUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to TorqueVector", this.toString());
         return new TorqueVector(this.data, TorqueUnit.SI);
     }
@@ -1062,7 +1062,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final TorqueVector asTorque(final TorqueUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(TorqueUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(TorqueUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to TorqueVector", this.toString());
         TorqueVector result = new TorqueVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -1075,7 +1075,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final VolumeVector asVolume()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(VolumeUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(VolumeUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to VolumeVector", this.toString());
         return new VolumeVector(this.data, VolumeUnit.SI);
     }
@@ -1087,7 +1087,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final VolumeVector asVolume(final VolumeUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(VolumeUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(VolumeUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to VolumeVector", this.toString());
         VolumeVector result = new VolumeVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -1100,7 +1100,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final AngleVector asAngle()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(AngleUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AngleUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AngleVector", this.toString());
         return new AngleVector(this.data, AngleUnit.SI);
     }
@@ -1112,7 +1112,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final AngleVector asAngle(final AngleUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(AngleUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AngleUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AngleVector", this.toString());
         AngleVector result = new AngleVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -1125,7 +1125,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final LengthVector asLength()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(LengthUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(LengthUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to LengthVector", this.toString());
         return new LengthVector(this.data, LengthUnit.SI);
     }
@@ -1137,7 +1137,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final LengthVector asLength(final LengthUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(LengthUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(LengthUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to LengthVector", this.toString());
         LengthVector result = new LengthVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -1150,7 +1150,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final TemperatureVector asTemperature()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(TemperatureUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(TemperatureUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to TemperatureVector", this.toString());
         return new TemperatureVector(this.data, TemperatureUnit.SI);
     }
@@ -1162,7 +1162,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final TemperatureVector asTemperature(final TemperatureUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(TemperatureUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(TemperatureUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to TemperatureVector", this.toString());
         TemperatureVector result = new TemperatureVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -1175,7 +1175,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final DurationVector asDuration()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(DurationUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(DurationUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to DurationVector", this.toString());
         return new DurationVector(this.data, DurationUnit.SI);
     }
@@ -1187,7 +1187,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      */
     public final DurationVector asDuration(final DurationUnit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(DurationUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(DurationUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to DurationVector", this.toString());
         DurationVector result = new DurationVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);

@@ -107,14 +107,14 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
      */
     public static Duration interpolate(final Duration zero, final Duration one, final double ratio)
     {
-        return new Duration(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new Duration(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public final Time plus(final Time v)
     {
-        TimeUnit targetUnit = v.getUnit();
+        TimeUnit targetUnit = v.getDisplayUnit();
         return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 

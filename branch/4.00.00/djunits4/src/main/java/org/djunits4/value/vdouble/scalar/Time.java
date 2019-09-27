@@ -87,7 +87,7 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
      */
     public static Time interpolate(final Time zero, final Time one, final double ratio)
     {
-        return new Time(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new Time(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

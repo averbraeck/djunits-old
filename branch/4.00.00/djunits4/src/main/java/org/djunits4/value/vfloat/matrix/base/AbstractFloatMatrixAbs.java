@@ -59,21 +59,21 @@ public abstract class AbstractFloatMatrixAbs<
     @Override
     public AM plus(RM increment) throws ValueRuntimeException
     {
-        return FloatMatrix.instantiate(this.getData().plus(increment.getData()), getUnit());
+        return FloatMatrix.instantiate(this.getData().plus(increment.getData()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public AM minus(RM decrement) throws ValueRuntimeException
     {
-        return FloatMatrix.instantiate(this.getData().minus(decrement.getData()), getUnit());
+        return FloatMatrix.instantiate(this.getData().minus(decrement.getData()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public RM minus(AM decrement) throws ValueRuntimeException
     {
-        return FloatMatrix.instantiate(this.getData().minus(decrement.getData()), decrement.getUnit().getRelativeUnit());
+        return FloatMatrix.instantiate(this.getData().minus(decrement.getData()), decrement.getDisplayUnit().getRelativeUnit());
     }
 
     /**

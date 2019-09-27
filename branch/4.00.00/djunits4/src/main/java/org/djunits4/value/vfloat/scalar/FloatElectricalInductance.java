@@ -106,8 +106,8 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
     public static FloatElectricalInductance interpolate(final FloatElectricalInductance zero,
             final FloatElectricalInductance one, final float ratio)
     {
-        return new FloatElectricalInductance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio,
-                zero.getUnit());
+        return new FloatElectricalInductance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**

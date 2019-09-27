@@ -58,7 +58,7 @@ public abstract class AbstractDoubleMatrixRelWithAbs<
     @Override
     public AM plus(AM increment)
     {
-        return DoubleMatrix.instantiate(this.getData().plus(increment.getData()), increment.getUnit().getStandardUnit());
+        return DoubleMatrix.instantiate(this.getData().plus(increment.getData()), increment.getDisplayUnit().getStandardUnit());
     }
 
 }

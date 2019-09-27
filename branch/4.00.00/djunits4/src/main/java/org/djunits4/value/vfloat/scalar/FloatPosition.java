@@ -91,7 +91,7 @@ public class FloatPosition extends AbstractFloatScalarAbs<PositionUnit, FloatPos
      */
     public static FloatPosition interpolate(final FloatPosition zero, final FloatPosition one, final float ratio)
     {
-        return new FloatPosition(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatPosition(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

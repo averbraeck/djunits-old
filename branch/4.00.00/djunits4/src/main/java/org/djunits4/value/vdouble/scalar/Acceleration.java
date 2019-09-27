@@ -95,7 +95,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
      */
     public static Acceleration interpolate(final Acceleration zero, final Acceleration one, final double ratio)
     {
-        return new Acceleration(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new Acceleration(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

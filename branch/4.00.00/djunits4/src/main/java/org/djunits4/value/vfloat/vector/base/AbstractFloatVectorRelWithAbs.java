@@ -52,7 +52,7 @@ public abstract class AbstractFloatVectorRelWithAbs<
     @Override
     public AV plus(AV increment)
     {
-        return FloatVector.instantiate(this.getData().plus(increment.getData()), increment.getUnit().getStandardUnit());
+        return FloatVector.instantiate(this.getData().plus(increment.getData()), increment.getDisplayUnit().getStandardUnit());
     }
 
 }

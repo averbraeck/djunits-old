@@ -111,14 +111,14 @@ public class FloatAngle extends AbstractFloatScalarRelWithAbs<DirectionUnit, Flo
      */
     public static FloatAngle interpolate(final FloatAngle zero, final FloatAngle one, final float ratio)
     {
-        return new FloatAngle(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatAngle(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public final FloatDirection plus(final FloatDirection v)
     {
-        DirectionUnit targetUnit = v.getUnit();
+        DirectionUnit targetUnit = v.getDisplayUnit();
         return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 

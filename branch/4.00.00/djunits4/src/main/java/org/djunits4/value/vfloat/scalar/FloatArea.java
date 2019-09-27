@@ -107,8 +107,8 @@ public class FloatArea extends AbstractFloatScalarRel<AreaUnit, FloatArea>
      */
     public static FloatArea interpolate(final FloatArea zero, final FloatArea one, final float ratio)
     {
-        return new FloatArea(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new FloatArea(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
+            .getDisplayUnit());
     }
 
     /**

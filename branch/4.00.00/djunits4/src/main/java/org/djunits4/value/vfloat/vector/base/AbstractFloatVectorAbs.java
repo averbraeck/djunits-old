@@ -53,21 +53,21 @@ public abstract class AbstractFloatVectorAbs<
     @Override
     public AV plus(RV increment) throws ValueRuntimeException
     {
-        return FloatVector.instantiate(this.getData().plus(increment.getData()), getUnit());
+        return FloatVector.instantiate(this.getData().plus(increment.getData()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public AV minus(RV decrement) throws ValueRuntimeException
     {
-        return FloatVector.instantiate(this.getData().minus(decrement.getData()), getUnit());
+        return FloatVector.instantiate(this.getData().minus(decrement.getData()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public RV minus(AV decrement) throws ValueRuntimeException
     {
-        return FloatVector.instantiate(this.getData().minus(decrement.getData()), decrement.getUnit().getRelativeUnit());
+        return FloatVector.instantiate(this.getData().minus(decrement.getData()), decrement.getDisplayUnit().getRelativeUnit());
     }
 
     /**

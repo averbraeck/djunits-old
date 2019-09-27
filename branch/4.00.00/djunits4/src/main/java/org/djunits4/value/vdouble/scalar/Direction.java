@@ -81,7 +81,7 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
      */
     public static Direction interpolate(final Direction zero, final Direction one, final double ratio)
     {
-        return new Direction(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new Direction(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

@@ -95,7 +95,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
      */
     public static FlowMass interpolate(final FlowMass zero, final FlowMass one, final double ratio)
     {
-        return new FlowMass(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FlowMass(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**

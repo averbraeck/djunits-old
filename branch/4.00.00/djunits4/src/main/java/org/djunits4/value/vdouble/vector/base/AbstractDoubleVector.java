@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 import org.djunits4.Throw;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.Absolute;
-import org.djunits4.value.AbstractValue;
+import org.djunits4.value.AbstractIndexedValue;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.formatter.Format;
 import org.djunits4.value.storage.StorageType;
@@ -34,7 +34,8 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorDataSparse;
  * @param <V> the generic vector type
  */
 public abstract class AbstractDoubleVector<U extends Unit<U>, S extends AbstractDoubleScalar<U, S>,
-        V extends AbstractDoubleVector<U, S, V>> extends AbstractValue<U, V> implements DoubleVectorInterface<U, S, V>
+        V extends AbstractDoubleVector<U, S, V>> extends AbstractIndexedValue<U, S, V, DoubleVectorData>
+        implements DoubleVectorInterface<U, S, V>
 {
     /** */
     private static final long serialVersionUID = 20161015L;
@@ -42,12 +43,6 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     /** The stored data as an object, can be sparse or dense. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected DoubleVectorData data;
-
-    /** If set, any modification of the data must be preceded by replacing the data with a local copy. */
-    private boolean copyOnWrite = false;
-
-    /** helper flag to indicate whether the data is mutable or not. */
-    private boolean mutable = false;
 
     /**
      * Construct a new AbstractDoubleVector.
@@ -60,120 +55,32 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
         this.data = data;
     }
 
-    /**
-     * Retrieve the data.
-     * @return the internal data -- can only be used within package and by subclasses.
-     */
-    protected final DoubleVectorData getData()
+    /** {@inheritDoc} */
+    @Override
+    protected DoubleVectorData getData()
     {
         return this.data;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final StorageType getStorageType()
+    protected void setData(DoubleVectorData data)
     {
-        return this.data.getStorageType();
-    }
-
-    /**
-     * Check the copyOnWrite flag and, if it is set, make a deep copy of the data and clear the flag.
-     * @throws ValueRuntimeException if the vector is immutable
-     */
-    protected final void checkCopyOnWrite()
-    {
-        Throw.when(!this.mutable, ValueRuntimeException.class, "Immutable Vector cannot be modified");
-        if (isCopyOnWrite())
-        {
-            this.data = this.data.copy();
-            setCopyOnWrite(false);
-        }
-    }
-
-    /**
-     * Retrieve the value of the copyOnWrite flag.
-     * @return boolean
-     */
-    private boolean isCopyOnWrite()
-    {
-        return this.copyOnWrite;
-    }
-
-    /**
-     * Change the copyOnWrite flag.
-     * @param copyOnWrite boolean; the new value for the copyOnWrite flag
-     */
-    final void setCopyOnWrite(final boolean copyOnWrite)
-    {
-        this.copyOnWrite = copyOnWrite;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public boolean isMutable()
-    {
-        return this.mutable;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public V immutable()
-    {
-        if (this.mutable)
-        {
-            setCopyOnWrite(true);
-        }
-        V result = DoubleVector.instantiate(this.data, getUnit().getStandardUnit());
-        result.setDisplayUnit(getUnit());
-        result.setCopyOnWrite(false);
-        result.setMutable(false);
-        return result;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public V mutable()
-    {
-        if (this.mutable)
-        {
-            setCopyOnWrite(true);
-        }
-        V result = DoubleVector.instantiate(this.data, getUnit().getStandardUnit());
-        result.setDisplayUnit(getUnit());
-        result.setCopyOnWrite(true);
-        result.setMutable(true);
-        return result;
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    protected AbstractDoubleVector<U, S, V> clone() throws CloneNotSupportedException
-    {
-        return (AbstractDoubleVector<U, S, V>) super.clone();
-    }
-
-    /**
-     * Set helper flag to indicate whether the data is mutable or not.
-     * @param mutable boolean; helper flag to indicate whether the data is mutable or not
-     */
-    protected void setMutable(final boolean mutable)
-    {
-        this.mutable = mutable;
+        this.data = data;
     }
 
     /** {@inheritDoc} */
     @Override
     public final double[] getValuesSI()
     {
-        return this.data.getDenseVectorSI();
+        return getData().getDenseVectorSI();
     }
 
     /** {@inheritDoc} */
     @Override
     public final double[] getValuesInUnit()
     {
-        return getValuesInUnit(getUnit());
+        return getValuesInUnit(getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -192,7 +99,7 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     @Override
     public final int size()
     {
-        return this.data.size();
+        return getData().size();
     }
 
     /**
@@ -213,21 +120,21 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     public final double getSI(final int index) throws ValueRuntimeException
     {
         checkIndex(index);
-        return this.data.getSI(index);
+        return getData().getSI(index);
     }
 
     /** {@inheritDoc} */
     @Override
     public S get(int index) throws ValueRuntimeException
     {
-        return DoubleScalar.instantiateSI(getSI(index), getUnit());
+        return DoubleScalar.instantiateSI(getSI(index), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public final double getInUnit(final int index) throws ValueRuntimeException
     {
-        return ValueUtil.expressAsUnit(getSI(index), getUnit());
+        return ValueUtil.expressAsUnit(getSI(index), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -243,14 +150,14 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     {
         checkIndex(index);
         checkCopyOnWrite();
-        this.data.setSI(index, valueSI);
+        getData().setSI(index, valueSI);
     }
 
     /** {@inheritDoc} */
     @Override
     public void setInUnit(int index, double valueInUnit) throws ValueRuntimeException
     {
-        setSI(index, ValueUtil.expressAsSIUnit(valueInUnit, getUnit()));
+        setSI(index, ValueUtil.expressAsSIUnit(valueInUnit, getDisplayUnit()));
     }
 
     /** {@inheritDoc} */
@@ -281,13 +188,6 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     }
 
     /** {@inheritDoc} */
-    @Override
-    public final int cardinality()
-    {
-        return this.data.cardinality();
-    }
-
-    /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
     public V toSparse()
@@ -296,13 +196,13 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
         if (getStorageType().equals(StorageType.SPARSE))
         {
             result = (V) this;
-            result.setDisplayUnit(getUnit());
+            result.setDisplayUnit(getDisplayUnit());
         }
         else
         {
-            result = (V) DoubleVector.instantiate(this.data.toSparse(), getUnit());
+            result = (V) DoubleVector.instantiate(getData().toSparse(), getDisplayUnit());
         }
-        result.setDisplayUnit(getUnit());
+        result.setDisplayUnit(getDisplayUnit());
         return result;
     }
 
@@ -315,21 +215,13 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
         if (getStorageType().equals(StorageType.DENSE))
         {
             result = (V) this;
-            result.setDisplayUnit(getUnit());
+            result.setDisplayUnit(getDisplayUnit());
         }
         else
         {
-            result = (V) DoubleVector.instantiate(this.data.toDense(), getUnit());
+            result = (V) DoubleVector.instantiate(getData().toDense(), getDisplayUnit());
         }
         return result;
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public V copy()
-    {
-        return (V) DoubleVector.instantiate(this.data.copy(), getUnit());
     }
 
     /** {@inheritDoc} */
@@ -338,13 +230,13 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     public final V assign(final DoubleFunction doubleFunction)
     {
         checkCopyOnWrite();
-        if (this.data instanceof DoubleVectorDataDense)
+        if (getData() instanceof DoubleVectorDataDense)
         {
-            ((DoubleVectorDataDense) this.data).assign(doubleFunction);
+            ((DoubleVectorDataDense) getData()).assign(doubleFunction);
         }
         else
         {
-            DoubleVectorDataDense dvdd = ((DoubleVectorDataSparse) this.data).toDense();
+            DoubleVectorDataDense dvdd = ((DoubleVectorDataSparse) getData()).toDense();
             dvdd.assign(doubleFunction);
             this.data = dvdd.toSparse();
         }
@@ -355,7 +247,7 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     @Override
     public V times(final double multiplier)
     {
-        V result = copy();
+        V result = clone();
         result.assign(DoubleMathFunctions.MULT(multiplier));
         return result;
     }
@@ -364,7 +256,7 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     @Override
     public V divide(final double divisor)
     {
-        V result = copy();
+        V result = clone();
         result.assign(DoubleMathFunctions.DIV(divisor));
         return result;
     }
@@ -388,7 +280,6 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     @Override
     public final V abs()
     {
-        checkCopyOnWrite();
         assign(DoubleMathFunctions.ABS);
         return (V) this;
     }
@@ -398,7 +289,6 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     @SuppressWarnings("unchecked")
     public final V ceil()
     {
-        checkCopyOnWrite();
         assign(DoubleMathFunctions.CEIL);
         return (V) this;
     }
@@ -408,7 +298,6 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     @SuppressWarnings("unchecked")
     public final V floor()
     {
-        checkCopyOnWrite();
         assign(DoubleMathFunctions.FLOOR);
         return (V) this;
     }
@@ -418,7 +307,6 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     @SuppressWarnings("unchecked")
     public final V neg()
     {
-        checkCopyOnWrite();
         assign(DoubleMathFunctions.NEG);
         return (V) this;
     }
@@ -428,30 +316,15 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     @SuppressWarnings("unchecked")
     public final V rint()
     {
-        checkCopyOnWrite();
         assign(DoubleMathFunctions.RINT);
         return (V) this;
     }
 
     /** {@inheritDoc} */
     @Override
-    public boolean isDense()
-    {
-        return this.data.isDense();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public boolean isSparse()
-    {
-        return this.data.isSparse();
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final String toString()
     {
-        return toString(getUnit(), false, true);
+        return toString(getDisplayUnit(), false, true);
     }
 
     /** {@inheritDoc} */
@@ -465,7 +338,7 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     @Override
     public final String toString(final boolean verbose, final boolean withUnit)
     {
-        return toString(getUnit(), verbose, withUnit);
+        return toString(getDisplayUnit(), verbose, withUnit);
     }
 
     /** {@inheritDoc} */
@@ -476,7 +349,7 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
         if (verbose)
         {
             String ar = this instanceof Absolute ? "Abs " : "Rel ";
-            String ds = this.data.isDense() ? "Dense  " : this.data.isSparse() ? "Sparse " : "?????? ";
+            String ds = getData().isDense() ? "Dense  " : getData().isSparse() ? "Sparse " : "?????? ";
             if (isMutable())
             {
                 buf.append("Mutable   " + ar + ds);
@@ -539,8 +412,8 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     public int hashCode()
     {
         final int prime = 31;
-        int result = getUnit().getStandardUnit().hashCode();
-        result = prime * result + ((this.data == null) ? 0 : this.data.hashCode());
+        int result = getDisplayUnit().getStandardUnit().hashCode();
+        result = prime * result + ((getData() == null) ? 0 : getData().hashCode());
         return result;
     }
 
@@ -556,14 +429,14 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
         if (getClass() != obj.getClass())
             return false;
         AbstractDoubleVector<?, ?, ?> other = (AbstractDoubleVector<?, ?, ?>) obj;
-        if (!getUnit().getStandardUnit().equals(other.getUnit().getStandardUnit()))
+        if (!getDisplayUnit().getStandardUnit().equals(other.getDisplayUnit().getStandardUnit()))
             return false;
-        if (this.data == null)
+        if (getData() == null)
         {
-            if (other.data != null)
+            if (other.getData() != null)
                 return false;
         }
-        else if (!this.data.equals(other.data))
+        else if (!getData().equals(other.getData()))
             return false;
         return true;
     }

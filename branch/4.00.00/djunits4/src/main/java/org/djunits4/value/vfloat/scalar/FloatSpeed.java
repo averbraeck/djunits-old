@@ -109,7 +109,7 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
      */
     public static FloatSpeed interpolate(final FloatSpeed zero, final FloatSpeed one, final float ratio)
     {
-        return new FloatSpeed(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatSpeed(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**
