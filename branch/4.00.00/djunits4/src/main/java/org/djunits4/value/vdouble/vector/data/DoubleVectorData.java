@@ -10,6 +10,7 @@ import java.util.stream.IntStream;
 import org.djunits4.unit.Unit;
 import org.djunits4.unit.scale.Scale;
 import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.AbstractStorage;
 import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalar;
 
@@ -22,7 +23,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalar;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public abstract class DoubleVectorData implements Serializable
+public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData> implements Serializable
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -30,9 +31,6 @@ public abstract class DoubleVectorData implements Serializable
     /** The internal storage of the Vector; can be sparse or dense. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected double[] vectorSI;
-
-    /** The data type. */
-    private final StorageType storageType;
 
     /** Threshold to do parallel execution. */
     protected static final int PARALLEL_THRESHOLD = 1000;
@@ -43,7 +41,7 @@ public abstract class DoubleVectorData implements Serializable
      */
     DoubleVectorData(final StorageType storageType)
     {
-        this.storageType = storageType;
+        super(storageType);
     }
 
     /* ============================================================================================ */
@@ -459,28 +457,10 @@ public abstract class DoubleVectorData implements Serializable
     /* ============================================================================================ */
 
     /**
-     * Return the StorageType (DENSE, SPARSE, etc.) for the stored Vector.
-     * @return the StorageType (DENSE, SPARSE, etc.) for the stored Vector
-     */
-    public final StorageType getStorageType()
-    {
-        return this.storageType;
-    }
-
-    /**
      * Retrieve the size of the vector.
      * @return int; the size of the vector
      */
     public abstract int size();
-
-    /**
-     * Is the data storage sparse?
-     * @return boolean; true if the data storage is sparse; false if the data storage is not sparse
-     */
-    public boolean isSparse()
-    {
-        return this.storageType.equals(StorageType.SPARSE);
-    }
 
     /**
      * Return the sparsely stored equivalent of this data.
@@ -489,15 +469,6 @@ public abstract class DoubleVectorData implements Serializable
     public DoubleVectorDataSparse toSparse()
     {
         return isSparse() ? (DoubleVectorDataSparse) this : ((DoubleVectorDataDense) this).toSparse();
-    }
-
-    /**
-     * Is the data storage dense?
-     * @return boolean; true if the data storage is dense; false if the data storage is not dense
-     */
-    public boolean isDense()
-    {
-        return this.storageType.equals(StorageType.DENSE);
     }
 
     /**
@@ -523,10 +494,8 @@ public abstract class DoubleVectorData implements Serializable
      */
     public abstract void setSI(int index, double valueSI);
 
-    /**
-     * Retrieve the number of non-zero cells.
-     * @return int; the number of non-zero cells
-     */
+    /** {@inheritDoc} */
+    @Override
     public final int cardinality()
     {
         return (int) Arrays.stream(this.vectorSI).parallel().filter(d -> d != 0.0).count();
@@ -540,12 +509,6 @@ public abstract class DoubleVectorData implements Serializable
     {
         return Arrays.stream(this.vectorSI).parallel().sum();
     }
-
-    /**
-     * Create and return a deep copy of the data.
-     * @return DoubleVectorData; a deep copy of the data
-     */
-    public abstract DoubleVectorData copy();
 
     /**
      * Create and return a dense copy of the data.

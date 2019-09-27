@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
 import org.djunits4.unit.Unit;
 import org.djunits4.unit.scale.Scale;
 import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.AbstractStorage;
 import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.matrix.base.FloatSparseValue;
 import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
@@ -21,7 +22,7 @@ import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public abstract class FloatMatrixData implements Serializable
+public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> implements Serializable
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -38,17 +39,13 @@ public abstract class FloatMatrixData implements Serializable
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected int cols;
 
-    /** the data type. */
-    private final StorageType storageType;
-
     /**
      * Construct a new DoubleMatrixData store.
      * @param storageType StorageType; the data type
      */
     public FloatMatrixData(final StorageType storageType)
     {
-        super();
-        this.storageType = storageType;
+        super(storageType);
     }
 
     /* ============================================================================================ */
@@ -175,15 +172,6 @@ public abstract class FloatMatrixData implements Serializable
     /* ============================================================================================ */
 
     /**
-     * Return the StorageType (DENSE, SPARSE, etc.) for the stored Matrix.
-     * @return the StorageType (DENSE, SPARSE, etc.) for the stored Matrix
-     */
-    public final StorageType getStorageType()
-    {
-        return this.storageType;
-    }
-
-    /**
      * Retrieve the row count.
      * @return int; the number of rows of the matrix
      */
@@ -202,30 +190,12 @@ public abstract class FloatMatrixData implements Serializable
     }
 
     /**
-     * Is this matrix sparse?
-     * @return boolean; true if the data storage type is sparse; false if the data storage type is not sparse
-     */
-    public boolean isSparse()
-    {
-        return this.storageType.equals(StorageType.SPARSE);
-    }
-
-    /**
      * Return the data of this matrix in sparse storage format.
      * @return FloatMatrixDataSparse; the sparse transformation of this data
      */
     public FloatMatrixDataSparse toSparse()
     {
         return isSparse() ? (FloatMatrixDataSparse) this : ((FloatMatrixDataDense) this).toSparse();
-    }
-
-    /**
-     * Is this matrix dense?
-     * @return boolean; true if the data storage type is dense; false if the data storage type is not dense
-     */
-    public boolean isDense()
-    {
-        return this.storageType.equals(StorageType.DENSE);
     }
 
     /**
@@ -253,10 +223,8 @@ public abstract class FloatMatrixData implements Serializable
      */
     public abstract void setSI(int row, int col, float valueSI);
 
-    /**
-     * Compute and return the number of non-zero cells in this matrix.
-     * @return int; the number of non-zero cells
-     */
+    /** {@inheritDoc} */
+    @Override
     public final int cardinality()
     {
         // this does not copy the data. See http://stackoverflow.com/questions/23106093/how-to-get-a-stream-from-a-float
@@ -273,12 +241,6 @@ public abstract class FloatMatrixData implements Serializable
         // this does not copy the data. See http://stackoverflow.com/questions/23106093/how-to-get-a-stream-from-a-float
         return (float) IntStream.range(0, this.matrixSI.length).parallel().mapToDouble(i -> this.matrixSI[i]).sum();
     }
-
-    /**
-     * Create and return a deep copy of the data.
-     * @return FloatMatrixData; a deep copy of the data
-     */
-    public abstract FloatMatrixData copy();
 
     /**
      * Create and return a deep copy of the data in dense format.

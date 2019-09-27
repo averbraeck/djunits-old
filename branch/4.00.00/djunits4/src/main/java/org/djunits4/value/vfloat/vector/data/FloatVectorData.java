@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 import org.djunits4.unit.Unit;
 import org.djunits4.unit.scale.Scale;
 import org.djunits4.value.ValueRuntimeException;
+import org.djunits4.value.storage.AbstractStorage;
 import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
 
@@ -21,7 +22,7 @@ import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public abstract class FloatVectorData implements Serializable
+public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> implements Serializable
 {
     /** */
     private static final long serialVersionUID = 1L;
@@ -30,17 +31,13 @@ public abstract class FloatVectorData implements Serializable
     @SuppressWarnings("checkstyle:visibilitymodifier")
     protected float[] vectorSI;
 
-    /** The data type. */
-    private final StorageType storageType;
-
     /**
      * Construct a new FloatVectorData object.
      * @param storageType StorageType; the data type.
      */
     FloatVectorData(final StorageType storageType)
     {
-        super();
-        this.storageType = storageType;
+        super(storageType);
     }
 
     /* ============================================================================================ */
@@ -259,28 +256,10 @@ public abstract class FloatVectorData implements Serializable
     /* ============================================================================================ */
 
     /**
-     * Return the StorageType (DENSE, SPARSE, etc.) for the stored Vector.
-     * @return the StorageType (DENSE, SPARSE, etc.) for the stored Vector
-     */
-    public final StorageType getStorageType()
-    {
-        return this.storageType;
-    }
-
-    /**
      * Retrieve the size of the vector.
      * @return int; the size of the vector
      */
     public abstract int size();
-
-    /**
-     * Is the data storage sparse?
-     * @return boolean; true if the data storage is sparse; false if the data storage is not sparse
-     */
-    public boolean isSparse()
-    {
-        return this.storageType.equals(StorageType.SPARSE);
-    }
 
     /**
      * Return the sparsely stored equivalent of this data.
@@ -289,15 +268,6 @@ public abstract class FloatVectorData implements Serializable
     public FloatVectorDataSparse toSparse()
     {
         return isSparse() ? (FloatVectorDataSparse) this : ((FloatVectorDataDense) this).toSparse();
-    }
-
-    /**
-     * Is the data storage dense?
-     * @return boolean; true if the data storage is dense; false if the data storage is not dense
-     */
-    public boolean isDense()
-    {
-        return this.storageType.equals(StorageType.DENSE);
     }
 
     /**
@@ -323,10 +293,8 @@ public abstract class FloatVectorData implements Serializable
      */
     public abstract void setSI(int index, float valueSI);
 
-    /**
-     * Retrieve the number of non-zero cells.
-     * @return int; the number of non-zero cells
-     */
+    /** {@inheritDoc} */
+    @Override
     public final int cardinality()
     {
         // this does not copy the data. See http://stackoverflow.com/questions/23106093/how-to-get-a-stream-from-a-float
@@ -343,12 +311,6 @@ public abstract class FloatVectorData implements Serializable
         // this does not copy the data. See http://stackoverflow.com/questions/23106093/how-to-get-a-stream-from-a-float
         return (float) IntStream.range(0, this.vectorSI.length).parallel().mapToDouble(i -> this.vectorSI[i]).sum();
     }
-
-    /**
-     * Create and return a deep copy of the data.
-     * @return FloatVectorData; a deep copy of the data
-     */
-    public abstract FloatVectorData copy();
 
     /**
      * Create and return a dense copy of the data.
