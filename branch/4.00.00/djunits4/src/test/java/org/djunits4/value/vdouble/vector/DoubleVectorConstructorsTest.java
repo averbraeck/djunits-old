@@ -405,7 +405,7 @@ public class DoubleVectorConstructorsTest
                     assertEquals("getInUnit returns value in specified unit", testValues[i], atv.getInUnit(i, temperatureUnit),
                             0.001);
                 }
-                
+
                 try
                 {
                     atv.getInUnit(-1, temperatureUnit);
@@ -416,7 +416,7 @@ public class DoubleVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
-                
+
                 try
                 {
                     atv.getInUnit(testValues.length, temperatureUnit);
@@ -426,7 +426,7 @@ public class DoubleVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
-                
+
                 try
                 {
                     atv.set(0, al.get(0));
@@ -436,7 +436,7 @@ public class DoubleVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
-                
+
                 try
                 {
                     atv.set(-1, al.get(0));
@@ -447,7 +447,7 @@ public class DoubleVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
-                
+
                 try
                 {
                     atv.set(testValues.length, al.get(0));
@@ -467,7 +467,7 @@ public class DoubleVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
-                
+
                 AbsoluteTemperatureVector matv = atv.mutable();
                 matv.setInUnit(0, 0, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT);
                 assertEquals("Setting temp in F should have stored equivalent value in K", matv.getSI(0), 255.37, 0.01);
@@ -480,7 +480,7 @@ public class DoubleVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
-                
+
                 matv.setInUnit(testValues.length - 1, 0, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT);
                 try
                 {
@@ -491,7 +491,7 @@ public class DoubleVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
-                
+
                 // More complete memory test; somewhat inspired on mats+
                 matv = atv.mutable();
                 for (int index = 0; index < testValues.length; index++)
@@ -526,7 +526,7 @@ public class DoubleVectorConstructorsTest
                     v = matv.getSI(index);
                     assertEquals("initial value + 100 is returned", testValues[index] + 100 + offset, v, 0.001);
                 }
-                
+
                 // Check that we can set on the mutable version
                 matv.set(0, al.get(0));
                 try
@@ -539,7 +539,7 @@ public class DoubleVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
-                
+
                 try
                 {
                     matv.set(testValues.length, al.get(0));
@@ -556,20 +556,20 @@ public class DoubleVectorConstructorsTest
                 assertEquals("Unit should be same", atv.getUnit(), dense.getUnit());
                 compareValues(dense.getValuesInUnit(), atv.getValuesInUnit());
                 assertFalse("Should be immutable", dense.isMutable());
-                
+
                 AbsoluteTemperatureVector sparse = atv.toSparse();
                 assertTrue("Should be sparse", sparse.isSparse());
                 assertFalse("Should not be be dense", sparse.isDense());
                 assertEquals("Unit should be same", atv.getUnit(), sparse.getUnit());
                 compareValues(sparse.getValuesInUnit(), atv.getValuesInUnit());
                 assertFalse("Should be immutable", sparse.isMutable());
-                
+
                 AbsoluteTemperatureVector copy = atv.copy();
                 assertEquals("storagetype should not have changed", atv.getStorageType(), copy.getStorageType());
                 assertEquals("unit should be same", atv.getUnit(), copy.getUnit());
                 compareValues(atv.getValuesInUnit(), copy.getValuesInUnit());
                 assertFalse("copy is immutable", copy.isMutable());
-                
+
                 copy = matv.copy();
                 assertEquals("storagetype should not have changed", matv.getStorageType(), copy.getStorageType());
                 assertEquals("unit should be same", matv.getUnit(), copy.getUnit());
@@ -599,12 +599,12 @@ public class DoubleVectorConstructorsTest
 
         for (String className : CLASSNAMES.ALL_NODIM_LIST)
         {
-            System.out.println("class name is " + className);
+            // System.out.println("class name is " + className);
             UnitBase<?> unitBase = UnitTypes.INSTANCE.getUnitBase(className + "Unit");
             // double
             @SuppressWarnings("rawtypes")
             Unit standardUnit = unitBase.getStandardUnit();
-            double[] testValues = new double[] { 0, 123.456d, 0, 0, 234.567d, 0 };
+            double[] testValues = new double[] { 0, 123.456d, 0, 0, -234.567d, 0 };
             int cardinality = 0;
             double zSum = 0;
             List<Double> list = new ArrayList<>();
@@ -657,6 +657,15 @@ public class DoubleVectorConstructorsTest
                 DoubleVectorInterface<?, ?, ?> immutable = siv.immutable();
                 try
                 {
+                    immutable.abs();
+                    fail("double vector should be immutable");
+                }
+                catch (ValueRuntimeException vre)
+                {
+                    // Ignore expected exception
+                }
+                try
+                {
                     immutable.ceil();
                     fail("double vector should be immutable");
                 }
@@ -698,6 +707,12 @@ public class DoubleVectorConstructorsTest
                     assertEquals("floor", Math.floor(testValues[index]), mutable.getInUnit(index), 0.001);
                 }
                 mutable = siv.mutable();
+                mutable.abs();
+                for (int index = 0; index < testValues.length; index++)
+                {
+                    assertEquals("abs", Math.abs(testValues[index]), mutable.getInUnit(index), 0.001);
+                }
+                mutable = siv.mutable();
                 mutable.rint();
                 for (int index = 0; index < testValues.length; index++)
                 {
@@ -732,7 +747,7 @@ public class DoubleVectorConstructorsTest
                     iterator.next();
                     fail("another call to next should have thrown a NoSuchElementException");
                 }
-                catch(NoSuchElementException nsee)
+                catch (NoSuchElementException nsee)
                 {
                     // Ignore expected exception
                 }
@@ -1228,6 +1243,32 @@ public class DoubleVectorConstructorsTest
                         compareSum(rtv.getValuesInUnit(TemperatureUnit.KELVIN),
                                 difftv.getValuesInUnit(AbsoluteTemperatureUnit.KELVIN),
                                 atv.getValuesInUnit(AbsoluteTemperatureUnit.KELVIN));
+
+                        String s = atv.toString(temperatureUnit);
+                        assertTrue("toString returns something sensible", s.startsWith("["));
+                        assertTrue("toString returns something sensible", s.endsWith("] " + temperatureUnit.toString()));
+                        System.out.println(atv.toString(true, true));
+                        s = atv.toString(true, true);
+                        assertTrue("toString includes Immutable", s.contains("Immutable"));
+                        assertTrue("toString includes Abs", s.contains("Abs"));
+                        assertTrue("toString includes Dense or Sparse", s.contains(atv.isDense() ? "Dense" : "Sparse"));
+                        assertTrue("toString returns something sensible", s.endsWith("] " + temperatureUnit.toString()));
+                        s = atv.mutable().toString(true, true);
+                        assertTrue("toString includes Mutable", s.contains("Mutable"));
+
+                        s = rtv.toString();
+                        assertTrue("toString returns something sensible", s.startsWith("["));
+                        assertTrue("toString returns something sensible",
+                                s.endsWith("] " + relativeTemperatureUnit.toString()));
+                        s = rtv.toString(true, true);
+                        assertTrue("toString includes Immutable", s.contains("Immutable"));
+                        assertTrue("toString includes Rel", s.contains("Rel"));
+                        assertTrue("toString includes Dense or Sparse", s.contains(rtv.isDense() ? "Dense" : "Sparse"));
+                        assertTrue("toString returns something sensible",
+                                s.endsWith("] " + relativeTemperatureUnit.toString()));
+                        s = rtv.mutable().toString(true, true);
+                        assertTrue("toString includes Mutable", s.contains("Mutable"));
+
                     }
                 }
             }
