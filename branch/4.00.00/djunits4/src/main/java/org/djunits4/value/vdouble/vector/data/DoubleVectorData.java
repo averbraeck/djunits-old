@@ -143,11 +143,11 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
                 {
                     if (scale.isBaseSIScale())
                     {
-                        nonZeroCount = (int) values.parallelStream().mapToDouble(d -> d).count();
+                        nonZeroCount = (int) values.parallelStream().filter(d -> d != 0.0).count();
                     }
                     else
                     {
-                        nonZeroCount = (int) values.parallelStream().mapToDouble(d -> scale.toStandardUnit(d)).count();
+                        nonZeroCount = (int) values.parallelStream().filter(d -> scale.toStandardUnit(d) != 0.0).count();
                     }
                 }
                 else
