@@ -1,6 +1,8 @@
 package org.djunits4.value.vdouble.vector;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.lang.reflect.InvocationTargetException;
@@ -112,6 +114,7 @@ public class DoubleVectorConstructorsTest
                 compareValuesWithScale(standardUnit.getScale(), testValues, doubleVector.getValuesSI());
                 assertEquals("Unit must match", standardUnit, doubleVector.getUnit());
                 assertEquals("StorageType must match", storageType, doubleVector.getStorageType());
+                assertFalse("double vector is immutable by default", doubleVector.isMutable());
                 try
                 {
                     doubleVector.setSI(0, 0);
@@ -140,6 +143,7 @@ public class DoubleVectorConstructorsTest
                     // Ignore expected exception
                 }
                 DoubleVectorInterface<?, ?, ?> mutable = doubleVector.mutable();
+                assertTrue("double vector is immutable by default", mutable.isMutable());
                 mutable.setSI(0, 0);
                 mutable.setInUnit(0, 0);
                 try
