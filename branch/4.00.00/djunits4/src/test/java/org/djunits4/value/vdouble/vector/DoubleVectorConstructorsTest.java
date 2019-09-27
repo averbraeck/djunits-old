@@ -10,6 +10,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -110,6 +111,7 @@ public class DoubleVectorConstructorsTest
                 String scalarClassName = "org.djunits4.value.vdouble.scalar." + className;
                 Class<?> scalarClass = Class.forName(scalarClassName);
                 assertEquals("getScalarClass", scalarClass, doubleVector.getScalarClass());
+                compareValues(testValues, doubleVector.getValuesInUnit());
                 doubleVector = DoubleVector.instantiateSI(testValues, standardUnit, storageType);
                 compareValuesWithScale(standardUnit.getScale(), testValues, doubleVector.getValuesSI());
                 assertEquals("Unit must match", standardUnit, doubleVector.getUnit());
@@ -398,6 +400,64 @@ public class DoubleVectorConstructorsTest
                 assertEquals("cardinality", cardinality, atv.cardinality());
 
                 atv = DoubleVector.instantiate(testValues, temperatureUnit, storageType);
+                for (int i = 0; i < testValues.length; i++)
+                {
+                    assertEquals("getInUnit returns value in specified unit", testValues[i], atv.getInUnit(i, temperatureUnit),
+                            0.001);
+                }
+                
+                try
+                {
+                    atv.getInUnit(-1, temperatureUnit);
+                    fail("negative index should have thrown a ValueRuntimeException");
+                }
+                catch (ValueRuntimeException vre)
+
+                {
+                    // Ignore expected exception
+                }
+                
+                try
+                {
+                    atv.getInUnit(testValues.length, temperatureUnit);
+                    fail("index above range should have thrown a ValueRuntimeException");
+                }
+                catch (ValueRuntimeException vre)
+                {
+                    // Ignore expected exception
+                }
+                
+                try
+                {
+                    atv.set(0, al.get(0));
+                    fail("double vector should be immutable");
+                }
+                catch (ValueRuntimeException vre)
+                {
+                    // Ignore expected exception
+                }
+                
+                try
+                {
+                    atv.set(-1, al.get(0));
+                    fail("negative index should have thrown a ValueRuntimeException");
+                }
+                catch (ValueRuntimeException vre)
+
+                {
+                    // Ignore expected exception
+                }
+                
+                try
+                {
+                    atv.set(testValues.length, al.get(0));
+                    fail("index above range should have thrown a ValueRuntimeException");
+                }
+                catch (ValueRuntimeException vre)
+                {
+                    // Ignore expected exception
+                }
+
                 try
                 {
                     atv.setInUnit(0, 0, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT);
@@ -407,6 +467,7 @@ public class DoubleVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
+                
                 AbsoluteTemperatureVector matv = atv.mutable();
                 matv.setInUnit(0, 0, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT);
                 assertEquals("Setting temp in F should have stored equivalent value in K", matv.getSI(0), 255.37, 0.01);
@@ -419,6 +480,7 @@ public class DoubleVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
+                
                 matv.setInUnit(testValues.length - 1, 0, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT);
                 try
                 {
@@ -429,6 +491,7 @@ public class DoubleVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
+                
                 // More complete memory test; somewhat inspired on mats+
                 matv = atv.mutable();
                 for (int index = 0; index < testValues.length; index++)
@@ -463,6 +526,56 @@ public class DoubleVectorConstructorsTest
                     v = matv.getSI(index);
                     assertEquals("initial value + 100 is returned", testValues[index] + 100 + offset, v, 0.001);
                 }
+                
+                // Check that we can set on the mutable version
+                matv.set(0, al.get(0));
+                try
+                {
+                    matv.set(-1, al.get(0));
+                    fail("negative index should have thrown a ValueRuntimeException");
+                }
+                catch (ValueRuntimeException vre)
+
+                {
+                    // Ignore expected exception
+                }
+                
+                try
+                {
+                    matv.set(testValues.length, al.get(0));
+                    fail("index above range should have thrown a ValueRuntimeException");
+                }
+                catch (ValueRuntimeException vre)
+                {
+                    // Ignore expected exception
+                }
+
+                AbsoluteTemperatureVector dense = atv.toDense();
+                assertTrue("Should be dense", dense.isDense());
+                assertFalse("Should be not be sparse", dense.isSparse());
+                assertEquals("Unit should be same", atv.getUnit(), dense.getUnit());
+                compareValues(dense.getValuesInUnit(), atv.getValuesInUnit());
+                assertFalse("Should be immutable", dense.isMutable());
+                
+                AbsoluteTemperatureVector sparse = atv.toSparse();
+                assertTrue("Should be sparse", sparse.isSparse());
+                assertFalse("Should not be be dense", sparse.isDense());
+                assertEquals("Unit should be same", atv.getUnit(), sparse.getUnit());
+                compareValues(sparse.getValuesInUnit(), atv.getValuesInUnit());
+                assertFalse("Should be immutable", sparse.isMutable());
+                
+                AbsoluteTemperatureVector copy = atv.copy();
+                assertEquals("storagetype should not have changed", atv.getStorageType(), copy.getStorageType());
+                assertEquals("unit should be same", atv.getUnit(), copy.getUnit());
+                compareValues(atv.getValuesInUnit(), copy.getValuesInUnit());
+                assertFalse("copy is immutable", copy.isMutable());
+                
+                copy = matv.copy();
+                assertEquals("storagetype should not have changed", matv.getStorageType(), copy.getStorageType());
+                assertEquals("unit should be same", matv.getUnit(), copy.getUnit());
+                compareValues(matv.getValuesInUnit(), copy.getValuesInUnit());
+                assertFalse("copy is immutable", copy.isMutable());
+                // FIXME should copy of a mutable be immutable?
             }
         }
     }
@@ -473,6 +586,7 @@ public class DoubleVectorConstructorsTest
      * @throws ValueRuntimeException if that happens uncaught; this test has failed
      * @throws ClassNotFoundException if that happens uncaught; this test has failed
      */
+    @SuppressWarnings("unlikely-arg-type")
     @Test
     public void siVectorTest() throws ValueRuntimeException, UnitException, ClassNotFoundException
     {
@@ -529,7 +643,13 @@ public class DoubleVectorConstructorsTest
                     // Ignore expected exception
                 }
                 SIVector mutable = siv.mutable();
+                assertTrue("vector is equal to itself", siv.equals(siv));
+                assertTrue("vector and mutable vector are considered equal", siv.equals(mutable));
+                assertTrue("vector and mutable vector are considered equal (symmetry)", mutable.equals(siv));
+                assertFalse("vector is not equal to null", siv.equals(null));
+                assertFalse("vecktor is not equal to some other object", siv.equals("hello world"));
                 mutable.ceil();
+                assertFalse("vector is not equal to ceil of vector", siv.equals(mutable));
                 for (int index = 0; index < testValues.length; index++)
                 {
                     assertEquals("ceil", Math.ceil(testValues[index]), mutable.getInUnit(index), 0.001);
@@ -590,12 +710,31 @@ public class DoubleVectorConstructorsTest
                     assertEquals("neg", -testValues[index], mutable.getInUnit(index), 0.001);
                 }
                 int nextIndex = 0;
-                for (Iterator<?> iterator = siv.iterator(); iterator.hasNext();)
+                Iterator<?> iterator;
+                for (iterator = siv.iterator(); iterator.hasNext();)
                 {
                     AbstractDoubleScalar<?, ?> s = (AbstractDoubleScalar<?, ?>) iterator.next();
                     assertEquals("SIDimensions match", s.getUnit().getUnitBase().getSiDimensions(), unitBase.getSiDimensions());
                     assertEquals("value of scalar matches", s.getInUnit(), testValues[nextIndex], 0.001);
                     nextIndex++;
+                    try
+                    {
+                        iterator.remove();
+                        fail("Removal of elements should not work in this iterator");
+                    }
+                    catch (RuntimeException rte)
+                    {
+                        // Ignore expected exception
+                    }
+                }
+                try
+                {
+                    iterator.next();
+                    fail("another call to next should have thrown a NoSuchElementException");
+                }
+                catch(NoSuchElementException nsee)
+                {
+                    // Ignore expected exception
                 }
                 siv = SIVector.instantiate(list, SIUnit.of(unitBase.getSiDimensions()), storageType);
                 compareValues(testValues, siv.getValuesSI());
