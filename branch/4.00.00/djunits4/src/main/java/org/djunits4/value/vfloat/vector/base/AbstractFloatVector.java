@@ -352,43 +352,35 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     }
 
     /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
     @Override
     public V times(final double multiplier)
     {
-        V result = isMutable() ? (V) this : copy();
+        V result = copy();
         result.assign(FloatMathFunctions.MULT((float) multiplier));
         return result;
     }
 
     /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
     @Override
     public V divide(final double divisor)
     {
-        V result = isMutable() ? (V) this : copy();
+        V result = copy();
         result.assign(FloatMathFunctions.DIV((float) divisor));
         return result;
     }
 
     /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
     @Override
     public V times(final float multiplier)
     {
-        V result = isMutable() ? (V) this : copy();
-        result.assign(FloatMathFunctions.MULT(multiplier));
-        return result;
+        return times((double) multiplier);
     }
 
     /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
     @Override
     public V divide(float divisor)
     {
-        V result = isMutable() ? (V) this : copy();
-        result.assign(FloatMathFunctions.DIV(divisor));
-        return result;
+        return divide((double) divisor);
     }
 
     /** {@inheritDoc} */

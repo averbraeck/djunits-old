@@ -352,11 +352,10 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     }
 
     /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
     @Override
     public V times(final double multiplier)
     {
-        V result = isMutable() ? (V) this : copy();
+        V result = copy();
         result.assign(DoubleMathFunctions.MULT(multiplier));
         return result;
     }
@@ -365,8 +364,7 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     @Override
     public V divide(final double divisor)
     {
-        @SuppressWarnings("unchecked")
-        V result = isMutable() ? (V) this : copy();
+        V result = copy();
         result.assign(DoubleMathFunctions.DIV(divisor));
         return result;
     }
@@ -520,6 +518,19 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
         Throw.whenNull(other, "Other vector is null");
         Throw.when(size() != other.size(), ValueRuntimeException.class, "The vectors have different sizes: %d != %d", size(),
                 other.size());
+    }
+
+    /**
+     * Centralized size equality check.
+     * @param other double[]; array of double
+     * @throws NullPointerException when array is null
+     * @throws ValueRuntimeException when vectors have unequal size
+     */
+    protected final void checkSize(final double[] other) throws ValueRuntimeException
+    {
+        Throw.whenNull(other, "Array is null");
+        Throw.when(size() != other.length, ValueRuntimeException.class,
+                "The vector and the array have different sizes: %d != %d", size(), other.length);
     }
 
     /** {@inheritDoc} */

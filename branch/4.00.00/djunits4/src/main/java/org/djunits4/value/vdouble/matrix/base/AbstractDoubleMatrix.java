@@ -479,11 +479,10 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
     }
 
     /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
     @Override
     public M times(final double multiplier)
     {
-        M result = isMutable() ? (M) this : copy();
+        M result = copy();
         result.assign(DoubleMathFunctions.MULT(multiplier));
         return result;
     }
@@ -492,8 +491,7 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
     @Override
     public M divide(final double divisor)
     {
-        @SuppressWarnings("unchecked")
-        M result = isMutable() ? (M) this : copy();
+        M result = copy();
         result.assign(DoubleMathFunctions.DIV(divisor));
         return result;
     }

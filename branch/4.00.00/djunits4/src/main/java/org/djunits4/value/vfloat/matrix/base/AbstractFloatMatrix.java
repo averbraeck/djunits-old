@@ -479,11 +479,10 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
     }
 
     /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
     @Override
     public M times(final double multiplier)
     {
-        M result = isMutable() ? (M) this : copy();
+        M result = copy();
         result.assign(FloatMathFunctions.MULT((float) multiplier));
         return result;
     }
@@ -492,8 +491,7 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
     @Override
     public M divide(final double divisor)
     {
-        @SuppressWarnings("unchecked")
-        M result = isMutable() ? (M) this : copy();
+        M result = copy();
         result.assign(FloatMathFunctions.DIV((float) divisor));
         return result;
     }
