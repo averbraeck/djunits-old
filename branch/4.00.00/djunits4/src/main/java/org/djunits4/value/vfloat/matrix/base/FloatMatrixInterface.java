@@ -103,24 +103,6 @@ public interface FloatMatrixInterface<U extends Unit<U>, S extends Scalar<U, S>,
      */
     float determinant() throws ValueRuntimeException;
     
-    /** 
-     * Return whether the internal storage type of the vector is dense or not.
-     * @return boolean; whether the internal storage type of the vector is dense or not
-     */
-    boolean isDense();
-
-    /** 
-     * Return whether the internal storage type of the vector is sparse or not.
-     * @return boolean; whether the internal storage type of the vector is sparse or not
-     */
-    boolean isSparse();
-
-    /**
-     * Return whether the data is mutable or not.
-     * @return boolean; whether the data is mutable or not
-     */
-    boolean isMutable();
-    
     /**
      * Set the value, specified in the standard SI unit, at the specified position.
      * @param row int; row of the value to set

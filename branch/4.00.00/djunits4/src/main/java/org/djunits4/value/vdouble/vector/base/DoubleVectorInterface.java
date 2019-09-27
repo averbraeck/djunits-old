@@ -65,24 +65,6 @@ public interface DoubleVectorInterface<U extends Unit<U>, S extends DoubleScalar
      */
     double[] getValuesInUnit(U targetUnit);
     
-    /** 
-     * Return whether the internal storage type of the vector is dense or not.
-     * @return boolean; whether the internal storage type of the vector is dense or not
-     */
-    boolean isDense();
-
-    /** 
-     * Return whether the internal storage type of the vector is sparse or not.
-     * @return boolean; whether the internal storage type of the vector is sparse or not
-     */
-    boolean isSparse();
-
-    /**
-     * Return whether the data is mutable or not.
-     * @return boolean; whether the data is mutable or not
-     */
-    boolean isMutable();
-    
     /**
      * Set the value, specified in the standard SI unit, at the specified position.
      * @param index int; the index of the value to set
