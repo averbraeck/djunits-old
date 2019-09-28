@@ -55,6 +55,7 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
     AbstractDoubleMatrix(final DoubleMatrixData data, final U unit)
     {
         super(unit);
+        Throw.whenNull(data, "data cannot be null");
         this.data = data;
     }
 

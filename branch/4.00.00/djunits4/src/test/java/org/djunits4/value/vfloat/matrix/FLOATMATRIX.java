@@ -11,7 +11,7 @@ import org.djunits4.value.vfloat.matrix.base.FloatSparseValue;
 import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
 
 /**
- * FLOATMATRIX.java.
+ * FLOATMATRIX for creating different test matrices. Matrix values from a float array are stored as m[row][column].
  * <p>
  * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
@@ -21,64 +21,67 @@ import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
 public class FLOATMATRIX
 {
     /**
-     * Return a square array with all values != 0.
-     * @param rc the number of rows and columns
+     * Return a rectangular array with all values != 0.
+     * @param rows the number of rows
+     * @param cols the number of columns
      * @return an array with all nonzero values
      */
-    public static float[][] denseSquareArrays(final int rc)
+    public static float[][] denseRectArrays(final int rows, final int cols)
     {
-        float[][] array = new float[rc][];
-        for (int i = 0; i < rc; i++)
+        float[][] array = new float[rows][];
+        for (int i = 0; i < rows; i++)
         {
-            float[] r = new float[rc];
+            float[] r = new float[cols];
             array[i] = r;
-            for (int j = 0; j < rc; j++)
+            for (int j = 0; j < cols; j++)
             {
-                r[j] = 10.0f * i + j + 1.0f;
+                r[j] = cols * i + j + 1.0f;
             }
         }
         return array;
     }
 
     /**
-     * Return a square array with only nonzero values on the diagonal.
-     * @param rc the number of rows and columns
+     * Return a rectangular array with only nonzero values on the diagonal.
+     * @param rows the number of rows
+     * @param cols the number of columns
      * @return an array with only nonzero values on the diagonal
      */
-    public static float[][] sparseSquareArrays(final int rc)
+    public static float[][] sparseRectArrays(final int rows, final int cols)
     {
-        float[][] array = new float[rc][];
-        for (int i = 0; i < rc; i++)
+        float[][] array = new float[rows][];
+        for (int i = 0; i < rows; i++)
         {
-            float[] r = new float[rc];
+            float[] r = new float[cols];
             array[i] = r;
-            for (int j = 0; j < rc; j++)
+            for (int j = 0; j < cols; j++)
             {
-                r[j] = (i == j) ? i + 1.0f : 0.0f;
+                r[j] = (i == j) ? i + 1 : 0.0f;
             }
         }
         return array;
     }
 
     /**
-     * Return a square array with all values != 0.
-     * @param rc the number of rows and columns
+     * Return a rectangular array with all values != 0.
+     * @param rows the number of rows
+     * @param cols the number of columns
      * @param scalarClass the class of scalars to use
      * @return an array with all nonzero values
      */
     @SuppressWarnings("unchecked")
-    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> S[][] denseSquareScalarArrays(final int rc,
-            final Class<S> scalarClass)
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> S[][] denseRectScalarArrays(final int rows,
+            final int cols, final Class<S> scalarClass)
     {
         try
         {
-            S[][] array = (S[][]) Array.newInstance(scalarClass, rc, rc);
+            S[][] array = (S[][]) Array.newInstance(scalarClass, rows, cols);
             Method createSI = scalarClass.getMethod("createSI", new Class<?>[] {float.class});
-            for (int i = 0; i < rc; i++)
+            for (int i = 0; i < rows; i++)
             {
-                for (int j = 0; j < rc; j++)
+                for (int j = 0; j < cols; j++)
                 {
-                    array[i][j] = (S) createSI.invoke(null, 10.0f * i + j + 1.0f);
+                    array[i][j] = (S) createSI.invoke(null, cols * i + j + 1.0f);
                 }
             }
             return array;
@@ -90,24 +93,25 @@ public class FLOATMATRIX
     }
 
     /**
-     * Return a square array with only nonzero values on the diagonal.
-     * @param rc the number of rows and columns
+     * Return a rectangular array with only nonzero values on the diagonal.
+     * @param rows the number of rows
+     * @param cols the number of columns
      * @param scalarClass the class of scalars to use
      * @return an array with only nonzero values on the diagonal
      */
     @SuppressWarnings("unchecked")
-    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> S[][] sparseSquareScalarArrays(final int rc,
-            final Class<S> scalarClass)
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> S[][] sparseRectScalarArrays(final int rows,
+            final int cols, final Class<S> scalarClass)
     {
         try
         {
-            S[][] array = (S[][]) Array.newInstance(scalarClass, rc, rc);
+            S[][] array = (S[][]) Array.newInstance(scalarClass, rows, cols);
             Method createSI = scalarClass.getMethod("createSI", new Class<?>[] {float.class});
-            for (int i = 0; i < rc; i++)
+            for (int i = 0; i < rows; i++)
             {
-                for (int j = 0; j < rc; j++)
+                for (int j = 0; j < cols; j++)
                 {
-                    array[i][j] = (i == j) ? (S) createSI.invoke(null, i + 1.0f) : (S) createSI.invoke(null, 0.0f);
+                    array[i][j] = (i == j) ? (S) createSI.invoke(null, i + 1) : (S) createSI.invoke(null, 0.0f);
                 }
             }
             return array;
@@ -119,25 +123,26 @@ public class FLOATMATRIX
     }
 
     /**
-     * Return a square array with all values != 0.
-     * @param rc the number of rows and columns
+     * Return a rectangular array with all values != 0.
+     * @param rows the number of rows
+     * @param cols the number of columns
      * @param scalarClass the class of scalars to use
      * @return an array with all nonzero values
      */
     @SuppressWarnings("unchecked")
     public static <U extends Unit<U>,
-            S extends FloatScalarInterface<U, S>> Collection<FloatSparseValue<U, S>> denseSquareTuples(final int rc,
-                    final Class<S> scalarClass)
+            S extends FloatScalarInterface<U, S>> Collection<FloatSparseValue<U, S>> denseRectTuples(final int rows,
+                    final int cols, final Class<S> scalarClass)
     {
         try
         {
             List<FloatSparseValue<U, S>> matrixList = new ArrayList<>();
             Method createSI = scalarClass.getMethod("createSI", new Class<?>[] {float.class});
-            for (int i = 0; i < rc; i++)
+            for (int i = 0; i < rows; i++)
             {
-                for (int j = 0; j < rc; j++)
+                for (int j = 0; j < cols; j++)
                 {
-                    S v = (S) createSI.invoke(null, 10.0f * i + j + 1.0f);
+                    S v = (S) createSI.invoke(null, cols * i + j + 1.0f);
                     FloatSparseValue<U, S> dsv = new FloatSparseValue<U, S>(i, j, v);
                     matrixList.add(dsv);
                 }
@@ -151,21 +156,22 @@ public class FLOATMATRIX
     }
 
     /**
-     * Return a square array with only nonzero values on the diagonal.
-     * @param rc the number of rows and columns
+     * Return a rectangular array with only nonzero values on the diagonal.
+     * @param rows the number of rows
+     * @param cols the number of columns
      * @param scalarClass the class of scalars to use
      * @return an array with only nonzero values on the diagonal
      */
     public static <U extends Unit<U>,
-            S extends FloatScalarInterface<U, S>> Collection<FloatSparseValue<U, S>> sparseSquareTuples(final int rc,
-                    final Class<S> scalarClass)
+            S extends FloatScalarInterface<U, S>> Collection<FloatSparseValue<U, S>> sparseRectTuples(final int rows,
+                    final int cols, final Class<S> scalarClass)
     {
         try
         {
             List<FloatSparseValue<U, S>> matrixList = new ArrayList<>();
-            for (int i = 0; i < rc; i++)
+            for (int i = 0; i < rows; i++)
             {
-                for (int j = 0; j < rc; j++)
+                for (int j = 0; j < cols; j++)
                 {
                     if (i == j)
                     {

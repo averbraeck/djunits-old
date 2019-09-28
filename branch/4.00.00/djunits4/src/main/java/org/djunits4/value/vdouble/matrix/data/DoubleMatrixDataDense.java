@@ -41,7 +41,8 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
     }
 
     /**
-     * Create a matrix with dense data.
+     * Create a matrix with dense data. The double array is of the form d[rows][columns] so each value can be found with
+     * d[row][column].
      * @param matrixSI double[][]; the data to store
      * @throws ValueRuntimeException in case matrix is ragged
      */

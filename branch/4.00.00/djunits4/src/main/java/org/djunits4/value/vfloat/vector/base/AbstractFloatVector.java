@@ -52,6 +52,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     AbstractFloatVector(final FloatVectorData data, final U unit)
     {
         super(unit);
+        Throw.whenNull(data, "data cannot be null");
         this.data = data;
     }
 

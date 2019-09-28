@@ -55,6 +55,7 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
     AbstractFloatMatrix(final FloatMatrixData data, final U unit)
     {
         super(unit);
+        Throw.whenNull(data, "data cannot be null");
         this.data = data;
     }
 

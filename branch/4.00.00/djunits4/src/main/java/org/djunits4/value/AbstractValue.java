@@ -2,6 +2,7 @@ package org.djunits4.value;
 
 import java.io.Serializable;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.Unit;
 
 /**
@@ -29,6 +30,7 @@ public abstract class AbstractValue<U extends Unit<U>, T extends Value<U, T>> im
      */
     protected AbstractValue(final U displayUnit)
     {
+        Throw.whenNull(displayUnit, "display unit cannot be null");
         this.displayUnit = displayUnit;
     }
 

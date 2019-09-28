@@ -52,6 +52,7 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     AbstractDoubleVector(final DoubleVectorData data, final U unit)
     {
         super(unit);
+        Throw.whenNull(data, "display unit cannot be null");
         this.data = data;
     }
 

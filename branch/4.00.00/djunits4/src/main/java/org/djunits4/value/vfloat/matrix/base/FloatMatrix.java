@@ -37,8 +37,9 @@ public final class FloatMatrix
     }
 
     /**
-     * Instantiate the FloatMatrix based on its unit. Rigid check on types for the compiler.
-     * @param valuesInUnit float[]; the values in the given unit
+     * Instantiate the FloatMatrix based on its unit. Rigid check on types for the compiler. The float array is of the form
+     * f[rows][columns] so each value can be found with f[row][column].
+     * @param valuesInUnit float[][]; the values in the given unit
      * @param unit U; the unit in which the values are expressed and displayed
      * @param storageType StorageType; whether the matrix is SPARSE or DENSE
      * @return M; an instantiated FloatMatrix with the values expressed in their unit
@@ -52,8 +53,9 @@ public final class FloatMatrix
 
     /**
      * Instantiate the FloatMatrix based on its unit. Rigid check on types for the compiler. The class for the matrix is
-     * explicitly provided, e.g., for user-defined matrix classes.
-     * @param valuesInUnit float[]; the values in the given unit
+     * explicitly provided, e.g., for user-defined matrix classes. The float array is of the form f[rows][columns] so each value
+     * can be found with f[row][column].
+     * @param valuesInUnit float[][]; the values in the given unit
      * @param unit U; the unit in which the values are expressed and displayed
      * @param storageType StorageType; whether the matrix is SPARSE or DENSE
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate
@@ -67,8 +69,9 @@ public final class FloatMatrix
     }
 
     /**
-     * Instantiate the FloatMatrix based on its unit. Rigid check on types for the compiler.
-     * @param valuesSI float[]; the values in the SI unit
+     * Instantiate the FloatMatrix based on its unit. Rigid check on types for the compiler. The float array is of the form
+     * f[rows][columns] so each value can be found with f[row][column].
+     * @param valuesSI float[][]; the values in the SI unit
      * @param displayUnit U; the unit in which the values will be displayed
      * @param storageType StorageType; whether the matrix is SPARSE or DENSE
      * @return M; an instantiated FloatMatrix with the SI values and display unit
@@ -82,8 +85,9 @@ public final class FloatMatrix
 
     /**
      * Instantiate the FloatMatrix based on its unit. Rigid check on types for the compiler. The class for the matrix is
-     * explicitly provided, e.g., for user-defined matrix classes.
-     * @param valuesSI float[]; the values in the SI unit
+     * explicitly provided, e.g., for user-defined matrix classes. The float array is of the form f[rows][columns] so each value
+     * can be found with f[row][column].
+     * @param valuesSI float[][]; the values in the SI unit
      * @param displayUnit U; the unit in which the values will be displayed
      * @param storageType StorageType; whether the matrix is SPARSE or DENSE
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate
@@ -125,7 +129,8 @@ public final class FloatMatrix
     }
 
     /**
-     * Construct a new Relative Immutable Float Matrix. Rigid check on types for the compiler.
+     * Construct a new Relative Immutable Float Matrix. Rigid check on types for the compiler. The FloatScalar array is of the
+     * form fs[rows][columns] so each value can be found with fs[row][column].
      * @param values S[][]; the values of the entries in the new Relative Immutable Float Matrix
      * @param displayUnit U; the unit in which the values will be displayed
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
@@ -140,7 +145,8 @@ public final class FloatMatrix
 
     /**
      * Construct a new Relative Immutable Float Matrix. Rigid check on types for the compiler. The class for the matrix is
-     * explicitly provided, e.g., for user-defined matrix classes.
+     * explicitly provided, e.g., for user-defined matrix classes. The FloatScalar array is of the form fs[rows][columns] so
+     * each value can be found with fs[row][column].
      * @param values S[][]; the values of the entries in the new Relative Immutable Float Matrix
      * @param displayUnit U; the unit in which the values will be displayed
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)

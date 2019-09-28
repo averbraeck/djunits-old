@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.IntStream;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.Unit;
 import org.djunits4.unit.scale.Scale;
 import org.djunits4.value.ValueRuntimeException;
@@ -53,7 +54,8 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
     /* ============================================================================================ */
 
     /**
-     * Instantiate a FloatMatrixData with the right data type.
+     * Instantiate a FloatMatrixData with the right data type. The float array is of the form f[rows][columns] so each value can
+     * be found with f[row][column].
      * @param values float[][]; the (SI) values to store
      * @param scale Scale; the scale of the unit to use for conversion to SI
      * @param storageType StorageType; the data type to use
@@ -63,9 +65,12 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
     public static FloatMatrixData instantiate(final float[][] values, final Scale scale, final StorageType storageType)
             throws ValueRuntimeException
     {
-        if (values == null || values.length == 0 || values[0].length == 0)
+        Throw.whenNull(values, "FloatMatrixData.instantiate: float[][] values is null");
+        Throw.whenNull(scale, "FloatMatrixData.instantiate: scale is null");
+        Throw.whenNull(storageType, "FloatMatrixData.instantiate: storageType is null");
+        if (values.length == 0 || values[0].length == 0)
         {
-            throw new ValueRuntimeException("FloatMatrixData.instantiate: float[][] values is null or "
+            throw new ValueRuntimeException("FloatMatrixData.instantiate: float[][] values wrong: "
                     + "values.length == 0 or values[0].length == 0");
         }
 
@@ -125,14 +130,15 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
     }
 
     /**
-     * Instantiate a FloatMatrixData with the right data type.
+     * Instantiate a FloatMatrixData with the right data type. The FloatScalar array is of the form fs[rows][columns] so each
+     * value can be found with fs[row][column].
      * @param values FloatScalarInterface[][]; the values to store
      * @param storageType StorageType; the data type to use
      * @return the FloatMatrixData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
      */
-    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> FloatMatrixData instantiate(
-            final FloatScalarInterface<U, S>[][] values, final StorageType storageType) throws ValueRuntimeException
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> FloatMatrixData instantiate(final S[][] values,
+            final StorageType storageType) throws ValueRuntimeException
     {
         if (values == null)
         {
@@ -243,13 +249,15 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
     }
 
     /**
-     * Create and return a deep copy of the data in dense format.
+     * Create and return a deep copy of the data in dense format. The float array is of the form f[rows][columns] so each value
+     * can be found with f[row][column].
      * @return float[][]; a safe, dense copy of matrixSI as a matrix
      */
     public abstract float[][] getDenseMatrixSI();
 
     /**
-     * Create and return a deep copy of the data in dense format.
+     * Create and return a deep copy of the data in dense format. The double array is of the form d[rows][columns] so each value
+     * can be found with d[row][column].
      * @return double[][]; a safe, dense copy of matrixSI as a matrix
      */
     public abstract double[][] getDoubleDenseMatrixSI();

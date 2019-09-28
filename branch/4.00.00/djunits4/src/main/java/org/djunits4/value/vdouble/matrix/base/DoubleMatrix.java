@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.SIUnit;
 import org.djunits4.unit.Unit;
 import org.djunits4.unit.scale.IdentityScale;
@@ -37,8 +38,9 @@ public final class DoubleMatrix
     }
 
     /**
-     * Instantiate the DoubleMatrix based on its unit. Rigid check on types for the compiler.
-     * @param valuesInUnit double[]; the values in the given unit
+     * Instantiate the DoubleMatrix based on its unit. Rigid check on types for the compiler. The double array is of the form
+     * d[rows][columns] so each value can be found with d[row][column].
+     * @param valuesInUnit double[][]; the values in the given unit
      * @param unit U; the unit in which the values are expressed and displayed
      * @param storageType StorageType; whether the matrix is SPARSE or DENSE
      * @return M; an instantiated DoubleMatrix with the values expressed in their unit
@@ -52,7 +54,8 @@ public final class DoubleMatrix
 
     /**
      * Instantiate the DoubleMatrix based on its unit. Rigid check on types for the compiler. The class for the matrix is
-     * explicitly provided, e.g., for user-defined matrix classes.
+     * explicitly provided, e.g., for user-defined matrix classes. The double array is of the form d[rows][columns] so each
+     * value can be found with d[row][column].
      * @param valuesInUnit double[]; the values in the given unit
      * @param unit U; the unit in which the values are expressed and displayed
      * @param storageType StorageType; whether the matrix is SPARSE or DENSE
@@ -68,8 +71,9 @@ public final class DoubleMatrix
     }
 
     /**
-     * Instantiate the DoubleMatrix based on its unit. Rigid check on types for the compiler.
-     * @param valuesSI double[]; the values in the SI unit
+     * Instantiate the DoubleMatrix based on its unit. Rigid check on types for the compiler. The double array is of the form
+     * d[rows][columns] so each value can be found with d[row][column].
+     * @param valuesSI double[][]; the values in the SI unit.
      * @param displayUnit U; the unit in which the values will be displayed
      * @param storageType StorageType; whether the matrix is SPARSE or DENSE
      * @return M; an instantiated DoubleMatrix with the SI values and display unit
@@ -83,8 +87,9 @@ public final class DoubleMatrix
 
     /**
      * Instantiate the DoubleMatrix based on its unit. Rigid check on types for the compiler. The class for the matrix is
-     * explicitly provided, e.g., for user-defined matrix classes.
-     * @param valuesSI double[]; the values in the SI unit
+     * explicitly provided, e.g., for user-defined matrix classes. The double array is of the form d[rows][columns] so each
+     * value can be found with d[row][column].
+     * @param valuesSI double[][]; the values in the SI unit
      * @param displayUnit U; the unit in which the values will be displayed
      * @param storageType StorageType; whether the matrix is SPARSE or DENSE
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate
@@ -126,7 +131,8 @@ public final class DoubleMatrix
     }
 
     /**
-     * Construct a new Relative Immutable Double Matrix. Rigid check on types for the compiler.
+     * Construct a new Relative Immutable Double Matrix. Rigid check on types for the compiler. The scalar array is of the form
+     * s[rows][columns] so each value can be found with s[row][column].
      * @param values S[][]; the values of the entries in the new Relative Immutable Double Matrix
      * @param displayUnit U; the unit in which the values will be displayed
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
@@ -141,7 +147,8 @@ public final class DoubleMatrix
 
     /**
      * Construct a new Relative Immutable Double Matrix. Rigid check on types for the compiler. The class for the matrix is
-     * explicitly provided, e.g., for user-defined matrix classes.
+     * explicitly provided, e.g., for user-defined matrix classes. The scalar array is of the form s[rows][columns] so each
+     * value can be found with s[row][column].
      * @param values S[][]; the values of the entries in the new Relative Immutable Double Matrix
      * @param displayUnit U; the unit in which the values will be displayed
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
@@ -203,6 +210,8 @@ public final class DoubleMatrix
             M extends AbstractDoubleMatrix<U, S, V, M>> M instantiateAnonymous(final DoubleMatrixData values,
                     final Unit<?> unit)
     {
+        Throw.whenNull(values, "data values cannot be null");
+        Throw.whenNull(unit, "unit cannot be null");
         try
         {
             Constructor<? extends AbstractDoubleMatrix<?, ?, ?, ?>> matrixConstructor = CACHE_DATA.get(unit);
@@ -251,6 +260,9 @@ public final class DoubleMatrix
             M extends AbstractDoubleMatrix<U, S, V, M>> M instantiateAnonymous(final DoubleMatrixData values,
                     final Unit<?> unit, final Class<M> matrixClass)
     {
+        Throw.whenNull(values, "data values cannot be null");
+        Throw.whenNull(unit, "unit cannot be null");
+        Throw.whenNull(matrixClass, "matrix class cannot be null");
         try
         {
             Constructor<? extends AbstractDoubleMatrix<?, ?, ?, ?>> matrixConstructor = CACHE_DATA.get(unit);

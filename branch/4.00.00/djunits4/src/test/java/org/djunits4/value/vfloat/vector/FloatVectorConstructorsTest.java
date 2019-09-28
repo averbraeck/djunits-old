@@ -534,7 +534,7 @@ public class FloatVectorConstructorsTest
             FloatVector.instantiate((float[]) null, AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
             fail("null pointer should have thrown an exception");
         }
-        catch (ValueRuntimeException vre)
+        catch (NullPointerException vre)
         {
             // Ignore expected exception
         }
@@ -678,7 +678,7 @@ public class FloatVectorConstructorsTest
             FloatVector.instantiate((float[]) null, SIUnit.of(unitBase.getSiDimensions()), StorageType.DENSE);
             fail("null pointer should have thrown an exception");
         }
-        catch (ValueRuntimeException vre)
+        catch (NullPointerException vre)
         {
             // Ignore expected exception
         }

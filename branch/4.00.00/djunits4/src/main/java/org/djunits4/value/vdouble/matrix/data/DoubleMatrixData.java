@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.IntStream;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.Unit;
 import org.djunits4.unit.scale.Scale;
 import org.djunits4.value.ValueRuntimeException;
@@ -53,7 +54,8 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
     /* ============================================================================================ */
 
     /**
-     * Instantiate a DoubleMatrixData with the right data type.
+     * Instantiate a DoubleMatrixData with the right data type. The double array is of the form d[rows][columns] so each value
+     * can be found with d[row][column].
      * @param values double[][]; the (SI) values to store
      * @param scale Scale; the scale of the unit to use for conversion to SI
      * @param storageType StorageType; the data type to use
@@ -63,14 +65,19 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
     public static DoubleMatrixData instantiate(final double[][] values, final Scale scale, final StorageType storageType)
             throws ValueRuntimeException
     {
-        if (values == null || values.length == 0 || values[0].length == 0)
+        Throw.whenNull(values, "DoubleMatrixData.instantiate: double[][] values is null");
+        Throw.whenNull(scale, "DoubleMatrixData.instantiate: scale is null");
+        Throw.whenNull(storageType, "DoubleMatrixData.instantiate: storageType is null");
+        if (values.length == 0 || values[0].length == 0)
         {
-            throw new ValueRuntimeException("DoubleMatrixData.instantiate: double[][] values is null or "
+            throw new ValueRuntimeException("DoubleMatrixData.instantiate: double[][] values wrong: "
                     + "values.length == 0 or values[0].length == 0");
         }
 
         final int rows = values.length;
         final int cols = values[0].length;
+        
+        // TODO: test not ragged
 
         switch (storageType)
         {
@@ -81,6 +88,7 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
                 return new DoubleMatrixDataDense(valuesSI, rows, cols);
 
             case SPARSE:
+                // TODO: too expensive, another copy of a probably already large matrix
                 double[][] matrixSI = new double[rows][cols];
                 IntStream.range(0, values.length).parallel().forEach(
                         r -> IntStream.range(0, cols).forEach(c -> matrixSI[r][c] = scale.toStandardUnit(values[r][c])));
@@ -125,14 +133,15 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
     }
 
     /**
-     * Instantiate a DoubleMatrixData with the right data type.
+     * Instantiate a DoubleMatrixData with the right data type. The double array is of the form d[rows][columns] so each value
+     * can be found with d[row][column].
      * @param values DoubleScalarInterface[][]; the values to store
      * @param storageType StorageType; the data type to use
      * @return the DoubleMatrixData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
      */
-    public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>> DoubleMatrixData instantiate(
-            final DoubleScalarInterface<U, S>[][] values, final StorageType storageType) throws ValueRuntimeException
+    public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>> DoubleMatrixData instantiate(final S[][] values,
+            final StorageType storageType) throws ValueRuntimeException
     {
         if (values == null)
         {
@@ -240,7 +249,8 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
     }
 
     /**
-     * Create and return a deep copy of the data in dense format.
+     * Create and return a deep copy of the data in dense format. The double array is of the form d[rows][columns] so each value
+     * can be found with d[row][column].
      * @return double[][]; a safe, dense copy of matrixSI as a matrix
      */
     public abstract double[][] getDenseMatrixSI();

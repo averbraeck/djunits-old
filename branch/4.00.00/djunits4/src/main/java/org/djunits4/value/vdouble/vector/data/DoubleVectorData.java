@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.stream.IntStream;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.Unit;
 import org.djunits4.unit.scale.Scale;
 import org.djunits4.value.ValueRuntimeException;
@@ -59,9 +60,12 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
     public static DoubleVectorData instantiate(final double[] values, final Scale scale, final StorageType storageType)
             throws ValueRuntimeException
     {
-        if (values == null)
+        Throw.whenNull(values, "DoubleVectorData.instantiate: double[] values is null");
+        Throw.whenNull(scale, "DoubleVectorData.instantiate: scale is null");
+        Throw.whenNull(storageType, "DoubleVectorData.instantiate: storageType is null");
+        if (values.length == 0)
         {
-            throw new ValueRuntimeException("DoubleVectorData.instantiate: double[] values is null");
+            throw new ValueRuntimeException("DoubleVectorData.instantiate: double[] values wrong: values.length == 0");
         }
 
         double[] valuesSI = scale.isBaseSIScale() ? values : new double[values.length];

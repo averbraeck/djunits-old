@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.SortedMap;
 import java.util.stream.IntStream;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.Unit;
 import org.djunits4.unit.scale.Scale;
 import org.djunits4.value.ValueRuntimeException;
@@ -55,9 +56,12 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
     public static FloatVectorData instantiate(final float[] values, final Scale scale, final StorageType storageType)
             throws ValueRuntimeException
     {
-        if (values == null)
+        Throw.whenNull(values, "FloatVectorData.instantiate: float[] values is null");
+        Throw.whenNull(scale, "FloatVectorData.instantiate: scale is null");
+        Throw.whenNull(storageType, "FloatVectorData.instantiate: storageType is null");
+        if (values.length == 0)
         {
-            throw new ValueRuntimeException("FloatVectorData.instantiate: float[] values is null");
+            throw new ValueRuntimeException("FloatVectorData.instantiate: float[] values wrong: values.length == 0");
         }
 
         float[] valuesSI = new float[values.length];

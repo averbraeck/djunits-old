@@ -1,5 +1,7 @@
 package org.djunits4.value.storage;
 
+import org.djunits4.Throw;
+
 /**
  * StorageInterface.java.
  * <p>
@@ -21,6 +23,7 @@ public abstract class AbstractStorage<T extends AbstractStorage<T>> implements C
     public AbstractStorage(final StorageType storageType)
     {
         super();
+        Throw.whenNull(storageType, "storage type cannot be null");
         this.storageType = storageType;
     }
 
