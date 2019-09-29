@@ -1,0 +1,32 @@
+package org.djunits4.userdefined;
+
+import org.djunits4.unit.Unit;
+import org.djunits4.unit.base.UnitBase;
+import org.djunits4.unit.scale.IdentityScale;
+import org.djunits4.unit.si.SIPrefixes;
+import org.djunits4.unit.unitsystem.UnitSystem;
+
+/**
+ * JerkUnit.java.
+ * <p>
+ * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
+ * <p>
+ * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
+ */
+public class JerkUnit extends Unit<JerkUnit>
+{
+    /** */
+    private static final long serialVersionUID = 1L;
+
+    /** The base, with "m/s3" as the SI signature. */
+    public static final UnitBase<JerkUnit> BASE = new UnitBase<>("m/s3");
+
+    /** The SI unit for area is m/s3. */
+    public static final JerkUnit SI =
+            new JerkUnit().build(new Unit.Builder<JerkUnit>().setUnitBase(BASE).setId("m/s3").setName("meter per second cubed")
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
+
+    /** m/s3. */
+    public static final JerkUnit JERK = SI;
+}

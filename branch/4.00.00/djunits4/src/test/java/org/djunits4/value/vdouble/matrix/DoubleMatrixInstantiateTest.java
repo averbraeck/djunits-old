@@ -780,6 +780,74 @@ public class DoubleMatrixInstantiateTest
         assertEquals(1, col1ss.zSum().getSI(), 0.001);
         assertEquals(SpeedUnit.METER_PER_SECOND, col1ss.getDisplayUnit());
 
+        // 1 x 1 DENSE DATA
+
+        SpeedMatrix row11dd =
+                DoubleMatrix.instantiate(DOUBLEMATRIX.denseRectArrays(1, 1), SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
+        assertEquals(1, row11dd.rows());
+        assertEquals(1, row11dd.cols());
+        assertEquals(1, row11dd.cardinality());
+        assertEquals(1, row11dd.zSum().getSI(), 0.001);
+        assertEquals(SpeedUnit.METER_PER_SECOND, row11dd.getDisplayUnit());
+
+        SpeedMatrix col11dd =
+                DoubleMatrix.instantiate(DOUBLEMATRIX.denseRectArrays(1, 1), SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
+        assertEquals(1, col11dd.rows());
+        assertEquals(1, col11dd.cols());
+        assertEquals(1, col11dd.cardinality());
+        assertEquals(1, col11dd.zSum().getSI(), 0.001);
+        assertEquals(SpeedUnit.METER_PER_SECOND, col11dd.getDisplayUnit());
+
+        SpeedMatrix row11ds =
+                DoubleMatrix.instantiate(DOUBLEMATRIX.denseRectArrays(1, 1), SpeedUnit.METER_PER_SECOND, StorageType.SPARSE);
+        assertEquals(1, row11ds.rows());
+        assertEquals(1, row11ds.cols());
+        assertEquals(1, row11ds.cardinality());
+        assertEquals(1, row11ds.zSum().getSI(), 0.001);
+        assertEquals(SpeedUnit.METER_PER_SECOND, row11ds.getDisplayUnit());
+
+        SpeedMatrix col11ds =
+                DoubleMatrix.instantiate(DOUBLEMATRIX.denseRectArrays(1, 1), SpeedUnit.METER_PER_SECOND, StorageType.SPARSE);
+        assertEquals(1, col11ds.rows());
+        assertEquals(1, col11ds.cols());
+        assertEquals(1, col11ds.cardinality());
+        assertEquals(1, col11ds.zSum().getSI(), 0.001);
+        assertEquals(SpeedUnit.METER_PER_SECOND, col11ds.getDisplayUnit());
+
+        // 1 x 1 SPARSE DATA
+
+        SpeedMatrix row11sd =
+                DoubleMatrix.instantiate(DOUBLEMATRIX.sparseRectArrays(1, 1), SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
+        assertEquals(1, row11sd.rows());
+        assertEquals(1, row11sd.cols());
+        assertEquals(1, row11sd.cardinality());
+        assertEquals(1, row11sd.zSum().getSI(), 0.001);
+        assertEquals(SpeedUnit.METER_PER_SECOND, row11sd.getDisplayUnit());
+
+        SpeedMatrix col11sd =
+                DoubleMatrix.instantiate(DOUBLEMATRIX.sparseRectArrays(1, 1), SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
+        assertEquals(1, col11sd.rows());
+        assertEquals(1, col11sd.cols());
+        assertEquals(1, col11sd.cardinality());
+        assertEquals(1, col11sd.zSum().getSI(), 0.001);
+        assertEquals(SpeedUnit.METER_PER_SECOND, col11sd.getDisplayUnit());
+
+        SpeedMatrix row11ss =
+                DoubleMatrix.instantiate(DOUBLEMATRIX.sparseRectArrays(1, 1), SpeedUnit.METER_PER_SECOND, StorageType.SPARSE);
+        assertEquals(1, row11ss.rows());
+        assertEquals(1, row11ss.cols());
+        assertEquals(1, row11ss.cardinality());
+        assertEquals(1, row11ss.zSum().getSI(), 0.001);
+        assertEquals(SpeedUnit.METER_PER_SECOND, row11ss.getDisplayUnit());
+
+        SpeedMatrix col11ss =
+                DoubleMatrix.instantiate(DOUBLEMATRIX.sparseRectArrays(1, 1), SpeedUnit.METER_PER_SECOND, StorageType.SPARSE);
+        assertEquals(1, col11ss.rows());
+        assertEquals(1, col11ss.cols());
+        assertEquals(1, col11ss.cardinality());
+        assertEquals(1, col11ss.zSum().getSI(), 0.001);
+        assertEquals(SpeedUnit.METER_PER_SECOND, col11ss.getDisplayUnit());
+
         // NULL / ZERO ROWS / ZERO COLS
 
         double[][] d0_1 = new double[0][1];
