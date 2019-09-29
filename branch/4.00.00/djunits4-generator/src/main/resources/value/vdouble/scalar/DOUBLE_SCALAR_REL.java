@@ -78,7 +78,7 @@ public class %Type% extends AbstractDoubleScalarRel<%Type%Unit, %Type%> %DIMLESS
      * @param value double; the double value in SI units
      * @return %Type%; the new scalar with the SI value
      */
-    public static final %Type% createSI(final double value)
+    public static final %Type% instantiateSI(final double value)
     {
         return new %Type%(value, %Type%Unit.SI);
     }

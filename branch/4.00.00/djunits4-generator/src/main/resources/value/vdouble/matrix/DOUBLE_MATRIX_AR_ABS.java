@@ -68,9 +68,11 @@ public class %TypeAbs%Matrix extends AbstractDoubleMatrixAbs<%TypeAbsUnit%, %Typ
 
     /** {@inheritDoc} */
     @Override
-    public %TypeAbs% instantiateScalar(final double value, final %TypeAbsUnit% unit)
+    public %TypeAbs% instantiateScalarSI(final double valueSI, final %TypeAbsUnit% displayUnit)
     {
-        return new %TypeAbs%(value, unit);
+        %TypeAbs% result = %TypeAbs%.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     /** {@inheritDoc} */
@@ -89,9 +91,11 @@ public class %TypeAbs%Matrix extends AbstractDoubleMatrixAbs<%TypeAbsUnit%, %Typ
 
     /** {@inheritDoc} */
     @Override
-    public %TypeRel% instantiateScalarRel(final double value, final %TypeRelUnit% unit)
+    public %TypeRel% instantiateScalarRelSI(final double valueSI, final %TypeRelUnit% displayUnit)
     {
-        return new %TypeRel%(value, unit);
+        %TypeRel% result = %TypeRel%.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
 %FORMULAS%%TypeAbs%%

@@ -47,7 +47,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
      * @return FloatSIMatrix; the FloatSIMatrix of the given unit
      * @throws ValueRuntimeException when values is null
      */
-    public static FloatSIMatrix create(final float[][] values, final SIUnit unit, final StorageType storageType)
+    public static FloatSIMatrix instantiate(final float[][] values, final SIUnit unit, final StorageType storageType)
             throws ValueRuntimeException
     {
         return new FloatSIMatrix(FloatMatrixData.instantiate(values, unit.getScale(), storageType), unit);
@@ -96,7 +96,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
             SIUnit unit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(unitString));
             if (unit != null)
             {
-                return FloatSIMatrix.create(values, unit, storageType);
+                return FloatSIMatrix.instantiate(values, unit, storageType);
             }
         }
         catch (Exception exception)
@@ -122,9 +122,9 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
 
     /** {@inheritDoc} */
     @Override
-    public FloatSIScalar instantiateScalar(final float value, final SIUnit unit)
+    public FloatSIScalar instantiateScalarSI(final float valueSI, final SIUnit unit)
     {
-        return new FloatSIScalar(value, unit);
+        return new FloatSIScalar(valueSI, unit);
     }
 
     /**********************************************************************************/

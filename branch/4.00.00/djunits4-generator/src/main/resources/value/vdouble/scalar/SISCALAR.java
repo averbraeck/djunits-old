@@ -65,7 +65,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      * @param unit SIUnit; the unit to use for the SI scalar
      * @return SIScalar; the new scalar with the SI value
      */
-    public static final SIScalar createSI(final double value, final SIUnit unit)
+    public static final SIScalar instantiateSI(final double value, final SIUnit unit)
     {
         return new SIScalar(value, unit);
     }

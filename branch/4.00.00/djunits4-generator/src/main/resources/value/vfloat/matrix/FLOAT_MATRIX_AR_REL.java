@@ -67,9 +67,11 @@ public class Float%TypeRel%Matrix extends AbstractFloatMatrixRelWithAbs<%TypeAbs
 
     /** {@inheritDoc} */
     @Override
-    public Float%TypeRel% instantiateScalar(final float value, final %TypeRelUnit% unit)
+    public Float%TypeRel% instantiateScalarSI(final float valueSI, final %TypeRelUnit% displayUnit)
     {
-        return new Float%TypeRel%(value, unit);
+        Float%TypeRel% result = Float%TypeRel%.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     /** {@inheritDoc} */
@@ -88,9 +90,11 @@ public class Float%TypeRel%Matrix extends AbstractFloatMatrixRelWithAbs<%TypeAbs
 
     /** {@inheritDoc} */
     @Override
-    public Float%TypeAbs% instantiateScalarAbs(final float value, final %TypeAbsUnit% unit)
+    public Float%TypeAbs% instantiateScalarAbsSI(final float valueSI, final %TypeAbsUnit% displayUnit)
     {
-        return new Float%TypeAbs%(value, unit);
+        Float%TypeAbs% result = Float%TypeAbs%.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     %FORMULAS%%TypeRel%%

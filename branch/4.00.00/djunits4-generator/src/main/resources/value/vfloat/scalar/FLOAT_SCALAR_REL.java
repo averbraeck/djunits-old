@@ -91,7 +91,7 @@ public class Float%Type% extends AbstractFloatScalarRel<%Type%Unit, Float%Type%>
      * @param value float; the float value in SI units
      * @return the new scalar with the SI value
      */
-    public static final Float%Type% createSI(final float value)
+    public static final Float%Type% instantiateSI(final float value)
     {
         return new Float%Type%(value, %Type%Unit.SI);
     }

@@ -54,9 +54,11 @@ public class %TypeRel%Vector extends AbstractDoubleVectorRelWithAbs<%TypeAbsUnit
 
     /** {@inheritDoc} */
     @Override
-    public %TypeRel% instantiateScalar(final double value, final %TypeRelUnit% unit)
+    public %TypeRel% instantiateScalarSI(final double valueSI, final %TypeRelUnit% displayUnit)
     {
-        return new %TypeRel%(value, unit);
+        %TypeRel% result = %TypeRel%.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     /** {@inheritDoc} */
@@ -68,9 +70,11 @@ public class %TypeRel%Vector extends AbstractDoubleVectorRelWithAbs<%TypeAbsUnit
 
     /** {@inheritDoc} */
     @Override
-    public %TypeAbs% instantiateScalarAbs(final double value, final %TypeAbsUnit% unit)
+    public %TypeAbs% instantiateScalarAbsSI(final double valueSI, final %TypeAbsUnit% displayUnit)
     {
-        return new %TypeAbs%(value, unit);
+        %TypeAbs% result = %TypeAbs%.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     %FORMULAS%%TypeRel%%

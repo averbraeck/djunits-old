@@ -88,7 +88,7 @@ public class Float%TypeRel% extends AbstractFloatScalarRelWithAbs<%TypeAbsUnit%,
      * @param value float; the float value in SI units
      * @return Float%TypeRel%; the new scalar with the SI value
      */
-    public static final Float%TypeRel% createSI(final float value)
+    public static final Float%TypeRel% instantiateSI(final float value)
     {
         return new Float%TypeRel%(value, %TypeRelUnit%.SI);
     }

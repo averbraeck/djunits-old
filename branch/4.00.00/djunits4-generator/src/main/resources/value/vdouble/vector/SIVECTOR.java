@@ -42,7 +42,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      * @return SIVector; the SIVector of the given unit
      * @throws ValueRuntimeException when values is null
      */
-    public static SIVector create(final double[] values, final SIUnit unit, final StorageType storageType)
+    public static SIVector instantiate(final double[] values, final SIUnit unit, final StorageType storageType)
             throws ValueRuntimeException
     {
         return new SIVector(DoubleVectorData.instantiate(values, unit.getScale(), storageType), unit);
@@ -56,7 +56,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      * @return SIVector; the SIVector of the given unit
      * @throws ValueRuntimeException when values is null
      */
-    public static SIVector create(final List<Double> values, final SIUnit unit, final StorageType storageType)
+    public static SIVector instantiate(final List<Double> values, final SIUnit unit, final StorageType storageType)
             throws ValueRuntimeException
     {
         return new SIVector(DoubleVectorData.instantiate(values, unit.getScale(), storageType), unit);
@@ -64,15 +64,15 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
 
     /**
      * Construct a new Relative Double SIVector.
-     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse  Double
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Double
      *            SIVector
-     * @param unit SIUnit; the unit of the new Relative Sparse  Double SIVector
      * @param length int; the size of the vector
+     * @param unit SIUnit; the unit of the new Relative Sparse Double SIVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @return SIVector; the SIVector of the given unit
      * @throws ValueRuntimeException when values is null
      */
-    public static SIVector create(final SortedMap<Integer, Double> values, final SIUnit unit, final int length,
+    public static SIVector instantiate(final SortedMap<Integer, Double> values, final int length, final SIUnit unit,
             final StorageType storageType) throws ValueRuntimeException
     {
         return new SIVector(DoubleVectorData.instantiate(values, length, unit.getScale(), storageType), unit);
@@ -114,7 +114,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
             SIUnit unit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(unitString));
             if (unit != null)
             {
-                return SIVector.create(value, unit, storageType);
+                return SIVector.instantiate(value, unit, storageType);
             }
         }
         catch (Exception exception)
@@ -144,7 +144,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
             SIUnit unit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(unitString));
             if (unit != null)
             {
-                return SIVector.create(valueList, unit, storageType);
+                return SIVector.instantiate(valueList, unit, storageType);
             }
         }
         catch (Exception exception)
@@ -176,7 +176,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
             SIUnit unit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(unitString));
             if (unit != null)
             {
-                return SIVector.create(valueMap, unit, length, storageType);
+                return SIVector.instantiate(valueMap, length, unit, storageType);
             }
         }
         catch (Exception exception)
@@ -195,9 +195,9 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
 
     /** {@inheritDoc} */
     @Override
-    public SIScalar instantiateScalar(final double value, final SIUnit unit)
+    public SIScalar instantiateScalarSI(final double valueSI, final SIUnit unit)
     {
-        return new SIScalar(value, unit);
+        return new SIScalar(valueSI, unit);
     }
     
     /**********************************************************************************/

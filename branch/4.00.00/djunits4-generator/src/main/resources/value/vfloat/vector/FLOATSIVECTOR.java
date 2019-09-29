@@ -43,7 +43,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
      * @return SIVector; the SIVector of the given unit
      * @throws ValueRuntimeException when values is null
      */
-    public static FloatSIVector create(final float[] values, final SIUnit unit, final StorageType storageType)
+    public static FloatSIVector instantiate(final float[] values, final SIUnit unit, final StorageType storageType)
             throws ValueRuntimeException
     {
         return new FloatSIVector(FloatVectorData.instantiate(values, unit.getScale(), storageType), unit);
@@ -57,7 +57,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
      * @return SIVector; the SIVector of the given unit
      * @throws ValueRuntimeException when values is null
      */
-    public static FloatSIVector create(final List<Float> values, final SIUnit unit, final StorageType storageType)
+    public static FloatSIVector instantiate(final List<Float> values, final SIUnit unit, final StorageType storageType)
             throws ValueRuntimeException
     {
         return new FloatSIVector(FloatVectorData.instantiate(values, unit.getScale(), storageType), unit);
@@ -66,13 +66,13 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
     /**
      * Construct a new Relative Float SIVector.
      * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Float SIVector
-     * @param unit SIUnit; the unit of the new Relative Sparse Float SIVector
      * @param length int; the size of the vector
+     * @param unit SIUnit; the unit of the new Relative Sparse Float SIVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @return SIVector; the SIVector of the given unit
      * @throws ValueRuntimeException when values is null
      */
-    public static FloatSIVector create(final SortedMap<Integer, Float> values, final SIUnit unit, final int length,
+    public static FloatSIVector instantiate(final SortedMap<Integer, Float> values, final int length, final SIUnit unit,
             final StorageType storageType) throws ValueRuntimeException
     {
         return new FloatSIVector(FloatVectorData.instantiate(values, length, unit.getScale(), storageType), unit);
@@ -114,7 +114,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
             SIUnit unit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(unitString));
             if (unit != null)
             {
-                return FloatSIVector.create(value, unit, storageType);
+                return FloatSIVector.instantiate(value, unit, storageType);
             }
         }
         catch (Exception exception)
@@ -144,7 +144,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
             SIUnit unit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(unitString));
             if (unit != null)
             {
-                return FloatSIVector.create(valueList, unit, storageType);
+                return FloatSIVector.instantiate(valueList, unit, storageType);
             }
         }
         catch (Exception exception)
@@ -176,7 +176,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
             SIUnit unit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(unitString));
             if (unit != null)
             {
-                return FloatSIVector.create(valueMap, unit, length, storageType);
+                return FloatSIVector.instantiate(valueMap, length, unit, storageType);
             }
         }
         catch (Exception exception)
@@ -195,9 +195,9 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /** {@inheritDoc} */
     @Override
-    public FloatSIScalar instantiateScalar(final float value, final SIUnit unit)
+    public FloatSIScalar instantiateScalarSI(final float valueSI, final SIUnit unit)
     {
-        return new FloatSIScalar(value, unit);
+        return new FloatSIScalar(valueSI, unit);
     }
 
     /**********************************************************************************/

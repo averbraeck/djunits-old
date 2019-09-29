@@ -47,7 +47,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      * @return SIMatrix; the SIMatrix of the given unit
      * @throws ValueRuntimeException when values is null
      */
-    public static SIMatrix create(final double[][] values, final SIUnit unit, final StorageType storageType)
+    public static SIMatrix instantiate(final double[][] values, final SIUnit unit, final StorageType storageType)
             throws ValueRuntimeException
     {
         return new SIMatrix(DoubleMatrixData.instantiate(values, unit.getScale(), storageType), unit);
@@ -96,7 +96,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
             SIUnit unit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(unitString));
             if (unit != null)
             {
-                return SIMatrix.create(values, unit, storageType);
+                return SIMatrix.instantiate(values, unit, storageType);
             }
         }
         catch (Exception exception)
@@ -122,9 +122,9 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
 
     /** {@inheritDoc} */
     @Override
-    public SIScalar instantiateScalar(final double value, final SIUnit unit)
+    public SIScalar instantiateScalarSI(final double valueSI, final SIUnit unit)
     {
-        return new SIScalar(value, unit);
+        return new SIScalar(valueSI, unit);
     }
 
     /**********************************************************************************/

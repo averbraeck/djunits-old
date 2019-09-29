@@ -54,9 +54,11 @@ public class Float%TypeAbs%Vector extends AbstractFloatVectorAbs<%TypeAbsUnit%, 
 
     /** {@inheritDoc} */
     @Override
-    public Float%TypeAbs% instantiateScalar(final float value, final %TypeAbsUnit% unit)
+    public Float%TypeAbs% instantiateScalarSI(final float valueSI, final %TypeAbsUnit% displayUnit)
     {
-        return new Float%TypeAbs%(value, unit);
+        Float%TypeAbs% result = Float%TypeAbs%.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     /** {@inheritDoc} */
@@ -68,9 +70,11 @@ public class Float%TypeAbs%Vector extends AbstractFloatVectorAbs<%TypeAbsUnit%, 
 
     /** {@inheritDoc} */
     @Override
-    public Float%TypeRel% instantiateScalarRel(final float value, final %TypeRelUnit% unit)
+    public Float%TypeRel% instantiateScalarRelSI(final float valueSI, final %TypeRelUnit% displayUnit)
     {
-        return new Float%TypeRel%(value, unit);
+        Float%TypeRel% result = Float%TypeRel%.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     %FORMULAS%%TypeAbs%%

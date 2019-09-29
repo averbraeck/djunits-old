@@ -54,9 +54,11 @@ public class Float%Type%Vector extends AbstractFloatVectorRel<%Type%Unit, Float%
 
     /** {@inheritDoc} */
     @Override
-    public Float%Type% instantiateScalar(final float value, final %Type%Unit unit)
+    public Float%Type% instantiateScalarSI(final float valueSI, final %Type%Unit displayUnit)
     {
-        return new Float%Type%(value, unit);
+        Float%Type% result = Float%Type%.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     %FORMULAS%%Type%%

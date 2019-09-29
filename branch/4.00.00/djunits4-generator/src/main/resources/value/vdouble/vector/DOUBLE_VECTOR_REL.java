@@ -56,9 +56,11 @@ public class %Type%Vector extends AbstractDoubleVectorRel<%Type%Unit, %Type%, %T
 
     /** {@inheritDoc} */
     @Override
-    public %Type% instantiateScalar(final double value, final %Type%Unit unit)
+    public %Type% instantiateScalarSI(final double valueSI, final %Type%Unit displayUnit)
     {
-        return new %Type%(value, unit);
+        %Type% result = %Type%.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     %FORMULAS%%Type%%

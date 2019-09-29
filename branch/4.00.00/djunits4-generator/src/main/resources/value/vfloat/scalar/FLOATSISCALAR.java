@@ -60,7 +60,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      * @param unit SIUnit; the unit to use for the SI scalar
      * @return FloatSIScalar; the new scalar with the SI value
      */
-    public static final FloatSIScalar createSI(final float value, final SIUnit unit)
+    public static final FloatSIScalar instantiateSI(final float value, final SIUnit unit)
     {
         return new FloatSIScalar(value, unit);
     }

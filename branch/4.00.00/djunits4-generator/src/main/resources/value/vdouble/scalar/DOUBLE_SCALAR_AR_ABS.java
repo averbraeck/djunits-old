@@ -67,7 +67,7 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
      * @param value double; value in SI units
      * @return %TypeAbs%; the new scalar with the SI value
      */
-    public static final %TypeAbs% createSI(final double value)
+    public static final %TypeAbs% instantiateSI(final double value)
     {
         return new %TypeAbs%(value, %TypeAbsUnit%.DEFAULT);
     }
