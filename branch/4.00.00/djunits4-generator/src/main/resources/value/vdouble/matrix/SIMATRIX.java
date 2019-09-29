@@ -7,18 +7,21 @@ import javax.annotation.Generated;
 
 import org.djunits4.Throw;
 import org.djunits4.unit.*;
-import org.djunits4.unit.VolumeUnit;
 import org.djunits4.unit.si.SIDimensions;
 import org.djunits4.unit.util.UnitRuntimeException;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.matrix.*;
 import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits4.value.vdouble.matrix.base.DoubleMatrix;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
+import org.djunits4.value.vdouble.scalar.*;
 import org.djunits4.value.vdouble.scalar.SIScalar;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits4.value.vdouble.vector.*;
 import org.djunits4.value.vdouble.vector.SIVector;
 import org.djunits4.value.vdouble.vector.base.AbstractDoubleVectorRel;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Easy access methods for the generic Relative SI DoubleMatrix.
@@ -103,6 +106,27 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         throw new IllegalArgumentException("Error parsing SIMatrix with unit " + unitString);
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public SIMatrix instantiateMatrix(final DoubleMatrixData dmd, final SIUnit unit)
+    {
+        return new SIMatrix(dmd, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SIVector instantiateVector(final DoubleVectorData dvd, final SIUnit unit)
+    {
+        return new SIVector(dvd, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SIScalar instantiateScalar(final double value, final SIUnit unit)
+    {
+        return new SIScalar(value, unit);
+    }
+
     /**********************************************************************************/
     /******************************** 'CAST AS' METHODS *******************************/
     /**********************************************************************************/
@@ -116,9 +140,9 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
     public final <U extends Unit<U>, S extends AbstractDoubleScalarRel<U, S>,
             V extends AbstractDoubleVectorRel<U, S, V>, M extends AbstractDoubleMatrixRel<U, S, V, M>> M as(final U displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(displayUnit.getUnitBase().getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(displayUnit.getUnitBase().getSiDimensions())),
                 UnitRuntimeException.class, "SIMatrix with unit %s cannot be converted to a matrix with unit %s",
-                getUnit(), displayUnit);
+                getDisplayUnit(), displayUnit);
         M result = DoubleMatrix.instantiate(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
         return result;

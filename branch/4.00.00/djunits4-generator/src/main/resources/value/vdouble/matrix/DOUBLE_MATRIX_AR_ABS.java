@@ -10,6 +10,7 @@ import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRelWithAbs;
 import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixAbs;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.vector.*;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 import org.djunits4.value.vdouble.scalar.*;
 
 /**
@@ -50,6 +51,48 @@ public class %TypeAbs%Matrix extends AbstractDoubleMatrixAbs<%TypeAbsUnit%, %Typ
     {
         return %TypeAbs%Vector.class;
     }
-    
+
+    /** {@inheritDoc} */
+    @Override
+    public %TypeAbs%Matrix instantiateMatrix(final DoubleMatrixData dmd, final %TypeAbsUnit% displayUnit)
+    {
+        return new %TypeAbs%Matrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public %TypeAbs%Vector instantiateVector(final DoubleVectorData dvd, final %TypeAbsUnit% displayUnit)
+    {
+        return new %TypeAbs%Vector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public %TypeAbs% instantiateScalar(final double value, final %TypeAbsUnit% unit)
+    {
+        return new %TypeAbs%(value, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public %TypeRel%Matrix instantiateMatrixRel(final DoubleMatrixData dmd, final %TypeRelUnit% displayUnit)
+    {
+        return new %TypeRel%Matrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public %TypeRel%Vector instantiateVectorRel(final DoubleVectorData dvd, final %TypeRelUnit% displayUnit)
+    {
+        return new %TypeRel%Vector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public %TypeRel% instantiateScalarRel(final double value, final %TypeRelUnit% unit)
+    {
+        return new %TypeRel%(value, unit);
+    }
+
 %FORMULAS%%TypeAbs%%
 }

@@ -30,8 +30,8 @@ public class %TypeAbs%Vector extends AbstractDoubleVectorAbs<%TypeAbsUnit%, %Typ
 
     /**
      * Construct an %TypeAbs%Vector from an internal data object.
-     * @param data DoubleVectorData; an internal data object
-     * @param unit %Type%Unit; the unit
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param unit %TypeAbsUnit%; the display unit of the vector data
      */
     public %TypeAbs%Vector(final DoubleVectorData data, final %TypeAbsUnit% unit)
     {
@@ -43,6 +43,34 @@ public class %TypeAbs%Vector extends AbstractDoubleVectorAbs<%TypeAbsUnit%, %Typ
     public Class<%TypeAbs%> getScalarClass()
     {
         return %TypeAbs%.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public %TypeAbs%Vector instantiateVector(final DoubleVectorData dvd, final %TypeAbsUnit% displayUnit)
+    {
+        return new %TypeAbs%Vector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public %TypeAbs% instantiateScalar(final double value, final %TypeAbsUnit% unit)
+    {
+        return new %TypeAbs%(value, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public %TypeRel%Vector instantiateVectorRel(final DoubleVectorData dvd, final %TypeRelUnit% displayUnit)
+    {
+        return new %TypeRel%Vector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public %TypeRel% instantiateScalarRel(final double value, final %TypeRelUnit% unit)
+    {
+        return new %TypeRel%(value, unit);
     }
 
     %FORMULAS%%TypeAbs%%

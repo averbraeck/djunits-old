@@ -6,10 +6,8 @@ import java.util.SortedMap;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.*;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
 import org.djunits4.value.vfloat.scalar.*;
-import org.djunits4.value.vfloat.scalar.base.FloatVectorData;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 import org.djunits4.value.vfloat.vector.base.*;
 
 /**
@@ -45,6 +43,34 @@ public class Float%TypeAbs%Vector extends AbstractFloatVectorAbs<%TypeAbsUnit%, 
     getScalarClass()
     {
         return Float%TypeAbs%.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Float%TypeAbs%Vector instantiateVector(final FloatVectorData fvd, final %TypeAbsUnit% displayUnit)
+    {
+        return new Float%TypeAbs%Vector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Float%TypeAbs% instantiateScalar(final float value, final %TypeAbsUnit% unit)
+    {
+        return new Float%TypeAbs%(value, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Float%TypeRel%Vector instantiateVectorRel(final FloatVectorData fvd, final %TypeRelUnit% displayUnit)
+    {
+        return new Float%TypeRel%Vector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Float%TypeRel% instantiateScalarRel(final float value, final %TypeRelUnit% unit)
+    {
+        return new Float%TypeRel%(value, unit);
     }
 
     %FORMULAS%%TypeAbs%%

@@ -6,10 +6,10 @@ import java.util.SortedMap;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.*;
-import org.djunits4.value.StorageType;
-import org.djunits4.value.ValueException;
+import org.djunits4.value.function.DimensionlessFunctions;
+import org.djunits4.value.vfloat.function.FloatMathFunctions;
 import org.djunits4.value.vfloat.scalar.*;
-import org.djunits4.value.vfloat.scalar.base.FloatVectorData;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 import org.djunits4.value.vfloat.vector.base.*;
 
 /**
@@ -45,6 +45,20 @@ public class Float%Type%Vector extends AbstractFloatVectorRel<%Type%Unit, Float%
         return Float%Type%.class;
     }
         
+    /** {@inheritDoc} */
+    @Override
+    public Float%Type%Vector instantiateVector(final FloatVectorData fvd, final %Type%Unit displayUnit)
+    {
+        return new Float%Type%Vector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Float%Type% instantiateScalar(final float value, final %Type%Unit unit)
+    {
+        return new Float%Type%(value, unit);
+    }
+
     %FORMULAS%%Type%%
 }
 

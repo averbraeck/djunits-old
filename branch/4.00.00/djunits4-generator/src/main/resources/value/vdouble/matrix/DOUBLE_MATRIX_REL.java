@@ -11,6 +11,7 @@ import org.djunits4.value.vdouble.function.DoubleMathFunctions;
 import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.vector.*;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 import org.djunits4.value.vdouble.scalar.*;
 
 /**
@@ -52,6 +53,26 @@ public class %Type%Matrix extends AbstractDoubleMatrixRel<%Type%Unit, %Type%, %T
         return %Type%Vector.class;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public %Type%Matrix instantiateMatrix(final DoubleMatrixData dmd, final %Type%Unit displayUnit)
+    {
+        return new %Type%Matrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public %Type%Vector instantiateVector(final DoubleVectorData dvd, final %Type%Unit displayUnit)
+    {
+        return new %Type%Vector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public %Type% instantiateScalar(final double value, final %Type%Unit unit)
+    {
+        return new %Type%(value, unit);
+    }
     
 %FORMULAS%%Type%%
 }

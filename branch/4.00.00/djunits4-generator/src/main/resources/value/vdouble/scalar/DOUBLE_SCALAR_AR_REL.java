@@ -99,15 +99,15 @@ public class %TypeRel% extends AbstractDoubleScalarRelWithAbs<%TypeAbsUnit%, %Ty
      */
     public static %TypeRel% interpolate(final %TypeRel% zero, final %TypeRel% one, final double ratio)
     {
-        return new %TypeRel%(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new %TypeRel%(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
+            .getDisplayUnit());
     }
     
     /** {@inheritDoc} */
     @Override
     public final %TypeAbs% plus(final %TypeAbs% v)
     {
-        %TypeAbsUnit% targetUnit = v.getUnit();
+        %TypeAbsUnit% targetUnit = v.getDisplayUnit();
         return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 

@@ -10,6 +10,7 @@ import org.djunits4.value.vfloat.matrix.base.*;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.*;
 import org.djunits4.value.vfloat.vector.*;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable Float%TypeRel% Matrix.
@@ -50,5 +51,47 @@ public class Float%TypeRel%Matrix extends AbstractFloatMatrixRelWithAbs<%TypeAbs
         return Float%TypeRel%Vector.class;
     }
         
-%FORMULAS%%TypeRel%%
+    /** {@inheritDoc} */
+    @Override
+    public Float%TypeRel%Matrix instantiateMatrix(final FloatMatrixData fmd, final %TypeRelUnit% displayUnit)
+    {
+        return new Float%TypeRel%Matrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Float%TypeRel%Vector instantiateVector(final FloatVectorData fvd, final %TypeRelUnit% displayUnit)
+    {
+        return new Float%TypeRel%Vector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Float%TypeRel% instantiateScalar(final float value, final %TypeRelUnit% unit)
+    {
+        return new Float%TypeRel%(value, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Float%TypeAbs%Matrix instantiateMatrixAbs(final FloatMatrixData fmd, final %TypeAbsUnit% displayUnit)
+    {
+        return new Float%TypeAbs%Matrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Float%TypeAbs%Vector instantiateVectorAbs(final FloatVectorData fvd, final %TypeAbsUnit% displayUnit)
+    {
+        return new Float%TypeAbs%Vector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Float%TypeAbs% instantiateScalarAbs(final float value, final %TypeAbsUnit% unit)
+    {
+        return new Float%TypeAbs%(value, unit);
+    }
+
+    %FORMULAS%%TypeRel%%
 }

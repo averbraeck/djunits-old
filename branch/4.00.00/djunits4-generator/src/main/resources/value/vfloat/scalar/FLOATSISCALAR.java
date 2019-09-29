@@ -74,7 +74,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public static FloatSIScalar interpolate(final FloatSIScalar zero, final FloatSIScalar one, final float ratio)
     {
-        return new FloatSIScalar(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatSIScalar(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
 
     /**
@@ -216,8 +216,8 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final <KU extends Unit<KU>, K extends AbstractFloatScalarRel<KU, K>> K as(final KU displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(displayUnit.getUnitBase().getSiDimensions())),
-                UnitRuntimeException.class, "FloatSIScalar with unit %s cannot be converted to a scalar with unit %s", getUnit(),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(displayUnit.getUnitBase().getSiDimensions())),
+                UnitRuntimeException.class, "FloatSIScalar with unit %s cannot be converted to a scalar with unit %s", getDisplayUnit(),
                 displayUnit);
         K result = FloatScalar.instantiate(this.si, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);

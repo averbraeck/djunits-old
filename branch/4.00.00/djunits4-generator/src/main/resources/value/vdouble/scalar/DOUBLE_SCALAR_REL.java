@@ -8,6 +8,7 @@ import org.djunits4.Throw;
 import org.djunits4.unit.*;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits4.value.function.DimensionlessFunctions;
 
 /**
  * Easy access methods for the %Type% DoubleScalar, which is relative by definition.
@@ -91,7 +92,7 @@ public class %Type% extends AbstractDoubleScalarRel<%Type%Unit, %Type%> %DIMLESS
      */
     public static %Type% interpolate(final %Type% zero, final %Type% one, final double ratio)
     {
-        return new %Type%(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new %Type%(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
     
     /**

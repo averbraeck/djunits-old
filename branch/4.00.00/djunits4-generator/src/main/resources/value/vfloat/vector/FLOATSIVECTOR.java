@@ -6,9 +6,7 @@ import java.util.SortedMap;
 import javax.annotation.Generated;
 
 import org.djunits4.Throw;
-import org.djunits4.unit.AreaUnit;
-import org.djunits4.unit.SIUnit;
-import org.djunits4.unit.Unit;
+import org.djunits4.unit.*;
 import org.djunits4.unit.si.SIDimensions;
 import org.djunits4.unit.util.UnitRuntimeException;
 import org.djunits4.value.ValueRuntimeException;
@@ -77,7 +75,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
     public static FloatSIVector create(final SortedMap<Integer, Float> values, final SIUnit unit, final int length,
             final StorageType storageType) throws ValueRuntimeException
     {
-        return FloatVector.create(values, unit, length, storageType);
+        return new FloatSIVector(FloatVectorData.instantiate(values, length, unit.getScale(), storageType), unit);
     }
 
     /**
@@ -188,6 +186,20 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         throw new IllegalArgumentException("Error parsing SIVector with unit " + unitString);
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public FloatSIVector instantiateVector(final FloatVectorData fvd, final SIUnit unit)
+    {
+        return new FloatSIVector(fvd, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatSIScalar instantiateScalar(final float value, final SIUnit unit)
+    {
+        return new FloatSIScalar(value, unit);
+    }
+
     /**********************************************************************************/
     /******************************** 'CAST AS' METHODS *******************************/
     /**********************************************************************************/
@@ -201,8 +213,8 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
     public final <U extends Unit<U>, S extends AbstractFloatScalarRel<U, S>,
             V extends AbstractFloatVectorRel<U, S, V>> V as(final U displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(displayUnit.getUnitBase().getSiDimensions())),
-                UnitRuntimeException.class, "SIVector with unit %s cannot be converted to a FloatVector with unit %s", getUnit(),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(displayUnit.getUnitBase().getSiDimensions())),
+                UnitRuntimeException.class, "SIVector with unit %s cannot be converted to a FloatVector with unit %s", getDisplayUnit(),
                 displayUnit);
         V result = FloatVector.instantiate(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);

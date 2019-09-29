@@ -109,15 +109,15 @@ public class Float%TypeRel% extends AbstractFloatScalarRelWithAbs<%TypeAbsUnit%,
      */
     public static Float%TypeRel% interpolate(final Float%TypeRel% zero, final Float%TypeRel% one, final float ratio)
     {
-        return new Float%TypeRel%(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new Float%TypeRel%(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
+            .getDisplayUnit());
     }
     
     /** {@inheritDoc} */
     @Override
     public final Float%TypeAbs% plus(final Float%TypeAbs% v)
     {
-        %TypeAbsUnit% targetUnit = v.getUnit();
+        %TypeAbsUnit% targetUnit = v.getDisplayUnit();
         return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 

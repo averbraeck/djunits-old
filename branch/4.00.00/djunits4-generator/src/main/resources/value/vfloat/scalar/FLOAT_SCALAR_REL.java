@@ -105,8 +105,8 @@ public class Float%Type% extends AbstractFloatScalarRel<%Type%Unit, Float%Type%>
      */
     public static Float%Type% interpolate(final Float%Type% zero, final Float%Type% one, final float ratio)
     {
-        return new Float%Type%(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new Float%Type%(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
+            .getDisplayUnit());
     }
 
     /**

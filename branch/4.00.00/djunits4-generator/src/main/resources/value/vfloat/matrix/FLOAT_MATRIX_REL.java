@@ -12,6 +12,7 @@ import org.djunits4.value.vfloat.matrix.base.*;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.*;
 import org.djunits4.value.vfloat.vector.*;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloat%Type%Matrix, a matrix of values with a %Type%Unit. 
@@ -51,7 +52,28 @@ public class Float%Type%Matrix extends AbstractFloatMatrixRel<%Type%Unit, Float%
     {
         return Float%Type%Vector.class;
     }
-    
+
+    /** {@inheritDoc} */
+    @Override
+    public Float%Type%Matrix instantiateMatrix(final FloatMatrixData fmd, final %Type%Unit displayUnit)
+    {
+        return new Float%Type%Matrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Float%Type%Vector instantiateVector(final FloatVectorData fvd, final %Type%Unit displayUnit)
+    {
+        return new Float%Type%Vector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Float%Type% instantiateScalar(final float value, final %Type%Unit unit)
+    {
+        return new Float%Type%(value, unit);
+    }
+
 %FORMULAS%%Type%%
 }
 

@@ -4,7 +4,7 @@
      */
     public final %Type% as%Type%()
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(%Type%Unit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(%Type%Unit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to %Type%", this.toString());
         return new %Type%(getSI(), %Type%Unit.SI);
     }
@@ -16,7 +16,7 @@
      */
     public final %Type% as%Type%(final %Type%Unit displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(%Type%Unit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(%Type%Unit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to %Type%", this.toString());
         %Type% result = new %Type%(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);

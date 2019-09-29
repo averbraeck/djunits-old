@@ -6,7 +6,9 @@ import java.util.SortedMap;
 import javax.annotation.Generated;
 
 import org.djunits4.unit.*;
+import org.djunits4.value.function.DimensionlessFunctions;
 import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.function.DoubleMathFunctions;
 import org.djunits4.value.vdouble.scalar.*;
 import org.djunits4.value.vdouble.vector.*;
 import org.djunits4.value.vdouble.vector.base.AbstractDoubleVectorRel;
@@ -30,12 +32,12 @@ public class %Type%Vector extends AbstractDoubleVectorRel<%Type%Unit, %Type%, %T
 
     /**
      * Construct an %Type%Vector from an internal data object.
-     * @param data DoubleVectorData; an internal data object
-     * @param unit %Type%Unit; the unit
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param displayUnit %Type%Unit; the display unit of the vector data
      */
-    public %Type%Vector(final DoubleVectorData data, final %Type%Unit unit)
+    public %Type%Vector(final DoubleVectorData data, final %Type%Unit displayUnit)
     {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
@@ -44,7 +46,21 @@ public class %Type%Vector extends AbstractDoubleVectorRel<%Type%Unit, %Type%, %T
     {
         return %Type%.class;
     }
-        
+
+    /** {@inheritDoc} */
+    @Override
+    public %Type%Vector instantiateVector(final DoubleVectorData dvd, final %Type%Unit displayUnit)
+    {
+        return new %Type%Vector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public %Type% instantiateScalar(final double value, final %Type%Unit unit)
+    {
+        return new %Type%(value, unit);
+    }
+
     %FORMULAS%%Type%%
 }
 

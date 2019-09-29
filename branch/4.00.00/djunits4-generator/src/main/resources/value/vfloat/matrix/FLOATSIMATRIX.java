@@ -17,6 +17,7 @@ import org.djunits4.value.vfloat.scalar.*;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
 import org.djunits4.value.vfloat.vector.*;
 import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorRel;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 import org.djunits4.value.vfloat.matrix.*;
 import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.base.FloatMatrix;
@@ -105,6 +106,27 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         throw new IllegalArgumentException("Error parsing FloatSIMatrix with unit " + unitString);
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public FloatSIMatrix instantiateMatrix(final FloatMatrixData fmd, final SIUnit unit)
+    {
+        return new FloatSIMatrix(fmd, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatSIVector instantiateVector(final FloatVectorData fvd, final SIUnit unit)
+    {
+        return new FloatSIVector(fvd, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatSIScalar instantiateScalar(final float value, final SIUnit unit)
+    {
+        return new FloatSIScalar(value, unit);
+    }
+
     /**********************************************************************************/
     /******************************** 'CAST AS' METHODS *******************************/
     /**********************************************************************************/
@@ -118,9 +140,9 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
     public final <U extends Unit<U>, S extends AbstractFloatScalarRel<U, S>,
             V extends AbstractFloatVectorRel<U, S, V>, M extends AbstractFloatMatrixRel<U, S, V, M>> M as(final U displayUnit)
     {
-        Throw.when(!(getUnit().getUnitBase().getSiDimensions().equals(displayUnit.getUnitBase().getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(displayUnit.getUnitBase().getSiDimensions())),
                 UnitRuntimeException.class, "FloatSIMatrix with unit %s cannot be converted to a FloatMatrix with unit %s",
-                getUnit(), displayUnit);
+                getDisplayUnit(), displayUnit);
         M result = FloatMatrix.instantiate(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
         return result;
