@@ -10,7 +10,6 @@ import org.djunits4.value.vfloat.function.FloatMathFunctions;
 import org.djunits4.value.vfloat.matrix.FloatSIMatrix;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
-import org.djunits4.value.vfloat.scalar.base.FloatScalar;
 import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorRel;
 
 /**
@@ -48,23 +47,22 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
      */
     public final S zSum()
     {
-        S result = FloatScalar.instantiate(this.data.zSum(), getDisplayUnit().getStandardUnit());
-        result.setDisplayUnit(getDisplayUnit());
-        return result;
+        return instantiateScalarSI(this.data.zSum(), getDisplayUnit());
+
     }
 
     /** {@inheritDoc} */
     @Override
     public final RM plus(final RM rel) throws ValueRuntimeException
     {
-        return FloatMatrix.instantiate(this.getData().plus(rel.getData()), getDisplayUnit());
+        return instantiateMatrix(this.getData().plus(rel.getData()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public final RM minus(final RM rel) throws ValueRuntimeException
     {
-        return FloatMatrix.instantiate(this.getData().minus(rel.getData()), getDisplayUnit());
+        return instantiateMatrix(this.getData().minus(rel.getData()), getDisplayUnit());
     }
 
     /**

@@ -18,7 +18,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
 public class PositionVector
         extends AbstractDoubleVectorAbs<PositionUnit, Position, PositionVector, LengthUnit, Length, LengthVector>
 {
@@ -51,9 +51,11 @@ public class PositionVector
 
     /** {@inheritDoc} */
     @Override
-    public Position instantiateScalar(final double value, final PositionUnit unit)
+    public Position instantiateScalarSI(final double valueSI, final PositionUnit displayUnit)
     {
-        return new Position(value, unit);
+        Position result = Position.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     /** {@inheritDoc} */
@@ -65,9 +67,11 @@ public class PositionVector
 
     /** {@inheritDoc} */
     @Override
-    public Length instantiateScalarRel(final double value, final LengthUnit unit)
+    public Length instantiateScalarRelSI(final double valueSI, final LengthUnit displayUnit)
     {
-        return new Length(value, unit);
+        Length result = Length.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
 }

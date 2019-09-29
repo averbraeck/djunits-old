@@ -18,7 +18,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
 public class FloatMagneticFluxMatrix
         extends AbstractFloatMatrixRel<MagneticFluxUnit, FloatMagneticFlux, FloatMagneticFluxVector, FloatMagneticFluxMatrix>
 
@@ -65,9 +65,11 @@ public class FloatMagneticFluxMatrix
 
     /** {@inheritDoc} */
     @Override
-    public FloatMagneticFlux instantiateScalar(final float value, final MagneticFluxUnit unit)
+    public FloatMagneticFlux instantiateScalarSI(final float valueSI, final MagneticFluxUnit displayUnit)
     {
-        return new FloatMagneticFlux(value, unit);
+        FloatMagneticFlux result = FloatMagneticFlux.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
 }

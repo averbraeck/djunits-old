@@ -39,4 +39,14 @@ public class FloatJerk extends AbstractFloatScalarRel<JerkUnit, FloatJerk>
         return new FloatJerk(value, unit);
     }
 
+    /**
+     * Instantiate a new FloatJerk scalar with an SI value.
+     * @param valueSI the SI value of the new Jerk
+     * @return a new FloatJerk scalar
+     */
+    public static FloatJerk instantiateSI(final float valueSI)
+    {
+        return new FloatJerk(valueSI, JerkUnit.SI);
+    }
+
 }

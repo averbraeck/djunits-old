@@ -18,7 +18,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
 public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, RadioActivity>
 {
     /** */
@@ -77,7 +77,7 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
      * @param value double; the double value in SI units
      * @return RadioActivity; the new scalar with the SI value
      */
-    public static final RadioActivity createSI(final double value)
+    public static final RadioActivity instantiateSI(final double value)
     {
         return new RadioActivity(value, RadioActivityUnit.SI);
     }

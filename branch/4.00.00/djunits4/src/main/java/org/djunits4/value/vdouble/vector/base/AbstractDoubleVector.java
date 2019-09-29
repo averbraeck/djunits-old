@@ -201,7 +201,7 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
         }
         else
         {
-            result = (V) DoubleVector.instantiate(getData().toSparse(), getDisplayUnit());
+            result = instantiateVector(getData().toSparse(), getDisplayUnit());
         }
         result.setDisplayUnit(getDisplayUnit());
         return result;
@@ -220,7 +220,7 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
         }
         else
         {
-            result = (V) DoubleVector.instantiate(getData().toDense(), getDisplayUnit());
+            result = instantiateVector(getData().toDense(), getDisplayUnit());
         }
         return result;
     }

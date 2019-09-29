@@ -18,7 +18,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
 public class FloatFlowVolumeMatrix
         extends AbstractFloatMatrixRel<FlowVolumeUnit, FloatFlowVolume, FloatFlowVolumeVector, FloatFlowVolumeMatrix>
 
@@ -65,9 +65,11 @@ public class FloatFlowVolumeMatrix
 
     /** {@inheritDoc} */
     @Override
-    public FloatFlowVolume instantiateScalar(final float value, final FlowVolumeUnit unit)
+    public FloatFlowVolume instantiateScalarSI(final float valueSI, final FlowVolumeUnit displayUnit)
     {
-        return new FloatFlowVolume(value, unit);
+        FloatFlowVolume result = FloatFlowVolume.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
 }

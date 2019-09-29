@@ -66,7 +66,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
 public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector, SIMatrix>
 {
     /** */
@@ -80,7 +80,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      * @return SIMatrix; the SIMatrix of the given unit
      * @throws ValueRuntimeException when values is null
      */
-    public static SIMatrix create(final double[][] values, final SIUnit unit, final StorageType storageType)
+    public static SIMatrix instantiate(final double[][] values, final SIUnit unit, final StorageType storageType)
             throws ValueRuntimeException
     {
         return new SIMatrix(DoubleMatrixData.instantiate(values, unit.getScale(), storageType), unit);
@@ -129,7 +129,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
             SIUnit unit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(unitString));
             if (unit != null)
             {
-                return SIMatrix.create(values, unit, storageType);
+                return SIMatrix.instantiate(values, unit, storageType);
             }
         }
         catch (Exception exception)
@@ -155,9 +155,9 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
 
     /** {@inheritDoc} */
     @Override
-    public SIScalar instantiateScalar(final double value, final SIUnit unit)
+    public SIScalar instantiateScalarSI(final double valueSI, final SIUnit unit)
     {
-        return new SIScalar(value, unit);
+        return new SIScalar(valueSI, unit);
     }
 
     /**********************************************************************************/

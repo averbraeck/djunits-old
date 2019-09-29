@@ -22,7 +22,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
 public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatFrequency>
 {
     /** */
@@ -91,7 +91,7 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
      * @param value float; the float value in SI units
      * @return the new scalar with the SI value
      */
-    public static final FloatFrequency createSI(final float value)
+    public static final FloatFrequency instantiateSI(final float value)
     {
         return new FloatFrequency(value, FrequencyUnit.SI);
     }

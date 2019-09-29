@@ -18,7 +18,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
 public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalInductanceUnit, ElectricalInductance>
 {
     /** */
@@ -81,7 +81,7 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
      * @param value double; the double value in SI units
      * @return ElectricalInductance; the new scalar with the SI value
      */
-    public static final ElectricalInductance createSI(final double value)
+    public static final ElectricalInductance instantiateSI(final double value)
     {
         return new ElectricalInductance(value, ElectricalInductanceUnit.SI);
     }

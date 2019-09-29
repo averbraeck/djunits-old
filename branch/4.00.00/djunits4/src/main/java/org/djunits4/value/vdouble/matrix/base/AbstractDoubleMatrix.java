@@ -18,7 +18,6 @@ import org.djunits4.value.vdouble.matrix.data.DoubleMatrixDataSparse;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalar;
 import org.djunits4.value.vdouble.scalar.base.DoubleScalar;
 import org.djunits4.value.vdouble.vector.base.AbstractDoubleVector;
-import org.djunits4.value.vdouble.vector.base.DoubleVector;
 import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 import org.ojalgo.matrix.PrimitiveMatrix;
 
@@ -243,9 +242,7 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
         checkRowIndex(row);
         DoubleVectorData dvd =
                 DoubleVectorData.instantiate(getRowSI(row), getDisplayUnit().getStandardUnit().getScale(), getStorageType());
-        V result = DoubleVector.instantiate(dvd, getDisplayUnit().getStandardUnit());
-        result.setDisplayUnit(getDisplayUnit());
-        return result;
+        return instantiateVector(dvd, getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -255,9 +252,7 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
         checkColumnIndex(column);
         DoubleVectorData dvd = DoubleVectorData.instantiate(getColumnSI(column), getDisplayUnit().getStandardUnit().getScale(),
                 getStorageType());
-        V result = DoubleVector.instantiate(dvd, getDisplayUnit().getStandardUnit());
-        result.setDisplayUnit(getDisplayUnit());
-        return result;
+        return instantiateVector(dvd, getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -267,10 +262,7 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
         checkSquare();
         DoubleVectorData dvd =
                 DoubleVectorData.instantiate(getDiagonalSI(), getDisplayUnit().getStandardUnit().getScale(), getStorageType());
-        V result = DoubleVector.instantiate(dvd, getDisplayUnit().getStandardUnit());
-        result.setDisplayUnit(getDisplayUnit());
-        return result;
-
+        return instantiateVector(dvd, getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -328,7 +320,7 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
         }
         else
         {
-            result = (M) DoubleMatrix.instantiate(this.data.toSparse(), getDisplayUnit());
+            result = instantiateMatrix(this.data.toSparse(), getDisplayUnit());
         }
         result.setDisplayUnit(getDisplayUnit());
         return result;
@@ -347,7 +339,7 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
         }
         else
         {
-            result = (M) DoubleMatrix.instantiate(this.data.toDense(), getDisplayUnit());
+            result = instantiateMatrix(this.data.toDense(), getDisplayUnit());
         }
         return result;
     }

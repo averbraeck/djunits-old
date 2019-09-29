@@ -21,7 +21,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
 public class AngleMatrix extends AbstractDoubleMatrixRelWithAbs<DirectionUnit, Direction, DirectionVector, DirectionMatrix,
         AngleUnit, Angle, AngleVector, AngleMatrix>
 {
@@ -67,9 +67,11 @@ public class AngleMatrix extends AbstractDoubleMatrixRelWithAbs<DirectionUnit, D
 
     /** {@inheritDoc} */
     @Override
-    public Angle instantiateScalar(final double value, final AngleUnit unit)
+    public Angle instantiateScalarSI(final double valueSI, final AngleUnit displayUnit)
     {
-        return new Angle(value, unit);
+        Angle result = Angle.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     /** {@inheritDoc} */
@@ -88,9 +90,11 @@ public class AngleMatrix extends AbstractDoubleMatrixRelWithAbs<DirectionUnit, D
 
     /** {@inheritDoc} */
     @Override
-    public Direction instantiateScalarAbs(final double value, final DirectionUnit unit)
+    public Direction instantiateScalarAbsSI(final double valueSI, final DirectionUnit displayUnit)
     {
-        return new Direction(value, unit);
+        Direction result = Direction.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
 }

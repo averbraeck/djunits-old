@@ -53,21 +53,21 @@ public abstract class AbstractFloatVectorAbs<
     @Override
     public AV plus(RV increment) throws ValueRuntimeException
     {
-        return FloatVector.instantiate(this.getData().plus(increment.getData()), getDisplayUnit());
+        return instantiateVector(this.getData().plus(increment.getData()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public AV minus(RV decrement) throws ValueRuntimeException
     {
-        return FloatVector.instantiate(this.getData().minus(decrement.getData()), getDisplayUnit());
+        return instantiateVector(this.getData().minus(decrement.getData()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public RV minus(AV decrement) throws ValueRuntimeException
     {
-        return FloatVector.instantiate(this.getData().minus(decrement.getData()), decrement.getDisplayUnit().getRelativeUnit());
+        return instantiateVectorRel(this.getData().minus(decrement.getData()), decrement.getDisplayUnit().getRelativeUnit());
     }
 
     /**
@@ -114,10 +114,10 @@ public abstract class AbstractFloatVectorAbs<
      * Instantiate a new relative scalar for the class of this absolute vector. This can be used instead of the
      * FloatScalar.instiantiate() methods in case a vector of this class is known. The method is faster than
      * FloatScalar.instantiate, and it will also work if the vector and/or scalar are user-defined.
-     * @param value float; the value of the relative scalar, expressed in the given unit
-     * @param unit RU; the unit in which the relative value is expressed
+     * @param valueSI float; the SI value of the relative scalar
+     * @param displayUnit RU; the unit in which the relative value will be displayed
      * @return R; a relative scalar of the correct type, belonging to this absolute vector type
      */
-    public abstract R instantiateScalarRel(float value, RU unit);
+    public abstract R instantiateScalarRelSI(float valueSI, RU displayUnit);
 
 }

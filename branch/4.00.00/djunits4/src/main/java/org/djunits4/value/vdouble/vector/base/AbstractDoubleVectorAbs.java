@@ -53,22 +53,21 @@ public abstract class AbstractDoubleVectorAbs<
     @Override
     public AV plus(RV increment) throws ValueRuntimeException
     {
-        return DoubleVector.instantiate(this.getData().plus(increment.getData()), getDisplayUnit());
+        return instantiateVector(this.getData().plus(increment.getData()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public AV minus(RV decrement) throws ValueRuntimeException
     {
-        return DoubleVector.instantiate(this.getData().minus(decrement.getData()), getDisplayUnit());
+        return instantiateVector(this.getData().minus(decrement.getData()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public RV minus(AV decrement) throws ValueRuntimeException
     {
-        return DoubleVector.instantiate(this.getData().minus(decrement.getData()),
-                decrement.getDisplayUnit().getRelativeUnit());
+        return instantiateVectorRel(this.getData().minus(decrement.getData()), decrement.getDisplayUnit().getRelativeUnit());
     }
 
     /**
@@ -115,10 +114,10 @@ public abstract class AbstractDoubleVectorAbs<
      * Instantiate a new relative scalar for the class of this absolute vector. This can be used instead of the
      * DoubleScalar.instiantiate() methods in case a vector of this class is known. The method is faster than
      * DoubleScalar.instantiate, and it will also work if the vector and/or scalar are user-defined.
-     * @param value double; the value of the relative scalar, expressed in the given unit
-     * @param unit RU; the unit in which the relative value is expressed
+     * @param valueSI double; the SI value of the relative scalar
+     * @param displayUunit RU; the unit in which the relative value will be displayed
      * @return R; a relative scalar of the correct type, belonging to this absolute vector type
      */
-    public abstract R instantiateScalarRel(double value, RU unit);
+    public abstract R instantiateScalarRelSI(double valueSI, RU displayUunit);
 
 }

@@ -18,7 +18,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
 public class EnergyMatrix extends AbstractDoubleMatrixRel<EnergyUnit, Energy, EnergyVector, EnergyMatrix>
 
 {
@@ -64,9 +64,11 @@ public class EnergyMatrix extends AbstractDoubleMatrixRel<EnergyUnit, Energy, En
 
     /** {@inheritDoc} */
     @Override
-    public Energy instantiateScalar(final double value, final EnergyUnit unit)
+    public Energy instantiateScalarSI(final double valueSI, final EnergyUnit displayUnit)
     {
-        return new Energy(value, unit);
+        Energy result = Energy.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
 }

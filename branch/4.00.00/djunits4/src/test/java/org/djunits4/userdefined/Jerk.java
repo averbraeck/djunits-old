@@ -39,5 +39,14 @@ public class Jerk extends AbstractDoubleScalarRel<JerkUnit, Jerk>
         return new Jerk(value, unit);
     }
 
+    /**
+     * Instantiate a new Jerk scalar with an SI value.
+     * @param valueSI the SI value of the new Jerk
+     * @return a new Jerk scalar
+     */
+    public static Jerk instantiateSI(final double valueSI)
+    {
+        return new Jerk(valueSI, JerkUnit.SI);
+    }
 }
 

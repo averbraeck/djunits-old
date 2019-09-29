@@ -18,7 +18,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
 public class FloatAngleVector extends AbstractFloatVectorRelWithAbs<DirectionUnit, FloatDirection, FloatDirectionVector,
         AngleUnit, FloatAngle, FloatAngleVector>
 {
@@ -51,9 +51,11 @@ public class FloatAngleVector extends AbstractFloatVectorRelWithAbs<DirectionUni
 
     /** {@inheritDoc} */
     @Override
-    public FloatAngle instantiateScalar(final float value, final AngleUnit unit)
+    public FloatAngle instantiateScalarSI(final float valueSI, final AngleUnit displayUnit)
     {
-        return new FloatAngle(value, unit);
+        FloatAngle result = FloatAngle.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     /** {@inheritDoc} */
@@ -65,9 +67,11 @@ public class FloatAngleVector extends AbstractFloatVectorRelWithAbs<DirectionUni
 
     /** {@inheritDoc} */
     @Override
-    public FloatDirection instantiateScalarAbs(final float value, final DirectionUnit unit)
+    public FloatDirection instantiateScalarAbsSI(final float valueSI, final DirectionUnit displayUnit)
     {
-        return new FloatDirection(value, unit);
+        FloatDirection result = FloatDirection.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
 }

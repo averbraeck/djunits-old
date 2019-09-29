@@ -16,7 +16,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
 public class FloatAngleSolidVector extends AbstractFloatVectorRel<AngleSolidUnit, FloatAngleSolid, FloatAngleSolidVector>
 
 {
@@ -49,9 +49,11 @@ public class FloatAngleSolidVector extends AbstractFloatVectorRel<AngleSolidUnit
 
     /** {@inheritDoc} */
     @Override
-    public FloatAngleSolid instantiateScalar(final float value, final AngleSolidUnit unit)
+    public FloatAngleSolid instantiateScalarSI(final float valueSI, final AngleSolidUnit displayUnit)
     {
-        return new FloatAngleSolid(value, unit);
+        FloatAngleSolid result = FloatAngleSolid.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
 }

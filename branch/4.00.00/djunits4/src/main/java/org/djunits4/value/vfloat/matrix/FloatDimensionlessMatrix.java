@@ -20,7 +20,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
 public class FloatDimensionlessMatrix extends
         AbstractFloatMatrixRel<DimensionlessUnit, FloatDimensionless, FloatDimensionlessVector, FloatDimensionlessMatrix>
         implements DimensionlessFunctions<DimensionlessUnit, FloatDimensionlessMatrix>
@@ -67,9 +67,11 @@ public class FloatDimensionlessMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public FloatDimensionless instantiateScalar(final float value, final DimensionlessUnit unit)
+    public FloatDimensionless instantiateScalarSI(final float valueSI, final DimensionlessUnit displayUnit)
     {
-        return new FloatDimensionless(value, unit);
+        FloatDimensionless result = FloatDimensionless.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     /** {@inheritDoc} */

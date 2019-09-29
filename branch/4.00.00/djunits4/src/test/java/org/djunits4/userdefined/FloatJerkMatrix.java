@@ -58,9 +58,11 @@ public class FloatJerkMatrix extends AbstractFloatMatrixRel<JerkUnit, FloatJerk,
 
     /** {@inheritDoc} */
     @Override
-    public FloatJerk instantiateScalar(final float value, final JerkUnit unit)
+    public FloatJerk instantiateScalarSI(final float valueSI, final JerkUnit displayUnit)
     {
-        return new FloatJerk(value, unit);
+        FloatJerk result = new FloatJerk(valueSI, displayUnit.getStandardUnit());
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
 }

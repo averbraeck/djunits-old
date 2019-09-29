@@ -201,7 +201,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
         }
         else
         {
-            result = (V) FloatVector.instantiate(this.data.toSparse(), getDisplayUnit());
+            result = instantiateVector(this.data.toSparse(), getDisplayUnit());
         }
         result.setDisplayUnit(getDisplayUnit());
         return result;
@@ -220,7 +220,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
         }
         else
         {
-            result = (V) FloatVector.instantiate(this.data.toDense(), getDisplayUnit());
+            result = instantiateVector(this.data.toDense(), getDisplayUnit());
         }
         return result;
     }

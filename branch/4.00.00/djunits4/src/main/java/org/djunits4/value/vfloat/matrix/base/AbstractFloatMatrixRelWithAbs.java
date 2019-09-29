@@ -59,7 +59,7 @@ public abstract class AbstractFloatMatrixRelWithAbs<
     @Override
     public AM plus(AM increment)
     {
-        return FloatMatrix.instantiate(this.getData().plus(increment.getData()), increment.getDisplayUnit().getStandardUnit());
+        return instantiateMatrixAbs(this.getData().plus(increment.getData()), increment.getDisplayUnit().getStandardUnit());
     }
 
     /**
@@ -86,10 +86,10 @@ public abstract class AbstractFloatMatrixRelWithAbs<
      * Instantiate a new absolute scalar for the class of this relative matrix. This can be used instead of the
      * FloatScalar.instiantiate() methods in case a matrix of this class is known. The method is faster than
      * FloatScalar.instantiate, and it will also work if the matrix and/or scalar are user-defined.
-     * @param value float; the value of the absolute scalar, expressed in the given unit
-     * @param unit AU; the unit in which the absolute value is expressed
+     * @param valueSI float; the SI value of the absolute scalar
+     * @param displayUnit AU; the unit in which the absolute value will be displayed
      * @return A; an absolute scalar of the correct type, belonging to this relative matrix type
      */
-    public abstract A instantiateScalarAbs(float value, AU unit);
+    public abstract A instantiateScalarAbsSI(float valueSI, AU displayUnit);
 
 }

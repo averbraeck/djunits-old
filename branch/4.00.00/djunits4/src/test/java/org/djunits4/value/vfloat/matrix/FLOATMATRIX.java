@@ -76,12 +76,12 @@ public class FLOATMATRIX
         try
         {
             S[][] array = (S[][]) Array.newInstance(scalarClass, rows, cols);
-            Method createSI = scalarClass.getMethod("createSI", new Class<?>[] {float.class});
+            Method instantiateSI = scalarClass.getMethod("instantiateSI", new Class<?>[] {float.class});
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < cols; j++)
                 {
-                    array[i][j] = (S) createSI.invoke(null, cols * i + j + 1.0f);
+                    array[i][j] = (S) instantiateSI.invoke(null, cols * i + j + 1.0f);
                 }
             }
             return array;
@@ -106,12 +106,12 @@ public class FLOATMATRIX
         try
         {
             S[][] array = (S[][]) Array.newInstance(scalarClass, rows, cols);
-            Method createSI = scalarClass.getMethod("createSI", new Class<?>[] {float.class});
+            Method instantiateSI = scalarClass.getMethod("instantiateSI", new Class<?>[] {float.class});
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < cols; j++)
                 {
-                    array[i][j] = (i == j) ? (S) createSI.invoke(null, i + 1) : (S) createSI.invoke(null, 0.0f);
+                    array[i][j] = (i == j) ? (S) instantiateSI.invoke(null, i + 1) : (S) instantiateSI.invoke(null, 0.0f);
                 }
             }
             return array;
@@ -137,12 +137,12 @@ public class FLOATMATRIX
         try
         {
             List<FloatSparseValue<U, S>> matrixList = new ArrayList<>();
-            Method createSI = scalarClass.getMethod("createSI", new Class<?>[] {float.class});
+            Method instantiateSI = scalarClass.getMethod("instantiateSI", new Class<?>[] {float.class});
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < cols; j++)
                 {
-                    S v = (S) createSI.invoke(null, cols * i + j + 1.0f);
+                    S v = (S) instantiateSI.invoke(null, cols * i + j + 1.0f);
                     FloatSparseValue<U, S> dsv = new FloatSparseValue<U, S>(i, j, v);
                     matrixList.add(dsv);
                 }

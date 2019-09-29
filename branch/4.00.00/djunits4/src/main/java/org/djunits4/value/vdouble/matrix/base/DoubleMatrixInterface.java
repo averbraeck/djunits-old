@@ -173,10 +173,10 @@ public interface DoubleMatrixInterface<U extends Unit<U>, S extends DoubleScalar
      * Instantiate a new scalar for the class of this matrix. This can be used instead of the DoubleScalar.instiantiate()
      * methods in case a matrix of this class is known. The method is faster than DoubleScalar.instantiate, and it will also
      * work if the matrix and/or scalar are user-defined.
-     * @param value double; the value of the scalar, expressed in the given unit
-     * @param unit U; the unit in which the value is expressed
+     * @param valueSI double; the SI value of the scalar
+     * @param displayUnit U; the unit in which the value will be displayed
      * @return S; a scalar of the correct type, belonging to the matrix type
      */
-    S instantiateScalar(double value, U unit);
+    S instantiateScalarSI(double valueSI, U displayUnit);
 
 }

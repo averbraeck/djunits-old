@@ -20,7 +20,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
 public class AbsoluteTemperature
         extends AbstractDoubleScalarAbs<AbsoluteTemperatureUnit, AbsoluteTemperature, TemperatureUnit, Temperature>
 {
@@ -68,7 +68,7 @@ public class AbsoluteTemperature
      * @param value double; value in SI units
      * @return AbsoluteTemperature; the new scalar with the SI value
      */
-    public static final AbsoluteTemperature createSI(final double value)
+    public static final AbsoluteTemperature instantiateSI(final double value)
     {
         return new AbsoluteTemperature(value, AbsoluteTemperatureUnit.DEFAULT);
     }

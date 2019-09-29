@@ -8,7 +8,6 @@ import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.base.Vector;
 import org.djunits4.value.vdouble.function.DoubleMathFunctions;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
-import org.djunits4.value.vdouble.scalar.base.DoubleScalar;
 import org.djunits4.value.vdouble.vector.SIVector;
 import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
@@ -46,23 +45,21 @@ public abstract class AbstractDoubleVectorRel<U extends Unit<U>, S extends Abstr
      */
     public final S zSum()
     {
-        S result = DoubleScalar.instantiate(this.data.zSum(), getDisplayUnit().getStandardUnit());
-        result.setDisplayUnit(getDisplayUnit());
-        return result;
+        return instantiateScalarSI(this.data.zSum(), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public final RV plus(final RV rel) throws ValueRuntimeException
     {
-        return DoubleVector.instantiate(this.getData().plus(rel.getData()), getDisplayUnit());
+        return instantiateVector(this.getData().plus(rel.getData()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public final RV minus(final RV rel) throws ValueRuntimeException
     {
-        return DoubleVector.instantiate(this.getData().minus(rel.getData()), getDisplayUnit());
+        return instantiateVector(this.getData().minus(rel.getData()), getDisplayUnit());
     }
 
     /**

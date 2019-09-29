@@ -21,7 +21,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
 public class TimeMatrix extends
         AbstractDoubleMatrixAbs<TimeUnit, Time, TimeVector, TimeMatrix, DurationUnit, Duration, DurationVector, DurationMatrix>
 {
@@ -67,9 +67,11 @@ public class TimeMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public Time instantiateScalar(final double value, final TimeUnit unit)
+    public Time instantiateScalarSI(final double valueSI, final TimeUnit displayUnit)
     {
-        return new Time(value, unit);
+        Time result = Time.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     /** {@inheritDoc} */
@@ -88,9 +90,11 @@ public class TimeMatrix extends
 
     /** {@inheritDoc} */
     @Override
-    public Duration instantiateScalarRel(final double value, final DurationUnit unit)
+    public Duration instantiateScalarRelSI(final double valueSI, final DurationUnit displayUnit)
     {
-        return new Duration(value, unit);
+        Duration result = Duration.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
 }

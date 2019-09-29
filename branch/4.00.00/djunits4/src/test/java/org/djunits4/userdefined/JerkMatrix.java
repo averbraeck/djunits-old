@@ -58,9 +58,11 @@ public class JerkMatrix extends AbstractDoubleMatrixRel<JerkUnit, Jerk, JerkVect
 
     /** {@inheritDoc} */
     @Override
-    public Jerk instantiateScalar(final double value, final JerkUnit unit)
+    public Jerk instantiateScalarSI(final double valueSI, final JerkUnit displayUnit)
     {
-        return new Jerk(value, unit);
+        Jerk result = new Jerk(valueSI, displayUnit.getStandardUnit());
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
 }

@@ -18,7 +18,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
 public class FlowMassMatrix extends AbstractDoubleMatrixRel<FlowMassUnit, FlowMass, FlowMassVector, FlowMassMatrix>
 
 {
@@ -64,9 +64,11 @@ public class FlowMassMatrix extends AbstractDoubleMatrixRel<FlowMassUnit, FlowMa
 
     /** {@inheritDoc} */
     @Override
-    public FlowMass instantiateScalar(final double value, final FlowMassUnit unit)
+    public FlowMass instantiateScalarSI(final double valueSI, final FlowMassUnit displayUnit)
     {
-        return new FlowMass(value, unit);
+        FlowMass result = FlowMass.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
 }

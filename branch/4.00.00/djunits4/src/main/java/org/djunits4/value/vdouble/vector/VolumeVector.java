@@ -16,7 +16,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
 public class VolumeVector extends AbstractDoubleVectorRel<VolumeUnit, Volume, VolumeVector>
 
 {
@@ -49,9 +49,11 @@ public class VolumeVector extends AbstractDoubleVectorRel<VolumeUnit, Volume, Vo
 
     /** {@inheritDoc} */
     @Override
-    public Volume instantiateScalar(final double value, final VolumeUnit unit)
+    public Volume instantiateScalarSI(final double valueSI, final VolumeUnit displayUnit)
     {
-        return new Volume(value, unit);
+        Volume result = Volume.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
 }

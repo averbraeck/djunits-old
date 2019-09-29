@@ -59,23 +59,23 @@ public class DoubleValueOfStringOfTest
             }
 
             // create a value so we can obtain info
-            Method createSIMethod = null;
+            Method instantiateSIMethod = null;
             try
             {
-                createSIMethod = scalarClass.getMethod("createSI", double.class);
+                instantiateSIMethod = scalarClass.getMethod("instantiateSI", double.class);
             }
             catch (NoSuchMethodException | SecurityException exception)
             {
-                fail("Method createSI not found for Scalar class " + classPath);
+                fail("Method instantiateSI not found for Scalar class " + classPath);
             }
             Scalar<?, ?> scalarSI = null;
             try
             {
-                scalarSI = (Scalar<?, ?>) createSIMethod.invoke(scalarClass, new Double(10.0));
+                scalarSI = (Scalar<?, ?>) instantiateSIMethod.invoke(scalarClass, new Double(10.0));
             }
             catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
             {
-                fail("Method createSI failed for Scalar class " + classPath);
+                fail("Method instantiateSI failed for Scalar class " + classPath);
             }
 
             // get the unit

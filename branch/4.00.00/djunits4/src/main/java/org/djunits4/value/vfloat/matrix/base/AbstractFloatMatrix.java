@@ -18,7 +18,6 @@ import org.djunits4.value.vfloat.matrix.data.FloatMatrixDataSparse;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalar;
 import org.djunits4.value.vfloat.scalar.base.FloatScalar;
 import org.djunits4.value.vfloat.vector.base.AbstractFloatVector;
-import org.djunits4.value.vfloat.vector.base.FloatVector;
 import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 import org.ojalgo.matrix.PrimitiveMatrix;
 
@@ -243,9 +242,7 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
         checkRowIndex(row);
         FloatVectorData dvd =
                 FloatVectorData.instantiate(getRowSI(row), getDisplayUnit().getStandardUnit().getScale(), getStorageType());
-        V result = FloatVector.instantiate(dvd, getDisplayUnit().getStandardUnit());
-        result.setDisplayUnit(getDisplayUnit());
-        return result;
+        return instantiateVector(dvd, getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -255,9 +252,7 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
         checkColumnIndex(column);
         FloatVectorData dvd = FloatVectorData.instantiate(getColumnSI(column), getDisplayUnit().getStandardUnit().getScale(),
                 getStorageType());
-        V result = FloatVector.instantiate(dvd, getDisplayUnit().getStandardUnit());
-        result.setDisplayUnit(getDisplayUnit());
-        return result;
+        return instantiateVector(dvd, getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -267,9 +262,7 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
         checkSquare();
         FloatVectorData dvd =
                 FloatVectorData.instantiate(getDiagonalSI(), getDisplayUnit().getStandardUnit().getScale(), getStorageType());
-        V result = FloatVector.instantiate(dvd, getDisplayUnit().getStandardUnit());
-        result.setDisplayUnit(getDisplayUnit());
-        return result;
+        return instantiateVector(dvd, getDisplayUnit());
 
     }
 
@@ -328,7 +321,7 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
         }
         else
         {
-            result = (M) FloatMatrix.instantiate(this.data.toSparse(), getDisplayUnit());
+            result = instantiateMatrix(this.data.toSparse(), getDisplayUnit());
         }
         result.setDisplayUnit(getDisplayUnit());
         return result;
@@ -347,7 +340,7 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
         }
         else
         {
-            result = (M) FloatMatrix.instantiate(this.data.toDense(), getDisplayUnit());
+            result = instantiateMatrix(this.data.toDense(), getDisplayUnit());
         }
         return result;
     }

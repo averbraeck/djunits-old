@@ -60,22 +60,21 @@ public abstract class AbstractDoubleMatrixAbs<
     @Override
     public AM plus(RM increment) throws ValueRuntimeException
     {
-        return DoubleMatrix.instantiate(this.getData().plus(increment.getData()), getDisplayUnit());
+        return instantiateMatrix(this.getData().plus(increment.getData()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public AM minus(RM decrement) throws ValueRuntimeException
     {
-        return DoubleMatrix.instantiate(this.getData().minus(decrement.getData()), getDisplayUnit());
+        return instantiateMatrix(this.getData().minus(decrement.getData()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public RM minus(AM decrement) throws ValueRuntimeException
     {
-        return DoubleMatrix.instantiate(this.getData().minus(decrement.getData()),
-                decrement.getDisplayUnit().getRelativeUnit());
+        return instantiateMatrixRel(this.getData().minus(decrement.getData()), decrement.getDisplayUnit().getRelativeUnit());
     }
 
     /**
@@ -132,10 +131,10 @@ public abstract class AbstractDoubleMatrixAbs<
      * Instantiate a new relative scalar for the class of this absolute matrix. This can be used instead of the
      * DoubleScalar.instiantiate() methods in case a matrix of this class is known. The method is faster than
      * DoubleScalar.instantiate, and it will also work if the matrix and/or scalar are user-defined.
-     * @param value double; the value of the relative scalar, expressed in the given unit
-     * @param unit RU; the unit in which the relative value is expressed
+     * @param valueSI double; the SI value of the relative scalar
+     * @param displayUnit RU; the unit in which the relative value will be displayed
      * @return R; a relative scalar of the correct type, belonging to this absolute matrix type
      */
-    public abstract R instantiateScalarRel(double value, RU unit);
+    public abstract R instantiateScalarRelSI(double valueSI, RU displayUnit);
 
 }

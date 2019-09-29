@@ -18,7 +18,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
 public class FloatElectricalPotentialMatrix extends AbstractFloatMatrixRel<ElectricalPotentialUnit, FloatElectricalPotential,
         FloatElectricalPotentialVector, FloatElectricalPotentialMatrix>
 
@@ -67,9 +67,11 @@ public class FloatElectricalPotentialMatrix extends AbstractFloatMatrixRel<Elect
 
     /** {@inheritDoc} */
     @Override
-    public FloatElectricalPotential instantiateScalar(final float value, final ElectricalPotentialUnit unit)
+    public FloatElectricalPotential instantiateScalarSI(final float valueSI, final ElectricalPotentialUnit displayUnit)
     {
-        return new FloatElectricalPotential(value, unit);
+        FloatElectricalPotential result = FloatElectricalPotential.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
 }

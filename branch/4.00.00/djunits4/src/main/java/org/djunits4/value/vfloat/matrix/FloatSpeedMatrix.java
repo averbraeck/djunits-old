@@ -18,7 +18,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
 public class FloatSpeedMatrix extends AbstractFloatMatrixRel<SpeedUnit, FloatSpeed, FloatSpeedVector, FloatSpeedMatrix>
 
 {
@@ -64,9 +64,11 @@ public class FloatSpeedMatrix extends AbstractFloatMatrixRel<SpeedUnit, FloatSpe
 
     /** {@inheritDoc} */
     @Override
-    public FloatSpeed instantiateScalar(final float value, final SpeedUnit unit)
+    public FloatSpeed instantiateScalarSI(final float valueSI, final SpeedUnit displayUnit)
     {
-        return new FloatSpeed(value, unit);
+        FloatSpeed result = FloatSpeed.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
 }

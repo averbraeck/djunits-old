@@ -18,7 +18,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
 public class AbsoluteTemperatureVector extends AbstractDoubleVectorAbs<AbsoluteTemperatureUnit, AbsoluteTemperature,
         AbsoluteTemperatureVector, TemperatureUnit, Temperature, TemperatureVector>
 {
@@ -51,9 +51,11 @@ public class AbsoluteTemperatureVector extends AbstractDoubleVectorAbs<AbsoluteT
 
     /** {@inheritDoc} */
     @Override
-    public AbsoluteTemperature instantiateScalar(final double value, final AbsoluteTemperatureUnit unit)
+    public AbsoluteTemperature instantiateScalarSI(final double valueSI, final AbsoluteTemperatureUnit displayUnit)
     {
-        return new AbsoluteTemperature(value, unit);
+        AbsoluteTemperature result = AbsoluteTemperature.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     /** {@inheritDoc} */
@@ -65,9 +67,11 @@ public class AbsoluteTemperatureVector extends AbstractDoubleVectorAbs<AbsoluteT
 
     /** {@inheritDoc} */
     @Override
-    public Temperature instantiateScalarRel(final double value, final TemperatureUnit unit)
+    public Temperature instantiateScalarRelSI(final double valueSI, final TemperatureUnit displayUnit)
     {
-        return new Temperature(value, unit);
+        Temperature result = Temperature.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
 }

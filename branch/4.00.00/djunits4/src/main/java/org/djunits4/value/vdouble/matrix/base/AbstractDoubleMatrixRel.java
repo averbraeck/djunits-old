@@ -10,7 +10,6 @@ import org.djunits4.value.vdouble.function.DoubleMathFunctions;
 import org.djunits4.value.vdouble.matrix.SIMatrix;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
-import org.djunits4.value.vdouble.scalar.base.DoubleScalar;
 import org.djunits4.value.vdouble.vector.base.AbstractDoubleVectorRel;
 
 /**
@@ -48,23 +47,21 @@ public abstract class AbstractDoubleMatrixRel<U extends Unit<U>, S extends Abstr
      */
     public final S zSum()
     {
-        S result = DoubleScalar.instantiate(this.data.zSum(), getDisplayUnit().getStandardUnit());
-        result.setDisplayUnit(getDisplayUnit());
-        return result;
+        return instantiateScalarSI(this.data.zSum(), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public final RM plus(final RM rel) throws ValueRuntimeException
     {
-        return DoubleMatrix.instantiate(this.getData().plus(rel.getData()), getDisplayUnit());
+        return instantiateMatrix(this.getData().plus(rel.getData()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
     public final RM minus(final RM rel) throws ValueRuntimeException
     {
-        return DoubleMatrix.instantiate(this.getData().minus(rel.getData()), getDisplayUnit());
+        return instantiateMatrix(this.getData().minus(rel.getData()), getDisplayUnit());
     }
 
     /**

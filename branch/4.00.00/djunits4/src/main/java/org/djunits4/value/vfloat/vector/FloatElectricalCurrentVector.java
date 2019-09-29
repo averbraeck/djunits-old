@@ -16,7 +16,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
 public class FloatElectricalCurrentVector
         extends AbstractFloatVectorRel<ElectricalCurrentUnit, FloatElectricalCurrent, FloatElectricalCurrentVector>
 
@@ -50,9 +50,11 @@ public class FloatElectricalCurrentVector
 
     /** {@inheritDoc} */
     @Override
-    public FloatElectricalCurrent instantiateScalar(final float value, final ElectricalCurrentUnit unit)
+    public FloatElectricalCurrent instantiateScalarSI(final float valueSI, final ElectricalCurrentUnit displayUnit)
     {
-        return new FloatElectricalCurrent(value, unit);
+        FloatElectricalCurrent result = FloatElectricalCurrent.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
 }

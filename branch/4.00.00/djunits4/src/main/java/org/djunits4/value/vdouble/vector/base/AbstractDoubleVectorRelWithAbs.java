@@ -52,7 +52,7 @@ public abstract class AbstractDoubleVectorRelWithAbs<
     @Override
     public AV plus(AV increment)
     {
-        return DoubleVector.instantiate(this.getData().plus(increment.getData()), increment.getDisplayUnit().getStandardUnit());
+        return instantiateVectorAbs(this.getData().plus(increment.getData()), increment.getDisplayUnit().getStandardUnit());
     }
 
     /**
@@ -69,9 +69,9 @@ public abstract class AbstractDoubleVectorRelWithAbs<
      * Instantiate a new absolute scalar for the class of this relative vector. This can be used instead of the
      * DoubleScalar.instiantiate() methods in case a vector of this class is known. The method is faster than
      * DoubleScalar.instantiate, and it will also work if the vector and/or scalar are user-defined.
-     * @param value double; the value of the absolute scalar, expressed in the given unit
-     * @param unit AU; the unit in which the absolute value is expressed
+     * @param valueSI double; the SI value of the absolute scalar
+     * @param displayUnit AU; the unit in which the absolute value will be displayed
      * @return A; an absolute scalar of the correct type, belonging to this relative vector type
      */
-    public abstract A instantiateScalarAbs(double value, AU unit);
+    public abstract A instantiateScalarAbsSI(double valueSI, AU displayUnit);
 }

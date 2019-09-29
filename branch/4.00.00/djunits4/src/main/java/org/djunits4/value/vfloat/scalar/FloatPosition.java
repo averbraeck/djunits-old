@@ -20,7 +20,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
 public class FloatPosition extends AbstractFloatScalarAbs<PositionUnit, FloatPosition, LengthUnit, FloatLength>
 {
     /** */
@@ -77,7 +77,7 @@ public class FloatPosition extends AbstractFloatScalarAbs<PositionUnit, FloatPos
      * @param value float; the float value in BASE units
      * @return FloatPosition; the new scalar with the BASE value
      */
-    public static final FloatPosition createSI(final float value)
+    public static final FloatPosition instantiateSI(final float value)
     {
         return new FloatPosition(value, PositionUnit.DEFAULT);
     }

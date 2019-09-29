@@ -18,7 +18,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
 public class PowerMatrix extends AbstractDoubleMatrixRel<PowerUnit, Power, PowerVector, PowerMatrix>
 
 {
@@ -64,9 +64,11 @@ public class PowerMatrix extends AbstractDoubleMatrixRel<PowerUnit, Power, Power
 
     /** {@inheritDoc} */
     @Override
-    public Power instantiateScalar(final double value, final PowerUnit unit)
+    public Power instantiateScalarSI(final double valueSI, final PowerUnit displayUnit)
     {
-        return new Power(value, unit);
+        Power result = Power.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
 }

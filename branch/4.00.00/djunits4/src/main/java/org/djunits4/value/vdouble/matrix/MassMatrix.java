@@ -18,7 +18,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
 public class MassMatrix extends AbstractDoubleMatrixRel<MassUnit, Mass, MassVector, MassMatrix>
 
 {
@@ -64,9 +64,11 @@ public class MassMatrix extends AbstractDoubleMatrixRel<MassUnit, Mass, MassVect
 
     /** {@inheritDoc} */
     @Override
-    public Mass instantiateScalar(final double value, final MassUnit unit)
+    public Mass instantiateScalarSI(final double valueSI, final MassUnit displayUnit)
     {
-        return new Mass(value, unit);
+        Mass result = Mass.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
 }
