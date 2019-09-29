@@ -465,7 +465,7 @@ public class DoubleVectorInstantiateTest
             {
                 DoubleVector.instantiate(d0, SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
             }
-        }.test("constructing matrix with zero vects should have thrown an exception", ValueRuntimeException.class);
+        }.test("constructing matrix with zero length should have thrown an exception", ValueRuntimeException.class);
 
         new Try()
         {
