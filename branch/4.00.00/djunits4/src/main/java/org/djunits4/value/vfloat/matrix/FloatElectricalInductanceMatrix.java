@@ -7,6 +7,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatElectricalInductance;
 import org.djunits4.value.vfloat.vector.FloatElectricalInductanceVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatElectricalInductanceMatrix, a matrix of values with a ElectricalInductanceUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vfloat.vector.FloatElectricalInductanceVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatElectricalInductanceMatrix extends AbstractFloatMatrixRel<ElectricalInductanceUnit, FloatElectricalInductance,
         FloatElectricalInductanceVector, FloatElectricalInductanceMatrix>
 
@@ -46,6 +47,29 @@ public class FloatElectricalInductanceMatrix extends AbstractFloatMatrixRel<Elec
     public Class<FloatElectricalInductanceVector> getVectorClass()
     {
         return FloatElectricalInductanceVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatElectricalInductanceMatrix instantiateMatrix(final FloatMatrixData fmd,
+            final ElectricalInductanceUnit displayUnit)
+    {
+        return new FloatElectricalInductanceMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatElectricalInductanceVector instantiateVector(final FloatVectorData fvd,
+            final ElectricalInductanceUnit displayUnit)
+    {
+        return new FloatElectricalInductanceVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatElectricalInductance instantiateScalar(final float value, final ElectricalInductanceUnit unit)
+    {
+        return new FloatElectricalInductance(value, unit);
     }
 
 }

@@ -7,6 +7,7 @@ import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.ElectricalPotential;
 import org.djunits4.value.vdouble.vector.ElectricalPotentialVector;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable Double ElectricalPotentialMatrix, a matrix of values with a ElectricalPotentialUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vdouble.vector.ElectricalPotentialVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class ElectricalPotentialMatrix extends AbstractDoubleMatrixRel<ElectricalPotentialUnit, ElectricalPotential,
         ElectricalPotentialVector, ElectricalPotentialMatrix>
 
@@ -46,6 +47,27 @@ public class ElectricalPotentialMatrix extends AbstractDoubleMatrixRel<Electrica
     public Class<ElectricalPotentialVector> getVectorClass()
     {
         return ElectricalPotentialVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalPotentialMatrix instantiateMatrix(final DoubleMatrixData dmd, final ElectricalPotentialUnit displayUnit)
+    {
+        return new ElectricalPotentialMatrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalPotentialVector instantiateVector(final DoubleVectorData dvd, final ElectricalPotentialUnit displayUnit)
+    {
+        return new ElectricalPotentialVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalPotential instantiateScalar(final double value, final ElectricalPotentialUnit unit)
+    {
+        return new ElectricalPotential(value, unit);
     }
 
 }

@@ -18,7 +18,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T16:38:21.610Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatDirectionVector extends
         AbstractFloatVectorAbs<DirectionUnit, FloatDirection, FloatDirectionVector, AngleUnit, FloatAngle, FloatAngleVector>
 {
@@ -42,6 +42,34 @@ public class FloatDirectionVector extends
             getScalarClass()
     {
         return FloatDirection.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatDirectionVector instantiateVector(final FloatVectorData fvd, final DirectionUnit displayUnit)
+    {
+        return new FloatDirectionVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatDirection instantiateScalar(final float value, final DirectionUnit unit)
+    {
+        return new FloatDirection(value, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatAngleVector instantiateVectorRel(final FloatVectorData fvd, final AngleUnit displayUnit)
+    {
+        return new FloatAngleVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatAngle instantiateScalarRel(final float value, final AngleUnit unit)
+    {
+        return new FloatAngle(value, unit);
     }
 
 }

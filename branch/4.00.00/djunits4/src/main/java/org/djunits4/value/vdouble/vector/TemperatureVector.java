@@ -18,7 +18,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T08:19:03.301Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class TemperatureVector extends AbstractDoubleVectorRelWithAbs<AbsoluteTemperatureUnit, AbsoluteTemperature,
         AbsoluteTemperatureVector, TemperatureUnit, Temperature, TemperatureVector>
 {
@@ -27,12 +27,12 @@ public class TemperatureVector extends AbstractDoubleVectorRelWithAbs<AbsoluteTe
 
     /**
      * Construct an TemperatureVector from an internal data object.
-     * @param data DoubleVectorData; an internal data object
-     * @param unit %Type%Unit; the unit
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param displayUnit TemperatureUnit; the display unit of the vector data
      */
-    public TemperatureVector(final DoubleVectorData data, final TemperatureUnit unit)
+    public TemperatureVector(final DoubleVectorData data, final TemperatureUnit displayUnit)
     {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
@@ -40,6 +40,34 @@ public class TemperatureVector extends AbstractDoubleVectorRelWithAbs<AbsoluteTe
     public Class<Temperature> getScalarClass()
     {
         return Temperature.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public TemperatureVector instantiateVector(final DoubleVectorData dvd, final TemperatureUnit displayUnit)
+    {
+        return new TemperatureVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Temperature instantiateScalar(final double value, final TemperatureUnit unit)
+    {
+        return new Temperature(value, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public AbsoluteTemperatureVector instantiateVectorAbs(final DoubleVectorData dvd, final AbsoluteTemperatureUnit displayUnit)
+    {
+        return new AbsoluteTemperatureVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public AbsoluteTemperature instantiateScalarAbs(final double value, final AbsoluteTemperatureUnit unit)
+    {
+        return new AbsoluteTemperature(value, unit);
     }
 
 }

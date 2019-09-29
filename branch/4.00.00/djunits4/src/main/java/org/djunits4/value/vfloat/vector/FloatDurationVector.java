@@ -18,7 +18,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T16:38:21.610Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatDurationVector extends
         AbstractFloatVectorRelWithAbs<TimeUnit, FloatTime, FloatTimeVector, DurationUnit, FloatDuration, FloatDurationVector>
 {
@@ -40,6 +40,34 @@ public class FloatDurationVector extends
     public Class<FloatDuration> getScalarClass()
     {
         return FloatDuration.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatDurationVector instantiateVector(final FloatVectorData fvd, final DurationUnit displayUnit)
+    {
+        return new FloatDurationVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatDuration instantiateScalar(final float value, final DurationUnit unit)
+    {
+        return new FloatDuration(value, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatTimeVector instantiateVectorAbs(final FloatVectorData fvd, final TimeUnit displayUnit)
+    {
+        return new FloatTimeVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatTime instantiateScalarAbs(final float value, final TimeUnit unit)
+    {
+        return new FloatTime(value, unit);
     }
 
 }

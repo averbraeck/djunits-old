@@ -5,6 +5,7 @@ import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.base.Scalar;
 import org.djunits4.value.base.Vector;
 import org.djunits4.value.vfloat.function.FloatFunction;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Interface for the FloatVector classes, specifically defining the methods that deal with float values.
@@ -64,7 +65,7 @@ public interface FloatVectorInterface<U extends Unit<U>, S extends Scalar<U, S>,
      * @return float[]; the values converted into the specified unit
      */
     float[] getValuesInUnit(U targetUnit);
-    
+
     /**
      * Set the value, specified in the standard SI unit, at the specified position.
      * @param index int; the index of the value to set
@@ -72,7 +73,7 @@ public interface FloatVectorInterface<U extends Unit<U>, S extends Scalar<U, S>,
      * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
      */
     void setSI(int index, float valueSI) throws ValueRuntimeException;
-    
+
     /**
      * Set the value, specified in the (current) display unit, at the specified position.
      * @param index int; the index of the value to set
@@ -80,7 +81,7 @@ public interface FloatVectorInterface<U extends Unit<U>, S extends Scalar<U, S>,
      * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
      */
     void setInUnit(int index, float valueInUnit) throws ValueRuntimeException;
-    
+
     /**
      * Set the value, specified in the <code>valueUnit</code>, at the specified position.
      * @param index int; the index of the value to set
@@ -89,7 +90,7 @@ public interface FloatVectorInterface<U extends Unit<U>, S extends Scalar<U, S>,
      * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
      */
     void setInUnit(int index, float valueInUnit, U valueUnit) throws ValueRuntimeException;
-    
+
     /**
      * Set the scalar value at the specified position.
      * @param index int; the index of the value to set
@@ -97,12 +98,32 @@ public interface FloatVectorInterface<U extends Unit<U>, S extends Scalar<U, S>,
      * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
      */
     void set(int index, S value) throws ValueRuntimeException;
-    
+
     /**
      * Execute a function on a cell by cell basis. Note: May be expensive when used on sparse data.
      * @param floatFunction FloatFunction; the function to apply
      * @return V; this updated vector
      */
     V assign(final FloatFunction floatFunction);
+
+    /**
+     * Instantiate a new vector of the class of this vector. This can be used instead of the FloatVector.instiantiate() methods
+     * in case another vector of this class is known. The method is faster than FloatVector.instantiate, and it will also work
+     * if the vector is user-defined.
+     * @param fvd FloatVectorData; the data used to instantiate the vector
+     * @param displayUnit U; the display unit of the vector
+     * @return V; a vector of the correct type
+     */
+    V instantiateVector(FloatVectorData fvd, U displayUnit);
+
+    /**
+     * Instantiate a new scalar for the class of this vector. This can be used instead of the FloatScalar.instiantiate() methods
+     * in case a vector of this class is known. The method is faster than FloatScalar.instantiate, and it will also work if the
+     * vector and/or scalar are user-defined.
+     * @param value float; the value of the scalar, expressed in the given unit
+     * @param unit U; the unit in which the value is expressed
+     * @return S; a scalar of the correct type, belonging to the vector type
+     */
+    S instantiateScalar(float value, U unit);
 
 }

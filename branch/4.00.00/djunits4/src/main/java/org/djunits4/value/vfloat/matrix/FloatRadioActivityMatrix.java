@@ -7,6 +7,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatRadioActivity;
 import org.djunits4.value.vfloat.vector.FloatRadioActivityVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatRadioActivityMatrix, a matrix of values with a RadioActivityUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vfloat.vector.FloatRadioActivityVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatRadioActivityMatrix extends
         AbstractFloatMatrixRel<RadioActivityUnit, FloatRadioActivity, FloatRadioActivityVector, FloatRadioActivityMatrix>
 
@@ -46,6 +47,27 @@ public class FloatRadioActivityMatrix extends
     public Class<FloatRadioActivityVector> getVectorClass()
     {
         return FloatRadioActivityVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatRadioActivityMatrix instantiateMatrix(final FloatMatrixData fmd, final RadioActivityUnit displayUnit)
+    {
+        return new FloatRadioActivityMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatRadioActivityVector instantiateVector(final FloatVectorData fvd, final RadioActivityUnit displayUnit)
+    {
+        return new FloatRadioActivityVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatRadioActivity instantiateScalar(final float value, final RadioActivityUnit unit)
+    {
+        return new FloatRadioActivity(value, unit);
     }
 
 }

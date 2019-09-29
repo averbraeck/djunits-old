@@ -60,7 +60,8 @@ public abstract class AbstractFloatScalarRel<U extends Unit<U>, R extends Abstra
         {
             return instantiateRel(this.getSI() + increment.getSI(), getDisplayUnit().getStandardUnit());
         }
-        return getDisplayUnit().equals(increment.getDisplayUnit()) ? instantiateRel(getInUnit() + increment.getInUnit(), getDisplayUnit())
+        return getDisplayUnit().equals(increment.getDisplayUnit())
+                ? instantiateRel(getInUnit() + increment.getInUnit(), getDisplayUnit())
                 : instantiateRel(this.getSI() + increment.getSI(), getDisplayUnit().getStandardUnit());
     }
 
@@ -72,7 +73,8 @@ public abstract class AbstractFloatScalarRel<U extends Unit<U>, R extends Abstra
         {
             return instantiateRel(this.getSI() - decrement.getSI(), getDisplayUnit().getStandardUnit());
         }
-        return getDisplayUnit().equals(decrement.getDisplayUnit()) ? instantiateRel(getInUnit() - decrement.getInUnit(), getDisplayUnit())
+        return getDisplayUnit().equals(decrement.getDisplayUnit())
+                ? instantiateRel(getInUnit() - decrement.getInUnit(), getDisplayUnit())
                 : instantiateRel(this.getSI() - decrement.getSI(), getDisplayUnit().getStandardUnit());
     }
 
@@ -88,7 +90,8 @@ public abstract class AbstractFloatScalarRel<U extends Unit<U>, R extends Abstra
     public static <U extends Unit<U>, R extends AbstractFloatScalarRel<U, R>> R interpolate(final R zero, final R one,
             final float ratio)
     {
-        return zero.instantiateRel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return zero.instantiateRel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**

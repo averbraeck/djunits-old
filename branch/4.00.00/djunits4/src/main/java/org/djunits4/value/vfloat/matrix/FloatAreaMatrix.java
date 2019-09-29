@@ -7,6 +7,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatArea;
 import org.djunits4.value.vfloat.vector.FloatAreaVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatAreaMatrix, a matrix of values with a AreaUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vfloat.vector.FloatAreaVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatAreaMatrix extends AbstractFloatMatrixRel<AreaUnit, FloatArea, FloatAreaVector, FloatAreaMatrix>
 
 {
@@ -45,6 +46,27 @@ public class FloatAreaMatrix extends AbstractFloatMatrixRel<AreaUnit, FloatArea,
     public Class<FloatAreaVector> getVectorClass()
     {
         return FloatAreaVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatAreaMatrix instantiateMatrix(final FloatMatrixData fmd, final AreaUnit displayUnit)
+    {
+        return new FloatAreaMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatAreaVector instantiateVector(final FloatVectorData fvd, final AreaUnit displayUnit)
+    {
+        return new FloatAreaVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatArea instantiateScalar(final float value, final AreaUnit unit)
+    {
+        return new FloatArea(value, unit);
     }
 
 }

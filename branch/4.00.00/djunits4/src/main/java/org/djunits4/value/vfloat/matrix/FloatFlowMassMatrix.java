@@ -7,6 +7,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatFlowMass;
 import org.djunits4.value.vfloat.vector.FloatFlowMassVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatFlowMassMatrix, a matrix of values with a FlowMassUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vfloat.vector.FloatFlowMassVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatFlowMassMatrix
         extends AbstractFloatMatrixRel<FlowMassUnit, FloatFlowMass, FloatFlowMassVector, FloatFlowMassMatrix>
 
@@ -46,6 +47,27 @@ public class FloatFlowMassMatrix
     public Class<FloatFlowMassVector> getVectorClass()
     {
         return FloatFlowMassVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatFlowMassMatrix instantiateMatrix(final FloatMatrixData fmd, final FlowMassUnit displayUnit)
+    {
+        return new FloatFlowMassMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatFlowMassVector instantiateVector(final FloatVectorData fvd, final FlowMassUnit displayUnit)
+    {
+        return new FloatFlowMassVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatFlowMass instantiateScalar(final float value, final FlowMassUnit unit)
+    {
+        return new FloatFlowMass(value, unit);
     }
 
 }

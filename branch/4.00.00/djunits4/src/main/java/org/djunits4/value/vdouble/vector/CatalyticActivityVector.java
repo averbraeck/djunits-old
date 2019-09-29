@@ -16,7 +16,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T08:19:03.301Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class CatalyticActivityVector
         extends AbstractDoubleVectorRel<CatalyticActivityUnit, CatalyticActivity, CatalyticActivityVector>
 
@@ -26,12 +26,12 @@ public class CatalyticActivityVector
 
     /**
      * Construct an CatalyticActivityVector from an internal data object.
-     * @param data DoubleVectorData; an internal data object
-     * @param unit CatalyticActivityUnit; the unit
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param displayUnit CatalyticActivityUnit; the display unit of the vector data
      */
-    public CatalyticActivityVector(final DoubleVectorData data, final CatalyticActivityUnit unit)
+    public CatalyticActivityVector(final DoubleVectorData data, final CatalyticActivityUnit displayUnit)
     {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
@@ -39,6 +39,20 @@ public class CatalyticActivityVector
     public Class<CatalyticActivity> getScalarClass()
     {
         return CatalyticActivity.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public CatalyticActivityVector instantiateVector(final DoubleVectorData dvd, final CatalyticActivityUnit displayUnit)
+    {
+        return new CatalyticActivityVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public CatalyticActivity instantiateScalar(final double value, final CatalyticActivityUnit unit)
+    {
+        return new CatalyticActivity(value, unit);
     }
 
 }

@@ -10,6 +10,7 @@ import org.djunits4.value.vfloat.scalar.FloatDuration;
 import org.djunits4.value.vfloat.scalar.FloatTime;
 import org.djunits4.value.vfloat.vector.FloatDurationVector;
 import org.djunits4.value.vfloat.vector.FloatTimeVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatDuration Matrix.
@@ -20,7 +21,7 @@ import org.djunits4.value.vfloat.vector.FloatTimeVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatDurationMatrix extends AbstractFloatMatrixRelWithAbs<TimeUnit, FloatTime, FloatTimeVector, FloatTimeMatrix,
         DurationUnit, FloatDuration, FloatDurationVector, FloatDurationMatrix>
 {
@@ -48,6 +49,48 @@ public class FloatDurationMatrix extends AbstractFloatMatrixRelWithAbs<TimeUnit,
     public Class<FloatDurationVector> getVectorClass()
     {
         return FloatDurationVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatDurationMatrix instantiateMatrix(final FloatMatrixData fmd, final DurationUnit displayUnit)
+    {
+        return new FloatDurationMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatDurationVector instantiateVector(final FloatVectorData fvd, final DurationUnit displayUnit)
+    {
+        return new FloatDurationVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatDuration instantiateScalar(final float value, final DurationUnit unit)
+    {
+        return new FloatDuration(value, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatTimeMatrix instantiateMatrixAbs(final FloatMatrixData fmd, final TimeUnit displayUnit)
+    {
+        return new FloatTimeMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatTimeVector instantiateVectorAbs(final FloatVectorData fvd, final TimeUnit displayUnit)
+    {
+        return new FloatTimeVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatTime instantiateScalarAbs(final float value, final TimeUnit unit)
+    {
+        return new FloatTime(value, unit);
     }
 
 }

@@ -5,7 +5,9 @@ import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.base.Matrix;
 import org.djunits4.value.base.Scalar;
 import org.djunits4.value.vfloat.function.FloatFunction;
+import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.vector.base.FloatVectorInterface;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Interface for the FloatMatrix classes, specifically defining the methods that deal with float values.
@@ -102,7 +104,7 @@ public interface FloatMatrixInterface<U extends Unit<U>, S extends Scalar<U, S>,
      * @throws ValueRuntimeException when matrix is neither sparse, nor dense, or not square
      */
     float determinant() throws ValueRuntimeException;
-    
+
     /**
      * Set the value, specified in the standard SI unit, at the specified position.
      * @param row int; row of the value to set
@@ -111,7 +113,7 @@ public interface FloatMatrixInterface<U extends Unit<U>, S extends Scalar<U, S>,
      * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
      */
     void setSI(int row, int column, float valueSI) throws ValueRuntimeException;
-    
+
     /**
      * Set the value, specified in the (current) display unit, at the specified position.
      * @param row int; row of the value to set
@@ -120,7 +122,7 @@ public interface FloatMatrixInterface<U extends Unit<U>, S extends Scalar<U, S>,
      * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
      */
     void setInUnit(int row, int column, float valueInUnit) throws ValueRuntimeException;
-    
+
     /**
      * Set the value, specified in the <code>valueUnit</code>, at the specified position.
      * @param row int; row of the value to set
@@ -130,7 +132,7 @@ public interface FloatMatrixInterface<U extends Unit<U>, S extends Scalar<U, S>,
      * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
      */
     void setInUnit(int row, int column, float valueInUnit, U valueUnit) throws ValueRuntimeException;
-    
+
     /**
      * Set the scalar value at the specified position.
      * @param row int; row of the value to set
@@ -139,7 +141,7 @@ public interface FloatMatrixInterface<U extends Unit<U>, S extends Scalar<U, S>,
      * @throws ValueRuntimeException when index out of range (index &lt; 0 or index &gt;= size())
      */
     void set(int row, int column, S value) throws ValueRuntimeException;
- 
+
     /**
      * Execute a function on a cell by cell basis. Note: May be expensive when used on sparse data.
      * @param floatFunction FloatFunction; the function to apply
@@ -147,4 +149,33 @@ public interface FloatMatrixInterface<U extends Unit<U>, S extends Scalar<U, S>,
      */
     M assign(final FloatFunction floatFunction);
 
+    /**
+     * Instantiate a new matrix of the class of this matrix. This can be used instead of the FloatMatrix.instiantiate() methods
+     * in case another matrix of this class is known. The method is faster than FloatMatrix.instantiate, and it will also work
+     * if the matrix is user-defined.
+     * @param fmd FloatMatrixData; the data used to instantiate the matrix
+     * @param displayUnit U; the display unit of the matrix
+     * @return V; a matrix of the correct type
+     */
+    M instantiateMatrix(FloatMatrixData fmd, U displayUnit);
+
+    /**
+     * Instantiate a new vector of the class of this matrix. This can be used instead of the FloatVector.instiantiate() methods
+     * in case another matrix of this class is known. The method is faster than FloatVector.instantiate, and it will also work
+     * if the matrix and/or vector are user-defined.
+     * @param fvd FloatVectorData; the data used to instantiate the vector
+     * @param displayUnit U; the display unit of the vector
+     * @return V; a vector of the correct type
+     */
+    V instantiateVector(FloatVectorData fvd, U displayUnit);
+
+    /**
+     * Instantiate a new scalar for the class of this matrix. This can be used instead of the FloatScalar.instiantiate() methods
+     * in case a matrix of this class is known. The method is faster than FloatScalar.instantiate, and it will also work if the
+     * matrix and/or scalar are user-defined.
+     * @param value float; the value of the scalar, expressed in the given unit
+     * @param unit U; the unit in which the value is expressed
+     * @return S; a scalar of the correct type, belonging to the matrix type
+     */
+    S instantiateScalar(float value, U unit);
 }

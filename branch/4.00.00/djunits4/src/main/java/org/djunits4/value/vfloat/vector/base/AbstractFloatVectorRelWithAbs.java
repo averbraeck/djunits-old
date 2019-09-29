@@ -55,4 +55,24 @@ public abstract class AbstractFloatVectorRelWithAbs<
         return FloatVector.instantiate(this.getData().plus(increment.getData()), increment.getDisplayUnit().getStandardUnit());
     }
 
+    /**
+     * Instantiate a new absolute vector of the class of this relative vector. This can be used instead of the
+     * FloatVector.instiantiate() methods in case another vector of this relative with absolute class is known. The method is
+     * faster than FloatVector.instantiate, and it will also work if the vector is user-defined.
+     * @param dvd FloatVectorData; the data used to instantiate the vector
+     * @param displayUnit AU; the display unit of the absolute vector
+     * @return AV; an absolute vector of the correct type, belonging to this relative vector type
+     */
+    public abstract AV instantiateVectorAbs(FloatVectorData dvd, AU displayUnit);
+
+    /**
+     * Instantiate a new absolute scalar for the class of this relative vector. This can be used instead of the
+     * FloatScalar.instiantiate() methods in case a vector of this class is known. The method is faster than
+     * FloatScalar.instantiate, and it will also work if the vector and/or scalar are user-defined.
+     * @param value float; the value of the absolute scalar, expressed in the given unit
+     * @param unit AU; the unit in which the absolute value is expressed
+     * @return A; an absolute scalar of the correct type, belonging to this relative vector type
+     */
+    public abstract A instantiateScalarAbs(float value, AU unit);
+
 }

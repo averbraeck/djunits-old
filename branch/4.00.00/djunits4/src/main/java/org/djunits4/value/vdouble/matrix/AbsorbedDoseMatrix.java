@@ -7,6 +7,7 @@ import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.AbsorbedDose;
 import org.djunits4.value.vdouble.vector.AbsorbedDoseVector;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable Double AbsorbedDoseMatrix, a matrix of values with a AbsorbedDoseUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vdouble.vector.AbsorbedDoseVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class AbsorbedDoseMatrix
         extends AbstractDoubleMatrixRel<AbsorbedDoseUnit, AbsorbedDose, AbsorbedDoseVector, AbsorbedDoseMatrix>
 
@@ -46,6 +47,27 @@ public class AbsorbedDoseMatrix
     public Class<AbsorbedDoseVector> getVectorClass()
     {
         return AbsorbedDoseVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public AbsorbedDoseMatrix instantiateMatrix(final DoubleMatrixData dmd, final AbsorbedDoseUnit displayUnit)
+    {
+        return new AbsorbedDoseMatrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public AbsorbedDoseVector instantiateVector(final DoubleVectorData dvd, final AbsorbedDoseUnit displayUnit)
+    {
+        return new AbsorbedDoseVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public AbsorbedDose instantiateScalar(final double value, final AbsorbedDoseUnit unit)
+    {
+        return new AbsorbedDose(value, unit);
     }
 
 }

@@ -66,7 +66,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T08:19:03.301Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector>
 {
     /** */
@@ -112,7 +112,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
     public static SIVector instantiate(final SortedMap<Integer, Double> values, final int length, final SIUnit unit,
             final StorageType storageType) throws ValueRuntimeException
     {
-        return DoubleVector.instantiateSI(values, length, unit, storageType);
+        return new SIVector(DoubleVectorData.instantiate(values, length, unit.getScale(), storageType), unit);
     }
 
     /**
@@ -223,6 +223,20 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         throw new IllegalArgumentException("Error parsing SIVector with unit " + unitString);
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public SIVector instantiateVector(final DoubleVectorData dvd, final SIUnit unit)
+    {
+        return new SIVector(dvd, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SIScalar instantiateScalar(final double value, final SIUnit unit)
+    {
+        return new SIScalar(value, unit);
+    }
+
     /**********************************************************************************/
     /******************************** 'CAST AS' METHODS *******************************/
     /**********************************************************************************/
@@ -237,8 +251,8 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
             V extends AbstractDoubleVectorRel<U, S, V>> V as(final U displayUnit)
     {
         Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(displayUnit.getUnitBase().getSiDimensions())),
-                UnitRuntimeException.class, "SIVector with unit %s cannot be converted to a vector with unit %s", getDisplayUnit(),
-                displayUnit);
+                UnitRuntimeException.class, "SIVector with unit %s cannot be converted to a vector with unit %s",
+                getDisplayUnit(), displayUnit);
         V result = DoubleVector.instantiate(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
         return result;

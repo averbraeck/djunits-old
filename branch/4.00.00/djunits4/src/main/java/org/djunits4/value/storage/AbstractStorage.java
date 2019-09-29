@@ -15,7 +15,7 @@ public abstract class AbstractStorage<T extends AbstractStorage<T>> implements C
 {
     /** the data type. */
     protected final StorageType storageType;
-    
+
     /**
      * Construct a new Data store.
      * @param storageType StorageType; the data type
@@ -53,7 +53,7 @@ public abstract class AbstractStorage<T extends AbstractStorage<T>> implements C
     {
         return this.storageType.equals(StorageType.SPARSE);
     }
-    
+
     /**
      * Compute and return the number of non-zero cells in this indexed value.
      * @return int; the number of non-zero cells
@@ -67,4 +67,3 @@ public abstract class AbstractStorage<T extends AbstractStorage<T>> implements C
     public abstract T copy();
 
 }
-

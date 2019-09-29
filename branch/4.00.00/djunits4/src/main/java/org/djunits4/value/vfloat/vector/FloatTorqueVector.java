@@ -16,7 +16,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T16:38:21.610Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatTorqueVector extends AbstractFloatVectorRel<TorqueUnit, FloatTorque, FloatTorqueVector>
 
 {
@@ -38,6 +38,20 @@ public class FloatTorqueVector extends AbstractFloatVectorRel<TorqueUnit, FloatT
     public Class<FloatTorque> getScalarClass()
     {
         return FloatTorque.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatTorqueVector instantiateVector(final FloatVectorData fvd, final TorqueUnit displayUnit)
+    {
+        return new FloatTorqueVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatTorque instantiateScalar(final float value, final TorqueUnit unit)
+    {
+        return new FloatTorque(value, unit);
     }
 
 }

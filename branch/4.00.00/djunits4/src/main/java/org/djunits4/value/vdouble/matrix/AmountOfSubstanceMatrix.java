@@ -7,6 +7,7 @@ import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.AmountOfSubstance;
 import org.djunits4.value.vdouble.vector.AmountOfSubstanceVector;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable Double AmountOfSubstanceMatrix, a matrix of values with a AmountOfSubstanceUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vdouble.vector.AmountOfSubstanceVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class AmountOfSubstanceMatrix extends
         AbstractDoubleMatrixRel<AmountOfSubstanceUnit, AmountOfSubstance, AmountOfSubstanceVector, AmountOfSubstanceMatrix>
 
@@ -46,6 +47,27 @@ public class AmountOfSubstanceMatrix extends
     public Class<AmountOfSubstanceVector> getVectorClass()
     {
         return AmountOfSubstanceVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public AmountOfSubstanceMatrix instantiateMatrix(final DoubleMatrixData dmd, final AmountOfSubstanceUnit displayUnit)
+    {
+        return new AmountOfSubstanceMatrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public AmountOfSubstanceVector instantiateVector(final DoubleVectorData dvd, final AmountOfSubstanceUnit displayUnit)
+    {
+        return new AmountOfSubstanceVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public AmountOfSubstance instantiateScalar(final double value, final AmountOfSubstanceUnit unit)
+    {
+        return new AmountOfSubstance(value, unit);
     }
 
 }

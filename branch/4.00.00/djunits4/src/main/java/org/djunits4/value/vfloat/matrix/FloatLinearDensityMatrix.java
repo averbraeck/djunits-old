@@ -7,6 +7,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatLinearDensity;
 import org.djunits4.value.vfloat.vector.FloatLinearDensityVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatLinearDensityMatrix, a matrix of values with a LinearDensityUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vfloat.vector.FloatLinearDensityVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatLinearDensityMatrix extends
         AbstractFloatMatrixRel<LinearDensityUnit, FloatLinearDensity, FloatLinearDensityVector, FloatLinearDensityMatrix>
 
@@ -46,6 +47,27 @@ public class FloatLinearDensityMatrix extends
     public Class<FloatLinearDensityVector> getVectorClass()
     {
         return FloatLinearDensityVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatLinearDensityMatrix instantiateMatrix(final FloatMatrixData fmd, final LinearDensityUnit displayUnit)
+    {
+        return new FloatLinearDensityMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatLinearDensityVector instantiateVector(final FloatVectorData fvd, final LinearDensityUnit displayUnit)
+    {
+        return new FloatLinearDensityVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatLinearDensity instantiateScalar(final float value, final LinearDensityUnit unit)
+    {
+        return new FloatLinearDensity(value, unit);
     }
 
 }

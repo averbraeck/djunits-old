@@ -7,6 +7,7 @@ import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.MagneticFluxDensity;
 import org.djunits4.value.vdouble.vector.MagneticFluxDensityVector;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable Double MagneticFluxDensityMatrix, a matrix of values with a MagneticFluxDensityUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vdouble.vector.MagneticFluxDensityVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class MagneticFluxDensityMatrix extends AbstractDoubleMatrixRel<MagneticFluxDensityUnit, MagneticFluxDensity,
         MagneticFluxDensityVector, MagneticFluxDensityMatrix>
 
@@ -46,6 +47,27 @@ public class MagneticFluxDensityMatrix extends AbstractDoubleMatrixRel<MagneticF
     public Class<MagneticFluxDensityVector> getVectorClass()
     {
         return MagneticFluxDensityVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public MagneticFluxDensityMatrix instantiateMatrix(final DoubleMatrixData dmd, final MagneticFluxDensityUnit displayUnit)
+    {
+        return new MagneticFluxDensityMatrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public MagneticFluxDensityVector instantiateVector(final DoubleVectorData dvd, final MagneticFluxDensityUnit displayUnit)
+    {
+        return new MagneticFluxDensityVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public MagneticFluxDensity instantiateScalar(final double value, final MagneticFluxDensityUnit unit)
+    {
+        return new MagneticFluxDensity(value, unit);
     }
 
 }

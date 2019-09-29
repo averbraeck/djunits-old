@@ -7,6 +7,7 @@ import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.ElectricalConductance;
 import org.djunits4.value.vdouble.vector.ElectricalConductanceVector;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable Double ElectricalConductanceMatrix, a matrix of values with a ElectricalConductanceUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vdouble.vector.ElectricalConductanceVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class ElectricalConductanceMatrix extends AbstractDoubleMatrixRel<ElectricalConductanceUnit, ElectricalConductance,
         ElectricalConductanceVector, ElectricalConductanceMatrix>
 
@@ -46,6 +47,29 @@ public class ElectricalConductanceMatrix extends AbstractDoubleMatrixRel<Electri
     public Class<ElectricalConductanceVector> getVectorClass()
     {
         return ElectricalConductanceVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalConductanceMatrix instantiateMatrix(final DoubleMatrixData dmd,
+            final ElectricalConductanceUnit displayUnit)
+    {
+        return new ElectricalConductanceMatrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalConductanceVector instantiateVector(final DoubleVectorData dvd,
+            final ElectricalConductanceUnit displayUnit)
+    {
+        return new ElectricalConductanceVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalConductance instantiateScalar(final double value, final ElectricalConductanceUnit unit)
+    {
+        return new ElectricalConductance(value, unit);
     }
 
 }

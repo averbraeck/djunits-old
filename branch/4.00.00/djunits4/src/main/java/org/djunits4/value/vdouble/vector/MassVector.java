@@ -16,7 +16,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T08:19:03.301Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class MassVector extends AbstractDoubleVectorRel<MassUnit, Mass, MassVector>
 
 {
@@ -25,12 +25,12 @@ public class MassVector extends AbstractDoubleVectorRel<MassUnit, Mass, MassVect
 
     /**
      * Construct an MassVector from an internal data object.
-     * @param data DoubleVectorData; an internal data object
-     * @param unit MassUnit; the unit
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param displayUnit MassUnit; the display unit of the vector data
      */
-    public MassVector(final DoubleVectorData data, final MassUnit unit)
+    public MassVector(final DoubleVectorData data, final MassUnit displayUnit)
     {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
@@ -38,6 +38,20 @@ public class MassVector extends AbstractDoubleVectorRel<MassUnit, Mass, MassVect
     public Class<Mass> getScalarClass()
     {
         return Mass.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public MassVector instantiateVector(final DoubleVectorData dvd, final MassUnit displayUnit)
+    {
+        return new MassVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Mass instantiateScalar(final double value, final MassUnit unit)
+    {
+        return new Mass(value, unit);
     }
 
 }

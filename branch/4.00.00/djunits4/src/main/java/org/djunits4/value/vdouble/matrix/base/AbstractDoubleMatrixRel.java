@@ -82,7 +82,8 @@ public abstract class AbstractDoubleMatrixRel<U extends Unit<U>, S extends Abstr
     }
 
     /**
-     * Increment all values of this matrix by the increment on a value by value basis. This only works if this matrix is mutable.
+     * Increment all values of this matrix by the increment on a value by value basis. This only works if this matrix is
+     * mutable.
      * @param increment RM; the matrix that contains the values by which to increment the corresponding values
      * @return RM; this modified matrix
      * @throws ValueRuntimeException in case this matrix is immutable
@@ -111,14 +112,15 @@ public abstract class AbstractDoubleMatrixRel<U extends Unit<U>, S extends Abstr
     }
 
     /**
-     * Decrement all values of this matrix by the decrement on a value by value basis. This only works if this matrix is mutable.
+     * Decrement all values of this matrix by the decrement on a value by value basis. This only works if this matrix is
+     * mutable.
      * @param decrement RM; the matrix that contains the values by which to decrement the corresponding values
      * @return RM; this modified matrix
      * @throws ValueRuntimeException in case this matrix is immutable
      * @Throws ValueException when the sizes of the matrices differ, or <code>decrement</code> is null
      */
     @SuppressWarnings("unchecked")
-    public RM  decrementBy(RM decrement)
+    public RM decrementBy(RM decrement)
     {
         checkCopyOnWrite();
         this.data.decrementBy(decrement.getData());
@@ -158,8 +160,8 @@ public abstract class AbstractDoubleMatrixRel<U extends Unit<U>, S extends Abstr
             throws ValueRuntimeException, UnitException
     {
         checkSize(rel);
-        return new SIMatrix(this.getData().times(rel.getData()),
-                SIUnit.of(getDisplayUnit().getUnitBase().getSiDimensions().plus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
+        return new SIMatrix(this.getData().times(rel.getData()), SIUnit.of(
+                getDisplayUnit().getUnitBase().getSiDimensions().plus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
     }
 
     /**
@@ -175,7 +177,7 @@ public abstract class AbstractDoubleMatrixRel<U extends Unit<U>, S extends Abstr
             throws ValueRuntimeException, UnitException
     {
         checkSize(rel);
-        return new SIMatrix(this.getData().divide(rel.getData()),
-                SIUnit.of(getDisplayUnit().getUnitBase().getSiDimensions().minus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
+        return new SIMatrix(this.getData().divide(rel.getData()), SIUnit.of(
+                getDisplayUnit().getUnitBase().getSiDimensions().minus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
     }
 }

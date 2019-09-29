@@ -85,7 +85,8 @@ public abstract class AbstractFloatVectorAbs<
     }
 
     /**
-     * Decrement all values of this vector by the decrement on a value by value basis. This only works if this vector is mutable.
+     * Decrement all values of this vector by the decrement on a value by value basis. This only works if this vector is
+     * mutable.
      * @param decrement RV; the vector that contains the values by which to decrement the corresponding values
      * @return AV; this modified vector
      * @throws ValueRuntimeException in case this vector is immutable
@@ -98,5 +99,25 @@ public abstract class AbstractFloatVectorAbs<
         this.data.decrementBy(decrement.getData());
         return (AV) this;
     }
+
+    /**
+     * Instantiate a new relative vector of the class of this absolute vector. This can be used instead of the
+     * FloatVector.instiantiate() methods in case another vector of this absolute vector class is known. The method is faster
+     * than FloatVector.instantiate, and it will also work if the vector is user-defined.
+     * @param dvd FloatVectorData; the data used to instantiate the vector
+     * @param displayUnit RU; the display unit of the relative vector
+     * @return RV; a relative vector of the correct type, belonging to this absolute vector type
+     */
+    public abstract RV instantiateVectorRel(FloatVectorData dvd, RU displayUnit);
+
+    /**
+     * Instantiate a new relative scalar for the class of this absolute vector. This can be used instead of the
+     * FloatScalar.instiantiate() methods in case a vector of this class is known. The method is faster than
+     * FloatScalar.instantiate, and it will also work if the vector and/or scalar are user-defined.
+     * @param value float; the value of the relative scalar, expressed in the given unit
+     * @param unit RU; the unit in which the relative value is expressed
+     * @return R; a relative scalar of the correct type, belonging to this absolute vector type
+     */
+    public abstract R instantiateScalarRel(float value, RU unit);
 
 }

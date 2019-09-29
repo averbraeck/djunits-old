@@ -16,7 +16,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T08:19:03.301Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class LuminousIntensityVector
         extends AbstractDoubleVectorRel<LuminousIntensityUnit, LuminousIntensity, LuminousIntensityVector>
 
@@ -26,12 +26,12 @@ public class LuminousIntensityVector
 
     /**
      * Construct an LuminousIntensityVector from an internal data object.
-     * @param data DoubleVectorData; an internal data object
-     * @param unit LuminousIntensityUnit; the unit
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param displayUnit LuminousIntensityUnit; the display unit of the vector data
      */
-    public LuminousIntensityVector(final DoubleVectorData data, final LuminousIntensityUnit unit)
+    public LuminousIntensityVector(final DoubleVectorData data, final LuminousIntensityUnit displayUnit)
     {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
@@ -39,6 +39,20 @@ public class LuminousIntensityVector
     public Class<LuminousIntensity> getScalarClass()
     {
         return LuminousIntensity.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public LuminousIntensityVector instantiateVector(final DoubleVectorData dvd, final LuminousIntensityUnit displayUnit)
+    {
+        return new LuminousIntensityVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public LuminousIntensity instantiateScalar(final double value, final LuminousIntensityUnit unit)
+    {
+        return new LuminousIntensity(value, unit);
     }
 
 }

@@ -80,7 +80,8 @@ public abstract class AbstractFloatVectorRel<U extends Unit<U>, S extends Abstra
     }
 
     /**
-     * Increment all values of this vector by the increment on a value by value basis. This only works if this vector is mutable.
+     * Increment all values of this vector by the increment on a value by value basis. This only works if this vector is
+     * mutable.
      * @param increment RV; the vector that contains the values by which to increment the corresponding values
      * @return RV; this modified vector
      * @throws ValueRuntimeException in case this vector is immutable
@@ -109,7 +110,8 @@ public abstract class AbstractFloatVectorRel<U extends Unit<U>, S extends Abstra
     }
 
     /**
-     * Decrement all values of this vector by the decrement on a value by value basis. This only works if this vector is mutable.
+     * Decrement all values of this vector by the decrement on a value by value basis. This only works if this vector is
+     * mutable.
      * @param decrement RV; the vector that contains the values by which to decrement the corresponding values
      * @return RV; this modified vector
      * @throws ValueRuntimeException in case this vector is immutable
@@ -156,8 +158,8 @@ public abstract class AbstractFloatVectorRel<U extends Unit<U>, S extends Abstra
             throws ValueRuntimeException, UnitException
     {
         checkSize(rel);
-        return new FloatSIVector(this.getData().times(rel.getData()),
-                SIUnit.of(getDisplayUnit().getUnitBase().getSiDimensions().plus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
+        return new FloatSIVector(this.getData().times(rel.getData()), SIUnit.of(
+                getDisplayUnit().getUnitBase().getSiDimensions().plus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
     }
 
     /**
@@ -173,7 +175,7 @@ public abstract class AbstractFloatVectorRel<U extends Unit<U>, S extends Abstra
             throws ValueRuntimeException, UnitException
     {
         checkSize(rel);
-        return new FloatSIVector(this.getData().divide(rel.getData()),
-                SIUnit.of(getDisplayUnit().getUnitBase().getSiDimensions().minus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
+        return new FloatSIVector(this.getData().divide(rel.getData()), SIUnit.of(
+                getDisplayUnit().getUnitBase().getSiDimensions().minus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
     }
 }

@@ -7,6 +7,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatAngleSolid;
 import org.djunits4.value.vfloat.vector.FloatAngleSolidVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatAngleSolidMatrix, a matrix of values with a AngleSolidUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vfloat.vector.FloatAngleSolidVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatAngleSolidMatrix
         extends AbstractFloatMatrixRel<AngleSolidUnit, FloatAngleSolid, FloatAngleSolidVector, FloatAngleSolidMatrix>
 
@@ -46,6 +47,27 @@ public class FloatAngleSolidMatrix
     public Class<FloatAngleSolidVector> getVectorClass()
     {
         return FloatAngleSolidVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatAngleSolidMatrix instantiateMatrix(final FloatMatrixData fmd, final AngleSolidUnit displayUnit)
+    {
+        return new FloatAngleSolidMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatAngleSolidVector instantiateVector(final FloatVectorData fvd, final AngleSolidUnit displayUnit)
+    {
+        return new FloatAngleSolidVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatAngleSolid instantiateScalar(final float value, final AngleSolidUnit unit)
+    {
+        return new FloatAngleSolid(value, unit);
     }
 
 }

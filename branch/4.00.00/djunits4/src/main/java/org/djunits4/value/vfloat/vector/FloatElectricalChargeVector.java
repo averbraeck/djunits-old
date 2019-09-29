@@ -16,7 +16,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T16:38:21.610Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatElectricalChargeVector
         extends AbstractFloatVectorRel<ElectricalChargeUnit, FloatElectricalCharge, FloatElectricalChargeVector>
 
@@ -39,6 +39,20 @@ public class FloatElectricalChargeVector
     public Class<FloatElectricalCharge> getScalarClass()
     {
         return FloatElectricalCharge.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatElectricalChargeVector instantiateVector(final FloatVectorData fvd, final ElectricalChargeUnit displayUnit)
+    {
+        return new FloatElectricalChargeVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatElectricalCharge instantiateScalar(final float value, final ElectricalChargeUnit unit)
+    {
+        return new FloatElectricalCharge(value, unit);
     }
 
 }

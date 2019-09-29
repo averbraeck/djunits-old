@@ -7,6 +7,7 @@ import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.ElectricalInductance;
 import org.djunits4.value.vdouble.vector.ElectricalInductanceVector;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable Double ElectricalInductanceMatrix, a matrix of values with a ElectricalInductanceUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vdouble.vector.ElectricalInductanceVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class ElectricalInductanceMatrix extends AbstractDoubleMatrixRel<ElectricalInductanceUnit, ElectricalInductance,
         ElectricalInductanceVector, ElectricalInductanceMatrix>
 
@@ -46,6 +47,27 @@ public class ElectricalInductanceMatrix extends AbstractDoubleMatrixRel<Electric
     public Class<ElectricalInductanceVector> getVectorClass()
     {
         return ElectricalInductanceVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalInductanceMatrix instantiateMatrix(final DoubleMatrixData dmd, final ElectricalInductanceUnit displayUnit)
+    {
+        return new ElectricalInductanceMatrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalInductanceVector instantiateVector(final DoubleVectorData dvd, final ElectricalInductanceUnit displayUnit)
+    {
+        return new ElectricalInductanceVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalInductance instantiateScalar(final double value, final ElectricalInductanceUnit unit)
+    {
+        return new ElectricalInductance(value, unit);
     }
 
 }

@@ -7,6 +7,7 @@ import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.RadioActivity;
 import org.djunits4.value.vdouble.vector.RadioActivityVector;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable Double RadioActivityMatrix, a matrix of values with a RadioActivityUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vdouble.vector.RadioActivityVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class RadioActivityMatrix
         extends AbstractDoubleMatrixRel<RadioActivityUnit, RadioActivity, RadioActivityVector, RadioActivityMatrix>
 
@@ -46,6 +47,27 @@ public class RadioActivityMatrix
     public Class<RadioActivityVector> getVectorClass()
     {
         return RadioActivityVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public RadioActivityMatrix instantiateMatrix(final DoubleMatrixData dmd, final RadioActivityUnit displayUnit)
+    {
+        return new RadioActivityMatrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public RadioActivityVector instantiateVector(final DoubleVectorData dvd, final RadioActivityUnit displayUnit)
+    {
+        return new RadioActivityVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public RadioActivity instantiateScalar(final double value, final RadioActivityUnit unit)
+    {
+        return new RadioActivity(value, unit);
     }
 
 }

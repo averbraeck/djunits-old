@@ -16,7 +16,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T08:19:03.301Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FrequencyVector extends AbstractDoubleVectorRel<FrequencyUnit, Frequency, FrequencyVector>
 
 {
@@ -25,12 +25,12 @@ public class FrequencyVector extends AbstractDoubleVectorRel<FrequencyUnit, Freq
 
     /**
      * Construct an FrequencyVector from an internal data object.
-     * @param data DoubleVectorData; an internal data object
-     * @param unit FrequencyUnit; the unit
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param displayUnit FrequencyUnit; the display unit of the vector data
      */
-    public FrequencyVector(final DoubleVectorData data, final FrequencyUnit unit)
+    public FrequencyVector(final DoubleVectorData data, final FrequencyUnit displayUnit)
     {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
@@ -38,6 +38,20 @@ public class FrequencyVector extends AbstractDoubleVectorRel<FrequencyUnit, Freq
     public Class<Frequency> getScalarClass()
     {
         return Frequency.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FrequencyVector instantiateVector(final DoubleVectorData dvd, final FrequencyUnit displayUnit)
+    {
+        return new FrequencyVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Frequency instantiateScalar(final double value, final FrequencyUnit unit)
+    {
+        return new Frequency(value, unit);
     }
 
 }

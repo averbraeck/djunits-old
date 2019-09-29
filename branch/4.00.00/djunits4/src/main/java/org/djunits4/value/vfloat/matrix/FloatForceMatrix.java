@@ -7,6 +7,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatForce;
 import org.djunits4.value.vfloat.vector.FloatForceVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatForceMatrix, a matrix of values with a ForceUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vfloat.vector.FloatForceVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatForceMatrix extends AbstractFloatMatrixRel<ForceUnit, FloatForce, FloatForceVector, FloatForceMatrix>
 
 {
@@ -45,6 +46,27 @@ public class FloatForceMatrix extends AbstractFloatMatrixRel<ForceUnit, FloatFor
     public Class<FloatForceVector> getVectorClass()
     {
         return FloatForceVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatForceMatrix instantiateMatrix(final FloatMatrixData fmd, final ForceUnit displayUnit)
+    {
+        return new FloatForceMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatForceVector instantiateVector(final FloatVectorData fvd, final ForceUnit displayUnit)
+    {
+        return new FloatForceVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatForce instantiateScalar(final float value, final ForceUnit unit)
+    {
+        return new FloatForce(value, unit);
     }
 
 }

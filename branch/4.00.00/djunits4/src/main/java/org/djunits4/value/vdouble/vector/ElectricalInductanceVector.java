@@ -16,7 +16,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T08:19:03.301Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class ElectricalInductanceVector
         extends AbstractDoubleVectorRel<ElectricalInductanceUnit, ElectricalInductance, ElectricalInductanceVector>
 
@@ -26,12 +26,12 @@ public class ElectricalInductanceVector
 
     /**
      * Construct an ElectricalInductanceVector from an internal data object.
-     * @param data DoubleVectorData; an internal data object
-     * @param unit ElectricalInductanceUnit; the unit
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param displayUnit ElectricalInductanceUnit; the display unit of the vector data
      */
-    public ElectricalInductanceVector(final DoubleVectorData data, final ElectricalInductanceUnit unit)
+    public ElectricalInductanceVector(final DoubleVectorData data, final ElectricalInductanceUnit displayUnit)
     {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
@@ -39,6 +39,20 @@ public class ElectricalInductanceVector
     public Class<ElectricalInductance> getScalarClass()
     {
         return ElectricalInductance.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalInductanceVector instantiateVector(final DoubleVectorData dvd, final ElectricalInductanceUnit displayUnit)
+    {
+        return new ElectricalInductanceVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalInductance instantiateScalar(final double value, final ElectricalInductanceUnit unit)
+    {
+        return new ElectricalInductance(value, unit);
     }
 
 }

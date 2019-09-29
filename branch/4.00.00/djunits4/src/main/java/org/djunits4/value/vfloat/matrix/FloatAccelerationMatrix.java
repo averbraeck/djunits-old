@@ -7,6 +7,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatAcceleration;
 import org.djunits4.value.vfloat.vector.FloatAccelerationVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatAccelerationMatrix, a matrix of values with a AccelerationUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vfloat.vector.FloatAccelerationVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatAccelerationMatrix
         extends AbstractFloatMatrixRel<AccelerationUnit, FloatAcceleration, FloatAccelerationVector, FloatAccelerationMatrix>
 
@@ -46,6 +47,27 @@ public class FloatAccelerationMatrix
     public Class<FloatAccelerationVector> getVectorClass()
     {
         return FloatAccelerationVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatAccelerationMatrix instantiateMatrix(final FloatMatrixData fmd, final AccelerationUnit displayUnit)
+    {
+        return new FloatAccelerationMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatAccelerationVector instantiateVector(final FloatVectorData fvd, final AccelerationUnit displayUnit)
+    {
+        return new FloatAccelerationVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatAcceleration instantiateScalar(final float value, final AccelerationUnit unit)
+    {
+        return new FloatAcceleration(value, unit);
     }
 
 }

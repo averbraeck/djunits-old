@@ -10,6 +10,7 @@ import org.djunits4.value.vdouble.scalar.Angle;
 import org.djunits4.value.vdouble.scalar.Direction;
 import org.djunits4.value.vdouble.vector.AngleVector;
 import org.djunits4.value.vdouble.vector.DirectionVector;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable Angle Matrix.
@@ -20,7 +21,7 @@ import org.djunits4.value.vdouble.vector.DirectionVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class AngleMatrix extends AbstractDoubleMatrixRelWithAbs<DirectionUnit, Direction, DirectionVector, DirectionMatrix,
         AngleUnit, Angle, AngleVector, AngleMatrix>
 {
@@ -48,6 +49,48 @@ public class AngleMatrix extends AbstractDoubleMatrixRelWithAbs<DirectionUnit, D
     public Class<AngleVector> getVectorClass()
     {
         return AngleVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public AngleMatrix instantiateMatrix(final DoubleMatrixData dmd, final AngleUnit displayUnit)
+    {
+        return new AngleMatrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public AngleVector instantiateVector(final DoubleVectorData dvd, final AngleUnit displayUnit)
+    {
+        return new AngleVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Angle instantiateScalar(final double value, final AngleUnit unit)
+    {
+        return new Angle(value, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public DirectionMatrix instantiateMatrixAbs(final DoubleMatrixData dmd, final DirectionUnit displayUnit)
+    {
+        return new DirectionMatrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public DirectionVector instantiateVectorAbs(final DoubleVectorData dvd, final DirectionUnit displayUnit)
+    {
+        return new DirectionVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Direction instantiateScalarAbs(final double value, final DirectionUnit unit)
+    {
+        return new Direction(value, unit);
     }
 
 }

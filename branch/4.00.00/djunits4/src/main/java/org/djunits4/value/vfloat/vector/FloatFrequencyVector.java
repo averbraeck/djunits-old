@@ -16,7 +16,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T16:38:21.610Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatFrequencyVector extends AbstractFloatVectorRel<FrequencyUnit, FloatFrequency, FloatFrequencyVector>
 
 {
@@ -38,6 +38,20 @@ public class FloatFrequencyVector extends AbstractFloatVectorRel<FrequencyUnit, 
     public Class<FloatFrequency> getScalarClass()
     {
         return FloatFrequency.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatFrequencyVector instantiateVector(final FloatVectorData fvd, final FrequencyUnit displayUnit)
+    {
+        return new FloatFrequencyVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatFrequency instantiateScalar(final float value, final FrequencyUnit unit)
+    {
+        return new FloatFrequency(value, unit);
     }
 
 }

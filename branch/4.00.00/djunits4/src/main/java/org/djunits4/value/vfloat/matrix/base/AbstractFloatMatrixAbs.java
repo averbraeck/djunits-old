@@ -11,6 +11,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarAbs;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
 import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorAbs;
 import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorRelWithAbs;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * AbstractMutableFloatMatrixRelWithAbs.java.
@@ -91,7 +92,8 @@ public abstract class AbstractFloatMatrixAbs<
     }
 
     /**
-     * Decrement all values of this matrix by the decrement on a value by value basis. This only works if this matrix is mutable.
+     * Decrement all values of this matrix by the decrement on a value by value basis. This only works if this matrix is
+     * mutable.
      * @param decrement RV; the matrix that contains the values by which to decrement the corresponding values
      * @return AV; this modified matrix
      * @throws ValueRuntimeException in case this matrix is immutable
@@ -104,5 +106,35 @@ public abstract class AbstractFloatMatrixAbs<
         this.data.decrementBy(decrement.getData());
         return (AM) this;
     }
+
+    /**
+     * Instantiate a new relative matrix of the class of this absolute matrix. This can be used instead of the
+     * FloatMatrix.instiantiate() methods in case another matrix of this absolute matrix class is known. The method is faster
+     * than FloatMatrix.instantiate, and it will also work if the matrix is user-defined.
+     * @param dmd FloatMatrixData; the data used to instantiate the matrix
+     * @param displayUnit RU; the display unit of the relative matrix
+     * @return RM; a relative matrix of the correct type, belonging to this absolute matrix type
+     */
+    public abstract RM instantiateMatrixRel(FloatMatrixData dmd, RU displayUnit);
+
+    /**
+     * Instantiate a new relative vector of the class of this absolute matrix. This can be used instead of the
+     * FloatVector.instiantiate() methods in case another matrix of this absolute matrix class is known. The method is faster
+     * than FloatVector.instantiate, and it will also work if the matrix or vector is user-defined.
+     * @param dvd FloatVectorData; the data used to instantiate the vector
+     * @param displayUnit RU; the display unit of the relative vector
+     * @return RV; a relative vector of the correct type, belonging to this absolute matrix type
+     */
+    public abstract RV instantiateVectorRel(FloatVectorData dvd, RU displayUnit);
+
+    /**
+     * Instantiate a new relative scalar for the class of this absolute matrix. This can be used instead of the
+     * FloatScalar.instiantiate() methods in case a matrix of this class is known. The method is faster than
+     * FloatScalar.instantiate, and it will also work if the matrix and/or scalar are user-defined.
+     * @param value float; the value of the relative scalar, expressed in the given unit
+     * @param unit RU; the unit in which the relative value is expressed
+     * @return R; a relative scalar of the correct type, belonging to this absolute matrix type
+     */
+    public abstract R instantiateScalarRel(float value, RU unit);
 
 }

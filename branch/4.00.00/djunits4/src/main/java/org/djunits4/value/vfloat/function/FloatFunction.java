@@ -17,4 +17,3 @@ public interface FloatFunction
      */
     float apply(float value);
 }
-

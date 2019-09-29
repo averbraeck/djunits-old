@@ -7,6 +7,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatVolume;
 import org.djunits4.value.vfloat.vector.FloatVolumeVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatVolumeMatrix, a matrix of values with a VolumeUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vfloat.vector.FloatVolumeVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatVolumeMatrix extends AbstractFloatMatrixRel<VolumeUnit, FloatVolume, FloatVolumeVector, FloatVolumeMatrix>
 
 {
@@ -45,6 +46,27 @@ public class FloatVolumeMatrix extends AbstractFloatMatrixRel<VolumeUnit, FloatV
     public Class<FloatVolumeVector> getVectorClass()
     {
         return FloatVolumeVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatVolumeMatrix instantiateMatrix(final FloatMatrixData fmd, final VolumeUnit displayUnit)
+    {
+        return new FloatVolumeMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatVolumeVector instantiateVector(final FloatVectorData fvd, final VolumeUnit displayUnit)
+    {
+        return new FloatVolumeVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatVolume instantiateScalar(final float value, final VolumeUnit unit)
+    {
+        return new FloatVolume(value, unit);
     }
 
 }

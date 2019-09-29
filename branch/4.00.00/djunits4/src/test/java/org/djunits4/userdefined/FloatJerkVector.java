@@ -21,11 +21,11 @@ public class FloatJerkVector extends AbstractFloatVectorRel<JerkUnit, FloatJerk,
     /**
      * Construct an JerkVector from an internal data object.
      * @param data FloatVectorData; an internal data object
-     * @param unit JerkUnit; the unit
+     * @param displayUnit JerkUnit; the unit in which the data will be displayed
      */
-    public FloatJerkVector(final FloatVectorData data, final JerkUnit unit)
+    public FloatJerkVector(final FloatVectorData data, final JerkUnit displayUnit)
     {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
@@ -33,6 +33,20 @@ public class FloatJerkVector extends AbstractFloatVectorRel<JerkUnit, FloatJerk,
     public Class<FloatJerk> getScalarClass()
     {
         return FloatJerk.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatJerkVector instantiateVector(final FloatVectorData fvd, final JerkUnit displayUnit)
+    {
+        return new FloatJerkVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatJerk instantiateScalar(final float value, final JerkUnit unit)
+    {
+        return new FloatJerk(value, unit);
     }
 
 }

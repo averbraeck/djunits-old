@@ -2,6 +2,7 @@ package org.djunits4.userdefined;
 
 import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable Float JerkMatrix, a matrix of values with a JerkUnit.
@@ -20,11 +21,11 @@ public class FloatJerkMatrix extends AbstractFloatMatrixRel<JerkUnit, FloatJerk,
 
     /**
      * @param data FloatMatrixData; an internal data object
-     * @param unit JerkUnit; the unit
+     * @param displayUnit JerkUnit; the unit in which the data will be displayed
      */
-    public FloatJerkMatrix(final FloatMatrixData data, final JerkUnit unit)
+    public FloatJerkMatrix(final FloatMatrixData data, final JerkUnit displayUnit)
     {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
@@ -39,6 +40,27 @@ public class FloatJerkMatrix extends AbstractFloatMatrixRel<JerkUnit, FloatJerk,
     public Class<FloatJerkVector> getVectorClass()
     {
         return FloatJerkVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatJerkMatrix instantiateMatrix(final FloatMatrixData fmd, final JerkUnit displayUnit)
+    {
+        return new FloatJerkMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatJerkVector instantiateVector(final FloatVectorData fvd, final JerkUnit displayUnit)
+    {
+        return new FloatJerkVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatJerk instantiateScalar(final float value, final JerkUnit unit)
+    {
+        return new FloatJerk(value, unit);
     }
 
 }

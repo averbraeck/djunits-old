@@ -7,6 +7,7 @@ import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.ElectricalCapacitance;
 import org.djunits4.value.vdouble.vector.ElectricalCapacitanceVector;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable Double ElectricalCapacitanceMatrix, a matrix of values with a ElectricalCapacitanceUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vdouble.vector.ElectricalCapacitanceVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class ElectricalCapacitanceMatrix extends AbstractDoubleMatrixRel<ElectricalCapacitanceUnit, ElectricalCapacitance,
         ElectricalCapacitanceVector, ElectricalCapacitanceMatrix>
 
@@ -46,6 +47,29 @@ public class ElectricalCapacitanceMatrix extends AbstractDoubleMatrixRel<Electri
     public Class<ElectricalCapacitanceVector> getVectorClass()
     {
         return ElectricalCapacitanceVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalCapacitanceMatrix instantiateMatrix(final DoubleMatrixData dmd,
+            final ElectricalCapacitanceUnit displayUnit)
+    {
+        return new ElectricalCapacitanceMatrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalCapacitanceVector instantiateVector(final DoubleVectorData dvd,
+            final ElectricalCapacitanceUnit displayUnit)
+    {
+        return new ElectricalCapacitanceVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalCapacitance instantiateScalar(final double value, final ElectricalCapacitanceUnit unit)
+    {
+        return new ElectricalCapacitance(value, unit);
     }
 
 }

@@ -217,8 +217,8 @@ public abstract class DoubleScalar
      */
     public static SIScalar multiply(final AbstractDoubleScalarRel<?, ?> left, final AbstractDoubleScalarRel<?, ?> right)
     {
-        SIUnit targetUnit = Unit.lookupOrCreateUnitWithSIDimensions(
-                left.getDisplayUnit().getUnitBase().getSiDimensions().plus(right.getDisplayUnit().getUnitBase().getSiDimensions()));
+        SIUnit targetUnit = Unit.lookupOrCreateUnitWithSIDimensions(left.getDisplayUnit().getUnitBase().getSiDimensions()
+                .plus(right.getDisplayUnit().getUnitBase().getSiDimensions()));
         return new SIScalar(left.getSI() * right.getSI(), targetUnit);
     }
 
@@ -230,8 +230,8 @@ public abstract class DoubleScalar
      */
     public static SIScalar divide(final AbstractDoubleScalarRel<?, ?> left, final AbstractDoubleScalarRel<?, ?> right)
     {
-        SIUnit targetUnit = Unit.lookupOrCreateUnitWithSIDimensions(
-                left.getDisplayUnit().getUnitBase().getSiDimensions().minus(right.getDisplayUnit().getUnitBase().getSiDimensions()));
+        SIUnit targetUnit = Unit.lookupOrCreateUnitWithSIDimensions(left.getDisplayUnit().getUnitBase().getSiDimensions()
+                .minus(right.getDisplayUnit().getUnitBase().getSiDimensions()));
         return new SIScalar(left.getSI() / right.getSI(), targetUnit);
     }
 
@@ -247,7 +247,8 @@ public abstract class DoubleScalar
     public static <U extends Unit<U>, R extends AbstractDoubleScalarRel<U, R>> R interpolate(final R zero, final R one,
             final double ratio)
     {
-        return zero.instantiateRel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return zero.instantiateRel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**
@@ -265,7 +266,8 @@ public abstract class DoubleScalar
             R extends AbstractDoubleScalarRelWithAbs<AU, A, RU, R>,
             A extends AbstractDoubleScalarAbs<AU, A, RU, R>> A interpolate(final A zero, final A one, final double ratio)
     {
-        return zero.instantiateAbs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return zero.instantiateAbs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**

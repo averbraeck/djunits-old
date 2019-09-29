@@ -16,7 +16,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T08:19:03.301Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class TorqueVector extends AbstractDoubleVectorRel<TorqueUnit, Torque, TorqueVector>
 
 {
@@ -25,12 +25,12 @@ public class TorqueVector extends AbstractDoubleVectorRel<TorqueUnit, Torque, To
 
     /**
      * Construct an TorqueVector from an internal data object.
-     * @param data DoubleVectorData; an internal data object
-     * @param unit TorqueUnit; the unit
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param displayUnit TorqueUnit; the display unit of the vector data
      */
-    public TorqueVector(final DoubleVectorData data, final TorqueUnit unit)
+    public TorqueVector(final DoubleVectorData data, final TorqueUnit displayUnit)
     {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
@@ -38,6 +38,20 @@ public class TorqueVector extends AbstractDoubleVectorRel<TorqueUnit, Torque, To
     public Class<Torque> getScalarClass()
     {
         return Torque.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public TorqueVector instantiateVector(final DoubleVectorData dvd, final TorqueUnit displayUnit)
+    {
+        return new TorqueVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Torque instantiateScalar(final double value, final TorqueUnit unit)
+    {
+        return new Torque(value, unit);
     }
 
 }

@@ -18,7 +18,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T08:19:03.301Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class AngleVector
         extends AbstractDoubleVectorRelWithAbs<DirectionUnit, Direction, DirectionVector, AngleUnit, Angle, AngleVector>
 {
@@ -27,12 +27,12 @@ public class AngleVector
 
     /**
      * Construct an AngleVector from an internal data object.
-     * @param data DoubleVectorData; an internal data object
-     * @param unit %Type%Unit; the unit
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param displayUnit AngleUnit; the display unit of the vector data
      */
-    public AngleVector(final DoubleVectorData data, final AngleUnit unit)
+    public AngleVector(final DoubleVectorData data, final AngleUnit displayUnit)
     {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
@@ -40,6 +40,34 @@ public class AngleVector
     public Class<Angle> getScalarClass()
     {
         return Angle.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public AngleVector instantiateVector(final DoubleVectorData dvd, final AngleUnit displayUnit)
+    {
+        return new AngleVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Angle instantiateScalar(final double value, final AngleUnit unit)
+    {
+        return new Angle(value, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public DirectionVector instantiateVectorAbs(final DoubleVectorData dvd, final DirectionUnit displayUnit)
+    {
+        return new DirectionVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Direction instantiateScalarAbs(final double value, final DirectionUnit unit)
+    {
+        return new Direction(value, unit);
     }
 
 }

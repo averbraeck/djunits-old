@@ -7,6 +7,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatEquivalentDose;
 import org.djunits4.value.vfloat.vector.FloatEquivalentDoseVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatEquivalentDoseMatrix, a matrix of values with a EquivalentDoseUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vfloat.vector.FloatEquivalentDoseVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatEquivalentDoseMatrix extends
         AbstractFloatMatrixRel<EquivalentDoseUnit, FloatEquivalentDose, FloatEquivalentDoseVector, FloatEquivalentDoseMatrix>
 
@@ -46,6 +47,27 @@ public class FloatEquivalentDoseMatrix extends
     public Class<FloatEquivalentDoseVector> getVectorClass()
     {
         return FloatEquivalentDoseVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatEquivalentDoseMatrix instantiateMatrix(final FloatMatrixData fmd, final EquivalentDoseUnit displayUnit)
+    {
+        return new FloatEquivalentDoseMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatEquivalentDoseVector instantiateVector(final FloatVectorData fvd, final EquivalentDoseUnit displayUnit)
+    {
+        return new FloatEquivalentDoseVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatEquivalentDose instantiateScalar(final float value, final EquivalentDoseUnit unit)
+    {
+        return new FloatEquivalentDose(value, unit);
     }
 
 }

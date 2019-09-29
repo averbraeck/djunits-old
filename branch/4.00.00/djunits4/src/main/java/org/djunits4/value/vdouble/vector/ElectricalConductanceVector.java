@@ -16,7 +16,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T08:19:03.301Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class ElectricalConductanceVector
         extends AbstractDoubleVectorRel<ElectricalConductanceUnit, ElectricalConductance, ElectricalConductanceVector>
 
@@ -26,12 +26,12 @@ public class ElectricalConductanceVector
 
     /**
      * Construct an ElectricalConductanceVector from an internal data object.
-     * @param data DoubleVectorData; an internal data object
-     * @param unit ElectricalConductanceUnit; the unit
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param displayUnit ElectricalConductanceUnit; the display unit of the vector data
      */
-    public ElectricalConductanceVector(final DoubleVectorData data, final ElectricalConductanceUnit unit)
+    public ElectricalConductanceVector(final DoubleVectorData data, final ElectricalConductanceUnit displayUnit)
     {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
@@ -39,6 +39,21 @@ public class ElectricalConductanceVector
     public Class<ElectricalConductance> getScalarClass()
     {
         return ElectricalConductance.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalConductanceVector instantiateVector(final DoubleVectorData dvd,
+            final ElectricalConductanceUnit displayUnit)
+    {
+        return new ElectricalConductanceVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalConductance instantiateScalar(final double value, final ElectricalConductanceUnit unit)
+    {
+        return new ElectricalConductance(value, unit);
     }
 
 }

@@ -16,7 +16,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T16:38:21.610Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatElectricalInductanceVector
         extends AbstractFloatVectorRel<ElectricalInductanceUnit, FloatElectricalInductance, FloatElectricalInductanceVector>
 
@@ -39,6 +39,21 @@ public class FloatElectricalInductanceVector
     public Class<FloatElectricalInductance> getScalarClass()
     {
         return FloatElectricalInductance.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatElectricalInductanceVector instantiateVector(final FloatVectorData fvd,
+            final ElectricalInductanceUnit displayUnit)
+    {
+        return new FloatElectricalInductanceVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatElectricalInductance instantiateScalar(final float value, final ElectricalInductanceUnit unit)
+    {
+        return new FloatElectricalInductance(value, unit);
     }
 
 }

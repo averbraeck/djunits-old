@@ -18,7 +18,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T08:19:03.301Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class DurationVector
         extends AbstractDoubleVectorRelWithAbs<TimeUnit, Time, TimeVector, DurationUnit, Duration, DurationVector>
 {
@@ -27,12 +27,12 @@ public class DurationVector
 
     /**
      * Construct an DurationVector from an internal data object.
-     * @param data DoubleVectorData; an internal data object
-     * @param unit %Type%Unit; the unit
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param displayUnit DurationUnit; the display unit of the vector data
      */
-    public DurationVector(final DoubleVectorData data, final DurationUnit unit)
+    public DurationVector(final DoubleVectorData data, final DurationUnit displayUnit)
     {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
@@ -40,6 +40,34 @@ public class DurationVector
     public Class<Duration> getScalarClass()
     {
         return Duration.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public DurationVector instantiateVector(final DoubleVectorData dvd, final DurationUnit displayUnit)
+    {
+        return new DurationVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Duration instantiateScalar(final double value, final DurationUnit unit)
+    {
+        return new Duration(value, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public TimeVector instantiateVectorAbs(final DoubleVectorData dvd, final TimeUnit displayUnit)
+    {
+        return new TimeVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Time instantiateScalarAbs(final double value, final TimeUnit unit)
+    {
+        return new Time(value, unit);
     }
 
 }

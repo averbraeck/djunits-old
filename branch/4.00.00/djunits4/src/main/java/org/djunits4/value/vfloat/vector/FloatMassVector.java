@@ -16,7 +16,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T16:38:21.610Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatMassVector extends AbstractFloatVectorRel<MassUnit, FloatMass, FloatMassVector>
 
 {
@@ -38,6 +38,20 @@ public class FloatMassVector extends AbstractFloatVectorRel<MassUnit, FloatMass,
     public Class<FloatMass> getScalarClass()
     {
         return FloatMass.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatMassVector instantiateVector(final FloatVectorData fvd, final MassUnit displayUnit)
+    {
+        return new FloatMassVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatMass instantiateScalar(final float value, final MassUnit unit)
+    {
+        return new FloatMass(value, unit);
     }
 
 }

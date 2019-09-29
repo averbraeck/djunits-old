@@ -16,7 +16,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T16:38:21.610Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatCatalyticActivityVector
         extends AbstractFloatVectorRel<CatalyticActivityUnit, FloatCatalyticActivity, FloatCatalyticActivityVector>
 
@@ -39,6 +39,20 @@ public class FloatCatalyticActivityVector
     public Class<FloatCatalyticActivity> getScalarClass()
     {
         return FloatCatalyticActivity.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatCatalyticActivityVector instantiateVector(final FloatVectorData fvd, final CatalyticActivityUnit displayUnit)
+    {
+        return new FloatCatalyticActivityVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatCatalyticActivity instantiateScalar(final float value, final CatalyticActivityUnit unit)
+    {
+        return new FloatCatalyticActivity(value, unit);
     }
 
 }

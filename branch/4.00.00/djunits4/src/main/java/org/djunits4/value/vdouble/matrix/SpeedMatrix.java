@@ -7,6 +7,7 @@ import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.Speed;
 import org.djunits4.value.vdouble.vector.SpeedVector;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable Double SpeedMatrix, a matrix of values with a SpeedUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vdouble.vector.SpeedVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class SpeedMatrix extends AbstractDoubleMatrixRel<SpeedUnit, Speed, SpeedVector, SpeedMatrix>
 
 {
@@ -45,6 +46,27 @@ public class SpeedMatrix extends AbstractDoubleMatrixRel<SpeedUnit, Speed, Speed
     public Class<SpeedVector> getVectorClass()
     {
         return SpeedVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SpeedMatrix instantiateMatrix(final DoubleMatrixData dmd, final SpeedUnit displayUnit)
+    {
+        return new SpeedMatrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SpeedVector instantiateVector(final DoubleVectorData dvd, final SpeedUnit displayUnit)
+    {
+        return new SpeedVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Speed instantiateScalar(final double value, final SpeedUnit unit)
+    {
+        return new Speed(value, unit);
     }
 
 }

@@ -7,6 +7,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatElectricalCharge;
 import org.djunits4.value.vfloat.vector.FloatElectricalChargeVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatElectricalChargeMatrix, a matrix of values with a ElectricalChargeUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vfloat.vector.FloatElectricalChargeVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatElectricalChargeMatrix extends AbstractFloatMatrixRel<ElectricalChargeUnit, FloatElectricalCharge,
         FloatElectricalChargeVector, FloatElectricalChargeMatrix>
 
@@ -46,6 +47,27 @@ public class FloatElectricalChargeMatrix extends AbstractFloatMatrixRel<Electric
     public Class<FloatElectricalChargeVector> getVectorClass()
     {
         return FloatElectricalChargeVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatElectricalChargeMatrix instantiateMatrix(final FloatMatrixData fmd, final ElectricalChargeUnit displayUnit)
+    {
+        return new FloatElectricalChargeMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatElectricalChargeVector instantiateVector(final FloatVectorData fvd, final ElectricalChargeUnit displayUnit)
+    {
+        return new FloatElectricalChargeVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatElectricalCharge instantiateScalar(final float value, final ElectricalChargeUnit unit)
+    {
+        return new FloatElectricalCharge(value, unit);
     }
 
 }

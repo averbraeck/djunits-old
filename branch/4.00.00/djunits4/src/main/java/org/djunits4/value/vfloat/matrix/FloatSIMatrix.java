@@ -54,6 +54,7 @@ import org.djunits4.value.vfloat.scalar.FloatSIScalar;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
 import org.djunits4.value.vfloat.vector.FloatSIVector;
 import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorRel;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Easy access methods for the generic Relative SI FloatMatrix.
@@ -65,7 +66,7 @@ import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar, FloatSIVector, FloatSIMatrix>
 {
     /** */
@@ -136,6 +137,27 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
             throw new IllegalArgumentException("Error parsing SIUnit from " + unitString, exception);
         }
         throw new IllegalArgumentException("Error parsing FloatSIMatrix with unit " + unitString);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatSIMatrix instantiateMatrix(final FloatMatrixData fmd, final SIUnit unit)
+    {
+        return new FloatSIMatrix(fmd, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatSIVector instantiateVector(final FloatVectorData fvd, final SIUnit unit)
+    {
+        return new FloatSIVector(fvd, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatSIScalar instantiateScalar(final float value, final SIUnit unit)
+    {
+        return new FloatSIScalar(value, unit);
     }
 
     /**********************************************************************************/

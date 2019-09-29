@@ -61,7 +61,7 @@ import org.djunits4.value.vdouble.scalar.base.DoubleScalar;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T08:03:09.298Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 {
     /** */
@@ -113,7 +113,8 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public static SIScalar interpolate(final SIScalar zero, final SIScalar one, final double ratio)
     {
-        return new SIScalar(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return new SIScalar(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**
@@ -256,8 +257,8 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
     public final <KU extends Unit<KU>, K extends AbstractDoubleScalarRel<KU, K>> K as(final KU displayUnit)
     {
         Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(displayUnit.getUnitBase().getSiDimensions())),
-                UnitRuntimeException.class, "SIScalar with unit %s cannot be converted to a scalar with unit %s", getDisplayUnit(),
-                displayUnit);
+                UnitRuntimeException.class, "SIScalar with unit %s cannot be converted to a scalar with unit %s",
+                getDisplayUnit(), displayUnit);
         K result = DoubleScalar.instantiate(this.si, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
         return result;

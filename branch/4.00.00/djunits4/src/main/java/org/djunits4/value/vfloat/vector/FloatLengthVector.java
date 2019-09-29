@@ -18,7 +18,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T16:38:21.610Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatLengthVector extends AbstractFloatVectorRelWithAbs<PositionUnit, FloatPosition, FloatPositionVector,
         LengthUnit, FloatLength, FloatLengthVector>
 {
@@ -40,6 +40,34 @@ public class FloatLengthVector extends AbstractFloatVectorRelWithAbs<PositionUni
     public Class<FloatLength> getScalarClass()
     {
         return FloatLength.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatLengthVector instantiateVector(final FloatVectorData fvd, final LengthUnit displayUnit)
+    {
+        return new FloatLengthVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatLength instantiateScalar(final float value, final LengthUnit unit)
+    {
+        return new FloatLength(value, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatPositionVector instantiateVectorAbs(final FloatVectorData fvd, final PositionUnit displayUnit)
+    {
+        return new FloatPositionVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatPosition instantiateScalarAbs(final float value, final PositionUnit unit)
+    {
+        return new FloatPosition(value, unit);
     }
 
 }

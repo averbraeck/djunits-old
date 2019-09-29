@@ -7,6 +7,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatPower;
 import org.djunits4.value.vfloat.vector.FloatPowerVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatPowerMatrix, a matrix of values with a PowerUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vfloat.vector.FloatPowerVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatPowerMatrix extends AbstractFloatMatrixRel<PowerUnit, FloatPower, FloatPowerVector, FloatPowerMatrix>
 
 {
@@ -45,6 +46,27 @@ public class FloatPowerMatrix extends AbstractFloatMatrixRel<PowerUnit, FloatPow
     public Class<FloatPowerVector> getVectorClass()
     {
         return FloatPowerVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatPowerMatrix instantiateMatrix(final FloatMatrixData fmd, final PowerUnit displayUnit)
+    {
+        return new FloatPowerMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatPowerVector instantiateVector(final FloatVectorData fvd, final PowerUnit displayUnit)
+    {
+        return new FloatPowerVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatPower instantiateScalar(final float value, final PowerUnit unit)
+    {
+        return new FloatPower(value, unit);
     }
 
 }

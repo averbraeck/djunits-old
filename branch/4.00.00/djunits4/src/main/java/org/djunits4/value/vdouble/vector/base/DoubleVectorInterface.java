@@ -5,6 +5,7 @@ import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.base.Vector;
 import org.djunits4.value.vdouble.function.DoubleFunction;
 import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Interface for the DoubleVector classes, specifically defining the methods that deal with double values.
@@ -64,7 +65,7 @@ public interface DoubleVectorInterface<U extends Unit<U>, S extends DoubleScalar
      * @return double[]; the values converted into the specified unit
      */
     double[] getValuesInUnit(U targetUnit);
-    
+
     /**
      * Set the value, specified in the standard SI unit, at the specified position.
      * @param index int; the index of the value to set
@@ -105,4 +106,23 @@ public interface DoubleVectorInterface<U extends Unit<U>, S extends DoubleScalar
      */
     V assign(final DoubleFunction doubleFunction);
 
+    /**
+     * Instantiate a new vector of the class of this vector. This can be used instead of the DoubleVector.instiantiate() methods
+     * in case another vector of this class is known. The method is faster than DoubleVector.instantiate, and it will also work
+     * if the vector is user-defined.
+     * @param dvd DoubleVectorData; the data used to instantiate the vector
+     * @param displayUnit U; the display unit of the vector
+     * @return V; a vector of the correct type
+     */
+    V instantiateVector(DoubleVectorData dvd, U displayUnit);
+
+    /**
+     * Instantiate a new scalar for the class of this vector. This can be used instead of the DoubleScalar.instiantiate()
+     * methods in case a vector of this class is known. The method is faster than DoubleScalar.instantiate, and it will also
+     * work if the vector and/or scalar are user-defined.
+     * @param value double; the value of the scalar, expressed in the given unit
+     * @param unit U; the unit in which the value is expressed
+     * @return S; a scalar of the correct type, belonging to the vector type
+     */
+    S instantiateScalar(double value, U unit);
 }

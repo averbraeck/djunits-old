@@ -66,13 +66,13 @@ public interface IndexedValue<U extends Unit<U>, S extends Scalar<U, S>, T exten
      * @return T; the internal storage with a cleared immutable flag
      */
     T mutable();
-    
+
     /**
      * Count the number of cells that have a non-zero SI value.
      * @return int; the number of cells having non-zero SI value
      */
     int cardinality();
-    
+
     /**
      * Return the class of the corresponding scalar.
      * @return Class&lt;S&gt;; the class of the corresponding scalar

@@ -7,6 +7,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatPressure;
 import org.djunits4.value.vfloat.vector.FloatPressureVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatPressureMatrix, a matrix of values with a PressureUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vfloat.vector.FloatPressureVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatPressureMatrix
         extends AbstractFloatMatrixRel<PressureUnit, FloatPressure, FloatPressureVector, FloatPressureMatrix>
 
@@ -46,6 +47,27 @@ public class FloatPressureMatrix
     public Class<FloatPressureVector> getVectorClass()
     {
         return FloatPressureVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatPressureMatrix instantiateMatrix(final FloatMatrixData fmd, final PressureUnit displayUnit)
+    {
+        return new FloatPressureMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatPressureVector instantiateVector(final FloatVectorData fvd, final PressureUnit displayUnit)
+    {
+        return new FloatPressureVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatPressure instantiateScalar(final float value, final PressureUnit unit)
+    {
+        return new FloatPressure(value, unit);
     }
 
 }

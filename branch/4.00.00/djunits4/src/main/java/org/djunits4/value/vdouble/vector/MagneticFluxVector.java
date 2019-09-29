@@ -16,7 +16,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T08:19:03.301Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class MagneticFluxVector extends AbstractDoubleVectorRel<MagneticFluxUnit, MagneticFlux, MagneticFluxVector>
 
 {
@@ -25,12 +25,12 @@ public class MagneticFluxVector extends AbstractDoubleVectorRel<MagneticFluxUnit
 
     /**
      * Construct an MagneticFluxVector from an internal data object.
-     * @param data DoubleVectorData; an internal data object
-     * @param unit MagneticFluxUnit; the unit
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param displayUnit MagneticFluxUnit; the display unit of the vector data
      */
-    public MagneticFluxVector(final DoubleVectorData data, final MagneticFluxUnit unit)
+    public MagneticFluxVector(final DoubleVectorData data, final MagneticFluxUnit displayUnit)
     {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
@@ -38,6 +38,20 @@ public class MagneticFluxVector extends AbstractDoubleVectorRel<MagneticFluxUnit
     public Class<MagneticFlux> getScalarClass()
     {
         return MagneticFlux.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public MagneticFluxVector instantiateVector(final DoubleVectorData dvd, final MagneticFluxUnit displayUnit)
+    {
+        return new MagneticFluxVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public MagneticFlux instantiateScalar(final double value, final MagneticFluxUnit unit)
+    {
+        return new MagneticFlux(value, unit);
     }
 
 }

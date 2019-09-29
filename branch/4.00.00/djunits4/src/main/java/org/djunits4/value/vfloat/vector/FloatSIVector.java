@@ -66,7 +66,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T16:38:21.610Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar, FloatSIVector>
 {
     /** */
@@ -103,16 +103,16 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
     /**
      * Construct a new Relative Float SIVector.
      * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Float SIVector
-     * @param length int; the size of the vector
      * @param unit SIUnit; the unit of the new Relative Sparse Float SIVector
+     * @param length int; the size of the vector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @return SIVector; the SIVector of the given unit
      * @throws ValueRuntimeException when values is null
      */
-    public static FloatSIVector create(final SortedMap<Integer, Float> values, final int length, final SIUnit unit,
+    public static FloatSIVector create(final SortedMap<Integer, Float> values, final SIUnit unit, final int length,
             final StorageType storageType) throws ValueRuntimeException
     {
-        return FloatVector.instantiate(values, length, unit, storageType);
+        return new FloatSIVector(FloatVectorData.instantiate(values, length, unit.getScale(), storageType), unit);
     }
 
     /**
@@ -213,7 +213,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
             SIUnit unit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(unitString));
             if (unit != null)
             {
-                return FloatSIVector.create(valueMap, length, unit, storageType);
+                return FloatSIVector.create(valueMap, unit, length, storageType);
             }
         }
         catch (Exception exception)
@@ -221,6 +221,20 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
             throw new IllegalArgumentException("Error parsing SIUnit from " + unitString, exception);
         }
         throw new IllegalArgumentException("Error parsing SIVector with unit " + unitString);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatSIVector instantiateVector(final FloatVectorData fvd, final SIUnit unit)
+    {
+        return new FloatSIVector(fvd, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatSIScalar instantiateScalar(final float value, final SIUnit unit)
+    {
+        return new FloatSIScalar(value, unit);
     }
 
     /**********************************************************************************/

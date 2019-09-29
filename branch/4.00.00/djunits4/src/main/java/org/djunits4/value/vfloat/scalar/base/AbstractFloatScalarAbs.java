@@ -101,7 +101,8 @@ public abstract class AbstractFloatScalarAbs<AU extends AbsoluteLinearUnit<AU, R
     public static <AU extends AbsoluteLinearUnit<AU, RU>, A extends AbstractFloatScalarAbs<AU, A, RU, R>, RU extends Unit<RU>,
             R extends AbstractFloatScalarRelWithAbs<AU, A, RU, R>> A interpolate(final A zero, final A one, final float ratio)
     {
-        return zero.instantiateAbs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return zero.instantiateAbs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**********************************************************************************/

@@ -21,11 +21,11 @@ public class JerkVector extends AbstractDoubleVectorRel<JerkUnit, Jerk, JerkVect
     /**
      * Construct an JerkVector from an internal data object.
      * @param data DoubleVectorData; an internal data object
-     * @param unit JerkUnit; the unit
+     * @param displayUnit JerkUnit; the unit in which the data will be displayed
      */
-    public JerkVector(final DoubleVectorData data, final JerkUnit unit)
+    public JerkVector(final DoubleVectorData data, final JerkUnit displayUnit)
     {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
@@ -33,6 +33,20 @@ public class JerkVector extends AbstractDoubleVectorRel<JerkUnit, Jerk, JerkVect
     public Class<Jerk> getScalarClass()
     {
         return Jerk.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public JerkVector instantiateVector(final DoubleVectorData dvd, final JerkUnit displayUnit)
+    {
+        return new JerkVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Jerk instantiateScalar(final double value, final JerkUnit unit)
+    {
+        return new Jerk(value, unit);
     }
 
 }

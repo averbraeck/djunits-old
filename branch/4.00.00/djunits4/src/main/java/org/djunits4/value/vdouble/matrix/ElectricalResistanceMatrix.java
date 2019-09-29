@@ -7,6 +7,7 @@ import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.ElectricalResistance;
 import org.djunits4.value.vdouble.vector.ElectricalResistanceVector;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable Double ElectricalResistanceMatrix, a matrix of values with a ElectricalResistanceUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vdouble.vector.ElectricalResistanceVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class ElectricalResistanceMatrix extends AbstractDoubleMatrixRel<ElectricalResistanceUnit, ElectricalResistance,
         ElectricalResistanceVector, ElectricalResistanceMatrix>
 
@@ -46,6 +47,27 @@ public class ElectricalResistanceMatrix extends AbstractDoubleMatrixRel<Electric
     public Class<ElectricalResistanceVector> getVectorClass()
     {
         return ElectricalResistanceVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalResistanceMatrix instantiateMatrix(final DoubleMatrixData dmd, final ElectricalResistanceUnit displayUnit)
+    {
+        return new ElectricalResistanceMatrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalResistanceVector instantiateVector(final DoubleVectorData dvd, final ElectricalResistanceUnit displayUnit)
+    {
+        return new ElectricalResistanceVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalResistance instantiateScalar(final double value, final ElectricalResistanceUnit unit)
+    {
+        return new ElectricalResistance(value, unit);
     }
 
 }

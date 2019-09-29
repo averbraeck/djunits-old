@@ -10,6 +10,7 @@ import org.djunits4.value.vfloat.scalar.FloatAbsoluteTemperature;
 import org.djunits4.value.vfloat.scalar.FloatTemperature;
 import org.djunits4.value.vfloat.vector.FloatAbsoluteTemperatureVector;
 import org.djunits4.value.vfloat.vector.FloatTemperatureVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatAbsoluteTemperature Matrix.
@@ -20,7 +21,7 @@ import org.djunits4.value.vfloat.vector.FloatTemperatureVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatAbsoluteTemperatureMatrix extends
         AbstractFloatMatrixAbs<AbsoluteTemperatureUnit, FloatAbsoluteTemperature, FloatAbsoluteTemperatureVector,
                 FloatAbsoluteTemperatureMatrix, TemperatureUnit, FloatTemperature, FloatTemperatureVector,
@@ -50,6 +51,50 @@ public class FloatAbsoluteTemperatureMatrix extends
     public Class<FloatAbsoluteTemperatureVector> getVectorClass()
     {
         return FloatAbsoluteTemperatureVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatAbsoluteTemperatureMatrix instantiateMatrix(final FloatMatrixData fmd,
+            final AbsoluteTemperatureUnit displayUnit)
+    {
+        return new FloatAbsoluteTemperatureMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatAbsoluteTemperatureVector instantiateVector(final FloatVectorData fvd,
+            final AbsoluteTemperatureUnit displayUnit)
+    {
+        return new FloatAbsoluteTemperatureVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatAbsoluteTemperature instantiateScalar(final float value, final AbsoluteTemperatureUnit unit)
+    {
+        return new FloatAbsoluteTemperature(value, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatTemperatureMatrix instantiateMatrixRel(final FloatMatrixData fmd, final TemperatureUnit displayUnit)
+    {
+        return new FloatTemperatureMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatTemperatureVector instantiateVectorRel(final FloatVectorData fvd, final TemperatureUnit displayUnit)
+    {
+        return new FloatTemperatureVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatTemperature instantiateScalarRel(final float value, final TemperatureUnit unit)
+    {
+        return new FloatTemperature(value, unit);
     }
 
 }

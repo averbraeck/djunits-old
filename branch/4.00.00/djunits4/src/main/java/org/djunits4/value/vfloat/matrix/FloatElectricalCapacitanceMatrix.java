@@ -7,6 +7,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatElectricalCapacitance;
 import org.djunits4.value.vfloat.vector.FloatElectricalCapacitanceVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatElectricalCapacitanceMatrix, a matrix of values with a ElectricalCapacitanceUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vfloat.vector.FloatElectricalCapacitanceVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatElectricalCapacitanceMatrix extends AbstractFloatMatrixRel<ElectricalCapacitanceUnit,
         FloatElectricalCapacitance, FloatElectricalCapacitanceVector, FloatElectricalCapacitanceMatrix>
 
@@ -46,6 +47,29 @@ public class FloatElectricalCapacitanceMatrix extends AbstractFloatMatrixRel<Ele
     public Class<FloatElectricalCapacitanceVector> getVectorClass()
     {
         return FloatElectricalCapacitanceVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatElectricalCapacitanceMatrix instantiateMatrix(final FloatMatrixData fmd,
+            final ElectricalCapacitanceUnit displayUnit)
+    {
+        return new FloatElectricalCapacitanceMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatElectricalCapacitanceVector instantiateVector(final FloatVectorData fvd,
+            final ElectricalCapacitanceUnit displayUnit)
+    {
+        return new FloatElectricalCapacitanceVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatElectricalCapacitance instantiateScalar(final float value, final ElectricalCapacitanceUnit unit)
+    {
+        return new FloatElectricalCapacitance(value, unit);
     }
 
 }

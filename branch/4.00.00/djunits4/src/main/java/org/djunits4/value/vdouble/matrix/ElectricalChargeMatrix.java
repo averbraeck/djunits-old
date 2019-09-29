@@ -7,6 +7,7 @@ import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.ElectricalCharge;
 import org.djunits4.value.vdouble.vector.ElectricalChargeVector;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable Double ElectricalChargeMatrix, a matrix of values with a ElectricalChargeUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vdouble.vector.ElectricalChargeVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class ElectricalChargeMatrix
         extends AbstractDoubleMatrixRel<ElectricalChargeUnit, ElectricalCharge, ElectricalChargeVector, ElectricalChargeMatrix>
 
@@ -46,6 +47,27 @@ public class ElectricalChargeMatrix
     public Class<ElectricalChargeVector> getVectorClass()
     {
         return ElectricalChargeVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalChargeMatrix instantiateMatrix(final DoubleMatrixData dmd, final ElectricalChargeUnit displayUnit)
+    {
+        return new ElectricalChargeMatrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalChargeVector instantiateVector(final DoubleVectorData dvd, final ElectricalChargeUnit displayUnit)
+    {
+        return new ElectricalChargeVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalCharge instantiateScalar(final double value, final ElectricalChargeUnit unit)
+    {
+        return new ElectricalCharge(value, unit);
     }
 
 }

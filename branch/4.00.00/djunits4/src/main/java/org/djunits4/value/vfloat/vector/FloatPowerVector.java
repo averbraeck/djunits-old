@@ -16,7 +16,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T16:38:21.610Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatPowerVector extends AbstractFloatVectorRel<PowerUnit, FloatPower, FloatPowerVector>
 
 {
@@ -38,6 +38,20 @@ public class FloatPowerVector extends AbstractFloatVectorRel<PowerUnit, FloatPow
     public Class<FloatPower> getScalarClass()
     {
         return FloatPower.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatPowerVector instantiateVector(final FloatVectorData fvd, final PowerUnit displayUnit)
+    {
+        return new FloatPowerVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatPower instantiateScalar(final float value, final PowerUnit unit)
+    {
+        return new FloatPower(value, unit);
     }
 
 }

@@ -16,7 +16,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T08:19:03.301Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class IlluminanceVector extends AbstractDoubleVectorRel<IlluminanceUnit, Illuminance, IlluminanceVector>
 
 {
@@ -25,12 +25,12 @@ public class IlluminanceVector extends AbstractDoubleVectorRel<IlluminanceUnit, 
 
     /**
      * Construct an IlluminanceVector from an internal data object.
-     * @param data DoubleVectorData; an internal data object
-     * @param unit IlluminanceUnit; the unit
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param displayUnit IlluminanceUnit; the display unit of the vector data
      */
-    public IlluminanceVector(final DoubleVectorData data, final IlluminanceUnit unit)
+    public IlluminanceVector(final DoubleVectorData data, final IlluminanceUnit displayUnit)
     {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
@@ -38,6 +38,20 @@ public class IlluminanceVector extends AbstractDoubleVectorRel<IlluminanceUnit, 
     public Class<Illuminance> getScalarClass()
     {
         return Illuminance.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public IlluminanceVector instantiateVector(final DoubleVectorData dvd, final IlluminanceUnit displayUnit)
+    {
+        return new IlluminanceVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Illuminance instantiateScalar(final double value, final IlluminanceUnit unit)
+    {
+        return new Illuminance(value, unit);
     }
 
 }

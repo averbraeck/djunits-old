@@ -7,6 +7,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatElectricalResistance;
 import org.djunits4.value.vfloat.vector.FloatElectricalResistanceVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatElectricalResistanceMatrix, a matrix of values with a ElectricalResistanceUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vfloat.vector.FloatElectricalResistanceVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatElectricalResistanceMatrix extends AbstractFloatMatrixRel<ElectricalResistanceUnit, FloatElectricalResistance,
         FloatElectricalResistanceVector, FloatElectricalResistanceMatrix>
 
@@ -46,6 +47,29 @@ public class FloatElectricalResistanceMatrix extends AbstractFloatMatrixRel<Elec
     public Class<FloatElectricalResistanceVector> getVectorClass()
     {
         return FloatElectricalResistanceVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatElectricalResistanceMatrix instantiateMatrix(final FloatMatrixData fmd,
+            final ElectricalResistanceUnit displayUnit)
+    {
+        return new FloatElectricalResistanceMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatElectricalResistanceVector instantiateVector(final FloatVectorData fvd,
+            final ElectricalResistanceUnit displayUnit)
+    {
+        return new FloatElectricalResistanceVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatElectricalResistance instantiateScalar(final float value, final ElectricalResistanceUnit unit)
+    {
+        return new FloatElectricalResistance(value, unit);
     }
 
 }

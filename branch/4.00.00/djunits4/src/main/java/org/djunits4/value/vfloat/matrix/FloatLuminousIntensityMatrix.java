@@ -7,6 +7,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatLuminousIntensity;
 import org.djunits4.value.vfloat.vector.FloatLuminousIntensityVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatLuminousIntensityMatrix, a matrix of values with a LuminousIntensityUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vfloat.vector.FloatLuminousIntensityVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatLuminousIntensityMatrix extends AbstractFloatMatrixRel<LuminousIntensityUnit, FloatLuminousIntensity,
         FloatLuminousIntensityVector, FloatLuminousIntensityMatrix>
 
@@ -46,6 +47,27 @@ public class FloatLuminousIntensityMatrix extends AbstractFloatMatrixRel<Luminou
     public Class<FloatLuminousIntensityVector> getVectorClass()
     {
         return FloatLuminousIntensityVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatLuminousIntensityMatrix instantiateMatrix(final FloatMatrixData fmd, final LuminousIntensityUnit displayUnit)
+    {
+        return new FloatLuminousIntensityMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatLuminousIntensityVector instantiateVector(final FloatVectorData fvd, final LuminousIntensityUnit displayUnit)
+    {
+        return new FloatLuminousIntensityVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatLuminousIntensity instantiateScalar(final float value, final LuminousIntensityUnit unit)
+    {
+        return new FloatLuminousIntensity(value, unit);
     }
 
 }

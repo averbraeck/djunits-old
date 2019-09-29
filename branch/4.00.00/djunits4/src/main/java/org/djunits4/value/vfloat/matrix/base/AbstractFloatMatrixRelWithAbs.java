@@ -9,6 +9,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarAbs;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
 import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorAbs;
 import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorRelWithAbs;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * AbstractMutableFloatMatrixRelWithAbs.java.
@@ -60,5 +61,35 @@ public abstract class AbstractFloatMatrixRelWithAbs<
     {
         return FloatMatrix.instantiate(this.getData().plus(increment.getData()), increment.getDisplayUnit().getStandardUnit());
     }
+
+    /**
+     * Instantiate a new absolute matrix of the class of this relative matrix. This can be used instead of the
+     * FloatMatrix.instiantiate() methods in case another matrix of this relative with absolute class is known. The method is
+     * faster than FloatMatrix.instantiate, and it will also work if the matrix is user-defined.
+     * @param dmd FloatMatrixData; the data used to instantiate the matrix
+     * @param displayUnit AU; the display unit of the absolute matrix
+     * @return AM; an absolute matrix of the correct type, belonging to this relative matrix type
+     */
+    public abstract AM instantiateMatrixAbs(FloatMatrixData dmd, AU displayUnit);
+
+    /**
+     * Instantiate a new absolute vector of the class of this relative matrix. This can be used instead of the
+     * FloatVector.instiantiate() methods in case another matrix of this relative with absolute class is known. The method is
+     * faster than FloatVector.instantiate, and it will also work if the matrix or vector is user-defined.
+     * @param dvd FloatVectorData; the data used to instantiate the vector
+     * @param displayUnit AU; the display unit of the absolute vector
+     * @return AV; an absolute vector of the correct type, belonging to this relative matrix type
+     */
+    public abstract AV instantiateVectorAbs(FloatVectorData dvd, AU displayUnit);
+
+    /**
+     * Instantiate a new absolute scalar for the class of this relative matrix. This can be used instead of the
+     * FloatScalar.instiantiate() methods in case a matrix of this class is known. The method is faster than
+     * FloatScalar.instantiate, and it will also work if the matrix and/or scalar are user-defined.
+     * @param value float; the value of the absolute scalar, expressed in the given unit
+     * @param unit AU; the unit in which the absolute value is expressed
+     * @return A; an absolute scalar of the correct type, belonging to this relative matrix type
+     */
+    public abstract A instantiateScalarAbs(float value, AU unit);
 
 }

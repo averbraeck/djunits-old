@@ -16,7 +16,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T08:19:03.301Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class SpeedVector extends AbstractDoubleVectorRel<SpeedUnit, Speed, SpeedVector>
 
 {
@@ -25,12 +25,12 @@ public class SpeedVector extends AbstractDoubleVectorRel<SpeedUnit, Speed, Speed
 
     /**
      * Construct an SpeedVector from an internal data object.
-     * @param data DoubleVectorData; an internal data object
-     * @param unit SpeedUnit; the unit
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param displayUnit SpeedUnit; the display unit of the vector data
      */
-    public SpeedVector(final DoubleVectorData data, final SpeedUnit unit)
+    public SpeedVector(final DoubleVectorData data, final SpeedUnit displayUnit)
     {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
@@ -38,6 +38,20 @@ public class SpeedVector extends AbstractDoubleVectorRel<SpeedUnit, Speed, Speed
     public Class<Speed> getScalarClass()
     {
         return Speed.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SpeedVector instantiateVector(final DoubleVectorData dvd, final SpeedUnit displayUnit)
+    {
+        return new SpeedVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Speed instantiateScalar(final double value, final SpeedUnit unit)
+    {
+        return new Speed(value, unit);
     }
 
 }

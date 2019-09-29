@@ -7,6 +7,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatMagneticFluxDensity;
 import org.djunits4.value.vfloat.vector.FloatMagneticFluxDensityVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatMagneticFluxDensityMatrix, a matrix of values with a MagneticFluxDensityUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vfloat.vector.FloatMagneticFluxDensityVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatMagneticFluxDensityMatrix extends AbstractFloatMatrixRel<MagneticFluxDensityUnit, FloatMagneticFluxDensity,
         FloatMagneticFluxDensityVector, FloatMagneticFluxDensityMatrix>
 
@@ -46,6 +47,29 @@ public class FloatMagneticFluxDensityMatrix extends AbstractFloatMatrixRel<Magne
     public Class<FloatMagneticFluxDensityVector> getVectorClass()
     {
         return FloatMagneticFluxDensityVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatMagneticFluxDensityMatrix instantiateMatrix(final FloatMatrixData fmd,
+            final MagneticFluxDensityUnit displayUnit)
+    {
+        return new FloatMagneticFluxDensityMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatMagneticFluxDensityVector instantiateVector(final FloatVectorData fvd,
+            final MagneticFluxDensityUnit displayUnit)
+    {
+        return new FloatMagneticFluxDensityVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatMagneticFluxDensity instantiateScalar(final float value, final MagneticFluxDensityUnit unit)
+    {
+        return new FloatMagneticFluxDensity(value, unit);
     }
 
 }

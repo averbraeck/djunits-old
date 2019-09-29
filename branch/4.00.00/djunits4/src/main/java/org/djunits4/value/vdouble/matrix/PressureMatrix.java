@@ -7,6 +7,7 @@ import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.Pressure;
 import org.djunits4.value.vdouble.vector.PressureVector;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable Double PressureMatrix, a matrix of values with a PressureUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vdouble.vector.PressureVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class PressureMatrix extends AbstractDoubleMatrixRel<PressureUnit, Pressure, PressureVector, PressureMatrix>
 
 {
@@ -45,6 +46,27 @@ public class PressureMatrix extends AbstractDoubleMatrixRel<PressureUnit, Pressu
     public Class<PressureVector> getVectorClass()
     {
         return PressureVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public PressureMatrix instantiateMatrix(final DoubleMatrixData dmd, final PressureUnit displayUnit)
+    {
+        return new PressureMatrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public PressureVector instantiateVector(final DoubleVectorData dvd, final PressureUnit displayUnit)
+    {
+        return new PressureVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Pressure instantiateScalar(final double value, final PressureUnit unit)
+    {
+        return new Pressure(value, unit);
     }
 
 }

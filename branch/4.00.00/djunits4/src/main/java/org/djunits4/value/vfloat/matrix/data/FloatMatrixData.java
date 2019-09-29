@@ -70,8 +70,8 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
         Throw.whenNull(storageType, "FloatMatrixData.instantiate: storageType is null");
         if (values.length == 0 || values[0].length == 0)
         {
-            throw new ValueRuntimeException("FloatMatrixData.instantiate: float[][] values wrong: "
-                    + "values.length == 0 or values[0].length == 0");
+            throw new ValueRuntimeException(
+                    "FloatMatrixData.instantiate: float[][] values wrong: " + "values.length == 0 or values[0].length == 0");
         }
 
         final int rows = values.length;

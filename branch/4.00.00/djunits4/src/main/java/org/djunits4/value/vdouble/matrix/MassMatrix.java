@@ -7,6 +7,7 @@ import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.Mass;
 import org.djunits4.value.vdouble.vector.MassVector;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable Double MassMatrix, a matrix of values with a MassUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vdouble.vector.MassVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class MassMatrix extends AbstractDoubleMatrixRel<MassUnit, Mass, MassVector, MassMatrix>
 
 {
@@ -45,6 +46,27 @@ public class MassMatrix extends AbstractDoubleMatrixRel<MassUnit, Mass, MassVect
     public Class<MassVector> getVectorClass()
     {
         return MassVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public MassMatrix instantiateMatrix(final DoubleMatrixData dmd, final MassUnit displayUnit)
+    {
+        return new MassMatrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public MassVector instantiateVector(final DoubleVectorData dvd, final MassUnit displayUnit)
+    {
+        return new MassVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Mass instantiateScalar(final double value, final MassUnit unit)
+    {
+        return new Mass(value, unit);
     }
 
 }

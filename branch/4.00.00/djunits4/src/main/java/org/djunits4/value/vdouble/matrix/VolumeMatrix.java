@@ -7,6 +7,7 @@ import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.Volume;
 import org.djunits4.value.vdouble.vector.VolumeVector;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable Double VolumeMatrix, a matrix of values with a VolumeUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vdouble.vector.VolumeVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class VolumeMatrix extends AbstractDoubleMatrixRel<VolumeUnit, Volume, VolumeVector, VolumeMatrix>
 
 {
@@ -45,6 +46,27 @@ public class VolumeMatrix extends AbstractDoubleMatrixRel<VolumeUnit, Volume, Vo
     public Class<VolumeVector> getVectorClass()
     {
         return VolumeVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public VolumeMatrix instantiateMatrix(final DoubleMatrixData dmd, final VolumeUnit displayUnit)
+    {
+        return new VolumeMatrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public VolumeVector instantiateVector(final DoubleVectorData dvd, final VolumeUnit displayUnit)
+    {
+        return new VolumeVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Volume instantiateScalar(final double value, final VolumeUnit unit)
+    {
+        return new Volume(value, unit);
     }
 
 }

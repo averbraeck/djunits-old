@@ -16,7 +16,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T08:19:03.301Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class AngleSolidVector extends AbstractDoubleVectorRel<AngleSolidUnit, AngleSolid, AngleSolidVector>
 
 {
@@ -25,12 +25,12 @@ public class AngleSolidVector extends AbstractDoubleVectorRel<AngleSolidUnit, An
 
     /**
      * Construct an AngleSolidVector from an internal data object.
-     * @param data DoubleVectorData; an internal data object
-     * @param unit AngleSolidUnit; the unit
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param displayUnit AngleSolidUnit; the display unit of the vector data
      */
-    public AngleSolidVector(final DoubleVectorData data, final AngleSolidUnit unit)
+    public AngleSolidVector(final DoubleVectorData data, final AngleSolidUnit displayUnit)
     {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
@@ -38,6 +38,20 @@ public class AngleSolidVector extends AbstractDoubleVectorRel<AngleSolidUnit, An
     public Class<AngleSolid> getScalarClass()
     {
         return AngleSolid.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public AngleSolidVector instantiateVector(final DoubleVectorData dvd, final AngleSolidUnit displayUnit)
+    {
+        return new AngleSolidVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public AngleSolid instantiateScalar(final double value, final AngleSolidUnit unit)
+    {
+        return new AngleSolid(value, unit);
     }
 
 }

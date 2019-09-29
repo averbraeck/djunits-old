@@ -7,6 +7,7 @@ import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.Density;
 import org.djunits4.value.vdouble.vector.DensityVector;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable Double DensityMatrix, a matrix of values with a DensityUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vdouble.vector.DensityVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class DensityMatrix extends AbstractDoubleMatrixRel<DensityUnit, Density, DensityVector, DensityMatrix>
 
 {
@@ -45,6 +46,27 @@ public class DensityMatrix extends AbstractDoubleMatrixRel<DensityUnit, Density,
     public Class<DensityVector> getVectorClass()
     {
         return DensityVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public DensityMatrix instantiateMatrix(final DoubleMatrixData dmd, final DensityUnit displayUnit)
+    {
+        return new DensityMatrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public DensityVector instantiateVector(final DoubleVectorData dvd, final DensityUnit displayUnit)
+    {
+        return new DensityVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Density instantiateScalar(final double value, final DensityUnit unit)
+    {
+        return new Density(value, unit);
     }
 
 }

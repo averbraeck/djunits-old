@@ -7,6 +7,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatMagneticFlux;
 import org.djunits4.value.vfloat.vector.FloatMagneticFluxVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatMagneticFluxMatrix, a matrix of values with a MagneticFluxUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vfloat.vector.FloatMagneticFluxVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatMagneticFluxMatrix
         extends AbstractFloatMatrixRel<MagneticFluxUnit, FloatMagneticFlux, FloatMagneticFluxVector, FloatMagneticFluxMatrix>
 
@@ -46,6 +47,27 @@ public class FloatMagneticFluxMatrix
     public Class<FloatMagneticFluxVector> getVectorClass()
     {
         return FloatMagneticFluxVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatMagneticFluxMatrix instantiateMatrix(final FloatMatrixData fmd, final MagneticFluxUnit displayUnit)
+    {
+        return new FloatMagneticFluxMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatMagneticFluxVector instantiateVector(final FloatVectorData fvd, final MagneticFluxUnit displayUnit)
+    {
+        return new FloatMagneticFluxVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatMagneticFlux instantiateScalar(final float value, final MagneticFluxUnit unit)
+    {
+        return new FloatMagneticFlux(value, unit);
     }
 
 }

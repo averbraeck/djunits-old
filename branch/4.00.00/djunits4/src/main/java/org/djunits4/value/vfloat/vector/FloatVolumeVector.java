@@ -16,7 +16,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T16:38:21.610Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatVolumeVector extends AbstractFloatVectorRel<VolumeUnit, FloatVolume, FloatVolumeVector>
 
 {
@@ -38,6 +38,20 @@ public class FloatVolumeVector extends AbstractFloatVectorRel<VolumeUnit, FloatV
     public Class<FloatVolume> getScalarClass()
     {
         return FloatVolume.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatVolumeVector instantiateVector(final FloatVectorData fvd, final VolumeUnit displayUnit)
+    {
+        return new FloatVolumeVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatVolume instantiateScalar(final float value, final VolumeUnit unit)
+    {
+        return new FloatVolume(value, unit);
     }
 
 }

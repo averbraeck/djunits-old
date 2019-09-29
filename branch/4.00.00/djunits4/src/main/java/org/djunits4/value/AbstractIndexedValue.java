@@ -45,12 +45,12 @@ public abstract class AbstractIndexedValue<U extends Unit<U>, S extends Scalar<U
      * @return D; the internal data
      */
     protected abstract D getData();
-    
+
     /**
      * Set the data object. Method can only be used within package and by subclasses.
      * @param data D; the internal data
      */
-    protected abstract void setData(D data); 
+    protected abstract void setData(D data);
 
     /** {@inheritDoc} */
     @Override
@@ -148,7 +148,7 @@ public abstract class AbstractIndexedValue<U extends Unit<U>, S extends Scalar<U
     {
         return getData().isSparse();
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public final int cardinality()

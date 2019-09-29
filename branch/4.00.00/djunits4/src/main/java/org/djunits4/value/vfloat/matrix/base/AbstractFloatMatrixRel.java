@@ -26,9 +26,8 @@ import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorRel;
  * @param <RM> the relative matrix type with this unit
  */
 public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends AbstractFloatScalarRel<U, S>,
-        RV extends AbstractFloatVectorRel<U, S, RV>,
-        RM extends AbstractFloatMatrixRel<U, S, RV, RM>> extends AbstractFloatMatrix<U, S, RV, RM>
-        implements Matrix.Rel<U, S, RV, RM>, Relative
+        RV extends AbstractFloatVectorRel<U, S, RV>, RM extends AbstractFloatMatrixRel<U, S, RV, RM>>
+        extends AbstractFloatMatrix<U, S, RV, RM> implements Matrix.Rel<U, S, RV, RM>, Relative
 {
     /** */
     private static final long serialVersionUID = 20190908L;
@@ -83,7 +82,8 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
     }
 
     /**
-     * Increment all values of this matrix by the increment on a value by value basis. This only works if this matrix is mutable.
+     * Increment all values of this matrix by the increment on a value by value basis. This only works if this matrix is
+     * mutable.
      * @param increment RM; the matrix that contains the values by which to increment the corresponding values
      * @return RM; this modified matrix
      * @throws ValueRuntimeException in case this matrix is immutable
@@ -112,14 +112,15 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
     }
 
     /**
-     * Decrement all values of this matrix by the decrement on a value by value basis. This only works if this matrix is mutable.
+     * Decrement all values of this matrix by the decrement on a value by value basis. This only works if this matrix is
+     * mutable.
      * @param decrement RM; the matrix that contains the values by which to decrement the corresponding values
      * @return RM; this modified matrix
      * @throws ValueRuntimeException in case this matrix is immutable
      * @Throws ValueException when the sizes of the matrices differ, or <code>decrement</code> is null
      */
     @SuppressWarnings("unchecked")
-    public RM  decrementBy(RM decrement)
+    public RM decrementBy(RM decrement)
     {
         checkCopyOnWrite();
         this.data.decrementBy(decrement.getData());
@@ -159,8 +160,8 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
             throws ValueRuntimeException, UnitException
     {
         checkSize(rel);
-        return new FloatSIMatrix(this.getData().times(rel.getData()),
-                SIUnit.of(getDisplayUnit().getUnitBase().getSiDimensions().plus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
+        return new FloatSIMatrix(this.getData().times(rel.getData()), SIUnit.of(
+                getDisplayUnit().getUnitBase().getSiDimensions().plus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
     }
 
     /**
@@ -176,7 +177,7 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
             throws ValueRuntimeException, UnitException
     {
         checkSize(rel);
-        return new FloatSIMatrix(this.getData().divide(rel.getData()),
-                SIUnit.of(getDisplayUnit().getUnitBase().getSiDimensions().minus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
+        return new FloatSIMatrix(this.getData().divide(rel.getData()), SIUnit.of(
+                getDisplayUnit().getUnitBase().getSiDimensions().minus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
     }
 }

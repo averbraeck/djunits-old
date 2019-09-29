@@ -9,6 +9,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatDimensionless;
 import org.djunits4.value.vfloat.vector.FloatDimensionlessVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatDimensionlessMatrix, a matrix of values with a DimensionlessUnit.
@@ -19,7 +20,7 @@ import org.djunits4.value.vfloat.vector.FloatDimensionlessVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatDimensionlessMatrix extends
         AbstractFloatMatrixRel<DimensionlessUnit, FloatDimensionless, FloatDimensionlessVector, FloatDimensionlessMatrix>
         implements DimensionlessFunctions<DimensionlessUnit, FloatDimensionlessMatrix>
@@ -48,6 +49,27 @@ public class FloatDimensionlessMatrix extends
     public Class<FloatDimensionlessVector> getVectorClass()
     {
         return FloatDimensionlessVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatDimensionlessMatrix instantiateMatrix(final FloatMatrixData fmd, final DimensionlessUnit displayUnit)
+    {
+        return new FloatDimensionlessMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatDimensionlessVector instantiateVector(final FloatVectorData fvd, final DimensionlessUnit displayUnit)
+    {
+        return new FloatDimensionlessVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatDimensionless instantiateScalar(final float value, final DimensionlessUnit unit)
+    {
+        return new FloatDimensionless(value, unit);
     }
 
     /** {@inheritDoc} */

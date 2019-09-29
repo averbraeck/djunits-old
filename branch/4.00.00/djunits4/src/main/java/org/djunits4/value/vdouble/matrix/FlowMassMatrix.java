@@ -7,6 +7,7 @@ import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.FlowMass;
 import org.djunits4.value.vdouble.vector.FlowMassVector;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable Double FlowMassMatrix, a matrix of values with a FlowMassUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vdouble.vector.FlowMassVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FlowMassMatrix extends AbstractDoubleMatrixRel<FlowMassUnit, FlowMass, FlowMassVector, FlowMassMatrix>
 
 {
@@ -45,6 +46,27 @@ public class FlowMassMatrix extends AbstractDoubleMatrixRel<FlowMassUnit, FlowMa
     public Class<FlowMassVector> getVectorClass()
     {
         return FlowMassVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FlowMassMatrix instantiateMatrix(final DoubleMatrixData dmd, final FlowMassUnit displayUnit)
+    {
+        return new FlowMassMatrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FlowMassVector instantiateVector(final DoubleVectorData dvd, final FlowMassUnit displayUnit)
+    {
+        return new FlowMassVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FlowMass instantiateScalar(final double value, final FlowMassUnit unit)
+    {
+        return new FlowMass(value, unit);
     }
 
 }

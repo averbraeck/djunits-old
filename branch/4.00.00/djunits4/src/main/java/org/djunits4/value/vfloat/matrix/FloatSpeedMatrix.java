@@ -7,6 +7,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatSpeed;
 import org.djunits4.value.vfloat.vector.FloatSpeedVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatSpeedMatrix, a matrix of values with a SpeedUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vfloat.vector.FloatSpeedVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatSpeedMatrix extends AbstractFloatMatrixRel<SpeedUnit, FloatSpeed, FloatSpeedVector, FloatSpeedMatrix>
 
 {
@@ -45,6 +46,27 @@ public class FloatSpeedMatrix extends AbstractFloatMatrixRel<SpeedUnit, FloatSpe
     public Class<FloatSpeedVector> getVectorClass()
     {
         return FloatSpeedVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatSpeedMatrix instantiateMatrix(final FloatMatrixData fmd, final SpeedUnit displayUnit)
+    {
+        return new FloatSpeedMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatSpeedVector instantiateVector(final FloatVectorData fvd, final SpeedUnit displayUnit)
+    {
+        return new FloatSpeedVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatSpeed instantiateScalar(final float value, final SpeedUnit unit)
+    {
+        return new FloatSpeed(value, unit);
     }
 
 }

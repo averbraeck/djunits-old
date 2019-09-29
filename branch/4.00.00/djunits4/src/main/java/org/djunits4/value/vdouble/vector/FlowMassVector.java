@@ -16,7 +16,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T08:19:03.301Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FlowMassVector extends AbstractDoubleVectorRel<FlowMassUnit, FlowMass, FlowMassVector>
 
 {
@@ -25,12 +25,12 @@ public class FlowMassVector extends AbstractDoubleVectorRel<FlowMassUnit, FlowMa
 
     /**
      * Construct an FlowMassVector from an internal data object.
-     * @param data DoubleVectorData; an internal data object
-     * @param unit FlowMassUnit; the unit
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param displayUnit FlowMassUnit; the display unit of the vector data
      */
-    public FlowMassVector(final DoubleVectorData data, final FlowMassUnit unit)
+    public FlowMassVector(final DoubleVectorData data, final FlowMassUnit displayUnit)
     {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
@@ -38,6 +38,20 @@ public class FlowMassVector extends AbstractDoubleVectorRel<FlowMassUnit, FlowMa
     public Class<FlowMass> getScalarClass()
     {
         return FlowMass.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FlowMassVector instantiateVector(final DoubleVectorData dvd, final FlowMassUnit displayUnit)
+    {
+        return new FlowMassVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FlowMass instantiateScalar(final double value, final FlowMassUnit unit)
+    {
+        return new FlowMass(value, unit);
     }
 
 }

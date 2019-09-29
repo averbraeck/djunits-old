@@ -7,6 +7,7 @@ import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.ElectricalCurrent;
 import org.djunits4.value.vdouble.vector.ElectricalCurrentVector;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable Double ElectricalCurrentMatrix, a matrix of values with a ElectricalCurrentUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vdouble.vector.ElectricalCurrentVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class ElectricalCurrentMatrix extends
         AbstractDoubleMatrixRel<ElectricalCurrentUnit, ElectricalCurrent, ElectricalCurrentVector, ElectricalCurrentMatrix>
 
@@ -46,6 +47,27 @@ public class ElectricalCurrentMatrix extends
     public Class<ElectricalCurrentVector> getVectorClass()
     {
         return ElectricalCurrentVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalCurrentMatrix instantiateMatrix(final DoubleMatrixData dmd, final ElectricalCurrentUnit displayUnit)
+    {
+        return new ElectricalCurrentMatrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalCurrentVector instantiateVector(final DoubleVectorData dvd, final ElectricalCurrentUnit displayUnit)
+    {
+        return new ElectricalCurrentVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalCurrent instantiateScalar(final double value, final ElectricalCurrentUnit unit)
+    {
+        return new ElectricalCurrent(value, unit);
     }
 
 }

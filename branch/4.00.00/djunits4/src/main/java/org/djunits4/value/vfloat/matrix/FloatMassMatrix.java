@@ -7,6 +7,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatMass;
 import org.djunits4.value.vfloat.vector.FloatMassVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatMassMatrix, a matrix of values with a MassUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vfloat.vector.FloatMassVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatMassMatrix extends AbstractFloatMatrixRel<MassUnit, FloatMass, FloatMassVector, FloatMassMatrix>
 
 {
@@ -45,6 +46,27 @@ public class FloatMassMatrix extends AbstractFloatMatrixRel<MassUnit, FloatMass,
     public Class<FloatMassVector> getVectorClass()
     {
         return FloatMassVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatMassMatrix instantiateMatrix(final FloatMatrixData fmd, final MassUnit displayUnit)
+    {
+        return new FloatMassMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatMassVector instantiateVector(final FloatVectorData fvd, final MassUnit displayUnit)
+    {
+        return new FloatMassVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatMass instantiateScalar(final float value, final MassUnit unit)
+    {
+        return new FloatMass(value, unit);
     }
 
 }

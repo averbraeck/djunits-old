@@ -9,6 +9,7 @@ import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.Dimensionless;
 import org.djunits4.value.vdouble.vector.DimensionlessVector;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable Double DimensionlessMatrix, a matrix of values with a DimensionlessUnit.
@@ -19,7 +20,7 @@ import org.djunits4.value.vdouble.vector.DimensionlessVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class DimensionlessMatrix
         extends AbstractDoubleMatrixRel<DimensionlessUnit, Dimensionless, DimensionlessVector, DimensionlessMatrix>
         implements DimensionlessFunctions<DimensionlessUnit, DimensionlessMatrix>
@@ -48,6 +49,27 @@ public class DimensionlessMatrix
     public Class<DimensionlessVector> getVectorClass()
     {
         return DimensionlessVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public DimensionlessMatrix instantiateMatrix(final DoubleMatrixData dmd, final DimensionlessUnit displayUnit)
+    {
+        return new DimensionlessMatrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public DimensionlessVector instantiateVector(final DoubleVectorData dvd, final DimensionlessUnit displayUnit)
+    {
+        return new DimensionlessVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Dimensionless instantiateScalar(final double value, final DimensionlessUnit unit)
+    {
+        return new Dimensionless(value, unit);
     }
 
     /** {@inheritDoc} */

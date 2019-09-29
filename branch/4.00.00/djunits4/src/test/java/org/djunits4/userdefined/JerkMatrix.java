@@ -2,6 +2,7 @@ package org.djunits4.userdefined;
 
 import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable Double JerkMatrix, a matrix of values with a JerkUnit.
@@ -20,11 +21,11 @@ public class JerkMatrix extends AbstractDoubleMatrixRel<JerkUnit, Jerk, JerkVect
 
     /**
      * @param data DoubleMatrixData; an internal data object
-     * @param unit JerkUnit; the unit
+     * @param displayUnit JerkUnit; the unit in which the data will be displayed
      */
-    public JerkMatrix(final DoubleMatrixData data, final JerkUnit unit)
+    public JerkMatrix(final DoubleMatrixData data, final JerkUnit displayUnit)
     {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
@@ -39,6 +40,27 @@ public class JerkMatrix extends AbstractDoubleMatrixRel<JerkUnit, Jerk, JerkVect
     public Class<JerkVector> getVectorClass()
     {
         return JerkVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public JerkMatrix instantiateMatrix(final DoubleMatrixData dmd, final JerkUnit displayUnit)
+    {
+        return new JerkMatrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public JerkVector instantiateVector(final DoubleVectorData dvd, final JerkUnit displayUnit)
+    {
+        return new JerkVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Jerk instantiateScalar(final double value, final JerkUnit unit)
+    {
+        return new Jerk(value, unit);
     }
 
 }

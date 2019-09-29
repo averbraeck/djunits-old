@@ -18,7 +18,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T08:19:03.301Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class TimeVector extends AbstractDoubleVectorAbs<TimeUnit, Time, TimeVector, DurationUnit, Duration, DurationVector>
 {
     /** */
@@ -26,8 +26,8 @@ public class TimeVector extends AbstractDoubleVectorAbs<TimeUnit, Time, TimeVect
 
     /**
      * Construct an TimeVector from an internal data object.
-     * @param data DoubleVectorData; an internal data object
-     * @param unit %Type%Unit; the unit
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param unit TimeUnit; the display unit of the vector data
      */
     public TimeVector(final DoubleVectorData data, final TimeUnit unit)
     {
@@ -39,6 +39,34 @@ public class TimeVector extends AbstractDoubleVectorAbs<TimeUnit, Time, TimeVect
     public Class<Time> getScalarClass()
     {
         return Time.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public TimeVector instantiateVector(final DoubleVectorData dvd, final TimeUnit displayUnit)
+    {
+        return new TimeVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Time instantiateScalar(final double value, final TimeUnit unit)
+    {
+        return new Time(value, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public DurationVector instantiateVectorRel(final DoubleVectorData dvd, final DurationUnit displayUnit)
+    {
+        return new DurationVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Duration instantiateScalarRel(final double value, final DurationUnit unit)
+    {
+        return new Duration(value, unit);
     }
 
 }

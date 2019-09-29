@@ -18,7 +18,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T16:38:21.610Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatAbsoluteTemperatureVector extends AbstractFloatVectorAbs<AbsoluteTemperatureUnit, FloatAbsoluteTemperature,
         FloatAbsoluteTemperatureVector, TemperatureUnit, FloatTemperature, FloatTemperatureVector>
 {
@@ -42,6 +42,35 @@ public class FloatAbsoluteTemperatureVector extends AbstractFloatVectorAbs<Absol
             getScalarClass()
     {
         return FloatAbsoluteTemperature.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatAbsoluteTemperatureVector instantiateVector(final FloatVectorData fvd,
+            final AbsoluteTemperatureUnit displayUnit)
+    {
+        return new FloatAbsoluteTemperatureVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatAbsoluteTemperature instantiateScalar(final float value, final AbsoluteTemperatureUnit unit)
+    {
+        return new FloatAbsoluteTemperature(value, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatTemperatureVector instantiateVectorRel(final FloatVectorData fvd, final TemperatureUnit displayUnit)
+    {
+        return new FloatTemperatureVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatTemperature instantiateScalarRel(final float value, final TemperatureUnit unit)
+    {
+        return new FloatTemperature(value, unit);
     }
 
 }

@@ -4,8 +4,10 @@ import org.djunits4.unit.Unit;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.base.Matrix;
 import org.djunits4.value.vdouble.function.DoubleFunction;
+import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
 import org.djunits4.value.vdouble.vector.base.DoubleVectorInterface;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Interface for the DoubleMatrix classes, specifically defining the methods that deal with double values.
@@ -146,5 +148,35 @@ public interface DoubleMatrixInterface<U extends Unit<U>, S extends DoubleScalar
      * @return M; this updated matrix
      */
     M assign(final DoubleFunction doubleFunction);
+
+    /**
+     * Instantiate a new matrix of the class of this matrix. This can be used instead of the DoubleMatrix.instiantiate() methods
+     * in case another matrix of this class is known. The method is faster than DoubleMatrix.instantiate, and it will also work
+     * if the matrix is user-defined.
+     * @param dmd DoubleMatrixData; the data used to instantiate the matrix
+     * @param displayUnit U; the display unit of the matrix
+     * @return V; a matrix of the correct type
+     */
+    M instantiateMatrix(DoubleMatrixData dmd, U displayUnit);
+
+    /**
+     * Instantiate a new vector of the class of this matrix. This can be used instead of the DoubleVector.instiantiate() methods
+     * in case another matrix of this class is known. The method is faster than DoubleVector.instantiate, and it will also work
+     * if the matrix and/or vector are user-defined.
+     * @param dvd DoubleVectorData; the data used to instantiate the vector
+     * @param displayUnit U; the display unit of the vector
+     * @return V; a vector of the correct type
+     */
+    V instantiateVector(DoubleVectorData dvd, U displayUnit);
+
+    /**
+     * Instantiate a new scalar for the class of this matrix. This can be used instead of the DoubleScalar.instiantiate()
+     * methods in case a matrix of this class is known. The method is faster than DoubleScalar.instantiate, and it will also
+     * work if the matrix and/or scalar are user-defined.
+     * @param value double; the value of the scalar, expressed in the given unit
+     * @param unit U; the unit in which the value is expressed
+     * @return S; a scalar of the correct type, belonging to the matrix type
+     */
+    S instantiateScalar(double value, U unit);
 
 }

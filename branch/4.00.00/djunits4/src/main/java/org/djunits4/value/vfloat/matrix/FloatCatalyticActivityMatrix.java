@@ -7,6 +7,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatCatalyticActivity;
 import org.djunits4.value.vfloat.vector.FloatCatalyticActivityVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatCatalyticActivityMatrix, a matrix of values with a CatalyticActivityUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vfloat.vector.FloatCatalyticActivityVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatCatalyticActivityMatrix extends AbstractFloatMatrixRel<CatalyticActivityUnit, FloatCatalyticActivity,
         FloatCatalyticActivityVector, FloatCatalyticActivityMatrix>
 
@@ -46,6 +47,27 @@ public class FloatCatalyticActivityMatrix extends AbstractFloatMatrixRel<Catalyt
     public Class<FloatCatalyticActivityVector> getVectorClass()
     {
         return FloatCatalyticActivityVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatCatalyticActivityMatrix instantiateMatrix(final FloatMatrixData fmd, final CatalyticActivityUnit displayUnit)
+    {
+        return new FloatCatalyticActivityMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatCatalyticActivityVector instantiateVector(final FloatVectorData fvd, final CatalyticActivityUnit displayUnit)
+    {
+        return new FloatCatalyticActivityVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatCatalyticActivity instantiateScalar(final float value, final CatalyticActivityUnit unit)
+    {
+        return new FloatCatalyticActivity(value, unit);
     }
 
 }

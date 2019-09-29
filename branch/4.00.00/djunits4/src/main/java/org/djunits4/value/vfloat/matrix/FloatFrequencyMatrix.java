@@ -7,6 +7,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatFrequency;
 import org.djunits4.value.vfloat.vector.FloatFrequencyVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatFrequencyMatrix, a matrix of values with a FrequencyUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vfloat.vector.FloatFrequencyVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatFrequencyMatrix
         extends AbstractFloatMatrixRel<FrequencyUnit, FloatFrequency, FloatFrequencyVector, FloatFrequencyMatrix>
 
@@ -46,6 +47,27 @@ public class FloatFrequencyMatrix
     public Class<FloatFrequencyVector> getVectorClass()
     {
         return FloatFrequencyVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatFrequencyMatrix instantiateMatrix(final FloatMatrixData fmd, final FrequencyUnit displayUnit)
+    {
+        return new FloatFrequencyMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatFrequencyVector instantiateVector(final FloatVectorData fvd, final FrequencyUnit displayUnit)
+    {
+        return new FloatFrequencyVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatFrequency instantiateScalar(final float value, final FrequencyUnit unit)
+    {
+        return new FloatFrequency(value, unit);
     }
 
 }

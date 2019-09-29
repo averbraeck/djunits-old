@@ -7,6 +7,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatElectricalCurrent;
 import org.djunits4.value.vfloat.vector.FloatElectricalCurrentVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatElectricalCurrentMatrix, a matrix of values with a ElectricalCurrentUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vfloat.vector.FloatElectricalCurrentVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatElectricalCurrentMatrix extends AbstractFloatMatrixRel<ElectricalCurrentUnit, FloatElectricalCurrent,
         FloatElectricalCurrentVector, FloatElectricalCurrentMatrix>
 
@@ -46,6 +47,27 @@ public class FloatElectricalCurrentMatrix extends AbstractFloatMatrixRel<Electri
     public Class<FloatElectricalCurrentVector> getVectorClass()
     {
         return FloatElectricalCurrentVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatElectricalCurrentMatrix instantiateMatrix(final FloatMatrixData fmd, final ElectricalCurrentUnit displayUnit)
+    {
+        return new FloatElectricalCurrentMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatElectricalCurrentVector instantiateVector(final FloatVectorData fvd, final ElectricalCurrentUnit displayUnit)
+    {
+        return new FloatElectricalCurrentVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatElectricalCurrent instantiateScalar(final float value, final ElectricalCurrentUnit unit)
+    {
+        return new FloatElectricalCurrent(value, unit);
     }
 
 }

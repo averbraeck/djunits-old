@@ -16,7 +16,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T08:19:03.301Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class EnergyVector extends AbstractDoubleVectorRel<EnergyUnit, Energy, EnergyVector>
 
 {
@@ -25,12 +25,12 @@ public class EnergyVector extends AbstractDoubleVectorRel<EnergyUnit, Energy, En
 
     /**
      * Construct an EnergyVector from an internal data object.
-     * @param data DoubleVectorData; an internal data object
-     * @param unit EnergyUnit; the unit
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param displayUnit EnergyUnit; the display unit of the vector data
      */
-    public EnergyVector(final DoubleVectorData data, final EnergyUnit unit)
+    public EnergyVector(final DoubleVectorData data, final EnergyUnit displayUnit)
     {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
@@ -38,6 +38,20 @@ public class EnergyVector extends AbstractDoubleVectorRel<EnergyUnit, Energy, En
     public Class<Energy> getScalarClass()
     {
         return Energy.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public EnergyVector instantiateVector(final DoubleVectorData dvd, final EnergyUnit displayUnit)
+    {
+        return new EnergyVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Energy instantiateScalar(final double value, final EnergyUnit unit)
+    {
+        return new Energy(value, unit);
     }
 
 }

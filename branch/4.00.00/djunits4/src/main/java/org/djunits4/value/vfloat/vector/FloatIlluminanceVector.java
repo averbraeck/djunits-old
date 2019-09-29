@@ -16,7 +16,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T16:38:21.610Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatIlluminanceVector extends AbstractFloatVectorRel<IlluminanceUnit, FloatIlluminance, FloatIlluminanceVector>
 
 {
@@ -38,6 +38,20 @@ public class FloatIlluminanceVector extends AbstractFloatVectorRel<IlluminanceUn
     public Class<FloatIlluminance> getScalarClass()
     {
         return FloatIlluminance.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatIlluminanceVector instantiateVector(final FloatVectorData fvd, final IlluminanceUnit displayUnit)
+    {
+        return new FloatIlluminanceVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatIlluminance instantiateScalar(final float value, final IlluminanceUnit unit)
+    {
+        return new FloatIlluminance(value, unit);
     }
 
 }

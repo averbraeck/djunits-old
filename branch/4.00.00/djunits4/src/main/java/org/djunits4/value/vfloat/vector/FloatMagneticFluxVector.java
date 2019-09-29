@@ -16,7 +16,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T16:38:21.610Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatMagneticFluxVector
         extends AbstractFloatVectorRel<MagneticFluxUnit, FloatMagneticFlux, FloatMagneticFluxVector>
 
@@ -39,6 +39,20 @@ public class FloatMagneticFluxVector
     public Class<FloatMagneticFlux> getScalarClass()
     {
         return FloatMagneticFlux.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatMagneticFluxVector instantiateVector(final FloatVectorData fvd, final MagneticFluxUnit displayUnit)
+    {
+        return new FloatMagneticFluxVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatMagneticFlux instantiateScalar(final float value, final MagneticFluxUnit unit)
+    {
+        return new FloatMagneticFlux(value, unit);
     }
 
 }

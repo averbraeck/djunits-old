@@ -16,7 +16,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T16:38:21.610Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatElectricalPotentialVector
         extends AbstractFloatVectorRel<ElectricalPotentialUnit, FloatElectricalPotential, FloatElectricalPotentialVector>
 
@@ -39,6 +39,21 @@ public class FloatElectricalPotentialVector
     public Class<FloatElectricalPotential> getScalarClass()
     {
         return FloatElectricalPotential.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatElectricalPotentialVector instantiateVector(final FloatVectorData fvd,
+            final ElectricalPotentialUnit displayUnit)
+    {
+        return new FloatElectricalPotentialVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatElectricalPotential instantiateScalar(final float value, final ElectricalPotentialUnit unit)
+    {
+        return new FloatElectricalPotential(value, unit);
     }
 
 }

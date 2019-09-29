@@ -11,6 +11,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarAbs;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
 import org.djunits4.value.vdouble.vector.base.AbstractDoubleVectorAbs;
 import org.djunits4.value.vdouble.vector.base.AbstractDoubleVectorRelWithAbs;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * AbstractMutableDoubleMatrixRelWithAbs.java.
@@ -73,7 +74,8 @@ public abstract class AbstractDoubleMatrixAbs<
     @Override
     public RM minus(AM decrement) throws ValueRuntimeException
     {
-        return DoubleMatrix.instantiate(this.getData().minus(decrement.getData()), decrement.getDisplayUnit().getRelativeUnit());
+        return DoubleMatrix.instantiate(this.getData().minus(decrement.getData()),
+                decrement.getDisplayUnit().getRelativeUnit());
     }
 
     /**
@@ -91,7 +93,8 @@ public abstract class AbstractDoubleMatrixAbs<
     }
 
     /**
-     * Decrement all values of this matrix by the decrement on a value by value basis. This only works if this matrix is mutable.
+     * Decrement all values of this matrix by the decrement on a value by value basis. This only works if this matrix is
+     * mutable.
      * @param decrement RV; the matrix that contains the values by which to decrement the corresponding values
      * @return AV; this modified matrix
      * @throws ValueRuntimeException in case this matrix is immutable
@@ -104,5 +107,35 @@ public abstract class AbstractDoubleMatrixAbs<
         this.data.decrementBy(decrement.getData());
         return (AM) this;
     }
+
+    /**
+     * Instantiate a new relative matrix of the class of this absolute matrix. This can be used instead of the
+     * DoubleMatrix.instiantiate() methods in case another matrix of this absolute matrix class is known. The method is faster
+     * than DoubleMatrix.instantiate, and it will also work if the matrix is user-defined.
+     * @param dmd DoubleMatrixData; the data used to instantiate the matrix
+     * @param displayUnit RU; the display unit of the relative matrix
+     * @return RM; a relative matrix of the correct type, belonging to this absolute matrix type
+     */
+    public abstract RM instantiateMatrixRel(DoubleMatrixData dmd, RU displayUnit);
+
+    /**
+     * Instantiate a new relative vector of the class of this absolute matrix. This can be used instead of the
+     * DoubleVector.instiantiate() methods in case another matrix of this absolute matrix class is known. The method is faster
+     * than DoubleVector.instantiate, and it will also work if the matrix or vector is user-defined.
+     * @param dvd DoubleVectorData; the data used to instantiate the vector
+     * @param displayUnit RU; the display unit of the relative vector
+     * @return RV; a relative vector of the correct type, belonging to this absolute matrix type
+     */
+    public abstract RV instantiateVectorRel(DoubleVectorData dvd, RU displayUnit);
+
+    /**
+     * Instantiate a new relative scalar for the class of this absolute matrix. This can be used instead of the
+     * DoubleScalar.instiantiate() methods in case a matrix of this class is known. The method is faster than
+     * DoubleScalar.instantiate, and it will also work if the matrix and/or scalar are user-defined.
+     * @param value double; the value of the relative scalar, expressed in the given unit
+     * @param unit RU; the unit in which the relative value is expressed
+     * @return R; a relative scalar of the correct type, belonging to this absolute matrix type
+     */
+    public abstract R instantiateScalarRel(double value, RU unit);
 
 }

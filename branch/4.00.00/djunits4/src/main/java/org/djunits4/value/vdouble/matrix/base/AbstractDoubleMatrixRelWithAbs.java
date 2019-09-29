@@ -9,6 +9,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarAbs;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
 import org.djunits4.value.vdouble.vector.base.AbstractDoubleVectorAbs;
 import org.djunits4.value.vdouble.vector.base.AbstractDoubleVectorRelWithAbs;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * AbstractMutableDoubleMatrixRelWithAbs.java.
@@ -60,5 +61,35 @@ public abstract class AbstractDoubleMatrixRelWithAbs<
     {
         return DoubleMatrix.instantiate(this.getData().plus(increment.getData()), increment.getDisplayUnit().getStandardUnit());
     }
+
+    /**
+     * Instantiate a new absolute matrix of the class of this relative matrix. This can be used instead of the
+     * DoubleMatrix.instiantiate() methods in case another matrix of this relative with absolute class is known. The method is
+     * faster than DoubleMatrix.instantiate, and it will also work if the matrix is user-defined.
+     * @param dmd DoubleMatrixData; the data used to instantiate the matrix
+     * @param displayUnit AU; the display unit of the absolute matrix
+     * @return AM; an absolute matrix of the correct type, belonging to this relative matrix type
+     */
+    public abstract AM instantiateMatrixAbs(DoubleMatrixData dmd, AU displayUnit);
+
+    /**
+     * Instantiate a new absolute vector of the class of this relative matrix. This can be used instead of the
+     * DoubleVector.instiantiate() methods in case another matrix of this relative with absolute class is known. The method is
+     * faster than DoubleVector.instantiate, and it will also work if the matrix or vector is user-defined.
+     * @param dvd DoubleVectorData; the data used to instantiate the vector
+     * @param displayUnit AU; the display unit of the absolute vector
+     * @return AV; an absolute vector of the correct type, belonging to this relative matrix type
+     */
+    public abstract AV instantiateVectorAbs(DoubleVectorData dvd, AU displayUnit);
+
+    /**
+     * Instantiate a new absolute scalar for the class of this relative matrix. This can be used instead of the
+     * DoubleScalar.instiantiate() methods in case a matrix of this class is known. The method is faster than
+     * DoubleScalar.instantiate, and it will also work if the matrix and/or scalar are user-defined.
+     * @param value double; the value of the absolute scalar, expressed in the given unit
+     * @param unit AU; the unit in which the absolute value is expressed
+     * @return A; an absolute scalar of the correct type, belonging to this relative matrix type
+     */
+    public abstract A instantiateScalarAbs(double value, AU unit);
 
 }

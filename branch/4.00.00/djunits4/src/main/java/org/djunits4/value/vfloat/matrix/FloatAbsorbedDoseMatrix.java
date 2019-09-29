@@ -7,6 +7,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatAbsorbedDose;
 import org.djunits4.value.vfloat.vector.FloatAbsorbedDoseVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatAbsorbedDoseMatrix, a matrix of values with a AbsorbedDoseUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vfloat.vector.FloatAbsorbedDoseVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatAbsorbedDoseMatrix
         extends AbstractFloatMatrixRel<AbsorbedDoseUnit, FloatAbsorbedDose, FloatAbsorbedDoseVector, FloatAbsorbedDoseMatrix>
 
@@ -46,6 +47,27 @@ public class FloatAbsorbedDoseMatrix
     public Class<FloatAbsorbedDoseVector> getVectorClass()
     {
         return FloatAbsorbedDoseVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatAbsorbedDoseMatrix instantiateMatrix(final FloatMatrixData fmd, final AbsorbedDoseUnit displayUnit)
+    {
+        return new FloatAbsorbedDoseMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatAbsorbedDoseVector instantiateVector(final FloatVectorData fvd, final AbsorbedDoseUnit displayUnit)
+    {
+        return new FloatAbsorbedDoseVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatAbsorbedDose instantiateScalar(final float value, final AbsorbedDoseUnit unit)
+    {
+        return new FloatAbsorbedDose(value, unit);
     }
 
 }

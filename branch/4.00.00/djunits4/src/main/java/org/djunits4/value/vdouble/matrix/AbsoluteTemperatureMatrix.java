@@ -10,6 +10,7 @@ import org.djunits4.value.vdouble.scalar.AbsoluteTemperature;
 import org.djunits4.value.vdouble.scalar.Temperature;
 import org.djunits4.value.vdouble.vector.AbsoluteTemperatureVector;
 import org.djunits4.value.vdouble.vector.TemperatureVector;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable AbsoluteTemperature Matrix.
@@ -20,7 +21,7 @@ import org.djunits4.value.vdouble.vector.TemperatureVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class AbsoluteTemperatureMatrix
         extends AbstractDoubleMatrixAbs<AbsoluteTemperatureUnit, AbsoluteTemperature, AbsoluteTemperatureVector,
                 AbsoluteTemperatureMatrix, TemperatureUnit, Temperature, TemperatureVector, TemperatureMatrix>
@@ -49,6 +50,48 @@ public class AbsoluteTemperatureMatrix
     public Class<AbsoluteTemperatureVector> getVectorClass()
     {
         return AbsoluteTemperatureVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public AbsoluteTemperatureMatrix instantiateMatrix(final DoubleMatrixData dmd, final AbsoluteTemperatureUnit displayUnit)
+    {
+        return new AbsoluteTemperatureMatrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public AbsoluteTemperatureVector instantiateVector(final DoubleVectorData dvd, final AbsoluteTemperatureUnit displayUnit)
+    {
+        return new AbsoluteTemperatureVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public AbsoluteTemperature instantiateScalar(final double value, final AbsoluteTemperatureUnit unit)
+    {
+        return new AbsoluteTemperature(value, unit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public TemperatureMatrix instantiateMatrixRel(final DoubleMatrixData dmd, final TemperatureUnit displayUnit)
+    {
+        return new TemperatureMatrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public TemperatureVector instantiateVectorRel(final DoubleVectorData dvd, final TemperatureUnit displayUnit)
+    {
+        return new TemperatureVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Temperature instantiateScalarRel(final double value, final TemperatureUnit unit)
+    {
+        return new Temperature(value, unit);
     }
 
 }

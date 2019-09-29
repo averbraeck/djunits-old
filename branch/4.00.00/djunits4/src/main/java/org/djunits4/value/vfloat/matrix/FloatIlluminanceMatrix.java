@@ -7,6 +7,7 @@ import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatIlluminance;
 import org.djunits4.value.vfloat.vector.FloatIlluminanceVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatFloatIlluminanceMatrix, a matrix of values with a IlluminanceUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vfloat.vector.FloatIlluminanceVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T21:03:23.462Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class FloatIlluminanceMatrix
         extends AbstractFloatMatrixRel<IlluminanceUnit, FloatIlluminance, FloatIlluminanceVector, FloatIlluminanceMatrix>
 
@@ -46,6 +47,27 @@ public class FloatIlluminanceMatrix
     public Class<FloatIlluminanceVector> getVectorClass()
     {
         return FloatIlluminanceVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatIlluminanceMatrix instantiateMatrix(final FloatMatrixData fmd, final IlluminanceUnit displayUnit)
+    {
+        return new FloatIlluminanceMatrix(fmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatIlluminanceVector instantiateVector(final FloatVectorData fvd, final IlluminanceUnit displayUnit)
+    {
+        return new FloatIlluminanceVector(fvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatIlluminance instantiateScalar(final float value, final IlluminanceUnit unit)
+    {
+        return new FloatIlluminance(value, unit);
     }
 
 }

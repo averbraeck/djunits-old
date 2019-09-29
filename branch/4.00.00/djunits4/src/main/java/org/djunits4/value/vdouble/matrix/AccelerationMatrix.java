@@ -7,6 +7,7 @@ import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.Acceleration;
 import org.djunits4.value.vdouble.vector.AccelerationVector;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable Double AccelerationMatrix, a matrix of values with a AccelerationUnit.
@@ -17,7 +18,7 @@ import org.djunits4.value.vdouble.vector.AccelerationVector;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-12T20:33:12.910Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T15:02:59.536Z")
 public class AccelerationMatrix
         extends AbstractDoubleMatrixRel<AccelerationUnit, Acceleration, AccelerationVector, AccelerationMatrix>
 
@@ -46,6 +47,27 @@ public class AccelerationMatrix
     public Class<AccelerationVector> getVectorClass()
     {
         return AccelerationVector.class;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public AccelerationMatrix instantiateMatrix(final DoubleMatrixData dmd, final AccelerationUnit displayUnit)
+    {
+        return new AccelerationMatrix(dmd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public AccelerationVector instantiateVector(final DoubleVectorData dvd, final AccelerationUnit displayUnit)
+    {
+        return new AccelerationVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Acceleration instantiateScalar(final double value, final AccelerationUnit unit)
+    {
+        return new Acceleration(value, unit);
     }
 
 }
