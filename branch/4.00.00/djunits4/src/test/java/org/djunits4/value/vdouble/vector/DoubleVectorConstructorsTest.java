@@ -412,7 +412,6 @@ public class DoubleVectorConstructorsTest
                     fail("negative index should have thrown a ValueRuntimeException");
                 }
                 catch (ValueRuntimeException vre)
-
                 {
                     // Ignore expected exception
                 }
@@ -443,7 +442,6 @@ public class DoubleVectorConstructorsTest
                     fail("negative index should have thrown a ValueRuntimeException");
                 }
                 catch (ValueRuntimeException vre)
-
                 {
                     // Ignore expected exception
                 }
@@ -535,7 +533,6 @@ public class DoubleVectorConstructorsTest
                     fail("negative index should have thrown a ValueRuntimeException");
                 }
                 catch (ValueRuntimeException vre)
-
                 {
                     // Ignore expected exception
                 }
@@ -663,6 +660,7 @@ public class DoubleVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
+                
                 try
                 {
                     immutable.ceil();
@@ -672,6 +670,7 @@ public class DoubleVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
+                
                 try
                 {
                     siv.floor();
@@ -681,6 +680,7 @@ public class DoubleVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
+                
                 try
                 {
                     siv.rint();
@@ -690,6 +690,7 @@ public class DoubleVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
+                
                 try
                 {
                     siv.neg();
@@ -699,6 +700,7 @@ public class DoubleVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
+                
                 mutable = siv.mutable().mutable();
                 mutable.floor();
                 for (int index = 0; index < testValues.length; index++)
@@ -801,6 +803,7 @@ public class DoubleVectorConstructorsTest
         {
             // Ignore expected exception
         }
+        
         try
         {
             DoubleVector.instantiate(testValues, null, StorageType.DENSE);
@@ -810,6 +813,7 @@ public class DoubleVectorConstructorsTest
         {
             // Ignore expected exception
         }
+        
         try
         {
             DoubleVector.instantiate(testValues, AbsoluteTemperatureUnit.KELVIN, null);
@@ -819,6 +823,7 @@ public class DoubleVectorConstructorsTest
         {
             // Ignore expected exception
         }
+        
         DoubleVector.instantiate(at, AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
         try
         {
@@ -829,6 +834,7 @@ public class DoubleVectorConstructorsTest
         {
             // Ignore expected exception
         }
+        
         try
         {
             DoubleVector.instantiate(at, null, StorageType.DENSE);
@@ -838,6 +844,7 @@ public class DoubleVectorConstructorsTest
         {
             // Ignore expected exception
         }
+        
         try
         {
             DoubleVector.instantiate(at, AbsoluteTemperatureUnit.KELVIN, null);
@@ -847,6 +854,7 @@ public class DoubleVectorConstructorsTest
         {
             // Ignore expected exception
         }
+        
         DoubleVector.instantiateList(al, AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
         try
         {
@@ -857,6 +865,7 @@ public class DoubleVectorConstructorsTest
         {
             // Ignore expected exception
         }
+        
         try
         {
             DoubleVector.instantiateList(al, null, StorageType.DENSE);
@@ -866,6 +875,7 @@ public class DoubleVectorConstructorsTest
         {
             // Ignore expected exception
         }
+        
         try
         {
             DoubleVector.instantiateList(al, AbsoluteTemperatureUnit.KELVIN, null);
@@ -886,6 +896,7 @@ public class DoubleVectorConstructorsTest
         {
             // Ignore expected exception
         }
+        
         try
         {
             DoubleVector.instantiateMap(map, testValues.length, null, StorageType.DENSE);
@@ -895,6 +906,7 @@ public class DoubleVectorConstructorsTest
         {
             // Ignore expected exception
         }
+        
         try
         {
             DoubleVector.instantiateMap(map, testValues.length, AbsoluteTemperatureUnit.KELVIN, null);
@@ -904,6 +916,7 @@ public class DoubleVectorConstructorsTest
         {
             // Ignore expected exception
         }
+        
         try
         {
             DoubleVector.instantiateMap(map, -1, AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
@@ -913,6 +926,7 @@ public class DoubleVectorConstructorsTest
         {
             // Ignore expected exception
         }
+        
         try
         {
             DoubleVector.instantiateMap(map, 1, AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
@@ -922,6 +936,7 @@ public class DoubleVectorConstructorsTest
         {
             // Ignore expected exception
         }
+        
         map.put(-1, at[0]);
         try
         {
@@ -932,6 +947,7 @@ public class DoubleVectorConstructorsTest
         {
             // Ignore expected exception
         }
+        
         map.remove(-1); // Remove the offending entry
         UnitBase<?> unitBase = UnitTypes.INSTANCE.getUnitBase("AbsoluteTemperature" + "Unit");
         SIVector.instantiate(testValues, SIUnit.of(unitBase.getSiDimensions()), StorageType.DENSE);
@@ -944,6 +960,7 @@ public class DoubleVectorConstructorsTest
         {
             // Ignore expected exception
         }
+        
         try
         {
             SIVector.instantiate((List<Double>) null, SIUnit.of(unitBase.getSiDimensions()), StorageType.DENSE);
@@ -953,6 +970,7 @@ public class DoubleVectorConstructorsTest
         {
             // Ignore expected exception
         }
+        
         try
         {
             SIVector.instantiate(testValues, null, StorageType.DENSE);
@@ -962,6 +980,7 @@ public class DoubleVectorConstructorsTest
         {
             // Ignore expected exception
         }
+        
         try
         {
             SIVector.instantiate(testValues, SIUnit.of(unitBase.getSiDimensions()), null);

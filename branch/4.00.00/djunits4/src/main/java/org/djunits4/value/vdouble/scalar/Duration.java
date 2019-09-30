@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits4.Throw;
+import org.djunits4.unit.AbsoluteTemperatureUnit;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.DurationUnit;
 import org.djunits4.unit.ElectricalChargeUnit;
@@ -116,7 +117,10 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
     public final Time plus(final Time v)
     {
         TimeUnit targetUnit = v.getDisplayUnit();
-        return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
+        Time result = instantiateAbs(v.getSI() + this.getSI(), TimeUnit.DEFAULT);
+        result.setDisplayUnit(targetUnit);
+        return result;
+//        return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 
     /**

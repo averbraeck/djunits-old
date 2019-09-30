@@ -111,7 +111,12 @@ public class Temperature
     public final AbsoluteTemperature plus(final AbsoluteTemperature v)
     {
         AbsoluteTemperatureUnit targetUnit = v.getDisplayUnit();
-        return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
+        //System.out.println("v: "+v.getInUnit() + ", this: " + getInUnit(targetUnit.getRelativeUnit()));
+        //System.out.println("Expected result " + result);
+        //return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
+        AbsoluteTemperature result = instantiateAbs(v.getSI() + this.getSI(), AbsoluteTemperatureUnit.DEFAULT);
+        result.setDisplayUnit(targetUnit);
+        return result;
     }
 
     /**

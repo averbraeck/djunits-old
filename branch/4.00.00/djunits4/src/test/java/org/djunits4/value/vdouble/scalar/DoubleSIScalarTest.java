@@ -44,7 +44,8 @@ public class DoubleSIScalarTest
         Length l = Length.valueOf("50.0 m");
         SIScalar pace = DoubleScalar.divide(d, l);
         System.out.println("pace = " + pace);
-        assertEquals("pace has as unit " + pace.getDisplayUnit().toString() + " instead of s/m", "s/m", pace.getDisplayUnit().toString());
+        assertEquals("pace has as unit " + pace.getDisplayUnit().toString() + " instead of s/m", "s/m",
+                pace.getDisplayUnit().toString());
         assertEquals(0.2, pace.getSI(), 0.00001);
         assertTrue(pace.toString().startsWith("0.200"));
         assertTrue(pace.toString().endsWith("s/m"));
@@ -201,7 +202,7 @@ public class DoubleSIScalarTest
         assertEquals("m", UNITS.METER.getId());
 
         AbstractDoubleScalarRel<?, ?> dimless = new Dimensionless(1.0, DimensionlessUnit.SI);
-        for (String type : CLASSNAMES.REL_LIST)
+        for (String type : CLASSNAMES.REL_ALL_LIST)
         {
             Class.forName("org.djunits4.unit." + type + "Unit");
             UnitBase<?> unitBase = UnitTypes.INSTANCE.getUnitBase(type + "Unit");

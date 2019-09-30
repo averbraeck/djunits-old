@@ -115,7 +115,13 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
     public final Position plus(final Position v)
     {
         PositionUnit targetUnit = v.getDisplayUnit();
-        return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
+        //System.out.println("v: "+v.getInUnit() + ", this: " + getInUnit(targetUnit.getRelativeUnit()));
+        //System.out.println("Expected result " + result);
+        //return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
+        Position result = instantiateAbs(v.getSI() + this.getSI(), PositionUnit.DEFAULT);
+        result.setDisplayUnit(targetUnit);
+        return result;
+//        return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 
     /**
