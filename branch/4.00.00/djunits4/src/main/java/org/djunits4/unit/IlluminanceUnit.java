@@ -20,7 +20,7 @@ public class IlluminanceUnit extends Unit<IlluminanceUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "lux" as the SI signature. */
-    public static final UnitBase<IlluminanceUnit> BASE = new UnitBase<>("cd/m2");
+    public static final UnitBase<IlluminanceUnit> BASE = new UnitBase<>("srcd/m2");
 
     /** The SI unit for amount of illuminance is lux */
     public static final IlluminanceUnit SI =
