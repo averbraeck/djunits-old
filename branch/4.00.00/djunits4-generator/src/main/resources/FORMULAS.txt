@@ -176,12 +176,12 @@
 /LuminousFlux=Dimensionless
 /Area=Illuminance
 /Illuminance=Area
-/LuminousIntensity=SolidAngle
-/SolidAngle=LuminousIntensity
+/LuminousIntensity=AngleSolid
+/AngleSolid=LuminousIntensity
 
 %LuminousIntensity
 /LuminousIntensity=Dimensionless
-*SolidAngle=LuminousFlux
+*AngleSolid=LuminousFlux
 
 %MagneticFluxDensity
 /MagneticFluxDensity=Dimensionless
@@ -189,7 +189,7 @@
 
 %MagneticFlux
 /MagneticFlux=Dimensionless
-/ElectricalPotental=Duration
+/ElectricalPotential=Duration
 /Duration=ElectricalPotential
 /Area=MagneticFluxDensity
 /MagneticFluxDensity=Area
