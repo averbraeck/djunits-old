@@ -20,7 +20,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalInductanceUnit, ElectricalInductance>
 {
     /** */
@@ -177,28 +177,22 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
      */
     public static ElectricalInductance valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing ElectricalInductance: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing ElectricalInductance: empty unitString");
+        Throw.whenNull(text, "Error parsing ElectricalInductance: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class,
+                "Error parsing ElectricalInductance: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            ElectricalInductanceUnit unit = ElectricalInductanceUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                ElectricalInductanceUnit unit = ElectricalInductanceUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new ElectricalInductance(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new ElectricalInductance(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing ElectricalInductance from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing ElectricalInductance from " + text);
@@ -230,7 +224,7 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
      * @param v ElectricalInductance scalar
      * @return Dimensionless scalar as a division of ElectricalInductance and ElectricalInductance
      */
-    public final Dimensionless divideBy(final ElectricalInductance v)
+    public final Dimensionless divide(final ElectricalInductance v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -240,7 +234,7 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
      * @param v ElectricalInductance scalar
      * @return MagneticFlux scalar as a multiplication of ElectricalInductance and ElectricalCurrent
      */
-    public final MagneticFlux multiplyBy(final ElectricalCurrent v)
+    public final MagneticFlux times(final ElectricalCurrent v)
     {
         return new MagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
     }

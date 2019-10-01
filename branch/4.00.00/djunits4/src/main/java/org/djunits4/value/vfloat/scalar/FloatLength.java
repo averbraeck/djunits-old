@@ -27,7 +27,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, FloatPosition, LengthUnit, FloatLength>
 {
     /** */
@@ -194,28 +194,21 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
      */
     public static FloatLength valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing FloatLength: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatLength: empty unitString");
+        Throw.whenNull(text, "Error parsing FloatLength: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatLength: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            LengthUnit unit = LengthUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                LengthUnit unit = LengthUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        float f = Float.parseFloat(valueString);
-                        return new FloatLength(f, unit);
-                    }
+                    float f = Float.parseFloat(valueString);
+                    return new FloatLength(f, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing FloatLength from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing FloatLength from " + text);
@@ -246,7 +239,7 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
      * @param v FloatLength scalar
      * @return FloatDimensionless scalar as a division of FloatLength and FloatLength
      */
-    public final FloatDimensionless divideBy(final FloatLength v)
+    public final FloatDimensionless divide(final FloatLength v)
     {
         return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -256,7 +249,7 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
      * @param v FloatLength scalar
      * @return FloatArea scalar as a multiplication of FloatLength and FloatLength
      */
-    public final FloatArea multiplyBy(final FloatLength v)
+    public final FloatArea times(final FloatLength v)
     {
         return new FloatArea(this.si * v.si, AreaUnit.SI);
     }
@@ -266,7 +259,7 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
      * @param v FloatLength scalar
      * @return FloatArea scalar as a division of FloatLength and FloatLinearDensity
      */
-    public final FloatArea divideBy(final FloatLinearDensity v)
+    public final FloatArea divide(final FloatLinearDensity v)
     {
         return new FloatArea(this.si / v.si, AreaUnit.SI);
     }
@@ -276,7 +269,7 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
      * @param v FloatLength scalar
      * @return FloatLinearDensity scalar as a division of FloatLength and FloatArea
      */
-    public final FloatLinearDensity divideBy(final FloatArea v)
+    public final FloatLinearDensity divide(final FloatArea v)
     {
         return new FloatLinearDensity(this.si / v.si, LinearDensityUnit.SI);
     }
@@ -286,7 +279,7 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
      * @param v FloatLength scalar
      * @return FloatVolume scalar as a multiplication of FloatLength and FloatArea
      */
-    public final FloatVolume multiplyBy(final FloatArea v)
+    public final FloatVolume times(final FloatArea v)
     {
         return new FloatVolume(this.si * v.si, VolumeUnit.SI);
     }
@@ -296,7 +289,7 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
      * @param v FloatLength scalar
      * @return FloatEnergy scalar as a multiplication of FloatLength and FloatForce
      */
-    public final FloatEnergy multiplyBy(final FloatForce v)
+    public final FloatEnergy times(final FloatForce v)
     {
         return new FloatEnergy(this.si * v.si, EnergyUnit.SI);
     }
@@ -306,7 +299,7 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
      * @param v FloatLength scalar
      * @return FloatSpeed scalar as a multiplication of FloatLength and FloatFrequency
      */
-    public final FloatSpeed multiplyBy(final FloatFrequency v)
+    public final FloatSpeed times(final FloatFrequency v)
     {
         return new FloatSpeed(this.si * v.si, SpeedUnit.SI);
     }
@@ -316,7 +309,7 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
      * @param v FloatLength scalar
      * @return FloatSpeed scalar as a division of FloatLength and FloatDuration
      */
-    public final FloatSpeed divideBy(final FloatDuration v)
+    public final FloatSpeed divide(final FloatDuration v)
     {
         return new FloatSpeed(this.si / v.si, SpeedUnit.SI);
     }
@@ -326,7 +319,7 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
      * @param v FloatLength scalar
      * @return FloatDuration scalar as a division of FloatLength and FloatSpeed
      */
-    public final FloatDuration divideBy(final FloatSpeed v)
+    public final FloatDuration divide(final FloatSpeed v)
     {
         return new FloatDuration(this.si / v.si, DurationUnit.SI);
     }

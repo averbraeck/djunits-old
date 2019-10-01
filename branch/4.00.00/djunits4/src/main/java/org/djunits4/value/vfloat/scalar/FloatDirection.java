@@ -20,7 +20,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatDirection, AngleUnit, FloatAngle>
 {
     /** */
@@ -168,28 +168,21 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
      */
     public static FloatDirection valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing FloatDirection: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatDirection: empty unitString");
+        Throw.whenNull(text, "Error parsing FloatDirection: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatDirection: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            DirectionUnit unit = DirectionUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                DirectionUnit unit = DirectionUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        float f = Float.parseFloat(valueString);
-                        return new FloatDirection(f, unit);
-                    }
+                    float f = Float.parseFloat(valueString);
+                    return new FloatDirection(f, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing FloatDirection from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing FloatDirection from " + text);

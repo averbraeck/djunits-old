@@ -22,7 +22,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, FloatAcceleration>
 {
     /** */
@@ -184,28 +184,21 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
      */
     public static FloatAcceleration valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing FloatAcceleration: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatAcceleration: empty unitString");
+        Throw.whenNull(text, "Error parsing FloatAcceleration: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatAcceleration: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            AccelerationUnit unit = AccelerationUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                AccelerationUnit unit = AccelerationUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        float f = Float.parseFloat(valueString);
-                        return new FloatAcceleration(f, unit);
-                    }
+                    float f = Float.parseFloat(valueString);
+                    return new FloatAcceleration(f, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing FloatAcceleration from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing FloatAcceleration from " + text);
@@ -237,7 +230,7 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
      * @param v FloatAcceleration scalar
      * @return FloatDimensionless scalar as a division of FloatAcceleration and FloatAcceleration
      */
-    public final FloatDimensionless divideBy(final FloatAcceleration v)
+    public final FloatDimensionless divide(final FloatAcceleration v)
     {
         return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -247,7 +240,7 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
      * @param v FloatAcceleration scalar
      * @return FloatForce scalar as a multiplication of FloatAcceleration and FloatMass
      */
-    public final FloatForce multiplyBy(final FloatMass v)
+    public final FloatForce times(final FloatMass v)
     {
         return new FloatForce(this.si * v.si, ForceUnit.SI);
     }
@@ -257,7 +250,7 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
      * @param v FloatAcceleration scalar
      * @return FloatSpeed scalar as a multiplication of FloatAcceleration and FloatDuration
      */
-    public final FloatSpeed multiplyBy(final FloatDuration v)
+    public final FloatSpeed times(final FloatDuration v)
     {
         return new FloatSpeed(this.si * v.si, SpeedUnit.SI);
     }
@@ -267,7 +260,7 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
      * @param v FloatAcceleration scalar
      * @return FloatSpeed scalar as a division of FloatAcceleration and FloatFrequency
      */
-    public final FloatSpeed divideBy(final FloatFrequency v)
+    public final FloatSpeed divide(final FloatFrequency v)
     {
         return new FloatSpeed(this.si / v.si, SpeedUnit.SI);
     }
@@ -277,7 +270,7 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
      * @param v FloatAcceleration scalar
      * @return FloatFrequency scalar as a division of FloatAcceleration and FloatSpeed
      */
-    public final FloatFrequency divideBy(final FloatSpeed v)
+    public final FloatFrequency divide(final FloatSpeed v)
     {
         return new FloatFrequency(this.si / v.si, FrequencyUnit.SI);
     }

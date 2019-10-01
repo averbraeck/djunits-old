@@ -21,7 +21,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class Angle extends AbstractDoubleScalarRelWithAbs<DirectionUnit, Direction, AngleUnit, Angle>
 {
     /** */
@@ -177,28 +177,21 @@ public class Angle extends AbstractDoubleScalarRelWithAbs<DirectionUnit, Directi
      */
     public static Angle valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing Angle: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Angle: empty unitString");
+        Throw.whenNull(text, "Error parsing Angle: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Angle: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            AngleUnit unit = AngleUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                AngleUnit unit = AngleUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new Angle(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new Angle(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing Angle from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing Angle from " + text);
@@ -229,7 +222,7 @@ public class Angle extends AbstractDoubleScalarRelWithAbs<DirectionUnit, Directi
      * @param v Angle scalar
      * @return Dimensionless scalar as a division of Angle and Angle
      */
-    public final Dimensionless divideBy(final Angle v)
+    public final Dimensionless divide(final Angle v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }

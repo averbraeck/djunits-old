@@ -28,7 +28,7 @@ public class CLASSNAMES
     public static final List<String> REL_WITH_ABS_LIST;
 
     /** The classes that are just relative (name = class name). */
-    private static final String[] REL = new String[] {"AbsorbedDose", "Acceleration", "AmountOfSubstance", "AngleSolid", "Area",
+    private static final String[] REL = new String[] {"AbsorbedDose", "Acceleration", "AmountOfSubstance", "SolidAngle", "Area",
             "CatalyticActivity", "Density", "Dimensionless", "ElectricalCapacitance", "ElectricalCharge",
             "ElectricalConductance", "ElectricalCurrent", "ElectricalInductance", "ElectricalPotential", "ElectricalResistance",
             "Energy", "EquivalentDose", "FlowMass", "FlowVolume", "Force", "Frequency", "Illuminance", "LinearDensity",

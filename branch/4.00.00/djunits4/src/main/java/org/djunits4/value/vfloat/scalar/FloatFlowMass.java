@@ -24,7 +24,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlowMass>
 {
     /** */
@@ -184,28 +184,21 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
      */
     public static FloatFlowMass valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing FloatFlowMass: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatFlowMass: empty unitString");
+        Throw.whenNull(text, "Error parsing FloatFlowMass: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatFlowMass: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            FlowMassUnit unit = FlowMassUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                FlowMassUnit unit = FlowMassUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        float f = Float.parseFloat(valueString);
-                        return new FloatFlowMass(f, unit);
-                    }
+                    float f = Float.parseFloat(valueString);
+                    return new FloatFlowMass(f, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing FloatFlowMass from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing FloatFlowMass from " + text);
@@ -236,7 +229,7 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
      * @param v FloatFlowMass scalar
      * @return FloatDimensionless scalar as a division of FloatFlowMass and FloatFlowMass
      */
-    public final FloatDimensionless divideBy(final FloatFlowMass v)
+    public final FloatDimensionless divide(final FloatFlowMass v)
     {
         return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -246,7 +239,7 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
      * @param v FloatFlowMass scalar
      * @return FloatMass scalar as a multiplication of FloatFlowMass and FloatDuration
      */
-    public final FloatMass multiplyBy(final FloatDuration v)
+    public final FloatMass times(final FloatDuration v)
     {
         return new FloatMass(this.si * v.si, MassUnit.SI);
     }
@@ -256,7 +249,7 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
      * @param v FloatFlowMass scalar
      * @return FloatMass scalar as a division of FloatFlowMass and FloatFrequency
      */
-    public final FloatMass divideBy(final FloatFrequency v)
+    public final FloatMass divide(final FloatFrequency v)
     {
         return new FloatMass(this.si / v.si, MassUnit.SI);
     }
@@ -266,7 +259,7 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
      * @param v FloatFlowMass scalar
      * @return FloatFrequency scalar as a division of FloatFlowMass and FloatMass
      */
-    public final FloatFrequency divideBy(final FloatMass v)
+    public final FloatFrequency divide(final FloatMass v)
     {
         return new FloatFrequency(this.si / v.si, FrequencyUnit.SI);
     }
@@ -276,7 +269,7 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
      * @param v FloatFlowMass scalar
      * @return FloatForce scalar as a multiplication of FloatFlowMass and FloatSpeed
      */
-    public final FloatForce multiplyBy(final FloatSpeed v)
+    public final FloatForce times(final FloatSpeed v)
     {
         return new FloatForce(this.si * v.si, ForceUnit.SI);
     }
@@ -286,7 +279,7 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
      * @param v FloatFlowMass scalar
      * @return FloatDensity scalar as a division of FloatFlowMass and FloatFlowVolume
      */
-    public final FloatDensity divideBy(final FloatFlowVolume v)
+    public final FloatDensity divide(final FloatFlowVolume v)
     {
         return new FloatDensity(this.si / v.si, DensityUnit.SI);
     }
@@ -296,7 +289,7 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
      * @param v FloatFlowMass scalar
      * @return FloatFlowVolume scalar as a division of FloatFlowMass and FloatDensity
      */
-    public final FloatFlowVolume divideBy(final FloatDensity v)
+    public final FloatFlowVolume divide(final FloatDensity v)
     {
         return new FloatFlowVolume(this.si / v.si, FlowVolumeUnit.SI);
     }

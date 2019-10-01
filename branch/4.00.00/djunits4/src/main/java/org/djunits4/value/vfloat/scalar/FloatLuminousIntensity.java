@@ -20,7 +20,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousIntensityUnit, FloatLuminousIntensity>
 {
     /** */
@@ -187,29 +187,22 @@ public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousInten
      */
     public static FloatLuminousIntensity valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing FloatLuminousIntensity: unitString is null");
+        Throw.whenNull(text, "Error parsing FloatLuminousIntensity: text to parse is null");
         Throw.when(text.length() == 0, IllegalArgumentException.class,
-                "Error parsing FloatLuminousIntensity: empty unitString");
+                "Error parsing FloatLuminousIntensity: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            LuminousIntensityUnit unit = LuminousIntensityUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                LuminousIntensityUnit unit = LuminousIntensityUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        float f = Float.parseFloat(valueString);
-                        return new FloatLuminousIntensity(f, unit);
-                    }
+                    float f = Float.parseFloat(valueString);
+                    return new FloatLuminousIntensity(f, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing FloatLuminousIntensity from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing FloatLuminousIntensity from " + text);
@@ -242,17 +235,17 @@ public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousInten
      * @param v FloatLuminousIntensity scalar
      * @return FloatDimensionless scalar as a division of FloatLuminousIntensity and FloatLuminousIntensity
      */
-    public final FloatDimensionless divideBy(final FloatLuminousIntensity v)
+    public final FloatDimensionless divide(final FloatLuminousIntensity v)
     {
         return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
 
     /**
-     * Calculate the multiplication of FloatLuminousIntensity and FloatAngleSolid, which results in a FloatLuminousFlux scalar.
+     * Calculate the multiplication of FloatLuminousIntensity and FloatSolidAngle, which results in a FloatLuminousFlux scalar.
      * @param v FloatLuminousIntensity scalar
-     * @return FloatLuminousFlux scalar as a multiplication of FloatLuminousIntensity and FloatAngleSolid
+     * @return FloatLuminousFlux scalar as a multiplication of FloatLuminousIntensity and FloatSolidAngle
      */
-    public final FloatLuminousFlux multiplyBy(final FloatAngleSolid v)
+    public final FloatLuminousFlux times(final FloatSolidAngle v)
     {
         return new FloatLuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
     }

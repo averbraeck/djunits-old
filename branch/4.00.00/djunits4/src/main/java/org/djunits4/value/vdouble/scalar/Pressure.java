@@ -21,7 +21,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 {
     /** */
@@ -171,28 +171,21 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
      */
     public static Pressure valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing Pressure: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Pressure: empty unitString");
+        Throw.whenNull(text, "Error parsing Pressure: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Pressure: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            PressureUnit unit = PressureUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                PressureUnit unit = PressureUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new Pressure(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new Pressure(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing Pressure from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing Pressure from " + text);
@@ -223,7 +216,7 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
      * @param v Pressure scalar
      * @return Dimensionless scalar as a division of Pressure and Pressure
      */
-    public final Dimensionless divideBy(final Pressure v)
+    public final Dimensionless divide(final Pressure v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -233,7 +226,7 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
      * @param v Pressure scalar
      * @return Force scalar as a multiplication of Pressure and Area
      */
-    public final Force multiplyBy(final Area v)
+    public final Force times(final Area v)
     {
         return new Force(this.si * v.si, ForceUnit.SI);
     }
@@ -243,7 +236,7 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
      * @param v Pressure scalar
      * @return Energy scalar as a multiplication of Pressure and Volume
      */
-    public final Energy multiplyBy(final Volume v)
+    public final Energy times(final Volume v)
     {
         return new Energy(this.si * v.si, EnergyUnit.SI);
     }

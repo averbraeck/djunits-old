@@ -23,7 +23,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalPotentialUnit, FloatElectricalPotential>
 {
     /** */
@@ -190,29 +190,22 @@ public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalP
      */
     public static FloatElectricalPotential valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing FloatElectricalPotential: unitString is null");
+        Throw.whenNull(text, "Error parsing FloatElectricalPotential: text to parse is null");
         Throw.when(text.length() == 0, IllegalArgumentException.class,
-                "Error parsing FloatElectricalPotential: empty unitString");
+                "Error parsing FloatElectricalPotential: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            ElectricalPotentialUnit unit = ElectricalPotentialUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                ElectricalPotentialUnit unit = ElectricalPotentialUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        float f = Float.parseFloat(valueString);
-                        return new FloatElectricalPotential(f, unit);
-                    }
+                    float f = Float.parseFloat(valueString);
+                    return new FloatElectricalPotential(f, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing FloatElectricalPotential from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing FloatElectricalPotential from " + text);
@@ -245,7 +238,7 @@ public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalP
      * @param v FloatElectricalPotential scalar
      * @return FloatDimensionless scalar as a division of FloatElectricalPotential and FloatElectricalPotential
      */
-    public final FloatDimensionless divideBy(final FloatElectricalPotential v)
+    public final FloatDimensionless divide(final FloatElectricalPotential v)
     {
         return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -256,7 +249,7 @@ public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalP
      * @param v FloatElectricalPotential scalar
      * @return FloatPower scalar as a multiplication of FloatElectricalPotential and FloatElectricalCurrent
      */
-    public final FloatPower multiplyBy(final FloatElectricalCurrent v)
+    public final FloatPower times(final FloatElectricalCurrent v)
     {
         return new FloatPower(this.si * v.si, PowerUnit.SI);
     }
@@ -267,7 +260,7 @@ public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalP
      * @param v FloatElectricalPotential scalar
      * @return FloatElectricalResistance scalar as a division of FloatElectricalPotential and FloatElectricalCurrent
      */
-    public final FloatElectricalResistance divideBy(final FloatElectricalCurrent v)
+    public final FloatElectricalResistance divide(final FloatElectricalCurrent v)
     {
         return new FloatElectricalResistance(this.si / v.si, ElectricalResistanceUnit.SI);
     }
@@ -278,7 +271,7 @@ public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalP
      * @param v FloatElectricalPotential scalar
      * @return FloatElectricalCurrent scalar as a division of FloatElectricalPotential and FloatElectricalResistance
      */
-    public final FloatElectricalCurrent divideBy(final FloatElectricalResistance v)
+    public final FloatElectricalCurrent divide(final FloatElectricalResistance v)
     {
         return new FloatElectricalCurrent(this.si / v.si, ElectricalCurrentUnit.SI);
     }
@@ -288,7 +281,7 @@ public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalP
      * @param v FloatElectricalPotential scalar
      * @return FloatMagneticFlux scalar as a multiplication of FloatElectricalPotential and FloatDuration
      */
-    public final FloatMagneticFlux multiplyBy(final FloatDuration v)
+    public final FloatMagneticFlux times(final FloatDuration v)
     {
         return new FloatMagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
     }

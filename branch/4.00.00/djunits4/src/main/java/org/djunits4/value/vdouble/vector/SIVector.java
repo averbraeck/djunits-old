@@ -9,7 +9,6 @@ import org.djunits4.Throw;
 import org.djunits4.unit.AbsorbedDoseUnit;
 import org.djunits4.unit.AccelerationUnit;
 import org.djunits4.unit.AmountOfSubstanceUnit;
-import org.djunits4.unit.AngleSolidUnit;
 import org.djunits4.unit.AngleUnit;
 import org.djunits4.unit.AreaUnit;
 import org.djunits4.unit.CatalyticActivityUnit;
@@ -41,6 +40,7 @@ import org.djunits4.unit.PowerUnit;
 import org.djunits4.unit.PressureUnit;
 import org.djunits4.unit.RadioActivityUnit;
 import org.djunits4.unit.SIUnit;
+import org.djunits4.unit.SolidAngleUnit;
 import org.djunits4.unit.SpeedUnit;
 import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.TorqueUnit;
@@ -66,7 +66,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector>
 {
     /** */
@@ -329,31 +329,6 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AmountOfSubstanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AmountOfSubstanceVector", this.toString());
         AmountOfSubstanceVector result = new AmountOfSubstanceVector(this.data, displayUnit.getStandardUnit());
-        result.setDisplayUnit(displayUnit);
-        return result;
-    }
-
-    /**
-     * Return the current vector as a anglesolid vector.
-     * @return AngleSolidVector; the current vector as a anglesolid vector
-     */
-    public final AngleSolidVector asAngleSolid()
-    {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AngleSolidUnit.BASE.getSiDimensions())),
-                UnitRuntimeException.class, "cannot cast %s to AngleSolidVector", this.toString());
-        return new AngleSolidVector(this.data, AngleSolidUnit.SI);
-    }
-
-    /**
-     * Return the current vector as a anglesolid vector, and provide a display unit.
-     * @param displayUnit the unit in which the value will be displayed
-     * @return AngleSolidVector; the current vector as a anglesolid vector
-     */
-    public final AngleSolidVector asAngleSolid(final AngleSolidUnit displayUnit)
-    {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AngleSolidUnit.BASE.getSiDimensions())),
-                UnitRuntimeException.class, "cannot cast %s to AngleSolidVector", this.toString());
-        AngleSolidVector result = new AngleSolidVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
         return result;
     }
@@ -1029,6 +1004,31 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(RadioActivityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to RadioActivityVector", this.toString());
         RadioActivityVector result = new RadioActivityVector(this.data, displayUnit.getStandardUnit());
+        result.setDisplayUnit(displayUnit);
+        return result;
+    }
+
+    /**
+     * Return the current vector as a solidangle vector.
+     * @return SolidAngleVector; the current vector as a solidangle vector
+     */
+    public final SolidAngleVector asSolidAngle()
+    {
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(SolidAngleUnit.BASE.getSiDimensions())),
+                UnitRuntimeException.class, "cannot cast %s to SolidAngleVector", this.toString());
+        return new SolidAngleVector(this.data, SolidAngleUnit.SI);
+    }
+
+    /**
+     * Return the current vector as a solidangle vector, and provide a display unit.
+     * @param displayUnit the unit in which the value will be displayed
+     * @return SolidAngleVector; the current vector as a solidangle vector
+     */
+    public final SolidAngleVector asSolidAngle(final SolidAngleUnit displayUnit)
+    {
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(SolidAngleUnit.BASE.getSiDimensions())),
+                UnitRuntimeException.class, "cannot cast %s to SolidAngleVector", this.toString());
+        SolidAngleVector result = new SolidAngleVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
         return result;
     }

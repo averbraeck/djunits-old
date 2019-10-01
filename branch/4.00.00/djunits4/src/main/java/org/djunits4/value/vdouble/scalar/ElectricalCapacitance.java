@@ -22,7 +22,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCapacitanceUnit, ElectricalCapacitance>
 {
     /** */
@@ -179,28 +179,22 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
      */
     public static ElectricalCapacitance valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing ElectricalCapacitance: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing ElectricalCapacitance: empty unitString");
+        Throw.whenNull(text, "Error parsing ElectricalCapacitance: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class,
+                "Error parsing ElectricalCapacitance: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            ElectricalCapacitanceUnit unit = ElectricalCapacitanceUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                ElectricalCapacitanceUnit unit = ElectricalCapacitanceUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new ElectricalCapacitance(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new ElectricalCapacitance(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing ElectricalCapacitance from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing ElectricalCapacitance from " + text);
@@ -232,7 +226,7 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
      * @param v ElectricalCapacitance scalar
      * @return Dimensionless scalar as a division of ElectricalCapacitance and ElectricalCapacitance
      */
-    public final Dimensionless divideBy(final ElectricalCapacitance v)
+    public final Dimensionless divide(final ElectricalCapacitance v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -243,7 +237,7 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
      * @param v ElectricalCapacitance scalar
      * @return ElectricalCharge scalar as a multiplication of ElectricalCapacitance and ElectricalPotential
      */
-    public final ElectricalCharge multiplyBy(final ElectricalPotential v)
+    public final ElectricalCharge times(final ElectricalPotential v)
     {
         return new ElectricalCharge(this.si * v.si, ElectricalChargeUnit.SI);
     }
@@ -253,7 +247,7 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
      * @param v ElectricalCapacitance scalar
      * @return ElectricalConductance scalar as a division of ElectricalCapacitance and Duration
      */
-    public final ElectricalConductance divideBy(final Duration v)
+    public final ElectricalConductance divide(final Duration v)
     {
         return new ElectricalConductance(this.si / v.si, ElectricalConductanceUnit.SI);
     }
@@ -263,7 +257,7 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
      * @param v ElectricalCapacitance scalar
      * @return Duration scalar as a division of ElectricalCapacitance and ElectricalConductance
      */
-    public final Duration divideBy(final ElectricalConductance v)
+    public final Duration divide(final ElectricalConductance v)
     {
         return new Duration(this.si / v.si, DurationUnit.SI);
     }

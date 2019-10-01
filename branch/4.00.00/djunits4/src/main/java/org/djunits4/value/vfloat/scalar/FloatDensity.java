@@ -21,7 +21,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class FloatDensity extends AbstractFloatScalarRel<DensityUnit, FloatDensity>
 {
     /** */
@@ -181,28 +181,21 @@ public class FloatDensity extends AbstractFloatScalarRel<DensityUnit, FloatDensi
      */
     public static FloatDensity valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing FloatDensity: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatDensity: empty unitString");
+        Throw.whenNull(text, "Error parsing FloatDensity: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatDensity: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            DensityUnit unit = DensityUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                DensityUnit unit = DensityUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        float f = Float.parseFloat(valueString);
-                        return new FloatDensity(f, unit);
-                    }
+                    float f = Float.parseFloat(valueString);
+                    return new FloatDensity(f, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing FloatDensity from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing FloatDensity from " + text);
@@ -233,7 +226,7 @@ public class FloatDensity extends AbstractFloatScalarRel<DensityUnit, FloatDensi
      * @param v FloatDensity scalar
      * @return FloatDimensionless scalar as a division of FloatDensity and FloatDensity
      */
-    public final FloatDimensionless divideBy(final FloatDensity v)
+    public final FloatDimensionless divide(final FloatDensity v)
     {
         return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -243,7 +236,7 @@ public class FloatDensity extends AbstractFloatScalarRel<DensityUnit, FloatDensi
      * @param v FloatDensity scalar
      * @return FloatMass scalar as a multiplication of FloatDensity and FloatVolume
      */
-    public final FloatMass multiplyBy(final FloatVolume v)
+    public final FloatMass times(final FloatVolume v)
     {
         return new FloatMass(this.si * v.si, MassUnit.SI);
     }
@@ -253,7 +246,7 @@ public class FloatDensity extends AbstractFloatScalarRel<DensityUnit, FloatDensi
      * @param v FloatDensity scalar
      * @return FloatFlowMass scalar as a multiplication of FloatDensity and FloatFlowVolume
      */
-    public final FloatFlowMass multiplyBy(final FloatFlowVolume v)
+    public final FloatFlowMass times(final FloatFlowVolume v)
     {
         return new FloatFlowMass(this.si * v.si, FlowMassUnit.SI);
     }

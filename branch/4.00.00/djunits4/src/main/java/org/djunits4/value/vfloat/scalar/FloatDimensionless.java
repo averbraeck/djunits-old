@@ -8,7 +8,6 @@ import org.djunits4.Throw;
 import org.djunits4.unit.AbsorbedDoseUnit;
 import org.djunits4.unit.AccelerationUnit;
 import org.djunits4.unit.AmountOfSubstanceUnit;
-import org.djunits4.unit.AngleSolidUnit;
 import org.djunits4.unit.AngleUnit;
 import org.djunits4.unit.AreaUnit;
 import org.djunits4.unit.CatalyticActivityUnit;
@@ -39,6 +38,7 @@ import org.djunits4.unit.MassUnit;
 import org.djunits4.unit.PowerUnit;
 import org.djunits4.unit.PressureUnit;
 import org.djunits4.unit.RadioActivityUnit;
+import org.djunits4.unit.SolidAngleUnit;
 import org.djunits4.unit.SpeedUnit;
 import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.TorqueUnit;
@@ -56,7 +56,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit, FloatDimensionless>
         implements DimensionlessFunctions<DimensionlessUnit, FloatDimensionless>
 {
@@ -221,28 +221,21 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      */
     public static FloatDimensionless valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing FloatDimensionless: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatDimensionless: empty unitString");
+        Throw.whenNull(text, "Error parsing FloatDimensionless: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatDimensionless: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            DimensionlessUnit unit = DimensionlessUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                DimensionlessUnit unit = DimensionlessUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        float f = Float.parseFloat(valueString);
-                        return new FloatDimensionless(f, unit);
-                    }
+                    float f = Float.parseFloat(valueString);
+                    return new FloatDimensionless(f, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing FloatDimensionless from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing FloatDimensionless from " + text);
@@ -407,7 +400,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatDimensionless scalar as a division of FloatDimensionless and FloatDimensionless
      */
-    public final FloatDimensionless divideBy(final FloatDimensionless v)
+    public final FloatDimensionless divide(final FloatDimensionless v)
     {
         return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -417,7 +410,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatAbsorbedDose scalar as a multiplication of FloatDimensionless and FloatAbsorbedDose
      */
-    public final FloatAbsorbedDose multiplyBy(final FloatAbsorbedDose v)
+    public final FloatAbsorbedDose times(final FloatAbsorbedDose v)
     {
         return new FloatAbsorbedDose(this.si * v.si, AbsorbedDoseUnit.SI);
     }
@@ -427,7 +420,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatAcceleration scalar as a multiplication of FloatDimensionless and FloatAcceleration
      */
-    public final FloatAcceleration multiplyBy(final FloatAcceleration v)
+    public final FloatAcceleration times(final FloatAcceleration v)
     {
         return new FloatAcceleration(this.si * v.si, AccelerationUnit.SI);
     }
@@ -438,7 +431,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatAmountOfSubstance scalar as a multiplication of FloatDimensionless and FloatAmountOfSubstance
      */
-    public final FloatAmountOfSubstance multiplyBy(final FloatAmountOfSubstance v)
+    public final FloatAmountOfSubstance times(final FloatAmountOfSubstance v)
     {
         return new FloatAmountOfSubstance(this.si * v.si, AmountOfSubstanceUnit.SI);
     }
@@ -448,19 +441,19 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatAngle scalar as a multiplication of FloatDimensionless and FloatAngle
      */
-    public final FloatAngle multiplyBy(final FloatAngle v)
+    public final FloatAngle times(final FloatAngle v)
     {
         return new FloatAngle(this.si * v.si, AngleUnit.SI);
     }
 
     /**
-     * Calculate the multiplication of FloatDimensionless and FloatAngleSolid, which results in a FloatAngleSolid scalar.
+     * Calculate the multiplication of FloatDimensionless and FloatSolidAngle, which results in a FloatSolidAngle scalar.
      * @param v FloatDimensionless scalar
-     * @return FloatAngleSolid scalar as a multiplication of FloatDimensionless and FloatAngleSolid
+     * @return FloatSolidAngle scalar as a multiplication of FloatDimensionless and FloatSolidAngle
      */
-    public final FloatAngleSolid multiplyBy(final FloatAngleSolid v)
+    public final FloatSolidAngle times(final FloatSolidAngle v)
     {
-        return new FloatAngleSolid(this.si * v.si, AngleSolidUnit.SI);
+        return new FloatSolidAngle(this.si * v.si, SolidAngleUnit.SI);
     }
 
     /**
@@ -468,7 +461,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatArea scalar as a multiplication of FloatDimensionless and FloatArea
      */
-    public final FloatArea multiplyBy(final FloatArea v)
+    public final FloatArea times(final FloatArea v)
     {
         return new FloatArea(this.si * v.si, AreaUnit.SI);
     }
@@ -479,7 +472,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatCatalyticActivity scalar as a multiplication of FloatDimensionless and FloatCatalyticActivity
      */
-    public final FloatCatalyticActivity multiplyBy(final FloatCatalyticActivity v)
+    public final FloatCatalyticActivity times(final FloatCatalyticActivity v)
     {
         return new FloatCatalyticActivity(this.si * v.si, CatalyticActivityUnit.SI);
     }
@@ -489,7 +482,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatDensity scalar as a multiplication of FloatDimensionless and FloatDensity
      */
-    public final FloatDensity multiplyBy(final FloatDensity v)
+    public final FloatDensity times(final FloatDensity v)
     {
         return new FloatDensity(this.si * v.si, DensityUnit.SI);
     }
@@ -499,7 +492,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatDimensionless scalar as a multiplication of FloatDimensionless and FloatDimensionless
      */
-    public final FloatDimensionless multiplyBy(final FloatDimensionless v)
+    public final FloatDimensionless times(final FloatDimensionless v)
     {
         return new FloatDimensionless(this.si * v.si, DimensionlessUnit.SI);
     }
@@ -510,7 +503,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatElectricalCapacitance scalar as a multiplication of FloatDimensionless and FloatElectricalCapacitance
      */
-    public final FloatElectricalCapacitance multiplyBy(final FloatElectricalCapacitance v)
+    public final FloatElectricalCapacitance times(final FloatElectricalCapacitance v)
     {
         return new FloatElectricalCapacitance(this.si * v.si, ElectricalCapacitanceUnit.SI);
     }
@@ -521,7 +514,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatElectricalCharge scalar as a multiplication of FloatDimensionless and FloatElectricalCharge
      */
-    public final FloatElectricalCharge multiplyBy(final FloatElectricalCharge v)
+    public final FloatElectricalCharge times(final FloatElectricalCharge v)
     {
         return new FloatElectricalCharge(this.si * v.si, ElectricalChargeUnit.SI);
     }
@@ -532,7 +525,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatElectricalConductance scalar as a multiplication of FloatDimensionless and FloatElectricalConductance
      */
-    public final FloatElectricalConductance multiplyBy(final FloatElectricalConductance v)
+    public final FloatElectricalConductance times(final FloatElectricalConductance v)
     {
         return new FloatElectricalConductance(this.si * v.si, ElectricalConductanceUnit.SI);
     }
@@ -543,7 +536,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatElectricalCurrent scalar as a multiplication of FloatDimensionless and FloatElectricalCurrent
      */
-    public final FloatElectricalCurrent multiplyBy(final FloatElectricalCurrent v)
+    public final FloatElectricalCurrent times(final FloatElectricalCurrent v)
     {
         return new FloatElectricalCurrent(this.si * v.si, ElectricalCurrentUnit.SI);
     }
@@ -554,7 +547,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatElectricalInductance scalar as a multiplication of FloatDimensionless and FloatElectricalInductance
      */
-    public final FloatElectricalInductance multiplyBy(final FloatElectricalInductance v)
+    public final FloatElectricalInductance times(final FloatElectricalInductance v)
     {
         return new FloatElectricalInductance(this.si * v.si, ElectricalInductanceUnit.SI);
     }
@@ -565,7 +558,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatElectricalPotential scalar as a multiplication of FloatDimensionless and FloatElectricalPotential
      */
-    public final FloatElectricalPotential multiplyBy(final FloatElectricalPotential v)
+    public final FloatElectricalPotential times(final FloatElectricalPotential v)
     {
         return new FloatElectricalPotential(this.si * v.si, ElectricalPotentialUnit.SI);
     }
@@ -576,7 +569,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatElectricalResistance scalar as a multiplication of FloatDimensionless and FloatElectricalResistance
      */
-    public final FloatElectricalResistance multiplyBy(final FloatElectricalResistance v)
+    public final FloatElectricalResistance times(final FloatElectricalResistance v)
     {
         return new FloatElectricalResistance(this.si * v.si, ElectricalResistanceUnit.SI);
     }
@@ -586,7 +579,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatEnergy scalar as a multiplication of FloatDimensionless and FloatEnergy
      */
-    public final FloatEnergy multiplyBy(final FloatEnergy v)
+    public final FloatEnergy times(final FloatEnergy v)
     {
         return new FloatEnergy(this.si * v.si, EnergyUnit.SI);
     }
@@ -597,7 +590,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatEquivalentDose scalar as a multiplication of FloatDimensionless and FloatEquivalentDose
      */
-    public final FloatEquivalentDose multiplyBy(final FloatEquivalentDose v)
+    public final FloatEquivalentDose times(final FloatEquivalentDose v)
     {
         return new FloatEquivalentDose(this.si * v.si, EquivalentDoseUnit.SI);
     }
@@ -607,7 +600,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatFlowMass scalar as a multiplication of FloatDimensionless and FloatFlowMass
      */
-    public final FloatFlowMass multiplyBy(final FloatFlowMass v)
+    public final FloatFlowMass times(final FloatFlowMass v)
     {
         return new FloatFlowMass(this.si * v.si, FlowMassUnit.SI);
     }
@@ -617,7 +610,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatFlowVolume scalar as a multiplication of FloatDimensionless and FloatFlowVolume
      */
-    public final FloatFlowVolume multiplyBy(final FloatFlowVolume v)
+    public final FloatFlowVolume times(final FloatFlowVolume v)
     {
         return new FloatFlowVolume(this.si * v.si, FlowVolumeUnit.SI);
     }
@@ -627,7 +620,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatForce scalar as a multiplication of FloatDimensionless and FloatForce
      */
-    public final FloatForce multiplyBy(final FloatForce v)
+    public final FloatForce times(final FloatForce v)
     {
         return new FloatForce(this.si * v.si, ForceUnit.SI);
     }
@@ -637,7 +630,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatFrequency scalar as a multiplication of FloatDimensionless and FloatFrequency
      */
-    public final FloatFrequency multiplyBy(final FloatFrequency v)
+    public final FloatFrequency times(final FloatFrequency v)
     {
         return new FloatFrequency(this.si * v.si, FrequencyUnit.SI);
     }
@@ -647,7 +640,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatIlluminance scalar as a multiplication of FloatDimensionless and FloatIlluminance
      */
-    public final FloatIlluminance multiplyBy(final FloatIlluminance v)
+    public final FloatIlluminance times(final FloatIlluminance v)
     {
         return new FloatIlluminance(this.si * v.si, IlluminanceUnit.SI);
     }
@@ -657,7 +650,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatLength scalar as a multiplication of FloatDimensionless and FloatLength
      */
-    public final FloatLength multiplyBy(final FloatLength v)
+    public final FloatLength times(final FloatLength v)
     {
         return new FloatLength(this.si * v.si, LengthUnit.SI);
     }
@@ -667,7 +660,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatLinearDensity scalar as a multiplication of FloatDimensionless and FloatLinearDensity
      */
-    public final FloatLinearDensity multiplyBy(final FloatLinearDensity v)
+    public final FloatLinearDensity times(final FloatLinearDensity v)
     {
         return new FloatLinearDensity(this.si * v.si, LinearDensityUnit.SI);
     }
@@ -677,7 +670,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatLuminousFlux scalar as a multiplication of FloatDimensionless and FloatLuminousFlux
      */
-    public final FloatLuminousFlux multiplyBy(final FloatLuminousFlux v)
+    public final FloatLuminousFlux times(final FloatLuminousFlux v)
     {
         return new FloatLuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
     }
@@ -688,7 +681,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatLuminousIntensity scalar as a multiplication of FloatDimensionless and FloatLuminousIntensity
      */
-    public final FloatLuminousIntensity multiplyBy(final FloatLuminousIntensity v)
+    public final FloatLuminousIntensity times(final FloatLuminousIntensity v)
     {
         return new FloatLuminousIntensity(this.si * v.si, LuminousIntensityUnit.SI);
     }
@@ -699,7 +692,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatMagneticFluxDensity scalar as a multiplication of FloatDimensionless and FloatMagneticFluxDensity
      */
-    public final FloatMagneticFluxDensity multiplyBy(final FloatMagneticFluxDensity v)
+    public final FloatMagneticFluxDensity times(final FloatMagneticFluxDensity v)
     {
         return new FloatMagneticFluxDensity(this.si * v.si, MagneticFluxDensityUnit.SI);
     }
@@ -709,7 +702,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatMagneticFlux scalar as a multiplication of FloatDimensionless and FloatMagneticFlux
      */
-    public final FloatMagneticFlux multiplyBy(final FloatMagneticFlux v)
+    public final FloatMagneticFlux times(final FloatMagneticFlux v)
     {
         return new FloatMagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
     }
@@ -719,7 +712,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatMass scalar as a multiplication of FloatDimensionless and FloatMass
      */
-    public final FloatMass multiplyBy(final FloatMass v)
+    public final FloatMass times(final FloatMass v)
     {
         return new FloatMass(this.si * v.si, MassUnit.SI);
     }
@@ -729,7 +722,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatPower scalar as a multiplication of FloatDimensionless and FloatPower
      */
-    public final FloatPower multiplyBy(final FloatPower v)
+    public final FloatPower times(final FloatPower v)
     {
         return new FloatPower(this.si * v.si, PowerUnit.SI);
     }
@@ -739,7 +732,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatPressure scalar as a multiplication of FloatDimensionless and FloatPressure
      */
-    public final FloatPressure multiplyBy(final FloatPressure v)
+    public final FloatPressure times(final FloatPressure v)
     {
         return new FloatPressure(this.si * v.si, PressureUnit.SI);
     }
@@ -749,7 +742,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatRadioActivity scalar as a multiplication of FloatDimensionless and FloatRadioActivity
      */
-    public final FloatRadioActivity multiplyBy(final FloatRadioActivity v)
+    public final FloatRadioActivity times(final FloatRadioActivity v)
     {
         return new FloatRadioActivity(this.si * v.si, RadioActivityUnit.SI);
     }
@@ -759,7 +752,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatSpeed scalar as a multiplication of FloatDimensionless and FloatSpeed
      */
-    public final FloatSpeed multiplyBy(final FloatSpeed v)
+    public final FloatSpeed times(final FloatSpeed v)
     {
         return new FloatSpeed(this.si * v.si, SpeedUnit.SI);
     }
@@ -769,7 +762,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatTemperature scalar as a multiplication of FloatDimensionless and FloatTemperature
      */
-    public final FloatTemperature multiplyBy(final FloatTemperature v)
+    public final FloatTemperature times(final FloatTemperature v)
     {
         return new FloatTemperature(this.si * v.si, TemperatureUnit.SI);
     }
@@ -779,7 +772,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatDuration scalar as a multiplication of FloatDimensionless and FloatDuration
      */
-    public final FloatDuration multiplyBy(final FloatDuration v)
+    public final FloatDuration times(final FloatDuration v)
     {
         return new FloatDuration(this.si * v.si, DurationUnit.SI);
     }
@@ -789,7 +782,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatTorque scalar as a multiplication of FloatDimensionless and FloatTorque
      */
-    public final FloatTorque multiplyBy(final FloatTorque v)
+    public final FloatTorque times(final FloatTorque v)
     {
         return new FloatTorque(this.si * v.si, TorqueUnit.SI);
     }
@@ -799,7 +792,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatVolume scalar as a multiplication of FloatDimensionless and FloatVolume
      */
-    public final FloatVolume multiplyBy(final FloatVolume v)
+    public final FloatVolume times(final FloatVolume v)
     {
         return new FloatVolume(this.si * v.si, VolumeUnit.SI);
     }
@@ -809,7 +802,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatLinearDensity scalar as a division of FloatDimensionless and FloatLength
      */
-    public final FloatLinearDensity divideBy(final FloatLength v)
+    public final FloatLinearDensity divide(final FloatLength v)
     {
         return new FloatLinearDensity(this.si / v.si, LinearDensityUnit.SI);
     }
@@ -819,7 +812,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatLength scalar as a division of FloatDimensionless and FloatLinearDensity
      */
-    public final FloatLength divideBy(final FloatLinearDensity v)
+    public final FloatLength divide(final FloatLinearDensity v)
     {
         return new FloatLength(this.si / v.si, LengthUnit.SI);
     }
@@ -829,7 +822,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatFrequency scalar as a division of FloatDimensionless and FloatDuration
      */
-    public final FloatFrequency divideBy(final FloatDuration v)
+    public final FloatFrequency divide(final FloatDuration v)
     {
         return new FloatFrequency(this.si / v.si, FrequencyUnit.SI);
     }
@@ -839,7 +832,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      * @param v FloatDimensionless scalar
      * @return FloatDuration scalar as a division of FloatDimensionless and FloatFrequency
      */
-    public final FloatDuration divideBy(final FloatFrequency v)
+    public final FloatDuration divide(final FloatFrequency v)
     {
         return new FloatDuration(this.si / v.si, DurationUnit.SI);
     }

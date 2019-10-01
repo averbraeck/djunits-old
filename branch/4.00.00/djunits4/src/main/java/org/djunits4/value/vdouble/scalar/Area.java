@@ -25,7 +25,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 {
     /** */
@@ -174,28 +174,21 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
      */
     public static Area valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing Area: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Area: empty unitString");
+        Throw.whenNull(text, "Error parsing Area: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Area: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            AreaUnit unit = AreaUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                AreaUnit unit = AreaUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new Area(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new Area(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing Area from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing Area from " + text);
@@ -226,7 +219,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
      * @param v Area scalar
      * @return Dimensionless scalar as a division of Area and Area
      */
-    public final Dimensionless divideBy(final Area v)
+    public final Dimensionless divide(final Area v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -236,7 +229,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
      * @param v Area scalar
      * @return Volume scalar as a multiplication of Area and Length
      */
-    public final Volume multiplyBy(final Length v)
+    public final Volume times(final Length v)
     {
         return new Volume(this.si * v.si, VolumeUnit.SI);
     }
@@ -246,7 +239,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
      * @param v Area scalar
      * @return Volume scalar as a division of Area and LinearDensity
      */
-    public final Volume divideBy(final LinearDensity v)
+    public final Volume divide(final LinearDensity v)
     {
         return new Volume(this.si / v.si, VolumeUnit.SI);
     }
@@ -256,7 +249,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
      * @param v Area scalar
      * @return LinearDensity scalar as a division of Area and Volume
      */
-    public final LinearDensity divideBy(final Volume v)
+    public final LinearDensity divide(final Volume v)
     {
         return new LinearDensity(this.si / v.si, LinearDensityUnit.SI);
     }
@@ -266,7 +259,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
      * @param v Area scalar
      * @return Length scalar as a division of Area and Length
      */
-    public final Length divideBy(final Length v)
+    public final Length divide(final Length v)
     {
         return new Length(this.si / v.si, LengthUnit.SI);
     }
@@ -276,7 +269,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
      * @param v Area scalar
      * @return Length scalar as a multiplication of Area and LinearDensity
      */
-    public final Length multiplyBy(final LinearDensity v)
+    public final Length times(final LinearDensity v)
     {
         return new Length(this.si * v.si, LengthUnit.SI);
     }
@@ -286,7 +279,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
      * @param v Area scalar
      * @return FlowVolume scalar as a multiplication of Area and Speed
      */
-    public final FlowVolume multiplyBy(final Speed v)
+    public final FlowVolume times(final Speed v)
     {
         return new FlowVolume(this.si * v.si, FlowVolumeUnit.SI);
     }
@@ -296,7 +289,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
      * @param v Area scalar
      * @return Force scalar as a multiplication of Area and Pressure
      */
-    public final Force multiplyBy(final Pressure v)
+    public final Force times(final Pressure v)
     {
         return new Force(this.si * v.si, ForceUnit.SI);
     }
@@ -306,7 +299,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
      * @param v Area scalar
      * @return LuminousFlux scalar as a multiplication of Area and Illuminance
      */
-    public final LuminousFlux multiplyBy(final Illuminance v)
+    public final LuminousFlux times(final Illuminance v)
     {
         return new LuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
     }

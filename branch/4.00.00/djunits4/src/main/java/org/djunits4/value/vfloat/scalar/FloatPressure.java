@@ -21,7 +21,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPressure>
 {
     /** */
@@ -181,28 +181,21 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
      */
     public static FloatPressure valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing FloatPressure: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatPressure: empty unitString");
+        Throw.whenNull(text, "Error parsing FloatPressure: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatPressure: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            PressureUnit unit = PressureUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                PressureUnit unit = PressureUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        float f = Float.parseFloat(valueString);
-                        return new FloatPressure(f, unit);
-                    }
+                    float f = Float.parseFloat(valueString);
+                    return new FloatPressure(f, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing FloatPressure from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing FloatPressure from " + text);
@@ -233,7 +226,7 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
      * @param v FloatPressure scalar
      * @return FloatDimensionless scalar as a division of FloatPressure and FloatPressure
      */
-    public final FloatDimensionless divideBy(final FloatPressure v)
+    public final FloatDimensionless divide(final FloatPressure v)
     {
         return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -243,7 +236,7 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
      * @param v FloatPressure scalar
      * @return FloatForce scalar as a multiplication of FloatPressure and FloatArea
      */
-    public final FloatForce multiplyBy(final FloatArea v)
+    public final FloatForce times(final FloatArea v)
     {
         return new FloatForce(this.si * v.si, ForceUnit.SI);
     }
@@ -253,7 +246,7 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
      * @param v FloatPressure scalar
      * @return FloatEnergy scalar as a multiplication of FloatPressure and FloatVolume
      */
-    public final FloatEnergy multiplyBy(final FloatVolume v)
+    public final FloatEnergy times(final FloatVolume v)
     {
         return new FloatEnergy(this.si * v.si, EnergyUnit.SI);
     }

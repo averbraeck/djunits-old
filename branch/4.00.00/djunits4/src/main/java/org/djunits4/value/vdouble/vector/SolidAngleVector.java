@@ -2,13 +2,13 @@ package org.djunits4.value.vdouble.vector;
 
 import javax.annotation.Generated;
 
-import org.djunits4.unit.AngleSolidUnit;
-import org.djunits4.value.vdouble.scalar.AngleSolid;
+import org.djunits4.unit.SolidAngleUnit;
+import org.djunits4.value.vdouble.scalar.SolidAngle;
 import org.djunits4.value.vdouble.vector.base.AbstractDoubleVectorRel;
 import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Double AngleSolidVector, a vector of values with a AngleSolidUnit.
+ * Double SolidAngleVector, a vector of values with a SolidAngleUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -16,42 +16,42 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
-public class AngleSolidVector extends AbstractDoubleVectorRel<AngleSolidUnit, AngleSolid, AngleSolidVector>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
+public class SolidAngleVector extends AbstractDoubleVectorRel<SolidAngleUnit, SolidAngle, SolidAngleVector>
 
 {
     /** */
     private static final long serialVersionUID = 20190905L;
 
     /**
-     * Construct an AngleSolidVector from an internal data object.
+     * Construct an SolidAngleVector from an internal data object.
      * @param data DoubleVectorData; the internal data object for the vector data
-     * @param displayUnit AngleSolidUnit; the display unit of the vector data
+     * @param displayUnit SolidAngleUnit; the display unit of the vector data
      */
-    public AngleSolidVector(final DoubleVectorData data, final AngleSolidUnit displayUnit)
+    public SolidAngleVector(final DoubleVectorData data, final SolidAngleUnit displayUnit)
     {
         super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public Class<AngleSolid> getScalarClass()
+    public Class<SolidAngle> getScalarClass()
     {
-        return AngleSolid.class;
+        return SolidAngle.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public AngleSolidVector instantiateVector(final DoubleVectorData dvd, final AngleSolidUnit displayUnit)
+    public SolidAngleVector instantiateVector(final DoubleVectorData dvd, final SolidAngleUnit displayUnit)
     {
-        return new AngleSolidVector(dvd, displayUnit);
+        return new SolidAngleVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public AngleSolid instantiateScalarSI(final double valueSI, final AngleSolidUnit displayUnit)
+    public SolidAngle instantiateScalarSI(final double valueSI, final SolidAngleUnit displayUnit)
     {
-        AngleSolid result = AngleSolid.instantiateSI(valueSI);
+        SolidAngle result = SolidAngle.instantiateSI(valueSI);
         result.setDisplayUnit(displayUnit);
         return result;
     }

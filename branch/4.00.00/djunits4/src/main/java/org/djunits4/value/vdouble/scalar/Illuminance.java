@@ -20,7 +20,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illuminance>
 {
     /** */
@@ -170,28 +170,21 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
      */
     public static Illuminance valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing Illuminance: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Illuminance: empty unitString");
+        Throw.whenNull(text, "Error parsing Illuminance: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Illuminance: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            IlluminanceUnit unit = IlluminanceUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                IlluminanceUnit unit = IlluminanceUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new Illuminance(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new Illuminance(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing Illuminance from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing Illuminance from " + text);
@@ -222,7 +215,7 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
      * @param v Illuminance scalar
      * @return Dimensionless scalar as a division of Illuminance and Illuminance
      */
-    public final Dimensionless divideBy(final Illuminance v)
+    public final Dimensionless divide(final Illuminance v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -232,7 +225,7 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
      * @param v Illuminance scalar
      * @return LuminousFlux scalar as a multiplication of Illuminance and Area
      */
-    public final LuminousFlux multiplyBy(final Area v)
+    public final LuminousFlux times(final Area v)
     {
         return new LuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
     }

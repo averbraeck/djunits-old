@@ -22,7 +22,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class FloatElectricalCapacitance extends AbstractFloatScalarRel<ElectricalCapacitanceUnit, FloatElectricalCapacitance>
 {
     /** */
@@ -190,29 +190,22 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
      */
     public static FloatElectricalCapacitance valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing FloatElectricalCapacitance: unitString is null");
+        Throw.whenNull(text, "Error parsing FloatElectricalCapacitance: text to parse is null");
         Throw.when(text.length() == 0, IllegalArgumentException.class,
-                "Error parsing FloatElectricalCapacitance: empty unitString");
+                "Error parsing FloatElectricalCapacitance: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            ElectricalCapacitanceUnit unit = ElectricalCapacitanceUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                ElectricalCapacitanceUnit unit = ElectricalCapacitanceUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        float f = Float.parseFloat(valueString);
-                        return new FloatElectricalCapacitance(f, unit);
-                    }
+                    float f = Float.parseFloat(valueString);
+                    return new FloatElectricalCapacitance(f, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing FloatElectricalCapacitance from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing FloatElectricalCapacitance from " + text);
@@ -245,7 +238,7 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
      * @param v FloatElectricalCapacitance scalar
      * @return FloatDimensionless scalar as a division of FloatElectricalCapacitance and FloatElectricalCapacitance
      */
-    public final FloatDimensionless divideBy(final FloatElectricalCapacitance v)
+    public final FloatDimensionless divide(final FloatElectricalCapacitance v)
     {
         return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -256,7 +249,7 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
      * @param v FloatElectricalCapacitance scalar
      * @return FloatElectricalCharge scalar as a multiplication of FloatElectricalCapacitance and FloatElectricalPotential
      */
-    public final FloatElectricalCharge multiplyBy(final FloatElectricalPotential v)
+    public final FloatElectricalCharge times(final FloatElectricalPotential v)
     {
         return new FloatElectricalCharge(this.si * v.si, ElectricalChargeUnit.SI);
     }
@@ -267,7 +260,7 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
      * @param v FloatElectricalCapacitance scalar
      * @return FloatElectricalConductance scalar as a division of FloatElectricalCapacitance and FloatDuration
      */
-    public final FloatElectricalConductance divideBy(final FloatDuration v)
+    public final FloatElectricalConductance divide(final FloatDuration v)
     {
         return new FloatElectricalConductance(this.si / v.si, ElectricalConductanceUnit.SI);
     }
@@ -278,7 +271,7 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
      * @param v FloatElectricalCapacitance scalar
      * @return FloatDuration scalar as a division of FloatElectricalCapacitance and FloatElectricalConductance
      */
-    public final FloatDuration divideBy(final FloatElectricalConductance v)
+    public final FloatDuration divide(final FloatElectricalConductance v)
     {
         return new FloatDuration(this.si / v.si, DurationUnit.SI);
     }

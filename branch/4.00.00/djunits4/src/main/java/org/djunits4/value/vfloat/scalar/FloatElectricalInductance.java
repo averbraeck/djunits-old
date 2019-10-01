@@ -20,7 +20,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class FloatElectricalInductance extends AbstractFloatScalarRel<ElectricalInductanceUnit, FloatElectricalInductance>
 {
     /** */
@@ -187,29 +187,22 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
      */
     public static FloatElectricalInductance valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing FloatElectricalInductance: unitString is null");
+        Throw.whenNull(text, "Error parsing FloatElectricalInductance: text to parse is null");
         Throw.when(text.length() == 0, IllegalArgumentException.class,
-                "Error parsing FloatElectricalInductance: empty unitString");
+                "Error parsing FloatElectricalInductance: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            ElectricalInductanceUnit unit = ElectricalInductanceUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                ElectricalInductanceUnit unit = ElectricalInductanceUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        float f = Float.parseFloat(valueString);
-                        return new FloatElectricalInductance(f, unit);
-                    }
+                    float f = Float.parseFloat(valueString);
+                    return new FloatElectricalInductance(f, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing FloatElectricalInductance from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing FloatElectricalInductance from " + text);
@@ -242,7 +235,7 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
      * @param v FloatElectricalInductance scalar
      * @return FloatDimensionless scalar as a division of FloatElectricalInductance and FloatElectricalInductance
      */
-    public final FloatDimensionless divideBy(final FloatElectricalInductance v)
+    public final FloatDimensionless divide(final FloatElectricalInductance v)
     {
         return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -253,7 +246,7 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
      * @param v FloatElectricalInductance scalar
      * @return FloatMagneticFlux scalar as a multiplication of FloatElectricalInductance and FloatElectricalCurrent
      */
-    public final FloatMagneticFlux multiplyBy(final FloatElectricalCurrent v)
+    public final FloatMagneticFlux times(final FloatElectricalCurrent v)
     {
         return new FloatMagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
     }

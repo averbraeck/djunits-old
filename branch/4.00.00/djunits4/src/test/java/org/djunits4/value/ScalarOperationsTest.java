@@ -28,7 +28,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Find all plus, minus, multiplyBy and divideBy operations and prove the type correctness.
+ * Find all plus, minus, times and divide operations and prove the type correctness.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -127,8 +127,8 @@ public class ScalarOperationsTest
     }
 
     /**
-     * Find the methods defined in the class itself (not in a superclass) called multiplyBy or divideBy and test the method.
-     * Also test the Unary methods of the class.
+     * Find the methods defined in the class itself (not in a superclass) called times or divide and test the method. Also test
+     * the Unary methods of the class.
      * @param scalarClassAbsRel class to test
      * @param isAbs boolean; if true; the scalarClassAbsRel must be aAsolute; if false; the scalarClassAbsRel must be Relative
      * @param doubleType boolean; if true; perform tests on DoubleScalar; if false perform tests on FloatScalar
@@ -145,12 +145,12 @@ public class ScalarOperationsTest
     {
         for (Method method : scalarClassAbsRel.getMethods())
         {
-            if (method.getName().equals("multiplyBy"))
+            if (method.getName().equals("times"))
             {
                 // note: filter out the method that multiplies by a constant or a general scalar...
                 testMultiplyOrDivideMethodAbsRel(scalarClassAbsRel, isAbs, method, true, doubleType);
             }
-            else if (method.getName().equals("divideBy"))
+            else if (method.getName().equals("divide"))
             {
                 // note: filter out the method that divides by a constant or a general scalar...
                 testMultiplyOrDivideMethodAbsRel(scalarClassAbsRel, isAbs, method, false, doubleType);
@@ -164,8 +164,8 @@ public class ScalarOperationsTest
      * Test a multiplication method for an Abs or Rel scalar. Note: filter out the method that multiplies by a constant...
      * @param scalarClass the Abs or Rel class for the multiplication, e.g. Length
      * @param abs boolean; true to test the Abs sub-class; false to test the Rel sub-class
-     * @param method the method 'multiplyBy' for that class
-     * @param multiply boolean; if true; test a multiplyBy method; if false; test a divideBy method
+     * @param method the method 'times' for that class
+     * @param multiply boolean; if true; test a times method; if false; test a divide method
      * @param doubleType boolean; if true; perform tests on DoubleScalar; if false; perform tests on FloatScalar
      * @throws NoSuchMethodException on class or method resolving error
      * @throws InvocationTargetException on class or method resolving error
@@ -214,8 +214,8 @@ public class ScalarOperationsTest
         Class<?> returnClass = method.getReturnType();
         if (!relativeOrAbsoluteClass.isAssignableFrom(returnClass))
         {
-            Assert.fail("DoubleScalar class " + scalarClass.getName()
-                    + ".multiplyBy() has return type with non-relative class: " + returnClass.getName());
+            Assert.fail("DoubleScalar class " + scalarClass.getName() + ".times() has return type with non-relative class: "
+                    + returnClass.getName());
         }
 
         // get the SI coefficients of the unit classes, scalar type, parameter type and return type
@@ -224,7 +224,7 @@ public class ScalarOperationsTest
         String paramSI = getCoefficients(getUnitClass(parameterClass));
         // print what we just have found
         System.out.println(scalarClass.getName().replaceFirst("org.djunits4.value.vdouble.scalar.", "") + "."
-                + (multiply ? "multiplyBy" : "divideBy") + "("
+                + (multiply ? "times" : "divide") + "("
                 + parameterClass.getName().replaceFirst("org.djunits4.value.vdouble.scalar.", "") + ") => "
                 + returnClass.getName().replaceFirst("org.djunits4.value.vdouble.scalar.", "") + ": " + scalarSI
                 + (multiply ? " * " : " : ") + paramSI + " => " + returnSI);
@@ -244,14 +244,14 @@ public class ScalarOperationsTest
 
             if (multiply)
             {
-                Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "multiplyBy", new Class[] {parameterClass});
+                Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "times", new Class[] {parameterClass});
                 Object result = multiplyMethod.invoke(left, right);
                 double resultSI = ((AbstractDoubleScalarAbs<?, ?, ?, ?>) result).getSI();
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
             else
             {
-                Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divideBy", new Class[] {parameterClass});
+                Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divide", new Class[] {parameterClass});
                 Object result = divideMethod.invoke(left, right);
                 double resultSI = ((AbstractDoubleScalarAbs<?, ?, ?, ?>) result).getSI();
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
@@ -272,14 +272,14 @@ public class ScalarOperationsTest
 
                 if (multiply)
                 {
-                    Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "multiplyBy", new Class[] {parameterClass});
+                    Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "times", new Class[] {parameterClass});
                     Object result = multiplyMethod.invoke(left, right);
                     double resultSI = ((AbstractDoubleScalarRel<?, ?>) result).getSI();
                     assertEquals("Result of operation", expectedValue, resultSI, 0.01);
                 }
                 else
                 {
-                    Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divideBy", new Class[] {parameterClass});
+                    Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divide", new Class[] {parameterClass});
                     Object result = divideMethod.invoke(left, right);
                     double resultSI = ((AbstractDoubleScalarRel<?, ?>) result).getSI();
                     assertEquals("Result of operation", expectedValue, resultSI, 0.01);
@@ -306,14 +306,14 @@ public class ScalarOperationsTest
 
                 if (multiply)
                 {
-                    Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "multiplyBy", new Class[] {parameterClass});
+                    Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "times", new Class[] {parameterClass});
                     Object result = multiplyMethod.invoke(left, right);
                     double resultSI = ((AbstractFloatScalarRel<?, ?>) result).getSI();
                     assertEquals("Result of operation", expectedValue, resultSI, 0.01);
                 }
                 else
                 {
-                    Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divideBy", new Class[] {parameterClass});
+                    Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divide", new Class[] {parameterClass});
                     Object result = divideMethod.invoke(left, right);
                     float resultSI = ((AbstractFloatScalarRel<?, ?>) result).getSI();
                     assertEquals("Result of operation", expectedValue, resultSI, 0.01);
@@ -646,15 +646,14 @@ public class ScalarOperationsTest
         }
         if (!abs)
         {
-            Method multiplyBy =
-                    ClassUtil.resolveMethod(scalarClass, "times", new Class[] {doubleType ? double.class : float.class});
-            result = doubleType ? multiplyBy.invoke(left, Math.PI) : multiplyBy.invoke(left, (float) Math.PI);
+            Method times = ClassUtil.resolveMethod(scalarClass, "times", new Class[] {doubleType ? double.class : float.class});
+            result = doubleType ? times.invoke(left, Math.PI) : times.invoke(left, (float) Math.PI);
             assertEquals("Result of operation", Math.PI * value, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                     0.01);
 
-            Method divideBy =
+            Method divide =
                     ClassUtil.resolveMethod(scalarClass, "divide", new Class[] {doubleType ? double.class : float.class});
-            result = doubleType ? divideBy.invoke(left, Math.PI) : divideBy.invoke(left, (float) Math.PI);
+            result = doubleType ? divide.invoke(left, Math.PI) : divide.invoke(left, (float) Math.PI);
             assertEquals("Result of operation", value / Math.PI, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                     0.01);
 

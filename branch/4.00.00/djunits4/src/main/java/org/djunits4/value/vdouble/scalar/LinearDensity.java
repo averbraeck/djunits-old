@@ -22,7 +22,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, LinearDensity>
 {
     /** */
@@ -172,28 +172,21 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
      */
     public static LinearDensity valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing LinearDensity: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing LinearDensity: empty unitString");
+        Throw.whenNull(text, "Error parsing LinearDensity: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing LinearDensity: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            LinearDensityUnit unit = LinearDensityUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                LinearDensityUnit unit = LinearDensityUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new LinearDensity(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new LinearDensity(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing LinearDensity from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing LinearDensity from " + text);
@@ -224,7 +217,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
      * @param v LinearDensity scalar
      * @return Dimensionless scalar as a division of LinearDensity and LinearDensity
      */
-    public final Dimensionless divideBy(final LinearDensity v)
+    public final Dimensionless divide(final LinearDensity v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -234,7 +227,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
      * @param v LinearDensity scalar
      * @return Length scalar as a multiplication of LinearDensity and Area
      */
-    public final Length multiplyBy(final Area v)
+    public final Length times(final Area v)
     {
         return new Length(this.si * v.si, LengthUnit.SI);
     }
@@ -244,7 +237,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
      * @param v LinearDensity scalar
      * @return Force scalar as a multiplication of LinearDensity and Energy
      */
-    public final Force multiplyBy(final Energy v)
+    public final Force times(final Energy v)
     {
         return new Force(this.si * v.si, ForceUnit.SI);
     }
@@ -254,7 +247,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
      * @param v LinearDensity scalar
      * @return Frequency scalar as a multiplication of LinearDensity and Speed
      */
-    public final Frequency multiplyBy(final Speed v)
+    public final Frequency times(final Speed v)
     {
         return new Frequency(this.si * v.si, FrequencyUnit.SI);
     }

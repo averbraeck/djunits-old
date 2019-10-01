@@ -25,7 +25,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
 {
     /** */
@@ -185,28 +185,21 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
      */
     public static FloatPower valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing FloatPower: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatPower: empty unitString");
+        Throw.whenNull(text, "Error parsing FloatPower: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatPower: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            PowerUnit unit = PowerUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                PowerUnit unit = PowerUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        float f = Float.parseFloat(valueString);
-                        return new FloatPower(f, unit);
-                    }
+                    float f = Float.parseFloat(valueString);
+                    return new FloatPower(f, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing FloatPower from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing FloatPower from " + text);
@@ -237,7 +230,7 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
      * @param v FloatPower scalar
      * @return FloatDimensionless scalar as a division of FloatPower and FloatPower
      */
-    public final FloatDimensionless divideBy(final FloatPower v)
+    public final FloatDimensionless divide(final FloatPower v)
     {
         return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -247,7 +240,7 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
      * @param v FloatPower scalar
      * @return FloatEnergy scalar as a multiplication of FloatPower and FloatDuration
      */
-    public final FloatEnergy multiplyBy(final FloatDuration v)
+    public final FloatEnergy times(final FloatDuration v)
     {
         return new FloatEnergy(this.si * v.si, EnergyUnit.SI);
     }
@@ -257,7 +250,7 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
      * @param v FloatPower scalar
      * @return FloatEnergy scalar as a division of FloatPower and FloatFrequency
      */
-    public final FloatEnergy divideBy(final FloatFrequency v)
+    public final FloatEnergy divide(final FloatFrequency v)
     {
         return new FloatEnergy(this.si / v.si, EnergyUnit.SI);
     }
@@ -267,7 +260,7 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
      * @param v FloatPower scalar
      * @return FloatFrequency scalar as a division of FloatPower and FloatEnergy
      */
-    public final FloatFrequency divideBy(final FloatEnergy v)
+    public final FloatFrequency divide(final FloatEnergy v)
     {
         return new FloatFrequency(this.si / v.si, FrequencyUnit.SI);
     }
@@ -277,7 +270,7 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
      * @param v FloatPower scalar
      * @return FloatForce scalar as a division of FloatPower and FloatSpeed
      */
-    public final FloatForce divideBy(final FloatSpeed v)
+    public final FloatForce divide(final FloatSpeed v)
     {
         return new FloatForce(this.si / v.si, ForceUnit.SI);
     }
@@ -287,7 +280,7 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
      * @param v FloatPower scalar
      * @return FloatSpeed scalar as a division of FloatPower and FloatForce
      */
-    public final FloatSpeed divideBy(final FloatForce v)
+    public final FloatSpeed divide(final FloatForce v)
     {
         return new FloatSpeed(this.si / v.si, SpeedUnit.SI);
     }
@@ -297,7 +290,7 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
      * @param v FloatPower scalar
      * @return FloatElectricalCurrent scalar as a division of FloatPower and FloatElectricalPotential
      */
-    public final FloatElectricalCurrent divideBy(final FloatElectricalPotential v)
+    public final FloatElectricalCurrent divide(final FloatElectricalPotential v)
     {
         return new FloatElectricalCurrent(this.si / v.si, ElectricalCurrentUnit.SI);
     }
@@ -307,7 +300,7 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
      * @param v FloatPower scalar
      * @return FloatElectricalPotential scalar as a division of FloatPower and FloatElectricalCurrent
      */
-    public final FloatElectricalPotential divideBy(final FloatElectricalCurrent v)
+    public final FloatElectricalPotential divide(final FloatElectricalCurrent v)
     {
         return new FloatElectricalPotential(this.si / v.si, ElectricalPotentialUnit.SI);
     }

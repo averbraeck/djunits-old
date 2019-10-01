@@ -4,7 +4,6 @@ import org.djunits4.unit.AbsoluteTemperatureUnit;
 import org.djunits4.unit.AbsorbedDoseUnit;
 import org.djunits4.unit.AccelerationUnit;
 import org.djunits4.unit.AmountOfSubstanceUnit;
-import org.djunits4.unit.AngleSolidUnit;
 import org.djunits4.unit.AngleUnit;
 import org.djunits4.unit.AreaUnit;
 import org.djunits4.unit.CatalyticActivityUnit;
@@ -37,6 +36,7 @@ import org.djunits4.unit.PositionUnit;
 import org.djunits4.unit.PowerUnit;
 import org.djunits4.unit.PressureUnit;
 import org.djunits4.unit.RadioActivityUnit;
+import org.djunits4.unit.SolidAngleUnit;
 import org.djunits4.unit.SpeedUnit;
 import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.TimeUnit;
@@ -101,11 +101,11 @@ public interface UNITS
     AmountOfSubstanceUnit MOLE                  = AmountOfSubstanceUnit.MOLE;
 
     /****************************************************************************************************************/
-    /************************************************* ANGLESOLID ***************************************************/
+    /************************************************* SOLIDANGLE ***************************************************/
     /****************************************************************************************************************/
 
-    AngleSolidUnit STERADIAN                    = AngleSolidUnit.STERADIAN;
-    AngleSolidUnit SQUARE_DEGREE                = AngleSolidUnit.SQUARE_DEGREE;
+    SolidAngleUnit STERADIAN                    = SolidAngleUnit.STERADIAN;
+    SolidAngleUnit SQUARE_DEGREE                = SolidAngleUnit.SQUARE_DEGREE;
 
     /****************************************************************************************************************/
     /*************************************************** ANGLE  *****************************************************/

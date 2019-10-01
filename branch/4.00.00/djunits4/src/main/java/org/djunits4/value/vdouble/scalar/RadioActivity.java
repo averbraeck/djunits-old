@@ -19,7 +19,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, RadioActivity>
 {
     /** */
@@ -169,28 +169,21 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
      */
     public static RadioActivity valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing RadioActivity: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing RadioActivity: empty unitString");
+        Throw.whenNull(text, "Error parsing RadioActivity: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing RadioActivity: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            RadioActivityUnit unit = RadioActivityUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                RadioActivityUnit unit = RadioActivityUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new RadioActivity(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new RadioActivity(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing RadioActivity from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing RadioActivity from " + text);
@@ -221,7 +214,7 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
      * @param v RadioActivity scalar
      * @return Dimensionless scalar as a division of RadioActivity and RadioActivity
      */
-    public final Dimensionless divideBy(final RadioActivity v)
+    public final Dimensionless divide(final RadioActivity v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }

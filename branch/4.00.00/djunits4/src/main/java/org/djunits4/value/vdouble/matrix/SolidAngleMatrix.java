@@ -2,15 +2,15 @@ package org.djunits4.value.vdouble.matrix;
 
 import javax.annotation.Generated;
 
-import org.djunits4.unit.AngleSolidUnit;
+import org.djunits4.unit.SolidAngleUnit;
 import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
-import org.djunits4.value.vdouble.scalar.AngleSolid;
-import org.djunits4.value.vdouble.vector.AngleSolidVector;
+import org.djunits4.value.vdouble.scalar.SolidAngle;
+import org.djunits4.value.vdouble.vector.SolidAngleVector;
 import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Double AngleSolidMatrix, a matrix of values with a AngleSolidUnit.
+ * Immutable Double SolidAngleMatrix, a matrix of values with a SolidAngleUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -18,8 +18,8 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
-public class AngleSolidMatrix extends AbstractDoubleMatrixRel<AngleSolidUnit, AngleSolid, AngleSolidVector, AngleSolidMatrix>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
+public class SolidAngleMatrix extends AbstractDoubleMatrixRel<SolidAngleUnit, SolidAngle, SolidAngleVector, SolidAngleMatrix>
 
 {
     /** */
@@ -27,46 +27,46 @@ public class AngleSolidMatrix extends AbstractDoubleMatrixRel<AngleSolidUnit, An
 
     /**
      * @param data DoubleMatrixData; an internal data object
-     * @param unit AngleSolidUnit; the unit
+     * @param unit SolidAngleUnit; the unit
      */
-    public AngleSolidMatrix(final DoubleMatrixData data, final AngleSolidUnit unit)
+    public SolidAngleMatrix(final DoubleMatrixData data, final SolidAngleUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public Class<AngleSolid> getScalarClass()
+    public Class<SolidAngle> getScalarClass()
     {
-        return AngleSolid.class;
+        return SolidAngle.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public Class<AngleSolidVector> getVectorClass()
+    public Class<SolidAngleVector> getVectorClass()
     {
-        return AngleSolidVector.class;
+        return SolidAngleVector.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public AngleSolidMatrix instantiateMatrix(final DoubleMatrixData dmd, final AngleSolidUnit displayUnit)
+    public SolidAngleMatrix instantiateMatrix(final DoubleMatrixData dmd, final SolidAngleUnit displayUnit)
     {
-        return new AngleSolidMatrix(dmd, displayUnit);
+        return new SolidAngleMatrix(dmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public AngleSolidVector instantiateVector(final DoubleVectorData dvd, final AngleSolidUnit displayUnit)
+    public SolidAngleVector instantiateVector(final DoubleVectorData dvd, final SolidAngleUnit displayUnit)
     {
-        return new AngleSolidVector(dvd, displayUnit);
+        return new SolidAngleVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public AngleSolid instantiateScalarSI(final double valueSI, final AngleSolidUnit displayUnit)
+    public SolidAngle instantiateScalarSI(final double valueSI, final SolidAngleUnit displayUnit)
     {
-        AngleSolid result = AngleSolid.instantiateSI(valueSI);
+        SolidAngle result = SolidAngle.instantiateSI(valueSI);
         result.setDisplayUnit(displayUnit);
         return result;
     }

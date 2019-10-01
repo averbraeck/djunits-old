@@ -25,7 +25,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
 {
     /** */
@@ -174,28 +174,21 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
      */
     public static Torque valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing Torque: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Torque: empty unitString");
+        Throw.whenNull(text, "Error parsing Torque: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Torque: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            TorqueUnit unit = TorqueUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                TorqueUnit unit = TorqueUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new Torque(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new Torque(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing Torque from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing Torque from " + text);
@@ -226,7 +219,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
      * @param v Torque scalar
      * @return Dimensionless scalar as a division of Torque and Torque
      */
-    public final Dimensionless divideBy(final Torque v)
+    public final Dimensionless divide(final Torque v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -236,7 +229,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
      * @param v Torque scalar
      * @return Length scalar as a division of Torque and Force
      */
-    public final Length divideBy(final Force v)
+    public final Length divide(final Force v)
     {
         return new Length(this.si / v.si, LengthUnit.SI);
     }
@@ -246,7 +239,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
      * @param v Torque scalar
      * @return Force scalar as a division of Torque and Length
      */
-    public final Force divideBy(final Length v)
+    public final Force divide(final Length v)
     {
         return new Force(this.si / v.si, ForceUnit.SI);
     }
@@ -256,7 +249,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
      * @param v Torque scalar
      * @return Force scalar as a multiplication of Torque and LinearDensity
      */
-    public final Force multiplyBy(final LinearDensity v)
+    public final Force times(final LinearDensity v)
     {
         return new Force(this.si * v.si, ForceUnit.SI);
     }
@@ -266,7 +259,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
      * @param v Torque scalar
      * @return Power scalar as a division of Torque and Duration
      */
-    public final Power divideBy(final Duration v)
+    public final Power divide(final Duration v)
     {
         return new Power(this.si / v.si, PowerUnit.SI);
     }
@@ -276,7 +269,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
      * @param v Torque scalar
      * @return Duration scalar as a division of Torque and Power
      */
-    public final Duration divideBy(final Power v)
+    public final Duration divide(final Power v)
     {
         return new Duration(this.si / v.si, DurationUnit.SI);
     }
@@ -286,7 +279,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
      * @param v Torque scalar
      * @return Power scalar as a multiplication of Torque and Frequency
      */
-    public final Power multiplyBy(final Frequency v)
+    public final Power times(final Frequency v)
     {
         return new Power(this.si * v.si, PowerUnit.SI);
     }
@@ -296,7 +289,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
      * @param v Torque scalar
      * @return Pressure scalar as a division of Torque and Volume
      */
-    public final Pressure divideBy(final Volume v)
+    public final Pressure divide(final Volume v)
     {
         return new Pressure(this.si / v.si, PressureUnit.SI);
     }
@@ -306,7 +299,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
      * @param v Torque scalar
      * @return Volume scalar as a division of Torque and Pressure
      */
-    public final Volume divideBy(final Pressure v)
+    public final Volume divide(final Pressure v)
     {
         return new Volume(this.si / v.si, VolumeUnit.SI);
     }

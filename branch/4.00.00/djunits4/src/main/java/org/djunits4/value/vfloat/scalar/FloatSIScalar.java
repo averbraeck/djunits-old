@@ -8,7 +8,6 @@ import org.djunits4.Throw;
 import org.djunits4.unit.AbsorbedDoseUnit;
 import org.djunits4.unit.AccelerationUnit;
 import org.djunits4.unit.AmountOfSubstanceUnit;
-import org.djunits4.unit.AngleSolidUnit;
 import org.djunits4.unit.AngleUnit;
 import org.djunits4.unit.AreaUnit;
 import org.djunits4.unit.CatalyticActivityUnit;
@@ -40,6 +39,7 @@ import org.djunits4.unit.PowerUnit;
 import org.djunits4.unit.PressureUnit;
 import org.djunits4.unit.RadioActivityUnit;
 import org.djunits4.unit.SIUnit;
+import org.djunits4.unit.SolidAngleUnit;
 import org.djunits4.unit.SpeedUnit;
 import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.TorqueUnit;
@@ -61,7 +61,7 @@ import org.djunits4.value.vfloat.scalar.base.FloatScalar;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
 {
     /** */
@@ -335,31 +335,6 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
         Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AmountOfSubstanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatAmountOfSubstance", this.toString());
         FloatAmountOfSubstance result = new FloatAmountOfSubstance(getSI(), displayUnit.getStandardUnit());
-        result.setDisplayUnit(displayUnit);
-        return result;
-    }
-
-    /**
-     * Return the current scalar as a anglesolid.
-     * @return FloatAngleSolid; the current scalar as a anglesolid
-     */
-    public final FloatAngleSolid asAngleSolid()
-    {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AngleSolidUnit.BASE.getSiDimensions())),
-                UnitRuntimeException.class, "cannot cast %s to FloatAngleSolid", this.toString());
-        return new FloatAngleSolid(getSI(), AngleSolidUnit.SI);
-    }
-
-    /**
-     * Return the current scalar as a anglesolid, and provide a display unit.
-     * @param displayUnit the unit in which the value will be displayed
-     * @return FloatAngleSolid; the current scalar as a anglesolid
-     */
-    public final FloatAngleSolid asAngleSolid(final AngleSolidUnit displayUnit)
-    {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AngleSolidUnit.BASE.getSiDimensions())),
-                UnitRuntimeException.class, "cannot cast %s to FloatAngleSolid", this.toString());
-        FloatAngleSolid result = new FloatAngleSolid(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
         return result;
     }
@@ -1035,6 +1010,31 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
         Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(RadioActivityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatRadioActivity", this.toString());
         FloatRadioActivity result = new FloatRadioActivity(getSI(), displayUnit.getStandardUnit());
+        result.setDisplayUnit(displayUnit);
+        return result;
+    }
+
+    /**
+     * Return the current scalar as a solidangle.
+     * @return FloatSolidAngle; the current scalar as a solidangle
+     */
+    public final FloatSolidAngle asSolidAngle()
+    {
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(SolidAngleUnit.BASE.getSiDimensions())),
+                UnitRuntimeException.class, "cannot cast %s to FloatSolidAngle", this.toString());
+        return new FloatSolidAngle(getSI(), SolidAngleUnit.SI);
+    }
+
+    /**
+     * Return the current scalar as a solidangle, and provide a display unit.
+     * @param displayUnit the unit in which the value will be displayed
+     * @return FloatSolidAngle; the current scalar as a solidangle
+     */
+    public final FloatSolidAngle asSolidAngle(final SolidAngleUnit displayUnit)
+    {
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(SolidAngleUnit.BASE.getSiDimensions())),
+                UnitRuntimeException.class, "cannot cast %s to FloatSolidAngle", this.toString());
+        FloatSolidAngle result = new FloatSolidAngle(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
         return result;
     }

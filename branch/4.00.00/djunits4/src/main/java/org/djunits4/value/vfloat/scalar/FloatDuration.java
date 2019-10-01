@@ -30,7 +30,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, FloatTime, DurationUnit, FloatDuration>
 {
     /** */
@@ -197,28 +197,21 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
      */
     public static FloatDuration valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing FloatDuration: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatDuration: empty unitString");
+        Throw.whenNull(text, "Error parsing FloatDuration: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatDuration: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            DurationUnit unit = DurationUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                DurationUnit unit = DurationUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        float f = Float.parseFloat(valueString);
-                        return new FloatDuration(f, unit);
-                    }
+                    float f = Float.parseFloat(valueString);
+                    return new FloatDuration(f, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing FloatDuration from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing FloatDuration from " + text);
@@ -249,7 +242,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
      * @param v FloatDuration scalar
      * @return FloatDimensionless scalar as a division of FloatDuration and FloatDuration
      */
-    public final FloatDimensionless divideBy(final FloatDuration v)
+    public final FloatDimensionless divide(final FloatDuration v)
     {
         return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -259,7 +252,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
      * @param v FloatDuration scalar
      * @return FloatDimensionless scalar as a multiplication of FloatDuration and FloatFrequency
      */
-    public final FloatDimensionless multiplyBy(final FloatFrequency v)
+    public final FloatDimensionless times(final FloatFrequency v)
     {
         return new FloatDimensionless(this.si * v.si, DimensionlessUnit.SI);
     }
@@ -270,7 +263,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
      * @param v FloatDuration scalar
      * @return FloatElectricalCharge scalar as a multiplication of FloatDuration and FloatElectricalCurrent
      */
-    public final FloatElectricalCharge multiplyBy(final FloatElectricalCurrent v)
+    public final FloatElectricalCharge times(final FloatElectricalCurrent v)
     {
         return new FloatElectricalCharge(this.si * v.si, ElectricalChargeUnit.SI);
     }
@@ -280,7 +273,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
      * @param v FloatDuration scalar
      * @return FloatMass scalar as a multiplication of FloatDuration and FloatFlowMass
      */
-    public final FloatMass multiplyBy(final FloatFlowMass v)
+    public final FloatMass times(final FloatFlowMass v)
     {
         return new FloatMass(this.si * v.si, MassUnit.SI);
     }
@@ -290,7 +283,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
      * @param v FloatDuration scalar
      * @return FloatVolume scalar as a multiplication of FloatDuration and FloatFlowVolume
      */
-    public final FloatVolume multiplyBy(final FloatFlowVolume v)
+    public final FloatVolume times(final FloatFlowVolume v)
     {
         return new FloatVolume(this.si * v.si, VolumeUnit.SI);
     }
@@ -300,7 +293,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
      * @param v FloatDuration scalar
      * @return FloatSpeed scalar as a multiplication of FloatDuration and FloatAcceleration
      */
-    public final FloatSpeed multiplyBy(final FloatAcceleration v)
+    public final FloatSpeed times(final FloatAcceleration v)
     {
         return new FloatSpeed(this.si * v.si, SpeedUnit.SI);
     }
@@ -310,7 +303,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
      * @param v FloatDuration scalar
      * @return FloatEnergy scalar as a multiplication of FloatDuration and FloatPower
      */
-    public final FloatEnergy multiplyBy(final FloatPower v)
+    public final FloatEnergy times(final FloatPower v)
     {
         return new FloatEnergy(this.si * v.si, EnergyUnit.SI);
     }
@@ -320,7 +313,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
      * @param v FloatDuration scalar
      * @return FloatLength scalar as a multiplication of FloatDuration and FloatSpeed
      */
-    public final FloatLength multiplyBy(final FloatSpeed v)
+    public final FloatLength times(final FloatSpeed v)
     {
         return new FloatLength(this.si * v.si, LengthUnit.SI);
     }
@@ -330,7 +323,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
      * @param v FloatDuration scalar
      * @return FloatMagneticFlux scalar as a multiplication of FloatDuration and FloatElectricalPotential
      */
-    public final FloatMagneticFlux multiplyBy(final FloatElectricalPotential v)
+    public final FloatMagneticFlux times(final FloatElectricalPotential v)
     {
         return new FloatMagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
     }
@@ -341,7 +334,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
      * @param v FloatDuration scalar
      * @return FloatElectricalInductance scalar as a multiplication of FloatDuration and FloatElectricalResistance
      */
-    public final FloatElectricalInductance multiplyBy(final FloatElectricalResistance v)
+    public final FloatElectricalInductance times(final FloatElectricalResistance v)
     {
         return new FloatElectricalInductance(this.si * v.si, ElectricalInductanceUnit.SI);
     }
@@ -352,7 +345,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
      * @param v FloatDuration scalar
      * @return FloatElectricalCapacitance scalar as a multiplication of FloatDuration and FloatElectricalConductance
      */
-    public final FloatElectricalCapacitance multiplyBy(final FloatElectricalConductance v)
+    public final FloatElectricalCapacitance times(final FloatElectricalConductance v)
     {
         return new FloatElectricalCapacitance(this.si * v.si, ElectricalCapacitanceUnit.SI);
     }

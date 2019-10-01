@@ -21,7 +21,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class FloatAngle extends AbstractFloatScalarRelWithAbs<DirectionUnit, FloatDirection, AngleUnit, FloatAngle>
 {
     /** */
@@ -188,28 +188,21 @@ public class FloatAngle extends AbstractFloatScalarRelWithAbs<DirectionUnit, Flo
      */
     public static FloatAngle valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing FloatAngle: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatAngle: empty unitString");
+        Throw.whenNull(text, "Error parsing FloatAngle: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatAngle: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            AngleUnit unit = AngleUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                AngleUnit unit = AngleUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        float f = Float.parseFloat(valueString);
-                        return new FloatAngle(f, unit);
-                    }
+                    float f = Float.parseFloat(valueString);
+                    return new FloatAngle(f, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing FloatAngle from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing FloatAngle from " + text);
@@ -240,7 +233,7 @@ public class FloatAngle extends AbstractFloatScalarRelWithAbs<DirectionUnit, Flo
      * @param v FloatAngle scalar
      * @return FloatDimensionless scalar as a division of FloatAngle and FloatAngle
      */
-    public final FloatDimensionless divideBy(final FloatAngle v)
+    public final FloatDimensionless divide(final FloatAngle v)
     {
         return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }

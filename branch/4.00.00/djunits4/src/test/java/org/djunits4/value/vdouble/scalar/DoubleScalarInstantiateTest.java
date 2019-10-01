@@ -3,7 +3,7 @@ package org.djunits4.value.vdouble.scalar;
 import static org.junit.Assert.assertEquals;
 
 import org.djunits4.unit.AccelerationUnit;
-import org.djunits4.unit.AngleSolidUnit;
+import org.djunits4.unit.SolidAngleUnit;
 import org.djunits4.unit.AngleUnit;
 import org.djunits4.unit.AreaUnit;
 import org.djunits4.unit.DimensionlessUnit;
@@ -39,10 +39,10 @@ public class DoubleScalarInstantiateTest
         acceleration = DoubleScalar.instantiate(12960.0, AccelerationUnit.KM_PER_HOUR_2);
         assertEquals("Acceleration", 1.0, acceleration.getSI(), 0.001d);
 
-        AngleSolid angleSolid = DoubleScalar.instantiate(10.0, AngleSolidUnit.SI);
-        assertEquals("AngleSolid", 10.0, angleSolid.getSI(), 0.0001d);
-        angleSolid = DoubleScalar.instantiate(1.0, AngleSolidUnit.SQUARE_DEGREE);
-        assertEquals("AngleSolid", (Math.PI / 180.0) * (Math.PI / 180.0), angleSolid.getSI(), 0.001d);
+        SolidAngle angleSolid = DoubleScalar.instantiate(10.0, SolidAngleUnit.SI);
+        assertEquals("SolidAngle", 10.0, angleSolid.getSI(), 0.0001d);
+        angleSolid = DoubleScalar.instantiate(1.0, SolidAngleUnit.SQUARE_DEGREE);
+        assertEquals("SolidAngle", (Math.PI / 180.0) * (Math.PI / 180.0), angleSolid.getSI(), 0.001d);
 
         Angle angle = DoubleScalar.instantiate(10.0, AngleUnit.SI);
         assertEquals("Angle", 10.0, angle.getSI(), 0.0001d);

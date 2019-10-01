@@ -2,15 +2,15 @@ package org.djunits4.value.vfloat.matrix;
 
 import javax.annotation.Generated;
 
-import org.djunits4.unit.EquivalentDoseUnit;
+import org.djunits4.unit.SolidAngleUnit;
 import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
-import org.djunits4.value.vfloat.scalar.FloatEquivalentDose;
-import org.djunits4.value.vfloat.vector.FloatEquivalentDoseVector;
+import org.djunits4.value.vfloat.scalar.FloatSolidAngle;
+import org.djunits4.value.vfloat.vector.FloatSolidAngleVector;
 import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable FloatFloatEquivalentDoseMatrix, a matrix of values with a EquivalentDoseUnit.
+ * Immutable FloatFloatSolidAngleMatrix, a matrix of values with a SolidAngleUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,8 +19,8 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
-public class FloatEquivalentDoseMatrix extends
-        AbstractFloatMatrixRel<EquivalentDoseUnit, FloatEquivalentDose, FloatEquivalentDoseVector, FloatEquivalentDoseMatrix>
+public class FloatSolidAngleMatrix
+        extends AbstractFloatMatrixRel<SolidAngleUnit, FloatSolidAngle, FloatSolidAngleVector, FloatSolidAngleMatrix>
 
 {
     /** */
@@ -28,46 +28,46 @@ public class FloatEquivalentDoseMatrix extends
 
     /**
      * @param data FloatMatrixData; an internal data object
-     * @param unit EquivalentDoseUnit; the unit
+     * @param unit SolidAngleUnit; the unit
      */
-    public FloatEquivalentDoseMatrix(final FloatMatrixData data, final EquivalentDoseUnit unit)
+    public FloatSolidAngleMatrix(final FloatMatrixData data, final SolidAngleUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public Class<FloatEquivalentDose> getScalarClass()
+    public Class<FloatSolidAngle> getScalarClass()
     {
-        return FloatEquivalentDose.class;
+        return FloatSolidAngle.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public Class<FloatEquivalentDoseVector> getVectorClass()
+    public Class<FloatSolidAngleVector> getVectorClass()
     {
-        return FloatEquivalentDoseVector.class;
+        return FloatSolidAngleVector.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public FloatEquivalentDoseMatrix instantiateMatrix(final FloatMatrixData fmd, final EquivalentDoseUnit displayUnit)
+    public FloatSolidAngleMatrix instantiateMatrix(final FloatMatrixData fmd, final SolidAngleUnit displayUnit)
     {
-        return new FloatEquivalentDoseMatrix(fmd, displayUnit);
+        return new FloatSolidAngleMatrix(fmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public FloatEquivalentDoseVector instantiateVector(final FloatVectorData fvd, final EquivalentDoseUnit displayUnit)
+    public FloatSolidAngleVector instantiateVector(final FloatVectorData fvd, final SolidAngleUnit displayUnit)
     {
-        return new FloatEquivalentDoseVector(fvd, displayUnit);
+        return new FloatSolidAngleVector(fvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public FloatEquivalentDose instantiateScalarSI(final float valueSI, final EquivalentDoseUnit displayUnit)
+    public FloatSolidAngle instantiateScalarSI(final float valueSI, final SolidAngleUnit displayUnit)
     {
-        FloatEquivalentDose result = FloatEquivalentDose.instantiateSI(valueSI);
+        FloatSolidAngle result = FloatSolidAngle.instantiateSI(valueSI);
         result.setDisplayUnit(displayUnit);
         return result;
     }

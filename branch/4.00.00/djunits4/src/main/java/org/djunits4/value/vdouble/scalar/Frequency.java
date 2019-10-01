@@ -22,7 +22,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 {
     /** */
@@ -172,28 +172,21 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
      */
     public static Frequency valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing Frequency: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Frequency: empty unitString");
+        Throw.whenNull(text, "Error parsing Frequency: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Frequency: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            FrequencyUnit unit = FrequencyUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                FrequencyUnit unit = FrequencyUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new Frequency(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new Frequency(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing Frequency from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing Frequency from " + text);
@@ -224,7 +217,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
      * @param v Frequency scalar
      * @return Dimensionless scalar as a division of Frequency and Frequency
      */
-    public final Dimensionless divideBy(final Frequency v)
+    public final Dimensionless divide(final Frequency v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -234,7 +227,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
      * @param v Frequency scalar
      * @return Dimensionless scalar as a multiplication of Frequency and Duration
      */
-    public final Dimensionless multiplyBy(final Duration v)
+    public final Dimensionless times(final Duration v)
     {
         return new Dimensionless(this.si * v.si, DimensionlessUnit.SI);
     }
@@ -244,7 +237,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
      * @param v Frequency scalar
      * @return Speed scalar as a multiplication of Frequency and Length
      */
-    public final Speed multiplyBy(final Length v)
+    public final Speed times(final Length v)
     {
         return new Speed(this.si * v.si, SpeedUnit.SI);
     }
@@ -254,7 +247,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
      * @param v Frequency scalar
      * @return Acceleration scalar as a multiplication of Frequency and Speed
      */
-    public final Acceleration multiplyBy(final Speed v)
+    public final Acceleration times(final Speed v)
     {
         return new Acceleration(this.si * v.si, AccelerationUnit.SI);
     }
@@ -264,7 +257,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
      * @param v Frequency scalar
      * @return Power scalar as a multiplication of Frequency and Energy
      */
-    public final Power multiplyBy(final Energy v)
+    public final Power times(final Energy v)
     {
         return new Power(this.si * v.si, PowerUnit.SI);
     }

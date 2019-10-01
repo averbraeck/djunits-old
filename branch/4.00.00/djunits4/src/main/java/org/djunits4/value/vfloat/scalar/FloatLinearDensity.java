@@ -22,7 +22,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit, FloatLinearDensity>
 {
     /** */
@@ -186,28 +186,21 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
      */
     public static FloatLinearDensity valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing FloatLinearDensity: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatLinearDensity: empty unitString");
+        Throw.whenNull(text, "Error parsing FloatLinearDensity: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatLinearDensity: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            LinearDensityUnit unit = LinearDensityUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                LinearDensityUnit unit = LinearDensityUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        float f = Float.parseFloat(valueString);
-                        return new FloatLinearDensity(f, unit);
-                    }
+                    float f = Float.parseFloat(valueString);
+                    return new FloatLinearDensity(f, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing FloatLinearDensity from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing FloatLinearDensity from " + text);
@@ -239,7 +232,7 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
      * @param v FloatLinearDensity scalar
      * @return FloatDimensionless scalar as a division of FloatLinearDensity and FloatLinearDensity
      */
-    public final FloatDimensionless divideBy(final FloatLinearDensity v)
+    public final FloatDimensionless divide(final FloatLinearDensity v)
     {
         return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -249,7 +242,7 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
      * @param v FloatLinearDensity scalar
      * @return FloatLength scalar as a multiplication of FloatLinearDensity and FloatArea
      */
-    public final FloatLength multiplyBy(final FloatArea v)
+    public final FloatLength times(final FloatArea v)
     {
         return new FloatLength(this.si * v.si, LengthUnit.SI);
     }
@@ -259,7 +252,7 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
      * @param v FloatLinearDensity scalar
      * @return FloatForce scalar as a multiplication of FloatLinearDensity and FloatEnergy
      */
-    public final FloatForce multiplyBy(final FloatEnergy v)
+    public final FloatForce times(final FloatEnergy v)
     {
         return new FloatForce(this.si * v.si, ForceUnit.SI);
     }
@@ -269,7 +262,7 @@ public class FloatLinearDensity extends AbstractFloatScalarRel<LinearDensityUnit
      * @param v FloatLinearDensity scalar
      * @return FloatFrequency scalar as a multiplication of FloatLinearDensity and FloatSpeed
      */
-    public final FloatFrequency multiplyBy(final FloatSpeed v)
+    public final FloatFrequency times(final FloatSpeed v)
     {
         return new FloatFrequency(this.si * v.si, FrequencyUnit.SI);
     }

@@ -26,7 +26,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 {
     /** */
@@ -175,28 +175,21 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
      */
     public static Speed valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing Speed: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Speed: empty unitString");
+        Throw.whenNull(text, "Error parsing Speed: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Speed: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            SpeedUnit unit = SpeedUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                SpeedUnit unit = SpeedUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new Speed(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new Speed(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing Speed from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing Speed from " + text);
@@ -227,7 +220,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
      * @param v Speed scalar
      * @return Dimensionless scalar as a division of Speed and Speed
      */
-    public final Dimensionless divideBy(final Speed v)
+    public final Dimensionless divide(final Speed v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -237,7 +230,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
      * @param v Speed scalar
      * @return FlowVolume scalar as a multiplication of Speed and Area
      */
-    public final FlowVolume multiplyBy(final Area v)
+    public final FlowVolume times(final Area v)
     {
         return new FlowVolume(this.si * v.si, FlowVolumeUnit.SI);
     }
@@ -247,7 +240,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
      * @param v Speed scalar
      * @return Power scalar as a multiplication of Speed and Force
      */
-    public final Power multiplyBy(final Force v)
+    public final Power times(final Force v)
     {
         return new Power(this.si * v.si, PowerUnit.SI);
     }
@@ -257,7 +250,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
      * @param v Speed scalar
      * @return Acceleration scalar as a multiplication of Speed and Frequency
      */
-    public final Acceleration multiplyBy(final Frequency v)
+    public final Acceleration times(final Frequency v)
     {
         return new Acceleration(this.si * v.si, AccelerationUnit.SI);
     }
@@ -267,7 +260,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
      * @param v Speed scalar
      * @return Frequency scalar as a division of Speed and Length
      */
-    public final Frequency divideBy(final Length v)
+    public final Frequency divide(final Length v)
     {
         return new Frequency(this.si / v.si, FrequencyUnit.SI);
     }
@@ -277,7 +270,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
      * @param v Speed scalar
      * @return Length scalar as a division of Speed and Frequency
      */
-    public final Length divideBy(final Frequency v)
+    public final Length divide(final Frequency v)
     {
         return new Length(this.si / v.si, LengthUnit.SI);
     }
@@ -287,7 +280,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
      * @param v Speed scalar
      * @return Frequency scalar as a multiplication of Speed and LinearDensity
      */
-    public final Frequency multiplyBy(final LinearDensity v)
+    public final Frequency times(final LinearDensity v)
     {
         return new Frequency(this.si * v.si, FrequencyUnit.SI);
     }
@@ -297,7 +290,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
      * @param v Speed scalar
      * @return Length scalar as a multiplication of Speed and Duration
      */
-    public final Length multiplyBy(final Duration v)
+    public final Length times(final Duration v)
     {
         return new Length(this.si * v.si, LengthUnit.SI);
     }
@@ -307,7 +300,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
      * @param v Speed scalar
      * @return Acceleration scalar as a division of Speed and Duration
      */
-    public final Acceleration divideBy(final Duration v)
+    public final Acceleration divide(final Duration v)
     {
         return new Acceleration(this.si / v.si, AccelerationUnit.SI);
     }
@@ -317,7 +310,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
      * @param v Speed scalar
      * @return Duration scalar as a division of Speed and Acceleration
      */
-    public final Duration divideBy(final Acceleration v)
+    public final Duration divide(final Acceleration v)
     {
         return new Duration(this.si / v.si, DurationUnit.SI);
     }
@@ -327,7 +320,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
      * @param v Speed scalar
      * @return Force scalar as a multiplication of Speed and FlowMass
      */
-    public final Force multiplyBy(final FlowMass v)
+    public final Force times(final FlowMass v)
     {
         return new Force(this.si * v.si, ForceUnit.SI);
     }

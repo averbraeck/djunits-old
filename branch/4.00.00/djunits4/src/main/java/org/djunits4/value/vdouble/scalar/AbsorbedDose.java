@@ -19,7 +19,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class AbsorbedDose extends AbstractDoubleScalarRel<AbsorbedDoseUnit, AbsorbedDose>
 {
     /** */
@@ -169,28 +169,21 @@ public class AbsorbedDose extends AbstractDoubleScalarRel<AbsorbedDoseUnit, Abso
      */
     public static AbsorbedDose valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing AbsorbedDose: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing AbsorbedDose: empty unitString");
+        Throw.whenNull(text, "Error parsing AbsorbedDose: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing AbsorbedDose: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            AbsorbedDoseUnit unit = AbsorbedDoseUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                AbsorbedDoseUnit unit = AbsorbedDoseUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new AbsorbedDose(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new AbsorbedDose(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing AbsorbedDose from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing AbsorbedDose from " + text);
@@ -221,7 +214,7 @@ public class AbsorbedDose extends AbstractDoubleScalarRel<AbsorbedDoseUnit, Abso
      * @param v AbsorbedDose scalar
      * @return Dimensionless scalar as a division of AbsorbedDose and AbsorbedDose
      */
-    public final Dimensionless divideBy(final AbsorbedDose v)
+    public final Dimensionless divide(final AbsorbedDose v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }

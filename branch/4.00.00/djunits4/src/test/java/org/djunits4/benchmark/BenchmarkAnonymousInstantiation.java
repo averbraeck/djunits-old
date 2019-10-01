@@ -10,7 +10,7 @@ import java.util.Map;
 
 import org.djunits4.unit.AbsoluteTemperatureUnit;
 import org.djunits4.unit.AccelerationUnit;
-import org.djunits4.unit.AngleSolidUnit;
+import org.djunits4.unit.SolidAngleUnit;
 import org.djunits4.unit.AngleUnit;
 import org.djunits4.unit.AreaUnit;
 import org.djunits4.unit.DensityUnit;
@@ -44,7 +44,7 @@ import org.djunits4.unit.util.UnitRuntimeException;
 import org.djunits4.value.vdouble.scalar.AbsoluteTemperature;
 import org.djunits4.value.vdouble.scalar.Acceleration;
 import org.djunits4.value.vdouble.scalar.Angle;
-import org.djunits4.value.vdouble.scalar.AngleSolid;
+import org.djunits4.value.vdouble.scalar.SolidAngle;
 import org.djunits4.value.vdouble.scalar.Area;
 import org.djunits4.value.vdouble.scalar.Density;
 import org.djunits4.value.vdouble.scalar.Dimensionless;
@@ -184,8 +184,8 @@ public class BenchmarkAnonymousInstantiation
             return (S) new Dimensionless(value, (DimensionlessUnit) unit);
         else if (unit instanceof AccelerationUnit)
             return (S) new Acceleration(value, (AccelerationUnit) unit);
-        else if (unit instanceof AngleSolidUnit)
-            return (S) new AngleSolid(value, (AngleSolidUnit) unit);
+        else if (unit instanceof SolidAngleUnit)
+            return (S) new SolidAngle(value, (SolidAngleUnit) unit);
         else if (unit instanceof AngleUnit)
             return (S) new Angle(value, (AngleUnit) unit);
         else if (unit instanceof DirectionUnit)

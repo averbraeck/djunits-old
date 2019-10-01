@@ -23,7 +23,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrentUnit, ElectricalCurrent>
 {
     /** */
@@ -175,28 +175,21 @@ public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrent
      */
     public static ElectricalCurrent valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing ElectricalCurrent: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing ElectricalCurrent: empty unitString");
+        Throw.whenNull(text, "Error parsing ElectricalCurrent: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing ElectricalCurrent: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            ElectricalCurrentUnit unit = ElectricalCurrentUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                ElectricalCurrentUnit unit = ElectricalCurrentUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new ElectricalCurrent(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new ElectricalCurrent(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing ElectricalCurrent from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing ElectricalCurrent from " + text);
@@ -228,7 +221,7 @@ public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrent
      * @param v ElectricalCurrent scalar
      * @return Dimensionless scalar as a division of ElectricalCurrent and ElectricalCurrent
      */
-    public final Dimensionless divideBy(final ElectricalCurrent v)
+    public final Dimensionless divide(final ElectricalCurrent v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -238,7 +231,7 @@ public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrent
      * @param v ElectricalCurrent scalar
      * @return Power scalar as a multiplication of ElectricalCurrent and ElectricalPotential
      */
-    public final Power multiplyBy(final ElectricalPotential v)
+    public final Power times(final ElectricalPotential v)
     {
         return new Power(this.si * v.si, PowerUnit.SI);
     }
@@ -248,7 +241,7 @@ public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrent
      * @param v ElectricalCurrent scalar
      * @return ElectricalCharge scalar as a multiplication of ElectricalCurrent and Duration
      */
-    public final ElectricalCharge multiplyBy(final Duration v)
+    public final ElectricalCharge times(final Duration v)
     {
         return new ElectricalCharge(this.si * v.si, ElectricalChargeUnit.SI);
     }
@@ -259,7 +252,7 @@ public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrent
      * @param v ElectricalCurrent scalar
      * @return ElectricalPotential scalar as a multiplication of ElectricalCurrent and ElectricalResistance
      */
-    public final ElectricalPotential multiplyBy(final ElectricalResistance v)
+    public final ElectricalPotential times(final ElectricalResistance v)
     {
         return new ElectricalPotential(this.si * v.si, ElectricalPotentialUnit.SI);
     }
@@ -269,7 +262,7 @@ public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrent
      * @param v ElectricalCurrent scalar
      * @return ElectricalConductance scalar as a division of ElectricalCurrent and ElectricalPotential
      */
-    public final ElectricalConductance divideBy(final ElectricalPotential v)
+    public final ElectricalConductance divide(final ElectricalPotential v)
     {
         return new ElectricalConductance(this.si / v.si, ElectricalConductanceUnit.SI);
     }
@@ -279,7 +272,7 @@ public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrent
      * @param v ElectricalCurrent scalar
      * @return ElectricalPotential scalar as a division of ElectricalCurrent and ElectricalConductance
      */
-    public final ElectricalPotential divideBy(final ElectricalConductance v)
+    public final ElectricalPotential divide(final ElectricalConductance v)
     {
         return new ElectricalPotential(this.si / v.si, ElectricalPotentialUnit.SI);
     }

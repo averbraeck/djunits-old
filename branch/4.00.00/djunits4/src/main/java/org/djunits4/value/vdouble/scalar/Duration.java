@@ -30,7 +30,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, DurationUnit, Duration>
 {
     /** */
@@ -187,28 +187,21 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
      */
     public static Duration valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing Duration: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Duration: empty unitString");
+        Throw.whenNull(text, "Error parsing Duration: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Duration: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            DurationUnit unit = DurationUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                DurationUnit unit = DurationUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new Duration(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new Duration(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing Duration from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing Duration from " + text);
@@ -239,7 +232,7 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
      * @param v Duration scalar
      * @return Dimensionless scalar as a division of Duration and Duration
      */
-    public final Dimensionless divideBy(final Duration v)
+    public final Dimensionless divide(final Duration v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -249,7 +242,7 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
      * @param v Duration scalar
      * @return Dimensionless scalar as a multiplication of Duration and Frequency
      */
-    public final Dimensionless multiplyBy(final Frequency v)
+    public final Dimensionless times(final Frequency v)
     {
         return new Dimensionless(this.si * v.si, DimensionlessUnit.SI);
     }
@@ -259,7 +252,7 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
      * @param v Duration scalar
      * @return ElectricalCharge scalar as a multiplication of Duration and ElectricalCurrent
      */
-    public final ElectricalCharge multiplyBy(final ElectricalCurrent v)
+    public final ElectricalCharge times(final ElectricalCurrent v)
     {
         return new ElectricalCharge(this.si * v.si, ElectricalChargeUnit.SI);
     }
@@ -269,7 +262,7 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
      * @param v Duration scalar
      * @return Mass scalar as a multiplication of Duration and FlowMass
      */
-    public final Mass multiplyBy(final FlowMass v)
+    public final Mass times(final FlowMass v)
     {
         return new Mass(this.si * v.si, MassUnit.SI);
     }
@@ -279,7 +272,7 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
      * @param v Duration scalar
      * @return Volume scalar as a multiplication of Duration and FlowVolume
      */
-    public final Volume multiplyBy(final FlowVolume v)
+    public final Volume times(final FlowVolume v)
     {
         return new Volume(this.si * v.si, VolumeUnit.SI);
     }
@@ -289,7 +282,7 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
      * @param v Duration scalar
      * @return Speed scalar as a multiplication of Duration and Acceleration
      */
-    public final Speed multiplyBy(final Acceleration v)
+    public final Speed times(final Acceleration v)
     {
         return new Speed(this.si * v.si, SpeedUnit.SI);
     }
@@ -299,7 +292,7 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
      * @param v Duration scalar
      * @return Energy scalar as a multiplication of Duration and Power
      */
-    public final Energy multiplyBy(final Power v)
+    public final Energy times(final Power v)
     {
         return new Energy(this.si * v.si, EnergyUnit.SI);
     }
@@ -309,7 +302,7 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
      * @param v Duration scalar
      * @return Length scalar as a multiplication of Duration and Speed
      */
-    public final Length multiplyBy(final Speed v)
+    public final Length times(final Speed v)
     {
         return new Length(this.si * v.si, LengthUnit.SI);
     }
@@ -319,7 +312,7 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
      * @param v Duration scalar
      * @return MagneticFlux scalar as a multiplication of Duration and ElectricalPotential
      */
-    public final MagneticFlux multiplyBy(final ElectricalPotential v)
+    public final MagneticFlux times(final ElectricalPotential v)
     {
         return new MagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
     }
@@ -329,7 +322,7 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
      * @param v Duration scalar
      * @return ElectricalInductance scalar as a multiplication of Duration and ElectricalResistance
      */
-    public final ElectricalInductance multiplyBy(final ElectricalResistance v)
+    public final ElectricalInductance times(final ElectricalResistance v)
     {
         return new ElectricalInductance(this.si * v.si, ElectricalInductanceUnit.SI);
     }
@@ -339,7 +332,7 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
      * @param v Duration scalar
      * @return ElectricalCapacitance scalar as a multiplication of Duration and ElectricalConductance
      */
-    public final ElectricalCapacitance multiplyBy(final ElectricalConductance v)
+    public final ElectricalCapacitance times(final ElectricalConductance v)
     {
         return new ElectricalCapacitance(this.si * v.si, ElectricalCapacitanceUnit.SI);
     }

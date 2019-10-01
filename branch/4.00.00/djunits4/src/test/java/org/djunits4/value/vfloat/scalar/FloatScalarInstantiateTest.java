@@ -3,7 +3,7 @@ package org.djunits4.value.vfloat.scalar;
 import static org.junit.Assert.assertEquals;
 
 import org.djunits4.unit.AccelerationUnit;
-import org.djunits4.unit.AngleSolidUnit;
+import org.djunits4.unit.SolidAngleUnit;
 import org.djunits4.unit.AngleUnit;
 import org.djunits4.unit.AreaUnit;
 import org.djunits4.unit.DimensionlessUnit;
@@ -39,10 +39,10 @@ public class FloatScalarInstantiateTest
         acceleration = FloatScalar.instantiate(12960.0f, AccelerationUnit.KM_PER_HOUR_2);
         assertEquals("FloatAcceleration", 1.0, acceleration.getSI(), 0.001d);
 
-        FloatAngleSolid angleSolid = FloatScalar.instantiate(10.0f, AngleSolidUnit.SI);
-        assertEquals("FloatAngleSolid", 10.0f, angleSolid.getSI(), 0.0001d);
-        angleSolid = FloatScalar.instantiate(1.0f, AngleSolidUnit.SQUARE_DEGREE);
-        assertEquals("FloatAngleSolid", (Math.PI / 180.0) * (Math.PI / 180.0), angleSolid.getSI(), 0.001d);
+        FloatSolidAngle angleSolid = FloatScalar.instantiate(10.0f, SolidAngleUnit.SI);
+        assertEquals("FloatSolidAngle", 10.0f, angleSolid.getSI(), 0.0001d);
+        angleSolid = FloatScalar.instantiate(1.0f, SolidAngleUnit.SQUARE_DEGREE);
+        assertEquals("FloatSolidAngle", (Math.PI / 180.0) * (Math.PI / 180.0), angleSolid.getSI(), 0.001d);
 
         FloatAngle angle = FloatScalar.instantiate(10.0f, AngleUnit.SI);
         assertEquals("FloatAngle", 10.0f, angle.getSI(), 0.0001d);

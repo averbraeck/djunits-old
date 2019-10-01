@@ -24,7 +24,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 {
     /** */
@@ -173,28 +173,21 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
      */
     public static Mass valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing Mass: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Mass: empty unitString");
+        Throw.whenNull(text, "Error parsing Mass: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Mass: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            MassUnit unit = MassUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                MassUnit unit = MassUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new Mass(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new Mass(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing Mass from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing Mass from " + text);
@@ -225,7 +218,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
      * @param v Mass scalar
      * @return Dimensionless scalar as a division of Mass and Mass
      */
-    public final Dimensionless divideBy(final Mass v)
+    public final Dimensionless divide(final Mass v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -235,7 +228,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
      * @param v Mass scalar
      * @return Duration scalar as a division of Mass and FlowMass
      */
-    public final Duration divideBy(final FlowMass v)
+    public final Duration divide(final FlowMass v)
     {
         return new Duration(this.si / v.si, DurationUnit.SI);
     }
@@ -245,7 +238,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
      * @param v Mass scalar
      * @return FlowMass scalar as a division of Mass and Duration
      */
-    public final FlowMass divideBy(final Duration v)
+    public final FlowMass divide(final Duration v)
     {
         return new FlowMass(this.si / v.si, FlowMassUnit.SI);
     }
@@ -255,7 +248,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
      * @param v Mass scalar
      * @return Force scalar as a multiplication of Mass and Acceleration
      */
-    public final Force multiplyBy(final Acceleration v)
+    public final Force times(final Acceleration v)
     {
         return new Force(this.si * v.si, ForceUnit.SI);
     }
@@ -265,7 +258,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
      * @param v Mass scalar
      * @return FlowMass scalar as a multiplication of Mass and Frequency
      */
-    public final FlowMass multiplyBy(final Frequency v)
+    public final FlowMass times(final Frequency v)
     {
         return new FlowMass(this.si * v.si, FlowMassUnit.SI);
     }
@@ -275,7 +268,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
      * @param v Mass scalar
      * @return Volume scalar as a division of Mass and Density
      */
-    public final Volume divideBy(final Density v)
+    public final Volume divide(final Density v)
     {
         return new Volume(this.si / v.si, VolumeUnit.SI);
     }
@@ -285,7 +278,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
      * @param v Mass scalar
      * @return Density scalar as a division of Mass and Volume
      */
-    public final Density divideBy(final Volume v)
+    public final Density divide(final Volume v)
     {
         return new Density(this.si / v.si, DensityUnit.SI);
     }

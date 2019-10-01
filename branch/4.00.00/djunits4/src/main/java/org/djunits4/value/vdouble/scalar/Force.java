@@ -26,7 +26,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 {
     /** */
@@ -175,28 +175,21 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
      */
     public static Force valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing Force: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Force: empty unitString");
+        Throw.whenNull(text, "Error parsing Force: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Force: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            ForceUnit unit = ForceUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                ForceUnit unit = ForceUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new Force(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new Force(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing Force from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing Force from " + text);
@@ -227,7 +220,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
      * @param v Force scalar
      * @return Dimensionless scalar as a division of Force and Force
      */
-    public final Dimensionless divideBy(final Force v)
+    public final Dimensionless divide(final Force v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -237,7 +230,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
      * @param v Force scalar
      * @return Energy scalar as a multiplication of Force and Length
      */
-    public final Energy multiplyBy(final Length v)
+    public final Energy times(final Length v)
     {
         return new Energy(this.si * v.si, EnergyUnit.SI);
     }
@@ -247,7 +240,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
      * @param v Force scalar
      * @return Energy scalar as a division of Force and LinearDensity
      */
-    public final Energy divideBy(final LinearDensity v)
+    public final Energy divide(final LinearDensity v)
     {
         return new Energy(this.si / v.si, EnergyUnit.SI);
     }
@@ -257,7 +250,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
      * @param v Force scalar
      * @return LinearDensity scalar as a division of Force and Energy
      */
-    public final LinearDensity divideBy(final Energy v)
+    public final LinearDensity divide(final Energy v)
     {
         return new LinearDensity(this.si / v.si, LinearDensityUnit.SI);
     }
@@ -267,7 +260,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
      * @param v Force scalar
      * @return Power scalar as a multiplication of Force and Speed
      */
-    public final Power multiplyBy(final Speed v)
+    public final Power times(final Speed v)
     {
         return new Power(this.si * v.si, PowerUnit.SI);
     }
@@ -277,7 +270,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
      * @param v Force scalar
      * @return Acceleration scalar as a division of Force and Mass
      */
-    public final Acceleration divideBy(final Mass v)
+    public final Acceleration divide(final Mass v)
     {
         return new Acceleration(this.si / v.si, AccelerationUnit.SI);
     }
@@ -287,7 +280,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
      * @param v Force scalar
      * @return Mass scalar as a division of Force and Acceleration
      */
-    public final Mass divideBy(final Acceleration v)
+    public final Mass divide(final Acceleration v)
     {
         return new Mass(this.si / v.si, MassUnit.SI);
     }
@@ -297,7 +290,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
      * @param v Force scalar
      * @return Pressure scalar as a division of Force and Area
      */
-    public final Pressure divideBy(final Area v)
+    public final Pressure divide(final Area v)
     {
         return new Pressure(this.si / v.si, PressureUnit.SI);
     }
@@ -307,7 +300,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
      * @param v Force scalar
      * @return Area scalar as a division of Force and Pressure
      */
-    public final Area divideBy(final Pressure v)
+    public final Area divide(final Pressure v)
     {
         return new Area(this.si / v.si, AreaUnit.SI);
     }

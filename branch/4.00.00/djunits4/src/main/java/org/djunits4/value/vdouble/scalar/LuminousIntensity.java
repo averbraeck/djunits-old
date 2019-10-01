@@ -20,7 +20,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensityUnit, LuminousIntensity>
 {
     /** */
@@ -172,28 +172,21 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
      */
     public static LuminousIntensity valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing LuminousIntensity: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing LuminousIntensity: empty unitString");
+        Throw.whenNull(text, "Error parsing LuminousIntensity: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing LuminousIntensity: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            LuminousIntensityUnit unit = LuminousIntensityUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                LuminousIntensityUnit unit = LuminousIntensityUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new LuminousIntensity(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new LuminousIntensity(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing LuminousIntensity from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing LuminousIntensity from " + text);
@@ -225,17 +218,17 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
      * @param v LuminousIntensity scalar
      * @return Dimensionless scalar as a division of LuminousIntensity and LuminousIntensity
      */
-    public final Dimensionless divideBy(final LuminousIntensity v)
+    public final Dimensionless divide(final LuminousIntensity v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
 
     /**
-     * Calculate the multiplication of LuminousIntensity and AngleSolid, which results in a LuminousFlux scalar.
+     * Calculate the multiplication of LuminousIntensity and SolidAngle, which results in a LuminousFlux scalar.
      * @param v LuminousIntensity scalar
-     * @return LuminousFlux scalar as a multiplication of LuminousIntensity and AngleSolid
+     * @return LuminousFlux scalar as a multiplication of LuminousIntensity and SolidAngle
      */
-    public final LuminousFlux multiplyBy(final AngleSolid v)
+    public final LuminousFlux times(final SolidAngle v)
     {
         return new LuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
     }

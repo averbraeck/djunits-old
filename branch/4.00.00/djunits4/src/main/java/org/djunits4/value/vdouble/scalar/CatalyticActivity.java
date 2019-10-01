@@ -21,7 +21,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivityUnit, CatalyticActivity>
 {
     /** */
@@ -173,28 +173,21 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
      */
     public static CatalyticActivity valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing CatalyticActivity: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing CatalyticActivity: empty unitString");
+        Throw.whenNull(text, "Error parsing CatalyticActivity: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing CatalyticActivity: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            CatalyticActivityUnit unit = CatalyticActivityUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                CatalyticActivityUnit unit = CatalyticActivityUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new CatalyticActivity(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new CatalyticActivity(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing CatalyticActivity from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing CatalyticActivity from " + text);
@@ -226,7 +219,7 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
      * @param v CatalyticActivity scalar
      * @return Dimensionless scalar as a division of CatalyticActivity and CatalyticActivity
      */
-    public final Dimensionless divideBy(final CatalyticActivity v)
+    public final Dimensionless divide(final CatalyticActivity v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -236,7 +229,7 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
      * @param v CatalyticActivity scalar
      * @return AmountOfSubstance scalar as a multiplication of CatalyticActivity and Duration
      */
-    public final AmountOfSubstance multiplyBy(final Duration v)
+    public final AmountOfSubstance times(final Duration v)
     {
         return new AmountOfSubstance(this.si * v.si, AmountOfSubstanceUnit.SI);
     }
@@ -246,7 +239,7 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
      * @param v CatalyticActivity scalar
      * @return Frequency scalar as a division of CatalyticActivity and AmountOfSubstance
      */
-    public final Frequency divideBy(final AmountOfSubstance v)
+    public final Frequency divide(final AmountOfSubstance v)
     {
         return new Frequency(this.si / v.si, FrequencyUnit.SI);
     }
@@ -256,7 +249,7 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
      * @param v CatalyticActivity scalar
      * @return AmountOfSubstance scalar as a division of CatalyticActivity and Frequency
      */
-    public final AmountOfSubstance divideBy(final Frequency v)
+    public final AmountOfSubstance divide(final Frequency v)
     {
         return new AmountOfSubstance(this.si / v.si, AmountOfSubstanceUnit.SI);
     }

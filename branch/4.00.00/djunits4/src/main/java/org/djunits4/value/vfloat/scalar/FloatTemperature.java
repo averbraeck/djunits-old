@@ -21,7 +21,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class FloatTemperature extends
         AbstractFloatScalarRelWithAbs<AbsoluteTemperatureUnit, FloatAbsoluteTemperature, TemperatureUnit, FloatTemperature>
 {
@@ -189,28 +189,21 @@ public class FloatTemperature extends
      */
     public static FloatTemperature valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing FloatTemperature: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatTemperature: empty unitString");
+        Throw.whenNull(text, "Error parsing FloatTemperature: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatTemperature: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            TemperatureUnit unit = TemperatureUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                TemperatureUnit unit = TemperatureUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        float f = Float.parseFloat(valueString);
-                        return new FloatTemperature(f, unit);
-                    }
+                    float f = Float.parseFloat(valueString);
+                    return new FloatTemperature(f, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing FloatTemperature from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing FloatTemperature from " + text);
@@ -242,7 +235,7 @@ public class FloatTemperature extends
      * @param v FloatTemperature scalar
      * @return FloatDimensionless scalar as a division of FloatTemperature and FloatTemperature
      */
-    public final FloatDimensionless divideBy(final FloatTemperature v)
+    public final FloatDimensionless divide(final FloatTemperature v)
     {
         return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }

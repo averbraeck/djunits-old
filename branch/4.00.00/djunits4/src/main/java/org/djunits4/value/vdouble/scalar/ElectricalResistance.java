@@ -21,7 +21,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResistanceUnit, ElectricalResistance>
 {
     /** */
@@ -178,28 +178,22 @@ public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResi
      */
     public static ElectricalResistance valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing ElectricalResistance: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing ElectricalResistance: empty unitString");
+        Throw.whenNull(text, "Error parsing ElectricalResistance: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class,
+                "Error parsing ElectricalResistance: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            ElectricalResistanceUnit unit = ElectricalResistanceUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                ElectricalResistanceUnit unit = ElectricalResistanceUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new ElectricalResistance(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new ElectricalResistance(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing ElectricalResistance from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing ElectricalResistance from " + text);
@@ -231,7 +225,7 @@ public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResi
      * @param v ElectricalResistance scalar
      * @return Dimensionless scalar as a division of ElectricalResistance and ElectricalResistance
      */
-    public final Dimensionless divideBy(final ElectricalResistance v)
+    public final Dimensionless divide(final ElectricalResistance v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -242,7 +236,7 @@ public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResi
      * @param v ElectricalResistance scalar
      * @return ElectricalPotential scalar as a multiplication of ElectricalResistance and ElectricalCurrent
      */
-    public final ElectricalPotential multiplyBy(final ElectricalCurrent v)
+    public final ElectricalPotential times(final ElectricalCurrent v)
     {
         return new ElectricalPotential(this.si * v.si, ElectricalPotentialUnit.SI);
     }
@@ -252,7 +246,7 @@ public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResi
      * @param v ElectricalResistance scalar
      * @return ElectricalInductance scalar as a multiplication of ElectricalResistance and Duration
      */
-    public final ElectricalInductance multiplyBy(final Duration v)
+    public final ElectricalInductance times(final Duration v)
     {
         return new ElectricalInductance(this.si * v.si, ElectricalInductanceUnit.SI);
     }

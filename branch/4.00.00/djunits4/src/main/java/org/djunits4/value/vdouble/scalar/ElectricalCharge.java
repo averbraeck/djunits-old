@@ -23,7 +23,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUnit, ElectricalCharge>
 {
     /** */
@@ -175,28 +175,21 @@ public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUn
      */
     public static ElectricalCharge valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing ElectricalCharge: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing ElectricalCharge: empty unitString");
+        Throw.whenNull(text, "Error parsing ElectricalCharge: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing ElectricalCharge: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            ElectricalChargeUnit unit = ElectricalChargeUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                ElectricalChargeUnit unit = ElectricalChargeUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new ElectricalCharge(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new ElectricalCharge(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing ElectricalCharge from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing ElectricalCharge from " + text);
@@ -228,7 +221,7 @@ public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUn
      * @param v ElectricalCharge scalar
      * @return Dimensionless scalar as a division of ElectricalCharge and ElectricalCharge
      */
-    public final Dimensionless divideBy(final ElectricalCharge v)
+    public final Dimensionless divide(final ElectricalCharge v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -238,7 +231,7 @@ public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUn
      * @param v ElectricalCharge scalar
      * @return ElectricalCurrent scalar as a division of ElectricalCharge and Duration
      */
-    public final ElectricalCurrent divideBy(final Duration v)
+    public final ElectricalCurrent divide(final Duration v)
     {
         return new ElectricalCurrent(this.si / v.si, ElectricalCurrentUnit.SI);
     }
@@ -248,7 +241,7 @@ public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUn
      * @param v ElectricalCharge scalar
      * @return Duration scalar as a division of ElectricalCharge and ElectricalCurrent
      */
-    public final Duration divideBy(final ElectricalCurrent v)
+    public final Duration divide(final ElectricalCurrent v)
     {
         return new Duration(this.si / v.si, DurationUnit.SI);
     }
@@ -258,7 +251,7 @@ public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUn
      * @param v ElectricalCharge scalar
      * @return ElectricalCapacitance scalar as a division of ElectricalCharge and ElectricalPotential
      */
-    public final ElectricalCapacitance divideBy(final ElectricalPotential v)
+    public final ElectricalCapacitance divide(final ElectricalPotential v)
     {
         return new ElectricalCapacitance(this.si / v.si, ElectricalCapacitanceUnit.SI);
     }
@@ -268,7 +261,7 @@ public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUn
      * @param v ElectricalCharge scalar
      * @return ElectricalPotential scalar as a division of ElectricalCharge and ElectricalCapacitance
      */
-    public final ElectricalPotential divideBy(final ElectricalCapacitance v)
+    public final ElectricalPotential divide(final ElectricalCapacitance v)
     {
         return new ElectricalPotential(this.si / v.si, ElectricalPotentialUnit.SI);
     }

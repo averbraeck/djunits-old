@@ -21,7 +21,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class Temperature
         extends AbstractDoubleScalarRelWithAbs<AbsoluteTemperatureUnit, AbsoluteTemperature, TemperatureUnit, Temperature>
 {
@@ -179,28 +179,21 @@ public class Temperature
      */
     public static Temperature valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing Temperature: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Temperature: empty unitString");
+        Throw.whenNull(text, "Error parsing Temperature: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Temperature: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            TemperatureUnit unit = TemperatureUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                TemperatureUnit unit = TemperatureUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new Temperature(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new Temperature(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing Temperature from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing Temperature from " + text);
@@ -231,7 +224,7 @@ public class Temperature
      * @param v Temperature scalar
      * @return Dimensionless scalar as a division of Temperature and Temperature
      */
-    public final Dimensionless divideBy(final Temperature v)
+    public final Dimensionless divide(final Temperature v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }

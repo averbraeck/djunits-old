@@ -6,13 +6,13 @@ import javax.annotation.Generated;
 
 import org.djunits4.Throw;
 import org.djunits4.unit.DimensionlessUnit;
-import org.djunits4.unit.IlluminanceUnit;
 import org.djunits4.unit.LuminousFluxUnit;
+import org.djunits4.unit.SolidAngleUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
 
 /**
- * Easy access methods for the FloatIlluminance FloatScalar, which is relative by definition.
+ * Easy access methods for the FloatSolidAngle FloatScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
@@ -21,77 +21,77 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
-public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, FloatIlluminance>
+public class FloatSolidAngle extends AbstractFloatScalarRel<SolidAngleUnit, FloatSolidAngle>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
     /** Constant with value zero. */
-    public static final FloatIlluminance ZERO = new FloatIlluminance(0.0f, IlluminanceUnit.SI);
+    public static final FloatSolidAngle ZERO = new FloatSolidAngle(0.0f, SolidAngleUnit.SI);
 
     /** Constant with value one. */
-    public static final FloatIlluminance ONE = new FloatIlluminance(1.0f, IlluminanceUnit.SI);
+    public static final FloatSolidAngle ONE = new FloatSolidAngle(1.0f, SolidAngleUnit.SI);
 
     /** Constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
-    public static final FloatIlluminance NaN = new FloatIlluminance(Float.NaN, IlluminanceUnit.SI);
+    public static final FloatSolidAngle NaN = new FloatSolidAngle(Float.NaN, SolidAngleUnit.SI);
 
     /** Constant with value POSITIVE_INFINITY. */
-    public static final FloatIlluminance POSITIVE_INFINITY = new FloatIlluminance(Float.POSITIVE_INFINITY, IlluminanceUnit.SI);
+    public static final FloatSolidAngle POSITIVE_INFINITY = new FloatSolidAngle(Float.POSITIVE_INFINITY, SolidAngleUnit.SI);
 
     /** Constant with value NEGATIVE_INFINITY. */
-    public static final FloatIlluminance NEGATIVE_INFINITY = new FloatIlluminance(Float.NEGATIVE_INFINITY, IlluminanceUnit.SI);
+    public static final FloatSolidAngle NEGATIVE_INFINITY = new FloatSolidAngle(Float.NEGATIVE_INFINITY, SolidAngleUnit.SI);
 
     /** Constant with value MAX_VALUE. */
-    public static final FloatIlluminance POS_MAXVALUE = new FloatIlluminance(Float.MAX_VALUE, IlluminanceUnit.SI);
+    public static final FloatSolidAngle POS_MAXVALUE = new FloatSolidAngle(Float.MAX_VALUE, SolidAngleUnit.SI);
 
     /** Constant with value -MAX_VALUE. */
-    public static final FloatIlluminance NEG_MAXVALUE = new FloatIlluminance(-Float.MAX_VALUE, IlluminanceUnit.SI);
+    public static final FloatSolidAngle NEG_MAXVALUE = new FloatSolidAngle(-Float.MAX_VALUE, SolidAngleUnit.SI);
 
     /**
-     * Construct FloatIlluminance scalar.
+     * Construct FloatSolidAngle scalar.
      * @param value float; the float value
      * @param unit unit for the float value
      */
-    public FloatIlluminance(final float value, final IlluminanceUnit unit)
+    public FloatSolidAngle(final float value, final SolidAngleUnit unit)
     {
         super(value, unit);
     }
 
     /**
-     * Construct FloatIlluminance scalar.
+     * Construct FloatSolidAngle scalar.
      * @param value Scalar from which to construct this instance
      */
-    public FloatIlluminance(final FloatIlluminance value)
+    public FloatSolidAngle(final FloatSolidAngle value)
     {
         super(value);
     }
 
     /**
-     * Construct FloatIlluminance scalar using a double value.
+     * Construct FloatSolidAngle scalar using a double value.
      * @param value double; the double value
      * @param unit unit for the resulting float value
      */
-    public FloatIlluminance(final double value, final IlluminanceUnit unit)
+    public FloatSolidAngle(final double value, final SolidAngleUnit unit)
     {
         super((float) value, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatIlluminance instantiateRel(final float value, final IlluminanceUnit unit)
+    public final FloatSolidAngle instantiateRel(final float value, final SolidAngleUnit unit)
     {
-        return new FloatIlluminance(value, unit);
+        return new FloatSolidAngle(value, unit);
     }
 
     /**
-     * Construct FloatIlluminance scalar.
+     * Construct FloatSolidAngle scalar.
      * @param value float; the float value in SI units
      * @return the new scalar with the SI value
      */
-    public static final FloatIlluminance instantiateSI(final float value)
+    public static final FloatSolidAngle instantiateSI(final float value)
     {
-        return new FloatIlluminance(value, IlluminanceUnit.SI);
+        return new FloatSolidAngle(value, SolidAngleUnit.SI);
     }
 
     /**
@@ -101,9 +101,9 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
      * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatIlluminance interpolate(final FloatIlluminance zero, final FloatIlluminance one, final float ratio)
+    public static FloatSolidAngle interpolate(final FloatSolidAngle zero, final FloatSolidAngle one, final float ratio)
     {
-        return new FloatIlluminance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+        return new FloatSolidAngle(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
                 zero.getDisplayUnit());
     }
 
@@ -113,7 +113,7 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
      * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
-    public static FloatIlluminance max(final FloatIlluminance r1, final FloatIlluminance r2)
+    public static FloatSolidAngle max(final FloatSolidAngle r1, final FloatSolidAngle r2)
     {
         return (r1.gt(r2)) ? r1 : r2;
     }
@@ -125,10 +125,10 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
      * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
-    public static FloatIlluminance max(final FloatIlluminance r1, final FloatIlluminance r2, final FloatIlluminance... rn)
+    public static FloatSolidAngle max(final FloatSolidAngle r1, final FloatSolidAngle r2, final FloatSolidAngle... rn)
     {
-        FloatIlluminance maxr = (r1.gt(r2)) ? r1 : r2;
-        for (FloatIlluminance r : rn)
+        FloatSolidAngle maxr = (r1.gt(r2)) ? r1 : r2;
+        for (FloatSolidAngle r : rn)
         {
             if (r.gt(maxr))
             {
@@ -144,7 +144,7 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
      * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
-    public static FloatIlluminance min(final FloatIlluminance r1, final FloatIlluminance r2)
+    public static FloatSolidAngle min(final FloatSolidAngle r1, final FloatSolidAngle r2)
     {
         return (r1.lt(r2)) ? r1 : r2;
     }
@@ -156,10 +156,10 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
      * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
-    public static FloatIlluminance min(final FloatIlluminance r1, final FloatIlluminance r2, final FloatIlluminance... rn)
+    public static FloatSolidAngle min(final FloatSolidAngle r1, final FloatSolidAngle r2, final FloatSolidAngle... rn)
     {
-        FloatIlluminance minr = (r1.lt(r2)) ? r1 : r2;
-        for (FloatIlluminance r : rn)
+        FloatSolidAngle minr = (r1.lt(r2)) ? r1 : r2;
+        for (FloatSolidAngle r : rn)
         {
             if (r.lt(minr))
             {
@@ -170,73 +170,72 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
     }
 
     /**
-     * Returns a FloatIlluminance representation of a textual representation of a value with a unit. The String representation
+     * Returns a FloatSolidAngle representation of a textual representation of a value with a unit. The String representation
      * that can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are
      * allowed, but not required, between the value and the unit.
-     * @param text String; the textual representation to parse into a FloatIlluminance
-     * @return FloatIlluminance; the Scalar representation of the value in its unit
+     * @param text String; the textual representation to parse into a FloatSolidAngle
+     * @return FloatSolidAngle; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
      * @throws NullPointerException when the text argument is null
      */
-    public static FloatIlluminance valueOf(final String text)
+    public static FloatSolidAngle valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing FloatIlluminance: text to parse is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatIlluminance: empty text to parse");
+        Throw.whenNull(text, "Error parsing FloatSolidAngle: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatSolidAngle: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
             String unitString = text.substring(index).trim();
             String valueString = text.substring(0, index).trim();
-            IlluminanceUnit unit = IlluminanceUnit.BASE.getUnitByAbbreviation(unitString);
+            SolidAngleUnit unit = SolidAngleUnit.BASE.getUnitByAbbreviation(unitString);
             if (unit != null)
             {
                 {
                     float f = Float.parseFloat(valueString);
-                    return new FloatIlluminance(f, unit);
+                    return new FloatSolidAngle(f, unit);
                 }
             }
         }
-        throw new IllegalArgumentException("Error parsing FloatIlluminance from " + text);
+        throw new IllegalArgumentException("Error parsing FloatSolidAngle from " + text);
     }
 
     /**
-     * Returns a FloatIlluminance based on a value and the textual representation of the unit.
+     * Returns a FloatSolidAngle based on a value and the textual representation of the unit.
      * @param value double; the value to use
      * @param unitString String; the textual representation of the unit
-     * @return FloatIlluminance; the Scalar representation of the value in its unit
+     * @return FloatSolidAngle; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
      * @throws NullPointerException when the unitString argument is null
      */
-    public static FloatIlluminance of(final float value, final String unitString)
+    public static FloatSolidAngle of(final float value, final String unitString)
     {
-        Throw.whenNull(unitString, "Error parsing FloatIlluminance: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class,
-                "Error parsing FloatIlluminance: empty unitString");
-        IlluminanceUnit unit = IlluminanceUnit.BASE.getUnitByAbbreviation(unitString);
+        Throw.whenNull(unitString, "Error parsing FloatSolidAngle: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatSolidAngle: empty unitString");
+        SolidAngleUnit unit = SolidAngleUnit.BASE.getUnitByAbbreviation(unitString);
         if (unit != null)
         {
-            return new FloatIlluminance(value, unit);
+            return new FloatSolidAngle(value, unit);
         }
-        throw new IllegalArgumentException("Error parsing FloatIlluminance with unit " + unitString);
+        throw new IllegalArgumentException("Error parsing FloatSolidAngle with unit " + unitString);
     }
 
     /**
-     * Calculate the division of FloatIlluminance and FloatIlluminance, which results in a FloatDimensionless scalar.
-     * @param v FloatIlluminance scalar
-     * @return FloatDimensionless scalar as a division of FloatIlluminance and FloatIlluminance
+     * Calculate the division of FloatSolidAngle and FloatSolidAngle, which results in a FloatDimensionless scalar.
+     * @param v FloatSolidAngle scalar
+     * @return FloatDimensionless scalar as a division of FloatSolidAngle and FloatSolidAngle
      */
-    public final FloatDimensionless divide(final FloatIlluminance v)
+    public final FloatDimensionless divide(final FloatSolidAngle v)
     {
         return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
 
     /**
-     * Calculate the multiplication of FloatIlluminance and FloatArea, which results in a FloatLuminousFlux scalar.
-     * @param v FloatIlluminance scalar
-     * @return FloatLuminousFlux scalar as a multiplication of FloatIlluminance and FloatArea
+     * Calculate the multiplication of FloatSolidAngle and FloatLuminousIntensity, which results in a FloatLuminousFlux scalar.
+     * @param v FloatSolidAngle scalar
+     * @return FloatLuminousFlux scalar as a multiplication of FloatSolidAngle and FloatLuminousIntensity
      */
-    public final FloatLuminousFlux times(final FloatArea v)
+    public final FloatLuminousFlux times(final FloatLuminousIntensity v)
     {
         return new FloatLuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
     }

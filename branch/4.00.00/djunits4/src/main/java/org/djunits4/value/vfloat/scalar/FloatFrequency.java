@@ -22,7 +22,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatFrequency>
 {
     /** */
@@ -182,28 +182,21 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
      */
     public static FloatFrequency valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing FloatFrequency: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatFrequency: empty unitString");
+        Throw.whenNull(text, "Error parsing FloatFrequency: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatFrequency: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            FrequencyUnit unit = FrequencyUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                FrequencyUnit unit = FrequencyUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        float f = Float.parseFloat(valueString);
-                        return new FloatFrequency(f, unit);
-                    }
+                    float f = Float.parseFloat(valueString);
+                    return new FloatFrequency(f, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing FloatFrequency from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing FloatFrequency from " + text);
@@ -234,7 +227,7 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
      * @param v FloatFrequency scalar
      * @return FloatDimensionless scalar as a division of FloatFrequency and FloatFrequency
      */
-    public final FloatDimensionless divideBy(final FloatFrequency v)
+    public final FloatDimensionless divide(final FloatFrequency v)
     {
         return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -244,7 +237,7 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
      * @param v FloatFrequency scalar
      * @return FloatDimensionless scalar as a multiplication of FloatFrequency and FloatDuration
      */
-    public final FloatDimensionless multiplyBy(final FloatDuration v)
+    public final FloatDimensionless times(final FloatDuration v)
     {
         return new FloatDimensionless(this.si * v.si, DimensionlessUnit.SI);
     }
@@ -254,7 +247,7 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
      * @param v FloatFrequency scalar
      * @return FloatSpeed scalar as a multiplication of FloatFrequency and FloatLength
      */
-    public final FloatSpeed multiplyBy(final FloatLength v)
+    public final FloatSpeed times(final FloatLength v)
     {
         return new FloatSpeed(this.si * v.si, SpeedUnit.SI);
     }
@@ -264,7 +257,7 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
      * @param v FloatFrequency scalar
      * @return FloatAcceleration scalar as a multiplication of FloatFrequency and FloatSpeed
      */
-    public final FloatAcceleration multiplyBy(final FloatSpeed v)
+    public final FloatAcceleration times(final FloatSpeed v)
     {
         return new FloatAcceleration(this.si * v.si, AccelerationUnit.SI);
     }
@@ -274,7 +267,7 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
      * @param v FloatFrequency scalar
      * @return FloatPower scalar as a multiplication of FloatFrequency and FloatEnergy
      */
-    public final FloatPower multiplyBy(final FloatEnergy v)
+    public final FloatPower times(final FloatEnergy v)
     {
         return new FloatPower(this.si * v.si, PowerUnit.SI);
     }

@@ -21,7 +21,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstanceUnit, AmountOfSubstance>
 {
     /** */
@@ -173,28 +173,21 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
      */
     public static AmountOfSubstance valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing AmountOfSubstance: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing AmountOfSubstance: empty unitString");
+        Throw.whenNull(text, "Error parsing AmountOfSubstance: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing AmountOfSubstance: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            AmountOfSubstanceUnit unit = AmountOfSubstanceUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                AmountOfSubstanceUnit unit = AmountOfSubstanceUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new AmountOfSubstance(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new AmountOfSubstance(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing AmountOfSubstance from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing AmountOfSubstance from " + text);
@@ -226,7 +219,7 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
      * @param v AmountOfSubstance scalar
      * @return Dimensionless scalar as a division of AmountOfSubstance and AmountOfSubstance
      */
-    public final Dimensionless divideBy(final AmountOfSubstance v)
+    public final Dimensionless divide(final AmountOfSubstance v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -236,7 +229,7 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
      * @param v AmountOfSubstance scalar
      * @return Duration scalar as a division of AmountOfSubstance and CatalyticActivity
      */
-    public final Duration divideBy(final CatalyticActivity v)
+    public final Duration divide(final CatalyticActivity v)
     {
         return new Duration(this.si / v.si, DurationUnit.SI);
     }
@@ -246,7 +239,7 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
      * @param v AmountOfSubstance scalar
      * @return CatalyticActivity scalar as a division of AmountOfSubstance and Duration
      */
-    public final CatalyticActivity divideBy(final Duration v)
+    public final CatalyticActivity divide(final Duration v)
     {
         return new CatalyticActivity(this.si / v.si, CatalyticActivityUnit.SI);
     }

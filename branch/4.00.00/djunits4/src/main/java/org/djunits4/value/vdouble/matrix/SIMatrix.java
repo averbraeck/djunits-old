@@ -6,7 +6,6 @@ import org.djunits4.Throw;
 import org.djunits4.unit.AbsorbedDoseUnit;
 import org.djunits4.unit.AccelerationUnit;
 import org.djunits4.unit.AmountOfSubstanceUnit;
-import org.djunits4.unit.AngleSolidUnit;
 import org.djunits4.unit.AngleUnit;
 import org.djunits4.unit.AreaUnit;
 import org.djunits4.unit.CatalyticActivityUnit;
@@ -38,6 +37,7 @@ import org.djunits4.unit.PowerUnit;
 import org.djunits4.unit.PressureUnit;
 import org.djunits4.unit.RadioActivityUnit;
 import org.djunits4.unit.SIUnit;
+import org.djunits4.unit.SolidAngleUnit;
 import org.djunits4.unit.SpeedUnit;
 import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.TorqueUnit;
@@ -66,7 +66,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector, SIMatrix>
 {
     /** */
@@ -252,31 +252,6 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AmountOfSubstanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AmountOfSubstanceMatrix", this.toString());
         AmountOfSubstanceMatrix result = new AmountOfSubstanceMatrix(this.data, displayUnit.getStandardUnit());
-        result.setDisplayUnit(displayUnit);
-        return result;
-    }
-
-    /**
-     * Return the current matrix as a anglesolid matrix.
-     * @return AngleSolidMatrix; the current matrix as a anglesolid matrix
-     */
-    public final AngleSolidMatrix asAngleSolid()
-    {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AngleSolidUnit.BASE.getSiDimensions())),
-                UnitRuntimeException.class, "cannot cast %s to AngleSolidMatrix", this.toString());
-        return new AngleSolidMatrix(this.data, AngleSolidUnit.SI);
-    }
-
-    /**
-     * Return the current matrix as a anglesolid matrix, and provide a display unit.
-     * @param displayUnit the unit in which the value will be displayed
-     * @return AngleSolidMatrix; the current matrix as a anglesolid matrix
-     */
-    public final AngleSolidMatrix asAngleSolid(final AngleSolidUnit displayUnit)
-    {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AngleSolidUnit.BASE.getSiDimensions())),
-                UnitRuntimeException.class, "cannot cast %s to AngleSolidMatrix", this.toString());
-        AngleSolidMatrix result = new AngleSolidMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
         return result;
     }
@@ -952,6 +927,31 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(RadioActivityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to RadioActivityMatrix", this.toString());
         RadioActivityMatrix result = new RadioActivityMatrix(this.data, displayUnit.getStandardUnit());
+        result.setDisplayUnit(displayUnit);
+        return result;
+    }
+
+    /**
+     * Return the current matrix as a solidangle matrix.
+     * @return SolidAngleMatrix; the current matrix as a solidangle matrix
+     */
+    public final SolidAngleMatrix asSolidAngle()
+    {
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(SolidAngleUnit.BASE.getSiDimensions())),
+                UnitRuntimeException.class, "cannot cast %s to SolidAngleMatrix", this.toString());
+        return new SolidAngleMatrix(this.data, SolidAngleUnit.SI);
+    }
+
+    /**
+     * Return the current matrix as a solidangle matrix, and provide a display unit.
+     * @param displayUnit the unit in which the value will be displayed
+     * @return SolidAngleMatrix; the current matrix as a solidangle matrix
+     */
+    public final SolidAngleMatrix asSolidAngle(final SolidAngleUnit displayUnit)
+    {
+        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(SolidAngleUnit.BASE.getSiDimensions())),
+                UnitRuntimeException.class, "cannot cast %s to SolidAngleMatrix", this.toString());
+        SolidAngleMatrix result = new SolidAngleMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
         return result;
     }

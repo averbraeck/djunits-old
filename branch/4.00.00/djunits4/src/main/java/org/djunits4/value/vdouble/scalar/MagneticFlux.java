@@ -25,7 +25,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, MagneticFlux>
 {
     /** */
@@ -175,28 +175,21 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
      */
     public static MagneticFlux valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing MagneticFlux: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing MagneticFlux: empty unitString");
+        Throw.whenNull(text, "Error parsing MagneticFlux: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing MagneticFlux: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            MagneticFluxUnit unit = MagneticFluxUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                MagneticFluxUnit unit = MagneticFluxUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new MagneticFlux(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new MagneticFlux(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing MagneticFlux from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing MagneticFlux from " + text);
@@ -227,7 +220,7 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
      * @param v MagneticFlux scalar
      * @return Dimensionless scalar as a division of MagneticFlux and MagneticFlux
      */
-    public final Dimensionless divideBy(final MagneticFlux v)
+    public final Dimensionless divide(final MagneticFlux v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -237,7 +230,7 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
      * @param v MagneticFlux scalar
      * @return Duration scalar as a division of MagneticFlux and ElectricalPotential
      */
-    public final Duration divideBy(final ElectricalPotential v)
+    public final Duration divide(final ElectricalPotential v)
     {
         return new Duration(this.si / v.si, DurationUnit.SI);
     }
@@ -247,7 +240,7 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
      * @param v MagneticFlux scalar
      * @return ElectricalPotential scalar as a division of MagneticFlux and Duration
      */
-    public final ElectricalPotential divideBy(final Duration v)
+    public final ElectricalPotential divide(final Duration v)
     {
         return new ElectricalPotential(this.si / v.si, ElectricalPotentialUnit.SI);
     }
@@ -257,7 +250,7 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
      * @param v MagneticFlux scalar
      * @return MagneticFluxDensity scalar as a division of MagneticFlux and Area
      */
-    public final MagneticFluxDensity divideBy(final Area v)
+    public final MagneticFluxDensity divide(final Area v)
     {
         return new MagneticFluxDensity(this.si / v.si, MagneticFluxDensityUnit.SI);
     }
@@ -267,7 +260,7 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
      * @param v MagneticFlux scalar
      * @return Area scalar as a division of MagneticFlux and MagneticFluxDensity
      */
-    public final Area divideBy(final MagneticFluxDensity v)
+    public final Area divide(final MagneticFluxDensity v)
     {
         return new Area(this.si / v.si, AreaUnit.SI);
     }
@@ -277,7 +270,7 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
      * @param v MagneticFlux scalar
      * @return ElectricalInductance scalar as a division of MagneticFlux and ElectricalCurrent
      */
-    public final ElectricalInductance divideBy(final ElectricalCurrent v)
+    public final ElectricalInductance divide(final ElectricalCurrent v)
     {
         return new ElectricalInductance(this.si / v.si, ElectricalInductanceUnit.SI);
     }
@@ -287,7 +280,7 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
      * @param v MagneticFlux scalar
      * @return ElectricalCurrent scalar as a division of MagneticFlux and ElectricalInductance
      */
-    public final ElectricalCurrent divideBy(final ElectricalInductance v)
+    public final ElectricalCurrent divide(final ElectricalInductance v)
     {
         return new ElectricalCurrent(this.si / v.si, ElectricalCurrentUnit.SI);
     }

@@ -27,7 +27,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Position, LengthUnit, Length>
 {
     /** */
@@ -183,28 +183,21 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
      */
     public static Length valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing Length: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Length: empty unitString");
+        Throw.whenNull(text, "Error parsing Length: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Length: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            LengthUnit unit = LengthUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                LengthUnit unit = LengthUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new Length(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new Length(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing Length from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing Length from " + text);
@@ -235,7 +228,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
      * @param v Length scalar
      * @return Dimensionless scalar as a division of Length and Length
      */
-    public final Dimensionless divideBy(final Length v)
+    public final Dimensionless divide(final Length v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -245,7 +238,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
      * @param v Length scalar
      * @return Area scalar as a multiplication of Length and Length
      */
-    public final Area multiplyBy(final Length v)
+    public final Area times(final Length v)
     {
         return new Area(this.si * v.si, AreaUnit.SI);
     }
@@ -255,7 +248,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
      * @param v Length scalar
      * @return Area scalar as a division of Length and LinearDensity
      */
-    public final Area divideBy(final LinearDensity v)
+    public final Area divide(final LinearDensity v)
     {
         return new Area(this.si / v.si, AreaUnit.SI);
     }
@@ -265,7 +258,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
      * @param v Length scalar
      * @return LinearDensity scalar as a division of Length and Area
      */
-    public final LinearDensity divideBy(final Area v)
+    public final LinearDensity divide(final Area v)
     {
         return new LinearDensity(this.si / v.si, LinearDensityUnit.SI);
     }
@@ -275,7 +268,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
      * @param v Length scalar
      * @return Volume scalar as a multiplication of Length and Area
      */
-    public final Volume multiplyBy(final Area v)
+    public final Volume times(final Area v)
     {
         return new Volume(this.si * v.si, VolumeUnit.SI);
     }
@@ -285,7 +278,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
      * @param v Length scalar
      * @return Energy scalar as a multiplication of Length and Force
      */
-    public final Energy multiplyBy(final Force v)
+    public final Energy times(final Force v)
     {
         return new Energy(this.si * v.si, EnergyUnit.SI);
     }
@@ -295,7 +288,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
      * @param v Length scalar
      * @return Speed scalar as a multiplication of Length and Frequency
      */
-    public final Speed multiplyBy(final Frequency v)
+    public final Speed times(final Frequency v)
     {
         return new Speed(this.si * v.si, SpeedUnit.SI);
     }
@@ -305,7 +298,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
      * @param v Length scalar
      * @return Speed scalar as a division of Length and Duration
      */
-    public final Speed divideBy(final Duration v)
+    public final Speed divide(final Duration v)
     {
         return new Speed(this.si / v.si, SpeedUnit.SI);
     }
@@ -315,7 +308,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
      * @param v Length scalar
      * @return Duration scalar as a division of Length and Speed
      */
-    public final Duration divideBy(final Speed v)
+    public final Duration divide(final Speed v)
     {
         return new Duration(this.si / v.si, DurationUnit.SI);
     }

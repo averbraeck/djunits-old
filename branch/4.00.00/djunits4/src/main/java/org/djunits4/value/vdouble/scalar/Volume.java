@@ -25,7 +25,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 {
     /** */
@@ -174,28 +174,21 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
      */
     public static Volume valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing Volume: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Volume: empty unitString");
+        Throw.whenNull(text, "Error parsing Volume: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Volume: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            VolumeUnit unit = VolumeUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                VolumeUnit unit = VolumeUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new Volume(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new Volume(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing Volume from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing Volume from " + text);
@@ -226,7 +219,7 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
      * @param v Volume scalar
      * @return Dimensionless scalar as a division of Volume and Volume
      */
-    public final Dimensionless divideBy(final Volume v)
+    public final Dimensionless divide(final Volume v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -236,7 +229,7 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
      * @param v Volume scalar
      * @return Mass scalar as a multiplication of Volume and Density
      */
-    public final Mass multiplyBy(final Density v)
+    public final Mass times(final Density v)
     {
         return new Mass(this.si * v.si, MassUnit.SI);
     }
@@ -246,7 +239,7 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
      * @param v Volume scalar
      * @return Energy scalar as a multiplication of Volume and Pressure
      */
-    public final Energy multiplyBy(final Pressure v)
+    public final Energy times(final Pressure v)
     {
         return new Energy(this.si * v.si, EnergyUnit.SI);
     }
@@ -256,7 +249,7 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
      * @param v Volume scalar
      * @return Area scalar as a division of Volume and Length
      */
-    public final Area divideBy(final Length v)
+    public final Area divide(final Length v)
     {
         return new Area(this.si / v.si, AreaUnit.SI);
     }
@@ -266,7 +259,7 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
      * @param v Volume scalar
      * @return Length scalar as a division of Volume and Area
      */
-    public final Length divideBy(final Area v)
+    public final Length divide(final Area v)
     {
         return new Length(this.si / v.si, LengthUnit.SI);
     }
@@ -276,7 +269,7 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
      * @param v Volume scalar
      * @return Area scalar as a multiplication of Volume and LinearDensity
      */
-    public final Area multiplyBy(final LinearDensity v)
+    public final Area times(final LinearDensity v)
     {
         return new Area(this.si * v.si, AreaUnit.SI);
     }
@@ -286,7 +279,7 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
      * @param v Volume scalar
      * @return FlowVolume scalar as a division of Volume and Duration
      */
-    public final FlowVolume divideBy(final Duration v)
+    public final FlowVolume divide(final Duration v)
     {
         return new FlowVolume(this.si / v.si, FlowVolumeUnit.SI);
     }
@@ -296,7 +289,7 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
      * @param v Volume scalar
      * @return Duration scalar as a division of Volume and FlowVolume
      */
-    public final Duration divideBy(final FlowVolume v)
+    public final Duration divide(final FlowVolume v)
     {
         return new Duration(this.si / v.si, DurationUnit.SI);
     }

@@ -26,7 +26,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
 {
     /** */
@@ -186,28 +186,21 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
      */
     public static FloatForce valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing FloatForce: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatForce: empty unitString");
+        Throw.whenNull(text, "Error parsing FloatForce: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatForce: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            ForceUnit unit = ForceUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                ForceUnit unit = ForceUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        float f = Float.parseFloat(valueString);
-                        return new FloatForce(f, unit);
-                    }
+                    float f = Float.parseFloat(valueString);
+                    return new FloatForce(f, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing FloatForce from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing FloatForce from " + text);
@@ -238,7 +231,7 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
      * @param v FloatForce scalar
      * @return FloatDimensionless scalar as a division of FloatForce and FloatForce
      */
-    public final FloatDimensionless divideBy(final FloatForce v)
+    public final FloatDimensionless divide(final FloatForce v)
     {
         return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -248,7 +241,7 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
      * @param v FloatForce scalar
      * @return FloatEnergy scalar as a multiplication of FloatForce and FloatLength
      */
-    public final FloatEnergy multiplyBy(final FloatLength v)
+    public final FloatEnergy times(final FloatLength v)
     {
         return new FloatEnergy(this.si * v.si, EnergyUnit.SI);
     }
@@ -258,7 +251,7 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
      * @param v FloatForce scalar
      * @return FloatEnergy scalar as a division of FloatForce and FloatLinearDensity
      */
-    public final FloatEnergy divideBy(final FloatLinearDensity v)
+    public final FloatEnergy divide(final FloatLinearDensity v)
     {
         return new FloatEnergy(this.si / v.si, EnergyUnit.SI);
     }
@@ -268,7 +261,7 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
      * @param v FloatForce scalar
      * @return FloatLinearDensity scalar as a division of FloatForce and FloatEnergy
      */
-    public final FloatLinearDensity divideBy(final FloatEnergy v)
+    public final FloatLinearDensity divide(final FloatEnergy v)
     {
         return new FloatLinearDensity(this.si / v.si, LinearDensityUnit.SI);
     }
@@ -278,7 +271,7 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
      * @param v FloatForce scalar
      * @return FloatPower scalar as a multiplication of FloatForce and FloatSpeed
      */
-    public final FloatPower multiplyBy(final FloatSpeed v)
+    public final FloatPower times(final FloatSpeed v)
     {
         return new FloatPower(this.si * v.si, PowerUnit.SI);
     }
@@ -288,7 +281,7 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
      * @param v FloatForce scalar
      * @return FloatAcceleration scalar as a division of FloatForce and FloatMass
      */
-    public final FloatAcceleration divideBy(final FloatMass v)
+    public final FloatAcceleration divide(final FloatMass v)
     {
         return new FloatAcceleration(this.si / v.si, AccelerationUnit.SI);
     }
@@ -298,7 +291,7 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
      * @param v FloatForce scalar
      * @return FloatMass scalar as a division of FloatForce and FloatAcceleration
      */
-    public final FloatMass divideBy(final FloatAcceleration v)
+    public final FloatMass divide(final FloatAcceleration v)
     {
         return new FloatMass(this.si / v.si, MassUnit.SI);
     }
@@ -308,7 +301,7 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
      * @param v FloatForce scalar
      * @return FloatPressure scalar as a division of FloatForce and FloatArea
      */
-    public final FloatPressure divideBy(final FloatArea v)
+    public final FloatPressure divide(final FloatArea v)
     {
         return new FloatPressure(this.si / v.si, PressureUnit.SI);
     }
@@ -318,7 +311,7 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
      * @param v FloatForce scalar
      * @return FloatArea scalar as a division of FloatForce and FloatPressure
      */
-    public final FloatArea divideBy(final FloatPressure v)
+    public final FloatArea divide(final FloatPressure v)
     {
         return new FloatArea(this.si / v.si, AreaUnit.SI);
     }

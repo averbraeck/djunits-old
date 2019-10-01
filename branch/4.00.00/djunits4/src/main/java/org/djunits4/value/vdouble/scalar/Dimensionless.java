@@ -8,7 +8,6 @@ import org.djunits4.Throw;
 import org.djunits4.unit.AbsorbedDoseUnit;
 import org.djunits4.unit.AccelerationUnit;
 import org.djunits4.unit.AmountOfSubstanceUnit;
-import org.djunits4.unit.AngleSolidUnit;
 import org.djunits4.unit.AngleUnit;
 import org.djunits4.unit.AreaUnit;
 import org.djunits4.unit.CatalyticActivityUnit;
@@ -39,6 +38,7 @@ import org.djunits4.unit.MassUnit;
 import org.djunits4.unit.PowerUnit;
 import org.djunits4.unit.PressureUnit;
 import org.djunits4.unit.RadioActivityUnit;
+import org.djunits4.unit.SolidAngleUnit;
 import org.djunits4.unit.SpeedUnit;
 import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.TorqueUnit;
@@ -56,7 +56,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Dimensionless>
         implements DimensionlessFunctions<DimensionlessUnit, Dimensionless>
 {
@@ -207,28 +207,21 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      */
     public static Dimensionless valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing Dimensionless: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Dimensionless: empty unitString");
+        Throw.whenNull(text, "Error parsing Dimensionless: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Dimensionless: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            DimensionlessUnit unit = DimensionlessUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                DimensionlessUnit unit = DimensionlessUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new Dimensionless(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new Dimensionless(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing Dimensionless from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing Dimensionless from " + text);
@@ -392,7 +385,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return Dimensionless scalar as a division of Dimensionless and Dimensionless
      */
-    public final Dimensionless divideBy(final Dimensionless v)
+    public final Dimensionless divide(final Dimensionless v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -402,7 +395,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return AbsorbedDose scalar as a multiplication of Dimensionless and AbsorbedDose
      */
-    public final AbsorbedDose multiplyBy(final AbsorbedDose v)
+    public final AbsorbedDose times(final AbsorbedDose v)
     {
         return new AbsorbedDose(this.si * v.si, AbsorbedDoseUnit.SI);
     }
@@ -412,7 +405,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return Acceleration scalar as a multiplication of Dimensionless and Acceleration
      */
-    public final Acceleration multiplyBy(final Acceleration v)
+    public final Acceleration times(final Acceleration v)
     {
         return new Acceleration(this.si * v.si, AccelerationUnit.SI);
     }
@@ -422,7 +415,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return AmountOfSubstance scalar as a multiplication of Dimensionless and AmountOfSubstance
      */
-    public final AmountOfSubstance multiplyBy(final AmountOfSubstance v)
+    public final AmountOfSubstance times(final AmountOfSubstance v)
     {
         return new AmountOfSubstance(this.si * v.si, AmountOfSubstanceUnit.SI);
     }
@@ -432,19 +425,19 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return Angle scalar as a multiplication of Dimensionless and Angle
      */
-    public final Angle multiplyBy(final Angle v)
+    public final Angle times(final Angle v)
     {
         return new Angle(this.si * v.si, AngleUnit.SI);
     }
 
     /**
-     * Calculate the multiplication of Dimensionless and AngleSolid, which results in a AngleSolid scalar.
+     * Calculate the multiplication of Dimensionless and SolidAngle, which results in a SolidAngle scalar.
      * @param v Dimensionless scalar
-     * @return AngleSolid scalar as a multiplication of Dimensionless and AngleSolid
+     * @return SolidAngle scalar as a multiplication of Dimensionless and SolidAngle
      */
-    public final AngleSolid multiplyBy(final AngleSolid v)
+    public final SolidAngle times(final SolidAngle v)
     {
-        return new AngleSolid(this.si * v.si, AngleSolidUnit.SI);
+        return new SolidAngle(this.si * v.si, SolidAngleUnit.SI);
     }
 
     /**
@@ -452,7 +445,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return Area scalar as a multiplication of Dimensionless and Area
      */
-    public final Area multiplyBy(final Area v)
+    public final Area times(final Area v)
     {
         return new Area(this.si * v.si, AreaUnit.SI);
     }
@@ -462,7 +455,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return CatalyticActivity scalar as a multiplication of Dimensionless and CatalyticActivity
      */
-    public final CatalyticActivity multiplyBy(final CatalyticActivity v)
+    public final CatalyticActivity times(final CatalyticActivity v)
     {
         return new CatalyticActivity(this.si * v.si, CatalyticActivityUnit.SI);
     }
@@ -472,7 +465,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return Density scalar as a multiplication of Dimensionless and Density
      */
-    public final Density multiplyBy(final Density v)
+    public final Density times(final Density v)
     {
         return new Density(this.si * v.si, DensityUnit.SI);
     }
@@ -482,7 +475,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return Dimensionless scalar as a multiplication of Dimensionless and Dimensionless
      */
-    public final Dimensionless multiplyBy(final Dimensionless v)
+    public final Dimensionless times(final Dimensionless v)
     {
         return new Dimensionless(this.si * v.si, DimensionlessUnit.SI);
     }
@@ -492,7 +485,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return ElectricalCapacitance scalar as a multiplication of Dimensionless and ElectricalCapacitance
      */
-    public final ElectricalCapacitance multiplyBy(final ElectricalCapacitance v)
+    public final ElectricalCapacitance times(final ElectricalCapacitance v)
     {
         return new ElectricalCapacitance(this.si * v.si, ElectricalCapacitanceUnit.SI);
     }
@@ -502,7 +495,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return ElectricalCharge scalar as a multiplication of Dimensionless and ElectricalCharge
      */
-    public final ElectricalCharge multiplyBy(final ElectricalCharge v)
+    public final ElectricalCharge times(final ElectricalCharge v)
     {
         return new ElectricalCharge(this.si * v.si, ElectricalChargeUnit.SI);
     }
@@ -512,7 +505,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return ElectricalConductance scalar as a multiplication of Dimensionless and ElectricalConductance
      */
-    public final ElectricalConductance multiplyBy(final ElectricalConductance v)
+    public final ElectricalConductance times(final ElectricalConductance v)
     {
         return new ElectricalConductance(this.si * v.si, ElectricalConductanceUnit.SI);
     }
@@ -522,7 +515,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return ElectricalCurrent scalar as a multiplication of Dimensionless and ElectricalCurrent
      */
-    public final ElectricalCurrent multiplyBy(final ElectricalCurrent v)
+    public final ElectricalCurrent times(final ElectricalCurrent v)
     {
         return new ElectricalCurrent(this.si * v.si, ElectricalCurrentUnit.SI);
     }
@@ -532,7 +525,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return ElectricalInductance scalar as a multiplication of Dimensionless and ElectricalInductance
      */
-    public final ElectricalInductance multiplyBy(final ElectricalInductance v)
+    public final ElectricalInductance times(final ElectricalInductance v)
     {
         return new ElectricalInductance(this.si * v.si, ElectricalInductanceUnit.SI);
     }
@@ -542,7 +535,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return ElectricalPotential scalar as a multiplication of Dimensionless and ElectricalPotential
      */
-    public final ElectricalPotential multiplyBy(final ElectricalPotential v)
+    public final ElectricalPotential times(final ElectricalPotential v)
     {
         return new ElectricalPotential(this.si * v.si, ElectricalPotentialUnit.SI);
     }
@@ -552,7 +545,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return ElectricalResistance scalar as a multiplication of Dimensionless and ElectricalResistance
      */
-    public final ElectricalResistance multiplyBy(final ElectricalResistance v)
+    public final ElectricalResistance times(final ElectricalResistance v)
     {
         return new ElectricalResistance(this.si * v.si, ElectricalResistanceUnit.SI);
     }
@@ -562,7 +555,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return Energy scalar as a multiplication of Dimensionless and Energy
      */
-    public final Energy multiplyBy(final Energy v)
+    public final Energy times(final Energy v)
     {
         return new Energy(this.si * v.si, EnergyUnit.SI);
     }
@@ -572,7 +565,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return EquivalentDose scalar as a multiplication of Dimensionless and EquivalentDose
      */
-    public final EquivalentDose multiplyBy(final EquivalentDose v)
+    public final EquivalentDose times(final EquivalentDose v)
     {
         return new EquivalentDose(this.si * v.si, EquivalentDoseUnit.SI);
     }
@@ -582,7 +575,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return FlowMass scalar as a multiplication of Dimensionless and FlowMass
      */
-    public final FlowMass multiplyBy(final FlowMass v)
+    public final FlowMass times(final FlowMass v)
     {
         return new FlowMass(this.si * v.si, FlowMassUnit.SI);
     }
@@ -592,7 +585,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return FlowVolume scalar as a multiplication of Dimensionless and FlowVolume
      */
-    public final FlowVolume multiplyBy(final FlowVolume v)
+    public final FlowVolume times(final FlowVolume v)
     {
         return new FlowVolume(this.si * v.si, FlowVolumeUnit.SI);
     }
@@ -602,7 +595,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return Force scalar as a multiplication of Dimensionless and Force
      */
-    public final Force multiplyBy(final Force v)
+    public final Force times(final Force v)
     {
         return new Force(this.si * v.si, ForceUnit.SI);
     }
@@ -612,7 +605,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return Frequency scalar as a multiplication of Dimensionless and Frequency
      */
-    public final Frequency multiplyBy(final Frequency v)
+    public final Frequency times(final Frequency v)
     {
         return new Frequency(this.si * v.si, FrequencyUnit.SI);
     }
@@ -622,7 +615,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return Illuminance scalar as a multiplication of Dimensionless and Illuminance
      */
-    public final Illuminance multiplyBy(final Illuminance v)
+    public final Illuminance times(final Illuminance v)
     {
         return new Illuminance(this.si * v.si, IlluminanceUnit.SI);
     }
@@ -632,7 +625,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return Length scalar as a multiplication of Dimensionless and Length
      */
-    public final Length multiplyBy(final Length v)
+    public final Length times(final Length v)
     {
         return new Length(this.si * v.si, LengthUnit.SI);
     }
@@ -642,7 +635,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return LinearDensity scalar as a multiplication of Dimensionless and LinearDensity
      */
-    public final LinearDensity multiplyBy(final LinearDensity v)
+    public final LinearDensity times(final LinearDensity v)
     {
         return new LinearDensity(this.si * v.si, LinearDensityUnit.SI);
     }
@@ -652,7 +645,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return LuminousFlux scalar as a multiplication of Dimensionless and LuminousFlux
      */
-    public final LuminousFlux multiplyBy(final LuminousFlux v)
+    public final LuminousFlux times(final LuminousFlux v)
     {
         return new LuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
     }
@@ -662,7 +655,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return LuminousIntensity scalar as a multiplication of Dimensionless and LuminousIntensity
      */
-    public final LuminousIntensity multiplyBy(final LuminousIntensity v)
+    public final LuminousIntensity times(final LuminousIntensity v)
     {
         return new LuminousIntensity(this.si * v.si, LuminousIntensityUnit.SI);
     }
@@ -672,7 +665,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return MagneticFluxDensity scalar as a multiplication of Dimensionless and MagneticFluxDensity
      */
-    public final MagneticFluxDensity multiplyBy(final MagneticFluxDensity v)
+    public final MagneticFluxDensity times(final MagneticFluxDensity v)
     {
         return new MagneticFluxDensity(this.si * v.si, MagneticFluxDensityUnit.SI);
     }
@@ -682,7 +675,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return MagneticFlux scalar as a multiplication of Dimensionless and MagneticFlux
      */
-    public final MagneticFlux multiplyBy(final MagneticFlux v)
+    public final MagneticFlux times(final MagneticFlux v)
     {
         return new MagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
     }
@@ -692,7 +685,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return Mass scalar as a multiplication of Dimensionless and Mass
      */
-    public final Mass multiplyBy(final Mass v)
+    public final Mass times(final Mass v)
     {
         return new Mass(this.si * v.si, MassUnit.SI);
     }
@@ -702,7 +695,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return Power scalar as a multiplication of Dimensionless and Power
      */
-    public final Power multiplyBy(final Power v)
+    public final Power times(final Power v)
     {
         return new Power(this.si * v.si, PowerUnit.SI);
     }
@@ -712,7 +705,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return Pressure scalar as a multiplication of Dimensionless and Pressure
      */
-    public final Pressure multiplyBy(final Pressure v)
+    public final Pressure times(final Pressure v)
     {
         return new Pressure(this.si * v.si, PressureUnit.SI);
     }
@@ -722,7 +715,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return RadioActivity scalar as a multiplication of Dimensionless and RadioActivity
      */
-    public final RadioActivity multiplyBy(final RadioActivity v)
+    public final RadioActivity times(final RadioActivity v)
     {
         return new RadioActivity(this.si * v.si, RadioActivityUnit.SI);
     }
@@ -732,7 +725,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return Speed scalar as a multiplication of Dimensionless and Speed
      */
-    public final Speed multiplyBy(final Speed v)
+    public final Speed times(final Speed v)
     {
         return new Speed(this.si * v.si, SpeedUnit.SI);
     }
@@ -742,7 +735,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return Temperature scalar as a multiplication of Dimensionless and Temperature
      */
-    public final Temperature multiplyBy(final Temperature v)
+    public final Temperature times(final Temperature v)
     {
         return new Temperature(this.si * v.si, TemperatureUnit.SI);
     }
@@ -752,7 +745,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return Duration scalar as a multiplication of Dimensionless and Duration
      */
-    public final Duration multiplyBy(final Duration v)
+    public final Duration times(final Duration v)
     {
         return new Duration(this.si * v.si, DurationUnit.SI);
     }
@@ -762,7 +755,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return Torque scalar as a multiplication of Dimensionless and Torque
      */
-    public final Torque multiplyBy(final Torque v)
+    public final Torque times(final Torque v)
     {
         return new Torque(this.si * v.si, TorqueUnit.SI);
     }
@@ -772,7 +765,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return Volume scalar as a multiplication of Dimensionless and Volume
      */
-    public final Volume multiplyBy(final Volume v)
+    public final Volume times(final Volume v)
     {
         return new Volume(this.si * v.si, VolumeUnit.SI);
     }
@@ -782,7 +775,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return LinearDensity scalar as a division of Dimensionless and Length
      */
-    public final LinearDensity divideBy(final Length v)
+    public final LinearDensity divide(final Length v)
     {
         return new LinearDensity(this.si / v.si, LinearDensityUnit.SI);
     }
@@ -792,7 +785,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return Length scalar as a division of Dimensionless and LinearDensity
      */
-    public final Length divideBy(final LinearDensity v)
+    public final Length divide(final LinearDensity v)
     {
         return new Length(this.si / v.si, LengthUnit.SI);
     }
@@ -802,7 +795,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return Frequency scalar as a division of Dimensionless and Duration
      */
-    public final Frequency divideBy(final Duration v)
+    public final Frequency divide(final Duration v)
     {
         return new Frequency(this.si / v.si, FrequencyUnit.SI);
     }
@@ -812,7 +805,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      * @param v Dimensionless scalar
      * @return Duration scalar as a division of Dimensionless and Frequency
      */
-    public final Duration divideBy(final Frequency v)
+    public final Duration divide(final Frequency v)
     {
         return new Duration(this.si / v.si, DurationUnit.SI);
     }

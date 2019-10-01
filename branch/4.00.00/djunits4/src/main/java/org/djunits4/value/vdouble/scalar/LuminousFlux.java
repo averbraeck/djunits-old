@@ -5,12 +5,12 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits4.Throw;
-import org.djunits4.unit.AngleSolidUnit;
 import org.djunits4.unit.AreaUnit;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.IlluminanceUnit;
 import org.djunits4.unit.LuminousFluxUnit;
 import org.djunits4.unit.LuminousIntensityUnit;
+import org.djunits4.unit.SolidAngleUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 
@@ -23,7 +23,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class LuminousFlux extends AbstractDoubleScalarRel<LuminousFluxUnit, LuminousFlux>
 {
     /** */
@@ -173,28 +173,21 @@ public class LuminousFlux extends AbstractDoubleScalarRel<LuminousFluxUnit, Lumi
      */
     public static LuminousFlux valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing LuminousFlux: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing LuminousFlux: empty unitString");
+        Throw.whenNull(text, "Error parsing LuminousFlux: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing LuminousFlux: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            LuminousFluxUnit unit = LuminousFluxUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                LuminousFluxUnit unit = LuminousFluxUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new LuminousFlux(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new LuminousFlux(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing LuminousFlux from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing LuminousFlux from " + text);
@@ -225,7 +218,7 @@ public class LuminousFlux extends AbstractDoubleScalarRel<LuminousFluxUnit, Lumi
      * @param v LuminousFlux scalar
      * @return Dimensionless scalar as a division of LuminousFlux and LuminousFlux
      */
-    public final Dimensionless divideBy(final LuminousFlux v)
+    public final Dimensionless divide(final LuminousFlux v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -235,7 +228,7 @@ public class LuminousFlux extends AbstractDoubleScalarRel<LuminousFluxUnit, Lumi
      * @param v LuminousFlux scalar
      * @return Illuminance scalar as a division of LuminousFlux and Area
      */
-    public final Illuminance divideBy(final Area v)
+    public final Illuminance divide(final Area v)
     {
         return new Illuminance(this.si / v.si, IlluminanceUnit.SI);
     }
@@ -245,27 +238,27 @@ public class LuminousFlux extends AbstractDoubleScalarRel<LuminousFluxUnit, Lumi
      * @param v LuminousFlux scalar
      * @return Area scalar as a division of LuminousFlux and Illuminance
      */
-    public final Area divideBy(final Illuminance v)
+    public final Area divide(final Illuminance v)
     {
         return new Area(this.si / v.si, AreaUnit.SI);
     }
 
     /**
-     * Calculate the division of LuminousFlux and LuminousIntensity, which results in a AngleSolid scalar.
+     * Calculate the division of LuminousFlux and LuminousIntensity, which results in a SolidAngle scalar.
      * @param v LuminousFlux scalar
-     * @return AngleSolid scalar as a division of LuminousFlux and LuminousIntensity
+     * @return SolidAngle scalar as a division of LuminousFlux and LuminousIntensity
      */
-    public final AngleSolid divideBy(final LuminousIntensity v)
+    public final SolidAngle divide(final LuminousIntensity v)
     {
-        return new AngleSolid(this.si / v.si, AngleSolidUnit.SI);
+        return new SolidAngle(this.si / v.si, SolidAngleUnit.SI);
     }
 
     /**
-     * Calculate the division of LuminousFlux and AngleSolid, which results in a LuminousIntensity scalar.
+     * Calculate the division of LuminousFlux and SolidAngle, which results in a LuminousIntensity scalar.
      * @param v LuminousFlux scalar
-     * @return LuminousIntensity scalar as a division of LuminousFlux and AngleSolid
+     * @return LuminousIntensity scalar as a division of LuminousFlux and SolidAngle
      */
-    public final LuminousIntensity divideBy(final AngleSolid v)
+    public final LuminousIntensity divide(final SolidAngle v)
     {
         return new LuminousIntensity(this.si / v.si, LuminousIntensityUnit.SI);
     }

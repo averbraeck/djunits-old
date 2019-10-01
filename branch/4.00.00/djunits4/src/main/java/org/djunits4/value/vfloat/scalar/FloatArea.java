@@ -25,7 +25,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class FloatArea extends AbstractFloatScalarRel<AreaUnit, FloatArea>
 {
     /** */
@@ -185,28 +185,21 @@ public class FloatArea extends AbstractFloatScalarRel<AreaUnit, FloatArea>
      */
     public static FloatArea valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing FloatArea: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatArea: empty unitString");
+        Throw.whenNull(text, "Error parsing FloatArea: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatArea: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            AreaUnit unit = AreaUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                AreaUnit unit = AreaUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        float f = Float.parseFloat(valueString);
-                        return new FloatArea(f, unit);
-                    }
+                    float f = Float.parseFloat(valueString);
+                    return new FloatArea(f, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing FloatArea from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing FloatArea from " + text);
@@ -237,7 +230,7 @@ public class FloatArea extends AbstractFloatScalarRel<AreaUnit, FloatArea>
      * @param v FloatArea scalar
      * @return FloatDimensionless scalar as a division of FloatArea and FloatArea
      */
-    public final FloatDimensionless divideBy(final FloatArea v)
+    public final FloatDimensionless divide(final FloatArea v)
     {
         return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -247,7 +240,7 @@ public class FloatArea extends AbstractFloatScalarRel<AreaUnit, FloatArea>
      * @param v FloatArea scalar
      * @return FloatVolume scalar as a multiplication of FloatArea and FloatLength
      */
-    public final FloatVolume multiplyBy(final FloatLength v)
+    public final FloatVolume times(final FloatLength v)
     {
         return new FloatVolume(this.si * v.si, VolumeUnit.SI);
     }
@@ -257,7 +250,7 @@ public class FloatArea extends AbstractFloatScalarRel<AreaUnit, FloatArea>
      * @param v FloatArea scalar
      * @return FloatVolume scalar as a division of FloatArea and FloatLinearDensity
      */
-    public final FloatVolume divideBy(final FloatLinearDensity v)
+    public final FloatVolume divide(final FloatLinearDensity v)
     {
         return new FloatVolume(this.si / v.si, VolumeUnit.SI);
     }
@@ -267,7 +260,7 @@ public class FloatArea extends AbstractFloatScalarRel<AreaUnit, FloatArea>
      * @param v FloatArea scalar
      * @return FloatLinearDensity scalar as a division of FloatArea and FloatVolume
      */
-    public final FloatLinearDensity divideBy(final FloatVolume v)
+    public final FloatLinearDensity divide(final FloatVolume v)
     {
         return new FloatLinearDensity(this.si / v.si, LinearDensityUnit.SI);
     }
@@ -277,7 +270,7 @@ public class FloatArea extends AbstractFloatScalarRel<AreaUnit, FloatArea>
      * @param v FloatArea scalar
      * @return FloatLength scalar as a division of FloatArea and FloatLength
      */
-    public final FloatLength divideBy(final FloatLength v)
+    public final FloatLength divide(final FloatLength v)
     {
         return new FloatLength(this.si / v.si, LengthUnit.SI);
     }
@@ -287,7 +280,7 @@ public class FloatArea extends AbstractFloatScalarRel<AreaUnit, FloatArea>
      * @param v FloatArea scalar
      * @return FloatLength scalar as a multiplication of FloatArea and FloatLinearDensity
      */
-    public final FloatLength multiplyBy(final FloatLinearDensity v)
+    public final FloatLength times(final FloatLinearDensity v)
     {
         return new FloatLength(this.si * v.si, LengthUnit.SI);
     }
@@ -297,7 +290,7 @@ public class FloatArea extends AbstractFloatScalarRel<AreaUnit, FloatArea>
      * @param v FloatArea scalar
      * @return FloatFlowVolume scalar as a multiplication of FloatArea and FloatSpeed
      */
-    public final FloatFlowVolume multiplyBy(final FloatSpeed v)
+    public final FloatFlowVolume times(final FloatSpeed v)
     {
         return new FloatFlowVolume(this.si * v.si, FlowVolumeUnit.SI);
     }
@@ -307,7 +300,7 @@ public class FloatArea extends AbstractFloatScalarRel<AreaUnit, FloatArea>
      * @param v FloatArea scalar
      * @return FloatForce scalar as a multiplication of FloatArea and FloatPressure
      */
-    public final FloatForce multiplyBy(final FloatPressure v)
+    public final FloatForce times(final FloatPressure v)
     {
         return new FloatForce(this.si * v.si, ForceUnit.SI);
     }
@@ -317,7 +310,7 @@ public class FloatArea extends AbstractFloatScalarRel<AreaUnit, FloatArea>
      * @param v FloatArea scalar
      * @return FloatLuminousFlux scalar as a multiplication of FloatArea and FloatIlluminance
      */
-    public final FloatLuminousFlux multiplyBy(final FloatIlluminance v)
+    public final FloatLuminousFlux times(final FloatIlluminance v)
     {
         return new FloatLuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
     }

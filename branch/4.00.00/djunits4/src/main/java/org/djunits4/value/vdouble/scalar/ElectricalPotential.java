@@ -23,7 +23,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPotentialUnit, ElectricalPotential>
 {
     /** */
@@ -180,28 +180,22 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
      */
     public static ElectricalPotential valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing ElectricalPotential: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing ElectricalPotential: empty unitString");
+        Throw.whenNull(text, "Error parsing ElectricalPotential: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class,
+                "Error parsing ElectricalPotential: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            ElectricalPotentialUnit unit = ElectricalPotentialUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                ElectricalPotentialUnit unit = ElectricalPotentialUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new ElectricalPotential(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new ElectricalPotential(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing ElectricalPotential from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing ElectricalPotential from " + text);
@@ -233,7 +227,7 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
      * @param v ElectricalPotential scalar
      * @return Dimensionless scalar as a division of ElectricalPotential and ElectricalPotential
      */
-    public final Dimensionless divideBy(final ElectricalPotential v)
+    public final Dimensionless divide(final ElectricalPotential v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -243,7 +237,7 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
      * @param v ElectricalPotential scalar
      * @return Power scalar as a multiplication of ElectricalPotential and ElectricalCurrent
      */
-    public final Power multiplyBy(final ElectricalCurrent v)
+    public final Power times(final ElectricalCurrent v)
     {
         return new Power(this.si * v.si, PowerUnit.SI);
     }
@@ -253,7 +247,7 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
      * @param v ElectricalPotential scalar
      * @return ElectricalResistance scalar as a division of ElectricalPotential and ElectricalCurrent
      */
-    public final ElectricalResistance divideBy(final ElectricalCurrent v)
+    public final ElectricalResistance divide(final ElectricalCurrent v)
     {
         return new ElectricalResistance(this.si / v.si, ElectricalResistanceUnit.SI);
     }
@@ -263,7 +257,7 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
      * @param v ElectricalPotential scalar
      * @return ElectricalCurrent scalar as a division of ElectricalPotential and ElectricalResistance
      */
-    public final ElectricalCurrent divideBy(final ElectricalResistance v)
+    public final ElectricalCurrent divide(final ElectricalResistance v)
     {
         return new ElectricalCurrent(this.si / v.si, ElectricalCurrentUnit.SI);
     }
@@ -273,7 +267,7 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
      * @param v ElectricalPotential scalar
      * @return MagneticFlux scalar as a multiplication of ElectricalPotential and Duration
      */
-    public final MagneticFlux multiplyBy(final Duration v)
+    public final MagneticFlux times(final Duration v)
     {
         return new MagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
     }

@@ -20,7 +20,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class AbsoluteTemperature
         extends AbstractDoubleScalarAbs<AbsoluteTemperatureUnit, AbsoluteTemperature, TemperatureUnit, Temperature>
 {
@@ -162,28 +162,22 @@ public class AbsoluteTemperature
      */
     public static AbsoluteTemperature valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing AbsoluteTemperature: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing AbsoluteTemperature: empty unitString");
+        Throw.whenNull(text, "Error parsing AbsoluteTemperature: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class,
+                "Error parsing AbsoluteTemperature: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            AbsoluteTemperatureUnit unit = AbsoluteTemperatureUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                AbsoluteTemperatureUnit unit = AbsoluteTemperatureUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new AbsoluteTemperature(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new AbsoluteTemperature(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing AbsoluteTemperature from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing AbsoluteTemperature from " + text);

@@ -13,24 +13,24 @@ import org.djunits4.unit.unitsystem.UnitSystem;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class AngleSolidUnit extends Unit<AngleSolidUnit>
+public class SolidAngleUnit extends Unit<SolidAngleUnit>
 {
     /** */
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "sr" as the SI signature. */
-    public static final UnitBase<AngleSolidUnit> BASE = new UnitBase<>("sr");
+    public static final UnitBase<SolidAngleUnit> BASE = new UnitBase<>("sr");
 
     /** The SI unit for solid angle is steradian. */
-    public static final AngleSolidUnit SI =
-            new AngleSolidUnit().build(new Unit.Builder<AngleSolidUnit>().setUnitBase(BASE).setId("sr").setName("steradian")
+    public static final SolidAngleUnit SI =
+            new SolidAngleUnit().build(new Unit.Builder<SolidAngleUnit>().setUnitBase(BASE).setId("sr").setName("steradian")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(IdentityScale.SCALE));
 
     /** steradian. */
-    public static final AngleSolidUnit STERADIAN = SI;
+    public static final SolidAngleUnit STERADIAN = SI;
 
     /** square degree. */
-    public static final AngleSolidUnit SQUARE_DEGREE =
+    public static final SolidAngleUnit SQUARE_DEGREE =
             STERADIAN.deriveLinear((Math.PI / 180.0) * (Math.PI / 180.0), "sq.deg", "square degree");
 
 }

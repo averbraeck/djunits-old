@@ -21,7 +21,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActivityUnit, FloatCatalyticActivity>
 {
     /** */
@@ -188,29 +188,22 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
      */
     public static FloatCatalyticActivity valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing FloatCatalyticActivity: unitString is null");
+        Throw.whenNull(text, "Error parsing FloatCatalyticActivity: text to parse is null");
         Throw.when(text.length() == 0, IllegalArgumentException.class,
-                "Error parsing FloatCatalyticActivity: empty unitString");
+                "Error parsing FloatCatalyticActivity: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            CatalyticActivityUnit unit = CatalyticActivityUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                CatalyticActivityUnit unit = CatalyticActivityUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        float f = Float.parseFloat(valueString);
-                        return new FloatCatalyticActivity(f, unit);
-                    }
+                    float f = Float.parseFloat(valueString);
+                    return new FloatCatalyticActivity(f, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing FloatCatalyticActivity from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing FloatCatalyticActivity from " + text);
@@ -243,7 +236,7 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
      * @param v FloatCatalyticActivity scalar
      * @return FloatDimensionless scalar as a division of FloatCatalyticActivity and FloatCatalyticActivity
      */
-    public final FloatDimensionless divideBy(final FloatCatalyticActivity v)
+    public final FloatDimensionless divide(final FloatCatalyticActivity v)
     {
         return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -254,7 +247,7 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
      * @param v FloatCatalyticActivity scalar
      * @return FloatAmountOfSubstance scalar as a multiplication of FloatCatalyticActivity and FloatDuration
      */
-    public final FloatAmountOfSubstance multiplyBy(final FloatDuration v)
+    public final FloatAmountOfSubstance times(final FloatDuration v)
     {
         return new FloatAmountOfSubstance(this.si * v.si, AmountOfSubstanceUnit.SI);
     }
@@ -264,7 +257,7 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
      * @param v FloatCatalyticActivity scalar
      * @return FloatFrequency scalar as a division of FloatCatalyticActivity and FloatAmountOfSubstance
      */
-    public final FloatFrequency divideBy(final FloatAmountOfSubstance v)
+    public final FloatFrequency divide(final FloatAmountOfSubstance v)
     {
         return new FloatFrequency(this.si / v.si, FrequencyUnit.SI);
     }
@@ -274,7 +267,7 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
      * @param v FloatCatalyticActivity scalar
      * @return FloatAmountOfSubstance scalar as a division of FloatCatalyticActivity and FloatFrequency
      */
-    public final FloatAmountOfSubstance divideBy(final FloatFrequency v)
+    public final FloatAmountOfSubstance divide(final FloatFrequency v)
     {
         return new FloatAmountOfSubstance(this.si / v.si, AmountOfSubstanceUnit.SI);
     }

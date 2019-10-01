@@ -25,7 +25,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
 {
     /** */
@@ -185,28 +185,21 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
      */
     public static FloatTorque valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing FloatTorque: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatTorque: empty unitString");
+        Throw.whenNull(text, "Error parsing FloatTorque: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatTorque: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            TorqueUnit unit = TorqueUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                TorqueUnit unit = TorqueUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        float f = Float.parseFloat(valueString);
-                        return new FloatTorque(f, unit);
-                    }
+                    float f = Float.parseFloat(valueString);
+                    return new FloatTorque(f, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing FloatTorque from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing FloatTorque from " + text);
@@ -237,7 +230,7 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
      * @param v FloatTorque scalar
      * @return FloatDimensionless scalar as a division of FloatTorque and FloatTorque
      */
-    public final FloatDimensionless divideBy(final FloatTorque v)
+    public final FloatDimensionless divide(final FloatTorque v)
     {
         return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
@@ -247,7 +240,7 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
      * @param v FloatTorque scalar
      * @return FloatLength scalar as a division of FloatTorque and FloatForce
      */
-    public final FloatLength divideBy(final FloatForce v)
+    public final FloatLength divide(final FloatForce v)
     {
         return new FloatLength(this.si / v.si, LengthUnit.SI);
     }
@@ -257,7 +250,7 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
      * @param v FloatTorque scalar
      * @return FloatForce scalar as a division of FloatTorque and FloatLength
      */
-    public final FloatForce divideBy(final FloatLength v)
+    public final FloatForce divide(final FloatLength v)
     {
         return new FloatForce(this.si / v.si, ForceUnit.SI);
     }
@@ -267,7 +260,7 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
      * @param v FloatTorque scalar
      * @return FloatForce scalar as a multiplication of FloatTorque and FloatLinearDensity
      */
-    public final FloatForce multiplyBy(final FloatLinearDensity v)
+    public final FloatForce times(final FloatLinearDensity v)
     {
         return new FloatForce(this.si * v.si, ForceUnit.SI);
     }
@@ -277,7 +270,7 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
      * @param v FloatTorque scalar
      * @return FloatPower scalar as a division of FloatTorque and FloatDuration
      */
-    public final FloatPower divideBy(final FloatDuration v)
+    public final FloatPower divide(final FloatDuration v)
     {
         return new FloatPower(this.si / v.si, PowerUnit.SI);
     }
@@ -287,7 +280,7 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
      * @param v FloatTorque scalar
      * @return FloatDuration scalar as a division of FloatTorque and FloatPower
      */
-    public final FloatDuration divideBy(final FloatPower v)
+    public final FloatDuration divide(final FloatPower v)
     {
         return new FloatDuration(this.si / v.si, DurationUnit.SI);
     }
@@ -297,7 +290,7 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
      * @param v FloatTorque scalar
      * @return FloatPower scalar as a multiplication of FloatTorque and FloatFrequency
      */
-    public final FloatPower multiplyBy(final FloatFrequency v)
+    public final FloatPower times(final FloatFrequency v)
     {
         return new FloatPower(this.si * v.si, PowerUnit.SI);
     }
@@ -307,7 +300,7 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
      * @param v FloatTorque scalar
      * @return FloatPressure scalar as a division of FloatTorque and FloatVolume
      */
-    public final FloatPressure divideBy(final FloatVolume v)
+    public final FloatPressure divide(final FloatVolume v)
     {
         return new FloatPressure(this.si / v.si, PressureUnit.SI);
     }
@@ -317,7 +310,7 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
      * @param v FloatTorque scalar
      * @return FloatVolume scalar as a division of FloatTorque and FloatPressure
      */
-    public final FloatVolume divideBy(final FloatPressure v)
+    public final FloatVolume divide(final FloatPressure v)
     {
         return new FloatVolume(this.si / v.si, VolumeUnit.SI);
     }

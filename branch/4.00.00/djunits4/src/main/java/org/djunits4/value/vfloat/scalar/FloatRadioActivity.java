@@ -19,7 +19,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
 public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit, FloatRadioActivity>
 {
     /** */
@@ -183,28 +183,21 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
      */
     public static FloatRadioActivity valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing FloatRadioActivity: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatRadioActivity: empty unitString");
+        Throw.whenNull(text, "Error parsing FloatRadioActivity: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatRadioActivity: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            RadioActivityUnit unit = RadioActivityUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                RadioActivityUnit unit = RadioActivityUnit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        float f = Float.parseFloat(valueString);
-                        return new FloatRadioActivity(f, unit);
-                    }
+                    float f = Float.parseFloat(valueString);
+                    return new FloatRadioActivity(f, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing FloatRadioActivity from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing FloatRadioActivity from " + text);
@@ -236,7 +229,7 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
      * @param v FloatRadioActivity scalar
      * @return FloatDimensionless scalar as a division of FloatRadioActivity and FloatRadioActivity
      */
-    public final FloatDimensionless divideBy(final FloatRadioActivity v)
+    public final FloatDimensionless divide(final FloatRadioActivity v)
     {
         return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
