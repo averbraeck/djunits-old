@@ -31,7 +31,7 @@
 *LinearDensity=Length
 *Speed=FlowVolume
 *Pressure=Force
-*LuminousFlux=Illuminance
+*Illuminance=LuminousFlux
 
 %CatalyticActivity
 /CatalyticActivity=Dimensionless
