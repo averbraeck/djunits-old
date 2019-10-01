@@ -214,7 +214,7 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
     @Override
     public S[][] getScalars()
     {
-        S[][] array = (S[][]) Array.newInstance(getScalarClass(), rows());
+        S[][] array = (S[][]) Array.newInstance(getScalarClass(), rows(), cols());
         for (int i = 0; i < rows(); i++)
         {
             S[] row = (S[]) Array.newInstance(getScalarClass(), cols());
@@ -368,32 +368,32 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
     @Override
     public M times(final double multiplier)
     {
-        M result = clone();
-        result.assign(FloatMathFunctions.MULT((float) multiplier));
-        return result;
+        return times((float) multiplier);
     }
 
     /** {@inheritDoc} */
     @Override
     public M divide(final double divisor)
     {
-        M result = clone();
-        result.assign(FloatMathFunctions.DIV((float) divisor));
-        return result;
+        return divide((float) divisor);
     }
 
     /** {@inheritDoc} */
     @Override
     public M times(final float multiplier)
     {
-        return times(multiplier);
+        M result = clone().mutable();
+        result.assign(FloatMathFunctions.MULT(multiplier));
+        return result.immutable();
     }
 
     /** {@inheritDoc} */
     @Override
     public M divide(float divisor)
     {
-        return divide(divisor);
+        M result = clone().mutable();
+        result.assign(FloatMathFunctions.DIV(divisor));
+        return result.immutable();
     }
 
     /** {@inheritDoc} */

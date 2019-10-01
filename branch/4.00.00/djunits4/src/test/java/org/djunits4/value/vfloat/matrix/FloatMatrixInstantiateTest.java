@@ -183,6 +183,16 @@ public class FloatMatrixInstantiateTest
         assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
         assertEquals(lmdkm10, lmdkm10.toDense());
         assertEquals(lmskm10, lmskm10.toSparse());
+
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmskm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toSparse().hashCode());
+
         assertTrue(lmdkm10.isDense());
         assertTrue(lmskm10.isSparse());
 
@@ -247,6 +257,13 @@ public class FloatMatrixInstantiateTest
         assertEquals(lmskm10, lmdkm10.toSparse());
         assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
         assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
+
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmskm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode());
 
         FloatLengthMatrix lmdsi10 =
                 FloatMatrix.instantiateSI(FLOATMATRIX.sparseRectArrays(10, 10), LengthUnit.CENTIMETER, StorageType.DENSE);
@@ -326,6 +343,13 @@ public class FloatMatrixInstantiateTest
         assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
         assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
 
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmskm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode());
+
         FloatAreaMatrix lmdsi10 = FloatMatrix.instantiateSI(FLOATMATRIX.denseRectArrays(10, 10), AreaUnit.SQUARE_CENTIMETER,
                 StorageType.DENSE, FloatAreaMatrix.class);
         assertEquals(10, lmdsi10.rows());
@@ -387,6 +411,13 @@ public class FloatMatrixInstantiateTest
         assertEquals(lmskm10, lmdkm10.toSparse());
         assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
         assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
+
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmskm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode());
 
         FloatAreaMatrix lmdsi10 = FloatMatrix.instantiateSI(FLOATMATRIX.sparseRectArrays(10, 10), AreaUnit.SQUARE_CENTIMETER,
                 StorageType.DENSE, FloatAreaMatrix.class);
@@ -483,12 +514,30 @@ public class FloatMatrixInstantiateTest
         assertEquals(si10dd, si10dd.toSparse().toDense());
         assertEquals(si10ds, si10ds.toDense().toSparse());
 
+        assertEquals(si10dd.hashCode(), si10ds.toDense().hashCode());
+        assertEquals(si10ds.hashCode(), si10dd.toSparse().hashCode());
+        assertEquals(si10dd.hashCode(), si10dd.toDense().hashCode());
+        assertEquals(si10ds.hashCode(), si10ds.toSparse().hashCode());
+        assertEquals(si10dd.hashCode(), si10dd.toSparse().toDense().hashCode());
+        assertEquals(si10ds.hashCode(), si10ds.toDense().toSparse().hashCode());
+        assertEquals(si10dd.hashCode(), si10dd.toSparse().hashCode());
+        assertEquals(si10ds.hashCode(), si10ds.toDense().hashCode());
+
         assertEquals(si10sd, si10ss.toDense());
         assertEquals(si10ss, si10sd.toSparse());
         assertEquals(si10sd, si10sd.toDense());
         assertEquals(si10ss, si10ss.toSparse());
         assertEquals(si10sd, si10sd.toSparse().toDense());
         assertEquals(si10ss, si10ss.toDense().toSparse());
+
+        assertEquals(si10sd.hashCode(), si10ss.toDense().hashCode());
+        assertEquals(si10ss.hashCode(), si10sd.toSparse().hashCode());
+        assertEquals(si10sd.hashCode(), si10sd.toDense().hashCode());
+        assertEquals(si10ss.hashCode(), si10ss.toSparse().hashCode());
+        assertEquals(si10sd.hashCode(), si10sd.toSparse().toDense().hashCode());
+        assertEquals(si10ss.hashCode(), si10ss.toDense().toSparse().hashCode());
+        assertEquals(si10sd.hashCode(), si10sd.toSparse().hashCode());
+        assertEquals(si10ss.hashCode(), si10ss.toDense().hashCode());
     }
 
     // =============================================== RECTANGULAR MATRICES ===================================================
@@ -523,8 +572,18 @@ public class FloatMatrixInstantiateTest
         assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
         assertEquals(lmdkm10, lmdkm10.toDense());
         assertEquals(lmskm10, lmskm10.toSparse());
+
         assertTrue(lmdkm10.isDense());
         assertTrue(lmskm10.isSparse());
+
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmskm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toSparse().hashCode());
 
         FloatLengthMatrix lmdsi10 =
                 FloatMatrix.instantiateSI(FLOATMATRIX.denseRectArrays(20, 10), LengthUnit.CENTIMETER, StorageType.DENSE);
@@ -587,6 +646,15 @@ public class FloatMatrixInstantiateTest
         assertEquals(lmskm10, lmdkm10.toSparse());
         assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
         assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
+
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmskm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toSparse().hashCode());
 
         FloatLengthMatrix lmdsi10 =
                 FloatMatrix.instantiateSI(FLOATMATRIX.sparseRectArrays(20, 10), LengthUnit.CENTIMETER, StorageType.DENSE);
@@ -666,6 +734,15 @@ public class FloatMatrixInstantiateTest
         assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
         assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
 
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmskm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toSparse().hashCode());
+
         FloatAreaMatrix lmdsi10 = FloatMatrix.instantiateSI(FLOATMATRIX.denseRectArrays(20, 10), AreaUnit.SQUARE_CENTIMETER,
                 StorageType.DENSE, FloatAreaMatrix.class);
         assertEquals(20, lmdsi10.rows());
@@ -728,6 +805,15 @@ public class FloatMatrixInstantiateTest
         assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
         assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
 
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmskm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toSparse().hashCode());
+
         FloatAreaMatrix lmdsi10 = FloatMatrix.instantiateSI(FLOATMATRIX.sparseRectArrays(20, 10), AreaUnit.SQUARE_CENTIMETER,
                 StorageType.DENSE, FloatAreaMatrix.class);
         assertEquals(20, lmdsi10.rows());
@@ -784,6 +870,15 @@ public class FloatMatrixInstantiateTest
         assertNotEquals(lmdkm10, lmstu10);
         assertNotEquals(lmskm10, lmdtu10);
         assertNotEquals(lmskm10, lmstu10);
+
+        assertNotEquals(lmdkm10.hashCode(), lmdsi10.hashCode());
+        assertNotEquals(lmdkm10.hashCode(), lmssi10.hashCode());
+        assertNotEquals(lmskm10.hashCode(), lmdsi10.hashCode());
+        assertNotEquals(lmskm10.hashCode(), lmssi10.hashCode());
+        assertNotEquals(lmdkm10.hashCode(), lmdtu10.hashCode());
+        assertNotEquals(lmdkm10.hashCode(), lmstu10.hashCode());
+        assertNotEquals(lmskm10.hashCode(), lmdtu10.hashCode());
+        assertNotEquals(lmskm10.hashCode(), lmstu10.hashCode());
     }
 
     /**
@@ -838,6 +933,22 @@ public class FloatMatrixInstantiateTest
         assertEquals(si10ss, si10ss.toSparse());
         assertEquals(si10sd, si10sd.toSparse().toDense());
         assertEquals(si10ss, si10ss.toDense().toSparse());
+
+        assertEquals(si10dd.hashCode(), si10ds.toDense().hashCode());
+        assertEquals(si10ds.hashCode(), si10dd.toSparse().hashCode());
+        assertEquals(si10dd.hashCode(), si10dd.toDense().hashCode());
+        assertEquals(si10ds.hashCode(), si10ds.toSparse().hashCode());
+        assertEquals(si10dd.hashCode(), si10dd.toSparse().toDense().hashCode());
+        assertEquals(si10ds.hashCode(), si10ds.toDense().toSparse().hashCode());
+        assertEquals(si10dd.hashCode(), si10dd.toSparse().hashCode());
+        assertEquals(si10ds.hashCode(), si10ds.toDense().hashCode());
+
+        assertEquals(si10sd.hashCode(), si10ss.toDense().hashCode());
+        assertEquals(si10ss.hashCode(), si10sd.toSparse().hashCode());
+        assertEquals(si10sd.hashCode(), si10sd.toDense().hashCode());
+        assertEquals(si10ss.hashCode(), si10ss.toSparse().hashCode());
+        assertEquals(si10sd.hashCode(), si10sd.toSparse().hashCode());
+        assertEquals(si10ss.hashCode(), si10ss.toDense().hashCode());
     }
 
     // =============================================== EDGE CASE MATRICES ===================================================
@@ -937,6 +1048,25 @@ public class FloatMatrixInstantiateTest
         assertNotEquals(col1ds, row1sd);
         assertNotEquals(row1sd, col1ds);
         assertNotEquals(col1sd, row1ds);
+
+        assertEquals(row1dd.hashCode(), row1dd.hashCode());
+        assertEquals(row1ss.hashCode(), row1ss.hashCode());
+        assertEquals(row1dd.hashCode(), row1ds.hashCode());
+        assertEquals(col1dd.hashCode(), col1ds.hashCode());
+        assertEquals(row1sd.hashCode(), row1ss.hashCode());
+        assertEquals(col1sd.hashCode(), col1ss.hashCode());
+        assertEquals(row1ds.hashCode(), row1dd.hashCode());
+        assertEquals(col1ds.hashCode(), col1dd.hashCode());
+        assertEquals(row1ss.hashCode(), row1sd.hashCode());
+        assertEquals(col1ss.hashCode(), col1sd.hashCode());
+        assertNotEquals(row1dd.hashCode(), col1dd.hashCode());
+        assertNotEquals(col1dd.hashCode(), row1dd.hashCode());
+        assertNotEquals(row1ss.hashCode(), col1ss.hashCode());
+        assertNotEquals(col1ss.hashCode(), row1ss.hashCode());
+        assertNotEquals(row1ds.hashCode(), col1sd.hashCode());
+        assertNotEquals(col1ds.hashCode(), row1sd.hashCode());
+        assertNotEquals(row1sd.hashCode(), col1ds.hashCode());
+        assertNotEquals(col1sd.hashCode(), row1ds.hashCode());
 
         // 1 x 1 DENSE DATA
 

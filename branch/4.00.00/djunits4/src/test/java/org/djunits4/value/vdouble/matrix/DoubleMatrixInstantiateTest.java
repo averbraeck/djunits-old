@@ -183,9 +183,19 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
         assertEquals(lmdkm10, lmdkm10.toDense());
         assertEquals(lmskm10, lmskm10.toSparse());
+        
         assertTrue(lmdkm10.isDense());
         assertTrue(lmskm10.isSparse());
 
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmskm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode()); 
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode()); 
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toSparse().hashCode());
+        
         LengthMatrix lmdsi10 =
                 DoubleMatrix.instantiateSI(DOUBLEMATRIX.denseRectArrays(10, 10), LengthUnit.CENTIMETER, StorageType.DENSE);
         assertEquals(10, lmdsi10.rows());
@@ -247,6 +257,15 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmskm10, lmdkm10.toSparse());
         assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
         assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
+
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmskm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode()); 
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode()); 
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toSparse().hashCode());
 
         LengthMatrix lmdsi10 =
                 DoubleMatrix.instantiateSI(DOUBLEMATRIX.sparseRectArrays(10, 10), LengthUnit.CENTIMETER, StorageType.DENSE);
@@ -326,6 +345,15 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
         assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
 
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmskm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode()); 
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode()); 
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toSparse().hashCode());
+
         AreaMatrix lmdsi10 = DoubleMatrix.instantiateSI(DOUBLEMATRIX.denseRectArrays(10, 10), AreaUnit.SQUARE_CENTIMETER,
                 StorageType.DENSE, AreaMatrix.class);
         assertEquals(10, lmdsi10.rows());
@@ -387,6 +415,15 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmskm10, lmdkm10.toSparse());
         assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
         assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
+
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmskm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode()); 
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode()); 
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toSparse().hashCode());
 
         AreaMatrix lmdsi10 = DoubleMatrix.instantiateSI(DOUBLEMATRIX.sparseRectArrays(10, 10), AreaUnit.SQUARE_CENTIMETER,
                 StorageType.DENSE, AreaMatrix.class);
@@ -481,6 +518,8 @@ public class DoubleMatrixInstantiateTest
         assertEquals(si10ds, si10ds.toSparse());
         assertEquals(si10dd, si10dd.toSparse().toDense());
         assertEquals(si10ds, si10ds.toDense().toSparse());
+        assertEquals(si10dd, si10dd.toSparse());
+        assertEquals(si10ds, si10ds.toDense());
 
         assertEquals(si10sd, si10ss.toDense());
         assertEquals(si10ss, si10sd.toSparse());
@@ -488,6 +527,26 @@ public class DoubleMatrixInstantiateTest
         assertEquals(si10ss, si10ss.toSparse());
         assertEquals(si10sd, si10sd.toSparse().toDense());
         assertEquals(si10ss, si10ss.toDense().toSparse());
+        assertEquals(si10sd, si10sd.toSparse());
+        assertEquals(si10ss, si10ss.toDense());
+
+        assertEquals(si10dd.hashCode(), si10ds.toDense().hashCode());
+        assertEquals(si10ds.hashCode(), si10dd.toSparse().hashCode());
+        assertEquals(si10dd.hashCode(), si10dd.toDense().hashCode());
+        assertEquals(si10ds.hashCode(), si10ds.toSparse().hashCode());
+        assertEquals(si10dd.hashCode(), si10dd.toSparse().toDense().hashCode());
+        assertEquals(si10ds.hashCode(), si10ds.toDense().toSparse().hashCode());
+        assertEquals(si10dd.hashCode(), si10dd.toSparse().hashCode());
+        assertEquals(si10ds.hashCode(), si10ds.toDense().hashCode());
+
+        assertEquals(si10sd.hashCode(), si10ss.toDense().hashCode());
+        assertEquals(si10ss.hashCode(), si10sd.toSparse().hashCode());
+        assertEquals(si10sd.hashCode(), si10sd.toDense().hashCode());
+        assertEquals(si10ss.hashCode(), si10ss.toSparse().hashCode());
+        assertEquals(si10sd.hashCode(), si10sd.toSparse().toDense().hashCode());
+        assertEquals(si10ss.hashCode(), si10ss.toDense().toSparse().hashCode());
+        assertEquals(si10sd.hashCode(), si10sd.toSparse().hashCode());
+        assertEquals(si10ss.hashCode(), si10ss.toDense().hashCode());
     }
 
     // =============================================== RECTANGULAR MATRICES ===================================================
@@ -522,8 +581,18 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
         assertEquals(lmdkm10, lmdkm10.toDense());
         assertEquals(lmskm10, lmskm10.toSparse());
+        
         assertTrue(lmdkm10.isDense());
         assertTrue(lmskm10.isSparse());
+
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmskm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode()); 
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode()); 
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toSparse().hashCode());
 
         LengthMatrix lmdsi10 =
                 DoubleMatrix.instantiateSI(DOUBLEMATRIX.denseRectArrays(20, 10), LengthUnit.CENTIMETER, StorageType.DENSE);
@@ -586,6 +655,15 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmskm10, lmdkm10.toSparse());
         assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
         assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
+
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmskm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode()); 
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode()); 
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toSparse().hashCode());
 
         LengthMatrix lmdsi10 =
                 DoubleMatrix.instantiateSI(DOUBLEMATRIX.sparseRectArrays(20, 10), LengthUnit.CENTIMETER, StorageType.DENSE);
@@ -665,6 +743,15 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
         assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
 
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmskm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode()); 
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode()); 
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toSparse().hashCode());
+
         AreaMatrix lmdsi10 = DoubleMatrix.instantiateSI(DOUBLEMATRIX.denseRectArrays(20, 10), AreaUnit.SQUARE_CENTIMETER,
                 StorageType.DENSE, AreaMatrix.class);
         assertEquals(20, lmdsi10.rows());
@@ -727,6 +814,15 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
         assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
 
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmskm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode()); 
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode()); 
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toDense().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toSparse().hashCode());
+
         AreaMatrix lmdsi10 = DoubleMatrix.instantiateSI(DOUBLEMATRIX.sparseRectArrays(20, 10), AreaUnit.SQUARE_CENTIMETER,
                 StorageType.DENSE, AreaMatrix.class);
         assertEquals(20, lmdsi10.rows());
@@ -783,7 +879,15 @@ public class DoubleMatrixInstantiateTest
         assertNotEquals(lmdkm10, lmstu10);
         assertNotEquals(lmskm10, lmdtu10);
         assertNotEquals(lmskm10, lmstu10);
-    }
+        
+        assertNotEquals(lmdkm10.hashCode(), lmdsi10.hashCode());
+        assertNotEquals(lmdkm10.hashCode(), lmssi10.hashCode());
+        assertNotEquals(lmskm10.hashCode(), lmdsi10.hashCode());
+        assertNotEquals(lmskm10.hashCode(), lmssi10.hashCode());
+        assertNotEquals(lmdkm10.hashCode(), lmdtu10.hashCode());
+        assertNotEquals(lmdkm10.hashCode(), lmstu10.hashCode());
+        assertNotEquals(lmskm10.hashCode(), lmdtu10.hashCode());
+        assertNotEquals(lmskm10.hashCode(), lmstu10.hashCode());    }
 
     /**
      * Test the instantiation of dense and sparse matrix types with dense data (no zeros).
@@ -829,6 +933,8 @@ public class DoubleMatrixInstantiateTest
         assertEquals(si10ds, si10ds.toSparse());
         assertEquals(si10dd, si10dd.toSparse().toDense());
         assertEquals(si10ds, si10ds.toDense().toSparse());
+        assertEquals(si10dd, si10dd.toSparse());
+        assertEquals(si10ds, si10ds.toDense());
 
         assertEquals(si10sd, si10ss.toDense());
         assertEquals(si10ss, si10sd.toSparse());
@@ -836,6 +942,26 @@ public class DoubleMatrixInstantiateTest
         assertEquals(si10ss, si10ss.toSparse());
         assertEquals(si10sd, si10sd.toSparse().toDense());
         assertEquals(si10ss, si10ss.toDense().toSparse());
+        assertEquals(si10sd, si10sd.toSparse());
+        assertEquals(si10ss, si10ss.toDense());
+
+        assertEquals(si10dd.hashCode(), si10ds.toDense().hashCode());
+        assertEquals(si10ds.hashCode(), si10dd.toSparse().hashCode());
+        assertEquals(si10dd.hashCode(), si10dd.toDense().hashCode());
+        assertEquals(si10ds.hashCode(), si10ds.toSparse().hashCode());
+        assertEquals(si10dd.hashCode(), si10dd.toSparse().toDense().hashCode());
+        assertEquals(si10ds.hashCode(), si10ds.toDense().toSparse().hashCode());
+        assertEquals(si10dd.hashCode(), si10dd.toSparse().hashCode());
+        assertEquals(si10ds.hashCode(), si10ds.toDense().hashCode());
+
+        assertEquals(si10sd.hashCode(), si10ss.toDense().hashCode());
+        assertEquals(si10ss.hashCode(), si10sd.toSparse().hashCode());
+        assertEquals(si10sd.hashCode(), si10sd.toDense().hashCode());
+        assertEquals(si10ss.hashCode(), si10ss.toSparse().hashCode());
+        assertEquals(si10sd.hashCode(), si10sd.toSparse().toDense().hashCode());
+        assertEquals(si10ss.hashCode(), si10ss.toDense().toSparse().hashCode());
+        assertEquals(si10sd.hashCode(), si10sd.toSparse().hashCode());
+        assertEquals(si10ss.hashCode(), si10ss.toDense().hashCode());
     }
 
     // =============================================== EDGE CASE MATRICES ===================================================
