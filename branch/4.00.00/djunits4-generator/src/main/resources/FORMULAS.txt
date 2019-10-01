@@ -18,8 +18,8 @@
 %Angle
 /Angle=Dimensionless
 
-%AngleSolid
-/AngleSolid=Dimensionless
+%SolidAngle
+/SolidAngle=Dimensionless
 *LuminousIntensity=LuminousFlux
 
 %Area
@@ -176,12 +176,12 @@
 /LuminousFlux=Dimensionless
 /Area=Illuminance
 /Illuminance=Area
-/LuminousIntensity=AngleSolid
-/AngleSolid=LuminousIntensity
+/LuminousIntensity=SolidAngle
+/SolidAngle=LuminousIntensity
 
 %LuminousIntensity
 /LuminousIntensity=Dimensionless
-*AngleSolid=LuminousFlux
+*SolidAngle=LuminousFlux
 
 %MagneticFluxDensity
 /MagneticFluxDensity=Dimensionless
@@ -270,7 +270,7 @@
 *Acceleration=Acceleration
 *AmountOfSubstance=AmountOfSubstance
 *Angle=Angle
-*AngleSolid=AngleSolid
+*SolidAngle=SolidAngle
 *Area=Area
 *CatalyticActivity=CatalyticActivity
 *Density=Density

@@ -1,7 +1,6 @@
 AbsorbedDose
 Acceleration
 AmountOfSubstance
-AngleSolid
 Area
 CatalyticActivity
 Density
@@ -29,6 +28,7 @@ Mass
 Power
 Pressure
 RadioActivity
+SolidAngle
 Speed
 Torque
 Volume

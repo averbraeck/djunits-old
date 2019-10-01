@@ -201,7 +201,7 @@ public class GenerateDJUNIT
             for (String f : formulas.get(type))
             {
                 String dm = f.startsWith("/") ? "division" : "multiplication";
-                String method = f.startsWith("/") ? "divideBy" : "multiplyBy";
+                String method = f.startsWith("/") ? "divide" : "times";
                 String mdsign = f.startsWith("/") ? "/" : "*";
                 f = f.substring(1, f.length());
                 String param = f.split("=")[0].trim();
@@ -1059,7 +1059,7 @@ public class GenerateDJUNIT
     }
 
     /**
-     * By default File#delete fails for non-empty directories, it works like "rm". We need something a little more brutual -
+     * By default File#delete fails for non-empty directories, it works like "rm". We need something a little more brutal -
      * this does the equivalent of "rm -r". From: http://stackoverflow.com/questions/779519/delete-files-recursively-in-java.
      * Note: USE CAREFULLY.
      * @param path File; Root File Path

@@ -176,28 +176,21 @@ public class %TypeRel% extends AbstractDoubleScalarRelWithAbs<%TypeAbsUnit%, %Ty
      */
     public static %TypeRel% valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing %TypeRel%: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing %TypeRel%: empty unitString");
+        Throw.whenNull(text, "Error parsing %TypeRel%: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing %TypeRel%: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            %TypeRelUnit% unit = %TypeRelUnit%.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                %TypeRelUnit% unit = %TypeRelUnit%.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new %TypeRel%(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new %TypeRel%(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing %TypeRel% from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing %TypeRel% from " + text);

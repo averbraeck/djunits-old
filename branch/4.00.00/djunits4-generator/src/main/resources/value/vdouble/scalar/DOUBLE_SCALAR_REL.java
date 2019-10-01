@@ -168,28 +168,21 @@ public class %Type% extends AbstractDoubleScalarRel<%Type%Unit, %Type%> %DIMLESS
      */
     public static %Type% valueOf(final String text)
     {
-        Throw.whenNull(text, "Error parsing %Type%: unitString is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing %Type%: empty unitString");
+        Throw.whenNull(text, "Error parsing %Type%: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing %Type%: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            %Type%Unit unit = %Type%Unit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                %Type%Unit unit = %Type%Unit.BASE.getUnitByAbbreviation(unitString);
-                if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new %Type%(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new %Type%(d, unit);
                 }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing %Type% from " + text, exception);
             }
         }
         throw new IllegalArgumentException("Error parsing %Type% from " + text);
