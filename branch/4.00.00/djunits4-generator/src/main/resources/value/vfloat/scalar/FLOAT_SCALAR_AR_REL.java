@@ -112,14 +112,6 @@ public class Float%TypeRel% extends AbstractFloatScalarRelWithAbs<%TypeAbsUnit%,
         return new Float%TypeRel%(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
             .getDisplayUnit());
     }
-    
-    /** {@inheritDoc} */
-    @Override
-    public final Float%TypeAbs% plus(final Float%TypeAbs% v)
-    {
-        %TypeAbsUnit% targetUnit = v.getDisplayUnit();
-        return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
-    }
 
     /**
      * Return the maximum value of two relative scalars.

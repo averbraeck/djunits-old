@@ -103,14 +103,6 @@ public class %TypeRel% extends AbstractDoubleScalarRelWithAbs<%TypeAbsUnit%, %Ty
             .getDisplayUnit());
     }
     
-    /** {@inheritDoc} */
-    @Override
-    public final %TypeAbs% plus(final %TypeAbs% v)
-    {
-        %TypeAbsUnit% targetUnit = v.getDisplayUnit();
-        return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
-    }
-
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 %TypeRel%; the first scalar

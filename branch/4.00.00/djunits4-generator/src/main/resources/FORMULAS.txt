@@ -1,6 +1,7 @@
 %AbsoluteTemperature
 
 %AbsorbedDose
+/AbsorbedDose=Dimensionless
 
 %Acceleration
 /Acceleration=Dimensionless
@@ -10,12 +11,16 @@
 /Speed=Frequency
 
 %AmountOfSubstance
+/AmountOfSubstance=Dimensionless
+/CatalyticActivity=Duration
+/Duration=CatalyticActivity
 
 %Angle
 /Angle=Dimensionless
 
 %AngleSolid
 /AngleSolid=Dimensionless
+*LuminousIntensity=LuminousFlux
 
 %Area
 /Area=Dimensionless
@@ -26,12 +31,18 @@
 *LinearDensity=Length
 *Speed=FlowVolume
 *Pressure=Force
+*LuminousFlux=Illuminance
 
 %CatalyticActivity
+/CatalyticActivity=Dimensionless
+*Duration=AmountOfSubstance
+/AmountOfSubstance=Frequency
+/Frequency=AmountOfSubstance
 
 %Density
 /Density=Dimensionless
 *Volume=Mass
+*FlowVolume=FlowMass
 
 %Direction
 
@@ -44,33 +55,51 @@
 *Acceleration=Speed
 *Power=Energy
 *Speed=Length
+*ElectricalPotential=MagneticFlux
+*ElectricalResistance=ElectricalInductance
+*ElectricalConductance=ElectricalCapacitance
 
 %ElectricalCapacitance
+/ElectricalCapacitance=Dimensionless
+*ElectricalPotential=ElectricalCharge
+/Duration=ElectricalConductance
+/ElectricalConductance=Duration
 
 %ElectricalCharge
 /ElectricalCharge=Dimensionless
 /Duration=ElectricalCurrent
 /ElectricalCurrent=Duration
+/ElectricalPotential=ElectricalCapacitance
+/ElectricalCapacitance=ElectricalPotential
 
 %ElectricalConductance
+/ElectricalConductance=Dimensionless
+*ElectricalPotential=ElectricalCurrent
+*Duration=ElectricalCapacitance
 
 %ElectricalCurrent
 /ElectricalCurrent=Dimensionless
 *ElectricalPotential=Power
 *Duration=ElectricalCharge
 *ElectricalResistance=ElectricalPotential
+/ElectricalPotential=ElectricalConductance
+/ElectricalConductance=ElectricalPotential
 
 %ElectricalInductance
+/ElectricalInductance=Dimensionless
+*ElectricalCurrent=MagneticFlux
 
 %ElectricalPotential
 /ElectricalPotential=Dimensionless
 *ElectricalCurrent=Power
 /ElectricalCurrent=ElectricalResistance
 /ElectricalResistance=ElectricalCurrent
+*Duration=MagneticFlux
 
 %ElectricalResistance
 /ElectricalResistance=Dimensionless
 *ElectricalCurrent=ElectricalPotential
+*Duration=ElectricalInductance
 
 %Energy
 /Energy=Dimensionless
@@ -80,9 +109,11 @@
 /Duration=Power
 /Power=Duration
 /Volume=Pressure
+/Pressure=Volume
 *Frequency=Power
 
 %EquivalentDose
+/EquivalentDose=Dimensionless
 
 %FlowMass
 /FlowMass=Dimensionless
@@ -90,6 +121,8 @@
 /Frequency=Mass
 /Mass=Frequency
 *Speed=Force
+/FlowVolume=Density
+/Density=FlowVolume
 
 %FlowVolume
 /FlowVolume=Dimensionless
@@ -98,6 +131,7 @@
 /Volume=Frequency
 /Area=Speed
 /Speed=Area
+*Density=FlowMass
 
 %Force
 /Force=Dimensionless
@@ -118,6 +152,8 @@
 *Energy=Power
 
 %Illuminance
+/Illuminance=Dimensionless
+*Area=LuminousFlux
 
 %Length
 /Length=Dimensionless
@@ -137,12 +173,28 @@
 *Speed=Frequency
 
 %LuminousFlux
+/LuminousFlux=Dimensionless
+/Area=Illuminance
+/Illuminance=Area
+/LuminousIntensity=SolidAngle
+/SolidAngle=LuminousIntensity
 
 %LuminousIntensity
+/LuminousIntensity=Dimensionless
+*SolidAngle=LuminousFlux
 
 %MagneticFluxDensity
+/MagneticFluxDensity=Dimensionless
+*Area=MagneticFlux
 
 %MagneticFlux
+/MagneticFlux=Dimensionless
+/ElectricalPotental=Duration
+/Duration=ElectricalPotential
+/Area=MagneticFluxDensity
+/MagneticFluxDensity=Area
+/ElectricalCurrent=ElectricalInductance
+/ElectricalInductance=ElectricalCurrent
 
 %Mass
 /Mass=Dimensionless
@@ -171,6 +223,7 @@
 *Volume=Energy
 
 %RadioActivity
+/RadioActivity=Dimensionless
 
 %Speed
 /Speed=Dimensionless
@@ -213,26 +266,39 @@
 
 %Dimensionless
 /Dimensionless=Dimensionless
+*AbsorbedDose=AbsorbedDose
 *Acceleration=Acceleration
+*AmountOfSubstance=AmountOfSubstance
 *Angle=Angle
 *AngleSolid=AngleSolid
 *Area=Area
+*CatalyticActivity=CatalyticActivity
 *Density=Density
 *Dimensionless=Dimensionless
+*ElectricalCapacitance=ElectricalCapacitance
 *ElectricalCharge=ElectricalCharge
+*ElectricalConductance=ElectricalConductance
 *ElectricalCurrent=ElectricalCurrent
+*ElectricalInductance=ElectricalInductance
 *ElectricalPotential=ElectricalPotential
 *ElectricalResistance=ElectricalResistance
 *Energy=Energy
+*EquivalentDose=EquivalentDose
 *FlowMass=FlowMass
 *FlowVolume=FlowVolume
 *Force=Force
 *Frequency=Frequency
+*Illuminance=Illuminance
 *Length=Length
 *LinearDensity=LinearDensity
+*LuminousFlux=LuminousFlux
+*LuminousIntensity=LuminousIntensity
+*MagneticFluxDensity=MagneticFluxDensity
+*MagneticFlux=MagneticFlux
 *Mass=Mass
 *Power=Power
 *Pressure=Pressure
+*RadioActivity=RadioActivity
 *Speed=Speed
 *Temperature=Temperature
 *Duration=Duration
