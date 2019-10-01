@@ -7,7 +7,6 @@ import static org.junit.Assert.assertTrue;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 
 import org.djunits4.unit.AbsoluteTemperatureUnit;
 import org.djunits4.unit.LengthUnit;
@@ -189,25 +188,8 @@ public class DoubleScalarTest
                             scalarClass.getDeclaredMethod("instantiateAbs", double.class, absoluteUnit.getClass());
                     AbstractDoubleScalarAbs<?, ?, ?, ?> absScalar = (AbstractDoubleScalarAbs<?, ?, ?, ?>) instantiateAbsMethod
                             .invoke(relScalar, absValue, absoluteUnit);
-                    
-                    // ?????????????????????????????????????????????????????????????????????????????????????????????????
-                    Temperature t = Temperature.of(10.0, "K");
-                    AbsoluteTemperature at = AbsoluteTemperature.of(10.0, "C");
-                    at = t.plus(at);
-                    System.out.println(at);
-                    Method[] m = scalarClass.getMethods();
-                    System.out.println(Arrays.asList(m).toString().replaceAll("\\, public", "\npublic")
-                            .replaceAll("org.djunits4.value.vdouble.scalar.base.", "")
-                            .replaceAll("org.djunits4.value.vdouble.scalar.", ""));
-                    Method tst = Temperature.class.getMethod("test");
-                    System.out.println(tst.toString());
-                    Method pmads = Temperature.class.getMethod("plus", AbstractDoubleScalarAbs.class);
-                    System.out.println(pmads.toString());
-                    Method pm = Temperature.class.getMethod("plus", AbsoluteTemperature.class);
-                    System.out.println(pm.toString());
-                    Method plusMethod = scalarClass.getMethod("plus", absScalar.getClass());
-                    // ?????????????????????????????????????????????????????????????????????????????????????????????????
-
+                    // method "plus" cannot be found with getMethod() for absScalar.getClass(). 
+                    Method plusMethod = scalarClass.getMethod("plus", absScalar.getClass().getSuperclass());
                     AbstractDoubleScalarAbs<?, ?, ?, ?> sum =
                             (AbstractDoubleScalarAbs<?, ?, ?, ?>) plusMethod.invoke(relScalar, absScalar);
                     System.out.println("rel=" + relScalar + ", abs=" + absScalar + ", sum=" + sum);
