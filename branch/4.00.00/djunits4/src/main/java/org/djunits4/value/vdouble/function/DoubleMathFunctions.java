@@ -189,7 +189,7 @@ public interface DoubleMathFunctions
         @Override
         public double apply(final double a)
         {
-            return -a;
+            return 0d == a ? 0d : -a;
         }
     };
 
