@@ -1,6 +1,8 @@
 package org.djunits4.value.vfloat.matrix.base;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.Unit;
+import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
 
@@ -33,10 +35,18 @@ public class FloatSparseValue<U extends Unit<U>, S extends FloatScalarInterface<
      */
     public FloatSparseValue(final int row, final int column, final S value)
     {
-        super();
-        this.row = row;
-        this.column = column;
-        this.valueSI = value.getSI();
+        this(row, column, checkNull(value).getSI());
+    }
+    
+    /**
+     * Check for null pointer in constructor.
+     * @param value S; the scalar to check
+     * @return S; the untouched scalar value
+     */
+    private static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> S checkNull(final S value)
+    {
+        Throw.whenNull(value, "value may not be null");
+        return value;
     }
 
     /**
@@ -48,10 +58,7 @@ public class FloatSparseValue<U extends Unit<U>, S extends FloatScalarInterface<
      */
     public FloatSparseValue(final int row, final int column, final float valueInUnit, final U unit)
     {
-        super();
-        this.row = row;
-        this.column = column;
-        this.valueSI = (float) ValueUtil.expressAsSIUnit(valueInUnit, unit);
+        this(row, column, (float) ValueUtil.expressAsSIUnit(valueInUnit, unit));
     }
 
     /**
@@ -62,7 +69,8 @@ public class FloatSparseValue<U extends Unit<U>, S extends FloatScalarInterface<
      */
     public FloatSparseValue(final int row, final int column, final float valueSI)
     {
-        super();
+        Throw.when(row < 0, ValueRuntimeException.class, "row may not be negative");
+        Throw.when(column < 0, ValueRuntimeException.class, "column may not be negative");
         this.row = row;
         this.column = column;
         this.valueSI = valueSI;
@@ -91,4 +99,5 @@ public class FloatSparseValue<U extends Unit<U>, S extends FloatScalarInterface<
     {
         return this.valueSI;
     }
+    
 }

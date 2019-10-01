@@ -3,7 +3,7 @@ package org.djunits4.value.vdouble.vector.data;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
+import java.util.Map.Entry;
 import java.util.SortedMap;
 import java.util.stream.IntStream;
 
@@ -63,10 +63,8 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
         Throw.whenNull(values, "DoubleVectorData.instantiate: double[] values is null");
         Throw.whenNull(scale, "DoubleVectorData.instantiate: scale is null");
         Throw.whenNull(storageType, "DoubleVectorData.instantiate: storageType is null");
-        if (values.length == 0)
-        {
-            throw new ValueRuntimeException("DoubleVectorData.instantiate: double[] values wrong: values.length == 0");
-        }
+        Throw.when(values.length == 0, ValueRuntimeException.class,
+                "DoubleVectorData.instantiate: double[] values wrong: values.length == 0");
 
         double[] valuesSI = scale.isBaseSIScale() ? values : new double[values.length];
         if (!scale.isBaseSIScale())
@@ -105,9 +103,13 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
     public static DoubleVectorData instantiate(final List<Double> values, final Scale scale, final StorageType storageType)
             throws ValueRuntimeException
     {
-        if (values == null)
+        Throw.whenNull(values, "DoubleVectorData.instantiate: double[] values is null");
+        Throw.whenNull(scale, "DoubleVectorData.instantiate: scale is null");
+        Throw.whenNull(storageType, "DoubleVectorData.instantiate: storageType is null");
+        Throw.when(values.size() == 0, ValueRuntimeException.class, "DoubleVectorData.instantiate: values.size() == 0");
+        for (Double d : values)
         {
-            throw new ValueRuntimeException("DoubleVectorData.instantiate: List<Double> values is null");
+            Throw.whenNull(d, "null value in values");
         }
 
         switch (storageType)
@@ -198,9 +200,13 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
     public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>> DoubleVectorData instantiate(final S[] values,
             final StorageType storageType) throws ValueRuntimeException
     {
-        if (values == null)
+        Throw.whenNull(values, "DoubleVectorData.instantiate: double[] values is null");
+        Throw.whenNull(storageType, "DoubleVectorData.instantiate: storageType is null");
+        Throw.when(values.length == 0, ValueRuntimeException.class,
+                "DoubleVectorData.instantiate: DoubleScalar[] values wrong: values.length == 0");
+        for (S s : values)
         {
-            throw new ValueRuntimeException("DoubleVectorData.instantiate: DoubleScalar[] values is null");
+            Throw.whenNull(s, "null value in values");
         }
 
         switch (storageType)
@@ -262,14 +268,16 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
     public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>> DoubleVectorData instantiateList(
             final List<S> valueList, final StorageType storageType) throws ValueRuntimeException
     {
-        if (valueList == null)
+        Throw.whenNull(valueList, "DoubleVectorData.instantiate: valueList is null");
+        Throw.whenNull(storageType, "DoubleVectorData.instantiate: storageType is null");
+        Throw.when(valueList.size() == 0, ValueRuntimeException.class, "DoubleVectorData.instantiate: valueList.size() == 0");
+        for (S s : valueList)
         {
-            throw new ValueRuntimeException("DoubleVectorData.instantiate: List<DoubleScalar> values is null");
+            Throw.whenNull(s, "null value in valueList");
         }
 
         switch (storageType)
         {
-            // TODO: check uniformly typed list
             case DENSE:
             {
                 double[] valuesSI;
@@ -311,19 +319,24 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
 
     /**
      * Instantiate a DoubleVectorData with the right data type.
-     * @param values SortedMap&lt;Integer,Double&gt;; the DoubleScalar values to store
+     * @param valueMap SortedMap&lt;Integer,Double&gt;; the DoubleScalar values to store
      * @param length int; the length of the vector to pad with 0 after last entry in map
      * @param scale Scale; the scale of the unit to use for conversion to SI
      * @param storageType StorageType; the data type to use
      * @return DoubleVectorData; the DoubleVectorData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
      */
-    public static DoubleVectorData instantiate(final SortedMap<Integer, Double> values, final int length, final Scale scale,
+    public static DoubleVectorData instantiate(final SortedMap<Integer, Double> valueMap, final int length, final Scale scale,
             final StorageType storageType) throws ValueRuntimeException
     {
-        if (values == null)
+        Throw.whenNull(valueMap, "DoubleVectorData.instantiate: values is null");
+        Throw.when(length < 1, ValueRuntimeException.class, "Length must be > 0");
+        Throw.whenNull(scale, "DoubleVectorData.instantiate: scale is null");
+        Throw.whenNull(storageType, "DoubleVectorData.instantiate: storageType is null");
+        Throw.when(valueMap.size() == 0, ValueRuntimeException.class, "DoubleVectorData.instantiate: values.size() == 0");
+        for (Integer key : valueMap.keySet())
         {
-            throw new ValueRuntimeException("DoubleVectorData.instantiate: values map is null");
+            Throw.when(key < 0 || key >= length, ValueRuntimeException.class, "Key in values out of range");
         }
 
         switch (storageType)
@@ -333,12 +346,12 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
                 double[] valuesSI = new double[length];
                 if (scale.isBaseSIScale())
                 {
-                    values.entrySet().parallelStream().forEach(entry -> valuesSI[entry.getKey()] = entry.getValue());
+                    valueMap.entrySet().parallelStream().forEach(entry -> valuesSI[entry.getKey()] = entry.getValue());
                 }
                 else
                 {
                     Arrays.fill(valuesSI, scale.toStandardUnit(0.0));
-                    values.entrySet().parallelStream()
+                    valueMap.entrySet().parallelStream()
                             .forEach(entry -> valuesSI[entry.getKey()] = scale.toStandardUnit(entry.getValue()));
                 }
                 return new DoubleVectorDataDense(valuesSI);
@@ -349,22 +362,22 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
                 int nonZeroCount;
                 if (scale.isBaseSIScale())
                 {
-                    nonZeroCount = (int) values.keySet().parallelStream().filter(d -> d != 0d).count();
+                    nonZeroCount = (int) valueMap.keySet().parallelStream().filter(d -> d != 0d).count();
                 }
                 else
                 {
                     // Much harder, and the result is unlikely to be very sparse
                     nonZeroCount =
-                            length - (int) values.values().parallelStream().filter(d -> scale.toStandardUnit(d) == 0d).count();
+                            length - (int) valueMap.values().parallelStream().filter(d -> scale.toStandardUnit(d) == 0d).count();
                 }
                 int[] indices = new int[nonZeroCount];
                 double[] valuesSI = new double[nonZeroCount];
                 if (scale.isBaseSIScale())
                 {
                     int index = 0;
-                    for (Integer key : values.keySet())
+                    for (Integer key : valueMap.keySet())
                     {
-                        double value = values.get(key);
+                        double value = valueMap.get(key);
                         if (0.0 != value)
                         {
                             indices[index] = key;
@@ -378,14 +391,14 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
                     Arrays.fill(valuesSI, scale.toStandardUnit(0.0));
                     int index = 0;
                     int lastKey = 0;
-                    for (Integer key : values.keySet())
+                    for (Integer key : valueMap.keySet())
                     {
                         for (int i = lastKey; i < key; i++)
                         {
                             indices[index++] = i;
                         }
                         lastKey = key;
-                        double value = scale.toStandardUnit(values.get(key));
+                        double value = scale.toStandardUnit(valueMap.get(key));
                         if (0.0 != value)
                         {
                             indices[index] = key;
@@ -409,20 +422,24 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
 
     /**
      * Instantiate a DoubleVectorData with the right data type.
-     * @param values Map&lt;Integer,S&gt;; the DoubleScalar values to store
+     * @param values SortedMap&lt;Integer,S&gt;; the DoubleScalar values to store
      * @param length int; the length of the vector to pad with 0 after last entry in map
      * @param storageType StorageType; the data type to use
      * @return DoubleVectorData; the DoubleVectorData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
      */
     public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>> DoubleVectorData instantiateMap(
-            final Map<Integer, S> values, final int length, final StorageType storageType) throws ValueRuntimeException
+            final SortedMap<Integer, S> values, final int length, final StorageType storageType) throws ValueRuntimeException
     {
-        if (values == null)
+        Throw.whenNull(values, "DoubleVectorData.instantiate: values is null");
+        Throw.when(length < 1, ValueRuntimeException.class, "Length must be > 0");
+        Throw.whenNull(storageType, "DoubleVectorData.instantiate: storageType is null");
+        for (Entry<Integer, S> e : values.entrySet())
         {
-            throw new ValueRuntimeException("DoubleVectorData.instantiateMap: values map is null");
+            Throw.when(e.getKey() < 0 || e.getKey() >= length, ValueRuntimeException.class, "Key in values out of range");
+            Throw.whenNull(e.getValue(), "null value in map");
         }
-
+  
         switch (storageType)
         {
             case DENSE:
@@ -547,6 +564,7 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
     public DoubleVectorData plus(final DoubleVectorData right) throws ValueRuntimeException
     {
         checkSizes(right);
+        // TODO this may cause an out of memory condition even though the result fits easily in available memory
         double[] dv = IntStream.range(0, size()).parallel().mapToDouble(i -> getSI(i) + right.getSI(i)).toArray();
         if (this instanceof DoubleVectorDataSparse && right instanceof DoubleVectorDataSparse)
         {

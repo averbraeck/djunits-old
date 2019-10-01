@@ -1,20 +1,39 @@
 package org.djunits4.value.vdouble.matrix;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.djunits4.Try;
+import org.djunits4.unit.AbsoluteLinearUnit;
 import org.djunits4.unit.AreaUnit;
 import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.SIUnit;
 import org.djunits4.unit.SpeedUnit;
+import org.djunits4.unit.Unit;
+import org.djunits4.unit.base.UnitBase;
+import org.djunits4.unit.base.UnitTypes;
+import org.djunits4.unit.util.UNITS;
 import org.djunits4.unit.util.UnitException;
+import org.djunits4.value.CLASSNAMES;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixAbs;
+import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRelWithAbs;
 import org.djunits4.value.vdouble.matrix.base.DoubleMatrix;
+import org.djunits4.value.vdouble.matrix.base.DoubleMatrixInterface;
+import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.Area;
 import org.djunits4.value.vdouble.scalar.Length;
+import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarAbs;
+import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
+import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
+import org.djunits4.value.vdouble.vector.base.AbstractDoubleVectorAbs;
+import org.djunits4.value.vdouble.vector.base.AbstractDoubleVectorRelWithAbs;
+import org.djunits4.value.vdouble.vector.base.DoubleVectorInterface;
+import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 import org.junit.Test;
 
 /**
@@ -27,6 +46,113 @@ import org.junit.Test;
  */
 public class DoubleMatrixInstantiateTest
 {
+    /**
+     * Test the constructors of all matrix classes.
+     */
+    @Test
+    public <U extends Unit<U>> void instatiateAllMatrixTypes()
+    {
+        // Force loading of all classes
+        LengthUnit length = UNITS.METER;
+        if (length == null)
+        {
+            fail();
+        }
+
+        for (String scalarName : CLASSNAMES.ALL_LIST)
+        {
+            @SuppressWarnings("unchecked")
+            UnitBase<U> unitBase = (UnitBase<U>) UnitTypes.INSTANCE.getUnitBase(scalarName + "Unit");
+            U standardUnit = unitBase.getStandardUnit();
+            for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+            {
+                double[][] testValues = DOUBLEMATRIX.denseRectArrays(5, 10);
+                DoubleMatrixData dmd = DoubleMatrixData.instantiate(testValues, standardUnit.getScale(), storageType);
+                DoubleMatrixInterface<U, ?, ?, ?> doubleMatrix =
+                        DoubleMatrix.instantiate(testValues, standardUnit, storageType);
+                Class<?> scalarClass = doubleMatrix.getScalarClass();
+                assertEquals("scalar class should have the right name", scalarName, scalarClass.getSimpleName());
+                Class<?> vectorClass = doubleMatrix.getVectorClass();
+                assertEquals("vector class should have the right name", scalarName + "Vector", vectorClass.getSimpleName());
+                DoubleMatrixInterface<U, ?, ?, ?> doubleMatrix2 = doubleMatrix.instantiateMatrix(dmd, standardUnit);
+                assertEquals("matrix constructed from DoubleMatrixData should be equal to matrix constructed from double[][]",
+                        doubleMatrix, doubleMatrix2);
+                DoubleVectorData dvd =
+                        DoubleVectorData.instantiate(doubleMatrix.getRowSI(0), standardUnit.getScale(), storageType);
+                DoubleVectorInterface<U, ?, ?> doubleVector = doubleMatrix.instantiateVector(dvd, standardUnit);
+                assertArrayEquals("Double vector contains values from row 0", new double[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+                        doubleVector.getValuesSI(), 0.001);
+                DoubleScalarInterface<U, ?> doubleScalar = doubleMatrix.instantiateScalarSI(1.234, standardUnit);
+                assertEquals("Constructed scalar has correct value", 1.234, doubleScalar.getSI(), 0.001);
+                assertEquals("Constructed scalar has correct unit", standardUnit, doubleScalar.getDisplayUnit());
+            }
+        }
+    }
+
+    /**
+     * Test the extra methods that Absolute and Relative with Absolute matrices implement.
+     */
+    @SuppressWarnings("unchecked")
+    @Test
+    public <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>> void instantiateRelAbsMatrixTypes()
+    {
+        // Force loading of all classes
+        LengthUnit length = UNITS.METER;
+        if (length == null)
+        {
+            fail();
+        }
+
+        for (int classIndex = 0; classIndex < CLASSNAMES.REL_WITH_ABS_LIST.size(); classIndex++)
+        {
+            String relScalarName = CLASSNAMES.REL_WITH_ABS_LIST.get(classIndex);
+            String absScalarName = CLASSNAMES.ABS_LIST.get(classIndex);
+            UnitBase<RU> relUnitBase = (UnitBase<RU>) UnitTypes.INSTANCE.getUnitBase(relScalarName + "Unit");
+            UnitBase<AU> absUnitBase = (UnitBase<AU>) UnitTypes.INSTANCE.getUnitBase(absScalarName + "Unit");
+            RU relStandardUnit = relUnitBase.getStandardUnit();
+            AU absStandardUnit = absUnitBase.getStandardUnit();
+            for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+            {
+                double[][] testValues = DOUBLEMATRIX.denseRectArrays(5, 10);
+                DoubleMatrixData dmd = DoubleMatrixData.instantiate(testValues, relStandardUnit.getScale(), storageType);
+                AbstractDoubleMatrixRelWithAbs<AU, ?, ?, ?, RU, ?, ?, ?> relDoubleMatrix = (AbstractDoubleMatrixRelWithAbs<AU,
+                        ?, ?, ?, RU, ?, ?, ?>) DoubleMatrix.instantiate(testValues, relStandardUnit, storageType);
+                AbstractDoubleMatrixAbs<AU, ?, ?, ?, RU, ?, ?, ?> absDoubleMatrix = (AbstractDoubleMatrixAbs<AU, ?, ?, ?, RU, ?,
+                        ?, ?>) DoubleMatrix.instantiate(testValues, absStandardUnit, storageType);
+
+                DoubleMatrixInterface<AU, ?, ?, ?> absDoubleMatrix2 =
+                        relDoubleMatrix.instantiateMatrixAbs(dmd, absStandardUnit);
+                assertEquals("matrix constructed from DoubleMatrixData should be equal to matrix constructed from double[][]",
+                        absDoubleMatrix, absDoubleMatrix2);
+                DoubleVectorData dvd =
+                        DoubleVectorData.instantiate(relDoubleMatrix.getRowSI(0), relStandardUnit.getScale(), storageType);
+                AbstractDoubleVectorAbs<AU, ?, ?, RU, ?, ?> absDoubleVector =
+                        relDoubleMatrix.instantiateVectorAbs(dvd, absStandardUnit);
+                assertArrayEquals("Double vector contains values from row 0", new double[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+                        absDoubleVector.getValuesSI(), 0.001);
+                AbstractDoubleScalarAbs<AU, ?, RU, ?> absDoubleScalar =
+                        relDoubleMatrix.instantiateScalarAbsSI(1.234, absStandardUnit);
+                assertEquals("Constructed scalar has correct value", 1.234, absDoubleScalar.si, 0.001);
+                assertEquals("Constructed scalar has correct unit", absStandardUnit, absDoubleScalar.getDisplayUnit());
+
+                DoubleMatrixInterface<RU, ?, ?, ?> relDoubleMatrix2 =
+                        absDoubleMatrix.instantiateMatrixRel(dmd, relStandardUnit);
+                assertEquals("matrix constructed from DoubleMatrixData should be equal to matrix constructed from double[][]",
+                        relDoubleMatrix, relDoubleMatrix2);
+                dvd = DoubleVectorData.instantiate(absDoubleMatrix.getRowSI(0), absStandardUnit.getScale(), storageType);
+                AbstractDoubleVectorRelWithAbs<AU, ?, ?, RU, ?, ?> relDoubleVector =
+                        absDoubleMatrix.instantiateVectorRel(dvd, relStandardUnit);
+                assertArrayEquals("Double vector contains values from row 0", new double[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+                        relDoubleVector.getValuesSI(), 0.001);
+                AbstractDoubleScalarRelWithAbs<AU, ?, RU, ?> relDoubleScalar =
+                        absDoubleMatrix.instantiateScalarRelSI(1.234, relStandardUnit);
+                assertEquals("Constructed scalar has correct value", 1.234, relDoubleScalar.si, 0.001);
+                assertEquals("Constructed scalar has correct unit", relStandardUnit, relDoubleScalar.getDisplayUnit());
+
+            }
+        }
+    }
+
     /**
      * Test the instantiation of dense and sparse matrix types with dense data (no zeros).
      */

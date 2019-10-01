@@ -2,6 +2,7 @@ package org.djunits4.value.util;
 
 import java.util.regex.Pattern;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.Unit;
 
 /**
@@ -41,6 +42,7 @@ public final class ValueUtil
      */
     public static double expressAsSIUnit(final double value, final Unit<?> unit)
     {
+        Throw.whenNull(unit, "expressAsSIUnit: unit may not be null");
         return unit.getScale().toStandardUnit(value);
     }
 
@@ -52,6 +54,7 @@ public final class ValueUtil
      */
     public static double expressAsUnit(final double siValue, final Unit<?> targetUnit)
     {
+        Throw.whenNull(targetUnit, "expressAsUnit: targetUnit may not be null");
         return targetUnit.getScale().fromStandardUnit(siValue);
     }
 

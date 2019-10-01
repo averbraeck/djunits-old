@@ -504,68 +504,6 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
     }
 
     /**
-     * Centralized size equality check.
-     * @param other AbstractDoubleMatrixRel&lt;?, ?, ?, ?&gt;; other DoubleMatrix
-     * @throws ValueRuntimeException when other is null, or matrices have unequal size
-     */
-    protected final void checkSize(final AbstractDoubleMatrix<?, ?, ?, ?> other) throws ValueRuntimeException
-    {
-        if (null == other)
-        {
-            throw new ValueRuntimeException("other is null");
-        }
-        if (rows() != other.rows() || cols() != other.cols())
-        {
-            throw new ValueRuntimeException(
-                    "The matrices have different sizes: " + rows() + "x" + cols() + " != " + other.rows() + "x" + other.cols());
-        }
-    }
-
-    /**
-     * Check that a 2D array of double is not null, not empty and not jagged; i.e. all rows have the same length.
-     * @param values double[][]; the 2D array to check
-     * @return the values in case the method is used in a constructor
-     * @throws ValueRuntimeException when <code>values</code> is null, empty, or jagged
-     */
-    protected static double[][] checkRectangularAndNonEmpty(final double[][] values) throws ValueRuntimeException
-    {
-        if (null == values)
-        {
-            throw new ValueRuntimeException(
-                    "Cannot create a DoubleVector or MutableDoubleVector from a null array of double[][]");
-        }
-        if (values.length > 0 && null == values[0])
-        {
-            throw new ValueRuntimeException("Creating DoubleVector or MutableDoubleVector: Row 0 is null");
-        }
-        for (int row = values.length; --row >= 1;)
-        {
-            if (null == values[row] || values[0].length != values[row].length)
-            {
-                throw new ValueRuntimeException(
-                        "Creating DoubleVector or MutableDoubleVector: Lengths of rows are not all the same");
-            }
-        }
-        return values;
-    }
-
-    /**
-     * Centralized size equality check.
-     * @param other double[][]; array of double
-     * @throws ValueRuntimeException when matrices have unequal size
-     */
-    protected final void checkSize(final double[][] other) throws ValueRuntimeException
-    {
-        checkRectangularAndNonEmpty(other);
-        final int otherCols = other[0].length;
-        if (rows() != other.length || cols() != otherCols)
-        {
-            throw new ValueRuntimeException("The matrix and the array have different sizes: " + rows() + "x" + cols() + " != "
-                    + other.length + "x" + otherCols);
-        }
-    }
-
-    /**
      * Check that provided row and column indices are valid.
      * @param row int; the row value to check
      * @param col int; the column value to check

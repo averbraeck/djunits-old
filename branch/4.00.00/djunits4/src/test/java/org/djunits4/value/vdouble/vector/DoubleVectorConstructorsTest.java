@@ -68,9 +68,9 @@ public class DoubleVectorConstructorsTest
             fail();
         }
 
-        for (String className : CLASSNAMES.ALL_NODIM_LIST)
+        for (String scalarName : CLASSNAMES.ALL_NODIM_LIST)
         {
-            UnitBase<?> unitBase = UnitTypes.INSTANCE.getUnitBase(className + "Unit");
+            UnitBase<?> unitBase = UnitTypes.INSTANCE.getUnitBase(scalarName + "Unit");
             // double
             @SuppressWarnings("rawtypes")
             Unit standardUnit = unitBase.getStandardUnit();
@@ -108,7 +108,7 @@ public class DoubleVectorConstructorsTest
                 {
                     assertEquals("zSum", zSum, ((AbstractDoubleVectorRel<?, ?, ?>) doubleVector).zSum().getSI(), 0.001);
                 }
-                String scalarClassName = "org.djunits4.value.vdouble.scalar." + className;
+                String scalarClassName = "org.djunits4.value.vdouble.scalar." + scalarName;
                 Class<?> scalarClass = Class.forName(scalarClassName);
                 assertEquals("getScalarClass", scalarClass, doubleVector.getScalarClass());
                 compareValues(testValues, doubleVector.getValuesInUnit());
@@ -253,7 +253,6 @@ public class DoubleVectorConstructorsTest
                     assertEquals("unit of scalar matches", s.getDisplayUnit(), standardUnit);
                     assertEquals("value of scalar matches", ((AbstractDoubleScalar<?, ?>) s).getSI(), testValues[i], 0.001);
                 }
-                // TODO get this to compile: doubleVector = DoubleVector.instantiate(scalarValues, standardUnit, storageType);
                 doubleVector = DoubleVector.instantiateSI(list, standardUnit, storageType);
                 assertEquals("Unit must match", standardUnit, doubleVector.getDisplayUnit());
                 compareValuesWithScale(standardUnit.getScale(), testValues, doubleVector.getValuesSI());
@@ -830,7 +829,7 @@ public class DoubleVectorConstructorsTest
             DoubleVector.instantiate((AbsoluteTemperature[]) null, AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
             fail("null pointer should have thrown an exception");
         }
-        catch (ValueRuntimeException vre)
+        catch (NullPointerException npe)
         {
             // Ignore expected exception
         }
@@ -861,7 +860,7 @@ public class DoubleVectorConstructorsTest
             DoubleVector.instantiateList((List<AbsoluteTemperature>) null, AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
             fail("null pointer should have thrown an exception");
         }
-        catch (ValueRuntimeException vre)
+        catch (NullPointerException npe)
         {
             // Ignore expected exception
         }
@@ -892,7 +891,7 @@ public class DoubleVectorConstructorsTest
                     AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
             fail("null pointer should have thrown an exception");
         }
-        catch (ValueRuntimeException vre)
+        catch (NullPointerException npe)
         {
             // Ignore expected exception
         }
@@ -922,7 +921,7 @@ public class DoubleVectorConstructorsTest
             DoubleVector.instantiateMap(map, -1, AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
             fail("negative length should have thrown an exception");
         }
-        catch (NegativeArraySizeException nase)
+        catch (ValueRuntimeException vre)
         {
             // Ignore expected exception
         }
@@ -932,7 +931,7 @@ public class DoubleVectorConstructorsTest
             DoubleVector.instantiateMap(map, 1, AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
             fail("bad length should have thrown an exception");
         }
-        catch (ArrayIndexOutOfBoundsException aeoobe)
+        catch (ValueRuntimeException vre)
         {
             // Ignore expected exception
         }
@@ -943,7 +942,7 @@ public class DoubleVectorConstructorsTest
             DoubleVector.instantiateMap(map, testValues.length, AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
             fail("bad entry in map should have thrown an exception");
         }
-        catch (ArrayIndexOutOfBoundsException aeoobe)
+        catch (ValueRuntimeException vre)
         {
             // Ignore expected exception
         }
@@ -956,7 +955,7 @@ public class DoubleVectorConstructorsTest
             SIVector.instantiate((double[]) null, SIUnit.of(unitBase.getSiDimensions()), StorageType.DENSE);
             fail("null pointer should have thrown an exception");
         }
-        catch (NullPointerException vre)
+        catch (NullPointerException npe)
         {
             // Ignore expected exception
         }
@@ -966,7 +965,7 @@ public class DoubleVectorConstructorsTest
             SIVector.instantiate((List<Double>) null, SIUnit.of(unitBase.getSiDimensions()), StorageType.DENSE);
             fail("null pointer should have thrown an exception");
         }
-        catch (ValueRuntimeException vre)
+        catch (NullPointerException npe)
         {
             // Ignore expected exception
         }

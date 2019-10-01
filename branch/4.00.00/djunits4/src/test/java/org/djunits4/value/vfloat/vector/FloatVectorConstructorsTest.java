@@ -562,7 +562,7 @@ public class FloatVectorConstructorsTest
             FloatVector.instantiate((FloatAbsoluteTemperature[]) null, AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
             fail("null pointer should have thrown an exception");
         }
-        catch (ValueRuntimeException vre)
+        catch (NullPointerException npe)
         {
             // Ignore expected exception
         }
@@ -591,7 +591,7 @@ public class FloatVectorConstructorsTest
                     StorageType.DENSE);
             fail("null pointer should have thrown an exception");
         }
-        catch (ValueRuntimeException vre)
+        catch (NullPointerException npe)
         {
             // Ignore expected exception
         }
@@ -620,7 +620,7 @@ public class FloatVectorConstructorsTest
                     AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
             fail("null pointer should have thrown an exception");
         }
-        catch (ValueRuntimeException vre)
+        catch (NullPointerException npe)
         {
             // Ignore expected exception
         }
@@ -647,7 +647,7 @@ public class FloatVectorConstructorsTest
             FloatVector.instantiateMap(map, -1, AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
             fail("negative length should have thrown an exception");
         }
-        catch (NegativeArraySizeException nase)
+        catch (ValueRuntimeException vre)
         {
             // Ignore expected exception
         }
@@ -656,7 +656,7 @@ public class FloatVectorConstructorsTest
             FloatVector.instantiateMap(map, 1, AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
             fail("bad length should have thrown an exception");
         }
-        catch (ArrayIndexOutOfBoundsException aeoobe)
+        catch (ValueRuntimeException vre)
         {
             // Ignore expected exception
         }
@@ -666,7 +666,7 @@ public class FloatVectorConstructorsTest
             FloatVector.instantiateMap(map, testValues.length, AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
             fail("bad entry in map should have thrown an exception");
         }
-        catch (ArrayIndexOutOfBoundsException aeoobe)
+        catch (ValueRuntimeException vre)
         {
             // Ignore expected exception
         }

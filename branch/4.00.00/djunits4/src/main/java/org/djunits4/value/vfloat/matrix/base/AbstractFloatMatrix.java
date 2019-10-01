@@ -505,67 +505,6 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
     }
 
     /**
-     * Centralized size equality check.
-     * @param other AbstractFloatMatrixRel&lt;?, ?, ?, ?&gt;; other FloatMatrix
-     * @throws ValueRuntimeException when other is null, or matrices have unequal size
-     */
-    protected final void checkSize(final AbstractFloatMatrix<?, ?, ?, ?> other) throws ValueRuntimeException
-    {
-        if (null == other)
-        {
-            throw new ValueRuntimeException("other is null");
-        }
-        if (rows() != other.rows() || cols() != other.cols())
-        {
-            throw new ValueRuntimeException(
-                    "The matrices have different sizes: " + rows() + "x" + cols() + " != " + other.rows() + "x" + other.cols());
-        }
-    }
-
-    /**
-     * Check that a 2D array of float is not null, not empty and not jagged; i.e. all rows have the same length.
-     * @param values float[][]; the 2D array to check
-     * @return the values in case the method is used in a constructor
-     * @throws ValueRuntimeException when <code>values</code> is null, empty, or jagged
-     */
-    protected static float[][] checkRectangularAndNonEmpty(final float[][] values) throws ValueRuntimeException
-    {
-        if (null == values)
-        {
-            throw new ValueRuntimeException("Cannot create a FloatVector or MutableFloatVector from a null array of float[][]");
-        }
-        if (values.length > 0 && null == values[0])
-        {
-            throw new ValueRuntimeException("Creating FloatVector or MutableFloatVector: Row 0 is null");
-        }
-        for (int row = values.length; --row >= 1;)
-        {
-            if (null == values[row] || values[0].length != values[row].length)
-            {
-                throw new ValueRuntimeException(
-                        "Creating FloatVector or MutableFloatVector: Lengths of rows are not all the same");
-            }
-        }
-        return values;
-    }
-
-    /**
-     * Centralized size equality check.
-     * @param other float[][]; array of float
-     * @throws ValueRuntimeException when matrices have unequal size
-     */
-    protected final void checkSize(final float[][] other) throws ValueRuntimeException
-    {
-        checkRectangularAndNonEmpty(other);
-        final int otherCols = other[0].length;
-        if (rows() != other.length || cols() != otherCols)
-        {
-            throw new ValueRuntimeException("The matrix and the array have different sizes: " + rows() + "x" + cols() + " != "
-                    + other.length + "x" + otherCols);
-        }
-    }
-
-    /**
      * Check that provided row and column indices are valid.
      * @param row int; the row value to check
      * @param col int; the column value to check

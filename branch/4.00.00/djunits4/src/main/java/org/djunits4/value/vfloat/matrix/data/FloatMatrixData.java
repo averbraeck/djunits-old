@@ -65,14 +65,9 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
     public static FloatMatrixData instantiate(final float[][] values, final Scale scale, final StorageType storageType)
             throws ValueRuntimeException
     {
-        Throw.whenNull(values, "FloatMatrixData.instantiate: float[][] values is null");
         Throw.whenNull(scale, "FloatMatrixData.instantiate: scale is null");
         Throw.whenNull(storageType, "FloatMatrixData.instantiate: storageType is null");
-        if (values.length == 0 || values[0].length == 0)
-        {
-            throw new ValueRuntimeException(
-                    "FloatMatrixData.instantiate: float[][] values wrong: " + "values.length == 0 or values[0].length == 0");
-        }
+        checkRectangularAndNonEmpty(values);
 
         final int rows = values.length;
         final int cols = values[0].length;
@@ -86,6 +81,7 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
                 return new FloatMatrixDataDense(valuesSI, rows, cols);
 
             case SPARSE:
+                // TODO: too expensive, another copy of a probably already large matrix
                 float[][] matrixSI = new float[rows][cols];
                 IntStream.range(0, values.length).parallel().forEach(r -> IntStream.range(0, cols)
                         .forEach(c -> matrixSI[r][c] = (float) scale.toStandardUnit(values[r][c])));
@@ -109,9 +105,15 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
             final Collection<FloatSparseValue<U, S>> values, final int rows, final int cols, final StorageType storageType)
             throws ValueRuntimeException
     {
-        if (values == null)
+        Throw.whenNull(values, "FloatMatrixData.instantiate: values is null");
+        Throw.whenNull(storageType, "FloatMatrixData.instantiate: storageType is null");
+        Throw.when(cols <= 0, ValueRuntimeException.class, "cols must be > 0");
+        Throw.when(rows <= 0, ValueRuntimeException.class, "rows must be > 0");
+        for (FloatSparseValue<U, S> fsp : values)
         {
-            throw new ValueRuntimeException("FloatMatrixData.instantiate: values is null");
+            Throw.whenNull(fsp, "null value in values");
+            Throw.when(fsp.getRow() < 0 || fsp.getRow() >= rows, ValueRuntimeException.class, "row out of range");
+            Throw.when(fsp.getColumn() < 0 || fsp.getColumn() >= cols, ValueRuntimeException.class, "column out of range");
         }
 
         switch (storageType)
@@ -140,16 +142,8 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> FloatMatrixData instantiate(final S[][] values,
             final StorageType storageType) throws ValueRuntimeException
     {
-        if (values == null)
-        {
-            throw new ValueRuntimeException("FloatMatrixData.instantiate: FloatScalar[] values is null");
-        }
-
-        if (values == null || values.length == 0 || values[0].length == 0)
-        {
-            throw new ValueRuntimeException("FloatMatrixData.instantiate: FloatScalar[][] values is null or "
-                    + "values.length == 0 or values[0].length == 0");
-        }
+        Throw.whenNull(storageType, "FloatMatrixData.instantiate: storageType is null");
+        checkRectangularAndNonEmpty(values);
 
         final int rows = values.length;
         final int cols = values[0].length;
@@ -261,6 +255,57 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      * @return double[][]; a safe, dense copy of matrixSI as a matrix
      */
     public abstract double[][] getDoubleDenseMatrixSI();
+
+    /**
+     * Check that a 2D array of float is not null, not empty and not jagged; i.e. all rows have the same length.
+     * @param values float[][]; the 2D array to check
+     * @return the values in case the method is used in a constructor
+     * @throws NullPointerException when <code>values</code> is null
+     * @throws ValueRuntimeException when <code>values</code> is empty, or jagged
+     */
+    protected static float[][] checkRectangularAndNonEmpty(final float[][] values) throws ValueRuntimeException
+    {
+        Throw.when(null == values, NullPointerException.class, "Cannot create a matrix from a null float[][]");
+        Throw.when(0 == values.length, ValueRuntimeException.class, "Cannot create a matrix from zero length float[][]");
+        for (int row = 0; row < values.length; row++)
+        {
+            Throw.when(null == values[row], ValueRuntimeException.class,
+                    "Cannot create a matrix from float[][] containing null row(s)");
+            Throw.when(values[row].length != values[0].length, ValueRuntimeException.class,
+                    "Cannot create a matrix from a jagged float[][]");
+        }
+        Throw.when(0 == values[0].length, ValueRuntimeException.class,
+                "Cannot create a matrix from a float[][] with zero values");
+        return values;
+    }
+
+    /**
+     * Check that a 2D array of float is not null, not empty and not jagged; i.e. all rows have the same length.
+     * @param values S[][]; the 2D array to check
+     * @return the values in case the method is used in a constructor
+     * @throws NullPointerException when <code>values</code> is null
+     * @throws ValueRuntimeException when <code>values</code> is empty, or jagged
+     */
+    protected static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> S[][] checkRectangularAndNonEmpty(
+            final S[][] values) throws ValueRuntimeException
+    {
+        Throw.when(null == values, NullPointerException.class, "Cannot create a matrix from a null Scalar[][]");
+        Throw.when(0 == values.length, ValueRuntimeException.class, "Cannot create a matrix from zero length Scalar[][]");
+        for (int row = 0; row < values.length; row++)
+        {
+            Throw.when(null == values[row], ValueRuntimeException.class,
+                    "Cannot create a matrix from Scalar[][] containing null row(s)");
+            Throw.when(values[row].length != values[0].length, ValueRuntimeException.class,
+                    "Cannot create a matrix from a jagged Scalar[][]");
+            for (int col = 0; col < values[row].length; col++)
+            {
+                Throw.whenNull(values[row][col], "Cannot create a matrix from Scalar[][] containing null(s)");
+            }
+        }
+        Throw.when(0 == values[0].length, ValueRuntimeException.class,
+                "Cannot create a matrix from a Scalar[][] with zero values");
+        return values;
+    }
 
     /**
      * Check the sizes of this data object and the other data object.

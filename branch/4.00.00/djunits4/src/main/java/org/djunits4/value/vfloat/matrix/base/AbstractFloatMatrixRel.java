@@ -157,7 +157,6 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
     public final <VT extends AbstractFloatMatrix<?, ?, ?, ?> & Relative> FloatSIMatrix times(final VT rel)
             throws ValueRuntimeException, UnitException
     {
-        checkSize(rel);
         return new FloatSIMatrix(this.getData().times(rel.getData()), SIUnit.of(
                 getDisplayUnit().getUnitBase().getSiDimensions().plus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
     }
@@ -174,7 +173,6 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
     public final <VT extends AbstractFloatMatrix<?, ?, ?, ?> & Relative> FloatSIMatrix divide(final VT rel)
             throws ValueRuntimeException, UnitException
     {
-        checkSize(rel);
         return new FloatSIMatrix(this.getData().divide(rel.getData()), SIUnit.of(
                 getDisplayUnit().getUnitBase().getSiDimensions().minus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
     }

@@ -381,32 +381,6 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
         return buf.toString();
     }
 
-    /**
-     * Centralized size equality check.
-     * @param other AbstractFloatVector&lt;U, ?&gt;; other FloatVector
-     * @throws NullPointerException when other vector is null
-     * @throws ValueRuntimeException when vectors have unequal size
-     */
-    protected final void checkSize(final FloatVectorInterface<?, ?, ?> other) throws ValueRuntimeException
-    {
-        Throw.whenNull(other, "Other vector is null");
-        Throw.when(size() != other.size(), ValueRuntimeException.class, "The vectors have different sizes: %d != %d", size(),
-                other.size());
-    }
-
-    /**
-     * Centralized size equality check.
-     * @param other float[]; array of float
-     * @throws NullPointerException when array is null
-     * @throws ValueRuntimeException when vectors have unequal size
-     */
-    protected final void checkSize(final float[] other) throws ValueRuntimeException
-    {
-        Throw.whenNull(other, "Array is null");
-        Throw.when(size() != other.length, ValueRuntimeException.class,
-                "The vector and the array have different sizes: %d != %d", size(), other.length);
-    }
-
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings("checkstyle:designforextension")

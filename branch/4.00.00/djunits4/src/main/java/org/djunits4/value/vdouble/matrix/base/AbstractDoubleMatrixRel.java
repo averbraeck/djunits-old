@@ -156,7 +156,6 @@ public abstract class AbstractDoubleMatrixRel<U extends Unit<U>, S extends Abstr
     public final <VT extends AbstractDoubleMatrix<?, ?, ?, ?> & Relative> SIMatrix times(final VT rel)
             throws ValueRuntimeException, UnitException
     {
-        checkSize(rel);
         return new SIMatrix(this.getData().times(rel.getData()), SIUnit.of(
                 getDisplayUnit().getUnitBase().getSiDimensions().plus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
     }
@@ -173,7 +172,6 @@ public abstract class AbstractDoubleMatrixRel<U extends Unit<U>, S extends Abstr
     public final <VT extends AbstractDoubleMatrix<?, ?, ?, ?> & Relative> SIMatrix divide(final VT rel)
             throws ValueRuntimeException, UnitException
     {
-        checkSize(rel);
         return new SIMatrix(this.getData().divide(rel.getData()), SIUnit.of(
                 getDisplayUnit().getUnitBase().getSiDimensions().minus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
     }

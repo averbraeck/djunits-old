@@ -154,7 +154,6 @@ public abstract class AbstractFloatVectorRel<U extends Unit<U>, S extends Abstra
     public final <VT extends AbstractFloatVector<?, ?, ?> & Relative> FloatSIVector times(final VT rel)
             throws ValueRuntimeException, UnitException
     {
-        checkSize(rel);
         return new FloatSIVector(this.getData().times(rel.getData()), SIUnit.of(
                 getDisplayUnit().getUnitBase().getSiDimensions().plus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
     }
@@ -171,7 +170,6 @@ public abstract class AbstractFloatVectorRel<U extends Unit<U>, S extends Abstra
     public final <VT extends AbstractFloatVector<?, ?, ?> & Relative> FloatSIVector divide(final VT rel)
             throws ValueRuntimeException, UnitException
     {
-        checkSize(rel);
         return new FloatSIVector(this.getData().divide(rel.getData()), SIUnit.of(
                 getDisplayUnit().getUnitBase().getSiDimensions().minus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
     }

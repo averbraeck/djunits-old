@@ -394,19 +394,6 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
                 other.size());
     }
 
-    /**
-     * Centralized size equality check.
-     * @param other double[]; array of double
-     * @throws NullPointerException when array is null
-     * @throws ValueRuntimeException when vectors have unequal size
-     */
-    protected final void checkSize(final double[] other) throws ValueRuntimeException
-    {
-        Throw.whenNull(other, "Array is null");
-        Throw.when(size() != other.length, ValueRuntimeException.class,
-                "The vector and the array have different sizes: %d != %d", size(), other.length);
-    }
-
     /** {@inheritDoc} */
     @Override
     @SuppressWarnings("checkstyle:designforextension")
