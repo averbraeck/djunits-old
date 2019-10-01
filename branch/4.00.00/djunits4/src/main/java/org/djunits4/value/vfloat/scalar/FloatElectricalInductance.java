@@ -5,7 +5,9 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits4.Throw;
+import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.ElectricalInductanceUnit;
+import org.djunits4.unit.MagneticFluxUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
 
@@ -18,7 +20,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class FloatElectricalInductance extends AbstractFloatScalarRel<ElectricalInductanceUnit, FloatElectricalInductance>
 {
     /** */
@@ -232,6 +234,28 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
             return new FloatElectricalInductance(value, unit);
         }
         throw new IllegalArgumentException("Error parsing FloatElectricalInductance with unit " + unitString);
+    }
+
+    /**
+     * Calculate the division of FloatElectricalInductance and FloatElectricalInductance, which results in a FloatDimensionless
+     * scalar.
+     * @param v FloatElectricalInductance scalar
+     * @return FloatDimensionless scalar as a division of FloatElectricalInductance and FloatElectricalInductance
+     */
+    public final FloatDimensionless divideBy(final FloatElectricalInductance v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of FloatElectricalInductance and FloatElectricalCurrent, which results in a
+     * FloatMagneticFlux scalar.
+     * @param v FloatElectricalInductance scalar
+     * @return FloatMagneticFlux scalar as a multiplication of FloatElectricalInductance and FloatElectricalCurrent
+     */
+    public final FloatMagneticFlux multiplyBy(final FloatElectricalCurrent v)
+    {
+        return new FloatMagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
     }
 
 }

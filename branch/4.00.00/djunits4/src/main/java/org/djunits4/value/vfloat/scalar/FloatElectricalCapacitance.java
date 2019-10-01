@@ -5,7 +5,11 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits4.Throw;
+import org.djunits4.unit.DimensionlessUnit;
+import org.djunits4.unit.DurationUnit;
 import org.djunits4.unit.ElectricalCapacitanceUnit;
+import org.djunits4.unit.ElectricalChargeUnit;
+import org.djunits4.unit.ElectricalConductanceUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
 
@@ -18,7 +22,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class FloatElectricalCapacitance extends AbstractFloatScalarRel<ElectricalCapacitanceUnit, FloatElectricalCapacitance>
 {
     /** */
@@ -233,6 +237,50 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
             return new FloatElectricalCapacitance(value, unit);
         }
         throw new IllegalArgumentException("Error parsing FloatElectricalCapacitance with unit " + unitString);
+    }
+
+    /**
+     * Calculate the division of FloatElectricalCapacitance and FloatElectricalCapacitance, which results in a
+     * FloatDimensionless scalar.
+     * @param v FloatElectricalCapacitance scalar
+     * @return FloatDimensionless scalar as a division of FloatElectricalCapacitance and FloatElectricalCapacitance
+     */
+    public final FloatDimensionless divideBy(final FloatElectricalCapacitance v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of FloatElectricalCapacitance and FloatElectricalPotential, which results in a
+     * FloatElectricalCharge scalar.
+     * @param v FloatElectricalCapacitance scalar
+     * @return FloatElectricalCharge scalar as a multiplication of FloatElectricalCapacitance and FloatElectricalPotential
+     */
+    public final FloatElectricalCharge multiplyBy(final FloatElectricalPotential v)
+    {
+        return new FloatElectricalCharge(this.si * v.si, ElectricalChargeUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FloatElectricalCapacitance and FloatDuration, which results in a FloatElectricalConductance
+     * scalar.
+     * @param v FloatElectricalCapacitance scalar
+     * @return FloatElectricalConductance scalar as a division of FloatElectricalCapacitance and FloatDuration
+     */
+    public final FloatElectricalConductance divideBy(final FloatDuration v)
+    {
+        return new FloatElectricalConductance(this.si / v.si, ElectricalConductanceUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FloatElectricalCapacitance and FloatElectricalConductance, which results in a FloatDuration
+     * scalar.
+     * @param v FloatElectricalCapacitance scalar
+     * @return FloatDuration scalar as a division of FloatElectricalCapacitance and FloatElectricalConductance
+     */
+    public final FloatDuration divideBy(final FloatElectricalConductance v)
+    {
+        return new FloatDuration(this.si / v.si, DurationUnit.SI);
     }
 
 }

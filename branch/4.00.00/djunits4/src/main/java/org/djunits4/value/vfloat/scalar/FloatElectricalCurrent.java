@@ -7,6 +7,7 @@ import javax.annotation.Generated;
 import org.djunits4.Throw;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.ElectricalChargeUnit;
+import org.djunits4.unit.ElectricalConductanceUnit;
 import org.djunits4.unit.ElectricalCurrentUnit;
 import org.djunits4.unit.ElectricalPotentialUnit;
 import org.djunits4.unit.PowerUnit;
@@ -22,7 +23,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCurrentUnit, FloatElectricalCurrent>
 {
     /** */
@@ -280,6 +281,28 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
     public final FloatElectricalPotential multiplyBy(final FloatElectricalResistance v)
     {
         return new FloatElectricalPotential(this.si * v.si, ElectricalPotentialUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FloatElectricalCurrent and FloatElectricalPotential, which results in a
+     * FloatElectricalConductance scalar.
+     * @param v FloatElectricalCurrent scalar
+     * @return FloatElectricalConductance scalar as a division of FloatElectricalCurrent and FloatElectricalPotential
+     */
+    public final FloatElectricalConductance divideBy(final FloatElectricalPotential v)
+    {
+        return new FloatElectricalConductance(this.si / v.si, ElectricalConductanceUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FloatElectricalCurrent and FloatElectricalConductance, which results in a
+     * FloatElectricalPotential scalar.
+     * @param v FloatElectricalCurrent scalar
+     * @return FloatElectricalPotential scalar as a division of FloatElectricalCurrent and FloatElectricalConductance
+     */
+    public final FloatElectricalPotential divideBy(final FloatElectricalConductance v)
+    {
+        return new FloatElectricalPotential(this.si / v.si, ElectricalPotentialUnit.SI);
     }
 
 }

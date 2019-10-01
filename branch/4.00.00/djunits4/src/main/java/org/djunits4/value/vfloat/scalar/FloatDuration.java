@@ -7,9 +7,12 @@ import javax.annotation.Generated;
 import org.djunits4.Throw;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.DurationUnit;
+import org.djunits4.unit.ElectricalCapacitanceUnit;
 import org.djunits4.unit.ElectricalChargeUnit;
+import org.djunits4.unit.ElectricalInductanceUnit;
 import org.djunits4.unit.EnergyUnit;
 import org.djunits4.unit.LengthUnit;
+import org.djunits4.unit.MagneticFluxUnit;
 import org.djunits4.unit.MassUnit;
 import org.djunits4.unit.SpeedUnit;
 import org.djunits4.unit.TimeUnit;
@@ -27,7 +30,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, FloatTime, DurationUnit, FloatDuration>
 {
     /** */
@@ -119,14 +122,6 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
     {
         return new FloatDuration(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
                 zero.getDisplayUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatTime plus(final FloatTime v)
-    {
-        TimeUnit targetUnit = v.getDisplayUnit();
-        return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 
     /**
@@ -328,6 +323,38 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
     public final FloatLength multiplyBy(final FloatSpeed v)
     {
         return new FloatLength(this.si * v.si, LengthUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of FloatDuration and FloatElectricalPotential, which results in a FloatMagneticFlux scalar.
+     * @param v FloatDuration scalar
+     * @return FloatMagneticFlux scalar as a multiplication of FloatDuration and FloatElectricalPotential
+     */
+    public final FloatMagneticFlux multiplyBy(final FloatElectricalPotential v)
+    {
+        return new FloatMagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of FloatDuration and FloatElectricalResistance, which results in a FloatElectricalInductance
+     * scalar.
+     * @param v FloatDuration scalar
+     * @return FloatElectricalInductance scalar as a multiplication of FloatDuration and FloatElectricalResistance
+     */
+    public final FloatElectricalInductance multiplyBy(final FloatElectricalResistance v)
+    {
+        return new FloatElectricalInductance(this.si * v.si, ElectricalInductanceUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of FloatDuration and FloatElectricalConductance, which results in a
+     * FloatElectricalCapacitance scalar.
+     * @param v FloatDuration scalar
+     * @return FloatElectricalCapacitance scalar as a multiplication of FloatDuration and FloatElectricalConductance
+     */
+    public final FloatElectricalCapacitance multiplyBy(final FloatElectricalConductance v)
+    {
+        return new FloatElectricalCapacitance(this.si * v.si, ElectricalCapacitanceUnit.SI);
     }
 
 }

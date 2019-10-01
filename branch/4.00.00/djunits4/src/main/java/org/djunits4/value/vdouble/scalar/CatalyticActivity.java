@@ -5,7 +5,10 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits4.Throw;
+import org.djunits4.unit.AmountOfSubstanceUnit;
 import org.djunits4.unit.CatalyticActivityUnit;
+import org.djunits4.unit.DimensionlessUnit;
+import org.djunits4.unit.FrequencyUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 
@@ -18,7 +21,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivityUnit, CatalyticActivity>
 {
     /** */
@@ -216,6 +219,46 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
             return new CatalyticActivity(value, unit);
         }
         throw new IllegalArgumentException("Error parsing CatalyticActivity with unit " + unitString);
+    }
+
+    /**
+     * Calculate the division of CatalyticActivity and CatalyticActivity, which results in a Dimensionless scalar.
+     * @param v CatalyticActivity scalar
+     * @return Dimensionless scalar as a division of CatalyticActivity and CatalyticActivity
+     */
+    public final Dimensionless divideBy(final CatalyticActivity v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of CatalyticActivity and Duration, which results in a AmountOfSubstance scalar.
+     * @param v CatalyticActivity scalar
+     * @return AmountOfSubstance scalar as a multiplication of CatalyticActivity and Duration
+     */
+    public final AmountOfSubstance multiplyBy(final Duration v)
+    {
+        return new AmountOfSubstance(this.si * v.si, AmountOfSubstanceUnit.SI);
+    }
+
+    /**
+     * Calculate the division of CatalyticActivity and AmountOfSubstance, which results in a Frequency scalar.
+     * @param v CatalyticActivity scalar
+     * @return Frequency scalar as a division of CatalyticActivity and AmountOfSubstance
+     */
+    public final Frequency divideBy(final AmountOfSubstance v)
+    {
+        return new Frequency(this.si / v.si, FrequencyUnit.SI);
+    }
+
+    /**
+     * Calculate the division of CatalyticActivity and Frequency, which results in a AmountOfSubstance scalar.
+     * @param v CatalyticActivity scalar
+     * @return AmountOfSubstance scalar as a division of CatalyticActivity and Frequency
+     */
+    public final AmountOfSubstance divideBy(final Frequency v)
+    {
+        return new AmountOfSubstance(this.si / v.si, AmountOfSubstanceUnit.SI);
     }
 
 }

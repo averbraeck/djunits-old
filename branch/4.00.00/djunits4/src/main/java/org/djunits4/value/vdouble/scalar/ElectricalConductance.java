@@ -5,7 +5,10 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits4.Throw;
+import org.djunits4.unit.DimensionlessUnit;
+import org.djunits4.unit.ElectricalCapacitanceUnit;
 import org.djunits4.unit.ElectricalConductanceUnit;
+import org.djunits4.unit.ElectricalCurrentUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 
@@ -18,7 +21,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalConductanceUnit, ElectricalConductance>
 {
     /** */
@@ -221,6 +224,37 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
             return new ElectricalConductance(value, unit);
         }
         throw new IllegalArgumentException("Error parsing ElectricalConductance with unit " + unitString);
+    }
+
+    /**
+     * Calculate the division of ElectricalConductance and ElectricalConductance, which results in a Dimensionless scalar.
+     * @param v ElectricalConductance scalar
+     * @return Dimensionless scalar as a division of ElectricalConductance and ElectricalConductance
+     */
+    public final Dimensionless divideBy(final ElectricalConductance v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of ElectricalConductance and ElectricalPotential, which results in a ElectricalCurrent
+     * scalar.
+     * @param v ElectricalConductance scalar
+     * @return ElectricalCurrent scalar as a multiplication of ElectricalConductance and ElectricalPotential
+     */
+    public final ElectricalCurrent multiplyBy(final ElectricalPotential v)
+    {
+        return new ElectricalCurrent(this.si * v.si, ElectricalCurrentUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of ElectricalConductance and Duration, which results in a ElectricalCapacitance scalar.
+     * @param v ElectricalConductance scalar
+     * @return ElectricalCapacitance scalar as a multiplication of ElectricalConductance and Duration
+     */
+    public final ElectricalCapacitance multiplyBy(final Duration v)
+    {
+        return new ElectricalCapacitance(this.si * v.si, ElectricalCapacitanceUnit.SI);
     }
 
 }

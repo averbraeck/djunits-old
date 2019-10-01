@@ -5,6 +5,8 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits4.Throw;
+import org.djunits4.unit.DimensionlessUnit;
+import org.djunits4.unit.LuminousFluxUnit;
 import org.djunits4.unit.LuminousIntensityUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
@@ -18,7 +20,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousIntensityUnit, FloatLuminousIntensity>
 {
     /** */
@@ -232,6 +234,27 @@ public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousInten
             return new FloatLuminousIntensity(value, unit);
         }
         throw new IllegalArgumentException("Error parsing FloatLuminousIntensity with unit " + unitString);
+    }
+
+    /**
+     * Calculate the division of FloatLuminousIntensity and FloatLuminousIntensity, which results in a FloatDimensionless
+     * scalar.
+     * @param v FloatLuminousIntensity scalar
+     * @return FloatDimensionless scalar as a division of FloatLuminousIntensity and FloatLuminousIntensity
+     */
+    public final FloatDimensionless divideBy(final FloatLuminousIntensity v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of FloatLuminousIntensity and FloatAngleSolid, which results in a FloatLuminousFlux scalar.
+     * @param v FloatLuminousIntensity scalar
+     * @return FloatLuminousFlux scalar as a multiplication of FloatLuminousIntensity and FloatAngleSolid
+     */
+    public final FloatLuminousFlux multiplyBy(final FloatAngleSolid v)
+    {
+        return new FloatLuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
     }
 
 }

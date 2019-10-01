@@ -5,27 +5,40 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits4.Throw;
+import org.djunits4.unit.AbsorbedDoseUnit;
 import org.djunits4.unit.AccelerationUnit;
+import org.djunits4.unit.AmountOfSubstanceUnit;
 import org.djunits4.unit.AngleSolidUnit;
 import org.djunits4.unit.AngleUnit;
 import org.djunits4.unit.AreaUnit;
+import org.djunits4.unit.CatalyticActivityUnit;
 import org.djunits4.unit.DensityUnit;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.DurationUnit;
+import org.djunits4.unit.ElectricalCapacitanceUnit;
 import org.djunits4.unit.ElectricalChargeUnit;
+import org.djunits4.unit.ElectricalConductanceUnit;
 import org.djunits4.unit.ElectricalCurrentUnit;
+import org.djunits4.unit.ElectricalInductanceUnit;
 import org.djunits4.unit.ElectricalPotentialUnit;
 import org.djunits4.unit.ElectricalResistanceUnit;
 import org.djunits4.unit.EnergyUnit;
+import org.djunits4.unit.EquivalentDoseUnit;
 import org.djunits4.unit.FlowMassUnit;
 import org.djunits4.unit.FlowVolumeUnit;
 import org.djunits4.unit.ForceUnit;
 import org.djunits4.unit.FrequencyUnit;
+import org.djunits4.unit.IlluminanceUnit;
 import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.LinearDensityUnit;
+import org.djunits4.unit.LuminousFluxUnit;
+import org.djunits4.unit.LuminousIntensityUnit;
+import org.djunits4.unit.MagneticFluxDensityUnit;
+import org.djunits4.unit.MagneticFluxUnit;
 import org.djunits4.unit.MassUnit;
 import org.djunits4.unit.PowerUnit;
 import org.djunits4.unit.PressureUnit;
+import org.djunits4.unit.RadioActivityUnit;
 import org.djunits4.unit.SpeedUnit;
 import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.TorqueUnit;
@@ -43,7 +56,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit, FloatDimensionless>
         implements DimensionlessFunctions<DimensionlessUnit, FloatDimensionless>
 {
@@ -400,6 +413,16 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
     }
 
     /**
+     * Calculate the multiplication of FloatDimensionless and FloatAbsorbedDose, which results in a FloatAbsorbedDose scalar.
+     * @param v FloatDimensionless scalar
+     * @return FloatAbsorbedDose scalar as a multiplication of FloatDimensionless and FloatAbsorbedDose
+     */
+    public final FloatAbsorbedDose multiplyBy(final FloatAbsorbedDose v)
+    {
+        return new FloatAbsorbedDose(this.si * v.si, AbsorbedDoseUnit.SI);
+    }
+
+    /**
      * Calculate the multiplication of FloatDimensionless and FloatAcceleration, which results in a FloatAcceleration scalar.
      * @param v FloatDimensionless scalar
      * @return FloatAcceleration scalar as a multiplication of FloatDimensionless and FloatAcceleration
@@ -407,6 +430,17 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
     public final FloatAcceleration multiplyBy(final FloatAcceleration v)
     {
         return new FloatAcceleration(this.si * v.si, AccelerationUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of FloatDimensionless and FloatAmountOfSubstance, which results in a FloatAmountOfSubstance
+     * scalar.
+     * @param v FloatDimensionless scalar
+     * @return FloatAmountOfSubstance scalar as a multiplication of FloatDimensionless and FloatAmountOfSubstance
+     */
+    public final FloatAmountOfSubstance multiplyBy(final FloatAmountOfSubstance v)
+    {
+        return new FloatAmountOfSubstance(this.si * v.si, AmountOfSubstanceUnit.SI);
     }
 
     /**
@@ -440,6 +474,17 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
     }
 
     /**
+     * Calculate the multiplication of FloatDimensionless and FloatCatalyticActivity, which results in a FloatCatalyticActivity
+     * scalar.
+     * @param v FloatDimensionless scalar
+     * @return FloatCatalyticActivity scalar as a multiplication of FloatDimensionless and FloatCatalyticActivity
+     */
+    public final FloatCatalyticActivity multiplyBy(final FloatCatalyticActivity v)
+    {
+        return new FloatCatalyticActivity(this.si * v.si, CatalyticActivityUnit.SI);
+    }
+
+    /**
      * Calculate the multiplication of FloatDimensionless and FloatDensity, which results in a FloatDensity scalar.
      * @param v FloatDimensionless scalar
      * @return FloatDensity scalar as a multiplication of FloatDimensionless and FloatDensity
@@ -460,6 +505,17 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
     }
 
     /**
+     * Calculate the multiplication of FloatDimensionless and FloatElectricalCapacitance, which results in a
+     * FloatElectricalCapacitance scalar.
+     * @param v FloatDimensionless scalar
+     * @return FloatElectricalCapacitance scalar as a multiplication of FloatDimensionless and FloatElectricalCapacitance
+     */
+    public final FloatElectricalCapacitance multiplyBy(final FloatElectricalCapacitance v)
+    {
+        return new FloatElectricalCapacitance(this.si * v.si, ElectricalCapacitanceUnit.SI);
+    }
+
+    /**
      * Calculate the multiplication of FloatDimensionless and FloatElectricalCharge, which results in a FloatElectricalCharge
      * scalar.
      * @param v FloatDimensionless scalar
@@ -471,6 +527,17 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
     }
 
     /**
+     * Calculate the multiplication of FloatDimensionless and FloatElectricalConductance, which results in a
+     * FloatElectricalConductance scalar.
+     * @param v FloatDimensionless scalar
+     * @return FloatElectricalConductance scalar as a multiplication of FloatDimensionless and FloatElectricalConductance
+     */
+    public final FloatElectricalConductance multiplyBy(final FloatElectricalConductance v)
+    {
+        return new FloatElectricalConductance(this.si * v.si, ElectricalConductanceUnit.SI);
+    }
+
+    /**
      * Calculate the multiplication of FloatDimensionless and FloatElectricalCurrent, which results in a FloatElectricalCurrent
      * scalar.
      * @param v FloatDimensionless scalar
@@ -479,6 +546,17 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
     public final FloatElectricalCurrent multiplyBy(final FloatElectricalCurrent v)
     {
         return new FloatElectricalCurrent(this.si * v.si, ElectricalCurrentUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of FloatDimensionless and FloatElectricalInductance, which results in a
+     * FloatElectricalInductance scalar.
+     * @param v FloatDimensionless scalar
+     * @return FloatElectricalInductance scalar as a multiplication of FloatDimensionless and FloatElectricalInductance
+     */
+    public final FloatElectricalInductance multiplyBy(final FloatElectricalInductance v)
+    {
+        return new FloatElectricalInductance(this.si * v.si, ElectricalInductanceUnit.SI);
     }
 
     /**
@@ -511,6 +589,17 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
     public final FloatEnergy multiplyBy(final FloatEnergy v)
     {
         return new FloatEnergy(this.si * v.si, EnergyUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of FloatDimensionless and FloatEquivalentDose, which results in a FloatEquivalentDose
+     * scalar.
+     * @param v FloatDimensionless scalar
+     * @return FloatEquivalentDose scalar as a multiplication of FloatDimensionless and FloatEquivalentDose
+     */
+    public final FloatEquivalentDose multiplyBy(final FloatEquivalentDose v)
+    {
+        return new FloatEquivalentDose(this.si * v.si, EquivalentDoseUnit.SI);
     }
 
     /**
@@ -554,6 +643,16 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
     }
 
     /**
+     * Calculate the multiplication of FloatDimensionless and FloatIlluminance, which results in a FloatIlluminance scalar.
+     * @param v FloatDimensionless scalar
+     * @return FloatIlluminance scalar as a multiplication of FloatDimensionless and FloatIlluminance
+     */
+    public final FloatIlluminance multiplyBy(final FloatIlluminance v)
+    {
+        return new FloatIlluminance(this.si * v.si, IlluminanceUnit.SI);
+    }
+
+    /**
      * Calculate the multiplication of FloatDimensionless and FloatLength, which results in a FloatLength scalar.
      * @param v FloatDimensionless scalar
      * @return FloatLength scalar as a multiplication of FloatDimensionless and FloatLength
@@ -571,6 +670,48 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
     public final FloatLinearDensity multiplyBy(final FloatLinearDensity v)
     {
         return new FloatLinearDensity(this.si * v.si, LinearDensityUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of FloatDimensionless and FloatLuminousFlux, which results in a FloatLuminousFlux scalar.
+     * @param v FloatDimensionless scalar
+     * @return FloatLuminousFlux scalar as a multiplication of FloatDimensionless and FloatLuminousFlux
+     */
+    public final FloatLuminousFlux multiplyBy(final FloatLuminousFlux v)
+    {
+        return new FloatLuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of FloatDimensionless and FloatLuminousIntensity, which results in a FloatLuminousIntensity
+     * scalar.
+     * @param v FloatDimensionless scalar
+     * @return FloatLuminousIntensity scalar as a multiplication of FloatDimensionless and FloatLuminousIntensity
+     */
+    public final FloatLuminousIntensity multiplyBy(final FloatLuminousIntensity v)
+    {
+        return new FloatLuminousIntensity(this.si * v.si, LuminousIntensityUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of FloatDimensionless and FloatMagneticFluxDensity, which results in a
+     * FloatMagneticFluxDensity scalar.
+     * @param v FloatDimensionless scalar
+     * @return FloatMagneticFluxDensity scalar as a multiplication of FloatDimensionless and FloatMagneticFluxDensity
+     */
+    public final FloatMagneticFluxDensity multiplyBy(final FloatMagneticFluxDensity v)
+    {
+        return new FloatMagneticFluxDensity(this.si * v.si, MagneticFluxDensityUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of FloatDimensionless and FloatMagneticFlux, which results in a FloatMagneticFlux scalar.
+     * @param v FloatDimensionless scalar
+     * @return FloatMagneticFlux scalar as a multiplication of FloatDimensionless and FloatMagneticFlux
+     */
+    public final FloatMagneticFlux multiplyBy(final FloatMagneticFlux v)
+    {
+        return new FloatMagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
     }
 
     /**
@@ -601,6 +742,16 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
     public final FloatPressure multiplyBy(final FloatPressure v)
     {
         return new FloatPressure(this.si * v.si, PressureUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of FloatDimensionless and FloatRadioActivity, which results in a FloatRadioActivity scalar.
+     * @param v FloatDimensionless scalar
+     * @return FloatRadioActivity scalar as a multiplication of FloatDimensionless and FloatRadioActivity
+     */
+    public final FloatRadioActivity multiplyBy(final FloatRadioActivity v)
+    {
+        return new FloatRadioActivity(this.si * v.si, RadioActivityUnit.SI);
     }
 
     /**

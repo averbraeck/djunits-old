@@ -9,6 +9,7 @@ import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.ElectricalCurrentUnit;
 import org.djunits4.unit.ElectricalPotentialUnit;
 import org.djunits4.unit.ElectricalResistanceUnit;
+import org.djunits4.unit.MagneticFluxUnit;
 import org.djunits4.unit.PowerUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
@@ -22,7 +23,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPotentialUnit, ElectricalPotential>
 {
     /** */
@@ -265,6 +266,16 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
     public final ElectricalCurrent divideBy(final ElectricalResistance v)
     {
         return new ElectricalCurrent(this.si / v.si, ElectricalCurrentUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of ElectricalPotential and Duration, which results in a MagneticFlux scalar.
+     * @param v ElectricalPotential scalar
+     * @return MagneticFlux scalar as a multiplication of ElectricalPotential and Duration
+     */
+    public final MagneticFlux multiplyBy(final Duration v)
+    {
+        return new MagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
     }
 
 }

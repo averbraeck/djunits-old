@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits4.Throw;
+import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.RadioActivityUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
@@ -18,7 +19,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit, FloatRadioActivity>
 {
     /** */
@@ -228,6 +229,16 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
             return new FloatRadioActivity(value, unit);
         }
         throw new IllegalArgumentException("Error parsing FloatRadioActivity with unit " + unitString);
+    }
+
+    /**
+     * Calculate the division of FloatRadioActivity and FloatRadioActivity, which results in a FloatDimensionless scalar.
+     * @param v FloatRadioActivity scalar
+     * @return FloatDimensionless scalar as a division of FloatRadioActivity and FloatRadioActivity
+     */
+    public final FloatDimensionless divideBy(final FloatRadioActivity v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
 
 }

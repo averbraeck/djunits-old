@@ -5,7 +5,10 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits4.Throw;
+import org.djunits4.unit.AmountOfSubstanceUnit;
 import org.djunits4.unit.CatalyticActivityUnit;
+import org.djunits4.unit.DimensionlessUnit;
+import org.djunits4.unit.FrequencyUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
 
@@ -18,7 +21,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActivityUnit, FloatCatalyticActivity>
 {
     /** */
@@ -232,6 +235,48 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
             return new FloatCatalyticActivity(value, unit);
         }
         throw new IllegalArgumentException("Error parsing FloatCatalyticActivity with unit " + unitString);
+    }
+
+    /**
+     * Calculate the division of FloatCatalyticActivity and FloatCatalyticActivity, which results in a FloatDimensionless
+     * scalar.
+     * @param v FloatCatalyticActivity scalar
+     * @return FloatDimensionless scalar as a division of FloatCatalyticActivity and FloatCatalyticActivity
+     */
+    public final FloatDimensionless divideBy(final FloatCatalyticActivity v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of FloatCatalyticActivity and FloatDuration, which results in a FloatAmountOfSubstance
+     * scalar.
+     * @param v FloatCatalyticActivity scalar
+     * @return FloatAmountOfSubstance scalar as a multiplication of FloatCatalyticActivity and FloatDuration
+     */
+    public final FloatAmountOfSubstance multiplyBy(final FloatDuration v)
+    {
+        return new FloatAmountOfSubstance(this.si * v.si, AmountOfSubstanceUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FloatCatalyticActivity and FloatAmountOfSubstance, which results in a FloatFrequency scalar.
+     * @param v FloatCatalyticActivity scalar
+     * @return FloatFrequency scalar as a division of FloatCatalyticActivity and FloatAmountOfSubstance
+     */
+    public final FloatFrequency divideBy(final FloatAmountOfSubstance v)
+    {
+        return new FloatFrequency(this.si / v.si, FrequencyUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FloatCatalyticActivity and FloatFrequency, which results in a FloatAmountOfSubstance scalar.
+     * @param v FloatCatalyticActivity scalar
+     * @return FloatAmountOfSubstance scalar as a division of FloatCatalyticActivity and FloatFrequency
+     */
+    public final FloatAmountOfSubstance divideBy(final FloatFrequency v)
+    {
+        return new FloatAmountOfSubstance(this.si / v.si, AmountOfSubstanceUnit.SI);
     }
 
 }

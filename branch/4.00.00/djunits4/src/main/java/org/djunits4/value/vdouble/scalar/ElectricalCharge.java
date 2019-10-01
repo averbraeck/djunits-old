@@ -7,8 +7,10 @@ import javax.annotation.Generated;
 import org.djunits4.Throw;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.DurationUnit;
+import org.djunits4.unit.ElectricalCapacitanceUnit;
 import org.djunits4.unit.ElectricalChargeUnit;
 import org.djunits4.unit.ElectricalCurrentUnit;
+import org.djunits4.unit.ElectricalPotentialUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 
@@ -21,7 +23,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUnit, ElectricalCharge>
 {
     /** */
@@ -249,6 +251,26 @@ public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUn
     public final Duration divideBy(final ElectricalCurrent v)
     {
         return new Duration(this.si / v.si, DurationUnit.SI);
+    }
+
+    /**
+     * Calculate the division of ElectricalCharge and ElectricalPotential, which results in a ElectricalCapacitance scalar.
+     * @param v ElectricalCharge scalar
+     * @return ElectricalCapacitance scalar as a division of ElectricalCharge and ElectricalPotential
+     */
+    public final ElectricalCapacitance divideBy(final ElectricalPotential v)
+    {
+        return new ElectricalCapacitance(this.si / v.si, ElectricalCapacitanceUnit.SI);
+    }
+
+    /**
+     * Calculate the division of ElectricalCharge and ElectricalCapacitance, which results in a ElectricalPotential scalar.
+     * @param v ElectricalCharge scalar
+     * @return ElectricalPotential scalar as a division of ElectricalCharge and ElectricalCapacitance
+     */
+    public final ElectricalPotential divideBy(final ElectricalCapacitance v)
+    {
+        return new ElectricalPotential(this.si / v.si, ElectricalPotentialUnit.SI);
     }
 
 }

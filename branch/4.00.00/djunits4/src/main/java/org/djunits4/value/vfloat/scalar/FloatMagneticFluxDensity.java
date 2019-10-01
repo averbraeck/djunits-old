@@ -5,7 +5,9 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits4.Throw;
+import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.MagneticFluxDensityUnit;
+import org.djunits4.unit.MagneticFluxUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
 
@@ -18,7 +20,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class FloatMagneticFluxDensity extends AbstractFloatScalarRel<MagneticFluxDensityUnit, FloatMagneticFluxDensity>
 {
     /** */
@@ -232,6 +234,27 @@ public class FloatMagneticFluxDensity extends AbstractFloatScalarRel<MagneticFlu
             return new FloatMagneticFluxDensity(value, unit);
         }
         throw new IllegalArgumentException("Error parsing FloatMagneticFluxDensity with unit " + unitString);
+    }
+
+    /**
+     * Calculate the division of FloatMagneticFluxDensity and FloatMagneticFluxDensity, which results in a FloatDimensionless
+     * scalar.
+     * @param v FloatMagneticFluxDensity scalar
+     * @return FloatDimensionless scalar as a division of FloatMagneticFluxDensity and FloatMagneticFluxDensity
+     */
+    public final FloatDimensionless divideBy(final FloatMagneticFluxDensity v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of FloatMagneticFluxDensity and FloatArea, which results in a FloatMagneticFlux scalar.
+     * @param v FloatMagneticFluxDensity scalar
+     * @return FloatMagneticFlux scalar as a multiplication of FloatMagneticFluxDensity and FloatArea
+     */
+    public final FloatMagneticFlux multiplyBy(final FloatArea v)
+    {
+        return new FloatMagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
     }
 
 }

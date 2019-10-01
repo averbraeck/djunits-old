@@ -27,7 +27,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Position, LengthUnit, Length>
 {
     /** */
@@ -108,20 +108,6 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
     public static Length interpolate(final Length zero, final Length one, final double ratio)
     {
         return new Length(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Position plus(final Position v)
-    {
-        PositionUnit targetUnit = v.getDisplayUnit();
-        //System.out.println("v: "+v.getInUnit() + ", this: " + getInUnit(targetUnit.getRelativeUnit()));
-        //System.out.println("Expected result " + result);
-        //return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
-        Position result = instantiateAbs(v.getSI() + this.getSI(), PositionUnit.DEFAULT);
-        result.setDisplayUnit(targetUnit);
-        return result;
-//        return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 
     /**

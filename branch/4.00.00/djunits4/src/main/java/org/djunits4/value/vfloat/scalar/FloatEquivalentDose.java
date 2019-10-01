@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits4.Throw;
+import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.EquivalentDoseUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
@@ -18,7 +19,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUnit, FloatEquivalentDose>
 {
     /** */
@@ -229,6 +230,16 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
             return new FloatEquivalentDose(value, unit);
         }
         throw new IllegalArgumentException("Error parsing FloatEquivalentDose with unit " + unitString);
+    }
+
+    /**
+     * Calculate the division of FloatEquivalentDose and FloatEquivalentDose, which results in a FloatDimensionless scalar.
+     * @param v FloatEquivalentDose scalar
+     * @return FloatDimensionless scalar as a division of FloatEquivalentDose and FloatEquivalentDose
+     */
+    public final FloatDimensionless divideBy(final FloatEquivalentDose v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
 
 }

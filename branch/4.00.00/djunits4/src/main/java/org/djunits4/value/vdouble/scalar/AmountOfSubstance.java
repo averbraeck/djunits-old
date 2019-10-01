@@ -6,6 +6,9 @@ import javax.annotation.Generated;
 
 import org.djunits4.Throw;
 import org.djunits4.unit.AmountOfSubstanceUnit;
+import org.djunits4.unit.CatalyticActivityUnit;
+import org.djunits4.unit.DimensionlessUnit;
+import org.djunits4.unit.DurationUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 
@@ -18,7 +21,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstanceUnit, AmountOfSubstance>
 {
     /** */
@@ -216,6 +219,36 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
             return new AmountOfSubstance(value, unit);
         }
         throw new IllegalArgumentException("Error parsing AmountOfSubstance with unit " + unitString);
+    }
+
+    /**
+     * Calculate the division of AmountOfSubstance and AmountOfSubstance, which results in a Dimensionless scalar.
+     * @param v AmountOfSubstance scalar
+     * @return Dimensionless scalar as a division of AmountOfSubstance and AmountOfSubstance
+     */
+    public final Dimensionless divideBy(final AmountOfSubstance v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
+
+    /**
+     * Calculate the division of AmountOfSubstance and CatalyticActivity, which results in a Duration scalar.
+     * @param v AmountOfSubstance scalar
+     * @return Duration scalar as a division of AmountOfSubstance and CatalyticActivity
+     */
+    public final Duration divideBy(final CatalyticActivity v)
+    {
+        return new Duration(this.si / v.si, DurationUnit.SI);
+    }
+
+    /**
+     * Calculate the division of AmountOfSubstance and Duration, which results in a CatalyticActivity scalar.
+     * @param v AmountOfSubstance scalar
+     * @return CatalyticActivity scalar as a division of AmountOfSubstance and Duration
+     */
+    public final CatalyticActivity divideBy(final Duration v)
+    {
+        return new CatalyticActivity(this.si / v.si, CatalyticActivityUnit.SI);
     }
 
 }

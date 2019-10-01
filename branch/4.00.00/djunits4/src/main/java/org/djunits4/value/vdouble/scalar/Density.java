@@ -7,6 +7,7 @@ import javax.annotation.Generated;
 import org.djunits4.Throw;
 import org.djunits4.unit.DensityUnit;
 import org.djunits4.unit.DimensionlessUnit;
+import org.djunits4.unit.FlowMassUnit;
 import org.djunits4.unit.MassUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
@@ -20,7 +21,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
 {
     /** */
@@ -235,6 +236,16 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
     public final Mass multiplyBy(final Volume v)
     {
         return new Mass(this.si * v.si, MassUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of Density and FlowVolume, which results in a FlowMass scalar.
+     * @param v Density scalar
+     * @return FlowMass scalar as a multiplication of Density and FlowVolume
+     */
+    public final FlowMass multiplyBy(final FlowVolume v)
+    {
+        return new FlowMass(this.si * v.si, FlowMassUnit.SI);
     }
 
 }

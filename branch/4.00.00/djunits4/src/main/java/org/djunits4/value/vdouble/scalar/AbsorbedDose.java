@@ -6,6 +6,7 @@ import javax.annotation.Generated;
 
 import org.djunits4.Throw;
 import org.djunits4.unit.AbsorbedDoseUnit;
+import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 
@@ -18,7 +19,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class AbsorbedDose extends AbstractDoubleScalarRel<AbsorbedDoseUnit, AbsorbedDose>
 {
     /** */
@@ -213,6 +214,16 @@ public class AbsorbedDose extends AbstractDoubleScalarRel<AbsorbedDoseUnit, Abso
             return new AbsorbedDose(value, unit);
         }
         throw new IllegalArgumentException("Error parsing AbsorbedDose with unit " + unitString);
+    }
+
+    /**
+     * Calculate the division of AbsorbedDose and AbsorbedDose, which results in a Dimensionless scalar.
+     * @param v AbsorbedDose scalar
+     * @return Dimensionless scalar as a division of AbsorbedDose and AbsorbedDose
+     */
+    public final Dimensionless divideBy(final AbsorbedDose v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
 
 }

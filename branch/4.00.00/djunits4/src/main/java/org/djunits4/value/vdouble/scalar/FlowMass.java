@@ -5,8 +5,10 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits4.Throw;
+import org.djunits4.unit.DensityUnit;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.FlowMassUnit;
+import org.djunits4.unit.FlowVolumeUnit;
 import org.djunits4.unit.ForceUnit;
 import org.djunits4.unit.FrequencyUnit;
 import org.djunits4.unit.MassUnit;
@@ -22,7 +24,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 {
     /** */
@@ -267,6 +269,26 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
     public final Force multiplyBy(final Speed v)
     {
         return new Force(this.si * v.si, ForceUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FlowMass and FlowVolume, which results in a Density scalar.
+     * @param v FlowMass scalar
+     * @return Density scalar as a division of FlowMass and FlowVolume
+     */
+    public final Density divideBy(final FlowVolume v)
+    {
+        return new Density(this.si / v.si, DensityUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FlowMass and Density, which results in a FlowVolume scalar.
+     * @param v FlowMass scalar
+     * @return FlowVolume scalar as a division of FlowMass and Density
+     */
+    public final FlowVolume divideBy(final Density v)
+    {
+        return new FlowVolume(this.si / v.si, FlowVolumeUnit.SI);
     }
 
 }

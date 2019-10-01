@@ -5,8 +5,10 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits4.Throw;
+import org.djunits4.unit.DensityUnit;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.FlowMassUnit;
+import org.djunits4.unit.FlowVolumeUnit;
 import org.djunits4.unit.ForceUnit;
 import org.djunits4.unit.FrequencyUnit;
 import org.djunits4.unit.MassUnit;
@@ -22,7 +24,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlowMass>
 {
     /** */
@@ -277,6 +279,26 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
     public final FloatForce multiplyBy(final FloatSpeed v)
     {
         return new FloatForce(this.si * v.si, ForceUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FloatFlowMass and FloatFlowVolume, which results in a FloatDensity scalar.
+     * @param v FloatFlowMass scalar
+     * @return FloatDensity scalar as a division of FloatFlowMass and FloatFlowVolume
+     */
+    public final FloatDensity divideBy(final FloatFlowVolume v)
+    {
+        return new FloatDensity(this.si / v.si, DensityUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FloatFlowMass and FloatDensity, which results in a FloatFlowVolume scalar.
+     * @param v FloatFlowMass scalar
+     * @return FloatFlowVolume scalar as a division of FloatFlowMass and FloatDensity
+     */
+    public final FloatFlowVolume divideBy(final FloatDensity v)
+    {
+        return new FloatFlowVolume(this.si / v.si, FlowVolumeUnit.SI);
     }
 
 }

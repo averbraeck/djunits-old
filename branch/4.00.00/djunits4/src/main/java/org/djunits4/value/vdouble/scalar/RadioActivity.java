@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits4.Throw;
+import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.RadioActivityUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
@@ -18,7 +19,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, RadioActivity>
 {
     /** */
@@ -213,6 +214,16 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
             return new RadioActivity(value, unit);
         }
         throw new IllegalArgumentException("Error parsing RadioActivity with unit " + unitString);
+    }
+
+    /**
+     * Calculate the division of RadioActivity and RadioActivity, which results in a Dimensionless scalar.
+     * @param v RadioActivity scalar
+     * @return Dimensionless scalar as a division of RadioActivity and RadioActivity
+     */
+    public final Dimensionless divideBy(final RadioActivity v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
 
 }

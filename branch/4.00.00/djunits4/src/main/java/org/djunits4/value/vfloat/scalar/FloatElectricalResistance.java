@@ -6,6 +6,7 @@ import javax.annotation.Generated;
 
 import org.djunits4.Throw;
 import org.djunits4.unit.DimensionlessUnit;
+import org.djunits4.unit.ElectricalInductanceUnit;
 import org.djunits4.unit.ElectricalPotentialUnit;
 import org.djunits4.unit.ElectricalResistanceUnit;
 import org.djunits4.value.util.ValueUtil;
@@ -20,7 +21,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class FloatElectricalResistance extends AbstractFloatScalarRel<ElectricalResistanceUnit, FloatElectricalResistance>
 {
     /** */
@@ -256,6 +257,17 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
     public final FloatElectricalPotential multiplyBy(final FloatElectricalCurrent v)
     {
         return new FloatElectricalPotential(this.si * v.si, ElectricalPotentialUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of FloatElectricalResistance and FloatDuration, which results in a FloatElectricalInductance
+     * scalar.
+     * @param v FloatElectricalResistance scalar
+     * @return FloatElectricalInductance scalar as a multiplication of FloatElectricalResistance and FloatDuration
+     */
+    public final FloatElectricalInductance multiplyBy(final FloatDuration v)
+    {
+        return new FloatElectricalInductance(this.si * v.si, ElectricalInductanceUnit.SI);
     }
 
 }

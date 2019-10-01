@@ -7,8 +7,10 @@ import javax.annotation.Generated;
 import org.djunits4.Throw;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.DurationUnit;
+import org.djunits4.unit.ElectricalCapacitanceUnit;
 import org.djunits4.unit.ElectricalChargeUnit;
 import org.djunits4.unit.ElectricalCurrentUnit;
+import org.djunits4.unit.ElectricalPotentialUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
 
@@ -21,7 +23,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChargeUnit, FloatElectricalCharge>
 {
     /** */
@@ -264,6 +266,28 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
     public final FloatDuration divideBy(final FloatElectricalCurrent v)
     {
         return new FloatDuration(this.si / v.si, DurationUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FloatElectricalCharge and FloatElectricalPotential, which results in a
+     * FloatElectricalCapacitance scalar.
+     * @param v FloatElectricalCharge scalar
+     * @return FloatElectricalCapacitance scalar as a division of FloatElectricalCharge and FloatElectricalPotential
+     */
+    public final FloatElectricalCapacitance divideBy(final FloatElectricalPotential v)
+    {
+        return new FloatElectricalCapacitance(this.si / v.si, ElectricalCapacitanceUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FloatElectricalCharge and FloatElectricalCapacitance, which results in a
+     * FloatElectricalPotential scalar.
+     * @param v FloatElectricalCharge scalar
+     * @return FloatElectricalPotential scalar as a division of FloatElectricalCharge and FloatElectricalCapacitance
+     */
+    public final FloatElectricalPotential divideBy(final FloatElectricalCapacitance v)
+    {
+        return new FloatElectricalPotential(this.si / v.si, ElectricalPotentialUnit.SI);
     }
 
 }

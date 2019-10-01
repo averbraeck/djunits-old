@@ -12,6 +12,7 @@ import org.djunits4.unit.ForceUnit;
 import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.PowerUnit;
 import org.djunits4.unit.PressureUnit;
+import org.djunits4.unit.VolumeUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 
@@ -24,7 +25,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 {
     /** */
@@ -288,6 +289,16 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
     public final Pressure divideBy(final Volume v)
     {
         return new Pressure(this.si / v.si, PressureUnit.SI);
+    }
+
+    /**
+     * Calculate the division of Energy and Pressure, which results in a Volume scalar.
+     * @param v Energy scalar
+     * @return Volume scalar as a division of Energy and Pressure
+     */
+    public final Volume divideBy(final Pressure v)
+    {
+        return new Volume(this.si / v.si, VolumeUnit.SI);
     }
 
     /**

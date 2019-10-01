@@ -7,6 +7,7 @@ import javax.annotation.Generated;
 import org.djunits4.Throw;
 import org.djunits4.unit.DensityUnit;
 import org.djunits4.unit.DimensionlessUnit;
+import org.djunits4.unit.FlowMassUnit;
 import org.djunits4.unit.MassUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
@@ -20,7 +21,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class FloatDensity extends AbstractFloatScalarRel<DensityUnit, FloatDensity>
 {
     /** */
@@ -245,6 +246,16 @@ public class FloatDensity extends AbstractFloatScalarRel<DensityUnit, FloatDensi
     public final FloatMass multiplyBy(final FloatVolume v)
     {
         return new FloatMass(this.si * v.si, MassUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of FloatDensity and FloatFlowVolume, which results in a FloatFlowMass scalar.
+     * @param v FloatDensity scalar
+     * @return FloatFlowMass scalar as a multiplication of FloatDensity and FloatFlowVolume
+     */
+    public final FloatFlowMass multiplyBy(final FloatFlowVolume v)
+    {
+        return new FloatFlowMass(this.si * v.si, FlowMassUnit.SI);
     }
 
 }

@@ -5,12 +5,14 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits4.Throw;
-import org.djunits4.unit.AbsoluteTemperatureUnit;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.DurationUnit;
+import org.djunits4.unit.ElectricalCapacitanceUnit;
 import org.djunits4.unit.ElectricalChargeUnit;
+import org.djunits4.unit.ElectricalInductanceUnit;
 import org.djunits4.unit.EnergyUnit;
 import org.djunits4.unit.LengthUnit;
+import org.djunits4.unit.MagneticFluxUnit;
 import org.djunits4.unit.MassUnit;
 import org.djunits4.unit.SpeedUnit;
 import org.djunits4.unit.TimeUnit;
@@ -28,7 +30,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, DurationUnit, Duration>
 {
     /** */
@@ -110,17 +112,6 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
     {
         return new Duration(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
                 zero.getDisplayUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Time plus(final Time v)
-    {
-        TimeUnit targetUnit = v.getDisplayUnit();
-        Time result = instantiateAbs(v.getSI() + this.getSI(), TimeUnit.DEFAULT);
-        result.setDisplayUnit(targetUnit);
-        return result;
-//        return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
     }
 
     /**
@@ -321,6 +312,36 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
     public final Length multiplyBy(final Speed v)
     {
         return new Length(this.si * v.si, LengthUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of Duration and ElectricalPotential, which results in a MagneticFlux scalar.
+     * @param v Duration scalar
+     * @return MagneticFlux scalar as a multiplication of Duration and ElectricalPotential
+     */
+    public final MagneticFlux multiplyBy(final ElectricalPotential v)
+    {
+        return new MagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of Duration and ElectricalResistance, which results in a ElectricalInductance scalar.
+     * @param v Duration scalar
+     * @return ElectricalInductance scalar as a multiplication of Duration and ElectricalResistance
+     */
+    public final ElectricalInductance multiplyBy(final ElectricalResistance v)
+    {
+        return new ElectricalInductance(this.si * v.si, ElectricalInductanceUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of Duration and ElectricalConductance, which results in a ElectricalCapacitance scalar.
+     * @param v Duration scalar
+     * @return ElectricalCapacitance scalar as a multiplication of Duration and ElectricalConductance
+     */
+    public final ElectricalCapacitance multiplyBy(final ElectricalConductance v)
+    {
+        return new ElectricalCapacitance(this.si * v.si, ElectricalCapacitanceUnit.SI);
     }
 
 }

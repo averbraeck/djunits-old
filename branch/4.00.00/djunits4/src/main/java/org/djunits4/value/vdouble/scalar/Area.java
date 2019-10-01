@@ -9,6 +9,7 @@ import org.djunits4.unit.AreaUnit;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.FlowVolumeUnit;
 import org.djunits4.unit.ForceUnit;
+import org.djunits4.unit.IlluminanceUnit;
 import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.LinearDensityUnit;
 import org.djunits4.unit.VolumeUnit;
@@ -24,7 +25,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 {
     /** */
@@ -298,6 +299,16 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
     public final Force multiplyBy(final Pressure v)
     {
         return new Force(this.si * v.si, ForceUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of Area and LuminousFlux, which results in a Illuminance scalar.
+     * @param v Area scalar
+     * @return Illuminance scalar as a multiplication of Area and LuminousFlux
+     */
+    public final Illuminance multiplyBy(final LuminousFlux v)
+    {
+        return new Illuminance(this.si * v.si, IlluminanceUnit.SI);
     }
 
 }

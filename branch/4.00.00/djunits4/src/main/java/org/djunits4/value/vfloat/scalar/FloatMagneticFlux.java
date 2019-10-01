@@ -5,6 +5,13 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits4.Throw;
+import org.djunits4.unit.AreaUnit;
+import org.djunits4.unit.DimensionlessUnit;
+import org.djunits4.unit.DurationUnit;
+import org.djunits4.unit.ElectricalCurrentUnit;
+import org.djunits4.unit.ElectricalInductanceUnit;
+import org.djunits4.unit.ElectricalPotentialUnit;
+import org.djunits4.unit.MagneticFluxDensityUnit;
 import org.djunits4.unit.MagneticFluxUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
@@ -18,7 +25,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class FloatMagneticFlux extends AbstractFloatScalarRel<MagneticFluxUnit, FloatMagneticFlux>
 {
     /** */
@@ -226,6 +233,78 @@ public class FloatMagneticFlux extends AbstractFloatScalarRel<MagneticFluxUnit, 
             return new FloatMagneticFlux(value, unit);
         }
         throw new IllegalArgumentException("Error parsing FloatMagneticFlux with unit " + unitString);
+    }
+
+    /**
+     * Calculate the division of FloatMagneticFlux and FloatMagneticFlux, which results in a FloatDimensionless scalar.
+     * @param v FloatMagneticFlux scalar
+     * @return FloatDimensionless scalar as a division of FloatMagneticFlux and FloatMagneticFlux
+     */
+    public final FloatDimensionless divideBy(final FloatMagneticFlux v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FloatMagneticFlux and FloatElectricalPotential, which results in a FloatDuration scalar.
+     * @param v FloatMagneticFlux scalar
+     * @return FloatDuration scalar as a division of FloatMagneticFlux and FloatElectricalPotential
+     */
+    public final FloatDuration divideBy(final FloatElectricalPotential v)
+    {
+        return new FloatDuration(this.si / v.si, DurationUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FloatMagneticFlux and FloatDuration, which results in a FloatElectricalPotential scalar.
+     * @param v FloatMagneticFlux scalar
+     * @return FloatElectricalPotential scalar as a division of FloatMagneticFlux and FloatDuration
+     */
+    public final FloatElectricalPotential divideBy(final FloatDuration v)
+    {
+        return new FloatElectricalPotential(this.si / v.si, ElectricalPotentialUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FloatMagneticFlux and FloatArea, which results in a FloatMagneticFluxDensity scalar.
+     * @param v FloatMagneticFlux scalar
+     * @return FloatMagneticFluxDensity scalar as a division of FloatMagneticFlux and FloatArea
+     */
+    public final FloatMagneticFluxDensity divideBy(final FloatArea v)
+    {
+        return new FloatMagneticFluxDensity(this.si / v.si, MagneticFluxDensityUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FloatMagneticFlux and FloatMagneticFluxDensity, which results in a FloatArea scalar.
+     * @param v FloatMagneticFlux scalar
+     * @return FloatArea scalar as a division of FloatMagneticFlux and FloatMagneticFluxDensity
+     */
+    public final FloatArea divideBy(final FloatMagneticFluxDensity v)
+    {
+        return new FloatArea(this.si / v.si, AreaUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FloatMagneticFlux and FloatElectricalCurrent, which results in a FloatElectricalInductance
+     * scalar.
+     * @param v FloatMagneticFlux scalar
+     * @return FloatElectricalInductance scalar as a division of FloatMagneticFlux and FloatElectricalCurrent
+     */
+    public final FloatElectricalInductance divideBy(final FloatElectricalCurrent v)
+    {
+        return new FloatElectricalInductance(this.si / v.si, ElectricalInductanceUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FloatMagneticFlux and FloatElectricalInductance, which results in a FloatElectricalCurrent
+     * scalar.
+     * @param v FloatMagneticFlux scalar
+     * @return FloatElectricalCurrent scalar as a division of FloatMagneticFlux and FloatElectricalInductance
+     */
+    public final FloatElectricalCurrent divideBy(final FloatElectricalInductance v)
+    {
+        return new FloatElectricalCurrent(this.si / v.si, ElectricalCurrentUnit.SI);
     }
 
 }

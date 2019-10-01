@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits4.Throw;
+import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.EquivalentDoseUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
@@ -18,7 +19,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, EquivalentDose>
 {
     /** */
@@ -213,6 +214,16 @@ public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, 
             return new EquivalentDose(value, unit);
         }
         throw new IllegalArgumentException("Error parsing EquivalentDose with unit " + unitString);
+    }
+
+    /**
+     * Calculate the division of EquivalentDose and EquivalentDose, which results in a Dimensionless scalar.
+     * @param v EquivalentDose scalar
+     * @return Dimensionless scalar as a division of EquivalentDose and EquivalentDose
+     */
+    public final Dimensionless divideBy(final EquivalentDose v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
     }
 
 }

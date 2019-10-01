@@ -5,7 +5,11 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits4.Throw;
+import org.djunits4.unit.DimensionlessUnit;
+import org.djunits4.unit.DurationUnit;
 import org.djunits4.unit.ElectricalCapacitanceUnit;
+import org.djunits4.unit.ElectricalChargeUnit;
+import org.djunits4.unit.ElectricalConductanceUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 
@@ -18,7 +22,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCapacitanceUnit, ElectricalCapacitance>
 {
     /** */
@@ -221,6 +225,47 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
             return new ElectricalCapacitance(value, unit);
         }
         throw new IllegalArgumentException("Error parsing ElectricalCapacitance with unit " + unitString);
+    }
+
+    /**
+     * Calculate the division of ElectricalCapacitance and ElectricalCapacitance, which results in a Dimensionless scalar.
+     * @param v ElectricalCapacitance scalar
+     * @return Dimensionless scalar as a division of ElectricalCapacitance and ElectricalCapacitance
+     */
+    public final Dimensionless divideBy(final ElectricalCapacitance v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of ElectricalCapacitance and ElectricalPotential, which results in a ElectricalCharge
+     * scalar.
+     * @param v ElectricalCapacitance scalar
+     * @return ElectricalCharge scalar as a multiplication of ElectricalCapacitance and ElectricalPotential
+     */
+    public final ElectricalCharge multiplyBy(final ElectricalPotential v)
+    {
+        return new ElectricalCharge(this.si * v.si, ElectricalChargeUnit.SI);
+    }
+
+    /**
+     * Calculate the division of ElectricalCapacitance and Duration, which results in a ElectricalConductance scalar.
+     * @param v ElectricalCapacitance scalar
+     * @return ElectricalConductance scalar as a division of ElectricalCapacitance and Duration
+     */
+    public final ElectricalConductance divideBy(final Duration v)
+    {
+        return new ElectricalConductance(this.si / v.si, ElectricalConductanceUnit.SI);
+    }
+
+    /**
+     * Calculate the division of ElectricalCapacitance and ElectricalConductance, which results in a Duration scalar.
+     * @param v ElectricalCapacitance scalar
+     * @return Duration scalar as a division of ElectricalCapacitance and ElectricalConductance
+     */
+    public final Duration divideBy(final ElectricalConductance v)
+    {
+        return new Duration(this.si / v.si, DurationUnit.SI);
     }
 
 }

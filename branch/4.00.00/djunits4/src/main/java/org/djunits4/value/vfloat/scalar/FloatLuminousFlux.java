@@ -5,7 +5,12 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits4.Throw;
+import org.djunits4.unit.AngleSolidUnit;
+import org.djunits4.unit.AreaUnit;
+import org.djunits4.unit.DimensionlessUnit;
+import org.djunits4.unit.IlluminanceUnit;
 import org.djunits4.unit.LuminousFluxUnit;
+import org.djunits4.unit.LuminousIntensityUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
 
@@ -18,7 +23,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class FloatLuminousFlux extends AbstractFloatScalarRel<LuminousFluxUnit, FloatLuminousFlux>
 {
     /** */
@@ -226,6 +231,56 @@ public class FloatLuminousFlux extends AbstractFloatScalarRel<LuminousFluxUnit, 
             return new FloatLuminousFlux(value, unit);
         }
         throw new IllegalArgumentException("Error parsing FloatLuminousFlux with unit " + unitString);
+    }
+
+    /**
+     * Calculate the division of FloatLuminousFlux and FloatLuminousFlux, which results in a FloatDimensionless scalar.
+     * @param v FloatLuminousFlux scalar
+     * @return FloatDimensionless scalar as a division of FloatLuminousFlux and FloatLuminousFlux
+     */
+    public final FloatDimensionless divideBy(final FloatLuminousFlux v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FloatLuminousFlux and FloatArea, which results in a FloatIlluminance scalar.
+     * @param v FloatLuminousFlux scalar
+     * @return FloatIlluminance scalar as a division of FloatLuminousFlux and FloatArea
+     */
+    public final FloatIlluminance divideBy(final FloatArea v)
+    {
+        return new FloatIlluminance(this.si / v.si, IlluminanceUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FloatLuminousFlux and FloatIlluminance, which results in a FloatArea scalar.
+     * @param v FloatLuminousFlux scalar
+     * @return FloatArea scalar as a division of FloatLuminousFlux and FloatIlluminance
+     */
+    public final FloatArea divideBy(final FloatIlluminance v)
+    {
+        return new FloatArea(this.si / v.si, AreaUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FloatLuminousFlux and FloatLuminousIntensity, which results in a FloatAngleSolid scalar.
+     * @param v FloatLuminousFlux scalar
+     * @return FloatAngleSolid scalar as a division of FloatLuminousFlux and FloatLuminousIntensity
+     */
+    public final FloatAngleSolid divideBy(final FloatLuminousIntensity v)
+    {
+        return new FloatAngleSolid(this.si / v.si, AngleSolidUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FloatLuminousFlux and FloatAngleSolid, which results in a FloatLuminousIntensity scalar.
+     * @param v FloatLuminousFlux scalar
+     * @return FloatLuminousIntensity scalar as a division of FloatLuminousFlux and FloatAngleSolid
+     */
+    public final FloatLuminousIntensity divideBy(final FloatAngleSolid v)
+    {
+        return new FloatLuminousIntensity(this.si / v.si, LuminousIntensityUnit.SI);
     }
 
 }

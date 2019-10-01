@@ -6,6 +6,9 @@ import javax.annotation.Generated;
 
 import org.djunits4.Throw;
 import org.djunits4.unit.AmountOfSubstanceUnit;
+import org.djunits4.unit.CatalyticActivityUnit;
+import org.djunits4.unit.DimensionlessUnit;
+import org.djunits4.unit.DurationUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
 
@@ -18,7 +21,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class FloatAmountOfSubstance extends AbstractFloatScalarRel<AmountOfSubstanceUnit, FloatAmountOfSubstance>
 {
     /** */
@@ -232,6 +235,37 @@ public class FloatAmountOfSubstance extends AbstractFloatScalarRel<AmountOfSubst
             return new FloatAmountOfSubstance(value, unit);
         }
         throw new IllegalArgumentException("Error parsing FloatAmountOfSubstance with unit " + unitString);
+    }
+
+    /**
+     * Calculate the division of FloatAmountOfSubstance and FloatAmountOfSubstance, which results in a FloatDimensionless
+     * scalar.
+     * @param v FloatAmountOfSubstance scalar
+     * @return FloatDimensionless scalar as a division of FloatAmountOfSubstance and FloatAmountOfSubstance
+     */
+    public final FloatDimensionless divideBy(final FloatAmountOfSubstance v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FloatAmountOfSubstance and FloatCatalyticActivity, which results in a FloatDuration scalar.
+     * @param v FloatAmountOfSubstance scalar
+     * @return FloatDuration scalar as a division of FloatAmountOfSubstance and FloatCatalyticActivity
+     */
+    public final FloatDuration divideBy(final FloatCatalyticActivity v)
+    {
+        return new FloatDuration(this.si / v.si, DurationUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FloatAmountOfSubstance and FloatDuration, which results in a FloatCatalyticActivity scalar.
+     * @param v FloatAmountOfSubstance scalar
+     * @return FloatCatalyticActivity scalar as a division of FloatAmountOfSubstance and FloatDuration
+     */
+    public final FloatCatalyticActivity divideBy(final FloatDuration v)
+    {
+        return new FloatCatalyticActivity(this.si / v.si, CatalyticActivityUnit.SI);
     }
 
 }

@@ -9,6 +9,7 @@ import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.ElectricalCurrentUnit;
 import org.djunits4.unit.ElectricalPotentialUnit;
 import org.djunits4.unit.ElectricalResistanceUnit;
+import org.djunits4.unit.MagneticFluxUnit;
 import org.djunits4.unit.PowerUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
@@ -22,7 +23,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalPotentialUnit, FloatElectricalPotential>
 {
     /** */
@@ -280,6 +281,16 @@ public class FloatElectricalPotential extends AbstractFloatScalarRel<ElectricalP
     public final FloatElectricalCurrent divideBy(final FloatElectricalResistance v)
     {
         return new FloatElectricalCurrent(this.si / v.si, ElectricalCurrentUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of FloatElectricalPotential and FloatDuration, which results in a FloatMagneticFlux scalar.
+     * @param v FloatElectricalPotential scalar
+     * @return FloatMagneticFlux scalar as a multiplication of FloatElectricalPotential and FloatDuration
+     */
+    public final FloatMagneticFlux multiplyBy(final FloatDuration v)
+    {
+        return new FloatMagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
     }
 
 }

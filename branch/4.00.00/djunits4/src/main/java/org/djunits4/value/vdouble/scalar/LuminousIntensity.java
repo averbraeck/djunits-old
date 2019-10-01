@@ -5,6 +5,8 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits4.Throw;
+import org.djunits4.unit.DimensionlessUnit;
+import org.djunits4.unit.LuminousFluxUnit;
 import org.djunits4.unit.LuminousIntensityUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
@@ -18,7 +20,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensityUnit, LuminousIntensity>
 {
     /** */
@@ -216,6 +218,26 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
             return new LuminousIntensity(value, unit);
         }
         throw new IllegalArgumentException("Error parsing LuminousIntensity with unit " + unitString);
+    }
+
+    /**
+     * Calculate the division of LuminousIntensity and LuminousIntensity, which results in a Dimensionless scalar.
+     * @param v LuminousIntensity scalar
+     * @return Dimensionless scalar as a division of LuminousIntensity and LuminousIntensity
+     */
+    public final Dimensionless divideBy(final LuminousIntensity v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of LuminousIntensity and AngleSolid, which results in a LuminousFlux scalar.
+     * @param v LuminousIntensity scalar
+     * @return LuminousFlux scalar as a multiplication of LuminousIntensity and AngleSolid
+     */
+    public final LuminousFlux multiplyBy(final AngleSolid v)
+    {
+        return new LuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
     }
 
 }

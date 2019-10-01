@@ -12,6 +12,7 @@ import org.djunits4.unit.ForceUnit;
 import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.PowerUnit;
 import org.djunits4.unit.PressureUnit;
+import org.djunits4.unit.VolumeUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
 
@@ -24,7 +25,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
 {
     /** */
@@ -299,6 +300,16 @@ public class FloatEnergy extends AbstractFloatScalarRel<EnergyUnit, FloatEnergy>
     public final FloatPressure divideBy(final FloatVolume v)
     {
         return new FloatPressure(this.si / v.si, PressureUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FloatEnergy and FloatPressure, which results in a FloatVolume scalar.
+     * @param v FloatEnergy scalar
+     * @return FloatVolume scalar as a division of FloatEnergy and FloatPressure
+     */
+    public final FloatVolume divideBy(final FloatPressure v)
+    {
+        return new FloatVolume(this.si / v.si, VolumeUnit.SI);
     }
 
     /**

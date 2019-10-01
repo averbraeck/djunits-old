@@ -6,6 +6,7 @@ import javax.annotation.Generated;
 
 import org.djunits4.Throw;
 import org.djunits4.unit.DimensionlessUnit;
+import org.djunits4.unit.ElectricalInductanceUnit;
 import org.djunits4.unit.ElectricalPotentialUnit;
 import org.djunits4.unit.ElectricalResistanceUnit;
 import org.djunits4.value.util.ValueUtil;
@@ -20,7 +21,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResistanceUnit, ElectricalResistance>
 {
     /** */
@@ -244,6 +245,16 @@ public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResi
     public final ElectricalPotential multiplyBy(final ElectricalCurrent v)
     {
         return new ElectricalPotential(this.si * v.si, ElectricalPotentialUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of ElectricalResistance and Duration, which results in a ElectricalInductance scalar.
+     * @param v ElectricalResistance scalar
+     * @return ElectricalInductance scalar as a multiplication of ElectricalResistance and Duration
+     */
+    public final ElectricalInductance multiplyBy(final Duration v)
+    {
+        return new ElectricalInductance(this.si * v.si, ElectricalInductanceUnit.SI);
     }
 
 }

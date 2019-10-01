@@ -5,7 +5,12 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits4.Throw;
+import org.djunits4.unit.AngleSolidUnit;
+import org.djunits4.unit.AreaUnit;
+import org.djunits4.unit.DimensionlessUnit;
+import org.djunits4.unit.IlluminanceUnit;
 import org.djunits4.unit.LuminousFluxUnit;
+import org.djunits4.unit.LuminousIntensityUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 
@@ -18,7 +23,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-09-29T16:47:45.717Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
 public class LuminousFlux extends AbstractDoubleScalarRel<LuminousFluxUnit, LuminousFlux>
 {
     /** */
@@ -213,6 +218,56 @@ public class LuminousFlux extends AbstractDoubleScalarRel<LuminousFluxUnit, Lumi
             return new LuminousFlux(value, unit);
         }
         throw new IllegalArgumentException("Error parsing LuminousFlux with unit " + unitString);
+    }
+
+    /**
+     * Calculate the division of LuminousFlux and LuminousFlux, which results in a Dimensionless scalar.
+     * @param v LuminousFlux scalar
+     * @return Dimensionless scalar as a division of LuminousFlux and LuminousFlux
+     */
+    public final Dimensionless divideBy(final LuminousFlux v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
+
+    /**
+     * Calculate the division of LuminousFlux and Area, which results in a Illuminance scalar.
+     * @param v LuminousFlux scalar
+     * @return Illuminance scalar as a division of LuminousFlux and Area
+     */
+    public final Illuminance divideBy(final Area v)
+    {
+        return new Illuminance(this.si / v.si, IlluminanceUnit.SI);
+    }
+
+    /**
+     * Calculate the division of LuminousFlux and Illuminance, which results in a Area scalar.
+     * @param v LuminousFlux scalar
+     * @return Area scalar as a division of LuminousFlux and Illuminance
+     */
+    public final Area divideBy(final Illuminance v)
+    {
+        return new Area(this.si / v.si, AreaUnit.SI);
+    }
+
+    /**
+     * Calculate the division of LuminousFlux and LuminousIntensity, which results in a AngleSolid scalar.
+     * @param v LuminousFlux scalar
+     * @return AngleSolid scalar as a division of LuminousFlux and LuminousIntensity
+     */
+    public final AngleSolid divideBy(final LuminousIntensity v)
+    {
+        return new AngleSolid(this.si / v.si, AngleSolidUnit.SI);
+    }
+
+    /**
+     * Calculate the division of LuminousFlux and AngleSolid, which results in a LuminousIntensity scalar.
+     * @param v LuminousFlux scalar
+     * @return LuminousIntensity scalar as a division of LuminousFlux and AngleSolid
+     */
+    public final LuminousIntensity divideBy(final AngleSolid v)
+    {
+        return new LuminousIntensity(this.si / v.si, LuminousIntensityUnit.SI);
     }
 
 }
