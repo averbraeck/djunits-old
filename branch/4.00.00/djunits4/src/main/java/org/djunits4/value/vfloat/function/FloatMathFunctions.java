@@ -189,7 +189,7 @@ public interface FloatMathFunctions
         @Override
         public float apply(final float a)
         {
-            return -a;
+            return 0f == a ? 0f : -a;
         }
     };
 

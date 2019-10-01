@@ -625,14 +625,23 @@ public class FloatMatrixDataSparse extends FloatMatrixData
     {
         if (this == obj)
             return true;
-        if (!super.equals(obj))
+        if (obj == null)
             return false;
+        if (!(obj instanceof FloatMatrixData))
+            return false;
+        FloatMatrixData other = (FloatMatrixData) obj;
+        if (this.rows != other.rows)
+            return false;
+        if (this.cols != other.cols)
+            return false;
+        if (other instanceof FloatMatrixDataDense)
+            return super.equals(this);
         if (getClass() != obj.getClass())
             return false;
-        FloatMatrixDataSparse other = (FloatMatrixDataSparse) obj;
-        if (!Arrays.equals(this.indices, other.indices))
+        // Both are sparse
+        if (!Arrays.equals(this.indices, ((FloatMatrixDataSparse)other).indices))
             return false;
-        return true;
+        return Arrays.equals(this.matrixSI, ((FloatMatrixDataSparse)other).matrixSI);
     }
 
 }

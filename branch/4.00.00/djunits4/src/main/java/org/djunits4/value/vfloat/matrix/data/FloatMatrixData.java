@@ -470,9 +470,37 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
         int result = 1;
         result = prime * result + this.rows;
         result = prime * result + this.cols;
-        result = prime * result + ((this.storageType == null) ? 0 : this.storageType.hashCode());
+        for (int row = 0; row < rows; row++)
+        {
+            for (int col = 0; col < cols; col++)
+            {
+
+                result = 31 * result + Float.floatToIntBits(getSI(row, col));
+            }
+        }
         result = prime * result + Arrays.hashCode(this.matrixSI);
         return result;
+    }
+
+    /**
+     * Compare contents of a dense and a sparse matrix.
+     * @param dm FloatMatrixDataDense; the dense matrix
+     * @param sm FloatMatrixDataSparse; the sparse matrix
+     * @return boolean; true if the contents are equal
+     */
+    protected boolean compareDenseMatrixWithSparseMatrix(final FloatMatrixDataDense dm, final FloatMatrixDataSparse sm)
+    {
+        for (int row = 0; row < dm.rows; row++)
+        {
+            for (int col = 0; col < dm.cols; col++)
+            {
+                if (dm.getSI(row, col) != sm.getSI(row, col))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /** {@inheritDoc} */
@@ -484,18 +512,23 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
             return true;
         if (obj == null)
             return false;
-        if (getClass() != obj.getClass())
+        if (!(obj instanceof FloatMatrixData))
             return false;
         FloatMatrixData other = (FloatMatrixData) obj;
         if (this.rows != other.rows)
             return false;
         if (this.cols != other.cols)
             return false;
-        if (this.storageType != other.storageType)
-            return false;
-        if (!Arrays.equals(this.matrixSI, other.matrixSI))
-            return false;
-        return true;
+        if (other instanceof FloatMatrixDataSparse && this instanceof FloatMatrixDataDense)
+        {
+            return compareDenseMatrixWithSparseMatrix((FloatMatrixDataDense) this, (FloatMatrixDataSparse) other);
+        }
+        else if (other instanceof FloatMatrixDataDense && this instanceof FloatMatrixDataSparse)
+        {
+            return compareDenseMatrixWithSparseMatrix((FloatMatrixDataDense) other, (FloatMatrixDataSparse) this);
+        }
+        // Both are dense (both sparse is handled in FloatMatrixDataSparse class)
+        return Arrays.equals(this.matrixSI, other.matrixSI);
     }
 
     /** {@inheritDoc} */
