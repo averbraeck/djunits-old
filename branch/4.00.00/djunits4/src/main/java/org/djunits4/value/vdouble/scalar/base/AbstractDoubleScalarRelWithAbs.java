@@ -63,16 +63,4 @@ public abstract class AbstractDoubleScalarRelWithAbs<AU extends AbsoluteLinearUn
         return result;
     }
 
-    public A plusX(final A increment)
-    {
-        A result = instantiateAbs(this.getSI() + increment.getSI(), increment.getDisplayUnit().getStandardUnit());
-        result.setDisplayUnit(increment.getDisplayUnit());
-        return result;
-    }
-
-    public void test()
-    {
-        //
-    }
-
 }
