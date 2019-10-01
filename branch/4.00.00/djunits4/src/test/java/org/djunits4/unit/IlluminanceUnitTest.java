@@ -34,7 +34,7 @@ public class IlluminanceUnitTest extends AbstractLinearUnitTest<IlluminanceUnit>
     @Test
     public final void conversions()
     {
-        assertEquals("cd/m2", IlluminanceUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
+        assertEquals("srcd/m2", IlluminanceUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(IlluminanceUnit.LUX, 1, 0.000001, "lux", "lx");
     }
 
