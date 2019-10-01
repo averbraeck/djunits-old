@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 import org.djunits4.unit.AbsoluteTemperatureUnit;
 import org.djunits4.unit.LengthUnit;
@@ -21,6 +22,7 @@ import org.djunits4.value.CLASSNAMES;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalar;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarAbs;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
 import org.djunits4.value.vdouble.scalar.base.DoubleScalar;
 import org.junit.Test;
 
@@ -168,7 +170,10 @@ public class DoubleScalarTest
             String relativeType = CLASSNAMES.REL_WITH_ABS_LIST.get(typeIndex);
             String absoluteType = CLASSNAMES.ABS_LIST.get(typeIndex);
             // This relies on the REL_WITH_ABS_LIST and ABS_LIST to be maintained "in sync".
-            Class<?> scalarClass = Class.forName("org.djunits4.value.vdouble.scalar." + relativeType);
+            @SuppressWarnings("unchecked")
+            Class<? extends AbstractDoubleScalarRelWithAbs<?, ?, ?, ?>> scalarClass =
+                    (Class<? extends AbstractDoubleScalarRelWithAbs<?, ?, ?, ?>>) Class
+                            .forName("org.djunits4.value.vdouble.scalar." + relativeType);
             double relValue = 123.456;
             for (Unit<?> relativeUnit : UnitTypes.INSTANCE.getUnitBase(relativeType + "Unit").getUnitsById().values())
             {
@@ -184,7 +189,25 @@ public class DoubleScalarTest
                             scalarClass.getDeclaredMethod("instantiateAbs", double.class, absoluteUnit.getClass());
                     AbstractDoubleScalarAbs<?, ?, ?, ?> absScalar = (AbstractDoubleScalarAbs<?, ?, ?, ?>) instantiateAbsMethod
                             .invoke(relScalar, absValue, absoluteUnit);
-                    Method plusMethod = scalarClass.getDeclaredMethod("plus", absScalar.getClass());
+                    
+                    // ?????????????????????????????????????????????????????????????????????????????????????????????????
+                    Temperature t = Temperature.of(10.0, "K");
+                    AbsoluteTemperature at = AbsoluteTemperature.of(10.0, "C");
+                    at = t.plus(at);
+                    System.out.println(at);
+                    Method[] m = scalarClass.getMethods();
+                    System.out.println(Arrays.asList(m).toString().replaceAll("\\, public", "\npublic")
+                            .replaceAll("org.djunits4.value.vdouble.scalar.base.", "")
+                            .replaceAll("org.djunits4.value.vdouble.scalar.", ""));
+                    Method tst = Temperature.class.getMethod("test");
+                    System.out.println(tst.toString());
+                    Method pmads = Temperature.class.getMethod("plus", AbstractDoubleScalarAbs.class);
+                    System.out.println(pmads.toString());
+                    Method pm = Temperature.class.getMethod("plus", AbsoluteTemperature.class);
+                    System.out.println(pm.toString());
+                    Method plusMethod = scalarClass.getMethod("plus", absScalar.getClass());
+                    // ?????????????????????????????????????????????????????????????????????????????????????????????????
+
                     AbstractDoubleScalarAbs<?, ?, ?, ?> sum =
                             (AbstractDoubleScalarAbs<?, ?, ?, ?>) plusMethod.invoke(relScalar, absScalar);
                     System.out.println("rel=" + relScalar + ", abs=" + absScalar + ", sum=" + sum);
@@ -257,7 +280,7 @@ public class DoubleScalarTest
     @Test
     public final void mathFunctionsTestAbsTest()
     {
-        double[] seedValues = { -10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10 };
+        double[] seedValues = {-10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10};
         for (double seedValue : seedValues)
         {
             double input = seedValue;
@@ -423,7 +446,7 @@ public class DoubleScalarTest
     @Test
     public final void mathFunctionsTestRelTest()
     {
-        double[] seedValues = { -10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10 };
+        double[] seedValues = {-10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10};
         for (double seedValue : seedValues)
         {
             double input = seedValue;

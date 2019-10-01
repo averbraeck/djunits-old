@@ -9,9 +9,9 @@ import org.djunits4.unit.AreaUnit;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.FlowVolumeUnit;
 import org.djunits4.unit.ForceUnit;
-import org.djunits4.unit.IlluminanceUnit;
 import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.LinearDensityUnit;
+import org.djunits4.unit.LuminousFluxUnit;
 import org.djunits4.unit.VolumeUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
@@ -25,7 +25,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
 public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 {
     /** */
@@ -302,13 +302,13 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
     }
 
     /**
-     * Calculate the multiplication of Area and LuminousFlux, which results in a Illuminance scalar.
+     * Calculate the multiplication of Area and Illuminance, which results in a LuminousFlux scalar.
      * @param v Area scalar
-     * @return Illuminance scalar as a multiplication of Area and LuminousFlux
+     * @return LuminousFlux scalar as a multiplication of Area and Illuminance
      */
-    public final Illuminance multiplyBy(final LuminousFlux v)
+    public final LuminousFlux multiplyBy(final Illuminance v)
     {
-        return new Illuminance(this.si * v.si, IlluminanceUnit.SI);
+        return new LuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
     }
 
 }

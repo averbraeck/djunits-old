@@ -288,7 +288,10 @@ public class ScalarOperationsTest
                         multiply ? DoubleScalar.multiply(left, right) : DoubleScalar.divide(left, right);
                 // System.out.println("result is " + result);
                 String resultCoefficients = result.getDisplayUnit().getUnitBase().getSiDimensions().toString();
-                assertEquals("SI coefficients of result should match expected SI coefficients", resultCoefficients, returnSI);
+                assertEquals(
+                        "SI coefficients of result of " + left.getClass().getSimpleName() + " x "
+                                + right.getClass().getSimpleName() + " should match expected SI coefficients",
+                        resultCoefficients, returnSI);
             }
             else
             {

@@ -9,9 +9,9 @@ import org.djunits4.unit.AreaUnit;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.FlowVolumeUnit;
 import org.djunits4.unit.ForceUnit;
-import org.djunits4.unit.IlluminanceUnit;
 import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.LinearDensityUnit;
+import org.djunits4.unit.LuminousFluxUnit;
 import org.djunits4.unit.VolumeUnit;
 import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
@@ -25,7 +25,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T00:59:39.126Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T06:49:16.706Z")
 public class FloatArea extends AbstractFloatScalarRel<AreaUnit, FloatArea>
 {
     /** */
@@ -313,13 +313,13 @@ public class FloatArea extends AbstractFloatScalarRel<AreaUnit, FloatArea>
     }
 
     /**
-     * Calculate the multiplication of FloatArea and FloatLuminousFlux, which results in a FloatIlluminance scalar.
+     * Calculate the multiplication of FloatArea and FloatIlluminance, which results in a FloatLuminousFlux scalar.
      * @param v FloatArea scalar
-     * @return FloatIlluminance scalar as a multiplication of FloatArea and FloatLuminousFlux
+     * @return FloatLuminousFlux scalar as a multiplication of FloatArea and FloatIlluminance
      */
-    public final FloatIlluminance multiplyBy(final FloatLuminousFlux v)
+    public final FloatLuminousFlux multiplyBy(final FloatIlluminance v)
     {
-        return new FloatIlluminance(this.si * v.si, IlluminanceUnit.SI);
+        return new FloatLuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
     }
 
 }
