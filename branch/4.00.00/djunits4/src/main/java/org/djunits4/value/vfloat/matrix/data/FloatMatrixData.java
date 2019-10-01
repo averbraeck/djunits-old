@@ -470,15 +470,13 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
         int result = 1;
         result = prime * result + this.rows;
         result = prime * result + this.cols;
-        for (int row = 0; row < rows; row++)
+        for (int row = 0; row < this.rows; row++)
         {
-            for (int col = 0; col < cols; col++)
+            for (int col = 0; col < this.cols; col++)
             {
-
                 result = 31 * result + Float.floatToIntBits(getSI(row, col));
             }
         }
-        result = prime * result + Arrays.hashCode(this.matrixSI);
         return result;
     }
 

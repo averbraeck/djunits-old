@@ -179,8 +179,8 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmskm10, lmskm10.toDense().toSparse());
         assertEquals(lmdkm10, lmskm10.toDense());
         assertEquals(lmskm10, lmdkm10.toSparse());
-        assertNotEquals(lmdkm10, lmdkm10.toSparse());
-        assertNotEquals(lmskm10, lmskm10.toDense());
+        assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
+        assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
         assertEquals(lmdkm10, lmdkm10.toDense());
         assertEquals(lmskm10, lmskm10.toSparse());
         assertTrue(lmdkm10.isDense());
@@ -245,8 +245,8 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmskm10, lmskm10.toDense().toSparse());
         assertEquals(lmdkm10, lmskm10.toDense());
         assertEquals(lmskm10, lmdkm10.toSparse());
-        assertNotEquals(lmdkm10, lmdkm10.toSparse());
-        assertNotEquals(lmskm10, lmskm10.toDense());
+        assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
+        assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
 
         LengthMatrix lmdsi10 =
                 DoubleMatrix.instantiateSI(DOUBLEMATRIX.sparseRectArrays(10, 10), LengthUnit.CENTIMETER, StorageType.DENSE);
@@ -323,8 +323,8 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmskm10, lmskm10.toDense().toSparse());
         assertEquals(lmdkm10, lmskm10.toDense());
         assertEquals(lmskm10, lmdkm10.toSparse());
-        assertNotEquals(lmdkm10, lmdkm10.toSparse());
-        assertNotEquals(lmskm10, lmskm10.toDense());
+        assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
+        assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
 
         AreaMatrix lmdsi10 = DoubleMatrix.instantiateSI(DOUBLEMATRIX.denseRectArrays(10, 10), AreaUnit.SQUARE_CENTIMETER,
                 StorageType.DENSE, AreaMatrix.class);
@@ -385,8 +385,8 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmskm10, lmskm10.toDense().toSparse());
         assertEquals(lmdkm10, lmskm10.toDense());
         assertEquals(lmskm10, lmdkm10.toSparse());
-        assertNotEquals(lmdkm10, lmdkm10.toSparse());
-        assertNotEquals(lmskm10, lmskm10.toDense());
+        assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
+        assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
 
         AreaMatrix lmdsi10 = DoubleMatrix.instantiateSI(DOUBLEMATRIX.sparseRectArrays(10, 10), AreaUnit.SQUARE_CENTIMETER,
                 StorageType.DENSE, AreaMatrix.class);
@@ -518,8 +518,8 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmskm10, lmskm10.toDense().toSparse());
         assertEquals(lmdkm10, lmskm10.toDense());
         assertEquals(lmskm10, lmdkm10.toSparse());
-        assertNotEquals(lmdkm10, lmdkm10.toSparse());
-        assertNotEquals(lmskm10, lmskm10.toDense());
+        assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
+        assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
         assertEquals(lmdkm10, lmdkm10.toDense());
         assertEquals(lmskm10, lmskm10.toSparse());
         assertTrue(lmdkm10.isDense());
@@ -584,8 +584,8 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmskm10, lmskm10.toDense().toSparse());
         assertEquals(lmdkm10, lmskm10.toDense());
         assertEquals(lmskm10, lmdkm10.toSparse());
-        assertNotEquals(lmdkm10, lmdkm10.toSparse());
-        assertNotEquals(lmskm10, lmskm10.toDense());
+        assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
+        assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
 
         LengthMatrix lmdsi10 =
                 DoubleMatrix.instantiateSI(DOUBLEMATRIX.sparseRectArrays(20, 10), LengthUnit.CENTIMETER, StorageType.DENSE);
@@ -662,8 +662,8 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmskm10, lmskm10.toDense().toSparse());
         assertEquals(lmdkm10, lmskm10.toDense());
         assertEquals(lmskm10, lmdkm10.toSparse());
-        assertNotEquals(lmdkm10, lmdkm10.toSparse());
-        assertNotEquals(lmskm10, lmskm10.toDense());
+        assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
+        assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
 
         AreaMatrix lmdsi10 = DoubleMatrix.instantiateSI(DOUBLEMATRIX.denseRectArrays(20, 10), AreaUnit.SQUARE_CENTIMETER,
                 StorageType.DENSE, AreaMatrix.class);
@@ -724,8 +724,8 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmskm10, lmskm10.toDense().toSparse());
         assertEquals(lmdkm10, lmskm10.toDense());
         assertEquals(lmskm10, lmdkm10.toSparse());
-        assertNotEquals(lmdkm10, lmdkm10.toSparse());
-        assertNotEquals(lmskm10, lmskm10.toDense());
+        assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
+        assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
 
         AreaMatrix lmdsi10 = DoubleMatrix.instantiateSI(DOUBLEMATRIX.sparseRectArrays(20, 10), AreaUnit.SQUARE_CENTIMETER,
                 StorageType.DENSE, AreaMatrix.class);
@@ -774,6 +774,15 @@ public class DoubleMatrixInstantiateTest
         assertEquals(10, lmstu10.cardinality());
         assertEquals(5 * 11, lmstu10.zSum().getSI(), 0.001);
         assertEquals(AreaUnit.ACRE, lmstu10.getDisplayUnit());
+        
+        assertNotEquals(lmdkm10, lmdsi10);
+        assertNotEquals(lmdkm10, lmssi10);
+        assertNotEquals(lmskm10, lmdsi10);
+        assertNotEquals(lmskm10, lmssi10);
+        assertNotEquals(lmdkm10, lmdtu10);
+        assertNotEquals(lmdkm10, lmstu10);
+        assertNotEquals(lmskm10, lmdtu10);
+        assertNotEquals(lmskm10, lmstu10);
     }
 
     /**
@@ -905,6 +914,27 @@ public class DoubleMatrixInstantiateTest
         assertEquals(1, col1ss.cardinality());
         assertEquals(1, col1ss.zSum().getSI(), 0.001);
         assertEquals(SpeedUnit.METER_PER_SECOND, col1ss.getDisplayUnit());
+
+        // equals
+        
+        assertEquals(row1dd, row1dd);
+        assertEquals(row1ss, row1ss);
+        assertEquals(row1dd, row1ds);
+        assertEquals(col1dd, col1ds);
+        assertEquals(row1sd, row1ss);
+        assertEquals(col1sd, col1ss);
+        assertEquals(row1ds, row1dd);
+        assertEquals(col1ds, col1dd);
+        assertEquals(row1ss, row1sd);
+        assertEquals(col1ss, col1sd);
+        assertNotEquals(row1dd, col1dd);
+        assertNotEquals(col1dd, row1dd);
+        assertNotEquals(row1ss, col1ss);
+        assertNotEquals(col1ss, row1ss);
+        assertNotEquals(row1ds, col1sd);
+        assertNotEquals(col1ds, row1sd);
+        assertNotEquals(row1sd, col1ds);
+        assertNotEquals(col1sd, row1ds);
 
         // 1 x 1 DENSE DATA
 

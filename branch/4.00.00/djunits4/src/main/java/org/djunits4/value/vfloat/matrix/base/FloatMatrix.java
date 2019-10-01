@@ -13,8 +13,8 @@ import org.djunits4.unit.util.UnitRuntimeException;
 import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.matrix.FloatSIMatrix;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
-import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalar;
-import org.djunits4.value.vfloat.vector.base.AbstractFloatVector;
+import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
+import org.djunits4.value.vfloat.vector.base.FloatVectorInterface;
 
 /**
  * FloatMatrix utility methods, e.g., for creating FloatMatrixs from different types of data.
@@ -28,7 +28,7 @@ import org.djunits4.value.vfloat.vector.base.AbstractFloatVector;
 public final class FloatMatrix
 {
     /** The cache to make the lookup of the constructor for a Immutable Matrix belonging to a unit faster. */
-    private static Map<Unit<?>, Constructor<? extends AbstractFloatMatrix<?, ?, ?, ?>>> CACHE_DATA = new HashMap<>();
+    private static Map<Unit<?>, Constructor<? extends FloatMatrixInterface<?, ?, ?, ?>>> CACHE_DATA = new HashMap<>();
 
     /** Do not instantiate. */
     private FloatMatrix()
@@ -44,8 +44,8 @@ public final class FloatMatrix
      * @param storageType StorageType; whether the matrix is SPARSE or DENSE
      * @return M; an instantiated FloatMatrix with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>, V extends AbstractFloatVector<U, S, V>,
-            M extends AbstractFloatMatrix<U, S, V, M>> M instantiate(final float[][] valuesInUnit, final U unit,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,
+            M extends FloatMatrixInterface<U, S, V, M>> M instantiate(final float[][] valuesInUnit, final U unit,
                     final StorageType storageType)
     {
         return instantiateAnonymous(FloatMatrixData.instantiate(valuesInUnit, unit.getScale(), storageType), unit);
@@ -61,8 +61,8 @@ public final class FloatMatrix
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate
      * @return M; an instantiated FloatMatrix with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>, V extends AbstractFloatVector<U, S, V>,
-            M extends AbstractFloatMatrix<U, S, V, M>> M instantiate(final float[][] valuesInUnit, final U unit,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,
+            M extends FloatMatrixInterface<U, S, V, M>> M instantiate(final float[][] valuesInUnit, final U unit,
                     final StorageType storageType, final Class<M> matrixClass)
     {
         return instantiateAnonymous(FloatMatrixData.instantiate(valuesInUnit, unit.getScale(), storageType), unit, matrixClass);
@@ -76,8 +76,8 @@ public final class FloatMatrix
      * @param storageType StorageType; whether the matrix is SPARSE or DENSE
      * @return M; an instantiated FloatMatrix with the SI values and display unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>, V extends AbstractFloatVector<U, S, V>,
-            M extends AbstractFloatMatrix<U, S, V, M>> M instantiateSI(final float[][] valuesSI, final U displayUnit,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,
+            M extends FloatMatrixInterface<U, S, V, M>> M instantiateSI(final float[][] valuesSI, final U displayUnit,
                     final StorageType storageType)
     {
         return instantiateAnonymous(FloatMatrixData.instantiate(valuesSI, IdentityScale.SCALE, storageType), displayUnit);
@@ -93,8 +93,8 @@ public final class FloatMatrix
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate
      * @return M; an instantiated FloatMatrix with the SI values and display unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>, V extends AbstractFloatVector<U, S, V>,
-            M extends AbstractFloatMatrix<U, S, V, M>> M instantiateSI(final float[][] valuesSI, final U displayUnit,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,
+            M extends FloatMatrixInterface<U, S, V, M>> M instantiateSI(final float[][] valuesSI, final U displayUnit,
                     final StorageType storageType, final Class<M> matrixClass)
     {
         return instantiateAnonymous(FloatMatrixData.instantiate(valuesSI, IdentityScale.SCALE, storageType), displayUnit,
@@ -107,8 +107,8 @@ public final class FloatMatrix
      * @param unit U; the unit in which the values are expressed
      * @return M; an instantiated mutable FloatMatrix with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>, V extends AbstractFloatVector<U, S, V>,
-            M extends AbstractFloatMatrix<U, S, V, M>> M instantiate(final FloatMatrixData values, final U unit)
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,
+            M extends FloatMatrixInterface<U, S, V, M>> M instantiate(final FloatMatrixData values, final U unit)
     {
         return instantiateAnonymous(values, unit);
     }
@@ -121,8 +121,8 @@ public final class FloatMatrix
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate
      * @return M; an instantiated mutable FloatMatrix with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>, V extends AbstractFloatVector<U, S, V>,
-            M extends AbstractFloatMatrix<U, S, V, M>> M instantiate(final FloatMatrixData values, final U unit,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,
+            M extends FloatMatrixInterface<U, S, V, M>> M instantiate(final FloatMatrixData values, final U unit,
                     final Class<M> matrixClass)
     {
         return instantiateAnonymous(values, unit, matrixClass);
@@ -136,8 +136,8 @@ public final class FloatMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @return M; an instantiated mutable FloatMatrix with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>, V extends AbstractFloatVector<U, S, V>,
-            M extends AbstractFloatMatrix<U, S, V, M>> M instantiate(final S[][] values, final U displayUnit,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,
+            M extends FloatMatrixInterface<U, S, V, M>> M instantiate(final S[][] values, final U displayUnit,
                     final StorageType storageType)
     {
         return instantiate(FloatMatrixData.instantiate(values, storageType), displayUnit);
@@ -153,8 +153,8 @@ public final class FloatMatrix
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate
      * @return M; an instantiated mutable FloatMatrix with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>, V extends AbstractFloatVector<U, S, V>,
-            M extends AbstractFloatMatrix<U, S, V, M>> M instantiate(final S[][] values, final U displayUnit,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,
+            M extends FloatMatrixInterface<U, S, V, M>> M instantiate(final S[][] values, final U displayUnit,
                     final StorageType storageType, final Class<M> matrixClass)
     {
         return instantiate(FloatMatrixData.instantiate(values, storageType), displayUnit, matrixClass);
@@ -169,8 +169,8 @@ public final class FloatMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @return M; an instantiated mutable FloatMatrix with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>, V extends AbstractFloatVector<U, S, V>,
-            M extends AbstractFloatMatrix<U, S, V, M>> M instantiate(final Collection<FloatSparseValue<U, S>> values,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,
+            M extends FloatMatrixInterface<U, S, V, M>> M instantiate(final Collection<FloatSparseValue<U, S>> values,
                     final int rows, final int cols, final U displayUnit, final StorageType storageType)
     {
         return instantiate(FloatMatrixData.instantiate(values, rows, cols, storageType), displayUnit);
@@ -187,8 +187,8 @@ public final class FloatMatrix
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate
      * @return M; an instantiated mutable FloatMatrix with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>, V extends AbstractFloatVector<U, S, V>,
-            M extends AbstractFloatMatrix<U, S, V, M>> M instantiate(final Collection<FloatSparseValue<U, S>> values,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,
+            M extends FloatMatrixInterface<U, S, V, M>> M instantiate(final Collection<FloatSparseValue<U, S>> values,
                     final int rows, final int cols, final U displayUnit, final StorageType storageType,
                     final Class<M> matrixClass)
     {
@@ -204,12 +204,12 @@ public final class FloatMatrix
      * @return M; an instantiated FloatMatrix with the values expressed in their unit
      */
     @SuppressWarnings("unchecked")
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>, V extends AbstractFloatVector<U, S, V>,
-            M extends AbstractFloatMatrix<U, S, V, M>> M instantiateAnonymous(final FloatMatrixData values, final Unit<?> unit)
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,
+            M extends FloatMatrixInterface<U, S, V, M>> M instantiateAnonymous(final FloatMatrixData values, final Unit<?> unit)
     {
         try
         {
-            Constructor<? extends AbstractFloatMatrix<?, ?, ?, ?>> matrixConstructor = CACHE_DATA.get(unit);
+            Constructor<? extends FloatMatrixInterface<?, ?, ?, ?>> matrixConstructor = CACHE_DATA.get(unit);
             if (matrixConstructor == null)
             {
                 if (!unit.getClass().getSimpleName().endsWith("Unit"))
@@ -217,7 +217,7 @@ public final class FloatMatrix
                     throw new ClassNotFoundException("Unit " + unit.getClass().getSimpleName()
                             + " name does not end with 'Unit'. Cannot find corresponding matrix");
                 }
-                Class<? extends AbstractFloatMatrix<?, ?, ?, ?>> matrixClass;
+                Class<? extends FloatMatrixInterface<?, ?, ?, ?>> matrixClass;
                 if (unit instanceof SIUnit)
                 {
                     matrixClass = FloatSIMatrix.class;
@@ -225,7 +225,7 @@ public final class FloatMatrix
                 else
                 {
                     matrixClass =
-                            (Class<AbstractFloatMatrix<?, ?, ?, ?>>) Class.forName("org.djunits4.value.vfloat.matrix.Float"
+                            (Class<FloatMatrixInterface<?, ?, ?, ?>>) Class.forName("org.djunits4.value.vfloat.matrix.Float"
                                     + unit.getClass().getSimpleName().replace("Unit", "") + "Matrix");
                 }
                 matrixConstructor = matrixClass.getDeclaredConstructor(FloatMatrixData.class, unit.getClass());
@@ -236,7 +236,7 @@ public final class FloatMatrix
         catch (SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException | ClassNotFoundException | NoSuchMethodException exception)
         {
-            throw new UnitRuntimeException("Cannot instantiate AbstractFloatMatrix of unit " + unit.toString() + ". Reason: "
+            throw new UnitRuntimeException("Cannot instantiate FloatMatrixInterface of unit " + unit.toString() + ". Reason: "
                     + exception.getMessage());
         }
     }
@@ -252,13 +252,13 @@ public final class FloatMatrix
      * @return M; an instantiated FloatMatrix with the values expressed in their unit
      */
     @SuppressWarnings("unchecked")
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>, V extends AbstractFloatVector<U, S, V>,
-            M extends AbstractFloatMatrix<U, S, V, M>> M instantiateAnonymous(final FloatMatrixData values, final Unit<?> unit,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,
+            M extends FloatMatrixInterface<U, S, V, M>> M instantiateAnonymous(final FloatMatrixData values, final Unit<?> unit,
                     final Class<M> matrixClass)
     {
         try
         {
-            Constructor<? extends AbstractFloatMatrix<?, ?, ?, ?>> matrixConstructor = CACHE_DATA.get(unit);
+            Constructor<? extends FloatMatrixInterface<?, ?, ?, ?>> matrixConstructor = CACHE_DATA.get(unit);
             if (matrixConstructor == null)
             {
                 matrixConstructor = matrixClass.getDeclaredConstructor(FloatMatrixData.class, unit.getClass());
@@ -269,7 +269,7 @@ public final class FloatMatrix
         catch (SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException | NoSuchMethodException exception)
         {
-            throw new UnitRuntimeException("Cannot instantiate AbstractFloatMatrix of unit " + unit.toString() + ". Reason: "
+            throw new UnitRuntimeException("Cannot instantiate FloatMatrixInterface of unit " + unit.toString() + ". Reason: "
                     + exception.getMessage());
         }
     }

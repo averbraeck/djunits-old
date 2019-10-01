@@ -3,12 +3,12 @@ package org.djunits4.value.vfloat.scalar;
 import static org.junit.Assert.assertEquals;
 
 import org.djunits4.unit.AccelerationUnit;
-import org.djunits4.unit.SolidAngleUnit;
 import org.djunits4.unit.AngleUnit;
 import org.djunits4.unit.AreaUnit;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.DirectionUnit;
 import org.djunits4.unit.LengthUnit;
+import org.djunits4.unit.SolidAngleUnit;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.vfloat.scalar.base.FloatScalar;
 import org.junit.Test;

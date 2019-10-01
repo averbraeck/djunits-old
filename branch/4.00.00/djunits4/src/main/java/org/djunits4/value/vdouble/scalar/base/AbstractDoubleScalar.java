@@ -145,7 +145,6 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, S extends Abstract
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings("checkstyle:designforextension")
     public final int compareTo(final S o)
     {
         return Double.compare(this.getSI(), o.getSI());

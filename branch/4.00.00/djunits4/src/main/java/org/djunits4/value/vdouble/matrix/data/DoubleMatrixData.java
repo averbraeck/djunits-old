@@ -13,7 +13,6 @@ import org.djunits4.value.storage.AbstractStorage;
 import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vdouble.matrix.base.DoubleSparseValue;
 import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
-import org.djunits4.value.vfloat.matrix.base.FloatSparseValue;
 
 /**
  * Stores the data for a DoubleMatrix and carries out basic operations.
@@ -473,9 +472,36 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
         int result = 1;
         result = prime * result + this.rows;
         result = prime * result + this.cols;
-        result = prime * result + ((this.storageType == null) ? 0 : this.storageType.hashCode());
-        result = prime * result + Arrays.hashCode(this.matrixSI);
+        for (int row = 0; row < this.rows; row++)
+        {
+            for (int col = 0; col < this.cols; col++)
+            {
+                long bits = Double.doubleToLongBits(getSI(row, col));
+                result = 31 * result + (int) (bits ^ (bits >>> 32));
+            }
+        }
         return result;
+    }
+
+    /**
+     * Compare contents of a dense and a sparse matrix.
+     * @param dm DoubleMatrixDataDense; the dense matrix
+     * @param sm DoubleMatrixDataSparse; the sparse matrix
+     * @return boolean; true if the contents are equal
+     */
+    protected boolean compareDenseMatrixWithSparseMatrix(final DoubleMatrixDataDense dm, final DoubleMatrixDataSparse sm)
+    {
+        for (int row = 0; row < dm.rows; row++)
+        {
+            for (int col = 0; col < dm.cols; col++)
+            {
+                if (dm.getSI(row, col) != sm.getSI(row, col))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /** {@inheritDoc} */
@@ -487,18 +513,23 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
             return true;
         if (obj == null)
             return false;
-        if (getClass() != obj.getClass())
+        if (!(obj instanceof DoubleMatrixData))
             return false;
         DoubleMatrixData other = (DoubleMatrixData) obj;
         if (this.rows != other.rows)
             return false;
         if (this.cols != other.cols)
             return false;
-        if (this.storageType != other.storageType)
-            return false;
-        if (!Arrays.equals(this.matrixSI, other.matrixSI))
-            return false;
-        return true;
+        if (other instanceof DoubleMatrixDataSparse && this instanceof DoubleMatrixDataDense)
+        {
+            return compareDenseMatrixWithSparseMatrix((DoubleMatrixDataDense) this, (DoubleMatrixDataSparse) other);
+        }
+        else if (other instanceof DoubleMatrixDataDense && this instanceof DoubleMatrixDataSparse)
+        {
+            return compareDenseMatrixWithSparseMatrix((DoubleMatrixDataDense) other, (DoubleMatrixDataSparse) this);
+        }
+        // Both are dense (both sparse is handled in DoubleMatrixDataSparse class)
+        return Arrays.equals(this.matrixSI, other.matrixSI);
     }
 
     /** {@inheritDoc} */

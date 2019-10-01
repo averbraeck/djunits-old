@@ -2,7 +2,6 @@ package org.djunits4.value.vdouble.scalar.base;
 
 import org.djunits4.unit.AbsoluteLinearUnit;
 import org.djunits4.unit.Unit;
-import org.djunits4.value.base.Scalar;
 import org.djunits4.value.util.ValueUtil;
 
 /**
@@ -23,7 +22,7 @@ import org.djunits4.value.util.ValueUtil;
 public abstract class AbstractDoubleScalarAbs<AU extends AbsoluteLinearUnit<AU, RU>,
         A extends AbstractDoubleScalarAbs<AU, A, RU, R>, RU extends Unit<RU>,
         R extends AbstractDoubleScalarRelWithAbs<AU, A, RU, R>> extends AbstractDoubleScalar<AU, A>
-        implements Scalar.Abs<AU, A, RU, R>
+        implements DoubleScalarInterface.Abs<AU, A, RU, R>
 {
     /**  */
     private static final long serialVersionUID = 20150626L;
@@ -46,22 +45,6 @@ public abstract class AbstractDoubleScalarAbs<AU extends AbsoluteLinearUnit<AU, 
     {
         super(value.getDisplayUnit(), value.getSI());
     }
-
-    /**
-     * Construct a new Absolute Immutable DoubleScalar of the right type. Each extending class must implement this method.
-     * @param value double; the double value
-     * @param unit AU; the unit
-     * @return A a new absolute instance of the DoubleScalar of the right type
-     */
-    public abstract A instantiateAbs(double value, AU unit);
-
-    /**
-     * Construct a new Relative Immutable DoubleScalar of the right type. Each extending class must implement this method.
-     * @param value double; the double value
-     * @param unit RU; the unit
-     * @return R a new relative instance of the DoubleScalar of the right type
-     */
-    public abstract R instantiateRel(double value, RU unit);
 
     /** {@inheritDoc} */
     @Override

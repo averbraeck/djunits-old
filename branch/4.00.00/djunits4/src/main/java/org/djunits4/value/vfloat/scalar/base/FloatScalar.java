@@ -27,7 +27,7 @@ public abstract class FloatScalar
     /**********************************************************************************/
 
     /** The cache to make the lookup of the constructor for a Scalar belonging to a unit faster. */
-    private static Map<Unit<?>, Constructor<? extends AbstractFloatScalar<?, ?>>> CACHE = new HashMap<>();
+    private static Map<Unit<?>, Constructor<? extends FloatScalarInterface<?, ?>>> CACHE = new HashMap<>();
 
     /** Do not instantiate. */
     private FloatScalar()
@@ -43,7 +43,7 @@ public abstract class FloatScalar
      * @param <U> the unit
      * @param <S> the return type
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>> S instantiate(final float value, final U unit)
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> S instantiate(final float value, final U unit)
     {
         return instantiateAnonymous(value, unit);
     }
@@ -56,7 +56,7 @@ public abstract class FloatScalar
      * @param <U> the unit
      * @param <S> the return type
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>> S instantiateSI(final float valueSI,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> S instantiateSI(final float valueSI,
             final U displayUnit)
     {
         S result = instantiateAnonymous(valueSI, displayUnit.getStandardUnit());
@@ -74,11 +74,11 @@ public abstract class FloatScalar
      * @param <S> the return type
      */
     @SuppressWarnings("unchecked")
-    public static <S extends AbstractFloatScalar<?, S>> S instantiateAnonymous(final float value, final Unit<?> unit)
+    public static <S extends FloatScalarInterface<?, S>> S instantiateAnonymous(final float value, final Unit<?> unit)
     {
         try
         {
-            Constructor<? extends AbstractFloatScalar<?, ?>> scalarConstructor = CACHE.get(unit);
+            Constructor<? extends FloatScalarInterface<?, ?>> scalarConstructor = CACHE.get(unit);
             if (scalarConstructor == null)
             {
                 if (!unit.getClass().getSimpleName().endsWith("Unit"))
@@ -86,14 +86,14 @@ public abstract class FloatScalar
                     throw new ClassNotFoundException("Unit " + unit.getClass().getSimpleName()
                             + " name does noet end with 'Unit'. Cannot find corresponding scalar");
                 }
-                Class<? extends AbstractFloatScalar<?, ?>> scalarClass;
+                Class<? extends FloatScalarInterface<?, ?>> scalarClass;
                 if (unit instanceof SIUnit)
                 {
                     scalarClass = FloatSIScalar.class;
                 }
                 else
                 {
-                    scalarClass = (Class<AbstractFloatScalar<?, ?>>) Class.forName(
+                    scalarClass = (Class<FloatScalarInterface<?, ?>>) Class.forName(
                             "org.djunits4.value.vfloat.scalar.Float" + unit.getClass().getSimpleName().replace("Unit", ""));
                 }
                 scalarConstructor = scalarClass.getDeclaredConstructor(float.class, unit.getClass());
@@ -104,7 +104,7 @@ public abstract class FloatScalar
         catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
                 | IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
         {
-            throw new UnitRuntimeException("Cannot instantiate AbstractFloatScalar of unit " + unit.toString() + ". Reason: "
+            throw new UnitRuntimeException("Cannot instantiate FloatScalarInterface of unit " + unit.toString() + ". Reason: "
                     + exception.getMessage());
         }
     }
@@ -121,8 +121,8 @@ public abstract class FloatScalar
      * @return A; an absolute typed FloatScalar; the sum of the values as an Absolute value
      */
     public static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
-            R extends AbstractFloatScalarRelWithAbs<AU, A, RU, R>,
-            A extends AbstractFloatScalarAbs<AU, A, RU, R>> A plus(final A left, final R right)
+            R extends FloatScalarInterface.RelWithAbs<AU, A, RU, R>,
+            A extends FloatScalarInterface.Abs<AU, A, RU, R>> A plus(final A left, final R right)
     {
         return left.plus(right);
     }
@@ -139,8 +139,8 @@ public abstract class FloatScalar
      * @return A; an absolute typed FloatScalar; the sum of the values as an Absolute value
      */
     public static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
-            R extends AbstractFloatScalarRelWithAbs<AU, A, RU, R>,
-            A extends AbstractFloatScalarAbs<AU, A, RU, R>> A plus(final R left, final A right)
+            R extends FloatScalarInterface.RelWithAbs<AU, A, RU, R>,
+            A extends FloatScalarInterface.Abs<AU, A, RU, R>> A plus(final R left, final A right)
     {
         return right.plus(left);
     }
@@ -154,7 +154,7 @@ public abstract class FloatScalar
      * @param <R> the relative type
      * @return R; a relative typed FloatScalar; the sum of the values as a Relative value
      */
-    public static <U extends Unit<U>, R extends AbstractFloatScalarRel<U, R>> R plus(final R left, final R right)
+    public static <U extends Unit<U>, R extends FloatScalarInterface.Rel<U, R>> R plus(final R left, final R right)
     {
         return left.plus(right);
     }
@@ -171,8 +171,8 @@ public abstract class FloatScalar
      * @return A; an absolute typed FloatScalar; the resulting value as an absolute value
      */
     public static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
-            R extends AbstractFloatScalarRelWithAbs<AU, A, RU, R>,
-            A extends AbstractFloatScalarAbs<AU, A, RU, R>> A minus(final A left, final R right)
+            R extends FloatScalarInterface.RelWithAbs<AU, A, RU, R>,
+            A extends FloatScalarInterface.Abs<AU, A, RU, R>> A minus(final A left, final R right)
     {
         return left.minus(right);
     }
@@ -186,7 +186,7 @@ public abstract class FloatScalar
      * @param <R> the relative type
      * @return R; a relative typed FloatScalar; the resulting value as a relative value
      */
-    public static <U extends Unit<U>, R extends AbstractFloatScalarRel<U, R>> R minus(final R left, final R right)
+    public static <U extends Unit<U>, R extends FloatScalarInterface.Rel<U, R>> R minus(final R left, final R right)
     {
         return left.minus(right);
     }
@@ -203,19 +203,19 @@ public abstract class FloatScalar
      * @return R; a relative typed FloatScalar; the difference of the two absolute values as a relative value
      */
     public static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
-            R extends AbstractFloatScalarRelWithAbs<AU, A, RU, R>,
-            A extends AbstractFloatScalarAbs<AU, A, RU, R>> R minus(final A left, final A right)
+            R extends FloatScalarInterface.RelWithAbs<AU, A, RU, R>,
+            A extends FloatScalarInterface.Abs<AU, A, RU, R>> R minus(final A left, final A right)
     {
         return left.minus(right);
     }
 
     /**
      * Multiply two values; the result is a new instance with a different (existing or generated) SI unit.
-     * @param left AbstractFloatScalarRel&lt;?, ?&gt;; the left operand
-     * @param right AbstractFloatScalarRel&lt;?, ?&gt;; the right operand
+     * @param left FloatScalarInterfaceRel&lt;?, ?&gt;; the left operand
+     * @param right FloatScalarInterfaceRel&lt;?, ?&gt;; the right operand
      * @return FloatScalar.Rel&lt;SIUnit&gt;; the product of the two values
      */
-    public static FloatSIScalar multiply(final AbstractFloatScalarRel<?, ?> left, final AbstractFloatScalarRel<?, ?> right)
+    public static FloatSIScalar multiply(final FloatScalarInterface.Rel<?, ?> left, final FloatScalarInterface.Rel<?, ?> right)
     {
         SIUnit targetUnit = Unit.lookupOrCreateUnitWithSIDimensions(left.getDisplayUnit().getUnitBase().getSiDimensions()
                 .plus(right.getDisplayUnit().getUnitBase().getSiDimensions()));
@@ -224,11 +224,11 @@ public abstract class FloatScalar
 
     /**
      * Divide two values; the result is a new instance with a different (existing or generated) SI unit.
-     * @param left AbstractFloatScalarRel&lt;?, ?&gt;; the left operand
-     * @param right AbstractFloatScalarRel&lt;?, ?&gt;; the right operand
+     * @param left FloatScalarInterfaceRel&lt;?, ?&gt;; the left operand
+     * @param right FloatScalarInterfaceRel&lt;?, ?&gt;; the right operand
      * @return FloatScalar.Rel&lt;SIUnit&gt;; the ratio of the two values
      */
-    public static FloatSIScalar divide(final AbstractFloatScalarRel<?, ?> left, final AbstractFloatScalarRel<?, ?> right)
+    public static FloatSIScalar divide(final FloatScalarInterface.Rel<?, ?> left, final FloatScalarInterface.Rel<?, ?> right)
     {
         SIUnit targetUnit = Unit.lookupOrCreateUnitWithSIDimensions(left.getDisplayUnit().getUnitBase().getSiDimensions()
                 .minus(right.getDisplayUnit().getUnitBase().getSiDimensions()));
@@ -244,7 +244,7 @@ public abstract class FloatScalar
      * @param <R> the relative type
      * @return R; an Absolute Scalar at the <code>ratio</code> between <code>zero</code> and <code>one</code>
      */
-    public static <U extends Unit<U>, R extends AbstractFloatScalarRel<U, R>> R interpolate(final R zero, final R one,
+    public static <U extends Unit<U>, R extends FloatScalarInterface.Rel<U, R>> R interpolate(final R zero, final R one,
             final float ratio)
     {
         return zero.instantiateRel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
@@ -263,8 +263,8 @@ public abstract class FloatScalar
      * @return R; a Relative Scalar at the <code>ratio</code> between <code>zero</code> and <code>one</code>
      */
     public static <AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>,
-            R extends AbstractFloatScalarRelWithAbs<AU, A, RU, R>,
-            A extends AbstractFloatScalarAbs<AU, A, RU, R>> A interpolate(final A zero, final A one, final float ratio)
+            R extends FloatScalarInterface.RelWithAbs<AU, A, RU, R>,
+            A extends FloatScalarInterface.Abs<AU, A, RU, R>> A interpolate(final A zero, final A one, final float ratio)
     {
         return zero.instantiateAbs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
                 zero.getDisplayUnit());
@@ -278,7 +278,7 @@ public abstract class FloatScalar
      * @param <T> the argument and result type
      * @return T; the maximum value of two relative scalars
      */
-    public static <U extends Unit<U>, T extends AbstractFloatScalar<U, T>> T max(final T r1, final T r2)
+    public static <U extends Unit<U>, T extends FloatScalarInterface<U, T>> T max(final T r1, final T r2)
     {
         return (r1.gt(r2)) ? r1 : r2;
     }
@@ -293,7 +293,7 @@ public abstract class FloatScalar
      * @return T; the maximum value of more than two relative scalars
      */
     @SafeVarargs
-    public static <U extends Unit<U>, T extends AbstractFloatScalar<U, T>> T max(final T r1, final T r2, final T... rn)
+    public static <U extends Unit<U>, T extends FloatScalarInterface<U, T>> T max(final T r1, final T r2, final T... rn)
     {
         T maxr = (r1.gt(r2)) ? r1 : r2;
         for (T r : rn)
@@ -314,7 +314,7 @@ public abstract class FloatScalar
      * @param <T> the argument and result type
      * @return T; the minimum value of two relative scalars
      */
-    public static <U extends Unit<U>, T extends AbstractFloatScalar<U, T>> T min(final T r1, final T r2)
+    public static <U extends Unit<U>, T extends FloatScalarInterface<U, T>> T min(final T r1, final T r2)
     {
         return (r1.lt(r2)) ? r1 : r2;
     }
@@ -329,7 +329,7 @@ public abstract class FloatScalar
      * @return T; the minimum value of more than two relative scalars
      */
     @SafeVarargs
-    public static <U extends Unit<U>, T extends AbstractFloatScalar<U, T>> T min(final T r1, final T r2, final T... rn)
+    public static <U extends Unit<U>, T extends FloatScalarInterface<U, T>> T min(final T r1, final T r2, final T... rn)
     {
         T minr = (r1.lt(r2)) ? r1 : r2;
         for (T r : rn)

@@ -50,7 +50,8 @@ public class FloatMatrixInstantiateTest
      * Test the constructors of all matrix classes.
      */
     @Test
-    public <U extends Unit<U>> void instatiateAllMatrixTypes()
+    public <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,
+            M extends FloatMatrixInterface<U, S, V, M>> void instatiateAllMatrixTypes()
     {
         // Force loading of all classes
         LengthUnit length = UNITS.METER;
@@ -64,28 +65,26 @@ public class FloatMatrixInstantiateTest
             @SuppressWarnings("unchecked")
             UnitBase<U> unitBase = (UnitBase<U>) UnitTypes.INSTANCE.getUnitBase(scalarName + "Unit");
             U standardUnit = unitBase.getStandardUnit();
-            for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+            for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
             {
                 float[][] testValues = FLOATMATRIX.denseRectArrays(5, 10);
                 FloatMatrixData dmd = FloatMatrixData.instantiate(testValues, standardUnit.getScale(), storageType);
-                FloatMatrixInterface<U, ?, ?, ?> floatMatrix = FloatMatrix.instantiate(testValues, standardUnit, storageType);
-                Class<?> scalarClass = floatMatrix.getScalarClass();
+                FloatMatrixInterface<U, S, V, M> floatMatrix = FloatMatrix.instantiate(testValues, standardUnit, storageType);
+                Class<S> scalarClass = floatMatrix.getScalarClass();
                 assertEquals("scalar class should have the right name", "Float" + scalarName, scalarClass.getSimpleName());
-                Class<?> vectorClass = floatMatrix.getVectorClass();
+                Class<V> vectorClass = floatMatrix.getVectorClass();
                 assertEquals("vector class should have the right name", "Float" + scalarName + "Vector",
                         vectorClass.getSimpleName());
-                FloatMatrixInterface<U, ?, ?, ?> floatMatrix2 = floatMatrix.instantiateMatrix(dmd, standardUnit);
+                FloatMatrixInterface<U, S, V, M> floatMatrix2 = floatMatrix.instantiateMatrix(dmd, standardUnit);
                 assertEquals("matrix constructed from FloatMatrixData should be equal to matrix constructed from float[][]",
                         floatMatrix, floatMatrix2);
                 FloatVectorData dvd =
                         FloatVectorData.instantiate(floatMatrix.getRowSI(0), standardUnit.getScale(), storageType);
-                FloatVectorInterface<U, ?, ?> floatVector = floatMatrix.instantiateVector(dvd, standardUnit);
-                assertArrayEquals("Float vector contains values from row 0", new float[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+                FloatVectorInterface<U, S, V> floatVector = floatMatrix.instantiateVector(dvd, standardUnit);
+                assertArrayEquals("Float vector contains values from row 0", new float[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
                         floatVector.getValuesSI(), 0.001f);
                 // TODO next cast should be unnecessary
-                @SuppressWarnings("unchecked")
-                FloatScalarInterface<U, ?> floatScalar =
-                        (FloatScalarInterface<U, ?>) floatMatrix.instantiateScalarSI(1.234f, standardUnit);
+                FloatScalarInterface<U, S> floatScalar = floatMatrix.instantiateScalarSI(1.234f, standardUnit);
                 assertEquals("Constructed scalar has correct value", 1.234f, floatScalar.getSI(), 0.001);
                 assertEquals("Constructed scalar has correct unit", standardUnit, floatScalar.getDisplayUnit());
             }
@@ -114,7 +113,7 @@ public class FloatMatrixInstantiateTest
             UnitBase<AU> absUnitBase = (UnitBase<AU>) UnitTypes.INSTANCE.getUnitBase(absScalarName + "Unit");
             RU relStandardUnit = relUnitBase.getStandardUnit();
             AU absStandardUnit = absUnitBase.getStandardUnit();
-            for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+            for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
             {
                 float[][] testValues = FLOATMATRIX.denseRectArrays(5, 10);
                 FloatMatrixData dmd = FloatMatrixData.instantiate(testValues, relStandardUnit.getScale(), storageType);
@@ -130,7 +129,7 @@ public class FloatMatrixInstantiateTest
                         FloatVectorData.instantiate(relFloatMatrix.getRowSI(0), relStandardUnit.getScale(), storageType);
                 AbstractFloatVectorAbs<AU, ?, ?, RU, ?, ?> absFloatVector =
                         relFloatMatrix.instantiateVectorAbs(dvd, absStandardUnit);
-                assertArrayEquals("Float vector contains values from row 0", new float[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+                assertArrayEquals("Float vector contains values from row 0", new float[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
                         absFloatVector.getValuesSI(), 0.001f);
                 AbstractFloatScalarAbs<AU, ?, RU, ?> absFloatScalar =
                         relFloatMatrix.instantiateScalarAbsSI(1.234f, absStandardUnit);
@@ -143,7 +142,7 @@ public class FloatMatrixInstantiateTest
                 dvd = FloatVectorData.instantiate(absFloatMatrix.getRowSI(0), absStandardUnit.getScale(), storageType);
                 AbstractFloatVectorRelWithAbs<AU, ?, ?, RU, ?, ?> relFloatVector =
                         absFloatMatrix.instantiateVectorRel(dvd, relStandardUnit);
-                assertArrayEquals("Float vector contains values from row 0", new float[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+                assertArrayEquals("Float vector contains values from row 0", new float[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
                         relFloatVector.getValuesSI(), 0.001f);
                 AbstractFloatScalarRelWithAbs<AU, ?, RU, ?> relFloatScalar =
                         absFloatMatrix.instantiateScalarRelSI(1.234f, relStandardUnit);
@@ -180,8 +179,8 @@ public class FloatMatrixInstantiateTest
         assertEquals(lmskm10, lmskm10.toDense().toSparse());
         assertEquals(lmdkm10, lmskm10.toDense());
         assertEquals(lmskm10, lmdkm10.toSparse());
-        assertNotEquals(lmdkm10, lmdkm10.toSparse());
-        assertNotEquals(lmskm10, lmskm10.toDense());
+        assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
+        assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
         assertEquals(lmdkm10, lmdkm10.toDense());
         assertEquals(lmskm10, lmskm10.toSparse());
         assertTrue(lmdkm10.isDense());
@@ -246,8 +245,8 @@ public class FloatMatrixInstantiateTest
         assertEquals(lmskm10, lmskm10.toDense().toSparse());
         assertEquals(lmdkm10, lmskm10.toDense());
         assertEquals(lmskm10, lmdkm10.toSparse());
-        assertNotEquals(lmdkm10, lmdkm10.toSparse());
-        assertNotEquals(lmskm10, lmskm10.toDense());
+        assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
+        assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
 
         FloatLengthMatrix lmdsi10 =
                 FloatMatrix.instantiateSI(FLOATMATRIX.sparseRectArrays(10, 10), LengthUnit.CENTIMETER, StorageType.DENSE);
@@ -324,8 +323,8 @@ public class FloatMatrixInstantiateTest
         assertEquals(lmskm10, lmskm10.toDense().toSparse());
         assertEquals(lmdkm10, lmskm10.toDense());
         assertEquals(lmskm10, lmdkm10.toSparse());
-        assertNotEquals(lmdkm10, lmdkm10.toSparse());
-        assertNotEquals(lmskm10, lmskm10.toDense());
+        assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
+        assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
 
         FloatAreaMatrix lmdsi10 = FloatMatrix.instantiateSI(FLOATMATRIX.denseRectArrays(10, 10), AreaUnit.SQUARE_CENTIMETER,
                 StorageType.DENSE, FloatAreaMatrix.class);
@@ -386,8 +385,8 @@ public class FloatMatrixInstantiateTest
         assertEquals(lmskm10, lmskm10.toDense().toSparse());
         assertEquals(lmdkm10, lmskm10.toDense());
         assertEquals(lmskm10, lmdkm10.toSparse());
-        assertNotEquals(lmdkm10, lmdkm10.toSparse());
-        assertNotEquals(lmskm10, lmskm10.toDense());
+        assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
+        assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
 
         FloatAreaMatrix lmdsi10 = FloatMatrix.instantiateSI(FLOATMATRIX.sparseRectArrays(10, 10), AreaUnit.SQUARE_CENTIMETER,
                 StorageType.DENSE, FloatAreaMatrix.class);
@@ -520,8 +519,8 @@ public class FloatMatrixInstantiateTest
         assertEquals(lmskm10, lmskm10.toDense().toSparse());
         assertEquals(lmdkm10, lmskm10.toDense());
         assertEquals(lmskm10, lmdkm10.toSparse());
-        assertNotEquals(lmdkm10, lmdkm10.toSparse());
-        assertNotEquals(lmskm10, lmskm10.toDense());
+        assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
+        assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
         assertEquals(lmdkm10, lmdkm10.toDense());
         assertEquals(lmskm10, lmskm10.toSparse());
         assertTrue(lmdkm10.isDense());
@@ -586,8 +585,8 @@ public class FloatMatrixInstantiateTest
         assertEquals(lmskm10, lmskm10.toDense().toSparse());
         assertEquals(lmdkm10, lmskm10.toDense());
         assertEquals(lmskm10, lmdkm10.toSparse());
-        assertNotEquals(lmdkm10, lmdkm10.toSparse());
-        assertNotEquals(lmskm10, lmskm10.toDense());
+        assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
+        assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
 
         FloatLengthMatrix lmdsi10 =
                 FloatMatrix.instantiateSI(FLOATMATRIX.sparseRectArrays(20, 10), LengthUnit.CENTIMETER, StorageType.DENSE);
@@ -664,8 +663,8 @@ public class FloatMatrixInstantiateTest
         assertEquals(lmskm10, lmskm10.toDense().toSparse());
         assertEquals(lmdkm10, lmskm10.toDense());
         assertEquals(lmskm10, lmdkm10.toSparse());
-        assertNotEquals(lmdkm10, lmdkm10.toSparse());
-        assertNotEquals(lmskm10, lmskm10.toDense());
+        assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
+        assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
 
         FloatAreaMatrix lmdsi10 = FloatMatrix.instantiateSI(FLOATMATRIX.denseRectArrays(20, 10), AreaUnit.SQUARE_CENTIMETER,
                 StorageType.DENSE, FloatAreaMatrix.class);
@@ -726,8 +725,8 @@ public class FloatMatrixInstantiateTest
         assertEquals(lmskm10, lmskm10.toDense().toSparse());
         assertEquals(lmdkm10, lmskm10.toDense());
         assertEquals(lmskm10, lmdkm10.toSparse());
-        assertNotEquals(lmdkm10, lmdkm10.toSparse());
-        assertNotEquals(lmskm10, lmskm10.toDense());
+        assertEquals(lmdkm10, lmdkm10.toSparse()); // dense and sparse are the same if content is the same
+        assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
 
         FloatAreaMatrix lmdsi10 = FloatMatrix.instantiateSI(FLOATMATRIX.sparseRectArrays(20, 10), AreaUnit.SQUARE_CENTIMETER,
                 StorageType.DENSE, FloatAreaMatrix.class);
@@ -776,6 +775,15 @@ public class FloatMatrixInstantiateTest
         assertEquals(10, lmstu10.cardinality());
         assertEquals(5 * 11, lmstu10.zSum().getSI(), 0.001);
         assertEquals(AreaUnit.ACRE, lmstu10.getDisplayUnit());
+
+        assertNotEquals(lmdkm10, lmdsi10);
+        assertNotEquals(lmdkm10, lmssi10);
+        assertNotEquals(lmskm10, lmdsi10);
+        assertNotEquals(lmskm10, lmssi10);
+        assertNotEquals(lmdkm10, lmdtu10);
+        assertNotEquals(lmdkm10, lmstu10);
+        assertNotEquals(lmskm10, lmdtu10);
+        assertNotEquals(lmskm10, lmstu10);
     }
 
     /**
@@ -908,6 +916,27 @@ public class FloatMatrixInstantiateTest
         assertEquals(1, col1ss.cardinality());
         assertEquals(1, col1ss.zSum().getSI(), 0.001);
         assertEquals(SpeedUnit.METER_PER_SECOND, col1ss.getDisplayUnit());
+
+        // equals
+
+        assertEquals(row1dd, row1dd);
+        assertEquals(row1ss, row1ss);
+        assertEquals(row1dd, row1ds);
+        assertEquals(col1dd, col1ds);
+        assertEquals(row1sd, row1ss);
+        assertEquals(col1sd, col1ss);
+        assertEquals(row1ds, row1dd);
+        assertEquals(col1ds, col1dd);
+        assertEquals(row1ss, row1sd);
+        assertEquals(col1ss, col1sd);
+        assertNotEquals(row1dd, col1dd);
+        assertNotEquals(col1dd, row1dd);
+        assertNotEquals(row1ss, col1ss);
+        assertNotEquals(col1ss, row1ss);
+        assertNotEquals(row1ds, col1sd);
+        assertNotEquals(col1ds, row1sd);
+        assertNotEquals(row1sd, col1ds);
+        assertNotEquals(col1sd, row1ds);
 
         // 1 x 1 DENSE DATA
 

@@ -13,7 +13,7 @@ import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.util.UnitRuntimeException;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
-import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalar;
+import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
 import org.djunits4.value.vfloat.vector.FloatSIVector;
 import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
@@ -29,7 +29,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 public final class FloatVector
 {
     /** The cache to make the lookup of the constructor for a Immutable Vector belonging to a unit faster. */
-    private static Map<Unit<?>, Constructor<? extends AbstractFloatVector<?, ?, ?>>> CACHE_DATA = new HashMap<>();
+    private static Map<Unit<?>, Constructor<? extends FloatVectorInterface<?, ?, ?>>> CACHE_DATA = new HashMap<>();
 
     /** Do not instantiate. */
     private FloatVector()
@@ -44,8 +44,8 @@ public final class FloatVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated FloatVector with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
-            V extends AbstractFloatVector<U, S, V>> V instantiate(final float[] valuesInUnit, final U unit,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
+            V extends FloatVectorInterface<U, S, V>> V instantiate(final float[] valuesInUnit, final U unit,
                     final StorageType storageType)
     {
         return instantiateAnonymous(FloatVectorData.instantiate(valuesInUnit, unit.getScale(), storageType), unit);
@@ -60,8 +60,8 @@ public final class FloatVector
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated FloatVector with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
-            V extends AbstractFloatVector<U, S, V>> V instantiate(final float[] valuesInUnit, final U unit,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
+            V extends FloatVectorInterface<U, S, V>> V instantiate(final float[] valuesInUnit, final U unit,
                     final StorageType storageType, final Class<V> vectorClass)
     {
         return instantiateAnonymous(FloatVectorData.instantiate(valuesInUnit, unit.getScale(), storageType), unit, vectorClass);
@@ -74,8 +74,8 @@ public final class FloatVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated FloatVector with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
-            V extends AbstractFloatVector<U, S, V>> V instantiateSI(final float[] valuesSI, final U displayUnit,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
+            V extends FloatVectorInterface<U, S, V>> V instantiateSI(final float[] valuesSI, final U displayUnit,
                     final StorageType storageType)
     {
         return instantiateAnonymous(FloatVectorData.instantiate(valuesSI, IdentityScale.SCALE, storageType), displayUnit);
@@ -90,8 +90,8 @@ public final class FloatVector
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated FloatVector with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
-            V extends AbstractFloatVector<U, S, V>> V instantiateSI(final float[] valuesSI, final U displayUnit,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
+            V extends FloatVectorInterface<U, S, V>> V instantiateSI(final float[] valuesSI, final U displayUnit,
                     final StorageType storageType, final Class<V> vectorClass)
     {
         return instantiateAnonymous(FloatVectorData.instantiate(valuesSI, IdentityScale.SCALE, storageType), displayUnit,
@@ -105,8 +105,8 @@ public final class FloatVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated FloatVector with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
-            V extends AbstractFloatVector<U, S, V>> V instantiate(final S[] values, final U displayUnit,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
+            V extends FloatVectorInterface<U, S, V>> V instantiate(final S[] values, final U displayUnit,
                     final StorageType storageType)
     {
         return instantiateAnonymous(FloatVectorData.instantiate(values, storageType), displayUnit);
@@ -121,8 +121,8 @@ public final class FloatVector
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated FloatVector with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
-            V extends AbstractFloatVector<U, S, V>> V instantiate(final S[] values, final U displayUnit,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
+            V extends FloatVectorInterface<U, S, V>> V instantiate(final S[] values, final U displayUnit,
                     final StorageType storageType, final Class<V> vectorClass)
     {
         return instantiateAnonymous(FloatVectorData.instantiate(values, storageType), displayUnit, vectorClass);
@@ -136,8 +136,8 @@ public final class FloatVector
      * @return V; an instantiated FloatVector with the values expressed in their unit
      * @throws ValueRuntimeException on vector init error
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
-            V extends AbstractFloatVector<U, S, V>> V instantiate(final List<Float> valueListInUnit, final U unit,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
+            V extends FloatVectorInterface<U, S, V>> V instantiate(final List<Float> valueListInUnit, final U unit,
                     final StorageType storageType) throws ValueRuntimeException
     {
         return instantiateAnonymous(FloatVectorData.instantiate(valueListInUnit, unit.getScale(), storageType), unit);
@@ -153,8 +153,8 @@ public final class FloatVector
      * @return V; an instantiated FloatVector with the values expressed in their unit
      * @throws ValueRuntimeException on vector init error
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
-            V extends AbstractFloatVector<U, S, V>> V instantiate(final List<Float> valueListInUnit, final U unit,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
+            V extends FloatVectorInterface<U, S, V>> V instantiate(final List<Float> valueListInUnit, final U unit,
                     final StorageType storageType, final Class<V> vectorClass) throws ValueRuntimeException
     {
         return instantiateAnonymous(FloatVectorData.instantiate(valueListInUnit, unit.getScale(), storageType), unit,
@@ -169,8 +169,8 @@ public final class FloatVector
      * @return V; an instantiated FloatVector with the values expressed in their unit
      * @throws ValueRuntimeException on vector init error
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
-            V extends AbstractFloatVector<U, S, V>> V instantiateSI(final List<Float> valueListSI, final U displayUnit,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
+            V extends FloatVectorInterface<U, S, V>> V instantiateSI(final List<Float> valueListSI, final U displayUnit,
                     final StorageType storageType) throws ValueRuntimeException
     {
         return instantiateAnonymous(FloatVectorData.instantiate(valueListSI, IdentityScale.SCALE, storageType), displayUnit);
@@ -186,8 +186,8 @@ public final class FloatVector
      * @return V; an instantiated FloatVector with the values expressed in their unit
      * @throws ValueRuntimeException on vector init error
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
-            V extends AbstractFloatVector<U, S, V>> V instantiateSI(final List<Float> valueListSI, final U displayUnit,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
+            V extends FloatVectorInterface<U, S, V>> V instantiateSI(final List<Float> valueListSI, final U displayUnit,
                     final StorageType storageType, final Class<V> vectorClass) throws ValueRuntimeException
     {
         return instantiateAnonymous(FloatVectorData.instantiate(valueListSI, IdentityScale.SCALE, storageType), displayUnit,
@@ -201,8 +201,8 @@ public final class FloatVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated FloatVector with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
-            V extends AbstractFloatVector<U, S, V>> V instantiateList(final List<S> valueList, final U displayUnit,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
+            V extends FloatVectorInterface<U, S, V>> V instantiateList(final List<S> valueList, final U displayUnit,
                     final StorageType storageType)
     {
         return instantiateAnonymous(FloatVectorData.instantiateList(valueList, storageType), displayUnit);
@@ -217,8 +217,8 @@ public final class FloatVector
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated FloatVector with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
-            V extends AbstractFloatVector<U, S, V>> V instantiateList(final List<S> valueList, final U displayUnit,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
+            V extends FloatVectorInterface<U, S, V>> V instantiateList(final List<S> valueList, final U displayUnit,
                     final StorageType storageType, final Class<V> vectorClass)
     {
         return instantiateAnonymous(FloatVectorData.instantiateList(valueList, storageType), displayUnit, vectorClass);
@@ -232,8 +232,8 @@ public final class FloatVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated FloatVector with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
-            V extends AbstractFloatVector<U, S, V>> V instantiate(final SortedMap<Integer, Float> valueMapInUnit,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
+            V extends FloatVectorInterface<U, S, V>> V instantiate(final SortedMap<Integer, Float> valueMapInUnit,
                     final int length, final U unit, final StorageType storageType)
     {
         return instantiateAnonymous(FloatVectorData.instantiate(valueMapInUnit, length, unit.getScale(), storageType), unit);
@@ -249,8 +249,8 @@ public final class FloatVector
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated FloatVector with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
-            V extends AbstractFloatVector<U, S, V>> V instantiate(final SortedMap<Integer, Float> valueMapInUnit,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
+            V extends FloatVectorInterface<U, S, V>> V instantiate(final SortedMap<Integer, Float> valueMapInUnit,
                     final int length, final U unit, final StorageType storageType, final Class<V> vectorClass)
     {
         return instantiateAnonymous(FloatVectorData.instantiate(valueMapInUnit, length, unit.getScale(), storageType), unit,
@@ -265,8 +265,8 @@ public final class FloatVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated FloatVector with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
-            V extends AbstractFloatVector<U, S, V>> V instantiateSI(final SortedMap<Integer, Float> valueMapSI,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
+            V extends FloatVectorInterface<U, S, V>> V instantiateSI(final SortedMap<Integer, Float> valueMapSI,
                     final int length, final U displayUnit, final StorageType storageType)
     {
         return instantiateAnonymous(FloatVectorData.instantiate(valueMapSI, length, IdentityScale.SCALE, storageType),
@@ -283,8 +283,8 @@ public final class FloatVector
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated FloatVector with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
-            V extends AbstractFloatVector<U, S, V>> V instantiateSI(final SortedMap<Integer, Float> valueMapSI,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
+            V extends FloatVectorInterface<U, S, V>> V instantiateSI(final SortedMap<Integer, Float> valueMapSI,
                     final int length, final U displayUnit, final StorageType storageType, final Class<V> vectorClass)
     {
         return instantiateAnonymous(FloatVectorData.instantiate(valueMapSI, length, IdentityScale.SCALE, storageType),
@@ -299,8 +299,8 @@ public final class FloatVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated FloatVector with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
-            V extends AbstractFloatVector<U, S, V>> V instantiateMap(final SortedMap<Integer, S> valueMap, final int length,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
+            V extends FloatVectorInterface<U, S, V>> V instantiateMap(final SortedMap<Integer, S> valueMap, final int length,
                     final U displayUnit, final StorageType storageType)
     {
         return instantiateAnonymous(FloatVectorData.instantiateMap(valueMap, length, storageType), displayUnit);
@@ -316,8 +316,8 @@ public final class FloatVector
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated FloatVector with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
-            V extends AbstractFloatVector<U, S, V>> V instantiateMap(final SortedMap<Integer, S> valueMap, final int length,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
+            V extends FloatVectorInterface<U, S, V>> V instantiateMap(final SortedMap<Integer, S> valueMap, final int length,
                     final U displayUnit, final StorageType storageType, final Class<V> vectorClass)
     {
         return instantiateAnonymous(FloatVectorData.instantiateMap(valueMap, length, storageType), displayUnit, vectorClass);
@@ -329,8 +329,8 @@ public final class FloatVector
      * @param unit U; the unit in which the values are expressed
      * @return V; an instantiated mutable FloatVector with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
-            V extends AbstractFloatVector<U, S, V>> V instantiate(final FloatVectorData values, final U unit)
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
+            V extends FloatVectorInterface<U, S, V>> V instantiate(final FloatVectorData values, final U unit)
     {
         return instantiateAnonymous(values, unit);
     }
@@ -343,8 +343,8 @@ public final class FloatVector
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated mutable FloatVector with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
-            V extends AbstractFloatVector<U, S, V>> V instantiate(final FloatVectorData values, final U unit,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
+            V extends FloatVectorInterface<U, S, V>> V instantiate(final FloatVectorData values, final U unit,
                     final Class<V> vectorClass)
     {
         return instantiateAnonymous(values, unit, vectorClass);
@@ -359,12 +359,12 @@ public final class FloatVector
      * @return V; an instantiated FloatVector with the values expressed in their unit
      */
     @SuppressWarnings("unchecked")
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
-            V extends AbstractFloatVector<U, S, V>> V instantiateAnonymous(final FloatVectorData values, final Unit<?> unit)
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
+            V extends FloatVectorInterface<U, S, V>> V instantiateAnonymous(final FloatVectorData values, final Unit<?> unit)
     {
         try
         {
-            Constructor<? extends AbstractFloatVector<?, ?, ?>> vectorConstructor = CACHE_DATA.get(unit);
+            Constructor<? extends FloatVectorInterface<?, ?, ?>> vectorConstructor = CACHE_DATA.get(unit);
             if (vectorConstructor == null)
             {
                 if (!unit.getClass().getSimpleName().endsWith("Unit"))
@@ -372,14 +372,14 @@ public final class FloatVector
                     throw new ClassNotFoundException("Unit " + unit.getClass().getSimpleName()
                             + " name does not end with 'Unit'. Cannot find corresponding vector");
                 }
-                Class<? extends AbstractFloatVector<?, ?, ?>> vectorClass;
+                Class<? extends FloatVectorInterface<?, ?, ?>> vectorClass;
                 if (unit instanceof SIUnit)
                 {
                     vectorClass = FloatSIVector.class;
                 }
                 else
                 {
-                    vectorClass = (Class<AbstractFloatVector<?, ?, ?>>) Class.forName("org.djunits4.value.vfloat.vector.Float"
+                    vectorClass = (Class<FloatVectorInterface<?, ?, ?>>) Class.forName("org.djunits4.value.vfloat.vector.Float"
                             + unit.getClass().getSimpleName().replace("Unit", "") + "Vector");
                 }
                 vectorConstructor = vectorClass.getDeclaredConstructor(FloatVectorData.class, unit.getClass());
@@ -390,7 +390,7 @@ public final class FloatVector
         catch (SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException | ClassNotFoundException | NoSuchMethodException exception)
         {
-            throw new UnitRuntimeException("Cannot instantiate AbstractFloatVector of unit " + unit.toString() + ". Reason: "
+            throw new UnitRuntimeException("Cannot instantiate FloatVectorInterface of unit " + unit.toString() + ". Reason: "
                     + exception.getMessage());
         }
     }
@@ -406,13 +406,13 @@ public final class FloatVector
      * @return V; an instantiated FloatVector with the values expressed in their unit
      */
     @SuppressWarnings("unchecked")
-    public static <U extends Unit<U>, S extends AbstractFloatScalar<U, S>,
-            V extends AbstractFloatVector<U, S, V>> V instantiateAnonymous(final FloatVectorData values, final Unit<?> unit,
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
+            V extends FloatVectorInterface<U, S, V>> V instantiateAnonymous(final FloatVectorData values, final Unit<?> unit,
                     final Class<V> vectorClass)
     {
         try
         {
-            Constructor<? extends AbstractFloatVector<?, ?, ?>> vectorConstructor = CACHE_DATA.get(unit);
+            Constructor<? extends FloatVectorInterface<?, ?, ?>> vectorConstructor = CACHE_DATA.get(unit);
             if (vectorConstructor == null)
             {
                 vectorConstructor = vectorClass.getDeclaredConstructor(FloatVectorData.class, unit.getClass());
@@ -423,7 +423,7 @@ public final class FloatVector
         catch (SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException | NoSuchMethodException exception)
         {
-            throw new UnitRuntimeException("Cannot instantiate AbstractFloatVector of unit " + unit.toString() + ". Reason: "
+            throw new UnitRuntimeException("Cannot instantiate FloatVectorInterface of unit " + unit.toString() + ". Reason: "
                     + exception.getMessage());
         }
     }

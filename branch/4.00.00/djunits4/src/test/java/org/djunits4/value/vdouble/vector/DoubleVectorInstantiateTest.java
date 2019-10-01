@@ -1,7 +1,6 @@
 package org.djunits4.value.vdouble.vector;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.djunits4.Try;
@@ -52,8 +51,8 @@ public class DoubleVectorInstantiateTest
         assertEquals(lvskm10, lvskm10.toDense().toSparse());
         assertEquals(lvdkm10, lvskm10.toDense());
         assertEquals(lvskm10, lvdkm10.toSparse());
-        assertNotEquals(lvdkm10, lvdkm10.toSparse());
-        assertNotEquals(lvskm10, lvskm10.toDense());
+        assertEquals(lvdkm10, lvdkm10.toSparse()); // dense and sparse are the same if content is the same
+        assertEquals(lvskm10, lvskm10.toDense()); // dense and sparse are the same if content is the same
         assertEquals(lvdkm10, lvdkm10.toDense());
         assertEquals(lvskm10, lvskm10.toSparse());
         assertTrue(lvdkm10.isDense());
@@ -111,8 +110,8 @@ public class DoubleVectorInstantiateTest
         assertEquals(lvskm10, lvskm10.toDense().toSparse());
         assertEquals(lvdkm10, lvskm10.toDense());
         assertEquals(lvskm10, lvdkm10.toSparse());
-        assertNotEquals(lvdkm10, lvdkm10.toSparse());
-        assertNotEquals(lvskm10, lvskm10.toDense());
+        assertEquals(lvdkm10, lvdkm10.toSparse()); // dense and sparse are the same if content is the same
+        assertEquals(lvskm10, lvskm10.toDense()); // dense and sparse are the same if content is the same
 
         LengthVector lvdsi10 =
                 DoubleVector.instantiateSI(DOUBLEVECTOR.sparseArray(100), LengthUnit.CENTIMETER, StorageType.DENSE);
@@ -167,8 +166,8 @@ public class DoubleVectorInstantiateTest
         assertEquals(lvskm10, lvskm10.toDense().toSparse());
         assertEquals(lvdkm10, lvskm10.toDense());
         assertEquals(lvskm10, lvdkm10.toSparse());
-        assertNotEquals(lvdkm10, lvdkm10.toSparse());
-        assertNotEquals(lvskm10, lvskm10.toDense());
+        assertEquals(lvdkm10, lvdkm10.toSparse()); // dense and sparse are the same if content is the same
+        assertEquals(lvskm10, lvskm10.toDense()); // dense and sparse are the same if content is the same
 
         AreaVector lvdsi10 = DoubleVector.instantiateSI(DOUBLEVECTOR.denseArray(100), AreaUnit.SQUARE_CENTIMETER,
                 StorageType.DENSE, AreaVector.class);
@@ -223,8 +222,8 @@ public class DoubleVectorInstantiateTest
         assertEquals(lvskm10, lvskm10.toDense().toSparse());
         assertEquals(lvdkm10, lvskm10.toDense());
         assertEquals(lvskm10, lvdkm10.toSparse());
-        assertNotEquals(lvdkm10, lvdkm10.toSparse());
-        assertNotEquals(lvskm10, lvskm10.toDense());
+        assertEquals(lvdkm10, lvdkm10.toSparse()); // dense and sparse are the same if content is the same
+        assertEquals(lvskm10, lvskm10.toDense()); // dense and sparse are the same if content is the same
 
         AreaVector lvdsi10 = DoubleVector.instantiateSI(DOUBLEVECTOR.sparseArray(100), AreaUnit.SQUARE_CENTIMETER,
                 StorageType.DENSE, AreaVector.class);
@@ -279,8 +278,8 @@ public class DoubleVectorInstantiateTest
         assertEquals(lvskm10, lvskm10.toDense().toSparse());
         assertEquals(lvdkm10, lvskm10.toDense());
         assertEquals(lvskm10, lvdkm10.toSparse());
-        assertNotEquals(lvdkm10, lvdkm10.toSparse());
-        assertNotEquals(lvskm10, lvskm10.toDense());
+        assertEquals(lvdkm10, lvdkm10.toSparse()); // dense and sparse are the same if content is the same
+        assertEquals(lvskm10, lvskm10.toDense()); // dense and sparse are the same if content is the same
 
         JerkVector lvdsi10 =
                 DoubleVector.instantiateSI(DOUBLEVECTOR.denseArray(100), JerkUnit.JERK, StorageType.DENSE, JerkVector.class);
@@ -335,8 +334,8 @@ public class DoubleVectorInstantiateTest
         assertEquals(lvskm10, lvskm10.toDense().toSparse());
         assertEquals(lvdkm10, lvskm10.toDense());
         assertEquals(lvskm10, lvdkm10.toSparse());
-        assertNotEquals(lvdkm10, lvdkm10.toSparse());
-        assertNotEquals(lvskm10, lvskm10.toDense());
+        assertEquals(lvdkm10, lvdkm10.toSparse()); // dense and sparse are the same if content is the same
+        assertEquals(lvskm10, lvskm10.toDense()); // dense and sparse are the same if content is the same
 
         JerkVector lvdsi10 =
                 DoubleVector.instantiateSI(DOUBLEVECTOR.sparseArray(100), JerkUnit.JERK, StorageType.DENSE, JerkVector.class);

@@ -145,7 +145,6 @@ public abstract class AbstractFloatScalar<U extends Unit<U>, S extends AbstractF
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings("checkstyle:designforextension")
     public final int compareTo(final S o)
     {
         return Float.compare(this.getSI(), o.getSI());

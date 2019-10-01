@@ -449,16 +449,10 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
         this.matrixSI = newMatrixSI;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    @SuppressWarnings("checkstyle:designforextension")
-    public int hashCode()
-    {
-        final int prime = 31;
-        int result = super.hashCode();
-        result = prime * result + Arrays.hashCode(this.indices);
-        return result;
-    }
+    /*
+     * NOTE: hashCode is not overridden on purpose. DoubleMatrixData takes full care of the calculation of the hasCode, which is
+     * independent of whether the data is stored in a sparse or in a dense manner.
+     */
 
     /** {@inheritDoc} */
     @Override
@@ -467,14 +461,23 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     {
         if (this == obj)
             return true;
-        if (!super.equals(obj))
+        if (obj == null)
             return false;
+        if (!(obj instanceof DoubleMatrixData))
+            return false;
+        DoubleMatrixData other = (DoubleMatrixData) obj;
+        if (this.rows != other.rows)
+            return false;
+        if (this.cols != other.cols)
+            return false;
+        if (other instanceof DoubleMatrixDataDense)
+            return super.equals(other);
         if (getClass() != obj.getClass())
             return false;
-        DoubleMatrixDataSparse other = (DoubleMatrixDataSparse) obj;
-        if (!Arrays.equals(this.indices, other.indices))
+        // Both are sparse
+        if (!Arrays.equals(this.indices, ((DoubleMatrixDataSparse) other).indices))
             return false;
-        return true;
+        return Arrays.equals(this.matrixSI, ((DoubleMatrixDataSparse) other).matrixSI);
     }
 
 }

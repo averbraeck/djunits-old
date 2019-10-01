@@ -14,8 +14,8 @@ import org.djunits4.unit.util.UnitRuntimeException;
 import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vdouble.matrix.SIMatrix;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
-import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalar;
-import org.djunits4.value.vdouble.vector.base.AbstractDoubleVector;
+import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
+import org.djunits4.value.vdouble.vector.base.DoubleVectorInterface;
 
 /**
  * DoubleMatrix utility methods, e.g., for creating DoubleMatrixs from different types of data.
@@ -29,7 +29,7 @@ import org.djunits4.value.vdouble.vector.base.AbstractDoubleVector;
 public final class DoubleMatrix
 {
     /** The cache to make the lookup of the constructor for a Immutable Matrix belonging to a unit faster. */
-    private static Map<Unit<?>, Constructor<? extends AbstractDoubleMatrix<?, ?, ?, ?>>> CACHE_DATA = new HashMap<>();
+    private static Map<Unit<?>, Constructor<? extends DoubleMatrixInterface<?, ?, ?, ?>>> CACHE_DATA = new HashMap<>();
 
     /** Do not instantiate. */
     private DoubleMatrix()
@@ -45,8 +45,8 @@ public final class DoubleMatrix
      * @param storageType StorageType; whether the matrix is SPARSE or DENSE
      * @return M; an instantiated DoubleMatrix with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>,
-            M extends AbstractDoubleMatrix<U, S, V, M>> M instantiate(final double[][] valuesInUnit, final U unit,
+    public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>, V extends DoubleVectorInterface<U, S, V>,
+            M extends DoubleMatrixInterface<U, S, V, M>> M instantiate(final double[][] valuesInUnit, final U unit,
                     final StorageType storageType)
     {
         return instantiateAnonymous(DoubleMatrixData.instantiate(valuesInUnit, unit.getScale(), storageType), unit);
@@ -62,8 +62,8 @@ public final class DoubleMatrix
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate
      * @return M; an instantiated DoubleMatrix with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>,
-            M extends AbstractDoubleMatrix<U, S, V, M>> M instantiate(final double[][] valuesInUnit, final U unit,
+    public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>, V extends DoubleVectorInterface<U, S, V>,
+            M extends DoubleMatrixInterface<U, S, V, M>> M instantiate(final double[][] valuesInUnit, final U unit,
                     final StorageType storageType, final Class<M> matrixClass)
     {
         return instantiateAnonymous(DoubleMatrixData.instantiate(valuesInUnit, unit.getScale(), storageType), unit,
@@ -78,8 +78,8 @@ public final class DoubleMatrix
      * @param storageType StorageType; whether the matrix is SPARSE or DENSE
      * @return M; an instantiated DoubleMatrix with the SI values and display unit
      */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>,
-            M extends AbstractDoubleMatrix<U, S, V, M>> M instantiateSI(final double[][] valuesSI, final U displayUnit,
+    public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>, V extends DoubleVectorInterface<U, S, V>,
+            M extends DoubleMatrixInterface<U, S, V, M>> M instantiateSI(final double[][] valuesSI, final U displayUnit,
                     final StorageType storageType)
     {
         return instantiateAnonymous(DoubleMatrixData.instantiate(valuesSI, IdentityScale.SCALE, storageType), displayUnit);
@@ -95,8 +95,8 @@ public final class DoubleMatrix
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate
      * @return M; an instantiated DoubleMatrix with the SI values and display unit
      */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>,
-            M extends AbstractDoubleMatrix<U, S, V, M>> M instantiateSI(final double[][] valuesSI, final U displayUnit,
+    public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>, V extends DoubleVectorInterface<U, S, V>,
+            M extends DoubleMatrixInterface<U, S, V, M>> M instantiateSI(final double[][] valuesSI, final U displayUnit,
                     final StorageType storageType, final Class<M> matrixClass)
     {
         return instantiateAnonymous(DoubleMatrixData.instantiate(valuesSI, IdentityScale.SCALE, storageType), displayUnit,
@@ -109,8 +109,8 @@ public final class DoubleMatrix
      * @param unit U; the unit in which the values are expressed
      * @return M; an instantiated mutable DoubleMatrix with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>,
-            M extends AbstractDoubleMatrix<U, S, V, M>> M instantiate(final DoubleMatrixData values, final U unit)
+    public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>, V extends DoubleVectorInterface<U, S, V>,
+            M extends DoubleMatrixInterface<U, S, V, M>> M instantiate(final DoubleMatrixData values, final U unit)
     {
         return instantiateAnonymous(values, unit);
     }
@@ -123,8 +123,8 @@ public final class DoubleMatrix
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate
      * @return M; an instantiated mutable DoubleMatrix with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>,
-            M extends AbstractDoubleMatrix<U, S, V, M>> M instantiate(final DoubleMatrixData values, final U unit,
+    public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>, V extends DoubleVectorInterface<U, S, V>,
+            M extends DoubleMatrixInterface<U, S, V, M>> M instantiate(final DoubleMatrixData values, final U unit,
                     final Class<M> matrixClass)
     {
         return instantiateAnonymous(values, unit, matrixClass);
@@ -138,8 +138,8 @@ public final class DoubleMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @return M; an instantiated mutable DoubleMatrix with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>,
-            M extends AbstractDoubleMatrix<U, S, V, M>> M instantiate(final S[][] values, final U displayUnit,
+    public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>, V extends DoubleVectorInterface<U, S, V>,
+            M extends DoubleMatrixInterface<U, S, V, M>> M instantiate(final S[][] values, final U displayUnit,
                     final StorageType storageType)
     {
         return instantiate(DoubleMatrixData.instantiate(values, storageType), displayUnit);
@@ -155,8 +155,8 @@ public final class DoubleMatrix
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate
      * @return M; an instantiated mutable DoubleMatrix with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>,
-            M extends AbstractDoubleMatrix<U, S, V, M>> M instantiate(final S[][] values, final U displayUnit,
+    public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>, V extends DoubleVectorInterface<U, S, V>,
+            M extends DoubleMatrixInterface<U, S, V, M>> M instantiate(final S[][] values, final U displayUnit,
                     final StorageType storageType, final Class<M> matrixClass)
     {
         return instantiate(DoubleMatrixData.instantiate(values, storageType), displayUnit, matrixClass);
@@ -171,8 +171,8 @@ public final class DoubleMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @return M; an instantiated mutable DoubleMatrix with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>,
-            M extends AbstractDoubleMatrix<U, S, V, M>> M instantiate(final Collection<DoubleSparseValue<U, S>> values,
+    public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>, V extends DoubleVectorInterface<U, S, V>,
+            M extends DoubleMatrixInterface<U, S, V, M>> M instantiate(final Collection<DoubleSparseValue<U, S>> values,
                     final int rows, final int cols, final U displayUnit, final StorageType storageType)
     {
         return instantiate(DoubleMatrixData.instantiate(values, rows, cols, storageType), displayUnit);
@@ -189,8 +189,8 @@ public final class DoubleMatrix
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate
      * @return M; an instantiated mutable DoubleMatrix with the values expressed in their unit
      */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>,
-            M extends AbstractDoubleMatrix<U, S, V, M>> M instantiate(final Collection<DoubleSparseValue<U, S>> values,
+    public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>, V extends DoubleVectorInterface<U, S, V>,
+            M extends DoubleMatrixInterface<U, S, V, M>> M instantiate(final Collection<DoubleSparseValue<U, S>> values,
                     final int rows, final int cols, final U displayUnit, final StorageType storageType,
                     final Class<M> matrixClass)
     {
@@ -206,15 +206,15 @@ public final class DoubleMatrix
      * @return M; an instantiated DoubleMatrix with the values expressed in their unit
      */
     @SuppressWarnings("unchecked")
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>,
-            M extends AbstractDoubleMatrix<U, S, V, M>> M instantiateAnonymous(final DoubleMatrixData values,
+    public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>, V extends DoubleVectorInterface<U, S, V>,
+            M extends DoubleMatrixInterface<U, S, V, M>> M instantiateAnonymous(final DoubleMatrixData values,
                     final Unit<?> unit)
     {
         Throw.whenNull(values, "data values cannot be null");
         Throw.whenNull(unit, "unit cannot be null");
         try
         {
-            Constructor<? extends AbstractDoubleMatrix<?, ?, ?, ?>> matrixConstructor = CACHE_DATA.get(unit);
+            Constructor<? extends DoubleMatrixInterface<?, ?, ?, ?>> matrixConstructor = CACHE_DATA.get(unit);
             if (matrixConstructor == null)
             {
                 if (!unit.getClass().getSimpleName().endsWith("Unit"))
@@ -222,14 +222,14 @@ public final class DoubleMatrix
                     throw new ClassNotFoundException("Unit " + unit.getClass().getSimpleName()
                             + " name does not end with 'Unit'. Cannot find corresponding matrix");
                 }
-                Class<? extends AbstractDoubleMatrix<?, ?, ?, ?>> matrixClass;
+                Class<? extends DoubleMatrixInterface<?, ?, ?, ?>> matrixClass;
                 if (unit instanceof SIUnit)
                 {
                     matrixClass = SIMatrix.class;
                 }
                 else
                 {
-                    matrixClass = (Class<AbstractDoubleMatrix<?, ?, ?, ?>>) Class.forName("org.djunits4.value.vdouble.matrix."
+                    matrixClass = (Class<DoubleMatrixInterface<?, ?, ?, ?>>) Class.forName("org.djunits4.value.vdouble.matrix."
                             + unit.getClass().getSimpleName().replace("Unit", "") + "Matrix");
                 }
                 matrixConstructor = matrixClass.getDeclaredConstructor(DoubleMatrixData.class, unit.getClass());
@@ -240,7 +240,7 @@ public final class DoubleMatrix
         catch (SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException | ClassNotFoundException | NoSuchMethodException exception)
         {
-            throw new UnitRuntimeException("Cannot instantiate AbstractDoubleMatrix of unit " + unit.toString() + ". Reason: "
+            throw new UnitRuntimeException("Cannot instantiate DoubleMatrixInterface of unit " + unit.toString() + ". Reason: "
                     + exception.getMessage());
         }
     }
@@ -256,8 +256,8 @@ public final class DoubleMatrix
      * @return M; an instantiated DoubleMatrix with the values expressed in their unit
      */
     @SuppressWarnings("unchecked")
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>, V extends AbstractDoubleVector<U, S, V>,
-            M extends AbstractDoubleMatrix<U, S, V, M>> M instantiateAnonymous(final DoubleMatrixData values,
+    public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>, V extends DoubleVectorInterface<U, S, V>,
+            M extends DoubleMatrixInterface<U, S, V, M>> M instantiateAnonymous(final DoubleMatrixData values,
                     final Unit<?> unit, final Class<M> matrixClass)
     {
         Throw.whenNull(values, "data values cannot be null");
@@ -265,7 +265,7 @@ public final class DoubleMatrix
         Throw.whenNull(matrixClass, "matrix class cannot be null");
         try
         {
-            Constructor<? extends AbstractDoubleMatrix<?, ?, ?, ?>> matrixConstructor = CACHE_DATA.get(unit);
+            Constructor<? extends DoubleMatrixInterface<?, ?, ?, ?>> matrixConstructor = CACHE_DATA.get(unit);
             if (matrixConstructor == null)
             {
                 matrixConstructor = matrixClass.getDeclaredConstructor(DoubleMatrixData.class, unit.getClass());
@@ -276,7 +276,7 @@ public final class DoubleMatrix
         catch (SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException | NoSuchMethodException exception)
         {
-            throw new UnitRuntimeException("Cannot instantiate AbstractDoubleMatrix of unit " + unit.toString() + ". Reason: "
+            throw new UnitRuntimeException("Cannot instantiate DoubleMatrixInterface of unit " + unit.toString() + ". Reason: "
                     + exception.getMessage());
         }
     }

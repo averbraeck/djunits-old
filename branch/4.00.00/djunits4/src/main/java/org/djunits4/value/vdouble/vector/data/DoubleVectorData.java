@@ -13,7 +13,7 @@ import org.djunits4.unit.scale.Scale;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.AbstractStorage;
 import org.djunits4.value.storage.StorageType;
-import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalar;
+import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
 
 /**
  * Stores the data for a DoubleVector and carries out basic operations.
@@ -197,7 +197,7 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @return DoubleVectorData; the DoubleVectorData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
      */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>> DoubleVectorData instantiate(final S[] values,
+    public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>> DoubleVectorData instantiate(final S[] values,
             final StorageType storageType) throws ValueRuntimeException
     {
         Throw.whenNull(values, "DoubleVectorData.instantiate: double[] values is null");
@@ -242,7 +242,7 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
                 int index = 0;
                 for (int i = 0; i < values.length; i++)
                 {
-                    double d = values[i].si;
+                    double d = values[i].getSI();
                     if (d != 0.0)
                     {
                         indices[index] = i;
@@ -265,7 +265,7 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @return DoubleVectorData; the DoubleVectorData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
      */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>> DoubleVectorData instantiateList(
+    public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>> DoubleVectorData instantiateList(
             final List<S> valueList, final StorageType storageType) throws ValueRuntimeException
     {
         Throw.whenNull(valueList, "DoubleVectorData.instantiate: valueList is null");
@@ -294,14 +294,14 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
 
             case SPARSE:
             {
-                int nonZeroCount = (int) valueList.parallelStream().filter(s -> s.si != 0.0).count();
+                int nonZeroCount = (int) valueList.parallelStream().filter(s -> s.getSI() != 0.0).count();
                 int[] indices = new int[nonZeroCount];
                 double[] valuesSI = new double[nonZeroCount];
                 // Counting non zeros could be done in parallel; but filling the arrays has to be done sequentially
                 int index = 0;
                 for (int i = 0; i < valueList.size(); i++)
                 {
-                    double d = valueList.get(i).si;
+                    double d = valueList.get(i).getSI();
                     if (d != 0.0)
                     {
                         indices[index] = i;
@@ -367,8 +367,8 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
                 else
                 {
                     // Much harder, and the result is unlikely to be very sparse
-                    nonZeroCount =
-                            length - (int) valueMap.values().parallelStream().filter(d -> scale.toStandardUnit(d) == 0d).count();
+                    nonZeroCount = length
+                            - (int) valueMap.values().parallelStream().filter(d -> scale.toStandardUnit(d) == 0d).count();
                 }
                 int[] indices = new int[nonZeroCount];
                 double[] valuesSI = new double[nonZeroCount];
@@ -428,7 +428,7 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @return DoubleVectorData; the DoubleVectorData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
      */
-    public static <U extends Unit<U>, S extends AbstractDoubleScalar<U, S>> DoubleVectorData instantiateMap(
+    public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>> DoubleVectorData instantiateMap(
             final SortedMap<Integer, S> values, final int length, final StorageType storageType) throws ValueRuntimeException
     {
         Throw.whenNull(values, "DoubleVectorData.instantiate: values is null");
@@ -439,25 +439,25 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
             Throw.when(e.getKey() < 0 || e.getKey() >= length, ValueRuntimeException.class, "Key in values out of range");
             Throw.whenNull(e.getValue(), "null value in map");
         }
-  
+
         switch (storageType)
         {
             case DENSE:
             {
                 double[] valuesSI = new double[length];
-                values.entrySet().parallelStream().forEach(entry -> valuesSI[entry.getKey()] = entry.getValue().si);
+                values.entrySet().parallelStream().forEach(entry -> valuesSI[entry.getKey()] = entry.getValue().getSI());
                 return new DoubleVectorDataDense(valuesSI);
             }
 
             case SPARSE:
             {
-                int nonZeroCount = (int) values.values().parallelStream().filter(s -> s.si != 0d).count();
+                int nonZeroCount = (int) values.values().parallelStream().filter(s -> s.getSI() != 0d).count();
                 int[] indices = new int[nonZeroCount];
                 double[] valuesSI = new double[nonZeroCount];
                 int index = 0;
                 for (Integer key : values.keySet())
                 {
-                    double value = values.get(key).si;
+                    double value = values.get(key).getSI();
                     if (0.0 != value)
                     {
                         indices[index] = key;
@@ -691,8 +691,31 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
     {
         final int prime = 31;
         int result = 1;
-        result = prime * result + Arrays.hashCode(this.vectorSI);
+        result = prime * result + this.size();
+        for (int index = 0; index < this.size(); index++)
+        {
+            long bits = Double.doubleToLongBits(getSI(index));
+            result = 31 * result + (int) (bits ^ (bits >>> 32));
+        }
         return result;
+    }
+
+    /**
+     * Compare contents of a dense and a sparse vector.
+     * @param dm DoubleVectorDataDense; the dense vector
+     * @param sm DoubleVectorDataSparse; the sparse vector
+     * @return boolean; true if the contents are equal
+     */
+    protected boolean compareDenseVectorWithSparseVector(final DoubleVectorDataDense dm, final DoubleVectorDataSparse sm)
+    {
+        for (int index = 0; index < dm.size(); index++)
+        {
+            if (dm.getSI(index) != sm.getSI(index))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     /** {@inheritDoc} */
@@ -704,12 +727,21 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
             return true;
         if (obj == null)
             return false;
-        if (getClass() != obj.getClass())
+        if (!(obj instanceof DoubleVectorData))
             return false;
         DoubleVectorData other = (DoubleVectorData) obj;
-        if (!Arrays.equals(this.vectorSI, other.vectorSI))
+        if (this.size() != other.size())
             return false;
-        return true;
+        if (other instanceof DoubleVectorDataSparse && this instanceof DoubleVectorDataDense)
+        {
+            return compareDenseVectorWithSparseVector((DoubleVectorDataDense) this, (DoubleVectorDataSparse) other);
+        }
+        else if (other instanceof DoubleVectorDataDense && this instanceof DoubleVectorDataSparse)
+        {
+            return compareDenseVectorWithSparseVector((DoubleVectorDataDense) other, (DoubleVectorDataSparse) this);
+        }
+        // Both are dense (both sparse is handled in DoubleVectorDataSparse class)
+        return Arrays.equals(this.vectorSI, other.vectorSI);
     }
 
     /** {@inheritDoc} */

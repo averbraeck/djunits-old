@@ -3,7 +3,6 @@ package org.djunits4.value.vfloat.matrix;
 import static org.junit.Assert.assertEquals;
 
 import org.djunits4.unit.AreaUnit;
-import org.djunits4.value.base.Matrix;
 import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.matrix.base.FloatMatrix;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;

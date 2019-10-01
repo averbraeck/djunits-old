@@ -589,35 +589,33 @@ public class FloatVectorDataSparse extends FloatVectorData
         this.vectorSI = Arrays.copyOf(tempVectorSI, nextIndex);
     }
 
-    /** {@inheritDoc} */
-    @Override
-    @SuppressWarnings("checkstyle:designforextension")
-    public int hashCode()
-    {
-        final int prime = 31;
-        int result = super.hashCode();
-        result = prime * result + Arrays.hashCode(this.indices);
-        result = prime * result + this.size;
-        return result;
-    }
+    /*
+     * NOTE: hashCode is not overridden on purpose. FloatVectorData takes full care of the calculation of the hasCode, which is
+     * independent of whether the data is stored in a sparse or in a dense manner.
+     */
 
     /** {@inheritDoc} */
-    @SuppressWarnings({"checkstyle:needbraces", "checkstyle:designforextension"})
     @Override
+    @SuppressWarnings({"checkstyle:needbraces", "checkstyle:designforextension"})
     public boolean equals(final Object obj)
     {
         if (this == obj)
             return true;
-        if (!super.equals(obj))
+        if (obj == null)
             return false;
+        if (!(obj instanceof FloatVectorData))
+            return false;
+        FloatVectorData other = (FloatVectorData) obj;
+        if (this.size() != other.size())
+            return false;
+        if (other instanceof FloatVectorDataDense)
+            return super.equals(other);
         if (getClass() != obj.getClass())
             return false;
-        FloatVectorDataSparse other = (FloatVectorDataSparse) obj;
-        if (!Arrays.equals(this.indices, other.indices))
+        // Both are sparse
+        if (!Arrays.equals(this.indices, ((FloatVectorDataSparse) other).indices))
             return false;
-        if (this.size != other.size)
-            return false;
-        return true;
+        return Arrays.equals(this.vectorSI, ((FloatVectorDataSparse) other).vectorSI);
     }
 
 }

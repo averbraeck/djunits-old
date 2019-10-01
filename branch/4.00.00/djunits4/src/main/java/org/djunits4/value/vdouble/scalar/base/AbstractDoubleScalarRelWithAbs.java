@@ -2,7 +2,6 @@ package org.djunits4.value.vdouble.scalar.base;
 
 import org.djunits4.unit.AbsoluteLinearUnit;
 import org.djunits4.unit.Unit;
-import org.djunits4.value.base.Scalar;
 
 /**
  * The typed, abstract DoubleScalarRelWithAbs class that forms the basis of the relative DoubleScalars suck as Duration that
@@ -22,7 +21,7 @@ import org.djunits4.value.base.Scalar;
 public abstract class AbstractDoubleScalarRelWithAbs<AU extends AbsoluteLinearUnit<AU, RU>,
         A extends AbstractDoubleScalarAbs<AU, A, RU, R>, RU extends Unit<RU>,
         R extends AbstractDoubleScalarRelWithAbs<AU, A, RU, R>> extends AbstractDoubleScalarRel<RU, R>
-        implements Scalar.RelWithAbs<AU, A, RU, R>
+        implements DoubleScalarInterface.RelWithAbs<AU, A, RU, R>
 {
     /**  */
     private static final long serialVersionUID = 20150626L;
@@ -45,14 +44,6 @@ public abstract class AbstractDoubleScalarRelWithAbs<AU extends AbsoluteLinearUn
     {
         super(value);
     }
-
-    /**
-     * Construct a new Absolute Immutable DoubleScalar of the right type. Each extending class must implement this method.
-     * @param value double; the double value
-     * @param unit U; the unit
-     * @return A; a new absolute instance of the DoubleScalar of the right type
-     */
-    public abstract A instantiateAbs(double value, AU unit);
 
     /** {@inheritDoc} */
     @Override

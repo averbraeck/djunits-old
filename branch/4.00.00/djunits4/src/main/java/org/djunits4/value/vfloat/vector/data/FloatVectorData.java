@@ -3,8 +3,8 @@ package org.djunits4.value.vfloat.vector.data;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
-import java.util.SortedMap;
 import java.util.Map.Entry;
+import java.util.SortedMap;
 import java.util.stream.IntStream;
 
 import org.djunits4.Throw;
@@ -122,8 +122,8 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @return FloatVectorData; the FloatVectorData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
      */
-    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> FloatVectorData instantiate(
-            final S[] values, final StorageType storageType) throws ValueRuntimeException
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> FloatVectorData instantiate(final S[] values,
+            final StorageType storageType) throws ValueRuntimeException
     {
         Throw.whenNull(values, "FloatVectorData.instantiate: double[] values is null");
         Throw.whenNull(storageType, "FloatVectorData.instantiate: storageType is null");
@@ -499,8 +499,30 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
     {
         final int prime = 31;
         int result = 1;
-        result = prime * result + Arrays.hashCode(this.vectorSI);
+        result = prime * result + this.size();
+        for (int index = 0; index < this.size(); index++)
+        {
+            result = 31 * result + Float.floatToIntBits(getSI(index));
+        }
         return result;
+    }
+
+    /**
+     * Compare contents of a dense and a sparse vector.
+     * @param dm FloatVectorDataDense; the dense vector
+     * @param sm FloatVectorDataSparse; the sparse vector
+     * @return boolean; true if the contents are equal
+     */
+    protected boolean compareDenseVectorWithSparseVector(final FloatVectorDataDense dm, final FloatVectorDataSparse sm)
+    {
+        for (int index = 0; index < dm.size(); index++)
+        {
+            if (dm.getSI(index) != sm.getSI(index))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     /** {@inheritDoc} */
@@ -512,12 +534,21 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
             return true;
         if (obj == null)
             return false;
-        if (getClass() != obj.getClass())
+        if (!(obj instanceof FloatVectorData))
             return false;
         FloatVectorData other = (FloatVectorData) obj;
-        if (!Arrays.equals(this.vectorSI, other.vectorSI))
+        if (this.size() != other.size())
             return false;
-        return true;
+        if (other instanceof FloatVectorDataSparse && this instanceof FloatVectorDataDense)
+        {
+            return compareDenseVectorWithSparseVector((FloatVectorDataDense) this, (FloatVectorDataSparse) other);
+        }
+        else if (other instanceof FloatVectorDataDense && this instanceof FloatVectorDataSparse)
+        {
+            return compareDenseVectorWithSparseVector((FloatVectorDataDense) other, (FloatVectorDataSparse) this);
+        }
+        // Both are dense (both sparse is handled in FloatVectorDataSparse class)
+        return Arrays.equals(this.vectorSI, other.vectorSI);
     }
 
     /** {@inheritDoc} */

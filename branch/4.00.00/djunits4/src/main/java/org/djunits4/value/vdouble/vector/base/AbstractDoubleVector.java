@@ -401,7 +401,7 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     {
         final int prime = 31;
         int result = getDisplayUnit().getStandardUnit().hashCode();
-        result = prime * result + ((getData() == null) ? 0 : getData().hashCode());
+        result = prime * result + ((this.data == null) ? 0 : this.data.hashCode());
         return result;
     }
 
@@ -419,12 +419,12 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
         AbstractDoubleVector<?, ?, ?> other = (AbstractDoubleVector<?, ?, ?>) obj;
         if (!getDisplayUnit().getStandardUnit().equals(other.getDisplayUnit().getStandardUnit()))
             return false;
-        if (getData() == null)
+        if (this.data == null)
         {
-            if (other.getData() != null)
+            if (other.data != null)
                 return false;
         }
-        else if (!getData().equals(other.getData()))
+        else if (!this.data.equals(other.data))
             return false;
         return true;
     }

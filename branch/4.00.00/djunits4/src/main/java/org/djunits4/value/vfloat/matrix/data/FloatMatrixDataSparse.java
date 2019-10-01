@@ -607,16 +607,10 @@ public class FloatMatrixDataSparse extends FloatMatrixData
         this.matrixSI = newMatrixSI;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    @SuppressWarnings("checkstyle:designforextension")
-    public int hashCode()
-    {
-        final int prime = 31;
-        int result = super.hashCode();
-        result = prime * result + Arrays.hashCode(this.indices);
-        return result;
-    }
+    /*
+     * NOTE: hashCode is not overridden on purpose. FloatMatrixData takes full care of the calculation of the hasCode, which is
+     * independent of whether the data is stored in a sparse or in a dense manner.
+     */
 
     /** {@inheritDoc} */
     @Override
@@ -635,13 +629,13 @@ public class FloatMatrixDataSparse extends FloatMatrixData
         if (this.cols != other.cols)
             return false;
         if (other instanceof FloatMatrixDataDense)
-            return super.equals(this);
+            return super.equals(other);
         if (getClass() != obj.getClass())
             return false;
         // Both are sparse
-        if (!Arrays.equals(this.indices, ((FloatMatrixDataSparse)other).indices))
+        if (!Arrays.equals(this.indices, ((FloatMatrixDataSparse) other).indices))
             return false;
-        return Arrays.equals(this.matrixSI, ((FloatMatrixDataSparse)other).matrixSI);
+        return Arrays.equals(this.matrixSI, ((FloatMatrixDataSparse) other).matrixSI);
     }
 
 }
