@@ -4,12 +4,23 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import org.djunits4.unit.AbsoluteTemperatureUnit;
 import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.PositionUnit;
 import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.Unit;
+import org.djunits4.unit.base.UnitBase;
+import org.djunits4.unit.base.UnitTypes;
+import org.djunits4.unit.util.UNITS;
+import org.djunits4.unit.util.UnitException;
+import org.djunits4.value.CLASSNAMES;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalar;
+import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarAbs;
+import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
 import org.djunits4.value.vfloat.scalar.base.FloatScalar;
 import org.junit.Test;
 
@@ -89,6 +100,106 @@ public class FloatScalarTest
     }
 
     /**
+     * Test all "of" methods.
+     * @throws SecurityException on error
+     * @throws NoSuchMethodException on error
+     * @throws InvocationTargetException on error
+     * @throws IllegalArgumentException on error
+     * @throws IllegalAccessException on error
+     * @throws ClassNotFoundException on error
+     * @throws UnitException on error
+     */
+    @Test
+    public void testAllOf() throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException,
+            InvocationTargetException, ClassNotFoundException, UnitException
+    {
+        // load all classes
+        assertEquals("m", UNITS.METER.getId());
+
+        float testValue = -123.456f;
+        for (String type : CLASSNAMES.ALL_LIST)
+        {
+            String className = "org.djunits4.value.vfloat.scalar.Float" + type;
+            Class<?> scalarClass = Class.forName(className);
+            UnitBase<?> unitBase = UnitTypes.INSTANCE.getUnitBase(type + "Unit");
+            for (Unit<?> unit : unitBase.getUnitsById().values())
+            {
+                Method ofMethod = scalarClass.getDeclaredMethod("of", float.class, String.class);
+                for (String unitAbbreviation : unit.getAbbreviations())
+                {
+                    AbstractFloatScalar<?, ?> scalar =
+                            (AbstractFloatScalar<?, ?>) ofMethod.invoke(null, testValue, unitAbbreviation);
+                    assertEquals("unit was parsed correctly", scalar.getDisplayUnit().getId(), unit.getId());
+                    if (Float.isFinite(scalar.getInUnit()) && (!unitAbbreviation.contains("s(Y")))
+                    {
+                        assertEquals("value was parsed correctly", scalar.getInUnit(), testValue, 0.01);
+                    }
+                }
+                try
+                {
+                    ofMethod.invoke(null, testValue, "abcQRS123");
+                }
+                catch (InvocationTargetException ite)
+                {
+                    assertTrue("Exception is an IllegalArgumentException",
+                            ite.getCause().toString().startsWith("java.lang.IllegalArgumentException"));
+                }
+            }
+        }
+    }
+
+    /**
+     * Test the plus method of absolutes.
+     * @throws ClassNotFoundException on error
+     * @throws InvocationTargetException on error
+     * @throws IllegalArgumentException on error
+     * @throws IllegalAccessException on error
+     * @throws SecurityException on error
+     * @throws NoSuchMethodException on error
+     * @throws InstantiationException on error
+     */
+    @Test
+    public final void testAbsPlus() throws ClassNotFoundException, IllegalAccessException, IllegalArgumentException,
+            InvocationTargetException, NoSuchMethodException, SecurityException, InstantiationException
+    {
+        // load all classes
+        assertEquals("m", UNITS.METER.getId());
+        assertEquals("type lists have same size", CLASSNAMES.REL_WITH_ABS_LIST.size(), CLASSNAMES.ABS_LIST.size());
+
+        for (int typeIndex = 0; typeIndex < CLASSNAMES.REL_WITH_ABS_LIST.size(); typeIndex++)
+        {
+            String relativeType = CLASSNAMES.REL_WITH_ABS_LIST.get(typeIndex);
+            String absoluteType = CLASSNAMES.ABS_LIST.get(typeIndex);
+            // This relies on the REL_WITH_ABS_LIST and ABS_LIST to be maintained "in sync".
+            Class<?> scalarClass = Class.forName("org.djunits4.value.vfloat.scalar.Float" + relativeType);
+            float relValue = 123.456f;
+            for (Unit<?> relativeUnit : UnitTypes.INSTANCE.getUnitBase(relativeType + "Unit").getUnitsById().values())
+            {
+                Constructor<?> relConstructor = scalarClass.getConstructor(float.class, relativeUnit.getClass());
+                AbstractFloatScalarRel<?, ?> relScalar =
+                        (AbstractFloatScalarRel<?, ?>) relConstructor.newInstance(relValue, relativeUnit);
+                float absValue = 234.567f;
+                UnitBase<?> unitBase = UnitTypes.INSTANCE.getUnitBase(absoluteType + "Unit");
+                for (Unit<?> absoluteUnit : unitBase.getUnitsById().values())
+                {
+                    // Create an abs
+                    Method instantiateAbsMethod =
+                            scalarClass.getDeclaredMethod("instantiateAbs", float.class, absoluteUnit.getClass());
+                    AbstractFloatScalarAbs<?, ?, ?, ?> absScalar = (AbstractFloatScalarAbs<?, ?, ?, ?>) instantiateAbsMethod
+                            .invoke(relScalar, absValue, absoluteUnit);
+                    // method "plus" cannot be found with getMethod() for absScalar.getClass(). 
+                    Method plusMethod = scalarClass.getMethod("plus", absScalar.getClass().getSuperclass());
+                    AbstractFloatScalarAbs<?, ?, ?, ?> sum =
+                            (AbstractFloatScalarAbs<?, ?, ?, ?>) plusMethod.invoke(relScalar, absScalar);
+                    System.out.println("rel=" + relScalar + ", abs=" + absScalar + ", sum=" + sum);
+                    assertEquals("sum in SI equals sum of SI values", absScalar.getSI() + relScalar.getSI(), sum.getSI(),
+                            sum.getSI() / 1e7);
+                }
+            }
+        }
+    }
+
+    /**
      * Test the equals method.
      */
     @Test
@@ -149,7 +260,7 @@ public class FloatScalarTest
     @Test
     public final void mathFunctionsTestAbsTest()
     {
-        float[] seedValues = {-10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f};
+        float[] seedValues = { -10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f };
         for (float seedValue : seedValues)
         {
             float input = seedValue;
@@ -315,7 +426,7 @@ public class FloatScalarTest
     @Test
     public final void mathFunctionsTestRelTest()
     {
-        float[] seedValues = {-10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f};
+        float[] seedValues = { -10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f };
         for (float seedValue : seedValues)
         {
             float input = seedValue;

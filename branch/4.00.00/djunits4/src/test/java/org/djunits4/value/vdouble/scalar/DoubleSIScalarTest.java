@@ -9,6 +9,7 @@ import static org.junit.Assert.fail;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import org.djunits4.Try;
 import org.djunits4.unit.DimensionlessUnit;
 import org.djunits4.unit.ElectricalResistanceUnit;
 import org.djunits4.unit.SIUnit;
@@ -21,6 +22,7 @@ import org.djunits4.unit.util.UNITS;
 import org.djunits4.unit.util.UnitException;
 import org.djunits4.unit.util.UnitRuntimeException;
 import org.djunits4.value.CLASSNAMES;
+import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 import org.djunits4.value.vdouble.scalar.base.DoubleScalar;
 import org.junit.Test;
