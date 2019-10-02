@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.function.DoubleFunction2;
 
 /**
  * Stores sparse data for a DoubleVector and carries out basic operations.
@@ -225,34 +226,6 @@ public class DoubleVectorDataSparse extends DoubleVectorData
 
     /** {@inheritDoc} */
     @Override
-    public final void incrementBy(final double valueSI)
-    {
-        int maxLength = size();
-        double[] tempVectorSI = new double[maxLength];
-        int[] tempIndices = new int[maxLength];
-        int nextIndex = 0;
-        int ownIndex = 0;
-        for (int i = 0; i < size(); i++)
-        {
-            if (ownIndex < this.indices.length && i > this.indices[ownIndex])
-            {
-                ownIndex++;
-            }
-            double value =
-                    (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0) + valueSI;
-            if (value != 0f)
-            {
-                tempIndices[nextIndex] = i;
-                tempVectorSI[nextIndex] = value;
-                nextIndex++;
-            }
-        }
-        this.indices = Arrays.copyOf(tempIndices, nextIndex);
-        this.vectorSI = Arrays.copyOf(tempVectorSI, nextIndex);
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final void decrementBy(final DoubleVectorData right) throws ValueRuntimeException
     {
         int maxLength =
@@ -334,32 +307,154 @@ public class DoubleVectorDataSparse extends DoubleVectorData
         this.vectorSI = Arrays.copyOf(tempVectorSI, nextIndex);
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public final void decrementBy(final double valueSI)
+    /**
+     * Perform assign operation modifying this DoubleVectorDataSparse. This is a simple straightforward implementation; no
+     * parallel operations.
+     * @param doubleFunction DoubleFunction; the operation to apply
+     * @param right DoubleVectorData; the right hand operand for the operation
+     */
+    public final void assign(final DoubleFunction2 doubleFunction, final DoubleVectorData right)
     {
-        int maxLength = size();
-        double[] tempVectorSI = new double[maxLength];
-        int[] tempIndices = new int[maxLength];
-        int nextIndex = 0;
-        int ownIndex = 0;
-        for (int i = 0; i < size(); i++)
+        int currentSize = size();
+        if (currentSize > 16)
         {
-            if (ownIndex < this.indices.length && i > this.indices[ownIndex])
+            currentSize = 16;
+        }
+        int[] newIndices = new int[currentSize];
+        double[] newValues = new double[currentSize];
+        int nonZeroValues = 0;
+        int ownIndex = 0;
+        int otherIndex = 0;
+        if (right.isSparse())
+        { // both are sparse; result must be sparse
+            DoubleVectorDataSparse other = (DoubleVectorDataSparse) right;
+            while (ownIndex < this.indices.length || otherIndex < other.indices.length)
             {
-                ownIndex++;
-            }
-            double value =
-                    (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0) - valueSI;
-            if (value != 0f)
-            {
-                tempIndices[nextIndex] = i;
-                tempVectorSI[nextIndex] = value;
-                nextIndex++;
+                double value;
+                int index;
+                if (ownIndex < this.indices.length && otherIndex < other.indices.length)
+                { // neither we nor right has run out of values
+                    if (this.indices[ownIndex] == other.indices[otherIndex])
+                    {
+                        value = doubleFunction.apply(this.vectorSI[ownIndex], other.vectorSI[otherIndex]);
+                        index = this.indices[ownIndex];
+                        ownIndex++;
+                        otherIndex++;
+                    }
+                    else if (this.indices[ownIndex] < other.indices[otherIndex])
+                    {
+                        // we have a non-zero; right has a zero
+                        value = doubleFunction.apply(this.vectorSI[ownIndex], 0.0);
+                        index = this.indices[ownIndex];
+                        ownIndex++;
+                    }
+                    else
+                    {
+                        // we have a zero; right has a non-zero
+                        value = doubleFunction.apply(0.0, other.vectorSI[otherIndex]);
+                        index = other.indices[otherIndex];
+                        otherIndex++;
+                    }
+                }
+                else if (ownIndex < this.indices.length)
+                { // right has run out of values; we have not
+                    value = this.vectorSI[ownIndex];
+                    index = this.indices[ownIndex];
+                    ownIndex++;
+                }
+                else
+                { // we have run out of values; right has not
+                    value = doubleFunction.apply(0.0, other.vectorSI[otherIndex]);
+                    index = other.indices[otherIndex];
+                    otherIndex++;
+                }
+                if (value != 0f)
+                {
+                    if (nonZeroValues >= currentSize)
+                    {
+                        // increase size of arrays
+                        currentSize *= 2;
+                        if (currentSize > this.size())
+                        {
+                            currentSize = this.size();
+                        }
+                        int[] newNewIndices = new int[currentSize];
+                        System.arraycopy(newIndices, 0, newNewIndices, 0, newIndices.length);
+                        newIndices = newNewIndices;
+                        double[] newNewValues = new double[currentSize];
+                        System.arraycopy(newNewValues, 0, newValues, 0, newValues.length);
+                        newValues = newNewValues;
+                    }
+                    newIndices[nonZeroValues] = index;
+                    newValues[nonZeroValues] = value;
+                    nonZeroValues++;
+                }
             }
         }
-        this.indices = Arrays.copyOf(tempIndices, nextIndex);
-        this.vectorSI = Arrays.copyOf(tempVectorSI, nextIndex);
+        else
+        { // we are sparse; other is dense; result must be sparse
+            DoubleVectorDataDense other = (DoubleVectorDataDense) right;
+            while (ownIndex < this.indices.length)
+            {
+                double value;
+                int index;
+                if (ownIndex < this.indices.length)
+                { // neither we nor right has run out of values
+                    if (this.indices[ownIndex] == otherIndex)
+                    {
+                        value = doubleFunction.apply(this.vectorSI[ownIndex], other.vectorSI[otherIndex]);
+                        index = this.indices[ownIndex];
+                        ownIndex++;
+                    }
+                    else
+                    {
+                        // we have a zero; other has a value
+                        value = doubleFunction.apply(0.0, other.vectorSI[otherIndex]);
+                        index = otherIndex;
+                    }
+                    otherIndex++;
+                }
+                else
+                { // we have run out of values; right has not
+                    value = doubleFunction.apply(0.0, other.vectorSI[otherIndex]);
+                    index = otherIndex;
+                    otherIndex++;
+                }
+                if (value != 0f)
+                {
+                    if (nonZeroValues >= currentSize)
+                    {
+                        // increase size of arrays
+                        currentSize *= 2;
+                        if (currentSize > this.size())
+                        {
+                            currentSize = this.size();
+                        }
+                        int[] newNewIndices = new int[currentSize];
+                        System.arraycopy(newIndices, 0, newNewIndices, 0, newIndices.length);
+                        newIndices = newNewIndices;
+                        double[] newNewValues = new double[currentSize];
+                        System.arraycopy(newNewValues, 0, newValues, 0, newValues.length);
+                        newValues = newNewValues;
+                    }
+                    newIndices[nonZeroValues] = index;
+                    newValues[nonZeroValues] = value;
+                    nonZeroValues++;
+                }
+            }
+        }
+        if (nonZeroValues < currentSize)
+        {
+            // reduce size of arrays
+            int[] newNewIndices = new int[nonZeroValues];
+            System.arraycopy(newIndices, 0, newNewIndices, 0, nonZeroValues);
+            newIndices = newNewIndices;
+            double[] newNewValues = new double[nonZeroValues];
+            System.arraycopy(newNewValues, 0, newValues, 0, nonZeroValues);
+            newValues = newNewValues;
+        }
+        this.indices = newIndices;
+        this.vectorSI = newValues;
     }
 
     /** {@inheritDoc} */
@@ -367,7 +462,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
     public final void multiplyBy(final DoubleVectorData right) throws ValueRuntimeException
     {
         int maxLength =
-                (right.isSparse() ? this.indices.length + ((DoubleVectorDataSparse) right).indices.length : right.size());
+                (right.isSparse() ? Math.max(this.indices.length, ((DoubleVectorDataSparse) right).indices.length) : size());
         double[] tempVectorSI = new double[maxLength];
         int[] tempIndices = new int[maxLength];
         int nextIndex = 0;
@@ -596,7 +691,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings({"checkstyle:needbraces", "checkstyle:designforextension"})
+    @SuppressWarnings({ "checkstyle:needbraces", "checkstyle:designforextension" })
     public boolean equals(final Object obj)
     {
         if (this == obj)

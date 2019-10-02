@@ -581,12 +581,6 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
     public abstract void incrementBy(DoubleVectorData right) throws ValueRuntimeException;
 
     /**
-     * Add a number to this vector on a cell-by-cell basis.
-     * @param valueSI double; the value to add
-     */
-    public abstract void incrementBy(double valueSI);
-
-    /**
      * Subtract two vectors on a cell-by-cell basis. If both vectors are sparse, a sparse vector is returned, otherwise a dense
      * vector is returned. Neither of the two objects is changed.
      * @param right DoubleVectorData; the other data object to subtract
@@ -610,12 +604,6 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @throws ValueRuntimeException if vectors have different lengths
      */
     public abstract void decrementBy(DoubleVectorData right) throws ValueRuntimeException;
-
-    /**
-     * Subtract a number from this vector on a cell-by-cell basis.
-     * @param valueSI double; the value to subtract
-     */
-    public abstract void decrementBy(double valueSI);
 
     /**
      * Multiply two vector on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
