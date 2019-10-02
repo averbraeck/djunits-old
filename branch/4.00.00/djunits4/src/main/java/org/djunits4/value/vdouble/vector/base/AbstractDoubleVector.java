@@ -248,18 +248,18 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     @Override
     public V times(final double multiplier)
     {
-        V result = clone();
+        V result = clone().mutable();
         result.assign(DoubleMathFunctions.MULT(multiplier));
-        return result;
+        return result.immutable();
     }
 
     /** {@inheritDoc} */
     @Override
     public V divide(final double divisor)
     {
-        V result = clone();
+        V result = clone().mutable();
         result.assign(DoubleMathFunctions.DIV(divisor));
-        return result;
+        return result.immutable();
     }
 
     /** {@inheritDoc} */

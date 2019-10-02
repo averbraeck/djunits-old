@@ -257,9 +257,9 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     @Override
     public V divide(final double divisor)
     {
-        V result = clone();
+        V result = clone().mutable();
         result.assign(FloatMathFunctions.DIV((float) divisor));
-        return result;
+        return result.immutable();
     }
 
     /** {@inheritDoc} */
