@@ -11,7 +11,7 @@ public class Determinant
 
     /**
      * Compute the determinant of a matrix. Code based on
-     * <h href="https://www.mathsisfun.com/algebra/matrix-determinant.html">Determinant of a Matrix</a>.
+     * <a href="https://www.mathsisfun.com/algebra/matrix-determinant.html">Determinant of a Matrix</a>.
      * @param matrix double[][]; the matrix (better be square, minimum size is 1x1)
      * @return double; the determinant of the matrix
      */
