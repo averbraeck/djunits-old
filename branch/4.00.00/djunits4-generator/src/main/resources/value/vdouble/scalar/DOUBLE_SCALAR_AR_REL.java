@@ -187,10 +187,8 @@ public class %TypeRel% extends AbstractDoubleScalarRelWithAbs<%TypeAbsUnit%, %Ty
             %TypeRelUnit% unit = %TypeRelUnit%.BASE.getUnitByAbbreviation(unitString);
             if (unit != null)
             {
-                {
-                    double d = Double.parseDouble(valueString);
-                    return new %TypeRel%(d, unit);
-                }
+                double d = Double.parseDouble(valueString);
+                return new %TypeRel%(d, unit);
             }
         }
         throw new IllegalArgumentException("Error parsing %TypeRel% from " + text);

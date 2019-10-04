@@ -179,10 +179,8 @@ public class Float%TypeAbs% extends AbstractFloatScalarAbs<%TypeAbsUnit%, Float%
             %TypeAbsUnit% unit = %TypeAbsUnit%.BASE.getUnitByAbbreviation(unitString);
             if (unit != null)
             {
-                {
-                    float f = Float.parseFloat(valueString);
-                    return new Float%TypeAbs%(f, unit);
-                }
+                float f = Float.parseFloat(valueString);
+                return new Float%TypeAbs%(f, unit);
             }
         }
         throw new IllegalArgumentException("Error parsing Float%TypeAbs% from " + text);

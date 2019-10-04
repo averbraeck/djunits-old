@@ -169,10 +169,8 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
             %TypeAbsUnit% unit = %TypeAbsUnit%.BASE.getUnitByAbbreviation(unitString);
             if (unit != null)
             {
-                {
-                    double d = Double.parseDouble(valueString);
-                    return new %TypeAbs%(d, unit);
-                }
+                double d = Double.parseDouble(valueString);
+                return new %TypeAbs%(d, unit);
             }
         }
         throw new IllegalArgumentException("Error parsing %TypeAbs% from " + text);

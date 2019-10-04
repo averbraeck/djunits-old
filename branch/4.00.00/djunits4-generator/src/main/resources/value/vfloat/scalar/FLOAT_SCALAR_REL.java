@@ -193,10 +193,8 @@ public class Float%Type% extends AbstractFloatScalarRel<%Type%Unit, Float%Type%>
             %Type%Unit unit = %Type%Unit.BASE.getUnitByAbbreviation(unitString);
             if (unit != null)
             {
-                {
-                    float f = Float.parseFloat(valueString);
-                    return new Float%Type%(f, unit);
-                }
+                float f = Float.parseFloat(valueString);
+                return new Float%Type%(f, unit);
             }
         }
         throw new IllegalArgumentException("Error parsing Float%Type% from " + text);
