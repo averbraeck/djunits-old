@@ -91,7 +91,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
      * @throws UnitRuntimeException when not all fields have been set
      */
     @SuppressWarnings("unchecked")
-    protected U build(final Builder<U> builder) throws UnitRuntimeException
+    public U build(final Builder<U> builder) throws UnitRuntimeException
     {
         // Check the validity
         String cName = getClass().getSimpleName();
@@ -214,7 +214,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
      * @return a scaled instance of this unit
      * @throws UnitRuntimeException when cloning fails
      */
-    protected U deriveSI(final SIPrefix siPrefix)
+    public U deriveSI(final SIPrefix siPrefix)
     {
         return deriveSI(siPrefix, false);
     }
@@ -306,7 +306,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
      * @return U; a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
      * @throws UnitRuntimeException when cloning fails
      */
-    protected U deriveLinear(final double scaleFactor, final String derivedId, final String derivedName,
+    public U deriveLinear(final double scaleFactor, final String derivedId, final String derivedName,
             final UnitSystem derivedUnitSystem, final String derivedDefaultDisplayAbbreviation,
             final String derivedDefaultTextualAbbreviation, final String... derivedAbbreviations)
     {
@@ -357,7 +357,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
      * @return U; a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
      * @throws UnitRuntimeException when cloning fails
      */
-    protected U deriveLinear(final double scaleFactor, final String derivedId, final String derivedName,
+    public U deriveLinear(final double scaleFactor, final String derivedId, final String derivedName,
             final UnitSystem derivedUnitSystem)
     {
         return deriveLinear(scaleFactor, derivedId, derivedName, derivedUnitSystem, null, null);
@@ -372,7 +372,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
      * @return U; a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
      * @throws UnitRuntimeException when cloning fails
      */
-    protected U deriveLinear(final double scaleFactor, final String derivedId, final String derivedName)
+    public U deriveLinear(final double scaleFactor, final String derivedId, final String derivedName)
     {
         return deriveLinear(scaleFactor, derivedId, derivedName, getUnitSystem());
     }
@@ -381,7 +381,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
      * Create a Builder. Override at subclasses to create extended builder.
      * @return an instance of a builder.
      */
-    protected Builder<U> makeBuilder()
+    public Builder<U> makeBuilder()
     {
         return new Builder<U>();
     }

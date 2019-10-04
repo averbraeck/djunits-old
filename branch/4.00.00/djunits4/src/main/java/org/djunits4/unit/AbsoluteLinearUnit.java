@@ -51,7 +51,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    protected AU build(Unit.Builder<AU> builder) throws UnitRuntimeException
+    public AU build(Unit.Builder<AU> builder) throws UnitRuntimeException
     {
         this.relativeUnit = ((Builder<AU, RU>) builder).getRelativeUnit();
         Throw.whenNull(this.relativeUnit, "Relative unit for unit " + builder.getId() + " cannot be null");
@@ -85,7 +85,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
      * @return AU; a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
      * @throws UnitRuntimeException when cloning fails
      */
-    protected AU deriveLinearOffset(final double scaleFactor, final double offset, final RU derivedRelativeUnit,
+    public AU deriveLinearOffset(final double scaleFactor, final double offset, final RU derivedRelativeUnit,
             final String derivedId, final String derivedName, final UnitSystem derivedUnitSystem,
             final String derivedDefaultDisplayAbbreviation, final String derivedDefaultTextualAbbreviation,
             final String... derivedAbbreviations)
@@ -140,7 +140,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
      * @return AU; a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
      * @throws UnitRuntimeException when cloning fails
      */
-    protected AU deriveLinearOffset(final double scaleFactor, final double offset, final RU derivedRelativeUnit,
+    public AU deriveLinearOffset(final double scaleFactor, final double offset, final RU derivedRelativeUnit,
             final String derivedId, final String derivedName, final UnitSystem derivedUnitSystem)
     {
         return deriveLinearOffset(scaleFactor, offset, derivedRelativeUnit, derivedId, derivedName, derivedUnitSystem, null,
@@ -158,7 +158,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
      * @return AU; a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
      * @throws UnitRuntimeException when cloning fails
      */
-    protected AU deriveLinearOffset(final double scaleFactor, final double offset, final RU derivedRelativeUnit,
+    public AU deriveLinearOffset(final double scaleFactor, final double offset, final RU derivedRelativeUnit,
             final String derivedId, final String derivedName)
     {
         return deriveLinearOffset(scaleFactor, offset, derivedRelativeUnit, derivedId, derivedName, getUnitSystem());
@@ -166,7 +166,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
 
     /** {@inheritDoc} */
     @Override
-    protected Builder<AU, RU> makeBuilder()
+    public Builder<AU, RU> makeBuilder()
     {
         Builder<AU, RU> builder = new Builder<AU, RU>();
         builder.setRelativeUnit(getRelativeUnit());
