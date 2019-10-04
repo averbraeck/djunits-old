@@ -1,5 +1,9 @@
 package org.djunits4.value.util;
 
+import org.djunits4.unit.AngleUnit;
+import org.djunits4.value.vdouble.scalar.Angle;
+import org.djunits4.value.vfloat.scalar.FloatAngle;
+
 /**
  * Utilities for Angles, such as normalization between 0 and 2 * PI.
  * <p>
@@ -35,4 +39,25 @@ public interface AngleUtil
     {
         return (float) normalize((double) angle); // for maximum precision of the float
     }
+    
+    /**
+     * Normalize an angle between 0 and 2 * PI.
+     * @param angle Angle; original angle.
+     * @return Angle; a new Angle object with angle between 0 and 2 * PI.
+     */
+    static Angle normalize(final Angle angle)
+    {
+        return new Angle(normalize(angle.si), AngleUnit.RADIAN);
+    }
+
+    /**
+     * Normalize an angle between 0 and 2 * PI.
+     * @param angle FloatAngle; original angle.
+     * @return angle between 0 and 2 * PI.
+     */
+    static FloatAngle normalize(final FloatAngle angle)
+    {
+        return new FloatAngle(normalize(angle.si), AngleUnit.RADIAN);
+    }
+
 }
