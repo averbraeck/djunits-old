@@ -1,4 +1,4 @@
-package org.djunits4.value.vdouble.vector;
+package org.djunits4.value.vfloat.vector;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -13,11 +13,11 @@ import org.djunits4.unit.TimeUnit;
 import org.djunits4.unit.util.UnitException;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
-import org.djunits4.value.vdouble.function.DoubleMathFunctions;
-import org.djunits4.value.vdouble.scalar.Area;
-import org.djunits4.value.vdouble.scalar.Duration;
-import org.djunits4.value.vdouble.vector.base.DoubleVector;
-import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
+import org.djunits4.value.vfloat.function.FloatMathFunctions;
+import org.djunits4.value.vfloat.scalar.FloatArea;
+import org.djunits4.value.vfloat.scalar.FloatDuration;
+import org.djunits4.value.vfloat.vector.base.FloatVector;
+import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 import org.junit.Test;
 
 /**
@@ -28,7 +28,7 @@ import org.junit.Test;
  * </p>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class DoubleVectorMethodTest
+public class FloatVectorMethodTest
 {
 
     /**
@@ -39,25 +39,25 @@ public class DoubleVectorMethodTest
     @Test
     public void testVectorMethods() throws ValueRuntimeException, UnitException
     {
-        double[] denseTestData = DOUBLEVECTOR.denseArray(105);
-        double[] sparseTestData = DOUBLEVECTOR.sparseArray(105);
-        double[] reverseSparseTestData = new double[sparseTestData.length];
+        float[] denseTestData = FLOATVECTOR.denseArray(105);
+        float[] sparseTestData = FLOATVECTOR.sparseArray(105);
+        float[] reverseSparseTestData = new float[sparseTestData.length];
         // sparseTestData and reverseSparseTestData should not "run out of values" at the same index
         for (int index = 0; index < sparseTestData.length; index++)
         {
             reverseSparseTestData[reverseSparseTestData.length - 1 - index] = sparseTestData[index];
         }
         // Ensure that both have a value at some index (i.c. 10)
-        sparseTestData[10] = 123.456;
+        sparseTestData[10] = 123.456f;
         reverseSparseTestData[10] = sparseTestData[10];
 
         for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
             for (AreaUnit au : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
             {
-                double[] testData = storageType.equals(StorageType.DENSE) ? denseTestData : sparseTestData;
-                AreaVector am =
-                        DoubleVector.instantiate(DoubleVectorData.instantiate(testData, au.getScale(), storageType), au);
+                float[] testData = storageType.equals(StorageType.DENSE) ? denseTestData : sparseTestData;
+                FloatAreaVector am =
+                        FloatVector.instantiate(FloatVectorData.instantiate(testData, au.getScale(), storageType), au);
 
                 // SPARSE AND DENSE
                 assertEquals(am, am.toSparse());
@@ -75,16 +75,16 @@ public class DoubleVectorMethodTest
                 assertEquals(am, am);
                 assertNotEquals(am, new Object());
                 assertNotEquals(am, null);
-                assertNotEquals(am, DoubleVector.instantiate(
-                        DoubleVectorData.instantiate(testData, LengthUnit.METER.getScale(), storageType), LengthUnit.METER));
+                assertNotEquals(am, FloatVector.instantiate(
+                        FloatVectorData.instantiate(testData, LengthUnit.METER.getScale(), storageType), LengthUnit.METER));
                 assertNotEquals(am, am.divide(2.0d));
 
                 // MUTABLE
                 assertFalse(am.isMutable());
-                AreaVector ammut = am.mutable();
+                FloatAreaVector ammut = am.mutable();
                 assertTrue(ammut.isMutable());
                 assertFalse(am.isMutable());
-                AreaVector ammut2 = ammut.multiplyBy(1.0);
+                FloatAreaVector ammut2 = ammut.multiplyBy(1.0);
                 assertEquals(am, ammut2);
                 assertTrue(ammut.isMutable());
                 assertFalse(am.isMutable());
@@ -94,7 +94,7 @@ public class DoubleVectorMethodTest
                 assertNotEquals(am, ammut2);
 
                 // ZSUM and CARDINALITY
-                Area zSum = am.zSum();
+                FloatArea zSum = am.zSum();
                 double sum = 0;
                 int card = 0;
                 for (int index = 0; index < testData.length; index++)
@@ -106,11 +106,11 @@ public class DoubleVectorMethodTest
                 assertEquals("cardinality", card, am.cardinality());
 
                 // INCREMENTBY(SCALAR) and DECREMENTBY(SCALAR)
-                AreaVector amold = am.clone();
-                Area fa = Area.of(10.0d, "m^2");
-                AreaVector aminc = am.mutable().incrementBy(fa).immutable();
-                AreaVector amdec = am.mutable().decrementBy(fa).immutable();
-                AreaVector amid = aminc.mutable().decrementBy(fa);
+                FloatAreaVector amold = am.clone();
+                FloatArea fa = FloatArea.of(10.0f, "m^2");
+                FloatAreaVector aminc = am.mutable().incrementBy(fa).immutable();
+                FloatAreaVector amdec = am.mutable().decrementBy(fa).immutable();
+                FloatAreaVector amid = aminc.mutable().decrementBy(fa);
                 assertEquals("immutable vector should not change when converted to mutable", am, amold);
                 for (int index = 0; index < testData.length; index++)
                 {
@@ -123,19 +123,19 @@ public class DoubleVectorMethodTest
                 }
 
                 // MULTIPLYBY() and DIVIDEBY(), TIMES(), DIVIDE()
-                AreaVector amt5 = am.mutable().multiplyBy(5.0d).immutable();
-                AreaVector amd5 = am.mutable().divideBy(5.0d).immutable();
-                AreaVector amtd = amt5.mutable().divideBy(5.0d);
-                AreaVector amtimD = am.times(5.0d);
-                AreaVector amtimF = am.times(5.0f);
-                AreaVector amdivD = am.divide(5.0d);
-                AreaVector amdivF = am.divide(5.0f);
+                FloatAreaVector amt5 = am.mutable().multiplyBy(5.0d).immutable();
+                FloatAreaVector amd5 = am.mutable().divideBy(5.0d).immutable();
+                FloatAreaVector amtd = amt5.mutable().divideBy(5.0d);
+                FloatAreaVector amtimD = am.times(5.0d);
+                FloatAreaVector amtimF = am.times(5.0f);
+                FloatAreaVector amdivD = am.divide(5.0d);
+                FloatAreaVector amdivF = am.divide(5.0f);
                 for (int index = 0; index < testData.length; index++)
                 {
                     assertEquals("times followed by divide with constant should result in same vector", am.getSI(index),
                             amtd.getSI(index), 0.1);
                     assertEquals("m * 5.0 = (m*5.0)", au.getScale().toStandardUnit(testData[index]) * 5.0d, amt5.getSI(index),
-                            0.1);
+                            0.2);
                     assertEquals("m / 5.0 = (m/5.0)", au.getScale().toStandardUnit(testData[index]) / 5.0d, amd5.getSI(index),
                             0.1);
                     assertEquals("amtimD", amt5.getSI(index), amtimD.getSI(index), 0.1d);
@@ -145,7 +145,7 @@ public class DoubleVectorMethodTest
                 }
 
                 // GET(), GETINUNIT()
-                assertEquals("get()", new Area(testData[2], au), am.get(2));
+                assertEquals("get()", new FloatArea(testData[2], au), am.get(2));
                 assertEquals("getSI()", au.getScale().toStandardUnit(testData[2]), am.getSI(2), 0.1);
                 assertEquals("getInUnit()", testData[2], am.getInUnit(2), 0.1);
                 assertEquals("getInUnit(unit)",
@@ -153,25 +153,25 @@ public class DoubleVectorMethodTest
                         am.getInUnit(2, AreaUnit.SQUARE_YARD), 0.1);
 
                 // SET(), SETINUNIT()
-                Area fasqft = new Area(10.5d, AreaUnit.SQUARE_FOOT);
-                AreaVector famChange = am.clone().mutable();
+                FloatArea fasqft = new FloatArea(10.5d, AreaUnit.SQUARE_FOOT);
+                FloatAreaVector famChange = am.clone().mutable();
                 famChange.set(2, fasqft);
                 assertEquals("set()", fasqft.si, famChange.get(2).si, 0.1d);
                 famChange = am.clone().mutable();
-                famChange.setSI(2, 123.4d);
+                famChange.setSI(2, 123.4f);
                 assertEquals("setSI()", 123.4d, famChange.get(2).si, 0.1d);
                 famChange = am.clone().mutable();
-                famChange.setInUnit(2, 1.2d);
+                famChange.setInUnit(2, 1.2f);
                 assertEquals("setInUnit()", 1.2d, famChange.getInUnit(2), 0.1d);
                 famChange = am.clone().mutable();
-                famChange.setInUnit(2, 1.5d, AreaUnit.HECTARE);
+                famChange.setInUnit(2, 1.5f, AreaUnit.HECTARE);
                 assertEquals("setInUnit(unit)", 15000.0d, famChange.get(2).si, 1.0d);
 
                 // GETVALUES(), GETSCALARS()
-                double[] valsi = am.getValuesSI();
-                double[] valunit = am.getValuesInUnit();
-                double[] valsqft = am.getValuesInUnit(AreaUnit.SQUARE_YARD);
-                Area[] valscalars = am.getScalars();
+                float[] valsi = am.getValuesSI();
+                float[] valunit = am.getValuesInUnit();
+                float[] valsqft = am.getValuesInUnit(AreaUnit.SQUARE_YARD);
+                FloatArea[] valscalars = am.getScalars();
                 for (int index = 0; index < testData.length; index++)
                 {
                     assertEquals("getValuesSI()", au.getScale().toStandardUnit(testData[index]), valsi[index], 0.1);
@@ -184,22 +184,22 @@ public class DoubleVectorMethodTest
                 }
 
                 // ASSIGN FUNCTION ABS, CEIL, FLOOR, NEG, RINT
-                AreaVector amdiv2 = am.divide(2.0d);
+                FloatAreaVector amdiv2 = am.divide(2.0d);
                 assertEquals(am.getStorageType(), amdiv2.getStorageType());
                 assertEquals(am.getDisplayUnit(), amdiv2.getDisplayUnit());
-                AreaVector amAbs = amdiv2.mutable().abs().immutable();
+                FloatAreaVector amAbs = amdiv2.mutable().abs().immutable();
                 assertEquals(am.getStorageType(), amAbs.getStorageType());
                 assertEquals(am.getDisplayUnit(), amAbs.getDisplayUnit());
-                AreaVector amCeil = amdiv2.mutable().ceil().immutable();
+                FloatAreaVector amCeil = amdiv2.mutable().ceil().immutable();
                 assertEquals(am.getStorageType(), amCeil.getStorageType());
                 assertEquals(am.getDisplayUnit(), amCeil.getDisplayUnit());
-                AreaVector amFloor = amdiv2.mutable().floor().immutable();
+                FloatAreaVector amFloor = amdiv2.mutable().floor().immutable();
                 assertEquals(am.getStorageType(), amFloor.getStorageType());
                 assertEquals(am.getDisplayUnit(), amFloor.getDisplayUnit());
-                AreaVector amNeg = amdiv2.mutable().neg().immutable();
+                FloatAreaVector amNeg = amdiv2.mutable().neg().immutable();
                 assertEquals(am.getStorageType(), amNeg.getStorageType());
                 assertEquals(am.getDisplayUnit(), amNeg.getDisplayUnit());
-                AreaVector amRint = amdiv2.mutable().rint().immutable();
+                FloatAreaVector amRint = amdiv2.mutable().rint().immutable();
                 assertEquals(am.getStorageType(), amRint.getStorageType());
                 assertEquals(am.getDisplayUnit(), amRint.getDisplayUnit());
                 for (int index = 0; index < testData.length; index++)
@@ -221,59 +221,60 @@ public class DoubleVectorMethodTest
 
                 for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
                 {
-                    double[] testData2 = storageType2.equals(StorageType.DENSE) ? denseTestData : reverseSparseTestData;
+                    float[] testData2 = storageType2.equals(StorageType.DENSE) ? denseTestData : reverseSparseTestData;
                     for (AreaUnit au2 : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
                     {
+
                         // PLUS and INCREMENTBY(VECTOR)
-                        AreaVector am2 = DoubleVector
-                                .instantiate(DoubleVectorData.instantiate(testData2, au2.getScale(), storageType2), au2);
-                        AreaVector amSum1 = am.plus(am2);
-                        AreaVector amSum2 = am2.plus(am);
-                        AreaVector amSum3 = am.mutable().incrementBy(am2).immutable();
+                        FloatAreaVector am2 = FloatVector
+                                .instantiate(FloatVectorData.instantiate(testData2, au2.getScale(), storageType2), au2);
+                        FloatAreaVector amSum1 = am.plus(am2);
+                        FloatAreaVector amSum2 = am2.plus(am);
+                        FloatAreaVector amSum3 = am.mutable().incrementBy(am2).immutable();
                         // different order of running out of nonzero values
-                        AreaVector amSum4 = am2.mutable().incrementBy(am).immutable();
+                        FloatAreaVector amSum4 = am2.mutable().incrementBy(am).immutable();
                         assertEquals("a+b == b+a", amSum1, amSum2);
                         assertEquals("a+b == b+a", amSum1, amSum3);
                         assertEquals("a+c == c+a", amSum1, amSum4);
                         for (int index = 0; index < testData.length; index++)
                         {
-                            double tolerance =
-                                    Double.isFinite(amSum1.getSI(index)) ? Math.abs(amSum1.getSI(index) / 10000.0d) : 0.1d;
+                            float tolerance =
+                                    Float.isFinite(amSum1.getSI(index)) ? Math.abs((float) (amSum1.getSI(index) / 10000.0d)) : 0.1f;
                             assertEquals("value in vector matches", au.getScale().toStandardUnit(testData[index])
                                     + au2.getScale().toStandardUnit(testData2[index]), amSum1.getSI(index), tolerance);
                         }
 
                         // MINUS and DECREMENTBY(VECTOR)
-                        AreaVector amDiff1 = am.minus(am2);
-                        AreaVector amDiff2 = am2.minus(am).mutable().neg();
-                        AreaVector amDiff3 = am.mutable().decrementBy(am2).immutable();
+                        FloatAreaVector amDiff1 = am.minus(am2);
+                        FloatAreaVector amDiff2 = am2.minus(am).mutable().neg();
+                        FloatAreaVector amDiff3 = am.mutable().decrementBy(am2).immutable();
                         // different order of running out of nonzero values
-                        AreaVector amDiff4 = am2.mutable().decrementBy(am).neg().immutable();
+                        FloatAreaVector amDiff4 = am2.mutable().decrementBy(am).neg().immutable();
                         assertEquals("a-b == -(b-a)", amDiff1, amDiff2);
                         assertEquals("a-b == -(b-a)", amDiff1, amDiff3);
                         assertEquals("a-c == -(c-a)", amDiff1, amDiff4);
                         for (int index = 0; index < testData.length; index++)
                         {
-                            double tolerance =
-                                    Double.isFinite(amDiff1.getSI(index)) ? Math.abs(amDiff1.getSI(index) / 10000.0d) : 0.1d;
+                            float tolerance =
+                                    Float.isFinite(amDiff1.getSI(index)) ? Math.abs((float) (amDiff1.getSI(index) / 10000.0d)) : 0.1f;
                             assertEquals("value in vector matches", au.getScale().toStandardUnit(testData[index])
                                     - au2.getScale().toStandardUnit(testData2[index]), amDiff1.getSI(index), tolerance);
                         }
 
                         // TIMES(VECTOR) and DIVIDE(VECTOR)
-                        SIVector amTim = am.times(am2);
-                        SIVector amDiv = am.divide(am2);
+                        FloatSIVector amTim = am.times(am2);
+                        FloatSIVector amDiv = am.divide(am2);
                         assertEquals("unit of m2 * m2 should be m4", "m4",
                                 amTim.getDisplayUnit().getUnitBase().getSiDimensions().toString(false, false, false));
                         assertEquals("unit of m2 / m2 should be 1", "1",
                                 amDiv.getDisplayUnit().getUnitBase().getSiDimensions().toString(false, false, false));
                         for (int index = 0; index < testData.length; index++)
                         {
-                            double tolerance =
-                                    Double.isFinite(amTim.getSI(index)) ? Math.abs(amTim.getSI(index) / 10000.0d) : 0.1d;
+                            float tolerance =
+                                    Float.isFinite(amTim.getSI(index)) ? Math.abs((float) (amTim.getSI(index) / 10000.0d)) : 0.1f;
                             assertEquals("value in m2 * m2 matches", au.getScale().toStandardUnit(testData[index])
                                     * au2.getScale().toStandardUnit(testData2[index]), amTim.getSI(index), tolerance);
-                            tolerance = Double.isFinite(amTim.getSI(index)) ? Math.abs(amDiv.getSI(index) / 10000.0d) : 0.1d;
+                            tolerance = Float.isFinite(amTim.getSI(index)) ? Math.abs((float) (amDiv.getSI(index) / 10000.0d)) : 0.1f;
                             assertEquals("value in m2 / m2 matches (could be NaN)",
                                     au.getScale().toStandardUnit(testData[index])
                                             / au2.getScale().toStandardUnit(testData2[index]),
@@ -292,24 +293,24 @@ public class DoubleVectorMethodTest
     @Test
     public void testImmutableVector()
     {
-        double[] denseTestData = DOUBLEVECTOR.denseArray(105);
-        double[] sparseTestData = DOUBLEVECTOR.sparseArray(105);
+        float[] denseTestData = FLOATVECTOR.denseArray(105);
+        float[] sparseTestData = FLOATVECTOR.sparseArray(105);
 
         for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
             for (AreaUnit au : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
             {
-                double[] testData = storageType.equals(StorageType.DENSE) ? denseTestData : sparseTestData;
-                AreaVector am =
-                        DoubleVector.instantiate(DoubleVectorData.instantiate(testData, au.getScale(), storageType), au);
+                float[] testData = storageType.equals(StorageType.DENSE) ? denseTestData : sparseTestData;
+                FloatAreaVector am =
+                        FloatVector.instantiate(FloatVectorData.instantiate(testData, au.getScale(), storageType), au);
                 am = am.immutable();
-                final AreaVector amPtr = am;
-                Area fa = Area.of(10.0d, "m^2");
+                final FloatAreaVector amPtr = am;
+                FloatArea fa = FloatArea.of(10.0f, "m^2");
                 new Try()
                 {
                     public @Override void execute()
                     {
-                        amPtr.assign(DoubleMathFunctions.ABS);
+                        amPtr.assign(FloatMathFunctions.ABS);
                     }
                 }.test("ImmutableVector.assign(...) should throw error");
                 new Try()
@@ -365,21 +366,21 @@ public class DoubleVectorMethodTest
                 {
                     public @Override void execute()
                     {
-                        amPtr.setSI(1, 20.1d);
+                        amPtr.setSI(1, 20.1f);
                     }
                 }.test("ImmutableVector.setSI() should throw error");
                 new Try()
                 {
                     public @Override void execute()
                     {
-                        amPtr.setInUnit(1, 15.2d);
+                        amPtr.setInUnit(1, 15.2f);
                     }
                 }.test("ImmutableVector.setInUnit(f) should throw error");
                 new Try()
                 {
                     public @Override void execute()
                     {
-                        amPtr.setInUnit(1, 15.2d, AreaUnit.ARE);
+                        amPtr.setInUnit(1, 15.2f, AreaUnit.ARE);
                     }
                 }.test("ImmutableVector.setInUnit(f, u) should throw error");
                 new Try()
@@ -427,16 +428,16 @@ public class DoubleVectorMethodTest
     @Test
     public void testVectorToString()
     {
-        double[] denseTestData = DOUBLEVECTOR.denseArray(105);
-        double[] sparseTestData = DOUBLEVECTOR.sparseArray(105);
+        float[] denseTestData = FLOATVECTOR.denseArray(105);
+        float[] sparseTestData = FLOATVECTOR.sparseArray(105);
 
         for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
             for (AreaUnit au : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
             {
-                double[] testData = storageType.equals(StorageType.DENSE) ? denseTestData : sparseTestData;
-                AreaVector am =
-                        DoubleVector.instantiate(DoubleVectorData.instantiate(testData, au.getScale(), storageType), au);
+                float[] testData = storageType.equals(StorageType.DENSE) ? denseTestData : sparseTestData;
+                FloatAreaVector am =
+                        FloatVector.instantiate(FloatVectorData.instantiate(testData, au.getScale(), storageType), au);
                 String s1 = am.toString(); // non-verbose with unit
                 assertTrue(s1.contains(au.getDefaultTextualAbbreviation()));
                 String s2 = am.toString(AreaUnit.SQUARE_INCH); // non-verbose with unit
@@ -457,7 +458,7 @@ public class DoubleVectorMethodTest
                 assertFalse(s3.contains("Abs"));
                 assertTrue(s3.contains("Immutable"));
                 assertFalse(s3.contains("Mutable"));
-                AreaVector ammut = am.mutable();
+                FloatAreaVector ammut = am.mutable();
                 String smut = ammut.toString(AreaUnit.SQUARE_INCH, true, true); // verbose with unit
                 assertFalse(smut.contains("Immutable"));
                 assertTrue(smut.contains("Mutable"));
@@ -469,13 +470,13 @@ public class DoubleVectorMethodTest
                 assertFalse(sNotVerbose.contains(au.getDefaultTextualAbbreviation()));
             }
         }
-        TimeVector tm = DoubleVector.instantiate(
-                DoubleVectorData.instantiate(denseTestData, TimeUnit.DEFAULT.getScale(), StorageType.DENSE), TimeUnit.DEFAULT);
+        FloatTimeVector tm = FloatVector.instantiate(
+                FloatVectorData.instantiate(denseTestData, TimeUnit.DEFAULT.getScale(), StorageType.DENSE), TimeUnit.DEFAULT);
         String st = tm.toString(TimeUnit.DEFAULT, true, true); // verbose with unit
         assertFalse(st.contains("Rel"));
         assertTrue(st.contains("Abs"));
-        LengthVector lm = DoubleVector.instantiate(
-                DoubleVectorData.instantiate(denseTestData, LengthUnit.SI.getScale(), StorageType.DENSE), LengthUnit.SI);
+        FloatLengthVector lm = FloatVector.instantiate(
+                FloatVectorData.instantiate(denseTestData, LengthUnit.SI.getScale(), StorageType.DENSE), LengthUnit.SI);
         String sl = lm.toString(LengthUnit.SI, true, true); // verbose with unit
         assertTrue(sl.contains("Rel"));
         assertFalse(sl.contains("Abs"));
@@ -487,23 +488,23 @@ public class DoubleVectorMethodTest
     @Test
     public void testSpecialVectorMethodsRelWithAbs()
     {
-        double[] denseTestData = DOUBLEVECTOR.denseArray(105);
-        TimeVector tm = DoubleVector.instantiate(
-                DoubleVectorData.instantiate(denseTestData, TimeUnit.DEFAULT.getScale(), StorageType.DENSE), TimeUnit.DEFAULT);
-        DurationVector dm = DoubleVector.instantiate(
-                DoubleVectorData.instantiate(denseTestData, DurationUnit.MINUTE.getScale(), StorageType.DENSE),
+        float[] denseTestData = FLOATVECTOR.denseArray(105);
+        FloatTimeVector tm = FloatVector.instantiate(
+                FloatVectorData.instantiate(denseTestData, TimeUnit.DEFAULT.getScale(), StorageType.DENSE), TimeUnit.DEFAULT);
+        FloatDurationVector dm = FloatVector.instantiate(
+                FloatVectorData.instantiate(denseTestData, DurationUnit.MINUTE.getScale(), StorageType.DENSE),
                 DurationUnit.SECOND);
         assertTrue(tm.isAbsolute());
         assertFalse(dm.isAbsolute());
         assertFalse(tm.isRelative());
         assertTrue(dm.isRelative());
 
-        TimeVector absPlusRel = tm.plus(dm);
-        TimeVector absMinusRel = tm.minus(dm);
-        DurationVector absMinusAbs = tm.minus(tm.divide(2.0));
-        TimeVector absDecByRelS = tm.mutable().decrementBy(Duration.of(1.0d, "min"));
-        TimeVector absDecByRelM = tm.mutable().decrementBy(dm.divide(2.0d));
-        TimeVector relPlusAbs = dm.plus(tm);
+        FloatTimeVector absPlusRel = tm.plus(dm);
+        FloatTimeVector absMinusRel = tm.minus(dm);
+        FloatDurationVector absMinusAbs = tm.minus(tm.divide(2.0));
+        FloatTimeVector absDecByRelS = tm.mutable().decrementBy(FloatDuration.of(1.0f, "min"));
+        FloatTimeVector absDecByRelM = tm.mutable().decrementBy(dm.divide(2.0d));
+        FloatTimeVector relPlusAbs = dm.plus(tm);
         for (int index = 0; index < denseTestData.length; index++)
         {
             assertEquals("absPlusRel", 61.0 * denseTestData[index], absPlusRel.getSI(index), 0.01);

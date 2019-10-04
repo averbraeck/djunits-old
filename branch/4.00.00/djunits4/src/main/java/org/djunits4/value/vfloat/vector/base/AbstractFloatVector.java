@@ -237,9 +237,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
         }
         else
         {
-            FloatVectorDataDense dvdd = ((FloatVectorDataSparse) this.data).toDense();
-            dvdd.assign(floatFunction);
-            this.data = dvdd.toSparse();
+            this.data = ((FloatVectorDataSparse) getData()).toDense().assign(floatFunction).toSparse();
         }
         return (V) this;
     }
@@ -248,18 +246,14 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     @Override
     public V times(final double multiplier)
     {
-        V result = clone();
-        result.assign(FloatMathFunctions.MULT((float) multiplier));
-        return result;
+        return clone().mutable().assign(FloatMathFunctions.MULT((float) multiplier)).immutable();
     }
 
     /** {@inheritDoc} */
     @Override
     public V divide(final double divisor)
     {
-        V result = clone().mutable();
-        result.assign(FloatMathFunctions.DIV((float) divisor));
-        return result.immutable();
+        return clone().mutable().assign(FloatMathFunctions.DIV((float) divisor)).immutable();
     }
 
     /** {@inheritDoc} */
@@ -277,48 +271,38 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     }
 
     /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
     @Override
     public final V abs()
     {
-        assign(FloatMathFunctions.ABS);
-        return (V) this;
+        return assign(FloatMathFunctions.ABS);
     }
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings("unchecked")
     public final V ceil()
     {
-        assign(FloatMathFunctions.CEIL);
-        return (V) this;
+        return assign(FloatMathFunctions.CEIL);
     }
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings("unchecked")
     public final V floor()
     {
-        assign(FloatMathFunctions.FLOOR);
-        return (V) this;
+        return assign(FloatMathFunctions.FLOOR);
     }
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings("unchecked")
     public final V neg()
     {
-        assign(FloatMathFunctions.NEG);
-        return (V) this;
+        return assign(FloatMathFunctions.NEG);
     }
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings("unchecked")
     public final V rint()
     {
-        assign(FloatMathFunctions.RINT);
-        return (V) this;
+        return assign(FloatMathFunctions.RINT);
     }
 
     /** {@inheritDoc} */

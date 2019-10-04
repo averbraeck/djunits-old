@@ -13,6 +13,7 @@ import org.djunits4.unit.scale.Scale;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.AbstractStorage;
 import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.function.DoubleFunction2;
 import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
 
 /**
@@ -542,7 +543,7 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @param other DoubleVectorData; the other data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    private void checkSizes(final DoubleVectorData other) throws ValueRuntimeException
+    protected void checkSizes(final DoubleVectorData other) throws ValueRuntimeException
     {
         if (this.size() != other.size())
         {
@@ -555,30 +556,30 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
     /* ============================================================================================ */
 
     /**
+     * Apply a binary operation on a cell by cell basis.
+     * @param doubleFunction2 DoubleFunction2; the binary operation to apply
+     * @param right DoubleVectorData; the right operand for the binary operation
+     * @return DoubleVectorData; this (modified) double vector data object
+     * @throws ValueRuntimeException when the sizes of the vectors do not match
+     */
+    abstract DoubleVectorData assign(DoubleFunction2 doubleFunction2, DoubleVectorData right) throws ValueRuntimeException;
+
+    /**
      * Add two vectors on a cell-by-cell basis. If both vectors are sparse, a sparse vector is returned, otherwise a dense
      * vector is returned. Neither of the two objects is changed.
      * @param right DoubleVectorData; the other data object to add
      * @return DoubleVectorData; the sum of this data object and the other data object as a new data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public DoubleVectorData plus(final DoubleVectorData right) throws ValueRuntimeException
-    {
-        checkSizes(right);
-        // TODO this may cause an out of memory condition even though the result fits easily in available memory
-        double[] dv = IntStream.range(0, size()).parallel().mapToDouble(i -> getSI(i) + right.getSI(i)).toArray();
-        if (this instanceof DoubleVectorDataSparse && right instanceof DoubleVectorDataSparse)
-        {
-            return new DoubleVectorDataDense(dv).toSparse();
-        }
-        return new DoubleVectorDataDense(dv);
-    }
+    public abstract DoubleVectorData plus(final DoubleVectorData right) throws ValueRuntimeException;
 
     /**
      * Add a vector to this vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the same.
      * @param right DoubleVectorData; the other data object to add
+     * @return DoubleVectorData; this modified double vector data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract void incrementBy(DoubleVectorData right) throws ValueRuntimeException;
+    public abstract DoubleVectorData incrementBy(DoubleVectorData right) throws ValueRuntimeException;
 
     /**
      * Subtract two vectors on a cell-by-cell basis. If both vectors are sparse, a sparse vector is returned, otherwise a dense
@@ -587,23 +588,15 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @return DoubleVectorData; the difference of this data object and the other data object as a new data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public DoubleVectorData minus(final DoubleVectorData right) throws ValueRuntimeException
-    {
-        checkSizes(right);
-        double[] dv = IntStream.range(0, size()).parallel().mapToDouble(i -> getSI(i) - right.getSI(i)).toArray();
-        if (this instanceof DoubleVectorDataSparse && right instanceof DoubleVectorDataSparse)
-        {
-            return new DoubleVectorDataDense(dv).toSparse();
-        }
-        return new DoubleVectorDataDense(dv);
-    }
+    public abstract DoubleVectorData minus(final DoubleVectorData right) throws ValueRuntimeException;
 
     /**
      * Subtract a vector from this vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the same.
      * @param right DoubleVectorData; the other data object to subtract
+     * @return DoubleVectorData; this modified double vector data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract void decrementBy(DoubleVectorData right) throws ValueRuntimeException;
+    public abstract DoubleVectorData decrementBy(DoubleVectorData right) throws ValueRuntimeException;
 
     /**
      * Multiply two vector on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
@@ -612,24 +605,16 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @return DoubleVectorData; the product of this data object and the other data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public DoubleVectorData times(final DoubleVectorData right) throws ValueRuntimeException
-    {
-        checkSizes(right);
-        double[] dv = IntStream.range(0, size()).parallel().mapToDouble(i -> getSI(i) * right.getSI(i)).toArray();
-        if (this instanceof DoubleVectorDataDense && right instanceof DoubleVectorDataDense)
-        {
-            return new DoubleVectorDataDense(dv);
-        }
-        return new DoubleVectorDataDense(dv).toSparse();
-    }
+    public abstract DoubleVectorData times(final DoubleVectorData right) throws ValueRuntimeException;
 
     /**
      * Multiply a vector with the values of another vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the
      * same.
      * @param right DoubleVectorData; the other data object to multiply with
+     * @return DoubleVectordata; this modified double vector data store
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract void multiplyBy(DoubleVectorData right) throws ValueRuntimeException;
+    public abstract DoubleVectorData multiplyBy(DoubleVectorData right) throws ValueRuntimeException;
 
     /**
      * Multiply the values of this vector with a number on a cell-by-cell basis.
@@ -638,30 +623,22 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
     public abstract void multiplyBy(double valueSI);
 
     /**
-     * Divide two vectors on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
-     * vector is returned.
+     * Divide two vectors on a cell-by-cell basis. If this vector is sparse and <code>right</code> is dense, a sparse vector is
+     * returned, otherwise a dense vector is returned.
      * @param right DoubleVectorData; the other data object to divide by
      * @return DoubleVectorData; the division of this data object and the other data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public DoubleVectorData divide(final DoubleVectorData right) throws ValueRuntimeException
-    {
-        checkSizes(right);
-        double[] dv = IntStream.range(0, size()).parallel().mapToDouble(i -> getSI(i) / right.getSI(i)).toArray();
-        if (this instanceof DoubleVectorDataDense && right instanceof DoubleVectorDataDense)
-        {
-            return new DoubleVectorDataDense(dv);
-        }
-        return new DoubleVectorDataDense(dv).toSparse();
-    }
+    public abstract DoubleVectorData divide(final DoubleVectorData right) throws ValueRuntimeException;
 
     /**
      * Divide the values of a vector by the values of another vector on a cell-by-cell basis. The type of vector (sparse, dense)
      * stays the same.
      * @param right DoubleVectorData; the other data object to divide by
+     * @return DoubleVectorData; this modified double vector data store
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract void divideBy(DoubleVectorData right) throws ValueRuntimeException;
+    public abstract DoubleVectorData divideBy(DoubleVectorData right) throws ValueRuntimeException;
 
     /**
      * Divide the values of this vector by a number on a cell-by-cell basis.

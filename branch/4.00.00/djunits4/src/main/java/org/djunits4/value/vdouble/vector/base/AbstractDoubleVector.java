@@ -237,9 +237,7 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
         }
         else
         {
-            DoubleVectorDataDense dvdd = ((DoubleVectorDataSparse) getData()).toDense();
-            dvdd.assign(doubleFunction);
-            this.data = dvdd.toSparse();
+            this.data = ((DoubleVectorDataSparse) getData()).toDense().assign(doubleFunction).toSparse();
         }
         return (V) this;
     }
@@ -248,18 +246,14 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     @Override
     public V times(final double multiplier)
     {
-        V result = clone().mutable();
-        result.assign(DoubleMathFunctions.MULT(multiplier));
-        return result.immutable();
+        return clone().mutable().assign(DoubleMathFunctions.MULT(multiplier)).immutable();
     }
 
     /** {@inheritDoc} */
     @Override
     public V divide(final double divisor)
     {
-        V result = clone().mutable();
-        result.assign(DoubleMathFunctions.DIV(divisor));
-        return result.immutable();
+        return clone().mutable().assign(DoubleMathFunctions.DIV(divisor)).immutable();
     }
 
     /** {@inheritDoc} */
@@ -277,48 +271,38 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     }
 
     /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
     @Override
     public final V abs()
     {
-        assign(DoubleMathFunctions.ABS);
-        return (V) this;
+        return assign(DoubleMathFunctions.ABS);
     }
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings("unchecked")
     public final V ceil()
     {
-        assign(DoubleMathFunctions.CEIL);
-        return (V) this;
+        return (V) assign(DoubleMathFunctions.CEIL);
     }
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings("unchecked")
     public final V floor()
     {
-        assign(DoubleMathFunctions.FLOOR);
-        return (V) this;
+        return (V) assign(DoubleMathFunctions.FLOOR);
     }
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings("unchecked")
     public final V neg()
     {
-        assign(DoubleMathFunctions.NEG);
-        return (V) this;
+        return (V) assign(DoubleMathFunctions.NEG);
     }
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings("unchecked")
     public final V rint()
     {
-        assign(DoubleMathFunctions.RINT);
-        return (V) this;
+        return (V) assign(DoubleMathFunctions.RINT);
     }
 
     /** {@inheritDoc} */

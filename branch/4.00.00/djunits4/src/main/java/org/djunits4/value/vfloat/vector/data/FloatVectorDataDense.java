@@ -34,10 +34,12 @@ public class FloatVectorDataDense extends FloatVectorData
     /**
      * Modify the data by applying a function to each value.
      * @param floatFunction FloatFunction; the function to apply on the (mutable) data elements
+     * @return FloatVectorDataDense; this (modified) data store
      */
-    public final void assign(final FloatFunction floatFunction)
+    public final FloatVectorDataDense assign(final FloatFunction floatFunction)
     {
         IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] = floatFunction.apply(this.vectorSI[i]));
+        return this;
     }
 
     /** {@inheritDoc} */

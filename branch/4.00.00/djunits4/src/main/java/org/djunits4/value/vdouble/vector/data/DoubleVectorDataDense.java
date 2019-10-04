@@ -5,6 +5,7 @@ import java.util.stream.IntStream;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vdouble.function.DoubleFunction;
+import org.djunits4.value.vdouble.function.DoubleFunction2;
 
 /**
  * Stores dense data for a DoubleVector and carries out basic operations.
@@ -34,10 +35,34 @@ public class DoubleVectorDataDense extends DoubleVectorData
     /**
      * Modify the data by applying a function to each value.
      * @param doubleFunction DoubleFunction; the function to apply on the (mutable) data elements
+     * @return DoubleVectorDataDense; this (modified) data store
      */
-    public final void assign(final DoubleFunction doubleFunction)
+    public final DoubleVectorDataDense assign(final DoubleFunction doubleFunction)
     {
         IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] = doubleFunction.apply(this.vectorSI[i]));
+        return this;
+    }
+
+    /**
+     * Modify the data by applying a binary operation to each value.
+     * @param doubleFunction2 DoubleFunction2; the function to apply on the (mutable) data elements
+     * @param right DoubleVectorData; the right operand of the operation
+     * @return DoubleVectorDataDense; this (modified) data store
+     */
+    @Override
+    public final DoubleVectorDataDense assign(final DoubleFunction2 doubleFunction2, DoubleVectorData right)
+    {
+        if (right.isDense())
+        {
+            IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] =
+                    doubleFunction2.apply(this.vectorSI[i], ((DoubleVectorDataDense) right).vectorSI[i]));
+        }
+        else
+        { // right is sparse
+            IntStream.range(0, size()).parallel().forEach(
+                    i -> this.vectorSI[i] = doubleFunction2.apply(this.vectorSI[i], ((DoubleVectorDataDense) right).getSI(i)));
+        }
+        return this;
     }
 
     /** {@inheritDoc} */
@@ -86,23 +111,58 @@ public class DoubleVectorDataDense extends DoubleVectorData
 
     /** {@inheritDoc} */
     @Override
-    public final void incrementBy(final DoubleVectorData right) throws ValueRuntimeException
+    public final DoubleVectorDataDense plus(DoubleVectorData right)
     {
+        checkSizes(right);
+        return new DoubleVectorDataDense(
+                IntStream.range(0, size()).parallel().mapToDouble(i -> getSI(i) + right.getSI(i)).toArray());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DoubleVectorDataDense incrementBy(final DoubleVectorData right) throws ValueRuntimeException
+    {
+        checkSizes(right);
         IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] += right.getSI(i));
+        return this;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final void decrementBy(final DoubleVectorData right) throws ValueRuntimeException
+    public final DoubleVectorDataDense minus(final DoubleVectorData right)
     {
-        IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] -= right.getSI(i));
+        checkSizes(right);
+        return new DoubleVectorDataDense(
+                IntStream.range(0, size()).parallel().mapToDouble(i -> getSI(i) - right.getSI(i)).toArray());
     }
 
     /** {@inheritDoc} */
     @Override
-    public final void multiplyBy(final DoubleVectorData right) throws ValueRuntimeException
+    public final DoubleVectorData decrementBy(final DoubleVectorData right) throws ValueRuntimeException
+    {
+        checkSizes(right);
+        IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] -= right.getSI(i));
+        return this;
+    }
+    
+    /** {@inheritDoc} */
+    @Override
+    public final DoubleVectorData times(final DoubleVectorData right)
+    {
+        if (right.isSparse())
+        {
+            return right.times(this);
+        }
+        checkSizes(right);
+        return this.copy().multiplyBy(right);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DoubleVectorDataDense multiplyBy(final DoubleVectorData right) throws ValueRuntimeException
     {
         IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] *= right.getSI(i));
+        return this;
     }
 
     /** {@inheritDoc} */
@@ -114,9 +174,18 @@ public class DoubleVectorDataDense extends DoubleVectorData
 
     /** {@inheritDoc} */
     @Override
-    public final void divideBy(final DoubleVectorData right) throws ValueRuntimeException
+    public final DoubleVectorData divide(final DoubleVectorData right)
     {
+        return this.copy().divideBy(right);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DoubleVectorDataDense divideBy(final DoubleVectorData right) throws ValueRuntimeException
+    {
+        checkSizes(right);
         IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] /= right.getSI(i));
+        return this;
     }
 
     /** {@inheritDoc} */
