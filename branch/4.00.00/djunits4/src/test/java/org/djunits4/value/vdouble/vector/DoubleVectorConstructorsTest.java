@@ -1269,7 +1269,7 @@ public class DoubleVectorConstructorsTest
                         String s = atv.toString(temperatureUnit);
                         assertTrue("toString returns something sensible", s.startsWith("["));
                         assertTrue("toString returns something sensible", s.endsWith("] " + temperatureUnit.toString()));
-                        System.out.println(atv.toString(true, true));
+                        // System.out.println(atv.toString(true, true));
                         s = atv.toString(true, true);
                         assertTrue("toString includes Immutable", s.contains("Immutable"));
                         assertTrue("toString includes Abs", s.contains("Abs"));
