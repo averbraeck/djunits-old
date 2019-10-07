@@ -2,7 +2,10 @@ package org.djunits4.value;
 
 import static org.junit.Assert.assertEquals;
 
+import org.djunits4.unit.AngleUnit;
 import org.djunits4.value.util.AngleUtil;
+import org.djunits4.value.vdouble.scalar.Angle;
+import org.djunits4.value.vfloat.scalar.FloatAngle;
 import org.junit.Test;
 
 /**
@@ -36,6 +39,9 @@ public class AngleUtilTest
             }
             assertEquals("normalized angle", expected, AngleUtil.normalize(testValue), 0.001);
             assertEquals("float normalized angle", (float) expected, AngleUtil.normalize((float) testValue), 0.001f);
+            assertEquals("normalized Angle", expected, AngleUtil.normalize(new Angle(testValue, AngleUnit.SI)).si, 0.001);
+            assertEquals("normalized FloatAngle", expected, AngleUtil.normalize(new FloatAngle(testValue, AngleUnit.SI)).si,
+                    0.001);
         }
     }
 }
