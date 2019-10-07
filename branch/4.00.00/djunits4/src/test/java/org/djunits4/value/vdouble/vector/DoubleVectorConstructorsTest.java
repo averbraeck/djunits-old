@@ -145,7 +145,7 @@ public class DoubleVectorConstructorsTest
                     // Ignore expected exception
                 }
                 DoubleVectorInterface<?, ?, ?> mutable = doubleVector.mutable();
-                assertTrue("double vector is immutable by default", mutable.isMutable());
+                assertTrue("mutable double vector is mutable", mutable.isMutable());
                 mutable.setSI(0, 0);
                 mutable.setInUnit(0, 0);
                 try
@@ -1345,20 +1345,6 @@ public class DoubleVectorConstructorsTest
         for (int i = 0; i < reference.length; i++)
         {
             assertEquals("value at each index must match", reference[i] * factor + offset, got[i], 0.001);
-        }
-    }
-
-    /**
-     * Compare two float arrays.
-     * @param reference float[]; the reference values
-     * @param got float[] the values that should match the reference values
-     */
-    public void compareValues(final float[] reference, final float[] got)
-    {
-        assertEquals("length of reference must equal length of result ", reference.length, got.length);
-        for (int i = 0; i < reference.length; i++)
-        {
-            assertEquals("value at each index must match", reference[i], got[i], 0.001);
         }
     }
 
