@@ -128,4 +128,5 @@ public interface DoubleScalarInterface<U extends Unit<U>, S extends DoubleScalar
          */
         A instantiateAbs(double value, AU unit);
     }
+    
 }

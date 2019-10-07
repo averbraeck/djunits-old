@@ -427,4 +427,5 @@ public final class FloatVector
                     + exception.getMessage());
         }
     }
+    
 }

@@ -125,4 +125,5 @@ public interface DoubleVectorInterface<U extends Unit<U>, S extends DoubleScalar
      * @return S; a scalar of the correct type, belonging to the vector type
      */
     S instantiateScalarSI(double valueSI, U displayUnit);
+    
 }

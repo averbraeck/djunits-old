@@ -3,9 +3,9 @@ package org.djunits4.value.vfloat.matrix.base;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.base.Matrix;
-import org.djunits4.value.base.Scalar;
 import org.djunits4.value.vfloat.function.FloatFunction;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
+import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
 import org.djunits4.value.vfloat.vector.base.FloatVectorInterface;
 import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
@@ -22,8 +22,8 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @param <V> the vector type belonging to the matrix type
  * @param <M> the generic matrix type
  */
-public interface FloatMatrixInterface<U extends Unit<U>, S extends Scalar<U, S>, V extends FloatVectorInterface<U, S, V>,
-        M extends FloatMatrixInterface<U, S, V, M>> extends Matrix<U, S, V, M>
+public interface FloatMatrixInterface<U extends Unit<U>, S extends FloatScalarInterface<U, S>,
+        V extends FloatVectorInterface<U, S, V>, M extends FloatMatrixInterface<U, S, V, M>> extends Matrix<U, S, V, M>
 {
     /**
      * Retrieve the value stored at a specified row and column in the standard SI unit.

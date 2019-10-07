@@ -128,4 +128,5 @@ public interface FloatScalarInterface<U extends Unit<U>, S extends FloatScalarIn
          */
         A instantiateAbs(float value, AU unit);
     }
+    
 }

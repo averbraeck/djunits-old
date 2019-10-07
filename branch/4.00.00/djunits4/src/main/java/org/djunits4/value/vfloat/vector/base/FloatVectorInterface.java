@@ -2,9 +2,9 @@ package org.djunits4.value.vfloat.vector.base;
 
 import org.djunits4.unit.Unit;
 import org.djunits4.value.ValueRuntimeException;
-import org.djunits4.value.base.Scalar;
 import org.djunits4.value.base.Vector;
 import org.djunits4.value.vfloat.function.FloatFunction;
+import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
 import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 
 /**
@@ -19,8 +19,8 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @param <S> the generic scalar type belonging to U
  * @param <V> the generic vector type
  */
-public interface FloatVectorInterface<U extends Unit<U>, S extends Scalar<U, S>, V extends FloatVectorInterface<U, S, V>>
-        extends Vector<U, S, V>
+public interface FloatVectorInterface<U extends Unit<U>, S extends FloatScalarInterface<U, S>,
+        V extends FloatVectorInterface<U, S, V>> extends Vector<U, S, V>
 {
     /**
      * Retrieve the value stored at a specified position in the standard SI unit.
