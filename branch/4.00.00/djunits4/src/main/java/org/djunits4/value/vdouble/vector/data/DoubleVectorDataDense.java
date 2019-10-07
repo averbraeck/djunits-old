@@ -43,12 +43,7 @@ public class DoubleVectorDataDense extends DoubleVectorData
         return this;
     }
 
-    /**
-     * Modify the data by applying a binary operation to each value.
-     * @param doubleFunction2 DoubleFunction2; the function to apply on the (mutable) data elements
-     * @param right DoubleVectorData; the right operand of the operation
-     * @return DoubleVectorDataDense; this (modified) data store
-     */
+    /** {@inheritDoc} */
     @Override
     public final DoubleVectorDataDense assign(final DoubleFunction2 doubleFunction2, DoubleVectorData right)
     {
@@ -161,6 +156,7 @@ public class DoubleVectorDataDense extends DoubleVectorData
     @Override
     public final DoubleVectorDataDense multiplyBy(final DoubleVectorData right) throws ValueRuntimeException
     {
+        checkSizes(right);
         IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] *= right.getSI(i));
         return this;
     }
@@ -176,6 +172,7 @@ public class DoubleVectorDataDense extends DoubleVectorData
     @Override
     public final DoubleVectorData divide(final DoubleVectorData right)
     {
+        checkSizes(right);
         return this.copy().divideBy(right);
     }
 

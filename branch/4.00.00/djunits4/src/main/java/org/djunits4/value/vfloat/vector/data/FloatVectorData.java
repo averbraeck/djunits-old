@@ -13,6 +13,7 @@ import org.djunits4.unit.scale.Scale;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.AbstractStorage;
 import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vfloat.function.FloatFunction2;
 import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
 
 /**
@@ -346,7 +347,7 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @param other FloatVectorData; the other data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    private void checkSizes(final FloatVectorData other) throws ValueRuntimeException
+    protected void checkSizes(final FloatVectorData other) throws ValueRuntimeException
     {
         if (this.size() != other.size())
         {
@@ -359,37 +360,30 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
     /* ============================================================================================ */
 
     /**
+     * Apply a binary operation on a cell by cell basis.
+     * @param floatFunction2 FloatFunction2; the binary operation to apply
+     * @param right FloatVectorData; the right operand for the binary operation
+     * @return FloatVectorData; this (modified) float vector data object
+     * @throws ValueRuntimeException when the sizes of the vectors do not match
+     */
+    abstract FloatVectorData assign(FloatFunction2 floatFunction2, FloatVectorData right) throws ValueRuntimeException;
+
+    /**
      * Add two vectors on a cell-by-cell basis. If both vectors are sparse, a sparse vector is returned, otherwise a dense
      * vector is returned.
      * @param right FloatVectorData; the other data object to add
      * @return FloatVectorData; the sum of this data object and the other data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public FloatVectorData plus(final FloatVectorData right) throws ValueRuntimeException
-    {
-        checkSizes(right);
-        // TODO this may cause an out of memory condition even though the result fits easily in available memory
-        float[] dv = new float[size()];
-        IntStream.range(0, size()).parallel().forEach(i -> dv[i] = getSI(i) + right.getSI(i));
-        if (this instanceof FloatVectorDataSparse && right instanceof FloatVectorDataSparse)
-        {
-            return new FloatVectorDataDense(dv).toSparse();
-        }
-        return new FloatVectorDataDense(dv);
-    }
+    public abstract FloatVectorData plus(final FloatVectorData right) throws ValueRuntimeException;
 
     /**
      * Add a vector to this vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the same.
      * @param right FloatVectorData; the other data object to add
+     * @return FloatVectorData; this modified float vector data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract void incrementBy(FloatVectorData right) throws ValueRuntimeException;
-
-    /**
-     * Add a number to this vector on a cell-by-cell basis.
-     * @param valueSI float; the value to add
-     */
-    public abstract void incrementBy(float valueSI);
+    public abstract FloatVectorData incrementBy(FloatVectorData right) throws ValueRuntimeException;
 
     /**
      * Subtract two vectors on a cell-by-cell basis. If both vectors are sparse, a sparse vector is returned, otherwise a dense
@@ -398,30 +392,31 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @return FloatVectorData; the difference of this data object and the other data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public FloatVectorData minus(final FloatVectorData right) throws ValueRuntimeException
-    {
-        checkSizes(right);
-        float[] dv = new float[size()];
-        IntStream.range(0, size()).parallel().forEach(i -> dv[i] = getSI(i) - right.getSI(i));
-        if (this instanceof FloatVectorDataSparse && right instanceof FloatVectorDataSparse)
-        {
-            return new FloatVectorDataDense(dv).toSparse();
-        }
-        return new FloatVectorDataDense(dv);
-    }
+    public abstract FloatVectorData minus(final FloatVectorData right) throws ValueRuntimeException;
+//    {
+//        checkSizes(right);
+//        float[] dv = new float[size()];
+//        IntStream.range(0, size()).parallel().forEach(i -> dv[i] = getSI(i) - right.getSI(i));
+//        if (this instanceof FloatVectorDataSparse && right instanceof FloatVectorDataSparse)
+//        {
+//            return new FloatVectorDataDense(dv).toSparse();
+//        }
+//        return new FloatVectorDataDense(dv);
+//    }
 
     /**
      * Subtract a vector from this vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the same.
      * @param right FloatVectorData; the other data object to subtract
+     * @return FloatVectorData; this modified float vector data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract void decrementBy(FloatVectorData right) throws ValueRuntimeException;
+    public abstract FloatVectorData decrementBy(FloatVectorData right) throws ValueRuntimeException;
 
-    /**
-     * Subtract a number from this vector on a cell-by-cell basis.
-     * @param valueSI float; the value to subtract
-     */
-    public abstract void decrementBy(float valueSI);
+//    /**
+//     * Subtract a number from this vector on a cell-by-cell basis.
+//     * @param valueSI float; the value to subtract
+//     */
+//    public abstract void decrementBy(float valueSI);
 
     /**
      * Multiply two vector on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
@@ -430,25 +425,26 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @return FloatVectorData; the product of this data object and the other data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public FloatVectorData times(final FloatVectorData right) throws ValueRuntimeException
-    {
-        checkSizes(right);
-        float[] dv = new float[size()];
-        IntStream.range(0, size()).parallel().forEach(i -> dv[i] = getSI(i) * right.getSI(i));
-        if (this instanceof FloatVectorDataDense && right instanceof FloatVectorDataDense)
-        {
-            return new FloatVectorDataDense(dv);
-        }
-        return new FloatVectorDataDense(dv).toSparse();
-    }
+    public abstract FloatVectorData times(final FloatVectorData right) throws ValueRuntimeException;
+//    {
+//        checkSizes(right);
+//        float[] dv = new float[size()];
+//        IntStream.range(0, size()).parallel().forEach(i -> dv[i] = getSI(i) * right.getSI(i));
+//        if (this instanceof FloatVectorDataDense && right instanceof FloatVectorDataDense)
+//        {
+//            return new FloatVectorDataDense(dv);
+//        }
+//        return new FloatVectorDataDense(dv).toSparse();
+//    }
 
     /**
      * Multiply a vector with the values of another vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the
      * same.
      * @param right FloatVectorData; the other data object to multiply with
+     * @return FloatVectorData; this modified float vector data store 
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract void multiplyBy(FloatVectorData right) throws ValueRuntimeException;
+    public abstract FloatVectorData multiplyBy(FloatVectorData right) throws ValueRuntimeException;
 
     /**
      * Multiply the values of this vector with a number on a cell-by-cell basis.
@@ -457,31 +453,32 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
     public abstract void multiplyBy(float valueSI);
 
     /**
-     * Divide two vectors on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
-     * vector is returned.
+     * Divide two vectors on a cell-by-cell basis. If this vector is sparse and <code>right</code> is dense, a sparse vector is
+     * returned, otherwise a dense vector is returned.
      * @param right FloatVectorData; the other data object to divide by
      * @return FloatVectorData; the division of this data object and the other data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public FloatVectorData divide(final FloatVectorData right) throws ValueRuntimeException
-    {
-        checkSizes(right);
-        float[] dv = new float[size()];
-        IntStream.range(0, size()).parallel().forEach(i -> dv[i] = getSI(i) / right.getSI(i));
-        if (this instanceof FloatVectorDataDense && right instanceof FloatVectorDataDense)
-        {
-            return new FloatVectorDataDense(dv);
-        }
-        return new FloatVectorDataDense(dv).toSparse();
-    }
+    public abstract FloatVectorData divide(final FloatVectorData right) throws ValueRuntimeException;
+//    {
+//        checkSizes(right);
+//        float[] dv = new float[size()];
+//        IntStream.range(0, size()).parallel().forEach(i -> dv[i] = getSI(i) / right.getSI(i));
+//        if (this instanceof FloatVectorDataDense && right instanceof FloatVectorDataDense)
+//        {
+//            return new FloatVectorDataDense(dv);
+//        }
+//        return new FloatVectorDataDense(dv).toSparse();
+//    }
 
     /**
      * Divide the values of a vector by the values of another vector on a cell-by-cell basis. The type of vector (sparse, dense)
      * stays the same.
      * @param right FloatVectorData; the other data object to divide by
+     * @return FloatVectorData; this modified float vector data store
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract void divideBy(FloatVectorData right) throws ValueRuntimeException;
+    public abstract FloatVectorData divideBy(FloatVectorData right) throws ValueRuntimeException;
 
     /**
      * Divide the values of this vector by a number on a cell-by-cell basis.
