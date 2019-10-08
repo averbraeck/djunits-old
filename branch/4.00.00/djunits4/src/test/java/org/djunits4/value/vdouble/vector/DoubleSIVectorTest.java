@@ -59,34 +59,40 @@ public class DoubleSIVectorTest
                 DimensionlessVector> dimlessVector = DoubleVector.instantiate(
                         DoubleVectorData.instantiate(denseTestData, DimensionlessUnit.SI.getScale(), StorageType.DENSE),
                         DimensionlessUnit.SI);
-        dimlessVector = dimlessVector.mutable().divide(dimlessVector).asDimensionless(); // unit matrix
+        dimlessVector = dimlessVector.mutable().divide(dimlessVector).asDimensionless(); // unit vector
         for (String type : CLASSNAMES.REL_ALL_LIST)
         {
             Class.forName("org.djunits4.unit." + type + "Unit");
             UnitBase<U> unitBase = (UnitBase<U>) UnitTypes.INSTANCE.getUnitBase(type + "Unit");
             for (U unit : unitBase.getUnitsById().values())
             {
-                AbstractDoubleVectorRel<U, S, V> matrix = (AbstractDoubleVectorRel<U, S, V>) DoubleVector
+                AbstractDoubleVectorRel<U, S, V> vector = (AbstractDoubleVectorRel<U, S, V>) DoubleVector
                         .instantiate(DoubleVectorData.instantiate(denseTestData, unit.getScale(), StorageType.DENSE), unit);
-                SIVector mult = matrix.times(dimlessVector);
-                Method asMethod = SIVector.class.getDeclaredMethod("as" + type);
-                AbstractDoubleVectorRel<U, S, V> asVector = (AbstractDoubleVectorRel<U, S, V>) asMethod.invoke(mult);
-                assertEquals(matrix.getDisplayUnit().getStandardUnit(), asVector.getDisplayUnit());
+                AbstractDoubleVectorRel<U, S, V> sparseVector = vector.toSparse();
                 for (int index = 0; index < denseTestData.length; index++)
                 {
-                    assertEquals(type + ", unit: " + unit.getDefaultTextualAbbreviation(), matrix.getSI(index),
-                            asVector.getSI(index), matrix.getSI(index) / 1000.0);
+                    assertEquals("Value at index matches", vector.getSI(index), sparseVector.getSI(index), 0.0);
+                }
+                
+                SIVector mult = vector.times(dimlessVector);
+                Method asMethod = SIVector.class.getDeclaredMethod("as" + type);
+                AbstractDoubleVectorRel<U, S, V> asVector = (AbstractDoubleVectorRel<U, S, V>) asMethod.invoke(mult);
+                assertEquals(vector.getDisplayUnit().getStandardUnit(), asVector.getDisplayUnit());
+                for (int index = 0; index < denseTestData.length; index++)
+                {
+                    assertEquals(type + ", unit: " + unit.getDefaultTextualAbbreviation(), vector.getSI(index),
+                            asVector.getSI(index), vector.getSI(index) / 1000.0);
                 }
 
                 Method asMethodDisplayUnit = SIVector.class.getDeclaredMethod("as" + type, unit.getClass());
                 AbstractDoubleVectorRel<U, S, V> asVectorDisplayUnit =
                         (AbstractDoubleVectorRel<U, S, V>) asMethodDisplayUnit.invoke(mult, unit.getStandardUnit());
-                assertEquals(matrix.getDisplayUnit().getStandardUnit(), asVectorDisplayUnit.getDisplayUnit());
+                assertEquals(vector.getDisplayUnit().getStandardUnit(), asVectorDisplayUnit.getDisplayUnit());
 
                 for (int index = 0; index < denseTestData.length; index++)
                 {
-                    assertEquals(type + ", unit: " + unit.getDefaultTextualAbbreviation(), matrix.getSI(index),
-                            asVectorDisplayUnit.getSI(index), matrix.getSI(index) / 1000.0);
+                    assertEquals(type + ", unit: " + unit.getDefaultTextualAbbreviation(), vector.getSI(index),
+                            asVectorDisplayUnit.getSI(index), vector.getSI(index) / 1000.0);
                 }
 
                 // test exception for wrong 'as'
@@ -104,7 +110,7 @@ public class DoubleSIVectorTest
                 try
                 {
                     AbstractDoubleVectorRel<U, S, V> asVectorDim =
-                            (AbstractDoubleVectorRel<U, S, V>) asMethodDisplayUnit.invoke(cd4sr2, matrix.getDisplayUnit());
+                            (AbstractDoubleVectorRel<U, S, V>) asMethodDisplayUnit.invoke(cd4sr2, vector.getDisplayUnit());
                     fail("should not be able to carry out 'as'" + type + " on cd4/sr2 SI unit -- resulted in " + asVectorDim);
                 }
                 catch (InvocationTargetException | UnitRuntimeException e)

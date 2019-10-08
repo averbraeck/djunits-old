@@ -16,6 +16,7 @@ import org.djunits4.unit.util.UnitException;
 import org.djunits4.unit.util.UnitRuntimeException;
 import org.djunits4.value.CLASSNAMES;
 import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.vector.base.AbstractDoubleVectorRel;
 import org.djunits4.value.vfloat.scalar.FloatDimensionless;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
 import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorRel;
@@ -59,34 +60,40 @@ public class FloatSIVectorTest
                 FloatDimensionlessVector> dimlessVector = FloatVector.instantiate(
                         FloatVectorData.instantiate(denseTestData, DimensionlessUnit.SI.getScale(), StorageType.DENSE),
                         DimensionlessUnit.SI);
-        dimlessVector = dimlessVector.mutable().divide(dimlessVector).asDimensionless(); // unit matrix
+        dimlessVector = dimlessVector.mutable().divide(dimlessVector).asDimensionless(); // unit vector
         for (String type : CLASSNAMES.REL_ALL_LIST)
         {
             Class.forName("org.djunits4.unit." + type + "Unit");
             UnitBase<U> unitBase = (UnitBase<U>) UnitTypes.INSTANCE.getUnitBase(type + "Unit");
             for (U unit : unitBase.getUnitsById().values())
             {
-                AbstractFloatVectorRel<U, S, V> matrix = (AbstractFloatVectorRel<U, S, V>) FloatVector
+                AbstractFloatVectorRel<U, S, V> vector = (AbstractFloatVectorRel<U, S, V>) FloatVector
                         .instantiate(FloatVectorData.instantiate(denseTestData, unit.getScale(), StorageType.DENSE), unit);
-                FloatSIVector mult = matrix.times(dimlessVector);
-                Method asMethod = FloatSIVector.class.getDeclaredMethod("as" + type);
-                AbstractFloatVectorRel<U, S, V> asVector = (AbstractFloatVectorRel<U, S, V>) asMethod.invoke(mult);
-                assertEquals(matrix.getDisplayUnit().getStandardUnit(), asVector.getDisplayUnit());
+                AbstractFloatVectorRel<U, S, V> sparseVector = vector.toSparse();
                 for (int index = 0; index < denseTestData.length; index++)
                 {
-                    assertEquals(type + ", unit: " + unit.getDefaultTextualAbbreviation(), matrix.getSI(index),
-                            asVector.getSI(index), matrix.getSI(index) / 1000.0);
+                    assertEquals("Value at index matches", vector.getSI(index), sparseVector.getSI(index), 0.0);
+                }
+
+                FloatSIVector mult = vector.times(dimlessVector);
+                Method asMethod = FloatSIVector.class.getDeclaredMethod("as" + type);
+                AbstractFloatVectorRel<U, S, V> asVector = (AbstractFloatVectorRel<U, S, V>) asMethod.invoke(mult);
+                assertEquals(vector.getDisplayUnit().getStandardUnit(), asVector.getDisplayUnit());
+                for (int index = 0; index < denseTestData.length; index++)
+                {
+                    assertEquals(type + ", unit: " + unit.getDefaultTextualAbbreviation(), vector.getSI(index),
+                            asVector.getSI(index), vector.getSI(index) / 1000.0);
                 }
 
                 Method asMethodDisplayUnit = FloatSIVector.class.getDeclaredMethod("as" + type, unit.getClass());
                 AbstractFloatVectorRel<U, S, V> asVectorDisplayUnit =
                         (AbstractFloatVectorRel<U, S, V>) asMethodDisplayUnit.invoke(mult, unit.getStandardUnit());
-                assertEquals(matrix.getDisplayUnit().getStandardUnit(), asVectorDisplayUnit.getDisplayUnit());
+                assertEquals(vector.getDisplayUnit().getStandardUnit(), asVectorDisplayUnit.getDisplayUnit());
 
                 for (int index = 0; index < denseTestData.length; index++)
                 {
-                    assertEquals(type + ", unit: " + unit.getDefaultTextualAbbreviation(), matrix.getSI(index),
-                            asVectorDisplayUnit.getSI(index), matrix.getSI(index) / 1000.0);
+                    assertEquals(type + ", unit: " + unit.getDefaultTextualAbbreviation(), vector.getSI(index),
+                            asVectorDisplayUnit.getSI(index), vector.getSI(index) / 1000.0);
                 }
 
                 // test exception for wrong 'as'
@@ -104,7 +111,7 @@ public class FloatSIVectorTest
                 try
                 {
                     AbstractFloatVectorRel<U, S, V> asVectorDim =
-                            (AbstractFloatVectorRel<U, S, V>) asMethodDisplayUnit.invoke(cd4sr2, matrix.getDisplayUnit());
+                            (AbstractFloatVectorRel<U, S, V>) asMethodDisplayUnit.invoke(cd4sr2, vector.getDisplayUnit());
                     fail("should not be able to carry out 'as'" + type + " on cd4/sr2 SI unit -- resulted in " + asVectorDim);
                 }
                 catch (InvocationTargetException | UnitRuntimeException e)
