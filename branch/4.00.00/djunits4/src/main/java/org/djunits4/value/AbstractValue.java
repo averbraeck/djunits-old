@@ -45,6 +45,7 @@ public abstract class AbstractValue<U extends Unit<U>, T extends Value<U, T>> im
     @Override
     public void setDisplayUnit(final U newUnit)
     {
+        Throw.whenNull(newUnit, "newUnit may not be null");
         this.displayUnit = newUnit;
     }
 

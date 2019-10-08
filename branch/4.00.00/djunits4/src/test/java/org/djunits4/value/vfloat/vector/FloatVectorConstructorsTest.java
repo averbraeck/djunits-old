@@ -699,7 +699,7 @@ public class FloatVectorConstructorsTest
                 compareValues(testValues, siv.getValuesSI());
                 siv = FloatVector.instantiate(map, testValues.length, SIUnit.of(unitBase.getSiDimensions()), storageType);
                 compareValues(testValues, siv.getValuesSI());
-                System.out.println("Creating FloatSIVector for unit " + standardUnit.getId());
+                // System.out.println("Creating FloatSIVector for unit " + standardUnit.getId());
                 siv = FloatSIVector.of(testValues, standardUnit.getUnitBase().getSiDimensions().toString(true, true, true),
                         storageType);
                 compareValues(testValues, siv.getValuesSI());
@@ -710,7 +710,6 @@ public class FloatVectorConstructorsTest
                 compareValues(testValues, siv.getValuesSI());
             }
         }
-
     }
 
     /**

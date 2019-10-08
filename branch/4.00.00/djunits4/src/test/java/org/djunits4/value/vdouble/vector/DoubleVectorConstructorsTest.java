@@ -756,7 +756,7 @@ public class DoubleVectorConstructorsTest
                 compareValues(testValues, siv.getValuesSI());
                 siv = SIVector.instantiate(map, testValues.length, SIUnit.of(unitBase.getSiDimensions()), storageType);
                 compareValues(testValues, siv.getValuesSI());
-                System.out.println("Creating SIVector for unit " + standardUnit.getId());
+                // System.out.println("Creating SIVector for unit " + standardUnit.getId());
                 siv = SIVector.of(testValues, standardUnit.getUnitBase().getSiDimensions().toString(true, true, true),
                         storageType);
                 compareValues(testValues, siv.getValuesSI());
@@ -766,7 +766,6 @@ public class DoubleVectorConstructorsTest
                 compareValues(testValues, siv.getValuesSI());
             }
         }
-
     }
 
     /**
