@@ -156,6 +156,8 @@ public class DoubleSIVectorTest
                     assertEquals("display unit of scalarRel matches", relativeUnit, scalarRel.getDisplayUnit());
                     assertEquals("value of scalarRel matches", testValue, scalarRel.getSI(), 0.001);
                 }
+                // Indirectly test the instantiateVectorRel method (we don't have direct access to a DoubleVectorData object)
+                // Why does this not compile? vector.minus(vector);
             }
         }
     }
