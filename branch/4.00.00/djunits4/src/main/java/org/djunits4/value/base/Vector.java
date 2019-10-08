@@ -80,9 +80,9 @@ public interface Vector<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
         RV plus(RV increment) throws ValueRuntimeException;
 
         /**
-         * Subtract a relative vector from this relative mutable vector. A new vector is returned. When the vector itself needs
-         * to be changed, use the decreaseBy(V) method instead. The subtraction is done value by value and the result is stored
-         * in a new vector. If both operands are sparse, the result is a sparse vector, otherwise the result is a dense vector.
+         * Subtract a relative vector from this relative mutable vector. The display unit of the result is the display unit of
+         * this absolute vector. The subtraction is done value by value and the result is stored in a new vector. If both
+         * operands are sparse, the result is a sparse vector, otherwise the result is a dense vector.
          * @param decrement RV; the value to subtract
          * @return RMV; the difference of this vector and the operand as a new relative, mutable vector
          * @throws ValueRuntimeException in case this vector and the operand have a different size
@@ -166,9 +166,9 @@ public interface Vector<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
             RV extends Vector.RelWithAbs<AU, A, AV, RU, R, RV>> extends Vector<AU, A, AV>, Absolute
     {
         /**
-         * Add a relative vector to this absolute vector. A new vector is returned. When the vector itself needs to be changed,
-         * use the increaseBy(V) method instead. The addition is done value by value and the result is stored in a new vector.
-         * If both operands are sparse, the result is a sparse vector, otherwise the result is a dense vector.
+         * Add a relative vector to this absolute vector. A new absolute vector is returned. The display unit of the new vector
+         * is the display unit of this absolute vector. The addition is done value by value and the result is stored in a new
+         * vector. If both operands are sparse, the result is a sparse vector, otherwise the result is a dense vector.
          * @param increment RV; the relative vector (mutable or immutable, sparse or dense) to add to this absolute vector
          * @return AIV; the sum of this value and the operand as a new absolute, immutable vector
          * @throws ValueRuntimeException in case this vector and the operand have a different size
@@ -176,9 +176,9 @@ public interface Vector<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
         AV plus(RV increment) throws ValueRuntimeException;
 
         /**
-         * Subtract a relative vector from this absolute vector. A new vector is returned. When the vector itself needs to be
-         * changed, use the decreaseBy(V) method instead. The subtraction is done value by value and the result is stored in a
-         * new vector. If both operands are sparse, the result is a sparse vector, otherwise the result is a dense vector.
+         * Subtract a relative vector from this absolute vector. A new absolute vector is returned. The display unit of the new
+         * vector is the display unit of this absolute vector. The subtraction is done value by value and the result is stored
+         * in a new vector. If both operands are sparse, the result is a sparse vector, otherwise the result is a dense vector.
          * @param decrement RV; the relative vector (mutable or immutable, sparse or dense) to subtract from this absolute
          *            vector
          * @return AIV; the difference of this value and the operand as a new absolute, immutable vector
@@ -187,9 +187,10 @@ public interface Vector<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
         AV minus(RV decrement) throws ValueRuntimeException;
 
         /**
-         * Subtract an absolute vector from this absolute vector.A new vector is returned. When the vector itself needs to be
-         * changed, use the decreaseBy(V) method instead. The subtraction is done value by value and the result is stored in a
-         * new vector. If both operands are sparse, the result is a sparse vector, otherwise the result is a dense vector.
+         * Subtract an absolute vector from this absolute vector. A new relative vector is returned. The display unit of the new
+         * vector is the display unit of relative counterpart of the display unit of this absolute vector. The subtraction is
+         * done value by value and the result is stored in a new vector. If both operands are sparse, the result is a sparse
+         * vector, otherwise the result is a dense vector.
          * @param decrement AV; the absolute vector (mutable or immutable, sparse or dense) to subtract from this absolute
          *            vector
          * @return RIV; the difference of this value and the operand as a new relative, immutable vector
@@ -197,4 +198,5 @@ public interface Vector<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
          */
         RV minus(AV decrement) throws ValueRuntimeException;
     }
+
 }

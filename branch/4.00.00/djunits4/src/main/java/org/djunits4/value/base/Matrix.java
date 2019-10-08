@@ -124,8 +124,8 @@ public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
             RM extends Matrix.Rel<U, S, V, RM>> extends Matrix<U, S, V, RM>, Relative
     {
         /**
-         * Add a relative matrix to this relative mutable matrix. A new matrix is returned. When the matrix itself needs to be
-         * changed, use the increaseBy(V) method instead. The addition is done value by value and the result is stored in a new
+         * Add a relative matrix to this relative mutable matrix. A new matrix is returned. The display unit of the result is
+         * the display unit of this relative matrix. The addition is done value by value and the result is stored in a new
          * matrix. If both operands are sparse, the result is a sparse matrix, otherwise the result is a dense matrix.
          * @param increment RV; the relative matrix (mutable or immutable, sparse or dense) to add
          * @return RMV; the sum of this matrix and the operand as a new relative, mutable matrix
@@ -134,9 +134,9 @@ public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
         RM plus(RM increment) throws ValueRuntimeException;
 
         /**
-         * Subtract a relative matrix from this relative mutable matrix. A new matrix is returned. When the matrix itself needs
-         * to be changed, use the decreaseBy(V) method instead. The subtraction is done value by value and the result is stored
-         * in a new matrix. If both operands are sparse, the result is a sparse matrix, otherwise the result is a dense matrix.
+         * Subtract a relative matrix from this relative mutable matrix. The display unit of the result is the display unit of
+         * this relative matrix. The subtraction is done value by value and the result is stored in a new matrix. If both
+         * operands are sparse, the result is a sparse matrix, otherwise the result is a dense matrix.
          * @param decrement RV; the value to subtract
          * @return RMV; the difference of this matrix and the operand as a new relative, mutable matrix
          * @throws ValueRuntimeException in case this matrix and the operand have a different size
@@ -226,9 +226,9 @@ public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
             RM extends Matrix.RelWithAbs<AU, A, AV, AM, RU, R, RV, RM>> extends Matrix<AU, A, AV, AM>, Absolute
     {
         /**
-         * Add a relative matrix to this absolute matrix. A new matrix is returned. When the matrix itself needs to be changed,
-         * use the increaseBy(V) method instead. The addition is done value by value and the result is stored in a new matrix.
-         * If both operands are sparse, the result is a sparse matrix, otherwise the result is a dense matrix.
+         * Add a relative matrix to this absolute matrix. A new absolute matrix is returned. The display unit of the new matrix
+         * is the display unit of this absolute matrix. The addition is done value by value and the result is stored in a new
+         * matrix. If both operands are sparse, the result is a sparse matrix, otherwise the result is a dense matrix.
          * @param increment RV; the relative matrix (mutable or immutable, sparse or dense) to add to this absolute matrix
          * @return AIV; the sum of this value and the operand as a new absolute, immutable matrix
          * @throws ValueRuntimeException in case this matrix and the operand have a different size
@@ -236,9 +236,9 @@ public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
         AM plus(RM increment) throws ValueRuntimeException;
 
         /**
-         * Subtract a relative matrix from this absolute matrix. A new matrix is returned. When the matrix itself needs to be
-         * changed, use the decreaseBy(V) method instead. The subtraction is done value by value and the result is stored in a
-         * new matrix. If both operands are sparse, the result is a sparse matrix, otherwise the result is a dense matrix.
+         * Subtract a relative matrix from this absolute matrix. A new absolute matrix is returned. The display unit of the new
+         * matrix is the display unit of this absolute matrix. The subtraction is done value by value and the result is stored
+         * in a new matrix. If both operands are sparse, the result is a sparse matrix, otherwise the result is a dense matrix.
          * @param decrement RV; the relative matrix (mutable or immutable, sparse or dense) to subtract from this absolute
          *            matrix
          * @return AIV; the difference of this value and the operand as a new absolute, immutable matrix
@@ -247,9 +247,10 @@ public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
         AM minus(RM decrement) throws ValueRuntimeException;
 
         /**
-         * Subtract an absolute matrix from this absolute matrix.A new matrix is returned. When the matrix itself needs to be
-         * changed, use the decreaseBy(V) method instead. The subtraction is done value by value and the result is stored in a
-         * new matrix. If both operands are sparse, the result is a sparse matrix, otherwise the result is a dense matrix.
+         * Subtract an absolute matrix from this absolute matrix. A new relative matrix is returned. The display unit of the new
+         * matrix is the relative counterpart of the display unit of this absolute matrix. The subtraction is done value by
+         * value and the result is stored in a new matrix. If both operands are sparse, the result is a sparse matrix, otherwise
+         * the result is a dense matrix.
          * @param decrement AV; the absolute matrix (mutable or immutable, sparse or dense) to subtract from this absolute
          *            matrix
          * @return RIV; the difference of this value and the operand as a new relative, immutable matrix
@@ -257,4 +258,5 @@ public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
          */
         RM minus(AM decrement) throws ValueRuntimeException;
     }
+
 }
