@@ -62,6 +62,13 @@ public class FloatVectorDataDense extends FloatVectorData
 
     /** {@inheritDoc} */
     @Override
+    public final FloatVectorDataDense toDense()
+    {
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public final FloatVectorDataSparse toSparse()
     {
         return FloatVectorDataSparse.instantiate(this.vectorSI);

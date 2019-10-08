@@ -13,7 +13,6 @@ import org.djunits4.unit.scale.Scale;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.AbstractStorage;
 import org.djunits4.value.storage.StorageType;
-import org.djunits4.value.vdouble.function.DoubleFunction;
 import org.djunits4.value.vdouble.function.DoubleFunction2;
 import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
 
@@ -486,22 +485,16 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
     public abstract int size();
 
     /**
-     * Return the sparsely stored equivalent of this data.
-     * @return DoubleVectorDataSparse; the sparse transformation of this data
-     */
-    public DoubleVectorDataSparse toSparse()
-    {
-        return isSparse() ? (DoubleVectorDataSparse) this : ((DoubleVectorDataDense) this).toSparse();
-    }
-
-    /**
      * Return the densely stored equivalent of this data.
      * @return DoubleVectorDataDense; the dense transformation of this data
      */
-    public DoubleVectorDataDense toDense()
-    {
-        return isDense() ? (DoubleVectorDataDense) this : ((DoubleVectorDataSparse) this).toDense();
-    }
+    public abstract DoubleVectorDataDense toDense();
+
+    /**
+     * Return the sparsely stored equivalent of this data.
+     * @return DoubleVectorDataSparse; the sparse transformation of this data
+     */
+    public abstract DoubleVectorDataSparse toSparse();
 
     /**
      * Retrieve the SI value of one element of this data.

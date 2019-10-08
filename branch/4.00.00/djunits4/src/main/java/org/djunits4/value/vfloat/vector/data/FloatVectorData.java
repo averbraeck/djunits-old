@@ -212,17 +212,74 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
             case DENSE:
             {
                 float[] valuesSI = new float[length];
-                valueMap.keySet().parallelStream()
-                        .forEach(index -> valuesSI[index] = (float) scale.toStandardUnit(valueMap.get(index)));
+                if (scale.isBaseSIScale())
+                {
+                    valueMap.entrySet().parallelStream().forEach(entry -> valuesSI[entry.getKey()] = entry.getValue());
+                }
+                else
+                {
+                    Arrays.fill(valuesSI, (float) scale.toStandardUnit(0.0));
+                    valueMap.entrySet().parallelStream()
+                            .forEach(entry -> valuesSI[entry.getKey()] = (float) scale.toStandardUnit(entry.getValue()));
+                }
                 return new FloatVectorDataDense(valuesSI);
             }
 
             case SPARSE:
             {
-                int[] indices = valueMap.keySet().parallelStream().mapToInt(i -> i).toArray();
-                float[] valuesSI = new float[valueMap.size()];
-                IntStream.range(0, valueMap.size()).parallel()
-                        .forEach(index -> valuesSI[index] = (float) scale.toStandardUnit(valueMap.get(indices[index])));
+                int nonZeroCount;
+                if (scale.isBaseSIScale())
+                {
+                    nonZeroCount = (int) valueMap.keySet().parallelStream().filter(d -> d != 0d).count();
+                }
+                else
+                {
+                    // Much harder, and the result is unlikely to be very sparse
+                    nonZeroCount = length
+                            - (int) valueMap.values().parallelStream().filter(d -> scale.toStandardUnit(d) == 0d).count();
+                }
+                int[] indices = new int[nonZeroCount];
+                float[] valuesSI = new float[nonZeroCount];
+                if (scale.isBaseSIScale())
+                {
+                    int index = 0;
+                    for (Integer key : valueMap.keySet())
+                    {
+                        float value = valueMap.get(key);
+                        if (0.0 != value)
+                        {
+                            indices[index] = key;
+                            valuesSI[index] = value;
+                            index++;
+                        }
+                    }
+                }
+                else
+                {
+                    Arrays.fill(valuesSI, (float) scale.toStandardUnit(0.0));
+                    int index = 0;
+                    int lastKey = 0;
+                    for (Integer key : valueMap.keySet())
+                    {
+                        for (int i = lastKey; i < key; i++)
+                        {
+                            indices[index++] = i;
+                        }
+                        lastKey = key;
+                        float value = (float) scale.toStandardUnit(valueMap.get(key));
+                        if (0.0 != value)
+                        {
+                            indices[index] = key;
+                            valuesSI[index] = value;
+                            index++;
+                        }
+                        lastKey = key + 1;
+                    }
+                    while (index < indices.length)
+                    {
+                        indices[index++] = lastKey++;
+                    }
+                }
                 return new FloatVectorDataSparse(valuesSI, indices, length);
             }
 
@@ -286,22 +343,16 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
     public abstract int size();
 
     /**
-     * Return the sparsely stored equivalent of this data.
-     * @return DoubleVectorDataSparse; the sparse transformation of this data
+     * Return the densely stored equivalent of this data.
+     * @return FloatVectorDataDense; the dense transformation of this data
      */
-    public FloatVectorDataSparse toSparse()
-    {
-        return isSparse() ? (FloatVectorDataSparse) this : ((FloatVectorDataDense) this).toSparse();
-    }
+    public abstract FloatVectorDataDense toDense();
 
     /**
-     * Return the densely stored equivalent of this data.
-     * @return DoubleVectorDataDense; the dense transformation of this data
+     * Return the sparsely stored equivalent of this data.
+     * @return FloatVectorDataSparse; the sparse transformation of this data
      */
-    public FloatVectorDataDense toDense()
-    {
-        return isDense() ? (FloatVectorDataDense) this : ((FloatVectorDataSparse) this).toDense();
-    }
+    public abstract FloatVectorDataSparse toSparse();
 
     /**
      * Retrieve the SI value of one element of this data.

@@ -292,7 +292,7 @@ public class DoubleVectorConstructorsTest
             {
                 notQuiteSparseMap.put(i, value);
             }
-            if (testValues[i] == -273.15)
+            if (AbsoluteTemperatureUnit.DEGREE_CELSIUS.getScale().toStandardUnit(testValues[i]) == 0)
             {
                 offsetCardinality--;
             }
@@ -1323,7 +1323,7 @@ public class DoubleVectorConstructorsTest
         assertEquals("length of reference must equal length of result ", reference.length, got.length);
         for (int i = 0; i < reference.length; i++)
         {
-            assertEquals("value at each index must match", reference[i], got[i], 0.001);
+            assertEquals("value at index " + i + " must match", reference[i], got[i], 0.001);
         }
     }
 
@@ -1344,7 +1344,7 @@ public class DoubleVectorConstructorsTest
         double factor = scale.toStandardUnit(1) - offset;
         for (int i = 0; i < reference.length; i++)
         {
-            assertEquals("value at each index must match", reference[i] * factor + offset, got[i], 0.001);
+            assertEquals("value at index " + i + " must match", reference[i] * factor + offset, got[i], 0.001);
         }
     }
 

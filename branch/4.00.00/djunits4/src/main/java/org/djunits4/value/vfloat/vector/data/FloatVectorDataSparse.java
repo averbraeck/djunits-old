@@ -55,6 +55,13 @@ public class FloatVectorDataSparse extends FloatVectorData
 
     /** {@inheritDoc} */
     @Override
+    public final FloatVectorDataSparse toSparse()
+    {
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public final int size()
     {
         return this.size;

@@ -27,7 +27,6 @@ import org.djunits4.value.Relative;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.base.Scalar;
 import org.djunits4.value.storage.StorageType;
-import org.djunits4.value.vdouble.vector.AbsoluteTemperatureVector;
 import org.djunits4.value.vfloat.scalar.FloatAbsoluteTemperature;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalar;
 import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorRel;
@@ -68,7 +67,7 @@ public class FloatVectorConstructorsTest
             // float
             @SuppressWarnings("rawtypes")
             Unit standardUnit = unitBase.getStandardUnit();
-            float[] testValues = new float[] {0, 123.456f, 0, 0, 234.567f, 0, 0};
+            float[] testValues = new float[] { 0, 123.456f, 0, 0, 234.567f, 0, 0 };
             int cardinality = 0;
             double zSum = 0;
             List<Float> list = new ArrayList<>();
@@ -90,7 +89,7 @@ public class FloatVectorConstructorsTest
                 }
                 list.add(value);
             }
-            for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+            for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
             {
                 FloatVectorInterface<?, ?, ?> floatVector = FloatVector.instantiate(testValues, standardUnit, storageType);
                 // System.out.println(floatVector);
@@ -260,7 +259,7 @@ public class FloatVectorConstructorsTest
     @Test
     public void instantiateListTest()
     {
-        float[] testValues = new float[] {0, 123.456f, 0, -273.15f, -273.15f, 0, -273.15f, 234.567f, 0, 0};
+        float[] testValues = new float[] { 0, 123.456f, 0, -273.15f, -273.15f, 0, -273.15f, 234.567f, 0, 0 };
         int cardinality = 0;
         int offsetCardinality = testValues.length;
         FloatAbsoluteTemperature[] at = new FloatAbsoluteTemperature[testValues.length];
@@ -286,32 +285,32 @@ public class FloatVectorConstructorsTest
             {
                 notQuiteSparseMap.put(i, value);
             }
-            if (testValues[i] == -273.15f)
+            if (AbsoluteTemperatureUnit.DEGREE_CELSIUS.getScale().toStandardUnit(testValues[i]) == 0)
             {
                 offsetCardinality--;
             }
         }
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
-            for (AbsoluteTemperatureUnit temperatureUnit : new AbsoluteTemperatureUnit[] {AbsoluteTemperatureUnit.KELVIN,
-                    AbsoluteTemperatureUnit.DEGREE_CELSIUS})
+            for (AbsoluteTemperatureUnit temperatureUnit : new AbsoluteTemperatureUnit[] { AbsoluteTemperatureUnit.KELVIN,
+                    AbsoluteTemperatureUnit.DEGREE_CELSIUS })
             {
                 float offset = temperatureUnit.equals(AbsoluteTemperatureUnit.KELVIN) ? 0f : 273.15f;
-                
+
                 FloatAbsoluteTemperatureVector atv = FloatVector.instantiate(testValues, temperatureUnit, storageType);
                 compareValuesWithScale(temperatureUnit.getScale(), testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", offset == 0 ? cardinality : testValues.length, atv.cardinality());
-                atv = FloatVector.instantiate(at, temperatureUnit, storageType);
+                atv = FloatVector.instantiate(testValues, temperatureUnit, storageType);
                 compareValuesWithScale(temperatureUnit.getScale(), testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
-                assertEquals("cardinality", cardinality, atv.cardinality());
-                
+                assertEquals("cardinality", offset == 0 ? cardinality : offsetCardinality, atv.cardinality());
+
                 atv = FloatVector.instantiateSI(testValues, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
-                atv = FloatVector.instantiateSI(testValues, temperatureUnit, storageType, AbsoluteTemperatureVector.class);
+                atv = FloatVector.instantiateSI(testValues, temperatureUnit, storageType, FloatAbsoluteTemperatureVector.class);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
@@ -320,7 +319,7 @@ public class FloatVectorConstructorsTest
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
-                atv = FloatVector.instantiateSI(afl, temperatureUnit, storageType, AbsoluteTemperatureVector.class);
+                atv = FloatVector.instantiateSI(afl, temperatureUnit, storageType, FloatAbsoluteTemperatureVector.class);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
@@ -329,7 +328,7 @@ public class FloatVectorConstructorsTest
                 compareValuesWithScale(temperatureUnit.getScale(), testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", offset == 0 ? cardinality : offsetCardinality, atv.cardinality());
-                atv = FloatVector.instantiate(afl, temperatureUnit, storageType, AbsoluteTemperatureVector.class);
+                atv = FloatVector.instantiate(afl, temperatureUnit, storageType, FloatAbsoluteTemperatureVector.class);
                 compareValuesWithScale(temperatureUnit.getScale(), testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", offset == 0 ? cardinality : offsetCardinality, atv.cardinality());
@@ -338,7 +337,7 @@ public class FloatVectorConstructorsTest
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
-                atv = FloatVector.instantiate(at, temperatureUnit, storageType, AbsoluteTemperatureVector.class);
+                atv = FloatVector.instantiate(at, temperatureUnit, storageType, FloatAbsoluteTemperatureVector.class);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
@@ -351,13 +350,13 @@ public class FloatVectorConstructorsTest
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
-                
+
                 atv = FloatVector.instantiateMap(map, testValues.length, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
                 atv = FloatVector.instantiateMap(map, testValues.length, temperatureUnit, storageType,
-                        AbsoluteTemperatureVector.class);
+                        FloatAbsoluteTemperatureVector.class);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
@@ -367,7 +366,7 @@ public class FloatVectorConstructorsTest
                 assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
                 atv = FloatVector.instantiateMap(notQuiteSparseMap, testValues.length, temperatureUnit, storageType,
-                        AbsoluteTemperatureVector.class);
+                        FloatAbsoluteTemperatureVector.class);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
@@ -377,7 +376,7 @@ public class FloatVectorConstructorsTest
                 assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", offset == 0 ? cardinality : offsetCardinality, atv.cardinality());
                 atv = FloatVector.instantiate(mapf, testValues.length, temperatureUnit, storageType,
-                        AbsoluteTemperatureVector.class);
+                        FloatAbsoluteTemperatureVector.class);
                 compareValuesWithScale(temperatureUnit.getScale(), testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", offset == 0 ? cardinality : offsetCardinality, atv.cardinality());
@@ -387,12 +386,68 @@ public class FloatVectorConstructorsTest
                 assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
                 atv = FloatVector.instantiateSI(mapf, testValues.length, temperatureUnit, storageType,
-                        AbsoluteTemperatureVector.class);
+                        FloatAbsoluteTemperatureVector.class);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
 
                 atv = FloatVector.instantiate(testValues, temperatureUnit, storageType);
+                for (int i = 0; i < testValues.length; i++)
+                {
+                    assertEquals("getInUnit returns value in specified unit", testValues[i], atv.getInUnit(i, temperatureUnit),
+                            0.001);
+                }
+
+                try
+                {
+                    atv.getInUnit(-1, temperatureUnit);
+                    fail("negative index should have thrown a ValueRuntimeException");
+                }
+                catch (ValueRuntimeException vre)
+                {
+                    // Ignore expected exception
+                }
+
+                try
+                {
+                    atv.getInUnit(testValues.length, temperatureUnit);
+                    fail("index above range should have thrown a ValueRuntimeException");
+                }
+                catch (ValueRuntimeException vre)
+                {
+                    // Ignore expected exception
+                }
+
+                try
+                {
+                    atv.set(0, al.get(0));
+                    fail("double vector should be immutable");
+                }
+                catch (ValueRuntimeException vre)
+                {
+                    // Ignore expected exception
+                }
+
+                try
+                {
+                    atv.set(-1, al.get(0));
+                    fail("negative index should have thrown a ValueRuntimeException");
+                }
+                catch (ValueRuntimeException vre)
+                {
+                    // Ignore expected exception
+                }
+
+                try
+                {
+                    atv.set(testValues.length, al.get(0));
+                    fail("index above range should have thrown a ValueRuntimeException");
+                }
+                catch (ValueRuntimeException vre)
+                {
+                    // Ignore expected exception
+                }
+
                 try
                 {
                     atv.setInUnit(0, 0, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT);
@@ -402,6 +457,7 @@ public class FloatVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
+
                 FloatAbsoluteTemperatureVector matv = atv.mutable();
                 matv.setInUnit(0, 0, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT);
                 assertEquals("Setting temp in F should have stored equivalent value in K", matv.getSI(0), 255.37, 0.01);
@@ -414,6 +470,7 @@ public class FloatVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
+
                 matv.setInUnit(testValues.length - 1, 0, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT);
                 try
                 {
@@ -424,39 +481,89 @@ public class FloatVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
+
                 // More complete memory test; somewhat inspired on mats+
                 matv = atv.mutable();
                 for (int index = 0; index < testValues.length; index++)
                 {
                     // read and check; change, read again and check again
                     float v = matv.getSI(index);
-                    assertEquals("initial value is returned", testValues[index], v, 0.001);
+                    assertEquals("initial value is returned", testValues[index] + offset, v, 0.001);
                     v += 100;
                     matv.setSI(index, v);
                     v = matv.getSI(index);
-                    assertEquals("initial value is returned", testValues[index] + 100, v, 0.001);
+                    assertEquals("initial value is returned", testValues[index] + 100 + offset, v, 0.001);
                 }
                 for (int index = testValues.length; --index >= 0;)
                 {
                     // read and check, change and check again
                     float v = matv.getSI(index);
-                    assertEquals("initial value is returned", testValues[index] + 100, v, 0.001);
+                    assertEquals("initial value is returned", testValues[index] + 100 + offset, v, 0.001);
                     v -= 100;
                     matv.setSI(index, v);
                     v = matv.getSI(index);
-                    assertEquals("initial value is returned", testValues[index], v, 0.001);
+                    assertEquals("initial value is returned", testValues[index] + offset, v, 0.001);
                 }
-                assertEquals("Cardinality should be back to original value", cardinality, matv.cardinality());
+                assertEquals("Cardinality should be back to original value", 0 == offset ? cardinality : offsetCardinality,
+                        matv.cardinality());
                 for (int index = 0; index < testValues.length; index++)
                 {
                     // read and check; change, read again and check again
                     float v = matv.getSI(index);
-                    assertEquals("initial value is returned", testValues[index], v, 0.001);
+                    assertEquals("initial value is returned", testValues[index] + offset, v, 0.001);
                     v += 100;
                     matv.setSI(index, v);
                     v = matv.getSI(index);
-                    assertEquals("initial value is returned", testValues[index] + 100, v, 0.001);
+                    assertEquals("initial value is returned", testValues[index] + 100 + offset, v, 0.001);
                 }
+
+                // Check that we can set on the mutable version
+                matv.set(0, al.get(0));
+                try
+                {
+                    matv.set(-1, al.get(0));
+                    fail("negative index should have thrown a ValueRuntimeException");
+                }
+                catch (ValueRuntimeException vre)
+                {
+                    // Ignore expected exception
+                }
+
+                try
+                {
+                    matv.set(testValues.length, al.get(0));
+                    fail("index above range should have thrown a ValueRuntimeException");
+                }
+                catch (ValueRuntimeException vre)
+                {
+                    // Ignore expected exception
+                }
+
+                FloatAbsoluteTemperatureVector dense = atv.toDense();
+                assertTrue("Should be dense", dense.isDense());
+                assertFalse("Should be not be sparse", dense.isSparse());
+                assertEquals("Unit should be same", atv.getDisplayUnit(), dense.getDisplayUnit());
+                compareValues(dense.getValuesInUnit(), atv.getValuesInUnit());
+                assertFalse("Should be immutable", dense.isMutable());
+
+                FloatAbsoluteTemperatureVector sparse = atv.toSparse();
+                assertTrue("Should be sparse", sparse.isSparse());
+                assertFalse("Should not be be dense", sparse.isDense());
+                assertEquals("Unit should be same", atv.getDisplayUnit(), sparse.getDisplayUnit());
+                compareValues(sparse.getValuesInUnit(), atv.getValuesInUnit());
+                assertFalse("Should be immutable", sparse.isMutable());
+
+                FloatAbsoluteTemperatureVector copy = atv.clone();
+                assertEquals("storagetype should not have changed", atv.getStorageType(), copy.getStorageType());
+                assertEquals("unit should be same", atv.getDisplayUnit(), copy.getDisplayUnit());
+                compareValues(atv.getValuesInUnit(), copy.getValuesInUnit());
+                assertFalse("copy is immutable", copy.isMutable());
+
+                copy = matv.clone();
+                assertEquals("storagetype should not have changed", matv.getStorageType(), copy.getStorageType());
+                assertEquals("unit should be same", matv.getDisplayUnit(), copy.getDisplayUnit());
+                compareValues(matv.getValuesInUnit(), copy.getValuesInUnit());
+                assertTrue("copy is immutable", copy.isMutable());
             }
         }
     }
@@ -484,7 +591,7 @@ public class FloatVectorConstructorsTest
             // float
             @SuppressWarnings("rawtypes")
             Unit standardUnit = unitBase.getStandardUnit();
-            float[] testValues = new float[] {0, 123.456f, 0, 0, 234.567f, 0};
+            float[] testValues = new float[] { 0, 123.456f, 0, 0, 234.567f, 0 };
             int cardinality = 0;
             List<Float> list = new ArrayList<>();
             SortedMap<Integer, Float> map = new TreeMap<>();
@@ -498,7 +605,7 @@ public class FloatVectorConstructorsTest
                 }
                 list.add(value);
             }
-            for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+            for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
             {
                 FloatSIVector siv = FloatVector.instantiate(testValues, SIUnit.of(unitBase.getSiDimensions()), storageType);
                 System.out.println(siv);
@@ -583,7 +690,8 @@ public class FloatVectorConstructorsTest
                 for (Iterator<?> iterator = siv.iterator(); iterator.hasNext();)
                 {
                     AbstractFloatScalar<?, ?> s = (AbstractFloatScalar<?, ?>) iterator.next();
-                    assertEquals("SIDimensions match", s.getDisplayUnit().getUnitBase().getSiDimensions(), unitBase.getSiDimensions());
+                    assertEquals("SIDimensions match", s.getDisplayUnit().getUnitBase().getSiDimensions(),
+                            unitBase.getSiDimensions());
                     assertEquals("value of scalar matches", s.getInUnit(), testValues[nextIndex], 0.001);
                     nextIndex++;
                 }
@@ -613,7 +721,7 @@ public class FloatVectorConstructorsTest
     @Test
     public void exceptionsTest() throws ValueRuntimeException, UnitException
     {
-        float[] testValues = new float[] {0f, 123.456f, 0f, 0f, 234.567f, 0f, 0f};
+        float[] testValues = new float[] { 0f, 123.456f, 0f, 0f, 234.567f, 0f, 0f };
         FloatAbsoluteTemperature[] at = new FloatAbsoluteTemperature[testValues.length];
         List<FloatAbsoluteTemperature> al = new ArrayList<>();
         SortedMap<Integer, FloatAbsoluteTemperature> map = new TreeMap<>();
@@ -828,10 +936,10 @@ public class FloatVectorConstructorsTest
                 map.put(i, value);
             }
         }
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
-            for (AbsoluteTemperatureUnit temperatureUnit : new AbsoluteTemperatureUnit[] {AbsoluteTemperatureUnit.KELVIN,
-                    AbsoluteTemperatureUnit.DEGREE_CELSIUS})
+            for (AbsoluteTemperatureUnit temperatureUnit : new AbsoluteTemperatureUnit[] { AbsoluteTemperatureUnit.KELVIN,
+                    AbsoluteTemperatureUnit.DEGREE_CELSIUS })
             {
                 FloatAbsoluteTemperatureVector atv = FloatVector.instantiate(testValues, temperatureUnit, storageType);
                 compareValuesWithScale(temperatureUnit.getScale(), testValues, atv.getValuesSI());
@@ -855,7 +963,7 @@ public class FloatVectorConstructorsTest
         assertEquals("length of reference must equal length of result ", reference.length, got.length);
         for (int i = 0; i < reference.length; i++)
         {
-            assertEquals("value at each index must match", reference[i], got[i], 0.001);
+            assertEquals("value at index " + i + " must match", reference[i], got[i], 0.001);
         }
     }
 
@@ -876,7 +984,7 @@ public class FloatVectorConstructorsTest
         double factor = scale.toStandardUnit(1) - offset;
         for (int i = 0; i < reference.length; i++)
         {
-            assertEquals("value at each index must match", reference[i] * factor + offset, got[i], 0.001);
+            assertEquals("value at index " + i + " must match", reference[i] * factor + offset, got[i], 0.001);
         }
     }
 

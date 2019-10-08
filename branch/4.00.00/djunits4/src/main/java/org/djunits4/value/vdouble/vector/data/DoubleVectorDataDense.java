@@ -62,11 +62,18 @@ public class DoubleVectorDataDense extends DoubleVectorData
 
     /** {@inheritDoc} */
     @Override
+    public final DoubleVectorDataDense toDense()
+    {
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public final DoubleVectorDataSparse toSparse()
     {
         return DoubleVectorDataSparse.instantiate(this.vectorSI);
     }
-
+    
     /** {@inheritDoc} */
     @Override
     public final int size()

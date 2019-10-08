@@ -28,7 +28,7 @@ public class MathFunctionsTest
         double[] testValues = { -100, -10, -1, -0.1, 0, 0.1, 1, 10, 100, -Math.PI, Math.PI };
         for (double testValue : testValues)
         {
-            System.out.println("Testing math functions with test value " + testValue);
+            // System.out.println("Testing math functions with test value " + testValue);
             check("acos", DoubleMathFunctions.ACOS, FloatMathFunctions.ACOS, testValue, Math.acos(testValue));
             check("asin", DoubleMathFunctions.ASIN, FloatMathFunctions.ASIN, testValue, Math.asin(testValue));
             check("atan", DoubleMathFunctions.ATAN, FloatMathFunctions.ATAN, testValue, Math.atan(testValue));
@@ -46,6 +46,7 @@ public class MathFunctionsTest
                     Math.pow(testValue, Math.PI));
             check("pow", DoubleMathFunctions.POW(-Math.PI), FloatMathFunctions.POW((float) -Math.PI), testValue,
                     Math.pow(testValue, -Math.PI));
+            check("signum", DoubleMathFunctions.SIGNUM, FloatMathFunctions.SIGNUM, testValue, Math.signum(testValue));
             check("sin", DoubleMathFunctions.SIN, FloatMathFunctions.SIN, testValue, Math.sin(testValue));
             check("sinh", DoubleMathFunctions.SINH, FloatMathFunctions.SINH, testValue, Math.sinh(testValue));
             check("sqrt", DoubleMathFunctions.SQRT, FloatMathFunctions.SQRT, testValue, Math.sqrt(testValue));

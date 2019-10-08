@@ -42,7 +42,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
 
     /** The stored data as an object, can be sparse or dense. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected FloatVectorData data;
+    private FloatVectorData data;
 
     /**
      * Construct a new FloatVector.
@@ -74,7 +74,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     @Override
     public final float[] getValuesSI()
     {
-        return this.data.getDenseVectorSI();
+        return getData().getDenseVectorSI();
     }
 
     /** {@inheritDoc} */
@@ -100,7 +100,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     @Override
     public final int size()
     {
-        return this.data.size();
+        return getData().size();
     }
 
     /**
@@ -121,7 +121,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     public final float getSI(final int index) throws ValueRuntimeException
     {
         checkIndex(index);
-        return this.data.getSI(index);
+        return getData().getSI(index);
     }
 
     /** {@inheritDoc} */
@@ -151,7 +151,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     {
         checkIndex(index);
         checkCopyOnWrite();
-        this.data.setSI(index, valueSI);
+        getData().setSI(index, valueSI);
     }
 
     /** {@inheritDoc} */
@@ -170,7 +170,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
 
     /** {@inheritDoc} */
     @Override
-    public void set(int index, S value) throws ValueRuntimeException
+    public void set(final int index, final S value) throws ValueRuntimeException
     {
         setSI(index, value.si);
     }
@@ -201,7 +201,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
         }
         else
         {
-            result = instantiateVector(this.data.toSparse(), getDisplayUnit());
+            result = instantiateVector(getData().toSparse(), getDisplayUnit());
         }
         result.setDisplayUnit(getDisplayUnit());
         return result;
@@ -220,7 +220,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
         }
         else
         {
-            result = instantiateVector(this.data.toDense(), getDisplayUnit());
+            result = instantiateVector(getData().toDense(), getDisplayUnit());
         }
         return result;
     }
@@ -231,9 +231,9 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     public final V assign(final FloatFunction floatFunction)
     {
         checkCopyOnWrite();
-        if (this.data instanceof FloatVectorDataDense)
+        if (getData() instanceof FloatVectorDataDense)
         {
-            ((FloatVectorDataDense) this.data).assign(floatFunction);
+            ((FloatVectorDataDense) getData()).assign(floatFunction);
         }
         else
         {
@@ -334,7 +334,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
         if (verbose)
         {
             String ar = this instanceof Absolute ? "Abs " : "Rel ";
-            String ds = this.data.isDense() ? "Dense  " : this.data.isSparse() ? "Sparse " : "?????? ";
+            String ds = getData().isDense() ? "Dense  " : getData().isSparse() ? "Sparse " : "?????? ";
             if (isMutable())
             {
                 buf.append("Mutable   " + ar + ds);
@@ -349,8 +349,8 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
         {
             try
             {
-                float d = (float) ValueUtil.expressAsUnit(getSI(i), displayUnit);
-                buf.append(" " + Format.format(d));
+                float f = (float) ValueUtil.expressAsUnit(getSI(i), displayUnit);
+                buf.append(" " + Format.format(f));
             }
             catch (ValueRuntimeException ve)
             {
@@ -363,6 +363,19 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
             buf.append(" " + displayUnit.getDefaultDisplayAbbreviation());
         }
         return buf.toString();
+    }
+
+    /**
+     * Centralized size equality check.
+     * @param other AbstractFloatVector&lt;U, ?&gt;; other FloatVector
+     * @throws NullPointerException when other vector is null
+     * @throws ValueRuntimeException when vectors have unequal size
+     */
+    protected final void checkSize(final FloatVectorInterface<?, ?, ?> other) throws ValueRuntimeException
+    {
+        Throw.whenNull(other, "Other vector is null");
+        Throw.when(size() != other.size(), ValueRuntimeException.class, "The vectors have different sizes: %d != %d", size(),
+                other.size());
     }
 
     /** {@inheritDoc} */

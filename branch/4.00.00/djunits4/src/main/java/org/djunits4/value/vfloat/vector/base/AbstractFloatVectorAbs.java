@@ -96,7 +96,7 @@ public abstract class AbstractFloatVectorAbs<
     public AV decrementBy(RV decrement)
     {
         checkCopyOnWrite();
-        this.data.decrementBy(decrement.getData());
+        getData().decrementBy(decrement.getData());
         return (AV) this;
     }
 

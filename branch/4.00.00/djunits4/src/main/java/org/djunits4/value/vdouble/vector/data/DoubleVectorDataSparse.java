@@ -185,17 +185,24 @@ public class DoubleVectorDataSparse extends DoubleVectorData
         return this;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public final DoubleVectorDataDense toDense()
-    {
-        double[] denseSI = new double[this.size];
-        for (int index = 0; index < this.vectorSI.length; index++)
-        {
-            denseSI[this.indices[index]] = this.vectorSI[index];
-        }
-        return new DoubleVectorDataDense(denseSI);
-    }
+   /** {@inheritDoc} */
+   @Override
+   public final DoubleVectorDataDense toDense()
+   {
+       double[] denseSI = new double[this.size];
+       for (int index = 0; index < this.vectorSI.length; index++)
+       {
+           denseSI[this.indices[index]] = this.vectorSI[index];
+       }
+       return new DoubleVectorDataDense(denseSI);
+   }
+
+   /** {@inheritDoc} */
+   @Override
+   public final DoubleVectorDataSparse toSparse()
+   {
+       return this;
+   }
 
     /** {@inheritDoc} */
     @Override

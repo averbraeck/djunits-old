@@ -42,7 +42,7 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
 
     /** The stored data as an object, can be sparse or dense. */
     @SuppressWarnings("checkstyle:visibilitymodifier")
-    protected DoubleVectorData data;
+    private DoubleVectorData data;
 
     /**
      * Construct a new AbstractDoubleVector.
@@ -52,20 +52,20 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     AbstractDoubleVector(final DoubleVectorData data, final U unit)
     {
         super(unit);
-        Throw.whenNull(data, "display unit cannot be null");
+        Throw.whenNull(data, "data cannot be null");
         this.data = data;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected DoubleVectorData getData()
+    protected final DoubleVectorData getData()
     {
         return this.data;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected void setData(DoubleVectorData data)
+    protected void setData(final DoubleVectorData data)
     {
         this.data = data;
     }
@@ -156,21 +156,21 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
 
     /** {@inheritDoc} */
     @Override
-    public void setInUnit(int index, double valueInUnit) throws ValueRuntimeException
+    public void setInUnit(final int index, final double valueInUnit) throws ValueRuntimeException
     {
         setSI(index, ValueUtil.expressAsSIUnit(valueInUnit, getDisplayUnit()));
     }
 
     /** {@inheritDoc} */
     @Override
-    public void setInUnit(int index, double valueInUnit, U valueUnit) throws ValueRuntimeException
+    public void setInUnit(final int index, final double valueInUnit, final U valueUnit) throws ValueRuntimeException
     {
         setSI(index, ValueUtil.expressAsSIUnit(valueInUnit, valueUnit));
     }
 
     /** {@inheritDoc} */
     @Override
-    public void set(int index, S value) throws ValueRuntimeException
+    public void set(final int index, final S value) throws ValueRuntimeException
     {
         setSI(index, value.si);
     }
@@ -281,28 +281,28 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
     @Override
     public final V ceil()
     {
-        return (V) assign(DoubleMathFunctions.CEIL);
+        return assign(DoubleMathFunctions.CEIL);
     }
 
     /** {@inheritDoc} */
     @Override
     public final V floor()
     {
-        return (V) assign(DoubleMathFunctions.FLOOR);
+        return assign(DoubleMathFunctions.FLOOR);
     }
 
     /** {@inheritDoc} */
     @Override
     public final V neg()
     {
-        return (V) assign(DoubleMathFunctions.NEG);
+        return assign(DoubleMathFunctions.NEG);
     }
 
     /** {@inheritDoc} */
     @Override
     public final V rint()
     {
-        return (V) assign(DoubleMathFunctions.RINT);
+        return assign(DoubleMathFunctions.RINT);
     }
 
     /** {@inheritDoc} */

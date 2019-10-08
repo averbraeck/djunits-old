@@ -23,6 +23,7 @@ import org.junit.Test;
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
+ * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 public class UnitBaseTest
 {
@@ -30,6 +31,7 @@ public class UnitBaseTest
      * Test the UnitBase functions.
      * @throws UnitException on error
      */
+    @SuppressWarnings("rawtypes")
     @Test
     public void testUnitBase() throws UnitException
     {
@@ -102,6 +104,25 @@ public class UnitBaseTest
         assertEquals(QUnit.BASE.of("GQ"), QUnit.BASE.getUnitsById().get("GQ"));
         assertEquals(QUnit.BASE.of("GQ"), QUnit.BASE.getUnitByAbbreviation("GQ"));
         assertEquals(QUnit.BASE.of("GQ"), QUnit.BASE.getUnitsByAbbreviation().get("GQ"));
+        
+        try
+        {
+            SIDimensions.of("m/m/m/m");
+            fail("UnitBase.of string with multiple slashes should have thrown a UnitRuntimeException");
+        }
+        catch (UnitException ut)
+        {
+            // Ignore expected exception
+        }
+        try
+        {
+            new UnitBase("m/m/m/m");
+            fail("constructing UnitBase from string with multiple slashes should have thrown a UnitRuntimeException");
+        }
+        catch (UnitRuntimeException urt)
+        {
+            // Ignore expected exception
+        }
 
         QUnit.BASE.unregister(QUnit.QQQ);
         assertNull(QUnit.BASE.of("QQQ"));
@@ -110,7 +131,7 @@ public class UnitBaseTest
         UnitTypes.INSTANCE.unregister(unitBase3); // probably not registered
         UnitTypes.INSTANCE.unregister(unitBase4); // probably not registered
         UnitTypes.INSTANCE.unregister(QUnit.BASE); // should unregister
-    }
+            }
 
     /** */
     protected static class QUnit extends Unit<QUnit>

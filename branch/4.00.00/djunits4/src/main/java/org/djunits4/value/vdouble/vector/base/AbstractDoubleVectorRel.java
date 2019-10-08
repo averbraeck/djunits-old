@@ -45,7 +45,7 @@ public abstract class AbstractDoubleVectorRel<U extends Unit<U>, S extends Abstr
      */
     public final S zSum()
     {
-        return instantiateScalarSI(this.data.zSum(), getDisplayUnit());
+        return instantiateScalarSI(getData().zSum(), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
@@ -88,7 +88,7 @@ public abstract class AbstractDoubleVectorRel<U extends Unit<U>, S extends Abstr
     public RV incrementBy(RV increment)
     {
         checkCopyOnWrite();
-        this.data.incrementBy(increment.getData());
+        getData().incrementBy(increment.getData());
         return (RV) this;
     }
 
@@ -118,7 +118,7 @@ public abstract class AbstractDoubleVectorRel<U extends Unit<U>, S extends Abstr
     public RV decrementBy(RV decrement)
     {
         checkCopyOnWrite();
-        this.data.decrementBy(decrement.getData());
+        getData().decrementBy(decrement.getData());
         return (RV) this;
     }
 
@@ -128,7 +128,7 @@ public abstract class AbstractDoubleVectorRel<U extends Unit<U>, S extends Abstr
     public RV multiplyBy(final double multiplier)
     {
         checkCopyOnWrite();
-        this.data.multiplyBy(multiplier);
+        getData().multiplyBy(multiplier);
         return (RV) this;
     }
 
@@ -138,7 +138,7 @@ public abstract class AbstractDoubleVectorRel<U extends Unit<U>, S extends Abstr
     public RV divideBy(final double divisor)
     {
         checkCopyOnWrite();
-        this.data.divideBy(divisor);
+        getData().divideBy(divisor);
         return (RV) this;
     }
 
