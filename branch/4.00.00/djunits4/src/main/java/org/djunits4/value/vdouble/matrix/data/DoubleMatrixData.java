@@ -190,22 +190,16 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
     }
 
     /**
-     * Return the data of this matrix in sparse storage format.
-     * @return DoubleMatrixDataSparse; the sparse transformation of this data
-     */
-    public DoubleMatrixDataSparse toSparse()
-    {
-        return isSparse() ? (DoubleMatrixDataSparse) this : ((DoubleMatrixDataDense) this).toSparse();
-    }
-
-    /**
      * Return the data of this matrix in dense storage format.
      * @return DoubleMatrixDataDense; the dense transformation of this data
      */
-    public DoubleMatrixDataDense toDense()
-    {
-        return isDense() ? (DoubleMatrixDataDense) this : ((DoubleMatrixDataSparse) this).toDense();
-    }
+    public abstract DoubleMatrixDataDense toDense();
+
+    /**
+     * Return the data of this matrix in sparse storage format.
+     * @return DoubleMatrixDataSparse; the sparse transformation of this data
+     */
+    public abstract DoubleMatrixDataSparse toSparse();
 
     /**
      * Retrieve one value from this data.

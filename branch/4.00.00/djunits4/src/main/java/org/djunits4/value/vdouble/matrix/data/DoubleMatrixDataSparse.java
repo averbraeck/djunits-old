@@ -199,6 +199,13 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
 
     /** {@inheritDoc} */
     @Override
+    public final DoubleMatrixDataSparse toSparse()
+    {
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public final double getSI(final int row, final int col)
     {
         long index = row * this.cols + col;

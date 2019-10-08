@@ -198,6 +198,13 @@ public class FloatMatrixDataSparse extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
+    public final FloatMatrixDataSparse toSparse()
+    {
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public final float getSI(final int row, final int col)
     {
         long index = row * this.cols + col;

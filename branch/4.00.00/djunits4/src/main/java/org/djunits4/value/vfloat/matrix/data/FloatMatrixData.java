@@ -190,22 +190,16 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
     }
 
     /**
-     * Return the data of this matrix in sparse storage format.
-     * @return FloatMatrixDataSparse; the sparse transformation of this data
-     */
-    public FloatMatrixDataSparse toSparse()
-    {
-        return isSparse() ? (FloatMatrixDataSparse) this : ((FloatMatrixDataDense) this).toSparse();
-    }
-
-    /**
      * Return the data of this matrix in dense storage format.
      * @return FloatMatrixDataDense; the dense transformation of this data
      */
-    public FloatMatrixDataDense toDense()
-    {
-        return isDense() ? (FloatMatrixDataDense) this : ((FloatMatrixDataSparse) this).toDense();
-    }
+    public abstract FloatMatrixDataDense toDense();
+
+    /**
+     * Return the data of this matrix in sparse storage format.
+     * @return FloatMatrixDataSparse; the sparse transformation of this data
+     */
+    public abstract FloatMatrixDataSparse toSparse();
 
     /**
      * Retrieve one value from this data.

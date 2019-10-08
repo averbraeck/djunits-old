@@ -79,6 +79,13 @@ public class FloatMatrixDataDense extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
+    public final FloatMatrixDataDense toDense()
+    {
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public final FloatMatrixDataSparse toSparse()
     {
         int length = cardinality();

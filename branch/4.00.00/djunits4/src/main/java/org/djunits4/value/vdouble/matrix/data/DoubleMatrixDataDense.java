@@ -79,6 +79,13 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
 
     /** {@inheritDoc} */
     @Override
+    public final DoubleMatrixDataDense toDense()
+    {
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public final DoubleMatrixDataSparse toSparse()
     {
         int length = cardinality();
