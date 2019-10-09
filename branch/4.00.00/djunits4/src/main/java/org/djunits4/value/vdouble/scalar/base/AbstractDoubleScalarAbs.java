@@ -70,24 +70,6 @@ public abstract class AbstractDoubleScalarAbs<AU extends AbsoluteLinearUnit<AU, 
         return instantiateRel(getInUnit() - decrement.getInUnit(getDisplayUnit()), targetUnit);
     }
 
-    /**
-     * Interpolate between two values.
-     * @param zero A; the low value
-     * @param one A; the high value
-     * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
-     * @param <AU> the absolute unit
-     * @param <A> the Absolute class for reference purposes
-     * @param <RU> the relative unit
-     * @param <R> the Relative class for reference purposes
-     */
-    public static <AU extends AbsoluteLinearUnit<AU, RU>, A extends AbstractDoubleScalarAbs<AU, A, RU, R>, RU extends Unit<RU>,
-            R extends AbstractDoubleScalarRelWithAbs<AU, A, RU, R>> A interpolate(final A zero, final A one, final double ratio)
-    {
-        return zero.instantiateAbs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
-                zero.getDisplayUnit());
-    }
-
     /**********************************************************************************/
     /********************************** MATH METHODS **********************************/
     /**********************************************************************************/

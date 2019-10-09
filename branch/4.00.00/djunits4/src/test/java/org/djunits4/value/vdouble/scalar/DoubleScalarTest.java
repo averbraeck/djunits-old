@@ -23,6 +23,9 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarAbs;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
 import org.djunits4.value.vdouble.scalar.base.DoubleScalar;
+import org.djunits4.value.vfloat.scalar.FloatLength;
+import org.djunits4.value.vfloat.scalar.FloatPosition;
+import org.djunits4.value.vfloat.scalar.base.FloatScalar;
 import org.junit.Test;
 
 /**
@@ -188,7 +191,7 @@ public class DoubleScalarTest
                             scalarClass.getDeclaredMethod("instantiateAbs", double.class, absoluteUnit.getClass());
                     AbstractDoubleScalarAbs<?, ?, ?, ?> absScalar = (AbstractDoubleScalarAbs<?, ?, ?, ?>) instantiateAbsMethod
                             .invoke(relScalar, absValue, absoluteUnit);
-                    // method "plus" cannot be found with getMethod() for absScalar.getClass(). 
+                    // method "plus" cannot be found with getMethod() for absScalar.getClass().
                     Method plusMethod = scalarClass.getMethod("plus", absScalar.getClass().getSuperclass());
                     AbstractDoubleScalarAbs<?, ?, ?, ?> sum =
                             (AbstractDoubleScalarAbs<?, ?, ?, ?>) plusMethod.invoke(relScalar, absScalar);
@@ -261,7 +264,7 @@ public class DoubleScalarTest
     @Test
     public final void mathFunctionsTestAbsTest()
     {
-        double[] seedValues = {-10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10};
+        double[] seedValues = { -10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10 };
         for (double seedValue : seedValues)
         {
             double input = seedValue;
@@ -309,6 +312,10 @@ public class DoubleScalarTest
         Position result = DoubleScalar.plus(left, right);
         assertEquals("value of element should be SI plus of contributing elements", left.getSI() + right.getSI(),
                 result.getSI(), 0.001);
+        // Reverse parameters
+        result = DoubleScalar.plus(right, left);
+        assertEquals("value of element should be SI plus of contributing elements", left.getSI() + right.getSI(),
+                result.getSI(), 0.001);
     }
 
     /**
@@ -326,6 +333,112 @@ public class DoubleScalarTest
                 result.getSI(), 0.001);
     }
 
+    /**
+     * Test minus(DoubleScalarAbs, DoubleScalarRel).
+     */
+    @Test
+    public final void binaryminusOfAbsAndAbsTest()
+    {
+        double leftValue = 123.4;
+        double rightValue = 234.5;
+        Position left = new Position(leftValue, PositionUnit.MILE);
+        Position right = new Position(rightValue, PositionUnit.MILE);
+        Length result = DoubleScalar.minus(left, right);
+        assertEquals("value of element should be SI minus of contributing elements", left.getSI() - right.getSI(),
+                result.getSI(), 0.001);
+    }
+
+    /**
+     * Test the interpolate methods. Also does the FloatXXX versions.
+     */
+    @Test
+    public final void interpolateTest()
+    {
+        double[] ratios = new double[] { 0.0, 1.0, 0.5, 0.1, -7.2, 8.04 };
+        double zeroValue = 123.4;
+        double oneValue = 234.5;
+        Position zeroPosition = new Position(zeroValue, PositionUnit.MILE);
+        Position onePosition = new Position(oneValue, PositionUnit.MILE);
+        Length zeroLength = new Length(zeroValue, LengthUnit.INCH);
+        Length oneLength = new Length(oneValue, LengthUnit.INCH);
+        FloatPosition floatZeroPosition = new FloatPosition(zeroValue, PositionUnit.MILE);
+        FloatPosition floatOnePosition = new FloatPosition(oneValue, PositionUnit.MILE);
+        FloatLength floatZeroLength = new FloatLength(zeroValue, LengthUnit.INCH);
+        FloatLength floatOneLength = new FloatLength(oneValue, LengthUnit.INCH);
+        for (double ratio : ratios)
+        {
+            double expected;
+            // Figure out the expected value in a way that is very different from the actual implementation
+            if (ratio == 0)
+            {
+                expected = zeroValue;
+            }
+            else if (ratio == 1)
+            {
+                expected = oneValue;
+            }
+            else
+            {
+                expected = zeroValue + (oneValue - zeroValue) * ratio;
+            }
+            Position interpolated = DoubleScalar.interpolate(zeroPosition, onePosition, ratio);
+            assertEquals("interpoated value matches ratio", expected, interpolated.getInUnit(), 0.001);
+            FloatPosition floatInterpolated = FloatScalar.interpolate(floatZeroPosition, floatOnePosition, (float) ratio);
+            assertEquals("interpoated value matches ratio", (float) expected, floatInterpolated.getInUnit(), 0.01f);
+            Length interpolatedLength = DoubleScalar.interpolate(zeroLength, oneLength, ratio);
+            assertEquals("interpoated value matches ratio", expected, interpolatedLength.getInUnit(), 0.001);
+            FloatLength floatInterpolatedLength = FloatScalar.interpolate(floatZeroLength, floatOneLength, (float) ratio);
+            assertEquals("interpoated value matches ratio", (float) expected, floatInterpolatedLength.getInUnit(), 0.01f);
+        }
+    }
+
+    /**
+     * Test the max and min methods.
+     */
+    @Test
+    public void maxAndMinTest()
+    {
+        double lowest = -123.45;
+        double middle = -23.5;
+        double highest = 45.67;
+        
+        Position lowestPosition = new Position(lowest, PositionUnit.FOOT);
+        Position middlePosition = new Position(middle, PositionUnit.FOOT);
+        Position highestPosition = new Position(highest, PositionUnit.FOOT);
+        
+        Position max = DoubleScalar.max(lowestPosition, highestPosition);
+        assertEquals("max returns highest", highestPosition, max);
+        // Reverse arguments
+        max = DoubleScalar.max(highestPosition, lowestPosition);
+        assertEquals("max returns highest", highestPosition, max);
+        // Three arguments
+        max = DoubleScalar.max(lowestPosition, middlePosition, highestPosition);
+        assertEquals("max returns highest", highestPosition, max);
+        max = DoubleScalar.max(highestPosition, lowestPosition, middlePosition);
+        assertEquals("max returns highest", highestPosition, max);
+        max = DoubleScalar.max(lowestPosition, highestPosition, middlePosition);
+        assertEquals("max returns highest", highestPosition, max);
+        // Lots of arguments
+        max = DoubleScalar.max(highestPosition, lowestPosition, highestPosition, middlePosition, middlePosition);
+        assertEquals("max returns highest", highestPosition, max);
+                
+        Position min = DoubleScalar.min(lowestPosition, highestPosition);
+        assertEquals("min returns lowest", lowestPosition, min);
+        // Reverse arguments
+        min = DoubleScalar.min(highestPosition, lowestPosition);
+        assertEquals("min returns highest", lowestPosition, min);
+        // Three arguments
+        min = DoubleScalar.min(lowestPosition, middlePosition, highestPosition);
+        assertEquals("min returns lowest", lowestPosition, min);
+        min = DoubleScalar.min(highestPosition, lowestPosition, middlePosition);
+        assertEquals("min returns lowest", lowestPosition, min);
+        min = DoubleScalar.min(highestPosition, middlePosition, lowestPosition);
+        assertEquals("min returns lowest", lowestPosition, min);
+        // Lots of arguments
+        min = DoubleScalar.min(highestPosition, lowestPosition, highestPosition, middlePosition, middlePosition);
+        assertEquals("min returns lowest", lowestPosition, min);
+    }
+    
     /**
      * Test that the toString method returns something sensible.
      */
@@ -427,7 +540,7 @@ public class DoubleScalarTest
     @Test
     public final void mathFunctionsTestRelTest()
     {
-        double[] seedValues = {-10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10};
+        double[] seedValues = { -10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10 };
         for (double seedValue : seedValues)
         {
             double input = seedValue;

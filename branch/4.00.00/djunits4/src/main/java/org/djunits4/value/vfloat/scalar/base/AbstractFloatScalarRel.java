@@ -70,22 +70,6 @@ public abstract class AbstractFloatScalarRel<U extends Unit<U>, R extends Abstra
     }
 
     /**
-     * Interpolate between two values.
-     * @param zero R; the low value
-     * @param one R; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
-     * @param <U> the unit
-     * @param <R> the Relative class for reference purposes
-     */
-    public static <U extends Unit<U>, R extends AbstractFloatScalarRel<U, R>> R interpolate(final R zero, final R one,
-            final float ratio)
-    {
-        return zero.instantiateRel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
-                zero.getDisplayUnit());
-    }
-
-    /**
      * Multiply this scalar by another scalar and create a new scalar.
      * @param otherScalar AbstractFloatScalarRel&lt;?, ?&gt;; the value by which this scalar is multiplied
      * @return FloatScalar&lt;?&gt;; a new scalar instance with correct SI dimensions

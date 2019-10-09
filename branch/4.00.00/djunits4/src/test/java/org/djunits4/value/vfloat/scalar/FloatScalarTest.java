@@ -308,6 +308,10 @@ public class FloatScalarTest
         FloatPosition result = FloatScalar.plus(left, right);
         assertEquals("value of element should be SI plus of contributing elements", left.getSI() + right.getSI(),
                 result.getSI(), 0.001);
+        // Reverse parameters
+        result = FloatScalar.plus(right, left);
+        assertEquals("value of element should be SI plus of contributing elements", left.getSI() + right.getSI(),
+                result.getSI(), 0.001);
     }
 
     /**
@@ -325,6 +329,68 @@ public class FloatScalarTest
                 result.getSI(), 0.001);
     }
 
+    /**
+     * Test minus(DoubleScalarAbs, DoubleScalarRel).
+     */
+    @Test
+    public final void binaryminusOfAbsAndAbsTest()
+    {
+        float leftValue = 123.4f;
+        float rightValue = 234.5f;
+        FloatPosition left = new FloatPosition(leftValue, PositionUnit.MILE);
+        FloatPosition right = new FloatPosition(rightValue, PositionUnit.MILE);
+        FloatLength result = FloatScalar.minus(left, right);
+        assertEquals("value of element should be SI minus of contributing elements", left.getSI() - right.getSI(),
+                result.getSI(), 0.001);
+    }
+
+    /**
+     * Test the max and min methods.
+     */
+    @Test
+    public void maxAndMinTest()
+    {
+        float lowest = -123.45f;
+        float middle = -23.5f;
+        float highest = 45.67f;
+        
+        FloatPosition lowestPosition = new FloatPosition(lowest, PositionUnit.FOOT);
+        FloatPosition middlePosition = new FloatPosition(middle, PositionUnit.FOOT);
+        FloatPosition highestPosition = new FloatPosition(highest, PositionUnit.FOOT);
+        
+        FloatPosition max = FloatScalar.max(lowestPosition, highestPosition);
+        assertEquals("max returns highest", highestPosition, max);
+        // Reverse arguments
+        max = FloatScalar.max(highestPosition, lowestPosition);
+        assertEquals("max returns highest", highestPosition, max);
+        // Three arguments
+        max = FloatScalar.max(lowestPosition, middlePosition, highestPosition);
+        assertEquals("max returns highest", highestPosition, max);
+        max = FloatScalar.max(highestPosition, lowestPosition, middlePosition);
+        assertEquals("max returns highest", highestPosition, max);
+        max = FloatScalar.max(lowestPosition, highestPosition, middlePosition);
+        assertEquals("max returns highest", highestPosition, max);
+        // Lots of arguments
+        max = FloatScalar.max(highestPosition, lowestPosition, highestPosition, middlePosition, middlePosition);
+        assertEquals("max returns highest", highestPosition, max);
+                
+        FloatPosition min = FloatScalar.min(lowestPosition, highestPosition);
+        assertEquals("min returns lowest", lowestPosition, min);
+        // Reverse arguments
+        min = FloatScalar.min(highestPosition, lowestPosition);
+        assertEquals("min returns highest", lowestPosition, min);
+        // Three arguments
+        min = FloatScalar.min(lowestPosition, middlePosition, highestPosition);
+        assertEquals("min returns lowest", lowestPosition, min);
+        min = FloatScalar.min(highestPosition, lowestPosition, middlePosition);
+        assertEquals("min returns lowest", lowestPosition, min);
+        min = FloatScalar.min(highestPosition, middlePosition, lowestPosition);
+        assertEquals("min returns lowest", lowestPosition, min);
+        // Lots of arguments
+        min = FloatScalar.min(highestPosition, lowestPosition, highestPosition, middlePosition, middlePosition);
+        assertEquals("min returns lowest", lowestPosition, min);
+    }
+    
     /**
      * Test that the toString method returns something sensible.
      */
