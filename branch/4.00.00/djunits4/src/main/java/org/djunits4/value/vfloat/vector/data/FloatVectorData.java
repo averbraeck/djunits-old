@@ -443,16 +443,6 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @throws ValueRuntimeException if vectors have different lengths
      */
     public abstract FloatVectorData minus(final FloatVectorData right) throws ValueRuntimeException;
-    // {
-    // checkSizes(right);
-    // float[] dv = new float[size()];
-    // IntStream.range(0, size()).parallel().forEach(i -> dv[i] = getSI(i) - right.getSI(i));
-    // if (this instanceof FloatVectorDataSparse && right instanceof FloatVectorDataSparse)
-    // {
-    // return new FloatVectorDataDense(dv).toSparse();
-    // }
-    // return new FloatVectorDataDense(dv);
-    // }
 
     /**
      * Subtract a vector from this vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the same.
@@ -461,12 +451,6 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @throws ValueRuntimeException if vectors have different lengths
      */
     public abstract FloatVectorData decrementBy(FloatVectorData right) throws ValueRuntimeException;
-
-    // /**
-    // * Subtract a number from this vector on a cell-by-cell basis.
-    // * @param valueSI float; the value to subtract
-    // */
-    // public abstract void decrementBy(float valueSI);
 
     /**
      * Multiply two vector on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
