@@ -124,26 +124,6 @@ public abstract class AbstractDoubleMatrixRel<U extends Unit<U>, S extends Abstr
         return (RM) this;
     }
 
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public RM multiplyBy(final double multiplier)
-    {
-        checkCopyOnWrite();
-        this.data.multiplyBy(multiplier);
-        return (RM) this;
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public RM divideBy(final double divisor)
-    {
-        checkCopyOnWrite();
-        this.data.divideBy(divisor);
-        return (RM) this;
-    }
-
     /**
      * Multiply a Relative value with this Relative value for a matrix or matrix. The multiplication is done value by value and
      * store the result in a new Relative value. If both operands are dense, the result is a dense matrix or matrix, otherwise
@@ -200,12 +180,28 @@ public abstract class AbstractDoubleMatrixRel<U extends Unit<U>, S extends Abstr
     {
         return times((double) multiplier);
     }
+    
+    /** {@inheritDoc} */
+    @Override
+    public RM multiplyBy(final double multiplier)
+    {
+        checkCopyOnWrite();
+        return assign(DoubleMathFunctions.MULT(multiplier));
+    }
 
     /** {@inheritDoc} */
     @Override
     public RM divide(float divisor)
     {
         return divide((double) divisor);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public RM divideBy(final double divisor)
+    {
+        checkCopyOnWrite();
+        return assign(DoubleMathFunctions.DIV(divisor));
     }
 
 }
