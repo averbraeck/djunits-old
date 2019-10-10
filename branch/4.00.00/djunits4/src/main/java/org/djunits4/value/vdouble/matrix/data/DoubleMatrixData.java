@@ -348,12 +348,9 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
 
     /**
      * Add a number to this matrix on a cell-by-cell basis.
-     * @param valueSI double; the value to add
+     * @param increment double; the amount to add
      */
-    public void incrementBy(final double valueSI)
-    {
-        IntStream.range(0, this.matrixSI.length).parallel().forEach(i -> this.matrixSI[i] += valueSI);
-    }
+    public abstract void incrementBy(final double increment);
 
     /**
      * Subtract two matrices on a cell-by-cell basis. If both matrices are sparse, a sparse matrix is returned, otherwise a
@@ -377,10 +374,10 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
 
     /**
      * Subtract a matrix from this matrix on a cell-by-cell basis. The type of matrix (sparse, dense) stays the same.
-     * @param right DoubleMatrixData; the other data object to subtract
+     * @param decrement DoubleMatrixData; the amount to subtract
      * @throws ValueRuntimeException if matrices have different sizes
      */
-    public abstract void decrementBy(DoubleMatrixData right) throws ValueRuntimeException;
+    public abstract void decrementBy(DoubleMatrixData decrement) throws ValueRuntimeException;
 
     /**
      * Subtract a number from this matrix on a cell-by-cell basis.

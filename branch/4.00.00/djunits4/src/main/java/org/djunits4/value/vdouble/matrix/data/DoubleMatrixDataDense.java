@@ -178,16 +178,16 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final void incrementBy(final double right) throws ValueRuntimeException
+    public final void incrementBy(final double increment)
     {
-        IntStream.range(0, this.rows).parallel()
-                .forEach(r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] += right));
+        IntStream.range(0, this.matrixSI.length).parallel().forEach(i -> this.matrixSI[i] += increment);
     }
-
+    
     /** {@inheritDoc} */
     @Override
     public final void incrementBy(final DoubleMatrixData right) throws ValueRuntimeException
     {
+        checkSizes(right);
         IntStream.range(0, this.rows).parallel().forEach(
                 r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] += right.getSI(r, c)));
     }
