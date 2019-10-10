@@ -26,7 +26,7 @@ import org.djunits4.value.vdouble.vector.base.AbstractDoubleVectorRel;
  */
 public abstract class AbstractDoubleMatrixRel<U extends Unit<U>, S extends AbstractDoubleScalarRel<U, S>,
         RV extends AbstractDoubleVectorRel<U, S, RV>, RM extends AbstractDoubleMatrixRel<U, S, RV, RM>>
-        extends AbstractDoubleMatrix<U, S, RV, RM> implements Matrix.Rel<U, S, RV, RM>, Relative
+        extends AbstractDoubleMatrix<U, S, RV, RM> implements Matrix.Rel<U, S, RV, RM>, Relative<U, RM>
 {
     /** */
     private static final long serialVersionUID = 20190908L;
@@ -153,7 +153,7 @@ public abstract class AbstractDoubleMatrixRel<U extends Unit<U>, S extends Abstr
      * @throws ValueRuntimeException in case this matrix or matrix and the operand have a different size
      * @throws UnitException on unit error
      */
-    public final <VT extends AbstractDoubleMatrix<?, ?, ?, ?> & Relative> SIMatrix times(final VT rel)
+    public final <VT extends AbstractDoubleMatrix<?, ?, ?, ?> & Relative<?, ?>> SIMatrix times(final VT rel)
             throws ValueRuntimeException, UnitException
     {
         return new SIMatrix(this.getData().times(rel.getData()), SIUnit.of(
@@ -169,10 +169,43 @@ public abstract class AbstractDoubleMatrixRel<U extends Unit<U>, S extends Abstr
      * @throws ValueRuntimeException in case this matrix or matrix and the operand have a different size
      * @throws UnitException on unit error
      */
-    public final <VT extends AbstractDoubleMatrix<?, ?, ?, ?> & Relative> SIMatrix divide(final VT rel)
+    public final <VT extends AbstractDoubleMatrix<?, ?, ?, ?> & Relative<?, ?>> SIMatrix divide(final VT rel)
             throws ValueRuntimeException, UnitException
     {
         return new SIMatrix(this.getData().divide(rel.getData()), SIUnit.of(
                 getDisplayUnit().getUnitBase().getSiDimensions().minus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
     }
+    
+    /** {@inheritDoc} */
+    @Override
+    public RM times(final double multiplier)
+    {
+        RM result = clone().mutable();
+        result.assign(DoubleMathFunctions.MULT(multiplier));
+        return result.immutable();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public RM divide(final double divisor)
+    {
+        RM result = clone().mutable();
+        result.assign(DoubleMathFunctions.DIV(divisor));
+        return result.immutable();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public RM times(final float multiplier)
+    {
+        return times((double) multiplier);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public RM divide(float divisor)
+    {
+        return divide((double) divisor);
+    }
+
 }

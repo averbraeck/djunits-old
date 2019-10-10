@@ -26,7 +26,7 @@ import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorRel;
  */
 public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends AbstractFloatScalarRel<U, S>,
         RV extends AbstractFloatVectorRel<U, S, RV>, RM extends AbstractFloatMatrixRel<U, S, RV, RM>>
-        extends AbstractFloatMatrix<U, S, RV, RM> implements Matrix.Rel<U, S, RV, RM>, Relative
+        extends AbstractFloatMatrix<U, S, RV, RM> implements Matrix.Rel<U, S, RV, RM>
 {
     /** */
     private static final long serialVersionUID = 20190908L;
@@ -154,7 +154,7 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
      * @throws ValueRuntimeException in case this matrix or matrix and the operand have a different size
      * @throws UnitException on unit error
      */
-    public final <VT extends AbstractFloatMatrix<?, ?, ?, ?> & Relative> FloatSIMatrix times(final VT rel)
+    public final <VT extends AbstractFloatMatrix<?, ?, ?, ?> & Relative<?, ?>> FloatSIMatrix times(final VT rel)
             throws ValueRuntimeException, UnitException
     {
         return new FloatSIMatrix(this.getData().times(rel.getData()), SIUnit.of(
@@ -170,10 +170,43 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
      * @throws ValueRuntimeException in case this matrix or matrix and the operand have a different size
      * @throws UnitException on unit error
      */
-    public final <VT extends AbstractFloatMatrix<?, ?, ?, ?> & Relative> FloatSIMatrix divide(final VT rel)
+    public final <VT extends AbstractFloatMatrix<?, ?, ?, ?> & Relative<?, ?>> FloatSIMatrix divide(final VT rel)
             throws ValueRuntimeException, UnitException
     {
         return new FloatSIMatrix(this.getData().divide(rel.getData()), SIUnit.of(
                 getDisplayUnit().getUnitBase().getSiDimensions().minus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
     }
+
+    /** {@inheritDoc} */
+    @Override
+    public RM times(final double multiplier)
+    {
+        return times((float) multiplier);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public RM divide(final double divisor)
+    {
+        return divide((float) divisor);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public RM times(final float multiplier)
+    {
+        RM result = clone().mutable();
+        result.assign(FloatMathFunctions.MULT(multiplier));
+        return result.immutable();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public RM divide(float divisor)
+    {
+        RM result = clone().mutable();
+        result.assign(FloatMathFunctions.DIV(divisor));
+        return result.immutable();
+    }
+
 }

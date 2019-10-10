@@ -364,38 +364,6 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
     }
 
     /** {@inheritDoc} */
-    @Override
-    public M times(final double multiplier)
-    {
-        M result = clone().mutable();
-        result.assign(DoubleMathFunctions.MULT(multiplier));
-        return result.immutable();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public M divide(final double divisor)
-    {
-        M result = clone().mutable();
-        result.assign(DoubleMathFunctions.DIV(divisor));
-        return result.immutable();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public M times(final float multiplier)
-    {
-        return times((double) multiplier);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public M divide(float divisor)
-    {
-        return divide((double) divisor);
-    }
-
-    /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
     public final M abs()

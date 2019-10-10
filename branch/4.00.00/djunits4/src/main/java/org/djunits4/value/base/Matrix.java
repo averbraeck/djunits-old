@@ -121,7 +121,7 @@ public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
      * @param <RM> the relative matrix type with this unit
      */
     public static interface Rel<U extends Unit<U>, S extends Scalar<U, S>, V extends Vector<U, S, V>,
-            RM extends Matrix.Rel<U, S, V, RM>> extends Matrix<U, S, V, RM>, Relative
+            RM extends Matrix.Rel<U, S, V, RM>> extends Matrix<U, S, V, RM>, Relative<U, RM>
     {
         /**
          * Add a relative matrix to this relative mutable matrix. A new matrix is returned. The display unit of the result is

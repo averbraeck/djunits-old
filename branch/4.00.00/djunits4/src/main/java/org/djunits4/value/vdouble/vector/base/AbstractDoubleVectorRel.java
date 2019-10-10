@@ -24,7 +24,7 @@ import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
  */
 public abstract class AbstractDoubleVectorRel<U extends Unit<U>, S extends AbstractDoubleScalarRel<U, S>,
         RV extends AbstractDoubleVectorRel<U, S, RV>> extends AbstractDoubleVector<U, S, RV>
-        implements Vector.Rel<U, S, RV>, Relative
+        implements Vector.Rel<U, S, RV>, Relative<U, RV>
 {
     /** */
     private static final long serialVersionUID = 20190908L;
@@ -151,7 +151,7 @@ public abstract class AbstractDoubleVectorRel<U extends Unit<U>, S extends Abstr
      * @throws ValueRuntimeException in case this vector or matrix and the operand have a different size
      * @throws UnitException on unit error
      */
-    public final <VT extends AbstractDoubleVector<?, ?, ?> & Relative> SIVector times(final VT rel)
+    public final <VT extends AbstractDoubleVector<?, ?, ?> & Relative<?, ?>> SIVector times(final VT rel)
             throws ValueRuntimeException, UnitException
     {
         checkSize(rel);
@@ -168,7 +168,7 @@ public abstract class AbstractDoubleVectorRel<U extends Unit<U>, S extends Abstr
      * @throws ValueRuntimeException in case this vector or matrix and the operand have a different size
      * @throws UnitException on unit error
      */
-    public final <VT extends AbstractDoubleVector<?, ?, ?> & Relative> SIVector divide(final VT rel)
+    public final <VT extends AbstractDoubleVector<?, ?, ?> & Relative<?, ?>> SIVector divide(final VT rel)
             throws ValueRuntimeException, UnitException
     {
         checkSize(rel);
@@ -176,4 +176,32 @@ public abstract class AbstractDoubleVectorRel<U extends Unit<U>, S extends Abstr
                 getDisplayUnit().getUnitBase().getSiDimensions().minus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
     }
     
+    /** {@inheritDoc} */
+    @Override
+    public RV times(final double multiplier)
+    {
+        return clone().mutable().assign(DoubleMathFunctions.MULT(multiplier)).immutable();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public RV divide(final double divisor)
+    {
+        return clone().mutable().assign(DoubleMathFunctions.DIV(divisor)).immutable();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public RV times(final float multiplier)
+    {
+        return times((double) multiplier);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public RV divide(float divisor)
+    {
+        return divide((double) divisor);
+    }
+
 }

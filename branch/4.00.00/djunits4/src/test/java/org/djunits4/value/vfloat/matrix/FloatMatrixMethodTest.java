@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.djunits4.Try;
 import org.djunits4.unit.AreaUnit;
@@ -38,9 +39,9 @@ public class FloatMatrixMethodTest
         float[][] denseTestData = FLOATMATRIX.denseRectArrays(5, 10);
         float[][] sparseTestData = FLOATMATRIX.sparseRectArrays(5, 10);
 
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
-            for (AreaUnit au : new AreaUnit[] {AreaUnit.SQUARE_METER, AreaUnit.ACRE})
+            for (AreaUnit au : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
             {
                 float[][] testData = storageType.equals(StorageType.DENSE) ? denseTestData : sparseTestData;
                 FloatAreaMatrix am =
@@ -270,10 +271,10 @@ public class FloatMatrixMethodTest
 
                 // TEST METHODS THAT INVOLVE TWO MATRIX INSTANCES
 
-                for (StorageType storageType2 : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+                for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
                 {
                     float[][] testData2 = storageType2.equals(StorageType.DENSE) ? denseTestData : sparseTestData;
-                    for (AreaUnit au2 : new AreaUnit[] {AreaUnit.SQUARE_METER, AreaUnit.ACRE})
+                    for (AreaUnit au2 : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
                     {
 
                         // PLUS and INCREMENTBY(MATRIX)
@@ -360,9 +361,9 @@ public class FloatMatrixMethodTest
         float[][] denseTestData = FLOATMATRIX.denseRectArrays(5, 10);
         float[][] sparseTestData = FLOATMATRIX.sparseRectArrays(5, 10);
 
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
-            for (AreaUnit au : new AreaUnit[] {AreaUnit.SQUARE_METER, AreaUnit.ACRE})
+            for (AreaUnit au : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
             {
                 float[][] testData = storageType.equals(StorageType.DENSE) ? denseTestData : sparseTestData;
                 FloatAreaMatrix am =
@@ -495,9 +496,9 @@ public class FloatMatrixMethodTest
         float[][] denseTestData = FLOATMATRIX.denseRectArrays(5, 10);
         float[][] sparseTestData = FLOATMATRIX.sparseRectArrays(5, 10);
 
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
-            for (AreaUnit au : new AreaUnit[] {AreaUnit.SQUARE_METER, AreaUnit.ACRE})
+            for (AreaUnit au : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
             {
                 float[][] testData = storageType.equals(StorageType.DENSE) ? denseTestData : sparseTestData;
                 FloatAreaMatrix am =
@@ -565,7 +566,17 @@ public class FloatMatrixMethodTest
 
         FloatTimeMatrix absPlusRel = tm.plus(dm);
         FloatTimeMatrix absMinusRel = tm.minus(dm);
-        FloatDurationMatrix absMinusAbs = tm.minus(tm.divide(2.0));
+        float[][] halfDenseData = FLOATMATRIX.denseRectArrays(5,  10);
+        for (int row = 0; row < halfDenseData.length; row++)
+        {
+            for (int col = 0; col < halfDenseData[row].length; col++)
+            {
+                halfDenseData[row][col] *= 0.5;
+            }
+        }
+        FloatTimeMatrix halfTimeMatrix = FloatMatrix.instantiate(FloatMatrixData.instantiate(halfDenseData, 
+                TimeUnit.DEFAULT.getScale(), StorageType.DENSE), TimeUnit.DEFAULT);
+        FloatDurationMatrix absMinusAbs = tm.minus(halfTimeMatrix);
         FloatTimeMatrix absDecByRelS = tm.mutable().decrementBy(FloatDuration.of(1.0f, "min"));
         FloatTimeMatrix absDecByRelM = tm.mutable().decrementBy(dm.divide(2.0f));
         FloatTimeMatrix relPlusAbs = dm.plus(tm);
@@ -581,6 +592,31 @@ public class FloatMatrixMethodTest
                 assertEquals("relPlusAbs", 61.0 * denseTestData[row][col], relPlusAbs.getSI(row, col), 0.01);
             }
         }
+        for (int dRows : new int[] {-1, 0, 1})
+        {
+            for (int dCols : new int[] {-1, 0, 1})
+            {
+                if (dRows == 0 && dCols == 0)
+                {
+                    continue;
+                }
+                float[][] other = FLOATMATRIX.denseRectArrays(denseTestData.length + dRows, denseTestData[0].length + dCols);
+                FloatTimeMatrix wrongTimeMatrix = FloatMatrix.instantiate(
+                        FloatMatrixData.instantiate(other, TimeUnit.DEFAULT.getScale(), StorageType.DENSE), TimeUnit.DEFAULT);
+                try
+                {
+                        tm.mutable().minus(wrongTimeMatrix);
+                        fail("Mismatching size should have thrown a ValueRuntimeException");
+                }
+                catch (ValueRuntimeException vre)
+                {
+                    // Ignore expected exception
+                }
+            }
+        }
+        assertTrue("toString returns something informative",
+                FloatMatrixData.instantiate(denseTestData, TimeUnit.DEFAULT.getScale(), StorageType.DENSE).toString()
+                        .startsWith("FloatMatrixData"));
     }
 
 }

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.djunits4.Try;
 import org.djunits4.unit.AreaUnit;
@@ -13,6 +14,7 @@ import org.djunits4.unit.TimeUnit;
 import org.djunits4.unit.util.UnitException;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vfloat.function.FloatMathFunctions;
 import org.djunits4.value.vfloat.scalar.FloatArea;
 import org.djunits4.value.vfloat.scalar.FloatDuration;
@@ -238,8 +240,8 @@ public class FloatVectorMethodTest
                         assertEquals("a+c == c+a", amSum1, amSum4);
                         for (int index = 0; index < testData.length; index++)
                         {
-                            float tolerance =
-                                    Float.isFinite(amSum1.getSI(index)) ? Math.abs((float) (amSum1.getSI(index) / 10000.0d)) : 0.1f;
+                            float tolerance = Float.isFinite(amSum1.getSI(index))
+                                    ? Math.abs((float) (amSum1.getSI(index) / 10000.0d)) : 0.1f;
                             assertEquals("value in vector matches", au.getScale().toStandardUnit(testData[index])
                                     + au2.getScale().toStandardUnit(testData2[index]), amSum1.getSI(index), tolerance);
                         }
@@ -255,8 +257,8 @@ public class FloatVectorMethodTest
                         assertEquals("a-c == -(c-a)", amDiff1, amDiff4);
                         for (int index = 0; index < testData.length; index++)
                         {
-                            float tolerance =
-                                    Float.isFinite(amDiff1.getSI(index)) ? Math.abs((float) (amDiff1.getSI(index) / 10000.0d)) : 0.1f;
+                            float tolerance = Float.isFinite(amDiff1.getSI(index))
+                                    ? Math.abs((float) (amDiff1.getSI(index) / 10000.0d)) : 0.1f;
                             assertEquals("value in vector matches", au.getScale().toStandardUnit(testData[index])
                                     - au2.getScale().toStandardUnit(testData2[index]), amDiff1.getSI(index), tolerance);
                         }
@@ -270,11 +272,12 @@ public class FloatVectorMethodTest
                                 amDiv.getDisplayUnit().getUnitBase().getSiDimensions().toString(false, false, false));
                         for (int index = 0; index < testData.length; index++)
                         {
-                            float tolerance =
-                                    Float.isFinite(amTim.getSI(index)) ? Math.abs((float) (amTim.getSI(index) / 10000.0d)) : 0.1f;
+                            float tolerance = Float.isFinite(amTim.getSI(index))
+                                    ? Math.abs((float) (amTim.getSI(index) / 10000.0d)) : 0.1f;
                             assertEquals("value in m2 * m2 matches", au.getScale().toStandardUnit(testData[index])
                                     * au2.getScale().toStandardUnit(testData2[index]), amTim.getSI(index), tolerance);
-                            tolerance = Float.isFinite(amTim.getSI(index)) ? Math.abs((float) (amDiv.getSI(index) / 10000.0d)) : 0.1f;
+                            tolerance = Float.isFinite(amTim.getSI(index)) ? Math.abs((float) (amDiv.getSI(index) / 10000.0d))
+                                    : 0.1f;
                             assertEquals("value in m2 / m2 matches (could be NaN)",
                                     au.getScale().toStandardUnit(testData[index])
                                             / au2.getScale().toStandardUnit(testData2[index]),
@@ -501,7 +504,14 @@ public class FloatVectorMethodTest
 
         FloatTimeVector absPlusRel = tm.plus(dm);
         FloatTimeVector absMinusRel = tm.minus(dm);
-        FloatDurationVector absMinusAbs = tm.minus(tm.divide(2.0));
+        float[] halfDenseData = FLOATVECTOR.denseArray(105);
+        for (int index = 0; index < halfDenseData.length; index++)
+        {
+            halfDenseData[index] *= 0.5;
+        }
+        FloatTimeVector halfTimeVector = FloatVector.instantiate(
+                FloatVectorData.instantiate(halfDenseData, TimeUnit.DEFAULT.getScale(), StorageType.DENSE), TimeUnit.DEFAULT);
+        FloatDurationVector absMinusAbs = tm.minus(halfTimeVector);
         FloatTimeVector absDecByRelS = tm.mutable().decrementBy(FloatDuration.of(1.0f, "min"));
         FloatTimeVector absDecByRelM = tm.mutable().decrementBy(dm.divide(2.0d));
         FloatTimeVector relPlusAbs = dm.plus(tm);
@@ -514,6 +524,24 @@ public class FloatVectorMethodTest
             assertEquals("absDecByRelM", -29.0 * denseTestData[index], absDecByRelM.getSI(index), 0.01);
             assertEquals("relPlusAbs", 61.0 * denseTestData[index], relPlusAbs.getSI(index), 0.01);
         }
+        for (int dLength : new int[] { -1, 1 })
+        {
+            float[] other = FLOATVECTOR.denseArray(denseTestData.length + dLength);
+            FloatTimeVector wrongTimeVector = FloatVector.instantiate(
+                    FloatVectorData.instantiate(other, TimeUnit.DEFAULT.getScale(), StorageType.DENSE), TimeUnit.DEFAULT);
+            try
+            {
+                tm.mutable().minus(wrongTimeVector);
+                fail("Mismatching size should have thrown a ValueRuntimeException");
+            }
+            catch (ValueRuntimeException vre)
+            {
+                // Ignore expected exception
+            }
+        }
+        assertTrue("toString returns something informative",
+                FloatVectorData.instantiate(denseTestData, TimeUnit.DEFAULT.getScale(), StorageType.DENSE).toString()
+                        .startsWith("FloatVectorData"));
     }
 
 }

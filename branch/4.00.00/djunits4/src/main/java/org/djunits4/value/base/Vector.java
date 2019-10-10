@@ -67,7 +67,7 @@ public interface Vector<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
      * @param <RV> the relative vector type with this unit
      */
     public static interface Rel<U extends Unit<U>, S extends Scalar<U, S>, RV extends Vector.Rel<U, S, RV>>
-            extends Vector<U, S, RV>, Relative
+            extends Vector<U, S, RV>, Relative<U, RV>
     {
         /**
          * Add a relative vector to this relative mutable vector. A new vector is returned. When the vector itself needs to be

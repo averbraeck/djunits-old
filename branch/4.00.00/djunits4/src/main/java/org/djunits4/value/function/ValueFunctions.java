@@ -24,34 +24,6 @@ import org.djunits4.value.Value;
 public interface ValueFunctions<U extends Unit<U>, T extends Value<U, T>> extends Serializable
 {
     /**
-     * Returns a new scalar/vector/matrix with value(s) multiplied by a factor.
-     * @param multiplier double; the multiplier
-     * @return T; a new scalar/vector/matrix
-     */
-    T times(double multiplier);
-
-    /**
-     * Returns a new scalar/vector/matrix with value(s) divided by a factor.
-     * @param divisor double; the divisor
-     * @return T; the modified T
-     */
-    T divide(double divisor);
-
-    /**
-     * Returns a new scalar/vector/matrix with value(s) multiplied by a factor.
-     * @param multiplier float; the multiplier
-     * @return T; a new scalar/vector/matrix
-     */
-    T times(float multiplier);
-
-    /**
-     * Returns a new scalar/vector/matrix with value(s) divided by a factor.
-     * @param divisor float; the divisor
-     * @return T; the modified T
-     */
-    T divide(float divisor);
-
-    /**
      * Return a new Scalar/Vector/Matrix with absolute value(s).
      * @return R; a new R with absolute value(s)
      */

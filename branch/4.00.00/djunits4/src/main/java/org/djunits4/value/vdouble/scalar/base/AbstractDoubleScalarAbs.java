@@ -114,36 +114,4 @@ public abstract class AbstractDoubleScalarAbs<AU extends AbsoluteLinearUnit<AU, 
         return instantiateAbs(Math.rint(getInUnit()), getDisplayUnit());
     }
 
-    /** {@inheritDoc} */
-    @Override
-    @SuppressWarnings("checkstyle:designforextension")
-    public A times(final double constant)
-    {
-        return instantiateAbs(getInUnit() * constant, getDisplayUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    @SuppressWarnings("checkstyle:designforextension")
-    public A divide(final double constant)
-    {
-        return instantiateAbs(getInUnit() / constant, getDisplayUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    @SuppressWarnings("checkstyle:designforextension")
-    public A times(final float constant)
-    {
-        return instantiateAbs(getInUnit() * constant, getDisplayUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    @SuppressWarnings("checkstyle:designforextension")
-    public A divide(final float constant)
-    {
-        return instantiateAbs(getInUnit() / constant, getDisplayUnit());
-    }
-
 }

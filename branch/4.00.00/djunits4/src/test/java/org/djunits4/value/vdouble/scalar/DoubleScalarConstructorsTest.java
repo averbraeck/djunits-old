@@ -10,9 +10,15 @@ import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.Unit;
 import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.base.UnitTypes;
+import org.djunits4.unit.scale.IdentityScale;
+import org.djunits4.unit.si.SIPrefixes;
+import org.djunits4.unit.unitsystem.UnitSystem;
 import org.djunits4.unit.util.UNITS;
+import org.djunits4.unit.util.UnitRuntimeException;
 import org.djunits4.value.CLASSNAMES;
+import org.djunits4.value.vdouble.scalar.base.DoubleScalar;
 import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
+import org.djunits4.value.vfloat.scalar.base.FloatScalar;
 import org.junit.Test;
 
 /**
@@ -62,4 +68,48 @@ public class DoubleScalarConstructorsTest implements UNITS
             assertEquals("Unit must match", standardUnit, secondaryDoubleScalar.getDisplayUnit());
         }
     }
+
+    /**
+     * Test that the constructors throw the expected exceptions.
+     */
+    @Test
+    public void constructorExceptionsTest()
+    {
+        try
+        {
+            DoubleScalar.instantiateAnonymous(123.456, BadUnitClass.SI);
+        }
+        catch (UnitRuntimeException ure)
+        {
+            // Ignore expected exception
+        }
+        
+        try
+        {
+            FloatScalar.instantiateAnonymous(123.456f, BadUnitClass.SI);
+        }
+        catch (UnitRuntimeException ure)
+        {
+            // Ignore expected exception
+        }
+    }
+
+}
+
+/**
+ * Unit class with name that does not end on "Unit".
+ */
+class BadUnitClass extends Unit<BadUnitClass>
+{
+
+    /** ... */
+    private static final long serialVersionUID = 1L;
+
+    /** The base, with "m/s2" as the SI signature. */
+    public static final UnitBase<BadUnitClass> BASE = new UnitBase<>("m/s2");
+
+    /** The SI unit for acceleration is m/s^2. */
+    public static final BadUnitClass SI = new BadUnitClass()
+            .build(new Unit.Builder<BadUnitClass>().setUnitBase(BASE).setId("m/s2").setName("meter per second squared")
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(IdentityScale.SCALE));
 }

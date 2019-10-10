@@ -70,24 +70,6 @@ public abstract class AbstractFloatScalarAbs<AU extends AbsoluteLinearUnit<AU, R
         return instantiateRel(getInUnit() - decrement.getInUnit(getDisplayUnit()), targetUnit);
     }
 
-    /**
-     * Interpolate between two values.
-     * @param zero A; the low value
-     * @param one A; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
-     * @param <AU> the absolute unit
-     * @param <A> the Absolute class for reference purposes
-     * @param <RU> the relative unit
-     * @param <R> the Relative class for reference purposes
-     */
-    public static <AU extends AbsoluteLinearUnit<AU, RU>, A extends AbstractFloatScalarAbs<AU, A, RU, R>, RU extends Unit<RU>,
-            R extends AbstractFloatScalarRelWithAbs<AU, A, RU, R>> A interpolate(final A zero, final A one, final float ratio)
-    {
-        return zero.instantiateAbs(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
-                zero.getDisplayUnit());
-    }
-
     /**********************************************************************************/
     /********************************** MATH METHODS **********************************/
     /**********************************************************************************/
@@ -130,38 +112,6 @@ public abstract class AbstractFloatScalarAbs<AU extends AbsoluteLinearUnit<AU, R
     public A rint()
     {
         return instantiateAbs((float) Math.rint(getInUnit()), getDisplayUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    @SuppressWarnings("checkstyle:designforextension")
-    public A times(final double constant)
-    {
-        return instantiateAbs((float) (getInUnit() * constant), getDisplayUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    @SuppressWarnings("checkstyle:designforextension")
-    public A divide(final double constant)
-    {
-        return instantiateAbs((float) (getInUnit() / constant), getDisplayUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    @SuppressWarnings("checkstyle:designforextension")
-    public A times(final float constant)
-    {
-        return instantiateAbs(getInUnit() * constant, getDisplayUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    @SuppressWarnings("checkstyle:designforextension")
-    public A divide(final float constant)
-    {
-        return instantiateAbs(getInUnit() / constant, getDisplayUnit());
     }
 
 }

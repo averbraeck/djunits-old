@@ -365,38 +365,6 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
     }
 
     /** {@inheritDoc} */
-    @Override
-    public M times(final double multiplier)
-    {
-        return times((float) multiplier);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public M divide(final double divisor)
-    {
-        return divide((float) divisor);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public M times(final float multiplier)
-    {
-        M result = clone().mutable();
-        result.assign(FloatMathFunctions.MULT(multiplier));
-        return result.immutable();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public M divide(float divisor)
-    {
-        M result = clone().mutable();
-        result.assign(FloatMathFunctions.DIV(divisor));
-        return result.immutable();
-    }
-
-    /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
     public final M abs()

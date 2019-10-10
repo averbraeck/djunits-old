@@ -1,5 +1,7 @@
 package org.djunits4.value;
 
+import org.djunits4.unit.Unit;
+
 /**
  * Relative values express differences. <br>
  * Values are Relative when adding or subtracting two values does make sense and results in a value of that same type.
@@ -9,8 +11,37 @@ package org.djunits4.value;
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
+ * @param <U> the unit type
+ * @param <T> the value type for this unit
  */
-public interface Relative
+public interface Relative <U extends Unit<U>, T extends Value<U, T>>
 {
-    // This interface does not force anything to be implemented in classes that implement it
+    /**
+     * Returns a new scalar/vector/matrix with value(s) multiplied by a factor.
+     * @param multiplier double; the multiplier
+     * @return T; a new scalar/vector/matrix
+     */
+    T times(double multiplier);
+
+    /**
+     * Returns a new scalar/vector/matrix with value(s) divided by a factor.
+     * @param divisor double; the divisor
+     * @return T; the modified T
+     */
+    T divide(double divisor);
+
+    /**
+     * Returns a new scalar/vector/matrix with value(s) multiplied by a factor.
+     * @param multiplier float; the multiplier
+     * @return T; a new scalar/vector/matrix
+     */
+    T times(float multiplier);
+
+    /**
+     * Returns a new scalar/vector/matrix with value(s) divided by a factor.
+     * @param divisor float; the divisor
+     * @return T; the modified T
+     */
+    T divide(float divisor);
+
 }

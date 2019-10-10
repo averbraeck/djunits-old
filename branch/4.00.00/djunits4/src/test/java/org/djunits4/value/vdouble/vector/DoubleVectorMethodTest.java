@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.djunits4.Try;
 import org.djunits4.unit.AreaUnit;
@@ -500,7 +501,14 @@ public class DoubleVectorMethodTest
 
         TimeVector absPlusRel = tm.plus(dm);
         TimeVector absMinusRel = tm.minus(dm);
-        DurationVector absMinusAbs = tm.minus(tm.divide(2.0));
+        double[] halfDenseData = DOUBLEVECTOR.denseArray(105);
+        for (int index = 0; index < halfDenseData.length; index++)
+        {
+            halfDenseData[index] *= 0.5;
+        }
+        TimeVector halfTimeVector = DoubleVector.instantiate(
+                DoubleVectorData.instantiate(halfDenseData, TimeUnit.DEFAULT.getScale(), StorageType.DENSE), TimeUnit.DEFAULT);
+        DurationVector absMinusAbs = tm.minus(halfTimeVector);
         TimeVector absDecByRelS = tm.mutable().decrementBy(Duration.of(1.0d, "min"));
         TimeVector absDecByRelM = tm.mutable().decrementBy(dm.divide(2.0d));
         TimeVector relPlusAbs = dm.plus(tm);
@@ -513,6 +521,24 @@ public class DoubleVectorMethodTest
             assertEquals("absDecByRelM", -29.0 * denseTestData[index], absDecByRelM.getSI(index), 0.01);
             assertEquals("relPlusAbs", 61.0 * denseTestData[index], relPlusAbs.getSI(index), 0.01);
         }
+        for (int dLength : new int[] { -1, 1 })
+        {
+            double[] other = DOUBLEVECTOR.denseArray(denseTestData.length + dLength);
+            TimeVector wrongTimeVector = DoubleVector.instantiate(
+                    DoubleVectorData.instantiate(other, TimeUnit.DEFAULT.getScale(), StorageType.DENSE), TimeUnit.DEFAULT);
+            try
+            {
+                tm.mutable().minus(wrongTimeVector);
+                fail("Mismatching size should have thrown a ValueRuntimeException");
+            }
+            catch (ValueRuntimeException vre)
+            {
+                // Ignore expected exception
+            }
+        }
+        assertTrue("toString returns something informative",
+                DoubleVectorData.instantiate(denseTestData, TimeUnit.DEFAULT.getScale(), StorageType.DENSE).toString()
+                        .startsWith("DoubleVectorData"));
     }
 
 }

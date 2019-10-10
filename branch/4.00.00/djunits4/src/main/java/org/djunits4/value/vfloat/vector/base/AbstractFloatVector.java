@@ -244,34 +244,6 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
 
     /** {@inheritDoc} */
     @Override
-    public V times(final double multiplier)
-    {
-        return clone().mutable().assign(FloatMathFunctions.MULT((float) multiplier)).immutable();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public V divide(final double divisor)
-    {
-        return clone().mutable().assign(FloatMathFunctions.DIV((float) divisor)).immutable();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public V times(final float multiplier)
-    {
-        return times((double) multiplier);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public V divide(float divisor)
-    {
-        return divide((double) divisor);
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final V abs()
     {
         return assign(FloatMathFunctions.ABS);

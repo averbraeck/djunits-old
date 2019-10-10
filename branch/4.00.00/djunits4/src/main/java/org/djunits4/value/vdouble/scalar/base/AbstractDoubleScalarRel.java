@@ -70,22 +70,6 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
     }
 
     /**
-     * Interpolate between two values.
-     * @param zero R; the low value
-     * @param one R; the high value
-     * @param ratio double; the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
-     * @param <U> the unit
-     * @param <R> the Relative class for reference purposes
-     */
-    public static <U extends Unit<U>, R extends AbstractDoubleScalarRel<U, R>> R interpolate(final R zero, final R one,
-            final double ratio)
-    {
-        return zero.instantiateRel(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
-                zero.getDisplayUnit());
-    }
-
-    /**
      * Multiply this scalar by another scalar and create a new scalar.
      * @param otherScalar AbstractDoubleScalarRel&lt;?, ?&gt;; the value by which this scalar is multiplied
      * @return DoubleScalar&lt;?&gt;; a new scalar instance with correct SI dimensions
