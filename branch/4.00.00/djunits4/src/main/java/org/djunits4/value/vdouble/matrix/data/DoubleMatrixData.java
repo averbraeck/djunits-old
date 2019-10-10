@@ -426,6 +426,7 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
      */
     public DoubleMatrixData divide(final DoubleMatrixData right) throws ValueRuntimeException
     {
+        // TODO: rewrite using assign in case the result should be sparse
         checkSizes(right);
         double[] dm = new double[this.rows * this.cols];
         IntStream.range(0, this.rows).parallel().forEach(
