@@ -83,12 +83,10 @@ public abstract class AbstractDoubleMatrixAbs<
      * @return AM; this modified vector
      * @throws ValueRuntimeException in case this vector is immutable
      */
-    @SuppressWarnings("unchecked")
     public AM decrementBy(final R decrement)
     {
         checkCopyOnWrite();
-        assign(DoubleMathFunctions.DEC(decrement.si));
-        return (AM) this;
+        return assign(DoubleMathFunctions.DEC(decrement.si));
     }
 
     /**
