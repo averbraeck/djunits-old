@@ -75,10 +75,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
     public FloatMatrixDataSparse(final float[][] dataSI) throws ValueRuntimeException
     {
         super(StorageType.SPARSE);
-        if (dataSI == null || dataSI.length == 0)
-        {
-            throw new ValueRuntimeException("FloatMatrixDataSparse constructor, matrixSI == null || matrixSI.length == 0");
-        }
+        checkRectangularAndNonEmpty(dataSI);
 
         int length = nonZero(dataSI);
         this.rows = dataSI.length;
