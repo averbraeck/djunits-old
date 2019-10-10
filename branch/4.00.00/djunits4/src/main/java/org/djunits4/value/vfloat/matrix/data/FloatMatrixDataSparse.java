@@ -118,6 +118,13 @@ public class FloatMatrixDataSparse extends FloatMatrixData
         }
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public final int cardinality()
+    {
+        return this.indices.length;
+    }
+
     /**
      * Fill the sparse data structures matrixSI[] and indices[]. Note: output vectors have to be initialized at the right size.
      * Cannot be parallelized because of stateful and sequence-sensitive count.

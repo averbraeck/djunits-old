@@ -95,6 +95,9 @@ public class DoubleMatrixMethodTest
                 }
                 assertEquals("zSum", sum, zSum.getInUnit(), 0.1);
                 assertEquals("cardinality", card, am.cardinality());
+                AreaMatrix ammutZero = ammut.multiplyBy(0.0);
+                assertEquals("cardinality should be 0", 0, ammutZero.cardinality());
+                assertEquals("zSum should be 0", 0.0, ammutZero.zSum().getSI(), 0);
 
                 // INCREMENTBY(SCALAR) and DECREMENTBY(SCALAR)
                 AreaMatrix amold = am.clone();

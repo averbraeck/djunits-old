@@ -1,5 +1,6 @@
 package org.djunits4.value.vdouble.vector.data;
 
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 import org.djunits4.value.ValueRuntimeException;
@@ -30,6 +31,13 @@ public class DoubleVectorDataDense extends DoubleVectorData
         super(StorageType.DENSE);
         this.vectorSI = new double[vectorSI.length];
         System.arraycopy(vectorSI, 0, this.vectorSI, 0, vectorSI.length);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final int cardinality()
+    {
+        return (int) Arrays.stream(this.vectorSI).parallel().filter(d -> d != 0.0).count();
     }
 
     /**

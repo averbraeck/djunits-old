@@ -95,10 +95,8 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
         Throw.whenNull(scale, "FloatVectorData.instantiate: scale is null");
         Throw.whenNull(storageType, "FloatVectorData.instantiate: storageType is null");
         Throw.when(values.size() == 0, ValueRuntimeException.class, "FloatVectorData.instantiate: values.size() == 0");
-        for (Float f : values)
-        {
-            Throw.whenNull(f, "null value in values");
-        }
+        Throw.when(values.parallelStream().filter(d -> d == null).count() > 0, NullPointerException.class,
+                "values contains one or more null values");
 
         float[] valuesSI = new float[values.size()];
         IntStream.range(0, values.size()).parallel().forEach(i -> valuesSI[i] = (float) scale.toStandardUnit(values.get(i)));
@@ -290,20 +288,20 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
 
     /**
      * Instantiate a FloatVectorData with the right data type.
-     * @param valueMap SortedMap&lt;Integer,S&gt;; the FloatScalar values to store
+     * @param values SortedMap&lt;Integer,S&gt;; the FloatScalar values to store
      * @param length int; the length of the vector to pad with 0 after last entry in map
      * @param storageType StorageType; the data type to use
      * @param <S> the scalar type to use
      * @return FloatVectorData; the FloatVectorData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
      */
-    public static <S extends FloatScalarInterface<?, ?>> FloatVectorData instantiateMap(final SortedMap<Integer, S> valueMap,
-            final int length, final StorageType storageType) throws ValueRuntimeException
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> FloatVectorData instantiateMap(
+            final SortedMap<Integer, S> values, final int length, final StorageType storageType) throws ValueRuntimeException
     {
-        Throw.whenNull(valueMap, "FloatVectorData.instantiate: values is null");
+        Throw.whenNull(values, "FloatVectorData.instantiate: values is null");
         Throw.when(length < 1, ValueRuntimeException.class, "Length must be > 0");
         Throw.whenNull(storageType, "FloatVectorData.instantiate: storageType is null");
-        for (Entry<Integer, S> e : valueMap.entrySet())
+        for (Entry<Integer, S> e : values.entrySet())
         {
             Throw.when(e.getKey() < 0 || e.getKey() >= length, ValueRuntimeException.class, "Key in values out of range");
             Throw.whenNull(e.getValue(), "null value in map");
@@ -314,16 +312,26 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
             case DENSE:
             {
                 float[] valuesSI = new float[length];
-                valueMap.keySet().parallelStream().forEach(index -> valuesSI[index] = valueMap.get(index).getSI());
+                values.entrySet().parallelStream().forEach(entry -> valuesSI[entry.getKey()] = entry.getValue().getSI());
                 return new FloatVectorDataDense(valuesSI);
             }
 
             case SPARSE:
             {
-                int[] indices = valueMap.keySet().parallelStream().mapToInt(i -> i).toArray();
-                float[] valuesSI = new float[valueMap.size()];
-                IntStream.range(0, valueMap.size()).parallel()
-                        .forEach(index -> valuesSI[index] = valueMap.get(indices[index]).getSI());
+                int nonZeroCount = (int) values.values().parallelStream().filter(s -> s.getSI() != 0f).count();
+                int[] indices = new int[nonZeroCount];
+                float[] valuesSI = new float[nonZeroCount];
+                int index = 0;
+                for (Integer key : values.keySet())
+                {
+                    float value = values.get(key).getSI();
+                    if (0.0f != value)
+                    {
+                        indices[index] = key;
+                        valuesSI[index] = value;
+                        index++;
+                    }
+                }
                 return new FloatVectorDataSparse(valuesSI, indices, length);
             }
 
@@ -367,15 +375,6 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @param valueSI float; the value at the index
      */
     public abstract void setSI(int index, float valueSI);
-
-    /** {@inheritDoc} */
-    @Override
-    public final int cardinality()
-    {
-        // this does not copy the data. See http://stackoverflow.com/questions/23106093/how-to-get-a-stream-from-a-float
-        return (int) IntStream.range(0, this.vectorSI.length).parallel().mapToDouble(i -> this.vectorSI[i])
-                .filter(d -> d != 0.0).count();
-    }
 
     /**
      * Compute and return the sum of all values.
@@ -444,16 +443,16 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @throws ValueRuntimeException if vectors have different lengths
      */
     public abstract FloatVectorData minus(final FloatVectorData right) throws ValueRuntimeException;
-//    {
-//        checkSizes(right);
-//        float[] dv = new float[size()];
-//        IntStream.range(0, size()).parallel().forEach(i -> dv[i] = getSI(i) - right.getSI(i));
-//        if (this instanceof FloatVectorDataSparse && right instanceof FloatVectorDataSparse)
-//        {
-//            return new FloatVectorDataDense(dv).toSparse();
-//        }
-//        return new FloatVectorDataDense(dv);
-//    }
+    // {
+    // checkSizes(right);
+    // float[] dv = new float[size()];
+    // IntStream.range(0, size()).parallel().forEach(i -> dv[i] = getSI(i) - right.getSI(i));
+    // if (this instanceof FloatVectorDataSparse && right instanceof FloatVectorDataSparse)
+    // {
+    // return new FloatVectorDataDense(dv).toSparse();
+    // }
+    // return new FloatVectorDataDense(dv);
+    // }
 
     /**
      * Subtract a vector from this vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the same.
@@ -463,11 +462,11 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      */
     public abstract FloatVectorData decrementBy(FloatVectorData right) throws ValueRuntimeException;
 
-//    /**
-//     * Subtract a number from this vector on a cell-by-cell basis.
-//     * @param valueSI float; the value to subtract
-//     */
-//    public abstract void decrementBy(float valueSI);
+    // /**
+    // * Subtract a number from this vector on a cell-by-cell basis.
+    // * @param valueSI float; the value to subtract
+    // */
+    // public abstract void decrementBy(float valueSI);
 
     /**
      * Multiply two vector on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
@@ -477,22 +476,12 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @throws ValueRuntimeException if vectors have different lengths
      */
     public abstract FloatVectorData times(final FloatVectorData right) throws ValueRuntimeException;
-//    {
-//        checkSizes(right);
-//        float[] dv = new float[size()];
-//        IntStream.range(0, size()).parallel().forEach(i -> dv[i] = getSI(i) * right.getSI(i));
-//        if (this instanceof FloatVectorDataDense && right instanceof FloatVectorDataDense)
-//        {
-//            return new FloatVectorDataDense(dv);
-//        }
-//        return new FloatVectorDataDense(dv).toSparse();
-//    }
 
     /**
      * Multiply a vector with the values of another vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the
      * same.
      * @param right FloatVectorData; the other data object to multiply with
-     * @return FloatVectorData; this modified float vector data store 
+     * @return FloatVectorData; this modified float vector data store
      * @throws ValueRuntimeException if vectors have different lengths
      */
     public abstract FloatVectorData multiplyBy(FloatVectorData right) throws ValueRuntimeException;
@@ -511,16 +500,6 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @throws ValueRuntimeException if vectors have different lengths
      */
     public abstract FloatVectorData divide(final FloatVectorData right) throws ValueRuntimeException;
-//    {
-//        checkSizes(right);
-//        float[] dv = new float[size()];
-//        IntStream.range(0, size()).parallel().forEach(i -> dv[i] = getSI(i) / right.getSI(i));
-//        if (this instanceof FloatVectorDataDense && right instanceof FloatVectorDataDense)
-//        {
-//            return new FloatVectorDataDense(dv);
-//        }
-//        return new FloatVectorDataDense(dv).toSparse();
-//    }
 
     /**
      * Divide the values of a vector by the values of another vector on a cell-by-cell basis. The type of vector (sparse, dense)

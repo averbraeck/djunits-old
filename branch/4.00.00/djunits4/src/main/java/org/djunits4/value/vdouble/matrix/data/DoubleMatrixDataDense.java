@@ -1,10 +1,12 @@
 package org.djunits4.value.vdouble.matrix.data;
 
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vdouble.function.DoubleFunction;
+import org.djunits4.value.vdouble.function.DoubleFunction2;
 
 /**
  * Stores dense data for a DoubleMatrix and carries out basic operations.
@@ -67,14 +69,38 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
         }
     }
 
-    /**
-     * Apply a function to all data elements of this matrix.
-     * @param doubleFunction DoubleFunction; the function to apply on the (mutable) data elements
-     */
-    public final void assign(final DoubleFunction doubleFunction)
+    /** {@inheritDoc} */
+    @Override
+    public final int cardinality()
+    {
+        return (int) Arrays.stream(this.matrixSI).parallel().filter(d -> d != 0.0).count();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DoubleMatrixDataDense assign(final DoubleFunction doubleFunction)
     {
         IntStream.range(0, this.rows() * this.cols()).parallel()
                 .forEach(i -> this.matrixSI[i] = doubleFunction.apply(this.matrixSI[i]));
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DoubleMatrixDataDense assign(final DoubleFunction2 doubleFunction, final DoubleMatrixData right)
+    {
+        if (right.isDense())
+        {
+            DoubleMatrixDataDense rightDense = (DoubleMatrixDataDense) right;
+            IntStream.range(0, this.rows() * this.cols()).parallel()
+                    .forEach(i -> this.matrixSI[i] = doubleFunction.apply(this.matrixSI[i], rightDense.matrixSI[i]));
+        }
+        else
+        {
+            IntStream.range(0, this.rows() * this.cols()).parallel().forEach(
+                    i -> this.matrixSI[i] = doubleFunction.apply(this.matrixSI[i], right.getSI(i / this.cols, i % this.cols)));
+        }
+        return this;
     }
 
     /** {@inheritDoc} */
@@ -152,10 +178,26 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
 
     /** {@inheritDoc} */
     @Override
+    public final void incrementBy(final double right) throws ValueRuntimeException
+    {
+        IntStream.range(0, this.rows).parallel()
+                .forEach(r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] += right));
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public final void incrementBy(final DoubleMatrixData right) throws ValueRuntimeException
     {
         IntStream.range(0, this.rows).parallel().forEach(
                 r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] += right.getSI(r, c)));
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void decrementBy(final double right) throws ValueRuntimeException
+    {
+        IntStream.range(0, this.rows).parallel()
+                .forEach(r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] -= right));
     }
 
     /** {@inheritDoc} */

@@ -11,6 +11,8 @@ import org.djunits4.unit.scale.Scale;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.AbstractStorage;
 import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.function.DoubleFunction;
+import org.djunits4.value.vdouble.function.DoubleFunction2;
 import org.djunits4.value.vdouble.matrix.base.DoubleSparseValue;
 import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
 
@@ -217,13 +219,6 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
      */
     public abstract void setSI(int row, int col, double valueSI);
 
-    /** {@inheritDoc} */
-    @Override
-    public final int cardinality()
-    {
-        return (int) Arrays.stream(this.matrixSI).parallel().filter(d -> d != 0.0).count();
-    }
-
     /**
      * Compute and return the sum of the values of all cells of this matrix.
      * @return double; the sum of the values of all cells
@@ -296,7 +291,7 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
      * @param other DoubleMatrixData; the other data object
      * @throws ValueRuntimeException if matrices have different lengths
      */
-    private void checkSizes(final DoubleMatrixData other) throws ValueRuntimeException
+    protected void checkSizes(final DoubleMatrixData other) throws ValueRuntimeException
     {
         if (this.rows() != other.rows() || this.cols() != other.cols())
         {
@@ -307,6 +302,22 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
     /* ============================================================================================ */
     /* ================================== CALCULATION FUNCTIONS =================================== */
     /* ============================================================================================ */
+
+    /**
+     * Apply an operation to each cell.
+     * @param doubleFunction DoubleFunction; the operation to apply
+     * @return DoubleMatrixData; this (modified) double matrix data object
+     */
+    public abstract DoubleMatrixData assign(DoubleFunction doubleFunction);
+
+    /**
+     * Apply a binary operation on a cell by cell basis.
+     * @param doubleFunction2 DoubleFunction2; the binary operation to apply
+     * @param right DoubleMatrixData; the right operand for the binary operation
+     * @return DoubleMatrixData; this (modified) double matrix data object
+     * @throws ValueRuntimeException when the sizes of the vectors do not match
+     */
+    abstract DoubleMatrixData assign(DoubleFunction2 doubleFunction2, DoubleMatrixData right) throws ValueRuntimeException;
 
     /**
      * Add two matrices on a cell-by-cell basis. If both matrices are sparse, a sparse matrix is returned, otherwise a dense
@@ -375,10 +386,7 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
      * Subtract a number from this matrix on a cell-by-cell basis.
      * @param valueSI double; the value to subtract
      */
-    public void decrementBy(final double valueSI)
-    {
-        IntStream.range(0, this.matrixSI.length).parallel().forEach(i -> this.matrixSI[i] -= valueSI);
-    }
+    abstract void decrementBy(final double valueSI);
 
     /**
      * Multiply two matrix on a cell-by-cell basis. If both matrices are dense, a dense matrix is returned, otherwise a sparse

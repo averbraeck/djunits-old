@@ -32,6 +32,15 @@ public class FloatVectorDataDense extends FloatVectorData
         System.arraycopy(vectorSI, 0, this.vectorSI, 0, vectorSI.length);
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public final int cardinality()
+    {
+        // this does not copy the data. See http://stackoverflow.com/questions/23106093/how-to-get-a-stream-from-a-float
+        return (int) IntStream.range(0, this.vectorSI.length).parallel().mapToDouble(i -> this.vectorSI[i])
+                .filter(d -> d != 0.0).count();
+    }
+
     /**
      * Modify the data by applying a function to each value.
      * @param floatFunction FloatFunction; the function to apply on the (mutable) data elements

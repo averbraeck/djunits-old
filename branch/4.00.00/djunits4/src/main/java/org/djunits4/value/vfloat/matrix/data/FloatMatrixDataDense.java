@@ -67,6 +67,15 @@ public class FloatMatrixDataDense extends FloatMatrixData
         }
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public final int cardinality()
+    {
+        // this does not copy the data. See http://stackoverflow.com/questions/23106093/how-to-get-a-stream-from-a-float
+        return (int) IntStream.range(0, this.matrixSI.length).parallel().mapToDouble(i -> this.matrixSI[i])
+                .filter(d -> d != 0.0).count();
+    }
+
     /**
      * Apply a function to all data elements of this matrix.
      * @param floatFunction FloatFunction; the function to apply on the (mutable) data elements

@@ -41,6 +41,13 @@ public class DoubleVectorDataSparse extends DoubleVectorData
     }
 
     /** {@inheritDoc} */
+    @Override
+    public final int cardinality()
+    {
+        return this.indices.length;
+    }
+
+    /** {@inheritDoc} */
    @Override
     public final DoubleVectorDataSparse assign(final DoubleFunction2 doubleFunction, final DoubleVectorData right)
     {
@@ -226,7 +233,24 @@ public class DoubleVectorDataSparse extends DoubleVectorData
         int internalIndex = Arrays.binarySearch(this.indices, index);
         if (internalIndex >= 0)
         {
-            this.vectorSI[internalIndex] = valueSI;
+            if (valueSI == 0f)
+            {
+                // remove room
+                int[] indicesNew = new int[this.indices.length - 1];
+                double[] vectorSINew = new double[this.vectorSI.length - 1];
+                System.arraycopy(this.indices, 0, indicesNew, 0, internalIndex);
+                System.arraycopy(this.vectorSI, 0, vectorSINew, 0, internalIndex);
+                System.arraycopy(this.indices, internalIndex + 1, indicesNew, internalIndex,
+                        this.indices.length - internalIndex - 1);
+                System.arraycopy(this.vectorSI, internalIndex + 1, vectorSINew, internalIndex,
+                        this.indices.length - internalIndex - 1);
+                this.indices = indicesNew;
+                this.vectorSI = vectorSINew;
+            }
+            else
+            {
+                this.vectorSI[internalIndex] = valueSI;
+            }
             return;
         }
 

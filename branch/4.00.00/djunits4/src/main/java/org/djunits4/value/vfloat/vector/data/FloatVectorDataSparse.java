@@ -43,6 +43,13 @@ public class FloatVectorDataSparse extends FloatVectorData
 
     /** {@inheritDoc} */
     @Override
+    public final int cardinality()
+    {
+        return this.indices.length;
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public final FloatVectorDataDense toDense()
     {
         float[] denseSI = new float[this.size];
@@ -82,10 +89,30 @@ public class FloatVectorDataSparse extends FloatVectorData
         int internalIndex = Arrays.binarySearch(this.indices, index);
         if (internalIndex >= 0)
         {
-            this.vectorSI[internalIndex] = valueSI;
+            if (valueSI == 0f)
+            {
+                // remove room
+                int[] indicesNew = new int[this.indices.length - 1];
+                float[] vectorSINew = new float[this.vectorSI.length - 1];
+                System.arraycopy(this.indices, 0, indicesNew, 0, internalIndex);
+                System.arraycopy(this.vectorSI, 0, vectorSINew, 0, internalIndex);
+                System.arraycopy(this.indices, internalIndex + 1, indicesNew, internalIndex,
+                        this.indices.length - internalIndex - 1);
+                System.arraycopy(this.vectorSI, internalIndex + 1, vectorSINew, internalIndex,
+                        this.indices.length - internalIndex - 1);
+                this.indices = indicesNew;
+                this.vectorSI = vectorSINew;
+            }
+            else
+            {
+                this.vectorSI[internalIndex] = valueSI;
+            }
             return;
         }
-
+        if (valueSI == 0f)
+        {
+            return;
+        }
         // make room. TODO increase size in chunks
         internalIndex = -internalIndex - 1;
         int[] indicesNew = new int[this.indices.length + 1];
@@ -390,7 +417,7 @@ public class FloatVectorDataSparse extends FloatVectorData
 
     /** {@inheritDoc} */
     @Override
-    public final FloatVectorData divide(final FloatVectorData right)  throws ValueRuntimeException
+    public final FloatVectorData divide(final FloatVectorData right) throws ValueRuntimeException
     {
         if (right.isSparse())
         {
@@ -400,7 +427,7 @@ public class FloatVectorDataSparse extends FloatVectorData
         // Sparse divided by dense makes a sparse
         return this.copy().divideBy(right);
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public final FloatVectorData divideBy(final FloatVectorData right) throws ValueRuntimeException

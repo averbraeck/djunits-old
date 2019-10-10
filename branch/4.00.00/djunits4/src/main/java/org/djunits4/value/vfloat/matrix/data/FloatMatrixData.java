@@ -217,15 +217,6 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      */
     public abstract void setSI(int row, int col, float valueSI);
 
-    /** {@inheritDoc} */
-    @Override
-    public final int cardinality()
-    {
-        // this does not copy the data. See http://stackoverflow.com/questions/23106093/how-to-get-a-stream-from-a-float
-        return (int) IntStream.range(0, this.matrixSI.length).parallel().mapToDouble(i -> this.matrixSI[i])
-                .filter(d -> d != 0.0).count();
-    }
-
     /**
      * Compute and return the sum of the values of all cells of this matrix.
      * @return float; the sum of the values of all cells
@@ -427,15 +418,16 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      */
     public FloatMatrixData divide(final FloatMatrixData right) throws ValueRuntimeException
     {
+        // TODO: rewrite using assign in case the result should be sparse
         checkSizes(right);
-        float[] dm = new float[this.rows * this.cols];
+        float[] fm = new float[this.rows * this.cols];
         IntStream.range(0, this.rows).parallel().forEach(
-                r -> IntStream.range(0, this.cols).forEach(c -> dm[r * this.cols + c] = getSI(r, c) / right.getSI(r, c)));
-        if (this instanceof FloatMatrixDataDense && right instanceof FloatMatrixDataDense)
+                r -> IntStream.range(0, this.cols).forEach(c -> fm[r * this.cols + c] = getSI(r, c) / right.getSI(r, c)));
+        if (this instanceof FloatMatrixDataSparse && right instanceof FloatMatrixDataSparse)
         {
-            return new FloatMatrixDataDense(dm, this.rows, this.cols);
+            return new FloatMatrixDataSparse(fm, this.rows, this.cols);
         }
-        return new FloatMatrixDataDense(dm, this.rows, this.cols).toSparse();
+        return new FloatMatrixDataDense(fm, this.rows, this.cols).toSparse();
     }
 
     /**

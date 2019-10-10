@@ -95,6 +95,9 @@ public class FloatMatrixMethodTest
                 }
                 assertEquals("zSum", sum, zSum.getInUnit(), 0.1);
                 assertEquals("cardinality", card, am.cardinality());
+                FloatAreaMatrix ammutZero = ammut.multiplyBy(0.0f);
+                assertEquals("cardinality should be 0", 0, ammutZero.cardinality());
+                assertEquals("zSum should be 0", 0.0, ammutZero.zSum().getSI(), 0);
 
                 // INCREMENTBY(SCALAR) and DECREMENTBY(SCALAR)
                 FloatAreaMatrix amold = am.clone();

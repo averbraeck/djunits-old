@@ -108,10 +108,8 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
         Throw.whenNull(scale, "DoubleVectorData.instantiate: scale is null");
         Throw.whenNull(storageType, "DoubleVectorData.instantiate: storageType is null");
         Throw.when(values.size() == 0, ValueRuntimeException.class, "DoubleVectorData.instantiate: values.size() == 0");
-        for (Double d : values)
-        {
-            Throw.whenNull(d, "null value in values");
-        }
+        Throw.when(values.parallelStream().filter(d -> d == null).count() > 0, NullPointerException.class,
+                "values contains one or more null values");
 
         switch (storageType)
         {
@@ -150,18 +148,18 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
                 {
                     if (scale.isBaseSIScale())
                     {
-                        nonZeroCount = (int) values.parallelStream().filter(d -> d != 0.0).count();
+                        nonZeroCount = (int) values.parallelStream().filter(d -> d != 0d).count();
                     }
                     else
                     {
-                        nonZeroCount = (int) values.parallelStream().filter(d -> scale.toStandardUnit(d) != 0.0).count();
+                        nonZeroCount = (int) values.parallelStream().filter(d -> scale.toStandardUnit(d) != 0d).count();
                     }
                 }
                 else
                 {
                     if (scale.isBaseSIScale())
                     {
-                        nonZeroCount = (int) values.stream().mapToDouble(d -> d).count();
+                        nonZeroCount = (int) values.stream().filter(d -> d != 0d).count();
                     }
                     else
                     {
@@ -509,13 +507,6 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @param valueSI double; the value at the index
      */
     public abstract void setSI(int index, double valueSI);
-
-    /** {@inheritDoc} */
-    @Override
-    public final int cardinality()
-    {
-        return (int) Arrays.stream(this.vectorSI).parallel().filter(d -> d != 0.0).count();
-    }
 
     /**
      * Compute and return the sum of all values.

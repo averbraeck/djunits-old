@@ -14,7 +14,6 @@ import org.djunits4.unit.TimeUnit;
 import org.djunits4.unit.util.UnitException;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
-import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vfloat.function.FloatMathFunctions;
 import org.djunits4.value.vfloat.scalar.FloatArea;
 import org.djunits4.value.vfloat.scalar.FloatDuration;

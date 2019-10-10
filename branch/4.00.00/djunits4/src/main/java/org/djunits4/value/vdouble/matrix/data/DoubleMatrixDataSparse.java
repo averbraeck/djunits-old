@@ -8,6 +8,8 @@ import java.util.stream.IntStream;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.function.DoubleFunction;
+import org.djunits4.value.vdouble.function.DoubleFunction2;
 import org.djunits4.value.vdouble.matrix.base.DoubleSparseValue;
 import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
 
@@ -119,6 +121,13 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
         }
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public final int cardinality()
+    {
+        return this.indices.length;
+    }
+
     /**
      * Fill the sparse data structures matrixSI[] and indices[]. Note: output vectors have to be initialized at the right size.
      * Cannot be parallelized because of stateful and sequence-sensitive count.
@@ -170,6 +179,225 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
                 count++;
             }
         }
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public DoubleMatrixData assign(final DoubleFunction doubleFunction)
+    {
+        int currentSize = rows() * cols();
+        if (currentSize > 16)
+        {
+            currentSize = 16;
+        }
+        long[] newIndices = new long[currentSize];
+        double[] newValues = new double[currentSize];
+        int nonZeroValues = 0;
+        int ownIndex = 0;
+        int otherIndex = 0;
+        while (ownIndex < this.indices.length)
+        {
+            double value;
+            int index = otherIndex;
+            if (ownIndex < this.indices.length)
+            { // neither we nor right has run out of values
+                if (this.indices[ownIndex] == otherIndex)
+                {
+                    value = doubleFunction.apply(this.matrixSI[ownIndex]);
+                    ownIndex++;
+                }
+                else
+                {
+                    // we have a zero; other has a value
+                    value = doubleFunction.apply(0.0);
+                }
+                otherIndex++;
+            }
+            else
+            { // we have run out of values; right has not
+                value = doubleFunction.apply(0.0);
+                otherIndex++;
+            }
+            if (value != 0f)
+            {
+                if (nonZeroValues >= currentSize)
+                {
+                    // increase size of arrays
+                    currentSize *= 2;
+                    if (currentSize > rows() * cols())
+                    {
+                        currentSize = rows() * cols();
+                    }
+                    long[] newNewIndices = new long[currentSize];
+                    System.arraycopy(newIndices, 0, newNewIndices, 0, newIndices.length);
+                    newIndices = newNewIndices;
+                    double[] newNewValues = new double[currentSize];
+                    System.arraycopy(newNewValues, 0, newValues, 0, newValues.length);
+                    newValues = newNewValues;
+                }
+                newIndices[nonZeroValues] = index;
+                newValues[nonZeroValues] = value;
+                nonZeroValues++;
+            }
+        }
+        if (nonZeroValues < currentSize)
+        {
+            // reduce size of arrays
+            long[] newNewIndices = new long[nonZeroValues];
+            System.arraycopy(newIndices, 0, newNewIndices, 0, nonZeroValues);
+            newIndices = newNewIndices;
+            double[] newNewValues = new double[nonZeroValues];
+            System.arraycopy(newValues, 0, newNewValues, 0, nonZeroValues);
+            newValues = newNewValues;
+        }
+        this.indices = newIndices;
+        this.matrixSI = newValues;
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DoubleMatrixDataSparse assign(final DoubleFunction2 doubleFunction, final DoubleMatrixData right)
+    {
+        checkSizes(right);
+        int currentSize = rows() * cols();
+        if (currentSize > 16)
+        {
+            currentSize = 16;
+        }
+        long[] newIndices = new long[currentSize];
+        double[] newValues = new double[currentSize];
+        int nonZeroValues = 0;
+        int ownIndex = 0;
+        int otherIndex = 0;
+        if (right.isSparse())
+        { // both are sparse; result must be sparse
+            DoubleMatrixDataSparse other = (DoubleMatrixDataSparse) right;
+            while (ownIndex < this.indices.length || otherIndex < other.indices.length)
+            {
+                double value;
+                long index;
+                if (ownIndex < this.indices.length && otherIndex < other.indices.length)
+                { // neither we nor right has run out of values
+                    if (this.indices[ownIndex] == other.indices[otherIndex])
+                    {
+                        value = doubleFunction.apply(this.matrixSI[ownIndex], other.matrixSI[otherIndex]);
+                        index = this.indices[ownIndex];
+                        ownIndex++;
+                        otherIndex++;
+                    }
+                    else if (this.indices[ownIndex] < other.indices[otherIndex])
+                    {
+                        // we have a non-zero; right has a zero
+                        value = doubleFunction.apply(this.matrixSI[ownIndex], 0.0);
+                        index = this.indices[ownIndex];
+                        ownIndex++;
+                    }
+                    else
+                    {
+                        // we have a zero; right has a non-zero
+                        value = doubleFunction.apply(0.0, other.matrixSI[otherIndex]);
+                        index = other.indices[otherIndex];
+                        otherIndex++;
+                    }
+                }
+                else if (ownIndex < this.indices.length)
+                { // right has run out of values; we have not
+                    value = this.matrixSI[ownIndex];
+                    index = this.indices[ownIndex];
+                    ownIndex++;
+                }
+                else
+                { // we have run out of values; right has not
+                    value = doubleFunction.apply(0.0, other.matrixSI[otherIndex]);
+                    index = other.indices[otherIndex];
+                    otherIndex++;
+                }
+                if (value != 0f)
+                {
+                    if (nonZeroValues >= currentSize)
+                    {
+                        // increase size of arrays
+                        currentSize *= 2;
+                        if (currentSize > rows() * cols())
+                        {
+                            currentSize = rows() * cols();
+                        }
+                        long[] newNewIndices = new long[currentSize];
+                        System.arraycopy(newIndices, 0, newNewIndices, 0, newIndices.length);
+                        newIndices = newNewIndices;
+                        double[] newNewValues = new double[currentSize];
+                        System.arraycopy(newNewValues, 0, newValues, 0, newValues.length);
+                        newValues = newNewValues;
+                    }
+                    newIndices[nonZeroValues] = index;
+                    newValues[nonZeroValues] = value;
+                    nonZeroValues++;
+                }
+            }
+        }
+        else
+        { // we are sparse; other is dense; result must be sparse
+            DoubleMatrixDataDense other = (DoubleMatrixDataDense) right;
+            while (ownIndex < this.indices.length)
+            {
+                double value;
+                int index = otherIndex;
+                if (ownIndex < this.indices.length)
+                { // neither we nor right has run out of values
+                    if (this.indices[ownIndex] == otherIndex)
+                    {
+                        value = doubleFunction.apply(this.matrixSI[ownIndex], other.matrixSI[otherIndex]);
+                        ownIndex++;
+                    }
+                    else
+                    {
+                        // we have a zero; other has a value
+                        value = doubleFunction.apply(0.0, other.matrixSI[otherIndex]);
+                    }
+                    otherIndex++;
+                }
+                else
+                { // we have run out of values; right has not
+                    value = doubleFunction.apply(0.0, other.matrixSI[otherIndex]);
+                    otherIndex++;
+                }
+                if (value != 0f)
+                {
+                    if (nonZeroValues >= currentSize)
+                    {
+                        // increase size of arrays
+                        currentSize *= 2;
+                        if (currentSize > rows() * cols())
+                        {
+                            currentSize = rows() * cols();
+                        }
+                        long[] newNewIndices = new long[currentSize];
+                        System.arraycopy(newIndices, 0, newNewIndices, 0, newIndices.length);
+                        newIndices = newNewIndices;
+                        double[] newNewValues = new double[currentSize];
+                        System.arraycopy(newNewValues, 0, newValues, 0, newValues.length);
+                        newValues = newNewValues;
+                    }
+                    newIndices[nonZeroValues] = index;
+                    newValues[nonZeroValues] = value;
+                    nonZeroValues++;
+                }
+            }
+        }
+        if (nonZeroValues < currentSize)
+        {
+            // reduce size of arrays
+            long[] newNewIndices = new long[nonZeroValues];
+            System.arraycopy(newIndices, 0, newNewIndices, 0, nonZeroValues);
+            newIndices = newNewIndices;
+            double[] newNewValues = new double[nonZeroValues];
+            System.arraycopy(newValues, 0, newNewValues, 0, nonZeroValues);
+            newValues = newNewValues;
+        }
+        this.indices = newIndices;
+        this.matrixSI = newValues;
+        return this;
     }
 
     /** {@inheritDoc} */
@@ -278,8 +506,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     {
         // determine number of non-null cells
         AtomicInteger atomicLength = new AtomicInteger(0);
-        IntStream.range(0, valuesSI.length).parallel().forEach(r -> IntStream.range(0, valuesSI[0].length).forEach(c ->
-        {
+        IntStream.range(0, valuesSI.length).parallel().forEach(r -> IntStream.range(0, valuesSI[0].length).forEach(c -> {
             if (valuesSI[r][c] != 0.0)
             {
                 atomicLength.incrementAndGet();
@@ -297,6 +524,20 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     private static int nonZero(final double[] valuesSI)
     {
         return (int) Arrays.stream(valuesSI).parallel().filter(d -> d != 0.0).count();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void incrementBy(final double increment) throws ValueRuntimeException
+    {
+        assign(new DoubleFunction()
+        {
+            @Override
+            public double apply(double value)
+            {
+                return value + increment;
+            }
+        });
     }
 
     /** {@inheritDoc} */
@@ -335,6 +576,20 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
         }
         this.indices = newIndices;
         this.matrixSI = newMatrixSI;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void decrementBy(final double decrement) throws ValueRuntimeException
+    {
+        assign(new DoubleFunction()
+        {
+            @Override
+            public double apply(double value)
+            {
+                return value - decrement;
+            }
+        });
     }
 
     /** {@inheritDoc} */
@@ -458,7 +713,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings({"checkstyle:needbraces", "checkstyle:designforextension"})
+    @SuppressWarnings({ "checkstyle:needbraces", "checkstyle:designforextension" })
     public boolean equals(final Object obj)
     {
         if (this == obj)
