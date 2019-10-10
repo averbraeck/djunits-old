@@ -53,7 +53,6 @@ public final class ClassUtil
      */
     private ClassUtil()
     {
-        super();
         // unreachable code
     }
 

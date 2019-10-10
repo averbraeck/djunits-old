@@ -19,7 +19,7 @@ public class ValueRuntimeException extends RuntimeException
      */
     public ValueRuntimeException()
     {
-        super();
+        // Nothing to do here
     }
 
     /**

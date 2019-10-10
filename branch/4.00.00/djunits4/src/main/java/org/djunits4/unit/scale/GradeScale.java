@@ -26,7 +26,6 @@ public class GradeScale implements Scale
      */
     public GradeScale(final double conversionFactorToGrade)
     {
-        super();
         this.conversionFactorToGrade = conversionFactorToGrade;
     }
 

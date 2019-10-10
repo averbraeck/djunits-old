@@ -19,7 +19,7 @@ public class SIRuntimeException extends RuntimeException
      */
     public SIRuntimeException()
     {
-        super();
+        // Nothing to do here
     }
 
     /**

@@ -19,7 +19,7 @@ public class UnitRuntimeException extends RuntimeException
      */
     public UnitRuntimeException()
     {
-        super();
+        // Nothing to do here
     }
 
     /**

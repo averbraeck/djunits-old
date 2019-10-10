@@ -19,7 +19,7 @@ public class UnitException extends Exception
      */
     public UnitException()
     {
-        super();
+        // Nothing to do here
     }
 
     /**

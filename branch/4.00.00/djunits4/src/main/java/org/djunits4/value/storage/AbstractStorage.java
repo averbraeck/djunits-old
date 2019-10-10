@@ -22,7 +22,6 @@ public abstract class AbstractStorage<T extends AbstractStorage<T>> implements C
      */
     public AbstractStorage(final StorageType storageType)
     {
-        super();
         Throw.whenNull(storageType, "storage type cannot be null");
         this.storageType = storageType;
     }

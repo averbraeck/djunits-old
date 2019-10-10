@@ -36,7 +36,6 @@ public final class Primitive
      */
     private Primitive()
     {
-        super();
         // unreachable code
     }
 
