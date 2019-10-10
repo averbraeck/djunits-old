@@ -8,6 +8,8 @@ import java.util.stream.IntStream;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vfloat.function.FloatFunction;
+import org.djunits4.value.vfloat.function.FloatFunction2;
 import org.djunits4.value.vfloat.matrix.base.FloatSparseValue;
 import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
 
@@ -176,6 +178,225 @@ public class FloatMatrixDataSparse extends FloatMatrixData
                 count++;
             }
         }
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatMatrixData assign(final FloatFunction floatFunction)
+    {
+        int currentSize = rows() * cols();
+        if (currentSize > 16)
+        {
+            currentSize = 16;
+        }
+        long[] newIndices = new long[currentSize];
+        float[] newValues = new float[currentSize];
+        int nonZeroValues = 0;
+        int ownIndex = 0;
+        int otherIndex = 0;
+        while (ownIndex < this.indices.length)
+        {
+            float value;
+            int index = otherIndex;
+            if (ownIndex < this.indices.length)
+            { // neither we nor right has run out of values
+                if (this.indices[ownIndex] == otherIndex)
+                {
+                    value = floatFunction.apply(this.matrixSI[ownIndex]);
+                    ownIndex++;
+                }
+                else
+                {
+                    // we have a zero; other has a value
+                    value = floatFunction.apply(0.0f);
+                }
+                otherIndex++;
+            }
+            else
+            { // we have run out of values; right has not
+                value = floatFunction.apply(0.0f);
+                otherIndex++;
+            }
+            if (value != 0f)
+            {
+                if (nonZeroValues >= currentSize)
+                {
+                    // increase size of arrays
+                    currentSize *= 2;
+                    if (currentSize > rows() * cols())
+                    {
+                        currentSize = rows() * cols();
+                    }
+                    long[] newNewIndices = new long[currentSize];
+                    System.arraycopy(newIndices, 0, newNewIndices, 0, newIndices.length);
+                    newIndices = newNewIndices;
+                    float[] newNewValues = new float[currentSize];
+                    System.arraycopy(newNewValues, 0, newValues, 0, newValues.length);
+                    newValues = newNewValues;
+                }
+                newIndices[nonZeroValues] = index;
+                newValues[nonZeroValues] = value;
+                nonZeroValues++;
+            }
+        }
+        if (nonZeroValues < currentSize)
+        {
+            // reduce size of arrays
+            long[] newNewIndices = new long[nonZeroValues];
+            System.arraycopy(newIndices, 0, newNewIndices, 0, nonZeroValues);
+            newIndices = newNewIndices;
+            float[] newNewValues = new float[nonZeroValues];
+            System.arraycopy(newValues, 0, newNewValues, 0, nonZeroValues);
+            newValues = newNewValues;
+        }
+        this.indices = newIndices;
+        this.matrixSI = newValues;
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatMatrixDataSparse assign(final FloatFunction2 floatFunction, final FloatMatrixData right)
+    {
+        checkSizes(right);
+        int currentSize = rows() * cols();
+        if (currentSize > 16)
+        {
+            currentSize = 16;
+        }
+        long[] newIndices = new long[currentSize];
+        float[] newValues = new float[currentSize];
+        int nonZeroValues = 0;
+        int ownIndex = 0;
+        int otherIndex = 0;
+        if (right.isSparse())
+        { // both are sparse; result must be sparse
+            FloatMatrixDataSparse other = (FloatMatrixDataSparse) right;
+            while (ownIndex < this.indices.length || otherIndex < other.indices.length)
+            {
+                float value;
+                long index;
+                if (ownIndex < this.indices.length && otherIndex < other.indices.length)
+                { // neither we nor right has run out of values
+                    if (this.indices[ownIndex] == other.indices[otherIndex])
+                    {
+                        value = floatFunction.apply(this.matrixSI[ownIndex], other.matrixSI[otherIndex]);
+                        index = this.indices[ownIndex];
+                        ownIndex++;
+                        otherIndex++;
+                    }
+                    else if (this.indices[ownIndex] < other.indices[otherIndex])
+                    {
+                        // we have a non-zero; right has a zero
+                        value = floatFunction.apply(this.matrixSI[ownIndex], 0.0f);
+                        index = this.indices[ownIndex];
+                        ownIndex++;
+                    }
+                    else
+                    {
+                        // we have a zero; right has a non-zero
+                        value = floatFunction.apply(0.0f, other.matrixSI[otherIndex]);
+                        index = other.indices[otherIndex];
+                        otherIndex++;
+                    }
+                }
+                else if (ownIndex < this.indices.length)
+                { // right has run out of values; we have not
+                    value = this.matrixSI[ownIndex];
+                    index = this.indices[ownIndex];
+                    ownIndex++;
+                }
+                else
+                { // we have run out of values; right has not
+                    value = floatFunction.apply(0.0f, other.matrixSI[otherIndex]);
+                    index = other.indices[otherIndex];
+                    otherIndex++;
+                }
+                if (value != 0f)
+                {
+                    if (nonZeroValues >= currentSize)
+                    {
+                        // increase size of arrays
+                        currentSize *= 2;
+                        if (currentSize > rows() * cols())
+                        {
+                            currentSize = rows() * cols();
+                        }
+                        long[] newNewIndices = new long[currentSize];
+                        System.arraycopy(newIndices, 0, newNewIndices, 0, newIndices.length);
+                        newIndices = newNewIndices;
+                        float[] newNewValues = new float[currentSize];
+                        System.arraycopy(newNewValues, 0, newValues, 0, newValues.length);
+                        newValues = newNewValues;
+                    }
+                    newIndices[nonZeroValues] = index;
+                    newValues[nonZeroValues] = value;
+                    nonZeroValues++;
+                }
+            }
+        }
+        else
+        { // we are sparse; other is dense; result must be sparse
+            FloatMatrixDataDense other = (FloatMatrixDataDense) right;
+            while (ownIndex < this.indices.length)
+            {
+                float value;
+                int index = otherIndex;
+                if (ownIndex < this.indices.length)
+                { // neither we nor right has run out of values
+                    if (this.indices[ownIndex] == otherIndex)
+                    {
+                        value = floatFunction.apply(this.matrixSI[ownIndex], other.matrixSI[otherIndex]);
+                        ownIndex++;
+                    }
+                    else
+                    {
+                        // we have a zero; other has a value
+                        value = floatFunction.apply(0.0f, other.matrixSI[otherIndex]);
+                    }
+                    otherIndex++;
+                }
+                else
+                { // we have run out of values; right has not
+                    value = floatFunction.apply(0.0f, other.matrixSI[otherIndex]);
+                    otherIndex++;
+                }
+                if (value != 0f)
+                {
+                    if (nonZeroValues >= currentSize)
+                    {
+                        // increase size of arrays
+                        currentSize *= 2;
+                        if (currentSize > rows() * cols())
+                        {
+                            currentSize = rows() * cols();
+                        }
+                        long[] newNewIndices = new long[currentSize];
+                        System.arraycopy(newIndices, 0, newNewIndices, 0, newIndices.length);
+                        newIndices = newNewIndices;
+                        float[] newNewValues = new float[currentSize];
+                        System.arraycopy(newNewValues, 0, newValues, 0, newValues.length);
+                        newValues = newNewValues;
+                    }
+                    newIndices[nonZeroValues] = index;
+                    newValues[nonZeroValues] = value;
+                    nonZeroValues++;
+                }
+            }
+        }
+        if (nonZeroValues < currentSize)
+        {
+            // reduce size of arrays
+            long[] newNewIndices = new long[nonZeroValues];
+            System.arraycopy(newIndices, 0, newNewIndices, 0, nonZeroValues);
+            newIndices = newNewIndices;
+            float[] newNewValues = new float[nonZeroValues];
+            System.arraycopy(newValues, 0, newNewValues, 0, nonZeroValues);
+            newValues = newNewValues;
+        }
+        this.indices = newIndices;
+        this.matrixSI = newValues;
+        return this;
     }
 
     /** {@inheritDoc} */
@@ -352,14 +573,23 @@ public class FloatMatrixDataSparse extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final void incrementBy(final float valueSI)
+    public final void incrementBy(final float increment)
     {
+        assign(new FloatFunction()
+        {
+            @Override
+            public float apply(float value)
+            {
+                return value + increment;
+            }
+        });
+
         int newLength = 0;
         for (int r = 0; r < rows(); r++)
         {
             for (int c = 0; c < cols(); c++)
             {
-                if (this.getSI(r, c) + valueSI != 0.0)
+                if (this.getSI(r, c) + increment != 0.0)
                 {
                     newLength++;
                 }
@@ -374,7 +604,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
         {
             for (int c = 0; c < cols(); c++)
             {
-                float value = this.getSI(r, c) + valueSI;
+                float value = this.getSI(r, c) + increment;
                 if (value != 0.0)
                 {
                     int index = r * cols() + c;
@@ -428,14 +658,14 @@ public class FloatMatrixDataSparse extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final void decrementBy(final float valueSI)
+    public final void decrementBy(final float decrement)
     {
         int newLength = 0;
         for (int r = 0; r < rows(); r++)
         {
             for (int c = 0; c < cols(); c++)
             {
-                if (this.getSI(r, c) - valueSI != 0.0)
+                if (this.getSI(r, c) - decrement != 0.0)
                 {
                     newLength++;
                 }
@@ -450,7 +680,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
         {
             for (int c = 0; c < cols(); c++)
             {
-                float value = this.getSI(r, c) - valueSI;
+                float value = this.getSI(r, c) - decrement;
                 if (value != 0.0)
                 {
                     int index = r * cols() + c;

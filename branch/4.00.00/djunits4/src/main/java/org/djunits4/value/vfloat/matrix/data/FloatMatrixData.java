@@ -11,6 +11,8 @@ import org.djunits4.unit.scale.Scale;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.AbstractStorage;
 import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vfloat.function.FloatFunction;
+import org.djunits4.value.vfloat.function.FloatFunction2;
 import org.djunits4.value.vfloat.matrix.base.FloatSparseValue;
 import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
 
@@ -297,7 +299,7 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      * @param other FloatMatrixData; the other data object
      * @throws ValueRuntimeException if matrices have different lengths
      */
-    private void checkSizes(final FloatMatrixData other) throws ValueRuntimeException
+    protected void checkSizes(final FloatMatrixData other) throws ValueRuntimeException
     {
         if (this.rows() != other.rows() || this.cols() != other.cols())
         {
@@ -308,6 +310,22 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
     /* ============================================================================================ */
     /* ================================== CALCULATION FUNCTIONS =================================== */
     /* ============================================================================================ */
+
+    /**
+     * Apply an operation to each cell.
+     * @param doubleFunction DoubleFunction; the operation to apply
+     * @return FloatMatrixData; this (modified) double matrix data object
+     */
+    public abstract FloatMatrixData assign(FloatFunction doubleFunction);
+
+    /**
+     * Apply a binary operation on a cell by cell basis.
+     * @param floatFunction FloatFunction2; the binary operation to apply
+     * @param right FloatMatrixData; the right operand for the binary operation
+     * @return FloatMatrixData; this (modified) double matrix data object
+     * @throws ValueRuntimeException when the sizes of the vectors do not match
+     */
+    abstract FloatMatrixData assign(FloatFunction2 floatFunction, FloatMatrixData right) throws ValueRuntimeException;
 
     /**
      * Add two matrices on a cell-by-cell basis. If both matrices are sparse, a sparse matrix is returned, otherwise a dense
@@ -338,9 +356,9 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
 
     /**
      * Add a number to this matrix on a cell-by-cell basis.
-     * @param valueSI float; the value to add
+     * @param increment float; the amount to add
      */
-    public abstract void incrementBy(float valueSI);
+    public abstract void incrementBy(float increment);
 
     /**
      * Subtract two matrices on a cell-by-cell basis. If both matrices are sparse, a sparse matrix is returned, otherwise a
@@ -371,9 +389,9 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
 
     /**
      * Subtract a number from this matrix on a cell-by-cell basis.
-     * @param valueSI float; the value to subtract
+     * @param decrement float; the amount to subtract
      */
-    public abstract void decrementBy(float valueSI);
+    public abstract void decrementBy(float decrement);
 
     /**
      * Multiply two matrix on a cell-by-cell basis. If both matrices are dense, a dense matrix is returned, otherwise a sparse

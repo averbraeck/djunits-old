@@ -5,6 +5,7 @@ import java.util.stream.IntStream;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.function.FloatFunction;
+import org.djunits4.value.vfloat.function.FloatFunction2;
 
 /**
  * Stores dense data for a FloatMatrix and carries out basic operations.
@@ -76,14 +77,31 @@ public class FloatMatrixDataDense extends FloatMatrixData
                 .filter(d -> d != 0.0).count();
     }
 
-    /**
-     * Apply a function to all data elements of this matrix.
-     * @param floatFunction FloatFunction; the function to apply on the (mutable) data elements
-     */
-    public final void assign(final FloatFunction floatFunction)
+    /** {@inheritDoc} */
+    @Override
+    public final FloatMatrixDataDense assign(final FloatFunction floatFunction)
     {
         IntStream.range(0, this.rows() * this.cols()).parallel()
                 .forEach(i -> this.matrixSI[i] = floatFunction.apply(this.matrixSI[i]));
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatMatrixDataDense assign(final FloatFunction2 floatFunction, final FloatMatrixData right)
+    {
+        if (right.isDense())
+        {
+            FloatMatrixDataDense rightDense = (FloatMatrixDataDense) right;
+            IntStream.range(0, this.rows() * this.cols()).parallel()
+                    .forEach(i -> this.matrixSI[i] = floatFunction.apply(this.matrixSI[i], rightDense.matrixSI[i]));
+        }
+        else
+        {
+            IntStream.range(0, this.rows() * this.cols()).parallel().forEach(
+                    i -> this.matrixSI[i] = floatFunction.apply(this.matrixSI[i], right.getSI(i / this.cols, i % this.cols)));
+        }
+        return this;
     }
 
     /** {@inheritDoc} */
@@ -187,9 +205,9 @@ public class FloatMatrixDataDense extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final void incrementBy(final float valueSI)
+    public final void incrementBy(final float increment)
     {
-        IntStream.range(0, this.matrixSI.length).parallel().forEach(i -> this.matrixSI[i] += valueSI);
+        IntStream.range(0, this.matrixSI.length).parallel().forEach(i -> this.matrixSI[i] += increment);
     }
 
     /** {@inheritDoc} */
@@ -202,9 +220,9 @@ public class FloatMatrixDataDense extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final void decrementBy(final float valueSI)
+    public final void decrementBy(final float decrement)
     {
-        IntStream.range(0, this.matrixSI.length).parallel().forEach(i -> this.matrixSI[i] -= valueSI);
+        IntStream.range(0, this.matrixSI.length).parallel().forEach(i -> this.matrixSI[i] -= decrement);
     }
 
     /** {@inheritDoc} */
