@@ -135,10 +135,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
         for (int r = 0; r < rows; r++)
         {
             float[] row = data[r];
-            if (row.length != cols)
-            {
-                throw new ValueRuntimeException("Matrix is ragged");
-            }
+            // Row length check has been done by checkRectangularAndNonEmpty
             for (int c = 0; c < cols; c++)
             {
                 int index = r * cols + c;
@@ -268,6 +265,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
      */
     public static FloatMatrixDataSparse instantiate(final float[][] valuesSI) throws ValueRuntimeException
     {
+        checkRectangularAndNonEmpty(valuesSI);
         int length = nonZero(valuesSI);
         final int rows = valuesSI.length;
         final int cols = valuesSI[0].length;

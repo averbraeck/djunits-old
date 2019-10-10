@@ -136,10 +136,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
         for (int r = 0; r < rows; r++)
         {
             double[] row = data[r];
-            if (row.length != cols)
-            {
-                throw new ValueRuntimeException("Matrix is ragged");
-            }
+            // Row length check has been done by checkRectangularAndNonEmpty
             for (int c = 0; c < cols; c++)
             {
                 int index = r * cols + c;
@@ -262,6 +259,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
      */
     public static DoubleMatrixDataSparse instantiate(final double[][] valuesSI) throws ValueRuntimeException
     {
+        checkRectangularAndNonEmpty(valuesSI);
         int length = nonZero(valuesSI);
         final int rows = valuesSI.length;
         final int cols = valuesSI[0].length;
