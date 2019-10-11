@@ -47,29 +47,6 @@ public class FloatMatrixDataSparse extends FloatMatrixData
     }
 
     /**
-     * Create a matrix with sparse data from an internal vector with dense data.
-     * @param denseSI float[]; the dense data to store
-     * @param rows int; the number of rows
-     * @param cols int; the number of columns
-     * @throws ValueRuntimeException in case size is incorrect
-     */
-    public FloatMatrixDataSparse(final float[] denseSI, final int rows, final int cols) throws ValueRuntimeException
-    {
-        super(StorageType.SPARSE);
-        if (denseSI == null || denseSI.length == 0)
-        {
-            throw new ValueRuntimeException("FloatMatrixDataSparse constructor, denseSI == null || denseSI.length == 0");
-        }
-
-        int length = nonZero(denseSI);
-        this.rows = rows;
-        this.cols = cols;
-        this.matrixSI = new float[length];
-        this.indices = new long[length];
-        fill(denseSI, this.matrixSI, this.indices);
-    }
-
-    /**
      * Create a matrix with sparse data.
      * @param dataSI float[][]; the data to store
      * @throws ValueRuntimeException in case matrix is ragged
@@ -154,28 +131,6 @@ public class FloatMatrixDataSparse extends FloatMatrixData
                     indices[count] = index;
                     count++;
                 }
-            }
-        }
-    }
-
-    /**
-     * Fill the sparse data structures matrixSI[] and indices[]. Note: output vectors have to be initialized at the right size.
-     * Cannot be parallelized because of stateful and sequence-sensitive count.
-     * @param data float[]; the input data
-     * @param matrixSI float[]; the matrix data to write
-     * @param indices long[]; the indices to write
-     */
-    @SuppressWarnings("checkstyle:finalparameters")
-    private static void fill(final float[] data, float[] matrixSI, long[] indices)
-    {
-        int count = 0;
-        for (int i = 0; i < data.length; i++)
-        {
-            if (data[i] != 0.0)
-            {
-                matrixSI[count] = data[i];
-                indices[count] = i;
-                count++;
             }
         }
     }
@@ -521,16 +476,6 @@ public class FloatMatrixDataSparse extends FloatMatrixData
         }));
 
         return atomicLength.get();
-    }
-
-    /**
-     * Calculate the number of non-zero values in a float[] vector.
-     * @param valuesSI float[]; the float[] vector
-     * @return the number of non-zero values in the float[] vector
-     */
-    private static int nonZero(final float[] valuesSI)
-    {
-        return (int) IntStream.range(0, valuesSI.length).parallel().mapToDouble(i -> valuesSI[i]).filter(f -> f != 0.0f).count();
     }
 
     /** {@inheritDoc} */

@@ -48,47 +48,6 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     }
 
     /**
-     * Create a matrix with sparse data from an internal vector with dense data.
-     * @param denseSI double[]; the dense data to store
-     * @param rows int; the number of rows
-     * @param cols int; the number of columns
-     * @throws ValueRuntimeException in case size is incorrect
-     */
-    public DoubleMatrixDataSparse(final double[] denseSI, final int rows, final int cols) throws ValueRuntimeException
-    {
-        super(StorageType.SPARSE);
-        if (denseSI == null || denseSI.length == 0)
-        {
-            throw new ValueRuntimeException("DoubleMatrixDataSparse constructor, denseSI == null || denseSI.length == 0");
-        }
-
-        int length = nonZero(denseSI);
-        this.rows = rows;
-        this.cols = cols;
-        this.matrixSI = new double[length];
-        this.indices = new long[length];
-        fill(denseSI, this.matrixSI, this.indices);
-    }
-
-    /**
-     * Create a matrix with sparse data.
-     * @param dataSI double[][]; the data to store
-     * @throws ValueRuntimeException in case matrix is ragged
-     */
-    public DoubleMatrixDataSparse(final double[][] dataSI) throws ValueRuntimeException
-    {
-        super(StorageType.SPARSE);
-        checkRectangularAndNonEmpty(dataSI);
-
-        int length = nonZero(dataSI);
-        this.rows = dataSI.length;
-        this.cols = dataSI[0].length;
-        this.matrixSI = new double[length];
-        this.indices = new long[length];
-        fill(dataSI, this.matrixSI, this.indices);
-    }
-
-    /**
      * Create a matrix with sparse data.
      * @param dataSI Collection&lt;DoubleSparseValue&lt;U, S&gt;&gt;; the sparse [X, Y, SI] values to store
      * @param rows int; the number of rows of the matrix
@@ -155,28 +114,6 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
                     indices[count] = index;
                     count++;
                 }
-            }
-        }
-    }
-
-    /**
-     * Fill the sparse data structures matrixSI[] and indices[]. Note: output vectors have to be initialized at the right size.
-     * Cannot be parallelized because of stateful and sequence-sensitive count.
-     * @param data double[]; the input data
-     * @param matrixSI double[]; the matrix data to write
-     * @param indices long[]; the indices to write
-     */
-    @SuppressWarnings("checkstyle:finalparameters")
-    private static void fill(final double[] data, double[] matrixSI, long[] indices)
-    {
-        int count = 0;
-        for (int i = 0; i < data.length; i++)
-        {
-            if (data[i] != 0.0)
-            {
-                matrixSI[count] = data[i];
-                indices[count] = i;
-                count++;
             }
         }
     }
@@ -516,15 +453,15 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
         return atomicLength.get();
     }
 
-    /**
-     * Calculate the number of non-zero values in a double[] vector.
-     * @param valuesSI double[]; the double[] vector
-     * @return the number of non-zero values in the double[] vector
-     */
-    private static int nonZero(final double[] valuesSI)
-    {
-        return (int) Arrays.stream(valuesSI).parallel().filter(d -> d != 0.0).count();
-    }
+//    /**
+//     * Calculate the number of non-zero values in a double[] vector.
+//     * @param valuesSI double[]; the double[] vector
+//     * @return the number of non-zero values in the double[] vector
+//     */
+//    private static int nonZero(final double[] valuesSI)
+//    {
+//        return (int) Arrays.stream(valuesSI).parallel().filter(d -> d != 0.0).count();
+//    }
 
     /** {@inheritDoc} */
     @Override
