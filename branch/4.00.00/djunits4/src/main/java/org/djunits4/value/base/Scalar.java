@@ -107,7 +107,7 @@ public interface Scalar<U extends Unit<U>, S extends Scalar<U, S>> extends Value
      * @param <U> the unit
      * @param <R> the relative scalar
      */
-    public static interface Rel<U extends Unit<U>, R extends Scalar.Rel<U, R>> extends Scalar<U, R>, Relative
+    public static interface Rel<U extends Unit<U>, R extends Scalar.Rel<U, R>> extends Scalar<U, R>, Relative<U, R>
     {
         /**
          * Add a Relative value to this Relative value. A new value is returned due to immutability.
