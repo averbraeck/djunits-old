@@ -374,70 +374,46 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
     public abstract void decrementBy(DoubleMatrixData decrement) throws ValueRuntimeException;
 
     /**
-     * Multiply two matrix on a cell-by-cell basis. If both matrices are dense, a dense matrix is returned, otherwise a sparse
+     * Multiply two matrices on a cell-by-cell basis. If both matrices are dense, a dense matrix is returned, otherwise a sparse
      * matrix is returned.
      * @param right DoubleMatrixData; the other data object to multiply with
-     * @return the sum of this data object and the other data object
+     * @return DoubleVectorData; a new double matrix data store holding the result of the multiplications
      * @throws ValueRuntimeException if matrices have different sizes
      */
-    public DoubleMatrixData times(final DoubleMatrixData right) throws ValueRuntimeException
-    {
-        checkSizes(right);
-        double[] dm = new double[this.rows * this.cols];
-        IntStream.range(0, this.rows).parallel().forEach(
-                r -> IntStream.range(0, this.cols).forEach(c -> dm[r * this.cols + c] = getSI(r, c) * right.getSI(r, c)));
-        if (this instanceof DoubleMatrixDataDense && right instanceof DoubleMatrixDataDense)
-        {
-            return new DoubleMatrixDataDense(dm, this.rows, this.cols);
-        }
-        return new DoubleMatrixDataDense(dm, this.rows, this.cols).toSparse();
-    }
+    public abstract DoubleMatrixData times(final DoubleMatrixData right) throws ValueRuntimeException;
 
     /**
      * Multiply a matrix with the values of another matrix on a cell-by-cell basis. The type of matrix (sparse, dense) stays the
      * same.
      * @param right DoubleMatrixData; the other data object to multiply with
+     * @return DoubleMatrixData; this modified data store
      * @throws ValueRuntimeException if matrices have different lengths
      */
-    public abstract void multiplyBy(DoubleMatrixData right) throws ValueRuntimeException;
+    public abstract DoubleMatrixData multiplyBy(DoubleMatrixData right) throws ValueRuntimeException;
 
     /**
      * Multiply the values of this matrix with a number on a cell-by-cell basis.
      * @param valueSI double; the value to multiply with
      */
-    public void multiplyBy(final double valueSI)
-    {
-        IntStream.range(0, this.matrixSI.length).parallel().forEach(i -> this.matrixSI[i] *= valueSI);
-    }
+    public abstract void multiplyBy(final double valueSI);
 
     /**
-     * Divide two matrices on a cell-by-cell basis. If both matrices are dense, a dense matrix is returned, otherwise a sparse
-     * matrix is returned.
+     * Divide two matrices on a cell-by-cell basis. If this matrix is sparse and <code>right</code> is dense, a sparse matrix is
+     * returned, otherwise a dense matrix is returned.
      * @param right DoubleMatrixData; the other data object to divide by
-     * @return the ratio of this data object and the other data object on a value by value basis
+     * @return DoubleMatrixData; the ratios of the values of this data object and the other data object
      * @throws ValueRuntimeException if matrices have different sizes
      */
-    public DoubleMatrixData divide(final DoubleMatrixData right) throws ValueRuntimeException
-    {
-        // TODO: rewrite using assign in case the result should be sparse
-        checkSizes(right);
-        double[] dm = new double[this.rows * this.cols];
-        IntStream.range(0, this.rows).parallel().forEach(
-                r -> IntStream.range(0, this.cols).forEach(c -> dm[r * this.cols + c] = getSI(r, c) / right.getSI(r, c)));
-        if (this instanceof DoubleMatrixDataSparse && right instanceof DoubleMatrixDataSparse)
-        {
-            return new DoubleMatrixDataSparse(dm, this.rows, this.cols);
-        }
-        return new DoubleMatrixDataDense(dm, this.rows, this.cols).toSparse();
-    }
+    public abstract DoubleMatrixData divide(final DoubleMatrixData right) throws ValueRuntimeException;
 
     /**
      * Divide the values of a matrix by the values of another matrix on a cell-by-cell basis. The type of matrix (sparse, dense)
      * stays the same.
      * @param right DoubleMatrixData; the other data object to divide by
+     * @return DoubleMatrixData; this modified data store
      * @throws ValueRuntimeException if matrices have different sizes
      */
-    public abstract void divideBy(DoubleMatrixData right) throws ValueRuntimeException;
+    public abstract DoubleMatrixData divideBy(DoubleMatrixData right) throws ValueRuntimeException;
 
     /**
      * Divide the values of this matrix by a number on a cell-by-cell basis.
@@ -518,13 +494,6 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
         }
         // Both are dense (both sparse is handled in DoubleMatrixDataSparse class)
         return Arrays.equals(this.matrixSI, other.matrixSI);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public String toString()
-    {
-        return "DoubleMatrixData [storageType=" + this.storageType + ", matrixSI=" + Arrays.toString(this.matrixSI) + "]";
     }
 
 }

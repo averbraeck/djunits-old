@@ -556,78 +556,83 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final void multiplyBy(final DoubleMatrixData right) throws ValueRuntimeException
+    public DoubleMatrixDataSparse times(final DoubleMatrixData right) throws ValueRuntimeException
     {
-        int newLength = 0;
-        for (int r = 0; r < rows(); r++)
-        {
-            for (int c = 0; c < cols(); c++)
-            {
-                if (this.getSI(r, c) * right.getSI(r, c) != 0.0)
-                {
-                    newLength++;
-                }
-            }
-        }
-        double[] newMatrixSI = new double[newLength];
-        long[] newIndices = new long[newLength];
-
-        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
-        int count = 0;
-        for (int r = 0; r < rows(); r++)
-        {
-            for (int c = 0; c < cols(); c++)
-            {
-                double value = this.getSI(r, c) * right.getSI(r, c);
-                if (value != 0.0)
-                {
-                    int index = r * cols() + c;
-                    newMatrixSI[count] = value;
-                    newIndices[count] = index;
-                    count++;
-                }
-            }
-        }
-        this.indices = newIndices;
-        this.matrixSI = newMatrixSI;
+        checkSizes(right);
+        DoubleMatrixDataSparse result = this.copy();
+        result.multiplyBy(right);
+        return result;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final void divideBy(final DoubleMatrixData right) throws ValueRuntimeException
+    public final DoubleMatrixDataSparse multiplyBy(final DoubleMatrixData right) throws ValueRuntimeException
     {
-        int newLength = 0;
-        for (int r = 0; r < rows(); r++)
+        return assign(new DoubleFunction2()
         {
-            for (int c = 0; c < cols(); c++)
-            {
-                if (this.getSI(r, c) / right.getSI(r, c) != 0.0)
-                {
-                    newLength++;
-                }
-            }
-        }
-        double[] newMatrixSI = new double[newLength];
-        long[] newIndices = new long[newLength];
 
-        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
-        int count = 0;
-        for (int r = 0; r < rows(); r++)
-        {
-            for (int c = 0; c < cols(); c++)
+            @Override
+            public double apply(double leftValue, double rightValue)
             {
-                double value = this.getSI(r, c) / right.getSI(r, c);
-                if (value != 0.0)
-                {
-                    int index = r * cols() + c;
-                    newMatrixSI[count] = value;
-                    newIndices[count] = index;
-                    count++;
-                }
+                return leftValue * rightValue;
             }
+        }, right);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void multiplyBy(double valueSI)
+    {
+        assign(new DoubleFunction()
+        {
+            @Override
+            public double apply(double value)
+            {
+                return value * valueSI;
+            }
+        });
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public DoubleMatrixData divide(final DoubleMatrixData right) throws ValueRuntimeException
+    {
+        if (right.isSparse())
+        {
+            // Sparse divided by sparse makes a dense
+            return this.toDense().divide(right);
         }
-        this.indices = newIndices;
-        this.matrixSI = newMatrixSI;
+        // Sparse divided by dense makes a sparse
+        checkSizes(right);
+        return this.copy().divideBy(right);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DoubleMatrixDataSparse divideBy(final DoubleMatrixData right) throws ValueRuntimeException
+    {
+        return assign(new DoubleFunction2()
+        {
+            @Override
+            public double apply(double leftValue, double rightValue)
+            {
+                return leftValue / rightValue;
+            }
+        }, right);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void divideBy(double valueSI)
+    {
+        assign(new DoubleFunction()
+        {
+            @Override
+            public double apply(double value)
+            {
+                return value / valueSI;
+            }
+        });
     }
 
     /*
@@ -659,6 +664,14 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
         if (!Arrays.equals(this.indices, ((DoubleMatrixDataSparse) other).indices))
             return false;
         return Arrays.equals(this.matrixSI, ((DoubleMatrixDataSparse) other).matrixSI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public String toString()
+    {
+        return "DoubleMatrixDataSparse [storageType=" + this.storageType + ", indices=" + Arrays.toString(this.indices)
+                + ", matrixSI=" + Arrays.toString(this.matrixSI) + "]";
     }
 
 }
