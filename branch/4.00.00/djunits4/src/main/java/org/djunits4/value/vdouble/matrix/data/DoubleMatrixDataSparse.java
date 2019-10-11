@@ -12,6 +12,7 @@ import org.djunits4.value.vdouble.function.DoubleFunction;
 import org.djunits4.value.vdouble.function.DoubleFunction2;
 import org.djunits4.value.vdouble.matrix.base.DoubleSparseValue;
 import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
+import org.djunits4.value.vfloat.function.FloatFunction2;
 
 /**
  * Stores sparse data for a DoubleMatrix and carries out basic operations. The index in the sparse matrix data is calculated as
@@ -376,7 +377,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
                         System.arraycopy(newIndices, 0, newNewIndices, 0, newIndices.length);
                         newIndices = newNewIndices;
                         double[] newNewValues = new double[currentSize];
-                        System.arraycopy(newNewValues, 0, newValues, 0, newValues.length);
+                        System.arraycopy(newValues, 0, newNewValues, 0, newValues.length);
                         newValues = newNewValues;
                     }
                     newIndices[nonZeroValues] = index;
@@ -528,6 +529,20 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
 
     /** {@inheritDoc} */
     @Override
+    public final void incrementBy(final DoubleMatrixData right) throws ValueRuntimeException
+    {
+        assign(new DoubleFunction2()
+        {
+            @Override
+            public double apply(double leftValue, double rightValue)
+            {
+                return leftValue + rightValue;
+            }
+        }, right);
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public final void incrementBy(final double increment) throws ValueRuntimeException
     {
         assign(new DoubleFunction()
@@ -542,40 +557,16 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final void incrementBy(final DoubleMatrixData right) throws ValueRuntimeException
+    public final void decrementBy(final DoubleMatrixData right) throws ValueRuntimeException
     {
-        int newLength = 0;
-        for (int r = 0; r < rows(); r++)
+        assign(new DoubleFunction2()
         {
-            for (int c = 0; c < cols(); c++)
+            @Override
+            public double apply(double leftValue, double rightValue)
             {
-                if (this.getSI(r, c) + right.getSI(r, c) != 0.0)
-                {
-                    newLength++;
-                }
+                return leftValue - rightValue;
             }
-        }
-        double[] newMatrixSI = new double[newLength];
-        long[] newIndices = new long[newLength];
-
-        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
-        int count = 0;
-        for (int r = 0; r < rows(); r++)
-        {
-            for (int c = 0; c < cols(); c++)
-            {
-                double value = this.getSI(r, c) + right.getSI(r, c);
-                if (value != 0.0)
-                {
-                    int index = r * cols() + c;
-                    newMatrixSI[count] = value;
-                    newIndices[count] = index;
-                    count++;
-                }
-            }
-        }
-        this.indices = newIndices;
-        this.matrixSI = newMatrixSI;
+        }, right);
     }
 
     /** {@inheritDoc} */
@@ -590,44 +581,6 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
                 return value - decrement;
             }
         });
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void decrementBy(final DoubleMatrixData right) throws ValueRuntimeException
-    {
-        int newLength = 0;
-        for (int r = 0; r < rows(); r++)
-        {
-            for (int c = 0; c < cols(); c++)
-            {
-                if (this.getSI(r, c) - right.getSI(r, c) != 0.0)
-                {
-                    newLength++;
-                }
-            }
-        }
-        double[] newMatrixSI = new double[newLength];
-        long[] newIndices = new long[newLength];
-
-        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
-        int count = 0;
-        for (int r = 0; r < rows(); r++)
-        {
-            for (int c = 0; c < cols(); c++)
-            {
-                double value = this.getSI(r, c) - right.getSI(r, c);
-                if (value != 0.0)
-                {
-                    int index = r * cols() + c;
-                    newMatrixSI[count] = value;
-                    newIndices[count] = index;
-                    count++;
-                }
-            }
-        }
-        this.indices = newIndices;
-        this.matrixSI = newMatrixSI;
     }
 
     /** {@inheritDoc} */
