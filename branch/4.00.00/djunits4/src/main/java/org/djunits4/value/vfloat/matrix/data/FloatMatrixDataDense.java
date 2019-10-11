@@ -213,10 +213,25 @@ public class FloatMatrixDataDense extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final void multiplyBy(final FloatMatrixData right) throws ValueRuntimeException
+    public FloatMatrixData times(final FloatMatrixData right) throws ValueRuntimeException
+    {
+        if (right.isSparse())
+        {
+            // result shall be sparse
+            return right.times(this);
+        }
+        // Both are dense
+        checkSizes(right);
+        return this.copy().multiplyBy(right);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatMatrixDataDense multiplyBy(final FloatMatrixData right) throws ValueRuntimeException
     {
         IntStream.range(0, this.rows).parallel().forEach(
                 r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] *= right.getSI(r, c)));
+        return this;
     }
 
     /** {@inheritDoc} */
@@ -228,10 +243,29 @@ public class FloatMatrixDataDense extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final void divideBy(final FloatMatrixData right) throws ValueRuntimeException
+    public FloatMatrixData divide(final FloatMatrixData right) throws ValueRuntimeException
+    {
+        checkSizes(right);
+        float[] fm = new float[this.rows * this.cols];
+        if (right.isDense())
+        {
+            IntStream.range(0, this.rows * this.cols).parallel().forEach(i -> fm[i] = this.matrixSI[i] / right.matrixSI[i]);
+        }
+        else
+        {
+            IntStream.range(0, this.rows).parallel().forEach(r -> IntStream.range(0, this.cols)
+                    .forEach(c -> fm[r * this.cols + c] = this.matrixSI[r * this.cols + c] / right.getSI(r, c)));
+        }
+        return new FloatMatrixDataDense(fm, this.rows, this.cols);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatMatrixDataDense divideBy(final FloatMatrixData right) throws ValueRuntimeException
     {
         IntStream.range(0, this.rows).parallel().forEach(
                 r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] /= right.getSI(r, c)));
+        return this;
     }
 
     /** {@inheritDoc} */

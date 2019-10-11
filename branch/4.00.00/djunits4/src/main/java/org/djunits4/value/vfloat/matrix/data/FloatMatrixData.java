@@ -382,32 +382,22 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
     public abstract void decrementBy(FloatMatrixData right) throws ValueRuntimeException;
 
     /**
-     * Multiply two matrix on a cell-by-cell basis. If both matrices are dense, a dense matrix is returned, otherwise a sparse
+     * Multiply two matrices on a cell-by-cell basis. If both matrices are dense, a dense matrix is returned, otherwise a sparse
      * matrix is returned.
      * @param right FloatMatrixData; the other data object to multiply with
-     * @return the sum of this data object and the other data object
+     * @return FloatMatrixData; a new double matrix data store holding the result of the multiplications
      * @throws ValueRuntimeException if matrices have different sizes
      */
-    public FloatMatrixData times(final FloatMatrixData right) throws ValueRuntimeException
-    {
-        checkSizes(right);
-        float[] dm = new float[this.rows * this.cols];
-        IntStream.range(0, this.rows).parallel().forEach(
-                r -> IntStream.range(0, this.cols).forEach(c -> dm[r * this.cols + c] = getSI(r, c) * right.getSI(r, c)));
-        if (this instanceof FloatMatrixDataDense && right instanceof FloatMatrixDataDense)
-        {
-            return new FloatMatrixDataDense(dm, this.rows, this.cols);
-        }
-        return new FloatMatrixDataDense(dm, this.rows, this.cols).toSparse();
-    }
+    public abstract FloatMatrixData times(final FloatMatrixData right) throws ValueRuntimeException;
 
     /**
      * Multiply a matrix with the values of another matrix on a cell-by-cell basis. The type of matrix (sparse, dense) stays the
      * same.
      * @param right FloatMatrixData; the other data object to multiply with
+     * @return FloatMatrixData; this modified data store
      * @throws ValueRuntimeException if matrices have different sizes
      */
-    public abstract void multiplyBy(FloatMatrixData right) throws ValueRuntimeException;
+    public abstract FloatMatrixData multiplyBy(FloatMatrixData right) throws ValueRuntimeException;
 
     /**
      * Multiply the values of this matrix with a number on a cell-by-cell basis.
@@ -422,27 +412,16 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      * @return the sum of this data object and the other data object
      * @throws ValueRuntimeException if matrices have different sizes
      */
-    public FloatMatrixData divide(final FloatMatrixData right) throws ValueRuntimeException
-    {
-        // TODO: rewrite using assign in case the result should be sparse
-        checkSizes(right);
-        float[] fm = new float[this.rows * this.cols];
-        IntStream.range(0, this.rows).parallel().forEach(
-                r -> IntStream.range(0, this.cols).forEach(c -> fm[r * this.cols + c] = getSI(r, c) / right.getSI(r, c)));
-        if (this instanceof FloatMatrixDataSparse && right instanceof FloatMatrixDataSparse)
-        {
-            return new FloatMatrixDataSparse(fm, this.rows, this.cols);
-        }
-        return new FloatMatrixDataDense(fm, this.rows, this.cols).toSparse();
-    }
+    public abstract FloatMatrixData divide(final FloatMatrixData right) throws ValueRuntimeException;
 
     /**
      * Divide the values of a matrix by the values of another matrix on a cell-by-cell basis. The type of matrix (sparse, dense)
      * stays the same.
      * @param right FloatMatrixData; the other data object to divide by
+     * @return FloatMatrixData; this modified data store
      * @throws ValueRuntimeException if matrices have different sizes
      */
-    public abstract void divideBy(FloatMatrixData right) throws ValueRuntimeException;
+    public abstract FloatMatrixData divideBy(FloatMatrixData right) throws ValueRuntimeException;
 
     /**
      * Divide the values of this matrix by a number on a cell-by-cell basis.
