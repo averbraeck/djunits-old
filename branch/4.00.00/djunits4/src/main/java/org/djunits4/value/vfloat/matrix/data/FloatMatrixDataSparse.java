@@ -338,7 +338,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
         else
         { // we are sparse; other is dense; result must be sparse
             FloatMatrixDataDense other = (FloatMatrixDataDense) right;
-            while (ownIndex < this.indices.length)
+            while (otherIndex < right.matrixSI.length)
             {
                 float value;
                 int index = otherIndex;
@@ -375,7 +375,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
                         System.arraycopy(newIndices, 0, newNewIndices, 0, newIndices.length);
                         newIndices = newNewIndices;
                         float[] newNewValues = new float[currentSize];
-                        System.arraycopy(newNewValues, 0, newValues, 0, newValues.length);
+                        System.arraycopy(newValues, 0, newNewValues, 0, newValues.length);
                         newValues = newNewValues;
                     }
                     newIndices[nonZeroValues] = index;
@@ -514,7 +514,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
         AtomicInteger atomicLength = new AtomicInteger(0);
         IntStream.range(0, valuesSI.length).parallel().forEach(r -> IntStream.range(0, valuesSI[0].length).forEach(c ->
         {
-            if (valuesSI[r][c] != 0.0)
+            if (valuesSI[r][c] != 0.0f)
             {
                 atomicLength.incrementAndGet();
             }
@@ -530,45 +530,21 @@ public class FloatMatrixDataSparse extends FloatMatrixData
      */
     private static int nonZero(final float[] valuesSI)
     {
-        return (int) IntStream.range(0, valuesSI.length).parallel().mapToDouble(i -> valuesSI[i]).filter(d -> d != 0.0).count();
+        return (int) IntStream.range(0, valuesSI.length).parallel().mapToDouble(i -> valuesSI[i]).filter(f -> f != 0.0f).count();
     }
 
     /** {@inheritDoc} */
     @Override
     public final void incrementBy(final FloatMatrixData right) throws ValueRuntimeException
     {
-        int newLength = 0;
-        for (int r = 0; r < rows(); r++)
+        assign(new FloatFunction2()
         {
-            for (int c = 0; c < cols(); c++)
+            @Override
+            public float apply(float leftValue, float rightValue)
             {
-                if (this.getSI(r, c) + right.getSI(r, c) != 0.0)
-                {
-                    newLength++;
-                }
+                return leftValue + rightValue;
             }
-        }
-        float[] newMatrixSI = new float[newLength];
-        long[] newIndices = new long[newLength];
-
-        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
-        int count = 0;
-        for (int r = 0; r < rows(); r++)
-        {
-            for (int c = 0; c < cols(); c++)
-            {
-                float value = this.getSI(r, c) + right.getSI(r, c);
-                if (value != 0.0)
-                {
-                    int index = r * cols() + c;
-                    newMatrixSI[count] = value;
-                    newIndices[count] = index;
-                    count++;
-                }
-            }
-        }
-        this.indices = newIndices;
-        this.matrixSI = newMatrixSI;
+        }, right);
     }
 
     /** {@inheritDoc} */
@@ -583,115 +559,34 @@ public class FloatMatrixDataSparse extends FloatMatrixData
                 return value + increment;
             }
         });
-
-        int newLength = 0;
-        for (int r = 0; r < rows(); r++)
-        {
-            for (int c = 0; c < cols(); c++)
-            {
-                if (this.getSI(r, c) + increment != 0.0)
-                {
-                    newLength++;
-                }
-            }
-        }
-        float[] newMatrixSI = new float[newLength];
-        long[] newIndices = new long[newLength];
-
-        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
-        int count = 0;
-        for (int r = 0; r < rows(); r++)
-        {
-            for (int c = 0; c < cols(); c++)
-            {
-                float value = this.getSI(r, c) + increment;
-                if (value != 0.0)
-                {
-                    int index = r * cols() + c;
-                    newMatrixSI[count] = value;
-                    newIndices[count] = index;
-                    count++;
-                }
-            }
-        }
-        this.indices = newIndices;
-        this.matrixSI = newMatrixSI;
     }
 
     /** {@inheritDoc} */
     @Override
     public final void decrementBy(final FloatMatrixData right) throws ValueRuntimeException
     {
-        int newLength = 0;
-        for (int r = 0; r < rows(); r++)
+        assign(new FloatFunction2()
         {
-            for (int c = 0; c < cols(); c++)
+            @Override
+            public float apply(float leftValue, float rightValue)
             {
-                if (this.getSI(r, c) - right.getSI(r, c) != 0.0)
-                {
-                    newLength++;
-                }
+                return leftValue - rightValue;
             }
-        }
-        float[] newMatrixSI = new float[newLength];
-        long[] newIndices = new long[newLength];
-
-        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
-        int count = 0;
-        for (int r = 0; r < rows(); r++)
-        {
-            for (int c = 0; c < cols(); c++)
-            {
-                float value = this.getSI(r, c) - right.getSI(r, c);
-                if (value != 0.0)
-                {
-                    int index = r * cols() + c;
-                    newMatrixSI[count] = value;
-                    newIndices[count] = index;
-                    count++;
-                }
-            }
-        }
-        this.indices = newIndices;
-        this.matrixSI = newMatrixSI;
+        }, right);
     }
 
     /** {@inheritDoc} */
     @Override
     public final void decrementBy(final float decrement)
     {
-        int newLength = 0;
-        for (int r = 0; r < rows(); r++)
+        assign(new FloatFunction()
         {
-            for (int c = 0; c < cols(); c++)
+            @Override
+            public float apply(float value)
             {
-                if (this.getSI(r, c) - decrement != 0.0)
-                {
-                    newLength++;
-                }
+                return value - decrement;
             }
-        }
-        float[] newMatrixSI = new float[newLength];
-        long[] newIndices = new long[newLength];
-
-        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
-        int count = 0;
-        for (int r = 0; r < rows(); r++)
-        {
-            for (int c = 0; c < cols(); c++)
-            {
-                float value = this.getSI(r, c) - decrement;
-                if (value != 0.0)
-                {
-                    int index = r * cols() + c;
-                    newMatrixSI[count] = value;
-                    newIndices[count] = index;
-                    count++;
-                }
-            }
-        }
-        this.indices = newIndices;
-        this.matrixSI = newMatrixSI;
+        });
     }
 
     /** {@inheritDoc} */

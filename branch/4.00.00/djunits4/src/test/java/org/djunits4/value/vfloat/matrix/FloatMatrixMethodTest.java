@@ -287,10 +287,6 @@ public class FloatMatrixMethodTest
                         FloatAreaMatrix amSum2 = am2.plus(am);
                         FloatAreaMatrix amSum3 = am.mutable().incrementBy(am2).immutable();
                         assertEquals("a+b == b+a", amSum1, amSum2);
-                        if (!amSum1.equals(amSum3))
-                        {
-                            amSum1.equals(amSum3);
-                        }
                         assertEquals("a+b == b+a", amSum1, amSum3);
                         for (int row = 0; row < testData.length; row++)
                         {

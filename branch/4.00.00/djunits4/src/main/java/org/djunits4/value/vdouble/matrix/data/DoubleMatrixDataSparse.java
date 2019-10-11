@@ -327,7 +327,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
                         System.arraycopy(newIndices, 0, newNewIndices, 0, newIndices.length);
                         newIndices = newNewIndices;
                         double[] newNewValues = new double[currentSize];
-                        System.arraycopy(newNewValues, 0, newValues, 0, newValues.length);
+                        System.arraycopy(newValues, 0, newNewValues, 0, newValues.length);
                         newValues = newNewValues;
                     }
                     newIndices[nonZeroValues] = index;
@@ -339,7 +339,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
         else
         { // we are sparse; other is dense; result must be sparse
             DoubleMatrixDataDense other = (DoubleMatrixDataDense) right;
-            while (ownIndex < this.indices.length)
+            while (otherIndex < right.matrixSI.length)
             {
                 double value;
                 int index = otherIndex;
