@@ -456,7 +456,7 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * Multiply two vector on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
      * vector is returned.
      * @param right FloatVectorData; the other data object to multiply with
-     * @return FloatVectorData; the product of this data object and the other data object
+     * @return FloatVectorData; a new double vector data store holding the result of the multiplications
      * @throws ValueRuntimeException if vectors have different lengths
      */
     public abstract FloatVectorData times(final FloatVectorData right) throws ValueRuntimeException;
@@ -480,7 +480,7 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * Divide two vectors on a cell-by-cell basis. If this vector is sparse and <code>right</code> is dense, a sparse vector is
      * returned, otherwise a dense vector is returned.
      * @param right FloatVectorData; the other data object to divide by
-     * @return FloatVectorData; the division of this data object and the other data object
+     * @return FloatVectorData; the ratios of the values of this data object and the other data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
     public abstract FloatVectorData divide(final FloatVectorData right) throws ValueRuntimeException;
