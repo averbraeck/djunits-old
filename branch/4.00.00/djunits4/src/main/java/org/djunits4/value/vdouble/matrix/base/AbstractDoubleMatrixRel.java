@@ -13,7 +13,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 import org.djunits4.value.vdouble.vector.base.AbstractDoubleVectorRel;
 
 /**
- * AbstractMutableDoubleMatrixRel.java.
+ * AbstractDoubleMatrixRel.java.
  * <p>
  * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
@@ -109,15 +109,15 @@ public abstract class AbstractDoubleMatrixRel<U extends Unit<U>, S extends Abstr
     }
 
     /**
-     * Decrement all values of this matrix by the decrement on a value by value basis. This only works if this matrix is
-     * mutable.
+     * Decrement this Relative matrix by another Relative matrix. The operation is done value by value. This is only allowed if
+     * this matrix is mutable.
      * @param decrement RM; the matrix that contains the values by which to decrement the corresponding values
      * @return RM; this modified matrix
      * @throws ValueRuntimeException in case this matrix is immutable
      * @Throws ValueException when the sizes of the matrices differ, or <code>decrement</code> is null
      */
     @SuppressWarnings("unchecked")
-    public RM decrementBy(RM decrement)
+    public final RM decrementBy(RM decrement)
     {
         checkCopyOnWrite();
         this.data.decrementBy(decrement.getData());
@@ -140,10 +140,34 @@ public abstract class AbstractDoubleMatrixRel<U extends Unit<U>, S extends Abstr
                 getDisplayUnit().getUnitBase().getSiDimensions().plus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public final RM times(final double multiplier)
+    {
+        RM result = clone().mutable();
+        result.assign(DoubleMathFunctions.MULT(multiplier));
+        return result.immutable();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final RM times(final float multiplier)
+    {
+        return times((double) multiplier);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final RM multiplyBy(final double multiplier)
+    {
+        return assign(DoubleMathFunctions.MULT(multiplier));
+    }
+
     /**
-     * Divide this Relative value by a Relative value for a matrix or matrix. The division is done value by value and store the
-     * result in a new Relative value. If both operands are dense, the result is a dense matrix or matrix, otherwise the result
-     * is a sparse matrix or matrix.
+     * Divide this Relative matrix by another Relative matrix. The operation is done value by value and store the result is
+     * stored in a new Relative matrix. If both operands are dense, the result is a dense matrix, otherwise the result is a
+     * sparse matrix.
+     * TODO discuss dense or sparseness of result.
      * @param rel VT; the right operand, which can be any matrix type
      * @return SIMatrix; the division of this matrix and the operand
      * @throws ValueRuntimeException in case this matrix or matrix and the operand have a different size
@@ -155,19 +179,17 @@ public abstract class AbstractDoubleMatrixRel<U extends Unit<U>, S extends Abstr
         return new SIMatrix(this.getData().divide(rel.getData()), SIUnit.of(
                 getDisplayUnit().getUnitBase().getSiDimensions().minus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
     }
-    
+
     /** {@inheritDoc} */
     @Override
-    public RM times(final double multiplier)
+    public final RM divide(final float divisor)
     {
-        RM result = clone().mutable();
-        result.assign(DoubleMathFunctions.MULT(multiplier));
-        return result.immutable();
+        return divide((double) divisor);
     }
 
     /** {@inheritDoc} */
     @Override
-    public RM divide(final double divisor)
+    public final RM divide(final double divisor)
     {
         RM result = clone().mutable();
         result.assign(DoubleMathFunctions.DIV(divisor));
@@ -176,31 +198,8 @@ public abstract class AbstractDoubleMatrixRel<U extends Unit<U>, S extends Abstr
 
     /** {@inheritDoc} */
     @Override
-    public RM times(final float multiplier)
+    public final RM divideBy(final double divisor)
     {
-        return times((double) multiplier);
-    }
-    
-    /** {@inheritDoc} */
-    @Override
-    public RM multiplyBy(final double multiplier)
-    {
-        checkCopyOnWrite();
-        return assign(DoubleMathFunctions.MULT(multiplier));
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public RM divide(float divisor)
-    {
-        return divide((double) divisor);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public RM divideBy(final double divisor)
-    {
-        checkCopyOnWrite();
         return assign(DoubleMathFunctions.DIV(divisor));
     }
 

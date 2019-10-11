@@ -13,7 +13,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
 import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorRel;
 
 /**
- * AbstractMutableFloatMatrixRel.java.
+ * AbstractFloatMatrixRel.java.
  * <p>
  * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
@@ -48,7 +48,6 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
     public final S zSum()
     {
         return instantiateScalarSI(this.data.zSum(), getDisplayUnit());
-
     }
 
     /** {@inheritDoc} */
@@ -110,38 +109,18 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
     }
 
     /**
-     * Decrement all values of this matrix by the decrement on a value by value basis. This only works if this matrix is
-     * mutable.
+     * Decrement this Relative matrix by another Relative matrix. The operation is done value by value. This is only allowed if
+     * this matrix is mutable.
      * @param decrement RM; the matrix that contains the values by which to decrement the corresponding values
      * @return RM; this modified matrix
      * @throws ValueRuntimeException in case this matrix is immutable
      * @Throws ValueException when the sizes of the matrices differ, or <code>decrement</code> is null
      */
     @SuppressWarnings("unchecked")
-    public RM decrementBy(RM decrement)
+    public final RM decrementBy(RM decrement)
     {
         checkCopyOnWrite();
         this.data.decrementBy(decrement.getData());
-        return (RM) this;
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public RM multiplyBy(final double multiplier)
-    {
-        checkCopyOnWrite();
-        this.data.multiplyBy((float) multiplier);
-        return (RM) this;
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
-    @Override
-    public RM divideBy(final double divisor)
-    {
-        checkCopyOnWrite();
-        this.data.divideBy((float) divisor);
         return (RM) this;
     }
 
@@ -161,10 +140,34 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
                 getDisplayUnit().getUnitBase().getSiDimensions().plus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public final RM times(final float multiplier)
+    {
+        RM result = clone().mutable();
+        result.assign(FloatMathFunctions.MULT(multiplier));
+        return result.immutable();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final RM times(final double multiplier)
+    {
+        return times((float) multiplier);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final RM multiplyBy(final double multiplier)
+    {
+        return assign(FloatMathFunctions.MULT((float) multiplier));
+    }
+
     /**
-     * Divide this Relative value by a Relative value for a matrix or matrix. The division is done value by value and store the
-     * result in a new Relative value. If both operands are dense, the result is a dense matrix or matrix, otherwise the result
-     * is a sparse matrix or matrix.
+     * Divide this Relative matrix by another Relative matrix. The operation is done value by value and store the result is
+     * stored in a new Relative matrix. If both operands are dense, the result is a dense matrix, otherwise the result is a
+     * sparse matrix.
+     * TODO discuss dense or sparseness of result.
      * @param rel VT; the right operand, which can be any matrix type
      * @return FloatSIMatrix; the division of this matrix and the operand
      * @throws ValueRuntimeException in case this matrix or matrix and the operand have a different size
@@ -179,34 +182,25 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
 
     /** {@inheritDoc} */
     @Override
-    public RM times(final double multiplier)
-    {
-        return times((float) multiplier);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public RM divide(final double divisor)
+    public final RM divide(final double divisor)
     {
         return divide((float) divisor);
     }
 
     /** {@inheritDoc} */
     @Override
-    public RM times(final float multiplier)
+    public final RM divide(float divisor)
     {
         RM result = clone().mutable();
-        result.assign(FloatMathFunctions.MULT(multiplier));
+        result.assign(FloatMathFunctions.DIV(divisor));
         return result.immutable();
     }
 
     /** {@inheritDoc} */
     @Override
-    public RM divide(float divisor)
+    public final RM divideBy(final double divisor)
     {
-        RM result = clone().mutable();
-        result.assign(FloatMathFunctions.DIV(divisor));
-        return result.immutable();
+        return assign(FloatMathFunctions.DIV((float) divisor));
     }
 
 }
