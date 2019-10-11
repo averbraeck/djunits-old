@@ -40,11 +40,8 @@ public class DoubleVectorDataDense extends DoubleVectorData
         return (int) Arrays.stream(this.vectorSI).parallel().filter(d -> d != 0.0).count();
     }
 
-    /**
-     * Modify the data by applying a function to each value.
-     * @param doubleFunction DoubleFunction; the function to apply on the (mutable) data elements
-     * @return DoubleVectorDataDense; this (modified) data store
-     */
+    /** {@inheritDoc} */
+    @Override
     public final DoubleVectorDataDense assign(final DoubleFunction doubleFunction)
     {
         IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] = doubleFunction.apply(this.vectorSI[i]));
@@ -81,7 +78,7 @@ public class DoubleVectorDataDense extends DoubleVectorData
     {
         return DoubleVectorDataSparse.instantiate(this.vectorSI);
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public final int size()
@@ -154,15 +151,17 @@ public class DoubleVectorDataDense extends DoubleVectorData
         IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] -= right.getSI(i));
         return this;
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public final DoubleVectorData times(final DoubleVectorData right)
     {
         if (right.isSparse())
         {
+            // result shall be sparse
             return right.times(this);
         }
+        // Both are dense
         checkSizes(right);
         return this.copy().multiplyBy(right);
     }

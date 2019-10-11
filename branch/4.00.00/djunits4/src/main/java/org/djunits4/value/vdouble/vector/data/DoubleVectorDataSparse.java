@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.function.DoubleFunction;
 import org.djunits4.value.vdouble.function.DoubleFunction2;
 
 /**
@@ -45,6 +46,80 @@ public class DoubleVectorDataSparse extends DoubleVectorData
     public final int cardinality()
     {
         return this.indices.length;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public DoubleVectorData assign(final DoubleFunction doubleFunction)
+    {
+        int currentSize = size();
+        if (currentSize > 16)
+        {
+            currentSize = 16;
+        }
+        int[] newIndices = new int[currentSize];
+        double[] newValues = new double[currentSize];
+        int nonZeroValues = 0;
+        int ownIndex = 0;
+        int otherIndex = 0;
+        while (ownIndex < this.indices.length)
+        {
+            double value;
+            int index = otherIndex;
+            if (ownIndex < this.indices.length)
+            { // neither we nor right has run out of values
+                if (this.indices[ownIndex] == otherIndex)
+                {
+                    value = doubleFunction.apply(this.vectorSI[ownIndex]);
+                    ownIndex++;
+                }
+                else
+                {
+                    // we have a zero; other has a value
+                    value = doubleFunction.apply(0.0);
+                }
+                otherIndex++;
+            }
+            else
+            { // we have run out of values; right has not
+                value = doubleFunction.apply(0.0);
+                otherIndex++;
+            }
+            if (value != 0f)
+            {
+                if (nonZeroValues >= currentSize)
+                {
+                    // increase size of arrays
+                    currentSize *= 2;
+                    if (currentSize > size())
+                    {
+                        currentSize = size();
+                    }
+                    int[] newNewIndices = new int[currentSize];
+                    System.arraycopy(newIndices, 0, newNewIndices, 0, newIndices.length);
+                    newIndices = newNewIndices;
+                    double[] newNewValues = new double[currentSize];
+                    System.arraycopy(newNewValues, 0, newValues, 0, newValues.length);
+                    newValues = newNewValues;
+                }
+                newIndices[nonZeroValues] = index;
+                newValues[nonZeroValues] = value;
+                nonZeroValues++;
+            }
+        }
+        if (nonZeroValues < currentSize)
+        {
+            // reduce size of arrays
+            int[] newNewIndices = new int[nonZeroValues];
+            System.arraycopy(newIndices, 0, newNewIndices, 0, nonZeroValues);
+            newIndices = newNewIndices;
+            double[] newNewValues = new double[nonZeroValues];
+            System.arraycopy(newValues, 0, newNewValues, 0, nonZeroValues);
+            newValues = newNewValues;
+        }
+        this.indices = newIndices;
+        this.vectorSI = newValues;
+        return this;
     }
 
     /** {@inheritDoc} */
@@ -574,7 +649,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
     @Override
     public final DoubleVectorData divideBy(final DoubleVectorData right) throws ValueRuntimeException
     {
-        assign(new DoubleFunction2()
+        return assign(new DoubleFunction2()
         {
             @Override
             public double apply(double leftValue, double rightValue)
@@ -582,35 +657,20 @@ public class DoubleVectorDataSparse extends DoubleVectorData
                 return leftValue / rightValue;
             }
         }, right);
-        return this;
     }
 
     /** {@inheritDoc} */
     @Override
     public final void divideBy(final double valueSI)
     {
-        int maxLength = size();
-        double[] tempVectorSI = new double[maxLength];
-        int[] tempIndices = new int[maxLength];
-        int nextIndex = 0;
-        int ownIndex = 0;
-        for (int i = 0; i < size(); i++)
+        assign(new DoubleFunction()
         {
-            if (ownIndex < this.indices.length && i > this.indices[ownIndex])
+            @Override
+            public double apply(double value)
             {
-                ownIndex++;
+                return value / valueSI;
             }
-            double value =
-                    (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0) / valueSI;
-            if (value != 0f)
-            {
-                tempIndices[nextIndex] = i;
-                tempVectorSI[nextIndex] = value;
-                nextIndex++;
-            }
-        }
-        this.indices = Arrays.copyOf(tempIndices, nextIndex);
-        this.vectorSI = Arrays.copyOf(tempVectorSI, nextIndex);
+        });
     }
 
     /*

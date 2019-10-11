@@ -13,6 +13,7 @@ import org.djunits4.unit.scale.Scale;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.AbstractStorage;
 import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.function.DoubleFunction;
 import org.djunits4.value.vdouble.function.DoubleFunction2;
 import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
 
@@ -541,6 +542,13 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
     /* ============================================================================================ */
 
     /**
+     * Apply an operation to each cell.
+     * @param doubleFunction DoubleFunction; the operation to apply
+     * @return DoubleVectorData; this (modified) double vector data object
+     */
+    public abstract DoubleVectorData assign(DoubleFunction doubleFunction);
+
+    /**
      * Apply a binary operation on a cell by cell basis.
      * @param doubleFunction2 DoubleFunction2; the binary operation to apply
      * @param right DoubleVectorData; the right operand for the binary operation
@@ -584,10 +592,10 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
     public abstract DoubleVectorData decrementBy(DoubleVectorData right) throws ValueRuntimeException;
 
     /**
-     * Multiply two vector on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
+     * Multiply two vectors on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
      * vector is returned.
      * @param right DoubleVectorData; the other data object to multiply with
-     * @return DoubleVectorData; the product of this data object and the other data object
+     * @return DoubleVectorData; a new double vector data store holding the result of the multiplications
      * @throws ValueRuntimeException if vectors have different lengths
      */
     public abstract DoubleVectorData times(final DoubleVectorData right) throws ValueRuntimeException;
@@ -611,7 +619,7 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * Divide two vectors on a cell-by-cell basis. If this vector is sparse and <code>right</code> is dense, a sparse vector is
      * returned, otherwise a dense vector is returned.
      * @param right DoubleVectorData; the other data object to divide by
-     * @return DoubleVectorData; the division of this data object and the other data object
+     * @return DoubleVectorData; the ratios of the values of this data object and the other data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
     public abstract DoubleVectorData divide(final DoubleVectorData right) throws ValueRuntimeException;
