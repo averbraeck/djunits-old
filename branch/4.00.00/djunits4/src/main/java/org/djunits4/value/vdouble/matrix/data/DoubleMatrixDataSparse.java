@@ -12,7 +12,6 @@ import org.djunits4.value.vdouble.function.DoubleFunction;
 import org.djunits4.value.vdouble.function.DoubleFunction2;
 import org.djunits4.value.vdouble.matrix.base.DoubleSparseValue;
 import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
-import org.djunits4.value.vfloat.function.FloatFunction2;
 
 /**
  * Stores sparse data for a DoubleMatrix and carries out basic operations. The index in the sparse matrix data is calculated as
@@ -543,20 +542,6 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final void incrementBy(final double increment) throws ValueRuntimeException
-    {
-        assign(new DoubleFunction()
-        {
-            @Override
-            public double apply(double value)
-            {
-                return value + increment;
-            }
-        });
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final void decrementBy(final DoubleMatrixData right) throws ValueRuntimeException
     {
         assign(new DoubleFunction2()
@@ -567,20 +552,6 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
                 return leftValue - rightValue;
             }
         }, right);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void decrementBy(final double decrement) throws ValueRuntimeException
-    {
-        assign(new DoubleFunction()
-        {
-            @Override
-            public double apply(double value)
-            {
-                return value - decrement;
-            }
-        });
     }
 
     /** {@inheritDoc} */

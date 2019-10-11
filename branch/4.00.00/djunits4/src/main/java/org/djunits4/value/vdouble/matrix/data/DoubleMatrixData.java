@@ -347,12 +347,6 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
     public abstract void incrementBy(DoubleMatrixData right) throws ValueRuntimeException;
 
     /**
-     * Add a number to this matrix on a cell-by-cell basis.
-     * @param increment double; the amount to add
-     */
-    public abstract void incrementBy(final double increment);
-
-    /**
      * Subtract two matrices on a cell-by-cell basis. If both matrices are sparse, a sparse matrix is returned, otherwise a
      * dense matrix is returned.
      * @param right DoubleMatrixData; the other data object to subtract
@@ -378,12 +372,6 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
      * @throws ValueRuntimeException if matrices have different sizes
      */
     public abstract void decrementBy(DoubleMatrixData decrement) throws ValueRuntimeException;
-
-    /**
-     * Subtract a number from this matrix on a cell-by-cell basis.
-     * @param valueSI double; the value to subtract
-     */
-    abstract void decrementBy(final double valueSI);
 
     /**
      * Multiply two matrix on a cell-by-cell basis. If both matrices are dense, a dense matrix is returned, otherwise a sparse

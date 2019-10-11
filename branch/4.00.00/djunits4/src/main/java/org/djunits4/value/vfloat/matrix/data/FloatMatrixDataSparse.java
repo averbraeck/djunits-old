@@ -549,20 +549,6 @@ public class FloatMatrixDataSparse extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final void incrementBy(final float increment)
-    {
-        assign(new FloatFunction()
-        {
-            @Override
-            public float apply(float value)
-            {
-                return value + increment;
-            }
-        });
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final void decrementBy(final FloatMatrixData right) throws ValueRuntimeException
     {
         assign(new FloatFunction2()
@@ -573,20 +559,6 @@ public class FloatMatrixDataSparse extends FloatMatrixData
                 return leftValue - rightValue;
             }
         }, right);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void decrementBy(final float decrement)
-    {
-        assign(new FloatFunction()
-        {
-            @Override
-            public float apply(float value)
-            {
-                return value - decrement;
-            }
-        });
     }
 
     /** {@inheritDoc} */

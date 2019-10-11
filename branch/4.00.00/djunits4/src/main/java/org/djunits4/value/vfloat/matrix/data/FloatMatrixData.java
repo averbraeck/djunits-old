@@ -355,12 +355,6 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
     public abstract void incrementBy(FloatMatrixData right) throws ValueRuntimeException;
 
     /**
-     * Add a number to this matrix on a cell-by-cell basis.
-     * @param increment float; the amount to add
-     */
-    public abstract void incrementBy(float increment);
-
-    /**
      * Subtract two matrices on a cell-by-cell basis. If both matrices are sparse, a sparse matrix is returned, otherwise a
      * dense matrix is returned.
      * @param right FloatMatrixData; the other data object to subtract
@@ -386,12 +380,6 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      * @throws ValueRuntimeException if matrices have different lengths
      */
     public abstract void decrementBy(FloatMatrixData right) throws ValueRuntimeException;
-
-    /**
-     * Subtract a number from this matrix on a cell-by-cell basis.
-     * @param decrement float; the amount to subtract
-     */
-    public abstract void decrementBy(float decrement);
 
     /**
      * Multiply two matrix on a cell-by-cell basis. If both matrices are dense, a dense matrix is returned, otherwise a sparse

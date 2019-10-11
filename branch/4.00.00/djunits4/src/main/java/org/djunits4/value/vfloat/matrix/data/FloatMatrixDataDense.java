@@ -205,24 +205,10 @@ public class FloatMatrixDataDense extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final void incrementBy(final float increment)
-    {
-        IntStream.range(0, this.matrixSI.length).parallel().forEach(i -> this.matrixSI[i] += increment);
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final void decrementBy(final FloatMatrixData right) throws ValueRuntimeException
     {
         IntStream.range(0, this.rows).parallel().forEach(
                 r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] -= right.getSI(r, c)));
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void decrementBy(final float decrement)
-    {
-        IntStream.range(0, this.matrixSI.length).parallel().forEach(i -> this.matrixSI[i] -= decrement);
     }
 
     /** {@inheritDoc} */
