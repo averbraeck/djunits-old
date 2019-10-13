@@ -20,7 +20,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-13T01:10:08.802Z")
 public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalInductanceUnit, ElectricalInductance>
 {
     /** */
@@ -189,10 +189,8 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
             ElectricalInductanceUnit unit = ElectricalInductanceUnit.BASE.getUnitByAbbreviation(unitString);
             if (unit != null)
             {
-                {
-                    double d = Double.parseDouble(valueString);
-                    return new ElectricalInductance(d, unit);
-                }
+                double d = Double.parseDouble(valueString);
+                return new ElectricalInductance(d, unit);
             }
         }
         throw new IllegalArgumentException("Error parsing ElectricalInductance from " + text);

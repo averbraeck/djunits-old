@@ -37,7 +37,7 @@ public class FloatSparseValue<U extends Unit<U>, S extends FloatScalarInterface<
     {
         this(row, column, checkNull(value).getSI());
     }
-    
+
     /**
      * Check for null pointer in constructor.
      * @param value S; the scalar to check
@@ -99,5 +99,5 @@ public class FloatSparseValue<U extends Unit<U>, S extends FloatScalarInterface<
     {
         return this.valueSI;
     }
-    
+
 }

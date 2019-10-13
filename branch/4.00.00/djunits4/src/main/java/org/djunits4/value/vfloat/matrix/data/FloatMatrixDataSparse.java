@@ -516,7 +516,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
         return result;
     }
 
-    /** {@inheritDoc}  */
+    /** {@inheritDoc} */
     @Override
     public final FloatMatrixData multiplyBy(final FloatMatrixData right) throws ValueRuntimeException
     {

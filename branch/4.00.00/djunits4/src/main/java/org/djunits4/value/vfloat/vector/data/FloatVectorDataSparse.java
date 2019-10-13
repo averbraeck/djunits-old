@@ -623,7 +623,7 @@ public class FloatVectorDataSparse extends FloatVectorData
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings({ "checkstyle:needbraces", "checkstyle:designforextension" })
+    @SuppressWarnings({"checkstyle:needbraces", "checkstyle:designforextension"})
     public boolean equals(final Object obj)
     {
         if (this == obj)

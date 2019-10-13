@@ -23,8 +23,7 @@ import org.djunits4.value.vfloat.vector.data.FloatVectorData;
  * @param <RV> the relative vector type with this unit
  */
 public abstract class AbstractFloatVectorRel<U extends Unit<U>, S extends AbstractFloatScalarRel<U, S>,
-        RV extends AbstractFloatVectorRel<U, S, RV>> extends AbstractFloatVector<U, S, RV>
-        implements Vector.Rel<U, S, RV>
+        RV extends AbstractFloatVectorRel<U, S, RV>> extends AbstractFloatVector<U, S, RV> implements Vector.Rel<U, S, RV>
 {
     /** */
     private static final long serialVersionUID = 20190908L;
@@ -173,7 +172,7 @@ public abstract class AbstractFloatVectorRel<U extends Unit<U>, S extends Abstra
         return new FloatSIVector(this.getData().divide(rel.getData()), SIUnit.of(
                 getDisplayUnit().getUnitBase().getSiDimensions().minus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public RV times(final double multiplier)

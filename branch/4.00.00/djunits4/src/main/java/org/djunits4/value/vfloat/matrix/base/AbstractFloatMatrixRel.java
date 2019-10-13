@@ -166,8 +166,7 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
     /**
      * Divide this Relative matrix by another Relative matrix. The operation is done value by value and store the result is
      * stored in a new Relative matrix. If both operands are dense, the result is a dense matrix, otherwise the result is a
-     * sparse matrix.
-     * TODO discuss dense or sparseness of result.
+     * sparse matrix. TODO discuss dense or sparseness of result.
      * @param rel VT; the right operand, which can be any matrix type
      * @return FloatSIMatrix; the division of this matrix and the operand
      * @throws ValueRuntimeException in case this matrix or matrix and the operand have a different size

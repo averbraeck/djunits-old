@@ -58,8 +58,8 @@ public class FloatVectorDataDense extends FloatVectorData
     {
         if (right.isDense())
         {
-            IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] =
-                    floatFunction2.apply(this.vectorSI[i], ((FloatVectorDataDense) right).vectorSI[i]));
+            IntStream.range(0, size()).parallel().forEach(
+                    i -> this.vectorSI[i] = floatFunction2.apply(this.vectorSI[i], ((FloatVectorDataDense) right).vectorSI[i]));
         }
         else
         { // right is sparse

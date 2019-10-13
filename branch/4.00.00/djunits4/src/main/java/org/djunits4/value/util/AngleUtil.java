@@ -39,7 +39,7 @@ public interface AngleUtil
     {
         return (float) normalize((double) angle); // for maximum precision of the float
     }
-    
+
     /**
      * Normalize an angle between 0 and 2 * PI.
      * @param angle Angle; original angle.

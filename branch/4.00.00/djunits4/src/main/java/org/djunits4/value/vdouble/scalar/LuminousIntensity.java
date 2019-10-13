@@ -20,7 +20,7 @@ import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-13T01:10:08.802Z")
 public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensityUnit, LuminousIntensity>
 {
     /** */
@@ -183,10 +183,8 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
             LuminousIntensityUnit unit = LuminousIntensityUnit.BASE.getUnitByAbbreviation(unitString);
             if (unit != null)
             {
-                {
-                    double d = Double.parseDouble(valueString);
-                    return new LuminousIntensity(d, unit);
-                }
+                double d = Double.parseDouble(valueString);
+                return new LuminousIntensity(d, unit);
             }
         }
         throw new IllegalArgumentException("Error parsing LuminousIntensity from " + text);

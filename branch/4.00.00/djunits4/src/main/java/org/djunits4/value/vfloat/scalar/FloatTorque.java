@@ -25,7 +25,7 @@ import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-01T09:41:03.599Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-13T01:10:08.802Z")
 public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
 {
     /** */
@@ -196,10 +196,8 @@ public class FloatTorque extends AbstractFloatScalarRel<TorqueUnit, FloatTorque>
             TorqueUnit unit = TorqueUnit.BASE.getUnitByAbbreviation(unitString);
             if (unit != null)
             {
-                {
-                    float f = Float.parseFloat(valueString);
-                    return new FloatTorque(f, unit);
-                }
+                float f = Float.parseFloat(valueString);
+                return new FloatTorque(f, unit);
             }
         }
         throw new IllegalArgumentException("Error parsing FloatTorque from " + text);

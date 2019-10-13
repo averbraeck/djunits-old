@@ -14,7 +14,7 @@ import org.djunits4.unit.Unit;
  * @param <U> the unit type
  * @param <T> the value type for this unit
  */
-public interface Relative <U extends Unit<U>, T extends Value<U, T>>
+public interface Relative<U extends Unit<U>, T extends Value<U, T>>
 {
     /**
      * Returns a new scalar/vector/matrix with value(s) multiplied by a factor.

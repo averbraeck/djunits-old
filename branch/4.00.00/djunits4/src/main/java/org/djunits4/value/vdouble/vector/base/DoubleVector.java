@@ -428,5 +428,5 @@ public final class DoubleVector
                     + exception.getMessage());
         }
     }
-    
+
 }

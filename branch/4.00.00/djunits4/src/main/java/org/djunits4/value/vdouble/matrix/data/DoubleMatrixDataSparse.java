@@ -443,7 +443,8 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     {
         // determine number of non-null cells
         AtomicInteger atomicLength = new AtomicInteger(0);
-        IntStream.range(0, valuesSI.length).parallel().forEach(r -> IntStream.range(0, valuesSI[0].length).forEach(c -> {
+        IntStream.range(0, valuesSI.length).parallel().forEach(r -> IntStream.range(0, valuesSI[0].length).forEach(c ->
+        {
             if (valuesSI[r][c] != 0.0)
             {
                 atomicLength.incrementAndGet();
@@ -453,15 +454,15 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
         return atomicLength.get();
     }
 
-//    /**
-//     * Calculate the number of non-zero values in a double[] vector.
-//     * @param valuesSI double[]; the double[] vector
-//     * @return the number of non-zero values in the double[] vector
-//     */
-//    private static int nonZero(final double[] valuesSI)
-//    {
-//        return (int) Arrays.stream(valuesSI).parallel().filter(d -> d != 0.0).count();
-//    }
+    // /**
+    // * Calculate the number of non-zero values in a double[] vector.
+    // * @param valuesSI double[]; the double[] vector
+    // * @return the number of non-zero values in the double[] vector
+    // */
+    // private static int nonZero(final double[] valuesSI)
+    // {
+    // return (int) Arrays.stream(valuesSI).parallel().filter(d -> d != 0.0).count();
+    // }
 
     /** {@inheritDoc} */
     @Override
@@ -579,7 +580,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings({ "checkstyle:needbraces", "checkstyle:designforextension" })
+    @SuppressWarnings({"checkstyle:needbraces", "checkstyle:designforextension"})
     public boolean equals(final Object obj)
     {
         if (this == obj)

@@ -175,7 +175,7 @@ public abstract class AbstractDoubleVectorRel<U extends Unit<U>, S extends Abstr
         return new SIVector(this.getData().divide(rel.getData()), SIUnit.of(
                 getDisplayUnit().getUnitBase().getSiDimensions().minus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public RV times(final double multiplier)

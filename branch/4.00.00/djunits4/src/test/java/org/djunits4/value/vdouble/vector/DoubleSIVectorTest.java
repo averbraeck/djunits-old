@@ -9,10 +9,13 @@ import java.lang.reflect.Method;
 
 import org.djunits4.unit.AbsoluteLinearUnit;
 import org.djunits4.unit.DimensionlessUnit;
+import org.djunits4.unit.LengthUnit;
+import org.djunits4.unit.PositionUnit;
 import org.djunits4.unit.SIUnit;
 import org.djunits4.unit.Unit;
 import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.base.UnitTypes;
+import org.djunits4.unit.scale.IdentityScale;
 import org.djunits4.unit.util.UNITS;
 import org.djunits4.unit.util.UnitException;
 import org.djunits4.unit.util.UnitRuntimeException;
@@ -133,10 +136,9 @@ public class DoubleSIVectorTest
             UnitBase<AU> unitBase = (UnitBase<AU>) UnitTypes.INSTANCE.getUnitBase(type + "Unit");
             for (AU unit : unitBase.getUnitsById().values())
             {
-                AbstractDoubleVectorAbs<AU, A, AV, RU, R, RV> vector =
-                        (AbstractDoubleVectorAbs<AU, A, AV, RU, R, RV>) DoubleVector.instantiate(
-                                DoubleVectorData.instantiate(denseTestData, unit.getScale(), StorageType.DENSE), unit);
-                AbstractDoubleVectorAbs<?, ?, ?, ?, ?, ?> sparseVector = vector.toSparse();
+                AV vector = DoubleVector
+                        .instantiate(DoubleVectorData.instantiate(denseTestData, unit.getScale(), StorageType.DENSE), unit);
+                AV sparseVector = vector.toSparse();
                 for (int index = 0; index < denseTestData.length; index++)
                 {
                     assertEquals("Value at index matches", vector.getSI(index), sparseVector.getSI(index), 0.0);
@@ -157,9 +159,21 @@ public class DoubleSIVectorTest
                     assertEquals("value of scalarRel matches", testValue, scalarRel.getSI(), 0.001);
                 }
                 // Indirectly test the instantiateVectorRel method (we don't have direct access to a DoubleVectorData object)
-                // Why does this not compile? vector.minus(vector);
+                // This was more difficult than it should be...
+                RV relVector = vector.minus(vector);
+                assertEquals(0.0, relVector.cardinality(), 0.0001);
             }
         }
+
+        // just to see if Position and Length play nice for 'minus'
+        PositionVector pv = DoubleVector.instantiate(
+                DoubleVectorData.instantiate(denseTestData, IdentityScale.SCALE, StorageType.DENSE), PositionUnit.METER);
+        LengthVector lv = DoubleVector.instantiate(
+                DoubleVectorData.instantiate(denseTestData, IdentityScale.SCALE, StorageType.DENSE), LengthUnit.METER);
+        PositionVector pdiff = pv.minus(lv);
+        assertEquals(0.0, pdiff.cardinality(), 0.0001);
+        LengthVector ldiff = pv.minus(pv);
+        assertEquals(0.0, ldiff.cardinality(), 0.0001);
     }
 
 }

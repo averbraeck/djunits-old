@@ -16,5 +16,5 @@ public interface FloatFunction
      * @return float; the transformed value
      */
     float apply(float value);
-    
+
 }

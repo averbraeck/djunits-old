@@ -99,5 +99,5 @@ public class DoubleSparseValue<U extends Unit<U>, S extends DoubleScalarInterfac
     {
         return this.valueSI;
     }
-    
+
 }

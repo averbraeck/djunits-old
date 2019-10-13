@@ -123,7 +123,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
     }
 
     /** {@inheritDoc} */
-   @Override
+    @Override
     public final DoubleVectorDataSparse assign(final DoubleFunction2 doubleFunction, final DoubleVectorData right)
     {
         checkSizes(right);
@@ -267,24 +267,24 @@ public class DoubleVectorDataSparse extends DoubleVectorData
         return this;
     }
 
-   /** {@inheritDoc} */
-   @Override
-   public final DoubleVectorDataDense toDense()
-   {
-       double[] denseSI = new double[this.size];
-       for (int index = 0; index < this.vectorSI.length; index++)
-       {
-           denseSI[this.indices[index]] = this.vectorSI[index];
-       }
-       return new DoubleVectorDataDense(denseSI);
-   }
+    /** {@inheritDoc} */
+    @Override
+    public final DoubleVectorDataDense toDense()
+    {
+        double[] denseSI = new double[this.size];
+        for (int index = 0; index < this.vectorSI.length; index++)
+        {
+            denseSI[this.indices[index]] = this.vectorSI[index];
+        }
+        return new DoubleVectorDataDense(denseSI);
+    }
 
-   /** {@inheritDoc} */
-   @Override
-   public final DoubleVectorDataSparse toSparse()
-   {
-       return this;
-   }
+    /** {@inheritDoc} */
+    @Override
+    public final DoubleVectorDataSparse toSparse()
+    {
+        return this;
+    }
 
     /** {@inheritDoc} */
     @Override
@@ -634,7 +634,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
 
     /** {@inheritDoc} */
     @Override
-    public final DoubleVectorData divide(final DoubleVectorData right)  throws ValueRuntimeException
+    public final DoubleVectorData divide(final DoubleVectorData right) throws ValueRuntimeException
     {
         if (right.isSparse())
         {
@@ -644,7 +644,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
         // Sparse divided by dense makes a sparse
         return this.copy().divideBy(right);
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public final DoubleVectorData divideBy(final DoubleVectorData right) throws ValueRuntimeException
@@ -680,7 +680,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings({ "checkstyle:needbraces", "checkstyle:designforextension" })
+    @SuppressWarnings({"checkstyle:needbraces", "checkstyle:designforextension"})
     public boolean equals(final Object obj)
     {
         if (this == obj)
