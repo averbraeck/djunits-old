@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head><meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>Test xref</title>
+<link type="text/css" rel="stylesheet" href="../../../../stylesheet.css" />
+</head>
+<body>
+<div id="overview"><a href="../../../../../apidocs/org/djunits/demo/website/Test.html">View Javadoc</a></div><pre>
+<a class="jxr_linenumber" name="L1" href="#L1">1</a>   <strong class="jxr_keyword">package</strong> org.djunits.demo.website;
+<a class="jxr_linenumber" name="L2" href="#L2">2</a>   
+<a class="jxr_linenumber" name="L3" href="#L3">3</a>   <strong class="jxr_keyword">import</strong> org.djunits.unit.DurationUnit;
+<a class="jxr_linenumber" name="L4" href="#L4">4</a>   <strong class="jxr_keyword">import</strong> org.djunits.unit.LengthUnit;
+<a class="jxr_linenumber" name="L5" href="#L5">5</a>   <strong class="jxr_keyword">import</strong> org.djunits.unit.SpeedUnit;
+<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <strong class="jxr_keyword">import</strong> org.djunits.unit.unitsystem.UnitSystem;
+<a class="jxr_linenumber" name="L7" href="#L7">7</a>   <strong class="jxr_keyword">import</strong> org.djunits.value.StorageType;
+<a class="jxr_linenumber" name="L8" href="#L8">8</a>   <strong class="jxr_keyword">import</strong> org.djunits.value.ValueException;
+<a class="jxr_linenumber" name="L9" href="#L9">9</a>   <strong class="jxr_keyword">import</strong> org.djunits.value.vdouble.matrix.MutableLengthMatrix;
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <strong class="jxr_keyword">import</strong> org.djunits.value.vdouble.scalar.DoubleScalar;
+<a class="jxr_linenumber" name="L11" href="#L11">11</a>  <strong class="jxr_keyword">import</strong> org.djunits.value.vdouble.scalar.Duration;
+<a class="jxr_linenumber" name="L12" href="#L12">12</a>  <strong class="jxr_keyword">import</strong> org.djunits.value.vdouble.scalar.Length;
+<a class="jxr_linenumber" name="L13" href="#L13">13</a>  <strong class="jxr_keyword">import</strong> org.djunits.value.vdouble.scalar.Speed;
+<a class="jxr_linenumber" name="L14" href="#L14">14</a>  <strong class="jxr_keyword">import</strong> org.djunits.value.vdouble.vector.DoubleVector;
+<a class="jxr_linenumber" name="L15" href="#L15">15</a>  
+<a class="jxr_linenumber" name="L16" href="#L16">16</a>  <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L17" href="#L17">17</a>  <em class="jxr_javadoccomment"> * &lt;p&gt;</em>
+<a class="jxr_linenumber" name="L18" href="#L18">18</a>  <em class="jxr_javadoccomment"> * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. &lt;br&gt;</em>
+<a class="jxr_linenumber" name="L19" href="#L19">19</a>  <em class="jxr_javadoccomment"> * BSD-style license. See &lt;a href="<a href="http://djunits.org/docs/license.html" target="alexandria_uri">http://djunits.org/docs/license.html</a>"&gt;DJUNITS License&lt;/a&gt;.</em>
+<a class="jxr_linenumber" name="L20" href="#L20">20</a>  <em class="jxr_javadoccomment"> * &lt;/p&gt;</em>
+<a class="jxr_linenumber" name="L21" href="#L21">21</a>  <em class="jxr_javadoccomment"> * $LastChangedDate: 2015-07-24 02:58:59 +0200 (Fri, 24 Jul 2015) $, @version $Revision: 1147 $, by $Author: averbraeck $,</em>
+<a class="jxr_linenumber" name="L22" href="#L22">22</a>  <em class="jxr_javadoccomment"> * initial version Oct 16, 2016 &lt;br&gt;</em>
+<a class="jxr_linenumber" name="L23" href="#L23">23</a>  <em class="jxr_javadoccomment"> * @author &lt;a href="<a href="http://www.tbm.tudelft.nl/averbraeck" target="alexandria_uri">http://www.tbm.tudelft.nl/averbraeck</a>"&gt;Alexander Verbraeck&lt;/a&gt;</em>
+<a class="jxr_linenumber" name="L24" href="#L24">24</a>  <em class="jxr_javadoccomment"> * @author &lt;a href="<a href="http://www.tudelft.nl/pknoppers" target="alexandria_uri">http://www.tudelft.nl/pknoppers</a>"&gt;Peter Knoppers&lt;/a&gt;</em>
+<a class="jxr_linenumber" name="L25" href="#L25">25</a>  <em class="jxr_javadoccomment"> * @author &lt;a href="<a href="http://www.transport.citg.tudelft.nl" target="alexandria_uri">http://www.transport.citg.tudelft.nl</a>"&gt;Wouter Schakel&lt;/a&gt;</em>
+<a class="jxr_linenumber" name="L26" href="#L26">26</a>  <em class="jxr_javadoccomment"> */</em>
+<a class="jxr_linenumber" name="L27" href="#L27">27</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../org/djunits/demo/website/Test.html">Test</a>
+<a class="jxr_linenumber" name="L28" href="#L28">28</a>  {
+<a class="jxr_linenumber" name="L29" href="#L29">29</a>      <em class="jxr_javadoccomment">/** Furlong example. */</em>
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> LengthUnit FURLONG = <strong class="jxr_keyword">new</strong> LengthUnit(<span class="jxr_string">"Furlong"</span>, <span class="jxr_string">"fr"</span>, UnitSystem.IMPERIAL, LengthUnit.FOOT, 660);
+<a class="jxr_linenumber" name="L31" href="#L31">31</a>  
+<a class="jxr_linenumber" name="L32" href="#L32">32</a>      <em class="jxr_javadoccomment">/** Fortnight example. */</em>
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> DurationUnit FORTNIGHT = <strong class="jxr_keyword">new</strong> DurationUnit(<span class="jxr_string">"Fortnight"</span>, <span class="jxr_string">"fn"</span>, UnitSystem.OTHER, DurationUnit.DAY, 14);
+<a class="jxr_linenumber" name="L34" href="#L34">34</a>  
+<a class="jxr_linenumber" name="L35" href="#L35">35</a>      <em class="jxr_javadoccomment">/** fr/fn example. */</em>
+<a class="jxr_linenumber" name="L36" href="#L36">36</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> SpeedUnit FURLONGS_PER_FORTNIGHT =
+<a class="jxr_linenumber" name="L37" href="#L37">37</a>              <strong class="jxr_keyword">new</strong> SpeedUnit(FURLONG, FORTNIGHT, <span class="jxr_string">"Furlongs per Fortnight"</span>, <span class="jxr_string">"fr/fn"</span>, UnitSystem.OTHER);
+<a class="jxr_linenumber" name="L38" href="#L38">38</a>  
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>      <em class="jxr_javadoccomment">/** */</em>
+<a class="jxr_linenumber" name="L40" href="#L40">40</a>      <strong class="jxr_keyword">private</strong> <a href="../../../../org/djunits/demo/website/Test.html">Test</a>()
+<a class="jxr_linenumber" name="L41" href="#L41">41</a>      {
+<a class="jxr_linenumber" name="L42" href="#L42">42</a>          <em class="jxr_comment">// utility class</em>
+<a class="jxr_linenumber" name="L43" href="#L43">43</a>      }
+<a class="jxr_linenumber" name="L44" href="#L44">44</a>  
+<a class="jxr_linenumber" name="L45" href="#L45">45</a>      <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L46" href="#L46">46</a>  <em class="jxr_javadoccomment">     * @param args String[]; args</em>
+<a class="jxr_linenumber" name="L47" href="#L47">47</a>  <em class="jxr_javadoccomment">     * @throws ValueException on error</em>
+<a class="jxr_linenumber" name="L48" href="#L48">48</a>  <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L49" href="#L49">49</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">void</strong> main(<strong class="jxr_keyword">final</strong> String[] args) <strong class="jxr_keyword">throws</strong> ValueException
+<a class="jxr_linenumber" name="L50" href="#L50">50</a>      {
+<a class="jxr_linenumber" name="L51" href="#L51">51</a>          Length fr1000 = <strong class="jxr_keyword">new</strong> Length(1000.0, FURLONG);
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>          Duration twoWeeks = <strong class="jxr_keyword">new</strong> Duration(1.0, FORTNIGHT);
+<a class="jxr_linenumber" name="L53" href="#L53">53</a>          Speed speed = fr1000.divideBy(twoWeeks);
+<a class="jxr_linenumber" name="L54" href="#L54">54</a>          System.out.println(speed);
+<a class="jxr_linenumber" name="L55" href="#L55">55</a>          System.out.println(speed.toString(FURLONGS_PER_FORTNIGHT));
+<a class="jxr_linenumber" name="L56" href="#L56">56</a>          System.out.println();
+<a class="jxr_linenumber" name="L57" href="#L57">57</a>  
+<a class="jxr_linenumber" name="L58" href="#L58">58</a>          DoubleScalar.Rel&lt;JerkUnit&gt; jerk1 = <strong class="jxr_keyword">new</strong> DoubleScalar.Rel&lt;&gt;(1.2, JerkUnit.SI);
+<a class="jxr_linenumber" name="L59" href="#L59">59</a>          System.out.println(<span class="jxr_string">"jerk1 = new DoubleScalar.Rel&lt;&gt;(1.2, JerkUnit.SI) : "</span> + jerk1);
+<a class="jxr_linenumber" name="L60" href="#L60">60</a>          DoubleScalar.Rel&lt;JerkUnit&gt; jerk2 = jerk1.multiplyBy(2.0);
+<a class="jxr_linenumber" name="L61" href="#L61">61</a>          System.out.println(<span class="jxr_string">"jerk2 = jerk1.multiplyBy(2.0)                    : "</span> + jerk2);
+<a class="jxr_linenumber" name="L62" href="#L62">62</a>          <strong class="jxr_keyword">double</strong>[] sv = <strong class="jxr_keyword">new</strong> <strong class="jxr_keyword">double</strong>[] {1, 2, 3, 4, 5};
+<a class="jxr_linenumber" name="L63" href="#L63">63</a>          DoubleVector.Rel&lt;JerkUnit&gt; jerkVector = <strong class="jxr_keyword">new</strong> DoubleVector.Rel&lt;JerkUnit&gt;(sv, JerkUnit.SI, StorageType.DENSE);
+<a class="jxr_linenumber" name="L64" href="#L64">64</a>          System.out.println(<span class="jxr_string">"jerkVector: : "</span> + jerkVector);
+<a class="jxr_linenumber" name="L65" href="#L65">65</a>  
+<a class="jxr_linenumber" name="L66" href="#L66">66</a>          <a href="../../../../org/djunits/demo/website/Jerk.html">Jerk</a> jjerk1 = <strong class="jxr_keyword">new</strong> <a href="../../../../org/djunits/demo/website/Jerk.html">Jerk</a>(1.2, JerkUnit.SI);
+<a class="jxr_linenumber" name="L67" href="#L67">67</a>          System.out.println(<span class="jxr_string">"jerk1 = new Jerk(1.2, JerkUnit.SI) : "</span> + jjerk1);
+<a class="jxr_linenumber" name="L68" href="#L68">68</a>          <a href="../../../../org/djunits/demo/website/Jerk.html">Jerk</a> jjerk2 = jjerk1.multiplyBy(2.0);
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>          System.out.println(<span class="jxr_string">"jerk2 = jerk1.multiplyBy(2.0)      : "</span> + jjerk2);
+<a class="jxr_linenumber" name="L70" href="#L70">70</a>  
+<a class="jxr_linenumber" name="L71" href="#L71">71</a>          <strong class="jxr_keyword">double</strong>[][] data = <strong class="jxr_keyword">new</strong> <strong class="jxr_keyword">double</strong>[1000][1000];
+<a class="jxr_linenumber" name="L72" href="#L72">72</a>          <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> i = 0; i &lt; 1000; i++)
+<a class="jxr_linenumber" name="L73" href="#L73">73</a>          {
+<a class="jxr_linenumber" name="L74" href="#L74">74</a>              <strong class="jxr_keyword">for</strong> (<strong class="jxr_keyword">int</strong> j = 0; j &lt; 1000; j++)
+<a class="jxr_linenumber" name="L75" href="#L75">75</a>              {
+<a class="jxr_linenumber" name="L76" href="#L76">76</a>                  data[i][j] = 9 * i + 2 * j * 0.364;
+<a class="jxr_linenumber" name="L77" href="#L77">77</a>              }
+<a class="jxr_linenumber" name="L78" href="#L78">78</a>          }
+<a class="jxr_linenumber" name="L79" href="#L79">79</a>          MutableLengthMatrix lengthMatrix = <strong class="jxr_keyword">new</strong> MutableLengthMatrix(data, LengthUnit.CENTIMETER, StorageType.DENSE);
+<a class="jxr_linenumber" name="L80" href="#L80">80</a>          lengthMatrix.round();
+<a class="jxr_linenumber" name="L81" href="#L81">81</a>      }
+<a class="jxr_linenumber" name="L82" href="#L82">82</a>  
+<a class="jxr_linenumber" name="L83" href="#L83">83</a>  }
+</pre>
+<hr/>
+<div id="footer">Copyright &#169; 2015&#x2013;2019 <a href="www.djunits.org">Delft University of Technology</a>. All rights reserved.</div>
+</body>
+</html>

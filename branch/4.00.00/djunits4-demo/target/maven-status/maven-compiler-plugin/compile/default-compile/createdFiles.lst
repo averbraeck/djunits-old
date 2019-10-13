@@ -1,0 +1,14 @@
+org\djunits\demo\examples\Angles.class
+org\djunits\demo\website\Jerk.class
+org\djunits\demo\examples\Parsing.class
+org\djunits\demo\examples\ShowDisplayUnit.class
+org\djunits\demo\examples\VectorAndMatrix.class
+org\djunits\demo\examples\VectorToArrayExample.class
+org\djunits\demo\examples\ConversionToAndFromSI.class
+org\djunits\demo\website\JerkUnit.class
+org\djunits\demo\examples\VectorIteratorExample.class
+org\djunits\demo\website\Test.class
+org\djunits\demo\examples\AbsAndRel.class
+org\djunits\demo\examples\Currency.class
+org\djunits\demo\examples\MinAndMax.class
+org\djunits\demo\examples\MultiplyAndDivide.class

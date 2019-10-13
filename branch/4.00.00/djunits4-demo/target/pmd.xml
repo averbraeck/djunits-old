@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd"
+    version="6.4.0" timestamp="2019-04-22T13:07:17.426">
+<file name="E:\java\djunits\workspace\djunits-demo\src\main\java\org\djunits\demo\examples\MultiplyAndDivide.java">
+<violation beginline="55" endline="55" begincolumn="37" endcolumn="42" rule="UnusedLocalVariable" ruleset="Best Practices" package="org.djunits.demo.examples" class="MultiplyAndDivide" method="main" variable="speed2" externalInfoUrl="https://pmd.github.io/pmd-6.4.0/pmd_rules_java_bestpractices.html#unusedlocalvariable" priority="3">
+Avoid unused local variables such as 'speed2'.
+</violation>
+<violation beginline="56" endline="56" begincolumn="37" endcolumn="42" rule="UnusedLocalVariable" ruleset="Best Practices" package="org.djunits.demo.examples" class="MultiplyAndDivide" method="main" variable="speed3" externalInfoUrl="https://pmd.github.io/pmd-6.4.0/pmd_rules_java_bestpractices.html#unusedlocalvariable" priority="3">
+Avoid unused local variables such as 'speed3'.
+</violation>
+<violation beginline="58" endline="58" begincolumn="37" endcolumn="47" rule="UnusedLocalVariable" ruleset="Best Practices" package="org.djunits.demo.examples" class="MultiplyAndDivide" method="main" variable="speedVector" externalInfoUrl="https://pmd.github.io/pmd-6.4.0/pmd_rules_java_bestpractices.html#unusedlocalvariable" priority="3">
+Avoid unused local variables such as 'speedVector'.
+</violation>
+</file>
+</pmd>

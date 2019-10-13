@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head><meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>Angles xref</title>
+<link type="text/css" rel="stylesheet" href="../../../../stylesheet.css" />
+</head>
+<body>
+<div id="overview"><a href="../../../../../apidocs/org/djunits/demo/examples/Angles.html">View Javadoc</a></div><pre>
+<a class="jxr_linenumber" name="L1" href="#L1">1</a>   <strong class="jxr_keyword">package</strong> org.djunits.demo.examples;
+<a class="jxr_linenumber" name="L2" href="#L2">2</a>   
+<a class="jxr_linenumber" name="L3" href="#L3">3</a>   <strong class="jxr_keyword">import</strong> org.djunits.unit.AngleUnit;
+<a class="jxr_linenumber" name="L4" href="#L4">4</a>   <strong class="jxr_keyword">import</strong> org.djunits.value.AngleUtil;
+<a class="jxr_linenumber" name="L5" href="#L5">5</a>   <strong class="jxr_keyword">import</strong> org.djunits.value.ValueException;
+<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <strong class="jxr_keyword">import</strong> org.djunits.value.vdouble.scalar.Angle;
+<a class="jxr_linenumber" name="L7" href="#L7">7</a>   
+<a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L9" href="#L9">9</a>   <em class="jxr_javadoccomment"> * Normalization of angles.</em>
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_javadoccomment"> * &lt;p&gt;</em>
+<a class="jxr_linenumber" name="L11" href="#L11">11</a>  <em class="jxr_javadoccomment"> * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. &lt;br&gt;</em>
+<a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_javadoccomment"> * BSD-style license. See &lt;a href="<a href="http://djunits.org/docs/license.html" target="alexandria_uri">http://djunits.org/docs/license.html</a>"&gt;DJUNITS License&lt;/a&gt;.</em>
+<a class="jxr_linenumber" name="L13" href="#L13">13</a>  <em class="jxr_javadoccomment"> * &lt;p&gt;</em>
+<a class="jxr_linenumber" name="L14" href="#L14">14</a>  <em class="jxr_javadoccomment"> * @version $Revision$, $LastChangedDate$, by $Author$, initial version Oct 28, 2015 &lt;br&gt;</em>
+<a class="jxr_linenumber" name="L15" href="#L15">15</a>  <em class="jxr_javadoccomment"> * @author &lt;a href="<a href="http://www.tbm.tudelft.nl/averbraeck" target="alexandria_uri">http://www.tbm.tudelft.nl/averbraeck</a>"&gt;Alexander Verbraeck&lt;/a&gt;</em>
+<a class="jxr_linenumber" name="L16" href="#L16">16</a>  <em class="jxr_javadoccomment"> * @author &lt;a href="<a href="http://www.tudelft.nl/pknoppers" target="alexandria_uri">http://www.tudelft.nl/pknoppers</a>"&gt;Peter Knoppers&lt;/a&gt;</em>
+<a class="jxr_linenumber" name="L17" href="#L17">17</a>  <em class="jxr_javadoccomment"> */</em>
+<a class="jxr_linenumber" name="L18" href="#L18">18</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../org/djunits/demo/examples/Angles.html">Angles</a>
+<a class="jxr_linenumber" name="L19" href="#L19">19</a>  {
+<a class="jxr_linenumber" name="L20" href="#L20">20</a>      <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L21" href="#L21">21</a>  <em class="jxr_javadoccomment">     * Create some Angle values to demonstrate conversion from and to related units, including the non-linear AngleUnit.PERCENT.</em>
+<a class="jxr_linenumber" name="L22" href="#L22">22</a>  <em class="jxr_javadoccomment">     * @param args String[]; the command line arguments; not used</em>
+<a class="jxr_linenumber" name="L23" href="#L23">23</a>  <em class="jxr_javadoccomment">     * @throws ValueException in case of error</em>
+<a class="jxr_linenumber" name="L24" href="#L24">24</a>  <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L25" href="#L25">25</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">void</strong> main(<strong class="jxr_keyword">final</strong> String[] args) <strong class="jxr_keyword">throws</strong> ValueException
+<a class="jxr_linenumber" name="L26" href="#L26">26</a>      {
+<a class="jxr_linenumber" name="L27" href="#L27">27</a>          System.out.println(<span class="jxr_string">"Normalization of an angle adds or subtracts a multiple of 2\u03c0. For linear angle units "</span>
+<a class="jxr_linenumber" name="L28" href="#L28">28</a>                  + <span class="jxr_string">"the result is a value between 0 and +2\u03c0."</span>);
+<a class="jxr_linenumber" name="L29" href="#L29">29</a>          System.out.println(<span class="jxr_string">"Angles not between -90\u00b0 and +90\u00b0, -\u03c0/2 and +\u03c0/2 cannot properly be "</span>
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>                  + <span class="jxr_string">"expressed as percentage."</span>);
+<a class="jxr_linenumber" name="L31" href="#L31">31</a>          Angle a1 = <strong class="jxr_keyword">new</strong> Angle(3 * Math.PI, AngleUnit.RADIAN);
+<a class="jxr_linenumber" name="L32" href="#L32">32</a>          Angle normA1 = AngleUtil.normalize(a1);
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>          System.out.println(<span class="jxr_string">"3 * \u03c0: "</span> + a1 + <span class="jxr_string">" ("</span> + a1.toString(AngleUnit.DEGREE) + <span class="jxr_string">", "</span> + a1.toString(AngleUnit.PERCENT)
+<a class="jxr_linenumber" name="L34" href="#L34">34</a>                  + <span class="jxr_string">") -&gt; "</span> + normA1 + <span class="jxr_string">" ("</span> + normA1.toString(AngleUnit.DEGREE) + <span class="jxr_string">", "</span> + normA1.toString(AngleUnit.PERCENT)
+<a class="jxr_linenumber" name="L35" href="#L35">35</a>                  + <span class="jxr_string">") Note: percentage almost 0"</span>);
+<a class="jxr_linenumber" name="L36" href="#L36">36</a>          Angle a2 = <strong class="jxr_keyword">new</strong> Angle(-Math.PI, AngleUnit.RADIAN);
+<a class="jxr_linenumber" name="L37" href="#L37">37</a>          Angle normA2 = AngleUtil.normalize(a2);
+<a class="jxr_linenumber" name="L38" href="#L38">38</a>          System.out.println(<span class="jxr_string">"   -\u03c0: "</span> + a2 + <span class="jxr_string">" ("</span> + a2.toString(AngleUnit.DEGREE) + <span class="jxr_string">", "</span> + a2.toString(AngleUnit.PERCENT)
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>                  + <span class="jxr_string">") -&gt; "</span> + normA2 + <span class="jxr_string">" ("</span> + normA2.toString(AngleUnit.DEGREE) + <span class="jxr_string">", "</span> + normA2.toString(AngleUnit.PERCENT)
+<a class="jxr_linenumber" name="L40" href="#L40">40</a>                  + <span class="jxr_string">") Note: percentage almost 0"</span>);
+<a class="jxr_linenumber" name="L41" href="#L41">41</a>          Angle a3 = <strong class="jxr_keyword">new</strong> Angle(-45, AngleUnit.DEGREE);
+<a class="jxr_linenumber" name="L42" href="#L42">42</a>          Angle normA3 = AngleUtil.normalize(a3);
+<a class="jxr_linenumber" name="L43" href="#L43">43</a>          System.out.println(
+<a class="jxr_linenumber" name="L44" href="#L44">44</a>                  <span class="jxr_string">"  -45\u0090: "</span> + a3 + <span class="jxr_string">" ("</span> + a3.toString(AngleUnit.RADIAN) + <span class="jxr_string">", "</span> + a3.toString(AngleUnit.PERCENT) + <span class="jxr_string">") -&gt; "</span>
+<a class="jxr_linenumber" name="L45" href="#L45">45</a>                          + normA3 + <span class="jxr_string">" ("</span> + normA3.toString(AngleUnit.RADIAN) + <span class="jxr_string">", "</span> + normA3.toString(AngleUnit.PERCENT) + <span class="jxr_string">")"</span>);
+<a class="jxr_linenumber" name="L46" href="#L46">46</a>          System.out.println(<span class="jxr_string">""</span>);
+<a class="jxr_linenumber" name="L47" href="#L47">47</a>          System.out.println(<span class="jxr_string">"Angles expressed as percentage are always between -inf and +inf (-90\u00b0 and +90\u00b0, "</span>
+<a class="jxr_linenumber" name="L48" href="#L48">48</a>                  + <span class="jxr_string">"-\u03c0/2 and +\u03c0/2); even after normalization."</span>);
+<a class="jxr_linenumber" name="L49" href="#L49">49</a>          Angle a4 = <strong class="jxr_keyword">new</strong> Angle(-100, AngleUnit.PERCENT);
+<a class="jxr_linenumber" name="L50" href="#L50">50</a>          Angle normA4 = AngleUtil.normalize(a4);
+<a class="jxr_linenumber" name="L51" href="#L51">51</a>          System.out.println(<span class="jxr_string">"-100%: "</span> + a4 + <span class="jxr_string">" ("</span> + a4.toString(AngleUnit.DEGREE) + <span class="jxr_string">", "</span> + a4.toString(AngleUnit.RADIAN)
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>                  + <span class="jxr_string">") -&gt; "</span> + normA4 + <span class="jxr_string">" ("</span> + normA4.toString(AngleUnit.DEGREE) + <span class="jxr_string">", "</span> + normA4.toString(AngleUnit.RADIAN) + <span class="jxr_string">")"</span>);
+<a class="jxr_linenumber" name="L53" href="#L53">53</a>          Angle a5 = <strong class="jxr_keyword">new</strong> Angle(100, AngleUnit.PERCENT);
+<a class="jxr_linenumber" name="L54" href="#L54">54</a>          Angle normA5 = AngleUtil.normalize(a5);
+<a class="jxr_linenumber" name="L55" href="#L55">55</a>          System.out.println(<span class="jxr_string">" 100%: "</span> + a5 + <span class="jxr_string">" ("</span> + a5.toString(AngleUnit.DEGREE) + <span class="jxr_string">", "</span> + a5.toString(AngleUnit.RADIAN)
+<a class="jxr_linenumber" name="L56" href="#L56">56</a>                  + <span class="jxr_string">") -&gt; "</span> + normA5 + <span class="jxr_string">" ("</span> + normA5.toString(AngleUnit.DEGREE) + <span class="jxr_string">", "</span> + normA5.toString(AngleUnit.RADIAN) + <span class="jxr_string">")"</span>);
+<a class="jxr_linenumber" name="L57" href="#L57">57</a>          Angle a6 = <strong class="jxr_keyword">new</strong> Angle(1000, AngleUnit.PERCENT);
+<a class="jxr_linenumber" name="L58" href="#L58">58</a>          Angle normA6 = AngleUtil.normalize(a6);
+<a class="jxr_linenumber" name="L59" href="#L59">59</a>          System.out.println(<span class="jxr_string">"1000%: "</span> + a6 + <span class="jxr_string">" ("</span> + a6.toString(AngleUnit.DEGREE) + <span class="jxr_string">", "</span> + a6.toString(AngleUnit.RADIAN)
+<a class="jxr_linenumber" name="L60" href="#L60">60</a>                  + <span class="jxr_string">") -&gt; "</span> + normA6 + <span class="jxr_string">" ("</span> + normA6.toString(AngleUnit.DEGREE) + <span class="jxr_string">", "</span> + normA6.toString(AngleUnit.RADIAN) + <span class="jxr_string">")"</span>);
+<a class="jxr_linenumber" name="L61" href="#L61">61</a>      }
+<a class="jxr_linenumber" name="L62" href="#L62">62</a>  
+<a class="jxr_linenumber" name="L63" href="#L63">63</a>  }
+</pre>
+<hr/>
+<div id="footer">Copyright &#169; 2015&#x2013;2019 <a href="www.djunits.org">Delft University of Technology</a>. All rights reserved.</div>
+</body>
+</html>

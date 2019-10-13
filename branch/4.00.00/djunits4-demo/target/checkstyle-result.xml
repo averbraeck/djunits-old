@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="6.18">
+<file name="E:\java\djunits\workspace\djunits-demo\src\main\java\org\djunits\demo\examples\AbsAndRel.java">
+</file>
+<file name="E:\java\djunits\workspace\djunits-demo\src\main\java\org\djunits\demo\examples\Angles.java">
+<error line="18" column="1" severity="warning" message="Utility classes should not have a public or default constructor." source="com.puppycrawl.tools.checkstyle.checks.design.HideUtilityClassConstructorCheck"/>
+</file>
+<file name="E:\java\djunits\workspace\djunits-demo\src\main\java\org\djunits\demo\examples\ConversionToAndFromSI.java">
+</file>
+<file name="E:\java\djunits\workspace\djunits-demo\src\main\java\org\djunits\demo\examples\Currency.java">
+</file>
+<file name="E:\java\djunits\workspace\djunits-demo\src\main\java\org\djunits\demo\examples\MinAndMax.java">
+</file>
+<file name="E:\java\djunits\workspace\djunits-demo\src\main\java\org\djunits\demo\examples\MultiplyAndDivide.java">
+</file>
+<file name="E:\java\djunits\workspace\djunits-demo\src\main\java\org\djunits\demo\examples\package-info.java">
+</file>
+<file name="E:\java\djunits\workspace\djunits-demo\src\main\java\org\djunits\demo\examples\Parsing.java">
+<error line="16" column="1" severity="warning" message="Utility classes should not have a public or default constructor." source="com.puppycrawl.tools.checkstyle.checks.design.HideUtilityClassConstructorCheck"/>
+<error line="18" column="5" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="18" column="29" severity="warning" message="Parameter args should be final." source="com.puppycrawl.tools.checkstyle.checks.FinalParametersCheck"/>
+</file>
+<file name="E:\java\djunits\workspace\djunits-demo\src\main\java\org\djunits\demo\examples\ShowDisplayUnit.java">
+</file>
+<file name="E:\java\djunits\workspace\djunits-demo\src\main\java\org\djunits\demo\examples\VectorAndMatrix.java">
+</file>
+<file name="E:\java\djunits\workspace\djunits-demo\src\main\java\org\djunits\demo\examples\VectorIteratorExample.java">
+</file>
+<file name="E:\java\djunits\workspace\djunits-demo\src\main\java\org\djunits\demo\examples\VectorToArrayExample.java">
+</file>
+<file name="E:\java\djunits\workspace\djunits-demo\src\main\java\org\djunits\demo\website\Jerk.java">
+<error line="24" column="5" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="29" column="5" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="40" column="5" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="45" column="5" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="50" column="5" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+</file>
+<file name="E:\java\djunits\workspace\djunits-demo\src\main\java\org\djunits\demo\website\JerkUnit.java">
+<error line="23" column="5" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="25" column="5" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="27" column="5" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="29" column="5" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="31" column="5" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="33" column="5" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="35" column="5" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="47" column="5" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="55" column="5" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="63" column="5" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="68" column="5" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+</file>
+<file name="E:\java\djunits\workspace\djunits-demo\src\main\java\org\djunits\demo\website\package-info.java">
+</file>
+<file name="E:\java\djunits\workspace\djunits-demo\src\main\java\org\djunits\demo\website\Test.java">
+</file>
+</checkstyle>
