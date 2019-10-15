@@ -52,6 +52,15 @@ public class DoubleVectorDataSparse extends DoubleVectorData
     @Override
     public DoubleVectorData assign(final DoubleFunction doubleFunction)
     {
+        if (doubleFunction.apply(0d) != 0d)
+        {
+            // It is most unlikely that the result AND the left and right operands are efficiently stored in Sparse format
+            DoubleVectorDataSparse result = toDense().assign(doubleFunction).toSparse();
+            this.indices = result.indices;
+            this.vectorSI = result.vectorSI;
+            return this;
+        }
+        // The code below relies on the fact that doubleFunction.apply(0d) yields 0d
         int currentSize = size();
         if (currentSize > 16)
         {
@@ -61,31 +70,12 @@ public class DoubleVectorDataSparse extends DoubleVectorData
         double[] newValues = new double[currentSize];
         int nonZeroValues = 0;
         int ownIndex = 0;
-        int otherIndex = 0;
         while (ownIndex < this.indices.length)
         {
-            double value;
-            int index = otherIndex;
-            if (ownIndex < this.indices.length)
-            { // neither we nor right has run out of values
-                if (this.indices[ownIndex] == otherIndex)
-                {
-                    value = doubleFunction.apply(this.vectorSI[ownIndex]);
-                    ownIndex++;
-                }
-                else
-                {
-                    // we have a zero; other has a value
-                    value = doubleFunction.apply(0.0);
-                }
-                otherIndex++;
-            }
-            else
-            { // we have run out of values; right has not
-                value = doubleFunction.apply(0.0);
-                otherIndex++;
-            }
-            if (value != 0f)
+            int index = this.indices[ownIndex];
+            double value = doubleFunction.apply(this.vectorSI[ownIndex]);
+            ownIndex++;
+            if (value != 0d)
             {
                 if (nonZeroValues >= currentSize)
                 {
@@ -99,7 +89,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
                     System.arraycopy(newIndices, 0, newNewIndices, 0, newIndices.length);
                     newIndices = newNewIndices;
                     double[] newNewValues = new double[currentSize];
-                    System.arraycopy(newNewValues, 0, newValues, 0, newValues.length);
+                    System.arraycopy(newValues, 0, newNewValues, 0, newValues.length);
                     newValues = newNewValues;
                 }
                 newIndices[nonZeroValues] = index;
@@ -126,6 +116,15 @@ public class DoubleVectorDataSparse extends DoubleVectorData
     @Override
     public final DoubleVectorDataSparse assign(final DoubleFunction2 doubleFunction, final DoubleVectorData right)
     {
+        if (doubleFunction.apply(0d, 0d) != 0d)
+        {
+            // It is most unlikely that the result AND the left and right operands are efficiently stored in Sparse format
+            DoubleVectorDataSparse result = toDense().assign(doubleFunction, right).toSparse();
+            this.indices = result.indices;
+            this.vectorSI = result.vectorSI;
+            return this;
+        }
+        // The code below relies on the fact that doubleFunction.apply(0d, 0d) yields 0d
         checkSizes(right);
         int currentSize = size();
         if (currentSize > 16)
@@ -138,7 +137,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
         int ownIndex = 0;
         int otherIndex = 0;
         if (right.isSparse())
-        { // both are sparse; result must be sparse
+        { // both are sparse, result must be sparse
             DoubleVectorDataSparse other = (DoubleVectorDataSparse) right;
             while (ownIndex < this.indices.length || otherIndex < other.indices.length)
             {
@@ -156,45 +155,45 @@ public class DoubleVectorDataSparse extends DoubleVectorData
                     else if (this.indices[ownIndex] < other.indices[otherIndex])
                     {
                         // we have a non-zero; right has a zero
-                        value = doubleFunction.apply(this.vectorSI[ownIndex], 0.0);
+                        value = doubleFunction.apply(this.vectorSI[ownIndex], 0d);
                         index = this.indices[ownIndex];
                         ownIndex++;
                     }
                     else
                     {
                         // we have a zero; right has a non-zero
-                        value = doubleFunction.apply(0.0, other.vectorSI[otherIndex]);
+                        value = doubleFunction.apply(0d, other.vectorSI[otherIndex]);
                         index = other.indices[otherIndex];
                         otherIndex++;
                     }
                 }
                 else if (ownIndex < this.indices.length)
                 { // right has run out of values; we have not
-                    value = this.vectorSI[ownIndex];
+                    value = doubleFunction.apply(this.vectorSI[ownIndex], 0d);
                     index = this.indices[ownIndex];
                     ownIndex++;
                 }
                 else
                 { // we have run out of values; right has not
-                    value = doubleFunction.apply(0.0, other.vectorSI[otherIndex]);
+                    value = doubleFunction.apply(0d, other.vectorSI[otherIndex]);
                     index = other.indices[otherIndex];
                     otherIndex++;
                 }
-                if (value != 0f)
+                if (value != 0d)
                 {
                     if (nonZeroValues >= currentSize)
                     {
                         // increase size of arrays
                         currentSize *= 2;
-                        if (currentSize > this.size())
+                        if (currentSize > size())
                         {
-                            currentSize = this.size();
+                            currentSize = size();
                         }
                         int[] newNewIndices = new int[currentSize];
                         System.arraycopy(newIndices, 0, newNewIndices, 0, newIndices.length);
                         newIndices = newNewIndices;
                         double[] newNewValues = new double[currentSize];
-                        System.arraycopy(newNewValues, 0, newValues, 0, newValues.length);
+                        System.arraycopy(newValues, 0, newNewValues, 0, newValues.length);
                         newValues = newNewValues;
                     }
                     newIndices[nonZeroValues] = index;
@@ -204,9 +203,9 @@ public class DoubleVectorDataSparse extends DoubleVectorData
             }
         }
         else
-        { // we are sparse; other is dense; result must be sparse
+        { // we are sparse; other is dense, result must be sparse
             DoubleVectorDataDense other = (DoubleVectorDataDense) right;
-            while (ownIndex < this.indices.length)
+            while (otherIndex < right.vectorSI.length)
             {
                 double value;
                 int index = otherIndex;
@@ -220,30 +219,30 @@ public class DoubleVectorDataSparse extends DoubleVectorData
                     else
                     {
                         // we have a zero; other has a value
-                        value = doubleFunction.apply(0.0, other.vectorSI[otherIndex]);
+                        value = doubleFunction.apply(0d, other.vectorSI[otherIndex]);
                     }
                     otherIndex++;
                 }
                 else
                 { // we have run out of values; right has not
-                    value = doubleFunction.apply(0.0, other.vectorSI[otherIndex]);
+                    value = doubleFunction.apply(0d, other.vectorSI[otherIndex]);
                     otherIndex++;
                 }
-                if (value != 0f)
+                if (value != 0d)
                 {
                     if (nonZeroValues >= currentSize)
                     {
                         // increase size of arrays
                         currentSize *= 2;
-                        if (currentSize > this.size())
+                        if (currentSize > size())
                         {
-                            currentSize = this.size();
+                            currentSize = size();
                         }
                         int[] newNewIndices = new int[currentSize];
                         System.arraycopy(newIndices, 0, newNewIndices, 0, newIndices.length);
                         newIndices = newNewIndices;
                         double[] newNewValues = new double[currentSize];
-                        System.arraycopy(newNewValues, 0, newValues, 0, newValues.length);
+                        System.arraycopy(newValues, 0, newNewValues, 0, newValues.length);
                         newValues = newNewValues;
                     }
                     newIndices[nonZeroValues] = index;
@@ -680,7 +679,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings({"checkstyle:needbraces", "checkstyle:designforextension"})
+    @SuppressWarnings({ "checkstyle:needbraces", "checkstyle:designforextension" })
     public boolean equals(final Object obj)
     {
         if (this == obj)

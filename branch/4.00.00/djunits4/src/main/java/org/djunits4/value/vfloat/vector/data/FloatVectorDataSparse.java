@@ -5,6 +5,7 @@ import java.util.stream.IntStream;
 
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vfloat.function.FloatFunction;
 import org.djunits4.value.vfloat.function.FloatFunction2;
 
 /**
@@ -46,6 +47,224 @@ public class FloatVectorDataSparse extends FloatVectorData
     public final int cardinality()
     {
         return this.indices.length;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatVectorData assign(final FloatFunction floatFunction)
+    {
+        if (floatFunction.apply(0f) != 0f)
+        {
+            // It is most unlikely that the result AND the left and right operands are efficiently stored in Sparse format
+            FloatVectorDataSparse result = toDense().assign(floatFunction).toSparse();
+            this.indices = result.indices;
+            this.vectorSI = result.vectorSI;
+            return this;
+        }
+        // The code below relies on the fact that doubleFunction.apply(0d) yields 0d
+        int currentSize = size();
+        if (currentSize > 16)
+        {
+            currentSize = 16;
+        }
+        int[] newIndices = new int[currentSize];
+        float[] newValues = new float[currentSize];
+        int nonZeroValues = 0;
+        int ownIndex = 0;
+        while (ownIndex < this.indices.length)
+        {
+            int index = this.indices[ownIndex];
+            float value = floatFunction.apply(this.vectorSI[ownIndex]);
+            ownIndex++;
+            if (value != 0f)
+            {
+                if (nonZeroValues >= currentSize)
+                {
+                    // increase size of arrays
+                    currentSize *= 2;
+                    if (currentSize > size())
+                    {
+                        currentSize = size();
+                    }
+                    int[] newNewIndices = new int[currentSize];
+                    System.arraycopy(newIndices, 0, newNewIndices, 0, newIndices.length);
+                    newIndices = newNewIndices;
+                    float[] newNewValues = new float[currentSize];
+                    System.arraycopy(newValues, 0, newNewValues, 0, newValues.length);
+                    newValues = newNewValues;
+                }
+                newIndices[nonZeroValues] = index;
+                newValues[nonZeroValues] = value;
+                nonZeroValues++;
+            }
+        }
+        if (nonZeroValues < currentSize)
+        {
+            // reduce size of arrays
+            int[] newNewIndices = new int[nonZeroValues];
+            System.arraycopy(newIndices, 0, newNewIndices, 0, nonZeroValues);
+            newIndices = newNewIndices;
+            float[] newNewValues = new float[nonZeroValues];
+            System.arraycopy(newValues, 0, newNewValues, 0, nonZeroValues);
+            newValues = newNewValues;
+        }
+        this.indices = newIndices;
+        this.vectorSI = newValues;
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatVectorDataSparse assign(final FloatFunction2 floatFunction, final FloatVectorData right)
+    {
+        if (floatFunction.apply(0f,  0f) != 0f)
+        {
+            // It is most unlikely that the result AND the left and right operands are efficiently stored in Sparse format
+            FloatVectorDataSparse result = toDense().assign(floatFunction, right).toSparse();
+            this.indices = result.indices;
+            this.vectorSI = result.vectorSI;
+            return this;
+        }
+        // The code below relies on the fact that doubleFunction.apply(0d, 0d) yields 0d
+        checkSizes(right);
+        int currentSize = size();
+        if (currentSize > 16)
+        {
+            currentSize = 16;
+        }
+        int[] newIndices = new int[currentSize];
+        float[] newValues = new float[currentSize];
+        int nonZeroValues = 0;
+        int ownIndex = 0;
+        int otherIndex = 0;
+        if (right.isSparse())
+        { // both are sparse, result must be sparse
+            FloatVectorDataSparse other = (FloatVectorDataSparse) right;
+            while (ownIndex < this.indices.length || otherIndex < other.indices.length)
+            {
+                float value;
+                int index;
+                if (ownIndex < this.indices.length && otherIndex < other.indices.length)
+                { // neither we nor right has run out of values
+                    if (this.indices[ownIndex] == other.indices[otherIndex])
+                    {
+                        value = floatFunction.apply(this.vectorSI[ownIndex], other.vectorSI[otherIndex]);
+                        index = this.indices[ownIndex];
+                        ownIndex++;
+                        otherIndex++;
+                    }
+                    else if (this.indices[ownIndex] < other.indices[otherIndex])
+                    {
+                        // we have a non-zero; right has a zero
+                        value = floatFunction.apply(this.vectorSI[ownIndex], 0f);
+                        index = this.indices[ownIndex];
+                        ownIndex++;
+                    }
+                    else
+                    {
+                        // we have a zero; right has a non-zero
+                        value = floatFunction.apply(0f, other.vectorSI[otherIndex]);
+                        index = other.indices[otherIndex];
+                        otherIndex++;
+                    }
+                }
+                else if (ownIndex < this.indices.length)
+                { // right has run out of values; we have not
+                    value = floatFunction.apply(this.vectorSI[ownIndex], 0f);
+                    index = this.indices[ownIndex];
+                    ownIndex++;
+                }
+                else
+                { // we have run out of values; right has not
+                    value = floatFunction.apply(0f, other.vectorSI[otherIndex]);
+                    index = other.indices[otherIndex];
+                    otherIndex++;
+                }
+                if (value != 0f)
+                {
+                    if (nonZeroValues >= currentSize)
+                    {
+                        // increase size of arrays
+                        currentSize *= 2;
+                        if (currentSize > size())
+                        {
+                            currentSize = size();
+                        }
+                        int[] newNewIndices = new int[currentSize];
+                        System.arraycopy(newIndices, 0, newNewIndices, 0, newIndices.length);
+                        newIndices = newNewIndices;
+                        float[] newNewValues = new float[currentSize];
+                        System.arraycopy(newValues, 0, newNewValues, 0, newValues.length);
+                        newValues = newNewValues;
+                    }
+                    newIndices[nonZeroValues] = index;
+                    newValues[nonZeroValues] = value;
+                    nonZeroValues++;
+                }
+            }
+        }
+        else
+        { // we are sparse; other is dense, result must be sparse
+            FloatVectorDataDense other = (FloatVectorDataDense) right;
+            while (otherIndex < right.vectorSI.length)
+            {
+                float value;
+                int index = otherIndex;
+                if (ownIndex < this.indices.length)
+                { // neither we nor right has run out of values
+                    if (this.indices[ownIndex] == otherIndex)
+                    {
+                        value = floatFunction.apply(this.vectorSI[ownIndex], other.vectorSI[otherIndex]);
+                        ownIndex++;
+                    }
+                    else
+                    {
+                        // we have a zero; other has a value
+                        value = floatFunction.apply(0f, other.vectorSI[otherIndex]);
+                    }
+                    otherIndex++;
+                }
+                else
+                { // we have run out of values; right has not
+                    value = floatFunction.apply(0f, other.vectorSI[otherIndex]);
+                    otherIndex++;
+                }
+                if (value != 0f)
+                {
+                    if (nonZeroValues >= currentSize)
+                    {
+                        // increase size of arrays
+                        currentSize *= 2;
+                        if (currentSize > size())
+                        {
+                            currentSize = size();
+                        }
+                        int[] newNewIndices = new int[currentSize];
+                        System.arraycopy(newIndices, 0, newNewIndices, 0, newIndices.length);
+                        newIndices = newNewIndices;
+                        float[] newNewValues = new float[currentSize];
+                        System.arraycopy(newValues, 0, newNewValues, 0, newValues.length);
+                        newValues = newNewValues;
+                    }
+                    newIndices[nonZeroValues] = index;
+                    newValues[nonZeroValues] = value;
+                    nonZeroValues++;
+                }
+            }
+        }
+        if (nonZeroValues < currentSize)
+        {
+            // reduce size of arrays
+            int[] newNewIndices = new int[nonZeroValues];
+            System.arraycopy(newIndices, 0, newNewIndices, 0, nonZeroValues);
+            newIndices = newNewIndices;
+            float[] newNewValues = new float[nonZeroValues];
+            System.arraycopy(newValues, 0, newNewValues, 0, nonZeroValues);
+            newValues = newNewValues;
+        }
+        this.indices = newIndices;
+        this.vectorSI = newValues;
+        return this;
     }
 
     /** {@inheritDoc} */
@@ -352,7 +571,7 @@ public class FloatVectorDataSparse extends FloatVectorData
                 }
                 float value = (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0)
                         - right.getSI(i);
-                if (value != 0d)
+                if (value != 0f)
                 {
                     tempIndices[nextIndex] = i;
                     tempVectorSI[nextIndex] = value;
@@ -469,151 +688,6 @@ public class FloatVectorDataSparse extends FloatVectorData
         }
         this.indices = Arrays.copyOf(tempIndices, nextIndex);
         this.vectorSI = Arrays.copyOf(tempVectorSI, nextIndex);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatVectorDataSparse assign(final FloatFunction2 floatFunction, final FloatVectorData right)
-    {
-        checkSizes(right);
-        int currentSize = size();
-        if (currentSize > 16)
-        {
-            currentSize = 16;
-        }
-        int[] newIndices = new int[currentSize];
-        float[] newValues = new float[currentSize];
-        int nonZeroValues = 0;
-        int ownIndex = 0;
-        int otherIndex = 0;
-        if (right.isSparse())
-        { // both are sparse; result must be sparse
-            FloatVectorDataSparse other = (FloatVectorDataSparse) right;
-            while (ownIndex < this.indices.length || otherIndex < other.indices.length)
-            {
-                float value;
-                int index;
-                if (ownIndex < this.indices.length && otherIndex < other.indices.length)
-                { // neither we nor right has run out of values
-                    if (this.indices[ownIndex] == other.indices[otherIndex])
-                    {
-                        value = floatFunction.apply(this.vectorSI[ownIndex], other.vectorSI[otherIndex]);
-                        index = this.indices[ownIndex];
-                        ownIndex++;
-                        otherIndex++;
-                    }
-                    else if (this.indices[ownIndex] < other.indices[otherIndex])
-                    {
-                        // we have a non-zero; right has a zero
-                        value = floatFunction.apply(this.vectorSI[ownIndex], 0.0f);
-                        index = this.indices[ownIndex];
-                        ownIndex++;
-                    }
-                    else
-                    {
-                        // we have a zero; right has a non-zero
-                        value = floatFunction.apply(0.0f, other.vectorSI[otherIndex]);
-                        index = other.indices[otherIndex];
-                        otherIndex++;
-                    }
-                }
-                else if (ownIndex < this.indices.length)
-                { // right has run out of values; we have not
-                    value = this.vectorSI[ownIndex];
-                    index = this.indices[ownIndex];
-                    ownIndex++;
-                }
-                else
-                { // we have run out of values; right has not
-                    value = floatFunction.apply(0.0f, other.vectorSI[otherIndex]);
-                    index = other.indices[otherIndex];
-                    otherIndex++;
-                }
-                if (value != 0f)
-                {
-                    if (nonZeroValues >= currentSize)
-                    {
-                        // increase size of arrays
-                        currentSize *= 2;
-                        if (currentSize > this.size())
-                        {
-                            currentSize = this.size();
-                        }
-                        int[] newNewIndices = new int[currentSize];
-                        System.arraycopy(newIndices, 0, newNewIndices, 0, newIndices.length);
-                        newIndices = newNewIndices;
-                        float[] newNewValues = new float[currentSize];
-                        System.arraycopy(newNewValues, 0, newValues, 0, newValues.length);
-                        newValues = newNewValues;
-                    }
-                    newIndices[nonZeroValues] = index;
-                    newValues[nonZeroValues] = value;
-                    nonZeroValues++;
-                }
-            }
-        }
-        else
-        { // we are sparse; other is dense; result must be sparse
-            FloatVectorDataDense other = (FloatVectorDataDense) right;
-            while (ownIndex < this.indices.length)
-            {
-                float value;
-                int index = otherIndex;
-                if (ownIndex < this.indices.length)
-                { // neither we nor right has run out of values
-                    if (this.indices[ownIndex] == otherIndex)
-                    {
-                        value = floatFunction.apply(this.vectorSI[ownIndex], other.vectorSI[otherIndex]);
-                        ownIndex++;
-                    }
-                    else
-                    {
-                        // we have a zero; other has a value
-                        value = floatFunction.apply(0.0f, other.vectorSI[otherIndex]);
-                    }
-                    otherIndex++;
-                }
-                else
-                { // we have run out of values; right has not
-                    value = floatFunction.apply(0.0f, other.vectorSI[otherIndex]);
-                    otherIndex++;
-                }
-                if (value != 0f)
-                {
-                    if (nonZeroValues >= currentSize)
-                    {
-                        // increase size of arrays
-                        currentSize *= 2;
-                        if (currentSize > this.size())
-                        {
-                            currentSize = this.size();
-                        }
-                        int[] newNewIndices = new int[currentSize];
-                        System.arraycopy(newIndices, 0, newNewIndices, 0, newIndices.length);
-                        newIndices = newNewIndices;
-                        float[] newNewValues = new float[currentSize];
-                        System.arraycopy(newNewValues, 0, newValues, 0, newValues.length);
-                        newValues = newNewValues;
-                    }
-                    newIndices[nonZeroValues] = index;
-                    newValues[nonZeroValues] = value;
-                    nonZeroValues++;
-                }
-            }
-        }
-        if (nonZeroValues < currentSize)
-        {
-            // reduce size of arrays
-            int[] newNewIndices = new int[nonZeroValues];
-            System.arraycopy(newIndices, 0, newNewIndices, 0, nonZeroValues);
-            newIndices = newNewIndices;
-            float[] newNewValues = new float[nonZeroValues];
-            System.arraycopy(newValues, 0, newNewValues, 0, nonZeroValues);
-            newValues = newNewValues;
-        }
-        this.indices = newIndices;
-        this.vectorSI = newValues;
-        return this;
     }
 
     /*

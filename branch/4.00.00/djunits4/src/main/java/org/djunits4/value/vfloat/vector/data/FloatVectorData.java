@@ -13,6 +13,7 @@ import org.djunits4.unit.scale.Scale;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.AbstractStorage;
 import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vfloat.function.FloatFunction;
 import org.djunits4.value.vfloat.function.FloatFunction2;
 import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
 
@@ -410,10 +411,17 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
     /* ============================================================================================ */
 
     /**
+     * Apply an operation to each cell.
+     * @param floatFunction FloatFunction; the operation to apply
+     * @return FloatVectorData; this (modified) float vector data object
+     */
+    public abstract FloatVectorData assign(FloatFunction floatFunction);
+
+    /**
      * Apply a binary operation on a cell by cell basis.
      * @param floatFunction2 FloatFunction2; the binary operation to apply
      * @param right FloatVectorData; the right operand for the binary operation
-     * @return FloatVectorData; this (modified) float vector data object
+     * @return DoubleMatrixData; this (modified) float vector data object
      * @throws ValueRuntimeException when the sizes of the vectors do not match
      */
     abstract FloatVectorData assign(FloatFunction2 floatFunction2, FloatVectorData right) throws ValueRuntimeException;
