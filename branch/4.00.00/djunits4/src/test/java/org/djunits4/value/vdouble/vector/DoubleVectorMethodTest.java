@@ -51,7 +51,12 @@ public class DoubleVectorMethodTest
         // Ensure that both have a value at some index (i.c. 10)
         sparseTestData[10] = 123.456;
         reverseSparseTestData[10] = sparseTestData[10];
-
+        // Ensure that there are > 50% positions where both have a non-zero value
+        for (int index = 20; index < 90; index++)
+        {
+            sparseTestData[index] = 10000.456 + index;
+            reverseSparseTestData[index] = 20000.567 + index;
+        }
         for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
             for (AreaUnit au : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
@@ -93,6 +98,19 @@ public class DoubleVectorMethodTest
                 ammut2 = ammut2.mutable().divideBy(2.0);
                 assertEquals(am, ammut);
                 assertNotEquals(am, ammut2);
+                AreaVector ammut3 = ammut2.mutable().divideBy(0.0);
+                for (int index = 0; index < ammut3.size(); index++)
+                {
+                    if (ammut2.getSI(index) == 0)
+                    {
+                        assertTrue("Value should be NaN", Double.isNaN(ammut3.getSI(index)));
+                        
+                    }
+                    else
+                    {
+                        assertTrue("Value should be Infinite", Double.isInfinite(ammut3.getSI(index)));
+                    }
+                }
 
                 // ZSUM and CARDINALITY
                 Area zSum = am.zSum();

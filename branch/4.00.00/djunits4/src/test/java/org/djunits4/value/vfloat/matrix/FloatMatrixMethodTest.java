@@ -80,6 +80,22 @@ public class FloatMatrixMethodTest
                 ammut2 = ammut2.mutable().divideBy(2.0);
                 assertEquals(am, ammut);
                 assertNotEquals(am, ammut2);
+                FloatAreaMatrix ammut3 = ammut2.mutable().divideBy(0.0);
+                for (int row = 0; row < ammut3.rows(); row++)
+                {
+                    for (int col = 0; col < ammut3.cols(); col++)
+                    {
+                        if (ammut2.getSI(row, col) == 0)
+                        {
+                            assertTrue("Value should be NaN", Float.isNaN(ammut3.getSI(row, col)));
+
+                        }
+                        else
+                        {
+                            assertTrue("Value should be Infinite", Float.isInfinite(ammut3.getSI(row, col)));
+                        }
+                    }
+                }
 
                 // ZSUM and CARDINALITY
                 FloatArea zSum = am.zSum();

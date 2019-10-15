@@ -36,8 +36,23 @@ public class DoubleMatrixMethodTest
     @Test
     public void testMatrixMethods() throws ValueRuntimeException, UnitException
     {
-        double[][] denseTestData = DOUBLEMATRIX.denseRectArrays(5, 10);
-        double[][] sparseTestData = DOUBLEMATRIX.sparseRectArrays(5, 10);
+        double[][] denseTestData = DOUBLEMATRIX.denseRectArrays(10, 20);
+        double[][] sparseTestData = DOUBLEMATRIX.sparseRectArrays(10, 20);
+        double[][] reverseSparseTestData = new double[sparseTestData.length][];
+        // sparseTestData and reverseSparseTestData should not "run out of values" at the same index
+        for (int index = 0; index < sparseTestData.length; index++)
+        {
+            reverseSparseTestData[reverseSparseTestData.length - 1 - index] = sparseTestData[index];
+        }
+        // Ensure that there are > 50% positions where both have a non-zero value
+        for (int row = 1; row < 8; row++)
+        {
+            for (int col = 2; col < 18; col++)
+            {
+                sparseTestData[row][col] = 10000.456 + row + 100 * col;
+                reverseSparseTestData[row][col] = 20000.567 + row + 100 * col;
+            }
+        }
 
         for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
@@ -80,6 +95,22 @@ public class DoubleMatrixMethodTest
                 ammut2 = ammut2.mutable().divideBy(2.0);
                 assertEquals(am, ammut);
                 assertNotEquals(am, ammut2);
+                AreaMatrix ammut3 = ammut2.mutable().divideBy(0.0);
+                for (int row = 0; row < ammut3.rows(); row++)
+                {
+                    for (int col = 0; col < ammut3.cols(); col++)
+                    {
+                        if (ammut2.getSI(row, col) == 0)
+                        {
+                            assertTrue("Value should be NaN", Double.isNaN(ammut3.getSI(row, col)));
+
+                        }
+                        else
+                        {
+                            assertTrue("Value should be Infinite", Double.isInfinite(ammut3.getSI(row, col)));
+                        }
+                    }
+                }
 
                 // ZSUM and CARDINALITY
                 Area zSum = am.zSum();
@@ -276,7 +307,7 @@ public class DoubleMatrixMethodTest
 
                 for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
                 {
-                    double[][] testData2 = storageType2.equals(StorageType.DENSE) ? denseTestData : sparseTestData;
+                    double[][] testData2 = storageType2.equals(StorageType.DENSE) ? denseTestData : reverseSparseTestData;
                     for (AreaUnit au2 : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
                     {
 
@@ -286,8 +317,10 @@ public class DoubleMatrixMethodTest
                         AreaMatrix amSum1 = am.plus(am2);
                         AreaMatrix amSum2 = am2.plus(am);
                         AreaMatrix amSum3 = am.mutable().incrementBy(am2).immutable();
+                        AreaMatrix amSum4 = am2.mutable().incrementBy(am).immutable();
                         assertEquals("a+b == b+a", amSum1, amSum2);
                         assertEquals("a+b == b+a", amSum1, amSum3);
+                        assertEquals("a+b == b+a", amSum1, amSum4);
                         for (int row = 0; row < testData.length; row++)
                         {
                             for (int col = 0; col < testData[0].length; col++)
@@ -321,6 +354,7 @@ public class DoubleMatrixMethodTest
                         }
 
                         // TIMES(MATRIX) and DIVIDE(MATRIX)
+                        System.out.println("am is " + am.getStorageType() + ", am2 is " + am2.getStorageType());
                         SIMatrix amTim = am.times(am2);
                         SIMatrix amDiv = am.divide(am2);
                         assertEquals("unit of m2 * m2 should be m4", "m4",
@@ -333,6 +367,16 @@ public class DoubleMatrixMethodTest
                             {
                                 double tolerance = Double.isFinite(amTim.getSI(row, col))
                                         ? Math.abs(amTim.getSI(row, col) / 10000.0d) : 0.1d;
+                                if (Math.abs(au.getScale().toStandardUnit(testData[row][col])
+                                        * au2.getScale().toStandardUnit(testData2[row][col])
+                                        - amTim.getSI(row, col)) > tolerance)
+                                {
+                                    System.out.println(
+                                            "mismatch at row " + row + ", col " + col + ", got " + amTim.getSI(row, col)
+                                                    + ", expected " + au.getScale().toStandardUnit(testData[row][col])
+                                                            * au2.getScale().toStandardUnit(testData2[row][col]));
+                                    am.times(am2);
+                                }
                                 assertEquals("value in m2 * m2 matches",
                                         au.getScale().toStandardUnit(testData[row][col])
                                                 * au2.getScale().toStandardUnit(testData2[row][col]),

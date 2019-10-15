@@ -14,6 +14,7 @@ import org.djunits4.unit.TimeUnit;
 import org.djunits4.unit.util.UnitException;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.vector.AreaVector;
 import org.djunits4.value.vfloat.function.FloatMathFunctions;
 import org.djunits4.value.vfloat.scalar.FloatArea;
 import org.djunits4.value.vfloat.scalar.FloatDuration;
@@ -93,6 +94,19 @@ public class FloatVectorMethodTest
                 ammut2 = ammut2.mutable().divideBy(2.0);
                 assertEquals(am, ammut);
                 assertNotEquals(am, ammut2);
+                FloatAreaVector ammut3 = ammut2.mutable().divideBy(0.0);
+                for (int index = 0; index < ammut3.size(); index++)
+                {
+                    if (ammut2.getSI(index) == 0)
+                    {
+                        assertTrue("Value should be NaN", Float.isNaN(ammut3.getSI(index)));
+                        
+                    }
+                    else
+                    {
+                        assertTrue("Value should be Infinite", Float.isInfinite(ammut3.getSI(index)));
+                    }
+                }
 
                 // ZSUM and CARDINALITY
                 FloatArea zSum = am.zSum();
