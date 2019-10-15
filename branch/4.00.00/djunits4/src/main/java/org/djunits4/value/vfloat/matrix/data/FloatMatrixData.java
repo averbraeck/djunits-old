@@ -314,7 +314,7 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
     /**
      * Apply an operation to each cell.
      * @param doubleFunction DoubleFunction; the operation to apply
-     * @return FloatMatrixData; this (modified) double matrix data object
+     * @return FloatMatrixData; this (modified) double vector data object
      */
     public abstract FloatMatrixData assign(FloatFunction doubleFunction);
 
@@ -336,6 +336,7 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      */
     public FloatMatrixData plus(final FloatMatrixData right) throws ValueRuntimeException
     {
+        // TODO Must be implemented in the sub classes.
         checkSizes(right);
         float[] dm = new float[this.rows * this.cols];
         IntStream.range(0, this.rows).parallel().forEach(

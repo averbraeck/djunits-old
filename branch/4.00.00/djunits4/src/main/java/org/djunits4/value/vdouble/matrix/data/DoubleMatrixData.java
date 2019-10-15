@@ -315,7 +315,7 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
      * @param doubleFunction2 DoubleFunction2; the binary operation to apply
      * @param right DoubleMatrixData; the right operand for the binary operation
      * @return DoubleMatrixData; this (modified) double matrix data object
-     * @throws ValueRuntimeException when the sizes of the vectors do not match
+     * @throws ValueRuntimeException when the sizes of the matrices do not match
      */
     abstract DoubleMatrixData assign(DoubleFunction2 doubleFunction2, DoubleMatrixData right) throws ValueRuntimeException;
 
