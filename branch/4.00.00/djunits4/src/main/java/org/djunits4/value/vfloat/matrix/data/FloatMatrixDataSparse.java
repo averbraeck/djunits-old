@@ -230,7 +230,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
                 }
                 else if (ownIndex < this.indices.length)
                 { // right has run out of values; we have not
-                    value = floatFunction.apply(0.0f, other.matrixSI[otherIndex]);
+                    value = floatFunction.apply(this.matrixSI[ownIndex], 0f);
                     index = this.indices[ownIndex];
                     ownIndex++;
                 }
@@ -254,7 +254,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
                         System.arraycopy(newIndices, 0, newNewIndices, 0, newIndices.length);
                         newIndices = newNewIndices;
                         float[] newNewValues = new float[currentSize];
-                        System.arraycopy(newNewValues, 0, newValues, 0, newValues.length);
+                        System.arraycopy(newValues, 0, newNewValues, 0, newValues.length);
                         newValues = newNewValues;
                     }
                     newIndices[nonZeroValues] = index;
