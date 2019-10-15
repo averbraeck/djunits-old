@@ -354,7 +354,6 @@ public class DoubleMatrixMethodTest
                         }
 
                         // TIMES(MATRIX) and DIVIDE(MATRIX)
-                        System.out.println("am is " + am.getStorageType() + ", am2 is " + am2.getStorageType());
                         SIMatrix amTim = am.times(am2);
                         SIMatrix amDiv = am.divide(am2);
                         assertEquals("unit of m2 * m2 should be m4", "m4",
