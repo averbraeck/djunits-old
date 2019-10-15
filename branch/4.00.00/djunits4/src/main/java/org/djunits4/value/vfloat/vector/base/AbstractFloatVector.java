@@ -17,8 +17,6 @@ import org.djunits4.value.vfloat.function.FloatMathFunctions;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalar;
 import org.djunits4.value.vfloat.scalar.base.FloatScalar;
 import org.djunits4.value.vfloat.vector.data.FloatVectorData;
-import org.djunits4.value.vfloat.vector.data.FloatVectorDataDense;
-import org.djunits4.value.vfloat.vector.data.FloatVectorDataSparse;
 
 /**
  * The most basic abstract class for the FloatVector.
@@ -231,14 +229,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
     public final V assign(final FloatFunction floatFunction)
     {
         checkCopyOnWrite();
-        if (getData() instanceof FloatVectorDataDense)
-        {
-            ((FloatVectorDataDense) getData()).assign(floatFunction);
-        }
-        else
-        {
-            this.data = ((FloatVectorDataSparse) getData()).toDense().assign(floatFunction).toSparse();
-        }
+        this.data.assign(floatFunction);
         return (V) this;
     }
 

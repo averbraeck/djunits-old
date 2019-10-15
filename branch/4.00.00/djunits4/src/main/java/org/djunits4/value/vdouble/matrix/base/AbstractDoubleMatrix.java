@@ -13,8 +13,6 @@ import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vdouble.function.DoubleFunction;
 import org.djunits4.value.vdouble.function.DoubleMathFunctions;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
-import org.djunits4.value.vdouble.matrix.data.DoubleMatrixDataDense;
-import org.djunits4.value.vdouble.matrix.data.DoubleMatrixDataSparse;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalar;
 import org.djunits4.value.vdouble.scalar.base.DoubleScalar;
 import org.djunits4.value.vdouble.vector.base.AbstractDoubleVector;
@@ -350,62 +348,43 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
     public final M assign(final DoubleFunction doubleFunction)
     {
         checkCopyOnWrite();
-        if (this.data instanceof DoubleMatrixDataDense)
-        {
-            ((DoubleMatrixDataDense) this.data).assign(doubleFunction);
-        }
-        else
-        {
-            DoubleMatrixDataDense dvdd = ((DoubleMatrixDataSparse) this.data).toDense();
-            dvdd.assign(doubleFunction);
-            this.data = dvdd.toSparse();
-        }
+        this.data.assign(doubleFunction);
         return (M) this;
     }
 
     /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
     @Override
     public final M abs()
     {
-        assign(DoubleMathFunctions.ABS);
-        return (M) this;
+        return assign(DoubleMathFunctions.ABS);
     }
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings("unchecked")
     public final M ceil()
     {
-        assign(DoubleMathFunctions.CEIL);
-        return (M) this;
+        return assign(DoubleMathFunctions.CEIL);
     }
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings("unchecked")
     public final M floor()
     {
-        assign(DoubleMathFunctions.FLOOR);
-        return (M) this;
+        return assign(DoubleMathFunctions.FLOOR);
     }
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings("unchecked")
     public final M neg()
     {
-        assign(DoubleMathFunctions.NEG);
-        return (M) this;
+        return assign(DoubleMathFunctions.NEG);
     }
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings("unchecked")
     public final M rint()
     {
-        assign(DoubleMathFunctions.RINT);
-        return (M) this;
+        return assign(DoubleMathFunctions.RINT);
     }
 
     /** {@inheritDoc} */

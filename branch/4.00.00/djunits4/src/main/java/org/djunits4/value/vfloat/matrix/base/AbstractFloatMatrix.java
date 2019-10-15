@@ -365,48 +365,38 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
     }
 
     /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
     @Override
     public final M abs()
     {
-        assign(FloatMathFunctions.ABS);
-        return (M) this;
+        return assign(FloatMathFunctions.ABS);
     }
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings("unchecked")
     public final M ceil()
     {
-        assign(FloatMathFunctions.CEIL);
-        return (M) this;
+        return assign(FloatMathFunctions.CEIL);
     }
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings("unchecked")
     public final M floor()
     {
-        assign(FloatMathFunctions.FLOOR);
-        return (M) this;
+        return assign(FloatMathFunctions.FLOOR);
     }
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings("unchecked")
     public final M neg()
     {
-        assign(FloatMathFunctions.NEG);
-        return (M) this;
+        return assign(FloatMathFunctions.NEG);
     }
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings("unchecked")
     public final M rint()
     {
-        assign(FloatMathFunctions.RINT);
-        return (M) this;
+        return assign(FloatMathFunctions.RINT);
     }
 
     /** {@inheritDoc} */
