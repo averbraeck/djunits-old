@@ -36,8 +36,23 @@ public class FloatMatrixMethodTest
     @Test
     public void testMatrixMethods() throws ValueRuntimeException, UnitException
     {
-        float[][] denseTestData = FLOATMATRIX.denseRectArrays(5, 10);
-        float[][] sparseTestData = FLOATMATRIX.sparseRectArrays(5, 10);
+        float[][] denseTestData = FLOATMATRIX.denseRectArrays(10, 20);
+        float[][] sparseTestData = FLOATMATRIX.sparseRectArrays(10, 20);
+        float[][] reverseSparseTestData = new float[sparseTestData.length][];
+        // sparseTestData and reverseSparseTestData should not "run out of values" at the same index
+        for (int index = 0; index < sparseTestData.length; index++)
+        {
+            reverseSparseTestData[reverseSparseTestData.length - 1 - index] = sparseTestData[index];
+        }
+        // Ensure that there are > 50% positions where both have a non-zero value
+        for (int row = 1; row < 8; row++)
+        {
+            for (int col = 2; col < 18; col++)
+            {
+                sparseTestData[row][col] = 10000.456f + row + 100 * col;
+                reverseSparseTestData[row][col] = 20000.567f + row + 100 * col;
+            }
+        }
 
         for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
@@ -109,7 +124,7 @@ public class FloatMatrixMethodTest
                         card += testData[row][col] == 0.0f ? 0 : 1;
                     }
                 }
-                assertEquals("zSum", sum, zSum.getInUnit(), 0.1);
+                assertEquals("zSum", sum, zSum.getInUnit(), 5f);
                 assertEquals("cardinality", card, am.cardinality());
                 FloatAreaMatrix ammutZero = ammut.multiplyBy(0.0f);
                 assertEquals("cardinality should be 0", 0, ammutZero.cardinality());
@@ -127,11 +142,11 @@ public class FloatMatrixMethodTest
                     for (int col = 0; col < testData[0].length; col++)
                     {
                         assertEquals("increment and decrement with scalar should result in same matrix", am.getSI(row, col),
-                                amid.getSI(row, col), 0.1);
+                                amid.getSI(row, col), 5f);
                         assertEquals("m + s = (m+s)", au.getScale().toStandardUnit(testData[row][col]) + 10.0,
-                                aminc.getSI(row, col), 0.1);
+                                aminc.getSI(row, col), 6f);
                         assertEquals("m - s = (m-s)", au.getScale().toStandardUnit(testData[row][col]) - 10.0,
-                                amdec.getSI(row, col), 0.1);
+                                amdec.getSI(row, col), 6f);
                     }
                 }
 
@@ -148,11 +163,11 @@ public class FloatMatrixMethodTest
                     for (int col = 0; col < testData[0].length; col++)
                     {
                         assertEquals("times followed by divide with constant should result in same matrix", am.getSI(row, col),
-                                amtd.getSI(row, col), 0.1);
+                                amtd.getSI(row, col), 0.5);
                         assertEquals("m * 5.0 = (m*5.0)", au.getScale().toStandardUnit(testData[row][col]) * 5.0f,
-                                amt5.getSI(row, col), 0.1);
+                                amt5.getSI(row, col), 50f);
                         assertEquals("m / 5.0 = (m/5.0)", au.getScale().toStandardUnit(testData[row][col]) / 5.0f,
-                                amd5.getSI(row, col), 0.1);
+                                amd5.getSI(row, col), 2f);
                         assertEquals("amtimD", amt5.getSI(row, col), amtimD.getSI(row, col), 0.1f);
                         assertEquals("amtimF", amt5.getSI(row, col), amtimF.getSI(row, col), 0.1f);
                         assertEquals("amdivD", amd5.getSI(row, col), amdivD.getSI(row, col), 0.01f);
@@ -162,11 +177,11 @@ public class FloatMatrixMethodTest
 
                 // GET(), GETINUNIT()
                 assertEquals("get()", new FloatArea(testData[2][2], au), am.get(2, 2));
-                assertEquals("getSI()", au.getScale().toStandardUnit(testData[2][2]), am.getSI(2, 2), 0.1);
+                assertEquals("getSI()", au.getScale().toStandardUnit(testData[2][2]), am.getSI(2, 2), 1f);
                 assertEquals("getInUnit()", testData[2][2], am.getInUnit(2, 2), 0.1);
                 assertEquals("getInUnit(unit)",
                         AreaUnit.SQUARE_YARD.getScale().fromStandardUnit(au.getScale().toStandardUnit(testData[2][2])),
-                        am.getInUnit(2, 2, AreaUnit.SQUARE_YARD), 0.1);
+                        am.getInUnit(2, 2, AreaUnit.SQUARE_YARD), 10f);
 
                 // SET(), SETINUNIT()
                 FloatArea fasqft = new FloatArea(10.5f, AreaUnit.SQUARE_FOOT);
@@ -199,15 +214,15 @@ public class FloatMatrixMethodTest
                 FloatArea[] diagscalar = amSquare.getDiagonalScalars();
                 for (int col = 0; col < testData[0].length; col++)
                 {
-                    assertEquals("row2si", au.getScale().toStandardUnit(testData[2][col]), row2si[col], 0.1f);
-                    assertEquals("row2v", au.getScale().toStandardUnit(testData[2][col]), row2v.getSI(col), 0.1f);
-                    assertEquals("row2scalar", au.getScale().toStandardUnit(testData[2][col]), row2scalar[col].si, 0.1f);
+                    assertEquals("row2si", au.getScale().toStandardUnit(testData[2][col]), row2si[col], 10f);
+                    assertEquals("row2v", au.getScale().toStandardUnit(testData[2][col]), row2v.getSI(col), 10f);
+                    assertEquals("row2scalar", au.getScale().toStandardUnit(testData[2][col]), row2scalar[col].si, 10f);
                 }
                 for (int row = 0; row < testData.length; row++)
                 {
-                    assertEquals("col2si", au.getScale().toStandardUnit(testData[row][2]), col2si[row], 0.1f);
-                    assertEquals("col2v", au.getScale().toStandardUnit(testData[row][2]), col2v.getSI(row), 0.1f);
-                    assertEquals("col2scalar", au.getScale().toStandardUnit(testData[row][2]), col2scalar[row].si, 0.1f);
+                    assertEquals("col2si", au.getScale().toStandardUnit(testData[row][2]), col2si[row], 10f);
+                    assertEquals("col2v", au.getScale().toStandardUnit(testData[row][2]), col2v.getSI(row), 10f);
+                    assertEquals("col2scalar", au.getScale().toStandardUnit(testData[row][2]), col2scalar[row].si, 10f);
                 }
                 for (int diag = 0; diag < amSquare.rows(); diag++)
                 {
@@ -226,12 +241,12 @@ public class FloatMatrixMethodTest
                 {
                     for (int col = 0; col < testData[0].length; col++)
                     {
-                        assertEquals("getValuesSI()", au.getScale().toStandardUnit(testData[row][col]), valsi[row][col], 0.1);
+                        assertEquals("getValuesSI()", au.getScale().toStandardUnit(testData[row][col]), valsi[row][col], 5f);
                         assertEquals("getValuesInUnit()", testData[row][col], valunit[row][col], 0.1);
                         assertEquals("getValuesInUnit(unit)", AreaUnit.SQUARE_YARD.getScale()
-                                .fromStandardUnit(au.getScale().toStandardUnit(testData[row][col])), valsqft[row][col], 0.1);
+                                .fromStandardUnit(au.getScale().toStandardUnit(testData[row][col])), valsqft[row][col], 10f);
                         assertEquals("getValuesInUnit(unit)", au.getScale().toStandardUnit(testData[row][col]),
-                                valscalars[row][col].si, 0.1);
+                                valscalars[row][col].si, 5f);
                     }
                 }
 
@@ -260,17 +275,17 @@ public class FloatMatrixMethodTest
                     {
                         // TODO: Should be rounded IN THE UNIT rather than BY SI VALUES
                         assertEquals("div2", au.getScale().toStandardUnit(testData[row][col]) / 2.0f, amdiv2.getSI(row, col),
-                                0.1f);
+                                5f);
                         assertEquals("abs", (float) Math.abs(au.getScale().toStandardUnit(testData[row][col]) / 2.0f),
                                 amAbs.getSI(row, col), 0.1f);
                         assertEquals("ceil", (float) Math.ceil(au.getScale().toStandardUnit(testData[row][col]) / 2.0f),
-                                amCeil.getSI(row, col), 0.1f);
+                                amCeil.getSI(row, col), 5f);
                         assertEquals("floor", (float) Math.floor(au.getScale().toStandardUnit(testData[row][col]) / 2.0f),
-                                amFloor.getSI(row, col), 0.1f);
+                                amFloor.getSI(row, col), 5f);
                         assertEquals("neg", -au.getScale().toStandardUnit(testData[row][col]) / 2.0f, amNeg.getSI(row, col),
-                                0.1f);
+                                5f);
                         assertEquals("rint", (float) Math.rint(au.getScale().toStandardUnit(testData[row][col]) / 2.0f),
-                                amRint.getSI(row, col), 0.1f);
+                                amRint.getSI(row, col), 5f);
                     }
                 }
 
@@ -292,7 +307,7 @@ public class FloatMatrixMethodTest
 
                 for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
                 {
-                    float[][] testData2 = storageType2.equals(StorageType.DENSE) ? denseTestData : sparseTestData;
+                    float[][] testData2 = storageType2.equals(StorageType.DENSE) ? denseTestData : reverseSparseTestData;
                     for (AreaUnit au2 : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
                     {
 
@@ -302,8 +317,10 @@ public class FloatMatrixMethodTest
                         FloatAreaMatrix amSum1 = am.plus(am2);
                         FloatAreaMatrix amSum2 = am2.plus(am);
                         FloatAreaMatrix amSum3 = am.mutable().incrementBy(am2).immutable();
+                        FloatAreaMatrix amSum4 = am2.mutable().incrementBy(am).immutable();
                         assertEquals("a+b == b+a", amSum1, amSum2);
                         assertEquals("a+b == b+a", amSum1, amSum3);
+                        assertEquals("a+b == b+a", amSum1, amSum4);
                         for (int row = 0; row < testData.length; row++)
                         {
                             for (int col = 0; col < testData[0].length; col++)
@@ -581,7 +598,7 @@ public class FloatMatrixMethodTest
 
         FloatTimeMatrix absPlusRel = tm.plus(dm);
         FloatTimeMatrix absMinusRel = tm.minus(dm);
-        float[][] halfDenseData = FLOATMATRIX.denseRectArrays(5,  10);
+        float[][] halfDenseData = FLOATMATRIX.denseRectArrays(5, 10);
         for (int row = 0; row < halfDenseData.length; row++)
         {
             for (int col = 0; col < halfDenseData[row].length; col++)
@@ -589,8 +606,8 @@ public class FloatMatrixMethodTest
                 halfDenseData[row][col] *= 0.5;
             }
         }
-        FloatTimeMatrix halfTimeMatrix = FloatMatrix.instantiate(FloatMatrixData.instantiate(halfDenseData, 
-                TimeUnit.DEFAULT.getScale(), StorageType.DENSE), TimeUnit.DEFAULT);
+        FloatTimeMatrix halfTimeMatrix = FloatMatrix.instantiate(
+                FloatMatrixData.instantiate(halfDenseData, TimeUnit.DEFAULT.getScale(), StorageType.DENSE), TimeUnit.DEFAULT);
         FloatDurationMatrix absMinusAbs = tm.minus(halfTimeMatrix);
         FloatTimeMatrix absDecByRelS = tm.mutable().decrementBy(FloatDuration.of(1.0f, "min"));
         FloatTimeMatrix absDecByRelM = tm.mutable().decrementBy(dm.divide(2.0f));
@@ -607,9 +624,9 @@ public class FloatMatrixMethodTest
                 assertEquals("relPlusAbs", 61.0 * denseTestData[row][col], relPlusAbs.getSI(row, col), 0.01);
             }
         }
-        for (int dRows : new int[] {-1, 0, 1})
+        for (int dRows : new int[] { -1, 0, 1 })
         {
-            for (int dCols : new int[] {-1, 0, 1})
+            for (int dCols : new int[] { -1, 0, 1 })
             {
                 if (dRows == 0 && dCols == 0)
                 {
@@ -620,8 +637,8 @@ public class FloatMatrixMethodTest
                         FloatMatrixData.instantiate(other, TimeUnit.DEFAULT.getScale(), StorageType.DENSE), TimeUnit.DEFAULT);
                 try
                 {
-                        tm.mutable().minus(wrongTimeMatrix);
-                        fail("Mismatching size should have thrown a ValueRuntimeException");
+                    tm.mutable().minus(wrongTimeMatrix);
+                    fail("Mismatching size should have thrown a ValueRuntimeException");
                 }
                 catch (ValueRuntimeException vre)
                 {
