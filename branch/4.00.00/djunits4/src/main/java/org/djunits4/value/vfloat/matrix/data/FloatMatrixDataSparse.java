@@ -14,7 +14,8 @@ import org.djunits4.value.vfloat.matrix.base.FloatSparseValue;
 import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
 
 /**
- * Stores sparse data for a FloatMatrix and carries out basic operations.
+ * Stores sparse data for a FloatMatrix and carries out basic operations. The index in the sparse matrix data is calculated as
+ * <code>r * columns + c</code>, where r is the row number, cols is the total number of columns, and c is the column number.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -44,24 +45,6 @@ public class FloatMatrixDataSparse extends FloatMatrixData
         this.indices = indices;
         this.rows = rows;
         this.cols = cols;
-    }
-
-    /**
-     * Create a matrix with sparse data.
-     * @param dataSI float[][]; the data to store
-     * @throws ValueRuntimeException in case matrix is ragged
-     */
-    public FloatMatrixDataSparse(final float[][] dataSI) throws ValueRuntimeException
-    {
-        super(StorageType.SPARSE);
-        checkRectangularAndNonEmpty(dataSI);
-
-        int length = nonZero(dataSI);
-        this.rows = dataSI.length;
-        this.cols = dataSI[0].length;
-        this.matrixSI = new float[length];
-        this.indices = new long[length];
-        fill(dataSI, this.matrixSI, this.indices);
     }
 
     /**
@@ -139,6 +122,15 @@ public class FloatMatrixDataSparse extends FloatMatrixData
     @Override
     public FloatMatrixData assign(final FloatFunction floatFunction)
     {
+        if (floatFunction.apply(0f) != 0f)
+        {
+            // It is most unlikely that the result AND the left and right operands are efficiently stored in Sparse format
+            FloatMatrixDataSparse result = toDense().assign(floatFunction).toSparse();
+            this.indices = result.indices;
+            this.matrixSI = result.matrixSI;
+            return this;
+        }
+        // The code below relies on the fact that floatFunction.apply(0f) yields 0f
         int currentSize = rows() * cols();
         if (currentSize > 16)
         {
@@ -148,30 +140,11 @@ public class FloatMatrixDataSparse extends FloatMatrixData
         float[] newValues = new float[currentSize];
         int nonZeroValues = 0;
         int ownIndex = 0;
-        int otherIndex = 0;
         while (ownIndex < this.indices.length)
         {
-            float value;
-            int index = otherIndex;
-            if (ownIndex < this.indices.length)
-            { // neither we nor right has run out of values
-                if (this.indices[ownIndex] == otherIndex)
-                {
-                    value = floatFunction.apply(this.matrixSI[ownIndex]);
-                    ownIndex++;
-                }
-                else
-                {
-                    // we have a zero; other has a value
-                    value = floatFunction.apply(0.0f);
-                }
-                otherIndex++;
-            }
-            else
-            { // we have run out of values; right has not
-                value = floatFunction.apply(0.0f);
-                otherIndex++;
-            }
+            long index = this.indices[ownIndex];
+            float value = floatFunction.apply(this.matrixSI[ownIndex]);
+            ownIndex++;
             if (value != 0f)
             {
                 if (nonZeroValues >= currentSize)
@@ -186,7 +159,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
                     System.arraycopy(newIndices, 0, newNewIndices, 0, newIndices.length);
                     newIndices = newNewIndices;
                     float[] newNewValues = new float[currentSize];
-                    System.arraycopy(newNewValues, 0, newValues, 0, newValues.length);
+                    System.arraycopy(newValues, 0, newNewValues, 0, newValues.length);
                     newValues = newNewValues;
                 }
                 newIndices[nonZeroValues] = index;
@@ -225,7 +198,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
         int ownIndex = 0;
         int otherIndex = 0;
         if (right.isSparse())
-        { // both are sparse; result must be sparse
+        { // both are sparse, result must be sparse
             FloatMatrixDataSparse other = (FloatMatrixDataSparse) right;
             while (ownIndex < this.indices.length || otherIndex < other.indices.length)
             {
@@ -257,7 +230,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
                 }
                 else if (ownIndex < this.indices.length)
                 { // right has run out of values; we have not
-                    value = this.matrixSI[ownIndex];
+                    value = floatFunction.apply(0.0f, other.matrixSI[otherIndex]);
                     index = this.indices[ownIndex];
                     ownIndex++;
                 }
@@ -291,7 +264,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
             }
         }
         else
-        { // we are sparse; other is dense; result must be sparse
+        { // we are sparse; other is dense, result must be sparse
             FloatMatrixDataDense other = (FloatMatrixDataDense) right;
             while (otherIndex < right.matrixSI.length)
             {

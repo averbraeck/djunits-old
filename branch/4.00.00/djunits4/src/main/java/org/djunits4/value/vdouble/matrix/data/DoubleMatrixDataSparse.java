@@ -122,6 +122,15 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     @Override
     public DoubleMatrixData assign(final DoubleFunction doubleFunction)
     {
+        if (doubleFunction.apply(0d) != 0d)
+        {
+            // It is most unlikely that the result AND the left and right operands are efficiently stored in Sparse format
+            DoubleMatrixDataSparse result = toDense().assign(doubleFunction).toSparse();
+            this.indices = result.indices;
+            this.matrixSI = result.matrixSI;
+            return this;
+        }
+        // The code below relies on the fact that doubleFunction.apply(0d) yields 0d
         int currentSize = rows() * cols();
         if (currentSize > 16)
         {
@@ -131,31 +140,12 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
         double[] newValues = new double[currentSize];
         int nonZeroValues = 0;
         int ownIndex = 0;
-        int otherIndex = 0;
         while (ownIndex < this.indices.length)
         {
-            double value;
-            int index = otherIndex;
-            if (ownIndex < this.indices.length)
-            { // neither we nor right has run out of values
-                if (this.indices[ownIndex] == otherIndex)
-                {
-                    value = doubleFunction.apply(this.matrixSI[ownIndex]);
-                    ownIndex++;
-                }
-                else
-                {
-                    // we have a zero; other has a value
-                    value = doubleFunction.apply(0.0);
-                }
-                otherIndex++;
-            }
-            else
-            { // we have run out of values; right has not
-                value = doubleFunction.apply(0.0);
-                otherIndex++;
-            }
-            if (value != 0f)
+            long index = this.indices[ownIndex];
+            double value = doubleFunction.apply(this.matrixSI[ownIndex]);
+            ownIndex++;
+            if (value != 0d)
             {
                 if (nonZeroValues >= currentSize)
                 {
@@ -169,7 +159,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
                     System.arraycopy(newIndices, 0, newNewIndices, 0, newIndices.length);
                     newIndices = newNewIndices;
                     double[] newNewValues = new double[currentSize];
-                    System.arraycopy(newNewValues, 0, newValues, 0, newValues.length);
+                    System.arraycopy(newValues, 0, newNewValues, 0, newValues.length);
                     newValues = newNewValues;
                 }
                 newIndices[nonZeroValues] = index;
@@ -196,6 +186,15 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     @Override
     public final DoubleMatrixDataSparse assign(final DoubleFunction2 doubleFunction, final DoubleMatrixData right)
     {
+        if (doubleFunction.apply(0d,  0d) != 0d)
+        {
+            // It is most unlikely that the result AND the left and right operands are efficiently stored in Sparse format
+            DoubleMatrixDataSparse result = toDense().assign(doubleFunction, right).toSparse();
+            this.indices = result.indices;
+            this.matrixSI = result.matrixSI;
+            return this;
+        }
+        // The code below relies on the fact that doubleFunction.apply(0d, 0d) yields 0d
         checkSizes(right);
         int currentSize = rows() * cols();
         if (currentSize > 16)
@@ -208,7 +207,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
         int ownIndex = 0;
         int otherIndex = 0;
         if (right.isSparse())
-        { // both are sparse; result must be sparse
+        { // both are sparse, result must be sparse
             DoubleMatrixDataSparse other = (DoubleMatrixDataSparse) right;
             while (ownIndex < this.indices.length || otherIndex < other.indices.length)
             {
@@ -226,31 +225,31 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
                     else if (this.indices[ownIndex] < other.indices[otherIndex])
                     {
                         // we have a non-zero; right has a zero
-                        value = doubleFunction.apply(this.matrixSI[ownIndex], 0.0);
+                        value = doubleFunction.apply(this.matrixSI[ownIndex], 0d);
                         index = this.indices[ownIndex];
                         ownIndex++;
                     }
                     else
                     {
                         // we have a zero; right has a non-zero
-                        value = doubleFunction.apply(0.0, other.matrixSI[otherIndex]);
+                        value = doubleFunction.apply(0d, other.matrixSI[otherIndex]);
                         index = other.indices[otherIndex];
                         otherIndex++;
                     }
                 }
                 else if (ownIndex < this.indices.length)
                 { // right has run out of values; we have not
-                    value = this.matrixSI[ownIndex];
+                    value = doubleFunction.apply(this.matrixSI[ownIndex], 0d);
                     index = this.indices[ownIndex];
                     ownIndex++;
                 }
                 else
                 { // we have run out of values; right has not
-                    value = doubleFunction.apply(0.0, other.matrixSI[otherIndex]);
+                    value = doubleFunction.apply(0d, other.matrixSI[otherIndex]);
                     index = other.indices[otherIndex];
                     otherIndex++;
                 }
-                if (value != 0f)
+                if (value != 0d)
                 {
                     if (nonZeroValues >= currentSize)
                     {
@@ -274,7 +273,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
             }
         }
         else
-        { // we are sparse; other is dense; result must be sparse
+        { // we are sparse; other is dense, result must be sparse
             DoubleMatrixDataDense other = (DoubleMatrixDataDense) right;
             while (otherIndex < right.matrixSI.length)
             {
@@ -290,16 +289,16 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
                     else
                     {
                         // we have a zero; other has a value
-                        value = doubleFunction.apply(0.0, other.matrixSI[otherIndex]);
+                        value = doubleFunction.apply(0d, other.matrixSI[otherIndex]);
                     }
                     otherIndex++;
                 }
                 else
                 { // we have run out of values; right has not
-                    value = doubleFunction.apply(0.0, other.matrixSI[otherIndex]);
+                    value = doubleFunction.apply(0d, other.matrixSI[otherIndex]);
                     otherIndex++;
                 }
-                if (value != 0f)
+                if (value != 0d)
                 {
                     if (nonZeroValues >= currentSize)
                     {
