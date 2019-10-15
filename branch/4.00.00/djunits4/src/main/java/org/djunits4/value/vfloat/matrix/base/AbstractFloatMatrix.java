@@ -13,8 +13,6 @@ import org.djunits4.value.util.ValueUtil;
 import org.djunits4.value.vfloat.function.FloatFunction;
 import org.djunits4.value.vfloat.function.FloatMathFunctions;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
-import org.djunits4.value.vfloat.matrix.data.FloatMatrixDataDense;
-import org.djunits4.value.vfloat.matrix.data.FloatMatrixDataSparse;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalar;
 import org.djunits4.value.vfloat.scalar.base.FloatScalar;
 import org.djunits4.value.vfloat.vector.base.AbstractFloatVector;
@@ -351,16 +349,7 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
     public final M assign(final FloatFunction floatFunction)
     {
         checkCopyOnWrite();
-        if (this.data instanceof FloatMatrixDataDense)
-        {
-            ((FloatMatrixDataDense) this.data).assign(floatFunction);
-        }
-        else
-        {
-            FloatMatrixDataDense dvdd = ((FloatMatrixDataSparse) this.data).toDense();
-            dvdd.assign(floatFunction);
-            this.data = dvdd.toSparse();
-        }
+        this.data.assign(floatFunction);
         return (M) this;
     }
 
