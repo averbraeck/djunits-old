@@ -62,152 +62,133 @@ public class DimensionlessVector extends AbstractDoubleVectorRel<DimensionlessUn
     @Override
     public final DimensionlessVector acos()
     {
-        assign(DoubleMathFunctions.ACOS);
-        return this;
+        return assign(DoubleMathFunctions.ACOS);
     }
 
     /** {@inheritDoc} */
     @Override
     public final DimensionlessVector asin()
     {
-        assign(DoubleMathFunctions.ASIN);
-        return this;
+        return assign(DoubleMathFunctions.ASIN);
     }
 
     /** {@inheritDoc} */
     @Override
     public final DimensionlessVector atan()
     {
-        assign(DoubleMathFunctions.ATAN);
-        return this;
+        return assign(DoubleMathFunctions.ATAN);
     }
 
     /** {@inheritDoc} */
     @Override
     public final DimensionlessVector cbrt()
     {
-        assign(DoubleMathFunctions.CBRT);
-        return this;
+        return assign(DoubleMathFunctions.CBRT);
     }
 
     /** {@inheritDoc} */
     @Override
     public final DimensionlessVector cos()
     {
-        assign(DoubleMathFunctions.COS);
-        return this;
+        return assign(DoubleMathFunctions.COS);
     }
 
     /** {@inheritDoc} */
     @Override
     public final DimensionlessVector cosh()
     {
-        assign(DoubleMathFunctions.COSH);
-        return this;
+        return assign(DoubleMathFunctions.COSH);
     }
 
     /** {@inheritDoc} */
     @Override
     public final DimensionlessVector exp()
     {
-        assign(DoubleMathFunctions.EXP);
-        return this;
+        return assign(DoubleMathFunctions.EXP);
     }
 
     /** {@inheritDoc} */
     @Override
     public final DimensionlessVector expm1()
     {
-        assign(DoubleMathFunctions.EXPM1);
-        return this;
+        return assign(DoubleMathFunctions.EXPM1);
     }
 
     /** {@inheritDoc} */
     @Override
     public final DimensionlessVector log()
     {
-        assign(DoubleMathFunctions.LOG);
-        return this;
+        return assign(DoubleMathFunctions.LOG);
     }
 
     /** {@inheritDoc} */
     @Override
     public final DimensionlessVector log10()
     {
-        assign(DoubleMathFunctions.LOG10);
-        return this;
+        return assign(DoubleMathFunctions.LOG10);
     }
 
     /** {@inheritDoc} */
     @Override
     public final DimensionlessVector log1p()
     {
-        assign(DoubleMathFunctions.LOG1P);
-        return this;
+        return assign(DoubleMathFunctions.LOG1P);
     }
 
     /** {@inheritDoc} */
     @Override
     public final DimensionlessVector pow(final double x)
     {
-        assign(DoubleMathFunctions.POW((float) x));
-        return this;
+        return assign(DoubleMathFunctions.POW((float) x));
     }
 
     /** {@inheritDoc} */
     @Override
     public final DimensionlessVector signum()
     {
-        assign(DoubleMathFunctions.SIGNUM);
-        return this;
+        return assign(DoubleMathFunctions.SIGNUM);
     }
 
     /** {@inheritDoc} */
     @Override
     public final DimensionlessVector sin()
     {
-        assign(DoubleMathFunctions.SIN);
-        return this;
+        return assign(DoubleMathFunctions.SIN);
     }
 
     /** {@inheritDoc} */
     @Override
     public final DimensionlessVector sinh()
     {
-        assign(DoubleMathFunctions.SINH);
-        return this;
+        return assign(DoubleMathFunctions.SINH);
     }
 
     /** {@inheritDoc} */
     @Override
     public final DimensionlessVector sqrt()
     {
-        assign(DoubleMathFunctions.SQRT);
-        return this;
+        return assign(DoubleMathFunctions.SQRT);
     }
 
     /** {@inheritDoc} */
     @Override
     public final DimensionlessVector tan()
     {
-        assign(DoubleMathFunctions.TAN);
-        return this;
+        return assign(DoubleMathFunctions.TAN);
     }
 
     /** {@inheritDoc} */
     @Override
     public final DimensionlessVector tanh()
     {
-        assign(DoubleMathFunctions.TANH);
-        return this;
+        return assign(DoubleMathFunctions.TANH);
     }
 
     /** {@inheritDoc} */
     @Override
     public final DimensionlessVector inv()
     {
-        assign(DoubleMathFunctions.INV);
-        return this;
+        return assign(DoubleMathFunctions.INV);
     }
 
 }
