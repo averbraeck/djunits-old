@@ -99,7 +99,6 @@ public class FloatVectorMethodTest
                     if (ammut2.getSI(index) == 0)
                     {
                         assertTrue("Value should be NaN", Float.isNaN(ammut3.getSI(index)));
-                        
                     }
                     else
                     {
