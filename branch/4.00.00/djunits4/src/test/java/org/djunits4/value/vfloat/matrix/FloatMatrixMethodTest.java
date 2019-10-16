@@ -14,6 +14,8 @@ import org.djunits4.unit.TimeUnit;
 import org.djunits4.unit.util.UnitException;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.matrix.AreaMatrix;
+import org.djunits4.value.vdouble.matrix.base.DoubleMatrix;
 import org.djunits4.value.vfloat.function.FloatMathFunctions;
 import org.djunits4.value.vfloat.matrix.base.FloatMatrix;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
@@ -649,6 +651,37 @@ public class FloatMatrixMethodTest
         assertTrue("toString returns something informative",
                 FloatMatrixData.instantiate(denseTestData, TimeUnit.DEFAULT.getScale(), StorageType.DENSE).toString()
                         .startsWith("FloatMatrixData"));
+    }
+
+    /**
+     * Execute a mats++-like memory test on a sparse matrix. See
+     * <a href="http://www.eng.auburn.edu/~agrawvd/COURSE/E7250_05/REPORTS_TERM/Raghuraman_Mem.doc">Memory Test</a>.
+     */
+    @Test
+    public void memoryTest()
+    {
+        AreaMatrix am = DoubleMatrix.instantiate(new double[5][10], AreaUnit.SI, StorageType.SPARSE);
+        am = am.mutable();
+        double nonZeroValue = 123.456;
+        // Initially the array is filled with zero values; we can skip the initialization phase
+        for (int compoundIndex = 0; compoundIndex < am.cols() * am.rows(); compoundIndex++)
+        {
+            // Let the row count fastest
+            int row = compoundIndex % am.rows();
+            int col = compoundIndex / am.rows();
+            assertEquals("initial value is 0", 0d, am.getSI(row, col), 0.0001);
+            am.setSI(row, col, nonZeroValue);
+            assertEquals("current value is nonZero", nonZeroValue, am.getSI(row, col), 0.0001);
+        }
+        for (int compoundIndex = am.cols() * am.rows(); --compoundIndex >= 0 ;)
+        {
+            // Let the row count fastest
+            int row = compoundIndex % am.rows();
+            int col = compoundIndex / am.rows();
+            assertEquals("current value is nonZero", nonZeroValue, am.getSI(row, col), 0.0001);
+            am.setSI(row, col, 0d);
+            assertEquals("final value is 0", 0d, am.getSI(row, col), 0.0001);
+        }
     }
 
 }
