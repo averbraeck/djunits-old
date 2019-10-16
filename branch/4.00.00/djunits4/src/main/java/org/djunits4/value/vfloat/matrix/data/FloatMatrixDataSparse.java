@@ -440,8 +440,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
     {
         // determine number of non-null cells
         AtomicInteger atomicLength = new AtomicInteger(0);
-        IntStream.range(0, valuesSI.length).parallel().forEach(r -> IntStream.range(0, valuesSI[0].length).forEach(c ->
-        {
+        IntStream.range(0, valuesSI.length).parallel().forEach(r -> IntStream.range(0, valuesSI[0].length).forEach(c -> {
             if (valuesSI[r][c] != 0.0f)
             {
                 atomicLength.incrementAndGet();
@@ -453,12 +452,31 @@ public class FloatMatrixDataSparse extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public FloatMatrixDataSparse times(final FloatMatrixData right) throws ValueRuntimeException
+    public FloatMatrixData plus(final FloatMatrixData right) throws ValueRuntimeException
     {
-        checkSizes(right);
-        FloatMatrixDataSparse result = this.copy();
-        result.multiplyBy(right);
-        return result;
+        if (right.isDense())
+        {
+            return right.copy().incrementBy(this);
+        }
+        return this.copy().incrementBy(right);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatMatrixData minus(final FloatMatrixData right)
+    {
+        if (right.isDense())
+        {
+            return this.toDense().decrementBy(right);
+        }
+        return this.copy().decrementBy(right);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatMatrixData times(final FloatMatrixData right) throws ValueRuntimeException
+    {
+        return this.copy().multiplyBy(right);
     }
 
     /** {@inheritDoc} */
@@ -471,7 +489,6 @@ public class FloatMatrixDataSparse extends FloatMatrixData
             return this.toDense().divide(right);
         }
         // Sparse divided by dense makes a sparse
-        checkSizes(right);
         return this.copy().divideBy(right);
     }
 
@@ -482,7 +499,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings({"checkstyle:needbraces", "checkstyle:designforextension"})
+    @SuppressWarnings({ "checkstyle:needbraces", "checkstyle:designforextension" })
     public boolean equals(final Object obj)
     {
         if (this == obj)

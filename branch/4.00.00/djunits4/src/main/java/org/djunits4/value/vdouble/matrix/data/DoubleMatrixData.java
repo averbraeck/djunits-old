@@ -326,27 +326,17 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
      * @return the sum of this data object and the other data object
      * @throws ValueRuntimeException if matrices have different lengths
      */
-    public DoubleMatrixData plus(final DoubleMatrixData right) throws ValueRuntimeException
-    {
-        checkSizes(right);
-        double[] dm = new double[this.rows * this.cols];
-        IntStream.range(0, this.rows).parallel().forEach(
-                r -> IntStream.range(0, this.cols).forEach(c -> dm[r * this.cols + c] = getSI(r, c) + right.getSI(r, c)));
-        if (this instanceof DoubleMatrixDataSparse && right instanceof DoubleMatrixDataSparse)
-        {
-            return new DoubleMatrixDataDense(dm, this.rows, this.cols).toSparse();
-        }
-        return new DoubleMatrixDataDense(dm, this.rows, this.cols);
-    }
+    public abstract DoubleMatrixData plus(final DoubleMatrixData right) throws ValueRuntimeException;
 
     /**
      * Add a matrix to this matrix on a cell-by-cell basis. The type of matrix (sparse, dense) stays the same.
      * @param right DoubleMatrixData; the other data object to add
+     * @return DoubleMatrixData; this modified double matrix data object
      * @throws ValueRuntimeException if matrices have different lengths
      */
-    public final void incrementBy(final DoubleMatrixData right) throws ValueRuntimeException
+    public final DoubleMatrixData incrementBy(final DoubleMatrixData right) throws ValueRuntimeException
     {
-        assign(new DoubleFunction2()
+        return assign(new DoubleFunction2()
         {
             @Override
             public double apply(double leftValue, double rightValue)
@@ -363,27 +353,16 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
      * @return the sum of this data object and the other data object
      * @throws ValueRuntimeException if matrices have different lengths
      */
-    public DoubleMatrixData minus(final DoubleMatrixData right) throws ValueRuntimeException
-    {
-        checkSizes(right);
-        double[] dm = new double[this.rows * this.cols];
-        IntStream.range(0, this.rows).parallel().forEach(
-                r -> IntStream.range(0, this.cols).forEach(c -> dm[r * this.cols + c] = getSI(r, c) - right.getSI(r, c)));
-        if (this instanceof DoubleMatrixDataSparse && right instanceof DoubleMatrixDataSparse)
-        {
-            return new DoubleMatrixDataDense(dm, this.rows, this.cols).toSparse();
-        }
-        return new DoubleMatrixDataDense(dm, this.rows, this.cols);
-    }
-
+    public abstract DoubleMatrixData minus(final DoubleMatrixData right) throws ValueRuntimeException;
     /**
      * Subtract a matrix from this matrix on a cell-by-cell basis. The type of matrix (sparse, dense) stays the same.
      * @param decrement DoubleMatrixData; the amount to subtract
+     * @return DoubleMatrixData; this modified double matrix data object
      * @throws ValueRuntimeException if matrices have different sizes
      */
-    public final void decrementBy(final DoubleMatrixData decrement) throws ValueRuntimeException
+    public final DoubleMatrixData decrementBy(final DoubleMatrixData decrement) throws ValueRuntimeException
     {
-        assign(new DoubleFunction2()
+        return assign(new DoubleFunction2()
         {
             @Override
             public double apply(double leftValue, double rightValue)
@@ -413,7 +392,6 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
     {
         return assign(new DoubleFunction2()
         {
-
             @Override
             public double apply(double leftValue, double rightValue)
             {

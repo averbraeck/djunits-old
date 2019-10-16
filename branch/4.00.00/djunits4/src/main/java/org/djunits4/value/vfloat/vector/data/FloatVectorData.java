@@ -441,7 +441,17 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @return FloatVectorData; this modified float vector data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract FloatVectorData incrementBy(FloatVectorData right) throws ValueRuntimeException;
+    public final FloatVectorData incrementBy(FloatVectorData right) throws ValueRuntimeException
+    {
+        return assign(new FloatFunction2()
+        {
+            @Override
+            public float apply(float leftValue, float rightValue)
+            {
+                return leftValue + rightValue;
+            }
+        }, right);
+    }
 
     /**
      * Subtract two vectors on a cell-by-cell basis. If both vectors are sparse, a sparse vector is returned, otherwise a dense
@@ -458,7 +468,17 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @return FloatVectorData; this modified float vector data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract FloatVectorData decrementBy(FloatVectorData right) throws ValueRuntimeException;
+    public final FloatVectorData decrementBy(FloatVectorData right) throws ValueRuntimeException
+    {
+        return assign(new FloatFunction2()
+        {
+            @Override
+            public float apply(float leftValue, float rightValue)
+            {
+                return leftValue - rightValue;
+            }
+        }, right);
+    }
 
     /**
      * Multiply two vector on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
@@ -476,13 +496,34 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @return FloatVectorData; this modified float vector data store
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract FloatVectorData multiplyBy(FloatVectorData right) throws ValueRuntimeException;
+    public final FloatVectorData multiplyBy(final FloatVectorData right) throws ValueRuntimeException
+    {
+        assign(new FloatFunction2()
+        {
+            @Override
+            public float apply(float leftValue, float rightValue)
+            {
+                return leftValue * rightValue;
+            }
+        }, right);
+        return this;
+    }
 
     /**
      * Multiply the values of this vector with a number on a cell-by-cell basis.
      * @param valueSI float; the value to multiply with
      */
-    public abstract void multiplyBy(float valueSI);
+    public final void multiplyBy(float valueSI)
+    {
+        assign(new FloatFunction()
+        {
+            @Override
+            public float apply(float value)
+            {
+                return value * valueSI;
+            }
+        });
+    }
 
     /**
      * Divide two vectors on a cell-by-cell basis. If this vector is sparse and <code>right</code> is dense, a sparse vector is
@@ -500,13 +541,33 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @return FloatVectorData; this modified float vector data store
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract FloatVectorData divideBy(FloatVectorData right) throws ValueRuntimeException;
+    public final FloatVectorData divideBy(final FloatVectorData right) throws ValueRuntimeException
+    {
+        return assign(new FloatFunction2()
+        {
+            @Override
+            public float apply(float leftValue, float rightValue)
+            {
+                return leftValue / rightValue;
+            }
+        }, right);
+    }
 
     /**
      * Divide the values of this vector by a number on a cell-by-cell basis.
-     * @param valueSI float; the value to multiply with
+     * @param valueSI float; the value to divide by
      */
-    public abstract void divideBy(float valueSI);
+    public final void divideBy(final float valueSI)
+    {
+        assign(new FloatFunction()
+        {
+            @Override
+            public float apply(float value)
+            {
+                return value / valueSI;
+            }
+        });
+    }
 
     /* ============================================================================================ */
     /* =============================== EQUALS, HASHCODE, TOSTRING ================================= */

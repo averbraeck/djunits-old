@@ -455,6 +455,28 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
 
     /** {@inheritDoc} */
     @Override
+    public DoubleMatrixData plus(final DoubleMatrixData right) throws ValueRuntimeException
+    {
+        if (right.isDense())
+        {
+            return right.copy().incrementBy(this);
+        }
+        return this.copy().incrementBy(right);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DoubleMatrixData minus(final DoubleMatrixData right)
+    {
+        if (right.isDense())
+        {
+            return this.toDense().decrementBy(right);
+        }
+        return this.copy().decrementBy(right);
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public DoubleMatrixDataSparse times(final DoubleMatrixData right) throws ValueRuntimeException
     {
         checkSizes(right);

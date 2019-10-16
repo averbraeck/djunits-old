@@ -2,7 +2,6 @@ package org.djunits4.value.vfloat.vector.data;
 
 import java.util.stream.IntStream;
 
-import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.function.FloatFunction;
 import org.djunits4.value.vfloat.function.FloatFunction2;
@@ -41,11 +40,8 @@ public class FloatVectorDataDense extends FloatVectorData
                 .filter(d -> d != 0.0).count();
     }
 
-    /**
-     * Modify the data by applying a function to each value.
-     * @param floatFunction FloatFunction; the function to apply on the (mutable) data elements
-     * @return FloatVectorDataDense; this (modified) data store
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatVectorDataDense assign(final FloatFunction floatFunction)
     {
         IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] = floatFunction.apply(this.vectorSI[i]));
@@ -58,13 +54,13 @@ public class FloatVectorDataDense extends FloatVectorData
     {
         if (right.isDense())
         {
-            IntStream.range(0, size()).parallel().forEach(
-                    i -> this.vectorSI[i] = floatFunction2.apply(this.vectorSI[i], ((FloatVectorDataDense) right).vectorSI[i]));
+            IntStream.range(0, size()).parallel()
+                    .forEach(i -> this.vectorSI[i] = floatFunction2.apply(this.vectorSI[i], right.vectorSI[i]));
         }
         else
         { // right is sparse
-            IntStream.range(0, size()).parallel().forEach(
-                    i -> this.vectorSI[i] = floatFunction2.apply(this.vectorSI[i], ((FloatVectorDataDense) right).getSI(i)));
+            IntStream.range(0, size()).parallel()
+                    .forEach(i -> this.vectorSI[i] = floatFunction2.apply(this.vectorSI[i], right.getSI(i)));
         }
         return this;
     }
@@ -132,15 +128,6 @@ public class FloatVectorDataDense extends FloatVectorData
 
     /** {@inheritDoc} */
     @Override
-    public final FloatVectorData incrementBy(final FloatVectorData right) throws ValueRuntimeException
-    {
-        checkSizes(right);
-        IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] += right.getSI(i));
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final FloatVectorDataDense minus(final FloatVectorData right)
     {
         checkSizes(right);
@@ -151,39 +138,16 @@ public class FloatVectorDataDense extends FloatVectorData
 
     /** {@inheritDoc} */
     @Override
-    public final FloatVectorDataDense decrementBy(final FloatVectorData right) throws ValueRuntimeException
-    {
-        checkSizes(right);
-        IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] -= right.getSI(i));
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final FloatVectorData times(final FloatVectorData right)
     {
         if (right.isSparse())
         {
+            // result shall be sparse
             return right.times(this);
         }
+        // Both are dense
         checkSizes(right);
         return this.copy().multiplyBy(right);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatVectorDataDense multiplyBy(final FloatVectorData right) throws ValueRuntimeException
-    {
-        checkSizes(right);
-        IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] *= right.getSI(i));
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void multiplyBy(final float valueSI)
-    {
-        IntStream.range(0, this.vectorSI.length).parallel().forEach(i -> this.vectorSI[i] *= valueSI);
     }
 
     /** {@inheritDoc} */
@@ -192,22 +156,6 @@ public class FloatVectorDataDense extends FloatVectorData
     {
         checkSizes(right);
         return this.copy().divideBy(right);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatVectorDataDense divideBy(final FloatVectorData right) throws ValueRuntimeException
-    {
-        checkSizes(right);
-        IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] /= right.getSI(i));
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void divideBy(final float valueSI)
-    {
-        IntStream.range(0, this.vectorSI.length).parallel().forEach(i -> this.vectorSI[i] /= valueSI);
     }
 
 }

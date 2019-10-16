@@ -117,7 +117,7 @@ public class FloatVectorDataSparse extends FloatVectorData
     @Override
     public final FloatVectorDataSparse assign(final FloatFunction2 floatFunction, final FloatVectorData right)
     {
-        if (floatFunction.apply(0f,  0f) != 0f)
+        if (floatFunction.apply(0f, 0f) != 0f)
         {
             // It is most unlikely that the result AND the left and right operands are efficiently stored in Sparse format
             FloatVectorDataSparse result = toDense().assign(floatFunction, right).toSparse();
@@ -337,11 +337,7 @@ public class FloatVectorDataSparse extends FloatVectorData
         int[] indicesNew = new int[this.indices.length + 1];
         float[] vectorSINew = new float[this.vectorSI.length + 1];
         System.arraycopy(this.indices, 0, indicesNew, 0, internalIndex);
-        System.arraycopy(this.vectorSI, 0, vectorSINew, 0, internalIndex);
-        // System.out.println("arraycopy1 current size is " + this.indices.length + " srcPos=" + internalIndex +
-        // ", new size is "
-        // + indicesNew.length + " dstPos=" + (internalIndex + 1) + " length=" + (this.indices.length - internalIndex));
-        System.arraycopy(this.indices, internalIndex, indicesNew, internalIndex + 1, this.indices.length - internalIndex);
+        System.arraycopy(this.vectorSI, 0, vectorSINew, 0, internalIndex);        System.arraycopy(this.indices, internalIndex, indicesNew, internalIndex + 1, this.indices.length - internalIndex);
         System.arraycopy(this.vectorSI, internalIndex, vectorSINew, internalIndex + 1, this.indices.length - internalIndex);
         indicesNew[internalIndex] = index;
         vectorSINew[internalIndex] = valueSI;
@@ -400,238 +396,27 @@ public class FloatVectorDataSparse extends FloatVectorData
     {
         if (right.isDense())
         {
-            FloatVectorData result = right.plus(this);
-            return result;
+            return right.plus(this);
         }
-        checkSizes(right);
         return this.copy().incrementBy(right);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatVectorData incrementBy(final FloatVectorData right) throws ValueRuntimeException
+    public final FloatVectorData minus(final FloatVectorData right)
     {
-        checkSizes(right);
-        int maxLength =
-                (right.isSparse() ? this.indices.length + ((FloatVectorDataSparse) right).indices.length : right.size());
-        float[] tempVectorSI = new float[maxLength];
-        int[] tempIndices = new int[maxLength];
-        int nextIndex = 0;
-        if (right.isSparse())
+        if (right.isDense())
         {
-            int ownIndex = 0;
-            int rightIndex = 0;
-            FloatVectorDataSparse rightData = (FloatVectorDataSparse) right;
-            while (ownIndex < this.indices.length || rightIndex < rightData.indices.length)
-            {
-                float value;
-                int index;
-                if (ownIndex < this.indices.length && rightIndex < rightData.indices.length)
-                { // neither we nor right has run out of values
-                    if (this.indices[ownIndex] == rightData.indices[rightIndex])
-                    {
-                        value = this.vectorSI[ownIndex] + rightData.vectorSI[rightIndex];
-                        index = this.indices[ownIndex];
-                        ownIndex++;
-                        rightIndex++;
-                    }
-                    else if (this.indices[ownIndex] < rightData.indices[rightIndex])
-                    {
-                        value = this.vectorSI[ownIndex];
-                        index = this.indices[ownIndex];
-                        ownIndex++;
-                    }
-                    else
-                    {
-                        value = rightData.vectorSI[rightIndex];
-                        index = rightData.indices[rightIndex];
-                        rightIndex++;
-                    }
-                }
-                else if (ownIndex < this.indices.length)
-                { // right has run out of values; we have not
-                    value = this.vectorSI[ownIndex];
-                    index = this.indices[ownIndex];
-                    ownIndex++;
-                }
-                else
-                { // we have run out of values; right has not
-                    value = rightData.vectorSI[rightIndex];
-                    index = rightData.indices[rightIndex];
-                    rightIndex++;
-                }
-                if (value != 0f)
-                {
-                    tempIndices[nextIndex] = index;
-                    tempVectorSI[nextIndex] = value;
-                    nextIndex++;
-                }
-            }
+            return this.toDense().decrementBy(right);
         }
-        else
-        {
-            int ownIndex = 0;
-            for (int i = 0; i < right.size(); i++)
-            {
-                if (ownIndex < this.indices.length && i > this.indices[ownIndex])
-                {
-                    ownIndex++;
-                }
-                float value = (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0f)
-                        + right.getSI(i);
-                if (value != 0f)
-                {
-                    tempIndices[nextIndex] = i;
-                    tempVectorSI[nextIndex] = value;
-                    nextIndex++;
-                }
-            }
-        }
-        this.indices = Arrays.copyOf(tempIndices, nextIndex);
-        this.vectorSI = Arrays.copyOf(tempVectorSI, nextIndex);
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatVectorDataSparse minus(final FloatVectorData right)
-    {
         return this.copy().decrementBy(right);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatVectorDataSparse decrementBy(final FloatVectorData right) throws ValueRuntimeException
-    {
-        checkSizes(right);
-        int maxLength =
-                (right.isSparse() ? this.indices.length + ((FloatVectorDataSparse) right).indices.length : right.size());
-        float[] tempVectorSI = new float[maxLength];
-        int[] tempIndices = new int[maxLength];
-        int nextIndex = 0;
-        if (right.isSparse())
-        {
-            int ownIndex = 0;
-            int rightIndex = 0;
-            FloatVectorDataSparse rightData = (FloatVectorDataSparse) right;
-            while (ownIndex < this.indices.length || rightIndex < rightData.indices.length)
-            {
-                float value;
-                int index;
-                if (ownIndex < this.indices.length && rightIndex < rightData.indices.length)
-                { // neither we nor right has run out of values
-                    if (this.indices[ownIndex] == rightData.indices[rightIndex])
-                    {
-                        value = this.vectorSI[ownIndex] - rightData.vectorSI[rightIndex];
-                        index = this.indices[ownIndex];
-                        ownIndex++;
-                        rightIndex++;
-                    }
-                    else if (this.indices[ownIndex] < rightData.indices[rightIndex])
-                    {
-                        value = this.vectorSI[ownIndex];
-                        index = this.indices[ownIndex];
-                        ownIndex++;
-                    }
-                    else
-                    {
-                        value = 0f - rightData.vectorSI[rightIndex];
-                        index = rightData.indices[rightIndex];
-                        rightIndex++;
-                    }
-                }
-                else if (ownIndex < this.indices.length)
-                { // right has run out of values; we have not
-                    value = this.vectorSI[ownIndex];
-                    index = this.indices[ownIndex];
-                    ownIndex++;
-                }
-                else
-                { // we have run out of values; right has not
-                    value = 0f - rightData.vectorSI[rightIndex];
-                    index = rightData.indices[rightIndex];
-                    rightIndex++;
-                }
-                if (value != 0d)
-                {
-                    tempIndices[nextIndex] = index;
-                    tempVectorSI[nextIndex] = value;
-                    nextIndex++;
-                }
-            }
-        }
-        else
-        {
-            int ownIndex = 0;
-            for (int i = 0; i < right.size(); i++)
-            {
-                if (ownIndex < this.indices.length && i > this.indices[ownIndex])
-                {
-                    ownIndex++;
-                }
-                float value = (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0)
-                        - right.getSI(i);
-                if (value != 0f)
-                {
-                    tempIndices[nextIndex] = i;
-                    tempVectorSI[nextIndex] = value;
-                    nextIndex++;
-                }
-            }
-        }
-        this.indices = Arrays.copyOf(tempIndices, nextIndex);
-        this.vectorSI = Arrays.copyOf(tempVectorSI, nextIndex);
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatVectorDataSparse times(final FloatVectorData right)
+    public final FloatVectorData times(final FloatVectorData right)
     {
         return this.copy().multiplyBy(right);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatVectorDataSparse multiplyBy(final FloatVectorData right) throws ValueRuntimeException
-    {
-        assign(new FloatFunction2()
-        {
-            @Override
-            public float apply(float leftValue, float rightValue)
-            {
-                return leftValue * rightValue;
-            }
-        }, right);
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void multiplyBy(final float valueSI)
-    {
-        int maxLength = size();
-        float[] tempVectorSI = new float[maxLength];
-        int[] tempIndices = new int[maxLength];
-        int nextIndex = 0;
-        int ownIndex = 0;
-        for (int i = 0; i < size(); i++)
-        {
-            if (ownIndex < this.indices.length && i > this.indices[ownIndex])
-            {
-                ownIndex++;
-            }
-            float value =
-                    (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0f) * valueSI;
-            if (value != 0f)
-            {
-                tempIndices[nextIndex] = i;
-                tempVectorSI[nextIndex] = value;
-                nextIndex++;
-            }
-        }
-        this.indices = Arrays.copyOf(tempIndices, nextIndex);
-        this.vectorSI = Arrays.copyOf(tempVectorSI, nextIndex);
     }
 
     /** {@inheritDoc} */
@@ -647,49 +432,6 @@ public class FloatVectorDataSparse extends FloatVectorData
         return this.copy().divideBy(right);
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public final FloatVectorData divideBy(final FloatVectorData right) throws ValueRuntimeException
-    {
-        assign(new FloatFunction2()
-        {
-            @Override
-            public float apply(float leftValue, float rightValue)
-            {
-                return leftValue / rightValue;
-            }
-        }, right);
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void divideBy(final float valueSI)
-    {
-        int maxLength = size();
-        float[] tempVectorSI = new float[maxLength];
-        int[] tempIndices = new int[maxLength];
-        int nextIndex = 0;
-        int ownIndex = 0;
-        for (int i = 0; i < size(); i++)
-        {
-            if (ownIndex < this.indices.length && i > this.indices[ownIndex])
-            {
-                ownIndex++;
-            }
-            float value =
-                    (ownIndex < this.indices.length && i == this.indices[ownIndex] ? this.vectorSI[ownIndex] : 0f) / valueSI;
-            if (value != 0f)
-            {
-                tempIndices[nextIndex] = i;
-                tempVectorSI[nextIndex] = value;
-                nextIndex++;
-            }
-        }
-        this.indices = Arrays.copyOf(tempIndices, nextIndex);
-        this.vectorSI = Arrays.copyOf(tempVectorSI, nextIndex);
-    }
-
     /*
      * NOTE: hashCode is not overridden on purpose. FloatVectorData takes full care of the calculation of the hasCode, which is
      * independent of whether the data is stored in a sparse or in a dense manner.
@@ -697,7 +439,7 @@ public class FloatVectorDataSparse extends FloatVectorData
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings({"checkstyle:needbraces", "checkstyle:designforextension"})
+    @SuppressWarnings({ "checkstyle:needbraces", "checkstyle:designforextension" })
     public boolean equals(final Object obj)
     {
         if (this == obj)

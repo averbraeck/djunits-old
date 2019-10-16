@@ -572,7 +572,17 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @return DoubleVectorData; this modified double vector data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract DoubleVectorData incrementBy(DoubleVectorData right) throws ValueRuntimeException;
+    public final DoubleVectorData incrementBy(DoubleVectorData right) throws ValueRuntimeException
+    {
+        return assign(new DoubleFunction2()
+        {
+            @Override
+            public double apply(double leftValue, double rightValue)
+            {
+                return leftValue + rightValue;
+            }
+        }, right);
+    }
 
     /**
      * Subtract two vectors on a cell-by-cell basis. If both vectors are sparse, a sparse vector is returned, otherwise a dense
@@ -589,7 +599,17 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @return DoubleVectorData; this modified double vector data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract DoubleVectorData decrementBy(DoubleVectorData right) throws ValueRuntimeException;
+    public final DoubleVectorData decrementBy(DoubleVectorData right) throws ValueRuntimeException
+    {
+        return assign(new DoubleFunction2()
+        {
+            @Override
+            public double apply(double leftValue, double rightValue)
+            {
+                return leftValue - rightValue;
+            }
+        }, right);
+    }
 
     /**
      * Multiply two vectors on a cell-by-cell basis. If both vectors are dense, a dense vector is returned, otherwise a sparse
@@ -607,13 +627,34 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @return DoubleVectordata; this modified double vector data store
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract DoubleVectorData multiplyBy(DoubleVectorData right) throws ValueRuntimeException;
+    public final DoubleVectorData multiplyBy(DoubleVectorData right) throws ValueRuntimeException
+    {
+        assign(new DoubleFunction2()
+        {
+            @Override
+            public double apply(double leftValue, double rightValue)
+            {
+                return leftValue * rightValue;
+            }
+        }, right);
+        return this;
+    }
 
     /**
      * Multiply the values of this vector with a number on a cell-by-cell basis.
      * @param valueSI double; the value to multiply with
      */
-    public abstract void multiplyBy(double valueSI);
+    public final void multiplyBy(double valueSI)
+    {
+        assign(new DoubleFunction()
+        {
+            @Override
+            public double apply(double value)
+            {
+                return value * valueSI;
+            }
+        });
+    }
 
     /**
      * Divide two vectors on a cell-by-cell basis. If this vector is sparse and <code>right</code> is dense, a sparse vector is
@@ -631,13 +672,33 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @return DoubleVectorData; this modified double vector data store
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract DoubleVectorData divideBy(DoubleVectorData right) throws ValueRuntimeException;
+    public final DoubleVectorData divideBy(DoubleVectorData right) throws ValueRuntimeException
+    {
+        return assign(new DoubleFunction2()
+        {
+            @Override
+            public double apply(double leftValue, double rightValue)
+            {
+                return leftValue / rightValue;
+            }
+        }, right);
+    }
 
     /**
      * Divide the values of this vector by a number on a cell-by-cell basis.
      * @param valueSI double; the value to multiply with
      */
-    public abstract void divideBy(double valueSI);
+    public final void divideBy(double valueSI)
+    {
+        assign(new DoubleFunction()
+        {
+            @Override
+            public double apply(double value)
+            {
+                return value / valueSI;
+            }
+        });
+    }
 
     /* ============================================================================================ */
     /* =============================== EQUALS, HASHCODE, TOSTRING ================================= */

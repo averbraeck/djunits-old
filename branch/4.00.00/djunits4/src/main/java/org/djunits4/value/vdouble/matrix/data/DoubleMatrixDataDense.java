@@ -178,6 +178,44 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
 
     /** {@inheritDoc} */
     @Override
+    public DoubleMatrixData plus(final DoubleMatrixData right) throws ValueRuntimeException
+    {
+        checkSizes(right);
+        double[] dm = new double[this.rows * this.cols];
+        if (right.isDense())
+        {
+            IntStream.range(0, this.rows).parallel().forEach(r -> IntStream.range(0, this.cols).forEach(
+                    c -> dm[r * this.cols + c] = this.matrixSI[r * this.cols + c] + right.matrixSI[r * this.cols + c]));
+        }
+        else
+        { // right is sparse
+            IntStream.range(0, this.rows).parallel().forEach(r -> IntStream.range(0, this.cols)
+                    .forEach(c -> dm[r * this.cols + c] = this.matrixSI[r * this.cols + c] + right.getSI(r, c)));
+        }
+        return new DoubleMatrixDataDense(dm, this.rows, this.cols);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DoubleMatrixDataDense minus(final DoubleMatrixData right)
+    {
+        checkSizes(right);
+        double[] dm = new double[this.rows * this.cols];
+        if (right.isDense())
+        {
+            IntStream.range(0, this.rows).parallel().forEach(r -> IntStream.range(0, this.cols).forEach(
+                    c -> dm[r * this.cols + c] = this.matrixSI[r * this.cols + c] - right.matrixSI[r * this.cols + c]));
+        }
+        else
+        { // right is sparse
+            IntStream.range(0, this.rows).parallel().forEach(r -> IntStream.range(0, this.cols)
+                    .forEach(c -> dm[r * this.cols + c] = this.matrixSI[r * this.cols + c] - right.getSI(r, c)));
+        }
+        return new DoubleMatrixDataDense(dm, this.rows, this.cols);
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public DoubleMatrixData times(final DoubleMatrixData right) throws ValueRuntimeException
     {
         if (right.isSparse())

@@ -334,28 +334,17 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      * @return the sum of this data object and the other data object
      * @throws ValueRuntimeException if matrices have different lengths
      */
-    public FloatMatrixData plus(final FloatMatrixData right) throws ValueRuntimeException
-    {
-        // TODO Must be implemented in the sub classes.
-        checkSizes(right);
-        float[] dm = new float[this.rows * this.cols];
-        IntStream.range(0, this.rows).parallel().forEach(
-                r -> IntStream.range(0, this.cols).forEach(c -> dm[r * this.cols + c] = getSI(r, c) + right.getSI(r, c)));
-        if (this instanceof FloatMatrixDataSparse && right instanceof FloatMatrixDataSparse)
-        {
-            return new FloatMatrixDataDense(dm, this.rows, this.cols).toSparse();
-        }
-        return new FloatMatrixDataDense(dm, this.rows, this.cols);
-    }
+    public abstract FloatMatrixData plus(final FloatMatrixData right) throws ValueRuntimeException;
 
     /**
      * Add a matrix to this matrix on a cell-by-cell basis. The type of matrix (sparse, dense) stays the same.
      * @param right FloatMatrixData; the other data object to add
+     * @return FloatMatrixData; this modified float matrix data object
      * @throws ValueRuntimeException if matrices have different lengths
      */
-    public final void incrementBy(final FloatMatrixData right) throws ValueRuntimeException
+    public final FloatMatrixData incrementBy(final FloatMatrixData right) throws ValueRuntimeException
     {
-        assign(new FloatFunction2()
+        return assign(new FloatFunction2()
         {
             @Override
             public float apply(float leftValue, float rightValue)
@@ -372,34 +361,24 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      * @return the sum of this data object and the other data object
      * @throws ValueRuntimeException if matrices have different lengths
      */
-    public FloatMatrixData minus(final FloatMatrixData right) throws ValueRuntimeException
-    {
-        checkSizes(right);
-        float[] dm = new float[this.rows * this.cols];
-        IntStream.range(0, this.rows).parallel().forEach(
-                r -> IntStream.range(0, this.cols).forEach(c -> dm[r * this.cols + c] = getSI(r, c) - right.getSI(r, c)));
-        if (this instanceof FloatMatrixDataSparse && right instanceof FloatMatrixDataSparse)
-        {
-            return new FloatMatrixDataDense(dm, this.rows, this.cols).toSparse();
-        }
-        return new FloatMatrixDataDense(dm, this.rows, this.cols);
-    }
+    public abstract FloatMatrixData minus(final FloatMatrixData right) throws ValueRuntimeException;
 
     /**
      * Subtract a matrix from this matrix on a cell-by-cell basis. The type of matrix (sparse, dense) stays the same.
-     * @param right FloatMatrixData; the other data object to subtract
+     * @param decrement FloatMatrixData; the other data object to subtract
+     * @return FloatMatrixData; this modified float matrix data object
      * @throws ValueRuntimeException if matrices have different lengths
      */
-    public final void decrementBy(final FloatMatrixData right) throws ValueRuntimeException
+    public final FloatMatrixData decrementBy(final FloatMatrixData decrement) throws ValueRuntimeException
     {
-        assign(new FloatFunction2()
+        return assign(new FloatFunction2()
         {
             @Override
             public float apply(float leftValue, float rightValue)
             {
                 return leftValue - rightValue;
             }
-        }, right);
+        }, decrement);
     }
 
     /**
@@ -480,12 +459,14 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      */
     public final void divideBy(final float valueSI)
     {
-        assign(new FloatFunction() {
+        assign(new FloatFunction()
+        {
             @Override
             public float apply(float value)
             {
                 return value / valueSI;
-            }});
+            }
+        });
     }
 
     /* ============================================================================================ */

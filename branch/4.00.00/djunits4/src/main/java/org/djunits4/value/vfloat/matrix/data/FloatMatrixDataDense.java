@@ -197,6 +197,44 @@ public class FloatMatrixDataDense extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
+    public FloatMatrixData plus(final FloatMatrixData right) throws ValueRuntimeException
+    {
+        checkSizes(right);
+        float[] fm = new float[this.rows * this.cols];
+        if (right.isDense())
+        {
+            IntStream.range(0, this.rows).parallel().forEach(r -> IntStream.range(0, this.cols).forEach(
+                    c -> fm[r * this.cols + c] = this.matrixSI[r * this.cols + c] + right.matrixSI[r * this.cols + c]));
+        }
+        else
+        { // right is sparse
+            IntStream.range(0, this.rows).parallel().forEach(r -> IntStream.range(0, this.cols)
+                    .forEach(c -> fm[r * this.cols + c] = this.matrixSI[r * this.cols + c] + right.getSI(r, c)));
+        }
+        return new FloatMatrixDataDense(fm, this.rows, this.cols);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatMatrixDataDense minus(final FloatMatrixData right)
+    {
+        checkSizes(right);
+        float[] fm = new float[this.rows * this.cols];
+        if (right.isDense())
+        {
+            IntStream.range(0, this.rows).parallel().forEach(r -> IntStream.range(0, this.cols).forEach(
+                    c -> fm[r * this.cols + c] = this.matrixSI[r * this.cols + c] - right.matrixSI[r * this.cols + c]));
+        }
+        else
+        { // right is sparse
+            IntStream.range(0, this.rows).parallel().forEach(r -> IntStream.range(0, this.cols)
+                    .forEach(c -> fm[r * this.cols + c] = this.matrixSI[r * this.cols + c] - right.getSI(r, c)));
+        }
+        return new FloatMatrixDataDense(fm, this.rows, this.cols);
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public FloatMatrixData times(final FloatMatrixData right) throws ValueRuntimeException
     {
         if (right.isSparse())
@@ -214,17 +252,7 @@ public class FloatMatrixDataDense extends FloatMatrixData
     public FloatMatrixData divide(final FloatMatrixData right) throws ValueRuntimeException
     {
         checkSizes(right);
-        float[] fm = new float[this.rows * this.cols];
-        if (right.isDense())
-        {
-            IntStream.range(0, this.rows * this.cols).parallel().forEach(i -> fm[i] = this.matrixSI[i] / right.matrixSI[i]);
-        }
-        else
-        {
-            IntStream.range(0, this.rows).parallel().forEach(r -> IntStream.range(0, this.cols)
-                    .forEach(c -> fm[r * this.cols + c] = this.matrixSI[r * this.cols + c] / right.getSI(r, c)));
-        }
-        return new FloatMatrixDataDense(fm, this.rows, this.cols);
+        return this.copy().divideBy(right);
     }
 
 }

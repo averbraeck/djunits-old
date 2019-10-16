@@ -3,7 +3,6 @@ package org.djunits4.value.vdouble.vector.data;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
-import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vdouble.function.DoubleFunction;
 import org.djunits4.value.vdouble.function.DoubleFunction2;
@@ -54,13 +53,13 @@ public class DoubleVectorDataDense extends DoubleVectorData
     {
         if (right.isDense())
         {
-            IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] =
-                    doubleFunction2.apply(this.vectorSI[i], ((DoubleVectorDataDense) right).vectorSI[i]));
+            IntStream.range(0, size()).parallel()
+                    .forEach(i -> this.vectorSI[i] = doubleFunction2.apply(this.vectorSI[i], right.vectorSI[i]));
         }
         else
         { // right is sparse
-            IntStream.range(0, size()).parallel().forEach(
-                    i -> this.vectorSI[i] = doubleFunction2.apply(this.vectorSI[i], ((DoubleVectorDataDense) right).getSI(i)));
+            IntStream.range(0, size()).parallel()
+                    .forEach(i -> this.vectorSI[i] = doubleFunction2.apply(this.vectorSI[i], right.getSI(i)));
         }
         return this;
     }
@@ -127,29 +126,11 @@ public class DoubleVectorDataDense extends DoubleVectorData
 
     /** {@inheritDoc} */
     @Override
-    public final DoubleVectorDataDense incrementBy(final DoubleVectorData right) throws ValueRuntimeException
-    {
-        checkSizes(right);
-        IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] += right.getSI(i));
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final DoubleVectorDataDense minus(final DoubleVectorData right)
     {
         checkSizes(right);
         return new DoubleVectorDataDense(
                 IntStream.range(0, size()).parallel().mapToDouble(i -> getSI(i) - right.getSI(i)).toArray());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final DoubleVectorData decrementBy(final DoubleVectorData right) throws ValueRuntimeException
-    {
-        checkSizes(right);
-        IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] -= right.getSI(i));
-        return this;
     }
 
     /** {@inheritDoc} */
@@ -168,42 +149,10 @@ public class DoubleVectorDataDense extends DoubleVectorData
 
     /** {@inheritDoc} */
     @Override
-    public final DoubleVectorDataDense multiplyBy(final DoubleVectorData right) throws ValueRuntimeException
-    {
-        checkSizes(right);
-        IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] *= right.getSI(i));
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void multiplyBy(final double valueSI)
-    {
-        IntStream.range(0, this.vectorSI.length).parallel().forEach(i -> this.vectorSI[i] *= valueSI);
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final DoubleVectorData divide(final DoubleVectorData right)
     {
         checkSizes(right);
         return this.copy().divideBy(right);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final DoubleVectorDataDense divideBy(final DoubleVectorData right) throws ValueRuntimeException
-    {
-        checkSizes(right);
-        IntStream.range(0, size()).parallel().forEach(i -> this.vectorSI[i] /= right.getSI(i));
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void divideBy(final double valueSI)
-    {
-        IntStream.range(0, this.vectorSI.length).parallel().forEach(i -> this.vectorSI[i] /= valueSI);
     }
 
 }
