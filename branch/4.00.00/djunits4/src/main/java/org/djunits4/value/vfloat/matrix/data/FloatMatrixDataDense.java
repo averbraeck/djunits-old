@@ -197,22 +197,6 @@ public class FloatMatrixDataDense extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final void incrementBy(final FloatMatrixData right) throws ValueRuntimeException
-    {
-        IntStream.range(0, this.rows).parallel().forEach(
-                r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] += right.getSI(r, c)));
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void decrementBy(final FloatMatrixData right) throws ValueRuntimeException
-    {
-        IntStream.range(0, this.rows).parallel().forEach(
-                r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] -= right.getSI(r, c)));
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public FloatMatrixData times(final FloatMatrixData right) throws ValueRuntimeException
     {
         if (right.isSparse())
@@ -223,22 +207,6 @@ public class FloatMatrixDataDense extends FloatMatrixData
         // Both are dense
         checkSizes(right);
         return this.copy().multiplyBy(right);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatMatrixDataDense multiplyBy(final FloatMatrixData right) throws ValueRuntimeException
-    {
-        IntStream.range(0, this.rows).parallel().forEach(
-                r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] *= right.getSI(r, c)));
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void multiplyBy(final float valueSI)
-    {
-        IntStream.range(0, this.matrixSI.length).parallel().forEach(i -> this.matrixSI[i] *= valueSI);
     }
 
     /** {@inheritDoc} */
@@ -257,22 +225,6 @@ public class FloatMatrixDataDense extends FloatMatrixData
                     .forEach(c -> fm[r * this.cols + c] = this.matrixSI[r * this.cols + c] / right.getSI(r, c)));
         }
         return new FloatMatrixDataDense(fm, this.rows, this.cols);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatMatrixDataDense divideBy(final FloatMatrixData right) throws ValueRuntimeException
-    {
-        IntStream.range(0, this.rows).parallel().forEach(
-                r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] /= right.getSI(r, c)));
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void divideBy(final float valueSI)
-    {
-        IntStream.range(0, this.matrixSI.length).parallel().forEach(i -> this.matrixSI[i] /= valueSI);
     }
 
 }

@@ -178,23 +178,6 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final void incrementBy(final DoubleMatrixData right) throws ValueRuntimeException
-    {
-        checkSizes(right);
-        IntStream.range(0, this.rows).parallel().forEach(
-                r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] += right.getSI(r, c)));
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void decrementBy(final DoubleMatrixData right) throws ValueRuntimeException
-    {
-        IntStream.range(0, this.rows).parallel().forEach(
-                r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] -= right.getSI(r, c)));
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public DoubleMatrixData times(final DoubleMatrixData right) throws ValueRuntimeException
     {
         if (right.isSparse())
@@ -205,23 +188,6 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
         // Both are dense
         checkSizes(right);
         return this.copy().multiplyBy(right);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final DoubleMatrixDataDense multiplyBy(final DoubleMatrixData right) throws ValueRuntimeException
-    {
-        checkSizes(right);
-        IntStream.range(0, this.rows).parallel().forEach(
-                r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] *= right.getSI(r, c)));
-        return this;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void multiplyBy(final double valueSI)
-    {
-        IntStream.range(0, this.matrixSI.length).parallel().forEach(i -> this.matrixSI[i] *= valueSI);
     }
 
     /** {@inheritDoc} */
@@ -240,16 +206,6 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
                     .forEach(c -> dm[r * this.cols + c] = this.matrixSI[r * this.cols + c] / right.getSI(r, c)));
         }
         return new DoubleMatrixDataDense(dm, this.rows, this.cols);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final DoubleMatrixDataDense divideBy(final DoubleMatrixData right) throws ValueRuntimeException
-    {
-        checkSizes(right);
-        IntStream.range(0, this.rows).parallel().forEach(
-                r -> IntStream.range(0, this.cols).forEach(c -> this.matrixSI[r * this.cols + c] /= right.getSI(r, c)));
-        return this;
     }
 
     /** {@inheritDoc} */

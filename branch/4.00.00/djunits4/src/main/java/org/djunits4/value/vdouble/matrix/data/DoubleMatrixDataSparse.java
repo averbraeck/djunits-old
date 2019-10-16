@@ -453,44 +453,6 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
         return atomicLength.get();
     }
 
-    // /**
-    // * Calculate the number of non-zero values in a double[] vector.
-    // * @param valuesSI double[]; the double[] vector
-    // * @return the number of non-zero values in the double[] vector
-    // */
-    // private static int nonZero(final double[] valuesSI)
-    // {
-    // return (int) Arrays.stream(valuesSI).parallel().filter(d -> d != 0.0).count();
-    // }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void incrementBy(final DoubleMatrixData right) throws ValueRuntimeException
-    {
-        assign(new DoubleFunction2()
-        {
-            @Override
-            public double apply(double leftValue, double rightValue)
-            {
-                return leftValue + rightValue;
-            }
-        }, right);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void decrementBy(final DoubleMatrixData right) throws ValueRuntimeException
-    {
-        assign(new DoubleFunction2()
-        {
-            @Override
-            public double apply(double leftValue, double rightValue)
-            {
-                return leftValue - rightValue;
-            }
-        }, right);
-    }
-
     /** {@inheritDoc} */
     @Override
     public DoubleMatrixDataSparse times(final DoubleMatrixData right) throws ValueRuntimeException
@@ -499,35 +461,6 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
         DoubleMatrixDataSparse result = this.copy();
         result.multiplyBy(right);
         return result;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final DoubleMatrixDataSparse multiplyBy(final DoubleMatrixData right) throws ValueRuntimeException
-    {
-        return assign(new DoubleFunction2()
-        {
-
-            @Override
-            public double apply(double leftValue, double rightValue)
-            {
-                return leftValue * rightValue;
-            }
-        }, right);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public void multiplyBy(double valueSI)
-    {
-        assign(new DoubleFunction()
-        {
-            @Override
-            public double apply(double value)
-            {
-                return value * valueSI;
-            }
-        });
     }
 
     /** {@inheritDoc} */
@@ -542,34 +475,6 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
         // Sparse divided by dense makes a sparse
         checkSizes(right);
         return this.copy().divideBy(right);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final DoubleMatrixDataSparse divideBy(final DoubleMatrixData right) throws ValueRuntimeException
-    {
-        return assign(new DoubleFunction2()
-        {
-            @Override
-            public double apply(double leftValue, double rightValue)
-            {
-                return leftValue / rightValue;
-            }
-        }, right);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public void divideBy(double valueSI)
-    {
-        assign(new DoubleFunction()
-        {
-            @Override
-            public double apply(double value)
-            {
-                return value / valueSI;
-            }
-        });
     }
 
     /*

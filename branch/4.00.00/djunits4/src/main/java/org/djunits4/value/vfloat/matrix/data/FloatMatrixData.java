@@ -353,7 +353,17 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      * @param right FloatMatrixData; the other data object to add
      * @throws ValueRuntimeException if matrices have different lengths
      */
-    public abstract void incrementBy(FloatMatrixData right) throws ValueRuntimeException;
+    public final void incrementBy(final FloatMatrixData right) throws ValueRuntimeException
+    {
+        assign(new FloatFunction2()
+        {
+            @Override
+            public float apply(float leftValue, float rightValue)
+            {
+                return leftValue + rightValue;
+            }
+        }, right);
+    }
 
     /**
      * Subtract two matrices on a cell-by-cell basis. If both matrices are sparse, a sparse matrix is returned, otherwise a
@@ -380,7 +390,17 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      * @param right FloatMatrixData; the other data object to subtract
      * @throws ValueRuntimeException if matrices have different lengths
      */
-    public abstract void decrementBy(FloatMatrixData right) throws ValueRuntimeException;
+    public final void decrementBy(final FloatMatrixData right) throws ValueRuntimeException
+    {
+        assign(new FloatFunction2()
+        {
+            @Override
+            public float apply(float leftValue, float rightValue)
+            {
+                return leftValue - rightValue;
+            }
+        }, right);
+    }
 
     /**
      * Multiply two matrices on a cell-by-cell basis. If both matrices are dense, a dense matrix is returned, otherwise a sparse
@@ -398,13 +418,33 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      * @return FloatMatrixData; this modified data store
      * @throws ValueRuntimeException if matrices have different sizes
      */
-    public abstract FloatMatrixData multiplyBy(FloatMatrixData right) throws ValueRuntimeException;
+    public final FloatMatrixData multiplyBy(final FloatMatrixData right) throws ValueRuntimeException
+    {
+        return assign(new FloatFunction2()
+        {
+            @Override
+            public float apply(float leftValue, float rightValue)
+            {
+                return leftValue * rightValue;
+            }
+        }, right);
+    }
 
     /**
      * Multiply the values of this matrix with a number on a cell-by-cell basis.
      * @param valueSI float; the value to multiply with
      */
-    public abstract void multiplyBy(float valueSI);
+    public final void multiplyBy(final float valueSI)
+    {
+        assign(new FloatFunction()
+        {
+            @Override
+            public float apply(float value)
+            {
+                return value * valueSI;
+            }
+        });
+    }
 
     /**
      * Divide two matrices on a cell-by-cell basis. If both matrices are dense, a dense matrix is returned, otherwise a sparse
@@ -422,13 +462,31 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      * @return FloatMatrixData; this modified data store
      * @throws ValueRuntimeException if matrices have different sizes
      */
-    public abstract FloatMatrixData divideBy(FloatMatrixData right) throws ValueRuntimeException;
+    public final FloatMatrixData divideBy(final FloatMatrixData right) throws ValueRuntimeException
+    {
+        return assign(new FloatFunction2()
+        {
+            @Override
+            public float apply(float leftValue, float rightValue)
+            {
+                return leftValue / rightValue;
+            }
+        }, right);
+    }
 
     /**
      * Divide the values of this matrix by a number on a cell-by-cell basis.
      * @param valueSI float; the value to multiply with
      */
-    public abstract void divideBy(float valueSI);
+    public final void divideBy(final float valueSI)
+    {
+        assign(new FloatFunction() {
+            @Override
+            public float apply(float value)
+            {
+                return value / valueSI;
+            }});
+    }
 
     /* ============================================================================================ */
     /* =============================== EQUALS, HASHCODE, TOSTRING ================================= */

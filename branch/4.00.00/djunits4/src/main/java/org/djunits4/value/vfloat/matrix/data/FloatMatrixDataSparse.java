@@ -453,69 +453,12 @@ public class FloatMatrixDataSparse extends FloatMatrixData
 
     /** {@inheritDoc} */
     @Override
-    public final void incrementBy(final FloatMatrixData right) throws ValueRuntimeException
-    {
-        assign(new FloatFunction2()
-        {
-            @Override
-            public float apply(float leftValue, float rightValue)
-            {
-                return leftValue + rightValue;
-            }
-        }, right);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void decrementBy(final FloatMatrixData right) throws ValueRuntimeException
-    {
-        assign(new FloatFunction2()
-        {
-            @Override
-            public float apply(float leftValue, float rightValue)
-            {
-                return leftValue - rightValue;
-            }
-        }, right);
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public FloatMatrixDataSparse times(final FloatMatrixData right) throws ValueRuntimeException
     {
         checkSizes(right);
         FloatMatrixDataSparse result = this.copy();
         result.multiplyBy(right);
         return result;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatMatrixData multiplyBy(final FloatMatrixData right) throws ValueRuntimeException
-    {
-        return assign(new FloatFunction2()
-        {
-
-            @Override
-            public float apply(float leftValue, float rightValue)
-            {
-                return leftValue * rightValue;
-            }
-        }, right);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void multiplyBy(final float valueSI)
-    {
-        assign(new FloatFunction()
-        {
-            @Override
-            public float apply(float value)
-            {
-                return value * valueSI;
-            }
-        });
     }
 
     /** {@inheritDoc} */
@@ -530,58 +473,6 @@ public class FloatMatrixDataSparse extends FloatMatrixData
         // Sparse divided by dense makes a sparse
         checkSizes(right);
         return this.copy().divideBy(right);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatMatrixDataSparse divideBy(final FloatMatrixData right) throws ValueRuntimeException
-    {
-        return assign(new FloatFunction2()
-        {
-            @Override
-            public float apply(float leftValue, float rightValue)
-            {
-                return leftValue / rightValue;
-            }
-        }, right);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final void divideBy(final float valueSI)
-    {
-        int newLength = 0;
-        for (int r = 0; r < rows(); r++)
-        {
-            for (int c = 0; c < cols(); c++)
-            {
-                if (this.getSI(r, c) / valueSI != 0.0)
-                {
-                    newLength++;
-                }
-            }
-        }
-        float[] newMatrixSI = new float[newLength];
-        long[] newIndices = new long[newLength];
-
-        // fill the sparse data structures. Cannot be parallelized because of stateful and sequence-sensitive count
-        int count = 0;
-        for (int r = 0; r < rows(); r++)
-        {
-            for (int c = 0; c < cols(); c++)
-            {
-                float value = this.getSI(r, c) / valueSI;
-                if (value != 0.0)
-                {
-                    int index = r * cols() + c;
-                    newMatrixSI[count] = value;
-                    newIndices[count] = index;
-                    count++;
-                }
-            }
-        }
-        this.indices = newIndices;
-        this.matrixSI = newMatrixSI;
     }
 
     /*

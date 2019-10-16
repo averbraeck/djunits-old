@@ -344,7 +344,17 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
      * @param right DoubleMatrixData; the other data object to add
      * @throws ValueRuntimeException if matrices have different lengths
      */
-    public abstract void incrementBy(DoubleMatrixData right) throws ValueRuntimeException;
+    public final void incrementBy(final DoubleMatrixData right) throws ValueRuntimeException
+    {
+        assign(new DoubleFunction2()
+        {
+            @Override
+            public double apply(double leftValue, double rightValue)
+            {
+                return leftValue + rightValue;
+            }
+        }, right);
+    }
 
     /**
      * Subtract two matrices on a cell-by-cell basis. If both matrices are sparse, a sparse matrix is returned, otherwise a
@@ -371,7 +381,17 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
      * @param decrement DoubleMatrixData; the amount to subtract
      * @throws ValueRuntimeException if matrices have different sizes
      */
-    public abstract void decrementBy(DoubleMatrixData decrement) throws ValueRuntimeException;
+    public final void decrementBy(final DoubleMatrixData decrement) throws ValueRuntimeException
+    {
+        assign(new DoubleFunction2()
+        {
+            @Override
+            public double apply(double leftValue, double rightValue)
+            {
+                return leftValue - rightValue;
+            }
+        }, decrement);
+    }
 
     /**
      * Multiply two matrices on a cell-by-cell basis. If both matrices are dense, a dense matrix is returned, otherwise a sparse
@@ -389,13 +409,34 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
      * @return DoubleMatrixData; this modified data store
      * @throws ValueRuntimeException if matrices have different lengths
      */
-    public abstract DoubleMatrixData multiplyBy(DoubleMatrixData right) throws ValueRuntimeException;
+    public final DoubleMatrixData multiplyBy(final DoubleMatrixData right) throws ValueRuntimeException
+    {
+        return assign(new DoubleFunction2()
+        {
+
+            @Override
+            public double apply(double leftValue, double rightValue)
+            {
+                return leftValue * rightValue;
+            }
+        }, right);
+    }
 
     /**
      * Multiply the values of this matrix with a number on a cell-by-cell basis.
      * @param valueSI double; the value to multiply with
      */
-    public abstract void multiplyBy(final double valueSI);
+    public final void multiplyBy(double valueSI)
+    {
+        assign(new DoubleFunction()
+        {
+            @Override
+            public double apply(double value)
+            {
+                return value * valueSI;
+            }
+        });
+    }
 
     /**
      * Divide two matrices on a cell-by-cell basis. If this matrix is sparse and <code>right</code> is dense, a sparse matrix is
@@ -413,16 +454,34 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
      * @return DoubleMatrixData; this modified data store
      * @throws ValueRuntimeException if matrices have different sizes
      */
-    public abstract DoubleMatrixData divideBy(DoubleMatrixData right) throws ValueRuntimeException;
+    public final DoubleMatrixData divideBy(final DoubleMatrixData right) throws ValueRuntimeException
+    {
+        return assign(new DoubleFunction2()
+        {
+            @Override
+            public double apply(double leftValue, double rightValue)
+            {
+                return leftValue / rightValue;
+            }
+        }, right);
+    }
 
     /**
      * Divide the values of this matrix by a number on a cell-by-cell basis.
      * @param valueSI double; the value to multiply with
      */
-    public void divideBy(final double valueSI)
+    public final void divideBy(double valueSI)
     {
-        IntStream.range(0, this.matrixSI.length).parallel().forEach(i -> this.matrixSI[i] /= valueSI);
+        assign(new DoubleFunction()
+        {
+            @Override
+            public double apply(double value)
+            {
+                return value / valueSI;
+            }
+        });
     }
+
 
     /* ============================================================================================ */
     /* =============================== EQUALS, HASHCODE, TOSTRING ================================= */
