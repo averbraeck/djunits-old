@@ -16,6 +16,7 @@ import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vdouble.scalar.Area;
 import org.djunits4.value.vdouble.scalar.Length;
+import org.djunits4.value.vdouble.scalar.SIScalar;
 import org.djunits4.value.vdouble.vector.base.DoubleVector;
 import org.junit.Test;
 
@@ -378,6 +379,7 @@ public class DoubleVectorInstantiateTest
         assertEquals(100, si10dd.cardinality());
         assertEquals(50 * 101, si10dd.zSum().getSI(), 0.001);
         assertEquals("m2/s3", si10dd.getDisplayUnit().getUnitBase().getSiDimensions().toString(true, false, false));
+        assertEquals("getScalarClass returns SIScalar", SIScalar.class, si10dd.getScalarClass());
 
         SIVector si10ds = DoubleVector.instantiate(DOUBLEVECTOR.denseArray(100), SIUnit.of("m2/s3"), StorageType.SPARSE);
         assertEquals(100, si10ds.size());

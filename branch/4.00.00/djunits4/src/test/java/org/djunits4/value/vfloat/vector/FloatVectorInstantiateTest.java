@@ -16,6 +16,7 @@ import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatArea;
 import org.djunits4.value.vfloat.scalar.FloatLength;
+import org.djunits4.value.vfloat.scalar.FloatSIScalar;
 import org.djunits4.value.vfloat.vector.base.FloatVector;
 import org.junit.Test;
 
@@ -378,6 +379,7 @@ public class FloatVectorInstantiateTest
         assertEquals(100, si10dd.cardinality());
         assertEquals(50 * 101, si10dd.zSum().getSI(), 0.001);
         assertEquals("m2/s3", si10dd.getDisplayUnit().getUnitBase().getSiDimensions().toString(true, false, false));
+        assertEquals("getScalarClass returns FloatSIScalar", FloatSIScalar.class, si10dd.getScalarClass());
 
         FloatSIVector si10ds = FloatVector.instantiate(FLOATVECTOR.denseArray(100), SIUnit.of("m2/s3"), StorageType.SPARSE);
         assertEquals(100, si10ds.size());
