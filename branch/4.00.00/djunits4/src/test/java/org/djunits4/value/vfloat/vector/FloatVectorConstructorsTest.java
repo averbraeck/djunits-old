@@ -9,6 +9,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -28,6 +29,7 @@ import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.base.Scalar;
 import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.scalar.FloatAbsoluteTemperature;
+import org.djunits4.value.vfloat.scalar.FloatSIScalar;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalar;
 import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorRel;
 import org.djunits4.value.vfloat.vector.base.FloatVector;
@@ -574,6 +576,7 @@ public class FloatVectorConstructorsTest
      * @throws ValueRuntimeException if that happens uncaught; this test has failed
      * @throws ClassNotFoundException if that happens uncaught; this test has failed
      */
+    @SuppressWarnings("unlikely-arg-type")
     @Test
     public void siVectorTest() throws ValueRuntimeException, UnitException, ClassNotFoundException
     {
@@ -593,6 +596,7 @@ public class FloatVectorConstructorsTest
             Unit standardUnit = unitBase.getStandardUnit();
             float[] testValues = new float[] { 0, 123.456f, 0, 0, 234.567f, 0 };
             int cardinality = 0;
+            double zSum = 0;
             List<Float> list = new ArrayList<>();
             SortedMap<Integer, Float> map = new TreeMap<>();
             for (int index = 0; index < testValues.length; index++)
@@ -601,6 +605,7 @@ public class FloatVectorConstructorsTest
                 if (0.0 != value)
                 {
                     cardinality++;
+                    zSum += value;
                     map.put(index, value);
                 }
                 list.add(value);
@@ -613,9 +618,8 @@ public class FloatVectorConstructorsTest
                 // assertEquals("Underlying standardUnit must match", standardUnit, siv.getUnit());
                 assertEquals("StorageType must match", storageType, siv.getStorageType());
                 assertEquals("Cardinality", cardinality, siv.cardinality());
-                // String scalarClassName = "org.djunits4.value.vfloat.scalar." + className;
-                // Class<?> scalarClass = Class.forName(scalarClassName);
-                // assertEquals("getScalarClass", scalarClass, siv.getScalarClass());
+                assertEquals("zSum", zSum, siv.zSum().getSI(), 0.001);
+                assertEquals("getScalarClass return FloatSIScalar", FloatSIScalar.class, siv.getScalarClass());
                 try
                 {
                     siv.ceil();
@@ -626,12 +630,28 @@ public class FloatVectorConstructorsTest
                     // Ignore expected exception
                 }
                 FloatSIVector mutable = siv.mutable();
+                assertTrue("vector is equal to itself", siv.equals(siv));
+                assertTrue("vector and mutable vector are considered equal", siv.equals(mutable));
+                assertTrue("vector and mutable vector are considered equal (symmetry)", mutable.equals(siv));
+                assertFalse("vector is not equal to null", siv.equals(null));
+                assertFalse("vector is not equal to some other object", siv.equals("hello world"));
                 mutable.ceil();
+                assertFalse("vector is not equal to ceil of vector", siv.equals(mutable));
                 for (int index = 0; index < testValues.length; index++)
                 {
                     assertEquals("ceil", Math.ceil(testValues[index]), mutable.getInUnit(index), 0.001);
                 }
                 FloatVectorInterface<?, ?, ?> immutable = siv.immutable();
+                try
+                {
+                    immutable.abs();
+                    fail("double vector should be immutable");
+                }
+                catch (ValueRuntimeException vre)
+                {
+                    // Ignore expected exception
+                }
+
                 try
                 {
                     immutable.ceil();
@@ -641,6 +661,7 @@ public class FloatVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
+                
                 try
                 {
                     siv.floor();
@@ -650,6 +671,7 @@ public class FloatVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
+                
                 try
                 {
                     siv.rint();
@@ -659,6 +681,7 @@ public class FloatVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
+                
                 try
                 {
                     siv.neg();
@@ -668,11 +691,18 @@ public class FloatVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
+                
                 mutable = siv.mutable().mutable();
                 mutable.floor();
                 for (int index = 0; index < testValues.length; index++)
                 {
                     assertEquals("floor", Math.floor(testValues[index]), mutable.getInUnit(index), 0.001);
+                }
+                mutable = siv.mutable();
+                mutable.abs();
+                for (int index = 0; index < testValues.length; index++)
+                {
+                    assertEquals("abs", Math.abs(testValues[index]), mutable.getInUnit(index), 0.001);
                 }
                 mutable = siv.mutable();
                 mutable.rint();
@@ -687,19 +717,37 @@ public class FloatVectorConstructorsTest
                     assertEquals("neg", -testValues[index], mutable.getInUnit(index), 0.001);
                 }
                 int nextIndex = 0;
-                for (Iterator<?> iterator = siv.iterator(); iterator.hasNext();)
+                Iterator<?> iterator;
+                for (iterator = siv.iterator(); iterator.hasNext();)
                 {
                     AbstractFloatScalar<?, ?> s = (AbstractFloatScalar<?, ?>) iterator.next();
                     assertEquals("SIDimensions match", s.getDisplayUnit().getUnitBase().getSiDimensions(),
                             unitBase.getSiDimensions());
                     assertEquals("value of scalar matches", s.getInUnit(), testValues[nextIndex], 0.001);
                     nextIndex++;
+                    try
+                    {
+                        iterator.remove();
+                        fail("Removal of elements should not work in this iterator");
+                    }
+                    catch (RuntimeException rte)
+                    {
+                        // Ignore expected exception
+                    }
                 }
+                try
+                {
+                    iterator.next();
+                    fail("another call to next should have thrown a NoSuchElementException");
+                }
+                catch (NoSuchElementException nsee)
+                {
+                    // Ignore expected exception
+                }
+                siv = FloatSIVector.instantiate(map, testValues.length, SIUnit.of(unitBase.getSiDimensions()), storageType);
+                compareValues(testValues, siv.getValuesSI());
                 siv = FloatVector.instantiate(list, SIUnit.of(unitBase.getSiDimensions()), storageType);
                 compareValues(testValues, siv.getValuesSI());
-                siv = FloatVector.instantiate(map, testValues.length, SIUnit.of(unitBase.getSiDimensions()), storageType);
-                compareValues(testValues, siv.getValuesSI());
-                // System.out.println("Creating FloatSIVector for unit " + standardUnit.getId());
                 siv = FloatSIVector.of(testValues, standardUnit.getUnitBase().getSiDimensions().toString(true, true, true),
                         storageType);
                 compareValues(testValues, siv.getValuesSI());

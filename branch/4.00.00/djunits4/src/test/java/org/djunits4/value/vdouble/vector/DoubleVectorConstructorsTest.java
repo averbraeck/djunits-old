@@ -625,9 +625,6 @@ public class DoubleVectorConstructorsTest
                 assertEquals("Cardinality", cardinality, siv.cardinality());
                 assertEquals("zSum", zSum, siv.zSum().getSI(), 0.001);
                 assertEquals("getScalarClass return SIScalar", SIScalar.class, siv.getScalarClass());
-                // String scalarClassName = "org.djunits4.value.vdouble.scalar." + className;
-                // Class<?> scalarClass = Class.forName(scalarClassName);
-                // assertEquals("getScalarClass", scalarClass, siv.getScalarClass());
                 try
                 {
                     siv.ceil();
@@ -642,7 +639,7 @@ public class DoubleVectorConstructorsTest
                 assertTrue("vector and mutable vector are considered equal", siv.equals(mutable));
                 assertTrue("vector and mutable vector are considered equal (symmetry)", mutable.equals(siv));
                 assertFalse("vector is not equal to null", siv.equals(null));
-                assertFalse("vecktor is not equal to some other object", siv.equals("hello world"));
+                assertFalse("vector is not equal to some other object", siv.equals("hello world"));
                 mutable.ceil();
                 assertFalse("vector is not equal to ceil of vector", siv.equals(mutable));
                 for (int index = 0; index < testValues.length; index++)
@@ -752,11 +749,10 @@ public class DoubleVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
-                siv = SIVector.instantiate(list, SIUnit.of(unitBase.getSiDimensions()), storageType);
-                compareValues(testValues, siv.getValuesSI());
                 siv = SIVector.instantiate(map, testValues.length, SIUnit.of(unitBase.getSiDimensions()), storageType);
                 compareValues(testValues, siv.getValuesSI());
-                // System.out.println("Creating SIVector for unit " + standardUnit.getId());
+                siv = SIVector.instantiate(list, SIUnit.of(unitBase.getSiDimensions()), storageType);
+                compareValues(testValues, siv.getValuesSI());
                 siv = SIVector.of(testValues, standardUnit.getUnitBase().getSiDimensions().toString(true, true, true),
                         storageType);
                 compareValues(testValues, siv.getValuesSI());
