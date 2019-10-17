@@ -920,20 +920,21 @@ public class FloatVectorConstructorsTest
         {
             testValues[i] = i % 3 != 0 ? 0f : (100.0f + i);
         }
-        FloatAbsoluteTemperature[] at = new FloatAbsoluteTemperature[testValues.length];
         List<FloatAbsoluteTemperature> al = new ArrayList<>();
         List<Float> fl = new ArrayList<>();
+        FloatAbsoluteTemperature[] at = new FloatAbsoluteTemperature[testValues.length];
         SortedMap<Integer, FloatAbsoluteTemperature> map = new TreeMap<>();
         for (int i = 0; i < testValues.length; i++)
         {
             FloatAbsoluteTemperature value = new FloatAbsoluteTemperature(testValues[i], AbsoluteTemperatureUnit.KELVIN);
-            at[i] = value;
             al.add(value);
             fl.add(testValues[i]);
             if (0.0 != value.si)
             {
                 map.put(i, value);
             }
+            value = new FloatAbsoluteTemperature(testValues[i], AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT);
+            at[i] = value;
         }
         for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
@@ -948,6 +949,8 @@ public class FloatVectorConstructorsTest
                 compareValues(testValues, atv.getValuesSI());
                 atv = FloatVector.instantiateMap(map, testValues.length, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
+                atv = FloatVector.instantiate(at, temperatureUnit, storageType);
+                compareValues(testValues, atv.getValuesInUnit(AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT));
             }
         }
     }

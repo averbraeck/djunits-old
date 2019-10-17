@@ -1001,20 +1001,21 @@ public class DoubleVectorConstructorsTest
         {
             testValues[i] = i % 3 != 0 ? 0 : (100.0 + i);
         }
-        AbsoluteTemperature[] at = new AbsoluteTemperature[testValues.length];
         List<AbsoluteTemperature> al = new ArrayList<>();
         List<Double> dl = new ArrayList<>();
         SortedMap<Integer, AbsoluteTemperature> map = new TreeMap<>();
+        AbsoluteTemperature[] at = new AbsoluteTemperature[testValues.length];
         for (int i = 0; i < testValues.length; i++)
         {
             AbsoluteTemperature value = new AbsoluteTemperature(testValues[i], AbsoluteTemperatureUnit.KELVIN);
-            at[i] = value;
             al.add(value);
             dl.add(testValues[i]);
             if (0.0 != value.si)
             {
                 map.put(i, value);
             }
+            value = new AbsoluteTemperature(testValues[i], AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT);
+            at[i] = value;
         }
         for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
@@ -1029,6 +1030,8 @@ public class DoubleVectorConstructorsTest
                 compareValues(testValues, atv.getValuesSI());
                 atv = DoubleVector.instantiateMap(map, testValues.length, temperatureUnit, storageType);
                 compareValues(testValues, atv.getValuesSI());
+                atv = DoubleVector.instantiate(at, temperatureUnit, storageType);
+                compareValues(testValues, atv.getValuesInUnit(AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT));
             }
         }
     }
