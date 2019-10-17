@@ -21,6 +21,8 @@ import org.djunits4.unit.util.UnitException;
 import org.djunits4.unit.util.UnitRuntimeException;
 import org.djunits4.value.CLASSNAMES;
 import org.djunits4.value.storage.StorageType;
+import org.djunits4.value.vdouble.function.DoubleFunction;
+import org.djunits4.value.vdouble.function.DoubleMathFunctions;
 import org.djunits4.value.vdouble.scalar.Dimensionless;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarAbs;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
@@ -174,6 +176,74 @@ public class DoubleSIVectorTest
         assertEquals(0.0, pdiff.cardinality(), 0.0001);
         LengthVector ldiff = pv.minus(pv);
         assertEquals(0.0, ldiff.cardinality(), 0.0001);
+    }
+
+    /**
+     * Test the methods that are only implemented in DimensionLess vectors.
+     */
+    @Test
+    public void testDimensionLess()
+    {
+        double[] denseTestData = DOUBLEVECTOR.denseArray(50);
+        // put at least one negative value in the test data
+        denseTestData[5] = -123d;
+        // put a zero value in the test data
+        denseTestData[10] = 0d;
+        DimensionlessVector dlv =
+                DoubleVector.instantiate(denseTestData, DimensionlessUnit.BASE.getStandardUnit(), StorageType.DENSE);
+        verifyDimensionLessVector(denseTestData, new DoubleFunction()
+        {
+            @Override
+            public double apply(double value)
+            {
+                return value;
+            }
+        }, dlv);
+        verifyDimensionLessVector(denseTestData, DoubleMathFunctions.ABS, dlv.mutable().abs());
+        verifyDimensionLessVector(denseTestData, DoubleMathFunctions.ACOS, dlv.mutable().acos());
+        verifyDimensionLessVector(denseTestData, DoubleMathFunctions.ASIN, dlv.mutable().asin());
+        verifyDimensionLessVector(denseTestData, DoubleMathFunctions.ATAN, dlv.mutable().atan());
+        verifyDimensionLessVector(denseTestData, DoubleMathFunctions.CBRT, dlv.mutable().cbrt());
+        verifyDimensionLessVector(denseTestData, DoubleMathFunctions.CEIL, dlv.mutable().ceil());
+        verifyDimensionLessVector(denseTestData, DoubleMathFunctions.COS, dlv.mutable().cos());
+        verifyDimensionLessVector(denseTestData, DoubleMathFunctions.COSH, dlv.mutable().cosh());
+        verifyDimensionLessVector(denseTestData, DoubleMathFunctions.EXP, dlv.mutable().exp());
+        verifyDimensionLessVector(denseTestData, DoubleMathFunctions.EXPM1, dlv.mutable().expm1());
+        verifyDimensionLessVector(denseTestData, DoubleMathFunctions.FLOOR, dlv.mutable().floor());
+        verifyDimensionLessVector(denseTestData, DoubleMathFunctions.INV, dlv.mutable().inv());
+        verifyDimensionLessVector(denseTestData, DoubleMathFunctions.LOG, dlv.mutable().log());
+        verifyDimensionLessVector(denseTestData, DoubleMathFunctions.LOG10, dlv.mutable().log10());
+        verifyDimensionLessVector(denseTestData, DoubleMathFunctions.LOG1P, dlv.mutable().log1p());
+        verifyDimensionLessVector(denseTestData, DoubleMathFunctions.NEG, dlv.mutable().neg());
+        verifyDimensionLessVector(denseTestData, DoubleMathFunctions.RINT, dlv.mutable().rint());
+        verifyDimensionLessVector(denseTestData, DoubleMathFunctions.SIGNUM, dlv.mutable().signum());
+        verifyDimensionLessVector(denseTestData, DoubleMathFunctions.SIN, dlv.mutable().sin());
+        verifyDimensionLessVector(denseTestData, DoubleMathFunctions.SINH, dlv.mutable().sinh());
+        verifyDimensionLessVector(denseTestData, DoubleMathFunctions.SQRT, dlv.mutable().sqrt());
+        verifyDimensionLessVector(denseTestData, DoubleMathFunctions.TAN, dlv.mutable().tan());
+        verifyDimensionLessVector(denseTestData, DoubleMathFunctions.TANH, dlv.mutable().tanh());
+        verifyDimensionLessVector(denseTestData, DoubleMathFunctions.POW((float) Math.PI), dlv.mutable().pow(Math.PI));
+    }
+
+    /**
+     * Verify the contents of a FloatDimensionlessVector.
+     * @param reference float[]; the values on which the <code>operation</code> needs to be applied to get the values that must
+     *            be verified
+     * @param operation FloatFunction; the operation that converts the <code>reference</code> values to the values that must be
+     *            verified
+     * @param got FloatDimensionlessVector; the values that must be verified
+     */
+    public static void verifyDimensionLessVector(double[] reference, DoubleFunction operation, DimensionlessVector got)
+    {
+        assertEquals("row count matches", reference.length, got.size());
+        assertEquals("unit is DimensionLessUnit", DimensionlessUnit.BASE.getStandardUnit(),
+                got.getDisplayUnit().getStandardUnit());
+        for (int index = 0; index < reference.length; index++)
+        {
+            double expect = operation.apply(reference[index]);
+            double tolerance = Math.abs(expect / 10000d);
+            assertEquals("value must match", expect, got.getSI(index), tolerance);
+        }
     }
 
 }
