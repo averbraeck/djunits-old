@@ -7,16 +7,25 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.djunits4.Try;
+import org.djunits4.unit.AbsoluteTemperatureUnit;
+import org.djunits4.unit.AngleUnit;
 import org.djunits4.unit.AreaUnit;
+import org.djunits4.unit.DirectionUnit;
 import org.djunits4.unit.DurationUnit;
 import org.djunits4.unit.LengthUnit;
+import org.djunits4.unit.PositionUnit;
+import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.TimeUnit;
 import org.djunits4.unit.util.UnitException;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vfloat.function.FloatMathFunctions;
+import org.djunits4.value.vfloat.scalar.FloatAbsoluteTemperature;
 import org.djunits4.value.vfloat.scalar.FloatArea;
+import org.djunits4.value.vfloat.scalar.FloatDirection;
 import org.djunits4.value.vfloat.scalar.FloatDuration;
+import org.djunits4.value.vfloat.scalar.FloatPosition;
+import org.djunits4.value.vfloat.scalar.FloatTime;
 import org.djunits4.value.vfloat.vector.base.FloatVector;
 import org.djunits4.value.vfloat.vector.data.FloatVectorData;
 import org.junit.Test;
@@ -503,18 +512,18 @@ public class FloatVectorMethodTest
     public void testSpecialVectorMethodsRelWithAbs()
     {
         float[] denseTestData = FLOATVECTOR.denseArray(105);
-        FloatTimeVector tm = FloatVector.instantiate(
+        FloatTimeVector tv = FloatVector.instantiate(
                 FloatVectorData.instantiate(denseTestData, TimeUnit.DEFAULT.getScale(), StorageType.DENSE), TimeUnit.DEFAULT);
-        FloatDurationVector dm = FloatVector.instantiate(
+        FloatDurationVector dv = FloatVector.instantiate(
                 FloatVectorData.instantiate(denseTestData, DurationUnit.MINUTE.getScale(), StorageType.DENSE),
                 DurationUnit.SECOND);
-        assertTrue(tm.isAbsolute());
-        assertFalse(dm.isAbsolute());
-        assertFalse(tm.isRelative());
-        assertTrue(dm.isRelative());
+        assertTrue(tv.isAbsolute());
+        assertFalse(dv.isAbsolute());
+        assertFalse(tv.isRelative());
+        assertTrue(dv.isRelative());
 
-        FloatTimeVector absPlusRel = tm.plus(dm);
-        FloatTimeVector absMinusRel = tm.minus(dm);
+        FloatTimeVector absPlusRel = tv.plus(dv);
+        FloatTimeVector absMinusRel = tv.minus(dv);
         float[] halfDenseData = FLOATVECTOR.denseArray(105);
         for (int index = 0; index < halfDenseData.length; index++)
         {
@@ -522,10 +531,10 @@ public class FloatVectorMethodTest
         }
         FloatTimeVector halfTimeVector = FloatVector.instantiate(
                 FloatVectorData.instantiate(halfDenseData, TimeUnit.DEFAULT.getScale(), StorageType.DENSE), TimeUnit.DEFAULT);
-        FloatDurationVector absMinusAbs = tm.minus(halfTimeVector);
-        FloatTimeVector absDecByRelS = tm.mutable().decrementBy(FloatDuration.of(1.0f, "min"));
-        FloatTimeVector absDecByRelM = tm.mutable().decrementBy(dm.divide(2.0d));
-        FloatTimeVector relPlusAbs = dm.plus(tm);
+        FloatDurationVector absMinusAbs = tv.minus(halfTimeVector);
+        FloatTimeVector absDecByRelS = tv.mutable().decrementBy(FloatDuration.of(1.0f, "min"));
+        FloatTimeVector absDecByRelM = tv.mutable().decrementBy(dv.divide(2.0d));
+        FloatTimeVector relPlusAbs = dv.plus(tv);
         for (int index = 0; index < denseTestData.length; index++)
         {
             assertEquals("absPlusRel", 61.0 * denseTestData[index], absPlusRel.getSI(index), 0.01);
@@ -542,7 +551,7 @@ public class FloatVectorMethodTest
                     FloatVectorData.instantiate(other, TimeUnit.DEFAULT.getScale(), StorageType.DENSE), TimeUnit.DEFAULT);
             try
             {
-                tm.mutable().minus(wrongTimeVector);
+                tv.mutable().minus(wrongTimeVector);
                 fail("Mismatching size should have thrown a ValueRuntimeException");
             }
             catch (ValueRuntimeException vre)
@@ -553,6 +562,84 @@ public class FloatVectorMethodTest
         assertTrue("toString returns something informative",
                 FloatVectorData.instantiate(denseTestData, TimeUnit.DEFAULT.getScale(), StorageType.DENSE).toString()
                         .startsWith("FloatVectorData"));
+    }
+
+    /**
+     * Test the instantiateAbs method and instantiateScalarAbsSI method.
+     */
+    @Test
+    public void testInstantiateAbs()
+    {
+        float[] denseTestData = FLOATVECTOR.denseArray(105);
+        FloatTimeVector timeVector = FloatVector.instantiate(
+                FloatVectorData.instantiate(denseTestData, TimeUnit.DEFAULT.getScale(), StorageType.DENSE), TimeUnit.DEFAULT);
+        FloatDurationVector durationVector = FloatVector.instantiate(
+                FloatVectorData.instantiate(denseTestData, DurationUnit.MINUTE.getScale(), StorageType.DENSE),
+                DurationUnit.SECOND);
+
+        float[] halfDenseData = FLOATVECTOR.denseArray(105);
+        for (int index = 0; index < halfDenseData.length; index++)
+        {
+            halfDenseData[index] *= 0.5;
+        }
+        FloatTimeVector relPlusAbsTime = durationVector.plus(timeVector);
+        for (int index = 0; index < denseTestData.length; index++)
+        {
+            assertEquals("relPlusAbsTime", 61.0 * denseTestData[index], relPlusAbsTime.getSI(index), 0.01);
+        }
+        FloatTime floatTime = durationVector.instantiateScalarAbsSI(123.456f, TimeUnit.EPOCH_DAY);
+        assertEquals("Unit of instantiateScalarAbsSI matches", TimeUnit.EPOCH_DAY, floatTime.getDisplayUnit());
+        assertEquals("Value of instantiateScalarAbsSI matches", 123.456f, floatTime.si, 0.1);
+
+        FloatAngleVector angleVector = FloatVector.instantiate(
+                FloatVectorData.instantiate(denseTestData, AngleUnit.DEGREE.getScale(), StorageType.DENSE), AngleUnit.DEGREE);
+        FloatDirectionVector directionVector = FloatVector.instantiate(
+                FloatVectorData.instantiate(denseTestData, DirectionUnit.EAST_DEGREE.getScale(), StorageType.DENSE),
+                DirectionUnit.EAST_DEGREE);
+
+        FloatDirectionVector relPlusAbsDirection = angleVector.plus(directionVector);
+        for (int index = 0; index < denseTestData.length; index++)
+        {
+            assertEquals("relPlusAbsDirection", 2.0 / 180 * Math.PI * denseTestData[index], relPlusAbsDirection.getSI(index),
+                    0.01);
+        }
+        FloatDirection floatDirection = angleVector.instantiateScalarAbsSI(123.456f, DirectionUnit.NORTH_RADIAN);
+        assertEquals("Unit of instantiateScalarAbsSI matches", DirectionUnit.NORTH_RADIAN, floatDirection.getDisplayUnit());
+        assertEquals("Value of instantiateScalarAbsSI matches", 123.456f, floatDirection.si, 0.1);
+
+        FloatTemperatureVector temperatureVector = FloatVector.instantiate(
+                FloatVectorData.instantiate(denseTestData, TemperatureUnit.DEGREE_FAHRENHEIT.getScale(), StorageType.DENSE),
+                TemperatureUnit.DEGREE_FAHRENHEIT);
+        FloatAbsoluteTemperatureVector absoluteTemperatureVector = FloatVector.instantiate(
+                FloatVectorData.instantiate(denseTestData, AbsoluteTemperatureUnit.KELVIN.getScale(), StorageType.DENSE),
+                AbsoluteTemperatureUnit.KELVIN);
+
+        FloatAbsoluteTemperatureVector relPlusAbsTemperature = temperatureVector.plus(absoluteTemperatureVector);
+        for (int index = 0; index < denseTestData.length; index++)
+        {
+            assertEquals("relPlusAbsTemperature", (1.0 + 5.0 / 9.0) * denseTestData[index], relPlusAbsTemperature.getSI(index),
+                    0.01);
+        }
+        FloatAbsoluteTemperature floatAbsoluteTemperature =
+                temperatureVector.instantiateScalarAbsSI(123.456f, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT);
+        assertEquals("Unit of instantiateScalarAbsSI matches", AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT,
+                floatAbsoluteTemperature.getDisplayUnit());
+        assertEquals("Value of instantiateScalarAbsSI matches", 123.456f, floatAbsoluteTemperature.si, 0.1);
+
+        FloatLengthVector lengthVector = FloatVector.instantiate(
+                FloatVectorData.instantiate(denseTestData, LengthUnit.MILE.getScale(), StorageType.DENSE), LengthUnit.MILE);
+        FloatPositionVector positionVector = FloatVector.instantiate(
+                FloatVectorData.instantiate(denseTestData, PositionUnit.KILOMETER.getScale(), StorageType.DENSE),
+                PositionUnit.KILOMETER);
+
+        FloatPositionVector relPlusAbsPosition = lengthVector.plus(positionVector);
+        for (int index = 0; index < denseTestData.length; index++)
+        {
+            assertEquals("relPlusAbsPosition", 2609.344 * denseTestData[index], relPlusAbsPosition.getSI(index), 1);
+        }
+        FloatPosition floatPosition = lengthVector.instantiateScalarAbsSI(123.456f, PositionUnit.ANGSTROM);
+        assertEquals("Unit of instantiateScalarAbsSI matches", PositionUnit.ANGSTROM, floatPosition.getDisplayUnit());
+        assertEquals("Value of instantiateScalarAbsSI matches", 123.456f, floatPosition.si, 0.1);
     }
 
 }

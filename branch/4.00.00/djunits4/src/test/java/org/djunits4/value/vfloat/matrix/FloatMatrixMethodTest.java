@@ -7,9 +7,14 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.djunits4.Try;
+import org.djunits4.unit.AbsoluteTemperatureUnit;
+import org.djunits4.unit.AngleUnit;
 import org.djunits4.unit.AreaUnit;
+import org.djunits4.unit.DirectionUnit;
 import org.djunits4.unit.DurationUnit;
 import org.djunits4.unit.LengthUnit;
+import org.djunits4.unit.PositionUnit;
+import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.TimeUnit;
 import org.djunits4.unit.util.UnitException;
 import org.djunits4.value.ValueRuntimeException;
@@ -19,8 +24,13 @@ import org.djunits4.value.vdouble.matrix.base.DoubleMatrix;
 import org.djunits4.value.vfloat.function.FloatMathFunctions;
 import org.djunits4.value.vfloat.matrix.base.FloatMatrix;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
+import org.djunits4.value.vfloat.scalar.FloatAbsoluteTemperature;
 import org.djunits4.value.vfloat.scalar.FloatArea;
+import org.djunits4.value.vfloat.scalar.FloatDirection;
 import org.djunits4.value.vfloat.scalar.FloatDuration;
+import org.djunits4.value.vfloat.scalar.FloatPosition;
+import org.djunits4.value.vfloat.scalar.FloatTime;
+import org.djunits4.value.vfloat.vector.FLOATVECTOR;
 import org.djunits4.value.vfloat.vector.FloatAreaVector;
 import org.junit.Test;
 
@@ -673,7 +683,7 @@ public class FloatMatrixMethodTest
             am.setSI(row, col, nonZeroValue);
             assertEquals("current value is nonZero", nonZeroValue, am.getSI(row, col), 0.0001);
         }
-        for (int compoundIndex = am.cols() * am.rows(); --compoundIndex >= 0 ;)
+        for (int compoundIndex = am.cols() * am.rows(); --compoundIndex >= 0;)
         {
             // Let the row count fastest
             int row = compoundIndex % am.rows();
@@ -682,6 +692,96 @@ public class FloatMatrixMethodTest
             am.setSI(row, col, 0d);
             assertEquals("final value is 0", 0d, am.getSI(row, col), 0.0001);
         }
+    }
+
+    /**
+     * Test the instantiateAbs method and instantiateScalarAbsSI method.
+     */
+    @Test
+    public void testInstantiateAbs()
+    {
+        float[][] denseTestData = FLOATMATRIX.denseRectArrays(10, 20);
+        FloatTimeMatrix timeMatrix = FloatMatrix.instantiate(
+                FloatMatrixData.instantiate(denseTestData, TimeUnit.DEFAULT.getScale(), StorageType.DENSE), TimeUnit.DEFAULT);
+        FloatDurationMatrix durationMatrix = FloatMatrix.instantiate(
+                FloatMatrixData.instantiate(denseTestData, DurationUnit.MINUTE.getScale(), StorageType.DENSE),
+                DurationUnit.SECOND);
+
+        float[] halfDenseData = FLOATVECTOR.denseArray(105);
+        for (int index = 0; index < halfDenseData.length; index++)
+        {
+            halfDenseData[index] *= 0.5;
+        }
+        FloatTimeMatrix relPlusAbsTime = durationMatrix.plus(timeMatrix);
+        for (int row = 0; row < denseTestData.length; row++)
+        {
+            for (int col = 0; col < denseTestData[0].length; col++)
+            {
+                assertEquals("relPlusAbsTime", 61.0 * denseTestData[row][col], relPlusAbsTime.getSI(row, col), 0.01);
+            }
+        }
+        FloatTime floatTime = durationMatrix.instantiateScalarAbsSI(123.456f, TimeUnit.EPOCH_DAY);
+        assertEquals("Unit of instantiateScalarAbsSI matches", TimeUnit.EPOCH_DAY, floatTime.getDisplayUnit());
+        assertEquals("Value of instantiateScalarAbsSI matches", 123.456f, floatTime.si, 0.1);
+
+        FloatAngleMatrix angleMatrix = FloatMatrix.instantiate(
+                FloatMatrixData.instantiate(denseTestData, AngleUnit.DEGREE.getScale(), StorageType.DENSE), AngleUnit.DEGREE);
+        FloatDirectionMatrix directionMatrix = FloatMatrix.instantiate(
+                FloatMatrixData.instantiate(denseTestData, DirectionUnit.EAST_DEGREE.getScale(), StorageType.DENSE),
+                DirectionUnit.EAST_DEGREE);
+
+        FloatDirectionMatrix relPlusAbsDirection = angleMatrix.plus(directionMatrix);
+        for (int row = 0; row < denseTestData.length; row++)
+        {
+            for (int col = 0; col < denseTestData[0].length; col++)
+            {
+                assertEquals("relPlusAbsTime", 2.0 / 180 * Math.PI * denseTestData[row][col],
+                        relPlusAbsDirection.getSI(row, col), 0.01);
+            }
+        }
+        FloatDirection floatDirection = angleMatrix.instantiateScalarAbsSI(123.456f, DirectionUnit.NORTH_RADIAN);
+        assertEquals("Unit of instantiateScalarAbsSI matches", DirectionUnit.NORTH_RADIAN, floatDirection.getDisplayUnit());
+        assertEquals("Value of instantiateScalarAbsSI matches", 123.456f, floatDirection.si, 0.1);
+
+        FloatTemperatureMatrix temperatureMatrix = FloatMatrix.instantiate(
+                FloatMatrixData.instantiate(denseTestData, TemperatureUnit.DEGREE_FAHRENHEIT.getScale(), StorageType.DENSE),
+                TemperatureUnit.DEGREE_FAHRENHEIT);
+        FloatAbsoluteTemperatureMatrix absoluteTemperatureMatrix = FloatMatrix.instantiate(
+                FloatMatrixData.instantiate(denseTestData, AbsoluteTemperatureUnit.KELVIN.getScale(), StorageType.DENSE),
+                AbsoluteTemperatureUnit.KELVIN);
+
+        FloatAbsoluteTemperatureMatrix relPlusAbsTemperature = temperatureMatrix.plus(absoluteTemperatureMatrix);
+        for (int row = 0; row < denseTestData.length; row++)
+        {
+            for (int col = 0; col < denseTestData[0].length; col++)
+            {
+                assertEquals("relPlusAbsTime", (1.0 + 5.0 / 9.0) * denseTestData[row][col],
+                        relPlusAbsTemperature.getSI(row, col), 0.01);
+            }
+        }
+        FloatAbsoluteTemperature floatAbsoluteTemperature =
+                temperatureMatrix.instantiateScalarAbsSI(123.456f, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT);
+        assertEquals("Unit of instantiateScalarAbsSI matches", AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT,
+                floatAbsoluteTemperature.getDisplayUnit());
+        assertEquals("Value of instantiateScalarAbsSI matches", 123.456f, floatAbsoluteTemperature.si, 0.1);
+
+        FloatLengthMatrix lengthMatrix = FloatMatrix.instantiate(
+                FloatMatrixData.instantiate(denseTestData, LengthUnit.MILE.getScale(), StorageType.DENSE), LengthUnit.MILE);
+        FloatPositionMatrix positionMatrix = FloatMatrix.instantiate(
+                FloatMatrixData.instantiate(denseTestData, PositionUnit.KILOMETER.getScale(), StorageType.DENSE),
+                PositionUnit.KILOMETER);
+
+        FloatPositionMatrix relPlusAbsPosition = lengthMatrix.plus(positionMatrix);
+        for (int row = 0; row < denseTestData.length; row++)
+        {
+            for (int col = 0; col < denseTestData[0].length; col++)
+            {
+                assertEquals("relPlusAbsTime", 2609.344 * denseTestData[row][col], relPlusAbsPosition.getSI(row, col), 0.1);
+            }
+        }
+        FloatPosition floatPosition = lengthMatrix.instantiateScalarAbsSI(123.456f, PositionUnit.ANGSTROM);
+        assertEquals("Unit of instantiateScalarAbsSI matches", PositionUnit.ANGSTROM, floatPosition.getDisplayUnit());
+        assertEquals("Value of instantiateScalarAbsSI matches", 123.456f, floatPosition.si, 0.1);
     }
 
 }

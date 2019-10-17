@@ -7,16 +7,25 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.djunits4.Try;
+import org.djunits4.unit.AbsoluteTemperatureUnit;
+import org.djunits4.unit.AngleUnit;
 import org.djunits4.unit.AreaUnit;
+import org.djunits4.unit.DirectionUnit;
 import org.djunits4.unit.DurationUnit;
 import org.djunits4.unit.LengthUnit;
+import org.djunits4.unit.PositionUnit;
+import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.TimeUnit;
 import org.djunits4.unit.util.UnitException;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vdouble.function.DoubleMathFunctions;
+import org.djunits4.value.vdouble.scalar.AbsoluteTemperature;
 import org.djunits4.value.vdouble.scalar.Area;
+import org.djunits4.value.vdouble.scalar.Direction;
 import org.djunits4.value.vdouble.scalar.Duration;
+import org.djunits4.value.vdouble.scalar.Position;
+import org.djunits4.value.vdouble.scalar.Time;
 import org.djunits4.value.vdouble.vector.base.DoubleVector;
 import org.djunits4.value.vdouble.vector.data.DoubleVectorData;
 import org.junit.Test;
@@ -104,7 +113,7 @@ public class DoubleVectorMethodTest
                     if (ammut2.getSI(index) == 0)
                     {
                         assertTrue("Value should be NaN", Double.isNaN(ammut3.getSI(index)));
-                        
+
                     }
                     else
                     {
@@ -557,6 +566,84 @@ public class DoubleVectorMethodTest
         assertTrue("toString returns something informative",
                 DoubleVectorData.instantiate(denseTestData, TimeUnit.DEFAULT.getScale(), StorageType.DENSE).toString()
                         .startsWith("DoubleVectorData"));
+    }
+
+    /**
+     * Test the instantiateAbs method and instantiateScalarAbsSI method.
+     */
+    @Test
+    public void testInstantiateAbs()
+    {
+        double[] denseTestData = DOUBLEVECTOR.denseArray(105);
+        TimeVector timeVector = DoubleVector.instantiate(
+                DoubleVectorData.instantiate(denseTestData, TimeUnit.DEFAULT.getScale(), StorageType.DENSE), TimeUnit.DEFAULT);
+        DurationVector durationVector = DoubleVector.instantiate(
+                DoubleVectorData.instantiate(denseTestData, DurationUnit.MINUTE.getScale(), StorageType.DENSE),
+                DurationUnit.SECOND);
+
+        double[] halfDenseData = DOUBLEVECTOR.denseArray(105);
+        for (int index = 0; index < halfDenseData.length; index++)
+        {
+            halfDenseData[index] *= 0.5;
+        }
+        TimeVector relPlusAbsTime = durationVector.plus(timeVector);
+        for (int index = 0; index < denseTestData.length; index++)
+        {
+            assertEquals("relPlusAbsTime", 61.0 * denseTestData[index], relPlusAbsTime.getSI(index), 0.01);
+        }
+        Time time = durationVector.instantiateScalarAbsSI(123.456f, TimeUnit.EPOCH_DAY);
+        assertEquals("Unit of instantiateScalarAbsSI matches", TimeUnit.EPOCH_DAY, time.getDisplayUnit());
+        assertEquals("Value of instantiateScalarAbsSI matches", 123.456f, time.si, 0.1);
+
+        AngleVector angleVector = DoubleVector.instantiate(
+                DoubleVectorData.instantiate(denseTestData, AngleUnit.DEGREE.getScale(), StorageType.DENSE), AngleUnit.DEGREE);
+        DirectionVector directionVector = DoubleVector.instantiate(
+                DoubleVectorData.instantiate(denseTestData, DirectionUnit.EAST_DEGREE.getScale(), StorageType.DENSE),
+                DirectionUnit.EAST_DEGREE);
+
+        DirectionVector relPlusAbsDirection = angleVector.plus(directionVector);
+        for (int index = 0; index < denseTestData.length; index++)
+        {
+            assertEquals("relPlusAbsDirection", 2.0 / 180 * Math.PI * denseTestData[index], relPlusAbsDirection.getSI(index),
+                    0.01);
+        }
+        Direction direction = angleVector.instantiateScalarAbsSI(123.456f, DirectionUnit.NORTH_RADIAN);
+        assertEquals("Unit of instantiateScalarAbsSI matches", DirectionUnit.NORTH_RADIAN, direction.getDisplayUnit());
+        assertEquals("Value of instantiateScalarAbsSI matches", 123.456f, direction.si, 0.1);
+
+        TemperatureVector temperatureVector = DoubleVector.instantiate(
+                DoubleVectorData.instantiate(denseTestData, TemperatureUnit.DEGREE_FAHRENHEIT.getScale(), StorageType.DENSE),
+                TemperatureUnit.DEGREE_FAHRENHEIT);
+        AbsoluteTemperatureVector absoluteTemperatureVector = DoubleVector.instantiate(
+                DoubleVectorData.instantiate(denseTestData, AbsoluteTemperatureUnit.KELVIN.getScale(), StorageType.DENSE),
+                AbsoluteTemperatureUnit.KELVIN);
+
+        AbsoluteTemperatureVector relPlusAbsTemperature = temperatureVector.plus(absoluteTemperatureVector);
+        for (int index = 0; index < denseTestData.length; index++)
+        {
+            assertEquals("relPlusAbsTemperature", (1.0 + 5.0 / 9.0) * denseTestData[index], relPlusAbsTemperature.getSI(index),
+                    0.01);
+        }
+        AbsoluteTemperature absoluteTemperature =
+                temperatureVector.instantiateScalarAbsSI(123.456f, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT);
+        assertEquals("Unit of instantiateScalarAbsSI matches", AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT,
+                absoluteTemperature.getDisplayUnit());
+        assertEquals("Value of instantiateScalarAbsSI matches", 123.456f, absoluteTemperature.si, 0.1);
+
+        LengthVector lengthVector = DoubleVector.instantiate(
+                DoubleVectorData.instantiate(denseTestData, LengthUnit.MILE.getScale(), StorageType.DENSE), LengthUnit.MILE);
+        PositionVector positionVector = DoubleVector.instantiate(
+                DoubleVectorData.instantiate(denseTestData, PositionUnit.KILOMETER.getScale(), StorageType.DENSE),
+                PositionUnit.KILOMETER);
+
+        PositionVector relPlusAbsPosition = lengthVector.plus(positionVector);
+        for (int index = 0; index < denseTestData.length; index++)
+        {
+            assertEquals("relPlusAbsPosition", 2609.344 * denseTestData[index], relPlusAbsPosition.getSI(index), 1);
+        }
+        Position position = lengthVector.instantiateScalarAbsSI(123.456f, PositionUnit.ANGSTROM);
+        assertEquals("Unit of instantiateScalarAbsSI matches", PositionUnit.ANGSTROM, position.getDisplayUnit());
+        assertEquals("Value of instantiateScalarAbsSI matches", 123.456f, position.si, 0.1);
     }
 
 }
