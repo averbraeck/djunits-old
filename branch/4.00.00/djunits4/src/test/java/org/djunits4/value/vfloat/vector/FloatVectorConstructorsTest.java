@@ -346,7 +346,7 @@ public class FloatVectorConstructorsTest
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());
-                atv = FloatVector.instantiateMap(map, testValues.length, temperatureUnit, storageType);
+                atv = FloatVector.instantiateList(al, temperatureUnit, storageType, FloatAbsoluteTemperatureVector.class);
                 compareValues(testValues, atv.getValuesSI());
                 assertEquals("Unit must match", temperatureUnit, atv.getDisplayUnit());
                 assertEquals("cardinality", cardinality, atv.cardinality());

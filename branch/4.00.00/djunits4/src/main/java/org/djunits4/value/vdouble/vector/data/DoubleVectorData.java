@@ -90,7 +90,7 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
                 return DoubleVectorDataSparse.instantiate(valuesSI);
 
             default:
-                throw new ValueRuntimeException("Unknown data type in DoubleVectorData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown storage type in DoubleVectorData.instantiate: " + storageType);
         }
     }
 
@@ -186,7 +186,7 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
             }
 
             default:
-                throw new ValueRuntimeException("Unknown data type in DoubleVectorData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown storage type in DoubleVectorData.instantiate: " + storageType);
         }
     }
 
@@ -254,7 +254,7 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
             }
 
             default:
-                throw new ValueRuntimeException("Unknown data type in DoubleVectorData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown storage type in DoubleVectorData.instantiate: " + storageType);
         }
     }
 
@@ -313,7 +313,7 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
             }
 
             default:
-                throw new ValueRuntimeException("Unknown data type in DoubleVectorData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown storage type in DoubleVectorData.instantiate: " + storageType);
         }
     }
 
@@ -416,7 +416,7 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
             }
 
             default:
-                throw new ValueRuntimeException("Unknown data type in DoubleVectorData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown storage type in DoubleVectorData.instantiate: " + storageType);
         }
     }
 
@@ -469,7 +469,7 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
             }
 
             default:
-                throw new ValueRuntimeException("Unknown data type in DoubleVectorData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown storage type in DoubleVectorData.instantiate: " + storageType);
         }
     }
 

@@ -90,7 +90,7 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
                 return FloatMatrixDataSparse.instantiate(matrixSI);
 
             default:
-                throw new ValueRuntimeException("Unknown data type in FloatMatrixData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown storage type in FloatMatrixData.instantiate: " + storageType);
         }
     }
 
@@ -129,7 +129,7 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
                 return new FloatMatrixDataSparse(values, rows, cols);
 
             default:
-                throw new ValueRuntimeException("Unknown data type in FloatMatrixData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown storage type in FloatMatrixData.instantiate: " + storageType);
         }
     }
 
@@ -165,7 +165,7 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
                 return FloatMatrixDataSparse.instantiate(matrixSI);
 
             default:
-                throw new ValueRuntimeException("Unknown data type in FloatMatrixData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown storage type in FloatMatrixData.instantiate: " + storageType);
         }
     }
 
@@ -410,22 +410,6 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
     }
 
     /**
-     * Multiply the values of this matrix with a number on a cell-by-cell basis.
-     * @param valueSI float; the value to multiply with
-     */
-    public final void multiplyBy(final float valueSI)
-    {
-        assign(new FloatFunction()
-        {
-            @Override
-            public float apply(float value)
-            {
-                return value * valueSI;
-            }
-        });
-    }
-
-    /**
      * Divide two matrices on a cell-by-cell basis. If both matrices are dense, a dense matrix is returned, otherwise a sparse
      * matrix is returned.
      * @param right FloatMatrixData; the other data object to divide by
@@ -451,22 +435,6 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
                 return leftValue / rightValue;
             }
         }, right);
-    }
-
-    /**
-     * Divide the values of this matrix by a number on a cell-by-cell basis.
-     * @param valueSI float; the value to multiply with
-     */
-    public final void divideBy(final float valueSI)
-    {
-        assign(new FloatFunction()
-        {
-            @Override
-            public float apply(float value)
-            {
-                return value / valueSI;
-            }
-        });
     }
 
     /* ============================================================================================ */

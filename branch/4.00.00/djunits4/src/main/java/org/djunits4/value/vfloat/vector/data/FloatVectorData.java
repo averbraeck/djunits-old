@@ -77,7 +77,7 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
                 return FloatVectorDataSparse.instantiate(valuesSI);
 
             default:
-                throw new ValueRuntimeException("Unknown data type in FloatVectorData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown storage type in FloatVectorData.instantiate: " + storageType);
         }
     }
 
@@ -111,7 +111,7 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
                 return FloatVectorDataSparse.instantiate(valuesSI);
 
             default:
-                throw new ValueRuntimeException("Unknown data type in FloatVectorData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown storage type in FloatVectorData.instantiate: " + storageType);
         }
     }
 
@@ -146,7 +146,7 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
                 return FloatVectorDataSparse.instantiate(valuesSI);
 
             default:
-                throw new ValueRuntimeException("Unknown data type in FloatVectorData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown storage type in FloatVectorData.instantiate: " + storageType);
         }
     }
 
@@ -180,7 +180,7 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
                 return FloatVectorDataSparse.instantiate(valuesSI);
 
             default:
-                throw new ValueRuntimeException("Unknown data type in FloatVectorData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown storage type in FloatVectorData.instantiate: " + storageType);
         }
     }
 
@@ -283,7 +283,7 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
             }
 
             default:
-                throw new ValueRuntimeException("Unknown data type in FloatVectorData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown storage type in FloatVectorData.instantiate: " + storageType);
         }
     }
 
@@ -337,7 +337,7 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
             }
 
             default:
-                throw new ValueRuntimeException("Unknown data type in FloatVectorData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown storage type in FloatVectorData.instantiate: " + storageType);
         }
     }
 
@@ -510,22 +510,6 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
     }
 
     /**
-     * Multiply the values of this vector with a number on a cell-by-cell basis.
-     * @param valueSI float; the value to multiply with
-     */
-    public final void multiplyBy(float valueSI)
-    {
-        assign(new FloatFunction()
-        {
-            @Override
-            public float apply(float value)
-            {
-                return value * valueSI;
-            }
-        });
-    }
-
-    /**
      * Divide two vectors on a cell-by-cell basis. If this vector is sparse and <code>right</code> is dense, a sparse vector is
      * returned, otherwise a dense vector is returned.
      * @param right FloatVectorData; the other data object to divide by
@@ -551,22 +535,6 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
                 return leftValue / rightValue;
             }
         }, right);
-    }
-
-    /**
-     * Divide the values of this vector by a number on a cell-by-cell basis.
-     * @param valueSI float; the value to divide by
-     */
-    public final void divideBy(final float valueSI)
-    {
-        assign(new FloatFunction()
-        {
-            @Override
-            public float apply(float value)
-            {
-                return value / valueSI;
-            }
-        });
     }
 
     /* ============================================================================================ */

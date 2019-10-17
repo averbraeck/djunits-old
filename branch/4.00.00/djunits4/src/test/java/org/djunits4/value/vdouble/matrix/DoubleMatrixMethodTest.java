@@ -74,6 +74,61 @@ public class DoubleMatrixMethodTest
                 AreaMatrix am =
                         DoubleMatrix.instantiate(DoubleMatrixData.instantiate(testData, au.getScale(), storageType), au);
 
+                // INDEX CHECKING
+                for (int row : new int[] { -1, 0, denseTestData.length - 1, denseTestData.length })
+                {
+                    for (int col : new int[] { -1, 0, denseTestData[0].length - 1, denseTestData[0].length })
+                    {
+                        if (row < 0 || col < 0 || row >= denseTestData.length || col >= denseTestData[0].length)
+                        {
+                            try
+                            {
+                                am.get(row, col);
+                                fail("bad row or bad column value should have thrown a ValueRuntimeException");
+                            }
+                            catch (ValueRuntimeException vre)
+                            {
+                                // Ignore expected exception
+                            }
+                        }
+                        else
+                        {
+                            am.get(row, col);
+                        }
+                    }
+                    if (row < 0 || row >= denseTestData.length)
+                    {
+                        try
+                        {
+                            am.getRow(row);
+                            fail("getRow with bad row value should have thrown a ValueRuntimeException");
+                        }
+                        catch (ValueRuntimeException vre)
+                        {
+                            // Ignore expected exception
+                        }
+                    }
+                }
+                for (int col : new int[] { -1, 0, denseTestData[0].length - 1, denseTestData[0].length })
+                {
+                    if (col < 0 || col >= denseTestData[0].length)
+                    {
+                        try
+                        {
+                            am.getColumn(col);
+                            fail("getColumn with bad column value should have thrown a ValueRuntimeException");
+                        }
+                        catch (ValueRuntimeException vre)
+                        {
+                            // Ignore expected exception
+                        }
+                    }
+                    else
+                    {
+                        am.getColumn(col);
+                    }
+                }
+
                 // SPARSE AND DENSE
                 assertEquals(am, am.toSparse());
                 assertEquals(am, am.toDense());
@@ -672,7 +727,7 @@ public class DoubleMatrixMethodTest
                 DoubleMatrixData.instantiate(denseTestData, TimeUnit.DEFAULT.getScale(), StorageType.DENSE).toString()
                         .startsWith("DoubleMatrixData"));
     }
-    
+
     /**
      * Execute a mats++-like memory test on a sparse matrix. See
      * <a href="http://www.eng.auburn.edu/~agrawvd/COURSE/E7250_05/REPORTS_TERM/Raghuraman_Mem.doc">Memory Test</a>.

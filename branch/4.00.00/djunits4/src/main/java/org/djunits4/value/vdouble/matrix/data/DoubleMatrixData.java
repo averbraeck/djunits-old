@@ -90,7 +90,7 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
                 return DoubleMatrixDataSparse.instantiate(matrixSI);
 
             default:
-                throw new ValueRuntimeException("Unknown data type in DoubleMatrixData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown storage type in DoubleMatrixData.instantiate: " + storageType);
         }
     }
 
@@ -129,7 +129,7 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
                 return new DoubleMatrixDataSparse(values, rows, cols);
 
             default:
-                throw new ValueRuntimeException("Unknown data type in DoubleMatrixData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown storage type in DoubleMatrixData.instantiate: " + storageType);
         }
     }
 
@@ -165,7 +165,7 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
                 return DoubleMatrixDataSparse.instantiate(matrixSI);
 
             default:
-                throw new ValueRuntimeException("Unknown data type in DoubleMatrixData.instantiate: " + storageType);
+                throw new ValueRuntimeException("Unknown storage type in DoubleMatrixData.instantiate: " + storageType);
         }
     }
 
@@ -401,22 +401,6 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
     }
 
     /**
-     * Multiply the values of this matrix with a number on a cell-by-cell basis.
-     * @param valueSI double; the value to multiply with
-     */
-    public final void multiplyBy(double valueSI)
-    {
-        assign(new DoubleFunction()
-        {
-            @Override
-            public double apply(double value)
-            {
-                return value * valueSI;
-            }
-        });
-    }
-
-    /**
      * Divide two matrices on a cell-by-cell basis. If this matrix is sparse and <code>right</code> is dense, a sparse matrix is
      * returned, otherwise a dense matrix is returned.
      * @param right DoubleMatrixData; the other data object to divide by
@@ -443,23 +427,6 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
             }
         }, right);
     }
-
-    /**
-     * Divide the values of this matrix by a number on a cell-by-cell basis.
-     * @param valueSI double; the value to multiply with
-     */
-    public final void divideBy(double valueSI)
-    {
-        assign(new DoubleFunction()
-        {
-            @Override
-            public double apply(double value)
-            {
-                return value / valueSI;
-            }
-        });
-    }
-
 
     /* ============================================================================================ */
     /* =============================== EQUALS, HASHCODE, TOSTRING ================================= */

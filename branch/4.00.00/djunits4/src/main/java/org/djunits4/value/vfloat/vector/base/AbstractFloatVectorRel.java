@@ -122,23 +122,17 @@ public abstract class AbstractFloatVectorRel<U extends Unit<U>, S extends Abstra
     }
 
     /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
     @Override
-    public RV multiplyBy(final double multiplier)
+    public final RV multiplyBy(final double multiplier)
     {
-        checkCopyOnWrite();
-        getData().multiplyBy((float) multiplier);
-        return (RV) this;
+        return assign(FloatMathFunctions.MULT((float) multiplier));
     }
 
     /** {@inheritDoc} */
-    @SuppressWarnings("unchecked")
     @Override
     public RV divideBy(final double divisor)
     {
-        checkCopyOnWrite();
-        getData().divideBy((float) divisor);
-        return (RV) this;
+        return assign(FloatMathFunctions.DIV((float) divisor));
     }
 
     /**
