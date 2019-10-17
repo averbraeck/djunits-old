@@ -46,7 +46,6 @@ import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.TorqueUnit;
 import org.djunits4.unit.Unit;
 import org.djunits4.unit.VolumeUnit;
-import org.djunits4.unit.si.SIDimensions;
 import org.djunits4.unit.util.UnitRuntimeException;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
@@ -143,22 +142,15 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
     public static SIVector of(final double[] value, final String unitString, final StorageType storageType)
     {
         Throw.whenNull(value, "Error parsing SIVector: value is null");
-        Throw.whenNull(unitString, "Error parsing SIVector: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing SIVector: empty unitString");
         Throw.whenNull(storageType, "Error parsing SIVector: storageType is null");
         try
         {
-            SIUnit unit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(unitString));
-            if (unit != null)
-            {
-                return SIVector.instantiate(value, unit, storageType);
-            }
+            return SIVector.instantiate(value, Unit.getUnit(unitString), storageType);
         }
         catch (Exception exception)
         {
             throw new IllegalArgumentException("Error parsing SIUnit from " + unitString, exception);
         }
-        throw new IllegalArgumentException("Error parsing SIVector with unit " + unitString);
     }
 
     /**
@@ -173,22 +165,15 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
     public static SIVector of(final List<Double> valueList, final String unitString, final StorageType storageType)
     {
         Throw.whenNull(valueList, "Error parsing SIVector: valueList is null");
-        Throw.whenNull(unitString, "Error parsing SIVector: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing SIVector: empty unitString");
         Throw.whenNull(storageType, "Error parsing SIVector: storageType is null");
         try
         {
-            SIUnit unit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(unitString));
-            if (unit != null)
-            {
-                return SIVector.instantiate(valueList, unit, storageType);
-            }
+            return SIVector.instantiate(valueList, Unit.getUnit(unitString), storageType);
         }
         catch (Exception exception)
         {
             throw new IllegalArgumentException("Error parsing SIUnit from " + unitString, exception);
         }
-        throw new IllegalArgumentException("Error parsing SIVector with unit " + unitString);
     }
 
     /**
@@ -205,22 +190,15 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
             final StorageType storageType)
     {
         Throw.whenNull(valueMap, "Error parsing SIVector: valueMap is null");
-        Throw.whenNull(unitString, "Error parsing SIVector: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing SIVector: empty unitString");
         Throw.whenNull(storageType, "Error parsing SIVector: storageType is null");
         try
         {
-            SIUnit unit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(unitString));
-            if (unit != null)
-            {
-                return SIVector.instantiate(valueMap, length, unit, storageType);
-            }
+            return SIVector.instantiate(valueMap, length, Unit.getUnit(unitString), storageType);
         }
         catch (Exception exception)
         {
             throw new IllegalArgumentException("Error parsing SIUnit from " + unitString, exception);
         }
-        throw new IllegalArgumentException("Error parsing SIVector with unit " + unitString);
     }
 
     /** {@inheritDoc} */

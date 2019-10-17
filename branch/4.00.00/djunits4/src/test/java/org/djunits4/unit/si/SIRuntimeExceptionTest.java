@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import org.djunits4.unit.Unit;
 import org.junit.Test;
 
 /**
@@ -76,4 +77,45 @@ public class SIRuntimeExceptionTest
             fail("Right exception not thrown");
         }
     }
+    
+    /**
+     * Test the static getUnit method in the Unit class.
+     */
+    @Test
+    public void testUnitGetUnit()
+    {
+        try
+        {
+            Unit.getUnit(null);
+            fail("null unit string should have thrown a NullPointerException");
+        }
+        catch (NullPointerException npe)
+        {
+            assertTrue("Exception describes the parameter that has the problem", npe.getMessage().contains("unitString"));
+        }
+        
+        try
+        {
+            Unit.getUnit("");
+            fail("empty string should have thrown a IllegalArgumentException");
+        }
+        catch (IllegalArgumentException npe)
+        {
+            assertTrue("Exception describes the parameter that has the problem", npe.getMessage().contains("unitString"));
+        }
+        
+        try
+        {
+            Unit.getUnit("m.m.m.m");
+            fail("Bad unit string should have thrown an IllegalArgumentException");
+        }
+        catch (IllegalArgumentException npe)
+        {
+            // Ignore expected exception
+        }
+        
+        Unit<?> u = Unit.getUnit("m/s");
+        assertTrue("u uses a base si scale", u.getScale().isBaseSIScale());
+    }
+    
 }

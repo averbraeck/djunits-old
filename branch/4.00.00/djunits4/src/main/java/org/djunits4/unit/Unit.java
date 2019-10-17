@@ -901,4 +901,30 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
 
     }
 
+    /**
+     * Find or create a unit for the given SI dimensions.
+     * @param unitString String; the textual representation of the unit
+     * @return SIUnit; the unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static SIUnit getUnit(final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing SIVector: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing SIVector: empty unitString");
+        try
+        {
+            SIUnit unit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(unitString));
+            if (unit != null)
+            {
+                return unit;
+            }
+        }
+        catch (Exception exception)
+        {
+            throw new IllegalArgumentException("Error parsing SIUnit from " + unitString, exception);
+        }
+        throw new IllegalArgumentException("Error parsing SIVector with unit " + unitString);
+    }
+
 }

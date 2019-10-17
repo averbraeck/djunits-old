@@ -43,7 +43,6 @@ import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.TorqueUnit;
 import org.djunits4.unit.Unit;
 import org.djunits4.unit.VolumeUnit;
-import org.djunits4.unit.si.SIDimensions;
 import org.djunits4.unit.util.UnitRuntimeException;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
@@ -121,22 +120,15 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
     public static FloatSIMatrix of(final float[][] values, final String unitString, final StorageType storageType)
     {
         Throw.whenNull(values, "Error parsing FloatSIMatrix: value is null");
-        Throw.whenNull(unitString, "Error parsing FloatSIMatrix: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatSIMatrix: empty unitString");
         Throw.whenNull(storageType, "Error parsing FloatSIMatrix: storageType is null");
         try
         {
-            SIUnit unit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(unitString));
-            if (unit != null)
-            {
-                return FloatSIMatrix.instantiate(values, unit, storageType);
-            }
+            return FloatSIMatrix.instantiate(values, Unit.getUnit(unitString), storageType);
         }
         catch (Exception exception)
         {
             throw new IllegalArgumentException("Error parsing SIUnit from " + unitString, exception);
         }
-        throw new IllegalArgumentException("Error parsing FloatSIMatrix with unit " + unitString);
     }
 
     /** {@inheritDoc} */
