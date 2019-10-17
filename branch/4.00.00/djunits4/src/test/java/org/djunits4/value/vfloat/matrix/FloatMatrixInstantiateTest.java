@@ -27,9 +27,11 @@ import org.djunits4.value.vfloat.matrix.base.FloatMatrixInterface;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatArea;
 import org.djunits4.value.vfloat.scalar.FloatLength;
+import org.djunits4.value.vfloat.scalar.FloatSIScalar;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarAbs;
 import org.djunits4.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
 import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
+import org.djunits4.value.vfloat.vector.FloatSIVector;
 import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorAbs;
 import org.djunits4.value.vfloat.vector.base.AbstractFloatVectorRelWithAbs;
 import org.djunits4.value.vfloat.vector.base.FloatVectorInterface;
@@ -895,6 +897,8 @@ public class FloatMatrixInstantiateTest
         assertEquals(200, si10dd.cardinality());
         assertEquals(100 * 201, si10dd.zSum().getSI(), 0.001);
         assertEquals("m2/s3", si10dd.getDisplayUnit().getUnitBase().getSiDimensions().toString(true, false, false));
+        assertEquals("getScalarClass returns FloatSIScalar", FloatSIScalar.class, si10dd.getScalarClass());
+        assertEquals("getVectorClass returns FloatSIVector", FloatSIVector.class, si10dd.getVectorClass());
 
         FloatSIMatrix si10ds =
                 FloatMatrix.instantiate(FLOATMATRIX.denseRectArrays(20, 10), SIUnit.of("m2/s3"), StorageType.SPARSE);

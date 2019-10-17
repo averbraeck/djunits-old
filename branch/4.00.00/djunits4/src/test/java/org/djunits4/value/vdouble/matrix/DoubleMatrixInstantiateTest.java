@@ -27,9 +27,11 @@ import org.djunits4.value.vdouble.matrix.base.DoubleMatrixInterface;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.Area;
 import org.djunits4.value.vdouble.scalar.Length;
+import org.djunits4.value.vdouble.scalar.SIScalar;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarAbs;
 import org.djunits4.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
 import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
+import org.djunits4.value.vdouble.vector.SIVector;
 import org.djunits4.value.vdouble.vector.base.AbstractDoubleVectorAbs;
 import org.djunits4.value.vdouble.vector.base.AbstractDoubleVectorRelWithAbs;
 import org.djunits4.value.vdouble.vector.base.DoubleVectorInterface;
@@ -487,6 +489,8 @@ public class DoubleMatrixInstantiateTest
         assertEquals(100, si10dd.cardinality());
         assertEquals(50 * 101, si10dd.zSum().getSI(), 0.001);
         assertEquals("m2/s3", si10dd.getDisplayUnit().getUnitBase().getSiDimensions().toString(true, false, false));
+        assertEquals("getScalarClass returns SIScalar", SIScalar.class, si10dd.getScalarClass());
+        assertEquals("getVectorClass returns SIVector", SIVector.class, si10dd.getVectorClass());
 
         SIMatrix si10ds =
                 DoubleMatrix.instantiate(DOUBLEMATRIX.denseRectArrays(10, 10), SIUnit.of("m2/s3"), StorageType.SPARSE);
