@@ -544,9 +544,9 @@ public class DoubleScalarTest
         for (double seedValue : seedValues)
         {
             double input = seedValue;
-            Length ds;
-            ds = new Length(input, LengthUnit.METER);
-            MathTester.tester(input, "abs", ds.abs(), 0.001, new DoubleToDouble()
+            Length length;
+            length = new Length(input, LengthUnit.METER);
+            MathTester.tester(input, "abs", length.abs(), 0.001, new DoubleToDouble()
             {
                 @Override
                 public double function(final double d)
@@ -554,8 +554,8 @@ public class DoubleScalarTest
                     return Math.abs(d);
                 }
             });
-            ds = new Length(input, LengthUnit.METER);
-            MathTester.tester(input, "ceil", ds.ceil(), 0.001, new DoubleToDouble()
+            length = new Length(input, LengthUnit.METER);
+            MathTester.tester(input, "ceil", length.ceil(), 0.001, new DoubleToDouble()
             {
                 @Override
                 public double function(final double d)
@@ -563,8 +563,8 @@ public class DoubleScalarTest
                     return Math.ceil(d);
                 }
             });
-            ds = new Length(input, LengthUnit.METER);
-            MathTester.tester(input, "floor", ds.floor(), 0.001, new DoubleToDouble()
+            length = new Length(input, LengthUnit.METER);
+            MathTester.tester(input, "floor", length.floor(), 0.001, new DoubleToDouble()
             {
                 @Override
                 public double function(final double d)
@@ -572,13 +572,40 @@ public class DoubleScalarTest
                     return Math.floor(d);
                 }
             });
-            ds = new Length(input, LengthUnit.METER);
-            MathTester.tester(input, "rint", ds.rint(), 0.001, new DoubleToDouble()
+            length = new Length(input, LengthUnit.METER);
+            MathTester.tester(input, "rint", length.rint(), 0.001, new DoubleToDouble()
             {
                 @Override
                 public double function(final double d)
                 {
                     return Math.rint(d);
+                }
+            });
+            length = new Length(input, LengthUnit.METER);
+            MathTester.tester(input, "neg", length.neg(), 0.001, new DoubleToDouble()
+            {
+                @Override
+                public double function(final double d)
+                {
+                    return -d;
+                }
+            });
+            length = new Length(input, LengthUnit.METER);
+            MathTester.tester(input, "times 3", length.times(3), 0.001, new DoubleToDouble()
+            {
+                @Override
+                public double function(final double d)
+                {
+                    return d * 3;
+                }
+            });
+            length = new Length(input, LengthUnit.METER);
+            MathTester.tester(input, "divide 7", length.divide(7), 0.001, new DoubleToDouble()
+            {
+                @Override
+                public double function(final double d)
+                {
+                    return d / 7;
                 }
             });
         }

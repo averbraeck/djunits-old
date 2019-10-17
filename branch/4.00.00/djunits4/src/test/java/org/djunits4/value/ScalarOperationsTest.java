@@ -855,7 +855,7 @@ public class ScalarOperationsTest
             {
                 // Ignore expected exception
             }
-            
+
             try
             {
                 valueOf.invoke(null, "");
@@ -865,7 +865,7 @@ public class ScalarOperationsTest
             {
                 // Ignore expected exception
             }
-            
+
             try
             {
                 valueOf.invoke(null, "NONSENSEVALUE");
@@ -945,40 +945,37 @@ public class ScalarOperationsTest
             result = (AbstractFloatScalar<?, ?>) min.invoke(null, zero, one, additionalArguments);
             assertEquals("min return object with minimum value", zero, result);
 
-            if (!scalarClass.getName().contains(".FloatElectricalResistance"))
+            Method valueOf = ClassUtil.resolveMethod(scalarClass, "valueOf", String.class);
+            String string = zero.toString();
+            result = (AbstractFloatScalar<?, ?>) valueOf.invoke(null, string);
+            assertEquals("valueOf toString returns a decent approximation of the input", zeroValue, result.getSI(), 0.001);
+            try
             {
-                Method valueOf = ClassUtil.resolveMethod(scalarClass, "valueOf", String.class);
-                String string = zero.toString();
-                result = (AbstractFloatScalar<?, ?>) valueOf.invoke(null, string);
-                assertEquals("valueOf toString returns a decent approximation of the input", zeroValue, result.getSI(), 0.001);
-                try
-                {
-                    valueOf.invoke(null, (String) null);
-                    fail("Null string in valueOf should have thrown an IllegalArgumentException (which may have been converted "
-                            + "into an InvocationTargetException)");
-                }
-                catch (IllegalArgumentException | InvocationTargetException iae)
-                {
-                    // Ignore expected exception
-                }
-                try
-                {
-                    valueOf.invoke(null, "");
-                    fail("Empty string in valueOf should have thrown an IllegalArgumentException");
-                }
-                catch (IllegalArgumentException | InvocationTargetException iae)
-                {
-                    // Ignore expected exception
-                }
-                try
-                {
-                    valueOf.invoke(null, "NONSENSEVALUE");
-                    fail("Nonsense string in valueOf should have thrown an IllegalArgumentException");
-                }
-                catch (IllegalArgumentException | InvocationTargetException iae)
-                {
-                    // Ignore expected exception
-                }
+                valueOf.invoke(null, (String) null);
+                fail("Null string in valueOf should have thrown an IllegalArgumentException (which may have been converted "
+                        + "into an InvocationTargetException)");
+            }
+            catch (IllegalArgumentException | InvocationTargetException iae)
+            {
+                // Ignore expected exception
+            }
+            try
+            {
+                valueOf.invoke(null, "");
+                fail("Empty string in valueOf should have thrown an IllegalArgumentException");
+            }
+            catch (IllegalArgumentException | InvocationTargetException iae)
+            {
+                // Ignore expected exception
+            }
+            try
+            {
+                valueOf.invoke(null, "NONSENSEVALUE");
+                fail("Nonsense string in valueOf should have thrown an IllegalArgumentException");
+            }
+            catch (IllegalArgumentException | InvocationTargetException iae)
+            {
+                // Ignore expected exception
             }
             Method instantiateSI = ClassUtil.resolveMethod(scalarClass, "instantiateSI", float.class);
             result = (AbstractFloatScalar<?, ?>) instantiateSI.invoke(null, zeroValue);

@@ -264,9 +264,9 @@ public class FloatScalarTest
         for (float seedValue : seedValues)
         {
             float input = seedValue;
-            FloatPosition ds;
-            ds = new FloatPosition(input, PositionUnit.DEFAULT);
-            MathTester.tester(input, "ceil", ds.ceil(), 0.001f, new FloatToFloat()
+            FloatLength floatLength;
+            floatLength = new FloatLength(input, LengthUnit.METER);
+            MathTester.tester(input, "ceil", floatLength.ceil(), 0.001f, new FloatToFloat()
             {
                 @Override
                 public float function(final float d)
@@ -274,8 +274,8 @@ public class FloatScalarTest
                     return (float) Math.ceil(d);
                 }
             });
-            ds = new FloatPosition(input, PositionUnit.DEFAULT);
-            MathTester.tester(input, "floor", ds.floor(), 0.001f, new FloatToFloat()
+            floatLength = new FloatLength(input, LengthUnit.METER);
+            MathTester.tester(input, "floor", floatLength.floor(), 0.001f, new FloatToFloat()
             {
                 @Override
                 public float function(final float d)
@@ -283,13 +283,40 @@ public class FloatScalarTest
                     return (float) Math.floor(d);
                 }
             });
-            ds = new FloatPosition(input, PositionUnit.DEFAULT);
-            MathTester.tester(input, "rint", ds.rint(), 0.001f, new FloatToFloat()
+            floatLength = new FloatLength(input, LengthUnit.METER);
+            MathTester.tester(input, "rint", floatLength.rint(), 0.001f, new FloatToFloat()
             {
                 @Override
                 public float function(final float d)
                 {
                     return (float) Math.rint(d);
+                }
+            });
+            floatLength = new FloatLength(input, LengthUnit.METER);
+            MathTester.tester(input, "neg", floatLength.neg(), 0.001f, new FloatToFloat()
+            {
+                @Override
+                public float function(final float d)
+                {
+                    return (float) -d;
+                }
+            });
+            floatLength = new FloatLength(input, LengthUnit.METER);
+            MathTester.tester(input, "times 3", floatLength.times(3f), 0.001f, new FloatToFloat()
+            {
+                @Override
+                public float function(final float d)
+                {
+                    return (float) (3 * d);
+                }
+            });
+            floatLength = new FloatLength(input, LengthUnit.METER);
+            MathTester.tester(input, "divide 7", floatLength.divide(7), 0.001f, new FloatToFloat()
+            {
+                @Override
+                public float function(final float d)
+                {
+                    return (float) (d / 7);
                 }
             });
         }
