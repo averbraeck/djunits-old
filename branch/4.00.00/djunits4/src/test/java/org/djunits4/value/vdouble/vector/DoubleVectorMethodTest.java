@@ -6,6 +6,9 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import org.djunits4.Try;
 import org.djunits4.unit.AbsoluteTemperatureUnit;
 import org.djunits4.unit.AngleUnit;
@@ -14,12 +17,21 @@ import org.djunits4.unit.DirectionUnit;
 import org.djunits4.unit.DurationUnit;
 import org.djunits4.unit.LengthUnit;
 import org.djunits4.unit.PositionUnit;
+import org.djunits4.unit.SIUnit;
 import org.djunits4.unit.TemperatureUnit;
 import org.djunits4.unit.TimeUnit;
+import org.djunits4.unit.Unit;
+import org.djunits4.unit.base.UnitBase;
+import org.djunits4.unit.base.UnitTypes;
 import org.djunits4.unit.util.UnitException;
+import org.djunits4.unit.util.UnitRuntimeException;
+import org.djunits4.value.CLASSNAMES;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vdouble.function.DoubleMathFunctions;
+import org.djunits4.value.vdouble.matrix.DOUBLEMATRIX;
+import org.djunits4.value.vdouble.matrix.SIMatrix;
+import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits4.value.vdouble.scalar.AbsoluteTemperature;
 import org.djunits4.value.vdouble.scalar.Area;
 import org.djunits4.value.vdouble.scalar.Direction;
@@ -644,6 +656,63 @@ public class DoubleVectorMethodTest
         Position position = lengthVector.instantiateScalarAbsSI(123.456f, PositionUnit.ANGSTROM);
         assertEquals("Unit of instantiateScalarAbsSI matches", PositionUnit.ANGSTROM, position.getDisplayUnit());
         assertEquals("Value of instantiateScalarAbsSI matches", 123.456f, position.si, 0.1);
+    }
+
+    /**
+     * Test the <code>as</code> method of the SIVector class
+     * @throws SecurityException on error
+     * @throws NoSuchMethodException on error
+     * @throws InvocationTargetException on error
+     * @throws IllegalArgumentException on error
+     * @throws IllegalAccessException on error
+     * @throws ClassNotFoundException on error
+     * @throws UnitException on error
+     */
+    @SuppressWarnings("unchecked")
+    @Test
+    public <U extends Unit<U>> void testAsUnit() throws ClassNotFoundException, NoSuchMethodException, SecurityException,
+            IllegalAccessException, IllegalArgumentException, InvocationTargetException, UnitException
+    {
+        double[][] testValues = DOUBLEMATRIX.denseRectArrays(10, 20);
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+        {
+            for (String type : CLASSNAMES.REL_LIST)
+            {
+                Class.forName("org.djunits4.unit." + type + "Unit");
+                UnitBase<U> unitBase = (UnitBase<U>) UnitTypes.INSTANCE.getUnitBase(type + "Unit");
+                for (U unit : unitBase.getUnitsById().values())
+                {
+                    for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, storageType })
+                    {
+                        SIUnit siUnit = SIUnit.of(unit.getUnitBase().getSiDimensions());
+                        SIMatrix matrix = SIMatrix.instantiate(testValues, siUnit, storageType2);
+                        Method asMethod = SIMatrix.class.getDeclaredMethod("as", Unit.class);
+                        AbstractDoubleMatrixRel<U, ?, ?, ?> asMatrix =
+                                (AbstractDoubleMatrixRel<U, ?, ?, ?>) asMethod.invoke(matrix, siUnit);
+                        assertEquals(matrix.getDisplayUnit().getStandardUnit(), asMatrix.getDisplayUnit());
+                        siUnit = SIUnit.of(AbsoluteTemperatureUnit.KELVIN.getUnitBase().getSiDimensions());
+                        for (int row = 0; row < testValues.length; row++)
+                        {
+                            for (int col = 0; col < testValues[0].length; col++)
+                            {
+                                assertEquals("Values should match", testValues[row][col], matrix.getInUnit(row, col), 0.001);
+                            }
+                        }
+                        try
+                        {
+                            asMethod.invoke(matrix, siUnit);
+                            fail("as method should not be able to cast to unrelated (absoluteTemperature) unit");
+                        }
+                        catch (InvocationTargetException ite)
+                        {
+                            Throwable cause = ite.getCause();
+                            assertEquals("cause is UnitRuntimeException", UnitRuntimeException.class, cause.getClass());
+                            // Otherwise ignore expected exception
+                        }
+                    }
+                }
+            }
+        }
     }
 
 }

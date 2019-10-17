@@ -120,7 +120,19 @@ public class FloatSIMatrixTest
                 {
                     // ok
                 }
+                FloatSIMatrix sim = FloatSIMatrix.of(denseTestData, unitBase.getSiDimensions().toString(true, true, true),
+                        StorageType.DENSE);
+                for (int row = 0; row < denseTestData.length; row++)
+                {
+                    for (int col = 0; col < denseTestData[0].length; col++)
+                    {
+                        assertEquals(type + ", unit: " + unit.getDefaultTextualAbbreviation(), denseTestData[row][col],
+                                sim.getInUnit(row, col), 0.001);
+                    }
+                }
+
             }
         }
     }
+
 }
