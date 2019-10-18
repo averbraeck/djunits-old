@@ -22,8 +22,8 @@ import org.djunits.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class PositionMatrix extends AbstractDoubleMatrixAbs<PositionUnit, Position, PositionVector, PositionMatrix,
-    LengthUnit, Length, LengthVector, LengthMatrix>
+public class PositionMatrix extends AbstractDoubleMatrixAbs<PositionUnit, Position, PositionVector, PositionMatrix, LengthUnit,
+        Length, LengthVector, LengthMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -96,5 +96,5 @@ public class PositionMatrix extends AbstractDoubleMatrixAbs<PositionUnit, Positi
         result.setDisplayUnit(displayUnit);
         return result;
     }
-
-}
+
+}

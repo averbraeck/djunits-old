@@ -20,7 +20,7 @@ import org.djunits.value.vfloat.vector.data.FloatVectorData;
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
 public class FloatAngleVector extends AbstractFloatVectorRelWithAbs<DirectionUnit, FloatDirection, FloatDirectionVector,
-    AngleUnit, FloatAngle, FloatAngleVector>
+        AngleUnit, FloatAngle, FloatAngleVector>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -73,5 +73,5 @@ public class FloatAngleVector extends AbstractFloatVectorRelWithAbs<DirectionUni
         result.setDisplayUnit(displayUnit);
         return result;
     }
-
-}
+
+}

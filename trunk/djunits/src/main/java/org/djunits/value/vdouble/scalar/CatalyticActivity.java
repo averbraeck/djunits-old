@@ -22,7 +22,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivityUnit, CatalyticActivity> 
+public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivityUnit, CatalyticActivity>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -38,10 +38,12 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
     public static final CatalyticActivity NaN = new CatalyticActivity(Double.NaN, CatalyticActivityUnit.SI);
 
     /** Constant with value POSITIVE_INFINITY. */
-    public static final CatalyticActivity POSITIVE_INFINITY = new CatalyticActivity(Double.POSITIVE_INFINITY, CatalyticActivityUnit.SI);
+    public static final CatalyticActivity POSITIVE_INFINITY =
+            new CatalyticActivity(Double.POSITIVE_INFINITY, CatalyticActivityUnit.SI);
 
     /** Constant with value NEGATIVE_INFINITY. */
-    public static final CatalyticActivity NEGATIVE_INFINITY = new CatalyticActivity(Double.NEGATIVE_INFINITY, CatalyticActivityUnit.SI);
+    public static final CatalyticActivity NEGATIVE_INFINITY =
+            new CatalyticActivity(Double.NEGATIVE_INFINITY, CatalyticActivityUnit.SI);
 
     /** Constant with value MAX_VALUE. */
     public static final CatalyticActivity POS_MAXVALUE = new CatalyticActivity(Double.MAX_VALUE, CatalyticActivityUnit.SI);
@@ -84,7 +86,7 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
     {
         return new CatalyticActivity(value, CatalyticActivityUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero CatalyticActivity; the low value
@@ -94,9 +96,10 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
      */
     public static CatalyticActivity interpolate(final CatalyticActivity zero, final CatalyticActivity one, final double ratio)
     {
-        return new CatalyticActivity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return new CatalyticActivity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 CatalyticActivity; the first scalar
@@ -160,9 +163,9 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
     }
 
     /**
-     * Returns a CatalyticActivity representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a CatalyticActivity representation of a textual representation of a value with a unit. The String representation
+     * that can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are
+     * allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a CatalyticActivity
      * @return CatalyticActivity; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -199,7 +202,8 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
     public static CatalyticActivity of(final double value, final String unitString)
     {
         Throw.whenNull(unitString, "Error parsing CatalyticActivity: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing CatalyticActivity: empty unitString");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class,
+                "Error parsing CatalyticActivity: empty unitString");
         CatalyticActivityUnit unit = CatalyticActivityUnit.BASE.getUnitByAbbreviation(unitString);
         if (unit != null)
         {
@@ -208,47 +212,44 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
         throw new IllegalArgumentException("Error parsing CatalyticActivity with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of CatalyticActivity and CatalyticActivity, which results in a Dimensionless scalar.
-         * @param v CatalyticActivity scalar
-         * @return Dimensionless scalar as a division of CatalyticActivity and CatalyticActivity
-         */
-        public final Dimensionless divide(final CatalyticActivity v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of CatalyticActivity and CatalyticActivity, which results in a Dimensionless scalar.
+     * @param v CatalyticActivity scalar
+     * @return Dimensionless scalar as a division of CatalyticActivity and CatalyticActivity
+     */
+    public final Dimensionless divide(final CatalyticActivity v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of CatalyticActivity and Duration, which results in a AmountOfSubstance scalar.
-         * @param v CatalyticActivity scalar
-         * @return AmountOfSubstance scalar as a multiplication of CatalyticActivity and Duration
-         */
-        public final AmountOfSubstance times(final Duration v)
-        {
-            return new AmountOfSubstance(this.si * v.si, AmountOfSubstanceUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of CatalyticActivity and Duration, which results in a AmountOfSubstance scalar.
+     * @param v CatalyticActivity scalar
+     * @return AmountOfSubstance scalar as a multiplication of CatalyticActivity and Duration
+     */
+    public final AmountOfSubstance times(final Duration v)
+    {
+        return new AmountOfSubstance(this.si * v.si, AmountOfSubstanceUnit.SI);
+    }
 
-        /**
-         * Calculate the division of CatalyticActivity and AmountOfSubstance, which results in a Frequency scalar.
-         * @param v CatalyticActivity scalar
-         * @return Frequency scalar as a division of CatalyticActivity and AmountOfSubstance
-         */
-        public final Frequency divide(final AmountOfSubstance v)
-        {
-            return new Frequency(this.si / v.si, FrequencyUnit.SI);
-        }
+    /**
+     * Calculate the division of CatalyticActivity and AmountOfSubstance, which results in a Frequency scalar.
+     * @param v CatalyticActivity scalar
+     * @return Frequency scalar as a division of CatalyticActivity and AmountOfSubstance
+     */
+    public final Frequency divide(final AmountOfSubstance v)
+    {
+        return new Frequency(this.si / v.si, FrequencyUnit.SI);
+    }
 
-        /**
-         * Calculate the division of CatalyticActivity and Frequency, which results in a AmountOfSubstance scalar.
-         * @param v CatalyticActivity scalar
-         * @return AmountOfSubstance scalar as a division of CatalyticActivity and Frequency
-         */
-        public final AmountOfSubstance divide(final Frequency v)
-        {
-            return new AmountOfSubstance(this.si / v.si, AmountOfSubstanceUnit.SI);
-        }
-
+    /**
+     * Calculate the division of CatalyticActivity and Frequency, which results in a AmountOfSubstance scalar.
+     * @param v CatalyticActivity scalar
+     * @return AmountOfSubstance scalar as a division of CatalyticActivity and Frequency
+     */
+    public final AmountOfSubstance divide(final Frequency v)
+    {
+        return new AmountOfSubstance(this.si / v.si, AmountOfSubstanceUnit.SI);
+    }
 
 }
-
-

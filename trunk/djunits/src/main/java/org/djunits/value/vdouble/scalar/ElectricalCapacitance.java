@@ -23,7 +23,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCapacitanceUnit, ElectricalCapacitance> 
+public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCapacitanceUnit, ElectricalCapacitance>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -39,16 +39,20 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
     public static final ElectricalCapacitance NaN = new ElectricalCapacitance(Double.NaN, ElectricalCapacitanceUnit.SI);
 
     /** Constant with value POSITIVE_INFINITY. */
-    public static final ElectricalCapacitance POSITIVE_INFINITY = new ElectricalCapacitance(Double.POSITIVE_INFINITY, ElectricalCapacitanceUnit.SI);
+    public static final ElectricalCapacitance POSITIVE_INFINITY =
+            new ElectricalCapacitance(Double.POSITIVE_INFINITY, ElectricalCapacitanceUnit.SI);
 
     /** Constant with value NEGATIVE_INFINITY. */
-    public static final ElectricalCapacitance NEGATIVE_INFINITY = new ElectricalCapacitance(Double.NEGATIVE_INFINITY, ElectricalCapacitanceUnit.SI);
+    public static final ElectricalCapacitance NEGATIVE_INFINITY =
+            new ElectricalCapacitance(Double.NEGATIVE_INFINITY, ElectricalCapacitanceUnit.SI);
 
     /** Constant with value MAX_VALUE. */
-    public static final ElectricalCapacitance POS_MAXVALUE = new ElectricalCapacitance(Double.MAX_VALUE, ElectricalCapacitanceUnit.SI);
+    public static final ElectricalCapacitance POS_MAXVALUE =
+            new ElectricalCapacitance(Double.MAX_VALUE, ElectricalCapacitanceUnit.SI);
 
     /** Constant with value -MAX_VALUE. */
-    public static final ElectricalCapacitance NEG_MAXVALUE = new ElectricalCapacitance(-Double.MAX_VALUE, ElectricalCapacitanceUnit.SI);
+    public static final ElectricalCapacitance NEG_MAXVALUE =
+            new ElectricalCapacitance(-Double.MAX_VALUE, ElectricalCapacitanceUnit.SI);
 
     /**
      * Construct ElectricalCapacitance scalar.
@@ -85,7 +89,7 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
     {
         return new ElectricalCapacitance(value, ElectricalCapacitanceUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero ElectricalCapacitance; the low value
@@ -93,11 +97,13 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
      * @param ratio double; the ratio between 0 and 1, inclusive
      * @return ElectricalCapacitance; a Scalar at the ratio between
      */
-    public static ElectricalCapacitance interpolate(final ElectricalCapacitance zero, final ElectricalCapacitance one, final double ratio)
+    public static ElectricalCapacitance interpolate(final ElectricalCapacitance zero, final ElectricalCapacitance one,
+            final double ratio)
     {
-        return new ElectricalCapacitance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return new ElectricalCapacitance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 ElectricalCapacitance; the first scalar
@@ -116,7 +122,8 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
      * @param rn ElectricalCapacitance...; the other scalars
      * @return ElectricalCapacitance; the maximum value of more than two relative scalars
      */
-    public static ElectricalCapacitance max(final ElectricalCapacitance r1, final ElectricalCapacitance r2, final ElectricalCapacitance... rn)
+    public static ElectricalCapacitance max(final ElectricalCapacitance r1, final ElectricalCapacitance r2,
+            final ElectricalCapacitance... rn)
     {
         ElectricalCapacitance maxr = (r1.gt(r2)) ? r1 : r2;
         for (ElectricalCapacitance r : rn)
@@ -147,7 +154,8 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
      * @param rn ElectricalCapacitance...; the other scalars
      * @return ElectricalCapacitance; the minimum value of more than two relative scalars
      */
-    public static ElectricalCapacitance min(final ElectricalCapacitance r1, final ElectricalCapacitance r2, final ElectricalCapacitance... rn)
+    public static ElectricalCapacitance min(final ElectricalCapacitance r1, final ElectricalCapacitance r2,
+            final ElectricalCapacitance... rn)
     {
         ElectricalCapacitance minr = (r1.lt(r2)) ? r1 : r2;
         for (ElectricalCapacitance r : rn)
@@ -161,9 +169,9 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
     }
 
     /**
-     * Returns a ElectricalCapacitance representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a ElectricalCapacitance representation of a textual representation of a value with a unit. The String
+     * representation that can be parsed is the double value in the unit, followed by the official abbreviation of the unit.
+     * Spaces are allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a ElectricalCapacitance
      * @return ElectricalCapacitance; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -172,7 +180,8 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
     public static ElectricalCapacitance valueOf(final String text)
     {
         Throw.whenNull(text, "Error parsing ElectricalCapacitance: text to parse is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing ElectricalCapacitance: empty text to parse");
+        Throw.when(text.length() == 0, IllegalArgumentException.class,
+                "Error parsing ElectricalCapacitance: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -200,7 +209,8 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
     public static ElectricalCapacitance of(final double value, final String unitString)
     {
         Throw.whenNull(unitString, "Error parsing ElectricalCapacitance: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing ElectricalCapacitance: empty unitString");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class,
+                "Error parsing ElectricalCapacitance: empty unitString");
         ElectricalCapacitanceUnit unit = ElectricalCapacitanceUnit.BASE.getUnitByAbbreviation(unitString);
         if (unit != null)
         {
@@ -209,47 +219,45 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
         throw new IllegalArgumentException("Error parsing ElectricalCapacitance with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of ElectricalCapacitance and ElectricalCapacitance, which results in a Dimensionless scalar.
-         * @param v ElectricalCapacitance scalar
-         * @return Dimensionless scalar as a division of ElectricalCapacitance and ElectricalCapacitance
-         */
-        public final Dimensionless divide(final ElectricalCapacitance v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of ElectricalCapacitance and ElectricalCapacitance, which results in a Dimensionless scalar.
+     * @param v ElectricalCapacitance scalar
+     * @return Dimensionless scalar as a division of ElectricalCapacitance and ElectricalCapacitance
+     */
+    public final Dimensionless divide(final ElectricalCapacitance v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of ElectricalCapacitance and ElectricalPotential, which results in a ElectricalCharge scalar.
-         * @param v ElectricalCapacitance scalar
-         * @return ElectricalCharge scalar as a multiplication of ElectricalCapacitance and ElectricalPotential
-         */
-        public final ElectricalCharge times(final ElectricalPotential v)
-        {
-            return new ElectricalCharge(this.si * v.si, ElectricalChargeUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of ElectricalCapacitance and ElectricalPotential, which results in a ElectricalCharge
+     * scalar.
+     * @param v ElectricalCapacitance scalar
+     * @return ElectricalCharge scalar as a multiplication of ElectricalCapacitance and ElectricalPotential
+     */
+    public final ElectricalCharge times(final ElectricalPotential v)
+    {
+        return new ElectricalCharge(this.si * v.si, ElectricalChargeUnit.SI);
+    }
 
-        /**
-         * Calculate the division of ElectricalCapacitance and Duration, which results in a ElectricalConductance scalar.
-         * @param v ElectricalCapacitance scalar
-         * @return ElectricalConductance scalar as a division of ElectricalCapacitance and Duration
-         */
-        public final ElectricalConductance divide(final Duration v)
-        {
-            return new ElectricalConductance(this.si / v.si, ElectricalConductanceUnit.SI);
-        }
+    /**
+     * Calculate the division of ElectricalCapacitance and Duration, which results in a ElectricalConductance scalar.
+     * @param v ElectricalCapacitance scalar
+     * @return ElectricalConductance scalar as a division of ElectricalCapacitance and Duration
+     */
+    public final ElectricalConductance divide(final Duration v)
+    {
+        return new ElectricalConductance(this.si / v.si, ElectricalConductanceUnit.SI);
+    }
 
-        /**
-         * Calculate the division of ElectricalCapacitance and ElectricalConductance, which results in a Duration scalar.
-         * @param v ElectricalCapacitance scalar
-         * @return Duration scalar as a division of ElectricalCapacitance and ElectricalConductance
-         */
-        public final Duration divide(final ElectricalConductance v)
-        {
-            return new Duration(this.si / v.si, DurationUnit.SI);
-        }
-
+    /**
+     * Calculate the division of ElectricalCapacitance and ElectricalConductance, which results in a Duration scalar.
+     * @param v ElectricalCapacitance scalar
+     * @return Duration scalar as a division of ElectricalCapacitance and ElectricalConductance
+     */
+    public final Duration divide(final ElectricalConductance v)
+    {
+        return new Duration(this.si / v.si, DurationUnit.SI);
+    }
 
 }
-
-

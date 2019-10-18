@@ -22,12 +22,12 @@ import org.djunits.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatTimeMatrix extends AbstractFloatMatrixAbs<TimeUnit, FloatTime, FloatTimeVector, FloatTimeMatrix,
-DurationUnit, FloatDuration, FloatDurationVector, FloatDurationMatrix>
+public class FloatTimeMatrix extends AbstractFloatMatrixAbs<TimeUnit, FloatTime, FloatTimeVector, FloatTimeMatrix, DurationUnit,
+        FloatDuration, FloatDurationVector, FloatDurationMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
-    
+
     /**
      * @param data FloatMatrixData; an internal data object
      * @param unit TimeUnit; the unit
@@ -36,14 +36,14 @@ DurationUnit, FloatDuration, FloatDurationVector, FloatDurationMatrix>
     {
         super(data, unit);
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public Class<FloatTime> getScalarClass()
     {
         return FloatTime.class;
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public Class<FloatTimeVector> getVectorClass()
@@ -96,5 +96,5 @@ DurationUnit, FloatDuration, FloatDurationVector, FloatDurationMatrix>
         result.setDisplayUnit(displayUnit);
         return result;
     }
-
-}
+
+}

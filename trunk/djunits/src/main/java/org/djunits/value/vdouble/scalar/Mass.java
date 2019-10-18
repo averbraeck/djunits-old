@@ -25,7 +25,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass> 
+public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -87,7 +87,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
     {
         return new Mass(value, MassUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero Mass; the low value
@@ -99,7 +99,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
     {
         return new Mass(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 Mass; the first scalar
@@ -211,77 +211,74 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
         throw new IllegalArgumentException("Error parsing Mass with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of Mass and Mass, which results in a Dimensionless scalar.
-         * @param v Mass scalar
-         * @return Dimensionless scalar as a division of Mass and Mass
-         */
-        public final Dimensionless divide(final Mass v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of Mass and Mass, which results in a Dimensionless scalar.
+     * @param v Mass scalar
+     * @return Dimensionless scalar as a division of Mass and Mass
+     */
+    public final Dimensionless divide(final Mass v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Mass and FlowMass, which results in a Duration scalar.
-         * @param v Mass scalar
-         * @return Duration scalar as a division of Mass and FlowMass
-         */
-        public final Duration divide(final FlowMass v)
-        {
-            return new Duration(this.si / v.si, DurationUnit.SI);
-        }
+    /**
+     * Calculate the division of Mass and FlowMass, which results in a Duration scalar.
+     * @param v Mass scalar
+     * @return Duration scalar as a division of Mass and FlowMass
+     */
+    public final Duration divide(final FlowMass v)
+    {
+        return new Duration(this.si / v.si, DurationUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Mass and Duration, which results in a FlowMass scalar.
-         * @param v Mass scalar
-         * @return FlowMass scalar as a division of Mass and Duration
-         */
-        public final FlowMass divide(final Duration v)
-        {
-            return new FlowMass(this.si / v.si, FlowMassUnit.SI);
-        }
+    /**
+     * Calculate the division of Mass and Duration, which results in a FlowMass scalar.
+     * @param v Mass scalar
+     * @return FlowMass scalar as a division of Mass and Duration
+     */
+    public final FlowMass divide(final Duration v)
+    {
+        return new FlowMass(this.si / v.si, FlowMassUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Mass and Acceleration, which results in a Force scalar.
-         * @param v Mass scalar
-         * @return Force scalar as a multiplication of Mass and Acceleration
-         */
-        public final Force times(final Acceleration v)
-        {
-            return new Force(this.si * v.si, ForceUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Mass and Acceleration, which results in a Force scalar.
+     * @param v Mass scalar
+     * @return Force scalar as a multiplication of Mass and Acceleration
+     */
+    public final Force times(final Acceleration v)
+    {
+        return new Force(this.si * v.si, ForceUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Mass and Frequency, which results in a FlowMass scalar.
-         * @param v Mass scalar
-         * @return FlowMass scalar as a multiplication of Mass and Frequency
-         */
-        public final FlowMass times(final Frequency v)
-        {
-            return new FlowMass(this.si * v.si, FlowMassUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Mass and Frequency, which results in a FlowMass scalar.
+     * @param v Mass scalar
+     * @return FlowMass scalar as a multiplication of Mass and Frequency
+     */
+    public final FlowMass times(final Frequency v)
+    {
+        return new FlowMass(this.si * v.si, FlowMassUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Mass and Density, which results in a Volume scalar.
-         * @param v Mass scalar
-         * @return Volume scalar as a division of Mass and Density
-         */
-        public final Volume divide(final Density v)
-        {
-            return new Volume(this.si / v.si, VolumeUnit.SI);
-        }
+    /**
+     * Calculate the division of Mass and Density, which results in a Volume scalar.
+     * @param v Mass scalar
+     * @return Volume scalar as a division of Mass and Density
+     */
+    public final Volume divide(final Density v)
+    {
+        return new Volume(this.si / v.si, VolumeUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Mass and Volume, which results in a Density scalar.
-         * @param v Mass scalar
-         * @return Density scalar as a division of Mass and Volume
-         */
-        public final Density divide(final Volume v)
-        {
-            return new Density(this.si / v.si, DensityUnit.SI);
-        }
-
+    /**
+     * Calculate the division of Mass and Volume, which results in a Density scalar.
+     * @param v Mass scalar
+     * @return Density scalar as a division of Mass and Volume
+     */
+    public final Density divide(final Volume v)
+    {
+        return new Density(this.si / v.si, DensityUnit.SI);
+    }
 
 }
-
-

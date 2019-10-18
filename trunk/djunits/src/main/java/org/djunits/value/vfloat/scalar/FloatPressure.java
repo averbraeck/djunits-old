@@ -22,7 +22,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPressure> 
+public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPressure>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -104,8 +104,8 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
      */
     public static FloatPressure interpolate(final FloatPressure zero, final FloatPressure one, final float ratio)
     {
-        return new FloatPressure(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new FloatPressure(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**
@@ -171,9 +171,9 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
     }
 
     /**
-     * Returns a FloatPressure representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a FloatPressure representation of a textual representation of a value with a unit. The String representation that
+     * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
+     * not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatPressure
      * @return FloatPressure; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -219,37 +219,34 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
         throw new IllegalArgumentException("Error parsing FloatPressure with unit " + unitString);
     }
 
-        /**
-         * Calculate the division of FloatPressure and FloatPressure, which results in a FloatDimensionless scalar.
-         * @param v FloatPressure scalar
-         * @return FloatDimensionless scalar as a division of FloatPressure and FloatPressure
-         */
-        public final FloatDimensionless divide(final FloatPressure v)
-        {
-            return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatPressure and FloatPressure, which results in a FloatDimensionless scalar.
+     * @param v FloatPressure scalar
+     * @return FloatDimensionless scalar as a division of FloatPressure and FloatPressure
+     */
+    public final FloatDimensionless divide(final FloatPressure v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatPressure and FloatArea, which results in a FloatForce scalar.
-         * @param v FloatPressure scalar
-         * @return FloatForce scalar as a multiplication of FloatPressure and FloatArea
-         */
-        public final FloatForce times(final FloatArea v)
-        {
-            return new FloatForce(this.si * v.si, ForceUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatPressure and FloatArea, which results in a FloatForce scalar.
+     * @param v FloatPressure scalar
+     * @return FloatForce scalar as a multiplication of FloatPressure and FloatArea
+     */
+    public final FloatForce times(final FloatArea v)
+    {
+        return new FloatForce(this.si * v.si, ForceUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatPressure and FloatVolume, which results in a FloatEnergy scalar.
-         * @param v FloatPressure scalar
-         * @return FloatEnergy scalar as a multiplication of FloatPressure and FloatVolume
-         */
-        public final FloatEnergy times(final FloatVolume v)
-        {
-            return new FloatEnergy(this.si * v.si, EnergyUnit.SI);
-        }
-
+    /**
+     * Calculate the multiplication of FloatPressure and FloatVolume, which results in a FloatEnergy scalar.
+     * @param v FloatPressure scalar
+     * @return FloatEnergy scalar as a multiplication of FloatPressure and FloatVolume
+     */
+    public final FloatEnergy times(final FloatVolume v)
+    {
+        return new FloatEnergy(this.si * v.si, EnergyUnit.SI);
+    }
 
 }
-
-

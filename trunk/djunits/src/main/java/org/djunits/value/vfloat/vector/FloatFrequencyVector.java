@@ -8,7 +8,7 @@ import org.djunits.value.vfloat.vector.base.AbstractFloatVectorRel;
 import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable Float FloatFrequencyVector, a vector of values with a FrequencyUnit. 
+ * Immutable Float FloatFrequencyVector, a vector of values with a FrequencyUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -39,7 +39,7 @@ public class FloatFrequencyVector extends AbstractFloatVectorRel<FrequencyUnit, 
     {
         return FloatFrequency.class;
     }
-        
+
     /** {@inheritDoc} */
     @Override
     public FloatFrequencyVector instantiateVector(final FloatVectorData fvd, final FrequencyUnit displayUnit)
@@ -56,7 +56,4 @@ public class FloatFrequencyVector extends AbstractFloatVectorRel<FrequencyUnit, 
         return result;
     }
 
-   
 }
-
-

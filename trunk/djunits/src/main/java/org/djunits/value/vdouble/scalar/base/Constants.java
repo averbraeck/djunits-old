@@ -23,7 +23,7 @@ public final class Constants
     {
         // utility class
     }
-    
+
     /**
      * Number of constituent particles in a Mole; a.k.a. Avogadro's number. This value is exact since the 2019 redefinition of
      * the SI base units.

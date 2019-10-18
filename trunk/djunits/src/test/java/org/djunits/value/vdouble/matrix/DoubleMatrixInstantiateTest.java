@@ -66,7 +66,7 @@ public class DoubleMatrixInstantiateTest
             @SuppressWarnings("unchecked")
             UnitBase<U> unitBase = (UnitBase<U>) UnitTypes.INSTANCE.getUnitBase(scalarName + "Unit");
             U standardUnit = unitBase.getStandardUnit();
-            for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+            for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
             {
                 double[][] testValues = DOUBLEMATRIX.denseRectArrays(5, 10);
                 DoubleMatrixData dmd = DoubleMatrixData.instantiate(testValues, standardUnit.getScale(), storageType);
@@ -82,7 +82,7 @@ public class DoubleMatrixInstantiateTest
                 DoubleVectorData dvd =
                         DoubleVectorData.instantiate(doubleMatrix.getRowSI(0), standardUnit.getScale(), storageType);
                 DoubleVectorInterface<U, ?, ?> doubleVector = doubleMatrix.instantiateVector(dvd, standardUnit);
-                assertArrayEquals("Double vector contains values from row 0", new double[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+                assertArrayEquals("Double vector contains values from row 0", new double[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
                         doubleVector.getValuesSI(), 0.001);
                 DoubleScalarInterface<U, ?> doubleScalar = doubleMatrix.instantiateScalarSI(1.234, standardUnit);
                 assertEquals("Constructed scalar has correct value", 1.234, doubleScalar.getSI(), 0.001);
@@ -113,7 +113,7 @@ public class DoubleMatrixInstantiateTest
             UnitBase<AU> absUnitBase = (UnitBase<AU>) UnitTypes.INSTANCE.getUnitBase(absScalarName + "Unit");
             RU relStandardUnit = relUnitBase.getStandardUnit();
             AU absStandardUnit = absUnitBase.getStandardUnit();
-            for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+            for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
             {
                 double[][] testValues = DOUBLEMATRIX.denseRectArrays(5, 10);
                 DoubleMatrixData dmd = DoubleMatrixData.instantiate(testValues, relStandardUnit.getScale(), storageType);
@@ -130,7 +130,7 @@ public class DoubleMatrixInstantiateTest
                         DoubleVectorData.instantiate(relDoubleMatrix.getRowSI(0), relStandardUnit.getScale(), storageType);
                 AbstractDoubleVectorAbs<AU, ?, ?, RU, ?, ?> absDoubleVector =
                         relDoubleMatrix.instantiateVectorAbs(dvd, absStandardUnit);
-                assertArrayEquals("Double vector contains values from row 0", new double[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+                assertArrayEquals("Double vector contains values from row 0", new double[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
                         absDoubleVector.getValuesSI(), 0.001);
                 AbstractDoubleScalarAbs<AU, ?, RU, ?> absDoubleScalar =
                         relDoubleMatrix.instantiateScalarAbsSI(1.234, absStandardUnit);
@@ -144,7 +144,7 @@ public class DoubleMatrixInstantiateTest
                 dvd = DoubleVectorData.instantiate(absDoubleMatrix.getRowSI(0), absStandardUnit.getScale(), storageType);
                 AbstractDoubleVectorRelWithAbs<AU, ?, ?, RU, ?, ?> relDoubleVector =
                         absDoubleMatrix.instantiateVectorRel(dvd, relStandardUnit);
-                assertArrayEquals("Double vector contains values from row 0", new double[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+                assertArrayEquals("Double vector contains values from row 0", new double[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
                         relDoubleVector.getValuesSI(), 0.001);
                 AbstractDoubleScalarRelWithAbs<AU, ?, RU, ?> relDoubleScalar =
                         absDoubleMatrix.instantiateScalarRelSI(1.234, relStandardUnit);
@@ -185,7 +185,7 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
         assertEquals(lmdkm10, lmdkm10.toDense());
         assertEquals(lmskm10, lmskm10.toSparse());
-        
+
         assertTrue(lmdkm10.isDense());
         assertTrue(lmskm10.isSparse());
 
@@ -193,11 +193,11 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmskm10.hashCode(), lmskm10.toDense().toSparse().hashCode());
         assertEquals(lmdkm10.hashCode(), lmskm10.toDense().hashCode());
         assertEquals(lmskm10.hashCode(), lmdkm10.toSparse().hashCode());
-        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode()); 
-        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode()); 
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode());
         assertEquals(lmdkm10.hashCode(), lmdkm10.toDense().hashCode());
         assertEquals(lmskm10.hashCode(), lmskm10.toSparse().hashCode());
-        
+
         LengthMatrix lmdsi10 =
                 DoubleMatrix.instantiateSI(DOUBLEMATRIX.denseRectArrays(10, 10), LengthUnit.CENTIMETER, StorageType.DENSE);
         assertEquals(10, lmdsi10.rows());
@@ -264,8 +264,8 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmskm10.hashCode(), lmskm10.toDense().toSparse().hashCode());
         assertEquals(lmdkm10.hashCode(), lmskm10.toDense().hashCode());
         assertEquals(lmskm10.hashCode(), lmdkm10.toSparse().hashCode());
-        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode()); 
-        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode()); 
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode());
         assertEquals(lmdkm10.hashCode(), lmdkm10.toDense().hashCode());
         assertEquals(lmskm10.hashCode(), lmskm10.toSparse().hashCode());
 
@@ -351,8 +351,8 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmskm10.hashCode(), lmskm10.toDense().toSparse().hashCode());
         assertEquals(lmdkm10.hashCode(), lmskm10.toDense().hashCode());
         assertEquals(lmskm10.hashCode(), lmdkm10.toSparse().hashCode());
-        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode()); 
-        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode()); 
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode());
         assertEquals(lmdkm10.hashCode(), lmdkm10.toDense().hashCode());
         assertEquals(lmskm10.hashCode(), lmskm10.toSparse().hashCode());
 
@@ -422,8 +422,8 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmskm10.hashCode(), lmskm10.toDense().toSparse().hashCode());
         assertEquals(lmdkm10.hashCode(), lmskm10.toDense().hashCode());
         assertEquals(lmskm10.hashCode(), lmdkm10.toSparse().hashCode());
-        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode()); 
-        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode()); 
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode());
         assertEquals(lmdkm10.hashCode(), lmdkm10.toDense().hashCode());
         assertEquals(lmskm10.hashCode(), lmskm10.toSparse().hashCode());
 
@@ -585,7 +585,7 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmskm10, lmskm10.toDense()); // dense and sparse are the same if content is the same
         assertEquals(lmdkm10, lmdkm10.toDense());
         assertEquals(lmskm10, lmskm10.toSparse());
-        
+
         assertTrue(lmdkm10.isDense());
         assertTrue(lmskm10.isSparse());
 
@@ -593,8 +593,8 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmskm10.hashCode(), lmskm10.toDense().toSparse().hashCode());
         assertEquals(lmdkm10.hashCode(), lmskm10.toDense().hashCode());
         assertEquals(lmskm10.hashCode(), lmdkm10.toSparse().hashCode());
-        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode()); 
-        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode()); 
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode());
         assertEquals(lmdkm10.hashCode(), lmdkm10.toDense().hashCode());
         assertEquals(lmskm10.hashCode(), lmskm10.toSparse().hashCode());
 
@@ -664,8 +664,8 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmskm10.hashCode(), lmskm10.toDense().toSparse().hashCode());
         assertEquals(lmdkm10.hashCode(), lmskm10.toDense().hashCode());
         assertEquals(lmskm10.hashCode(), lmdkm10.toSparse().hashCode());
-        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode()); 
-        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode()); 
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode());
         assertEquals(lmdkm10.hashCode(), lmdkm10.toDense().hashCode());
         assertEquals(lmskm10.hashCode(), lmskm10.toSparse().hashCode());
 
@@ -751,8 +751,8 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmskm10.hashCode(), lmskm10.toDense().toSparse().hashCode());
         assertEquals(lmdkm10.hashCode(), lmskm10.toDense().hashCode());
         assertEquals(lmskm10.hashCode(), lmdkm10.toSparse().hashCode());
-        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode()); 
-        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode()); 
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode());
         assertEquals(lmdkm10.hashCode(), lmdkm10.toDense().hashCode());
         assertEquals(lmskm10.hashCode(), lmskm10.toSparse().hashCode());
 
@@ -822,8 +822,8 @@ public class DoubleMatrixInstantiateTest
         assertEquals(lmskm10.hashCode(), lmskm10.toDense().toSparse().hashCode());
         assertEquals(lmdkm10.hashCode(), lmskm10.toDense().hashCode());
         assertEquals(lmskm10.hashCode(), lmdkm10.toSparse().hashCode());
-        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode()); 
-        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode()); 
+        assertEquals(lmdkm10.hashCode(), lmdkm10.toSparse().hashCode());
+        assertEquals(lmskm10.hashCode(), lmskm10.toDense().hashCode());
         assertEquals(lmdkm10.hashCode(), lmdkm10.toDense().hashCode());
         assertEquals(lmskm10.hashCode(), lmskm10.toSparse().hashCode());
 
@@ -874,7 +874,7 @@ public class DoubleMatrixInstantiateTest
         assertEquals(10, lmstu10.cardinality());
         assertEquals(5 * 11, lmstu10.zSum().getSI(), 0.001);
         assertEquals(AreaUnit.ACRE, lmstu10.getDisplayUnit());
-        
+
         assertNotEquals(lmdkm10, lmdsi10);
         assertNotEquals(lmdkm10, lmssi10);
         assertNotEquals(lmskm10, lmdsi10);
@@ -883,7 +883,7 @@ public class DoubleMatrixInstantiateTest
         assertNotEquals(lmdkm10, lmstu10);
         assertNotEquals(lmskm10, lmdtu10);
         assertNotEquals(lmskm10, lmstu10);
-        
+
         assertNotEquals(lmdkm10.hashCode(), lmdsi10.hashCode());
         assertNotEquals(lmdkm10.hashCode(), lmssi10.hashCode());
         assertNotEquals(lmskm10.hashCode(), lmdsi10.hashCode());
@@ -891,7 +891,8 @@ public class DoubleMatrixInstantiateTest
         assertNotEquals(lmdkm10.hashCode(), lmdtu10.hashCode());
         assertNotEquals(lmdkm10.hashCode(), lmstu10.hashCode());
         assertNotEquals(lmskm10.hashCode(), lmdtu10.hashCode());
-        assertNotEquals(lmskm10.hashCode(), lmstu10.hashCode());    }
+        assertNotEquals(lmskm10.hashCode(), lmstu10.hashCode());
+    }
 
     /**
      * Test the instantiation of dense and sparse matrix types with dense data (no zeros).
@@ -1046,7 +1047,7 @@ public class DoubleMatrixInstantiateTest
         assertEquals(SpeedUnit.METER_PER_SECOND, col1ss.getDisplayUnit());
 
         // equals
-        
+
         assertEquals(row1dd, row1dd);
         assertEquals(row1ss, row1ss);
         assertEquals(row1dd, row1ds);

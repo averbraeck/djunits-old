@@ -22,8 +22,9 @@ import org.djunits.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class AbsoluteTemperatureMatrix extends AbstractDoubleMatrixAbs<AbsoluteTemperatureUnit, AbsoluteTemperature, AbsoluteTemperatureVector, AbsoluteTemperatureMatrix,
-    TemperatureUnit, Temperature, TemperatureVector, TemperatureMatrix>
+public class AbsoluteTemperatureMatrix
+        extends AbstractDoubleMatrixAbs<AbsoluteTemperatureUnit, AbsoluteTemperature, AbsoluteTemperatureVector,
+                AbsoluteTemperatureMatrix, TemperatureUnit, Temperature, TemperatureVector, TemperatureMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -96,5 +97,5 @@ public class AbsoluteTemperatureMatrix extends AbstractDoubleMatrixAbs<AbsoluteT
         result.setDisplayUnit(displayUnit);
         return result;
     }
-
-}
+
+}

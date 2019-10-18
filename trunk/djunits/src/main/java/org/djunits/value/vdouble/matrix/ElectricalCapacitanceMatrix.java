@@ -10,7 +10,7 @@ import org.djunits.value.vdouble.vector.ElectricalCapacitanceVector;
 import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Double ElectricalCapacitanceMatrix, a matrix of values with a ElectricalCapacitanceUnit. 
+ * Immutable Double ElectricalCapacitanceMatrix, a matrix of values with a ElectricalCapacitanceUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,7 +19,8 @@ import org.djunits.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class ElectricalCapacitanceMatrix extends AbstractDoubleMatrixRel<ElectricalCapacitanceUnit, ElectricalCapacitance, ElectricalCapacitanceVector, ElectricalCapacitanceMatrix>
+public class ElectricalCapacitanceMatrix extends AbstractDoubleMatrixRel<ElectricalCapacitanceUnit, ElectricalCapacitance,
+        ElectricalCapacitanceVector, ElectricalCapacitanceMatrix>
 
 {
     /** */
@@ -50,14 +51,16 @@ public class ElectricalCapacitanceMatrix extends AbstractDoubleMatrixRel<Electri
 
     /** {@inheritDoc} */
     @Override
-    public ElectricalCapacitanceMatrix instantiateMatrix(final DoubleMatrixData dmd, final ElectricalCapacitanceUnit displayUnit)
+    public ElectricalCapacitanceMatrix instantiateMatrix(final DoubleMatrixData dmd,
+            final ElectricalCapacitanceUnit displayUnit)
     {
         return new ElectricalCapacitanceMatrix(dmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public ElectricalCapacitanceVector instantiateVector(final DoubleVectorData dvd, final ElectricalCapacitanceUnit displayUnit)
+    public ElectricalCapacitanceVector instantiateVector(final DoubleVectorData dvd,
+            final ElectricalCapacitanceUnit displayUnit)
     {
         return new ElectricalCapacitanceVector(dvd, displayUnit);
     }
@@ -70,6 +73,5 @@ public class ElectricalCapacitanceMatrix extends AbstractDoubleMatrixRel<Electri
         result.setDisplayUnit(displayUnit);
         return result;
     }
-    
+
 }
-

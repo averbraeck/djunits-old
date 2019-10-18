@@ -93,8 +93,8 @@ public abstract class DoubleScalar
                 }
                 else
                 {
-                    scalarClass = (Class<DoubleScalarInterface<?, ?>>) Class.forName(
-                            "org.djunits.value.vdouble.scalar." + unit.getClass().getSimpleName().replace("Unit", ""));
+                    scalarClass = (Class<DoubleScalarInterface<?, ?>>) Class
+                            .forName("org.djunits.value.vdouble.scalar." + unit.getClass().getSimpleName().replace("Unit", ""));
                 }
                 scalarConstructor = scalarClass.getDeclaredConstructor(double.class, unit.getClass());
                 CACHE.put(unit, scalarConstructor);

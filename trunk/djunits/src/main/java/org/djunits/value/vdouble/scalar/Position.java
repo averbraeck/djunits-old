@@ -16,7 +16,6 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarAbs;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
-
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
@@ -82,8 +81,8 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
      */
     public static Position interpolate(final Position zero, final Position one, final double ratio)
     {
-        return new Position(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new Position(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**
@@ -149,8 +148,8 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
     }
 
     /**
-     * Returns a Position representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
+     * Returns a Position representation of a textual representation of a value with a unit. The String representation that can
+     * be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
      * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Position
      * @return Position; the Scalar representation of the value in its unit
@@ -197,6 +196,4 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
         throw new IllegalArgumentException("Error parsing Position with unit " + unitString);
     }
 
-    
 }
-

@@ -22,12 +22,14 @@ import org.djunits.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatAbsoluteTemperatureMatrix extends AbstractFloatMatrixAbs<AbsoluteTemperatureUnit, FloatAbsoluteTemperature, FloatAbsoluteTemperatureVector, FloatAbsoluteTemperatureMatrix,
-TemperatureUnit, FloatTemperature, FloatTemperatureVector, FloatTemperatureMatrix>
+public class FloatAbsoluteTemperatureMatrix extends
+        AbstractFloatMatrixAbs<AbsoluteTemperatureUnit, FloatAbsoluteTemperature, FloatAbsoluteTemperatureVector,
+                FloatAbsoluteTemperatureMatrix, TemperatureUnit, FloatTemperature, FloatTemperatureVector,
+                FloatTemperatureMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
-    
+
     /**
      * @param data FloatMatrixData; an internal data object
      * @param unit AbsoluteTemperatureUnit; the unit
@@ -36,14 +38,14 @@ TemperatureUnit, FloatTemperature, FloatTemperatureVector, FloatTemperatureMatri
     {
         super(data, unit);
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public Class<FloatAbsoluteTemperature> getScalarClass()
     {
         return FloatAbsoluteTemperature.class;
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public Class<FloatAbsoluteTemperatureVector> getVectorClass()
@@ -53,14 +55,16 @@ TemperatureUnit, FloatTemperature, FloatTemperatureVector, FloatTemperatureMatri
 
     /** {@inheritDoc} */
     @Override
-    public FloatAbsoluteTemperatureMatrix instantiateMatrix(final FloatMatrixData fmd, final AbsoluteTemperatureUnit displayUnit)
+    public FloatAbsoluteTemperatureMatrix instantiateMatrix(final FloatMatrixData fmd,
+            final AbsoluteTemperatureUnit displayUnit)
     {
         return new FloatAbsoluteTemperatureMatrix(fmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public FloatAbsoluteTemperatureVector instantiateVector(final FloatVectorData fvd, final AbsoluteTemperatureUnit displayUnit)
+    public FloatAbsoluteTemperatureVector instantiateVector(final FloatVectorData fvd,
+            final AbsoluteTemperatureUnit displayUnit)
     {
         return new FloatAbsoluteTemperatureVector(fvd, displayUnit);
     }
@@ -96,5 +100,5 @@ TemperatureUnit, FloatTemperature, FloatTemperatureVector, FloatTemperatureMatri
         result.setDisplayUnit(displayUnit);
         return result;
     }
-
-}
+
+}

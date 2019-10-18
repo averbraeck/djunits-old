@@ -22,7 +22,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure> 
+public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -84,7 +84,7 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
     {
         return new Pressure(value, PressureUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero Pressure; the low value
@@ -94,9 +94,10 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
      */
     public static Pressure interpolate(final Pressure zero, final Pressure one, final double ratio)
     {
-        return new Pressure(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return new Pressure(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 Pressure; the first scalar
@@ -160,8 +161,8 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
     }
 
     /**
-     * Returns a Pressure representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
+     * Returns a Pressure representation of a textual representation of a value with a unit. The String representation that can
+     * be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
      * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Pressure
      * @return Pressure; the Scalar representation of the value in its unit
@@ -208,37 +209,34 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
         throw new IllegalArgumentException("Error parsing Pressure with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of Pressure and Pressure, which results in a Dimensionless scalar.
-         * @param v Pressure scalar
-         * @return Dimensionless scalar as a division of Pressure and Pressure
-         */
-        public final Dimensionless divide(final Pressure v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of Pressure and Pressure, which results in a Dimensionless scalar.
+     * @param v Pressure scalar
+     * @return Dimensionless scalar as a division of Pressure and Pressure
+     */
+    public final Dimensionless divide(final Pressure v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Pressure and Area, which results in a Force scalar.
-         * @param v Pressure scalar
-         * @return Force scalar as a multiplication of Pressure and Area
-         */
-        public final Force times(final Area v)
-        {
-            return new Force(this.si * v.si, ForceUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Pressure and Area, which results in a Force scalar.
+     * @param v Pressure scalar
+     * @return Force scalar as a multiplication of Pressure and Area
+     */
+    public final Force times(final Area v)
+    {
+        return new Force(this.si * v.si, ForceUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Pressure and Volume, which results in a Energy scalar.
-         * @param v Pressure scalar
-         * @return Energy scalar as a multiplication of Pressure and Volume
-         */
-        public final Energy times(final Volume v)
-        {
-            return new Energy(this.si * v.si, EnergyUnit.SI);
-        }
-
+    /**
+     * Calculate the multiplication of Pressure and Volume, which results in a Energy scalar.
+     * @param v Pressure scalar
+     * @return Energy scalar as a multiplication of Pressure and Volume
+     */
+    public final Energy times(final Volume v)
+    {
+        return new Energy(this.si * v.si, EnergyUnit.SI);
+    }
 
 }
-
-

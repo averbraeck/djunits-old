@@ -21,7 +21,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalInductanceUnit, ElectricalInductance> 
+public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalInductanceUnit, ElectricalInductance>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -37,16 +37,20 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
     public static final ElectricalInductance NaN = new ElectricalInductance(Double.NaN, ElectricalInductanceUnit.SI);
 
     /** Constant with value POSITIVE_INFINITY. */
-    public static final ElectricalInductance POSITIVE_INFINITY = new ElectricalInductance(Double.POSITIVE_INFINITY, ElectricalInductanceUnit.SI);
+    public static final ElectricalInductance POSITIVE_INFINITY =
+            new ElectricalInductance(Double.POSITIVE_INFINITY, ElectricalInductanceUnit.SI);
 
     /** Constant with value NEGATIVE_INFINITY. */
-    public static final ElectricalInductance NEGATIVE_INFINITY = new ElectricalInductance(Double.NEGATIVE_INFINITY, ElectricalInductanceUnit.SI);
+    public static final ElectricalInductance NEGATIVE_INFINITY =
+            new ElectricalInductance(Double.NEGATIVE_INFINITY, ElectricalInductanceUnit.SI);
 
     /** Constant with value MAX_VALUE. */
-    public static final ElectricalInductance POS_MAXVALUE = new ElectricalInductance(Double.MAX_VALUE, ElectricalInductanceUnit.SI);
+    public static final ElectricalInductance POS_MAXVALUE =
+            new ElectricalInductance(Double.MAX_VALUE, ElectricalInductanceUnit.SI);
 
     /** Constant with value -MAX_VALUE. */
-    public static final ElectricalInductance NEG_MAXVALUE = new ElectricalInductance(-Double.MAX_VALUE, ElectricalInductanceUnit.SI);
+    public static final ElectricalInductance NEG_MAXVALUE =
+            new ElectricalInductance(-Double.MAX_VALUE, ElectricalInductanceUnit.SI);
 
     /**
      * Construct ElectricalInductance scalar.
@@ -83,7 +87,7 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
     {
         return new ElectricalInductance(value, ElectricalInductanceUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero ElectricalInductance; the low value
@@ -91,11 +95,13 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
      * @param ratio double; the ratio between 0 and 1, inclusive
      * @return ElectricalInductance; a Scalar at the ratio between
      */
-    public static ElectricalInductance interpolate(final ElectricalInductance zero, final ElectricalInductance one, final double ratio)
+    public static ElectricalInductance interpolate(final ElectricalInductance zero, final ElectricalInductance one,
+            final double ratio)
     {
-        return new ElectricalInductance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return new ElectricalInductance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 ElectricalInductance; the first scalar
@@ -114,7 +120,8 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
      * @param rn ElectricalInductance...; the other scalars
      * @return ElectricalInductance; the maximum value of more than two relative scalars
      */
-    public static ElectricalInductance max(final ElectricalInductance r1, final ElectricalInductance r2, final ElectricalInductance... rn)
+    public static ElectricalInductance max(final ElectricalInductance r1, final ElectricalInductance r2,
+            final ElectricalInductance... rn)
     {
         ElectricalInductance maxr = (r1.gt(r2)) ? r1 : r2;
         for (ElectricalInductance r : rn)
@@ -145,7 +152,8 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
      * @param rn ElectricalInductance...; the other scalars
      * @return ElectricalInductance; the minimum value of more than two relative scalars
      */
-    public static ElectricalInductance min(final ElectricalInductance r1, final ElectricalInductance r2, final ElectricalInductance... rn)
+    public static ElectricalInductance min(final ElectricalInductance r1, final ElectricalInductance r2,
+            final ElectricalInductance... rn)
     {
         ElectricalInductance minr = (r1.lt(r2)) ? r1 : r2;
         for (ElectricalInductance r : rn)
@@ -159,9 +167,9 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
     }
 
     /**
-     * Returns a ElectricalInductance representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a ElectricalInductance representation of a textual representation of a value with a unit. The String
+     * representation that can be parsed is the double value in the unit, followed by the official abbreviation of the unit.
+     * Spaces are allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a ElectricalInductance
      * @return ElectricalInductance; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -170,7 +178,8 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
     public static ElectricalInductance valueOf(final String text)
     {
         Throw.whenNull(text, "Error parsing ElectricalInductance: text to parse is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing ElectricalInductance: empty text to parse");
+        Throw.when(text.length() == 0, IllegalArgumentException.class,
+                "Error parsing ElectricalInductance: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -198,7 +207,8 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
     public static ElectricalInductance of(final double value, final String unitString)
     {
         Throw.whenNull(unitString, "Error parsing ElectricalInductance: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing ElectricalInductance: empty unitString");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class,
+                "Error parsing ElectricalInductance: empty unitString");
         ElectricalInductanceUnit unit = ElectricalInductanceUnit.BASE.getUnitByAbbreviation(unitString);
         if (unit != null)
         {
@@ -207,27 +217,24 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
         throw new IllegalArgumentException("Error parsing ElectricalInductance with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of ElectricalInductance and ElectricalInductance, which results in a Dimensionless scalar.
-         * @param v ElectricalInductance scalar
-         * @return Dimensionless scalar as a division of ElectricalInductance and ElectricalInductance
-         */
-        public final Dimensionless divide(final ElectricalInductance v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of ElectricalInductance and ElectricalInductance, which results in a Dimensionless scalar.
+     * @param v ElectricalInductance scalar
+     * @return Dimensionless scalar as a division of ElectricalInductance and ElectricalInductance
+     */
+    public final Dimensionless divide(final ElectricalInductance v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of ElectricalInductance and ElectricalCurrent, which results in a MagneticFlux scalar.
-         * @param v ElectricalInductance scalar
-         * @return MagneticFlux scalar as a multiplication of ElectricalInductance and ElectricalCurrent
-         */
-        public final MagneticFlux times(final ElectricalCurrent v)
-        {
-            return new MagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
-        }
-
+    /**
+     * Calculate the multiplication of ElectricalInductance and ElectricalCurrent, which results in a MagneticFlux scalar.
+     * @param v ElectricalInductance scalar
+     * @return MagneticFlux scalar as a multiplication of ElectricalInductance and ElectricalCurrent
+     */
+    public final MagneticFlux times(final ElectricalCurrent v)
+    {
+        return new MagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
+    }
 
 }
-
-

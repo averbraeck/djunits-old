@@ -10,7 +10,7 @@ import org.djunits.value.vdouble.vector.AreaVector;
 import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Double AreaMatrix, a matrix of values with a AreaUnit. 
+ * Immutable Double AreaMatrix, a matrix of values with a AreaUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -70,6 +70,5 @@ public class AreaMatrix extends AbstractDoubleMatrixRel<AreaUnit, Area, AreaVect
         result.setDisplayUnit(displayUnit);
         return result;
     }
-    
+
 }
-

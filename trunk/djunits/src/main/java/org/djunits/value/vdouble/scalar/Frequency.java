@@ -23,7 +23,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency> 
+public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -85,7 +85,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
     {
         return new Frequency(value, FrequencyUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero Frequency; the low value
@@ -95,9 +95,10 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
      */
     public static Frequency interpolate(final Frequency zero, final Frequency one, final double ratio)
     {
-        return new Frequency(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return new Frequency(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 Frequency; the first scalar
@@ -161,8 +162,8 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
     }
 
     /**
-     * Returns a Frequency representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
+     * Returns a Frequency representation of a textual representation of a value with a unit. The String representation that can
+     * be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
      * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Frequency
      * @return Frequency; the Scalar representation of the value in its unit
@@ -209,57 +210,54 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
         throw new IllegalArgumentException("Error parsing Frequency with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of Frequency and Frequency, which results in a Dimensionless scalar.
-         * @param v Frequency scalar
-         * @return Dimensionless scalar as a division of Frequency and Frequency
-         */
-        public final Dimensionless divide(final Frequency v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of Frequency and Frequency, which results in a Dimensionless scalar.
+     * @param v Frequency scalar
+     * @return Dimensionless scalar as a division of Frequency and Frequency
+     */
+    public final Dimensionless divide(final Frequency v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Frequency and Duration, which results in a Dimensionless scalar.
-         * @param v Frequency scalar
-         * @return Dimensionless scalar as a multiplication of Frequency and Duration
-         */
-        public final Dimensionless times(final Duration v)
-        {
-            return new Dimensionless(this.si * v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Frequency and Duration, which results in a Dimensionless scalar.
+     * @param v Frequency scalar
+     * @return Dimensionless scalar as a multiplication of Frequency and Duration
+     */
+    public final Dimensionless times(final Duration v)
+    {
+        return new Dimensionless(this.si * v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Frequency and Length, which results in a Speed scalar.
-         * @param v Frequency scalar
-         * @return Speed scalar as a multiplication of Frequency and Length
-         */
-        public final Speed times(final Length v)
-        {
-            return new Speed(this.si * v.si, SpeedUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Frequency and Length, which results in a Speed scalar.
+     * @param v Frequency scalar
+     * @return Speed scalar as a multiplication of Frequency and Length
+     */
+    public final Speed times(final Length v)
+    {
+        return new Speed(this.si * v.si, SpeedUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Frequency and Speed, which results in a Acceleration scalar.
-         * @param v Frequency scalar
-         * @return Acceleration scalar as a multiplication of Frequency and Speed
-         */
-        public final Acceleration times(final Speed v)
-        {
-            return new Acceleration(this.si * v.si, AccelerationUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Frequency and Speed, which results in a Acceleration scalar.
+     * @param v Frequency scalar
+     * @return Acceleration scalar as a multiplication of Frequency and Speed
+     */
+    public final Acceleration times(final Speed v)
+    {
+        return new Acceleration(this.si * v.si, AccelerationUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Frequency and Energy, which results in a Power scalar.
-         * @param v Frequency scalar
-         * @return Power scalar as a multiplication of Frequency and Energy
-         */
-        public final Power times(final Energy v)
-        {
-            return new Power(this.si * v.si, PowerUnit.SI);
-        }
-
+    /**
+     * Calculate the multiplication of Frequency and Energy, which results in a Power scalar.
+     * @param v Frequency scalar
+     * @return Power scalar as a multiplication of Frequency and Energy
+     */
+    public final Power times(final Energy v)
+    {
+        return new Power(this.si * v.si, PowerUnit.SI);
+    }
 
 }
-
-

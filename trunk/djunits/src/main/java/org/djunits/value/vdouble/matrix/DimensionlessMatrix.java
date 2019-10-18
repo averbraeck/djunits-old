@@ -12,7 +12,7 @@ import org.djunits.value.vdouble.vector.DimensionlessVector;
 import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Double DimensionlessMatrix, a matrix of values with a DimensionlessUnit. 
+ * Immutable Double DimensionlessMatrix, a matrix of values with a DimensionlessUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -21,8 +21,9 @@ import org.djunits.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class DimensionlessMatrix extends AbstractDoubleMatrixRel<DimensionlessUnit, Dimensionless, DimensionlessVector, DimensionlessMatrix>
- implements DimensionlessFunctions<DimensionlessUnit, DimensionlessMatrix>
+public class DimensionlessMatrix
+        extends AbstractDoubleMatrixRel<DimensionlessUnit, Dimensionless, DimensionlessVector, DimensionlessMatrix>
+        implements DimensionlessFunctions<DimensionlessUnit, DimensionlessMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -72,7 +73,7 @@ public class DimensionlessMatrix extends AbstractDoubleMatrixRel<DimensionlessUn
         result.setDisplayUnit(displayUnit);
         return result;
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public final DimensionlessMatrix acos()
@@ -224,6 +225,5 @@ public class DimensionlessMatrix extends AbstractDoubleMatrixRel<DimensionlessUn
         assign(DoubleMathFunctions.INV);
         return this;
     }
-    
-   
+
 }

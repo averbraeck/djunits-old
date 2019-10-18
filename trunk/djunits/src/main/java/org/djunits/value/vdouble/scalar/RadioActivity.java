@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, RadioActivity> 
+public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, RadioActivity>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -82,7 +82,7 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
     {
         return new RadioActivity(value, RadioActivityUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero RadioActivity; the low value
@@ -92,9 +92,10 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
      */
     public static RadioActivity interpolate(final RadioActivity zero, final RadioActivity one, final double ratio)
     {
-        return new RadioActivity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return new RadioActivity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 RadioActivity; the first scalar
@@ -158,9 +159,9 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
     }
 
     /**
-     * Returns a RadioActivity representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a RadioActivity representation of a textual representation of a value with a unit. The String representation that
+     * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
+     * not required, between the value and the unit.
      * @param text String; the textual representation to parse into a RadioActivity
      * @return RadioActivity; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -206,17 +207,14 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
         throw new IllegalArgumentException("Error parsing RadioActivity with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of RadioActivity and RadioActivity, which results in a Dimensionless scalar.
-         * @param v RadioActivity scalar
-         * @return Dimensionless scalar as a division of RadioActivity and RadioActivity
-         */
-        public final Dimensionless divide(final RadioActivity v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
-
+    /**
+     * Calculate the division of RadioActivity and RadioActivity, which results in a Dimensionless scalar.
+     * @param v RadioActivity scalar
+     * @return Dimensionless scalar as a division of RadioActivity and RadioActivity
+     */
+    public final Dimensionless divide(final RadioActivity v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
 }
-
-

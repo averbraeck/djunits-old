@@ -20,7 +20,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit, FloatRadioActivity> 
+public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit, FloatRadioActivity>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -36,10 +36,12 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
     public static final FloatRadioActivity NaN = new FloatRadioActivity(Float.NaN, RadioActivityUnit.SI);
 
     /** Constant with value POSITIVE_INFINITY. */
-    public static final FloatRadioActivity POSITIVE_INFINITY = new FloatRadioActivity(Float.POSITIVE_INFINITY, RadioActivityUnit.SI);
+    public static final FloatRadioActivity POSITIVE_INFINITY =
+            new FloatRadioActivity(Float.POSITIVE_INFINITY, RadioActivityUnit.SI);
 
     /** Constant with value NEGATIVE_INFINITY. */
-    public static final FloatRadioActivity NEGATIVE_INFINITY = new FloatRadioActivity(Float.NEGATIVE_INFINITY, RadioActivityUnit.SI);
+    public static final FloatRadioActivity NEGATIVE_INFINITY =
+            new FloatRadioActivity(Float.NEGATIVE_INFINITY, RadioActivityUnit.SI);
 
     /** Constant with value MAX_VALUE. */
     public static final FloatRadioActivity POS_MAXVALUE = new FloatRadioActivity(Float.MAX_VALUE, RadioActivityUnit.SI);
@@ -102,8 +104,8 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
      */
     public static FloatRadioActivity interpolate(final FloatRadioActivity zero, final FloatRadioActivity one, final float ratio)
     {
-        return new FloatRadioActivity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new FloatRadioActivity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**
@@ -124,7 +126,8 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
      * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
-    public static FloatRadioActivity max(final FloatRadioActivity r1, final FloatRadioActivity r2, final FloatRadioActivity... rn)
+    public static FloatRadioActivity max(final FloatRadioActivity r1, final FloatRadioActivity r2,
+            final FloatRadioActivity... rn)
     {
         FloatRadioActivity maxr = (r1.gt(r2)) ? r1 : r2;
         for (FloatRadioActivity r : rn)
@@ -155,7 +158,8 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
      * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
-    public static FloatRadioActivity min(final FloatRadioActivity r1, final FloatRadioActivity r2, final FloatRadioActivity... rn)
+    public static FloatRadioActivity min(final FloatRadioActivity r1, final FloatRadioActivity r2,
+            final FloatRadioActivity... rn)
     {
         FloatRadioActivity minr = (r1.lt(r2)) ? r1 : r2;
         for (FloatRadioActivity r : rn)
@@ -169,9 +173,9 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
     }
 
     /**
-     * Returns a FloatRadioActivity representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a FloatRadioActivity representation of a textual representation of a value with a unit. The String representation
+     * that can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are
+     * allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatRadioActivity
      * @return FloatRadioActivity; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -208,7 +212,8 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
     public static FloatRadioActivity of(final float value, final String unitString)
     {
         Throw.whenNull(unitString, "Error parsing FloatRadioActivity: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatRadioActivity: empty unitString");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class,
+                "Error parsing FloatRadioActivity: empty unitString");
         RadioActivityUnit unit = RadioActivityUnit.BASE.getUnitByAbbreviation(unitString);
         if (unit != null)
         {
@@ -217,17 +222,14 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
         throw new IllegalArgumentException("Error parsing FloatRadioActivity with unit " + unitString);
     }
 
-        /**
-         * Calculate the division of FloatRadioActivity and FloatRadioActivity, which results in a FloatDimensionless scalar.
-         * @param v FloatRadioActivity scalar
-         * @return FloatDimensionless scalar as a division of FloatRadioActivity and FloatRadioActivity
-         */
-        public final FloatDimensionless divide(final FloatRadioActivity v)
-        {
-            return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
-
+    /**
+     * Calculate the division of FloatRadioActivity and FloatRadioActivity, which results in a FloatDimensionless scalar.
+     * @param v FloatRadioActivity scalar
+     * @return FloatDimensionless scalar as a division of FloatRadioActivity and FloatRadioActivity
+     */
+    public final FloatDimensionless divide(final FloatRadioActivity v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
 }
-
-

@@ -25,7 +25,7 @@ public class MathFunctionsTest
     @Test
     public void mathFunctionsTest()
     {
-        double[] testValues = { -100, -10, -1, -0.1, 0, 0.1, 1, 10, 100, -Math.PI, Math.PI };
+        double[] testValues = {-100, -10, -1, -0.1, 0, 0.1, 1, 10, 100, -Math.PI, Math.PI};
         for (double testValue : testValues)
         {
             // System.out.println("Testing math functions with test value " + testValue);

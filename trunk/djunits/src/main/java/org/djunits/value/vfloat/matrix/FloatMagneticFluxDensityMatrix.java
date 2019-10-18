@@ -10,7 +10,7 @@ import org.djunits.value.vfloat.vector.FloatMagneticFluxDensityVector;
 import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable FloatFloatMagneticFluxDensityMatrix, a matrix of values with a MagneticFluxDensityUnit. 
+ * Immutable FloatFloatMagneticFluxDensityMatrix, a matrix of values with a MagneticFluxDensityUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,7 +19,8 @@ import org.djunits.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatMagneticFluxDensityMatrix extends AbstractFloatMatrixRel<MagneticFluxDensityUnit, FloatMagneticFluxDensity, FloatMagneticFluxDensityVector, FloatMagneticFluxDensityMatrix>
+public class FloatMagneticFluxDensityMatrix extends AbstractFloatMatrixRel<MagneticFluxDensityUnit, FloatMagneticFluxDensity,
+        FloatMagneticFluxDensityVector, FloatMagneticFluxDensityMatrix>
 
 {
     /** */
@@ -50,14 +51,16 @@ public class FloatMagneticFluxDensityMatrix extends AbstractFloatMatrixRel<Magne
 
     /** {@inheritDoc} */
     @Override
-    public FloatMagneticFluxDensityMatrix instantiateMatrix(final FloatMatrixData fmd, final MagneticFluxDensityUnit displayUnit)
+    public FloatMagneticFluxDensityMatrix instantiateMatrix(final FloatMatrixData fmd,
+            final MagneticFluxDensityUnit displayUnit)
     {
         return new FloatMagneticFluxDensityMatrix(fmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public FloatMagneticFluxDensityVector instantiateVector(final FloatVectorData fvd, final MagneticFluxDensityUnit displayUnit)
+    public FloatMagneticFluxDensityVector instantiateVector(final FloatVectorData fvd,
+            final MagneticFluxDensityUnit displayUnit)
     {
         return new FloatMagneticFluxDensityVector(fvd, displayUnit);
     }
@@ -70,6 +73,5 @@ public class FloatMagneticFluxDensityMatrix extends AbstractFloatMatrixRel<Magne
         result.setDisplayUnit(displayUnit);
         return result;
     }
-
+
 }
-

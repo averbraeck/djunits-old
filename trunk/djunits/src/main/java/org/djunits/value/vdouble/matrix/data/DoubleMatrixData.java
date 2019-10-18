@@ -354,6 +354,7 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
      * @throws ValueRuntimeException if matrices have different lengths
      */
     public abstract DoubleMatrixData minus(final DoubleMatrixData right) throws ValueRuntimeException;
+
     /**
      * Subtract a matrix from this matrix on a cell-by-cell basis. The type of matrix (sparse, dense) stays the same.
      * @param decrement DoubleMatrixData; the amount to subtract

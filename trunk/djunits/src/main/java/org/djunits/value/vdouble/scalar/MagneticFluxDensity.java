@@ -21,7 +21,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class MagneticFluxDensity extends AbstractDoubleScalarRel<MagneticFluxDensityUnit, MagneticFluxDensity> 
+public class MagneticFluxDensity extends AbstractDoubleScalarRel<MagneticFluxDensityUnit, MagneticFluxDensity>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -37,16 +37,20 @@ public class MagneticFluxDensity extends AbstractDoubleScalarRel<MagneticFluxDen
     public static final MagneticFluxDensity NaN = new MagneticFluxDensity(Double.NaN, MagneticFluxDensityUnit.SI);
 
     /** Constant with value POSITIVE_INFINITY. */
-    public static final MagneticFluxDensity POSITIVE_INFINITY = new MagneticFluxDensity(Double.POSITIVE_INFINITY, MagneticFluxDensityUnit.SI);
+    public static final MagneticFluxDensity POSITIVE_INFINITY =
+            new MagneticFluxDensity(Double.POSITIVE_INFINITY, MagneticFluxDensityUnit.SI);
 
     /** Constant with value NEGATIVE_INFINITY. */
-    public static final MagneticFluxDensity NEGATIVE_INFINITY = new MagneticFluxDensity(Double.NEGATIVE_INFINITY, MagneticFluxDensityUnit.SI);
+    public static final MagneticFluxDensity NEGATIVE_INFINITY =
+            new MagneticFluxDensity(Double.NEGATIVE_INFINITY, MagneticFluxDensityUnit.SI);
 
     /** Constant with value MAX_VALUE. */
-    public static final MagneticFluxDensity POS_MAXVALUE = new MagneticFluxDensity(Double.MAX_VALUE, MagneticFluxDensityUnit.SI);
+    public static final MagneticFluxDensity POS_MAXVALUE =
+            new MagneticFluxDensity(Double.MAX_VALUE, MagneticFluxDensityUnit.SI);
 
     /** Constant with value -MAX_VALUE. */
-    public static final MagneticFluxDensity NEG_MAXVALUE = new MagneticFluxDensity(-Double.MAX_VALUE, MagneticFluxDensityUnit.SI);
+    public static final MagneticFluxDensity NEG_MAXVALUE =
+            new MagneticFluxDensity(-Double.MAX_VALUE, MagneticFluxDensityUnit.SI);
 
     /**
      * Construct MagneticFluxDensity scalar.
@@ -83,7 +87,7 @@ public class MagneticFluxDensity extends AbstractDoubleScalarRel<MagneticFluxDen
     {
         return new MagneticFluxDensity(value, MagneticFluxDensityUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero MagneticFluxDensity; the low value
@@ -91,11 +95,13 @@ public class MagneticFluxDensity extends AbstractDoubleScalarRel<MagneticFluxDen
      * @param ratio double; the ratio between 0 and 1, inclusive
      * @return MagneticFluxDensity; a Scalar at the ratio between
      */
-    public static MagneticFluxDensity interpolate(final MagneticFluxDensity zero, final MagneticFluxDensity one, final double ratio)
+    public static MagneticFluxDensity interpolate(final MagneticFluxDensity zero, final MagneticFluxDensity one,
+            final double ratio)
     {
-        return new MagneticFluxDensity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return new MagneticFluxDensity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 MagneticFluxDensity; the first scalar
@@ -114,7 +120,8 @@ public class MagneticFluxDensity extends AbstractDoubleScalarRel<MagneticFluxDen
      * @param rn MagneticFluxDensity...; the other scalars
      * @return MagneticFluxDensity; the maximum value of more than two relative scalars
      */
-    public static MagneticFluxDensity max(final MagneticFluxDensity r1, final MagneticFluxDensity r2, final MagneticFluxDensity... rn)
+    public static MagneticFluxDensity max(final MagneticFluxDensity r1, final MagneticFluxDensity r2,
+            final MagneticFluxDensity... rn)
     {
         MagneticFluxDensity maxr = (r1.gt(r2)) ? r1 : r2;
         for (MagneticFluxDensity r : rn)
@@ -145,7 +152,8 @@ public class MagneticFluxDensity extends AbstractDoubleScalarRel<MagneticFluxDen
      * @param rn MagneticFluxDensity...; the other scalars
      * @return MagneticFluxDensity; the minimum value of more than two relative scalars
      */
-    public static MagneticFluxDensity min(final MagneticFluxDensity r1, final MagneticFluxDensity r2, final MagneticFluxDensity... rn)
+    public static MagneticFluxDensity min(final MagneticFluxDensity r1, final MagneticFluxDensity r2,
+            final MagneticFluxDensity... rn)
     {
         MagneticFluxDensity minr = (r1.lt(r2)) ? r1 : r2;
         for (MagneticFluxDensity r : rn)
@@ -159,9 +167,9 @@ public class MagneticFluxDensity extends AbstractDoubleScalarRel<MagneticFluxDen
     }
 
     /**
-     * Returns a MagneticFluxDensity representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a MagneticFluxDensity representation of a textual representation of a value with a unit. The String
+     * representation that can be parsed is the double value in the unit, followed by the official abbreviation of the unit.
+     * Spaces are allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a MagneticFluxDensity
      * @return MagneticFluxDensity; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -170,7 +178,8 @@ public class MagneticFluxDensity extends AbstractDoubleScalarRel<MagneticFluxDen
     public static MagneticFluxDensity valueOf(final String text)
     {
         Throw.whenNull(text, "Error parsing MagneticFluxDensity: text to parse is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing MagneticFluxDensity: empty text to parse");
+        Throw.when(text.length() == 0, IllegalArgumentException.class,
+                "Error parsing MagneticFluxDensity: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -198,7 +207,8 @@ public class MagneticFluxDensity extends AbstractDoubleScalarRel<MagneticFluxDen
     public static MagneticFluxDensity of(final double value, final String unitString)
     {
         Throw.whenNull(unitString, "Error parsing MagneticFluxDensity: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing MagneticFluxDensity: empty unitString");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class,
+                "Error parsing MagneticFluxDensity: empty unitString");
         MagneticFluxDensityUnit unit = MagneticFluxDensityUnit.BASE.getUnitByAbbreviation(unitString);
         if (unit != null)
         {
@@ -207,27 +217,24 @@ public class MagneticFluxDensity extends AbstractDoubleScalarRel<MagneticFluxDen
         throw new IllegalArgumentException("Error parsing MagneticFluxDensity with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of MagneticFluxDensity and MagneticFluxDensity, which results in a Dimensionless scalar.
-         * @param v MagneticFluxDensity scalar
-         * @return Dimensionless scalar as a division of MagneticFluxDensity and MagneticFluxDensity
-         */
-        public final Dimensionless divide(final MagneticFluxDensity v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of MagneticFluxDensity and MagneticFluxDensity, which results in a Dimensionless scalar.
+     * @param v MagneticFluxDensity scalar
+     * @return Dimensionless scalar as a division of MagneticFluxDensity and MagneticFluxDensity
+     */
+    public final Dimensionless divide(final MagneticFluxDensity v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of MagneticFluxDensity and Area, which results in a MagneticFlux scalar.
-         * @param v MagneticFluxDensity scalar
-         * @return MagneticFlux scalar as a multiplication of MagneticFluxDensity and Area
-         */
-        public final MagneticFlux times(final Area v)
-        {
-            return new MagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
-        }
-
+    /**
+     * Calculate the multiplication of MagneticFluxDensity and Area, which results in a MagneticFlux scalar.
+     * @param v MagneticFluxDensity scalar
+     * @return MagneticFlux scalar as a multiplication of MagneticFluxDensity and Area
+     */
+    public final MagneticFlux times(final Area v)
+    {
+        return new MagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
+    }
 
 }
-
-

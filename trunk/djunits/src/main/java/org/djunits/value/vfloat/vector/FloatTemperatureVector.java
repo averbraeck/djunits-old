@@ -19,8 +19,8 @@ import org.djunits.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatTemperatureVector extends AbstractFloatVectorRelWithAbs<AbsoluteTemperatureUnit, FloatAbsoluteTemperature, FloatAbsoluteTemperatureVector,
-    TemperatureUnit, FloatTemperature, FloatTemperatureVector>
+public class FloatTemperatureVector extends AbstractFloatVectorRelWithAbs<AbsoluteTemperatureUnit, FloatAbsoluteTemperature,
+        FloatAbsoluteTemperatureVector, TemperatureUnit, FloatTemperature, FloatTemperatureVector>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -60,7 +60,8 @@ public class FloatTemperatureVector extends AbstractFloatVectorRelWithAbs<Absolu
 
     /** {@inheritDoc} */
     @Override
-    public FloatAbsoluteTemperatureVector instantiateVectorAbs(final FloatVectorData fvd, final AbsoluteTemperatureUnit displayUnit)
+    public FloatAbsoluteTemperatureVector instantiateVectorAbs(final FloatVectorData fvd,
+            final AbsoluteTemperatureUnit displayUnit)
     {
         return new FloatAbsoluteTemperatureVector(fvd, displayUnit);
     }
@@ -73,5 +74,5 @@ public class FloatTemperatureVector extends AbstractFloatVectorRelWithAbs<Absolu
         result.setDisplayUnit(displayUnit);
         return result;
     }
-
-}
+
+}

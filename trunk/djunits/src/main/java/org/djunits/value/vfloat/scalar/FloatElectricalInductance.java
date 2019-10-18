@@ -21,7 +21,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatElectricalInductance extends AbstractFloatScalarRel<ElectricalInductanceUnit, FloatElectricalInductance> 
+public class FloatElectricalInductance extends AbstractFloatScalarRel<ElectricalInductanceUnit, FloatElectricalInductance>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -37,16 +37,20 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
     public static final FloatElectricalInductance NaN = new FloatElectricalInductance(Float.NaN, ElectricalInductanceUnit.SI);
 
     /** Constant with value POSITIVE_INFINITY. */
-    public static final FloatElectricalInductance POSITIVE_INFINITY = new FloatElectricalInductance(Float.POSITIVE_INFINITY, ElectricalInductanceUnit.SI);
+    public static final FloatElectricalInductance POSITIVE_INFINITY =
+            new FloatElectricalInductance(Float.POSITIVE_INFINITY, ElectricalInductanceUnit.SI);
 
     /** Constant with value NEGATIVE_INFINITY. */
-    public static final FloatElectricalInductance NEGATIVE_INFINITY = new FloatElectricalInductance(Float.NEGATIVE_INFINITY, ElectricalInductanceUnit.SI);
+    public static final FloatElectricalInductance NEGATIVE_INFINITY =
+            new FloatElectricalInductance(Float.NEGATIVE_INFINITY, ElectricalInductanceUnit.SI);
 
     /** Constant with value MAX_VALUE. */
-    public static final FloatElectricalInductance POS_MAXVALUE = new FloatElectricalInductance(Float.MAX_VALUE, ElectricalInductanceUnit.SI);
+    public static final FloatElectricalInductance POS_MAXVALUE =
+            new FloatElectricalInductance(Float.MAX_VALUE, ElectricalInductanceUnit.SI);
 
     /** Constant with value -MAX_VALUE. */
-    public static final FloatElectricalInductance NEG_MAXVALUE = new FloatElectricalInductance(-Float.MAX_VALUE, ElectricalInductanceUnit.SI);
+    public static final FloatElectricalInductance NEG_MAXVALUE =
+            new FloatElectricalInductance(-Float.MAX_VALUE, ElectricalInductanceUnit.SI);
 
     /**
      * Construct FloatElectricalInductance scalar.
@@ -101,10 +105,11 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
      * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatElectricalInductance interpolate(final FloatElectricalInductance zero, final FloatElectricalInductance one, final float ratio)
+    public static FloatElectricalInductance interpolate(final FloatElectricalInductance zero,
+            final FloatElectricalInductance one, final float ratio)
     {
-        return new FloatElectricalInductance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new FloatElectricalInductance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**
@@ -125,7 +130,8 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
      * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
-    public static FloatElectricalInductance max(final FloatElectricalInductance r1, final FloatElectricalInductance r2, final FloatElectricalInductance... rn)
+    public static FloatElectricalInductance max(final FloatElectricalInductance r1, final FloatElectricalInductance r2,
+            final FloatElectricalInductance... rn)
     {
         FloatElectricalInductance maxr = (r1.gt(r2)) ? r1 : r2;
         for (FloatElectricalInductance r : rn)
@@ -156,7 +162,8 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
      * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
-    public static FloatElectricalInductance min(final FloatElectricalInductance r1, final FloatElectricalInductance r2, final FloatElectricalInductance... rn)
+    public static FloatElectricalInductance min(final FloatElectricalInductance r1, final FloatElectricalInductance r2,
+            final FloatElectricalInductance... rn)
     {
         FloatElectricalInductance minr = (r1.lt(r2)) ? r1 : r2;
         for (FloatElectricalInductance r : rn)
@@ -170,9 +177,9 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
     }
 
     /**
-     * Returns a FloatElectricalInductance representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a FloatElectricalInductance representation of a textual representation of a value with a unit. The String
+     * representation that can be parsed is the double value in the unit, followed by the official abbreviation of the unit.
+     * Spaces are allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatElectricalInductance
      * @return FloatElectricalInductance; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -181,7 +188,8 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
     public static FloatElectricalInductance valueOf(final String text)
     {
         Throw.whenNull(text, "Error parsing FloatElectricalInductance: text to parse is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatElectricalInductance: empty text to parse");
+        Throw.when(text.length() == 0, IllegalArgumentException.class,
+                "Error parsing FloatElectricalInductance: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -209,7 +217,8 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
     public static FloatElectricalInductance of(final float value, final String unitString)
     {
         Throw.whenNull(unitString, "Error parsing FloatElectricalInductance: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatElectricalInductance: empty unitString");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class,
+                "Error parsing FloatElectricalInductance: empty unitString");
         ElectricalInductanceUnit unit = ElectricalInductanceUnit.BASE.getUnitByAbbreviation(unitString);
         if (unit != null)
         {
@@ -218,27 +227,26 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
         throw new IllegalArgumentException("Error parsing FloatElectricalInductance with unit " + unitString);
     }
 
-        /**
-         * Calculate the division of FloatElectricalInductance and FloatElectricalInductance, which results in a FloatDimensionless scalar.
-         * @param v FloatElectricalInductance scalar
-         * @return FloatDimensionless scalar as a division of FloatElectricalInductance and FloatElectricalInductance
-         */
-        public final FloatDimensionless divide(final FloatElectricalInductance v)
-        {
-            return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatElectricalInductance and FloatElectricalInductance, which results in a FloatDimensionless
+     * scalar.
+     * @param v FloatElectricalInductance scalar
+     * @return FloatDimensionless scalar as a division of FloatElectricalInductance and FloatElectricalInductance
+     */
+    public final FloatDimensionless divide(final FloatElectricalInductance v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatElectricalInductance and FloatElectricalCurrent, which results in a FloatMagneticFlux scalar.
-         * @param v FloatElectricalInductance scalar
-         * @return FloatMagneticFlux scalar as a multiplication of FloatElectricalInductance and FloatElectricalCurrent
-         */
-        public final FloatMagneticFlux times(final FloatElectricalCurrent v)
-        {
-            return new FloatMagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
-        }
-
+    /**
+     * Calculate the multiplication of FloatElectricalInductance and FloatElectricalCurrent, which results in a
+     * FloatMagneticFlux scalar.
+     * @param v FloatElectricalInductance scalar
+     * @return FloatMagneticFlux scalar as a multiplication of FloatElectricalInductance and FloatElectricalCurrent
+     */
+    public final FloatMagneticFlux times(final FloatElectricalCurrent v)
+    {
+        return new FloatMagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
+    }
 
 }
-
-

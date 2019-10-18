@@ -26,7 +26,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume> 
+public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -88,7 +88,7 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
     {
         return new Volume(value, VolumeUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero Volume; the low value
@@ -100,7 +100,7 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
     {
         return new Volume(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 Volume; the first scalar
@@ -212,87 +212,84 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
         throw new IllegalArgumentException("Error parsing Volume with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of Volume and Volume, which results in a Dimensionless scalar.
-         * @param v Volume scalar
-         * @return Dimensionless scalar as a division of Volume and Volume
-         */
-        public final Dimensionless divide(final Volume v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of Volume and Volume, which results in a Dimensionless scalar.
+     * @param v Volume scalar
+     * @return Dimensionless scalar as a division of Volume and Volume
+     */
+    public final Dimensionless divide(final Volume v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Volume and Density, which results in a Mass scalar.
-         * @param v Volume scalar
-         * @return Mass scalar as a multiplication of Volume and Density
-         */
-        public final Mass times(final Density v)
-        {
-            return new Mass(this.si * v.si, MassUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Volume and Density, which results in a Mass scalar.
+     * @param v Volume scalar
+     * @return Mass scalar as a multiplication of Volume and Density
+     */
+    public final Mass times(final Density v)
+    {
+        return new Mass(this.si * v.si, MassUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Volume and Pressure, which results in a Energy scalar.
-         * @param v Volume scalar
-         * @return Energy scalar as a multiplication of Volume and Pressure
-         */
-        public final Energy times(final Pressure v)
-        {
-            return new Energy(this.si * v.si, EnergyUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Volume and Pressure, which results in a Energy scalar.
+     * @param v Volume scalar
+     * @return Energy scalar as a multiplication of Volume and Pressure
+     */
+    public final Energy times(final Pressure v)
+    {
+        return new Energy(this.si * v.si, EnergyUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Volume and Length, which results in a Area scalar.
-         * @param v Volume scalar
-         * @return Area scalar as a division of Volume and Length
-         */
-        public final Area divide(final Length v)
-        {
-            return new Area(this.si / v.si, AreaUnit.SI);
-        }
+    /**
+     * Calculate the division of Volume and Length, which results in a Area scalar.
+     * @param v Volume scalar
+     * @return Area scalar as a division of Volume and Length
+     */
+    public final Area divide(final Length v)
+    {
+        return new Area(this.si / v.si, AreaUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Volume and Area, which results in a Length scalar.
-         * @param v Volume scalar
-         * @return Length scalar as a division of Volume and Area
-         */
-        public final Length divide(final Area v)
-        {
-            return new Length(this.si / v.si, LengthUnit.SI);
-        }
+    /**
+     * Calculate the division of Volume and Area, which results in a Length scalar.
+     * @param v Volume scalar
+     * @return Length scalar as a division of Volume and Area
+     */
+    public final Length divide(final Area v)
+    {
+        return new Length(this.si / v.si, LengthUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Volume and LinearDensity, which results in a Area scalar.
-         * @param v Volume scalar
-         * @return Area scalar as a multiplication of Volume and LinearDensity
-         */
-        public final Area times(final LinearDensity v)
-        {
-            return new Area(this.si * v.si, AreaUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Volume and LinearDensity, which results in a Area scalar.
+     * @param v Volume scalar
+     * @return Area scalar as a multiplication of Volume and LinearDensity
+     */
+    public final Area times(final LinearDensity v)
+    {
+        return new Area(this.si * v.si, AreaUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Volume and Duration, which results in a FlowVolume scalar.
-         * @param v Volume scalar
-         * @return FlowVolume scalar as a division of Volume and Duration
-         */
-        public final FlowVolume divide(final Duration v)
-        {
-            return new FlowVolume(this.si / v.si, FlowVolumeUnit.SI);
-        }
+    /**
+     * Calculate the division of Volume and Duration, which results in a FlowVolume scalar.
+     * @param v Volume scalar
+     * @return FlowVolume scalar as a division of Volume and Duration
+     */
+    public final FlowVolume divide(final Duration v)
+    {
+        return new FlowVolume(this.si / v.si, FlowVolumeUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Volume and FlowVolume, which results in a Duration scalar.
-         * @param v Volume scalar
-         * @return Duration scalar as a division of Volume and FlowVolume
-         */
-        public final Duration divide(final FlowVolume v)
-        {
-            return new Duration(this.si / v.si, DurationUnit.SI);
-        }
-
+    /**
+     * Calculate the division of Volume and FlowVolume, which results in a Duration scalar.
+     * @param v Volume scalar
+     * @return Duration scalar as a division of Volume and FlowVolume
+     */
+    public final Duration divide(final FlowVolume v)
+    {
+        return new Duration(this.si / v.si, DurationUnit.SI);
+    }
 
 }
-
-

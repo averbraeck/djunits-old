@@ -264,7 +264,7 @@ public class DoubleScalarTest
     @Test
     public final void mathFunctionsTestAbsTest()
     {
-        double[] seedValues = { -10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10 };
+        double[] seedValues = {-10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10};
         for (double seedValue : seedValues)
         {
             double input = seedValue;
@@ -354,7 +354,7 @@ public class DoubleScalarTest
     @Test
     public final void interpolateTest()
     {
-        double[] ratios = new double[] { 0.0, 1.0, 0.5, 0.1, -7.2, 8.04 };
+        double[] ratios = new double[] {0.0, 1.0, 0.5, 0.1, -7.2, 8.04};
         double zeroValue = 123.4;
         double oneValue = 234.5;
         Position zeroPosition = new Position(zeroValue, PositionUnit.MILE);
@@ -401,11 +401,11 @@ public class DoubleScalarTest
         double lowest = -123.45;
         double middle = -23.5;
         double highest = 45.67;
-        
+
         Position lowestPosition = new Position(lowest, PositionUnit.FOOT);
         Position middlePosition = new Position(middle, PositionUnit.FOOT);
         Position highestPosition = new Position(highest, PositionUnit.FOOT);
-        
+
         Position max = DoubleScalar.max(lowestPosition, highestPosition);
         assertEquals("max returns highest", highestPosition, max);
         // Reverse arguments
@@ -421,7 +421,7 @@ public class DoubleScalarTest
         // Lots of arguments
         max = DoubleScalar.max(highestPosition, lowestPosition, highestPosition, middlePosition, middlePosition);
         assertEquals("max returns highest", highestPosition, max);
-                
+
         Position min = DoubleScalar.min(lowestPosition, highestPosition);
         assertEquals("min returns lowest", lowestPosition, min);
         // Reverse arguments
@@ -438,7 +438,7 @@ public class DoubleScalarTest
         min = DoubleScalar.min(highestPosition, lowestPosition, highestPosition, middlePosition, middlePosition);
         assertEquals("min returns lowest", lowestPosition, min);
     }
-    
+
     /**
      * Test that the toString method returns something sensible.
      */
@@ -540,7 +540,7 @@ public class DoubleScalarTest
     @Test
     public final void mathFunctionsTestRelTest()
     {
-        double[] seedValues = { -10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10 };
+        double[] seedValues = {-10, -2, -1, -0.5, -0.1, 0, 0.1, 0.5, 1, 2, 10};
         for (double seedValue : seedValues)
         {
             double input = seedValue;

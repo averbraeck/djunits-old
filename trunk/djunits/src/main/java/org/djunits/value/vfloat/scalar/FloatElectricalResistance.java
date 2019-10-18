@@ -22,7 +22,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatElectricalResistance extends AbstractFloatScalarRel<ElectricalResistanceUnit, FloatElectricalResistance> 
+public class FloatElectricalResistance extends AbstractFloatScalarRel<ElectricalResistanceUnit, FloatElectricalResistance>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -38,16 +38,20 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
     public static final FloatElectricalResistance NaN = new FloatElectricalResistance(Float.NaN, ElectricalResistanceUnit.SI);
 
     /** Constant with value POSITIVE_INFINITY. */
-    public static final FloatElectricalResistance POSITIVE_INFINITY = new FloatElectricalResistance(Float.POSITIVE_INFINITY, ElectricalResistanceUnit.SI);
+    public static final FloatElectricalResistance POSITIVE_INFINITY =
+            new FloatElectricalResistance(Float.POSITIVE_INFINITY, ElectricalResistanceUnit.SI);
 
     /** Constant with value NEGATIVE_INFINITY. */
-    public static final FloatElectricalResistance NEGATIVE_INFINITY = new FloatElectricalResistance(Float.NEGATIVE_INFINITY, ElectricalResistanceUnit.SI);
+    public static final FloatElectricalResistance NEGATIVE_INFINITY =
+            new FloatElectricalResistance(Float.NEGATIVE_INFINITY, ElectricalResistanceUnit.SI);
 
     /** Constant with value MAX_VALUE. */
-    public static final FloatElectricalResistance POS_MAXVALUE = new FloatElectricalResistance(Float.MAX_VALUE, ElectricalResistanceUnit.SI);
+    public static final FloatElectricalResistance POS_MAXVALUE =
+            new FloatElectricalResistance(Float.MAX_VALUE, ElectricalResistanceUnit.SI);
 
     /** Constant with value -MAX_VALUE. */
-    public static final FloatElectricalResistance NEG_MAXVALUE = new FloatElectricalResistance(-Float.MAX_VALUE, ElectricalResistanceUnit.SI);
+    public static final FloatElectricalResistance NEG_MAXVALUE =
+            new FloatElectricalResistance(-Float.MAX_VALUE, ElectricalResistanceUnit.SI);
 
     /**
      * Construct FloatElectricalResistance scalar.
@@ -102,10 +106,11 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
      * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatElectricalResistance interpolate(final FloatElectricalResistance zero, final FloatElectricalResistance one, final float ratio)
+    public static FloatElectricalResistance interpolate(final FloatElectricalResistance zero,
+            final FloatElectricalResistance one, final float ratio)
     {
-        return new FloatElectricalResistance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new FloatElectricalResistance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**
@@ -126,7 +131,8 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
      * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
-    public static FloatElectricalResistance max(final FloatElectricalResistance r1, final FloatElectricalResistance r2, final FloatElectricalResistance... rn)
+    public static FloatElectricalResistance max(final FloatElectricalResistance r1, final FloatElectricalResistance r2,
+            final FloatElectricalResistance... rn)
     {
         FloatElectricalResistance maxr = (r1.gt(r2)) ? r1 : r2;
         for (FloatElectricalResistance r : rn)
@@ -157,7 +163,8 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
      * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
-    public static FloatElectricalResistance min(final FloatElectricalResistance r1, final FloatElectricalResistance r2, final FloatElectricalResistance... rn)
+    public static FloatElectricalResistance min(final FloatElectricalResistance r1, final FloatElectricalResistance r2,
+            final FloatElectricalResistance... rn)
     {
         FloatElectricalResistance minr = (r1.lt(r2)) ? r1 : r2;
         for (FloatElectricalResistance r : rn)
@@ -171,9 +178,9 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
     }
 
     /**
-     * Returns a FloatElectricalResistance representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a FloatElectricalResistance representation of a textual representation of a value with a unit. The String
+     * representation that can be parsed is the double value in the unit, followed by the official abbreviation of the unit.
+     * Spaces are allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatElectricalResistance
      * @return FloatElectricalResistance; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -182,7 +189,8 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
     public static FloatElectricalResistance valueOf(final String text)
     {
         Throw.whenNull(text, "Error parsing FloatElectricalResistance: text to parse is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatElectricalResistance: empty text to parse");
+        Throw.when(text.length() == 0, IllegalArgumentException.class,
+                "Error parsing FloatElectricalResistance: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -210,7 +218,8 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
     public static FloatElectricalResistance of(final float value, final String unitString)
     {
         Throw.whenNull(unitString, "Error parsing FloatElectricalResistance: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatElectricalResistance: empty unitString");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class,
+                "Error parsing FloatElectricalResistance: empty unitString");
         ElectricalResistanceUnit unit = ElectricalResistanceUnit.BASE.getUnitByAbbreviation(unitString);
         if (unit != null)
         {
@@ -219,37 +228,37 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
         throw new IllegalArgumentException("Error parsing FloatElectricalResistance with unit " + unitString);
     }
 
-        /**
-         * Calculate the division of FloatElectricalResistance and FloatElectricalResistance, which results in a FloatDimensionless scalar.
-         * @param v FloatElectricalResistance scalar
-         * @return FloatDimensionless scalar as a division of FloatElectricalResistance and FloatElectricalResistance
-         */
-        public final FloatDimensionless divide(final FloatElectricalResistance v)
-        {
-            return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatElectricalResistance and FloatElectricalResistance, which results in a FloatDimensionless
+     * scalar.
+     * @param v FloatElectricalResistance scalar
+     * @return FloatDimensionless scalar as a division of FloatElectricalResistance and FloatElectricalResistance
+     */
+    public final FloatDimensionless divide(final FloatElectricalResistance v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatElectricalResistance and FloatElectricalCurrent, which results in a FloatElectricalPotential scalar.
-         * @param v FloatElectricalResistance scalar
-         * @return FloatElectricalPotential scalar as a multiplication of FloatElectricalResistance and FloatElectricalCurrent
-         */
-        public final FloatElectricalPotential times(final FloatElectricalCurrent v)
-        {
-            return new FloatElectricalPotential(this.si * v.si, ElectricalPotentialUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatElectricalResistance and FloatElectricalCurrent, which results in a
+     * FloatElectricalPotential scalar.
+     * @param v FloatElectricalResistance scalar
+     * @return FloatElectricalPotential scalar as a multiplication of FloatElectricalResistance and FloatElectricalCurrent
+     */
+    public final FloatElectricalPotential times(final FloatElectricalCurrent v)
+    {
+        return new FloatElectricalPotential(this.si * v.si, ElectricalPotentialUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatElectricalResistance and FloatDuration, which results in a FloatElectricalInductance scalar.
-         * @param v FloatElectricalResistance scalar
-         * @return FloatElectricalInductance scalar as a multiplication of FloatElectricalResistance and FloatDuration
-         */
-        public final FloatElectricalInductance times(final FloatDuration v)
-        {
-            return new FloatElectricalInductance(this.si * v.si, ElectricalInductanceUnit.SI);
-        }
-
+    /**
+     * Calculate the multiplication of FloatElectricalResistance and FloatDuration, which results in a FloatElectricalInductance
+     * scalar.
+     * @param v FloatElectricalResistance scalar
+     * @return FloatElectricalInductance scalar as a multiplication of FloatElectricalResistance and FloatDuration
+     */
+    public final FloatElectricalInductance times(final FloatDuration v)
+    {
+        return new FloatElectricalInductance(this.si * v.si, ElectricalInductanceUnit.SI);
+    }
 
 }
-
-

@@ -27,7 +27,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed> 
+public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -109,8 +109,8 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
      */
     public static FloatSpeed interpolate(final FloatSpeed zero, final FloatSpeed one, final float ratio)
     {
-        return new FloatSpeed(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new FloatSpeed(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**
@@ -176,9 +176,9 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
     }
 
     /**
-     * Returns a FloatSpeed representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a FloatSpeed representation of a textual representation of a value with a unit. The String representation that
+     * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
+     * not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatSpeed
      * @return FloatSpeed; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -224,117 +224,114 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
         throw new IllegalArgumentException("Error parsing FloatSpeed with unit " + unitString);
     }
 
-        /**
-         * Calculate the division of FloatSpeed and FloatSpeed, which results in a FloatDimensionless scalar.
-         * @param v FloatSpeed scalar
-         * @return FloatDimensionless scalar as a division of FloatSpeed and FloatSpeed
-         */
-        public final FloatDimensionless divide(final FloatSpeed v)
-        {
-            return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatSpeed and FloatSpeed, which results in a FloatDimensionless scalar.
+     * @param v FloatSpeed scalar
+     * @return FloatDimensionless scalar as a division of FloatSpeed and FloatSpeed
+     */
+    public final FloatDimensionless divide(final FloatSpeed v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatSpeed and FloatArea, which results in a FloatFlowVolume scalar.
-         * @param v FloatSpeed scalar
-         * @return FloatFlowVolume scalar as a multiplication of FloatSpeed and FloatArea
-         */
-        public final FloatFlowVolume times(final FloatArea v)
-        {
-            return new FloatFlowVolume(this.si * v.si, FlowVolumeUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatSpeed and FloatArea, which results in a FloatFlowVolume scalar.
+     * @param v FloatSpeed scalar
+     * @return FloatFlowVolume scalar as a multiplication of FloatSpeed and FloatArea
+     */
+    public final FloatFlowVolume times(final FloatArea v)
+    {
+        return new FloatFlowVolume(this.si * v.si, FlowVolumeUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatSpeed and FloatForce, which results in a FloatPower scalar.
-         * @param v FloatSpeed scalar
-         * @return FloatPower scalar as a multiplication of FloatSpeed and FloatForce
-         */
-        public final FloatPower times(final FloatForce v)
-        {
-            return new FloatPower(this.si * v.si, PowerUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatSpeed and FloatForce, which results in a FloatPower scalar.
+     * @param v FloatSpeed scalar
+     * @return FloatPower scalar as a multiplication of FloatSpeed and FloatForce
+     */
+    public final FloatPower times(final FloatForce v)
+    {
+        return new FloatPower(this.si * v.si, PowerUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatSpeed and FloatFrequency, which results in a FloatAcceleration scalar.
-         * @param v FloatSpeed scalar
-         * @return FloatAcceleration scalar as a multiplication of FloatSpeed and FloatFrequency
-         */
-        public final FloatAcceleration times(final FloatFrequency v)
-        {
-            return new FloatAcceleration(this.si * v.si, AccelerationUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatSpeed and FloatFrequency, which results in a FloatAcceleration scalar.
+     * @param v FloatSpeed scalar
+     * @return FloatAcceleration scalar as a multiplication of FloatSpeed and FloatFrequency
+     */
+    public final FloatAcceleration times(final FloatFrequency v)
+    {
+        return new FloatAcceleration(this.si * v.si, AccelerationUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatSpeed and FloatLength, which results in a FloatFrequency scalar.
-         * @param v FloatSpeed scalar
-         * @return FloatFrequency scalar as a division of FloatSpeed and FloatLength
-         */
-        public final FloatFrequency divide(final FloatLength v)
-        {
-            return new FloatFrequency(this.si / v.si, FrequencyUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatSpeed and FloatLength, which results in a FloatFrequency scalar.
+     * @param v FloatSpeed scalar
+     * @return FloatFrequency scalar as a division of FloatSpeed and FloatLength
+     */
+    public final FloatFrequency divide(final FloatLength v)
+    {
+        return new FloatFrequency(this.si / v.si, FrequencyUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatSpeed and FloatFrequency, which results in a FloatLength scalar.
-         * @param v FloatSpeed scalar
-         * @return FloatLength scalar as a division of FloatSpeed and FloatFrequency
-         */
-        public final FloatLength divide(final FloatFrequency v)
-        {
-            return new FloatLength(this.si / v.si, LengthUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatSpeed and FloatFrequency, which results in a FloatLength scalar.
+     * @param v FloatSpeed scalar
+     * @return FloatLength scalar as a division of FloatSpeed and FloatFrequency
+     */
+    public final FloatLength divide(final FloatFrequency v)
+    {
+        return new FloatLength(this.si / v.si, LengthUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatSpeed and FloatLinearDensity, which results in a FloatFrequency scalar.
-         * @param v FloatSpeed scalar
-         * @return FloatFrequency scalar as a multiplication of FloatSpeed and FloatLinearDensity
-         */
-        public final FloatFrequency times(final FloatLinearDensity v)
-        {
-            return new FloatFrequency(this.si * v.si, FrequencyUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatSpeed and FloatLinearDensity, which results in a FloatFrequency scalar.
+     * @param v FloatSpeed scalar
+     * @return FloatFrequency scalar as a multiplication of FloatSpeed and FloatLinearDensity
+     */
+    public final FloatFrequency times(final FloatLinearDensity v)
+    {
+        return new FloatFrequency(this.si * v.si, FrequencyUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatSpeed and FloatDuration, which results in a FloatLength scalar.
-         * @param v FloatSpeed scalar
-         * @return FloatLength scalar as a multiplication of FloatSpeed and FloatDuration
-         */
-        public final FloatLength times(final FloatDuration v)
-        {
-            return new FloatLength(this.si * v.si, LengthUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatSpeed and FloatDuration, which results in a FloatLength scalar.
+     * @param v FloatSpeed scalar
+     * @return FloatLength scalar as a multiplication of FloatSpeed and FloatDuration
+     */
+    public final FloatLength times(final FloatDuration v)
+    {
+        return new FloatLength(this.si * v.si, LengthUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatSpeed and FloatDuration, which results in a FloatAcceleration scalar.
-         * @param v FloatSpeed scalar
-         * @return FloatAcceleration scalar as a division of FloatSpeed and FloatDuration
-         */
-        public final FloatAcceleration divide(final FloatDuration v)
-        {
-            return new FloatAcceleration(this.si / v.si, AccelerationUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatSpeed and FloatDuration, which results in a FloatAcceleration scalar.
+     * @param v FloatSpeed scalar
+     * @return FloatAcceleration scalar as a division of FloatSpeed and FloatDuration
+     */
+    public final FloatAcceleration divide(final FloatDuration v)
+    {
+        return new FloatAcceleration(this.si / v.si, AccelerationUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatSpeed and FloatAcceleration, which results in a FloatDuration scalar.
-         * @param v FloatSpeed scalar
-         * @return FloatDuration scalar as a division of FloatSpeed and FloatAcceleration
-         */
-        public final FloatDuration divide(final FloatAcceleration v)
-        {
-            return new FloatDuration(this.si / v.si, DurationUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatSpeed and FloatAcceleration, which results in a FloatDuration scalar.
+     * @param v FloatSpeed scalar
+     * @return FloatDuration scalar as a division of FloatSpeed and FloatAcceleration
+     */
+    public final FloatDuration divide(final FloatAcceleration v)
+    {
+        return new FloatDuration(this.si / v.si, DurationUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatSpeed and FloatFlowMass, which results in a FloatForce scalar.
-         * @param v FloatSpeed scalar
-         * @return FloatForce scalar as a multiplication of FloatSpeed and FloatFlowMass
-         */
-        public final FloatForce times(final FloatFlowMass v)
-        {
-            return new FloatForce(this.si * v.si, ForceUnit.SI);
-        }
-
+    /**
+     * Calculate the multiplication of FloatSpeed and FloatFlowMass, which results in a FloatForce scalar.
+     * @param v FloatSpeed scalar
+     * @return FloatForce scalar as a multiplication of FloatSpeed and FloatFlowMass
+     */
+    public final FloatForce times(final FloatFlowMass v)
+    {
+        return new FloatForce(this.si * v.si, ForceUnit.SI);
+    }
 
 }
-
-

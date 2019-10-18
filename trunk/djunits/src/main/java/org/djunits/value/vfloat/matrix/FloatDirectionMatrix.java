@@ -22,12 +22,12 @@ import org.djunits.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatDirectionMatrix extends AbstractFloatMatrixAbs<DirectionUnit, FloatDirection, FloatDirectionVector, FloatDirectionMatrix,
-AngleUnit, FloatAngle, FloatAngleVector, FloatAngleMatrix>
+public class FloatDirectionMatrix extends AbstractFloatMatrixAbs<DirectionUnit, FloatDirection, FloatDirectionVector,
+        FloatDirectionMatrix, AngleUnit, FloatAngle, FloatAngleVector, FloatAngleMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
-    
+
     /**
      * @param data FloatMatrixData; an internal data object
      * @param unit DirectionUnit; the unit
@@ -36,14 +36,14 @@ AngleUnit, FloatAngle, FloatAngleVector, FloatAngleMatrix>
     {
         super(data, unit);
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public Class<FloatDirection> getScalarClass()
     {
         return FloatDirection.class;
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public Class<FloatDirectionVector> getVectorClass()
@@ -96,5 +96,5 @@ AngleUnit, FloatAngle, FloatAngleVector, FloatAngleMatrix>
         result.setDisplayUnit(displayUnit);
         return result;
     }
-
-}
+
+}

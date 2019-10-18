@@ -22,8 +22,8 @@ import org.djunits.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class TimeMatrix extends AbstractDoubleMatrixAbs<TimeUnit, Time, TimeVector, TimeMatrix,
-    DurationUnit, Duration, DurationVector, DurationMatrix>
+public class TimeMatrix extends
+        AbstractDoubleMatrixAbs<TimeUnit, Time, TimeVector, TimeMatrix, DurationUnit, Duration, DurationVector, DurationMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -96,5 +96,5 @@ public class TimeMatrix extends AbstractDoubleMatrixAbs<TimeUnit, Time, TimeVect
         result.setDisplayUnit(displayUnit);
         return result;
     }
-
-}
+
+}

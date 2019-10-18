@@ -185,9 +185,9 @@ public class FloatScalarTest
                     // Create an abs
                     Method instantiateAbsMethod =
                             scalarClass.getDeclaredMethod("instantiateAbs", float.class, absoluteUnit.getClass());
-                    AbstractFloatScalarAbs<?, ?, ?, ?> absScalar = (AbstractFloatScalarAbs<?, ?, ?, ?>) instantiateAbsMethod
-                            .invoke(relScalar, absValue, absoluteUnit);
-                    // method "plus" cannot be found with getMethod() for absScalar.getClass(). 
+                    AbstractFloatScalarAbs<?, ?, ?, ?> absScalar =
+                            (AbstractFloatScalarAbs<?, ?, ?, ?>) instantiateAbsMethod.invoke(relScalar, absValue, absoluteUnit);
+                    // method "plus" cannot be found with getMethod() for absScalar.getClass().
                     Method plusMethod = scalarClass.getMethod("plus", absScalar.getClass().getSuperclass());
                     AbstractFloatScalarAbs<?, ?, ?, ?> sum =
                             (AbstractFloatScalarAbs<?, ?, ?, ?>) plusMethod.invoke(relScalar, absScalar);
@@ -260,7 +260,7 @@ public class FloatScalarTest
     @Test
     public final void mathFunctionsTestAbsTest()
     {
-        float[] seedValues = { -10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f };
+        float[] seedValues = {-10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f};
         for (float seedValue : seedValues)
         {
             float input = seedValue;
@@ -380,11 +380,11 @@ public class FloatScalarTest
         float lowest = -123.45f;
         float middle = -23.5f;
         float highest = 45.67f;
-        
+
         FloatPosition lowestPosition = new FloatPosition(lowest, PositionUnit.FOOT);
         FloatPosition middlePosition = new FloatPosition(middle, PositionUnit.FOOT);
         FloatPosition highestPosition = new FloatPosition(highest, PositionUnit.FOOT);
-        
+
         FloatPosition max = FloatScalar.max(lowestPosition, highestPosition);
         assertEquals("max returns highest", highestPosition, max);
         // Reverse arguments
@@ -400,7 +400,7 @@ public class FloatScalarTest
         // Lots of arguments
         max = FloatScalar.max(highestPosition, lowestPosition, highestPosition, middlePosition, middlePosition);
         assertEquals("max returns highest", highestPosition, max);
-                
+
         FloatPosition min = FloatScalar.min(lowestPosition, highestPosition);
         assertEquals("min returns lowest", lowestPosition, min);
         // Reverse arguments
@@ -417,7 +417,7 @@ public class FloatScalarTest
         min = FloatScalar.min(highestPosition, lowestPosition, highestPosition, middlePosition, middlePosition);
         assertEquals("min returns lowest", lowestPosition, min);
     }
-    
+
     /**
      * Test that the toString method returns something sensible.
      */
@@ -519,7 +519,7 @@ public class FloatScalarTest
     @Test
     public final void mathFunctionsTestRelTest()
     {
-        float[] seedValues = { -10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f };
+        float[] seedValues = {-10f, -2f, -1f, -0.5f, -0.1f, 0f, 0.1f, 0.5f, 1f, 2f, 10f};
         for (float seedValue : seedValues)
         {
             float input = seedValue;

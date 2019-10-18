@@ -23,7 +23,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatFrequency> 
+public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatFrequency>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -105,8 +105,8 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
      */
     public static FloatFrequency interpolate(final FloatFrequency zero, final FloatFrequency one, final float ratio)
     {
-        return new FloatFrequency(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new FloatFrequency(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**
@@ -172,9 +172,9 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
     }
 
     /**
-     * Returns a FloatFrequency representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a FloatFrequency representation of a textual representation of a value with a unit. The String representation
+     * that can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are
+     * allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatFrequency
      * @return FloatFrequency; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -220,57 +220,54 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
         throw new IllegalArgumentException("Error parsing FloatFrequency with unit " + unitString);
     }
 
-        /**
-         * Calculate the division of FloatFrequency and FloatFrequency, which results in a FloatDimensionless scalar.
-         * @param v FloatFrequency scalar
-         * @return FloatDimensionless scalar as a division of FloatFrequency and FloatFrequency
-         */
-        public final FloatDimensionless divide(final FloatFrequency v)
-        {
-            return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatFrequency and FloatFrequency, which results in a FloatDimensionless scalar.
+     * @param v FloatFrequency scalar
+     * @return FloatDimensionless scalar as a division of FloatFrequency and FloatFrequency
+     */
+    public final FloatDimensionless divide(final FloatFrequency v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatFrequency and FloatDuration, which results in a FloatDimensionless scalar.
-         * @param v FloatFrequency scalar
-         * @return FloatDimensionless scalar as a multiplication of FloatFrequency and FloatDuration
-         */
-        public final FloatDimensionless times(final FloatDuration v)
-        {
-            return new FloatDimensionless(this.si * v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatFrequency and FloatDuration, which results in a FloatDimensionless scalar.
+     * @param v FloatFrequency scalar
+     * @return FloatDimensionless scalar as a multiplication of FloatFrequency and FloatDuration
+     */
+    public final FloatDimensionless times(final FloatDuration v)
+    {
+        return new FloatDimensionless(this.si * v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatFrequency and FloatLength, which results in a FloatSpeed scalar.
-         * @param v FloatFrequency scalar
-         * @return FloatSpeed scalar as a multiplication of FloatFrequency and FloatLength
-         */
-        public final FloatSpeed times(final FloatLength v)
-        {
-            return new FloatSpeed(this.si * v.si, SpeedUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatFrequency and FloatLength, which results in a FloatSpeed scalar.
+     * @param v FloatFrequency scalar
+     * @return FloatSpeed scalar as a multiplication of FloatFrequency and FloatLength
+     */
+    public final FloatSpeed times(final FloatLength v)
+    {
+        return new FloatSpeed(this.si * v.si, SpeedUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatFrequency and FloatSpeed, which results in a FloatAcceleration scalar.
-         * @param v FloatFrequency scalar
-         * @return FloatAcceleration scalar as a multiplication of FloatFrequency and FloatSpeed
-         */
-        public final FloatAcceleration times(final FloatSpeed v)
-        {
-            return new FloatAcceleration(this.si * v.si, AccelerationUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatFrequency and FloatSpeed, which results in a FloatAcceleration scalar.
+     * @param v FloatFrequency scalar
+     * @return FloatAcceleration scalar as a multiplication of FloatFrequency and FloatSpeed
+     */
+    public final FloatAcceleration times(final FloatSpeed v)
+    {
+        return new FloatAcceleration(this.si * v.si, AccelerationUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatFrequency and FloatEnergy, which results in a FloatPower scalar.
-         * @param v FloatFrequency scalar
-         * @return FloatPower scalar as a multiplication of FloatFrequency and FloatEnergy
-         */
-        public final FloatPower times(final FloatEnergy v)
-        {
-            return new FloatPower(this.si * v.si, PowerUnit.SI);
-        }
-
+    /**
+     * Calculate the multiplication of FloatFrequency and FloatEnergy, which results in a FloatPower scalar.
+     * @param v FloatFrequency scalar
+     * @return FloatPower scalar as a multiplication of FloatFrequency and FloatEnergy
+     */
+    public final FloatPower times(final FloatEnergy v)
+    {
+        return new FloatPower(this.si * v.si, PowerUnit.SI);
+    }
 
 }
-
-

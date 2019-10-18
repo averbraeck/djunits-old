@@ -20,7 +20,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUnit, FloatEquivalentDose> 
+public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUnit, FloatEquivalentDose>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -36,10 +36,12 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
     public static final FloatEquivalentDose NaN = new FloatEquivalentDose(Float.NaN, EquivalentDoseUnit.SI);
 
     /** Constant with value POSITIVE_INFINITY. */
-    public static final FloatEquivalentDose POSITIVE_INFINITY = new FloatEquivalentDose(Float.POSITIVE_INFINITY, EquivalentDoseUnit.SI);
+    public static final FloatEquivalentDose POSITIVE_INFINITY =
+            new FloatEquivalentDose(Float.POSITIVE_INFINITY, EquivalentDoseUnit.SI);
 
     /** Constant with value NEGATIVE_INFINITY. */
-    public static final FloatEquivalentDose NEGATIVE_INFINITY = new FloatEquivalentDose(Float.NEGATIVE_INFINITY, EquivalentDoseUnit.SI);
+    public static final FloatEquivalentDose NEGATIVE_INFINITY =
+            new FloatEquivalentDose(Float.NEGATIVE_INFINITY, EquivalentDoseUnit.SI);
 
     /** Constant with value MAX_VALUE. */
     public static final FloatEquivalentDose POS_MAXVALUE = new FloatEquivalentDose(Float.MAX_VALUE, EquivalentDoseUnit.SI);
@@ -100,10 +102,11 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
      * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatEquivalentDose interpolate(final FloatEquivalentDose zero, final FloatEquivalentDose one, final float ratio)
+    public static FloatEquivalentDose interpolate(final FloatEquivalentDose zero, final FloatEquivalentDose one,
+            final float ratio)
     {
-        return new FloatEquivalentDose(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new FloatEquivalentDose(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**
@@ -124,7 +127,8 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
      * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
-    public static FloatEquivalentDose max(final FloatEquivalentDose r1, final FloatEquivalentDose r2, final FloatEquivalentDose... rn)
+    public static FloatEquivalentDose max(final FloatEquivalentDose r1, final FloatEquivalentDose r2,
+            final FloatEquivalentDose... rn)
     {
         FloatEquivalentDose maxr = (r1.gt(r2)) ? r1 : r2;
         for (FloatEquivalentDose r : rn)
@@ -155,7 +159,8 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
      * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
-    public static FloatEquivalentDose min(final FloatEquivalentDose r1, final FloatEquivalentDose r2, final FloatEquivalentDose... rn)
+    public static FloatEquivalentDose min(final FloatEquivalentDose r1, final FloatEquivalentDose r2,
+            final FloatEquivalentDose... rn)
     {
         FloatEquivalentDose minr = (r1.lt(r2)) ? r1 : r2;
         for (FloatEquivalentDose r : rn)
@@ -169,9 +174,9 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
     }
 
     /**
-     * Returns a FloatEquivalentDose representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a FloatEquivalentDose representation of a textual representation of a value with a unit. The String
+     * representation that can be parsed is the double value in the unit, followed by the official abbreviation of the unit.
+     * Spaces are allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatEquivalentDose
      * @return FloatEquivalentDose; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -180,7 +185,8 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
     public static FloatEquivalentDose valueOf(final String text)
     {
         Throw.whenNull(text, "Error parsing FloatEquivalentDose: text to parse is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatEquivalentDose: empty text to parse");
+        Throw.when(text.length() == 0, IllegalArgumentException.class,
+                "Error parsing FloatEquivalentDose: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -208,7 +214,8 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
     public static FloatEquivalentDose of(final float value, final String unitString)
     {
         Throw.whenNull(unitString, "Error parsing FloatEquivalentDose: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatEquivalentDose: empty unitString");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class,
+                "Error parsing FloatEquivalentDose: empty unitString");
         EquivalentDoseUnit unit = EquivalentDoseUnit.BASE.getUnitByAbbreviation(unitString);
         if (unit != null)
         {
@@ -217,17 +224,14 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
         throw new IllegalArgumentException("Error parsing FloatEquivalentDose with unit " + unitString);
     }
 
-        /**
-         * Calculate the division of FloatEquivalentDose and FloatEquivalentDose, which results in a FloatDimensionless scalar.
-         * @param v FloatEquivalentDose scalar
-         * @return FloatDimensionless scalar as a division of FloatEquivalentDose and FloatEquivalentDose
-         */
-        public final FloatDimensionless divide(final FloatEquivalentDose v)
-        {
-            return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
-
+    /**
+     * Calculate the division of FloatEquivalentDose and FloatEquivalentDose, which results in a FloatDimensionless scalar.
+     * @param v FloatEquivalentDose scalar
+     * @return FloatDimensionless scalar as a division of FloatEquivalentDose and FloatEquivalentDose
+     */
+    public final FloatDimensionless divide(final FloatEquivalentDose v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
 }
-
-

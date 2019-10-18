@@ -8,7 +8,7 @@ import org.djunits.value.vfloat.vector.base.AbstractFloatVectorRel;
 import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable Float FloatEnergyVector, a vector of values with a EnergyUnit. 
+ * Immutable Float FloatEnergyVector, a vector of values with a EnergyUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -39,7 +39,7 @@ public class FloatEnergyVector extends AbstractFloatVectorRel<EnergyUnit, FloatE
     {
         return FloatEnergy.class;
     }
-        
+
     /** {@inheritDoc} */
     @Override
     public FloatEnergyVector instantiateVector(final FloatVectorData fvd, final EnergyUnit displayUnit)
@@ -56,7 +56,4 @@ public class FloatEnergyVector extends AbstractFloatVectorRel<EnergyUnit, FloatE
         return result;
     }
 
-   
 }
-
-

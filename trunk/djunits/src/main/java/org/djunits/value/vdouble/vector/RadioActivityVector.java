@@ -8,7 +8,7 @@ import org.djunits.value.vdouble.vector.base.AbstractDoubleVectorRel;
 import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Double RadioActivityVector, a vector of values with a RadioActivityUnit. 
+ * Double RadioActivityVector, a vector of values with a RadioActivityUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -56,6 +56,4 @@ public class RadioActivityVector extends AbstractDoubleVectorRel<RadioActivityUn
         return result;
     }
 
-   
 }
-

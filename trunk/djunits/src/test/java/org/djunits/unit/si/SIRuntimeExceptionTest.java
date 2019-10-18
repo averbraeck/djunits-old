@@ -77,7 +77,7 @@ public class SIRuntimeExceptionTest
             fail("Right exception not thrown");
         }
     }
-    
+
     /**
      * Test the static getUnit method in the Unit class.
      */
@@ -93,7 +93,7 @@ public class SIRuntimeExceptionTest
         {
             assertTrue("Exception describes the parameter that has the problem", npe.getMessage().contains("unitString"));
         }
-        
+
         try
         {
             Unit.getUnit("");
@@ -103,7 +103,7 @@ public class SIRuntimeExceptionTest
         {
             assertTrue("Exception describes the parameter that has the problem", npe.getMessage().contains("unitString"));
         }
-        
+
         try
         {
             Unit.getUnit("m.m.m.m");
@@ -113,9 +113,9 @@ public class SIRuntimeExceptionTest
         {
             // Ignore expected exception
         }
-        
+
         Unit<?> u = Unit.getUnit("m/s");
         assertTrue("u uses a base si scale", u.getScale().isBaseSIScale());
     }
-    
+
 }

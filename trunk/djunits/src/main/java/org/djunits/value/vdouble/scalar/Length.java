@@ -107,10 +107,9 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
      */
     public static Length interpolate(final Length zero, final Length one, final double ratio)
     {
-        return new Length(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new Length(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 Length; the first scalar
@@ -172,7 +171,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
         }
         return minr;
     }
-    
+
     /**
      * Returns a Length representation of a textual representation of a value with a unit. The String representation that can be
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
@@ -222,97 +221,94 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
         throw new IllegalArgumentException("Error parsing Length with unit " + unitString);
     }
 
-        /**
-         * Calculate the division of Length and Length, which results in a Dimensionless scalar.
-         * @param v Length scalar
-         * @return Dimensionless scalar as a division of Length and Length
-         */
-        public final Dimensionless divide(final Length v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of Length and Length, which results in a Dimensionless scalar.
+     * @param v Length scalar
+     * @return Dimensionless scalar as a division of Length and Length
+     */
+    public final Dimensionless divide(final Length v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Length and Length, which results in a Area scalar.
-         * @param v Length scalar
-         * @return Area scalar as a multiplication of Length and Length
-         */
-        public final Area times(final Length v)
-        {
-            return new Area(this.si * v.si, AreaUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Length and Length, which results in a Area scalar.
+     * @param v Length scalar
+     * @return Area scalar as a multiplication of Length and Length
+     */
+    public final Area times(final Length v)
+    {
+        return new Area(this.si * v.si, AreaUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Length and LinearDensity, which results in a Area scalar.
-         * @param v Length scalar
-         * @return Area scalar as a division of Length and LinearDensity
-         */
-        public final Area divide(final LinearDensity v)
-        {
-            return new Area(this.si / v.si, AreaUnit.SI);
-        }
+    /**
+     * Calculate the division of Length and LinearDensity, which results in a Area scalar.
+     * @param v Length scalar
+     * @return Area scalar as a division of Length and LinearDensity
+     */
+    public final Area divide(final LinearDensity v)
+    {
+        return new Area(this.si / v.si, AreaUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Length and Area, which results in a LinearDensity scalar.
-         * @param v Length scalar
-         * @return LinearDensity scalar as a division of Length and Area
-         */
-        public final LinearDensity divide(final Area v)
-        {
-            return new LinearDensity(this.si / v.si, LinearDensityUnit.SI);
-        }
+    /**
+     * Calculate the division of Length and Area, which results in a LinearDensity scalar.
+     * @param v Length scalar
+     * @return LinearDensity scalar as a division of Length and Area
+     */
+    public final LinearDensity divide(final Area v)
+    {
+        return new LinearDensity(this.si / v.si, LinearDensityUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Length and Area, which results in a Volume scalar.
-         * @param v Length scalar
-         * @return Volume scalar as a multiplication of Length and Area
-         */
-        public final Volume times(final Area v)
-        {
-            return new Volume(this.si * v.si, VolumeUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Length and Area, which results in a Volume scalar.
+     * @param v Length scalar
+     * @return Volume scalar as a multiplication of Length and Area
+     */
+    public final Volume times(final Area v)
+    {
+        return new Volume(this.si * v.si, VolumeUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Length and Force, which results in a Energy scalar.
-         * @param v Length scalar
-         * @return Energy scalar as a multiplication of Length and Force
-         */
-        public final Energy times(final Force v)
-        {
-            return new Energy(this.si * v.si, EnergyUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Length and Force, which results in a Energy scalar.
+     * @param v Length scalar
+     * @return Energy scalar as a multiplication of Length and Force
+     */
+    public final Energy times(final Force v)
+    {
+        return new Energy(this.si * v.si, EnergyUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Length and Frequency, which results in a Speed scalar.
-         * @param v Length scalar
-         * @return Speed scalar as a multiplication of Length and Frequency
-         */
-        public final Speed times(final Frequency v)
-        {
-            return new Speed(this.si * v.si, SpeedUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Length and Frequency, which results in a Speed scalar.
+     * @param v Length scalar
+     * @return Speed scalar as a multiplication of Length and Frequency
+     */
+    public final Speed times(final Frequency v)
+    {
+        return new Speed(this.si * v.si, SpeedUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Length and Duration, which results in a Speed scalar.
-         * @param v Length scalar
-         * @return Speed scalar as a division of Length and Duration
-         */
-        public final Speed divide(final Duration v)
-        {
-            return new Speed(this.si / v.si, SpeedUnit.SI);
-        }
+    /**
+     * Calculate the division of Length and Duration, which results in a Speed scalar.
+     * @param v Length scalar
+     * @return Speed scalar as a division of Length and Duration
+     */
+    public final Speed divide(final Duration v)
+    {
+        return new Speed(this.si / v.si, SpeedUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Length and Speed, which results in a Duration scalar.
-         * @param v Length scalar
-         * @return Duration scalar as a division of Length and Speed
-         */
-        public final Duration divide(final Speed v)
-        {
-            return new Duration(this.si / v.si, DurationUnit.SI);
-        }
+    /**
+     * Calculate the division of Length and Speed, which results in a Duration scalar.
+     * @param v Length scalar
+     * @return Duration scalar as a division of Length and Speed
+     */
+    public final Duration divide(final Speed v)
+    {
+        return new Duration(this.si / v.si, DurationUnit.SI);
+    }
 
-
-    
 }
-

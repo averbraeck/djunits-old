@@ -104,7 +104,7 @@ public class UnitBaseTest
         assertEquals(QUnit.BASE.of("GQ"), QUnit.BASE.getUnitsById().get("GQ"));
         assertEquals(QUnit.BASE.of("GQ"), QUnit.BASE.getUnitByAbbreviation("GQ"));
         assertEquals(QUnit.BASE.of("GQ"), QUnit.BASE.getUnitsByAbbreviation().get("GQ"));
-        
+
         try
         {
             SIDimensions.of("m/m/m/m");
@@ -131,7 +131,7 @@ public class UnitBaseTest
         UnitTypes.INSTANCE.unregister(unitBase3); // probably not registered
         UnitTypes.INSTANCE.unregister(unitBase4); // probably not registered
         UnitTypes.INSTANCE.unregister(QUnit.BASE); // should unregister
-            }
+    }
 
     /** */
     protected static class QUnit extends Unit<QUnit>

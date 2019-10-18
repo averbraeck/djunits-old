@@ -27,7 +27,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class Force extends AbstractDoubleScalarRel<ForceUnit, Force> 
+public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -89,7 +89,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
     {
         return new Force(value, ForceUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero Force; the low value
@@ -101,7 +101,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
     {
         return new Force(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 Force; the first scalar
@@ -213,97 +213,94 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
         throw new IllegalArgumentException("Error parsing Force with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of Force and Force, which results in a Dimensionless scalar.
-         * @param v Force scalar
-         * @return Dimensionless scalar as a division of Force and Force
-         */
-        public final Dimensionless divide(final Force v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of Force and Force, which results in a Dimensionless scalar.
+     * @param v Force scalar
+     * @return Dimensionless scalar as a division of Force and Force
+     */
+    public final Dimensionless divide(final Force v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Force and Length, which results in a Energy scalar.
-         * @param v Force scalar
-         * @return Energy scalar as a multiplication of Force and Length
-         */
-        public final Energy times(final Length v)
-        {
-            return new Energy(this.si * v.si, EnergyUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Force and Length, which results in a Energy scalar.
+     * @param v Force scalar
+     * @return Energy scalar as a multiplication of Force and Length
+     */
+    public final Energy times(final Length v)
+    {
+        return new Energy(this.si * v.si, EnergyUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Force and LinearDensity, which results in a Energy scalar.
-         * @param v Force scalar
-         * @return Energy scalar as a division of Force and LinearDensity
-         */
-        public final Energy divide(final LinearDensity v)
-        {
-            return new Energy(this.si / v.si, EnergyUnit.SI);
-        }
+    /**
+     * Calculate the division of Force and LinearDensity, which results in a Energy scalar.
+     * @param v Force scalar
+     * @return Energy scalar as a division of Force and LinearDensity
+     */
+    public final Energy divide(final LinearDensity v)
+    {
+        return new Energy(this.si / v.si, EnergyUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Force and Energy, which results in a LinearDensity scalar.
-         * @param v Force scalar
-         * @return LinearDensity scalar as a division of Force and Energy
-         */
-        public final LinearDensity divide(final Energy v)
-        {
-            return new LinearDensity(this.si / v.si, LinearDensityUnit.SI);
-        }
+    /**
+     * Calculate the division of Force and Energy, which results in a LinearDensity scalar.
+     * @param v Force scalar
+     * @return LinearDensity scalar as a division of Force and Energy
+     */
+    public final LinearDensity divide(final Energy v)
+    {
+        return new LinearDensity(this.si / v.si, LinearDensityUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Force and Speed, which results in a Power scalar.
-         * @param v Force scalar
-         * @return Power scalar as a multiplication of Force and Speed
-         */
-        public final Power times(final Speed v)
-        {
-            return new Power(this.si * v.si, PowerUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Force and Speed, which results in a Power scalar.
+     * @param v Force scalar
+     * @return Power scalar as a multiplication of Force and Speed
+     */
+    public final Power times(final Speed v)
+    {
+        return new Power(this.si * v.si, PowerUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Force and Mass, which results in a Acceleration scalar.
-         * @param v Force scalar
-         * @return Acceleration scalar as a division of Force and Mass
-         */
-        public final Acceleration divide(final Mass v)
-        {
-            return new Acceleration(this.si / v.si, AccelerationUnit.SI);
-        }
+    /**
+     * Calculate the division of Force and Mass, which results in a Acceleration scalar.
+     * @param v Force scalar
+     * @return Acceleration scalar as a division of Force and Mass
+     */
+    public final Acceleration divide(final Mass v)
+    {
+        return new Acceleration(this.si / v.si, AccelerationUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Force and Acceleration, which results in a Mass scalar.
-         * @param v Force scalar
-         * @return Mass scalar as a division of Force and Acceleration
-         */
-        public final Mass divide(final Acceleration v)
-        {
-            return new Mass(this.si / v.si, MassUnit.SI);
-        }
+    /**
+     * Calculate the division of Force and Acceleration, which results in a Mass scalar.
+     * @param v Force scalar
+     * @return Mass scalar as a division of Force and Acceleration
+     */
+    public final Mass divide(final Acceleration v)
+    {
+        return new Mass(this.si / v.si, MassUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Force and Area, which results in a Pressure scalar.
-         * @param v Force scalar
-         * @return Pressure scalar as a division of Force and Area
-         */
-        public final Pressure divide(final Area v)
-        {
-            return new Pressure(this.si / v.si, PressureUnit.SI);
-        }
+    /**
+     * Calculate the division of Force and Area, which results in a Pressure scalar.
+     * @param v Force scalar
+     * @return Pressure scalar as a division of Force and Area
+     */
+    public final Pressure divide(final Area v)
+    {
+        return new Pressure(this.si / v.si, PressureUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Force and Pressure, which results in a Area scalar.
-         * @param v Force scalar
-         * @return Area scalar as a division of Force and Pressure
-         */
-        public final Area divide(final Pressure v)
-        {
-            return new Area(this.si / v.si, AreaUnit.SI);
-        }
-
+    /**
+     * Calculate the division of Force and Pressure, which results in a Area scalar.
+     * @param v Force scalar
+     * @return Area scalar as a division of Force and Pressure
+     */
+    public final Area divide(final Pressure v)
+    {
+        return new Area(this.si / v.si, AreaUnit.SI);
+    }
 
 }
-
-

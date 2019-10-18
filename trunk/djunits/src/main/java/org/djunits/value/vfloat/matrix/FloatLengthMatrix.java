@@ -22,12 +22,12 @@ import org.djunits.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatLengthMatrix extends AbstractFloatMatrixRelWithAbs<PositionUnit, FloatPosition, FloatPositionVector, FloatPositionMatrix,
-LengthUnit, FloatLength, FloatLengthVector, FloatLengthMatrix>
+public class FloatLengthMatrix extends AbstractFloatMatrixRelWithAbs<PositionUnit, FloatPosition, FloatPositionVector,
+        FloatPositionMatrix, LengthUnit, FloatLength, FloatLengthVector, FloatLengthMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
-    
+
     /**
      * @param data FloatMatrixData; an internal data object
      * @param unit LengthUnit; the unit
@@ -36,21 +36,21 @@ LengthUnit, FloatLength, FloatLengthVector, FloatLengthMatrix>
     {
         super(data, unit);
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public Class<FloatLength> getScalarClass()
     {
         return FloatLength.class;
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public Class<FloatLengthVector> getVectorClass()
     {
         return FloatLengthVector.class;
     }
-        
+
     /** {@inheritDoc} */
     @Override
     public FloatLengthMatrix instantiateMatrix(final FloatMatrixData fmd, final LengthUnit displayUnit)
@@ -97,5 +97,4 @@ LengthUnit, FloatLength, FloatLengthVector, FloatLengthMatrix>
         return result;
     }
 
-   
-}
+}

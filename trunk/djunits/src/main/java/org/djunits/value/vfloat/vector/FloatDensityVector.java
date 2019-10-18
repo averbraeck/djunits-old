@@ -8,7 +8,7 @@ import org.djunits.value.vfloat.vector.base.AbstractFloatVectorRel;
 import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable Float FloatDensityVector, a vector of values with a DensityUnit. 
+ * Immutable Float FloatDensityVector, a vector of values with a DensityUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -39,7 +39,7 @@ public class FloatDensityVector extends AbstractFloatVectorRel<DensityUnit, Floa
     {
         return FloatDensity.class;
     }
-        
+
     /** {@inheritDoc} */
     @Override
     public FloatDensityVector instantiateVector(final FloatVectorData fvd, final DensityUnit displayUnit)
@@ -56,7 +56,4 @@ public class FloatDensityVector extends AbstractFloatVectorRel<DensityUnit, Floa
         return result;
     }
 
-   
 }
-
-

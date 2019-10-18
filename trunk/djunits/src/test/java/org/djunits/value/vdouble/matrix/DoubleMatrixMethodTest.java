@@ -78,18 +78,18 @@ public class DoubleMatrixMethodTest
             }
         }
 
-        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
         {
-            for (AreaUnit au : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
+            for (AreaUnit au : new AreaUnit[] {AreaUnit.SQUARE_METER, AreaUnit.ACRE})
             {
                 double[][] testData = storageType.equals(StorageType.DENSE) ? denseTestData : sparseTestData;
                 AreaMatrix am =
                         DoubleMatrix.instantiate(DoubleMatrixData.instantiate(testData, au.getScale(), storageType), au);
 
                 // INDEX CHECKING
-                for (int row : new int[] { -1, 0, denseTestData.length - 1, denseTestData.length })
+                for (int row : new int[] {-1, 0, denseTestData.length - 1, denseTestData.length})
                 {
-                    for (int col : new int[] { -1, 0, denseTestData[0].length - 1, denseTestData[0].length })
+                    for (int col : new int[] {-1, 0, denseTestData[0].length - 1, denseTestData[0].length})
                     {
                         if (row < 0 || col < 0 || row >= denseTestData.length || col >= denseTestData[0].length)
                         {
@@ -121,7 +121,7 @@ public class DoubleMatrixMethodTest
                         }
                     }
                 }
-                for (int col : new int[] { -1, 0, denseTestData[0].length - 1, denseTestData[0].length })
+                for (int col : new int[] {-1, 0, denseTestData[0].length - 1, denseTestData[0].length})
                 {
                     if (col < 0 || col >= denseTestData[0].length)
                     {
@@ -384,10 +384,10 @@ public class DoubleMatrixMethodTest
 
                 // TEST METHODS THAT INVOLVE TWO MATRIX INSTANCES
 
-                for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+                for (StorageType storageType2 : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
                 {
                     double[][] testData2 = storageType2.equals(StorageType.DENSE) ? denseTestData : reverseSparseTestData;
-                    for (AreaUnit au2 : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
+                    for (AreaUnit au2 : new AreaUnit[] {AreaUnit.SQUARE_METER, AreaUnit.ACRE})
                     {
 
                         // PLUS and INCREMENTBY(MATRIX)
@@ -482,9 +482,9 @@ public class DoubleMatrixMethodTest
         double[][] denseTestData = DOUBLEMATRIX.denseRectArrays(5, 10);
         double[][] sparseTestData = DOUBLEMATRIX.sparseRectArrays(5, 10);
 
-        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
         {
-            for (AreaUnit au : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
+            for (AreaUnit au : new AreaUnit[] {AreaUnit.SQUARE_METER, AreaUnit.ACRE})
             {
                 double[][] testData = storageType.equals(StorageType.DENSE) ? denseTestData : sparseTestData;
                 AreaMatrix am =
@@ -617,9 +617,9 @@ public class DoubleMatrixMethodTest
         double[][] denseTestData = DOUBLEMATRIX.denseRectArrays(5, 10);
         double[][] sparseTestData = DOUBLEMATRIX.sparseRectArrays(5, 10);
 
-        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
         {
-            for (AreaUnit au : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
+            for (AreaUnit au : new AreaUnit[] {AreaUnit.SQUARE_METER, AreaUnit.ACRE})
             {
                 double[][] testData = storageType.equals(StorageType.DENSE) ? denseTestData : sparseTestData;
                 AreaMatrix am =
@@ -713,9 +713,9 @@ public class DoubleMatrixMethodTest
                 assertEquals("relPlusAbs", 61.0 * denseTestData[row][col], relPlusAbs.getSI(row, col), 0.01);
             }
         }
-        for (int dRows : new int[] { -1, 0, 1 })
+        for (int dRows : new int[] {-1, 0, 1})
         {
-            for (int dCols : new int[] { -1, 0, 1 })
+            for (int dCols : new int[] {-1, 0, 1})
             {
                 if (dRows == 0 && dCols == 0)
                 {
@@ -877,7 +877,7 @@ public class DoubleMatrixMethodTest
             IllegalAccessException, IllegalArgumentException, InvocationTargetException, UnitException
     {
         double[][] testValues = DOUBLEMATRIX.denseRectArrays(10, 20);
-        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
         {
             for (String type : CLASSNAMES.REL_LIST)
             {
@@ -885,7 +885,7 @@ public class DoubleMatrixMethodTest
                 UnitBase<U> unitBase = (UnitBase<U>) UnitTypes.INSTANCE.getUnitBase(type + "Unit");
                 for (U unit : unitBase.getUnitsById().values())
                 {
-                    for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, storageType })
+                    for (StorageType storageType2 : new StorageType[] {StorageType.DENSE, storageType})
                     {
                         SIUnit siUnit = SIUnit.of(unit.getUnitBase().getSiDimensions());
                         SIMatrix matrix = SIMatrix.instantiate(testValues, siUnit, storageType2);
@@ -927,7 +927,7 @@ public class DoubleMatrixMethodTest
     {
         double[][] testData = DOUBLEMATRIX.denseRectArrays(12, 34);
         testData[2][2] = 0;
-        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
         {
             DoubleMatrixData dmd = DoubleMatrixData.instantiate(testData, TemperatureUnit.KELVIN.getScale(), storageType);
             assertTrue("Double matrix is equal to itself", dmd.equals(dmd));
@@ -935,10 +935,11 @@ public class DoubleMatrixMethodTest
             assertFalse("Double matrix data is not equal to some string", dmd.equals("some string"));
             assertTrue("Double matrix is equal to sparse version of itself", dmd.equals(dmd.toSparse()));
             assertTrue("Double matrix is equal to dense version of itself", dmd.equals(dmd.toDense()));
-            for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+            for (StorageType storageType2 : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
             {
                 DoubleMatrixData dvd2 = DoubleMatrixData.instantiate(testData, TemperatureUnit.KELVIN.getScale(), storageType2);
-                assertEquals("Double matrix data is equal to other double vector containing same values regardless of storage type",
+                assertEquals(
+                        "Double matrix data is equal to other double vector containing same values regardless of storage type",
                         dmd, dvd2);
                 double[][] testData2 = DOUBLEMATRIX.denseRectArrays(12, 33);
                 testData2[2][2] = 0;
@@ -957,11 +958,11 @@ public class DoubleMatrixMethodTest
             }
         }
     }
-    
+
     /**
      * Test the sparse value class.
      */
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     @Test
     public void sparseValueTest()
     {

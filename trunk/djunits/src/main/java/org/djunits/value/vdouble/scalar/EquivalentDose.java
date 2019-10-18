@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, EquivalentDose> 
+public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, EquivalentDose>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -82,7 +82,7 @@ public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, 
     {
         return new EquivalentDose(value, EquivalentDoseUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero EquivalentDose; the low value
@@ -92,9 +92,10 @@ public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, 
      */
     public static EquivalentDose interpolate(final EquivalentDose zero, final EquivalentDose one, final double ratio)
     {
-        return new EquivalentDose(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return new EquivalentDose(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 EquivalentDose; the first scalar
@@ -158,9 +159,9 @@ public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, 
     }
 
     /**
-     * Returns a EquivalentDose representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a EquivalentDose representation of a textual representation of a value with a unit. The String representation
+     * that can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are
+     * allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a EquivalentDose
      * @return EquivalentDose; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -206,17 +207,14 @@ public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, 
         throw new IllegalArgumentException("Error parsing EquivalentDose with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of EquivalentDose and EquivalentDose, which results in a Dimensionless scalar.
-         * @param v EquivalentDose scalar
-         * @return Dimensionless scalar as a division of EquivalentDose and EquivalentDose
-         */
-        public final Dimensionless divide(final EquivalentDose v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
-
+    /**
+     * Calculate the division of EquivalentDose and EquivalentDose, which results in a Dimensionless scalar.
+     * @param v EquivalentDose scalar
+     * @return Dimensionless scalar as a division of EquivalentDose and EquivalentDose
+     */
+    public final Dimensionless divide(final EquivalentDose v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
 }
-
-

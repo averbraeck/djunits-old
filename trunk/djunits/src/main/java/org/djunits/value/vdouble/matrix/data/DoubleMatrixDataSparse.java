@@ -184,7 +184,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     @Override
     public final DoubleMatrixDataSparse assign(final DoubleFunction2 doubleFunction, final DoubleMatrixData right)
     {
-        if (doubleFunction.apply(0d,  0d) != 0d)
+        if (doubleFunction.apply(0d, 0d) != 0d)
         {
             // It is most unlikely that the result AND the left and right operands are efficiently stored in Sparse format
             DoubleMatrixDataSparse result = toDense().assign(doubleFunction, right).toSparse();

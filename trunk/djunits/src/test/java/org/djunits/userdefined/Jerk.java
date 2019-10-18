@@ -49,4 +49,3 @@ public class Jerk extends AbstractDoubleScalarRel<JerkUnit, Jerk>
         return new Jerk(valueSI, JerkUnit.SI);
     }
 }
-

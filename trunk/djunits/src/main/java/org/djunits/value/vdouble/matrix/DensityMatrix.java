@@ -10,7 +10,7 @@ import org.djunits.value.vdouble.vector.DensityVector;
 import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Double DensityMatrix, a matrix of values with a DensityUnit. 
+ * Immutable Double DensityMatrix, a matrix of values with a DensityUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -70,6 +70,5 @@ public class DensityMatrix extends AbstractDoubleMatrixRel<DensityUnit, Density,
         result.setDisplayUnit(displayUnit);
         return result;
     }
-    
+
 }
-

@@ -21,7 +21,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class SolidAngle extends AbstractDoubleScalarRel<SolidAngleUnit, SolidAngle> 
+public class SolidAngle extends AbstractDoubleScalarRel<SolidAngleUnit, SolidAngle>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -83,7 +83,7 @@ public class SolidAngle extends AbstractDoubleScalarRel<SolidAngleUnit, SolidAng
     {
         return new SolidAngle(value, SolidAngleUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero SolidAngle; the low value
@@ -93,9 +93,10 @@ public class SolidAngle extends AbstractDoubleScalarRel<SolidAngleUnit, SolidAng
      */
     public static SolidAngle interpolate(final SolidAngle zero, final SolidAngle one, final double ratio)
     {
-        return new SolidAngle(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return new SolidAngle(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 SolidAngle; the first scalar
@@ -159,9 +160,9 @@ public class SolidAngle extends AbstractDoubleScalarRel<SolidAngleUnit, SolidAng
     }
 
     /**
-     * Returns a SolidAngle representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a SolidAngle representation of a textual representation of a value with a unit. The String representation that
+     * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
+     * not required, between the value and the unit.
      * @param text String; the textual representation to parse into a SolidAngle
      * @return SolidAngle; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -207,27 +208,24 @@ public class SolidAngle extends AbstractDoubleScalarRel<SolidAngleUnit, SolidAng
         throw new IllegalArgumentException("Error parsing SolidAngle with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of SolidAngle and SolidAngle, which results in a Dimensionless scalar.
-         * @param v SolidAngle scalar
-         * @return Dimensionless scalar as a division of SolidAngle and SolidAngle
-         */
-        public final Dimensionless divide(final SolidAngle v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of SolidAngle and SolidAngle, which results in a Dimensionless scalar.
+     * @param v SolidAngle scalar
+     * @return Dimensionless scalar as a division of SolidAngle and SolidAngle
+     */
+    public final Dimensionless divide(final SolidAngle v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of SolidAngle and LuminousIntensity, which results in a LuminousFlux scalar.
-         * @param v SolidAngle scalar
-         * @return LuminousFlux scalar as a multiplication of SolidAngle and LuminousIntensity
-         */
-        public final LuminousFlux times(final LuminousIntensity v)
-        {
-            return new LuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
-        }
-
+    /**
+     * Calculate the multiplication of SolidAngle and LuminousIntensity, which results in a LuminousFlux scalar.
+     * @param v SolidAngle scalar
+     * @return LuminousFlux scalar as a multiplication of SolidAngle and LuminousIntensity
+     */
+    public final LuminousFlux times(final LuminousIntensity v)
+    {
+        return new LuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
+    }
 
 }
-
-

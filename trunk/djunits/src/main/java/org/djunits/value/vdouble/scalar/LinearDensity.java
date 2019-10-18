@@ -23,7 +23,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, LinearDensity> 
+public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, LinearDensity>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -85,7 +85,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
     {
         return new LinearDensity(value, LinearDensityUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero LinearDensity; the low value
@@ -95,9 +95,10 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
      */
     public static LinearDensity interpolate(final LinearDensity zero, final LinearDensity one, final double ratio)
     {
-        return new LinearDensity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return new LinearDensity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 LinearDensity; the first scalar
@@ -161,9 +162,9 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
     }
 
     /**
-     * Returns a LinearDensity representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a LinearDensity representation of a textual representation of a value with a unit. The String representation that
+     * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
+     * not required, between the value and the unit.
      * @param text String; the textual representation to parse into a LinearDensity
      * @return LinearDensity; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -209,47 +210,44 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
         throw new IllegalArgumentException("Error parsing LinearDensity with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of LinearDensity and LinearDensity, which results in a Dimensionless scalar.
-         * @param v LinearDensity scalar
-         * @return Dimensionless scalar as a division of LinearDensity and LinearDensity
-         */
-        public final Dimensionless divide(final LinearDensity v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of LinearDensity and LinearDensity, which results in a Dimensionless scalar.
+     * @param v LinearDensity scalar
+     * @return Dimensionless scalar as a division of LinearDensity and LinearDensity
+     */
+    public final Dimensionless divide(final LinearDensity v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of LinearDensity and Area, which results in a Length scalar.
-         * @param v LinearDensity scalar
-         * @return Length scalar as a multiplication of LinearDensity and Area
-         */
-        public final Length times(final Area v)
-        {
-            return new Length(this.si * v.si, LengthUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of LinearDensity and Area, which results in a Length scalar.
+     * @param v LinearDensity scalar
+     * @return Length scalar as a multiplication of LinearDensity and Area
+     */
+    public final Length times(final Area v)
+    {
+        return new Length(this.si * v.si, LengthUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of LinearDensity and Energy, which results in a Force scalar.
-         * @param v LinearDensity scalar
-         * @return Force scalar as a multiplication of LinearDensity and Energy
-         */
-        public final Force times(final Energy v)
-        {
-            return new Force(this.si * v.si, ForceUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of LinearDensity and Energy, which results in a Force scalar.
+     * @param v LinearDensity scalar
+     * @return Force scalar as a multiplication of LinearDensity and Energy
+     */
+    public final Force times(final Energy v)
+    {
+        return new Force(this.si * v.si, ForceUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of LinearDensity and Speed, which results in a Frequency scalar.
-         * @param v LinearDensity scalar
-         * @return Frequency scalar as a multiplication of LinearDensity and Speed
-         */
-        public final Frequency times(final Speed v)
-        {
-            return new Frequency(this.si * v.si, FrequencyUnit.SI);
-        }
-
+    /**
+     * Calculate the multiplication of LinearDensity and Speed, which results in a Frequency scalar.
+     * @param v LinearDensity scalar
+     * @return Frequency scalar as a multiplication of LinearDensity and Speed
+     */
+    public final Frequency times(final Speed v)
+    {
+        return new Frequency(this.si * v.si, FrequencyUnit.SI);
+    }
 
 }
-
-

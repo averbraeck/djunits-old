@@ -22,7 +22,8 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class Temperature extends AbstractDoubleScalarRelWithAbs<AbsoluteTemperatureUnit, AbsoluteTemperature, TemperatureUnit, Temperature>
+public class Temperature
+        extends AbstractDoubleScalarRelWithAbs<AbsoluteTemperatureUnit, AbsoluteTemperature, TemperatureUnit, Temperature>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -101,10 +102,10 @@ public class Temperature extends AbstractDoubleScalarRelWithAbs<AbsoluteTemperat
      */
     public static Temperature interpolate(final Temperature zero, final Temperature one, final double ratio)
     {
-        return new Temperature(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new Temperature(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 Temperature; the first scalar
@@ -166,11 +167,11 @@ public class Temperature extends AbstractDoubleScalarRelWithAbs<AbsoluteTemperat
         }
         return minr;
     }
-    
+
     /**
-     * Returns a Temperature representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a Temperature representation of a textual representation of a value with a unit. The String representation that
+     * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
+     * not required, between the value and the unit.
      * @param text String; the textual representation to parse into a Temperature
      * @return Temperature; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -216,17 +217,14 @@ public class Temperature extends AbstractDoubleScalarRelWithAbs<AbsoluteTemperat
         throw new IllegalArgumentException("Error parsing Temperature with unit " + unitString);
     }
 
-        /**
-         * Calculate the division of Temperature and Temperature, which results in a Dimensionless scalar.
-         * @param v Temperature scalar
-         * @return Dimensionless scalar as a division of Temperature and Temperature
-         */
-        public final Dimensionless divide(final Temperature v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of Temperature and Temperature, which results in a Dimensionless scalar.
+     * @param v Temperature scalar
+     * @return Dimensionless scalar as a division of Temperature and Temperature
+     */
+    public final Dimensionless divide(final Temperature v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-
-    
 }
-
