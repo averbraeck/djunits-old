@@ -166,7 +166,6 @@ public class GenerateCliConvertersTest
          */
         public TestRecord(String type, double amount1, String unit1, String value1, double amount2, String unit2, String value2)
         {
-            super();
             this.type = type;
             this.amount1 = amount1;
             this.unit1 = unit1;
