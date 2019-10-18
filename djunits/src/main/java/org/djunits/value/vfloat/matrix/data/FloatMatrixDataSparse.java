@@ -54,6 +54,8 @@ public class FloatMatrixDataSparse extends FloatMatrixData
      * @param rows int; the number of rows of the matrix
      * @param cols int; the number of columns of the matrix
      * @throws NullPointerException when storageType is null or dataSI is null
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
      */
     public <U extends Unit<U>, S extends FloatScalarInterface<U, S>> FloatMatrixDataSparse(
             final Collection<FloatSparseValue<U, S>> dataSI, final int rows, final int cols) throws NullPointerException

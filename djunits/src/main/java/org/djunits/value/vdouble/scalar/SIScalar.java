@@ -203,10 +203,8 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
                 SIUnit unit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(unitString));
                 if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new SIScalar(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new SIScalar(d, unit);
                 }
             }
             catch (Exception exception)
@@ -253,6 +251,8 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      * otherwise the scalar cannot be transformed. The compiler will check the alignment between the return value and the unit.
      * @param displayUnit KU; the unit in which the scalar needs to be expressed
      * @return K; the scalar that has been transformed into the right scalar type and unit
+     * @param <KU> the unit
+     * @param <K> the corresponding scalar type
      */
     public final <KU extends Unit<KU>, K extends AbstractDoubleScalarRel<KU, K>> K as(final KU displayUnit)
     {

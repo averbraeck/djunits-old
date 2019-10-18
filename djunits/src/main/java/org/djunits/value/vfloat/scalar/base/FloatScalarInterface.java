@@ -48,7 +48,7 @@ public interface FloatScalarInterface<U extends Unit<U>, S extends FloatScalarIn
      * @param <U> the unit
      * @param <R> the relative scalar
      */
-    public static interface Rel<U extends Unit<U>, R extends FloatScalarInterface.Rel<U, R>>
+    public interface Rel<U extends Unit<U>, R extends FloatScalarInterface.Rel<U, R>>
             extends FloatScalarInterface<U, R>, Scalar.Rel<U, R>
     {
         /**
@@ -74,7 +74,7 @@ public interface FloatScalarInterface<U extends Unit<U>, S extends FloatScalarIn
      * @param <RU> the absolute unit belonging to the relative unit
      * @param <R> the relative scalar belonging to the absolute scalar
      */
-    public static interface RelWithAbs<AU extends AbsoluteLinearUnit<AU, RU>, A extends FloatScalarInterface.Abs<AU, A, RU, R>,
+    public interface RelWithAbs<AU extends AbsoluteLinearUnit<AU, RU>, A extends FloatScalarInterface.Abs<AU, A, RU, R>,
             RU extends Unit<RU>, R extends FloatScalarInterface.RelWithAbs<AU, A, RU, R>>
             extends FloatScalarInterface<RU, R>, Scalar.RelWithAbs<AU, A, RU, R>
     {
@@ -108,7 +108,7 @@ public interface FloatScalarInterface<U extends Unit<U>, S extends FloatScalarIn
      * @param <RU> the absolute unit belonging to the relative unit
      * @param <R> the relative scalar belonging to the absolute scalar
      */
-    public static interface Abs<AU extends AbsoluteLinearUnit<AU, RU>, A extends FloatScalarInterface.Abs<AU, A, RU, R>,
+    public interface Abs<AU extends AbsoluteLinearUnit<AU, RU>, A extends FloatScalarInterface.Abs<AU, A, RU, R>,
             RU extends Unit<RU>, R extends FloatScalarInterface.RelWithAbs<AU, A, RU, R>>
             extends FloatScalarInterface<AU, A>, Scalar.Abs<AU, A, RU, R>
     {

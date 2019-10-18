@@ -44,6 +44,10 @@ public final class DoubleMatrix
      * @param unit U; the unit in which the values are expressed and displayed
      * @param storageType StorageType; whether the matrix is SPARSE or DENSE
      * @return M; an instantiated DoubleMatrix with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the corresponding matrix type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>, V extends DoubleVectorInterface<U, S, V>,
             M extends DoubleMatrixInterface<U, S, V, M>> M instantiate(final double[][] valuesInUnit, final U unit,
@@ -61,6 +65,10 @@ public final class DoubleMatrix
      * @param storageType StorageType; whether the matrix is SPARSE or DENSE
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate
      * @return M; an instantiated DoubleMatrix with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the corresponding matrix type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>, V extends DoubleVectorInterface<U, S, V>,
             M extends DoubleMatrixInterface<U, S, V, M>> M instantiate(final double[][] valuesInUnit, final U unit,
@@ -77,6 +85,10 @@ public final class DoubleMatrix
      * @param displayUnit U; the unit in which the values will be displayed
      * @param storageType StorageType; whether the matrix is SPARSE or DENSE
      * @return M; an instantiated DoubleMatrix with the SI values and display unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the corresponding matrix type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>, V extends DoubleVectorInterface<U, S, V>,
             M extends DoubleMatrixInterface<U, S, V, M>> M instantiateSI(final double[][] valuesSI, final U displayUnit,
@@ -94,6 +106,10 @@ public final class DoubleMatrix
      * @param storageType StorageType; whether the matrix is SPARSE or DENSE
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate
      * @return M; an instantiated DoubleMatrix with the SI values and display unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the corresponding matrix type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>, V extends DoubleVectorInterface<U, S, V>,
             M extends DoubleMatrixInterface<U, S, V, M>> M instantiateSI(final double[][] valuesSI, final U displayUnit,
@@ -108,6 +124,10 @@ public final class DoubleMatrix
      * @param values DoubleMatrixData; the values
      * @param unit U; the unit in which the values are expressed
      * @return M; an instantiated mutable DoubleMatrix with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the corresponding matrix type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>, V extends DoubleVectorInterface<U, S, V>,
             M extends DoubleMatrixInterface<U, S, V, M>> M instantiate(final DoubleMatrixData values, final U unit)
@@ -122,6 +142,10 @@ public final class DoubleMatrix
      * @param unit U; the unit in which the values are expressed
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate
      * @return M; an instantiated mutable DoubleMatrix with the values expressed in their unit
+     * @param <U> the unit
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the matrix type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>, V extends DoubleVectorInterface<U, S, V>,
             M extends DoubleMatrixInterface<U, S, V, M>> M instantiate(final DoubleMatrixData values, final U unit,
@@ -137,6 +161,10 @@ public final class DoubleMatrix
      * @param displayUnit U; the unit in which the values will be displayed
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @return M; an instantiated mutable DoubleMatrix with the values expressed in their unit
+     * @param <U> the unit
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the matrix type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>, V extends DoubleVectorInterface<U, S, V>,
             M extends DoubleMatrixInterface<U, S, V, M>> M instantiate(final S[][] values, final U displayUnit,
@@ -154,6 +182,10 @@ public final class DoubleMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate
      * @return M; an instantiated mutable DoubleMatrix with the values expressed in their unit
+     * @param <U> the unit
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the matrix type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>, V extends DoubleVectorInterface<U, S, V>,
             M extends DoubleMatrixInterface<U, S, V, M>> M instantiate(final S[][] values, final U displayUnit,
@@ -170,6 +202,10 @@ public final class DoubleMatrix
      * @param displayUnit U; the unit in which the values will be displayed
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @return M; an instantiated mutable DoubleMatrix with the values expressed in their unit
+     * @param <U> the unit
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the matrix type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>, V extends DoubleVectorInterface<U, S, V>,
             M extends DoubleMatrixInterface<U, S, V, M>> M instantiate(final Collection<DoubleSparseValue<U, S>> values,
@@ -188,6 +224,10 @@ public final class DoubleMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate
      * @return M; an instantiated mutable DoubleMatrix with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the corresponding matrix type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>, V extends DoubleVectorInterface<U, S, V>,
             M extends DoubleMatrixInterface<U, S, V, M>> M instantiate(final Collection<DoubleSparseValue<U, S>> values,
@@ -204,6 +244,10 @@ public final class DoubleMatrix
      * @param values DoubleMatrixData; the values
      * @param unit Unit&lt;?&gt;; the unit in which the values are expressed
      * @return M; an instantiated DoubleMatrix with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the corresponding matrix type
      */
     @SuppressWarnings("unchecked")
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>, V extends DoubleVectorInterface<U, S, V>,
@@ -254,6 +298,10 @@ public final class DoubleMatrix
      * @param unit Unit&lt;?&gt;; the unit in which the values are expressed
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate
      * @return M; an instantiated DoubleMatrix with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the corresponding matrix type
      */
     @SuppressWarnings("unchecked")
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>, V extends DoubleVectorInterface<U, S, V>,

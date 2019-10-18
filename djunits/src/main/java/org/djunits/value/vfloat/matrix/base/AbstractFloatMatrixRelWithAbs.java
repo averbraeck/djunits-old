@@ -56,7 +56,7 @@ public abstract class AbstractFloatMatrixRelWithAbs<
 
     /** {@inheritDoc} */
     @Override
-    public AM plus(AM increment)
+    public AM plus(final AM increment)
     {
         return instantiateMatrixAbs(this.getData().plus(increment.getData()), increment.getDisplayUnit().getStandardUnit());
     }

@@ -169,6 +169,10 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
      * otherwise the matrix cannot be transformed. The compiler will check the alignment between the return value and the unit.
      * @param displayUnit KU; the unit in which the matrix needs to be expressed
      * @return K; the matrix that has been transformed into the right matrix type and unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the corresponding matrix type
      */
     public final <U extends Unit<U>, S extends AbstractFloatScalarRel<U, S>, V extends AbstractFloatVectorRel<U, S, V>,
             M extends AbstractFloatMatrixRel<U, S, V, M>> M as(final U displayUnit)

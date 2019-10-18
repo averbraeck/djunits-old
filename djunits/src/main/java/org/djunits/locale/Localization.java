@@ -135,7 +135,7 @@ public class Localization implements Serializable
     }
 
     /**
-     * Return whether the current locale is the default (English) locale
+     * Return whether the current locale is the default (English) locale.
      * @return boolean; true if the current locale is the default; false if the current locale is not the default
      */
     public boolean isDefault()
@@ -148,6 +148,7 @@ public class Localization implements Serializable
         return true;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString()
     {

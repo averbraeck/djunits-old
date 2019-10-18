@@ -246,6 +246,9 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
      * otherwise the vector cannot be transformed. The compiler will check the alignment between the return value and the unit.
      * @param displayUnit KU; the unit in which the vector needs to be expressed
      * @return K; the vector that has been transformed into the right vector type and unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public final <U extends Unit<U>, S extends AbstractFloatScalarRel<U, S>,
             V extends AbstractFloatVectorRel<U, S, V>> V as(final U displayUnit)

@@ -43,6 +43,9 @@ public final class FloatVector
      * @param unit U; the unit in which the values are expressed and displayed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated FloatVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
             V extends FloatVectorInterface<U, S, V>> V instantiate(final float[] valuesInUnit, final U unit,
@@ -59,6 +62,9 @@ public final class FloatVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated FloatVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
             V extends FloatVectorInterface<U, S, V>> V instantiate(final float[] valuesInUnit, final U unit,
@@ -73,6 +79,9 @@ public final class FloatVector
      * @param displayUnit U; the unit in which the values will be displayed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated FloatVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
             V extends FloatVectorInterface<U, S, V>> V instantiateSI(final float[] valuesSI, final U displayUnit,
@@ -89,6 +98,9 @@ public final class FloatVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated FloatVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
             V extends FloatVectorInterface<U, S, V>> V instantiateSI(final float[] valuesSI, final U displayUnit,
@@ -104,6 +116,9 @@ public final class FloatVector
      * @param displayUnit U; the unit in which the values will be displayed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated FloatVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
             V extends FloatVectorInterface<U, S, V>> V instantiate(final S[] values, final U displayUnit,
@@ -120,6 +135,9 @@ public final class FloatVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated FloatVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
             V extends FloatVectorInterface<U, S, V>> V instantiate(final S[] values, final U displayUnit,
@@ -135,6 +153,9 @@ public final class FloatVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated FloatVector with the values expressed in their unit
      * @throws ValueRuntimeException on vector init error
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
             V extends FloatVectorInterface<U, S, V>> V instantiate(final List<Float> valueListInUnit, final U unit,
@@ -152,6 +173,9 @@ public final class FloatVector
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated FloatVector with the values expressed in their unit
      * @throws ValueRuntimeException on vector init error
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
             V extends FloatVectorInterface<U, S, V>> V instantiate(final List<Float> valueListInUnit, final U unit,
@@ -168,6 +192,9 @@ public final class FloatVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated FloatVector with the values expressed in their unit
      * @throws ValueRuntimeException on vector init error
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
             V extends FloatVectorInterface<U, S, V>> V instantiateSI(final List<Float> valueListSI, final U displayUnit,
@@ -185,6 +212,9 @@ public final class FloatVector
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated FloatVector with the values expressed in their unit
      * @throws ValueRuntimeException on vector init error
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
             V extends FloatVectorInterface<U, S, V>> V instantiateSI(final List<Float> valueListSI, final U displayUnit,
@@ -200,6 +230,9 @@ public final class FloatVector
      * @param displayUnit U; the unit in which the values will be displayed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated FloatVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
             V extends FloatVectorInterface<U, S, V>> V instantiateList(final List<S> valueList, final U displayUnit,
@@ -216,6 +249,9 @@ public final class FloatVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated FloatVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
             V extends FloatVectorInterface<U, S, V>> V instantiateList(final List<S> valueList, final U displayUnit,
@@ -231,6 +267,9 @@ public final class FloatVector
      * @param unit U; the unit in which the values are expressed and displayed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated FloatVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
             V extends FloatVectorInterface<U, S, V>> V instantiate(final SortedMap<Integer, Float> valueMapInUnit,
@@ -248,6 +287,9 @@ public final class FloatVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated FloatVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
             V extends FloatVectorInterface<U, S, V>> V instantiate(final SortedMap<Integer, Float> valueMapInUnit,
@@ -264,6 +306,9 @@ public final class FloatVector
      * @param displayUnit U; the unit in which the values are displayed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated FloatVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
             V extends FloatVectorInterface<U, S, V>> V instantiateSI(final SortedMap<Integer, Float> valueMapSI,
@@ -282,6 +327,9 @@ public final class FloatVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated FloatVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
             V extends FloatVectorInterface<U, S, V>> V instantiateSI(final SortedMap<Integer, Float> valueMapSI,
@@ -298,6 +346,9 @@ public final class FloatVector
      * @param length int; the size of the vector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated FloatVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
             V extends FloatVectorInterface<U, S, V>> V instantiateMap(final SortedMap<Integer, S> valueMap, final int length,
@@ -315,6 +366,9 @@ public final class FloatVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated FloatVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
             V extends FloatVectorInterface<U, S, V>> V instantiateMap(final SortedMap<Integer, S> valueMap, final int length,
@@ -328,6 +382,9 @@ public final class FloatVector
      * @param values FloatVectorData; the values
      * @param unit U; the unit in which the values are expressed
      * @return V; an instantiated mutable FloatVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
             V extends FloatVectorInterface<U, S, V>> V instantiate(final FloatVectorData values, final U unit)
@@ -342,6 +399,9 @@ public final class FloatVector
      * @param unit U; the unit in which the values are expressed
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated mutable FloatVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
             V extends FloatVectorInterface<U, S, V>> V instantiate(final FloatVectorData values, final U unit,
@@ -357,6 +417,9 @@ public final class FloatVector
      * @param values FloatVectorData; the values
      * @param unit Unit&lt;?&gt;; the unit in which the values are expressed
      * @return V; an instantiated FloatVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     @SuppressWarnings("unchecked")
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,
@@ -404,6 +467,9 @@ public final class FloatVector
      * @param unit Unit&lt;?&gt;; the unit in which the values are expressed
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated FloatVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     @SuppressWarnings("unchecked")
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>,

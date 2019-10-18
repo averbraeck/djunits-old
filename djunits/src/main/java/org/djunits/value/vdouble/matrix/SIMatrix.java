@@ -169,6 +169,10 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      * otherwise the matrix cannot be transformed. The compiler will check the alignment between the return value and the unit.
      * @param displayUnit KU; the unit in which the matrix needs to be expressed
      * @return K; the matrix that has been transformed into the right matrix type and unit
+     * @param <U> the unit
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the matrix type
      */
     public final <U extends Unit<U>, S extends AbstractDoubleScalarRel<U, S>, V extends AbstractDoubleVectorRel<U, S, V>,
             M extends AbstractDoubleMatrixRel<U, S, V, M>> M as(final U displayUnit)

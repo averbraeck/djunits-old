@@ -127,7 +127,7 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
 
     /** {@inheritDoc} */
     @Override
-    public S get(int index) throws ValueRuntimeException
+    public S get(final int index) throws ValueRuntimeException
     {
         return DoubleScalar.instantiateSI(getSI(index), getDisplayUnit());
     }
@@ -445,6 +445,7 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
             throw new RuntimeException("Remove function cannot be applied on fixed-size DJUNITS Vector");
         }
 
+        /** {@inheritDoc} */
         @Override
         public String toString()
         {

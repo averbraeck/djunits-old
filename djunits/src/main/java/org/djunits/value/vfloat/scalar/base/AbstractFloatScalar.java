@@ -28,7 +28,7 @@ public abstract class AbstractFloatScalar<U extends Unit<U>, S extends AbstractF
     public final float si;
 
     /**
-     * Construct a new AbstractFloatScalar;
+     * Construct a new AbstractFloatScalar.
      * @param unit U; the unit
      * @param si float; the si value to store
      */

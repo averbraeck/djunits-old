@@ -27,7 +27,7 @@ public class LengthUnit extends Unit<LengthUnit>
             .setName("meter").setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** meter. */
-    public final static LengthUnit METER = SI;
+    public static final LengthUnit METER = SI;
 
     /** nm. */
     public static final LengthUnit NANOMETER = METER.deriveSI(SIPrefixes.getUnit("n"));

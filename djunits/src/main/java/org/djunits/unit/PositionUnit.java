@@ -28,7 +28,7 @@ public class PositionUnit extends AbsoluteLinearUnit<PositionUnit, LengthUnit>
                     .setScale(new OffsetLinearScale(1.0, 0.0)).setRelativeUnit(LengthUnit.METER));
 
     /** meter. */
-    public final static PositionUnit METER = DEFAULT;
+    public static final PositionUnit METER = DEFAULT;
 
     /** nm. */
     public static final PositionUnit NANOMETER = METER.deriveSI(SIPrefixes.getUnit("n"));

@@ -121,6 +121,8 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @param storageType StorageType; the data type to use
      * @return FloatVectorData; the FloatVectorData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> FloatVectorData instantiate(final S[] values,
             final StorageType storageType) throws ValueRuntimeException
@@ -156,6 +158,8 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @param storageType StorageType; the data type to use
      * @return FloatVectorData; the FloatVectorData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> FloatVectorData instantiateList(
             final List<S> valueList, final StorageType storageType) throws ValueRuntimeException
@@ -291,9 +295,10 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @param values SortedMap&lt;Integer,S&gt;; the FloatScalar values to store
      * @param length int; the length of the vector to pad with 0 after last entry in map
      * @param storageType StorageType; the data type to use
-     * @param <S> the scalar type to use
      * @return FloatVectorData; the FloatVectorData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
+     * @param <U> the unit type
+     * @param <S> the scalar type to use
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> FloatVectorData instantiateMap(
             final SortedMap<Integer, S> values, final int length, final StorageType storageType) throws ValueRuntimeException
@@ -432,7 +437,7 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @return FloatVectorData; the sum of this data object and the other data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract FloatVectorData plus(final FloatVectorData right) throws ValueRuntimeException;
+    public abstract FloatVectorData plus(FloatVectorData right) throws ValueRuntimeException;
 
     /**
      * Add a vector to this vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the same.
@@ -440,12 +445,12 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @return FloatVectorData; this modified float vector data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public final FloatVectorData incrementBy(FloatVectorData right) throws ValueRuntimeException
+    public final FloatVectorData incrementBy(final FloatVectorData right) throws ValueRuntimeException
     {
         return assign(new FloatFunction2()
         {
             @Override
-            public float apply(float leftValue, float rightValue)
+            public float apply(final float leftValue, final float rightValue)
             {
                 return leftValue + rightValue;
             }
@@ -459,7 +464,7 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @return FloatVectorData; the difference of this data object and the other data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract FloatVectorData minus(final FloatVectorData right) throws ValueRuntimeException;
+    public abstract FloatVectorData minus(FloatVectorData right) throws ValueRuntimeException;
 
     /**
      * Subtract a vector from this vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the same.
@@ -467,12 +472,12 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @return FloatVectorData; this modified float vector data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public final FloatVectorData decrementBy(FloatVectorData right) throws ValueRuntimeException
+    public final FloatVectorData decrementBy(final FloatVectorData right) throws ValueRuntimeException
     {
         return assign(new FloatFunction2()
         {
             @Override
-            public float apply(float leftValue, float rightValue)
+            public float apply(final float leftValue, final float rightValue)
             {
                 return leftValue - rightValue;
             }
@@ -486,7 +491,7 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @return FloatVectorData; a new double vector data store holding the result of the multiplications
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract FloatVectorData times(final FloatVectorData right) throws ValueRuntimeException;
+    public abstract FloatVectorData times(FloatVectorData right) throws ValueRuntimeException;
 
     /**
      * Multiply a vector with the values of another vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the
@@ -500,7 +505,7 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
         assign(new FloatFunction2()
         {
             @Override
-            public float apply(float leftValue, float rightValue)
+            public float apply(final float leftValue, final float rightValue)
             {
                 return leftValue * rightValue;
             }
@@ -515,7 +520,7 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @return FloatVectorData; the ratios of the values of this data object and the other data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract FloatVectorData divide(final FloatVectorData right) throws ValueRuntimeException;
+    public abstract FloatVectorData divide(FloatVectorData right) throws ValueRuntimeException;
 
     /**
      * Divide the values of a vector by the values of another vector on a cell-by-cell basis. The type of vector (sparse, dense)
@@ -529,7 +534,7 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
         return assign(new FloatFunction2()
         {
             @Override
-            public float apply(float leftValue, float rightValue)
+            public float apply(final float leftValue, final float rightValue)
             {
                 return leftValue / rightValue;
             }
@@ -602,7 +607,7 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
     @Override
     public String toString()
     {
-        return "FloatVectorData [storageType=" + this.storageType + ", vectorSI=" + Arrays.toString(this.vectorSI) + "]";
+        return "FloatVectorData [storageType=" + getStorageType() + ", vectorSI=" + Arrays.toString(this.vectorSI) + "]";
     }
 
 }

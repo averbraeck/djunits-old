@@ -196,6 +196,8 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @param storageType StorageType; the data type to use
      * @return DoubleVectorData; the DoubleVectorData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>> DoubleVectorData instantiate(final S[] values,
             final StorageType storageType) throws ValueRuntimeException
@@ -264,6 +266,8 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @param storageType StorageType; the data type to use
      * @return DoubleVectorData; the DoubleVectorData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>> DoubleVectorData instantiateList(
             final List<S> valueList, final StorageType storageType) throws ValueRuntimeException
@@ -426,6 +430,8 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @param storageType StorageType; the data type to use
      * @return DoubleVectorData; the DoubleVectorData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
+     * @param <U> the unit
+     * @param <S> the corresponding scalar type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>> DoubleVectorData instantiateMap(
             final SortedMap<Integer, S> values, final int length, final StorageType storageType) throws ValueRuntimeException
@@ -563,7 +569,7 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @return DoubleVectorData; the sum of this data object and the other data object as a new data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract DoubleVectorData plus(final DoubleVectorData right) throws ValueRuntimeException;
+    public abstract DoubleVectorData plus(DoubleVectorData right) throws ValueRuntimeException;
 
     /**
      * Add a vector to this vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the same.
@@ -571,12 +577,12 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @return DoubleVectorData; this modified double vector data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public final DoubleVectorData incrementBy(DoubleVectorData right) throws ValueRuntimeException
+    public final DoubleVectorData incrementBy(final DoubleVectorData right) throws ValueRuntimeException
     {
         return assign(new DoubleFunction2()
         {
             @Override
-            public double apply(double leftValue, double rightValue)
+            public double apply(final double leftValue, final double rightValue)
             {
                 return leftValue + rightValue;
             }
@@ -590,7 +596,7 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @return DoubleVectorData; the difference of this data object and the other data object as a new data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract DoubleVectorData minus(final DoubleVectorData right) throws ValueRuntimeException;
+    public abstract DoubleVectorData minus(DoubleVectorData right) throws ValueRuntimeException;
 
     /**
      * Subtract a vector from this vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the same.
@@ -598,12 +604,12 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @return DoubleVectorData; this modified double vector data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public final DoubleVectorData decrementBy(DoubleVectorData right) throws ValueRuntimeException
+    public final DoubleVectorData decrementBy(final DoubleVectorData right) throws ValueRuntimeException
     {
         return assign(new DoubleFunction2()
         {
             @Override
-            public double apply(double leftValue, double rightValue)
+            public double apply(final double leftValue, final double rightValue)
             {
                 return leftValue - rightValue;
             }
@@ -617,7 +623,7 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @return DoubleVectorData; a new double vector data store holding the result of the multiplications
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract DoubleVectorData times(final DoubleVectorData right) throws ValueRuntimeException;
+    public abstract DoubleVectorData times(DoubleVectorData right) throws ValueRuntimeException;
 
     /**
      * Multiply a vector with the values of another vector on a cell-by-cell basis. The type of vector (sparse, dense) stays the
@@ -626,12 +632,12 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @return DoubleVectordata; this modified double vector data store
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public final DoubleVectorData multiplyBy(DoubleVectorData right) throws ValueRuntimeException
+    public final DoubleVectorData multiplyBy(final DoubleVectorData right) throws ValueRuntimeException
     {
         assign(new DoubleFunction2()
         {
             @Override
-            public double apply(double leftValue, double rightValue)
+            public double apply(final double leftValue, final double rightValue)
             {
                 return leftValue * rightValue;
             }
@@ -643,12 +649,12 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * Multiply the values of this vector with a number on a cell-by-cell basis.
      * @param valueSI double; the value to multiply with
      */
-    public final void multiplyBy(double valueSI)
+    public final void multiplyBy(final double valueSI)
     {
         assign(new DoubleFunction()
         {
             @Override
-            public double apply(double value)
+            public double apply(final double value)
             {
                 return value * valueSI;
             }
@@ -662,7 +668,7 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @return DoubleVectorData; the ratios of the values of this data object and the other data object
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public abstract DoubleVectorData divide(final DoubleVectorData right) throws ValueRuntimeException;
+    public abstract DoubleVectorData divide(DoubleVectorData right) throws ValueRuntimeException;
 
     /**
      * Divide the values of a vector by the values of another vector on a cell-by-cell basis. The type of vector (sparse, dense)
@@ -671,12 +677,12 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @return DoubleVectorData; this modified double vector data store
      * @throws ValueRuntimeException if vectors have different lengths
      */
-    public final DoubleVectorData divideBy(DoubleVectorData right) throws ValueRuntimeException
+    public final DoubleVectorData divideBy(final DoubleVectorData right) throws ValueRuntimeException
     {
         return assign(new DoubleFunction2()
         {
             @Override
-            public double apply(double leftValue, double rightValue)
+            public double apply(final double leftValue, final double rightValue)
             {
                 return leftValue / rightValue;
             }
@@ -687,12 +693,12 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * Divide the values of this vector by a number on a cell-by-cell basis.
      * @param valueSI double; the value to multiply with
      */
-    public final void divideBy(double valueSI)
+    public final void divideBy(final double valueSI)
     {
         assign(new DoubleFunction()
         {
             @Override
-            public double apply(double value)
+            public double apply(final double value)
             {
                 return value / valueSI;
             }
@@ -766,7 +772,7 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
     @Override
     public String toString()
     {
-        return "DoubleVectorData [storageType=" + this.storageType + ", vectorSI=" + Arrays.toString(this.vectorSI) + "]";
+        return "DoubleVectorData [storageType=" + getStorageType() + ", vectorSI=" + Arrays.toString(this.vectorSI) + "]";
     }
 
 }

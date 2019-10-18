@@ -147,7 +147,7 @@ public interface DoubleMatrixInterface<U extends Unit<U>, S extends DoubleScalar
      * @param doubleFunction DoubleFunction; the function to apply
      * @return M; this updated matrix
      */
-    M assign(final DoubleFunction doubleFunction);
+    M assign(DoubleFunction doubleFunction);
 
     /**
      * Instantiate a new matrix of the class of this matrix. This can be used instead of the DoubleMatrix.instiantiate() methods

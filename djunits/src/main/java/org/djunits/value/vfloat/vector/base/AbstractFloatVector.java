@@ -125,7 +125,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
 
     /** {@inheritDoc} */
     @Override
-    public S get(int index) throws ValueRuntimeException
+    public S get(final int index) throws ValueRuntimeException
     {
         return FloatScalar.instantiateSI(getSI(index), getDisplayUnit());
     }
@@ -436,6 +436,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
             throw new RuntimeException("Remove function cannot be applied on fixed-size DJUNITS Vector");
         }
 
+        /** {@inheritDoc} */
         @Override
         public String toString()
         {

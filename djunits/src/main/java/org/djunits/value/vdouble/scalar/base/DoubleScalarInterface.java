@@ -48,7 +48,7 @@ public interface DoubleScalarInterface<U extends Unit<U>, S extends DoubleScalar
      * @param <U> the unit
      * @param <R> the relative scalar
      */
-    public static interface Rel<U extends Unit<U>, R extends DoubleScalarInterface.Rel<U, R>>
+    public interface Rel<U extends Unit<U>, R extends DoubleScalarInterface.Rel<U, R>>
             extends DoubleScalarInterface<U, R>, Scalar.Rel<U, R>
     {
         /**
@@ -74,7 +74,7 @@ public interface DoubleScalarInterface<U extends Unit<U>, S extends DoubleScalar
      * @param <RU> the absolute unit belonging to the relative unit
      * @param <R> the relative scalar belonging to the absolute scalar
      */
-    public static interface RelWithAbs<AU extends AbsoluteLinearUnit<AU, RU>, A extends DoubleScalarInterface.Abs<AU, A, RU, R>,
+    public interface RelWithAbs<AU extends AbsoluteLinearUnit<AU, RU>, A extends DoubleScalarInterface.Abs<AU, A, RU, R>,
             RU extends Unit<RU>, R extends DoubleScalarInterface.RelWithAbs<AU, A, RU, R>>
             extends DoubleScalarInterface<RU, R>, Scalar.RelWithAbs<AU, A, RU, R>
     {
@@ -108,7 +108,7 @@ public interface DoubleScalarInterface<U extends Unit<U>, S extends DoubleScalar
      * @param <RU> the absolute unit belonging to the relative unit
      * @param <R> the relative scalar belonging to the absolute scalar
      */
-    public static interface Abs<AU extends AbsoluteLinearUnit<AU, RU>, A extends DoubleScalarInterface.Abs<AU, A, RU, R>,
+    public interface Abs<AU extends AbsoluteLinearUnit<AU, RU>, A extends DoubleScalarInterface.Abs<AU, A, RU, R>,
             RU extends Unit<RU>, R extends DoubleScalarInterface.RelWithAbs<AU, A, RU, R>>
             extends DoubleScalarInterface<AU, A>, Scalar.Abs<AU, A, RU, R>
     {

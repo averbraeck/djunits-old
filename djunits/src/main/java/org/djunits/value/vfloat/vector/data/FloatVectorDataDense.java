@@ -50,7 +50,7 @@ public class FloatVectorDataDense extends FloatVectorData
 
     /** {@inheritDoc} */
     @Override
-    public final FloatVectorDataDense assign(final FloatFunction2 floatFunction2, FloatVectorData right)
+    public final FloatVectorDataDense assign(final FloatFunction2 floatFunction2, final FloatVectorData right)
     {
         if (right.isDense())
         {
