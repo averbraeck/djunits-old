@@ -29,7 +29,7 @@ package org.djunits.unit.scale;
  * valueSI = (value1 + o1) * f1 = value2 * (f1 * f2) + (f1 * f2 * o2 + f1 * o1)
  * </pre>
  * <p>
- * as an example for F --2--&gt; C --1--&gtp K: o1 = 273.15, f1 = 1, o2 = -32, f2 = 5/9: <br>
+ * as an example for F --2--&gt; C --1--&gt; K: o1 = 273.15, f1 = 1, o2 = -32, f2 = 5/9: <br>
  * 110 F = 110*5/9 -32*5/9 + 273.15 = 316.483 K.
  * </p>
  * <p>

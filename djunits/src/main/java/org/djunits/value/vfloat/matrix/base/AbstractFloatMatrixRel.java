@@ -85,8 +85,7 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
      * mutable.
      * @param increment RM; the matrix that contains the values by which to increment the corresponding values
      * @return RM; this modified matrix
-     * @throws ValueRuntimeException in case this matrix is immutable
-     * @Throws ValueException when the sizes of the matrices differ, or <code>increment</code> is null
+     * @throws ValueRuntimeException in case this matrix is immutable or when the sizes of the matrices differ
      */
     @SuppressWarnings("unchecked")
     public RM incrementBy(final RM increment)
@@ -115,8 +114,7 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
      * this matrix is mutable.
      * @param decrement RM; the matrix that contains the values by which to decrement the corresponding values
      * @return RM; this modified matrix
-     * @throws ValueRuntimeException in case this matrix is immutable
-     * @Throws ValueException when the sizes of the matrices differ, or <code>decrement</code> is null
+     * @throws ValueRuntimeException in case this matrix is immutable or when the sizes of the matrices differ
      */
     @SuppressWarnings("unchecked")
     public final RM decrementBy(final RM decrement)
