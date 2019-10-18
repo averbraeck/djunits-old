@@ -217,7 +217,7 @@ public class FloatSIVectorTest
      */
     public static void verifyDimensionLessVector(float[] reference, FloatFunction operation, FloatDimensionlessVector got)
     {
-        assertEquals("row count matches", reference.length, got.size());
+        assertEquals("item count matches", reference.length, got.size());
         assertEquals("unit is DimensionLessUnit", DimensionlessUnit.BASE.getStandardUnit(),
                 got.getDisplayUnit().getStandardUnit());
         for (int index = 0; index < reference.length; index++)

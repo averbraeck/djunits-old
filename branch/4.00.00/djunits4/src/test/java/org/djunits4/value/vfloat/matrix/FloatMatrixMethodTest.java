@@ -906,4 +906,42 @@ public class FloatMatrixMethodTest
         }
     }
 
+    /**
+     * Test the equals method.
+     */
+    @SuppressWarnings("unlikely-arg-type")
+    @Test
+    public void testEquals()
+    {
+        float[][] testData = FLOATMATRIX.denseRectArrays(12, 34);
+        testData[2][2] = 0;
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+        {
+            FloatMatrixData fmd = FloatMatrixData.instantiate(testData, TemperatureUnit.KELVIN.getScale(), storageType);
+            assertTrue("Float matrix is equal to itself", fmd.equals(fmd));
+            assertFalse("Float matrix is not equal to null", fmd.equals(null));
+            assertFalse("Float matrix data is not equal to some string", fmd.equals("some string"));
+            for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+            {
+                FloatMatrixData dvd2 = FloatMatrixData.instantiate(testData, TemperatureUnit.KELVIN.getScale(), storageType2);
+                assertEquals("Float matrix data is equal to other double vector containing same values regardless of storage type",
+                        fmd, dvd2);
+                float[][] testData2 = FLOATMATRIX.denseRectArrays(12, 33);
+                testData2[2][2] = 0;
+                dvd2 = FloatMatrixData.instantiate(testData2, TemperatureUnit.KELVIN.getScale(), storageType2);
+                assertFalse("Float matrix data is not equal to other double vector containing same values except last one",
+                        fmd.equals(dvd2));
+                testData2 = FLOATMATRIX.denseRectArrays(13, 34);
+                testData2[2][2] = 0;
+                dvd2 = FloatMatrixData.instantiate(testData2, TemperatureUnit.KELVIN.getScale(), storageType2);
+                assertFalse("Float matrix data is not equal to other double vector containing same values except last one",
+                        fmd.equals(dvd2));
+                testData2 = FLOATMATRIX.denseRectArrays(12, 34);
+                dvd2 = FloatMatrixData.instantiate(testData2, TemperatureUnit.KELVIN.getScale(), storageType2);
+                assertFalse("Float matrix data is not equal to other double vector containing same values except for one zero",
+                        fmd.equals(dvd2));
+            }
+        }
+    }
+
 }

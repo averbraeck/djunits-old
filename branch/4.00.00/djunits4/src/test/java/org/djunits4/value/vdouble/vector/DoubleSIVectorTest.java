@@ -227,7 +227,7 @@ public class DoubleSIVectorTest
 
     /**
      * Verify the contents of a FloatDimensionlessVector.
-     * @param reference float[]; the values on which the <code>operation</code> needs to be applied to get the values that must
+     * @param reference double[]; the values on which the <code>operation</code> needs to be applied to get the values that must
      *            be verified
      * @param operation FloatFunction; the operation that converts the <code>reference</code> values to the values that must be
      *            verified
@@ -235,7 +235,7 @@ public class DoubleSIVectorTest
      */
     public static void verifyDimensionLessVector(double[] reference, DoubleFunction operation, DimensionlessVector got)
     {
-        assertEquals("row count matches", reference.length, got.size());
+        assertEquals("item count matches", reference.length, got.size());
         assertEquals("unit is DimensionLessUnit", DimensionlessUnit.BASE.getStandardUnit(),
                 got.getDisplayUnit().getStandardUnit());
         for (int index = 0; index < reference.length; index++)

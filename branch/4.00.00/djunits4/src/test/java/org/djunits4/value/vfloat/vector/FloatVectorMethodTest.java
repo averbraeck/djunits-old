@@ -711,4 +711,37 @@ public class FloatVectorMethodTest
         }
     }
 
+    /**
+     * Test the equals method.
+     */
+    @SuppressWarnings("unlikely-arg-type")
+    @Test
+    public void testEquals()
+    {
+        float[] testData = FLOATVECTOR.denseArray(123);
+        testData[2] = 0;
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+        {
+            FloatVectorData fvd = FloatVectorData.instantiate(testData, TemperatureUnit.KELVIN.getScale(), storageType);
+            assertTrue("Float vector data is equal to itself", fvd.equals(fvd));
+            assertFalse("Float vector data is not equal to null", fvd.equals(null));
+            assertFalse("Float vector data is not equal to some string", fvd.equals("some string"));
+            for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+            {
+                FloatVectorData dvd2 = FloatVectorData.instantiate(testData, TemperatureUnit.KELVIN.getScale(), storageType2);
+                assertEquals("Float vector data is equal to other double vector containing same values regardless of storage type",
+                        fvd, dvd2);
+                float[] testData2 = FLOATVECTOR.denseArray(122);
+                testData2[2] = 0;
+                dvd2 = FloatVectorData.instantiate(testData2, TemperatureUnit.KELVIN.getScale(), storageType2);
+                assertFalse("Float vector data is not equal to other double vector containing same values except last one",
+                        fvd.equals(dvd2));
+                testData2 = FLOATVECTOR.denseArray(123);
+                dvd2 = FloatVectorData.instantiate(testData2, TemperatureUnit.KELVIN.getScale(), storageType2);
+                assertFalse("Float vector data is not equal to other double vector containing same values except for one zero",
+                        fvd.equals(dvd2));
+            }
+        }
+    }
+
 }

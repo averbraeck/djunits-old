@@ -715,4 +715,37 @@ public class DoubleVectorMethodTest
         }
     }
 
+    /**
+     * Test the equals method.
+     */
+    @SuppressWarnings("unlikely-arg-type")
+    @Test
+    public void testEquals()
+    {
+        double[] testData = DOUBLEVECTOR.denseArray(123);
+        testData[2] = 0;
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+        {
+            DoubleVectorData dvd = DoubleVectorData.instantiate(testData, TemperatureUnit.KELVIN.getScale(), storageType);
+            assertTrue("Double vector data is equal to itself", dvd.equals(dvd));
+            assertFalse("Double vector data is not equal to null", dvd.equals(null));
+            assertFalse("Double vector data is not equal to some string", dvd.equals("some string"));
+            for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+            {
+                DoubleVectorData dvd2 = DoubleVectorData.instantiate(testData, TemperatureUnit.KELVIN.getScale(), storageType2);
+                assertEquals("Double vector data is equal to other double vector containing same values regardless of storage type",
+                        dvd, dvd2);
+                double[] testData2 = DOUBLEVECTOR.denseArray(122);
+                testData2[2] = 0;
+                dvd2 = DoubleVectorData.instantiate(testData2, TemperatureUnit.KELVIN.getScale(), storageType2);
+                assertFalse("Double vector data is not equal to other double vector containing same values except last one",
+                        dvd.equals(dvd2));
+                testData2 = DOUBLEVECTOR.denseArray(123);
+                dvd2 = DoubleVectorData.instantiate(testData2, TemperatureUnit.KELVIN.getScale(), storageType2);
+                assertFalse("Double vector data is not equal to other double vector containing same values except for one zero",
+                        dvd.equals(dvd2));
+            }
+        }
+    }
+
 }
