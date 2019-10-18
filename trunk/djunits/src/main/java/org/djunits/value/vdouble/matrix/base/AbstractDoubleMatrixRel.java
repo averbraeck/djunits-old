@@ -9,7 +9,9 @@ import org.djunits.value.base.Matrix;
 import org.djunits.value.vdouble.function.DoubleMathFunctions;
 import org.djunits.value.vdouble.matrix.SIMatrix;
 import org.djunits.value.vdouble.matrix.data.DoubleMatrixData;
+import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalar;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits.value.vdouble.vector.base.AbstractDoubleVector;
 import org.djunits.value.vdouble.vector.base.AbstractDoubleVectorRel;
 
 /**
@@ -87,7 +89,7 @@ public abstract class AbstractDoubleMatrixRel<U extends Unit<U>, S extends Abstr
      * @Throws ValueException when the sizes of the matrices differ, or <code>increment</code> is null
      */
     @SuppressWarnings("unchecked")
-    public RM incrementBy(RM increment)
+    public RM incrementBy(final RM increment)
     {
         checkCopyOnWrite();
         this.data.incrementBy(increment.getData());
@@ -117,7 +119,7 @@ public abstract class AbstractDoubleMatrixRel<U extends Unit<U>, S extends Abstr
      * @Throws ValueException when the sizes of the matrices differ, or <code>decrement</code> is null
      */
     @SuppressWarnings("unchecked")
-    public final RM decrementBy(RM decrement)
+    public final RM decrementBy(final RM decrement)
     {
         checkCopyOnWrite();
         this.data.decrementBy(decrement.getData());
@@ -132,9 +134,14 @@ public abstract class AbstractDoubleMatrixRel<U extends Unit<U>, S extends Abstr
      * @return SIMatrix; the multiplication of this matrix and the operand
      * @throws ValueRuntimeException in case this matrix or matrix and the operand have a different size
      * @throws UnitException on unit error
+     * @param <UT> the unit type of the multiplier
+     * @param <ST> the scalar type of the multiplier
+     * @param <VT> the vector type of the multiplier
+     * @param <MT> the matrix type of the multiplier
      */
-    public final <VT extends AbstractDoubleMatrix<?, ?, ?, ?> & Relative<?, ?>> SIMatrix times(final VT rel)
-            throws ValueRuntimeException, UnitException
+    public final <UT extends Unit<UT>, ST extends AbstractDoubleScalar<UT, ST>, VT extends AbstractDoubleVector<UT, ST, VT>,
+            MT extends AbstractDoubleMatrix<UT, ST, VT, MT> & Relative<UT, MT>> SIMatrix times(final MT rel)
+                    throws ValueRuntimeException, UnitException
     {
         return new SIMatrix(this.getData().times(rel.getData()), SIUnit.of(
                 getDisplayUnit().getUnitBase().getSiDimensions().plus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
@@ -171,8 +178,13 @@ public abstract class AbstractDoubleMatrixRel<U extends Unit<U>, S extends Abstr
      * @return SIMatrix; the division of this matrix and the operand
      * @throws ValueRuntimeException in case this matrix or matrix and the operand have a different size
      * @throws UnitException on unit error
+     * @param <UT> the unit type of the multiplier
+     * @param <ST> the scalar type of the multiplier
+     * @param <VT> the vector type of the multiplier
+     * @param <MT> the matrix type of the multiplier
      */
-    public final <VT extends AbstractDoubleMatrix<?, ?, ?, ?> & Relative<?, ?>> SIMatrix divide(final VT rel)
+    public final <UT extends Unit<UT>, ST extends AbstractDoubleScalar<UT, ST>, VT extends AbstractDoubleVector<UT, ST, VT>,
+    MT extends AbstractDoubleMatrix<UT, ST, VT, MT> & Relative<UT, MT>> SIMatrix divide(final MT rel)
             throws ValueRuntimeException, UnitException
     {
         return new SIMatrix(this.getData().divide(rel.getData()), SIUnit.of(

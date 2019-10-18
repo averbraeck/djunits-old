@@ -20,7 +20,6 @@ import org.djunits.value.CLASSNAMES;
 import org.djunits.value.storage.StorageType;
 import org.djunits.value.vfloat.function.FloatFunction;
 import org.djunits.value.vfloat.function.FloatMathFunctions;
-import org.djunits.value.vfloat.scalar.FloatDimensionless;
 import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarAbs;
 import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
 import org.djunits.value.vfloat.vector.base.AbstractFloatVectorAbs;
@@ -64,10 +63,9 @@ public class FloatSIVectorTest
         assertEquals("m", UNITS.METER.getId());
 
         float[] denseTestData = FLOATVECTOR.denseArray(50);
-        AbstractFloatVectorRel<DimensionlessUnit, FloatDimensionless,
-                FloatDimensionlessVector> dimlessVector = FloatVector.instantiate(
-                        FloatVectorData.instantiate(denseTestData, DimensionlessUnit.SI.getScale(), StorageType.DENSE),
-                        DimensionlessUnit.SI);
+        FloatDimensionlessVector dimlessVector = FloatVector.instantiate(
+                FloatVectorData.instantiate(denseTestData, DimensionlessUnit.SI.getScale(), StorageType.DENSE),
+                DimensionlessUnit.SI);
         dimlessVector = dimlessVector.mutable().divide(dimlessVector).asDimensionless(); // unit vector
         for (String type : CLASSNAMES.REL_ALL_LIST)
         {

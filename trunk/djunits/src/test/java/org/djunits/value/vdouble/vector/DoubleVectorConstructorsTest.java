@@ -1053,8 +1053,8 @@ public class DoubleVectorConstructorsTest
         double[] testValues = new double[] {0, 123.456d, 0, -273.15, -273.15, 0, -273.15, 234.567d, 0, 0};
         for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
         {
-            AbstractDoubleVectorRel<?, ?, ?> dimless =
-                    (AbstractDoubleVectorRel<?, ?, ?>) DoubleVector.instantiate(new double[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+            AbstractDoubleVectorRel allVector =
+                    (AbstractDoubleVectorRel) DoubleVector.instantiate(new double[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
                             DimensionlessUnit.SI.getStandardUnit(), storageType);
             for (String type : CLASSNAMES.REL_LIST)
             {
@@ -1064,9 +1064,9 @@ public class DoubleVectorConstructorsTest
                 {
                     for (StorageType storageType2 : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
                     {
-                        AbstractDoubleVectorRel<U, ?, ?> vector =
-                                (AbstractDoubleVectorRel<U, ?, ?>) DoubleVector.instantiate(testValues, unit, storageType2);
-                        SIVector mult = vector.times(dimless);
+                        AbstractDoubleVectorRel vector =
+                                (AbstractDoubleVectorRel) DoubleVector.instantiate(testValues, unit, storageType2);
+                        SIVector mult = vector.times(allVector);
                         Method asMethod = SIVector.class.getDeclaredMethod("as" + type);
                         AbstractDoubleVectorRel<U, ?, ?> asVector = (AbstractDoubleVectorRel<U, ?, ?>) asMethod.invoke(mult);
                         assertEquals(vector.getDisplayUnit().getStandardUnit(), asVector.getDisplayUnit());
@@ -1140,8 +1140,8 @@ public class DoubleVectorConstructorsTest
                 {
                     for (StorageType storageType2 : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
                     {
-                        AbstractDoubleVectorRel<U, ?, ?> vector =
-                                (AbstractDoubleVectorRel<U, ?, ?>) DoubleVector.instantiate(testValues, unit, storageType2);
+                        AbstractDoubleVectorRel vector =
+                                (AbstractDoubleVectorRel) DoubleVector.instantiate(testValues, unit, storageType2);
                         SIVector mult = vector.times(dimless);
                         Method asMethod = SIVector.class.getDeclaredMethod("as" + type);
                         AbstractDoubleVectorRel<U, ?, ?> asVector = (AbstractDoubleVectorRel<U, ?, ?>) asMethod.invoke(mult);

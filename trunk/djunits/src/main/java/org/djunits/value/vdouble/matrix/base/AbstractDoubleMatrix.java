@@ -127,7 +127,7 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
 
     /** {@inheritDoc} */
     @Override
-    public double[] getRowSI(int row) throws ValueRuntimeException
+    public double[] getRowSI(final int row) throws ValueRuntimeException
     {
         checkRowIndex(row);
         double[] result = new double[this.data.cols()];
@@ -140,7 +140,7 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
 
     /** {@inheritDoc} */
     @Override
-    public double[] getColumnSI(int column) throws ValueRuntimeException
+    public double[] getColumnSI(final int column) throws ValueRuntimeException
     {
         checkColumnIndex(column);
         double[] result = new double[this.data.rows()];

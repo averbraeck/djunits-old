@@ -84,7 +84,7 @@ public abstract class AbstractFloatVectorRel<U extends Unit<U>, S extends Abstra
      * @Throws ValueException when the sizes of the vectors differ, or <code>increment</code> is null
      */
     @SuppressWarnings("unchecked")
-    public RV incrementBy(RV increment)
+    public RV incrementBy(final RV increment)
     {
         checkCopyOnWrite();
         getData().incrementBy(increment.getData());
@@ -114,7 +114,7 @@ public abstract class AbstractFloatVectorRel<U extends Unit<U>, S extends Abstra
      * @Throws ValueException when the sizes of the vectors differ, or <code>decrement</code> is null
      */
     @SuppressWarnings("unchecked")
-    public RV decrementBy(RV decrement)
+    public RV decrementBy(final RV decrement)
     {
         checkCopyOnWrite();
         getData().decrementBy(decrement.getData());
@@ -143,9 +143,13 @@ public abstract class AbstractFloatVectorRel<U extends Unit<U>, S extends Abstra
      * @return FloatSIVector; the multiplication of this vector and the operand
      * @throws ValueRuntimeException in case this vector or matrix and the operand have a different size
      * @throws UnitException on unit error
+     * @param <UT> the unit type of the multiplier
+     * @param <ST> the scalar type of the multiplier
+     * @param <VT> the vector type of the multiplier
      */
-    public final <VT extends AbstractFloatVector<?, ?, ?> & Relative<?, ?>> FloatSIVector times(final VT rel)
-            throws ValueRuntimeException, UnitException
+    public final <UT extends Unit<UT>, ST extends AbstractFloatScalarRel<UT, ST>,
+            VT extends AbstractFloatVectorRel<UT, ST, VT> & Relative<UT, VT>> FloatSIVector times(final VT rel)
+                    throws ValueRuntimeException, UnitException
     {
         return new FloatSIVector(this.getData().times(rel.getData()), SIUnit.of(
                 getDisplayUnit().getUnitBase().getSiDimensions().plus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
@@ -159,9 +163,13 @@ public abstract class AbstractFloatVectorRel<U extends Unit<U>, S extends Abstra
      * @return FloatSIVector; the division of this vector and the operand
      * @throws ValueRuntimeException in case this vector or matrix and the operand have a different size
      * @throws UnitException on unit error
+     * @param <UT> the unit type of the multiplier
+     * @param <ST> the scalar type of the multiplier
+     * @param <VT> the vector type of the multiplier
      */
-    public final <VT extends AbstractFloatVector<?, ?, ?> & Relative<?, ?>> FloatSIVector divide(final VT rel)
-            throws ValueRuntimeException, UnitException
+    public final <UT extends Unit<UT>, ST extends AbstractFloatScalarRel<UT, ST>,
+            VT extends AbstractFloatVectorRel<UT, ST, VT> & Relative<UT, VT>> FloatSIVector divide(final VT rel)
+                    throws ValueRuntimeException, UnitException
     {
         return new FloatSIVector(this.getData().divide(rel.getData()), SIUnit.of(
                 getDisplayUnit().getUnitBase().getSiDimensions().minus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
@@ -190,7 +198,7 @@ public abstract class AbstractFloatVectorRel<U extends Unit<U>, S extends Abstra
 
     /** {@inheritDoc} */
     @Override
-    public RV divide(float divisor)
+    public RV divide(final float divisor)
     {
         return divide((double) divisor);
     }
