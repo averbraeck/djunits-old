@@ -1,12 +1,16 @@
 package org.djunits.value.vdouble.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.ElectricalPotentialUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
+import org.djunits.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits.value.vdouble.scalar.ElectricalPotential;
+import org.djunits.value.vdouble.vector.ElectricalPotentialVector;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Double ElectricalPotentialMatrix, a matrix of values with a ElectricalPotentialUnit.
+ * Immutable Double ElectricalPotentialMatrix, a matrix of values with a ElectricalPotentialUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -14,80 +18,58 @@ import org.djunits.value.vdouble.scalar.ElectricalPotential;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class ElectricalPotentialMatrix extends AbstractDoubleMatrixRel<ElectricalPotentialUnit, ElectricalPotentialMatrix,
-        MutableElectricalPotentialMatrix, ElectricalPotential>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class ElectricalPotentialMatrix extends AbstractDoubleMatrixRel<ElectricalPotentialUnit, ElectricalPotential, ElectricalPotentialVector, ElectricalPotentialMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Double ElectricalPotentialMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double ElectricalPotentialMatrix
-     * @param unit ElectricalPotentialUnit; the unit of the new Relative Immutable Double ElectricalPotentialMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public ElectricalPotentialMatrix(final double[][] values, final ElectricalPotentialUnit unit, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double ElectricalPotentialMatrix.
-     * @param values ElectricalPotential[][]; the values of the entries in the new Relative Immutable Double
-     *            ElectricalPotentialMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public ElectricalPotentialMatrix(final ElectricalPotential[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data DoubleMatrixData; an internal data object
      * @param unit ElectricalPotentialUnit; the unit
      */
-    ElectricalPotentialMatrix(final DoubleMatrixData data, final ElectricalPotentialUnit unit)
+    public ElectricalPotentialMatrix(final DoubleMatrixData data, final ElectricalPotentialUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final ElectricalPotentialMatrix toDense()
+    public Class<ElectricalPotential> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return ElectricalPotential.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final ElectricalPotentialMatrix toSparse()
+    public Class<ElectricalPotentialVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+        return ElectricalPotentialVector.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final ElectricalPotentialMatrix instantiateType(final DoubleMatrixData dmd, final ElectricalPotentialUnit unit)
+    public ElectricalPotentialMatrix instantiateMatrix(final DoubleMatrixData dmd, final ElectricalPotentialUnit displayUnit)
     {
-        return new ElectricalPotentialMatrix(dmd, unit);
+        return new ElectricalPotentialMatrix(dmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableElectricalPotentialMatrix instantiateMutableType(final DoubleMatrixData dmd,
-            final ElectricalPotentialUnit unit)
+    public ElectricalPotentialVector instantiateVector(final DoubleVectorData dvd, final ElectricalPotentialUnit displayUnit)
     {
-        return new MutableElectricalPotentialMatrix(dmd, unit);
+        return new ElectricalPotentialVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final ElectricalPotential instantiateScalar(final double value, final ElectricalPotentialUnit unit)
+    public ElectricalPotential instantiateScalarSI(final double valueSI, final ElectricalPotentialUnit displayUnit)
     {
-        return new ElectricalPotential(value, unit);
+        ElectricalPotential result = ElectricalPotential.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
-
+    
 }
+

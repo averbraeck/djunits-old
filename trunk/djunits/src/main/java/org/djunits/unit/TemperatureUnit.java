@@ -1,10 +1,8 @@
 package org.djunits.unit;
 
-import static org.djunits.unit.unitsystem.UnitSystem.IMPERIAL;
-import static org.djunits.unit.unitsystem.UnitSystem.OTHER;
-import static org.djunits.unit.unitsystem.UnitSystem.SI_BASE;
-import static org.djunits.unit.unitsystem.UnitSystem.SI_DERIVED;
-
+import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.scale.IdentityScale;
+import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
 
 /**
@@ -15,89 +13,36 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class TemperatureUnit extends LinearUnit<TemperatureUnit>
+public class TemperatureUnit extends Unit<TemperatureUnit>
 {
     /** */
     private static final long serialVersionUID = 20140605L;
 
+    /** The base, with "m2" as the SI signature. */
+    public static final UnitBase<TemperatureUnit> BASE = new UnitBase<>("K");
+
     /** The SI unit for temperature is Kelvin. */
-    public static final TemperatureUnit SI;
+    public static final TemperatureUnit SI =
+            new TemperatureUnit().build(new Unit.Builder<TemperatureUnit>().setUnitBase(BASE).setId("K").setName("Kelvin")
+                    .setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** Kelvin. */
-    public static final TemperatureUnit KELVIN;
+    public static final TemperatureUnit KELVIN = SI;
 
     /** Degree Celsius. */
-    public static final TemperatureUnit DEGREE_CELSIUS;
+    public static final TemperatureUnit DEGREE_CELSIUS =
+            KELVIN.deriveLinear(1.0, "dgC", "degree Celcius", UnitSystem.SI_DERIVED, "\u00B0C", "degC", new String[] {"C"});
 
     /** Degree Fahrenheit. */
-    public static final TemperatureUnit DEGREE_FAHRENHEIT;
+    public static final TemperatureUnit DEGREE_FAHRENHEIT = KELVIN.deriveLinear(5.0 / 9.0, "dgF", "degree Fahrenheit",
+            UnitSystem.SI_DERIVED, "\u00B0F", "degF", new String[] {"F"});
 
     /** Degree Rankine. */
-    public static final TemperatureUnit DEGREE_RANKINE;
+    public static final TemperatureUnit DEGREE_RANKINE = KELVIN.deriveLinear(5.0 / 9.0, "dgR", "degree Rankine",
+            UnitSystem.SI_DERIVED, "\u00B0R", "degR", new String[] {"R"});
 
     /** Degree Reaumur. */
-    public static final TemperatureUnit DEGREE_REAUMUR;
-
-    static
-    {
-        SI = new TemperatureUnit("TemperatureUnit.K", SI_BASE);
-        KELVIN = SI;
-        DEGREE_CELSIUS = new TemperatureUnit("TemperatureUnit.dgC", SI_DERIVED, KELVIN, 1.0);
-        DEGREE_FAHRENHEIT = new TemperatureUnit("TemperatureUnit.dgF", IMPERIAL, KELVIN, 5.0 / 9.0);
-        DEGREE_RANKINE = new TemperatureUnit("TemperatureUnit.dgR", OTHER, KELVIN, 5.0 / 9.0);
-        DEGREE_REAUMUR = new TemperatureUnit("TemperatureUnit.dgRe", OTHER, KELVIN, 4.0 / 5.0);
-    }
-
-    /**
-     * Build a standard TemperatureUnit.
-     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
-     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     */
-    private TemperatureUnit(final String abbreviationKey, final UnitSystem unitSystem)
-    {
-        super(abbreviationKey, unitSystem);
-    }
-
-    /**
-     * Build a standard TemperatureUnit with a conversion factor and offset to Kelvin.
-     * @param abbreviationKey String; the abbreviation of the unit
-     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     * @param referenceUnit TemperatureUnit; the unit to convert to
-     * @param scaleFactorToStandardUnit double; multiply by this number to convert to the standard unit
-     */
-    private TemperatureUnit(final String abbreviationKey, final UnitSystem unitSystem, final TemperatureUnit referenceUnit,
-            final double scaleFactorToStandardUnit)
-    {
-        super(abbreviationKey, unitSystem, referenceUnit, scaleFactorToStandardUnit);
-    }
-
-    /**
-     * Build a user-defined TemperatureUnit with a conversion factor and offset to Kelvin.
-     * @param name String; the long name of the unit
-     * @param abbreviation String; the abbreviation of the unit
-     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     * @param referenceUnit TemperatureUnit; the unit to convert to
-     * @param scaleFactorToStandardUnit double; multiply by this number to convert to the standard unit
-     * @param offsetToKelvin double; the offsetToKelvin to add to convert to the standard (e.g., SI) unit
-     */
-    public TemperatureUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
-            final TemperatureUnit referenceUnit, final double scaleFactorToStandardUnit, final double offsetToKelvin)
-    {
-        super(name, abbreviation, unitSystem, referenceUnit, scaleFactorToStandardUnit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final TemperatureUnit getStandardUnit()
-    {
-        return KELVIN;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final String getSICoefficientsString()
-    {
-        return "K";
-    }
+    public static final TemperatureUnit DEGREE_REAUMUR = KELVIN.deriveLinear(4.0 / 5.0, "dgRe", "degree Reaumur",
+            UnitSystem.SI_DERIVED, "\u00B0R\u00E9", "degRe", new String[] {"Re", "R\u00E9"});
 
 }

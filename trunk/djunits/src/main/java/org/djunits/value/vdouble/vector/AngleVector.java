@@ -1,168 +1,78 @@
 package org.djunits.value.vdouble.vector;
 
-import java.util.List;
-import java.util.SortedMap;
+import javax.annotation.Generated;
 
 import org.djunits.unit.AngleUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.unit.DirectionUnit;
 import org.djunits.value.vdouble.scalar.Angle;
+import org.djunits.value.vdouble.scalar.Direction;
+import org.djunits.value.vdouble.vector.base.AbstractDoubleVectorRelWithAbs;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Relative Angle Vector.
+ * Double AngleVector, a vector of values with a AngleUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * version Sep 5, 2015 <br>
+ * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class AngleVector extends AbstractDoubleVectorRel<AngleUnit, AngleVector, MutableAngleVector, Angle>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class AngleVector extends AbstractDoubleVectorRelWithAbs<DirectionUnit, Direction, DirectionVector, 
+        AngleUnit, Angle, AngleVector>
 {
     /** */
-    private static final long serialVersionUID = 20151006L;
+    private static final long serialVersionUID = 20190905L;
 
     /**
-     * Construct a new Relative Immutable Double AngleVector.
-     * @param values double[]; the values of the entries in the new Relative Immutable Double AngleVector
-     * @param unit AngleUnit; the unit of the new Relative Immutable Double AngleVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * Construct an AngleVector from an internal data object.
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param displayUnit AngleUnit; the display unit of the vector data
      */
-    public AngleVector(final double[] values, final AngleUnit unit, final StorageType storageType) throws ValueException
+    public AngleVector(final DoubleVectorData data, final AngleUnit displayUnit)
     {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double AngleVector.
-     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double AngleVector
-     * @param unit AngleUnit; the unit of the new Relative Immutable Double AngleVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public AngleVector(final List<Double> values, final AngleUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double AngleVector.
-     * @param values Angle[]; the values of the entries in the new Relative Immutable Double AngleVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public AngleVector(final Angle[] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double AngleVector.
-     * @param values List&lt;Angle&gt;; the values of the entries in the new Relative Immutable Double AngleVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public AngleVector(final List<Angle> values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double AngleVector.
-     * @param values SortedMap&lt;Integer, Angle&gt;; the values of the entries in the new Relative Sparse Mutable Double
-     *            AngleVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public AngleVector(final SortedMap<Integer, Angle> values, final int length, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double AngleVector.
-     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
-     *            AngleVector
-     * @param unit AngleUnit; the unit of the new Relative Sparse Mutable Double AngleVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public AngleVector(final SortedMap<Integer, Double> values, final AngleUnit unit, final int length,
-            final StorageType storageType) throws ValueException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double AngleVector.
-     * @param data DoubleVectorData; an internal data object
-     * @param unit AngleUnit; the unit
-     */
-    AngleVector(final DoubleVectorData data, final AngleUnit unit)
-    {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final AngleVector instantiateType(final DoubleVectorData dvd, final AngleUnit unit)
+    public Class<Angle> getScalarClass()
     {
-        return new AngleVector(dvd, unit);
+        return Angle.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableAngleVector instantiateMutableType(final DoubleVectorData dvd, final AngleUnit unit)
+    public AngleVector instantiateVector(final DoubleVectorData dvd, final AngleUnit displayUnit)
     {
-        return new MutableAngleVector(dvd, unit);
+        return new AngleVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Angle instantiateScalar(final double value, final AngleUnit unit)
+    public Angle instantiateScalarSI(final double valueSI, final AngleUnit displayUnit)
     {
-        return new Angle(value, unit);
+        Angle result = Angle.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final AngleVector toDense()
+    public DirectionVector instantiateVectorAbs(final DoubleVectorData dvd, final DirectionUnit displayUnit)
     {
-        return this.data.isDense() ? (AngleVector) this : instantiateType(this.data.toDense(), getUnit());
+        return new DirectionVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final AngleVector toSparse()
+    public Direction instantiateScalarAbsSI(final double valueSI, final DirectionUnit displayUnit)
     {
-        return this.data.isSparse() ? (AngleVector) this : instantiateType(this.data.toSparse(), getUnit());
+        Direction result = Direction.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
-    /**
-     * Return an array of Angle Scalars from this vector.
-     * @return Angle[]; an array of Angle Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public Angle[] toArray()
-    {
-        Angle[] array = new Angle[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
-    }
-
-}
+   
+}

@@ -1,93 +1,101 @@
 package org.djunits.value.vfloat.matrix;
 
+import javax.annotation.Generated;
+
+import org.djunits.unit.AbsoluteTemperatureUnit;
 import org.djunits.unit.TemperatureUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vfloat.matrix.base.AbstractFloatMatrixRelWithAbs;
+import org.djunits.value.vfloat.matrix.data.FloatMatrixData;
+import org.djunits.value.vfloat.scalar.FloatAbsoluteTemperature;
 import org.djunits.value.vfloat.scalar.FloatTemperature;
+import org.djunits.value.vfloat.vector.FloatAbsoluteTemperatureVector;
+import org.djunits.value.vfloat.vector.FloatTemperatureVector;
+import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Immutable FloatTemperature Matrix.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class FloatTemperatureMatrix
-        extends AbstractFloatMatrixRel<TemperatureUnit, FloatTemperatureMatrix, MutableFloatTemperatureMatrix, FloatTemperature>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class FloatTemperatureMatrix extends AbstractFloatMatrixRelWithAbs<AbsoluteTemperatureUnit, FloatAbsoluteTemperature, FloatAbsoluteTemperatureVector, FloatAbsoluteTemperatureMatrix,
+TemperatureUnit, FloatTemperature, FloatTemperatureVector, FloatTemperatureMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
-
+    
     /**
-     * Construct a new Relative Immutable FloatTemperatureMatrix.
-     * @param values float[][]; the values of the entries in the new Relative Immutable FloatTemperatureMatrix
-     * @param unit TemperatureUnit; the unit of the new Relative Immutable FloatTemperatureMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatTemperatureMatrix(final float[][] values, final TemperatureUnit unit, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatTemperatureMatrix.
-     * @param values FloatTemperature[][]; the values of the entries in the new Relative Immutable FloatTemperatureMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatTemperatureMatrix(final FloatTemperature[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatTemperatureMatrix.
      * @param data FloatMatrixData; an internal data object
      * @param unit TemperatureUnit; the unit
      */
-    FloatTemperatureMatrix(final FloatMatrixData data, final TemperatureUnit unit)
+    public FloatTemperatureMatrix(final FloatMatrixData data, final TemperatureUnit unit)
     {
         super(data, unit);
     }
-
+    
     /** {@inheritDoc} */
     @Override
-    public final FloatTemperatureMatrix toDense()
+    public Class<FloatTemperature> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return FloatTemperature.class;
+    }
+    
+    /** {@inheritDoc} */
+    @Override
+    public Class<FloatTemperatureVector> getVectorClass()
+    {
+        return FloatTemperatureVector.class;
+    }
+        
+    /** {@inheritDoc} */
+    @Override
+    public FloatTemperatureMatrix instantiateMatrix(final FloatMatrixData fmd, final TemperatureUnit displayUnit)
+    {
+        return new FloatTemperatureMatrix(fmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatTemperatureMatrix toSparse()
+    public FloatTemperatureVector instantiateVector(final FloatVectorData fvd, final TemperatureUnit displayUnit)
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+        return new FloatTemperatureVector(fvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatTemperatureMatrix instantiateType(final FloatMatrixData fmd, final TemperatureUnit unit)
+    public FloatTemperature instantiateScalarSI(final float valueSI, final TemperatureUnit displayUnit)
     {
-        return new FloatTemperatureMatrix(fmd, unit);
+        FloatTemperature result = FloatTemperature.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatTemperatureMatrix instantiateMutableType(final FloatMatrixData fmd, final TemperatureUnit unit)
+    public FloatAbsoluteTemperatureMatrix instantiateMatrixAbs(final FloatMatrixData fmd, final AbsoluteTemperatureUnit displayUnit)
     {
-        return new MutableFloatTemperatureMatrix(fmd, unit);
+        return new FloatAbsoluteTemperatureMatrix(fmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatTemperature instantiateScalar(final float value, final TemperatureUnit unit)
+    public FloatAbsoluteTemperatureVector instantiateVectorAbs(final FloatVectorData fvd, final AbsoluteTemperatureUnit displayUnit)
     {
-        return new FloatTemperature(value, unit);
+        return new FloatAbsoluteTemperatureVector(fvd, displayUnit);
     }
 
-}
+    /** {@inheritDoc} */
+    @Override
+    public FloatAbsoluteTemperature instantiateScalarAbsSI(final float valueSI, final AbsoluteTemperatureUnit displayUnit)
+    {
+        FloatAbsoluteTemperature result = FloatAbsoluteTemperature.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
+    }
+
+   
+}

@@ -1,12 +1,12 @@
 package org.djunits.unit;
 
-import static org.djunits.unit.unitsystem.UnitSystem.OTHER;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Locale;
 
 import org.djunits.locale.DefaultLocale;
+import org.djunits.unit.unitsystem.UnitSystem;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,20 +29,12 @@ public class LengthUnitTest extends AbstractLinearUnitTest<LengthUnit>
     }
 
     /**
-     * Verify the result of some get*Key methods.
-     */
-    @Test
-    public final void keys()
-    {
-        checkKeys(LengthUnit.METER, "LengthUnit.meter", "LengthUnit.m");
-    }
-
-    /**
      * Verify conversion factors, English names and abbreviations.
      */
     @Test
     public final void conversions()
     {
+        assertEquals("m", LengthUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(LengthUnit.METER, 1, 0.00000001, "meter", "m");
         checkUnitRatioNameAndAbbreviation(LengthUnit.MILE, 1609, 0.5, "mile", "mi");
         checkUnitRatioNameAndAbbreviation(LengthUnit.CENTIMETER, 0.01, 0.000000001, "centimeter", "cm");
@@ -54,7 +46,7 @@ public class LengthUnitTest extends AbstractLinearUnitTest<LengthUnit>
         // Check conversion factor to standard unit for all remaining distance units
         checkUnitRatioNameAndAbbreviation(LengthUnit.MILLIMETER, 0.001, 0.000000001, "millimeter", "mm");
         checkUnitRatioNameAndAbbreviation(LengthUnit.DECIMETER, 0.1, 0.000000001, "decimeter", "dm");
-        checkUnitRatioNameAndAbbreviation(LengthUnit.DEKAMETER, 10, 0.0000001, "dekameter", "dam");
+        checkUnitRatioNameAndAbbreviation(LengthUnit.DECAMETER, 10, 0.0000001, "decameter", "dam");
         checkUnitRatioNameAndAbbreviation(LengthUnit.HECTOMETER, 100, 0.000001, "hectometer", "hm");
         checkUnitRatioNameAndAbbreviation(LengthUnit.KILOMETER, 1000, 0.00001, "kilometer", "km");
         checkUnitRatioNameAndAbbreviation(LengthUnit.FOOT, 0.3048, 0.000001, "foot", "ft");
@@ -69,9 +61,9 @@ public class LengthUnitTest extends AbstractLinearUnitTest<LengthUnit>
     @Test
     public final void createLengthUnit()
     {
-        LengthUnit myLU = new LengthUnit("Furlong", "fl", OTHER, LengthUnit.METER, 201.16800);
+        LengthUnit myLU = LengthUnit.METER.deriveLinear(201.16800, "fl", "Furlong", UnitSystem.OTHER);
         assertTrue("Can create a new LengthUnit", null != myLU);
         checkUnitRatioNameAndAbbreviation(myLU, 200, 2, "Furlong", "fl");
-        deregisterUnit(myLU);
+        LengthUnit.BASE.unregister(myLU);
     }
 }

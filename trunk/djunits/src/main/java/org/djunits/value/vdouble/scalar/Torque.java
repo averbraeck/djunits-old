@@ -2,6 +2,9 @@ package org.djunits.value.vdouble.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
+import org.djunits.Throw;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.DurationUnit;
 import org.djunits.unit.ForceUnit;
@@ -9,59 +12,51 @@ import org.djunits.unit.LengthUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.unit.PressureUnit;
 import org.djunits.unit.TorqueUnit;
-import org.djunits.unit.Unit;
 import org.djunits.unit.VolumeUnit;
+import org.djunits.value.util.ValueUtil;
+import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 
 /**
- * Easy access methods for the Torque DoubleScalar, which is relative by definition. Instead of:
- * 
- * <pre>
- * DoubleScalar.Rel&lt;TorqueUnit&gt; value = new DoubleScalar.Rel&lt;TorqueUnit&gt;(100.0, TorqueUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * Torque value = new Torque(100.0, TorqueUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the Torque DoubleScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque> 
 {
     /** */
     private static final long serialVersionUID = 20150905L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final Torque ZERO = new Torque(0.0, TorqueUnit.SI);
 
-    /** constant with value NaN. */
+    /** Constant with value one. */
+    public static final Torque ONE = new Torque(1.0, TorqueUnit.SI);
+
+    /** Constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final Torque NaN = new Torque(Double.NaN, TorqueUnit.SI);
 
-    /** constant with value POSITIVE_INFINITY. */
+    /** Constant with value POSITIVE_INFINITY. */
     public static final Torque POSITIVE_INFINITY = new Torque(Double.POSITIVE_INFINITY, TorqueUnit.SI);
 
-    /** constant with value NEGATIVE_INFINITY. */
+    /** Constant with value NEGATIVE_INFINITY. */
     public static final Torque NEGATIVE_INFINITY = new Torque(Double.NEGATIVE_INFINITY, TorqueUnit.SI);
 
-    /** constant with value MAX_VALUE. */
+    /** Constant with value MAX_VALUE. */
     public static final Torque POS_MAXVALUE = new Torque(Double.MAX_VALUE, TorqueUnit.SI);
 
-    /** constant with value -MAX_VALUE. */
+    /** Constant with value -MAX_VALUE. */
     public static final Torque NEG_MAXVALUE = new Torque(-Double.MAX_VALUE, TorqueUnit.SI);
 
     /**
      * Construct Torque scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; the double value
+     * @param unit TorqueUnit; unit for the double value
      */
     public Torque(final double value, final TorqueUnit unit)
     {
@@ -70,7 +65,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
 
     /**
      * Construct Torque scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Torque; Scalar from which to construct this instance
      */
     public Torque(final Torque value)
     {
@@ -86,31 +81,31 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
 
     /**
      * Construct Torque scalar.
-     * @param value double value in SI units
-     * @return the new scalar with the SI value
+     * @param value double; the double value in SI units
+     * @return Torque; the new scalar with the SI value
      */
-    public static final Torque createSI(final double value)
+    public static final Torque instantiateSI(final double value)
     {
         return new Torque(value, TorqueUnit.SI);
     }
-
+    
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @param zero Torque; the low value
+     * @param one Torque; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @return Torque; a Scalar at the ratio between
      */
     public static Torque interpolate(final Torque zero, final Torque one, final double ratio)
     {
-        return new Torque(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new Torque(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
-
+    
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the maximum value of two relative scalars
+     * @param r1 Torque; the first scalar
+     * @param r2 Torque; the second scalar
+     * @return Torque; the maximum value of two relative scalars
      */
     public static Torque max(final Torque r1, final Torque r2)
     {
@@ -119,10 +114,10 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @param r1 Torque; the first scalar
+     * @param r2 Torque; the second scalar
+     * @param rn Torque...; the other scalars
+     * @return Torque; the maximum value of more than two relative scalars
      */
     public static Torque max(final Torque r1, final Torque r2, final Torque... rn)
     {
@@ -139,9 +134,9 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the minimum value of two relative scalars
+     * @param r1 Torque; the first scalar
+     * @param r2 Torque; the second scalar
+     * @return Torque; the minimum value of two relative scalars
      */
     public static Torque min(final Torque r1, final Torque r2)
     {
@@ -150,10 +145,10 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @param r1 Torque; the first scalar
+     * @param r2 Torque; the second scalar
+     * @param rn Torque...; the other scalars
+     * @return Torque; the minimum value of more than two relative scalars
      */
     public static Torque min(final Torque r1, final Torque r2, final Torque... rn)
     {
@@ -171,130 +166,143 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
     /**
      * Returns a Torque representation of a textual representation of a value with a unit. The String representation that can be
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Torque
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return Torque; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static Torque valueOf(final String text) throws IllegalArgumentException
+    public static Torque valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing Torque -- null or empty argument");
-        }
-        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        Throw.whenNull(text, "Error parsing Torque: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Torque: empty text to parse");
+        Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            TorqueUnit unit = TorqueUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                for (TorqueUnit unit : Unit.getUnits(TorqueUnit.class))
-                {
-                    if (unit.getDefaultLocaleTextualRepresentations().contains(unitString))
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new Torque(d, unit);
-                    }
-                }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing Torque from " + text, exception);
+                double d = Double.parseDouble(valueString);
+                return new Torque(d, unit);
             }
         }
         throw new IllegalArgumentException("Error parsing Torque from " + text);
     }
 
     /**
-     * Calculate the division of Torque and Torque, which results in a Dimensionless scalar.
-     * @param v Torque scalar
-     * @return Dimensionless scalar as a division of Torque and Torque
+     * Returns a Torque based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return Torque; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
      */
-    public final Dimensionless divideBy(final Torque v)
+    public static Torque of(final double value, final String unitString)
     {
-        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+        Throw.whenNull(unitString, "Error parsing Torque: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing Torque: empty unitString");
+        TorqueUnit unit = TorqueUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new Torque(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing Torque with unit " + unitString);
     }
 
-    /**
-     * Calculate the division of Torque and Force, which results in a Length scalar.
-     * @param v Torque scalar
-     * @return Length scalar as a division of Torque and Force
-     */
-    public final Length divideBy(final Force v)
-    {
-        return new Length(this.si / v.si, LengthUnit.SI);
-    }
+            /**
+         * Calculate the division of Torque and Torque, which results in a Dimensionless scalar.
+         * @param v Torque scalar
+         * @return Dimensionless scalar as a division of Torque and Torque
+         */
+        public final Dimensionless divide(final Torque v)
+        {
+            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+        }
 
-    /**
-     * Calculate the division of Torque and Length, which results in a Force scalar.
-     * @param v Torque scalar
-     * @return Force scalar as a division of Torque and Length
-     */
-    public final Force divideBy(final Length v)
-    {
-        return new Force(this.si / v.si, ForceUnit.SI);
-    }
+        /**
+         * Calculate the division of Torque and Force, which results in a Length scalar.
+         * @param v Torque scalar
+         * @return Length scalar as a division of Torque and Force
+         */
+        public final Length divide(final Force v)
+        {
+            return new Length(this.si / v.si, LengthUnit.SI);
+        }
 
-    /**
-     * Calculate the multiplication of Torque and LinearDensity, which results in a Force scalar.
-     * @param v Torque scalar
-     * @return Force scalar as a multiplication of Torque and LinearDensity
-     */
-    public final Force multiplyBy(final LinearDensity v)
-    {
-        return new Force(this.si * v.si, ForceUnit.SI);
-    }
+        /**
+         * Calculate the division of Torque and Length, which results in a Force scalar.
+         * @param v Torque scalar
+         * @return Force scalar as a division of Torque and Length
+         */
+        public final Force divide(final Length v)
+        {
+            return new Force(this.si / v.si, ForceUnit.SI);
+        }
 
-    /**
-     * Calculate the division of Torque and Duration, which results in a Power scalar.
-     * @param v Torque scalar
-     * @return Power scalar as a division of Torque and Duration
-     */
-    public final Power divideBy(final Duration v)
-    {
-        return new Power(this.si / v.si, PowerUnit.SI);
-    }
+        /**
+         * Calculate the multiplication of Torque and LinearDensity, which results in a Force scalar.
+         * @param v Torque scalar
+         * @return Force scalar as a multiplication of Torque and LinearDensity
+         */
+        public final Force times(final LinearDensity v)
+        {
+            return new Force(this.si * v.si, ForceUnit.SI);
+        }
 
-    /**
-     * Calculate the division of Torque and Power, which results in a Duration scalar.
-     * @param v Torque scalar
-     * @return Duration scalar as a division of Torque and Power
-     */
-    public final Duration divideBy(final Power v)
-    {
-        return new Duration(this.si / v.si, DurationUnit.SI);
-    }
+        /**
+         * Calculate the division of Torque and Duration, which results in a Power scalar.
+         * @param v Torque scalar
+         * @return Power scalar as a division of Torque and Duration
+         */
+        public final Power divide(final Duration v)
+        {
+            return new Power(this.si / v.si, PowerUnit.SI);
+        }
 
-    /**
-     * Calculate the multiplication of Torque and Frequency, which results in a Power scalar.
-     * @param v Torque scalar
-     * @return Power scalar as a multiplication of Torque and Frequency
-     */
-    public final Power multiplyBy(final Frequency v)
-    {
-        return new Power(this.si * v.si, PowerUnit.SI);
-    }
+        /**
+         * Calculate the division of Torque and Power, which results in a Duration scalar.
+         * @param v Torque scalar
+         * @return Duration scalar as a division of Torque and Power
+         */
+        public final Duration divide(final Power v)
+        {
+            return new Duration(this.si / v.si, DurationUnit.SI);
+        }
 
-    /**
-     * Calculate the division of Torque and Volume, which results in a Pressure scalar.
-     * @param v Torque scalar
-     * @return Pressure scalar as a division of Torque and Volume
-     */
-    public final Pressure divideBy(final Volume v)
-    {
-        return new Pressure(this.si / v.si, PressureUnit.SI);
-    }
+        /**
+         * Calculate the multiplication of Torque and Frequency, which results in a Power scalar.
+         * @param v Torque scalar
+         * @return Power scalar as a multiplication of Torque and Frequency
+         */
+        public final Power times(final Frequency v)
+        {
+            return new Power(this.si * v.si, PowerUnit.SI);
+        }
 
-    /**
-     * Calculate the division of Torque and Pressure, which results in a Volume scalar.
-     * @param v Torque scalar
-     * @return Volume scalar as a division of Torque and Pressure
-     */
-    public final Volume divideBy(final Pressure v)
-    {
-        return new Volume(this.si / v.si, VolumeUnit.SI);
-    }
+        /**
+         * Calculate the division of Torque and Volume, which results in a Pressure scalar.
+         * @param v Torque scalar
+         * @return Pressure scalar as a division of Torque and Volume
+         */
+        public final Pressure divide(final Volume v)
+        {
+            return new Pressure(this.si / v.si, PressureUnit.SI);
+        }
+
+        /**
+         * Calculate the division of Torque and Pressure, which results in a Volume scalar.
+         * @param v Torque scalar
+         * @return Volume scalar as a division of Torque and Pressure
+         */
+        public final Volume divide(final Pressure v)
+        {
+            return new Volume(this.si / v.si, VolumeUnit.SI);
+        }
+
 
 }
+
+

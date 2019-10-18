@@ -1,170 +1,77 @@
 package org.djunits.value.vfloat.vector;
 
-import java.util.List;
-import java.util.SortedMap;
+import javax.annotation.Generated;
 
 import org.djunits.unit.LengthUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.unit.PositionUnit;
 import org.djunits.value.vfloat.scalar.FloatLength;
+import org.djunits.value.vfloat.scalar.FloatPosition;
+import org.djunits.value.vfloat.vector.base.AbstractFloatVectorRelWithAbs;
+import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Relative FloatLength Vector.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class FloatLengthVector
-        extends AbstractFloatVectorRel<LengthUnit, FloatLengthVector, MutableFloatLengthVector, FloatLength>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class FloatLengthVector extends AbstractFloatVectorRelWithAbs<PositionUnit, FloatPosition, FloatPositionVector,
+    LengthUnit, FloatLength, FloatLengthVector>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
 
     /**
      * Construct a new Relative Immutable FloatLengthVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable FloatLengthVector
-     * @param unit LengthUnit; the unit of the new Relative Immutable FloatLengthVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatLengthVector(final float[] values, final LengthUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatLengthVector.
-     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable FloatLengthVector
-     * @param unit LengthUnit; the unit of the new Relative Immutable FloatLengthVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatLengthVector(final List<Float> values, final LengthUnit unit, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatLengthVector.
-     * @param values FloatLength[]; the values of the entries in the new Relative Immutable FloatLengthVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatLengthVector(final FloatLength[] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatLengthVector.
-     * @param values List&lt;FloatLength&gt;; the values of the entries in the new Relative Immutable FloatLengthVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatLengthVector(final List<FloatLength> values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatLengthVector.
-     * @param values SortedMap&lt;Integer, FloatLength&gt;; the values of the entries in the new Relative Sparse Mutable
-     *            FloatLengthVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatLengthVector(final SortedMap<Integer, FloatLength> values, final int length, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatLengthVector.
-     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable
-     *            FloatLengthVector
-     * @param unit LengthUnit; the unit of the new Relative Sparse Mutable FloatLengthVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatLengthVector(final SortedMap<Integer, Float> values, final LengthUnit unit, final int length,
-            final StorageType storageType) throws ValueException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatLengthVector.
      * @param data FloatVectorData; an internal data object
      * @param unit LengthUnit; the unit
      */
-    FloatLengthVector(final FloatVectorData data, final LengthUnit unit)
+    public FloatLengthVector(final FloatVectorData data, final LengthUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatLengthVector instantiateType(final FloatVectorData dvd, final LengthUnit unit)
+    public Class<FloatLength> getScalarClass()
     {
-        return new FloatLengthVector(dvd, unit);
+        return FloatLength.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatLengthVector instantiateMutableType(final FloatVectorData dvd, final LengthUnit unit)
+    public FloatLengthVector instantiateVector(final FloatVectorData fvd, final LengthUnit displayUnit)
     {
-        return new MutableFloatLengthVector(dvd, unit);
+        return new FloatLengthVector(fvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatLength instantiateScalar(final float value, final LengthUnit unit)
+    public FloatLength instantiateScalarSI(final float valueSI, final LengthUnit displayUnit)
     {
-        return new FloatLength(value, unit);
+        FloatLength result = FloatLength.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatLengthVector toDense()
+    public FloatPositionVector instantiateVectorAbs(final FloatVectorData fvd, final PositionUnit displayUnit)
     {
-        return this.data.isDense() ? (FloatLengthVector) this : instantiateType(this.data.toDense(), getUnit());
+        return new FloatPositionVector(fvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatLengthVector toSparse()
+    public FloatPosition instantiateScalarAbsSI(final float valueSI, final PositionUnit displayUnit)
     {
-        return this.data.isSparse() ? (FloatLengthVector) this : instantiateType(this.data.toSparse(), getUnit());
+        FloatPosition result = FloatPosition.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
-
-    /**
-     * Return an array of FloatLength Scalars from this vector.
-     * @return FloatLength[]; an array of FloatLength Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public FloatLength[] toArray()
-    {
-        FloatLength[] array = new FloatLength[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
-    }
-
-}
+
+}

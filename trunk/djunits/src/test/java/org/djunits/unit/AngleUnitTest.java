@@ -1,15 +1,12 @@
 package org.djunits.unit;
 
-import static org.djunits.unit.unitsystem.UnitSystem.OTHER;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Locale;
 
 import org.djunits.locale.DefaultLocale;
-import org.djunits.value.AngleUtil;
-import org.djunits.value.vdouble.scalar.DoubleScalar;
-import org.djunits.value.vfloat.scalar.FloatScalar;
+import org.djunits.unit.unitsystem.UnitSystem;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,7 +17,7 @@ import org.junit.Test;
  * <p>
  * @author <a href="https://tudelft.nl/pknoppers">Peter Knoppers</a>
  */
-public class AngleUnitTest extends AbstractUnitTest<AngleUnit>
+public class AngleUnitTest extends AbstractLinearUnitTest<AngleUnit>
 {
     /**
      * Set the locale to "en" so we know what texts should be retrieved from the resources.
@@ -29,15 +26,6 @@ public class AngleUnitTest extends AbstractUnitTest<AngleUnit>
     public final void setup()
     {
         DefaultLocale.setLocale(new Locale("en"));
-    }
-
-    /**
-     * Verify the result of some get*Key methods.
-     */
-    @Test
-    public final void keys()
-    {
-        checkKeys(AngleUnit.RADIAN, "AngleUnit.radian", "AngleUnit.rad");
     }
 
     /**
@@ -51,11 +39,12 @@ public class AngleUnitTest extends AbstractUnitTest<AngleUnit>
     protected final void checkUnitValueNameAndAbbreviation(final AngleUnit au, final double expectedValue,
             final double precision, final String expectedName, final String expectedAbbreviation)
     {
-        assertEquals(String.format("one %s is about %f reference unit", au.getAbbreviationKey(), expectedValue), expectedValue,
+        assertEquals("rad", AngleUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
+        assertEquals(String.format("one %s is about %f reference unit", au.getId(), expectedValue), expectedValue,
                 au.getScale().toStandardUnit(1.0), precision);
-        assertEquals(String.format("Name of %s is %s", au.getAbbreviationKey(), expectedName), expectedName, au.getName());
-        assertEquals(String.format("Abbreviation of %s is %s", au.getAbbreviationKey(), expectedAbbreviation),
-                expectedAbbreviation, au.getAbbreviation());
+        assertEquals(String.format("Name of %s is %s", au.getId(), expectedName), expectedName, au.getName());
+        assertEquals(String.format("Abbreviation of %s is %s", au.getId(), expectedAbbreviation), expectedAbbreviation,
+                au.getDefaultDisplayAbbreviation());
     }
 
     /**
@@ -68,13 +57,12 @@ public class AngleUnitTest extends AbstractUnitTest<AngleUnit>
         checkUnitValueNameAndAbbreviation(AngleUnit.ARCMINUTE, 2 * Math.PI / 360 / 60, 0.0001, "arcminute", "\'");
         checkUnitValueNameAndAbbreviation(AngleUnit.GRAD, 2 * Math.PI / 400, 0.00001, "gradian", "grad");
         // TODO Check two conversions between non-standard Angle units
-        // assertEquals("one GRAD is about 54 ARCMINUTE", 54, getMultiplicationFactorTo(AngleUnit.GRAD,
-        // AngleUnit.ARCMINUTE), 0.5);
-        // assertEquals("one ARCMINUTE is about 0.0185 GRAD", 0.0185, getMultiplicationFactorTo(AngleUnit.ARCMINUTE,
-        // AngleUnit.GRAD), 0.0001);
+        assertEquals("one GRAD is about 54 ARCMINUTE", 54, getMultiplicationFactorTo(AngleUnit.GRAD, AngleUnit.ARCMINUTE), 0.5);
+        assertEquals("one ARCMINUTE is about 0.0185 GRAD", 0.0185,
+                getMultiplicationFactorTo(AngleUnit.ARCMINUTE, AngleUnit.GRAD), 0.0001);
         // Check conversion factor to standard unit for all remaining time units
-        checkUnitValueNameAndAbbreviation(AngleUnit.CENTESIMAL_ARCMINUTE, 0.00015708, 0.0000001, "centesimal arcminute", "\'");
-        checkUnitValueNameAndAbbreviation(AngleUnit.CENTESIMAL_ARCSECOND, 1.57079e-6, 0.1, "centesimal arcsecond", "\"");
+        checkUnitValueNameAndAbbreviation(AngleUnit.CENTESIMAL_ARCMINUTE, 0.00015708, 0.0000001, "centesimal arcminute", "c\'");
+        checkUnitValueNameAndAbbreviation(AngleUnit.CENTESIMAL_ARCSECOND, 1.57079e-6, 0.1, "centesimal arcsecond", "c\"");
         checkUnitValueNameAndAbbreviation(AngleUnit.PERCENT, 0.0099996667, 0.0001, "percent", "%");
     }
 
@@ -84,71 +72,10 @@ public class AngleUnitTest extends AbstractUnitTest<AngleUnit>
     @Test
     public final void createAngleUnit()
     {
-        AngleUnit myAPU = new AngleUnit("point", "pt", OTHER, AngleUnit.RADIAN, 0.19634954085);
+        AngleUnit myAPU = AngleUnit.RADIAN.deriveLinear(0.19634954085, "pt", "point", UnitSystem.OTHER);
         assertTrue("Can create a new AngleUnit", null != myAPU);
         checkUnitValueNameAndAbbreviation(myAPU, 0.19634954085, 0.0000001, "point", "pt");
-        deregisterUnit(myAPU);
-    }
-
-    /**
-     * Check normalize for all data types.
-     * @param input double; value to normalize
-     */
-    private void checkDoubleNormalize(final double input)
-    {
-        double margin = 0.00000000001;
-        double expected = input;
-        while (expected > 0)
-        {
-            expected -= 2 * Math.PI;
-        }
-        while (expected < 0)
-        {
-            expected += 2 * Math.PI;
-        }
-        assertEquals("double normalize", expected, AngleUtil.normalize(input), margin);
-        DoubleScalar.Rel<AngleUnit> dsr = new DoubleScalar.Rel<AngleUnit>(input, AngleUnit.SI);
-        assertEquals("DoubleScalar.Rel normalize", expected, AngleUtil.normalize(dsr).getSI(), margin);
-    }
-
-    /**
-     * Check normalize for all data types.
-     * @param input double; value to normalize
-     */
-    private void checkFloatNormalize(final float input)
-    {
-        double margin = 0.00001;
-        float expected = input;
-        while (expected > 0)
-        {
-            expected -= 2 * Math.PI;
-        }
-        while (expected < 0)
-        {
-            expected += 2 * Math.PI;
-        }
-        assertEquals("float normalize", expected, AngleUtil.normalize(input), margin);
-        FloatScalar.Abs<DirectionUnit, AngleUnit> fsa = new FloatScalar.Abs<>(input, DirectionUnit.BASE);
-        assertEquals("FloatScalar.Abs normalize", expected, AngleUtil.normalize(fsa).getSI(), margin);
-        FloatScalar.Rel<AngleUnit> fsr = new FloatScalar.Rel<AngleUnit>(input, AngleUnit.SI);
-        assertEquals("FloatScalar.Rek normalize", expected, AngleUtil.normalize(fsr).getSI(), margin);
-    }
-
-    /**
-     * Verify that the normalizations work as intended.
-     */
-    @Test
-    public final void normalizations()
-    {
-        for (int i = -100; i <= 100; i++)
-        {
-            double doubleValue = i * Math.PI / 10;
-            checkDoubleNormalize(doubleValue - i * Math.ulp(doubleValue));
-            checkDoubleNormalize(doubleValue + i * Math.ulp(doubleValue));
-            float floatValue = (float) (i * Math.PI / 10);
-            checkFloatNormalize(floatValue - i * Math.ulp(floatValue));
-            checkFloatNormalize(floatValue + i * Math.ulp(floatValue));
-        }
+        AngleUnit.BASE.unregister(myAPU);
     }
 
 }

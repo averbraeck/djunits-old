@@ -1,12 +1,12 @@
 package org.djunits.unit;
 
-import static org.djunits.unit.unitsystem.UnitSystem.OTHER;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Locale;
 
 import org.djunits.locale.DefaultLocale;
+import org.djunits.unit.unitsystem.UnitSystem;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,21 +29,13 @@ public class FrequencyUnitTest extends AbstractLinearUnitTest<FrequencyUnit>
     }
 
     /**
-     * Verify the result of some get*Key methods.
-     */
-    @Test
-    public final void keys()
-    {
-        checkKeys(FrequencyUnit.HERTZ, "FrequencyUnit.Hertz", "FrequencyUnit.Hz");
-    }
-
-    /**
      * Verify conversion factors, English names and abbreviations.
      */
     @Test
     public final void conversions()
     {
-        checkUnitRatioNameAndAbbreviation(FrequencyUnit.HERTZ, 1, 0.000001, "Hertz", "Hz");
+        assertEquals("1/s", FrequencyUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
+        checkUnitRatioNameAndAbbreviation(FrequencyUnit.HERTZ, 1, 0.000001, "hertz", "Hz");
         checkUnitRatioNameAndAbbreviation(FrequencyUnit.KILOHERTZ, 1000, 0.0001, "kilohertz", "kHz");
         // Check two conversions between non-standard units
         assertEquals("one KILOHERTZ is 0.001 MEGAHERTZ", 0.001,
@@ -60,10 +52,10 @@ public class FrequencyUnitTest extends AbstractLinearUnitTest<FrequencyUnit>
     @Test
     public final void createFrequencyUnit()
     {
-        FrequencyUnit myFU = new FrequencyUnit("MiddleA", "MA", OTHER, FrequencyUnit.KILOHERTZ, 0.440);
+        FrequencyUnit myFU = FrequencyUnit.KILOHERTZ.deriveLinear(0.440, "MA", "MiddleA", UnitSystem.OTHER);
         assertTrue("Can create a new ForceUnit", null != myFU);
         checkUnitRatioNameAndAbbreviation(myFU, 440, 0.0001, "MiddleA", "MA");
-        deregisterUnit(myFU);
+        FrequencyUnit.BASE.unregister(myFU);
     }
 
 }

@@ -1,12 +1,16 @@
 package org.djunits.value.vdouble.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.EnergyUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
+import org.djunits.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits.value.vdouble.scalar.Energy;
+import org.djunits.value.vdouble.vector.EnergyVector;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Double EnergyMatrix, a matrix of values with a EnergyUnit.
+ * Immutable Double EnergyMatrix, a matrix of values with a EnergyUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -14,76 +18,58 @@ import org.djunits.value.vdouble.scalar.Energy;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class EnergyMatrix extends AbstractDoubleMatrixRel<EnergyUnit, EnergyMatrix, MutableEnergyMatrix, Energy>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class EnergyMatrix extends AbstractDoubleMatrixRel<EnergyUnit, Energy, EnergyVector, EnergyMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Double EnergyMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double EnergyMatrix
-     * @param unit EnergyUnit; the unit of the new Relative Immutable Double EnergyMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public EnergyMatrix(final double[][] values, final EnergyUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double EnergyMatrix.
-     * @param values Energy[][]; the values of the entries in the new Relative Immutable Double EnergyMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public EnergyMatrix(final Energy[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data DoubleMatrixData; an internal data object
      * @param unit EnergyUnit; the unit
      */
-    EnergyMatrix(final DoubleMatrixData data, final EnergyUnit unit)
+    public EnergyMatrix(final DoubleMatrixData data, final EnergyUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final EnergyMatrix toDense()
+    public Class<Energy> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return Energy.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final EnergyMatrix toSparse()
+    public Class<EnergyVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+        return EnergyVector.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final EnergyMatrix instantiateType(final DoubleMatrixData dmd, final EnergyUnit unit)
+    public EnergyMatrix instantiateMatrix(final DoubleMatrixData dmd, final EnergyUnit displayUnit)
     {
-        return new EnergyMatrix(dmd, unit);
+        return new EnergyMatrix(dmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableEnergyMatrix instantiateMutableType(final DoubleMatrixData dmd, final EnergyUnit unit)
+    public EnergyVector instantiateVector(final DoubleVectorData dvd, final EnergyUnit displayUnit)
     {
-        return new MutableEnergyMatrix(dmd, unit);
+        return new EnergyVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Energy instantiateScalar(final double value, final EnergyUnit unit)
+    public Energy instantiateScalarSI(final double valueSI, final EnergyUnit displayUnit)
     {
-        return new Energy(value, unit);
+        Energy result = Energy.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
-
+    
 }
+

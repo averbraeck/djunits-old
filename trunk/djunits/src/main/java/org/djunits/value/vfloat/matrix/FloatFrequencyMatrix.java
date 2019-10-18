@@ -1,12 +1,16 @@
 package org.djunits.value.vfloat.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.FrequencyUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vfloat.matrix.base.AbstractFloatMatrixRel;
+import org.djunits.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits.value.vfloat.scalar.FloatFrequency;
+import org.djunits.value.vfloat.vector.FloatFrequencyVector;
+import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable FloatFrequencyMatrix, a matrix of values with a FrequencyUnit.
+ * Immutable FloatFloatFrequencyMatrix, a matrix of values with a FrequencyUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -14,78 +18,58 @@ import org.djunits.value.vfloat.scalar.FloatFrequency;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class FloatFrequencyMatrix
-        extends AbstractFloatMatrixRel<FrequencyUnit, FloatFrequencyMatrix, MutableFloatFrequencyMatrix, FloatFrequency>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class FloatFrequencyMatrix extends AbstractFloatMatrixRel<FrequencyUnit, FloatFrequency, FloatFrequencyVector, FloatFrequencyMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatFrequencyMatrix.
-     * @param values float[][]; the values of the entries in the new Relative Immutable FloatFrequencyMatrix
-     * @param unit FrequencyUnit; the unit of the new Relative Immutable FloatFrequencyMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatFrequencyMatrix(final float[][] values, final FrequencyUnit unit, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatFrequencyMatrix.
-     * @param values FloatFrequency[][]; the values of the entries in the new Relative Immutable Float FloatFrequencyMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatFrequencyMatrix(final FloatFrequency[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data FloatMatrixData; an internal data object
      * @param unit FrequencyUnit; the unit
      */
-    FloatFrequencyMatrix(final FloatMatrixData data, final FrequencyUnit unit)
+    public FloatFrequencyMatrix(final FloatMatrixData data, final FrequencyUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatFrequencyMatrix toDense()
+    public Class<FloatFrequency> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return FloatFrequency.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatFrequencyMatrix toSparse()
+    public Class<FloatFrequencyVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+        return FloatFrequencyVector.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatFrequencyMatrix instantiateType(final FloatMatrixData fmd, final FrequencyUnit unit)
+    public FloatFrequencyMatrix instantiateMatrix(final FloatMatrixData fmd, final FrequencyUnit displayUnit)
     {
-        return new FloatFrequencyMatrix(fmd, unit);
+        return new FloatFrequencyMatrix(fmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatFrequencyMatrix instantiateMutableType(final FloatMatrixData fmd, final FrequencyUnit unit)
+    public FloatFrequencyVector instantiateVector(final FloatVectorData fvd, final FrequencyUnit displayUnit)
     {
-        return new MutableFloatFrequencyMatrix(fmd, unit);
+        return new FloatFrequencyVector(fvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatFrequency instantiateScalar(final float value, final FrequencyUnit unit)
+    public FloatFrequency instantiateScalarSI(final float valueSI, final FrequencyUnit displayUnit)
     {
-        return new FloatFrequency(value, unit);
+        FloatFrequency result = FloatFrequency.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
-
+
 }
+

@@ -1,12 +1,12 @@
 package org.djunits.unit;
 
-import static org.djunits.unit.unitsystem.UnitSystem.OTHER;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Locale;
 
 import org.djunits.locale.DefaultLocale;
+import org.djunits.unit.unitsystem.UnitSystem;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,20 +29,12 @@ public class MassUnitTest extends AbstractLinearUnitTest<MassUnit>
     }
 
     /**
-     * Verify the result of some get*Key methods.
-     */
-    @Test
-    public final void keys()
-    {
-        checkKeys(MassUnit.KILOGRAM, "MassUnit.kilogram", "MassUnit.kg");
-    }
-
-    /**
      * Verify conversion factors, English names and abbreviations.
      */
     @Test
     public final void conversions()
     {
+        assertEquals("kg", MassUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(MassUnit.KILOGRAM, 1, 0.00000001, "kilogram", "kg");
         checkUnitRatioNameAndAbbreviation(MassUnit.GRAM, 0.001, 0.000000001, "gram", "g");
         checkUnitRatioNameAndAbbreviation(MassUnit.POUND, 0.453592, 0.000001, "pound", "lb");
@@ -62,10 +54,10 @@ public class MassUnitTest extends AbstractLinearUnitTest<MassUnit>
     @Test
     public final void createMassUnit()
     {
-        MassUnit myMU = new MassUnit("Person", "pn", OTHER, MassUnit.KILOGRAM, 80);
+        MassUnit myMU = MassUnit.KILOGRAM.deriveLinear(80, "pn", "Person", UnitSystem.OTHER);
         assertTrue("Can create a new MassUnit", null != myMU);
         checkUnitRatioNameAndAbbreviation(myMU, 80, 1, "Person", "pn");
-        deregisterUnit(myMU);
+        MassUnit.BASE.unregister(myMU);
     }
 
 }

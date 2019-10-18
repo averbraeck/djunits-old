@@ -1,12 +1,16 @@
 package org.djunits.value.vfloat.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.FlowVolumeUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vfloat.matrix.base.AbstractFloatMatrixRel;
+import org.djunits.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits.value.vfloat.scalar.FloatFlowVolume;
+import org.djunits.value.vfloat.vector.FloatFlowVolumeVector;
+import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable FloatFlowVolumeMatrix, a matrix of values with a FlowVolumeUnit.
+ * Immutable FloatFloatFlowVolumeMatrix, a matrix of values with a FlowVolumeUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -14,78 +18,58 @@ import org.djunits.value.vfloat.scalar.FloatFlowVolume;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class FloatFlowVolumeMatrix
-        extends AbstractFloatMatrixRel<FlowVolumeUnit, FloatFlowVolumeMatrix, MutableFloatFlowVolumeMatrix, FloatFlowVolume>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class FloatFlowVolumeMatrix extends AbstractFloatMatrixRel<FlowVolumeUnit, FloatFlowVolume, FloatFlowVolumeVector, FloatFlowVolumeMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatFlowVolumeMatrix.
-     * @param values float[][]; the values of the entries in the new Relative Immutable FloatFlowVolumeMatrix
-     * @param unit FlowVolumeUnit; the unit of the new Relative Immutable FloatFlowVolumeMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatFlowVolumeMatrix(final float[][] values, final FlowVolumeUnit unit, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatFlowVolumeMatrix.
-     * @param values FloatFlowVolume[][]; the values of the entries in the new Relative Immutable Float FloatFlowVolumeMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatFlowVolumeMatrix(final FloatFlowVolume[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data FloatMatrixData; an internal data object
      * @param unit FlowVolumeUnit; the unit
      */
-    FloatFlowVolumeMatrix(final FloatMatrixData data, final FlowVolumeUnit unit)
+    public FloatFlowVolumeMatrix(final FloatMatrixData data, final FlowVolumeUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatFlowVolumeMatrix toDense()
+    public Class<FloatFlowVolume> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return FloatFlowVolume.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatFlowVolumeMatrix toSparse()
+    public Class<FloatFlowVolumeVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+        return FloatFlowVolumeVector.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatFlowVolumeMatrix instantiateType(final FloatMatrixData fmd, final FlowVolumeUnit unit)
+    public FloatFlowVolumeMatrix instantiateMatrix(final FloatMatrixData fmd, final FlowVolumeUnit displayUnit)
     {
-        return new FloatFlowVolumeMatrix(fmd, unit);
+        return new FloatFlowVolumeMatrix(fmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatFlowVolumeMatrix instantiateMutableType(final FloatMatrixData fmd, final FlowVolumeUnit unit)
+    public FloatFlowVolumeVector instantiateVector(final FloatVectorData fvd, final FlowVolumeUnit displayUnit)
     {
-        return new MutableFloatFlowVolumeMatrix(fmd, unit);
+        return new FloatFlowVolumeVector(fvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatFlowVolume instantiateScalar(final float value, final FlowVolumeUnit unit)
+    public FloatFlowVolume instantiateScalarSI(final float valueSI, final FlowVolumeUnit displayUnit)
     {
-        return new FloatFlowVolume(value, unit);
+        FloatFlowVolume result = FloatFlowVolume.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
-
+
 }
+

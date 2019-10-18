@@ -1,12 +1,16 @@
 package org.djunits.value.vfloat.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.EnergyUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vfloat.matrix.base.AbstractFloatMatrixRel;
+import org.djunits.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits.value.vfloat.scalar.FloatEnergy;
+import org.djunits.value.vfloat.vector.FloatEnergyVector;
+import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable FloatEnergyMatrix, a matrix of values with a EnergyUnit.
+ * Immutable FloatFloatEnergyMatrix, a matrix of values with a EnergyUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -14,77 +18,58 @@ import org.djunits.value.vfloat.scalar.FloatEnergy;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class FloatEnergyMatrix
-        extends AbstractFloatMatrixRel<EnergyUnit, FloatEnergyMatrix, MutableFloatEnergyMatrix, FloatEnergy>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class FloatEnergyMatrix extends AbstractFloatMatrixRel<EnergyUnit, FloatEnergy, FloatEnergyVector, FloatEnergyMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatEnergyMatrix.
-     * @param values float[][]; the values of the entries in the new Relative Immutable FloatEnergyMatrix
-     * @param unit EnergyUnit; the unit of the new Relative Immutable FloatEnergyMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatEnergyMatrix(final float[][] values, final EnergyUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatEnergyMatrix.
-     * @param values FloatEnergy[][]; the values of the entries in the new Relative Immutable Float FloatEnergyMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatEnergyMatrix(final FloatEnergy[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data FloatMatrixData; an internal data object
      * @param unit EnergyUnit; the unit
      */
-    FloatEnergyMatrix(final FloatMatrixData data, final EnergyUnit unit)
+    public FloatEnergyMatrix(final FloatMatrixData data, final EnergyUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatEnergyMatrix toDense()
+    public Class<FloatEnergy> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return FloatEnergy.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatEnergyMatrix toSparse()
+    public Class<FloatEnergyVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+        return FloatEnergyVector.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatEnergyMatrix instantiateType(final FloatMatrixData fmd, final EnergyUnit unit)
+    public FloatEnergyMatrix instantiateMatrix(final FloatMatrixData fmd, final EnergyUnit displayUnit)
     {
-        return new FloatEnergyMatrix(fmd, unit);
+        return new FloatEnergyMatrix(fmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatEnergyMatrix instantiateMutableType(final FloatMatrixData fmd, final EnergyUnit unit)
+    public FloatEnergyVector instantiateVector(final FloatVectorData fvd, final EnergyUnit displayUnit)
     {
-        return new MutableFloatEnergyMatrix(fmd, unit);
+        return new FloatEnergyVector(fvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatEnergy instantiateScalar(final float value, final EnergyUnit unit)
+    public FloatEnergy instantiateScalarSI(final float valueSI, final EnergyUnit displayUnit)
     {
-        return new FloatEnergy(value, unit);
+        FloatEnergy result = FloatEnergy.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
-
+
 }
+

@@ -2,62 +2,57 @@ package org.djunits.value.vdouble.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
+import org.djunits.Throw;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.EnergyUnit;
 import org.djunits.unit.ForceUnit;
 import org.djunits.unit.PressureUnit;
-import org.djunits.unit.Unit;
+import org.djunits.value.util.ValueUtil;
+import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 
 /**
- * Easy access methods for the Pressure DoubleScalar, which is relative by definition. Instead of:
- * 
- * <pre>
- * DoubleScalar.Rel&lt;PressureUnit&gt; value = new DoubleScalar.Rel&lt;PressureUnit&gt;(100.0, PressureUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * Pressure value = new Pressure(100.0, PressureUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the Pressure DoubleScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure> 
 {
     /** */
     private static final long serialVersionUID = 20150905L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final Pressure ZERO = new Pressure(0.0, PressureUnit.SI);
 
-    /** constant with value NaN. */
+    /** Constant with value one. */
+    public static final Pressure ONE = new Pressure(1.0, PressureUnit.SI);
+
+    /** Constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final Pressure NaN = new Pressure(Double.NaN, PressureUnit.SI);
 
-    /** constant with value POSITIVE_INFINITY. */
+    /** Constant with value POSITIVE_INFINITY. */
     public static final Pressure POSITIVE_INFINITY = new Pressure(Double.POSITIVE_INFINITY, PressureUnit.SI);
 
-    /** constant with value NEGATIVE_INFINITY. */
+    /** Constant with value NEGATIVE_INFINITY. */
     public static final Pressure NEGATIVE_INFINITY = new Pressure(Double.NEGATIVE_INFINITY, PressureUnit.SI);
 
-    /** constant with value MAX_VALUE. */
+    /** Constant with value MAX_VALUE. */
     public static final Pressure POS_MAXVALUE = new Pressure(Double.MAX_VALUE, PressureUnit.SI);
 
-    /** constant with value -MAX_VALUE. */
+    /** Constant with value -MAX_VALUE. */
     public static final Pressure NEG_MAXVALUE = new Pressure(-Double.MAX_VALUE, PressureUnit.SI);
 
     /**
      * Construct Pressure scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; the double value
+     * @param unit PressureUnit; unit for the double value
      */
     public Pressure(final double value, final PressureUnit unit)
     {
@@ -66,7 +61,7 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Construct Pressure scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Pressure; Scalar from which to construct this instance
      */
     public Pressure(final Pressure value)
     {
@@ -82,31 +77,31 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Construct Pressure scalar.
-     * @param value double value in SI units
-     * @return the new scalar with the SI value
+     * @param value double; the double value in SI units
+     * @return Pressure; the new scalar with the SI value
      */
-    public static final Pressure createSI(final double value)
+    public static final Pressure instantiateSI(final double value)
     {
         return new Pressure(value, PressureUnit.SI);
     }
-
+    
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @param zero Pressure; the low value
+     * @param one Pressure; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @return Pressure; a Scalar at the ratio between
      */
     public static Pressure interpolate(final Pressure zero, final Pressure one, final double ratio)
     {
-        return new Pressure(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new Pressure(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
-
+    
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the maximum value of two relative scalars
+     * @param r1 Pressure; the first scalar
+     * @param r2 Pressure; the second scalar
+     * @return Pressure; the maximum value of two relative scalars
      */
     public static Pressure max(final Pressure r1, final Pressure r2)
     {
@@ -115,10 +110,10 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @param r1 Pressure; the first scalar
+     * @param r2 Pressure; the second scalar
+     * @param rn Pressure...; the other scalars
+     * @return Pressure; the maximum value of more than two relative scalars
      */
     public static Pressure max(final Pressure r1, final Pressure r2, final Pressure... rn)
     {
@@ -135,9 +130,9 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the minimum value of two relative scalars
+     * @param r1 Pressure; the first scalar
+     * @param r2 Pressure; the second scalar
+     * @return Pressure; the minimum value of two relative scalars
      */
     public static Pressure min(final Pressure r1, final Pressure r2)
     {
@@ -146,10 +141,10 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @param r1 Pressure; the first scalar
+     * @param r2 Pressure; the second scalar
+     * @param rn Pressure...; the other scalars
+     * @return Pressure; the minimum value of more than two relative scalars
      */
     public static Pressure min(final Pressure r1, final Pressure r2, final Pressure... rn)
     {
@@ -165,72 +160,85 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
     }
 
     /**
-     * Returns a Pressure representation of a textual representation of a value with a unit. The String representation that can
-     * be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * Returns a Pressure representation of a textual representation of a value with a unit. The String representation that can be
+     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Pressure
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return Pressure; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static Pressure valueOf(final String text) throws IllegalArgumentException
+    public static Pressure valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing Pressure -- null or empty argument");
-        }
-        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        Throw.whenNull(text, "Error parsing Pressure: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Pressure: empty text to parse");
+        Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            PressureUnit unit = PressureUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                for (PressureUnit unit : Unit.getUnits(PressureUnit.class))
-                {
-                    if (unit.getDefaultLocaleTextualRepresentations().contains(unitString))
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new Pressure(d, unit);
-                    }
-                }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing Pressure from " + text, exception);
+                double d = Double.parseDouble(valueString);
+                return new Pressure(d, unit);
             }
         }
         throw new IllegalArgumentException("Error parsing Pressure from " + text);
     }
 
     /**
-     * Calculate the division of Pressure and Pressure, which results in a Dimensionless scalar.
-     * @param v Pressure scalar
-     * @return Dimensionless scalar as a division of Pressure and Pressure
+     * Returns a Pressure based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return Pressure; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
      */
-    public final Dimensionless divideBy(final Pressure v)
+    public static Pressure of(final double value, final String unitString)
     {
-        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+        Throw.whenNull(unitString, "Error parsing Pressure: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing Pressure: empty unitString");
+        PressureUnit unit = PressureUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new Pressure(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing Pressure with unit " + unitString);
     }
 
-    /**
-     * Calculate the multiplication of Pressure and Area, which results in a Force scalar.
-     * @param v Pressure scalar
-     * @return Force scalar as a multiplication of Pressure and Area
-     */
-    public final Force multiplyBy(final Area v)
-    {
-        return new Force(this.si * v.si, ForceUnit.SI);
-    }
+            /**
+         * Calculate the division of Pressure and Pressure, which results in a Dimensionless scalar.
+         * @param v Pressure scalar
+         * @return Dimensionless scalar as a division of Pressure and Pressure
+         */
+        public final Dimensionless divide(final Pressure v)
+        {
+            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+        }
 
-    /**
-     * Calculate the multiplication of Pressure and Volume, which results in a Energy scalar.
-     * @param v Pressure scalar
-     * @return Energy scalar as a multiplication of Pressure and Volume
-     */
-    public final Energy multiplyBy(final Volume v)
-    {
-        return new Energy(this.si * v.si, EnergyUnit.SI);
-    }
+        /**
+         * Calculate the multiplication of Pressure and Area, which results in a Force scalar.
+         * @param v Pressure scalar
+         * @return Force scalar as a multiplication of Pressure and Area
+         */
+        public final Force times(final Area v)
+        {
+            return new Force(this.si * v.si, ForceUnit.SI);
+        }
+
+        /**
+         * Calculate the multiplication of Pressure and Volume, which results in a Energy scalar.
+         * @param v Pressure scalar
+         * @return Energy scalar as a multiplication of Pressure and Volume
+         */
+        public final Energy times(final Volume v)
+        {
+            return new Energy(this.si * v.si, EnergyUnit.SI);
+        }
+
 
 }
+
+

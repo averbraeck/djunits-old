@@ -1,6 +1,5 @@
 package org.djunits.unit;
 
-import static org.djunits.unit.unitsystem.UnitSystem.SI_DERIVED;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -30,23 +29,15 @@ public class ElectricalResistanceUnitTest extends AbstractLinearUnitTest<Electri
     }
 
     /**
-     * Verify the result of some get*Key methods.
-     */
-    @Test
-    public final void keys()
-    {
-        checkKeys(ElectricalResistanceUnit.OHM, "ElectricalResistanceUnit.ohm_(name)", "ElectricalResistanceUnit.ohm");
-    }
-
-    /**
      * Verify conversion factors, English names and abbreviations.
      */
     @Test
     public final void conversions()
     {
+        assertEquals("kgm2/s3A2", ElectricalResistanceUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(ElectricalResistanceUnit.OHM, 1, 0.00000001, "ohm", "\u03A9");
         checkUnitRatioNameAndAbbreviation(ElectricalResistanceUnit.MILLIOHM, 0.001, 0.00000000001, "milliohm", "m\u03A9");
-        checkUnitRatioNameAndAbbreviation(ElectricalResistanceUnit.KILOOHM, 1000, 0.005, "kilo-ohm", "k\u03A9");
+        checkUnitRatioNameAndAbbreviation(ElectricalResistanceUnit.KILOOHM, 1000, 0.005, "kiloohm", "k\u03A9");
         // Check two conversions between non-standard units
         assertEquals("one KILOOHM is 1000000 MILLIOHM", 1000000,
                 getMultiplicationFactorTo(ElectricalResistanceUnit.KILOOHM, ElectricalResistanceUnit.MILLIOHM), 0.0001);
@@ -58,17 +49,19 @@ public class ElectricalResistanceUnitTest extends AbstractLinearUnitTest<Electri
     @Test
     public final void createElectricalResistanceUnit()
     {
-        ElectricalResistanceUnit myERU =
-                new ElectricalResistanceUnit("GigaOhm", "GOhm", SI_DERIVED, ElectricalResistanceUnit.OHM, 1e9);
+        ElectricalResistanceUnit myERU = ElectricalResistanceUnit.OHM.deriveLinear(1.0E9, "GigOhm", "GigaOhm");
         assertTrue("Can create a new ElectricalResistanceUnit", null != myERU);
-        checkUnitRatioNameAndAbbreviation(myERU, 1e9, 0.1, "GigaOhm", "GOhm");
-        deregisterUnit(myERU);
+        checkUnitRatioNameAndAbbreviation(myERU, 1e9, 0.1, "GigaOhm", "GigOhm");
+        ElectricalResistanceUnit.BASE.unregister(myERU);
 
-        ElectricalResistanceUnit abOhm = new ElectricalResistanceUnit(ElectricalPotentialUnit.ABVOLT,
-                ElectricalCurrentUnit.ABAMPERE, "AbOhm", "AOhm", UnitSystem.CGS);
+        ElectricalResistanceUnit abOhm =
+                ElectricalResistanceUnit.OHM.deriveLinear(
+                        ElectricalPotentialUnit.ABVOLT.getScale().toStandardUnit(1.0)
+                                / ElectricalCurrentUnit.ABAMPERE.getScale().toStandardUnit(1.0),
+                        "abOO", "abOhm(CGS)", UnitSystem.CGS);
         assertTrue("Can create Abohm unit", null != abOhm);
-        checkUnitRatioNameAndAbbreviation(abOhm, 1e-9, 1e-12, "AbOhm", "AOhm");
-        deregisterUnit(abOhm);
+        checkUnitRatioNameAndAbbreviation(abOhm, 1e-9, 1e-12, "abOhm(CGS)", "abOO");
+        ElectricalResistanceUnit.BASE.unregister(myERU);
     }
 
 }

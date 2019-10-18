@@ -1,12 +1,12 @@
 package org.djunits.unit;
 
-import static org.djunits.unit.unitsystem.UnitSystem.SI_DERIVED;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Locale;
 
 import org.djunits.locale.DefaultLocale;
+import org.djunits.unit.unitsystem.UnitSystem;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,20 +29,12 @@ public class DensityUnitTest extends AbstractLinearUnitTest<DensityUnit>
     }
 
     /**
-     * Verify the result of some get*Key methods.
-     */
-    @Test
-    public final void keys()
-    {
-        checkKeys(DensityUnit.KG_PER_METER_3, "DensityUnit.kilogram_per_cubic_meter", "DensityUnit.kg/m^3");
-    }
-
-    /**
      * Verify conversion factors, English names and abbreviations.
      */
     @Test
     public final void conversions()
     {
+        assertEquals("kg/m3", DensityUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(DensityUnit.KG_PER_METER_3, 1, 0.00000001, "kilogram per cubic meter", "kg/m^3");
         checkUnitRatioNameAndAbbreviation(DensityUnit.GRAM_PER_CENTIMETER_3, 1000, 0.0001, "gram per cubic centimeter",
                 "g/cm^3");
@@ -57,10 +49,10 @@ public class DensityUnitTest extends AbstractLinearUnitTest<DensityUnit>
     @Test
     public final void createDensityUnit()
     {
-        DensityUnit myDU = new DensityUnit("DensityUnit", "SPCF", SI_DERIVED, DensityUnit.KG_PER_METER_3, 515.317882);
+        DensityUnit myDU = DensityUnit.KG_PER_METER_3.deriveLinear(515.317882, "SPCF", "DensityUnit", UnitSystem.SI_DERIVED);
         assertTrue("Can create a new DensityUnit", null != myDU);
         checkUnitRatioNameAndAbbreviation(myDU, 515.3, 0.1, "DensityUnit", "SPCF");
-        deregisterUnit(myDU);
+        DensityUnit.BASE.unregister(myDU);
     }
 
 }

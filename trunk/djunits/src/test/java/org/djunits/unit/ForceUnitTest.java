@@ -29,20 +29,12 @@ public class ForceUnitTest extends AbstractLinearUnitTest<ForceUnit>
     }
 
     /**
-     * Verify the result of some get*Key methods.
-     */
-    @Test
-    public final void keys()
-    {
-        checkKeys(ForceUnit.NEWTON, "ForceUnit.newton", "ForceUnit.N");
-    }
-
-    /**
      * Verify conversion factors, English names and abbreviations.
      */
     @Test
     public final void conversions()
     {
+        assertEquals("kgm/s2", ForceUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(ForceUnit.NEWTON, 1, 0.000001, "newton", "N");
         checkUnitRatioNameAndAbbreviation(ForceUnit.DYNE, 0.00001, 0.000000001, "dyne", "dyn");
         // Check two conversions between non-standard units
@@ -58,10 +50,10 @@ public class ForceUnitTest extends AbstractLinearUnitTest<ForceUnit>
     @Test
     public final void createForceUnit()
     {
-        ForceUnit myFU = new ForceUnit("AntForce", "af", UnitSystem.OTHER, ForceUnit.KILOGRAM_FORCE, 0.002);
+        ForceUnit myFU = ForceUnit.KILOGRAM_FORCE.deriveLinear(0.002, "af", "AntForce", UnitSystem.OTHER);
         assertTrue("Can create a new ForceUnit", null != myFU);
         checkUnitRatioNameAndAbbreviation(myFU, 0.002 * 9.8, 0.0001, "AntForce", "af");
-        deregisterUnit(myFU);
+        ForceUnit.BASE.unregister(myFU);
     }
 
 }

@@ -1,10 +1,12 @@
 package org.djunits.unit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Locale;
 
 import org.djunits.locale.DefaultLocale;
+import org.djunits.unit.unitsystem.UnitSystem;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,36 +29,28 @@ public class AccelerationUnitTest extends AbstractLinearUnitTest<AccelerationUni
     }
 
     /**
-     * Verify the result of some get*Key methods.
-     */
-    @Test
-    public final void keys()
-    {
-        checkKeys(AccelerationUnit.INCH_PER_SECOND_2, "AccelerationUnit.inch_per_second_squared", "AccelerationUnit.in/s^2");
-    }
-
-    /**
      * Verify conversion factors, English names and abbreviations.
      */
     @Test
     public final void conversions()
     {
+        assertEquals("m/s2", AccelerationUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(AccelerationUnit.METER_PER_SECOND_2, 1, 0.00000001, "meter per second squared",
-                "m/s^2");
-        checkUnitRatioNameAndAbbreviation(AccelerationUnit.KM_PER_HOUR_2, 1 / 3.6 / 3600, 0.0005, "km per hour squared",
-                "km/h^2");
+                "m/s2");
+        checkUnitRatioNameAndAbbreviation(AccelerationUnit.KM_PER_HOUR_2, 1 / 3.6 / 3600, 0.0005, "kilometer per hour squared",
+                "km/h2");
         checkUnitRatioNameAndAbbreviation(AccelerationUnit.FOOT_PER_SECOND_2, 0.3048, 0.00001, "foot per second squared",
-                "ft/s^2");
+                "ft/s2");
         // Check two conversions between non-standard units
         assertEquals("one FOOT PER SECOND PER SECOND is ??? KM PER HOUR PER HOUR", 3950.208,
                 getMultiplicationFactorTo(AccelerationUnit.FOOT_PER_SECOND_2, AccelerationUnit.KM_PER_HOUR_2), 0.01);
         // Check conversion factor to standard unit for all remaining acceleration units
         checkUnitRatioNameAndAbbreviation(AccelerationUnit.INCH_PER_SECOND_2, 0.0254, 0.0000000001, "inch per second squared",
-                "in/s^2");
+                "in/s2");
         checkUnitRatioNameAndAbbreviation(AccelerationUnit.MILE_PER_HOUR_2, 0.000124177778, 0.0000000001,
-                "mile per hour squared", "mi/h^2");
+                "mile per hour squared", "mi/h2");
         checkUnitRatioNameAndAbbreviation(AccelerationUnit.MILE_PER_SECOND_2, 1609.344, 0.000001, "mile per second squared",
-                "mi/s^2");
+                "mi/s2");
         checkUnitRatioNameAndAbbreviation(AccelerationUnit.KNOT_PER_SECOND, 0.514444444, 0.000001, "knot per second", "kt/s");
         checkUnitRatioNameAndAbbreviation(AccelerationUnit.MILE_PER_HOUR_PER_SECOND, 0.44704, 0.00000001,
                 "mile per hour per second", "mi/h/s");
@@ -70,4 +64,17 @@ public class AccelerationUnitTest extends AbstractLinearUnitTest<AccelerationUni
     {
         checkUnitRatioNameAndAbbreviation(AccelerationUnit.STANDARD_GRAVITY, 9.8, 0.02, "standard gravity", "g");
     }
+
+    /**
+     * Verify that we can create our own Acceleration unit.
+     */
+    @Test
+    public final void createAccelerationUnit()
+    {
+        AccelerationUnit myUnit = AccelerationUnit.SI.deriveLinear(1.23, "my", "myAcceleration", UnitSystem.OTHER);
+        assertTrue("Can create a new AccelerationUnit", null != myUnit);
+        checkUnitRatioNameAndAbbreviation(myUnit, 1.23, 0.0001, "myAcceleration", "my");
+        AccelerationUnit.BASE.unregister(myUnit);
+    }
+
 }

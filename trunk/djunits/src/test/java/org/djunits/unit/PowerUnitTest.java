@@ -29,20 +29,12 @@ public class PowerUnitTest extends AbstractLinearUnitTest<PowerUnit>
     }
 
     /**
-     * Verify the result of some getKey methods.
-     */
-    @Test
-    public final void keys()
-    {
-        checkKeys(PowerUnit.WATT, "PowerUnit.watt", "PowerUnit.W");
-    }
-
-    /**
      * Verify conversion factors, English names and abbreviations.
      */
     @Test
     public final void conversions()
     {
+        assertEquals("kgm2/s3", PowerUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(PowerUnit.WATT, 1, 0.00000001, "watt", "W");
         checkUnitRatioNameAndAbbreviation(PowerUnit.FOOT_POUND_FORCE_PER_HOUR, 0.00037661608333, 0.0000000001,
                 "foot pound-force per hour", "ft.lbf/h");
@@ -70,10 +62,10 @@ public class PowerUnitTest extends AbstractLinearUnitTest<PowerUnit>
     @Test
     public final void createPowerUnitUnit()
     {
-        PowerUnit myMU = new PowerUnit("Person", "pnp", UnitSystem.OTHER, PowerUnit.WATT, 250);
+        PowerUnit myMU = PowerUnit.WATT.deriveLinear(250, "pnp", "Person", UnitSystem.OTHER);
         assertTrue("Can create a new PowerUnit", null != myMU);
         checkUnitRatioNameAndAbbreviation(myMU, 250, 1, "Person", "pnp");
-        deregisterUnit(myMU);
+        PowerUnit.BASE.unregister(myMU);
     }
 
 }

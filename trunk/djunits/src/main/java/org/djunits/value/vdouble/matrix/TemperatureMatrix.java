@@ -1,93 +1,100 @@
 package org.djunits.value.vdouble.matrix;
 
+import javax.annotation.Generated;
+
+import org.djunits.unit.AbsoluteTemperatureUnit;
 import org.djunits.unit.TemperatureUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vdouble.matrix.base.AbstractDoubleMatrixRelWithAbs;
+import org.djunits.value.vdouble.matrix.data.DoubleMatrixData;
+import org.djunits.value.vdouble.scalar.AbsoluteTemperature;
 import org.djunits.value.vdouble.scalar.Temperature;
+import org.djunits.value.vdouble.vector.AbsoluteTemperatureVector;
+import org.djunits.value.vdouble.vector.TemperatureVector;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable Temperature Matrix.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class TemperatureMatrix
-        extends AbstractDoubleMatrixRel<TemperatureUnit, TemperatureMatrix, MutableTemperatureMatrix, Temperature>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class TemperatureMatrix extends AbstractDoubleMatrixRelWithAbs<AbsoluteTemperatureUnit, AbsoluteTemperature, AbsoluteTemperatureVector, AbsoluteTemperatureMatrix,
+    TemperatureUnit, Temperature, TemperatureVector, TemperatureMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
 
     /**
-     * Construct a new Relative Immutable Double TemperatureMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double TemperatureMatrix
-     * @param unit TemperatureUnit; the unit of the new Relative Immutable Double TemperatureMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public TemperatureMatrix(final double[][] values, final TemperatureUnit unit, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double TemperatureMatrix.
-     * @param values Temperature[][]; the values of the entries in the new Relative Immutable Double TemperatureMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public TemperatureMatrix(final Temperature[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double TemperatureMatrix.
      * @param data DoubleMatrixData; an internal data object
      * @param unit TemperatureUnit; the unit
      */
-    TemperatureMatrix(final DoubleMatrixData data, final TemperatureUnit unit)
+    public TemperatureMatrix(final DoubleMatrixData data, final TemperatureUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final TemperatureMatrix toDense()
+    public Class<Temperature> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return Temperature.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final TemperatureMatrix toSparse()
+    public Class<TemperatureVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+        return TemperatureVector.class;
+    }
+    
+    /** {@inheritDoc} */
+    @Override
+    public TemperatureMatrix instantiateMatrix(final DoubleMatrixData dmd, final TemperatureUnit displayUnit)
+    {
+        return new TemperatureMatrix(dmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final TemperatureMatrix instantiateType(final DoubleMatrixData dmd, final TemperatureUnit unit)
+    public TemperatureVector instantiateVector(final DoubleVectorData dvd, final TemperatureUnit displayUnit)
     {
-        return new TemperatureMatrix(dmd, unit);
+        return new TemperatureVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableTemperatureMatrix instantiateMutableType(final DoubleMatrixData dmd, final TemperatureUnit unit)
+    public Temperature instantiateScalarSI(final double valueSI, final TemperatureUnit displayUnit)
     {
-        return new MutableTemperatureMatrix(dmd, unit);
+        Temperature result = Temperature.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Temperature instantiateScalar(final double value, final TemperatureUnit unit)
+    public AbsoluteTemperatureMatrix instantiateMatrixAbs(final DoubleMatrixData dmd, final AbsoluteTemperatureUnit displayUnit)
     {
-        return new Temperature(value, unit);
+        return new AbsoluteTemperatureMatrix(dmd, displayUnit);
     }
 
-}
+    /** {@inheritDoc} */
+    @Override
+    public AbsoluteTemperatureVector instantiateVectorAbs(final DoubleVectorData dvd, final AbsoluteTemperatureUnit displayUnit)
+    {
+        return new AbsoluteTemperatureVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public AbsoluteTemperature instantiateScalarAbsSI(final double valueSI, final AbsoluteTemperatureUnit displayUnit)
+    {
+        AbsoluteTemperature result = AbsoluteTemperature.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
+    }
+
+}

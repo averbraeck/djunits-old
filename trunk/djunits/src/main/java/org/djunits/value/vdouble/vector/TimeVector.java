@@ -1,177 +1,78 @@
 package org.djunits.value.vdouble.vector;
 
-import java.util.List;
-import java.util.SortedMap;
+import javax.annotation.Generated;
 
 import org.djunits.unit.DurationUnit;
 import org.djunits.unit.TimeUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vdouble.scalar.Duration;
 import org.djunits.value.vdouble.scalar.Time;
+import org.djunits.value.vdouble.vector.base.AbstractDoubleVectorAbs;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Absolute Time Vector.
+ * Double TimeVector, a vector of values with a TimeUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * version Sep 5, 2015 <br>
+ * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class TimeVector
-        extends AbstractDoubleVectorAbs<TimeUnit, DurationUnit, TimeVector, DurationVector, MutableTimeVector, Time>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class TimeVector extends AbstractDoubleVectorAbs<TimeUnit, Time, TimeVector, 
+        DurationUnit, Duration, DurationVector>
 {
     /** */
-    private static final long serialVersionUID = 20151003L;
+    private static final long serialVersionUID = 20190905L;
 
     /**
-     * Construct a new Absolute Immutable Double TimeVector.
-     * @param values double[]; the values of the entries in the new Absolute Immutable Double TimeVector
-     * @param unit TimeUnit; the unit of the new Absolute Immutable Double TimeVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * Construct an TimeVector from an internal data object.
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param unit TimeUnit; the display unit of the vector data
      */
-    public TimeVector(final double[] values, final TimeUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable Double TimeVector.
-     * @param values List&lt;Double&gt;; the values of the entries in the new Absolute Immutable Double TimeVector
-     * @param unit TimeUnit; the unit of the new Absolute Immutable Double TimeVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public TimeVector(final List<Double> values, final TimeUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable Double TimeVector.
-     * @param values Time[]; the values of the entries in the new Absolute Immutable Double TimeVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public TimeVector(final Time[] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable Double TimeVector.
-     * @param values List&lt;Time&gt;; the values of the entries in the new Absolute Immutable Double TimeVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public TimeVector(final List<Time> values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable Double TimeVector.
-     * @param values SortedMap&lt;Integer, Time&gt;; the values of the entries in the new Absolute Sparse Mutable Double
-     *            TimeVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public TimeVector(final SortedMap<Integer, Time> values, final int length, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable Double TimeVector.
-     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Absolute Sparse Mutable Double
-     *            TimeVector
-     * @param unit TimeUnit; the unit of the new Absolute Sparse Mutable Double TimeVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public TimeVector(final SortedMap<Integer, Double> values, final TimeUnit unit, final int length,
-            final StorageType storageType) throws ValueException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable Double TimeVector.
-     * @param data DoubleVectorData; an internal data object
-     * @param unit TimeUnit; the unit
-     */
-    TimeVector(final DoubleVectorData data, final TimeUnit unit)
+    public TimeVector(final DoubleVectorData data, final TimeUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final TimeVector instantiateTypeAbs(final DoubleVectorData dvd, final TimeUnit unit)
+    public Class<Time> getScalarClass()
     {
-        return new TimeVector(dvd, unit);
+        return Time.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final DurationVector instantiateTypeRel(final DoubleVectorData dvd, final DurationUnit unit)
+    public TimeVector instantiateVector(final DoubleVectorData dvd, final TimeUnit displayUnit)
     {
-        return new DurationVector(dvd, unit);
+        return new TimeVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableTimeVector instantiateMutableType(final DoubleVectorData dvd, final TimeUnit unit)
+    public Time instantiateScalarSI(final double valueSI, final TimeUnit displayUnit)
     {
-        return new MutableTimeVector(dvd, unit);
+        Time result = Time.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Time instantiateScalar(final double value, final TimeUnit unit)
+    public DurationVector instantiateVectorRel(final DoubleVectorData dvd, final DurationUnit displayUnit)
     {
-        return new Time(value, unit);
+        return new DurationVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final TimeVector toDense()
+    public Duration instantiateScalarRelSI(final double valueSI, final DurationUnit displayUnit)
     {
-        return this.data.isDense() ? (TimeVector) this : instantiateTypeAbs(this.data.toDense(), getUnit());
+        Duration result = Duration.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public final TimeVector toSparse()
-    {
-        return this.data.isSparse() ? (TimeVector) this : instantiateTypeAbs(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Return an array of Time Scalars from this vector.
-     * @return Time[]; an array of Time Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public Time[] toArray()
-    {
-        Time[] array = new Time[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
-    }
-
-}
+   
+}

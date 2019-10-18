@@ -8,8 +8,8 @@ import org.djunits.locale.Localization;
  * Systems of Units such as SI, including SI-derived; cgs (centimeter-gram-second).
  * <p>
  * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
+ * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
 public abstract class UnitSystem implements Serializable
@@ -65,16 +65,17 @@ public abstract class UnitSystem implements Serializable
         AU = new AU("UnitSystem.AU", "UnitSystem.Atomic_Unit_system");
     }
 
-    /** the abbreviation of the unit system, such as cgs. */
+    /** The abbreviation of the unit system, such as cgs. */
     private final String abbreviationKey;
 
-    /** the name of the unit system, such as centimeter-gram-second. */
+    /** The name of the unit system, such as centimeter-gram-second. */
     private final String nameKey;
 
-    /** localization information. */
+    /** Localization information. */
     private static Localization localization = new Localization("localeunitsystem");
 
     /**
+     * Construct a new UnitSystem.
      * @param abbreviationKey String; the abbreviation of the unit system, such as cgs
      * @param nameKey String; the name of the unit system, such as centimeter-gram-second
      */
@@ -85,7 +86,8 @@ public abstract class UnitSystem implements Serializable
     }
 
     /**
-     * @return name, e.g. centimeter-gram-second
+     * Retrieve the name of this UnitSystem.
+     * @return String; the name of this UnitSystem, e.g. centimeter-gram-second
      */
     public final String getName()
     {
@@ -93,7 +95,8 @@ public abstract class UnitSystem implements Serializable
     }
 
     /**
-     * @return name key, e.g. CGS.centimeter-gram-second
+     * Retrieve the name key of this UnitSystem.
+     * @return String; the name key of this UnitSystem, e.g. CGS.centimeter-gram-second
      */
     public final String getNameKey()
     {
@@ -101,7 +104,8 @@ public abstract class UnitSystem implements Serializable
     }
 
     /**
-     * @return abbreviation, e.g., CGS.cgs
+     * Retrieve the abbreviation of this UnitSystem.
+     * @return String; the abbreviation of this UnitSystem, e.g., CGS.cgs
      */
     public final String getAbbreviation()
     {
@@ -109,11 +113,18 @@ public abstract class UnitSystem implements Serializable
     }
 
     /**
-     * @return abbreviation key, e.g. cgs
+     * Retrieve the abbreviation key of this UnitSystem.
+     * @return String; the abbreviation key of this UnitSystem, e.g. cgs
      */
     public final String getAbbreviationKey()
     {
         return this.abbreviationKey;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "UnitSystem [abbreviationKey=" + abbreviationKey + ", nameKey=" + nameKey + "]";
     }
 
 }

@@ -1,171 +1,78 @@
 package org.djunits.value.vdouble.vector;
 
-import java.util.List;
-import java.util.SortedMap;
+import javax.annotation.Generated;
 
+import org.djunits.unit.AbsoluteTemperatureUnit;
 import org.djunits.unit.TemperatureUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vdouble.scalar.AbsoluteTemperature;
 import org.djunits.value.vdouble.scalar.Temperature;
+import org.djunits.value.vdouble.vector.base.AbstractDoubleVectorRelWithAbs;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Relative Temperature Vector.
+ * Double TemperatureVector, a vector of values with a TemperatureUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * version Sep 5, 2015 <br>
+ * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class TemperatureVector
-        extends AbstractDoubleVectorRel<TemperatureUnit, TemperatureVector, MutableTemperatureVector, Temperature>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class TemperatureVector extends AbstractDoubleVectorRelWithAbs<AbsoluteTemperatureUnit, AbsoluteTemperature, AbsoluteTemperatureVector, 
+        TemperatureUnit, Temperature, TemperatureVector>
 {
     /** */
-    private static final long serialVersionUID = 20151006L;
+    private static final long serialVersionUID = 20190905L;
 
     /**
-     * Construct a new Relative Immutable Double TemperatureVector.
-     * @param values double[]; the values of the entries in the new Relative Immutable Double TemperatureVector
-     * @param unit TemperatureUnit; the unit of the new Relative Immutable Double TemperatureVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * Construct an TemperatureVector from an internal data object.
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param displayUnit TemperatureUnit; the display unit of the vector data
      */
-    public TemperatureVector(final double[] values, final TemperatureUnit unit, final StorageType storageType)
-            throws ValueException
+    public TemperatureVector(final DoubleVectorData data, final TemperatureUnit displayUnit)
     {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double TemperatureVector.
-     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double TemperatureVector
-     * @param unit TemperatureUnit; the unit of the new Relative Immutable Double TemperatureVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public TemperatureVector(final List<Double> values, final TemperatureUnit unit, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double TemperatureVector.
-     * @param values Temperature[]; the values of the entries in the new Relative Immutable Double TemperatureVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public TemperatureVector(final Temperature[] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double TemperatureVector.
-     * @param values List&lt;Temperature&gt;; the values of the entries in the new Relative Immutable Double TemperatureVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public TemperatureVector(final List<Temperature> values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double TemperatureVector.
-     * @param values SortedMap&lt;Integer, Temperature&gt;; the values of the entries in the new Relative Sparse Mutable Double
-     *            TemperatureVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public TemperatureVector(final SortedMap<Integer, Temperature> values, final int length, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double TemperatureVector.
-     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
-     *            TemperatureVector
-     * @param unit TemperatureUnit; the unit of the new Relative Sparse Mutable Double TemperatureVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public TemperatureVector(final SortedMap<Integer, Double> values, final TemperatureUnit unit, final int length,
-            final StorageType storageType) throws ValueException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double TemperatureVector.
-     * @param data DoubleVectorData; an internal data object
-     * @param unit TemperatureUnit; the unit
-     */
-    TemperatureVector(final DoubleVectorData data, final TemperatureUnit unit)
-    {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final TemperatureVector instantiateType(final DoubleVectorData dvd, final TemperatureUnit unit)
+    public Class<Temperature> getScalarClass()
     {
-        return new TemperatureVector(dvd, unit);
+        return Temperature.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableTemperatureVector instantiateMutableType(final DoubleVectorData dvd, final TemperatureUnit unit)
+    public TemperatureVector instantiateVector(final DoubleVectorData dvd, final TemperatureUnit displayUnit)
     {
-        return new MutableTemperatureVector(dvd, unit);
+        return new TemperatureVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Temperature instantiateScalar(final double value, final TemperatureUnit unit)
+    public Temperature instantiateScalarSI(final double valueSI, final TemperatureUnit displayUnit)
     {
-        return new Temperature(value, unit);
+        Temperature result = Temperature.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final TemperatureVector toDense()
+    public AbsoluteTemperatureVector instantiateVectorAbs(final DoubleVectorData dvd, final AbsoluteTemperatureUnit displayUnit)
     {
-        return this.data.isDense() ? (TemperatureVector) this : instantiateType(this.data.toDense(), getUnit());
+        return new AbsoluteTemperatureVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final TemperatureVector toSparse()
+    public AbsoluteTemperature instantiateScalarAbsSI(final double valueSI, final AbsoluteTemperatureUnit displayUnit)
     {
-        return this.data.isSparse() ? (TemperatureVector) this : instantiateType(this.data.toSparse(), getUnit());
+        AbsoluteTemperature result = AbsoluteTemperature.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
-    /**
-     * Return an array of Temperature Scalars from this vector.
-     * @return Temperature[]; an array of Temperature Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public Temperature[] toArray()
-    {
-        Temperature[] array = new Temperature[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
-    }
-
-}
+   
+}

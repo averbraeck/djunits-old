@@ -1,10 +1,12 @@
 package org.djunits.unit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Locale;
 
 import org.djunits.locale.DefaultLocale;
+import org.djunits.unit.unitsystem.UnitSystem;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,21 +29,13 @@ public class EnergyUnitTest extends AbstractLinearUnitTest<EnergyUnit>
     }
 
     /**
-     * Verify the result of some get*Key methods.
-     */
-    @Test
-    public final void keys()
-    {
-        checkKeys(EnergyUnit.JOULE, "EnergyUnit.Joule", "EnergyUnit.J");
-    }
-
-    /**
      * Verify conversion factors, English names and abbreviations.
      */
     @Test
     public final void conversions()
     {
-        checkUnitRatioNameAndAbbreviation(EnergyUnit.JOULE, 1, 0.00000001, "Joule", "J");
+        assertEquals("kgm2/s2", EnergyUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
+        checkUnitRatioNameAndAbbreviation(EnergyUnit.JOULE, 1, 0.00000001, "joule", "J");
         checkUnitRatioNameAndAbbreviation(EnergyUnit.FOOT_POUND_FORCE, 1.35581794833, 0.0000005, "foot pound-force", "ft.lbf");
         checkUnitRatioNameAndAbbreviation(EnergyUnit.BTU_ISO, 1054.5, 0.001, "British thermal unit (ISO)", "BTU(ISO)");
         // Check two conversions between non-standard units
@@ -54,6 +48,18 @@ public class EnergyUnitTest extends AbstractLinearUnitTest<EnergyUnit>
         checkUnitRatioNameAndAbbreviation(EnergyUnit.CALORIE_IT, 4.1868, 0.00005, "calorie (International Table)", "cal(IT)");
         checkUnitRatioNameAndAbbreviation(EnergyUnit.KILOCALORIE, 4184, 0.05, "kilocalorie", "kcal");
         checkUnitRatioNameAndAbbreviation(EnergyUnit.KILOWATT_HOUR, 3600000, 0.1, "kilowatt-hour", "kWh");
+    }
+
+    /**
+     * Verify that we can create our own Energy unit.
+     */
+    @Test
+    public final void createEnergyUnit()
+    {
+        EnergyUnit myUnit = EnergyUnit.SI.deriveLinear(1.23, "my", "myEnergy", UnitSystem.OTHER);
+        assertTrue("Can create a new EnergyUnit", null != myUnit);
+        checkUnitRatioNameAndAbbreviation(myUnit, 1.23, 0.0001, "myEnergy", "my");
+        EnergyUnit.BASE.unregister(myUnit);
     }
 
 }

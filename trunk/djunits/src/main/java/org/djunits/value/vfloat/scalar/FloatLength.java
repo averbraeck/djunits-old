@@ -2,69 +2,63 @@ package org.djunits.value.vfloat.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
+import org.djunits.Throw;
 import org.djunits.unit.AreaUnit;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.DurationUnit;
 import org.djunits.unit.EnergyUnit;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.LinearDensityUnit;
-import org.djunits.unit.MoneyUnit;
 import org.djunits.unit.PositionUnit;
 import org.djunits.unit.SpeedUnit;
-import org.djunits.unit.Unit;
 import org.djunits.unit.VolumeUnit;
+import org.djunits.value.util.ValueUtil;
+import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
 
 /**
- * Easy access methods for the %Type% FloatScalar. Instead of:
- * 
- * <pre>
- * FloatScalar.Rel&lt;LengthUnit&gt; value = new FloatScalar.Rel&lt;LengthUnit&gt;(100.0, LengthUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * FloatLength value = new FloatLength(100.0, LengthUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the FloatLength FloatScalar.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
- * <p>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, FloatPosition, LengthUnit, FloatLength>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final FloatLength ZERO = new FloatLength(0.0f, LengthUnit.SI);
 
-    /** constant with value NaN. */
+    /** Constant with value one. */
+    public static final FloatLength ONE = new FloatLength(1.0f, LengthUnit.SI);
+
+    /** Constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatLength NaN = new FloatLength(Float.NaN, LengthUnit.SI);
 
-    /** constant with value POSITIVE_INFINITY. */
+    /** Constant with value POSITIVE_INFINITY. */
     public static final FloatLength POSITIVE_INFINITY = new FloatLength(Float.POSITIVE_INFINITY, LengthUnit.SI);
 
-    /** constant with value NEGATIVE_INFINITY. */
+    /** Constant with value NEGATIVE_INFINITY. */
     public static final FloatLength NEGATIVE_INFINITY = new FloatLength(Float.NEGATIVE_INFINITY, LengthUnit.SI);
 
-    /** constant with value MAX_VALUE. */
+    /** Constant with value MAX_VALUE. */
     public static final FloatLength POS_MAXVALUE = new FloatLength(Float.MAX_VALUE, LengthUnit.SI);
 
-    /** constant with value -MAX_VALUE. */
+    /** Constant with value -MAX_VALUE. */
     public static final FloatLength NEG_MAXVALUE = new FloatLength(-Float.MAX_VALUE, LengthUnit.SI);
 
     /**
      * Construct FloatLength scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; the float value
+     * @param unit LengthUnit; unit for the float value
      */
     public FloatLength(final float value, final LengthUnit unit)
     {
@@ -73,7 +67,7 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Construct FloatLength scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatLength; Scalar from which to construct this instance
      */
     public FloatLength(final FloatLength value)
     {
@@ -82,8 +76,8 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Construct FloatLength scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; the double value
+     * @param unit LengthUnit; unit for the resulting float value
      */
     public FloatLength(final double value, final LengthUnit unit)
     {
@@ -99,20 +93,16 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Construct FloatLength scalar.
-     * @param value float value in SI units
-     * @return the new scalar with the SI value
+     * @param value float; the float value in SI units
+     * @return FloatLength; the new scalar with the SI value
      */
-    public static final FloatLength createSI(final float value)
+    public static final FloatLength instantiateSI(final float value)
     {
         return new FloatLength(value, LengthUnit.SI);
     }
 
-    /**
-     * Construct a new Absolute Immutable FloatScalar of the right type. Each extending class must implement this method.
-     * @param value the float value
-     * @param unit the unit
-     * @return A a new absolute instance of the FloatScalar of the right type
-     */
+    /** {@inheritDoc} */
+    @Override
     public final FloatPosition instantiateAbs(final float value, final PositionUnit unit)
     {
         return new FloatPosition(value, unit);
@@ -120,32 +110,22 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @param zero FloatLength; the low value
+     * @param one FloatLength; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @return FloatLength; a Scalar at the ratio between
      */
     public static FloatLength interpolate(final FloatLength zero, final FloatLength one, final float ratio)
     {
-        return new FloatLength(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
-    }
-
-    /**
-     * Relative scalar plus Absolute scalar = Absolute scalar.
-     * @param v the value to add
-     * @return sum of this value and v as a new object
-     */
-    public final FloatPosition plus(final FloatPosition v)
-    {
-        PositionUnit targetUnit = v.getUnit();
-        return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
+        return new FloatLength(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
+            .getDisplayUnit());
     }
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the maximum value of two relative scalars
+     * @param r1 FloatLength; the first scalar
+     * @param r2 FloatLength; the second scalar
+     * @return FloatLength; the maximum value of two relative scalars
      */
     public static FloatLength max(final FloatLength r1, final FloatLength r2)
     {
@@ -154,10 +134,10 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @param r1 FloatLength; the first scalar
+     * @param r2 FloatLength; the second scalar
+     * @param rn FloatLength...; the other scalars
+     * @return FloatLength; the maximum value of more than two relative scalars
      */
     public static FloatLength max(final FloatLength r1, final FloatLength r2, final FloatLength... rn)
     {
@@ -174,9 +154,9 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the minimum value of two relative scalars
+     * @param r1 FloatLength; the first scalar
+     * @param r2 FloatLength; the second scalar
+     * @return FloatLength; the minimum value of two relative scalars
      */
     public static FloatLength min(final FloatLength r1, final FloatLength r2)
     {
@@ -185,10 +165,10 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @param r1 FloatLength; the first scalar
+     * @param r2 FloatLength; the second scalar
+     * @param rn FloatLength...; the other scalars
+     * @return FloatLength; the minimum value of more than two relative scalars
      */
     public static FloatLength min(final FloatLength r1, final FloatLength r2, final FloatLength... rn)
     {
@@ -204,142 +184,144 @@ public class FloatLength extends AbstractFloatScalarRel<LengthUnit, FloatLength>
     }
 
     /**
-     * Returns a FloatLength representation of a textual representation of a value with a unit. The String representation that
-     * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
-     * not necessary, between the value and the unit.
+     * Returns a FloatLength representation of a textual representation of a value with a unit. The String representation that can be
+     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatLength
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return FloatLength; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static FloatLength valueOf(final String text) throws IllegalArgumentException
+    public static FloatLength valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing FloatLength -- null or empty argument");
-        }
-        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        Throw.whenNull(text, "Error parsing FloatLength: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatLength: empty text to parse");
+        Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            LengthUnit unit = LengthUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                for (LengthUnit unit : Unit.getUnits(LengthUnit.class))
-                {
-                    if (unit.getDefaultLocaleTextualRepresentations().contains(unitString))
-                    {
-                        float f = Float.parseFloat(valueString);
-                        return new FloatLength(f, unit);
-                    }
-                }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing FloatLength from " + text, exception);
+                float f = Float.parseFloat(valueString);
+                return new FloatLength(f, unit);
             }
         }
         throw new IllegalArgumentException("Error parsing FloatLength from " + text);
     }
 
     /**
-     * Calculate the division of FloatLength and FloatLength, which results in a FloatDimensionless scalar.
-     * @param v FloatLength scalar
-     * @return FloatDimensionless scalar as a division of FloatLength and FloatLength
+     * Returns a FloatLength based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return FloatLength; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
      */
-    public final FloatDimensionless divideBy(final FloatLength v)
+    public static FloatLength of(final float value, final String unitString)
     {
-        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+        Throw.whenNull(unitString, "Error parsing FloatLength: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatLength: empty unitString");
+        LengthUnit unit = LengthUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new FloatLength(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing FloatLength with unit " + unitString);
     }
 
-    /**
-     * Calculate the multiplication of FloatLength and FloatLength, which results in a FloatArea scalar.
-     * @param v FloatLength scalar
-     * @return FloatArea scalar as a multiplication of FloatLength and FloatLength
-     */
-    public final FloatArea multiplyBy(final FloatLength v)
-    {
-        return new FloatArea(this.si * v.si, AreaUnit.SI);
-    }
+        /**
+         * Calculate the division of FloatLength and FloatLength, which results in a FloatDimensionless scalar.
+         * @param v FloatLength scalar
+         * @return FloatDimensionless scalar as a division of FloatLength and FloatLength
+         */
+        public final FloatDimensionless divide(final FloatLength v)
+        {
+            return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+        }
 
-    /**
-     * Calculate the division of FloatLength and FloatLinearDensity, which results in a FloatArea scalar.
-     * @param v FloatLength scalar
-     * @return FloatArea scalar as a division of FloatLength and FloatLinearDensity
-     */
-    public final FloatArea divideBy(final FloatLinearDensity v)
-    {
-        return new FloatArea(this.si / v.si, AreaUnit.SI);
-    }
+        /**
+         * Calculate the multiplication of FloatLength and FloatLength, which results in a FloatArea scalar.
+         * @param v FloatLength scalar
+         * @return FloatArea scalar as a multiplication of FloatLength and FloatLength
+         */
+        public final FloatArea times(final FloatLength v)
+        {
+            return new FloatArea(this.si * v.si, AreaUnit.SI);
+        }
 
-    /**
-     * Calculate the division of FloatLength and FloatArea, which results in a FloatLinearDensity scalar.
-     * @param v FloatLength scalar
-     * @return FloatLinearDensity scalar as a division of FloatLength and FloatArea
-     */
-    public final FloatLinearDensity divideBy(final FloatArea v)
-    {
-        return new FloatLinearDensity(this.si / v.si, LinearDensityUnit.SI);
-    }
+        /**
+         * Calculate the division of FloatLength and FloatLinearDensity, which results in a FloatArea scalar.
+         * @param v FloatLength scalar
+         * @return FloatArea scalar as a division of FloatLength and FloatLinearDensity
+         */
+        public final FloatArea divide(final FloatLinearDensity v)
+        {
+            return new FloatArea(this.si / v.si, AreaUnit.SI);
+        }
 
-    /**
-     * Calculate the multiplication of FloatLength and FloatArea, which results in a FloatVolume scalar.
-     * @param v FloatLength scalar
-     * @return FloatVolume scalar as a multiplication of FloatLength and FloatArea
-     */
-    public final FloatVolume multiplyBy(final FloatArea v)
-    {
-        return new FloatVolume(this.si * v.si, VolumeUnit.SI);
-    }
+        /**
+         * Calculate the division of FloatLength and FloatArea, which results in a FloatLinearDensity scalar.
+         * @param v FloatLength scalar
+         * @return FloatLinearDensity scalar as a division of FloatLength and FloatArea
+         */
+        public final FloatLinearDensity divide(final FloatArea v)
+        {
+            return new FloatLinearDensity(this.si / v.si, LinearDensityUnit.SI);
+        }
 
-    /**
-     * Calculate the multiplication of FloatLength and FloatForce, which results in a FloatEnergy scalar.
-     * @param v FloatLength scalar
-     * @return FloatEnergy scalar as a multiplication of FloatLength and FloatForce
-     */
-    public final FloatEnergy multiplyBy(final FloatForce v)
-    {
-        return new FloatEnergy(this.si * v.si, EnergyUnit.SI);
-    }
+        /**
+         * Calculate the multiplication of FloatLength and FloatArea, which results in a FloatVolume scalar.
+         * @param v FloatLength scalar
+         * @return FloatVolume scalar as a multiplication of FloatLength and FloatArea
+         */
+        public final FloatVolume times(final FloatArea v)
+        {
+            return new FloatVolume(this.si * v.si, VolumeUnit.SI);
+        }
 
-    /**
-     * Calculate the multiplication of FloatLength and FloatFrequency, which results in a FloatSpeed scalar.
-     * @param v FloatLength scalar
-     * @return FloatSpeed scalar as a multiplication of FloatLength and FloatFrequency
-     */
-    public final FloatSpeed multiplyBy(final FloatFrequency v)
-    {
-        return new FloatSpeed(this.si * v.si, SpeedUnit.SI);
-    }
+        /**
+         * Calculate the multiplication of FloatLength and FloatForce, which results in a FloatEnergy scalar.
+         * @param v FloatLength scalar
+         * @return FloatEnergy scalar as a multiplication of FloatLength and FloatForce
+         */
+        public final FloatEnergy times(final FloatForce v)
+        {
+            return new FloatEnergy(this.si * v.si, EnergyUnit.SI);
+        }
 
-    /**
-     * Calculate the division of FloatLength and FloatDuration, which results in a FloatSpeed scalar.
-     * @param v FloatLength scalar
-     * @return FloatSpeed scalar as a division of FloatLength and FloatDuration
-     */
-    public final FloatSpeed divideBy(final FloatDuration v)
-    {
-        return new FloatSpeed(this.si / v.si, SpeedUnit.SI);
-    }
+        /**
+         * Calculate the multiplication of FloatLength and FloatFrequency, which results in a FloatSpeed scalar.
+         * @param v FloatLength scalar
+         * @return FloatSpeed scalar as a multiplication of FloatLength and FloatFrequency
+         */
+        public final FloatSpeed times(final FloatFrequency v)
+        {
+            return new FloatSpeed(this.si * v.si, SpeedUnit.SI);
+        }
 
-    /**
-     * Calculate the division of FloatLength and FloatSpeed, which results in a FloatDuration scalar.
-     * @param v FloatLength scalar
-     * @return FloatDuration scalar as a division of FloatLength and FloatSpeed
-     */
-    public final FloatDuration divideBy(final FloatSpeed v)
-    {
-        return new FloatDuration(this.si / v.si, DurationUnit.SI);
-    }
+        /**
+         * Calculate the division of FloatLength and FloatDuration, which results in a FloatSpeed scalar.
+         * @param v FloatLength scalar
+         * @return FloatSpeed scalar as a division of FloatLength and FloatDuration
+         */
+        public final FloatSpeed divide(final FloatDuration v)
+        {
+            return new FloatSpeed(this.si / v.si, SpeedUnit.SI);
+        }
 
-    /**
-     * Calculate the multiplication of FloatLength and FloatMoneyPerLength, which results in a FloatMoney scalar.
-     * @param v FloatLength scalar
-     * @return FloatMoney scalar as a multiplication of FloatLength and FloatMoneyPerLength
-     */
-    public final FloatMoney multiplyBy(final FloatMoneyPerLength v)
-    {
-        return new FloatMoney(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
-    }
+        /**
+         * Calculate the division of FloatLength and FloatSpeed, which results in a FloatDuration scalar.
+         * @param v FloatLength scalar
+         * @return FloatDuration scalar as a division of FloatLength and FloatSpeed
+         */
+        public final FloatDuration divide(final FloatSpeed v)
+        {
+            return new FloatDuration(this.si / v.si, DurationUnit.SI);
+        }
+
 
 }
+

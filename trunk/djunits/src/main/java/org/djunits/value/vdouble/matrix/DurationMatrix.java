@@ -1,91 +1,100 @@
 package org.djunits.value.vdouble.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.DurationUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.unit.TimeUnit;
+import org.djunits.value.vdouble.matrix.base.AbstractDoubleMatrixRelWithAbs;
+import org.djunits.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits.value.vdouble.scalar.Duration;
+import org.djunits.value.vdouble.scalar.Time;
+import org.djunits.value.vdouble.vector.DurationVector;
+import org.djunits.value.vdouble.vector.TimeVector;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable Duration Matrix.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class DurationMatrix extends AbstractDoubleMatrixRel<DurationUnit, DurationMatrix, MutableDurationMatrix, Duration>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class DurationMatrix extends AbstractDoubleMatrixRelWithAbs<TimeUnit, Time, TimeVector, TimeMatrix,
+    DurationUnit, Duration, DurationVector, DurationMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
 
     /**
-     * Construct a new Relative Immutable Double DurationMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double DurationMatrix
-     * @param unit DurationUnit; the unit of the new Relative Immutable Double DurationMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public DurationMatrix(final double[][] values, final DurationUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double DurationMatrix.
-     * @param values Duration[][]; the values of the entries in the new Relative Immutable Double DurationMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public DurationMatrix(final Duration[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double DurationMatrix.
      * @param data DoubleMatrixData; an internal data object
      * @param unit DurationUnit; the unit
      */
-    DurationMatrix(final DoubleMatrixData data, final DurationUnit unit)
+    public DurationMatrix(final DoubleMatrixData data, final DurationUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final DurationMatrix toDense()
+    public Class<Duration> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return Duration.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final DurationMatrix toSparse()
+    public Class<DurationVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+        return DurationVector.class;
+    }
+    
+    /** {@inheritDoc} */
+    @Override
+    public DurationMatrix instantiateMatrix(final DoubleMatrixData dmd, final DurationUnit displayUnit)
+    {
+        return new DurationMatrix(dmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final DurationMatrix instantiateType(final DoubleMatrixData dmd, final DurationUnit unit)
+    public DurationVector instantiateVector(final DoubleVectorData dvd, final DurationUnit displayUnit)
     {
-        return new DurationMatrix(dmd, unit);
+        return new DurationVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableDurationMatrix instantiateMutableType(final DoubleMatrixData dmd, final DurationUnit unit)
+    public Duration instantiateScalarSI(final double valueSI, final DurationUnit displayUnit)
     {
-        return new MutableDurationMatrix(dmd, unit);
+        Duration result = Duration.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Duration instantiateScalar(final double value, final DurationUnit unit)
+    public TimeMatrix instantiateMatrixAbs(final DoubleMatrixData dmd, final TimeUnit displayUnit)
     {
-        return new Duration(value, unit);
+        return new TimeMatrix(dmd, displayUnit);
     }
 
-}
+    /** {@inheritDoc} */
+    @Override
+    public TimeVector instantiateVectorAbs(final DoubleVectorData dvd, final TimeUnit displayUnit)
+    {
+        return new TimeVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Time instantiateScalarAbsSI(final double valueSI, final TimeUnit displayUnit)
+    {
+        Time result = Time.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
+    }
+
+}

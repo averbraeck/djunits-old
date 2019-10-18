@@ -58,11 +58,11 @@ public class UnitSystemLocalizationsTest
                 String abbreviation = us.getAbbreviation();
                 if (abbreviation.startsWith("!") && abbreviation.endsWith("!"))
                 {
-                    errors.add(String.format("Missing translation for abbreviation %s to %s", abbreviationKey, localeName));
+                    errors.add(String.format("Missing translation for abbreviation %s to %s\n", abbreviationKey, localeName));
                 }
                 if (name.startsWith("!") && name.endsWith("!"))
                 {
-                    errors.add(String.format("Missing translation for name %s to %s", nameKey, localeName));
+                    errors.add(String.format("Missing translation for name %s to %s\n", nameKey, localeName));
                 }
             }
         }
@@ -70,6 +70,6 @@ public class UnitSystemLocalizationsTest
         {
             System.out.println(s);
         }
-        assertTrue("There should be no errors in UnitSystemLocalizations", errors.isEmpty());
+        assertTrue("Errors in UnitSystemLocalizations: " + errors, errors.isEmpty());
     }
 }

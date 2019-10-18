@@ -1,12 +1,16 @@
 package org.djunits.value.vfloat.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.TorqueUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vfloat.matrix.base.AbstractFloatMatrixRel;
+import org.djunits.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits.value.vfloat.scalar.FloatTorque;
+import org.djunits.value.vfloat.vector.FloatTorqueVector;
+import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable FloatTorqueMatrix, a matrix of values with a TorqueUnit.
+ * Immutable FloatFloatTorqueMatrix, a matrix of values with a TorqueUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -14,77 +18,58 @@ import org.djunits.value.vfloat.scalar.FloatTorque;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class FloatTorqueMatrix
-        extends AbstractFloatMatrixRel<TorqueUnit, FloatTorqueMatrix, MutableFloatTorqueMatrix, FloatTorque>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class FloatTorqueMatrix extends AbstractFloatMatrixRel<TorqueUnit, FloatTorque, FloatTorqueVector, FloatTorqueMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatTorqueMatrix.
-     * @param values float[][]; the values of the entries in the new Relative Immutable FloatTorqueMatrix
-     * @param unit TorqueUnit; the unit of the new Relative Immutable FloatTorqueMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatTorqueMatrix(final float[][] values, final TorqueUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatTorqueMatrix.
-     * @param values FloatTorque[][]; the values of the entries in the new Relative Immutable Float FloatTorqueMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatTorqueMatrix(final FloatTorque[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data FloatMatrixData; an internal data object
      * @param unit TorqueUnit; the unit
      */
-    FloatTorqueMatrix(final FloatMatrixData data, final TorqueUnit unit)
+    public FloatTorqueMatrix(final FloatMatrixData data, final TorqueUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatTorqueMatrix toDense()
+    public Class<FloatTorque> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return FloatTorque.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatTorqueMatrix toSparse()
+    public Class<FloatTorqueVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+        return FloatTorqueVector.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatTorqueMatrix instantiateType(final FloatMatrixData fmd, final TorqueUnit unit)
+    public FloatTorqueMatrix instantiateMatrix(final FloatMatrixData fmd, final TorqueUnit displayUnit)
     {
-        return new FloatTorqueMatrix(fmd, unit);
+        return new FloatTorqueMatrix(fmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatTorqueMatrix instantiateMutableType(final FloatMatrixData fmd, final TorqueUnit unit)
+    public FloatTorqueVector instantiateVector(final FloatVectorData fvd, final TorqueUnit displayUnit)
     {
-        return new MutableFloatTorqueMatrix(fmd, unit);
+        return new FloatTorqueVector(fvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatTorque instantiateScalar(final float value, final TorqueUnit unit)
+    public FloatTorque instantiateScalarSI(final float valueSI, final TorqueUnit displayUnit)
     {
-        return new FloatTorque(value, unit);
+        FloatTorque result = FloatTorque.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
-
+
 }
+

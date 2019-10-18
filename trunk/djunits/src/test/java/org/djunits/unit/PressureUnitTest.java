@@ -29,20 +29,12 @@ public class PressureUnitTest extends AbstractLinearUnitTest<PressureUnit>
     }
 
     /**
-     * Verify the result of some get*Key methods.
-     */
-    @Test
-    public final void keys()
-    {
-        checkKeys(PressureUnit.PASCAL, "PressureUnit.pascal", "PressureUnit.Pa");
-    }
-
-    /**
      * Verify conversion factors, English names and abbreviations.
      */
     @Test
     public final void conversions()
     {
+        assertEquals("kg/ms2", PressureUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(PressureUnit.PASCAL, 1, 0.00000001, "pascal", "Pa");
         checkUnitRatioNameAndAbbreviation(PressureUnit.ATMOSPHERE_STANDARD, 101325, 0.5, "atmosphere (standard)", "atm");
         checkUnitRatioNameAndAbbreviation(PressureUnit.ATMOSPHERE_TECHNICAL, 98066.5, 0.1, "atmosphere (technical)", "at");
@@ -62,10 +54,10 @@ public class PressureUnitTest extends AbstractLinearUnitTest<PressureUnit>
         checkUnitRatioNameAndAbbreviation(PressureUnit.INCH_MERCURY, 3386, 0.5, "inch mercury", "inHg");
         checkUnitRatioNameAndAbbreviation(PressureUnit.KGF_PER_SQUARE_MM, 9806650, 0.5, "kilogram-force per square millimeter",
                 "kgf/mm^2");
-        checkUnitRatioNameAndAbbreviation(PressureUnit.POUND_PER_SQUARE_FOOT, 47.880259, 0.000001, "pound per square foot",
-                "lbf/ft^2");
-        checkUnitRatioNameAndAbbreviation(PressureUnit.POUND_PER_SQUARE_INCH, 6894.75729, 0.00001, "pound per square inch",
-                "lbf/in^2");
+        checkUnitRatioNameAndAbbreviation(PressureUnit.POUND_PER_SQUARE_FOOT, 47.880259, 0.000001,
+                "pound-force per square foot", "lbf/ft^2");
+        checkUnitRatioNameAndAbbreviation(PressureUnit.POUND_PER_SQUARE_INCH, 6894.75729, 0.00001,
+                "pound-force per square inch", "lbf/in^2");
     }
 
     /**
@@ -74,11 +66,10 @@ public class PressureUnitTest extends AbstractLinearUnitTest<PressureUnit>
     @Test
     public final void createPressureUnit()
     {
-        PressureUnit myPU =
-                new PressureUnit("HealthyHumanHeart", "hhhp", UnitSystem.OTHER, PressureUnit.MILLIMETER_MERCURY, 106);
+        PressureUnit myPU = PressureUnit.MILLIMETER_MERCURY.deriveLinear(106, "hhhp", "HealthyHumanHeart", UnitSystem.OTHER);
         assertTrue("Can create a new PowerUnit", null != myPU);
         checkUnitRatioNameAndAbbreviation(myPU, 14132.1711, 0.01, "HealthyHumanHeart", "hhhp");
-        deregisterUnit(myPU);
+        PressureUnit.BASE.unregister(myPU);
     }
 
 }

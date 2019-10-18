@@ -1,12 +1,12 @@
 package org.djunits.unit;
 
-import static org.djunits.unit.unitsystem.UnitSystem.OTHER;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Locale;
 
 import org.djunits.locale.DefaultLocale;
+import org.djunits.unit.unitsystem.UnitSystem;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,20 +29,12 @@ public class VolumeUnitTest extends AbstractLinearUnitTest<VolumeUnit>
     }
 
     /**
-     * Verify the result of some get*Key methods.
-     */
-    @Test
-    public final void keys()
-    {
-        checkKeys(VolumeUnit.CUBIC_METER, "VolumeUnit.cubic_meter", "VolumeUnit.m^3");
-    }
-
-    /**
      * Verify conversion factors, English names and abbreviations.
      */
     @Test
     public final void conversions()
     {
+        assertEquals("m3", VolumeUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(VolumeUnit.CUBIC_METER, 1, 0.00000001, "cubic meter", "m^3");
         checkUnitRatioNameAndAbbreviation(VolumeUnit.CUBIC_DECIMETER, 0.001, 0.0000000001, "cubic decimeter", "dm^3");
         checkUnitRatioNameAndAbbreviation(VolumeUnit.LITER, 0.001, 0.0000000001, "liter", "L");
@@ -58,15 +50,14 @@ public class VolumeUnitTest extends AbstractLinearUnitTest<VolumeUnit>
         checkUnitRatioNameAndAbbreviation(VolumeUnit.CUBIC_FOOT, 0.0283168, 0.0000001, "cubic foot", "ft^3");
         checkUnitRatioNameAndAbbreviation(VolumeUnit.CUBIC_INCH, 1.6387e-5, 1e-9, "cubic inch", "in^3");
         checkUnitRatioNameAndAbbreviation(VolumeUnit.CUBIC_YARD, 0.764554858, 0.0000001, "cubic yard", "yd^3");
-        checkUnitRatioNameAndAbbreviation(VolumeUnit.GALLON_US_FLUID, 0.0037854, 0.0000001, "gallon (US)", "gal(US)");
-        checkUnitRatioNameAndAbbreviation(VolumeUnit.OUNCE_US_FLUID, 0.000029574, 0.000000001, "ounce (fluid US)", "US fl oz");
-        // TODO checkUnitRatioNameAndAbbreviation(VolumeUnit.OUNCE_IMP_FLUID, .00002841306, 0.00000000001,
-        // "horsepower (metric)", "hp(M)");
-        // TODO checkUnitRatioNameAndAbbreviation(VolumeUnit.PINT_US_FLUID, 0.000473176473, 0.0000000000001, "pt(US fl)",
-        // "hp(M)");
-        // TODO checkUnitRatioNameAndAbbreviation(VolumeUnit.PINT_IMP, 735.49875, 0.00001, "horsepower (metric)", "hp(M)");
-        // TODO checkUnitRatioNameAndAbbreviation(VolumeUnit.QUART_US_FLUID, 0.000946353, 0.0000000001, "qt(US fl)", "hp(M)");
-        // TODO checkUnitRatioNameAndAbbreviation(VolumeUnit.QUART_IMP, 0.00113652, 0.000005, "quart (imperial)", "qt (imp)");
+        checkUnitRatioNameAndAbbreviation(VolumeUnit.GALLON_US, 0.0037854, 0.0000001, "gallon (US)", "gal(US)");
+        checkUnitRatioNameAndAbbreviation(VolumeUnit.FLUID_OUNCE_US, 0.000029574, 0.000000001, "fluid ounce (US)", "fl.oz(US)");
+        checkUnitRatioNameAndAbbreviation(VolumeUnit.FLUID_OUNCE_IMP, .00002841306, 0.00000000001, "fluid ounce (imp)",
+                "fl.oz(imp)");
+        checkUnitRatioNameAndAbbreviation(VolumeUnit.PINT_US, 0.000473176473, 0.0000000000001, "pint (US)", "pt(US)");
+        checkUnitRatioNameAndAbbreviation(VolumeUnit.PINT_IMP, 0.5 * 0.00113652, 0.00001, "pint (imp)", "pt(imp)");
+        checkUnitRatioNameAndAbbreviation(VolumeUnit.QUART_US, 0.000946353, 0.0000000001, "quart (US)", "qt(US)");
+        checkUnitRatioNameAndAbbreviation(VolumeUnit.QUART_IMP, 0.00113652, 0.000005, "quart (imp)", "qt(imp)");
     }
 
     /**
@@ -75,10 +66,10 @@ public class VolumeUnitTest extends AbstractLinearUnitTest<VolumeUnit>
     @Test
     public final void createVolumeUnit()
     {
-        VolumeUnit myVU = new VolumeUnit("Barrel", "brl", OTHER, VolumeUnit.LITER, 119.240471);
+        VolumeUnit myVU = VolumeUnit.LITER.deriveLinear(119.240471, "brl", "Barrel", UnitSystem.OTHER);
         assertTrue("Can create a new VolumeUnit", null != myVU);
         checkUnitRatioNameAndAbbreviation(myVU, 0.119240471, 0.000001, "Barrel", "brl");
-        deregisterUnit(myVU);
+        VolumeUnit.BASE.unregister(myVU);
     }
 
 }

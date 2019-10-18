@@ -1,12 +1,12 @@
 package org.djunits.unit;
 
-import static org.djunits.unit.unitsystem.UnitSystem.SI_DERIVED;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Locale;
 
 import org.djunits.locale.DefaultLocale;
+import org.djunits.unit.unitsystem.UnitSystem;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,20 +29,12 @@ public class SpeedUnitTest extends AbstractLinearUnitTest<SpeedUnit>
     }
 
     /**
-     * Verify the result of some get*Key methods.
-     */
-    @Test
-    public final void keys()
-    {
-        checkKeys(SpeedUnit.METER_PER_SECOND, "SpeedUnit.meter_per_second", "SpeedUnit.m/s");
-    }
-
-    /**
      * Verify conversion factors, English names and abbreviations.
      */
     @Test
     public final void conversions()
     {
+        assertEquals("m/s", SpeedUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(SpeedUnit.METER_PER_SECOND, 1, 0.00000001, "meter per second", "m/s");
         checkUnitRatioNameAndAbbreviation(SpeedUnit.KM_PER_HOUR, 0.277778, 0.000001, "kilometer per hour", "km/h");
         checkUnitRatioNameAndAbbreviation(SpeedUnit.MILE_PER_HOUR, 0.44704, 0.00001, "mile per hour", "mi/h");
@@ -62,10 +54,10 @@ public class SpeedUnitTest extends AbstractLinearUnitTest<SpeedUnit>
     @Test
     public final void createSpeedUnit()
     {
-        SpeedUnit mySU = new SpeedUnit("Sprinter", "sprtr", SI_DERIVED, SpeedUnit.KM_PER_HOUR, 48);
+        SpeedUnit mySU = SpeedUnit.KM_PER_HOUR.deriveLinear(48, "sprtr", "Sprinter", UnitSystem.SI_DERIVED);
         assertTrue("Can create a new PowerUnit", null != mySU);
         checkUnitRatioNameAndAbbreviation(mySU, 13.3333, 0.0001, "Sprinter", "sprtr");
-        deregisterUnit(mySU);
+        SpeedUnit.BASE.unregister(mySU);
     }
 
 }

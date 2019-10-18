@@ -14,7 +14,7 @@ package org.djunits.unit.scale;
 public class GradeScale implements Scale
 {
     /** */
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 20151011L;
 
     /** Multiply by this number to convert to the standard (e.g., SI) unit. */
     private final double conversionFactorToGrade;
@@ -26,7 +26,6 @@ public class GradeScale implements Scale
      */
     public GradeScale(final double conversionFactorToGrade)
     {
-        super();
         this.conversionFactorToGrade = conversionFactorToGrade;
     }
 
@@ -54,9 +53,9 @@ public class GradeScale implements Scale
 
     /** {@inheritDoc} */
     @Override
-    public final boolean isBaseSIScale()
+    public boolean isBaseSIScale()
     {
-        return this.conversionFactorToGrade == 1.0;
+        return false;
     }
 
     /** {@inheritDoc} */
@@ -86,6 +85,13 @@ public class GradeScale implements Scale
         if (Double.doubleToLongBits(this.conversionFactorToGrade) != Double.doubleToLongBits(other.conversionFactorToGrade))
             return false;
         return true;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public String toString()
+    {
+        return "GradeScale [conversionFactorToGrade=" + this.conversionFactorToGrade + "]";
     }
 
 }

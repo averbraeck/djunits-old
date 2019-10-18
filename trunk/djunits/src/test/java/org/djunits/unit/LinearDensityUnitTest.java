@@ -1,12 +1,12 @@
 package org.djunits.unit;
 
-import static org.djunits.unit.unitsystem.UnitSystem.OTHER;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Locale;
 
 import org.djunits.locale.DefaultLocale;
+import org.djunits.unit.unitsystem.UnitSystem;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,20 +29,12 @@ public class LinearDensityUnitTest extends AbstractLinearUnitTest<LinearDensityU
     }
 
     /**
-     * Verify the result of some get*Key methods.
-     */
-    @Test
-    public final void keys()
-    {
-        checkKeys(LinearDensityUnit.PER_METER, "LinearDensityUnit.per_meter", "LinearDensityUnit./m");
-    }
-
-    /**
      * Verify conversion factors, English names and abbreviations.
      */
     @Test
     public final void conversions()
     {
+        assertEquals("1/m", LinearDensityUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(LinearDensityUnit.PER_METER, 1, 0.000001, "per meter", "/m");
         checkUnitRatioNameAndAbbreviation(LinearDensityUnit.PER_KILOMETER, 0.001, 0.0000001, "per kilometer", "/km");
         checkUnitRatioNameAndAbbreviation(LinearDensityUnit.PER_MILLIMETER, 1000, 0.01, "per millimeter", "/mm");
@@ -54,15 +46,15 @@ public class LinearDensityUnitTest extends AbstractLinearUnitTest<LinearDensityU
     }
 
     /**
-     * Verify that we can create our own Frequency unit.
+     * Verify that we can create our own LinearDensity unit.
      */
     @Test
     public final void createLinearDensityUnit()
     {
-        LinearDensityUnit muLDU = new LinearDensityUnit("PerInch", "/in", OTHER, LinearDensityUnit.PER_METER, 2.54 / 100);
+        LinearDensityUnit muLDU = LinearDensityUnit.PER_METER.deriveLinear(2.54 / 100, "perin", "PerInch", UnitSystem.OTHER);
         assertTrue("Can create a new LinearDensityUnit", null != muLDU);
-        checkUnitRatioNameAndAbbreviation(muLDU, 0.0254, 0.000001, "PerInch", "/in");
-        deregisterUnit(muLDU);
+        checkUnitRatioNameAndAbbreviation(muLDU, 0.0254, 0.000001, "PerInch", "perin");
+        LinearDensityUnit.BASE.unregister(muLDU);
     }
 
 }

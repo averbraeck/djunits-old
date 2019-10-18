@@ -2,45 +2,38 @@ package org.djunits.value.vdouble.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
+import org.djunits.Throw;
 import org.djunits.unit.AngleUnit;
 import org.djunits.unit.DirectionUnit;
-import org.djunits.unit.Unit;
+import org.djunits.value.util.ValueUtil;
+import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarAbs;
 
 /**
- * Easy access methods for the Absolute Direction DoubleScalar. Instead of:
- * 
- * <pre>
- * DoubleScalar.Abs&lt;DirectionUnit&gt; value = new DoubleScalar.Abs&lt;DirectionUnit&gt;(100.0, DirectionUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * Direction value = new Direction(100.0, DirectionUnit.BASE);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the Absolute Direction DoubleScalar.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
- * <p>
+
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
 public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction, AngleUnit, Angle>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
-    /** constant with value zero. */
-    public static final Direction ZERO = new Direction(0.0, DirectionUnit.BASE);
+    /** Constant with value zero. */
+    public static final Direction ZERO = new Direction(0.0, DirectionUnit.DEFAULT);
 
     /**
      * Construct Direction scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; value
+     * @param unit DirectionUnit; unit for the double value
      */
     public Direction(final double value, final DirectionUnit unit)
     {
@@ -49,7 +42,7 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
 
     /**
      * Construct Direction scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Direction; Scalar from which to construct this instance
      */
     public Direction(final Direction value)
     {
@@ -71,32 +64,33 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
     }
 
     /**
-     * Construct %TypeAbsl% scalar.
-     * @param value double value in SI units
-     * @return the new scalar with the SI value
+     * Construct Direction scalar.
+     * @param value double; value in SI units
+     * @return Direction; the new scalar with the SI value
      */
-    public static final Direction createSI(final double value)
+    public static final Direction instantiateSI(final double value)
     {
-        return new Direction(value, DirectionUnit.BASE);
+        return new Direction(value, DirectionUnit.DEFAULT);
     }
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @param zero Direction; the low value
+     * @param one Direction; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @return Direction; a Scalar at the ratio between
      */
     public static Direction interpolate(final Direction zero, final Direction one, final double ratio)
     {
-        return new Direction(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new Direction(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
+            .getDisplayUnit());
     }
 
     /**
      * Return the maximum value of two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @return the maximum value of two absolute scalars
+     * @param a1 Direction; the first scalar
+     * @param a2 Direction; the second scalar
+     * @return Direction; the maximum value of two absolute scalars
      */
     public static Direction max(final Direction a1, final Direction a2)
     {
@@ -105,9 +99,9 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
 
     /**
      * Return the maximum value of more than two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @param an the other scalars
+     * @param a1 Direction; the first scalar
+     * @param a2 Direction; the second scalar
+     * @param an Direction...; the other scalars
      * @return the maximum value of more than two absolute scalars
      */
     public static Direction max(final Direction a1, final Direction a2, final Direction... an)
@@ -125,8 +119,8 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
 
     /**
      * Return the minimum value of two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
+     * @param a1 Direction; the first scalar
+     * @param a2 Direction; the second scalar
      * @return the minimum value of two absolute scalars
      */
     public static Direction min(final Direction a1, final Direction a2)
@@ -136,9 +130,9 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
 
     /**
      * Return the minimum value of more than two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @param an the other scalars
+     * @param a1 Direction; the first scalar
+     * @param a2 Direction; the second scalar
+     * @param an Direction...; the other scalars
      * @return the minimum value of more than two absolute scalars
      */
     public static Direction min(final Direction a1, final Direction a2, final Direction... an)
@@ -155,42 +149,54 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
     }
 
     /**
-     * Returns a Direction representation of a textual representation of a value with a unit. The String representation that can
-     * be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * Returns a Direction representation of a textual representation of a value with a unit. The String representation that can be
+     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Direction
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return Direction; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static Direction valueOf(final String text) throws IllegalArgumentException
+    public static Direction valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing Direction -- null or empty argument");
-        }
-        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        Throw.whenNull(text, "Error parsing Direction: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Direction: empty text to parse");
+        Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            DirectionUnit unit = DirectionUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                for (DirectionUnit unit : Unit.getUnits(DirectionUnit.class))
-                {
-                    if (unit.getDefaultLocaleTextualRepresentations().contains(unitString))
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new Direction(d, unit);
-                    }
-                }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing Direction from " + text, exception);
+                double d = Double.parseDouble(valueString);
+                return new Direction(d, unit);
             }
         }
         throw new IllegalArgumentException("Error parsing Direction from " + text);
     }
 
+    /**
+     * Returns a Direction based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return Direction; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static Direction of(final double value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing Direction: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing Direction: empty unitString");
+        DirectionUnit unit = DirectionUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new Direction(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing Direction with unit " + unitString);
+    }
+
+    
 }
+

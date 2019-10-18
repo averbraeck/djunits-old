@@ -1,15 +1,16 @@
 package org.djunits.value.vfloat.vector;
 
-import java.util.List;
-import java.util.SortedMap;
+import javax.annotation.Generated;
 
 import org.djunits.unit.DimensionlessUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.function.DimensionlessFunctions;
+import org.djunits.value.vfloat.function.FloatMathFunctions;
 import org.djunits.value.vfloat.scalar.FloatDimensionless;
+import org.djunits.value.vfloat.vector.base.AbstractFloatVectorRel;
+import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable Float FloatDimensionlessVector, a vector of values with a DimensionlessUnit.
+ * Immutable Float FloatDimensionlessVector, a vector of values with a DimensionlessUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -17,156 +18,199 @@ import org.djunits.value.vfloat.scalar.FloatDimensionless;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class FloatDimensionlessVector extends
-        AbstractFloatVectorRel<DimensionlessUnit, FloatDimensionlessVector, MutableFloatDimensionlessVector, FloatDimensionless>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class FloatDimensionlessVector extends AbstractFloatVectorRel<DimensionlessUnit, FloatDimensionless, FloatDimensionlessVector>
+ implements DimensionlessFunctions<DimensionlessUnit, FloatDimensionlessVector>
 {
     /** */
-    private static final long serialVersionUID = 20151109L;
+    private static final long serialVersionUID = 20190905L;
 
     /**
-     * Construct a new Relative Immutable Float FloatDimensionlessVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable Float FloatDimensionlessVector
-     * @param unit DimensionlessUnit; the unit of the new Relative Immutable Float FloatDimensionlessVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatDimensionlessVector(final float[] values, final DimensionlessUnit unit, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatDimensionlessVector.
-     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float FloatDimensionlessVector
-     * @param unit DimensionlessUnit; the unit of the new Relative Immutable Float FloatDimensionlessVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatDimensionlessVector(final List<Float> values, final DimensionlessUnit unit, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatDimensionlessVector.
-     * @param values FloatDimensionless[]; the values of the entries in the new Relative Immutable Float
-     *            FloatDimensionlessVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatDimensionlessVector(final FloatDimensionless[] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatDimensionlessVector.
-     * @param values List&lt;FloatDimensionless&gt;; the values of the entries in the new Relative Immutable Float
-     *            FloatDimensionlessVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatDimensionlessVector(final List<FloatDimensionless> values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatDimensionlessVector.
-     * @param values SortedMap&lt;Integer, FloatDimensionless&gt;; the values of the entries in the new Relative Sparse Mutable
-     *            Float FloatDimensionlessVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatDimensionlessVector(final SortedMap<Integer, FloatDimensionless> values, final int length,
-            final StorageType storageType) throws ValueException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatDimensionlessVector.
-     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
-     *            FloatDimensionlessVector
-     * @param unit DimensionlessUnit; the unit of the new Relative Sparse Mutable Float FloatDimensionlessVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatDimensionlessVector(final SortedMap<Integer, Float> values, final DimensionlessUnit unit, final int length,
-            final StorageType storageType) throws ValueException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
+     * Construct an FloatDimensionlessVector from an internal data object.
      * @param data FloatVectorData; an internal data object
      * @param unit DimensionlessUnit; the unit
      */
-    FloatDimensionlessVector(final FloatVectorData data, final DimensionlessUnit unit)
+    public FloatDimensionlessVector(final FloatVectorData data, final DimensionlessUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatDimensionlessVector instantiateType(final FloatVectorData dvd, final DimensionlessUnit unit)
+    public Class<FloatDimensionless> getScalarClass()
     {
-        return new FloatDimensionlessVector(dvd, unit);
+        return FloatDimensionless.class;
+    }
+        
+    /** {@inheritDoc} */
+    @Override
+    public FloatDimensionlessVector instantiateVector(final FloatVectorData fvd, final DimensionlessUnit displayUnit)
+    {
+        return new FloatDimensionlessVector(fvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatDimensionlessVector instantiateMutableType(final FloatVectorData dvd,
-            final DimensionlessUnit unit)
+    public FloatDimensionless instantiateScalarSI(final float valueSI, final DimensionlessUnit displayUnit)
     {
-        return new MutableFloatDimensionlessVector(dvd, unit);
+        FloatDimensionless result = FloatDimensionless.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
+    }
+
+   
+    /** {@inheritDoc} */
+    @Override
+    public final FloatDimensionlessVector acos()
+    {
+        assign(FloatMathFunctions.ACOS);
+        return this;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatDimensionless instantiateScalar(final float value, final DimensionlessUnit unit)
+    public final FloatDimensionlessVector asin()
     {
-        return new FloatDimensionless(value, unit);
+        assign(FloatMathFunctions.ASIN);
+        return this;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatDimensionlessVector toDense()
+    public final FloatDimensionlessVector atan()
     {
-        return this.data.isDense() ? (FloatDimensionlessVector) this : instantiateType(this.data.toDense(), getUnit());
+        assign(FloatMathFunctions.ATAN);
+        return this;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatDimensionlessVector toSparse()
+    public final FloatDimensionlessVector cbrt()
     {
-        return this.data.isSparse() ? (FloatDimensionlessVector) this : instantiateType(this.data.toSparse(), getUnit());
+        assign(FloatMathFunctions.CBRT);
+        return this;
     }
 
-    /**
-     * Return an array of FloatDimensionless Scalars from this vector.
-     * @return FloatDimensionless[]; an array of FloatDimensionless Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public FloatDimensionless[] toArray()
+    /** {@inheritDoc} */
+    @Override
+    public final FloatDimensionlessVector cos()
     {
-        FloatDimensionless[] array = new FloatDimensionless[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
+        assign(FloatMathFunctions.COS);
+        return this;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public final FloatDimensionlessVector cosh()
+    {
+        assign(FloatMathFunctions.COSH);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatDimensionlessVector exp()
+    {
+        assign(FloatMathFunctions.EXP);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatDimensionlessVector expm1()
+    {
+        assign(FloatMathFunctions.EXPM1);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatDimensionlessVector log()
+    {
+        assign(FloatMathFunctions.LOG);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatDimensionlessVector log10()
+    {
+        assign(FloatMathFunctions.LOG10);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatDimensionlessVector log1p()
+    {
+        assign(FloatMathFunctions.LOG1P);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatDimensionlessVector pow(final double x)
+    {
+        assign(FloatMathFunctions.POW((float) x));
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatDimensionlessVector signum()
+    {
+        assign(FloatMathFunctions.SIGNUM);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatDimensionlessVector sin()
+    {
+        assign(FloatMathFunctions.SIN);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatDimensionlessVector sinh()
+    {
+        assign(FloatMathFunctions.SINH);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatDimensionlessVector sqrt()
+    {
+        assign(FloatMathFunctions.SQRT);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatDimensionlessVector tan()
+    {
+        assign(FloatMathFunctions.TAN);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatDimensionlessVector tanh()
+    {
+        assign(FloatMathFunctions.TANH);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final FloatDimensionlessVector inv()
+    {
+        assign(FloatMathFunctions.INV);
+        return this;
+    }
+    
+   
 }
+

@@ -2,6 +2,9 @@ package org.djunits.value.vfloat.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
+import org.djunits.Throw;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.ElectricalCurrentUnit;
 import org.djunits.unit.ElectricalPotentialUnit;
@@ -10,57 +13,49 @@ import org.djunits.unit.ForceUnit;
 import org.djunits.unit.FrequencyUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.unit.SpeedUnit;
-import org.djunits.unit.Unit;
+import org.djunits.value.util.ValueUtil;
+import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
 
 /**
- * Easy access methods for the Power FloatScalar, which is relative by definition. An example is Speed. Instead of:
- * 
- * <pre>
- * FloatScalar.Rel&lt;PowerUnit&gt; value = new FloatScalar.Rel&lt;PowerUnit&gt;(100.0, PowerUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * FloatPower value = new FloatPower(100.0, PowerUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the FloatPower FloatScalar, which is relative by definition.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower> 
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final FloatPower ZERO = new FloatPower(0.0f, PowerUnit.SI);
 
-    /** constant with value NaN. */
+    /** Constant with value one. */
+    public static final FloatPower ONE = new FloatPower(1.0f, PowerUnit.SI);
+
+    /** Constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final FloatPower NaN = new FloatPower(Float.NaN, PowerUnit.SI);
 
-    /** constant with value POSITIVE_INFINITY. */
+    /** Constant with value POSITIVE_INFINITY. */
     public static final FloatPower POSITIVE_INFINITY = new FloatPower(Float.POSITIVE_INFINITY, PowerUnit.SI);
 
-    /** constant with value NEGATIVE_INFINITY. */
+    /** Constant with value NEGATIVE_INFINITY. */
     public static final FloatPower NEGATIVE_INFINITY = new FloatPower(Float.NEGATIVE_INFINITY, PowerUnit.SI);
 
-    /** constant with value MAX_VALUE. */
+    /** Constant with value MAX_VALUE. */
     public static final FloatPower POS_MAXVALUE = new FloatPower(Float.MAX_VALUE, PowerUnit.SI);
 
-    /** constant with value -MAX_VALUE. */
+    /** Constant with value -MAX_VALUE. */
     public static final FloatPower NEG_MAXVALUE = new FloatPower(-Float.MAX_VALUE, PowerUnit.SI);
 
     /**
      * Construct FloatPower scalar.
-     * @param value float value
+     * @param value float; the float value
      * @param unit unit for the float value
      */
     public FloatPower(final float value, final PowerUnit unit)
@@ -79,7 +74,7 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
 
     /**
      * Construct FloatPower scalar using a double value.
-     * @param value double value
+     * @param value double; the double value
      * @param unit unit for the resulting float value
      */
     public FloatPower(final double value, final PowerUnit unit)
@@ -96,10 +91,10 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
 
     /**
      * Construct FloatPower scalar.
-     * @param value float value in SI units
+     * @param value float; the float value in SI units
      * @return the new scalar with the SI value
      */
-    public static final FloatPower createSI(final float value)
+    public static final FloatPower instantiateSI(final float value)
     {
         return new FloatPower(value, PowerUnit.SI);
     }
@@ -108,12 +103,13 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
      * Interpolate between two values.
      * @param zero the low value
      * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatPower interpolate(final FloatPower zero, final FloatPower one, final float ratio)
     {
-        return new FloatPower(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new FloatPower(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
+            .getDisplayUnit());
     }
 
     /**
@@ -179,122 +175,135 @@ public class FloatPower extends AbstractFloatScalarRel<PowerUnit, FloatPower>
     }
 
     /**
-     * Returns a FloatPower representation of a textual representation of a value with a unit. The String representation that
-     * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
-     * not necessary, between the value and the unit.
+     * Returns a FloatPower representation of a textual representation of a value with a unit. The String representation that can be
+     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatPower
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return FloatPower; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static FloatPower valueOf(final String text) throws IllegalArgumentException
+    public static FloatPower valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing FloatPower -- null or empty argument");
-        }
-        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        Throw.whenNull(text, "Error parsing FloatPower: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatPower: empty text to parse");
+        Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            PowerUnit unit = PowerUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                for (PowerUnit unit : Unit.getUnits(PowerUnit.class))
-                {
-                    if (unit.getDefaultLocaleTextualRepresentations().contains(unitString))
-                    {
-                        float f = Float.parseFloat(valueString);
-                        return new FloatPower(f, unit);
-                    }
-                }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing FloatPower from " + text, exception);
+                float f = Float.parseFloat(valueString);
+                return new FloatPower(f, unit);
             }
         }
         throw new IllegalArgumentException("Error parsing FloatPower from " + text);
     }
 
     /**
-     * Calculate the division of FloatPower and FloatPower, which results in a FloatDimensionless scalar.
-     * @param v FloatPower scalar
-     * @return FloatDimensionless scalar as a division of FloatPower and FloatPower
+     * Returns a FloatPower based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return FloatPower; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
      */
-    public final FloatDimensionless divideBy(final FloatPower v)
+    public static FloatPower of(final float value, final String unitString)
     {
-        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+        Throw.whenNull(unitString, "Error parsing FloatPower: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatPower: empty unitString");
+        PowerUnit unit = PowerUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new FloatPower(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing FloatPower with unit " + unitString);
     }
 
-    /**
-     * Calculate the multiplication of FloatPower and FloatDuration, which results in a FloatEnergy scalar.
-     * @param v FloatPower scalar
-     * @return FloatEnergy scalar as a multiplication of FloatPower and FloatDuration
-     */
-    public final FloatEnergy multiplyBy(final FloatDuration v)
-    {
-        return new FloatEnergy(this.si * v.si, EnergyUnit.SI);
-    }
+        /**
+         * Calculate the division of FloatPower and FloatPower, which results in a FloatDimensionless scalar.
+         * @param v FloatPower scalar
+         * @return FloatDimensionless scalar as a division of FloatPower and FloatPower
+         */
+        public final FloatDimensionless divide(final FloatPower v)
+        {
+            return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+        }
 
-    /**
-     * Calculate the division of FloatPower and FloatFrequency, which results in a FloatEnergy scalar.
-     * @param v FloatPower scalar
-     * @return FloatEnergy scalar as a division of FloatPower and FloatFrequency
-     */
-    public final FloatEnergy divideBy(final FloatFrequency v)
-    {
-        return new FloatEnergy(this.si / v.si, EnergyUnit.SI);
-    }
+        /**
+         * Calculate the multiplication of FloatPower and FloatDuration, which results in a FloatEnergy scalar.
+         * @param v FloatPower scalar
+         * @return FloatEnergy scalar as a multiplication of FloatPower and FloatDuration
+         */
+        public final FloatEnergy times(final FloatDuration v)
+        {
+            return new FloatEnergy(this.si * v.si, EnergyUnit.SI);
+        }
 
-    /**
-     * Calculate the division of FloatPower and FloatEnergy, which results in a FloatFrequency scalar.
-     * @param v FloatPower scalar
-     * @return FloatFrequency scalar as a division of FloatPower and FloatEnergy
-     */
-    public final FloatFrequency divideBy(final FloatEnergy v)
-    {
-        return new FloatFrequency(this.si / v.si, FrequencyUnit.SI);
-    }
+        /**
+         * Calculate the division of FloatPower and FloatFrequency, which results in a FloatEnergy scalar.
+         * @param v FloatPower scalar
+         * @return FloatEnergy scalar as a division of FloatPower and FloatFrequency
+         */
+        public final FloatEnergy divide(final FloatFrequency v)
+        {
+            return new FloatEnergy(this.si / v.si, EnergyUnit.SI);
+        }
 
-    /**
-     * Calculate the division of FloatPower and FloatSpeed, which results in a FloatForce scalar.
-     * @param v FloatPower scalar
-     * @return FloatForce scalar as a division of FloatPower and FloatSpeed
-     */
-    public final FloatForce divideBy(final FloatSpeed v)
-    {
-        return new FloatForce(this.si / v.si, ForceUnit.SI);
-    }
+        /**
+         * Calculate the division of FloatPower and FloatEnergy, which results in a FloatFrequency scalar.
+         * @param v FloatPower scalar
+         * @return FloatFrequency scalar as a division of FloatPower and FloatEnergy
+         */
+        public final FloatFrequency divide(final FloatEnergy v)
+        {
+            return new FloatFrequency(this.si / v.si, FrequencyUnit.SI);
+        }
 
-    /**
-     * Calculate the division of FloatPower and FloatForce, which results in a FloatSpeed scalar.
-     * @param v FloatPower scalar
-     * @return FloatSpeed scalar as a division of FloatPower and FloatForce
-     */
-    public final FloatSpeed divideBy(final FloatForce v)
-    {
-        return new FloatSpeed(this.si / v.si, SpeedUnit.SI);
-    }
+        /**
+         * Calculate the division of FloatPower and FloatSpeed, which results in a FloatForce scalar.
+         * @param v FloatPower scalar
+         * @return FloatForce scalar as a division of FloatPower and FloatSpeed
+         */
+        public final FloatForce divide(final FloatSpeed v)
+        {
+            return new FloatForce(this.si / v.si, ForceUnit.SI);
+        }
 
-    /**
-     * Calculate the division of FloatPower and FloatElectricalPotential, which results in a FloatElectricalCurrent scalar.
-     * @param v FloatPower scalar
-     * @return FloatElectricalCurrent scalar as a division of FloatPower and FloatElectricalPotential
-     */
-    public final FloatElectricalCurrent divideBy(final FloatElectricalPotential v)
-    {
-        return new FloatElectricalCurrent(this.si / v.si, ElectricalCurrentUnit.SI);
-    }
+        /**
+         * Calculate the division of FloatPower and FloatForce, which results in a FloatSpeed scalar.
+         * @param v FloatPower scalar
+         * @return FloatSpeed scalar as a division of FloatPower and FloatForce
+         */
+        public final FloatSpeed divide(final FloatForce v)
+        {
+            return new FloatSpeed(this.si / v.si, SpeedUnit.SI);
+        }
 
-    /**
-     * Calculate the division of FloatPower and FloatElectricalCurrent, which results in a FloatElectricalPotential scalar.
-     * @param v FloatPower scalar
-     * @return FloatElectricalPotential scalar as a division of FloatPower and FloatElectricalCurrent
-     */
-    public final FloatElectricalPotential divideBy(final FloatElectricalCurrent v)
-    {
-        return new FloatElectricalPotential(this.si / v.si, ElectricalPotentialUnit.SI);
-    }
+        /**
+         * Calculate the division of FloatPower and FloatElectricalPotential, which results in a FloatElectricalCurrent scalar.
+         * @param v FloatPower scalar
+         * @return FloatElectricalCurrent scalar as a division of FloatPower and FloatElectricalPotential
+         */
+        public final FloatElectricalCurrent divide(final FloatElectricalPotential v)
+        {
+            return new FloatElectricalCurrent(this.si / v.si, ElectricalCurrentUnit.SI);
+        }
+
+        /**
+         * Calculate the division of FloatPower and FloatElectricalCurrent, which results in a FloatElectricalPotential scalar.
+         * @param v FloatPower scalar
+         * @return FloatElectricalPotential scalar as a division of FloatPower and FloatElectricalCurrent
+         */
+        public final FloatElectricalPotential divide(final FloatElectricalCurrent v)
+        {
+            return new FloatElectricalPotential(this.si / v.si, ElectricalPotentialUnit.SI);
+        }
+
 
 }
+
+

@@ -1,12 +1,16 @@
 package org.djunits.value.vdouble.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.VolumeUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
+import org.djunits.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits.value.vdouble.scalar.Volume;
+import org.djunits.value.vdouble.vector.VolumeVector;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Double VolumeMatrix, a matrix of values with a VolumeUnit.
+ * Immutable Double VolumeMatrix, a matrix of values with a VolumeUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -14,76 +18,58 @@ import org.djunits.value.vdouble.scalar.Volume;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class VolumeMatrix extends AbstractDoubleMatrixRel<VolumeUnit, VolumeMatrix, MutableVolumeMatrix, Volume>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class VolumeMatrix extends AbstractDoubleMatrixRel<VolumeUnit, Volume, VolumeVector, VolumeMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Double VolumeMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double VolumeMatrix
-     * @param unit VolumeUnit; the unit of the new Relative Immutable Double VolumeMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public VolumeMatrix(final double[][] values, final VolumeUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double VolumeMatrix.
-     * @param values Volume[][]; the values of the entries in the new Relative Immutable Double VolumeMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public VolumeMatrix(final Volume[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data DoubleMatrixData; an internal data object
      * @param unit VolumeUnit; the unit
      */
-    VolumeMatrix(final DoubleMatrixData data, final VolumeUnit unit)
+    public VolumeMatrix(final DoubleMatrixData data, final VolumeUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final VolumeMatrix toDense()
+    public Class<Volume> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return Volume.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final VolumeMatrix toSparse()
+    public Class<VolumeVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+        return VolumeVector.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final VolumeMatrix instantiateType(final DoubleMatrixData dmd, final VolumeUnit unit)
+    public VolumeMatrix instantiateMatrix(final DoubleMatrixData dmd, final VolumeUnit displayUnit)
     {
-        return new VolumeMatrix(dmd, unit);
+        return new VolumeMatrix(dmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableVolumeMatrix instantiateMutableType(final DoubleMatrixData dmd, final VolumeUnit unit)
+    public VolumeVector instantiateVector(final DoubleVectorData dvd, final VolumeUnit displayUnit)
     {
-        return new MutableVolumeMatrix(dmd, unit);
+        return new VolumeVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Volume instantiateScalar(final double value, final VolumeUnit unit)
+    public Volume instantiateScalarSI(final double valueSI, final VolumeUnit displayUnit)
     {
-        return new Volume(value, unit);
+        Volume result = Volume.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
-
+    
 }
+

@@ -1,12 +1,18 @@
 package org.djunits.value.vdouble.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.DimensionlessUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.function.DimensionlessFunctions;
+import org.djunits.value.vdouble.function.DoubleMathFunctions;
+import org.djunits.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
+import org.djunits.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits.value.vdouble.scalar.Dimensionless;
+import org.djunits.value.vdouble.vector.DimensionlessVector;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Double DimensionlessMatrix, a matrix of values with a DimensionlessUnit.
+ * Immutable Double DimensionlessMatrix, a matrix of values with a DimensionlessUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -14,78 +20,210 @@ import org.djunits.value.vdouble.scalar.Dimensionless;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class DimensionlessMatrix
-        extends AbstractDoubleMatrixRel<DimensionlessUnit, DimensionlessMatrix, MutableDimensionlessMatrix, Dimensionless>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class DimensionlessMatrix extends AbstractDoubleMatrixRel<DimensionlessUnit, Dimensionless, DimensionlessVector, DimensionlessMatrix>
+ implements DimensionlessFunctions<DimensionlessUnit, DimensionlessMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Double DimensionlessMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double DimensionlessMatrix
-     * @param unit DimensionlessUnit; the unit of the new Relative Immutable Double DimensionlessMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public DimensionlessMatrix(final double[][] values, final DimensionlessUnit unit, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double DimensionlessMatrix.
-     * @param values Dimensionless[][]; the values of the entries in the new Relative Immutable Double DimensionlessMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public DimensionlessMatrix(final Dimensionless[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data DoubleMatrixData; an internal data object
      * @param unit DimensionlessUnit; the unit
      */
-    DimensionlessMatrix(final DoubleMatrixData data, final DimensionlessUnit unit)
+    public DimensionlessMatrix(final DoubleMatrixData data, final DimensionlessUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final DimensionlessMatrix toDense()
+    public Class<Dimensionless> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return Dimensionless.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final DimensionlessMatrix toSparse()
+    public Class<DimensionlessVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+        return DimensionlessVector.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final DimensionlessMatrix instantiateType(final DoubleMatrixData dmd, final DimensionlessUnit unit)
+    public DimensionlessMatrix instantiateMatrix(final DoubleMatrixData dmd, final DimensionlessUnit displayUnit)
     {
-        return new DimensionlessMatrix(dmd, unit);
+        return new DimensionlessMatrix(dmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableDimensionlessMatrix instantiateMutableType(final DoubleMatrixData dmd, final DimensionlessUnit unit)
+    public DimensionlessVector instantiateVector(final DoubleVectorData dvd, final DimensionlessUnit displayUnit)
     {
-        return new MutableDimensionlessMatrix(dmd, unit);
+        return new DimensionlessVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Dimensionless instantiateScalar(final double value, final DimensionlessUnit unit)
+    public Dimensionless instantiateScalarSI(final double valueSI, final DimensionlessUnit displayUnit)
     {
-        return new Dimensionless(value, unit);
+        Dimensionless result = Dimensionless.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
+    }
+    
+    /** {@inheritDoc} */
+    @Override
+    public final DimensionlessMatrix acos()
+    {
+        assign(DoubleMathFunctions.ACOS);
+        return this;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public final DimensionlessMatrix asin()
+    {
+        assign(DoubleMathFunctions.ASIN);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DimensionlessMatrix atan()
+    {
+        assign(DoubleMathFunctions.ATAN);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DimensionlessMatrix cbrt()
+    {
+        assign(DoubleMathFunctions.CBRT);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DimensionlessMatrix cos()
+    {
+        assign(DoubleMathFunctions.COS);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DimensionlessMatrix cosh()
+    {
+        assign(DoubleMathFunctions.COSH);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DimensionlessMatrix exp()
+    {
+        assign(DoubleMathFunctions.EXP);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DimensionlessMatrix expm1()
+    {
+        assign(DoubleMathFunctions.EXPM1);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DimensionlessMatrix log()
+    {
+        assign(DoubleMathFunctions.LOG);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DimensionlessMatrix log10()
+    {
+        assign(DoubleMathFunctions.LOG10);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DimensionlessMatrix log1p()
+    {
+        assign(DoubleMathFunctions.LOG1P);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DimensionlessMatrix pow(final double x)
+    {
+        assign(DoubleMathFunctions.POW((float) x));
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DimensionlessMatrix signum()
+    {
+        assign(DoubleMathFunctions.SIGNUM);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DimensionlessMatrix sin()
+    {
+        assign(DoubleMathFunctions.SIN);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DimensionlessMatrix sinh()
+    {
+        assign(DoubleMathFunctions.SINH);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DimensionlessMatrix sqrt()
+    {
+        assign(DoubleMathFunctions.SQRT);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DimensionlessMatrix tan()
+    {
+        assign(DoubleMathFunctions.TAN);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DimensionlessMatrix tanh()
+    {
+        assign(DoubleMathFunctions.TANH);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final DimensionlessMatrix inv()
+    {
+        assign(DoubleMathFunctions.INV);
+        return this;
+    }
+    
+   
 }

@@ -1,15 +1,14 @@
 package org.djunits.value.vfloat.vector;
 
-import java.util.List;
-import java.util.SortedMap;
+import javax.annotation.Generated;
 
 import org.djunits.unit.ForceUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatForce;
+import org.djunits.value.vfloat.vector.base.AbstractFloatVectorRel;
+import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable Float FloatForceVector, a vector of values with a ForceUnit.
+ * Immutable Float FloatForceVector, a vector of values with a ForceUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -17,150 +16,47 @@ import org.djunits.value.vfloat.scalar.FloatForce;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class FloatForceVector extends AbstractFloatVectorRel<ForceUnit, FloatForceVector, MutableFloatForceVector, FloatForce>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class FloatForceVector extends AbstractFloatVectorRel<ForceUnit, FloatForce, FloatForceVector>
+
 {
     /** */
-    private static final long serialVersionUID = 20151109L;
+    private static final long serialVersionUID = 20190905L;
 
     /**
-     * Construct a new Relative Immutable Float FloatForceVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable Float FloatForceVector
-     * @param unit ForceUnit; the unit of the new Relative Immutable Float FloatForceVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatForceVector(final float[] values, final ForceUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatForceVector.
-     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float FloatForceVector
-     * @param unit ForceUnit; the unit of the new Relative Immutable Float FloatForceVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatForceVector(final List<Float> values, final ForceUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatForceVector.
-     * @param values FloatForce[]; the values of the entries in the new Relative Immutable Float FloatForceVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatForceVector(final FloatForce[] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatForceVector.
-     * @param values List&lt;FloatForce&gt;; the values of the entries in the new Relative Immutable Float FloatForceVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatForceVector(final List<FloatForce> values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatForceVector.
-     * @param values SortedMap&lt;Integer, FloatForce&gt;; the values of the entries in the new Relative Sparse Mutable Float
-     *            FloatForceVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatForceVector(final SortedMap<Integer, FloatForce> values, final int length, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatForceVector.
-     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
-     *            FloatForceVector
-     * @param unit ForceUnit; the unit of the new Relative Sparse Mutable Float FloatForceVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatForceVector(final SortedMap<Integer, Float> values, final ForceUnit unit, final int length,
-            final StorageType storageType) throws ValueException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
+     * Construct an FloatForceVector from an internal data object.
      * @param data FloatVectorData; an internal data object
      * @param unit ForceUnit; the unit
      */
-    FloatForceVector(final FloatVectorData data, final ForceUnit unit)
+    public FloatForceVector(final FloatVectorData data, final ForceUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatForceVector instantiateType(final FloatVectorData dvd, final ForceUnit unit)
+    public Class<FloatForce> getScalarClass()
     {
-        return new FloatForceVector(dvd, unit);
+        return FloatForce.class;
+    }
+        
+    /** {@inheritDoc} */
+    @Override
+    public FloatForceVector instantiateVector(final FloatVectorData fvd, final ForceUnit displayUnit)
+    {
+        return new FloatForceVector(fvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatForceVector instantiateMutableType(final FloatVectorData dvd, final ForceUnit unit)
+    public FloatForce instantiateScalarSI(final float valueSI, final ForceUnit displayUnit)
     {
-        return new MutableFloatForceVector(dvd, unit);
+        FloatForce result = FloatForce.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatForce instantiateScalar(final float value, final ForceUnit unit)
-    {
-        return new FloatForce(value, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForceVector toDense()
-    {
-        return this.data.isDense() ? (FloatForceVector) this : instantiateType(this.data.toDense(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatForceVector toSparse()
-    {
-        return this.data.isSparse() ? (FloatForceVector) this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Return an array of FloatForce Scalars from this vector.
-     * @return FloatForce[]; an array of FloatForce Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public FloatForce[] toArray()
-    {
-        FloatForce[] array = new FloatForce[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
-    }
-
+   
 }
+
+

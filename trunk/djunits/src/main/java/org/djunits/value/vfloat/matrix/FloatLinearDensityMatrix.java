@@ -1,12 +1,16 @@
 package org.djunits.value.vfloat.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.LinearDensityUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vfloat.matrix.base.AbstractFloatMatrixRel;
+import org.djunits.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits.value.vfloat.scalar.FloatLinearDensity;
+import org.djunits.value.vfloat.vector.FloatLinearDensityVector;
+import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable FloatLinearDensityMatrix, a matrix of values with a LinearDensityUnit.
+ * Immutable FloatFloatLinearDensityMatrix, a matrix of values with a LinearDensityUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -14,80 +18,58 @@ import org.djunits.value.vfloat.scalar.FloatLinearDensity;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class FloatLinearDensityMatrix extends
-        AbstractFloatMatrixRel<LinearDensityUnit, FloatLinearDensityMatrix, MutableFloatLinearDensityMatrix, FloatLinearDensity>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class FloatLinearDensityMatrix extends AbstractFloatMatrixRel<LinearDensityUnit, FloatLinearDensity, FloatLinearDensityVector, FloatLinearDensityMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatLinearDensityMatrix.
-     * @param values float[][]; the values of the entries in the new Relative Immutable FloatLinearDensityMatrix
-     * @param unit LinearDensityUnit; the unit of the new Relative Immutable FloatLinearDensityMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatLinearDensityMatrix(final float[][] values, final LinearDensityUnit unit, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatLinearDensityMatrix.
-     * @param values FloatLinearDensity[][]; the values of the entries in the new Relative Immutable Float
-     *            FloatLinearDensityMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatLinearDensityMatrix(final FloatLinearDensity[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data FloatMatrixData; an internal data object
      * @param unit LinearDensityUnit; the unit
      */
-    FloatLinearDensityMatrix(final FloatMatrixData data, final LinearDensityUnit unit)
+    public FloatLinearDensityMatrix(final FloatMatrixData data, final LinearDensityUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatLinearDensityMatrix toDense()
+    public Class<FloatLinearDensity> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return FloatLinearDensity.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatLinearDensityMatrix toSparse()
+    public Class<FloatLinearDensityVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+        return FloatLinearDensityVector.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatLinearDensityMatrix instantiateType(final FloatMatrixData fmd, final LinearDensityUnit unit)
+    public FloatLinearDensityMatrix instantiateMatrix(final FloatMatrixData fmd, final LinearDensityUnit displayUnit)
     {
-        return new FloatLinearDensityMatrix(fmd, unit);
+        return new FloatLinearDensityMatrix(fmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatLinearDensityMatrix instantiateMutableType(final FloatMatrixData fmd,
-            final LinearDensityUnit unit)
+    public FloatLinearDensityVector instantiateVector(final FloatVectorData fvd, final LinearDensityUnit displayUnit)
     {
-        return new MutableFloatLinearDensityMatrix(fmd, unit);
+        return new FloatLinearDensityVector(fvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatLinearDensity instantiateScalar(final float value, final LinearDensityUnit unit)
+    public FloatLinearDensity instantiateScalarSI(final float valueSI, final LinearDensityUnit displayUnit)
     {
-        return new FloatLinearDensity(value, unit);
+        FloatLinearDensity result = FloatLinearDensity.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
-
+
 }
+

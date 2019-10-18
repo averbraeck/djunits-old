@@ -12,7 +12,7 @@ import java.util.Map;
  * <p>
  * Copyright (c) 2002-2009 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.
  * <p>
- * See for project information <a href="http://www.simulation.tudelft.nl/"> www.simulation.tudelft.nl</a>.
+ * See for project information <a href="http://www.getSI()mulation.tudelft.nl/"> www.getSI()mulation.tudelft.nl</a>.
  * <p>
  * The DSOL project is distributed under the following BSD-style license:<br>
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following
@@ -53,7 +53,6 @@ public class FieldSignature implements Serializable
      */
     public FieldSignature(final String value)
     {
-        super();
         this.value = value;
     }
 

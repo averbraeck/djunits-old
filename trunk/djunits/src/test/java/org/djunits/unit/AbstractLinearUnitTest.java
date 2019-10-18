@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
  * @author <a href="https://tudelft.nl/pknoppers">Peter Knoppers</a>
  * @param <U> Make the test specific for this sub class of Unit
  */
-public abstract class AbstractLinearUnitTest<U extends LinearUnit<U>> extends AbstractUnitTest<U>
+public abstract class AbstractLinearUnitTest<U extends Unit<U>> extends AbstractUnitTest<U>
 {
     /**
      * Verify one length conversion factor to standard unit and the localization of the name and abbreviation.
@@ -23,11 +23,11 @@ public abstract class AbstractLinearUnitTest<U extends LinearUnit<U>> extends Ab
     protected final void checkUnitRatioNameAndAbbreviation(final U u, final double expectedRatio, final double precision,
             final String expectedName, final String expectedAbbreviation)
     {
-        assertEquals(String.format("one %s is about %f reference unit", u.getAbbreviationKey(), expectedRatio), expectedRatio,
-                u.getScaleFactor(), precision);
-        assertEquals(String.format("Name of %s is %s", u.getAbbreviationKey(), expectedName), expectedName, u.getName());
-        assertEquals(String.format("Abbreviation of %s is %s", u.getAbbreviationKey(), expectedAbbreviation),
-                expectedAbbreviation, u.getAbbreviation());
+        assertEquals(String.format("one %s is about %f reference unit", u.getId(), expectedRatio), expectedRatio,
+                u.getScale().toStandardUnit(1.0), precision);
+        assertEquals(String.format("Name of %s is %s", u.getId(), expectedName), expectedName, u.getName());
+        assertEquals(String.format("Abbreviation of %s is %s", u.getId(), expectedAbbreviation), expectedAbbreviation,
+                u.getDefaultDisplayAbbreviation());
     }
 
     /**
@@ -37,7 +37,7 @@ public abstract class AbstractLinearUnitTest<U extends LinearUnit<U>> extends Ab
      */
     public final double getMultiplicationFactorTo(final U fromUnit, final U toUnit)
     {
-        return fromUnit.getScaleFactor() / toUnit.getScaleFactor();
+        return fromUnit.getScale().toStandardUnit(1.0) / toUnit.getScale().toStandardUnit(1.0);
     }
 
 }

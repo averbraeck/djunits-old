@@ -1,9 +1,37 @@
 package org.djunits.unit.scale;
 
 /**
+ * Scale with factor and zero point offset.
+ * <p>
  * A Scale for linear transformations with an offset that has to be applied first when converting to the standard (SI) unit,
  * before the scaling takes place, e.g. for Temperature. As an example, transform from Degrees Fahrenheit to Kelvin (SI). The
  * conversion is K = (F + 459.67) × 5⁄9, and F = K × 9⁄5 − 459.67.
+ * </p>
+ * <p>
+ * When we have an original scale with offset o1 and scalefactor f1, the calculation to the base unit is
+ * 
+ * <pre>
+ * valueSI = (value1 + o1) * f1
+ * </pre>
+ * 
+ * So the offset is expressed in the "unit" of the value. As an example, when we transform degrees Fahrenheit to Kelvin, the
+ * factor is 5/9, and the offset is 459.67 (degrees Fahrenheit of 0 degrees Fahrenheit expressed in Kelvin). The formula
+ * becomes: K = (F + 459.67) * 5/9. So 0 F is 459.67 * 5/9 = 255.372 K. For Celcius to Kelvin, the scale factor is 1, and the
+ * offset 273.15. From Fahrenheit to Celcius, the offset is -32, and the factor is 5/9.
+ * </p>
+ * <p>
+ * When we apply a second offset transformation on a scale, e.g. from Fahrenheit to Celcius to Kelvin, this works as follows: If
+ * we combine a second scale factor for a derived unit with offset o2 and scalefactor f2, we need to calculate the ultimate
+ * scale to the base (si) unit. The factor then becomes:
+ * 
+ * <pre>
+ * value1  = (value2 + o2) * f2
+ * valueSI = (value1 + o1) * f1 = value2 * (f1 * f2) + (f1 * f2 * o2 + f1 * o1)
+ * </pre>
+ * 
+ * as an example for F --2--> C --1--> K: o1 = 273.15, f1 = 1, o2 = -32, f2 = 5/9: <br>
+ * 110 F = 110*5/9 -32*5/9 + 273.15 = 316.483 K.
+ * </p>
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -14,7 +42,7 @@ package org.djunits.unit.scale;
 public class OffsetLinearScale extends LinearScale implements Scale
 {
     /** */
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 20151011L;
 
     /** The offset that has to be taken into account for conversions, multiplied by the conversionFactorToStandardUnit. */
     private final double offsetToStandardUnit;
@@ -47,7 +75,8 @@ public class OffsetLinearScale extends LinearScale implements Scale
     }
 
     /**
-     * @return offsetToStandardUnit
+     * Retrieve the offset from the standard unit.
+     * @return double; the offset from the standard unit
      */
     public final double getOffsetToStandardUnit()
     {
@@ -56,9 +85,9 @@ public class OffsetLinearScale extends LinearScale implements Scale
 
     /** {@inheritDoc} */
     @Override
-    public final boolean isBaseSIScale()
+    public boolean isBaseSIScale()
     {
-        return getConversionFactorToStandardUnit() == 1.0 && this.offsetToStandardUnit == 0.0;
+        return super.isBaseSIScale() && this.offsetToStandardUnit == 0.0;
     }
 
     /** {@inheritDoc} */
@@ -88,6 +117,14 @@ public class OffsetLinearScale extends LinearScale implements Scale
         if (Double.doubleToLongBits(this.offsetToStandardUnit) != Double.doubleToLongBits(other.offsetToStandardUnit))
             return false;
         return true;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public String toString()
+    {
+        return "OffsetLinearScale [offsetToStandardUnit=" + this.offsetToStandardUnit + ", conversionFactorToStandardUnit="
+                + this.getConversionFactorToStandardUnit() + "]";
     }
 
 }

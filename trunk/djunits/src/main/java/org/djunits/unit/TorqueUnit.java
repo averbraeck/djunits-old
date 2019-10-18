@@ -1,9 +1,8 @@
 package org.djunits.unit;
 
-import static org.djunits.unit.unitsystem.UnitSystem.IMPERIAL;
-import static org.djunits.unit.unitsystem.UnitSystem.OTHER;
-import static org.djunits.unit.unitsystem.UnitSystem.SI_DERIVED;
-
+import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.scale.IdentityScale;
+import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
 
 /**
@@ -14,185 +13,43 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class TorqueUnit extends LinearUnit<TorqueUnit>
+public class TorqueUnit extends Unit<TorqueUnit>
 {
     /** */
     private static final long serialVersionUID = 20140607L;
 
-    /** The unit of mass for the torque unit, e.g., kilogram. */
-    private final MassUnit massUnit;
+    /** The base, with "kgm2/s2" as the SI signature. */
+    public static final UnitBase<TorqueUnit> BASE = new UnitBase<>("kgm2/s2");
 
-    /** The unit of length for the torque unit, e.g., length. */
-    private final LengthUnit lengthUnit;
-
-    /** The unit of time for the torque unit, e.g., second. */
-    private final DurationUnit durationUnit;
-
-    /** The SI unit for torque is Newton meter. */
-    public static final TorqueUnit SI;
+    /** The SI unit for torque is Newton meter = kgm2/s2. */
+    public static final TorqueUnit SI =
+            new TorqueUnit().build(new Unit.Builder<TorqueUnit>().setUnitBase(BASE).setId("N.m").setName("Newton meter")
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(IdentityScale.SCALE));
 
     /** Newton meter. */
-    public static final TorqueUnit NEWTON_METER;
+    public static final TorqueUnit NEWTON_METER = SI;
 
     /** meter kilogram-force. */
-    public static final TorqueUnit METER_KILOGRAM_FORCE;
+    public static final TorqueUnit METER_KILOGRAM_FORCE = SI.deriveLinear(factorLF(LengthUnit.METER, ForceUnit.KILOGRAM_FORCE),
+            "m.kgf", "meter kilogram-force", UnitSystem.OTHER);
 
     /** Pound foot. */
-    public static final TorqueUnit POUND_FOOT;
+    public static final TorqueUnit POUND_FOOT =
+            SI.deriveLinear(factorLF(LengthUnit.FOOT, ForceUnit.POUND_FORCE), "lbf.ft", "pound-foot", UnitSystem.IMPERIAL);
 
     /** Pound inch. */
-    public static final TorqueUnit POUND_INCH;
-
-    static
-    {
-        SI = new TorqueUnit(MassUnit.KILOGRAM, LengthUnit.METER, DurationUnit.SECOND, "TorqueUnit.N.m", SI_DERIVED);
-        NEWTON_METER = SI;
-        METER_KILOGRAM_FORCE = new TorqueUnit(ForceUnit.KILOGRAM_FORCE, LengthUnit.METER, "TorqueUnit.m.kgf", OTHER);
-        POUND_FOOT = new TorqueUnit(ForceUnit.POUND_FORCE, LengthUnit.FOOT, "TorqueUnit.lbf.ft", IMPERIAL);
-        POUND_INCH = new TorqueUnit(ForceUnit.POUND_FORCE, LengthUnit.INCH, "TorqueUnit.lbf.in", IMPERIAL);
-    }
+    public static final TorqueUnit POUND_INCH =
+            SI.deriveLinear(factorLF(LengthUnit.INCH, ForceUnit.POUND_FORCE), "lbf.in", "pound-inch", UnitSystem.IMPERIAL);
 
     /**
-     * Create a torque unit from mass, length and time units.
-     * @param massUnit MassUnit; the unit of mass for the torque unit, e.g., kilogram
-     * @param lengthUnit LengthUnit; the unit of length for the torque unit, e.g., meter
-     * @param durationUnit DurationUnit; the unit of time for the torque unit, e.g., second
-     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
-     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * Determine the conversion factor to the base torque unit, given a length unit and a force unit.
+     * @param length LengthUnit; the used length unit, e.g. m
+     * @param force ForceUnit; the used force unit, e.g. kgf
+     * @return double; the conversion factor from the provided units (e.g. m.kgf) to the standard unit (e.g., Nm or kg.m2/s2)
      */
-    private TorqueUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final DurationUnit durationUnit,
-            final String abbreviationKey, final UnitSystem unitSystem)
+    private static double factorLF(final LengthUnit length, final ForceUnit force)
     {
-        super(abbreviationKey, unitSystem, NEWTON_METER, massUnit.getScaleFactor() * lengthUnit.getScaleFactor()
-                * lengthUnit.getScaleFactor() / (durationUnit.getScaleFactor() * durationUnit.getScaleFactor()));
-        this.massUnit = massUnit;
-        this.lengthUnit = lengthUnit;
-        this.durationUnit = durationUnit;
-    }
-
-    /**
-     * Create a user-defined torque unit from mass, length and time units.
-     * @param massUnit MassUnit; the unit of mass for the torque unit, e.g., kilogram
-     * @param lengthUnit LengthUnit; the unit of length for the torque unit, e.g., meter
-     * @param durationUnit DurationUnit; the unit of time for the torque unit, e.g., second
-     * @param name String; the long name of the unit
-     * @param abbreviation String; the abbreviation of the unit
-     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     */
-    public TorqueUnit(final MassUnit massUnit, final LengthUnit lengthUnit, final DurationUnit durationUnit, final String name,
-            final String abbreviation, final UnitSystem unitSystem)
-    {
-        super(name, abbreviation, unitSystem, NEWTON_METER, massUnit.getScaleFactor() * lengthUnit.getScaleFactor()
-                * lengthUnit.getScaleFactor() / (durationUnit.getScaleFactor() * durationUnit.getScaleFactor()));
-        this.massUnit = massUnit;
-        this.lengthUnit = lengthUnit;
-        this.durationUnit = durationUnit;
-    }
-
-    /**
-     * Create a torque unit from force and length units.
-     * @param forceUnit ForceUnit; the unit of force for the torque unit, e.g., Newton
-     * @param lengthUnit LengthUnit; the unit of length for the torque unit, e.g., meter
-     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
-     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     */
-    private TorqueUnit(final ForceUnit forceUnit, final LengthUnit lengthUnit, final String abbreviationKey,
-            final UnitSystem unitSystem)
-    {
-        super(abbreviationKey, unitSystem, NEWTON_METER, forceUnit.getScaleFactor() * lengthUnit.getScaleFactor());
-        this.massUnit = forceUnit.getMassUnit();
-        this.lengthUnit = forceUnit.getLengthUnit();
-        this.durationUnit = forceUnit.getDurationUnit();
-    }
-
-    /**
-     * Create a user-defined torque unit from force and length units.
-     * @param forceUnit ForceUnit; the unit of force for the torque unit, e.g., Newton
-     * @param lengthUnit LengthUnit; the unit of length for the torque unit, e.g., meter
-     * @param name String; the long name of the unit
-     * @param abbreviation String; the abbreviation of the unit
-     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     */
-    public TorqueUnit(final ForceUnit forceUnit, final LengthUnit lengthUnit, final String name, final String abbreviation,
-            final UnitSystem unitSystem)
-    {
-        super(name, abbreviation, unitSystem, NEWTON_METER, forceUnit.getScaleFactor() * lengthUnit.getScaleFactor());
-        this.massUnit = forceUnit.getMassUnit();
-        this.lengthUnit = forceUnit.getLengthUnit();
-        this.durationUnit = forceUnit.getDurationUnit();
-    }
-
-    /**
-     * Construct a torque unit based on another torque unit.
-     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
-     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     * @param referenceUnit TorqueUnit; the unit to convert to
-     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
-     *            unit
-     */
-    private TorqueUnit(final String abbreviationKey, final UnitSystem unitSystem, final TorqueUnit referenceUnit,
-            final double scaleFactorToReferenceUnit)
-    {
-        super(abbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
-        this.massUnit = referenceUnit.getMassUnit();
-        this.lengthUnit = referenceUnit.getLengthUnit();
-        this.durationUnit = referenceUnit.getDurationUnit();
-    }
-
-    /**
-     * Build a user-defined unit with a conversion factor to another unit.
-     * @param name String; the long name of the unit
-     * @param abbreviation String; the abbreviation of the unit
-     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     * @param referenceUnit TorqueUnit; the unit to convert to
-     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
-     *            unit
-     */
-    public TorqueUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final TorqueUnit referenceUnit,
-            final double scaleFactorToReferenceUnit)
-    {
-        super(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
-        this.massUnit = referenceUnit.getMassUnit();
-        this.lengthUnit = referenceUnit.getLengthUnit();
-        this.durationUnit = referenceUnit.getDurationUnit();
-    }
-
-    /**
-     * @return massUnit
-     */
-    public final MassUnit getMassUnit()
-    {
-        return this.massUnit;
-    }
-
-    /**
-     * @return lengthUnit
-     */
-    public final LengthUnit getLengthUnit()
-    {
-        return this.lengthUnit;
-    }
-
-    /**
-     * @return durationUnit
-     */
-    public final DurationUnit getDurationUnit()
-    {
-        return this.durationUnit;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final TorqueUnit getStandardUnit()
-    {
-        return NEWTON_METER;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final String getSICoefficientsString()
-    {
-        return "kgm2/s2";
+        return length.getScale().toStandardUnit(1.0) * force.getScale().toStandardUnit(1.0);
     }
 
 }

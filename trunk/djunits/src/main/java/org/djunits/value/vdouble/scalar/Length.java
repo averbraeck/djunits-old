@@ -2,69 +2,63 @@ package org.djunits.value.vdouble.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
+import org.djunits.Throw;
 import org.djunits.unit.AreaUnit;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.DurationUnit;
 import org.djunits.unit.EnergyUnit;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.LinearDensityUnit;
-import org.djunits.unit.MoneyUnit;
 import org.djunits.unit.PositionUnit;
 import org.djunits.unit.SpeedUnit;
-import org.djunits.unit.Unit;
 import org.djunits.unit.VolumeUnit;
+import org.djunits.value.util.ValueUtil;
+import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
 
 /**
- * Easy access methods for the Relative Length DoubleScalar. Instead of:
- * 
- * <pre>
- * DoubleScalar&lt;LengthUnit&gt; value = new DoubleScalar&lt;LengthUnit&gt;(100.0, LengthUnit.SI);
- * </pre>
- * 
- * we can now write:
- * 
- * <pre>
- * Length value = new Length(100.0, LengthUnit.SI);
- * </pre>
- * 
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the unit
- * used are compatible.
+ * Easy access methods for the Relative Length DoubleScalar.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
- * <p>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Position, LengthUnit, Length>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final Length ZERO = new Length(0.0, LengthUnit.SI);
 
-    /** constant with value NaN. */
+    /** Constant with value one. */
+    public static final Length ONE = new Length(1.0, LengthUnit.SI);
+
+    /** Constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final Length NaN = new Length(Double.NaN, LengthUnit.SI);
 
-    /** constant with value POSITIVE_INFINITY. */
+    /** Constant with value POSITIVE_INFINITY. */
     public static final Length POSITIVE_INFINITY = new Length(Double.POSITIVE_INFINITY, LengthUnit.SI);
 
-    /** constant with value NEGATIVE_INFINITY. */
+    /** Constant with value NEGATIVE_INFINITY. */
     public static final Length NEGATIVE_INFINITY = new Length(Double.NEGATIVE_INFINITY, LengthUnit.SI);
 
-    /** constant with value MAX_VALUE. */
+    /** Constant with value MAX_VALUE. */
     public static final Length POS_MAXVALUE = new Length(Double.MAX_VALUE, LengthUnit.SI);
 
-    /** constant with value -MAX_VALUE. */
+    /** Constant with value -MAX_VALUE. */
     public static final Length NEG_MAXVALUE = new Length(-Double.MAX_VALUE, LengthUnit.SI);
 
     /**
      * Construct Length scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; double value
+     * @param unit LengthUnit; unit for the double value
      */
     public Length(final double value, final LengthUnit unit)
     {
@@ -73,7 +67,7 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Construct Length scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Length; Scalar from which to construct this instance
      */
     public Length(final Length value)
     {
@@ -87,12 +81,8 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
         return new Length(value, unit);
     }
 
-    /**
-     * Construct a new Absolute Immutable DoubleScalar of the right type. Each extending class must implement this method.
-     * @param value the double value
-     * @param unit the unit
-     * @return A a new absolute instance of the DoubleScalar of the right type
-     */
+    /** {@inheritDoc} */
+    @Override
     public final Position instantiateAbs(final double value, final PositionUnit unit)
     {
         return new Position(value, unit);
@@ -100,42 +90,32 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Construct Length scalar.
-     * @param value double value in SI units
-     * @return the new scalar with the SI value
+     * @param value double; the double value in SI units
+     * @return Length; the new scalar with the SI value
      */
-    public static final Length createSI(final double value)
+    public static final Length instantiateSI(final double value)
     {
         return new Length(value, LengthUnit.SI);
     }
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @param zero Length; the low value
+     * @param one Length; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @return Length; a Scalar at the ratio between
      */
     public static Length interpolate(final Length zero, final Length one, final double ratio)
     {
-        return new Length(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero.getUnit());
+        return new Length(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
+            .getDisplayUnit());
     }
-
-    /**
-     * Relative scalar plus Absolute scalar = Absolute scalar.
-     * @param v the value to add
-     * @return sum of this value and v as a new object
-     */
-    public final Position plus(final Position v)
-    {
-        PositionUnit targetUnit = v.getUnit();
-        return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
-    }
-
+    
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the maximum value of two relative scalars
+     * @param r1 Length; the first scalar
+     * @param r2 Length; the second scalar
+     * @return Length; the maximum value of two relative scalars
      */
     public static Length max(final Length r1, final Length r2)
     {
@@ -144,10 +124,10 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @param r1 Length; the first scalar
+     * @param r2 Length; the second scalar
+     * @param rn Length...; the other scalars
+     * @return Length; the maximum value of more than two relative scalars
      */
     public static Length max(final Length r1, final Length r2, final Length... rn)
     {
@@ -164,9 +144,9 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the minimum value of two relative scalars
+     * @param r1 Length; the first scalar
+     * @param r2 Length; the second scalar
+     * @return Length; the minimum value of two relative scalars
      */
     public static Length min(final Length r1, final Length r2)
     {
@@ -175,10 +155,10 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @param r1 Length; the first scalar
+     * @param r2 Length; the second scalar
+     * @param rn Length...; the other scalars
+     * @return Length; the minimum value of more than two relative scalars
      */
     public static Length min(final Length r1, final Length r2, final Length... rn)
     {
@@ -192,144 +172,147 @@ public class Length extends AbstractDoubleScalarRel<LengthUnit, Length>
         }
         return minr;
     }
-
+    
     /**
      * Returns a Length representation of a textual representation of a value with a unit. The String representation that can be
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Length
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return Length; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static Length valueOf(final String text) throws IllegalArgumentException
+    public static Length valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing Length -- null or empty argument");
-        }
-        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        Throw.whenNull(text, "Error parsing Length: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Length: empty text to parse");
+        Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            LengthUnit unit = LengthUnit.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                for (LengthUnit unit : Unit.getUnits(LengthUnit.class))
-                {
-                    if (unit.getDefaultLocaleTextualRepresentations().contains(unitString))
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new Length(d, unit);
-                    }
-                }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing Length from " + text, exception);
+                double d = Double.parseDouble(valueString);
+                return new Length(d, unit);
             }
         }
         throw new IllegalArgumentException("Error parsing Length from " + text);
     }
 
     /**
-     * Calculate the division of Length and Length, which results in a Dimensionless scalar.
-     * @param v Length scalar
-     * @return Dimensionless scalar as a division of Length and Length
+     * Returns a Length based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return Length; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
      */
-    public final Dimensionless divideBy(final Length v)
+    public static Length of(final double value, final String unitString)
     {
-        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+        Throw.whenNull(unitString, "Error parsing Length: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing Length: empty unitString");
+        LengthUnit unit = LengthUnit.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new Length(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing Length with unit " + unitString);
     }
 
-    /**
-     * Calculate the multiplication of Length and Length, which results in a Area scalar.
-     * @param v Length scalar
-     * @return Area scalar as a multiplication of Length and Length
-     */
-    public final Area multiplyBy(final Length v)
-    {
-        return new Area(this.si * v.si, AreaUnit.SI);
-    }
+        /**
+         * Calculate the division of Length and Length, which results in a Dimensionless scalar.
+         * @param v Length scalar
+         * @return Dimensionless scalar as a division of Length and Length
+         */
+        public final Dimensionless divide(final Length v)
+        {
+            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+        }
 
-    /**
-     * Calculate the division of Length and LinearDensity, which results in a Area scalar.
-     * @param v Length scalar
-     * @return Area scalar as a division of Length and LinearDensity
-     */
-    public final Area divideBy(final LinearDensity v)
-    {
-        return new Area(this.si / v.si, AreaUnit.SI);
-    }
+        /**
+         * Calculate the multiplication of Length and Length, which results in a Area scalar.
+         * @param v Length scalar
+         * @return Area scalar as a multiplication of Length and Length
+         */
+        public final Area times(final Length v)
+        {
+            return new Area(this.si * v.si, AreaUnit.SI);
+        }
 
-    /**
-     * Calculate the division of Length and Area, which results in a LinearDensity scalar.
-     * @param v Length scalar
-     * @return LinearDensity scalar as a division of Length and Area
-     */
-    public final LinearDensity divideBy(final Area v)
-    {
-        return new LinearDensity(this.si / v.si, LinearDensityUnit.SI);
-    }
+        /**
+         * Calculate the division of Length and LinearDensity, which results in a Area scalar.
+         * @param v Length scalar
+         * @return Area scalar as a division of Length and LinearDensity
+         */
+        public final Area divide(final LinearDensity v)
+        {
+            return new Area(this.si / v.si, AreaUnit.SI);
+        }
 
-    /**
-     * Calculate the multiplication of Length and Area, which results in a Volume scalar.
-     * @param v Length scalar
-     * @return Volume scalar as a multiplication of Length and Area
-     */
-    public final Volume multiplyBy(final Area v)
-    {
-        return new Volume(this.si * v.si, VolumeUnit.SI);
-    }
+        /**
+         * Calculate the division of Length and Area, which results in a LinearDensity scalar.
+         * @param v Length scalar
+         * @return LinearDensity scalar as a division of Length and Area
+         */
+        public final LinearDensity divide(final Area v)
+        {
+            return new LinearDensity(this.si / v.si, LinearDensityUnit.SI);
+        }
 
-    /**
-     * Calculate the multiplication of Length and Force, which results in a Energy scalar.
-     * @param v Length scalar
-     * @return Energy scalar as a multiplication of Length and Force
-     */
-    public final Energy multiplyBy(final Force v)
-    {
-        return new Energy(this.si * v.si, EnergyUnit.SI);
-    }
+        /**
+         * Calculate the multiplication of Length and Area, which results in a Volume scalar.
+         * @param v Length scalar
+         * @return Volume scalar as a multiplication of Length and Area
+         */
+        public final Volume times(final Area v)
+        {
+            return new Volume(this.si * v.si, VolumeUnit.SI);
+        }
 
-    /**
-     * Calculate the multiplication of Length and Frequency, which results in a Speed scalar.
-     * @param v Length scalar
-     * @return Speed scalar as a multiplication of Length and Frequency
-     */
-    public final Speed multiplyBy(final Frequency v)
-    {
-        return new Speed(this.si * v.si, SpeedUnit.SI);
-    }
+        /**
+         * Calculate the multiplication of Length and Force, which results in a Energy scalar.
+         * @param v Length scalar
+         * @return Energy scalar as a multiplication of Length and Force
+         */
+        public final Energy times(final Force v)
+        {
+            return new Energy(this.si * v.si, EnergyUnit.SI);
+        }
 
-    /**
-     * Calculate the division of Length and Duration, which results in a Speed scalar.
-     * @param v Length scalar
-     * @return Speed scalar as a division of Length and Duration
-     */
-    public final Speed divideBy(final Duration v)
-    {
-        return new Speed(this.si / v.si, SpeedUnit.SI);
-    }
+        /**
+         * Calculate the multiplication of Length and Frequency, which results in a Speed scalar.
+         * @param v Length scalar
+         * @return Speed scalar as a multiplication of Length and Frequency
+         */
+        public final Speed times(final Frequency v)
+        {
+            return new Speed(this.si * v.si, SpeedUnit.SI);
+        }
 
-    /**
-     * Calculate the division of Length and Speed, which results in a Duration scalar.
-     * @param v Length scalar
-     * @return Duration scalar as a division of Length and Speed
-     */
-    public final Duration divideBy(final Speed v)
-    {
-        return new Duration(this.si / v.si, DurationUnit.SI);
-    }
+        /**
+         * Calculate the division of Length and Duration, which results in a Speed scalar.
+         * @param v Length scalar
+         * @return Speed scalar as a division of Length and Duration
+         */
+        public final Speed divide(final Duration v)
+        {
+            return new Speed(this.si / v.si, SpeedUnit.SI);
+        }
 
-    /**
-     * Calculate the multiplication of Length and MoneyPerLength, which results in a Money scalar.
-     * @param v Length scalar
-     * @return Money scalar as a multiplication of Length and MoneyPerLength
-     */
-    public final Money multiplyBy(final MoneyPerLength v)
-    {
-        return new Money(this.si * v.si, MoneyUnit.getStandardMoneyUnit());
-    }
+        /**
+         * Calculate the division of Length and Speed, which results in a Duration scalar.
+         * @param v Length scalar
+         * @return Duration scalar as a division of Length and Speed
+         */
+        public final Duration divide(final Speed v)
+        {
+            return new Duration(this.si / v.si, DurationUnit.SI);
+        }
 
+
+    
 }
+

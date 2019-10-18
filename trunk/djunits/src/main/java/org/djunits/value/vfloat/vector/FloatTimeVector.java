@@ -1,177 +1,80 @@
 package org.djunits.value.vfloat.vector;
 
-import java.util.List;
-import java.util.SortedMap;
+import javax.annotation.Generated;
 
 import org.djunits.unit.DurationUnit;
 import org.djunits.unit.TimeUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vfloat.scalar.FloatDuration;
 import org.djunits.value.vfloat.scalar.FloatTime;
+import org.djunits.value.vfloat.vector.base.AbstractFloatVectorAbs;
+import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
  * Absolute FloatTime Vector.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class FloatTimeVector extends
-        AbstractFloatVectorAbs<TimeUnit, DurationUnit, FloatTimeVector, FloatDurationVector, MutableFloatTimeVector, FloatTime>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class FloatTimeVector extends AbstractFloatVectorAbs<TimeUnit, FloatTime, FloatTimeVector,
+    DurationUnit, FloatDuration, FloatDurationVector>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
 
     /**
-     * Construct a new Absolute Immutable FloatTimeVector.
-     * @param values float[]; the values of the entries in the new Absolute Immutable FloatTimeVector
-     * @param unit TimeUnit; the unit of the new Absolute Immutable FloatTimeVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatTimeVector(final float[] values, final TimeUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable FloatTimeVector.
-     * @param values List&lt;Float&gt;; the values of the entries in the new Absolute Immutable FloatTimeVector
-     * @param unit TimeUnit; the unit of the new Absolute Immutable FloatTimeVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatTimeVector(final List<Float> values, final TimeUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable FloatTimeVector.
-     * @param values FloatTime[]; the values of the entries in the new Absolute Immutable FloatTimeVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatTimeVector(final FloatTime[] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable FloatTimeVector.
-     * @param values List&lt;FloatTime&gt;; the values of the entries in the new Absolute Immutable FloatTimeVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatTimeVector(final List<FloatTime> values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable FloatTimeVector.
-     * @param values SortedMap&lt;Integer, FloatTime&gt;; the values of the entries in the new Absolute Sparse Mutable
-     *            FloatTimeVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatTimeVector(final SortedMap<Integer, FloatTime> values, final int length, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable FloatTimeVector.
-     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Absolute Sparse Mutable
-     *            FloatTimeVector
-     * @param unit TimeUnit; the unit of the new Absolute Sparse Mutable FloatTimeVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatTimeVector(final SortedMap<Integer, Float> values, final TimeUnit unit, final int length,
-            final StorageType storageType) throws ValueException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable FloatTimeVector.
+     * Construct a new Absative Immutable FloatTimeVector.
      * @param data FloatVectorData; an internal data object
      * @param unit TimeUnit; the unit
      */
-    FloatTimeVector(final FloatVectorData data, final TimeUnit unit)
+    public FloatTimeVector(final FloatVectorData data, final TimeUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatTimeVector instantiateTypeAbs(final FloatVectorData dvd, final TimeUnit unit)
+    public Class<FloatTime>
+
+    getScalarClass()
     {
-        return new FloatTimeVector(dvd, unit);
+        return FloatTime.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatDurationVector instantiateTypeRel(final FloatVectorData dvd, final DurationUnit unit)
+    public FloatTimeVector instantiateVector(final FloatVectorData fvd, final TimeUnit displayUnit)
     {
-        return new FloatDurationVector(dvd, unit);
+        return new FloatTimeVector(fvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatTimeVector instantiateMutableType(final FloatVectorData dvd, final TimeUnit unit)
+    public FloatTime instantiateScalarSI(final float valueSI, final TimeUnit displayUnit)
     {
-        return new MutableFloatTimeVector(dvd, unit);
+        FloatTime result = FloatTime.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatTime instantiateScalar(final float value, final TimeUnit unit)
+    public FloatDurationVector instantiateVectorRel(final FloatVectorData fvd, final DurationUnit displayUnit)
     {
-        return new FloatTime(value, unit);
+        return new FloatDurationVector(fvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatTimeVector toDense()
+    public FloatDuration instantiateScalarRelSI(final float valueSI, final DurationUnit displayUnit)
     {
-        return this.data.isDense() ? (FloatTimeVector) this : instantiateTypeAbs(this.data.toDense(), getUnit());
+        FloatDuration result = FloatDuration.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public final FloatTimeVector toSparse()
-    {
-        return this.data.isSparse() ? (FloatTimeVector) this : instantiateTypeAbs(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Return an array of FloatTime Scalars from this vector.
-     * @return FloatTime[]; an array of FloatTime Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public FloatTime[] toArray()
-    {
-        FloatTime[] array = new FloatTime[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
-    }
-
-}
+   
+}
