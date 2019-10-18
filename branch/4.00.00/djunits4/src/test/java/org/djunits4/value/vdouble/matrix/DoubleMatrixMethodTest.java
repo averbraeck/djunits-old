@@ -31,11 +31,13 @@ import org.djunits4.value.storage.StorageType;
 import org.djunits4.value.vdouble.function.DoubleMathFunctions;
 import org.djunits4.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits4.value.vdouble.matrix.base.DoubleMatrix;
+import org.djunits4.value.vdouble.matrix.base.DoubleSparseValue;
 import org.djunits4.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits4.value.vdouble.scalar.AbsoluteTemperature;
 import org.djunits4.value.vdouble.scalar.Area;
 import org.djunits4.value.vdouble.scalar.Direction;
 import org.djunits4.value.vdouble.scalar.Duration;
+import org.djunits4.value.vdouble.scalar.Length;
 import org.djunits4.value.vdouble.scalar.Position;
 import org.djunits4.value.vdouble.scalar.Time;
 import org.djunits4.value.vdouble.vector.AreaVector;
@@ -954,6 +956,44 @@ public class DoubleMatrixMethodTest
                         dmd.equals(dvd2));
             }
         }
+    }
+    
+    /**
+     * Test the sparse value class.
+     */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @Test
+    public void sparseValueTest()
+    {
+        try
+        {
+            new DoubleSparseValue(-1, 0, 123.456);
+            fail("Negative row should have caused a ValueRuntimeException");
+        }
+        catch (ValueRuntimeException vre)
+        {
+            // Ignore expected exception
+        }
+
+        try
+        {
+            new DoubleSparseValue(0, -1, 123.456);
+            fail("Negative column should have caused a ValueRuntimeException");
+        }
+        catch (ValueRuntimeException vre)
+        {
+            // Ignore expected exception
+        }
+
+        Length length = Length.valueOf("123 km");
+        DoubleSparseValue dsv = new DoubleSparseValue(2, 3, length);
+        assertEquals("row matches", 2, dsv.getRow());
+        assertEquals("column matches", 3, dsv.getColumn());
+        assertEquals("value matches", 123000, dsv.getValueSI(), 0.1);
+        dsv = new DoubleSparseValue(2, 3, 123.000, LengthUnit.KILOMETER);
+        assertEquals("row matches", 2, dsv.getRow());
+        assertEquals("column matches", 3, dsv.getColumn());
+        assertEquals("value matches", 123000, dsv.getValueSI(), 0.1);
     }
 
 }

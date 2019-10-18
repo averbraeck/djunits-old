@@ -33,11 +33,13 @@ import org.djunits4.value.vdouble.matrix.base.DoubleMatrix;
 import org.djunits4.value.vfloat.function.FloatMathFunctions;
 import org.djunits4.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits4.value.vfloat.matrix.base.FloatMatrix;
+import org.djunits4.value.vfloat.matrix.base.FloatSparseValue;
 import org.djunits4.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits4.value.vfloat.scalar.FloatAbsoluteTemperature;
 import org.djunits4.value.vfloat.scalar.FloatArea;
 import org.djunits4.value.vfloat.scalar.FloatDirection;
 import org.djunits4.value.vfloat.scalar.FloatDuration;
+import org.djunits4.value.vfloat.scalar.FloatLength;
 import org.djunits4.value.vfloat.scalar.FloatPosition;
 import org.djunits4.value.vfloat.scalar.FloatTime;
 import org.djunits4.value.vfloat.vector.FLOATVECTOR;
@@ -944,6 +946,44 @@ public class FloatMatrixMethodTest
                         fmd.equals(dvd2));
             }
         }
+    }
+
+    /**
+     * Test the sparse value class.
+     */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @Test
+    public void sparseValueTest()
+    {
+        try
+        {
+            new FloatSparseValue(-1, 0, 123.456f);
+            fail("Negative row should have caused a ValueRuntimeException");
+        }
+        catch (ValueRuntimeException vre)
+        {
+            // Ignore expected exception
+        }
+
+        try
+        {
+            new FloatSparseValue(0, -1, 123.456f);
+            fail("Negative column should have caused a ValueRuntimeException");
+        }
+        catch (ValueRuntimeException vre)
+        {
+            // Ignore expected exception
+        }
+
+        FloatLength length = FloatLength.valueOf("123 km");
+        FloatSparseValue dsv = new FloatSparseValue(2, 3, length);
+        assertEquals("row matches", 2, dsv.getRow());
+        assertEquals("column matches", 3, dsv.getColumn());
+        assertEquals("value matches", 123000, dsv.getValueSI(), 0.1);
+        dsv = new FloatSparseValue(2, 3, 123.000f, LengthUnit.KILOMETER);
+        assertEquals("row matches", 2, dsv.getRow());
+        assertEquals("column matches", 3, dsv.getColumn());
+        assertEquals("value matches", 123000, dsv.getValueSI(), 0.1);
     }
 
 }
