@@ -46,7 +46,6 @@ public final class URLResource
      */
     private URLResource()
     {
-        super();
         // unreachable code
     }
 
@@ -273,7 +272,6 @@ public final class URLResource
          */
         public PasswordAuthenticator(final String userName, final String password)
         {
-            super();
             this.userName = userName;
             this.password = password;
         }
