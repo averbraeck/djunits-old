@@ -200,7 +200,6 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
         Throw.when(length < 1, ValueRuntimeException.class, "Length must be > 0");
         Throw.whenNull(scale, "FloatVectorData.instantiate: scale is null");
         Throw.whenNull(storageType, "FloatVectorData.instantiate: storageType is null");
-        Throw.when(valueMap.size() == 0, ValueRuntimeException.class, "FloatVectorData.instantiate: values.size() == 0");
         for (Integer key : valueMap.keySet())
         {
             Throw.when(key < 0 || key >= length, ValueRuntimeException.class, "Key in values out of range");
