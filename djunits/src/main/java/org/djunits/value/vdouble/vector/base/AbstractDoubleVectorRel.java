@@ -85,7 +85,7 @@ public abstract class AbstractDoubleVectorRel<U extends Unit<U>, S extends Abstr
      * @Throws ValueException when the sizes of the vectors differ, or <code>increment</code> is null
      */
     @SuppressWarnings("unchecked")
-    public RV incrementBy(RV increment)
+    public RV incrementBy(final RV increment)
     {
         checkCopyOnWrite();
         getData().incrementBy(increment.getData());
@@ -115,7 +115,7 @@ public abstract class AbstractDoubleVectorRel<U extends Unit<U>, S extends Abstr
      * @Throws ValueException when the sizes of the vectors differ, or <code>decrement</code> is null
      */
     @SuppressWarnings("unchecked")
-    public RV decrementBy(RV decrement)
+    public RV decrementBy(final RV decrement)
     {
         checkCopyOnWrite();
         getData().decrementBy(decrement.getData());
@@ -150,9 +150,13 @@ public abstract class AbstractDoubleVectorRel<U extends Unit<U>, S extends Abstr
      * @return SIVector; the multiplication of this vector and the operand
      * @throws ValueRuntimeException in case this vector or matrix and the operand have a different size
      * @throws UnitException on unit error
+     * @param <UT> the unit type of the multiplier
+     * @param <ST> the scalar type of the multiplier
+     * @param <VT> the vector type of the multiplier
      */
-    public final <VT extends AbstractDoubleVector<?, ?, ?> & Relative<?, ?>> SIVector times(final VT rel)
-            throws ValueRuntimeException, UnitException
+    public final <UT extends Unit<UT>, ST extends AbstractDoubleScalarRel<UT, ST>,
+            VT extends AbstractDoubleVectorRel<UT, ST, VT> & Relative<UT, VT>> SIVector times(final VT rel)
+                    throws ValueRuntimeException, UnitException
     {
         checkSize(rel);
         return new SIVector(this.getData().times(rel.getData()), SIUnit.of(
@@ -167,9 +171,13 @@ public abstract class AbstractDoubleVectorRel<U extends Unit<U>, S extends Abstr
      * @return SIVector; the division of this vector and the operand
      * @throws ValueRuntimeException in case this vector or matrix and the operand have a different size
      * @throws UnitException on unit error
+     * @param <UT> the unit type of the multiplier
+     * @param <ST> the scalar type of the multiplier
+     * @param <VT> the vector type of the multiplier
      */
-    public final <VT extends AbstractDoubleVector<?, ?, ?> & Relative<?, ?>> SIVector divide(final VT rel)
-            throws ValueRuntimeException, UnitException
+    public final <UT extends Unit<UT>, ST extends AbstractDoubleScalarRel<UT, ST>,
+            VT extends AbstractDoubleVectorRel<UT, ST, VT>> SIVector divide(final VT rel)
+                    throws ValueRuntimeException, UnitException
     {
         checkSize(rel);
         return new SIVector(this.getData().divide(rel.getData()), SIUnit.of(
@@ -199,7 +207,7 @@ public abstract class AbstractDoubleVectorRel<U extends Unit<U>, S extends Abstr
 
     /** {@inheritDoc} */
     @Override
-    public RV divide(float divisor)
+    public RV divide(final float divisor)
     {
         return divide((double) divisor);
     }

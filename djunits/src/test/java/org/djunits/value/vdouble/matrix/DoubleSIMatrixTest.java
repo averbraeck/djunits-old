@@ -21,9 +21,7 @@ import org.djunits.value.vdouble.function.DoubleMathFunctions;
 import org.djunits.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
 import org.djunits.value.vdouble.matrix.base.DoubleMatrix;
 import org.djunits.value.vdouble.matrix.data.DoubleMatrixData;
-import org.djunits.value.vdouble.scalar.Dimensionless;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
-import org.djunits.value.vdouble.vector.DimensionlessVector;
 import org.djunits.value.vdouble.vector.base.AbstractDoubleVectorRel;
 import org.junit.Test;
 
@@ -59,10 +57,9 @@ public class DoubleSIMatrixTest
         assertEquals("m", UNITS.METER.getId());
 
         double[][] denseTestData = DOUBLEMATRIX.denseRectArrays(5, 10);
-        AbstractDoubleMatrixRel<DimensionlessUnit, Dimensionless, DimensionlessVector,
-                DimensionlessMatrix> dimlessMatrix = DoubleMatrix.instantiate(
-                        DoubleMatrixData.instantiate(denseTestData, DimensionlessUnit.SI.getScale(), StorageType.DENSE),
-                        DimensionlessUnit.SI);
+        DimensionlessMatrix dimlessMatrix = DoubleMatrix.instantiate(
+                DoubleMatrixData.instantiate(denseTestData, DimensionlessUnit.SI.getScale(), StorageType.DENSE),
+                DimensionlessUnit.SI);
         dimlessMatrix = dimlessMatrix.mutable().divide(dimlessMatrix).asDimensionless(); // unit matrix
         for (String type : CLASSNAMES.REL_ALL_LIST)
         {

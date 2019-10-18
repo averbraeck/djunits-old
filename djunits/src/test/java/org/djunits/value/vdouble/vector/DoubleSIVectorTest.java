@@ -23,7 +23,6 @@ import org.djunits.value.CLASSNAMES;
 import org.djunits.value.storage.StorageType;
 import org.djunits.value.vdouble.function.DoubleFunction;
 import org.djunits.value.vdouble.function.DoubleMathFunctions;
-import org.djunits.value.vdouble.scalar.Dimensionless;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarAbs;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
 import org.djunits.value.vdouble.vector.base.AbstractDoubleVectorAbs;
@@ -67,10 +66,9 @@ public class DoubleSIVectorTest
         assertEquals("m", UNITS.METER.getId());
 
         double[] denseTestData = DOUBLEVECTOR.denseArray(50);
-        AbstractDoubleVectorRel<DimensionlessUnit, Dimensionless,
-                DimensionlessVector> dimlessVector = DoubleVector.instantiate(
-                        DoubleVectorData.instantiate(denseTestData, DimensionlessUnit.SI.getScale(), StorageType.DENSE),
-                        DimensionlessUnit.SI);
+        DimensionlessVector dimlessVector = DoubleVector.instantiate(
+                DoubleVectorData.instantiate(denseTestData, DimensionlessUnit.SI.getScale(), StorageType.DENSE),
+                DimensionlessUnit.SI);
         dimlessVector = dimlessVector.mutable().divide(dimlessVector).asDimensionless(); // unit vector
         for (String type : CLASSNAMES.REL_ALL_LIST)
         {
