@@ -29,7 +29,7 @@ import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 public final class DoubleVector
 {
     /** The cache to make the lookup of the constructor for a Immutable Vector belonging to a unit faster. */
-    private static Map<Unit<?>, Constructor<? extends DoubleVectorInterface<?, ?, ?>>> CACHE_DATA = new HashMap<>();
+    private static final Map<Unit<?>, Constructor<? extends DoubleVectorInterface<?, ?, ?>>> CACHE_DATA = new HashMap<>();
 
     /** Do not instantiate. */
     private DoubleVector()

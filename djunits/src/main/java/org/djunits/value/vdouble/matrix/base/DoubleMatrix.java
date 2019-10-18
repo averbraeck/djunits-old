@@ -29,7 +29,7 @@ import org.djunits.value.vdouble.vector.base.DoubleVectorInterface;
 public final class DoubleMatrix
 {
     /** The cache to make the lookup of the constructor for a Immutable Matrix belonging to a unit faster. */
-    private static Map<Unit<?>, Constructor<? extends DoubleMatrixInterface<?, ?, ?, ?>>> CACHE_DATA = new HashMap<>();
+    private static final Map<Unit<?>, Constructor<? extends DoubleMatrixInterface<?, ?, ?, ?>>> CACHE_DATA = new HashMap<>();
 
     /** Do not instantiate. */
     private DoubleMatrix()

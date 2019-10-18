@@ -45,6 +45,10 @@ public class DoubleSIMatrixTest
      * @throws IllegalAccessException on error
      * @throws ClassNotFoundException on error
      * @throws UnitException on error
+     * @param <U> the unit type
+     * @param <S> the scalar type
+     * @param <V> the vector type
+     * @param <M> the matrix type
      */
     @SuppressWarnings("unchecked")
     @Test
@@ -149,7 +153,7 @@ public class DoubleSIMatrixTest
         verifyDimensionLessMatrix(denseTestData, new DoubleFunction()
         {
             @Override
-            public double apply(double value)
+            public double apply(final double value)
             {
                 return value;
             }
@@ -188,7 +192,8 @@ public class DoubleSIMatrixTest
      *            verified
      * @param got DimensionlessMatrix; the values that must be verified
      */
-    public static void verifyDimensionLessMatrix(double[][] reference, DoubleFunction operation, DimensionlessMatrix got)
+    public static void verifyDimensionLessMatrix(final double[][] reference, final DoubleFunction operation,
+            final DimensionlessMatrix got)
     {
         assertEquals("row count matches", reference.length, got.rows());
         assertEquals("column count matches", reference[0].length, got.cols());

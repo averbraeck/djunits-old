@@ -987,7 +987,7 @@ public class DoubleVectorConstructorsTest
     }
 
     /**
-     * Test that parallelized operations work
+     * Test that parallelized operations work.
      */
     @Test
     public void parallelTest()
@@ -1041,8 +1041,9 @@ public class DoubleVectorConstructorsTest
      * @throws IllegalAccessException on error
      * @throws ClassNotFoundException on error
      * @throws UnitException on error
+     * @param <U> the unit type
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "rawtypes"})
     @Test
     public <U extends Unit<U>> void testAsMost() throws NoSuchMethodException, SecurityException, IllegalAccessException,
             IllegalArgumentException, InvocationTargetException, ClassNotFoundException, UnitException
@@ -1117,8 +1118,9 @@ public class DoubleVectorConstructorsTest
      * @throws IllegalAccessException on error
      * @throws ClassNotFoundException on error
      * @throws UnitException on error
+     * @param <U> the unit type
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "rawtypes"})
     @Test
     public <U extends Unit<U>> void testAsRemaining() throws NoSuchMethodException, SecurityException, IllegalAccessException,
             IllegalArgumentException, InvocationTargetException, ClassNotFoundException, UnitException
@@ -1185,7 +1187,7 @@ public class DoubleVectorConstructorsTest
     }
 
     /**
-     * Test the <code>as</code> method of the SIVector class
+     * Test the <code>as</code> method of the SIVector class.
      * @throws SecurityException on error
      * @throws NoSuchMethodException on error
      * @throws InvocationTargetException on error
@@ -1193,6 +1195,7 @@ public class DoubleVectorConstructorsTest
      * @throws IllegalAccessException on error
      * @throws ClassNotFoundException on error
      * @throws UnitException on error
+     * @param <U> the unit type
      */
     @SuppressWarnings("unchecked")
     @Test

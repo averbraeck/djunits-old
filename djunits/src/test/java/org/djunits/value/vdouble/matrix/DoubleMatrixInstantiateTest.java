@@ -50,6 +50,7 @@ public class DoubleMatrixInstantiateTest
 {
     /**
      * Test the constructors of all matrix classes.
+     * @param <U> the unit type
      */
     @Test
     public <U extends Unit<U>> void instatiateAllMatrixTypes()
@@ -93,6 +94,8 @@ public class DoubleMatrixInstantiateTest
 
     /**
      * Test the extra methods that Absolute and Relative with Absolute matrices implement.
+     * @param <AU> the absolute unit type
+     * @param <RU> the relative unit type
      */
     @SuppressWarnings("unchecked")
     @Test
@@ -976,6 +979,7 @@ public class DoubleMatrixInstantiateTest
      * zero rows/columns.
      */
     @Test
+    @SuppressWarnings({"checkstyle:localvariablename", "checkstyle:methodlength"})
     public void testInstantiateEdgeCases()
     {
         // DENSE DATA
@@ -1146,7 +1150,8 @@ public class DoubleMatrixInstantiateTest
 
         new Try()
         {
-            public @Override void execute()
+            @Override
+            public void execute()
             {
                 DoubleMatrix.instantiate(d0_1, SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
             }
@@ -1154,7 +1159,8 @@ public class DoubleMatrixInstantiateTest
 
         new Try()
         {
-            public @Override void execute()
+            @Override
+            public void execute()
             {
                 DoubleMatrix.instantiate(d1_0, SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
             }
@@ -1162,7 +1168,8 @@ public class DoubleMatrixInstantiateTest
 
         new Try()
         {
-            public @Override void execute()
+            @Override
+            public void execute()
             {
                 DoubleMatrix.instantiate(d0_0, SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
             }
@@ -1170,7 +1177,8 @@ public class DoubleMatrixInstantiateTest
 
         new Try()
         {
-            public @Override void execute()
+            @Override
+            public void execute()
             {
                 DoubleMatrix.instantiate((double[][]) null, SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
             }
@@ -1178,7 +1186,8 @@ public class DoubleMatrixInstantiateTest
 
         new Try()
         {
-            public @Override void execute()
+            @Override
+            public void execute()
             {
                 DoubleMatrix.instantiate(d1_1, null, StorageType.DENSE);
             }
@@ -1186,7 +1195,8 @@ public class DoubleMatrixInstantiateTest
 
         new Try()
         {
-            public @Override void execute()
+            @Override
+            public void execute()
             {
                 DoubleMatrix.instantiate(d1_1, SpeedUnit.METER_PER_SECOND, null);
             }

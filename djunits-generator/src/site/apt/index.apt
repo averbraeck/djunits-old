@@ -1,10 +1,10 @@
-                   ------------------------------------------
-                   DJUNITS-GENERATOR - Delft Java UNIT System
-                   ------------------------------------------
-                   September, 2015
-                   ------------------------------------------
+                   --------------------------------
+                   DJUNITS - Delft Java UNIT System
+                   --------------------------------
+                   Version 4, October, 2019
+                   --------------------------------
                    
-DJUNITS - Code Generators for Delft Java UNIT System
+DJUNITS - Delft Java UNIT System
 
 	DJUNITS is a set of Java classes that make life easy for scientific software writers by catching many common errors at compile time.
 
@@ -20,7 +20,9 @@ DJUNITS - Code Generators for Delft Java UNIT System
       E.g. a distance in Miles is correctly added to a distance in kilometers.
 
     * DJUNITS knows or computes the SI type of the result when a value in one unit is multiplied, or divided by another value 
-      (that may have another unit),
+      (that may have another unit).
+
+    * DJUNITS can create and carry out operations with new SI types such as s2/m2 using SIDimensions. 
 
     * DJUNITS handles Scalars, Vectors and Matrices.
 
@@ -32,6 +34,7 @@ DJUNITS - Code Generators for Delft Java UNIT System
     []
 
 ==========
+
 
 	The code generators take care of generating 'repeated' code, such as the Double and Float classes, and the Abs and Rel subclasses.
 	 

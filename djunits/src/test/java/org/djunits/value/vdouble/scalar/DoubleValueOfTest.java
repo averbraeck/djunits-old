@@ -24,12 +24,13 @@ import org.junit.Test;
 public class DoubleValueOfTest
 {
     /**
-     * Test legal "of" arguments
+     * Test legal "of" arguments.
      * @param scalarClass the scalar class
      * @param value the value to enter
      * @param unitString the unit String to use
      */
-    private void legal(Class<? extends DoubleScalarInterface<?, ?>> scalarClass, double value, String unitString)
+    private void legal(final Class<? extends DoubleScalarInterface<?, ?>> scalarClass, final double value,
+            final String unitString)
     {
         try
         {
@@ -43,11 +44,11 @@ public class DoubleValueOfTest
     }
 
     /**
-     * Test legal "valueOf" arguments
+     * Test legal "valueOf" arguments.
      * @param scalarClass the scalar class
      * @param text the text to parse
      */
-    private void legal(Class<? extends DoubleScalarInterface<?, ?>> scalarClass, String text)
+    private void legal(final Class<? extends DoubleScalarInterface<?, ?>> scalarClass, final String text)
     {
         try
         {
@@ -61,12 +62,13 @@ public class DoubleValueOfTest
     }
 
     /**
-     * Test illegal "of" arguments
+     * Test illegal "of" arguments.
      * @param scalarClass the scalar class
      * @param value the value to enter
      * @param unitString the unit String to use
      */
-    private void illegal(Class<? extends DoubleScalarInterface<?, ?>> scalarClass, double value, String unitString)
+    private void illegal(final Class<? extends DoubleScalarInterface<?, ?>> scalarClass, final double value,
+            final String unitString)
     {
         try
         {
@@ -85,11 +87,11 @@ public class DoubleValueOfTest
     }
 
     /**
-     * Test illegal "valueOf" arguments
+     * Test illegal "valueOf" arguments.
      * @param scalarClass the scalar class
      * @param text the text to parse
      */
-    private void illegal(Class<? extends DoubleScalarInterface<?, ?>> scalarClass, String text)
+    private void illegal(final Class<? extends DoubleScalarInterface<?, ?>> scalarClass, final String text)
     {
         try
         {

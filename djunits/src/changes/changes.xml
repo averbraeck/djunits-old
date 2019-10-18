@@ -2,11 +2,71 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
-    <release version="4.00.00" date="2019-10.XX" description="MAJOR NEW RELEASE, MANY METHODS CHANGED">
+    <release version="4.00.02" date="2019-10-19" description="Small updates in site docs, javadoc, final">
+      <action dev="averbraeck" type="update">
+        Site documentation adapted for version 4.
+      </action>
+      <action dev="averbraeck" type="fix">
+        Javadoc fixed in a couple of places to account for generics parameters.
+      </action>
+      <action dev="averbraeck" type="fix">
+        Added 'final' for parameters in a number of methods.
+      </action>
+    </release>
+    
+    <release version="4.00.01" date="2019-10-18" description="MAJOR NEW RELEASE, MANY METHODS CHANGED">
+      <action dev="averbraeck" type="add">
+        Added SIDimensions class to indicate the factors used in each unit (m/s2 = m1 s-2 kg0 mol0 rad0 sr0 A0 cd0 K0).
+        The SIDimensions class is used to construct new SIUnits and to do dimension checks.
+      </action>
+      <action dev="averbraeck" type="add">
+        Every unit now has a BaseUnit that stores the common dimensionality of all the DisplayUnits of that unit.
+      </action>
+      <action dev="averbraeck" type="update">
+        Package structure for each type of scalar, vector and matrix updated to have the types (including SI type),
+        the base (abstract) classes from which the types extend, and the data classes that are used to store the data
+        internally.  
+      </action>
+      <action dev="averbraeck" type="update">
+        The absolute and relative classes have new abstract classes that are organized as follows: Rel,
+        Abs, and RelWithAbs. The latter is there to allow Abs = Rel.plus(Abs) operations. 
+      </action>
+      <action dev="pknoppers" type="add">
+        Almost full coverage of unit tests made to catch many errors.
+      </action>
+      <action dev="pknoppers" type="fix">
+        Fixed dozens of errors in (sparse) vector and matrix calculations.
+      </action>
+      <action dev="pknoppers" type="update">
+        Changed the vector and matrix calculation routines for sparse and dense data in such a way that
+        the assign(Function) method is used to do the majority of calculations, avoiding many different
+        implementations for operation on (especially sparse) vectors and matrices.
+      </action>
+      <action dev="averbraeck" type="remove">
+        Several operations have been removed that do not make sense, such as multiplying or dividing absolute
+        values with each other (or with relative values). This does not make sense as they do have a scale
+        with a shifted (or fixed) offset. 
+      </action>
+      <action dev="averbraeck" type="remove">
+        The separate mutable types of Vector, Matrix, FloatVector and FloatMatrix have been removed. Instead, a flag
+        in the different types indicates whether it is mutable or not. CopyOnWrite is used to avoid duplicating
+        data when no changes are made to vectors and matrices. 
+      </action>
+      <action dev="averbraeck" type="remove">
+        For now, the Money types have been removed because they were not generic enough and did not 
+        provide enough added value. In a later version, the money types might come back in a much more 
+        flexible version (possibly as an extra SIDimension). 
+      </action>
+      <action dev="averbraeck" type="add">
+        of(value, "unit") static method added for all scalars to make it easy to instantiate a scalar.
+      </action>
+      <action dev="averbraeck" type="add">
+        as(unitType, displayUnit) and asUnit() methods added for all scalars to transform an SIScalar to any type.
+      </action>
       <action dev="averbraeck" type="update">
         create(...) methods renamed to instantiate(...) methods.
         createSI(value) in scalar is now instantiateSI(value) to make it consistent with matrices and vectors.
-        create() methods in SIScalar, SIVector, SIScalar renamed to instantiate()
+        create() methods in SIScalar, SIVector, SIScalar renamed to instantiate().
         instantiate methods for scalars are now all instantiateSI methods to make it consistent with the 
         SI values in the data storage of matrices and vectors.
         Added instantiate methods in all classes to deal with user-defined units, scalars, vectors and matrices.

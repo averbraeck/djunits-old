@@ -449,7 +449,7 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
         @Override
         public String toString()
         {
-            return "Itr [cursor=" + cursor + "]";
+            return "Itr [cursor=" + this.cursor + "]";
         }
 
     }

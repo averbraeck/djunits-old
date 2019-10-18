@@ -107,10 +107,11 @@ public class FloatSparseValue<U extends Unit<U>, S extends FloatScalarInterface<
         return this.valueSI;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString()
     {
-        return "FloatSparseValue [row=" + row + ", column=" + column + ", valueSI=" + valueSI + "]";
+        return "FloatSparseValue [row=" + this.row + ", column=" + this.column + ", valueSI=" + this.valueSI + "]";
     }
 
 }

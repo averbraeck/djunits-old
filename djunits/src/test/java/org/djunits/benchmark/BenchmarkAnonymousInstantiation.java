@@ -84,10 +84,10 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalar;
 public final class BenchmarkAnonymousInstantiation
 {
     /** the cache to make the lookup of the constructor for a Scalar belonging to a unit faster. */
-    private static Map<Unit<?>, Constructor<? extends AbstractDoubleScalar<?, ?>>> CACHE = new HashMap<>();
+    private static final Map<Unit<?>, Constructor<? extends AbstractDoubleScalar<?, ?>>> CACHE = new HashMap<>();
 
     /** the cache to make the lookup of the method handle for a Scalar belonging to a unit faster. */
-    private static Map<Unit<?>, MethodHandle> MH_CACHE = new HashMap<>();
+    private static final Map<Unit<?>, MethodHandle> MH_CACHE = new HashMap<>();
 
     /** */
     private BenchmarkAnonymousInstantiation()
@@ -339,6 +339,7 @@ public final class BenchmarkAnonymousInstantiation
      * @param args empty
      * @throws Throwable on error
      */
+    @SuppressWarnings("checkstyle:localvariablename")
     public static void main(final String[] args) throws Throwable
     {
         int MAX = 10_000_000;

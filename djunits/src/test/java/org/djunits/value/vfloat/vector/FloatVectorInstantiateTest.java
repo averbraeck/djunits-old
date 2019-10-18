@@ -465,7 +465,8 @@ public class FloatVectorInstantiateTest
 
         new Try()
         {
-            public @Override void execute()
+            @Override
+            public void execute()
             {
                 FloatVector.instantiate(d0, SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
             }
@@ -473,7 +474,8 @@ public class FloatVectorInstantiateTest
 
         new Try()
         {
-            public @Override void execute()
+            @Override
+            public void execute()
             {
                 FloatVector.instantiate((float[]) null, SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
             }
@@ -481,7 +483,8 @@ public class FloatVectorInstantiateTest
 
         new Try()
         {
-            public @Override void execute()
+            @Override
+            public void execute()
             {
                 FloatVector.instantiate(d1, null, StorageType.DENSE);
             }
@@ -489,7 +492,8 @@ public class FloatVectorInstantiateTest
 
         new Try()
         {
-            public @Override void execute()
+            @Override
+            public void execute()
             {
                 FloatVector.instantiate(d1, SpeedUnit.METER_PER_SECOND, null);
             }

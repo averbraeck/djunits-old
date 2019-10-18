@@ -14,8 +14,14 @@ import org.djunits.value.vdouble.scalar.base.DoubleScalarInterface;
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public class DOUBLEVECTOR
+public final class DOUBLEVECTOR
 {
+    /** */
+    private DOUBLEVECTOR()
+    {
+        // Utility class
+    }
+
     /**
      * Return an array with all values != 0.
      * @param size the number of cells
@@ -52,6 +58,8 @@ public class DOUBLEVECTOR
      * @param size the number of cells
      * @param scalarClass the class of scalars to use
      * @return an array with all nonzero values
+     * @param <U> the unit type
+     * @param <S> the scalar type
      */
     @SuppressWarnings("unchecked")
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>> S[] denseScalarArray(final int size,
@@ -78,6 +86,8 @@ public class DOUBLEVECTOR
      * @param size the number of cells
      * @param scalarClass the class of scalars to use
      * @return an array with only nonzero values on the diagonal
+     * @param <U> the unit type
+     * @param <S> the scalar type
      */
     @SuppressWarnings("unchecked")
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>> S[] sparseScalarArray(final int size,

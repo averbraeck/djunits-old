@@ -98,13 +98,17 @@ public class FloatValueOfStringOfTest
             {
                 // FLOAT -- PREVENT UNDERFLOW / OVERFLOW
                 if (unit.getScale().toStandardUnit(1.0) > 1.0E30 || 1.0 / unit.getScale().toStandardUnit(1.0) > 1.0E30)
+                {
                     continue;
+                }
                 FloatScalarInterface<?, ?> scalar = null;
                 try
                 {
                     // XXX: TimeUnit of Y(1) fails. Check WHY!!!!!
                     if (unit instanceof TimeUnit)
+                    {
                         continue;
+                    }
                     scalar = (FloatScalarInterface<?, ?>) constructScalar.newInstance(new Float(1.0f), unit);
                     assertEquals("Float construction with unit + get in unit failed for " + unit.toString(), 1.0,
                             scalar.getInUnit(), 0.01);

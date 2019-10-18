@@ -50,6 +50,10 @@ public class FloatMatrixInstantiateTest
 {
     /**
      * Test the constructors of all matrix classes.
+     * @param <U> the unit type
+     * @param <S> the scalar type
+     * @param <V> the vector type
+     * @param <M> the matrix type
      */
     @Test
     public <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,
@@ -95,6 +99,8 @@ public class FloatMatrixInstantiateTest
 
     /**
      * Test the extra methods that Absolute and Relative with Absolute matrices implement.
+     * @param <AU> the absolute unit type
+     * @param <RU> the relative unit type
      */
     @SuppressWarnings("unchecked")
     @Test
@@ -962,6 +968,7 @@ public class FloatMatrixInstantiateTest
      * zero rows/columns.
      */
     @Test
+    @SuppressWarnings({"checkstyle:methodlength", "checkstyle:localvariablename"})
     public void testInstantiateEdgeCases()
     {
         // DENSE DATA
@@ -1151,7 +1158,8 @@ public class FloatMatrixInstantiateTest
 
         new Try()
         {
-            public @Override void execute()
+            @Override
+            public void execute()
             {
                 FloatMatrix.instantiate(d0_1, SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
             }
@@ -1159,7 +1167,8 @@ public class FloatMatrixInstantiateTest
 
         new Try()
         {
-            public @Override void execute()
+            @Override
+            public void execute()
             {
                 FloatMatrix.instantiate(d1_0, SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
             }
@@ -1167,7 +1176,8 @@ public class FloatMatrixInstantiateTest
 
         new Try()
         {
-            public @Override void execute()
+            @Override
+            public void execute()
             {
                 FloatMatrix.instantiate(d0_0, SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
             }
@@ -1175,7 +1185,8 @@ public class FloatMatrixInstantiateTest
 
         new Try()
         {
-            public @Override void execute()
+            @Override
+            public void execute()
             {
                 FloatMatrix.instantiate((float[][]) null, SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
             }
@@ -1183,7 +1194,8 @@ public class FloatMatrixInstantiateTest
 
         new Try()
         {
-            public @Override void execute()
+            @Override
+            public void execute()
             {
                 FloatMatrix.instantiate(d1_1, null, StorageType.DENSE);
             }
@@ -1191,7 +1203,8 @@ public class FloatMatrixInstantiateTest
 
         new Try()
         {
-            public @Override void execute()
+            @Override
+            public void execute()
             {
                 FloatMatrix.instantiate(d1_1, SpeedUnit.METER_PER_SECOND, null);
             }

@@ -559,7 +559,8 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
 
     /** {@inheritDoc} */
     @Override
-    public boolean equals(Object obj)
+    @SuppressWarnings("checkstyle:needbraces")
+    public boolean equals(final Object obj)
     {
         if (this == obj)
             return true;
@@ -705,13 +706,13 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
         /**
          * Set whether SI prefixes, ranging from yotta (y) to yocto (Y), are allowed. If not set; this property defaults to
          * <code>false</code>.
-         * @param siPrefixes SIPrefixes; SIPrefixes set siPrefixes, NONE (e.g., for inch), ALL (e.g., for meter) or KILO (e.g.,
+         * @param newSiPrefixes SIPrefixes; SIPrefixes set siPrefixes, NONE (e.g., for inch), ALL (e.g., for meter) or KILO (e.g.,
          *            for kilometer)
          * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
-        public Builder<U> setSiPrefixes(final SIPrefixes siPrefixes)
+        public Builder<U> setSiPrefixes(final SIPrefixes newSiPrefixes)
         {
-            this.siPrefixes = siPrefixes;
+            this.siPrefixes = newSiPrefixes;
             return this;
         }
 
@@ -726,13 +727,13 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
 
         /**
          * Set the id of the unit that this builder builds.
-         * @param id String; set the id of the unit that this builder builds (must be set; the default is <code>null</code>
+         * @param newId String; set the id of the unit that this builder builds (must be set; the default is <code>null</code>
          *            which is invalid)
          * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
-        public Builder<U> setId(final String id)
+        public Builder<U> setId(final String newId)
         {
-            this.id = id;
+            this.id = newId;
             return this;
         }
 
@@ -747,12 +748,12 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
 
         /**
          * Set the additional abbreviations.
-         * @param additionalAbbreviations String...; the additional abbreviations
+         * @param newAdditionalAbbreviations String...; the additional abbreviations
          * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
-        public Builder<U> setAdditionalAbbreviations(final String... additionalAbbreviations)
+        public Builder<U> setAdditionalAbbreviations(final String... newAdditionalAbbreviations)
         {
-            this.additionalAbbreviations = new LinkedHashSet<>(Arrays.asList(additionalAbbreviations)); // safe copy
+            this.additionalAbbreviations = new LinkedHashSet<>(Arrays.asList(newAdditionalAbbreviations)); // safe copy
             return this;
         }
 
@@ -767,12 +768,12 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
 
         /**
          * Set the default display abbreviation.
-         * @param defaultDisplayAbbreviation String; the default display abbreviation
+         * @param newDefaultDisplayAbbreviation String; the default display abbreviation
          * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
-        public Builder<U> setDefaultDisplayAbbreviation(final String defaultDisplayAbbreviation)
+        public Builder<U> setDefaultDisplayAbbreviation(final String newDefaultDisplayAbbreviation)
         {
-            this.defaultDisplayAbbreviation = defaultDisplayAbbreviation;
+            this.defaultDisplayAbbreviation = newDefaultDisplayAbbreviation;
             return this;
         }
 
@@ -787,12 +788,12 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
 
         /**
          * Set the default textual abbreviation.
-         * @param defaultTextualAbbreviation String; the default textual abbreviation
+         * @param newDefaultTextualAbbreviation String; the default textual abbreviation
          * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
-        public Builder<U> setDefaultTextualAbbreviation(final String defaultTextualAbbreviation)
+        public Builder<U> setDefaultTextualAbbreviation(final String newDefaultTextualAbbreviation)
         {
-            this.defaultTextualAbbreviation = defaultTextualAbbreviation;
+            this.defaultTextualAbbreviation = newDefaultTextualAbbreviation;
             return this;
         }
 
@@ -807,12 +808,12 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
 
         /**
          * Set the name.
-         * @param name String; the name
+         * @param newName String; the name
          * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
-        public Builder<U> setName(final String name)
+        public Builder<U> setName(final String newName)
         {
-            this.name = name;
+            this.name = newName;
             return this;
         }
 
@@ -827,12 +828,12 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
 
         /**
          * Set the scale.
-         * @param scale Scale; set the scale
+         * @param newScale Scale; set the scale
          * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
-        public Builder<U> setScale(final Scale scale)
+        public Builder<U> setScale(final Scale newScale)
         {
-            this.scale = scale;
+            this.scale = newScale;
             return this;
         }
 
@@ -847,12 +848,12 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
 
         /**
          * Set the unit system.
-         * @param unitSystem UnitSystem; the unit system
+         * @param newUnitSystem UnitSystem; the unit system
          * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
-        public Builder<U> setUnitSystem(final UnitSystem unitSystem)
+        public Builder<U> setUnitSystem(final UnitSystem newUnitSystem)
         {
-            this.unitSystem = unitSystem;
+            this.unitSystem = newUnitSystem;
             return this;
         }
 
@@ -867,12 +868,12 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
 
         /**
          * Set the generated flag. Defaults to false. Should be set for units that are automatically generated.
-         * @param generated boolean; the value for the generated flag
+         * @param newGenerated boolean; the value for the generated flag
          * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
-        public Builder<U> setGenerated(final boolean generated)
+        public Builder<U> setGenerated(final boolean newGenerated)
         {
-            this.generated = generated;
+            this.generated = newGenerated;
             return this;
         }
 
@@ -887,12 +888,12 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
 
         /**
          * Set the unit base. Can never be null and has to be filled.
-         * @param unitBase UnitBase&lt;U&gt;; the unit base
+         * @param newUnitBase UnitBase&lt;U&gt;; the unit base
          * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
-        public Builder<U> setUnitBase(final UnitBase<U> unitBase)
+        public Builder<U> setUnitBase(final UnitBase<U> newUnitBase)
         {
-            this.unitBase = unitBase;
+            this.unitBase = newUnitBase;
             return this;
         }
 

@@ -9,7 +9,7 @@ package org.djunits.unit.scale;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class IdentityScale extends LinearScale
+public final class IdentityScale extends LinearScale
 {
     /** */
     private static final long serialVersionUID = 20151011L;
@@ -27,14 +27,14 @@ public class IdentityScale extends LinearScale
 
     /** {@inheritDoc} */
     @Override
-    public final double toStandardUnit(final double value)
+    public double toStandardUnit(final double value)
     {
         return value;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final double fromStandardUnit(final double value)
+    public double fromStandardUnit(final double value)
     {
         return value;
     }

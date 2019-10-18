@@ -49,6 +49,12 @@ public class FloatSIVectorTest
      * @throws IllegalAccessException on error
      * @throws ClassNotFoundException on error
      * @throws UnitException on error
+     * @param <AU> the absolute unit type
+     * @param <A> the absolute scalar type
+     * @param <AV> the absolute vector type
+     * @param <RU> the relative unit type
+     * @param <R> the relative scalar type
+     * @param <RV> the relative vector type
      */
     @SuppressWarnings("unchecked")
     @Test
@@ -174,7 +180,7 @@ public class FloatSIVectorTest
         verifyDimensionLessVector(denseTestData, new FloatFunction()
         {
             @Override
-            public float apply(float value)
+            public float apply(final float value)
             {
                 return value;
             }
@@ -213,7 +219,8 @@ public class FloatSIVectorTest
      *            verified
      * @param got FloatDimensionlessVector; the values that must be verified
      */
-    public static void verifyDimensionLessVector(float[] reference, FloatFunction operation, FloatDimensionlessVector got)
+    public static void verifyDimensionLessVector(final float[] reference, final FloatFunction operation,
+            final FloatDimensionlessVector got)
     {
         assertEquals("item count matches", reference.length, got.size());
         assertEquals("unit is DimensionLessUnit", DimensionlessUnit.BASE.getStandardUnit(),

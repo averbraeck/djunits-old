@@ -462,7 +462,8 @@ public class DoubleVectorInstantiateTest
 
         new Try()
         {
-            public @Override void execute()
+            @Override
+            public void execute()
             {
                 DoubleVector.instantiate(d0, SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
             }
@@ -470,7 +471,8 @@ public class DoubleVectorInstantiateTest
 
         new Try()
         {
-            public @Override void execute()
+            @Override
+            public void execute()
             {
                 DoubleVector.instantiate((double[]) null, SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
             }
@@ -478,7 +480,8 @@ public class DoubleVectorInstantiateTest
 
         new Try()
         {
-            public @Override void execute()
+            @Override
+            public void execute()
             {
                 DoubleVector.instantiate(d1, null, StorageType.DENSE);
             }
@@ -486,7 +489,8 @@ public class DoubleVectorInstantiateTest
 
         new Try()
         {
-            public @Override void execute()
+            @Override
+            public void execute()
             {
                 DoubleVector.instantiate(d1, SpeedUnit.METER_PER_SECOND, null);
             }

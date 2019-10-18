@@ -298,7 +298,7 @@ public class FloatScalarTest
                 @Override
                 public float function(final float d)
                 {
-                    return (float) -d;
+                    return -d;
                 }
             });
             floatLength = new FloatLength(input, LengthUnit.METER);
@@ -307,7 +307,7 @@ public class FloatScalarTest
                 @Override
                 public float function(final float d)
                 {
-                    return (float) (3 * d);
+                    return 3 * d;
                 }
             });
             floatLength = new FloatLength(input, LengthUnit.METER);
@@ -316,7 +316,7 @@ public class FloatScalarTest
                 @Override
                 public float function(final float d)
                 {
-                    return (float) (d / 7);
+                    return d / 7;
                 }
             });
         }

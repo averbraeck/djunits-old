@@ -32,23 +32,35 @@ public class TestUNITS
         // See if we can calculate a value for each of the constants
         for (Field constantField : UNITS.class.getDeclaredFields())
         {
-            if (constantField.getName().equals("UNIT")) // dimensionless
+            if (constantField.getName().equals("UNIT"))
+            {
                 continue;
+            }
             Unit<?> constant = (Unit<?>) constantField.get(null);
             if (constant == null)
+            {
                 fail("constant for field " + constantField.getName() + " is null");
+            }
             assertEquals("types of fields differ for " + constantField.getName(), constant.getClass(), constantField.getType());
-            if (constant.getId().contains("eV")) // used in Energy and Mass with prefix, so they differ...
+            if (constant.getId().contains("eV"))
+            {
                 continue;
+            }
             if (constant.getUnitBase().getStandardUnit().getName().equals("Kelvin")
-                    && constant instanceof AbsoluteLinearUnit<?, ?>) // KELVIN_ABS etc.
+                    && constant instanceof AbsoluteLinearUnit<?, ?>)
+            {
                 continue;
+            }
             if (constant.getUnitBase().getStandardUnit().getName().equals("meter")
-                    && constant instanceof AbsoluteLinearUnit<?, ?>) // METER_ABS etc.
+                    && constant instanceof AbsoluteLinearUnit<?, ?>)
+            {
                 continue;
+            }
             if (constant.getUnitBase().getStandardUnit().getName().equals("second")
-                    && constant instanceof AbsoluteLinearUnit<?, ?>) // SECOND_ABS etc.
+                    && constant instanceof AbsoluteLinearUnit<?, ?>)
+            {
                 continue;
+            }
             // find the field with this name in the declaring class
             Field unitField = constant.getClass().getDeclaredField(constantField.getName());
             Unit<?> unitConstant = (Unit<?>) unitField.get(constant.getClass());
