@@ -4,7 +4,7 @@
 
   <groupId>org.djunits</groupId>
   <artifactId>djunits</artifactId>
-  <version>4.00.01</version>
+  <version>4.00.02</version>
 
   <name>DJUNITS</name>
   <description>Delft Java UNIT System</description>
