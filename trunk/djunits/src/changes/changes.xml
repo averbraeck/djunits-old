@@ -25,6 +25,14 @@
       <action dev="averbraeck" type="add">
         Every unit now has a BaseUnit that stores the common dimensionality of all the DisplayUnits of that unit.
       </action>
+      <action dev="averbraeck" type="add">
+        The following units have been added as standard units w.r.t. djunits version 3: AbsorbedDose, AmountOfSubstance,
+        CatalyticActivity, ElectricalCapacitance, ElectricalConductance, ElectricalInductance, EquivalentDose,
+        Illuminance, LuminousFlux, LuminousIntensity, MagneticFluxDensity, MagneticFlux, and RadioActivity.
+      </action>
+      <action dev="averbraeck" type="update">
+        All classes with the name AngleSolid have been renamed to SolidAngle.
+      </action>
       <action dev="averbraeck" type="update">
         Package structure for each type of scalar, vector and matrix updated to have the types (including SI type),
         the base (abstract) classes from which the types extend, and the data classes that are used to store the data
