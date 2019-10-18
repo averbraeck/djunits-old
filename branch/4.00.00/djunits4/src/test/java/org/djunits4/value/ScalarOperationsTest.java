@@ -435,6 +435,7 @@ public class ScalarOperationsTest
      * @throws NoSuchFieldException on class or method resolving error
      * @throws ClassNotFoundException on class or method resolving error
      */
+    @SuppressWarnings("rawtypes")
     private void testUnaryMethods(final Class<?> scalarClass, final boolean abs, final boolean doubleType)
             throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException,
             NoSuchFieldException, ClassNotFoundException
@@ -613,14 +614,13 @@ public class ScalarOperationsTest
             // Construct a new unit to test mixed unit plus and minus
             Class<?> unitClass = getUnitClass(scalarClass);
             UnitSystem unitSystem = UnitSystem.SI_DERIVED;
-            Unit<?> referenceUnit;
             // Call the getUnit method of left
             Method getUnitMethod = ClassUtil.resolveMethod(scalarClass, "getDisplayUnit");
-            referenceUnit = (Unit<?>) getUnitMethod.invoke(left);
+            Unit referenceUnit = (Unit<?>) getUnitMethod.invoke(left);
             Constructor<?> unitConstructor = unitClass.getConstructor(); // empty constructor -- provide Builder
             Unit newUnit = (Unit) unitConstructor.newInstance();
             Method buildMethod = ClassUtil.resolveMethod(Unit.class, "build", Unit.Builder.class);
-            Unit.Builder builder = new Unit.Builder<>();
+            Unit.Builder<?> builder = new Unit.Builder<>();
             builder.setId("7abbr");
             builder.setName("7fullName");
             builder.setUnitSystem(unitSystem);
@@ -646,17 +646,29 @@ public class ScalarOperationsTest
         }
         if (!abs)
         {
-            Method times =
-                    ClassUtil.resolveMethod(scalarClass, "times", new Class[] { doubleType ? double.class : float.class });
+            Method times = ClassUtil.resolveMethod(scalarClass, "times", new Class[] { double.class });
             result = doubleType ? times.invoke(left, Math.PI) : times.invoke(left, (float) Math.PI);
             assertEquals("Result of operation", Math.PI * value, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                     0.01);
+            if (!doubleType)
+            {
+                times = ClassUtil.resolveMethod(scalarClass, "times", new Class[] { float.class });
+                result = doubleType ? times.invoke(left, Math.PI) : times.invoke(left, (float) Math.PI);
+                assertEquals("Result of operation", Math.PI * value, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
+                        0.01);
+            }
 
-            Method divide =
-                    ClassUtil.resolveMethod(scalarClass, "divide", new Class[] { doubleType ? double.class : float.class });
+            Method divide = ClassUtil.resolveMethod(scalarClass, "divide", new Class[] { double.class });
             result = doubleType ? divide.invoke(left, Math.PI) : divide.invoke(left, (float) Math.PI);
             assertEquals("Result of operation", value / Math.PI, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                     0.01);
+            if (!doubleType)
+            {
+                divide = ClassUtil.resolveMethod(scalarClass, "divide", new Class[] { float.class });
+                result = doubleType ? divide.invoke(left, Math.PI) : divide.invoke(left, (float) Math.PI);
+                assertEquals("Result of operation", value / Math.PI, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
+                        0.01);
+            }
 
             Method plus = ClassUtil.resolveMethod(scalarClass, "plus", new Class[] { scalarClass });
             result = plus.invoke(left, left);
