@@ -101,10 +101,9 @@ public class Angle extends AbstractDoubleScalarRelWithAbs<DirectionUnit, Directi
      */
     public static Angle interpolate(final Angle zero, final Angle one, final double ratio)
     {
-        return new Angle(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new Angle(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 Angle; the first scalar
@@ -166,7 +165,7 @@ public class Angle extends AbstractDoubleScalarRelWithAbs<DirectionUnit, Directi
         }
         return minr;
     }
-    
+
     /**
      * Returns a Angle representation of a textual representation of a value with a unit. The String representation that can be
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
@@ -216,17 +215,14 @@ public class Angle extends AbstractDoubleScalarRelWithAbs<DirectionUnit, Directi
         throw new IllegalArgumentException("Error parsing Angle with unit " + unitString);
     }
 
-        /**
-         * Calculate the division of Angle and Angle, which results in a Dimensionless scalar.
-         * @param v Angle scalar
-         * @return Dimensionless scalar as a division of Angle and Angle
-         */
-        public final Dimensionless divide(final Angle v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of Angle and Angle, which results in a Dimensionless scalar.
+     * @param v Angle scalar
+     * @return Dimensionless scalar as a division of Angle and Angle
+     */
+    public final Dimensionless divide(final Angle v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-
-    
 }
-

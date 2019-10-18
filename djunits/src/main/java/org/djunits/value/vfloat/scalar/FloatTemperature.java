@@ -22,7 +22,8 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatTemperature extends AbstractFloatScalarRelWithAbs<AbsoluteTemperatureUnit, FloatAbsoluteTemperature, TemperatureUnit, FloatTemperature>
+public class FloatTemperature extends
+        AbstractFloatScalarRelWithAbs<AbsoluteTemperatureUnit, FloatAbsoluteTemperature, TemperatureUnit, FloatTemperature>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -111,8 +112,8 @@ public class FloatTemperature extends AbstractFloatScalarRelWithAbs<AbsoluteTemp
      */
     public static FloatTemperature interpolate(final FloatTemperature zero, final FloatTemperature one, final float ratio)
     {
-        return new FloatTemperature(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new FloatTemperature(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**
@@ -178,9 +179,9 @@ public class FloatTemperature extends AbstractFloatScalarRelWithAbs<AbsoluteTemp
     }
 
     /**
-     * Returns a FloatTemperature representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a FloatTemperature representation of a textual representation of a value with a unit. The String representation
+     * that can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are
+     * allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatTemperature
      * @return FloatTemperature; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -217,7 +218,8 @@ public class FloatTemperature extends AbstractFloatScalarRelWithAbs<AbsoluteTemp
     public static FloatTemperature of(final float value, final String unitString)
     {
         Throw.whenNull(unitString, "Error parsing FloatTemperature: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatTemperature: empty unitString");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class,
+                "Error parsing FloatTemperature: empty unitString");
         TemperatureUnit unit = TemperatureUnit.BASE.getUnitByAbbreviation(unitString);
         if (unit != null)
         {
@@ -226,16 +228,14 @@ public class FloatTemperature extends AbstractFloatScalarRelWithAbs<AbsoluteTemp
         throw new IllegalArgumentException("Error parsing FloatTemperature with unit " + unitString);
     }
 
-        /**
-         * Calculate the division of FloatTemperature and FloatTemperature, which results in a FloatDimensionless scalar.
-         * @param v FloatTemperature scalar
-         * @return FloatDimensionless scalar as a division of FloatTemperature and FloatTemperature
-         */
-        public final FloatDimensionless divide(final FloatTemperature v)
-        {
-            return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
-
+    /**
+     * Calculate the division of FloatTemperature and FloatTemperature, which results in a FloatDimensionless scalar.
+     * @param v FloatTemperature scalar
+     * @return FloatDimensionless scalar as a division of FloatTemperature and FloatTemperature
+     */
+    public final FloatDimensionless divide(final FloatTemperature v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
 }
-

@@ -26,7 +26,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class Area extends AbstractDoubleScalarRel<AreaUnit, Area> 
+public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -88,7 +88,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
     {
         return new Area(value, AreaUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero Area; the low value
@@ -100,7 +100,7 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
     {
         return new Area(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 Area; the first scalar
@@ -212,97 +212,94 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
         throw new IllegalArgumentException("Error parsing Area with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of Area and Area, which results in a Dimensionless scalar.
-         * @param v Area scalar
-         * @return Dimensionless scalar as a division of Area and Area
-         */
-        public final Dimensionless divide(final Area v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of Area and Area, which results in a Dimensionless scalar.
+     * @param v Area scalar
+     * @return Dimensionless scalar as a division of Area and Area
+     */
+    public final Dimensionless divide(final Area v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Area and Length, which results in a Volume scalar.
-         * @param v Area scalar
-         * @return Volume scalar as a multiplication of Area and Length
-         */
-        public final Volume times(final Length v)
-        {
-            return new Volume(this.si * v.si, VolumeUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Area and Length, which results in a Volume scalar.
+     * @param v Area scalar
+     * @return Volume scalar as a multiplication of Area and Length
+     */
+    public final Volume times(final Length v)
+    {
+        return new Volume(this.si * v.si, VolumeUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Area and LinearDensity, which results in a Volume scalar.
-         * @param v Area scalar
-         * @return Volume scalar as a division of Area and LinearDensity
-         */
-        public final Volume divide(final LinearDensity v)
-        {
-            return new Volume(this.si / v.si, VolumeUnit.SI);
-        }
+    /**
+     * Calculate the division of Area and LinearDensity, which results in a Volume scalar.
+     * @param v Area scalar
+     * @return Volume scalar as a division of Area and LinearDensity
+     */
+    public final Volume divide(final LinearDensity v)
+    {
+        return new Volume(this.si / v.si, VolumeUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Area and Volume, which results in a LinearDensity scalar.
-         * @param v Area scalar
-         * @return LinearDensity scalar as a division of Area and Volume
-         */
-        public final LinearDensity divide(final Volume v)
-        {
-            return new LinearDensity(this.si / v.si, LinearDensityUnit.SI);
-        }
+    /**
+     * Calculate the division of Area and Volume, which results in a LinearDensity scalar.
+     * @param v Area scalar
+     * @return LinearDensity scalar as a division of Area and Volume
+     */
+    public final LinearDensity divide(final Volume v)
+    {
+        return new LinearDensity(this.si / v.si, LinearDensityUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Area and Length, which results in a Length scalar.
-         * @param v Area scalar
-         * @return Length scalar as a division of Area and Length
-         */
-        public final Length divide(final Length v)
-        {
-            return new Length(this.si / v.si, LengthUnit.SI);
-        }
+    /**
+     * Calculate the division of Area and Length, which results in a Length scalar.
+     * @param v Area scalar
+     * @return Length scalar as a division of Area and Length
+     */
+    public final Length divide(final Length v)
+    {
+        return new Length(this.si / v.si, LengthUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Area and LinearDensity, which results in a Length scalar.
-         * @param v Area scalar
-         * @return Length scalar as a multiplication of Area and LinearDensity
-         */
-        public final Length times(final LinearDensity v)
-        {
-            return new Length(this.si * v.si, LengthUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Area and LinearDensity, which results in a Length scalar.
+     * @param v Area scalar
+     * @return Length scalar as a multiplication of Area and LinearDensity
+     */
+    public final Length times(final LinearDensity v)
+    {
+        return new Length(this.si * v.si, LengthUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Area and Speed, which results in a FlowVolume scalar.
-         * @param v Area scalar
-         * @return FlowVolume scalar as a multiplication of Area and Speed
-         */
-        public final FlowVolume times(final Speed v)
-        {
-            return new FlowVolume(this.si * v.si, FlowVolumeUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Area and Speed, which results in a FlowVolume scalar.
+     * @param v Area scalar
+     * @return FlowVolume scalar as a multiplication of Area and Speed
+     */
+    public final FlowVolume times(final Speed v)
+    {
+        return new FlowVolume(this.si * v.si, FlowVolumeUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Area and Pressure, which results in a Force scalar.
-         * @param v Area scalar
-         * @return Force scalar as a multiplication of Area and Pressure
-         */
-        public final Force times(final Pressure v)
-        {
-            return new Force(this.si * v.si, ForceUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Area and Pressure, which results in a Force scalar.
+     * @param v Area scalar
+     * @return Force scalar as a multiplication of Area and Pressure
+     */
+    public final Force times(final Pressure v)
+    {
+        return new Force(this.si * v.si, ForceUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Area and Illuminance, which results in a LuminousFlux scalar.
-         * @param v Area scalar
-         * @return LuminousFlux scalar as a multiplication of Area and Illuminance
-         */
-        public final LuminousFlux times(final Illuminance v)
-        {
-            return new LuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
-        }
-
+    /**
+     * Calculate the multiplication of Area and Illuminance, which results in a LuminousFlux scalar.
+     * @param v Area scalar
+     * @return LuminousFlux scalar as a multiplication of Area and Illuminance
+     */
+    public final LuminousFlux times(final Illuminance v)
+    {
+        return new LuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
+    }
 
 }
-
-

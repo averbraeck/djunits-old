@@ -8,7 +8,7 @@ import org.djunits.value.vfloat.vector.base.AbstractFloatVectorRel;
 import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable Float FloatSpeedVector, a vector of values with a SpeedUnit. 
+ * Immutable Float FloatSpeedVector, a vector of values with a SpeedUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -39,7 +39,7 @@ public class FloatSpeedVector extends AbstractFloatVectorRel<SpeedUnit, FloatSpe
     {
         return FloatSpeed.class;
     }
-        
+
     /** {@inheritDoc} */
     @Override
     public FloatSpeedVector instantiateVector(final FloatVectorData fvd, final SpeedUnit displayUnit)
@@ -56,7 +56,4 @@ public class FloatSpeedVector extends AbstractFloatVectorRel<SpeedUnit, FloatSpe
         return result;
     }
 
-   
 }
-
-

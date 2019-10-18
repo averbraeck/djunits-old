@@ -337,7 +337,8 @@ public class FloatVectorDataSparse extends FloatVectorData
         int[] indicesNew = new int[this.indices.length + 1];
         float[] vectorSINew = new float[this.vectorSI.length + 1];
         System.arraycopy(this.indices, 0, indicesNew, 0, internalIndex);
-        System.arraycopy(this.vectorSI, 0, vectorSINew, 0, internalIndex);        System.arraycopy(this.indices, internalIndex, indicesNew, internalIndex + 1, this.indices.length - internalIndex);
+        System.arraycopy(this.vectorSI, 0, vectorSINew, 0, internalIndex);
+        System.arraycopy(this.indices, internalIndex, indicesNew, internalIndex + 1, this.indices.length - internalIndex);
         System.arraycopy(this.vectorSI, internalIndex, vectorSINew, internalIndex + 1, this.indices.length - internalIndex);
         indicesNew[internalIndex] = index;
         vectorSINew[internalIndex] = valueSI;
@@ -441,7 +442,7 @@ public class FloatVectorDataSparse extends FloatVectorData
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings({ "checkstyle:needbraces", "checkstyle:designforextension" })
+    @SuppressWarnings({"checkstyle:needbraces", "checkstyle:designforextension"})
     public boolean equals(final Object obj)
     {
         if (this == obj)

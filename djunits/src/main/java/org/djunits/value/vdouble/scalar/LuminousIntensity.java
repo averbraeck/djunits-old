@@ -21,7 +21,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensityUnit, LuminousIntensity> 
+public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensityUnit, LuminousIntensity>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -37,10 +37,12 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
     public static final LuminousIntensity NaN = new LuminousIntensity(Double.NaN, LuminousIntensityUnit.SI);
 
     /** Constant with value POSITIVE_INFINITY. */
-    public static final LuminousIntensity POSITIVE_INFINITY = new LuminousIntensity(Double.POSITIVE_INFINITY, LuminousIntensityUnit.SI);
+    public static final LuminousIntensity POSITIVE_INFINITY =
+            new LuminousIntensity(Double.POSITIVE_INFINITY, LuminousIntensityUnit.SI);
 
     /** Constant with value NEGATIVE_INFINITY. */
-    public static final LuminousIntensity NEGATIVE_INFINITY = new LuminousIntensity(Double.NEGATIVE_INFINITY, LuminousIntensityUnit.SI);
+    public static final LuminousIntensity NEGATIVE_INFINITY =
+            new LuminousIntensity(Double.NEGATIVE_INFINITY, LuminousIntensityUnit.SI);
 
     /** Constant with value MAX_VALUE. */
     public static final LuminousIntensity POS_MAXVALUE = new LuminousIntensity(Double.MAX_VALUE, LuminousIntensityUnit.SI);
@@ -83,7 +85,7 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
     {
         return new LuminousIntensity(value, LuminousIntensityUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero LuminousIntensity; the low value
@@ -93,9 +95,10 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
      */
     public static LuminousIntensity interpolate(final LuminousIntensity zero, final LuminousIntensity one, final double ratio)
     {
-        return new LuminousIntensity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return new LuminousIntensity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 LuminousIntensity; the first scalar
@@ -159,9 +162,9 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
     }
 
     /**
-     * Returns a LuminousIntensity representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a LuminousIntensity representation of a textual representation of a value with a unit. The String representation
+     * that can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are
+     * allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a LuminousIntensity
      * @return LuminousIntensity; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -198,7 +201,8 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
     public static LuminousIntensity of(final double value, final String unitString)
     {
         Throw.whenNull(unitString, "Error parsing LuminousIntensity: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing LuminousIntensity: empty unitString");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class,
+                "Error parsing LuminousIntensity: empty unitString");
         LuminousIntensityUnit unit = LuminousIntensityUnit.BASE.getUnitByAbbreviation(unitString);
         if (unit != null)
         {
@@ -207,27 +211,24 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
         throw new IllegalArgumentException("Error parsing LuminousIntensity with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of LuminousIntensity and LuminousIntensity, which results in a Dimensionless scalar.
-         * @param v LuminousIntensity scalar
-         * @return Dimensionless scalar as a division of LuminousIntensity and LuminousIntensity
-         */
-        public final Dimensionless divide(final LuminousIntensity v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of LuminousIntensity and LuminousIntensity, which results in a Dimensionless scalar.
+     * @param v LuminousIntensity scalar
+     * @return Dimensionless scalar as a division of LuminousIntensity and LuminousIntensity
+     */
+    public final Dimensionless divide(final LuminousIntensity v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of LuminousIntensity and SolidAngle, which results in a LuminousFlux scalar.
-         * @param v LuminousIntensity scalar
-         * @return LuminousFlux scalar as a multiplication of LuminousIntensity and SolidAngle
-         */
-        public final LuminousFlux times(final SolidAngle v)
-        {
-            return new LuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
-        }
-
+    /**
+     * Calculate the multiplication of LuminousIntensity and SolidAngle, which results in a LuminousFlux scalar.
+     * @param v LuminousIntensity scalar
+     * @return LuminousFlux scalar as a multiplication of LuminousIntensity and SolidAngle
+     */
+    public final LuminousFlux times(final SolidAngle v)
+    {
+        return new LuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
+    }
 
 }
-
-

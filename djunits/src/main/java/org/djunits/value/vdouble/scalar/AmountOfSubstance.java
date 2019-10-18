@@ -22,7 +22,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstanceUnit, AmountOfSubstance> 
+public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstanceUnit, AmountOfSubstance>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -38,10 +38,12 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
     public static final AmountOfSubstance NaN = new AmountOfSubstance(Double.NaN, AmountOfSubstanceUnit.SI);
 
     /** Constant with value POSITIVE_INFINITY. */
-    public static final AmountOfSubstance POSITIVE_INFINITY = new AmountOfSubstance(Double.POSITIVE_INFINITY, AmountOfSubstanceUnit.SI);
+    public static final AmountOfSubstance POSITIVE_INFINITY =
+            new AmountOfSubstance(Double.POSITIVE_INFINITY, AmountOfSubstanceUnit.SI);
 
     /** Constant with value NEGATIVE_INFINITY. */
-    public static final AmountOfSubstance NEGATIVE_INFINITY = new AmountOfSubstance(Double.NEGATIVE_INFINITY, AmountOfSubstanceUnit.SI);
+    public static final AmountOfSubstance NEGATIVE_INFINITY =
+            new AmountOfSubstance(Double.NEGATIVE_INFINITY, AmountOfSubstanceUnit.SI);
 
     /** Constant with value MAX_VALUE. */
     public static final AmountOfSubstance POS_MAXVALUE = new AmountOfSubstance(Double.MAX_VALUE, AmountOfSubstanceUnit.SI);
@@ -84,7 +86,7 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
     {
         return new AmountOfSubstance(value, AmountOfSubstanceUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero AmountOfSubstance; the low value
@@ -94,9 +96,10 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
      */
     public static AmountOfSubstance interpolate(final AmountOfSubstance zero, final AmountOfSubstance one, final double ratio)
     {
-        return new AmountOfSubstance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return new AmountOfSubstance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 AmountOfSubstance; the first scalar
@@ -160,9 +163,9 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
     }
 
     /**
-     * Returns a AmountOfSubstance representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a AmountOfSubstance representation of a textual representation of a value with a unit. The String representation
+     * that can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are
+     * allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a AmountOfSubstance
      * @return AmountOfSubstance; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -199,7 +202,8 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
     public static AmountOfSubstance of(final double value, final String unitString)
     {
         Throw.whenNull(unitString, "Error parsing AmountOfSubstance: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing AmountOfSubstance: empty unitString");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class,
+                "Error parsing AmountOfSubstance: empty unitString");
         AmountOfSubstanceUnit unit = AmountOfSubstanceUnit.BASE.getUnitByAbbreviation(unitString);
         if (unit != null)
         {
@@ -208,37 +212,34 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
         throw new IllegalArgumentException("Error parsing AmountOfSubstance with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of AmountOfSubstance and AmountOfSubstance, which results in a Dimensionless scalar.
-         * @param v AmountOfSubstance scalar
-         * @return Dimensionless scalar as a division of AmountOfSubstance and AmountOfSubstance
-         */
-        public final Dimensionless divide(final AmountOfSubstance v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of AmountOfSubstance and AmountOfSubstance, which results in a Dimensionless scalar.
+     * @param v AmountOfSubstance scalar
+     * @return Dimensionless scalar as a division of AmountOfSubstance and AmountOfSubstance
+     */
+    public final Dimensionless divide(final AmountOfSubstance v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the division of AmountOfSubstance and CatalyticActivity, which results in a Duration scalar.
-         * @param v AmountOfSubstance scalar
-         * @return Duration scalar as a division of AmountOfSubstance and CatalyticActivity
-         */
-        public final Duration divide(final CatalyticActivity v)
-        {
-            return new Duration(this.si / v.si, DurationUnit.SI);
-        }
+    /**
+     * Calculate the division of AmountOfSubstance and CatalyticActivity, which results in a Duration scalar.
+     * @param v AmountOfSubstance scalar
+     * @return Duration scalar as a division of AmountOfSubstance and CatalyticActivity
+     */
+    public final Duration divide(final CatalyticActivity v)
+    {
+        return new Duration(this.si / v.si, DurationUnit.SI);
+    }
 
-        /**
-         * Calculate the division of AmountOfSubstance and Duration, which results in a CatalyticActivity scalar.
-         * @param v AmountOfSubstance scalar
-         * @return CatalyticActivity scalar as a division of AmountOfSubstance and Duration
-         */
-        public final CatalyticActivity divide(final Duration v)
-        {
-            return new CatalyticActivity(this.si / v.si, CatalyticActivityUnit.SI);
-        }
-
+    /**
+     * Calculate the division of AmountOfSubstance and Duration, which results in a CatalyticActivity scalar.
+     * @param v AmountOfSubstance scalar
+     * @return CatalyticActivity scalar as a division of AmountOfSubstance and Duration
+     */
+    public final CatalyticActivity divide(final Duration v)
+    {
+        return new CatalyticActivity(this.si / v.si, CatalyticActivityUnit.SI);
+    }
 
 }
-
-

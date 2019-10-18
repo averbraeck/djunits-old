@@ -22,12 +22,14 @@ import org.djunits.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatTemperatureMatrix extends AbstractFloatMatrixRelWithAbs<AbsoluteTemperatureUnit, FloatAbsoluteTemperature, FloatAbsoluteTemperatureVector, FloatAbsoluteTemperatureMatrix,
-TemperatureUnit, FloatTemperature, FloatTemperatureVector, FloatTemperatureMatrix>
+public class FloatTemperatureMatrix extends
+        AbstractFloatMatrixRelWithAbs<AbsoluteTemperatureUnit, FloatAbsoluteTemperature, FloatAbsoluteTemperatureVector,
+                FloatAbsoluteTemperatureMatrix, TemperatureUnit, FloatTemperature, FloatTemperatureVector,
+                FloatTemperatureMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
-    
+
     /**
      * @param data FloatMatrixData; an internal data object
      * @param unit TemperatureUnit; the unit
@@ -36,21 +38,21 @@ TemperatureUnit, FloatTemperature, FloatTemperatureVector, FloatTemperatureMatri
     {
         super(data, unit);
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public Class<FloatTemperature> getScalarClass()
     {
         return FloatTemperature.class;
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public Class<FloatTemperatureVector> getVectorClass()
     {
         return FloatTemperatureVector.class;
     }
-        
+
     /** {@inheritDoc} */
     @Override
     public FloatTemperatureMatrix instantiateMatrix(final FloatMatrixData fmd, final TemperatureUnit displayUnit)
@@ -76,14 +78,16 @@ TemperatureUnit, FloatTemperature, FloatTemperatureVector, FloatTemperatureMatri
 
     /** {@inheritDoc} */
     @Override
-    public FloatAbsoluteTemperatureMatrix instantiateMatrixAbs(final FloatMatrixData fmd, final AbsoluteTemperatureUnit displayUnit)
+    public FloatAbsoluteTemperatureMatrix instantiateMatrixAbs(final FloatMatrixData fmd,
+            final AbsoluteTemperatureUnit displayUnit)
     {
         return new FloatAbsoluteTemperatureMatrix(fmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public FloatAbsoluteTemperatureVector instantiateVectorAbs(final FloatVectorData fvd, final AbsoluteTemperatureUnit displayUnit)
+    public FloatAbsoluteTemperatureVector instantiateVectorAbs(final FloatVectorData fvd,
+            final AbsoluteTemperatureUnit displayUnit)
     {
         return new FloatAbsoluteTemperatureVector(fvd, displayUnit);
     }
@@ -97,5 +101,4 @@ TemperatureUnit, FloatTemperature, FloatTemperatureVector, FloatTemperatureMatri
         return result;
     }
 
-   
-}
+}

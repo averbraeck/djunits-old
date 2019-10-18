@@ -170,8 +170,8 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
      * @param displayUnit KU; the unit in which the matrix needs to be expressed
      * @return K; the matrix that has been transformed into the right matrix type and unit
      */
-    public final <U extends Unit<U>, S extends AbstractFloatScalarRel<U, S>,
-            V extends AbstractFloatVectorRel<U, S, V>, M extends AbstractFloatMatrixRel<U, S, V, M>> M as(final U displayUnit)
+    public final <U extends Unit<U>, S extends AbstractFloatScalarRel<U, S>, V extends AbstractFloatVectorRel<U, S, V>,
+            M extends AbstractFloatMatrixRel<U, S, V, M>> M as(final U displayUnit)
     {
         Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(displayUnit.getUnitBase().getSiDimensions())),
                 UnitRuntimeException.class, "FloatSIMatrix with unit %s cannot be converted to a FloatMatrix with unit %s",
@@ -181,7 +181,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         return result;
     }
 
-        /**
+    /**
      * Return the current matrix as a absorbeddose matrix.
      * @return FloatAbsorbedDoseMatrix; the current matrix as a absorbeddose matrix
      */
@@ -205,6 +205,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a acceleration matrix.
      * @return FloatAccelerationMatrix; the current matrix as a acceleration matrix
@@ -229,6 +230,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a amountofsubstance matrix.
      * @return FloatAmountOfSubstanceMatrix; the current matrix as a amountofsubstance matrix
@@ -253,6 +255,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a area matrix.
      * @return FloatAreaMatrix; the current matrix as a area matrix
@@ -277,6 +280,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a catalyticactivity matrix.
      * @return FloatCatalyticActivityMatrix; the current matrix as a catalyticactivity matrix
@@ -301,6 +305,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a density matrix.
      * @return FloatDensityMatrix; the current matrix as a density matrix
@@ -325,6 +330,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a dimensionless matrix.
      * @return FloatDimensionlessMatrix; the current matrix as a dimensionless matrix
@@ -349,6 +355,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a electricalcapacitance matrix.
      * @return FloatElectricalCapacitanceMatrix; the current matrix as a electricalcapacitance matrix
@@ -369,10 +376,12 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
     {
         Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalCapacitanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatElectricalCapacitanceMatrix", this.toString());
-        FloatElectricalCapacitanceMatrix result = new FloatElectricalCapacitanceMatrix(this.data, displayUnit.getStandardUnit());
+        FloatElectricalCapacitanceMatrix result =
+                new FloatElectricalCapacitanceMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a electricalcharge matrix.
      * @return FloatElectricalChargeMatrix; the current matrix as a electricalcharge matrix
@@ -397,6 +406,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a electricalconductance matrix.
      * @return FloatElectricalConductanceMatrix; the current matrix as a electricalconductance matrix
@@ -417,10 +427,12 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
     {
         Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalConductanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatElectricalConductanceMatrix", this.toString());
-        FloatElectricalConductanceMatrix result = new FloatElectricalConductanceMatrix(this.data, displayUnit.getStandardUnit());
+        FloatElectricalConductanceMatrix result =
+                new FloatElectricalConductanceMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a electricalcurrent matrix.
      * @return FloatElectricalCurrentMatrix; the current matrix as a electricalcurrent matrix
@@ -445,6 +457,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a electricalinductance matrix.
      * @return FloatElectricalInductanceMatrix; the current matrix as a electricalinductance matrix
@@ -469,6 +482,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a electricalpotential matrix.
      * @return FloatElectricalPotentialMatrix; the current matrix as a electricalpotential matrix
@@ -493,6 +507,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a electricalresistance matrix.
      * @return FloatElectricalResistanceMatrix; the current matrix as a electricalresistance matrix
@@ -517,6 +532,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a energy matrix.
      * @return FloatEnergyMatrix; the current matrix as a energy matrix
@@ -541,6 +557,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a equivalentdose matrix.
      * @return FloatEquivalentDoseMatrix; the current matrix as a equivalentdose matrix
@@ -565,6 +582,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a flowmass matrix.
      * @return FloatFlowMassMatrix; the current matrix as a flowmass matrix
@@ -589,6 +607,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a flowvolume matrix.
      * @return FloatFlowVolumeMatrix; the current matrix as a flowvolume matrix
@@ -613,6 +632,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a force matrix.
      * @return FloatForceMatrix; the current matrix as a force matrix
@@ -637,6 +657,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a frequency matrix.
      * @return FloatFrequencyMatrix; the current matrix as a frequency matrix
@@ -661,6 +682,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a illuminance matrix.
      * @return FloatIlluminanceMatrix; the current matrix as a illuminance matrix
@@ -685,6 +707,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a lineardensity matrix.
      * @return FloatLinearDensityMatrix; the current matrix as a lineardensity matrix
@@ -709,6 +732,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a luminousflux matrix.
      * @return FloatLuminousFluxMatrix; the current matrix as a luminousflux matrix
@@ -733,6 +757,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a luminousintensity matrix.
      * @return FloatLuminousIntensityMatrix; the current matrix as a luminousintensity matrix
@@ -757,6 +782,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a magneticfluxdensity matrix.
      * @return FloatMagneticFluxDensityMatrix; the current matrix as a magneticfluxdensity matrix
@@ -781,6 +807,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a magneticflux matrix.
      * @return FloatMagneticFluxMatrix; the current matrix as a magneticflux matrix
@@ -805,6 +832,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a mass matrix.
      * @return FloatMassMatrix; the current matrix as a mass matrix
@@ -829,6 +857,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a power matrix.
      * @return FloatPowerMatrix; the current matrix as a power matrix
@@ -853,6 +882,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a pressure matrix.
      * @return FloatPressureMatrix; the current matrix as a pressure matrix
@@ -877,6 +907,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a radioactivity matrix.
      * @return FloatRadioActivityMatrix; the current matrix as a radioactivity matrix
@@ -901,6 +932,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a solidangle matrix.
      * @return FloatSolidAngleMatrix; the current matrix as a solidangle matrix
@@ -925,6 +957,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a speed matrix.
      * @return FloatSpeedMatrix; the current matrix as a speed matrix
@@ -949,6 +982,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a torque matrix.
      * @return FloatTorqueMatrix; the current matrix as a torque matrix
@@ -973,6 +1007,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a volume matrix.
      * @return FloatVolumeMatrix; the current matrix as a volume matrix
@@ -997,6 +1032,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a angle matrix.
      * @return FloatAngleMatrix; the current matrix as a angle matrix
@@ -1021,6 +1057,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a length matrix.
      * @return FloatLengthMatrix; the current matrix as a length matrix
@@ -1045,6 +1082,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a temperature matrix.
      * @return FloatTemperatureMatrix; the current matrix as a temperature matrix
@@ -1069,6 +1107,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a duration matrix.
      * @return FloatDurationMatrix; the current matrix as a duration matrix

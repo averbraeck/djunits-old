@@ -8,7 +8,7 @@ import org.djunits.value.vfloat.vector.base.AbstractFloatVectorRel;
 import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable Float FloatAreaVector, a vector of values with a AreaUnit. 
+ * Immutable Float FloatAreaVector, a vector of values with a AreaUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -39,7 +39,7 @@ public class FloatAreaVector extends AbstractFloatVectorRel<AreaUnit, FloatArea,
     {
         return FloatArea.class;
     }
-        
+
     /** {@inheritDoc} */
     @Override
     public FloatAreaVector instantiateVector(final FloatVectorData fvd, final AreaUnit displayUnit)
@@ -56,7 +56,4 @@ public class FloatAreaVector extends AbstractFloatVectorRel<AreaUnit, FloatArea,
         return result;
     }
 
-   
 }
-
-

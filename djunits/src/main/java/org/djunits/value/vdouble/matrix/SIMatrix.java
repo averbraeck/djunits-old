@@ -170,8 +170,8 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      * @param displayUnit KU; the unit in which the matrix needs to be expressed
      * @return K; the matrix that has been transformed into the right matrix type and unit
      */
-    public final <U extends Unit<U>, S extends AbstractDoubleScalarRel<U, S>,
-            V extends AbstractDoubleVectorRel<U, S, V>, M extends AbstractDoubleMatrixRel<U, S, V, M>> M as(final U displayUnit)
+    public final <U extends Unit<U>, S extends AbstractDoubleScalarRel<U, S>, V extends AbstractDoubleVectorRel<U, S, V>,
+            M extends AbstractDoubleMatrixRel<U, S, V, M>> M as(final U displayUnit)
     {
         Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(displayUnit.getUnitBase().getSiDimensions())),
                 UnitRuntimeException.class, "SIMatrix with unit %s cannot be converted to a matrix with unit %s",
@@ -181,7 +181,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         return result;
     }
 
-        /**
+    /**
      * Return the current matrix as a absorbeddose matrix.
      * @return AbsorbedDoseMatrix; the current matrix as a absorbeddose matrix
      */
@@ -205,6 +205,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a acceleration matrix.
      * @return AccelerationMatrix; the current matrix as a acceleration matrix
@@ -229,6 +230,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a amountofsubstance matrix.
      * @return AmountOfSubstanceMatrix; the current matrix as a amountofsubstance matrix
@@ -253,6 +255,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a area matrix.
      * @return AreaMatrix; the current matrix as a area matrix
@@ -277,6 +280,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a catalyticactivity matrix.
      * @return CatalyticActivityMatrix; the current matrix as a catalyticactivity matrix
@@ -301,6 +305,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a density matrix.
      * @return DensityMatrix; the current matrix as a density matrix
@@ -325,6 +330,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a dimensionless matrix.
      * @return DimensionlessMatrix; the current matrix as a dimensionless matrix
@@ -349,6 +355,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a electricalcapacitance matrix.
      * @return ElectricalCapacitanceMatrix; the current matrix as a electricalcapacitance matrix
@@ -373,6 +380,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a electricalcharge matrix.
      * @return ElectricalChargeMatrix; the current matrix as a electricalcharge matrix
@@ -397,6 +405,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a electricalconductance matrix.
      * @return ElectricalConductanceMatrix; the current matrix as a electricalconductance matrix
@@ -421,6 +430,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a electricalcurrent matrix.
      * @return ElectricalCurrentMatrix; the current matrix as a electricalcurrent matrix
@@ -445,6 +455,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a electricalinductance matrix.
      * @return ElectricalInductanceMatrix; the current matrix as a electricalinductance matrix
@@ -469,6 +480,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a electricalpotential matrix.
      * @return ElectricalPotentialMatrix; the current matrix as a electricalpotential matrix
@@ -493,6 +505,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a electricalresistance matrix.
      * @return ElectricalResistanceMatrix; the current matrix as a electricalresistance matrix
@@ -517,6 +530,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a energy matrix.
      * @return EnergyMatrix; the current matrix as a energy matrix
@@ -541,6 +555,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a equivalentdose matrix.
      * @return EquivalentDoseMatrix; the current matrix as a equivalentdose matrix
@@ -565,6 +580,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a flowmass matrix.
      * @return FlowMassMatrix; the current matrix as a flowmass matrix
@@ -589,6 +605,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a flowvolume matrix.
      * @return FlowVolumeMatrix; the current matrix as a flowvolume matrix
@@ -613,6 +630,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a force matrix.
      * @return ForceMatrix; the current matrix as a force matrix
@@ -637,6 +655,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a frequency matrix.
      * @return FrequencyMatrix; the current matrix as a frequency matrix
@@ -661,6 +680,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a illuminance matrix.
      * @return IlluminanceMatrix; the current matrix as a illuminance matrix
@@ -685,6 +705,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a lineardensity matrix.
      * @return LinearDensityMatrix; the current matrix as a lineardensity matrix
@@ -709,6 +730,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a luminousflux matrix.
      * @return LuminousFluxMatrix; the current matrix as a luminousflux matrix
@@ -733,6 +755,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a luminousintensity matrix.
      * @return LuminousIntensityMatrix; the current matrix as a luminousintensity matrix
@@ -757,6 +780,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a magneticfluxdensity matrix.
      * @return MagneticFluxDensityMatrix; the current matrix as a magneticfluxdensity matrix
@@ -781,6 +805,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a magneticflux matrix.
      * @return MagneticFluxMatrix; the current matrix as a magneticflux matrix
@@ -805,6 +830,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a mass matrix.
      * @return MassMatrix; the current matrix as a mass matrix
@@ -829,6 +855,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a power matrix.
      * @return PowerMatrix; the current matrix as a power matrix
@@ -853,6 +880,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a pressure matrix.
      * @return PressureMatrix; the current matrix as a pressure matrix
@@ -877,6 +905,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a radioactivity matrix.
      * @return RadioActivityMatrix; the current matrix as a radioactivity matrix
@@ -901,6 +930,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a solidangle matrix.
      * @return SolidAngleMatrix; the current matrix as a solidangle matrix
@@ -925,6 +955,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a speed matrix.
      * @return SpeedMatrix; the current matrix as a speed matrix
@@ -949,6 +980,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a torque matrix.
      * @return TorqueMatrix; the current matrix as a torque matrix
@@ -973,6 +1005,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a volume matrix.
      * @return VolumeMatrix; the current matrix as a volume matrix
@@ -997,6 +1030,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a angle matrix.
      * @return AngleMatrix; the current matrix as a angle matrix
@@ -1021,6 +1055,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a length matrix.
      * @return LengthMatrix; the current matrix as a length matrix
@@ -1045,6 +1080,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a temperature matrix.
      * @return TemperatureMatrix; the current matrix as a temperature matrix
@@ -1069,6 +1105,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current matrix as a duration matrix.
      * @return DurationMatrix; the current matrix as a duration matrix

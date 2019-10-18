@@ -10,7 +10,7 @@ import org.djunits.value.vdouble.vector.EquivalentDoseVector;
 import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Double EquivalentDoseMatrix, a matrix of values with a EquivalentDoseUnit. 
+ * Immutable Double EquivalentDoseMatrix, a matrix of values with a EquivalentDoseUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,7 +19,8 @@ import org.djunits.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class EquivalentDoseMatrix extends AbstractDoubleMatrixRel<EquivalentDoseUnit, EquivalentDose, EquivalentDoseVector, EquivalentDoseMatrix>
+public class EquivalentDoseMatrix
+        extends AbstractDoubleMatrixRel<EquivalentDoseUnit, EquivalentDose, EquivalentDoseVector, EquivalentDoseMatrix>
 
 {
     /** */
@@ -70,6 +71,5 @@ public class EquivalentDoseMatrix extends AbstractDoubleMatrixRel<EquivalentDose
         result.setDisplayUnit(displayUnit);
         return result;
     }
-    
+
 }
-

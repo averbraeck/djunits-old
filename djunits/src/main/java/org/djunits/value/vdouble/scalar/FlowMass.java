@@ -25,7 +25,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass> 
+public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -87,7 +87,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
     {
         return new FlowMass(value, FlowMassUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero FlowMass; the low value
@@ -97,9 +97,10 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
      */
     public static FlowMass interpolate(final FlowMass zero, final FlowMass one, final double ratio)
     {
-        return new FlowMass(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return new FlowMass(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 FlowMass; the first scalar
@@ -163,8 +164,8 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
     }
 
     /**
-     * Returns a FlowMass representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
+     * Returns a FlowMass representation of a textual representation of a value with a unit. The String representation that can
+     * be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
      * required, between the value and the unit.
      * @param text String; the textual representation to parse into a FlowMass
      * @return FlowMass; the Scalar representation of the value in its unit
@@ -211,77 +212,74 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
         throw new IllegalArgumentException("Error parsing FlowMass with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of FlowMass and FlowMass, which results in a Dimensionless scalar.
-         * @param v FlowMass scalar
-         * @return Dimensionless scalar as a division of FlowMass and FlowMass
-         */
-        public final Dimensionless divide(final FlowMass v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of FlowMass and FlowMass, which results in a Dimensionless scalar.
+     * @param v FlowMass scalar
+     * @return Dimensionless scalar as a division of FlowMass and FlowMass
+     */
+    public final Dimensionless divide(final FlowMass v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FlowMass and Duration, which results in a Mass scalar.
-         * @param v FlowMass scalar
-         * @return Mass scalar as a multiplication of FlowMass and Duration
-         */
-        public final Mass times(final Duration v)
-        {
-            return new Mass(this.si * v.si, MassUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FlowMass and Duration, which results in a Mass scalar.
+     * @param v FlowMass scalar
+     * @return Mass scalar as a multiplication of FlowMass and Duration
+     */
+    public final Mass times(final Duration v)
+    {
+        return new Mass(this.si * v.si, MassUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FlowMass and Frequency, which results in a Mass scalar.
-         * @param v FlowMass scalar
-         * @return Mass scalar as a division of FlowMass and Frequency
-         */
-        public final Mass divide(final Frequency v)
-        {
-            return new Mass(this.si / v.si, MassUnit.SI);
-        }
+    /**
+     * Calculate the division of FlowMass and Frequency, which results in a Mass scalar.
+     * @param v FlowMass scalar
+     * @return Mass scalar as a division of FlowMass and Frequency
+     */
+    public final Mass divide(final Frequency v)
+    {
+        return new Mass(this.si / v.si, MassUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FlowMass and Mass, which results in a Frequency scalar.
-         * @param v FlowMass scalar
-         * @return Frequency scalar as a division of FlowMass and Mass
-         */
-        public final Frequency divide(final Mass v)
-        {
-            return new Frequency(this.si / v.si, FrequencyUnit.SI);
-        }
+    /**
+     * Calculate the division of FlowMass and Mass, which results in a Frequency scalar.
+     * @param v FlowMass scalar
+     * @return Frequency scalar as a division of FlowMass and Mass
+     */
+    public final Frequency divide(final Mass v)
+    {
+        return new Frequency(this.si / v.si, FrequencyUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FlowMass and Speed, which results in a Force scalar.
-         * @param v FlowMass scalar
-         * @return Force scalar as a multiplication of FlowMass and Speed
-         */
-        public final Force times(final Speed v)
-        {
-            return new Force(this.si * v.si, ForceUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FlowMass and Speed, which results in a Force scalar.
+     * @param v FlowMass scalar
+     * @return Force scalar as a multiplication of FlowMass and Speed
+     */
+    public final Force times(final Speed v)
+    {
+        return new Force(this.si * v.si, ForceUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FlowMass and FlowVolume, which results in a Density scalar.
-         * @param v FlowMass scalar
-         * @return Density scalar as a division of FlowMass and FlowVolume
-         */
-        public final Density divide(final FlowVolume v)
-        {
-            return new Density(this.si / v.si, DensityUnit.SI);
-        }
+    /**
+     * Calculate the division of FlowMass and FlowVolume, which results in a Density scalar.
+     * @param v FlowMass scalar
+     * @return Density scalar as a division of FlowMass and FlowVolume
+     */
+    public final Density divide(final FlowVolume v)
+    {
+        return new Density(this.si / v.si, DensityUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FlowMass and Density, which results in a FlowVolume scalar.
-         * @param v FlowMass scalar
-         * @return FlowVolume scalar as a division of FlowMass and Density
-         */
-        public final FlowVolume divide(final Density v)
-        {
-            return new FlowVolume(this.si / v.si, FlowVolumeUnit.SI);
-        }
-
+    /**
+     * Calculate the division of FlowMass and Density, which results in a FlowVolume scalar.
+     * @param v FlowMass scalar
+     * @return FlowVolume scalar as a division of FlowMass and Density
+     */
+    public final FlowVolume divide(final Density v)
+    {
+        return new FlowVolume(this.si / v.si, FlowVolumeUnit.SI);
+    }
 
 }
-
-

@@ -23,7 +23,7 @@ import org.djunits.value.vdouble.vector.data.DoubleVectorData;
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
 public class DirectionMatrix extends AbstractDoubleMatrixAbs<DirectionUnit, Direction, DirectionVector, DirectionMatrix,
-    AngleUnit, Angle, AngleVector, AngleMatrix>
+        AngleUnit, Angle, AngleVector, AngleMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -96,5 +96,5 @@ public class DirectionMatrix extends AbstractDoubleMatrixAbs<DirectionUnit, Dire
         result.setDisplayUnit(displayUnit);
         return result;
     }
-
-}
+
+}

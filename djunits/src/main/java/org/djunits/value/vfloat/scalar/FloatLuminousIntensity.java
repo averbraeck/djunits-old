@@ -21,7 +21,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousIntensityUnit, FloatLuminousIntensity> 
+public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousIntensityUnit, FloatLuminousIntensity>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -37,16 +37,20 @@ public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousInten
     public static final FloatLuminousIntensity NaN = new FloatLuminousIntensity(Float.NaN, LuminousIntensityUnit.SI);
 
     /** Constant with value POSITIVE_INFINITY. */
-    public static final FloatLuminousIntensity POSITIVE_INFINITY = new FloatLuminousIntensity(Float.POSITIVE_INFINITY, LuminousIntensityUnit.SI);
+    public static final FloatLuminousIntensity POSITIVE_INFINITY =
+            new FloatLuminousIntensity(Float.POSITIVE_INFINITY, LuminousIntensityUnit.SI);
 
     /** Constant with value NEGATIVE_INFINITY. */
-    public static final FloatLuminousIntensity NEGATIVE_INFINITY = new FloatLuminousIntensity(Float.NEGATIVE_INFINITY, LuminousIntensityUnit.SI);
+    public static final FloatLuminousIntensity NEGATIVE_INFINITY =
+            new FloatLuminousIntensity(Float.NEGATIVE_INFINITY, LuminousIntensityUnit.SI);
 
     /** Constant with value MAX_VALUE. */
-    public static final FloatLuminousIntensity POS_MAXVALUE = new FloatLuminousIntensity(Float.MAX_VALUE, LuminousIntensityUnit.SI);
+    public static final FloatLuminousIntensity POS_MAXVALUE =
+            new FloatLuminousIntensity(Float.MAX_VALUE, LuminousIntensityUnit.SI);
 
     /** Constant with value -MAX_VALUE. */
-    public static final FloatLuminousIntensity NEG_MAXVALUE = new FloatLuminousIntensity(-Float.MAX_VALUE, LuminousIntensityUnit.SI);
+    public static final FloatLuminousIntensity NEG_MAXVALUE =
+            new FloatLuminousIntensity(-Float.MAX_VALUE, LuminousIntensityUnit.SI);
 
     /**
      * Construct FloatLuminousIntensity scalar.
@@ -101,10 +105,11 @@ public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousInten
      * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatLuminousIntensity interpolate(final FloatLuminousIntensity zero, final FloatLuminousIntensity one, final float ratio)
+    public static FloatLuminousIntensity interpolate(final FloatLuminousIntensity zero, final FloatLuminousIntensity one,
+            final float ratio)
     {
-        return new FloatLuminousIntensity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new FloatLuminousIntensity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**
@@ -125,7 +130,8 @@ public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousInten
      * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
-    public static FloatLuminousIntensity max(final FloatLuminousIntensity r1, final FloatLuminousIntensity r2, final FloatLuminousIntensity... rn)
+    public static FloatLuminousIntensity max(final FloatLuminousIntensity r1, final FloatLuminousIntensity r2,
+            final FloatLuminousIntensity... rn)
     {
         FloatLuminousIntensity maxr = (r1.gt(r2)) ? r1 : r2;
         for (FloatLuminousIntensity r : rn)
@@ -156,7 +162,8 @@ public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousInten
      * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
-    public static FloatLuminousIntensity min(final FloatLuminousIntensity r1, final FloatLuminousIntensity r2, final FloatLuminousIntensity... rn)
+    public static FloatLuminousIntensity min(final FloatLuminousIntensity r1, final FloatLuminousIntensity r2,
+            final FloatLuminousIntensity... rn)
     {
         FloatLuminousIntensity minr = (r1.lt(r2)) ? r1 : r2;
         for (FloatLuminousIntensity r : rn)
@@ -170,9 +177,9 @@ public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousInten
     }
 
     /**
-     * Returns a FloatLuminousIntensity representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a FloatLuminousIntensity representation of a textual representation of a value with a unit. The String
+     * representation that can be parsed is the double value in the unit, followed by the official abbreviation of the unit.
+     * Spaces are allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatLuminousIntensity
      * @return FloatLuminousIntensity; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -181,7 +188,8 @@ public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousInten
     public static FloatLuminousIntensity valueOf(final String text)
     {
         Throw.whenNull(text, "Error parsing FloatLuminousIntensity: text to parse is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatLuminousIntensity: empty text to parse");
+        Throw.when(text.length() == 0, IllegalArgumentException.class,
+                "Error parsing FloatLuminousIntensity: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -209,7 +217,8 @@ public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousInten
     public static FloatLuminousIntensity of(final float value, final String unitString)
     {
         Throw.whenNull(unitString, "Error parsing FloatLuminousIntensity: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatLuminousIntensity: empty unitString");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class,
+                "Error parsing FloatLuminousIntensity: empty unitString");
         LuminousIntensityUnit unit = LuminousIntensityUnit.BASE.getUnitByAbbreviation(unitString);
         if (unit != null)
         {
@@ -218,27 +227,25 @@ public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousInten
         throw new IllegalArgumentException("Error parsing FloatLuminousIntensity with unit " + unitString);
     }
 
-        /**
-         * Calculate the division of FloatLuminousIntensity and FloatLuminousIntensity, which results in a FloatDimensionless scalar.
-         * @param v FloatLuminousIntensity scalar
-         * @return FloatDimensionless scalar as a division of FloatLuminousIntensity and FloatLuminousIntensity
-         */
-        public final FloatDimensionless divide(final FloatLuminousIntensity v)
-        {
-            return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatLuminousIntensity and FloatLuminousIntensity, which results in a FloatDimensionless
+     * scalar.
+     * @param v FloatLuminousIntensity scalar
+     * @return FloatDimensionless scalar as a division of FloatLuminousIntensity and FloatLuminousIntensity
+     */
+    public final FloatDimensionless divide(final FloatLuminousIntensity v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatLuminousIntensity and FloatSolidAngle, which results in a FloatLuminousFlux scalar.
-         * @param v FloatLuminousIntensity scalar
-         * @return FloatLuminousFlux scalar as a multiplication of FloatLuminousIntensity and FloatSolidAngle
-         */
-        public final FloatLuminousFlux times(final FloatSolidAngle v)
-        {
-            return new FloatLuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
-        }
-
+    /**
+     * Calculate the multiplication of FloatLuminousIntensity and FloatSolidAngle, which results in a FloatLuminousFlux scalar.
+     * @param v FloatLuminousIntensity scalar
+     * @return FloatLuminousFlux scalar as a multiplication of FloatLuminousIntensity and FloatSolidAngle
+     */
+    public final FloatLuminousFlux times(final FloatSolidAngle v)
+    {
+        return new FloatLuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
+    }
 
 }
-
-

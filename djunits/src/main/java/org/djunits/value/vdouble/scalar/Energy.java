@@ -26,7 +26,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy> 
+public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -88,7 +88,7 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
     {
         return new Energy(value, EnergyUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero Energy; the low value
@@ -100,7 +100,7 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
     {
         return new Energy(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 Energy; the first scalar
@@ -212,97 +212,94 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
         throw new IllegalArgumentException("Error parsing Energy with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of Energy and Energy, which results in a Dimensionless scalar.
-         * @param v Energy scalar
-         * @return Dimensionless scalar as a division of Energy and Energy
-         */
-        public final Dimensionless divide(final Energy v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of Energy and Energy, which results in a Dimensionless scalar.
+     * @param v Energy scalar
+     * @return Dimensionless scalar as a division of Energy and Energy
+     */
+    public final Dimensionless divide(final Energy v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Energy and Force, which results in a Length scalar.
-         * @param v Energy scalar
-         * @return Length scalar as a division of Energy and Force
-         */
-        public final Length divide(final Force v)
-        {
-            return new Length(this.si / v.si, LengthUnit.SI);
-        }
+    /**
+     * Calculate the division of Energy and Force, which results in a Length scalar.
+     * @param v Energy scalar
+     * @return Length scalar as a division of Energy and Force
+     */
+    public final Length divide(final Force v)
+    {
+        return new Length(this.si / v.si, LengthUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Energy and Length, which results in a Force scalar.
-         * @param v Energy scalar
-         * @return Force scalar as a division of Energy and Length
-         */
-        public final Force divide(final Length v)
-        {
-            return new Force(this.si / v.si, ForceUnit.SI);
-        }
+    /**
+     * Calculate the division of Energy and Length, which results in a Force scalar.
+     * @param v Energy scalar
+     * @return Force scalar as a division of Energy and Length
+     */
+    public final Force divide(final Length v)
+    {
+        return new Force(this.si / v.si, ForceUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Energy and LinearDensity, which results in a Force scalar.
-         * @param v Energy scalar
-         * @return Force scalar as a multiplication of Energy and LinearDensity
-         */
-        public final Force times(final LinearDensity v)
-        {
-            return new Force(this.si * v.si, ForceUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Energy and LinearDensity, which results in a Force scalar.
+     * @param v Energy scalar
+     * @return Force scalar as a multiplication of Energy and LinearDensity
+     */
+    public final Force times(final LinearDensity v)
+    {
+        return new Force(this.si * v.si, ForceUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Energy and Duration, which results in a Power scalar.
-         * @param v Energy scalar
-         * @return Power scalar as a division of Energy and Duration
-         */
-        public final Power divide(final Duration v)
-        {
-            return new Power(this.si / v.si, PowerUnit.SI);
-        }
+    /**
+     * Calculate the division of Energy and Duration, which results in a Power scalar.
+     * @param v Energy scalar
+     * @return Power scalar as a division of Energy and Duration
+     */
+    public final Power divide(final Duration v)
+    {
+        return new Power(this.si / v.si, PowerUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Energy and Power, which results in a Duration scalar.
-         * @param v Energy scalar
-         * @return Duration scalar as a division of Energy and Power
-         */
-        public final Duration divide(final Power v)
-        {
-            return new Duration(this.si / v.si, DurationUnit.SI);
-        }
+    /**
+     * Calculate the division of Energy and Power, which results in a Duration scalar.
+     * @param v Energy scalar
+     * @return Duration scalar as a division of Energy and Power
+     */
+    public final Duration divide(final Power v)
+    {
+        return new Duration(this.si / v.si, DurationUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Energy and Volume, which results in a Pressure scalar.
-         * @param v Energy scalar
-         * @return Pressure scalar as a division of Energy and Volume
-         */
-        public final Pressure divide(final Volume v)
-        {
-            return new Pressure(this.si / v.si, PressureUnit.SI);
-        }
+    /**
+     * Calculate the division of Energy and Volume, which results in a Pressure scalar.
+     * @param v Energy scalar
+     * @return Pressure scalar as a division of Energy and Volume
+     */
+    public final Pressure divide(final Volume v)
+    {
+        return new Pressure(this.si / v.si, PressureUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Energy and Pressure, which results in a Volume scalar.
-         * @param v Energy scalar
-         * @return Volume scalar as a division of Energy and Pressure
-         */
-        public final Volume divide(final Pressure v)
-        {
-            return new Volume(this.si / v.si, VolumeUnit.SI);
-        }
+    /**
+     * Calculate the division of Energy and Pressure, which results in a Volume scalar.
+     * @param v Energy scalar
+     * @return Volume scalar as a division of Energy and Pressure
+     */
+    public final Volume divide(final Pressure v)
+    {
+        return new Volume(this.si / v.si, VolumeUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Energy and Frequency, which results in a Power scalar.
-         * @param v Energy scalar
-         * @return Power scalar as a multiplication of Energy and Frequency
-         */
-        public final Power times(final Frequency v)
-        {
-            return new Power(this.si * v.si, PowerUnit.SI);
-        }
-
+    /**
+     * Calculate the multiplication of Energy and Frequency, which results in a Power scalar.
+     * @param v Energy scalar
+     * @return Power scalar as a multiplication of Energy and Frequency
+     */
+    public final Power times(final Frequency v)
+    {
+        return new Power(this.si * v.si, PowerUnit.SI);
+    }
 
 }
-
-

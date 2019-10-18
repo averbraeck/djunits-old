@@ -27,7 +27,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed> 
+public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -89,7 +89,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
     {
         return new Speed(value, SpeedUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero Speed; the low value
@@ -101,7 +101,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
     {
         return new Speed(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 Speed; the first scalar
@@ -213,117 +213,114 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
         throw new IllegalArgumentException("Error parsing Speed with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of Speed and Speed, which results in a Dimensionless scalar.
-         * @param v Speed scalar
-         * @return Dimensionless scalar as a division of Speed and Speed
-         */
-        public final Dimensionless divide(final Speed v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of Speed and Speed, which results in a Dimensionless scalar.
+     * @param v Speed scalar
+     * @return Dimensionless scalar as a division of Speed and Speed
+     */
+    public final Dimensionless divide(final Speed v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Speed and Area, which results in a FlowVolume scalar.
-         * @param v Speed scalar
-         * @return FlowVolume scalar as a multiplication of Speed and Area
-         */
-        public final FlowVolume times(final Area v)
-        {
-            return new FlowVolume(this.si * v.si, FlowVolumeUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Speed and Area, which results in a FlowVolume scalar.
+     * @param v Speed scalar
+     * @return FlowVolume scalar as a multiplication of Speed and Area
+     */
+    public final FlowVolume times(final Area v)
+    {
+        return new FlowVolume(this.si * v.si, FlowVolumeUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Speed and Force, which results in a Power scalar.
-         * @param v Speed scalar
-         * @return Power scalar as a multiplication of Speed and Force
-         */
-        public final Power times(final Force v)
-        {
-            return new Power(this.si * v.si, PowerUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Speed and Force, which results in a Power scalar.
+     * @param v Speed scalar
+     * @return Power scalar as a multiplication of Speed and Force
+     */
+    public final Power times(final Force v)
+    {
+        return new Power(this.si * v.si, PowerUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Speed and Frequency, which results in a Acceleration scalar.
-         * @param v Speed scalar
-         * @return Acceleration scalar as a multiplication of Speed and Frequency
-         */
-        public final Acceleration times(final Frequency v)
-        {
-            return new Acceleration(this.si * v.si, AccelerationUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Speed and Frequency, which results in a Acceleration scalar.
+     * @param v Speed scalar
+     * @return Acceleration scalar as a multiplication of Speed and Frequency
+     */
+    public final Acceleration times(final Frequency v)
+    {
+        return new Acceleration(this.si * v.si, AccelerationUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Speed and Length, which results in a Frequency scalar.
-         * @param v Speed scalar
-         * @return Frequency scalar as a division of Speed and Length
-         */
-        public final Frequency divide(final Length v)
-        {
-            return new Frequency(this.si / v.si, FrequencyUnit.SI);
-        }
+    /**
+     * Calculate the division of Speed and Length, which results in a Frequency scalar.
+     * @param v Speed scalar
+     * @return Frequency scalar as a division of Speed and Length
+     */
+    public final Frequency divide(final Length v)
+    {
+        return new Frequency(this.si / v.si, FrequencyUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Speed and Frequency, which results in a Length scalar.
-         * @param v Speed scalar
-         * @return Length scalar as a division of Speed and Frequency
-         */
-        public final Length divide(final Frequency v)
-        {
-            return new Length(this.si / v.si, LengthUnit.SI);
-        }
+    /**
+     * Calculate the division of Speed and Frequency, which results in a Length scalar.
+     * @param v Speed scalar
+     * @return Length scalar as a division of Speed and Frequency
+     */
+    public final Length divide(final Frequency v)
+    {
+        return new Length(this.si / v.si, LengthUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Speed and LinearDensity, which results in a Frequency scalar.
-         * @param v Speed scalar
-         * @return Frequency scalar as a multiplication of Speed and LinearDensity
-         */
-        public final Frequency times(final LinearDensity v)
-        {
-            return new Frequency(this.si * v.si, FrequencyUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Speed and LinearDensity, which results in a Frequency scalar.
+     * @param v Speed scalar
+     * @return Frequency scalar as a multiplication of Speed and LinearDensity
+     */
+    public final Frequency times(final LinearDensity v)
+    {
+        return new Frequency(this.si * v.si, FrequencyUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Speed and Duration, which results in a Length scalar.
-         * @param v Speed scalar
-         * @return Length scalar as a multiplication of Speed and Duration
-         */
-        public final Length times(final Duration v)
-        {
-            return new Length(this.si * v.si, LengthUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Speed and Duration, which results in a Length scalar.
+     * @param v Speed scalar
+     * @return Length scalar as a multiplication of Speed and Duration
+     */
+    public final Length times(final Duration v)
+    {
+        return new Length(this.si * v.si, LengthUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Speed and Duration, which results in a Acceleration scalar.
-         * @param v Speed scalar
-         * @return Acceleration scalar as a division of Speed and Duration
-         */
-        public final Acceleration divide(final Duration v)
-        {
-            return new Acceleration(this.si / v.si, AccelerationUnit.SI);
-        }
+    /**
+     * Calculate the division of Speed and Duration, which results in a Acceleration scalar.
+     * @param v Speed scalar
+     * @return Acceleration scalar as a division of Speed and Duration
+     */
+    public final Acceleration divide(final Duration v)
+    {
+        return new Acceleration(this.si / v.si, AccelerationUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Speed and Acceleration, which results in a Duration scalar.
-         * @param v Speed scalar
-         * @return Duration scalar as a division of Speed and Acceleration
-         */
-        public final Duration divide(final Acceleration v)
-        {
-            return new Duration(this.si / v.si, DurationUnit.SI);
-        }
+    /**
+     * Calculate the division of Speed and Acceleration, which results in a Duration scalar.
+     * @param v Speed scalar
+     * @return Duration scalar as a division of Speed and Acceleration
+     */
+    public final Duration divide(final Acceleration v)
+    {
+        return new Duration(this.si / v.si, DurationUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Speed and FlowMass, which results in a Force scalar.
-         * @param v Speed scalar
-         * @return Force scalar as a multiplication of Speed and FlowMass
-         */
-        public final Force times(final FlowMass v)
-        {
-            return new Force(this.si * v.si, ForceUnit.SI);
-        }
-
+    /**
+     * Calculate the multiplication of Speed and FlowMass, which results in a Force scalar.
+     * @param v Speed scalar
+     * @return Force scalar as a multiplication of Speed and FlowMass
+     */
+    public final Force times(final FlowMass v)
+    {
+        return new Force(this.si * v.si, ForceUnit.SI);
+    }
 
 }
-
-

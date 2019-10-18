@@ -16,13 +16,13 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarAbs;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
-
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class AbsoluteTemperature extends AbstractDoubleScalarAbs<AbsoluteTemperatureUnit, AbsoluteTemperature, TemperatureUnit, Temperature>
+public class AbsoluteTemperature
+        extends AbstractDoubleScalarAbs<AbsoluteTemperatureUnit, AbsoluteTemperature, TemperatureUnit, Temperature>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -80,10 +80,11 @@ public class AbsoluteTemperature extends AbstractDoubleScalarAbs<AbsoluteTempera
      * @param ratio double; the ratio between 0 and 1, inclusive
      * @return AbsoluteTemperature; a Scalar at the ratio between
      */
-    public static AbsoluteTemperature interpolate(final AbsoluteTemperature zero, final AbsoluteTemperature one, final double ratio)
+    public static AbsoluteTemperature interpolate(final AbsoluteTemperature zero, final AbsoluteTemperature one,
+            final double ratio)
     {
-        return new AbsoluteTemperature(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new AbsoluteTemperature(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**
@@ -104,7 +105,8 @@ public class AbsoluteTemperature extends AbstractDoubleScalarAbs<AbsoluteTempera
      * @param an AbsoluteTemperature...; the other scalars
      * @return the maximum value of more than two absolute scalars
      */
-    public static AbsoluteTemperature max(final AbsoluteTemperature a1, final AbsoluteTemperature a2, final AbsoluteTemperature... an)
+    public static AbsoluteTemperature max(final AbsoluteTemperature a1, final AbsoluteTemperature a2,
+            final AbsoluteTemperature... an)
     {
         AbsoluteTemperature maxa = (a1.gt(a2)) ? a1 : a2;
         for (AbsoluteTemperature a : an)
@@ -135,7 +137,8 @@ public class AbsoluteTemperature extends AbstractDoubleScalarAbs<AbsoluteTempera
      * @param an AbsoluteTemperature...; the other scalars
      * @return the minimum value of more than two absolute scalars
      */
-    public static AbsoluteTemperature min(final AbsoluteTemperature a1, final AbsoluteTemperature a2, final AbsoluteTemperature... an)
+    public static AbsoluteTemperature min(final AbsoluteTemperature a1, final AbsoluteTemperature a2,
+            final AbsoluteTemperature... an)
     {
         AbsoluteTemperature mina = (a1.lt(a2)) ? a1 : a2;
         for (AbsoluteTemperature a : an)
@@ -149,9 +152,9 @@ public class AbsoluteTemperature extends AbstractDoubleScalarAbs<AbsoluteTempera
     }
 
     /**
-     * Returns a AbsoluteTemperature representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a AbsoluteTemperature representation of a textual representation of a value with a unit. The String
+     * representation that can be parsed is the double value in the unit, followed by the official abbreviation of the unit.
+     * Spaces are allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a AbsoluteTemperature
      * @return AbsoluteTemperature; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -160,7 +163,8 @@ public class AbsoluteTemperature extends AbstractDoubleScalarAbs<AbsoluteTempera
     public static AbsoluteTemperature valueOf(final String text)
     {
         Throw.whenNull(text, "Error parsing AbsoluteTemperature: text to parse is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing AbsoluteTemperature: empty text to parse");
+        Throw.when(text.length() == 0, IllegalArgumentException.class,
+                "Error parsing AbsoluteTemperature: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -188,7 +192,8 @@ public class AbsoluteTemperature extends AbstractDoubleScalarAbs<AbsoluteTempera
     public static AbsoluteTemperature of(final double value, final String unitString)
     {
         Throw.whenNull(unitString, "Error parsing AbsoluteTemperature: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing AbsoluteTemperature: empty unitString");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class,
+                "Error parsing AbsoluteTemperature: empty unitString");
         AbsoluteTemperatureUnit unit = AbsoluteTemperatureUnit.BASE.getUnitByAbbreviation(unitString);
         if (unit != null)
         {
@@ -197,6 +202,4 @@ public class AbsoluteTemperature extends AbstractDoubleScalarAbs<AbsoluteTempera
         throw new IllegalArgumentException("Error parsing AbsoluteTemperature with unit " + unitString);
     }
 
-    
 }
-

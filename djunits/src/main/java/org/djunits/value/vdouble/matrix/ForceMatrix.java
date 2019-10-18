@@ -10,7 +10,7 @@ import org.djunits.value.vdouble.vector.ForceVector;
 import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Double ForceMatrix, a matrix of values with a ForceUnit. 
+ * Immutable Double ForceMatrix, a matrix of values with a ForceUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -70,6 +70,5 @@ public class ForceMatrix extends AbstractDoubleMatrixRel<ForceUnit, Force, Force
         result.setDisplayUnit(displayUnit);
         return result;
     }
-    
+
 }
-

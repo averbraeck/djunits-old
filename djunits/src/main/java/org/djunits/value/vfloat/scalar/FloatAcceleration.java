@@ -23,7 +23,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, FloatAcceleration> 
+public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, FloatAcceleration>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -39,10 +39,12 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
     public static final FloatAcceleration NaN = new FloatAcceleration(Float.NaN, AccelerationUnit.SI);
 
     /** Constant with value POSITIVE_INFINITY. */
-    public static final FloatAcceleration POSITIVE_INFINITY = new FloatAcceleration(Float.POSITIVE_INFINITY, AccelerationUnit.SI);
+    public static final FloatAcceleration POSITIVE_INFINITY =
+            new FloatAcceleration(Float.POSITIVE_INFINITY, AccelerationUnit.SI);
 
     /** Constant with value NEGATIVE_INFINITY. */
-    public static final FloatAcceleration NEGATIVE_INFINITY = new FloatAcceleration(Float.NEGATIVE_INFINITY, AccelerationUnit.SI);
+    public static final FloatAcceleration NEGATIVE_INFINITY =
+            new FloatAcceleration(Float.NEGATIVE_INFINITY, AccelerationUnit.SI);
 
     /** Constant with value MAX_VALUE. */
     public static final FloatAcceleration POS_MAXVALUE = new FloatAcceleration(Float.MAX_VALUE, AccelerationUnit.SI);
@@ -105,8 +107,8 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
      */
     public static FloatAcceleration interpolate(final FloatAcceleration zero, final FloatAcceleration one, final float ratio)
     {
-        return new FloatAcceleration(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new FloatAcceleration(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**
@@ -172,9 +174,9 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
     }
 
     /**
-     * Returns a FloatAcceleration representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a FloatAcceleration representation of a textual representation of a value with a unit. The String representation
+     * that can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are
+     * allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatAcceleration
      * @return FloatAcceleration; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -211,7 +213,8 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
     public static FloatAcceleration of(final float value, final String unitString)
     {
         Throw.whenNull(unitString, "Error parsing FloatAcceleration: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatAcceleration: empty unitString");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class,
+                "Error parsing FloatAcceleration: empty unitString");
         AccelerationUnit unit = AccelerationUnit.BASE.getUnitByAbbreviation(unitString);
         if (unit != null)
         {
@@ -220,57 +223,54 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
         throw new IllegalArgumentException("Error parsing FloatAcceleration with unit " + unitString);
     }
 
-        /**
-         * Calculate the division of FloatAcceleration and FloatAcceleration, which results in a FloatDimensionless scalar.
-         * @param v FloatAcceleration scalar
-         * @return FloatDimensionless scalar as a division of FloatAcceleration and FloatAcceleration
-         */
-        public final FloatDimensionless divide(final FloatAcceleration v)
-        {
-            return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatAcceleration and FloatAcceleration, which results in a FloatDimensionless scalar.
+     * @param v FloatAcceleration scalar
+     * @return FloatDimensionless scalar as a division of FloatAcceleration and FloatAcceleration
+     */
+    public final FloatDimensionless divide(final FloatAcceleration v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatAcceleration and FloatMass, which results in a FloatForce scalar.
-         * @param v FloatAcceleration scalar
-         * @return FloatForce scalar as a multiplication of FloatAcceleration and FloatMass
-         */
-        public final FloatForce times(final FloatMass v)
-        {
-            return new FloatForce(this.si * v.si, ForceUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatAcceleration and FloatMass, which results in a FloatForce scalar.
+     * @param v FloatAcceleration scalar
+     * @return FloatForce scalar as a multiplication of FloatAcceleration and FloatMass
+     */
+    public final FloatForce times(final FloatMass v)
+    {
+        return new FloatForce(this.si * v.si, ForceUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatAcceleration and FloatDuration, which results in a FloatSpeed scalar.
-         * @param v FloatAcceleration scalar
-         * @return FloatSpeed scalar as a multiplication of FloatAcceleration and FloatDuration
-         */
-        public final FloatSpeed times(final FloatDuration v)
-        {
-            return new FloatSpeed(this.si * v.si, SpeedUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatAcceleration and FloatDuration, which results in a FloatSpeed scalar.
+     * @param v FloatAcceleration scalar
+     * @return FloatSpeed scalar as a multiplication of FloatAcceleration and FloatDuration
+     */
+    public final FloatSpeed times(final FloatDuration v)
+    {
+        return new FloatSpeed(this.si * v.si, SpeedUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatAcceleration and FloatFrequency, which results in a FloatSpeed scalar.
-         * @param v FloatAcceleration scalar
-         * @return FloatSpeed scalar as a division of FloatAcceleration and FloatFrequency
-         */
-        public final FloatSpeed divide(final FloatFrequency v)
-        {
-            return new FloatSpeed(this.si / v.si, SpeedUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatAcceleration and FloatFrequency, which results in a FloatSpeed scalar.
+     * @param v FloatAcceleration scalar
+     * @return FloatSpeed scalar as a division of FloatAcceleration and FloatFrequency
+     */
+    public final FloatSpeed divide(final FloatFrequency v)
+    {
+        return new FloatSpeed(this.si / v.si, SpeedUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatAcceleration and FloatSpeed, which results in a FloatFrequency scalar.
-         * @param v FloatAcceleration scalar
-         * @return FloatFrequency scalar as a division of FloatAcceleration and FloatSpeed
-         */
-        public final FloatFrequency divide(final FloatSpeed v)
-        {
-            return new FloatFrequency(this.si / v.si, FrequencyUnit.SI);
-        }
-
+    /**
+     * Calculate the division of FloatAcceleration and FloatSpeed, which results in a FloatFrequency scalar.
+     * @param v FloatAcceleration scalar
+     * @return FloatFrequency scalar as a division of FloatAcceleration and FloatSpeed
+     */
+    public final FloatFrequency divide(final FloatSpeed v)
+    {
+        return new FloatFrequency(this.si / v.si, FrequencyUnit.SI);
+    }
 
 }
-
-

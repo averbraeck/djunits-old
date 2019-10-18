@@ -22,7 +22,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatAmountOfSubstance extends AbstractFloatScalarRel<AmountOfSubstanceUnit, FloatAmountOfSubstance> 
+public class FloatAmountOfSubstance extends AbstractFloatScalarRel<AmountOfSubstanceUnit, FloatAmountOfSubstance>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -38,16 +38,20 @@ public class FloatAmountOfSubstance extends AbstractFloatScalarRel<AmountOfSubst
     public static final FloatAmountOfSubstance NaN = new FloatAmountOfSubstance(Float.NaN, AmountOfSubstanceUnit.SI);
 
     /** Constant with value POSITIVE_INFINITY. */
-    public static final FloatAmountOfSubstance POSITIVE_INFINITY = new FloatAmountOfSubstance(Float.POSITIVE_INFINITY, AmountOfSubstanceUnit.SI);
+    public static final FloatAmountOfSubstance POSITIVE_INFINITY =
+            new FloatAmountOfSubstance(Float.POSITIVE_INFINITY, AmountOfSubstanceUnit.SI);
 
     /** Constant with value NEGATIVE_INFINITY. */
-    public static final FloatAmountOfSubstance NEGATIVE_INFINITY = new FloatAmountOfSubstance(Float.NEGATIVE_INFINITY, AmountOfSubstanceUnit.SI);
+    public static final FloatAmountOfSubstance NEGATIVE_INFINITY =
+            new FloatAmountOfSubstance(Float.NEGATIVE_INFINITY, AmountOfSubstanceUnit.SI);
 
     /** Constant with value MAX_VALUE. */
-    public static final FloatAmountOfSubstance POS_MAXVALUE = new FloatAmountOfSubstance(Float.MAX_VALUE, AmountOfSubstanceUnit.SI);
+    public static final FloatAmountOfSubstance POS_MAXVALUE =
+            new FloatAmountOfSubstance(Float.MAX_VALUE, AmountOfSubstanceUnit.SI);
 
     /** Constant with value -MAX_VALUE. */
-    public static final FloatAmountOfSubstance NEG_MAXVALUE = new FloatAmountOfSubstance(-Float.MAX_VALUE, AmountOfSubstanceUnit.SI);
+    public static final FloatAmountOfSubstance NEG_MAXVALUE =
+            new FloatAmountOfSubstance(-Float.MAX_VALUE, AmountOfSubstanceUnit.SI);
 
     /**
      * Construct FloatAmountOfSubstance scalar.
@@ -102,10 +106,11 @@ public class FloatAmountOfSubstance extends AbstractFloatScalarRel<AmountOfSubst
      * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatAmountOfSubstance interpolate(final FloatAmountOfSubstance zero, final FloatAmountOfSubstance one, final float ratio)
+    public static FloatAmountOfSubstance interpolate(final FloatAmountOfSubstance zero, final FloatAmountOfSubstance one,
+            final float ratio)
     {
-        return new FloatAmountOfSubstance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new FloatAmountOfSubstance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**
@@ -126,7 +131,8 @@ public class FloatAmountOfSubstance extends AbstractFloatScalarRel<AmountOfSubst
      * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
-    public static FloatAmountOfSubstance max(final FloatAmountOfSubstance r1, final FloatAmountOfSubstance r2, final FloatAmountOfSubstance... rn)
+    public static FloatAmountOfSubstance max(final FloatAmountOfSubstance r1, final FloatAmountOfSubstance r2,
+            final FloatAmountOfSubstance... rn)
     {
         FloatAmountOfSubstance maxr = (r1.gt(r2)) ? r1 : r2;
         for (FloatAmountOfSubstance r : rn)
@@ -157,7 +163,8 @@ public class FloatAmountOfSubstance extends AbstractFloatScalarRel<AmountOfSubst
      * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
-    public static FloatAmountOfSubstance min(final FloatAmountOfSubstance r1, final FloatAmountOfSubstance r2, final FloatAmountOfSubstance... rn)
+    public static FloatAmountOfSubstance min(final FloatAmountOfSubstance r1, final FloatAmountOfSubstance r2,
+            final FloatAmountOfSubstance... rn)
     {
         FloatAmountOfSubstance minr = (r1.lt(r2)) ? r1 : r2;
         for (FloatAmountOfSubstance r : rn)
@@ -171,9 +178,9 @@ public class FloatAmountOfSubstance extends AbstractFloatScalarRel<AmountOfSubst
     }
 
     /**
-     * Returns a FloatAmountOfSubstance representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a FloatAmountOfSubstance representation of a textual representation of a value with a unit. The String
+     * representation that can be parsed is the double value in the unit, followed by the official abbreviation of the unit.
+     * Spaces are allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatAmountOfSubstance
      * @return FloatAmountOfSubstance; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -182,7 +189,8 @@ public class FloatAmountOfSubstance extends AbstractFloatScalarRel<AmountOfSubst
     public static FloatAmountOfSubstance valueOf(final String text)
     {
         Throw.whenNull(text, "Error parsing FloatAmountOfSubstance: text to parse is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatAmountOfSubstance: empty text to parse");
+        Throw.when(text.length() == 0, IllegalArgumentException.class,
+                "Error parsing FloatAmountOfSubstance: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -210,7 +218,8 @@ public class FloatAmountOfSubstance extends AbstractFloatScalarRel<AmountOfSubst
     public static FloatAmountOfSubstance of(final float value, final String unitString)
     {
         Throw.whenNull(unitString, "Error parsing FloatAmountOfSubstance: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatAmountOfSubstance: empty unitString");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class,
+                "Error parsing FloatAmountOfSubstance: empty unitString");
         AmountOfSubstanceUnit unit = AmountOfSubstanceUnit.BASE.getUnitByAbbreviation(unitString);
         if (unit != null)
         {
@@ -219,37 +228,35 @@ public class FloatAmountOfSubstance extends AbstractFloatScalarRel<AmountOfSubst
         throw new IllegalArgumentException("Error parsing FloatAmountOfSubstance with unit " + unitString);
     }
 
-        /**
-         * Calculate the division of FloatAmountOfSubstance and FloatAmountOfSubstance, which results in a FloatDimensionless scalar.
-         * @param v FloatAmountOfSubstance scalar
-         * @return FloatDimensionless scalar as a division of FloatAmountOfSubstance and FloatAmountOfSubstance
-         */
-        public final FloatDimensionless divide(final FloatAmountOfSubstance v)
-        {
-            return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatAmountOfSubstance and FloatAmountOfSubstance, which results in a FloatDimensionless
+     * scalar.
+     * @param v FloatAmountOfSubstance scalar
+     * @return FloatDimensionless scalar as a division of FloatAmountOfSubstance and FloatAmountOfSubstance
+     */
+    public final FloatDimensionless divide(final FloatAmountOfSubstance v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatAmountOfSubstance and FloatCatalyticActivity, which results in a FloatDuration scalar.
-         * @param v FloatAmountOfSubstance scalar
-         * @return FloatDuration scalar as a division of FloatAmountOfSubstance and FloatCatalyticActivity
-         */
-        public final FloatDuration divide(final FloatCatalyticActivity v)
-        {
-            return new FloatDuration(this.si / v.si, DurationUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatAmountOfSubstance and FloatCatalyticActivity, which results in a FloatDuration scalar.
+     * @param v FloatAmountOfSubstance scalar
+     * @return FloatDuration scalar as a division of FloatAmountOfSubstance and FloatCatalyticActivity
+     */
+    public final FloatDuration divide(final FloatCatalyticActivity v)
+    {
+        return new FloatDuration(this.si / v.si, DurationUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatAmountOfSubstance and FloatDuration, which results in a FloatCatalyticActivity scalar.
-         * @param v FloatAmountOfSubstance scalar
-         * @return FloatCatalyticActivity scalar as a division of FloatAmountOfSubstance and FloatDuration
-         */
-        public final FloatCatalyticActivity divide(final FloatDuration v)
-        {
-            return new FloatCatalyticActivity(this.si / v.si, CatalyticActivityUnit.SI);
-        }
-
+    /**
+     * Calculate the division of FloatAmountOfSubstance and FloatDuration, which results in a FloatCatalyticActivity scalar.
+     * @param v FloatAmountOfSubstance scalar
+     * @return FloatCatalyticActivity scalar as a division of FloatAmountOfSubstance and FloatDuration
+     */
+    public final FloatCatalyticActivity divide(final FloatDuration v)
+    {
+        return new FloatCatalyticActivity(this.si / v.si, CatalyticActivityUnit.SI);
+    }
 
 }
-
-

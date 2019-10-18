@@ -10,7 +10,7 @@ import org.djunits.value.vdouble.vector.VolumeVector;
 import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Double VolumeMatrix, a matrix of values with a VolumeUnit. 
+ * Immutable Double VolumeMatrix, a matrix of values with a VolumeUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -70,6 +70,5 @@ public class VolumeMatrix extends AbstractDoubleMatrixRel<VolumeUnit, Volume, Vo
         result.setDisplayUnit(displayUnit);
         return result;
     }
-    
+
 }
-

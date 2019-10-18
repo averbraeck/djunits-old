@@ -25,7 +25,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolume> 
+public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolume>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -87,7 +87,7 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
     {
         return new FlowVolume(value, FlowVolumeUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero FlowVolume; the low value
@@ -97,9 +97,10 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
      */
     public static FlowVolume interpolate(final FlowVolume zero, final FlowVolume one, final double ratio)
     {
-        return new FlowVolume(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return new FlowVolume(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 FlowVolume; the first scalar
@@ -163,9 +164,9 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
     }
 
     /**
-     * Returns a FlowVolume representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a FlowVolume representation of a textual representation of a value with a unit. The String representation that
+     * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
+     * not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FlowVolume
      * @return FlowVolume; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -211,77 +212,74 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
         throw new IllegalArgumentException("Error parsing FlowVolume with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of FlowVolume and FlowVolume, which results in a Dimensionless scalar.
-         * @param v FlowVolume scalar
-         * @return Dimensionless scalar as a division of FlowVolume and FlowVolume
-         */
-        public final Dimensionless divide(final FlowVolume v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of FlowVolume and FlowVolume, which results in a Dimensionless scalar.
+     * @param v FlowVolume scalar
+     * @return Dimensionless scalar as a division of FlowVolume and FlowVolume
+     */
+    public final Dimensionless divide(final FlowVolume v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FlowVolume and Duration, which results in a Volume scalar.
-         * @param v FlowVolume scalar
-         * @return Volume scalar as a multiplication of FlowVolume and Duration
-         */
-        public final Volume times(final Duration v)
-        {
-            return new Volume(this.si * v.si, VolumeUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FlowVolume and Duration, which results in a Volume scalar.
+     * @param v FlowVolume scalar
+     * @return Volume scalar as a multiplication of FlowVolume and Duration
+     */
+    public final Volume times(final Duration v)
+    {
+        return new Volume(this.si * v.si, VolumeUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FlowVolume and Frequency, which results in a Volume scalar.
-         * @param v FlowVolume scalar
-         * @return Volume scalar as a division of FlowVolume and Frequency
-         */
-        public final Volume divide(final Frequency v)
-        {
-            return new Volume(this.si / v.si, VolumeUnit.SI);
-        }
+    /**
+     * Calculate the division of FlowVolume and Frequency, which results in a Volume scalar.
+     * @param v FlowVolume scalar
+     * @return Volume scalar as a division of FlowVolume and Frequency
+     */
+    public final Volume divide(final Frequency v)
+    {
+        return new Volume(this.si / v.si, VolumeUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FlowVolume and Volume, which results in a Frequency scalar.
-         * @param v FlowVolume scalar
-         * @return Frequency scalar as a division of FlowVolume and Volume
-         */
-        public final Frequency divide(final Volume v)
-        {
-            return new Frequency(this.si / v.si, FrequencyUnit.SI);
-        }
+    /**
+     * Calculate the division of FlowVolume and Volume, which results in a Frequency scalar.
+     * @param v FlowVolume scalar
+     * @return Frequency scalar as a division of FlowVolume and Volume
+     */
+    public final Frequency divide(final Volume v)
+    {
+        return new Frequency(this.si / v.si, FrequencyUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FlowVolume and Area, which results in a Speed scalar.
-         * @param v FlowVolume scalar
-         * @return Speed scalar as a division of FlowVolume and Area
-         */
-        public final Speed divide(final Area v)
-        {
-            return new Speed(this.si / v.si, SpeedUnit.SI);
-        }
+    /**
+     * Calculate the division of FlowVolume and Area, which results in a Speed scalar.
+     * @param v FlowVolume scalar
+     * @return Speed scalar as a division of FlowVolume and Area
+     */
+    public final Speed divide(final Area v)
+    {
+        return new Speed(this.si / v.si, SpeedUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FlowVolume and Speed, which results in a Area scalar.
-         * @param v FlowVolume scalar
-         * @return Area scalar as a division of FlowVolume and Speed
-         */
-        public final Area divide(final Speed v)
-        {
-            return new Area(this.si / v.si, AreaUnit.SI);
-        }
+    /**
+     * Calculate the division of FlowVolume and Speed, which results in a Area scalar.
+     * @param v FlowVolume scalar
+     * @return Area scalar as a division of FlowVolume and Speed
+     */
+    public final Area divide(final Speed v)
+    {
+        return new Area(this.si / v.si, AreaUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FlowVolume and Density, which results in a FlowMass scalar.
-         * @param v FlowVolume scalar
-         * @return FlowMass scalar as a multiplication of FlowVolume and Density
-         */
-        public final FlowMass times(final Density v)
-        {
-            return new FlowMass(this.si * v.si, FlowMassUnit.SI);
-        }
-
+    /**
+     * Calculate the multiplication of FlowVolume and Density, which results in a FlowMass scalar.
+     * @param v FlowVolume scalar
+     * @return FlowMass scalar as a multiplication of FlowVolume and Density
+     */
+    public final FlowMass times(final Density v)
+    {
+        return new FlowMass(this.si * v.si, FlowMassUnit.SI);
+    }
 
 }
-
-

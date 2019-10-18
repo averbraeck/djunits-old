@@ -120,8 +120,8 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
      */
     public static FloatDuration interpolate(final FloatDuration zero, final FloatDuration one, final float ratio)
     {
-        return new FloatDuration(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new FloatDuration(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**
@@ -187,9 +187,9 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
     }
 
     /**
-     * Returns a FloatDuration representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a FloatDuration representation of a textual representation of a value with a unit. The String representation that
+     * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
+     * not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatDuration
      * @return FloatDuration; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -235,116 +235,117 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
         throw new IllegalArgumentException("Error parsing FloatDuration with unit " + unitString);
     }
 
-        /**
-         * Calculate the division of FloatDuration and FloatDuration, which results in a FloatDimensionless scalar.
-         * @param v FloatDuration scalar
-         * @return FloatDimensionless scalar as a division of FloatDuration and FloatDuration
-         */
-        public final FloatDimensionless divide(final FloatDuration v)
-        {
-            return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatDuration and FloatDuration, which results in a FloatDimensionless scalar.
+     * @param v FloatDuration scalar
+     * @return FloatDimensionless scalar as a division of FloatDuration and FloatDuration
+     */
+    public final FloatDimensionless divide(final FloatDuration v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatDuration and FloatFrequency, which results in a FloatDimensionless scalar.
-         * @param v FloatDuration scalar
-         * @return FloatDimensionless scalar as a multiplication of FloatDuration and FloatFrequency
-         */
-        public final FloatDimensionless times(final FloatFrequency v)
-        {
-            return new FloatDimensionless(this.si * v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatDuration and FloatFrequency, which results in a FloatDimensionless scalar.
+     * @param v FloatDuration scalar
+     * @return FloatDimensionless scalar as a multiplication of FloatDuration and FloatFrequency
+     */
+    public final FloatDimensionless times(final FloatFrequency v)
+    {
+        return new FloatDimensionless(this.si * v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatDuration and FloatElectricalCurrent, which results in a FloatElectricalCharge scalar.
-         * @param v FloatDuration scalar
-         * @return FloatElectricalCharge scalar as a multiplication of FloatDuration and FloatElectricalCurrent
-         */
-        public final FloatElectricalCharge times(final FloatElectricalCurrent v)
-        {
-            return new FloatElectricalCharge(this.si * v.si, ElectricalChargeUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatDuration and FloatElectricalCurrent, which results in a FloatElectricalCharge
+     * scalar.
+     * @param v FloatDuration scalar
+     * @return FloatElectricalCharge scalar as a multiplication of FloatDuration and FloatElectricalCurrent
+     */
+    public final FloatElectricalCharge times(final FloatElectricalCurrent v)
+    {
+        return new FloatElectricalCharge(this.si * v.si, ElectricalChargeUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatDuration and FloatFlowMass, which results in a FloatMass scalar.
-         * @param v FloatDuration scalar
-         * @return FloatMass scalar as a multiplication of FloatDuration and FloatFlowMass
-         */
-        public final FloatMass times(final FloatFlowMass v)
-        {
-            return new FloatMass(this.si * v.si, MassUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatDuration and FloatFlowMass, which results in a FloatMass scalar.
+     * @param v FloatDuration scalar
+     * @return FloatMass scalar as a multiplication of FloatDuration and FloatFlowMass
+     */
+    public final FloatMass times(final FloatFlowMass v)
+    {
+        return new FloatMass(this.si * v.si, MassUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatDuration and FloatFlowVolume, which results in a FloatVolume scalar.
-         * @param v FloatDuration scalar
-         * @return FloatVolume scalar as a multiplication of FloatDuration and FloatFlowVolume
-         */
-        public final FloatVolume times(final FloatFlowVolume v)
-        {
-            return new FloatVolume(this.si * v.si, VolumeUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatDuration and FloatFlowVolume, which results in a FloatVolume scalar.
+     * @param v FloatDuration scalar
+     * @return FloatVolume scalar as a multiplication of FloatDuration and FloatFlowVolume
+     */
+    public final FloatVolume times(final FloatFlowVolume v)
+    {
+        return new FloatVolume(this.si * v.si, VolumeUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatDuration and FloatAcceleration, which results in a FloatSpeed scalar.
-         * @param v FloatDuration scalar
-         * @return FloatSpeed scalar as a multiplication of FloatDuration and FloatAcceleration
-         */
-        public final FloatSpeed times(final FloatAcceleration v)
-        {
-            return new FloatSpeed(this.si * v.si, SpeedUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatDuration and FloatAcceleration, which results in a FloatSpeed scalar.
+     * @param v FloatDuration scalar
+     * @return FloatSpeed scalar as a multiplication of FloatDuration and FloatAcceleration
+     */
+    public final FloatSpeed times(final FloatAcceleration v)
+    {
+        return new FloatSpeed(this.si * v.si, SpeedUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatDuration and FloatPower, which results in a FloatEnergy scalar.
-         * @param v FloatDuration scalar
-         * @return FloatEnergy scalar as a multiplication of FloatDuration and FloatPower
-         */
-        public final FloatEnergy times(final FloatPower v)
-        {
-            return new FloatEnergy(this.si * v.si, EnergyUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatDuration and FloatPower, which results in a FloatEnergy scalar.
+     * @param v FloatDuration scalar
+     * @return FloatEnergy scalar as a multiplication of FloatDuration and FloatPower
+     */
+    public final FloatEnergy times(final FloatPower v)
+    {
+        return new FloatEnergy(this.si * v.si, EnergyUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatDuration and FloatSpeed, which results in a FloatLength scalar.
-         * @param v FloatDuration scalar
-         * @return FloatLength scalar as a multiplication of FloatDuration and FloatSpeed
-         */
-        public final FloatLength times(final FloatSpeed v)
-        {
-            return new FloatLength(this.si * v.si, LengthUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatDuration and FloatSpeed, which results in a FloatLength scalar.
+     * @param v FloatDuration scalar
+     * @return FloatLength scalar as a multiplication of FloatDuration and FloatSpeed
+     */
+    public final FloatLength times(final FloatSpeed v)
+    {
+        return new FloatLength(this.si * v.si, LengthUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatDuration and FloatElectricalPotential, which results in a FloatMagneticFlux scalar.
-         * @param v FloatDuration scalar
-         * @return FloatMagneticFlux scalar as a multiplication of FloatDuration and FloatElectricalPotential
-         */
-        public final FloatMagneticFlux times(final FloatElectricalPotential v)
-        {
-            return new FloatMagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatDuration and FloatElectricalPotential, which results in a FloatMagneticFlux scalar.
+     * @param v FloatDuration scalar
+     * @return FloatMagneticFlux scalar as a multiplication of FloatDuration and FloatElectricalPotential
+     */
+    public final FloatMagneticFlux times(final FloatElectricalPotential v)
+    {
+        return new FloatMagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatDuration and FloatElectricalResistance, which results in a FloatElectricalInductance scalar.
-         * @param v FloatDuration scalar
-         * @return FloatElectricalInductance scalar as a multiplication of FloatDuration and FloatElectricalResistance
-         */
-        public final FloatElectricalInductance times(final FloatElectricalResistance v)
-        {
-            return new FloatElectricalInductance(this.si * v.si, ElectricalInductanceUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatDuration and FloatElectricalResistance, which results in a FloatElectricalInductance
+     * scalar.
+     * @param v FloatDuration scalar
+     * @return FloatElectricalInductance scalar as a multiplication of FloatDuration and FloatElectricalResistance
+     */
+    public final FloatElectricalInductance times(final FloatElectricalResistance v)
+    {
+        return new FloatElectricalInductance(this.si * v.si, ElectricalInductanceUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatDuration and FloatElectricalConductance, which results in a FloatElectricalCapacitance scalar.
-         * @param v FloatDuration scalar
-         * @return FloatElectricalCapacitance scalar as a multiplication of FloatDuration and FloatElectricalConductance
-         */
-        public final FloatElectricalCapacitance times(final FloatElectricalConductance v)
-        {
-            return new FloatElectricalCapacitance(this.si * v.si, ElectricalCapacitanceUnit.SI);
-        }
-
+    /**
+     * Calculate the multiplication of FloatDuration and FloatElectricalConductance, which results in a
+     * FloatElectricalCapacitance scalar.
+     * @param v FloatDuration scalar
+     * @return FloatElectricalCapacitance scalar as a multiplication of FloatDuration and FloatElectricalConductance
+     */
+    public final FloatElectricalCapacitance times(final FloatElectricalConductance v)
+    {
+        return new FloatElectricalCapacitance(this.si * v.si, ElectricalCapacitanceUnit.SI);
+    }
 
 }
-

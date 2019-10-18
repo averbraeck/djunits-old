@@ -10,7 +10,7 @@ import org.djunits.value.vfloat.vector.FloatVolumeVector;
 import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable FloatFloatVolumeMatrix, a matrix of values with a VolumeUnit. 
+ * Immutable FloatFloatVolumeMatrix, a matrix of values with a VolumeUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -70,6 +70,5 @@ public class FloatVolumeMatrix extends AbstractFloatMatrixRel<VolumeUnit, FloatV
         result.setDisplayUnit(displayUnit);
         return result;
     }
-
+
 }
-

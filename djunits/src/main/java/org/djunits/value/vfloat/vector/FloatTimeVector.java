@@ -19,8 +19,8 @@ import org.djunits.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatTimeVector extends AbstractFloatVectorAbs<TimeUnit, FloatTime, FloatTimeVector,
-    DurationUnit, FloatDuration, FloatDurationVector>
+public class FloatTimeVector
+        extends AbstractFloatVectorAbs<TimeUnit, FloatTime, FloatTimeVector, DurationUnit, FloatDuration, FloatDurationVector>
 {
     /** */
     private static final long serialVersionUID = 20151003L;
@@ -39,7 +39,7 @@ public class FloatTimeVector extends AbstractFloatVectorAbs<TimeUnit, FloatTime,
     @Override
     public Class<FloatTime>
 
-    getScalarClass()
+            getScalarClass()
     {
         return FloatTime.class;
     }
@@ -76,5 +76,4 @@ public class FloatTimeVector extends AbstractFloatVectorAbs<TimeUnit, FloatTime,
         return result;
     }
 
-   
-}
+}

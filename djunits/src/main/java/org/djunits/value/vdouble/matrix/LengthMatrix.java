@@ -23,7 +23,7 @@ import org.djunits.value.vdouble.vector.data.DoubleVectorData;
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
 public class LengthMatrix extends AbstractDoubleMatrixRelWithAbs<PositionUnit, Position, PositionVector, PositionMatrix,
-    LengthUnit, Length, LengthVector, LengthMatrix>
+        LengthUnit, Length, LengthVector, LengthMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -50,7 +50,7 @@ public class LengthMatrix extends AbstractDoubleMatrixRelWithAbs<PositionUnit, P
     {
         return LengthVector.class;
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public LengthMatrix instantiateMatrix(final DoubleMatrixData dmd, final LengthUnit displayUnit)
@@ -96,5 +96,5 @@ public class LengthMatrix extends AbstractDoubleMatrixRelWithAbs<PositionUnit, P
         result.setDisplayUnit(displayUnit);
         return result;
     }
-
-}
+
+}

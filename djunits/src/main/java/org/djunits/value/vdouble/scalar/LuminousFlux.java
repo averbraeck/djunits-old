@@ -24,7 +24,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class LuminousFlux extends AbstractDoubleScalarRel<LuminousFluxUnit, LuminousFlux> 
+public class LuminousFlux extends AbstractDoubleScalarRel<LuminousFluxUnit, LuminousFlux>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -86,7 +86,7 @@ public class LuminousFlux extends AbstractDoubleScalarRel<LuminousFluxUnit, Lumi
     {
         return new LuminousFlux(value, LuminousFluxUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero LuminousFlux; the low value
@@ -96,9 +96,10 @@ public class LuminousFlux extends AbstractDoubleScalarRel<LuminousFluxUnit, Lumi
      */
     public static LuminousFlux interpolate(final LuminousFlux zero, final LuminousFlux one, final double ratio)
     {
-        return new LuminousFlux(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return new LuminousFlux(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 LuminousFlux; the first scalar
@@ -162,9 +163,9 @@ public class LuminousFlux extends AbstractDoubleScalarRel<LuminousFluxUnit, Lumi
     }
 
     /**
-     * Returns a LuminousFlux representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a LuminousFlux representation of a textual representation of a value with a unit. The String representation that
+     * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
+     * not required, between the value and the unit.
      * @param text String; the textual representation to parse into a LuminousFlux
      * @return LuminousFlux; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -210,57 +211,54 @@ public class LuminousFlux extends AbstractDoubleScalarRel<LuminousFluxUnit, Lumi
         throw new IllegalArgumentException("Error parsing LuminousFlux with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of LuminousFlux and LuminousFlux, which results in a Dimensionless scalar.
-         * @param v LuminousFlux scalar
-         * @return Dimensionless scalar as a division of LuminousFlux and LuminousFlux
-         */
-        public final Dimensionless divide(final LuminousFlux v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of LuminousFlux and LuminousFlux, which results in a Dimensionless scalar.
+     * @param v LuminousFlux scalar
+     * @return Dimensionless scalar as a division of LuminousFlux and LuminousFlux
+     */
+    public final Dimensionless divide(final LuminousFlux v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the division of LuminousFlux and Area, which results in a Illuminance scalar.
-         * @param v LuminousFlux scalar
-         * @return Illuminance scalar as a division of LuminousFlux and Area
-         */
-        public final Illuminance divide(final Area v)
-        {
-            return new Illuminance(this.si / v.si, IlluminanceUnit.SI);
-        }
+    /**
+     * Calculate the division of LuminousFlux and Area, which results in a Illuminance scalar.
+     * @param v LuminousFlux scalar
+     * @return Illuminance scalar as a division of LuminousFlux and Area
+     */
+    public final Illuminance divide(final Area v)
+    {
+        return new Illuminance(this.si / v.si, IlluminanceUnit.SI);
+    }
 
-        /**
-         * Calculate the division of LuminousFlux and Illuminance, which results in a Area scalar.
-         * @param v LuminousFlux scalar
-         * @return Area scalar as a division of LuminousFlux and Illuminance
-         */
-        public final Area divide(final Illuminance v)
-        {
-            return new Area(this.si / v.si, AreaUnit.SI);
-        }
+    /**
+     * Calculate the division of LuminousFlux and Illuminance, which results in a Area scalar.
+     * @param v LuminousFlux scalar
+     * @return Area scalar as a division of LuminousFlux and Illuminance
+     */
+    public final Area divide(final Illuminance v)
+    {
+        return new Area(this.si / v.si, AreaUnit.SI);
+    }
 
-        /**
-         * Calculate the division of LuminousFlux and LuminousIntensity, which results in a SolidAngle scalar.
-         * @param v LuminousFlux scalar
-         * @return SolidAngle scalar as a division of LuminousFlux and LuminousIntensity
-         */
-        public final SolidAngle divide(final LuminousIntensity v)
-        {
-            return new SolidAngle(this.si / v.si, SolidAngleUnit.SI);
-        }
+    /**
+     * Calculate the division of LuminousFlux and LuminousIntensity, which results in a SolidAngle scalar.
+     * @param v LuminousFlux scalar
+     * @return SolidAngle scalar as a division of LuminousFlux and LuminousIntensity
+     */
+    public final SolidAngle divide(final LuminousIntensity v)
+    {
+        return new SolidAngle(this.si / v.si, SolidAngleUnit.SI);
+    }
 
-        /**
-         * Calculate the division of LuminousFlux and SolidAngle, which results in a LuminousIntensity scalar.
-         * @param v LuminousFlux scalar
-         * @return LuminousIntensity scalar as a division of LuminousFlux and SolidAngle
-         */
-        public final LuminousIntensity divide(final SolidAngle v)
-        {
-            return new LuminousIntensity(this.si / v.si, LuminousIntensityUnit.SI);
-        }
-
+    /**
+     * Calculate the division of LuminousFlux and SolidAngle, which results in a LuminousIntensity scalar.
+     * @param v LuminousFlux scalar
+     * @return LuminousIntensity scalar as a division of LuminousFlux and SolidAngle
+     */
+    public final LuminousIntensity divide(final SolidAngle v)
+    {
+        return new LuminousIntensity(this.si / v.si, LuminousIntensityUnit.SI);
+    }
 
 }
-
-

@@ -10,7 +10,7 @@ import org.djunits.value.vdouble.vector.base.AbstractDoubleVectorRel;
 import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Double DimensionlessVector, a vector of values with a DimensionlessUnit. 
+ * Double DimensionlessVector, a vector of values with a DimensionlessUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.vector.data.DoubleVectorData;
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
 public class DimensionlessVector extends AbstractDoubleVectorRel<DimensionlessUnit, Dimensionless, DimensionlessVector>
- implements DoubleMathFunctions, DimensionlessFunctions<DimensionlessUnit, DimensionlessVector>
+        implements DoubleMathFunctions, DimensionlessFunctions<DimensionlessUnit, DimensionlessVector>
 {
     /** */
     private static final long serialVersionUID = 20190905L;
@@ -58,7 +58,6 @@ public class DimensionlessVector extends AbstractDoubleVectorRel<DimensionlessUn
         return result;
     }
 
-   
     /** {@inheritDoc} */
     @Override
     public final DimensionlessVector acos()
@@ -210,6 +209,5 @@ public class DimensionlessVector extends AbstractDoubleVectorRel<DimensionlessUn
         assign(DoubleMathFunctions.INV);
         return this;
     }
-    
-   
+
 }

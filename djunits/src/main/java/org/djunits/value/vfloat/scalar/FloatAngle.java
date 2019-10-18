@@ -111,8 +111,8 @@ public class FloatAngle extends AbstractFloatScalarRelWithAbs<DirectionUnit, Flo
      */
     public static FloatAngle interpolate(final FloatAngle zero, final FloatAngle one, final float ratio)
     {
-        return new FloatAngle(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new FloatAngle(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**
@@ -178,9 +178,9 @@ public class FloatAngle extends AbstractFloatScalarRelWithAbs<DirectionUnit, Flo
     }
 
     /**
-     * Returns a FloatAngle representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a FloatAngle representation of a textual representation of a value with a unit. The String representation that
+     * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
+     * not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatAngle
      * @return FloatAngle; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -226,16 +226,14 @@ public class FloatAngle extends AbstractFloatScalarRelWithAbs<DirectionUnit, Flo
         throw new IllegalArgumentException("Error parsing FloatAngle with unit " + unitString);
     }
 
-        /**
-         * Calculate the division of FloatAngle and FloatAngle, which results in a FloatDimensionless scalar.
-         * @param v FloatAngle scalar
-         * @return FloatDimensionless scalar as a division of FloatAngle and FloatAngle
-         */
-        public final FloatDimensionless divide(final FloatAngle v)
-        {
-            return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
-
+    /**
+     * Calculate the division of FloatAngle and FloatAngle, which results in a FloatDimensionless scalar.
+     * @param v FloatAngle scalar
+     * @return FloatDimensionless scalar as a division of FloatAngle and FloatAngle
+     */
+    public final FloatDimensionless divide(final FloatAngle v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
 }
-

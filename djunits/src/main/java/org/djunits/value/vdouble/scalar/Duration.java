@@ -110,10 +110,10 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
      */
     public static Duration interpolate(final Duration zero, final Duration one, final double ratio)
     {
-        return new Duration(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new Duration(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 Duration; the first scalar
@@ -175,10 +175,10 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
         }
         return minr;
     }
-    
+
     /**
-     * Returns a Duration representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
+     * Returns a Duration representation of a textual representation of a value with a unit. The String representation that can
+     * be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
      * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Duration
      * @return Duration; the Scalar representation of the value in its unit
@@ -225,117 +225,114 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
         throw new IllegalArgumentException("Error parsing Duration with unit " + unitString);
     }
 
-        /**
-         * Calculate the division of Duration and Duration, which results in a Dimensionless scalar.
-         * @param v Duration scalar
-         * @return Dimensionless scalar as a division of Duration and Duration
-         */
-        public final Dimensionless divide(final Duration v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of Duration and Duration, which results in a Dimensionless scalar.
+     * @param v Duration scalar
+     * @return Dimensionless scalar as a division of Duration and Duration
+     */
+    public final Dimensionless divide(final Duration v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Duration and Frequency, which results in a Dimensionless scalar.
-         * @param v Duration scalar
-         * @return Dimensionless scalar as a multiplication of Duration and Frequency
-         */
-        public final Dimensionless times(final Frequency v)
-        {
-            return new Dimensionless(this.si * v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Duration and Frequency, which results in a Dimensionless scalar.
+     * @param v Duration scalar
+     * @return Dimensionless scalar as a multiplication of Duration and Frequency
+     */
+    public final Dimensionless times(final Frequency v)
+    {
+        return new Dimensionless(this.si * v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Duration and ElectricalCurrent, which results in a ElectricalCharge scalar.
-         * @param v Duration scalar
-         * @return ElectricalCharge scalar as a multiplication of Duration and ElectricalCurrent
-         */
-        public final ElectricalCharge times(final ElectricalCurrent v)
-        {
-            return new ElectricalCharge(this.si * v.si, ElectricalChargeUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Duration and ElectricalCurrent, which results in a ElectricalCharge scalar.
+     * @param v Duration scalar
+     * @return ElectricalCharge scalar as a multiplication of Duration and ElectricalCurrent
+     */
+    public final ElectricalCharge times(final ElectricalCurrent v)
+    {
+        return new ElectricalCharge(this.si * v.si, ElectricalChargeUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Duration and FlowMass, which results in a Mass scalar.
-         * @param v Duration scalar
-         * @return Mass scalar as a multiplication of Duration and FlowMass
-         */
-        public final Mass times(final FlowMass v)
-        {
-            return new Mass(this.si * v.si, MassUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Duration and FlowMass, which results in a Mass scalar.
+     * @param v Duration scalar
+     * @return Mass scalar as a multiplication of Duration and FlowMass
+     */
+    public final Mass times(final FlowMass v)
+    {
+        return new Mass(this.si * v.si, MassUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Duration and FlowVolume, which results in a Volume scalar.
-         * @param v Duration scalar
-         * @return Volume scalar as a multiplication of Duration and FlowVolume
-         */
-        public final Volume times(final FlowVolume v)
-        {
-            return new Volume(this.si * v.si, VolumeUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Duration and FlowVolume, which results in a Volume scalar.
+     * @param v Duration scalar
+     * @return Volume scalar as a multiplication of Duration and FlowVolume
+     */
+    public final Volume times(final FlowVolume v)
+    {
+        return new Volume(this.si * v.si, VolumeUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Duration and Acceleration, which results in a Speed scalar.
-         * @param v Duration scalar
-         * @return Speed scalar as a multiplication of Duration and Acceleration
-         */
-        public final Speed times(final Acceleration v)
-        {
-            return new Speed(this.si * v.si, SpeedUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Duration and Acceleration, which results in a Speed scalar.
+     * @param v Duration scalar
+     * @return Speed scalar as a multiplication of Duration and Acceleration
+     */
+    public final Speed times(final Acceleration v)
+    {
+        return new Speed(this.si * v.si, SpeedUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Duration and Power, which results in a Energy scalar.
-         * @param v Duration scalar
-         * @return Energy scalar as a multiplication of Duration and Power
-         */
-        public final Energy times(final Power v)
-        {
-            return new Energy(this.si * v.si, EnergyUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Duration and Power, which results in a Energy scalar.
+     * @param v Duration scalar
+     * @return Energy scalar as a multiplication of Duration and Power
+     */
+    public final Energy times(final Power v)
+    {
+        return new Energy(this.si * v.si, EnergyUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Duration and Speed, which results in a Length scalar.
-         * @param v Duration scalar
-         * @return Length scalar as a multiplication of Duration and Speed
-         */
-        public final Length times(final Speed v)
-        {
-            return new Length(this.si * v.si, LengthUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Duration and Speed, which results in a Length scalar.
+     * @param v Duration scalar
+     * @return Length scalar as a multiplication of Duration and Speed
+     */
+    public final Length times(final Speed v)
+    {
+        return new Length(this.si * v.si, LengthUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Duration and ElectricalPotential, which results in a MagneticFlux scalar.
-         * @param v Duration scalar
-         * @return MagneticFlux scalar as a multiplication of Duration and ElectricalPotential
-         */
-        public final MagneticFlux times(final ElectricalPotential v)
-        {
-            return new MagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Duration and ElectricalPotential, which results in a MagneticFlux scalar.
+     * @param v Duration scalar
+     * @return MagneticFlux scalar as a multiplication of Duration and ElectricalPotential
+     */
+    public final MagneticFlux times(final ElectricalPotential v)
+    {
+        return new MagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Duration and ElectricalResistance, which results in a ElectricalInductance scalar.
-         * @param v Duration scalar
-         * @return ElectricalInductance scalar as a multiplication of Duration and ElectricalResistance
-         */
-        public final ElectricalInductance times(final ElectricalResistance v)
-        {
-            return new ElectricalInductance(this.si * v.si, ElectricalInductanceUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Duration and ElectricalResistance, which results in a ElectricalInductance scalar.
+     * @param v Duration scalar
+     * @return ElectricalInductance scalar as a multiplication of Duration and ElectricalResistance
+     */
+    public final ElectricalInductance times(final ElectricalResistance v)
+    {
+        return new ElectricalInductance(this.si * v.si, ElectricalInductanceUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Duration and ElectricalConductance, which results in a ElectricalCapacitance scalar.
-         * @param v Duration scalar
-         * @return ElectricalCapacitance scalar as a multiplication of Duration and ElectricalConductance
-         */
-        public final ElectricalCapacitance times(final ElectricalConductance v)
-        {
-            return new ElectricalCapacitance(this.si * v.si, ElectricalCapacitanceUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Duration and ElectricalConductance, which results in a ElectricalCapacitance scalar.
+     * @param v Duration scalar
+     * @return ElectricalCapacitance scalar as a multiplication of Duration and ElectricalConductance
+     */
+    public final ElectricalCapacitance times(final ElectricalConductance v)
+    {
+        return new ElectricalCapacitance(this.si * v.si, ElectricalCapacitanceUnit.SI);
+    }
 
-
-    
 }
-

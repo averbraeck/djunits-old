@@ -10,7 +10,7 @@ import org.djunits.value.vdouble.vector.RadioActivityVector;
 import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Double RadioActivityMatrix, a matrix of values with a RadioActivityUnit. 
+ * Immutable Double RadioActivityMatrix, a matrix of values with a RadioActivityUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,7 +19,8 @@ import org.djunits.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class RadioActivityMatrix extends AbstractDoubleMatrixRel<RadioActivityUnit, RadioActivity, RadioActivityVector, RadioActivityMatrix>
+public class RadioActivityMatrix
+        extends AbstractDoubleMatrixRel<RadioActivityUnit, RadioActivity, RadioActivityVector, RadioActivityMatrix>
 
 {
     /** */
@@ -70,6 +71,5 @@ public class RadioActivityMatrix extends AbstractDoubleMatrixRel<RadioActivityUn
         result.setDisplayUnit(displayUnit);
         return result;
     }
-    
+
 }
-

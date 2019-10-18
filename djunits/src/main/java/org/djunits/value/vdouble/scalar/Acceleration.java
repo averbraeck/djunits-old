@@ -23,7 +23,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acceleration> 
+public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acceleration>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -85,7 +85,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
     {
         return new Acceleration(value, AccelerationUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero Acceleration; the low value
@@ -95,9 +95,10 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
      */
     public static Acceleration interpolate(final Acceleration zero, final Acceleration one, final double ratio)
     {
-        return new Acceleration(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return new Acceleration(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 Acceleration; the first scalar
@@ -161,9 +162,9 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
     }
 
     /**
-     * Returns a Acceleration representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a Acceleration representation of a textual representation of a value with a unit. The String representation that
+     * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
+     * not required, between the value and the unit.
      * @param text String; the textual representation to parse into a Acceleration
      * @return Acceleration; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -209,57 +210,54 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
         throw new IllegalArgumentException("Error parsing Acceleration with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of Acceleration and Acceleration, which results in a Dimensionless scalar.
-         * @param v Acceleration scalar
-         * @return Dimensionless scalar as a division of Acceleration and Acceleration
-         */
-        public final Dimensionless divide(final Acceleration v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of Acceleration and Acceleration, which results in a Dimensionless scalar.
+     * @param v Acceleration scalar
+     * @return Dimensionless scalar as a division of Acceleration and Acceleration
+     */
+    public final Dimensionless divide(final Acceleration v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Acceleration and Mass, which results in a Force scalar.
-         * @param v Acceleration scalar
-         * @return Force scalar as a multiplication of Acceleration and Mass
-         */
-        public final Force times(final Mass v)
-        {
-            return new Force(this.si * v.si, ForceUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Acceleration and Mass, which results in a Force scalar.
+     * @param v Acceleration scalar
+     * @return Force scalar as a multiplication of Acceleration and Mass
+     */
+    public final Force times(final Mass v)
+    {
+        return new Force(this.si * v.si, ForceUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Acceleration and Duration, which results in a Speed scalar.
-         * @param v Acceleration scalar
-         * @return Speed scalar as a multiplication of Acceleration and Duration
-         */
-        public final Speed times(final Duration v)
-        {
-            return new Speed(this.si * v.si, SpeedUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Acceleration and Duration, which results in a Speed scalar.
+     * @param v Acceleration scalar
+     * @return Speed scalar as a multiplication of Acceleration and Duration
+     */
+    public final Speed times(final Duration v)
+    {
+        return new Speed(this.si * v.si, SpeedUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Acceleration and Frequency, which results in a Speed scalar.
-         * @param v Acceleration scalar
-         * @return Speed scalar as a division of Acceleration and Frequency
-         */
-        public final Speed divide(final Frequency v)
-        {
-            return new Speed(this.si / v.si, SpeedUnit.SI);
-        }
+    /**
+     * Calculate the division of Acceleration and Frequency, which results in a Speed scalar.
+     * @param v Acceleration scalar
+     * @return Speed scalar as a division of Acceleration and Frequency
+     */
+    public final Speed divide(final Frequency v)
+    {
+        return new Speed(this.si / v.si, SpeedUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Acceleration and Speed, which results in a Frequency scalar.
-         * @param v Acceleration scalar
-         * @return Frequency scalar as a division of Acceleration and Speed
-         */
-        public final Frequency divide(final Speed v)
-        {
-            return new Frequency(this.si / v.si, FrequencyUnit.SI);
-        }
-
+    /**
+     * Calculate the division of Acceleration and Speed, which results in a Frequency scalar.
+     * @param v Acceleration scalar
+     * @return Frequency scalar as a division of Acceleration and Speed
+     */
+    public final Frequency divide(final Speed v)
+    {
+        return new Frequency(this.si / v.si, FrequencyUnit.SI);
+    }
 
 }
-
-

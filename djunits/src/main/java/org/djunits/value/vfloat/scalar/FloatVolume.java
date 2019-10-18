@@ -26,7 +26,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatVolume extends AbstractFloatScalarRel<VolumeUnit, FloatVolume> 
+public class FloatVolume extends AbstractFloatScalarRel<VolumeUnit, FloatVolume>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -108,8 +108,8 @@ public class FloatVolume extends AbstractFloatScalarRel<VolumeUnit, FloatVolume>
      */
     public static FloatVolume interpolate(final FloatVolume zero, final FloatVolume one, final float ratio)
     {
-        return new FloatVolume(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new FloatVolume(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**
@@ -175,9 +175,9 @@ public class FloatVolume extends AbstractFloatScalarRel<VolumeUnit, FloatVolume>
     }
 
     /**
-     * Returns a FloatVolume representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a FloatVolume representation of a textual representation of a value with a unit. The String representation that
+     * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
+     * not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatVolume
      * @return FloatVolume; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -223,87 +223,84 @@ public class FloatVolume extends AbstractFloatScalarRel<VolumeUnit, FloatVolume>
         throw new IllegalArgumentException("Error parsing FloatVolume with unit " + unitString);
     }
 
-        /**
-         * Calculate the division of FloatVolume and FloatVolume, which results in a FloatDimensionless scalar.
-         * @param v FloatVolume scalar
-         * @return FloatDimensionless scalar as a division of FloatVolume and FloatVolume
-         */
-        public final FloatDimensionless divide(final FloatVolume v)
-        {
-            return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatVolume and FloatVolume, which results in a FloatDimensionless scalar.
+     * @param v FloatVolume scalar
+     * @return FloatDimensionless scalar as a division of FloatVolume and FloatVolume
+     */
+    public final FloatDimensionless divide(final FloatVolume v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatVolume and FloatDensity, which results in a FloatMass scalar.
-         * @param v FloatVolume scalar
-         * @return FloatMass scalar as a multiplication of FloatVolume and FloatDensity
-         */
-        public final FloatMass times(final FloatDensity v)
-        {
-            return new FloatMass(this.si * v.si, MassUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatVolume and FloatDensity, which results in a FloatMass scalar.
+     * @param v FloatVolume scalar
+     * @return FloatMass scalar as a multiplication of FloatVolume and FloatDensity
+     */
+    public final FloatMass times(final FloatDensity v)
+    {
+        return new FloatMass(this.si * v.si, MassUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatVolume and FloatPressure, which results in a FloatEnergy scalar.
-         * @param v FloatVolume scalar
-         * @return FloatEnergy scalar as a multiplication of FloatVolume and FloatPressure
-         */
-        public final FloatEnergy times(final FloatPressure v)
-        {
-            return new FloatEnergy(this.si * v.si, EnergyUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatVolume and FloatPressure, which results in a FloatEnergy scalar.
+     * @param v FloatVolume scalar
+     * @return FloatEnergy scalar as a multiplication of FloatVolume and FloatPressure
+     */
+    public final FloatEnergy times(final FloatPressure v)
+    {
+        return new FloatEnergy(this.si * v.si, EnergyUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatVolume and FloatLength, which results in a FloatArea scalar.
-         * @param v FloatVolume scalar
-         * @return FloatArea scalar as a division of FloatVolume and FloatLength
-         */
-        public final FloatArea divide(final FloatLength v)
-        {
-            return new FloatArea(this.si / v.si, AreaUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatVolume and FloatLength, which results in a FloatArea scalar.
+     * @param v FloatVolume scalar
+     * @return FloatArea scalar as a division of FloatVolume and FloatLength
+     */
+    public final FloatArea divide(final FloatLength v)
+    {
+        return new FloatArea(this.si / v.si, AreaUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatVolume and FloatArea, which results in a FloatLength scalar.
-         * @param v FloatVolume scalar
-         * @return FloatLength scalar as a division of FloatVolume and FloatArea
-         */
-        public final FloatLength divide(final FloatArea v)
-        {
-            return new FloatLength(this.si / v.si, LengthUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatVolume and FloatArea, which results in a FloatLength scalar.
+     * @param v FloatVolume scalar
+     * @return FloatLength scalar as a division of FloatVolume and FloatArea
+     */
+    public final FloatLength divide(final FloatArea v)
+    {
+        return new FloatLength(this.si / v.si, LengthUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatVolume and FloatLinearDensity, which results in a FloatArea scalar.
-         * @param v FloatVolume scalar
-         * @return FloatArea scalar as a multiplication of FloatVolume and FloatLinearDensity
-         */
-        public final FloatArea times(final FloatLinearDensity v)
-        {
-            return new FloatArea(this.si * v.si, AreaUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatVolume and FloatLinearDensity, which results in a FloatArea scalar.
+     * @param v FloatVolume scalar
+     * @return FloatArea scalar as a multiplication of FloatVolume and FloatLinearDensity
+     */
+    public final FloatArea times(final FloatLinearDensity v)
+    {
+        return new FloatArea(this.si * v.si, AreaUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatVolume and FloatDuration, which results in a FloatFlowVolume scalar.
-         * @param v FloatVolume scalar
-         * @return FloatFlowVolume scalar as a division of FloatVolume and FloatDuration
-         */
-        public final FloatFlowVolume divide(final FloatDuration v)
-        {
-            return new FloatFlowVolume(this.si / v.si, FlowVolumeUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatVolume and FloatDuration, which results in a FloatFlowVolume scalar.
+     * @param v FloatVolume scalar
+     * @return FloatFlowVolume scalar as a division of FloatVolume and FloatDuration
+     */
+    public final FloatFlowVolume divide(final FloatDuration v)
+    {
+        return new FloatFlowVolume(this.si / v.si, FlowVolumeUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatVolume and FloatFlowVolume, which results in a FloatDuration scalar.
-         * @param v FloatVolume scalar
-         * @return FloatDuration scalar as a division of FloatVolume and FloatFlowVolume
-         */
-        public final FloatDuration divide(final FloatFlowVolume v)
-        {
-            return new FloatDuration(this.si / v.si, DurationUnit.SI);
-        }
-
+    /**
+     * Calculate the division of FloatVolume and FloatFlowVolume, which results in a FloatDuration scalar.
+     * @param v FloatVolume scalar
+     * @return FloatDuration scalar as a division of FloatVolume and FloatFlowVolume
+     */
+    public final FloatDuration divide(final FloatFlowVolume v)
+    {
+        return new FloatDuration(this.si / v.si, DurationUnit.SI);
+    }
 
 }
-
-

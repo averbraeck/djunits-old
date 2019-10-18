@@ -20,7 +20,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatAbsorbedDose extends AbstractFloatScalarRel<AbsorbedDoseUnit, FloatAbsorbedDose> 
+public class FloatAbsorbedDose extends AbstractFloatScalarRel<AbsorbedDoseUnit, FloatAbsorbedDose>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -36,10 +36,12 @@ public class FloatAbsorbedDose extends AbstractFloatScalarRel<AbsorbedDoseUnit, 
     public static final FloatAbsorbedDose NaN = new FloatAbsorbedDose(Float.NaN, AbsorbedDoseUnit.SI);
 
     /** Constant with value POSITIVE_INFINITY. */
-    public static final FloatAbsorbedDose POSITIVE_INFINITY = new FloatAbsorbedDose(Float.POSITIVE_INFINITY, AbsorbedDoseUnit.SI);
+    public static final FloatAbsorbedDose POSITIVE_INFINITY =
+            new FloatAbsorbedDose(Float.POSITIVE_INFINITY, AbsorbedDoseUnit.SI);
 
     /** Constant with value NEGATIVE_INFINITY. */
-    public static final FloatAbsorbedDose NEGATIVE_INFINITY = new FloatAbsorbedDose(Float.NEGATIVE_INFINITY, AbsorbedDoseUnit.SI);
+    public static final FloatAbsorbedDose NEGATIVE_INFINITY =
+            new FloatAbsorbedDose(Float.NEGATIVE_INFINITY, AbsorbedDoseUnit.SI);
 
     /** Constant with value MAX_VALUE. */
     public static final FloatAbsorbedDose POS_MAXVALUE = new FloatAbsorbedDose(Float.MAX_VALUE, AbsorbedDoseUnit.SI);
@@ -102,8 +104,8 @@ public class FloatAbsorbedDose extends AbstractFloatScalarRel<AbsorbedDoseUnit, 
      */
     public static FloatAbsorbedDose interpolate(final FloatAbsorbedDose zero, final FloatAbsorbedDose one, final float ratio)
     {
-        return new FloatAbsorbedDose(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new FloatAbsorbedDose(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**
@@ -169,9 +171,9 @@ public class FloatAbsorbedDose extends AbstractFloatScalarRel<AbsorbedDoseUnit, 
     }
 
     /**
-     * Returns a FloatAbsorbedDose representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a FloatAbsorbedDose representation of a textual representation of a value with a unit. The String representation
+     * that can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are
+     * allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatAbsorbedDose
      * @return FloatAbsorbedDose; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -208,7 +210,8 @@ public class FloatAbsorbedDose extends AbstractFloatScalarRel<AbsorbedDoseUnit, 
     public static FloatAbsorbedDose of(final float value, final String unitString)
     {
         Throw.whenNull(unitString, "Error parsing FloatAbsorbedDose: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatAbsorbedDose: empty unitString");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class,
+                "Error parsing FloatAbsorbedDose: empty unitString");
         AbsorbedDoseUnit unit = AbsorbedDoseUnit.BASE.getUnitByAbbreviation(unitString);
         if (unit != null)
         {
@@ -217,17 +220,14 @@ public class FloatAbsorbedDose extends AbstractFloatScalarRel<AbsorbedDoseUnit, 
         throw new IllegalArgumentException("Error parsing FloatAbsorbedDose with unit " + unitString);
     }
 
-        /**
-         * Calculate the division of FloatAbsorbedDose and FloatAbsorbedDose, which results in a FloatDimensionless scalar.
-         * @param v FloatAbsorbedDose scalar
-         * @return FloatDimensionless scalar as a division of FloatAbsorbedDose and FloatAbsorbedDose
-         */
-        public final FloatDimensionless divide(final FloatAbsorbedDose v)
-        {
-            return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
-
+    /**
+     * Calculate the division of FloatAbsorbedDose and FloatAbsorbedDose, which results in a FloatDimensionless scalar.
+     * @param v FloatAbsorbedDose scalar
+     * @return FloatDimensionless scalar as a division of FloatAbsorbedDose and FloatAbsorbedDose
+     */
+    public final FloatDimensionless divide(final FloatAbsorbedDose v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
 }
-
-

@@ -10,7 +10,7 @@ import org.djunits.value.vfloat.vector.base.AbstractFloatVectorRel;
 import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable Float FloatDimensionlessVector, a vector of values with a DimensionlessUnit. 
+ * Immutable Float FloatDimensionlessVector, a vector of values with a DimensionlessUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,8 +19,9 @@ import org.djunits.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatDimensionlessVector extends AbstractFloatVectorRel<DimensionlessUnit, FloatDimensionless, FloatDimensionlessVector>
- implements DimensionlessFunctions<DimensionlessUnit, FloatDimensionlessVector>
+public class FloatDimensionlessVector
+        extends AbstractFloatVectorRel<DimensionlessUnit, FloatDimensionless, FloatDimensionlessVector>
+        implements DimensionlessFunctions<DimensionlessUnit, FloatDimensionlessVector>
 {
     /** */
     private static final long serialVersionUID = 20190905L;
@@ -41,7 +42,7 @@ public class FloatDimensionlessVector extends AbstractFloatVectorRel<Dimensionle
     {
         return FloatDimensionless.class;
     }
-        
+
     /** {@inheritDoc} */
     @Override
     public FloatDimensionlessVector instantiateVector(final FloatVectorData fvd, final DimensionlessUnit displayUnit)
@@ -58,7 +59,6 @@ public class FloatDimensionlessVector extends AbstractFloatVectorRel<Dimensionle
         return result;
     }
 
-   
     /** {@inheritDoc} */
     @Override
     public final FloatDimensionlessVector acos()
@@ -210,7 +210,5 @@ public class FloatDimensionlessVector extends AbstractFloatVectorRel<Dimensionle
         assign(FloatMathFunctions.INV);
         return this;
     }
-    
-   
-}
 
+}

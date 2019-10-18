@@ -26,7 +26,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque> 
+public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -88,7 +88,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
     {
         return new Torque(value, TorqueUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero Torque; the low value
@@ -100,7 +100,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
     {
         return new Torque(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 Torque; the first scalar
@@ -212,97 +212,94 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
         throw new IllegalArgumentException("Error parsing Torque with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of Torque and Torque, which results in a Dimensionless scalar.
-         * @param v Torque scalar
-         * @return Dimensionless scalar as a division of Torque and Torque
-         */
-        public final Dimensionless divide(final Torque v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of Torque and Torque, which results in a Dimensionless scalar.
+     * @param v Torque scalar
+     * @return Dimensionless scalar as a division of Torque and Torque
+     */
+    public final Dimensionless divide(final Torque v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Torque and Force, which results in a Length scalar.
-         * @param v Torque scalar
-         * @return Length scalar as a division of Torque and Force
-         */
-        public final Length divide(final Force v)
-        {
-            return new Length(this.si / v.si, LengthUnit.SI);
-        }
+    /**
+     * Calculate the division of Torque and Force, which results in a Length scalar.
+     * @param v Torque scalar
+     * @return Length scalar as a division of Torque and Force
+     */
+    public final Length divide(final Force v)
+    {
+        return new Length(this.si / v.si, LengthUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Torque and Length, which results in a Force scalar.
-         * @param v Torque scalar
-         * @return Force scalar as a division of Torque and Length
-         */
-        public final Force divide(final Length v)
-        {
-            return new Force(this.si / v.si, ForceUnit.SI);
-        }
+    /**
+     * Calculate the division of Torque and Length, which results in a Force scalar.
+     * @param v Torque scalar
+     * @return Force scalar as a division of Torque and Length
+     */
+    public final Force divide(final Length v)
+    {
+        return new Force(this.si / v.si, ForceUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Torque and LinearDensity, which results in a Force scalar.
-         * @param v Torque scalar
-         * @return Force scalar as a multiplication of Torque and LinearDensity
-         */
-        public final Force times(final LinearDensity v)
-        {
-            return new Force(this.si * v.si, ForceUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Torque and LinearDensity, which results in a Force scalar.
+     * @param v Torque scalar
+     * @return Force scalar as a multiplication of Torque and LinearDensity
+     */
+    public final Force times(final LinearDensity v)
+    {
+        return new Force(this.si * v.si, ForceUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Torque and Duration, which results in a Power scalar.
-         * @param v Torque scalar
-         * @return Power scalar as a division of Torque and Duration
-         */
-        public final Power divide(final Duration v)
-        {
-            return new Power(this.si / v.si, PowerUnit.SI);
-        }
+    /**
+     * Calculate the division of Torque and Duration, which results in a Power scalar.
+     * @param v Torque scalar
+     * @return Power scalar as a division of Torque and Duration
+     */
+    public final Power divide(final Duration v)
+    {
+        return new Power(this.si / v.si, PowerUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Torque and Power, which results in a Duration scalar.
-         * @param v Torque scalar
-         * @return Duration scalar as a division of Torque and Power
-         */
-        public final Duration divide(final Power v)
-        {
-            return new Duration(this.si / v.si, DurationUnit.SI);
-        }
+    /**
+     * Calculate the division of Torque and Power, which results in a Duration scalar.
+     * @param v Torque scalar
+     * @return Duration scalar as a division of Torque and Power
+     */
+    public final Duration divide(final Power v)
+    {
+        return new Duration(this.si / v.si, DurationUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Torque and Frequency, which results in a Power scalar.
-         * @param v Torque scalar
-         * @return Power scalar as a multiplication of Torque and Frequency
-         */
-        public final Power times(final Frequency v)
-        {
-            return new Power(this.si * v.si, PowerUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Torque and Frequency, which results in a Power scalar.
+     * @param v Torque scalar
+     * @return Power scalar as a multiplication of Torque and Frequency
+     */
+    public final Power times(final Frequency v)
+    {
+        return new Power(this.si * v.si, PowerUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Torque and Volume, which results in a Pressure scalar.
-         * @param v Torque scalar
-         * @return Pressure scalar as a division of Torque and Volume
-         */
-        public final Pressure divide(final Volume v)
-        {
-            return new Pressure(this.si / v.si, PressureUnit.SI);
-        }
+    /**
+     * Calculate the division of Torque and Volume, which results in a Pressure scalar.
+     * @param v Torque scalar
+     * @return Pressure scalar as a division of Torque and Volume
+     */
+    public final Pressure divide(final Volume v)
+    {
+        return new Pressure(this.si / v.si, PressureUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Torque and Pressure, which results in a Volume scalar.
-         * @param v Torque scalar
-         * @return Volume scalar as a division of Torque and Pressure
-         */
-        public final Volume divide(final Pressure v)
-        {
-            return new Volume(this.si / v.si, VolumeUnit.SI);
-        }
-
+    /**
+     * Calculate the division of Torque and Pressure, which results in a Volume scalar.
+     * @param v Torque scalar
+     * @return Volume scalar as a division of Torque and Pressure
+     */
+    public final Volume divide(final Pressure v)
+    {
+        return new Volume(this.si / v.si, VolumeUnit.SI);
+    }
 
 }
-
-

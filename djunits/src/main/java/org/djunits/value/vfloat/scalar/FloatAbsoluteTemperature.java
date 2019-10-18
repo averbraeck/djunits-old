@@ -16,13 +16,13 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarAbs;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
-
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatAbsoluteTemperature extends AbstractFloatScalarAbs<AbsoluteTemperatureUnit, FloatAbsoluteTemperature, TemperatureUnit, FloatTemperature>
+public class FloatAbsoluteTemperature
+        extends AbstractFloatScalarAbs<AbsoluteTemperatureUnit, FloatAbsoluteTemperature, TemperatureUnit, FloatTemperature>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -90,12 +90,13 @@ public class FloatAbsoluteTemperature extends AbstractFloatScalarAbs<AbsoluteTem
      * @param ratio float; the ratio between 0 and 1, inclusive
      * @return FloatAbsoluteTemperature; a Scalar at the ratio between
      */
-    public static FloatAbsoluteTemperature interpolate(final FloatAbsoluteTemperature zero, final FloatAbsoluteTemperature one, final float ratio)
+    public static FloatAbsoluteTemperature interpolate(final FloatAbsoluteTemperature zero, final FloatAbsoluteTemperature one,
+            final float ratio)
     {
-        return new FloatAbsoluteTemperature(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new FloatAbsoluteTemperature(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two absolute scalars.
      * @param a1 FloatAbsoluteTemperature; the first scalar
@@ -114,7 +115,8 @@ public class FloatAbsoluteTemperature extends AbstractFloatScalarAbs<AbsoluteTem
      * @param an FloatAbsoluteTemperature...; the other scalars
      * @return FloatAbsoluteTemperature; the maximum value of more than two absolute scalars
      */
-    public static FloatAbsoluteTemperature max(final FloatAbsoluteTemperature a1, final FloatAbsoluteTemperature a2, final FloatAbsoluteTemperature... an)
+    public static FloatAbsoluteTemperature max(final FloatAbsoluteTemperature a1, final FloatAbsoluteTemperature a2,
+            final FloatAbsoluteTemperature... an)
     {
         FloatAbsoluteTemperature maxa = (a1.gt(a2)) ? a1 : a2;
         for (FloatAbsoluteTemperature a : an)
@@ -145,7 +147,8 @@ public class FloatAbsoluteTemperature extends AbstractFloatScalarAbs<AbsoluteTem
      * @param an FloatAbsoluteTemperature...; the other scalars
      * @return FloatAbsoluteTemperature; the minimum value of more than two absolute scalars
      */
-    public static FloatAbsoluteTemperature min(final FloatAbsoluteTemperature a1, final FloatAbsoluteTemperature a2, final FloatAbsoluteTemperature... an)
+    public static FloatAbsoluteTemperature min(final FloatAbsoluteTemperature a1, final FloatAbsoluteTemperature a2,
+            final FloatAbsoluteTemperature... an)
     {
         FloatAbsoluteTemperature mina = (a1.lt(a2)) ? a1 : a2;
         for (FloatAbsoluteTemperature a : an)
@@ -157,11 +160,11 @@ public class FloatAbsoluteTemperature extends AbstractFloatScalarAbs<AbsoluteTem
         }
         return mina;
     }
-    
+
     /**
-     * Returns a FloatAbsoluteTemperature representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a FloatAbsoluteTemperature representation of a textual representation of a value with a unit. The String
+     * representation that can be parsed is the double value in the unit, followed by the official abbreviation of the unit.
+     * Spaces are allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatAbsoluteTemperature
      * @return FloatAbsoluteTemperature; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -170,7 +173,8 @@ public class FloatAbsoluteTemperature extends AbstractFloatScalarAbs<AbsoluteTem
     public static FloatAbsoluteTemperature valueOf(final String text)
     {
         Throw.whenNull(text, "Error parsing FloatAbsoluteTemperature: text to parse is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatAbsoluteTemperature: empty text to parse");
+        Throw.when(text.length() == 0, IllegalArgumentException.class,
+                "Error parsing FloatAbsoluteTemperature: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -198,7 +202,8 @@ public class FloatAbsoluteTemperature extends AbstractFloatScalarAbs<AbsoluteTem
     public static FloatAbsoluteTemperature of(final float value, final String unitString)
     {
         Throw.whenNull(unitString, "Error parsing FloatAbsoluteTemperature: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatAbsoluteTemperature: empty unitString");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class,
+                "Error parsing FloatAbsoluteTemperature: empty unitString");
         AbsoluteTemperatureUnit unit = AbsoluteTemperatureUnit.BASE.getUnitByAbbreviation(unitString);
         if (unit != null)
         {
@@ -207,6 +212,4 @@ public class FloatAbsoluteTemperature extends AbstractFloatScalarAbs<AbsoluteTem
         throw new IllegalArgumentException("Error parsing FloatAbsoluteTemperature with unit " + unitString);
     }
 
-
 }
-

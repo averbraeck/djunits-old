@@ -10,7 +10,7 @@ import org.djunits.value.vfloat.vector.FloatElectricalInductanceVector;
 import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable FloatFloatElectricalInductanceMatrix, a matrix of values with a ElectricalInductanceUnit. 
+ * Immutable FloatFloatElectricalInductanceMatrix, a matrix of values with a ElectricalInductanceUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,7 +19,8 @@ import org.djunits.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatElectricalInductanceMatrix extends AbstractFloatMatrixRel<ElectricalInductanceUnit, FloatElectricalInductance, FloatElectricalInductanceVector, FloatElectricalInductanceMatrix>
+public class FloatElectricalInductanceMatrix extends AbstractFloatMatrixRel<ElectricalInductanceUnit, FloatElectricalInductance,
+        FloatElectricalInductanceVector, FloatElectricalInductanceMatrix>
 
 {
     /** */
@@ -50,14 +51,16 @@ public class FloatElectricalInductanceMatrix extends AbstractFloatMatrixRel<Elec
 
     /** {@inheritDoc} */
     @Override
-    public FloatElectricalInductanceMatrix instantiateMatrix(final FloatMatrixData fmd, final ElectricalInductanceUnit displayUnit)
+    public FloatElectricalInductanceMatrix instantiateMatrix(final FloatMatrixData fmd,
+            final ElectricalInductanceUnit displayUnit)
     {
         return new FloatElectricalInductanceMatrix(fmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public FloatElectricalInductanceVector instantiateVector(final FloatVectorData fvd, final ElectricalInductanceUnit displayUnit)
+    public FloatElectricalInductanceVector instantiateVector(final FloatVectorData fvd,
+            final ElectricalInductanceUnit displayUnit)
     {
         return new FloatElectricalInductanceVector(fvd, displayUnit);
     }
@@ -70,6 +73,5 @@ public class FloatElectricalInductanceMatrix extends AbstractFloatMatrixRel<Elec
         result.setDisplayUnit(displayUnit);
         return result;
     }
-
+
 }
-

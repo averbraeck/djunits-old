@@ -21,7 +21,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatMagneticFluxDensity extends AbstractFloatScalarRel<MagneticFluxDensityUnit, FloatMagneticFluxDensity> 
+public class FloatMagneticFluxDensity extends AbstractFloatScalarRel<MagneticFluxDensityUnit, FloatMagneticFluxDensity>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -37,16 +37,20 @@ public class FloatMagneticFluxDensity extends AbstractFloatScalarRel<MagneticFlu
     public static final FloatMagneticFluxDensity NaN = new FloatMagneticFluxDensity(Float.NaN, MagneticFluxDensityUnit.SI);
 
     /** Constant with value POSITIVE_INFINITY. */
-    public static final FloatMagneticFluxDensity POSITIVE_INFINITY = new FloatMagneticFluxDensity(Float.POSITIVE_INFINITY, MagneticFluxDensityUnit.SI);
+    public static final FloatMagneticFluxDensity POSITIVE_INFINITY =
+            new FloatMagneticFluxDensity(Float.POSITIVE_INFINITY, MagneticFluxDensityUnit.SI);
 
     /** Constant with value NEGATIVE_INFINITY. */
-    public static final FloatMagneticFluxDensity NEGATIVE_INFINITY = new FloatMagneticFluxDensity(Float.NEGATIVE_INFINITY, MagneticFluxDensityUnit.SI);
+    public static final FloatMagneticFluxDensity NEGATIVE_INFINITY =
+            new FloatMagneticFluxDensity(Float.NEGATIVE_INFINITY, MagneticFluxDensityUnit.SI);
 
     /** Constant with value MAX_VALUE. */
-    public static final FloatMagneticFluxDensity POS_MAXVALUE = new FloatMagneticFluxDensity(Float.MAX_VALUE, MagneticFluxDensityUnit.SI);
+    public static final FloatMagneticFluxDensity POS_MAXVALUE =
+            new FloatMagneticFluxDensity(Float.MAX_VALUE, MagneticFluxDensityUnit.SI);
 
     /** Constant with value -MAX_VALUE. */
-    public static final FloatMagneticFluxDensity NEG_MAXVALUE = new FloatMagneticFluxDensity(-Float.MAX_VALUE, MagneticFluxDensityUnit.SI);
+    public static final FloatMagneticFluxDensity NEG_MAXVALUE =
+            new FloatMagneticFluxDensity(-Float.MAX_VALUE, MagneticFluxDensityUnit.SI);
 
     /**
      * Construct FloatMagneticFluxDensity scalar.
@@ -101,10 +105,11 @@ public class FloatMagneticFluxDensity extends AbstractFloatScalarRel<MagneticFlu
      * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatMagneticFluxDensity interpolate(final FloatMagneticFluxDensity zero, final FloatMagneticFluxDensity one, final float ratio)
+    public static FloatMagneticFluxDensity interpolate(final FloatMagneticFluxDensity zero, final FloatMagneticFluxDensity one,
+            final float ratio)
     {
-        return new FloatMagneticFluxDensity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new FloatMagneticFluxDensity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**
@@ -125,7 +130,8 @@ public class FloatMagneticFluxDensity extends AbstractFloatScalarRel<MagneticFlu
      * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
-    public static FloatMagneticFluxDensity max(final FloatMagneticFluxDensity r1, final FloatMagneticFluxDensity r2, final FloatMagneticFluxDensity... rn)
+    public static FloatMagneticFluxDensity max(final FloatMagneticFluxDensity r1, final FloatMagneticFluxDensity r2,
+            final FloatMagneticFluxDensity... rn)
     {
         FloatMagneticFluxDensity maxr = (r1.gt(r2)) ? r1 : r2;
         for (FloatMagneticFluxDensity r : rn)
@@ -156,7 +162,8 @@ public class FloatMagneticFluxDensity extends AbstractFloatScalarRel<MagneticFlu
      * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
-    public static FloatMagneticFluxDensity min(final FloatMagneticFluxDensity r1, final FloatMagneticFluxDensity r2, final FloatMagneticFluxDensity... rn)
+    public static FloatMagneticFluxDensity min(final FloatMagneticFluxDensity r1, final FloatMagneticFluxDensity r2,
+            final FloatMagneticFluxDensity... rn)
     {
         FloatMagneticFluxDensity minr = (r1.lt(r2)) ? r1 : r2;
         for (FloatMagneticFluxDensity r : rn)
@@ -170,9 +177,9 @@ public class FloatMagneticFluxDensity extends AbstractFloatScalarRel<MagneticFlu
     }
 
     /**
-     * Returns a FloatMagneticFluxDensity representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a FloatMagneticFluxDensity representation of a textual representation of a value with a unit. The String
+     * representation that can be parsed is the double value in the unit, followed by the official abbreviation of the unit.
+     * Spaces are allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatMagneticFluxDensity
      * @return FloatMagneticFluxDensity; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -181,7 +188,8 @@ public class FloatMagneticFluxDensity extends AbstractFloatScalarRel<MagneticFlu
     public static FloatMagneticFluxDensity valueOf(final String text)
     {
         Throw.whenNull(text, "Error parsing FloatMagneticFluxDensity: text to parse is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatMagneticFluxDensity: empty text to parse");
+        Throw.when(text.length() == 0, IllegalArgumentException.class,
+                "Error parsing FloatMagneticFluxDensity: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -209,7 +217,8 @@ public class FloatMagneticFluxDensity extends AbstractFloatScalarRel<MagneticFlu
     public static FloatMagneticFluxDensity of(final float value, final String unitString)
     {
         Throw.whenNull(unitString, "Error parsing FloatMagneticFluxDensity: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatMagneticFluxDensity: empty unitString");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class,
+                "Error parsing FloatMagneticFluxDensity: empty unitString");
         MagneticFluxDensityUnit unit = MagneticFluxDensityUnit.BASE.getUnitByAbbreviation(unitString);
         if (unit != null)
         {
@@ -218,27 +227,25 @@ public class FloatMagneticFluxDensity extends AbstractFloatScalarRel<MagneticFlu
         throw new IllegalArgumentException("Error parsing FloatMagneticFluxDensity with unit " + unitString);
     }
 
-        /**
-         * Calculate the division of FloatMagneticFluxDensity and FloatMagneticFluxDensity, which results in a FloatDimensionless scalar.
-         * @param v FloatMagneticFluxDensity scalar
-         * @return FloatDimensionless scalar as a division of FloatMagneticFluxDensity and FloatMagneticFluxDensity
-         */
-        public final FloatDimensionless divide(final FloatMagneticFluxDensity v)
-        {
-            return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatMagneticFluxDensity and FloatMagneticFluxDensity, which results in a FloatDimensionless
+     * scalar.
+     * @param v FloatMagneticFluxDensity scalar
+     * @return FloatDimensionless scalar as a division of FloatMagneticFluxDensity and FloatMagneticFluxDensity
+     */
+    public final FloatDimensionless divide(final FloatMagneticFluxDensity v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatMagneticFluxDensity and FloatArea, which results in a FloatMagneticFlux scalar.
-         * @param v FloatMagneticFluxDensity scalar
-         * @return FloatMagneticFlux scalar as a multiplication of FloatMagneticFluxDensity and FloatArea
-         */
-        public final FloatMagneticFlux times(final FloatArea v)
-        {
-            return new FloatMagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
-        }
-
+    /**
+     * Calculate the multiplication of FloatMagneticFluxDensity and FloatArea, which results in a FloatMagneticFlux scalar.
+     * @param v FloatMagneticFluxDensity scalar
+     * @return FloatMagneticFlux scalar as a multiplication of FloatMagneticFluxDensity and FloatArea
+     */
+    public final FloatMagneticFlux times(final FloatArea v)
+    {
+        return new FloatMagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
+    }
 
 }
-
-

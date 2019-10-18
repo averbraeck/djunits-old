@@ -441,7 +441,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
         {
             return "Itr [cursor=" + cursor + "]";
         }
-        
+
     }
 
 }

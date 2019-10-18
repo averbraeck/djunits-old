@@ -130,9 +130,8 @@ public class FLOATMATRIX
      * @return an array with all nonzero values
      */
     @SuppressWarnings("unchecked")
-    public static <U extends Unit<U>,
-            S extends FloatScalarInterface<U, S>> Collection<FloatSparseValue<U, S>> denseRectTuples(final int rows,
-                    final int cols, final Class<S> scalarClass)
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> Collection<FloatSparseValue<U, S>> denseRectTuples(
+            final int rows, final int cols, final Class<S> scalarClass)
     {
         try
         {
@@ -162,9 +161,8 @@ public class FLOATMATRIX
      * @param scalarClass the class of scalars to use
      * @return an array with only nonzero values on the diagonal
      */
-    public static <U extends Unit<U>,
-            S extends FloatScalarInterface<U, S>> Collection<FloatSparseValue<U, S>> sparseRectTuples(final int rows,
-                    final int cols, final Class<S> scalarClass)
+    public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> Collection<FloatSparseValue<U, S>> sparseRectTuples(
+            final int rows, final int cols, final Class<S> scalarClass)
     {
         try
         {

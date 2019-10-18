@@ -22,12 +22,12 @@ import org.djunits.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatPositionMatrix extends AbstractFloatMatrixAbs<PositionUnit, FloatPosition, FloatPositionVector, FloatPositionMatrix,
-LengthUnit, FloatLength, FloatLengthVector, FloatLengthMatrix>
+public class FloatPositionMatrix extends AbstractFloatMatrixAbs<PositionUnit, FloatPosition, FloatPositionVector,
+        FloatPositionMatrix, LengthUnit, FloatLength, FloatLengthVector, FloatLengthMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
-    
+
     /**
      * @param data FloatMatrixData; an internal data object
      * @param unit PositionUnit; the unit
@@ -36,14 +36,14 @@ LengthUnit, FloatLength, FloatLengthVector, FloatLengthMatrix>
     {
         super(data, unit);
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public Class<FloatPosition> getScalarClass()
     {
         return FloatPosition.class;
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public Class<FloatPositionVector> getVectorClass()
@@ -96,5 +96,5 @@ LengthUnit, FloatLength, FloatLengthVector, FloatLengthMatrix>
         result.setDisplayUnit(displayUnit);
         return result;
     }
-
-}
+
+}

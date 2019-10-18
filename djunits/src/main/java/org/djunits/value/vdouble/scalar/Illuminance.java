@@ -21,7 +21,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illuminance> 
+public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illuminance>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -83,7 +83,7 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
     {
         return new Illuminance(value, IlluminanceUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero Illuminance; the low value
@@ -93,9 +93,10 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
      */
     public static Illuminance interpolate(final Illuminance zero, final Illuminance one, final double ratio)
     {
-        return new Illuminance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return new Illuminance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 Illuminance; the first scalar
@@ -159,9 +160,9 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
     }
 
     /**
-     * Returns a Illuminance representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a Illuminance representation of a textual representation of a value with a unit. The String representation that
+     * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
+     * not required, between the value and the unit.
      * @param text String; the textual representation to parse into a Illuminance
      * @return Illuminance; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -207,27 +208,24 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
         throw new IllegalArgumentException("Error parsing Illuminance with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of Illuminance and Illuminance, which results in a Dimensionless scalar.
-         * @param v Illuminance scalar
-         * @return Dimensionless scalar as a division of Illuminance and Illuminance
-         */
-        public final Dimensionless divide(final Illuminance v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of Illuminance and Illuminance, which results in a Dimensionless scalar.
+     * @param v Illuminance scalar
+     * @return Dimensionless scalar as a division of Illuminance and Illuminance
+     */
+    public final Dimensionless divide(final Illuminance v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Illuminance and Area, which results in a LuminousFlux scalar.
-         * @param v Illuminance scalar
-         * @return LuminousFlux scalar as a multiplication of Illuminance and Area
-         */
-        public final LuminousFlux times(final Area v)
-        {
-            return new LuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
-        }
-
+    /**
+     * Calculate the multiplication of Illuminance and Area, which results in a LuminousFlux scalar.
+     * @param v Illuminance scalar
+     * @return LuminousFlux scalar as a multiplication of Illuminance and Area
+     */
+    public final LuminousFlux times(final Area v)
+    {
+        return new LuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
+    }
 
 }
-
-

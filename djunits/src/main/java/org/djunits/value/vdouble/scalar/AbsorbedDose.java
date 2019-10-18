@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class AbsorbedDose extends AbstractDoubleScalarRel<AbsorbedDoseUnit, AbsorbedDose> 
+public class AbsorbedDose extends AbstractDoubleScalarRel<AbsorbedDoseUnit, AbsorbedDose>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -82,7 +82,7 @@ public class AbsorbedDose extends AbstractDoubleScalarRel<AbsorbedDoseUnit, Abso
     {
         return new AbsorbedDose(value, AbsorbedDoseUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero AbsorbedDose; the low value
@@ -92,9 +92,10 @@ public class AbsorbedDose extends AbstractDoubleScalarRel<AbsorbedDoseUnit, Abso
      */
     public static AbsorbedDose interpolate(final AbsorbedDose zero, final AbsorbedDose one, final double ratio)
     {
-        return new AbsorbedDose(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return new AbsorbedDose(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 AbsorbedDose; the first scalar
@@ -158,9 +159,9 @@ public class AbsorbedDose extends AbstractDoubleScalarRel<AbsorbedDoseUnit, Abso
     }
 
     /**
-     * Returns a AbsorbedDose representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a AbsorbedDose representation of a textual representation of a value with a unit. The String representation that
+     * can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but
+     * not required, between the value and the unit.
      * @param text String; the textual representation to parse into a AbsorbedDose
      * @return AbsorbedDose; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -206,17 +207,14 @@ public class AbsorbedDose extends AbstractDoubleScalarRel<AbsorbedDoseUnit, Abso
         throw new IllegalArgumentException("Error parsing AbsorbedDose with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of AbsorbedDose and AbsorbedDose, which results in a Dimensionless scalar.
-         * @param v AbsorbedDose scalar
-         * @return Dimensionless scalar as a division of AbsorbedDose and AbsorbedDose
-         */
-        public final Dimensionless divide(final AbsorbedDose v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
-
+    /**
+     * Calculate the division of AbsorbedDose and AbsorbedDose, which results in a Dimensionless scalar.
+     * @param v AbsorbedDose scalar
+     * @return Dimensionless scalar as a division of AbsorbedDose and AbsorbedDose
+     */
+    public final Dimensionless divide(final AbsorbedDose v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
 }
-
-

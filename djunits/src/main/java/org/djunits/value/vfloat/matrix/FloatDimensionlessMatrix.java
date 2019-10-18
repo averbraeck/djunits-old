@@ -12,7 +12,7 @@ import org.djunits.value.vfloat.vector.FloatDimensionlessVector;
 import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable FloatFloatDimensionlessMatrix, a matrix of values with a DimensionlessUnit. 
+ * Immutable FloatFloatDimensionlessMatrix, a matrix of values with a DimensionlessUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -21,8 +21,9 @@ import org.djunits.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatDimensionlessMatrix extends AbstractFloatMatrixRel<DimensionlessUnit, FloatDimensionless, FloatDimensionlessVector, FloatDimensionlessMatrix>
- implements DimensionlessFunctions<DimensionlessUnit, FloatDimensionlessMatrix>
+public class FloatDimensionlessMatrix extends
+        AbstractFloatMatrixRel<DimensionlessUnit, FloatDimensionless, FloatDimensionlessVector, FloatDimensionlessMatrix>
+        implements DimensionlessFunctions<DimensionlessUnit, FloatDimensionlessMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151109L;
@@ -72,7 +73,7 @@ public class FloatDimensionlessMatrix extends AbstractFloatMatrixRel<Dimensionle
         result.setDisplayUnit(displayUnit);
         return result;
     }
-
+
     /** {@inheritDoc} */
     @Override
     public final FloatDimensionlessMatrix acos()
@@ -224,6 +225,5 @@ public class FloatDimensionlessMatrix extends AbstractFloatMatrixRel<Dimensionle
         assign(FloatMathFunctions.INV);
         return this;
     }
-    
-   
+
 }

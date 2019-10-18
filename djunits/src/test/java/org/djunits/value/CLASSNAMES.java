@@ -40,13 +40,13 @@ public class CLASSNAMES
 
     /** List of all relative classes, except SI. */
     public static final List<String> REL_ALL_LIST;
-    
+
     /** List of all classes, except SI. */
     public static final List<String> ALL_LIST;
-    
+
     /** List of all classes, except Dimensionless and SI. */
     public static final List<String> ALL_NODIM_LIST;
-    
+
     static
     {
         ABS_LIST = Arrays.asList(ABS);

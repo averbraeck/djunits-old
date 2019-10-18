@@ -21,7 +21,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, FloatIlluminance> 
+public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, FloatIlluminance>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -103,8 +103,8 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
      */
     public static FloatIlluminance interpolate(final FloatIlluminance zero, final FloatIlluminance one, final float ratio)
     {
-        return new FloatIlluminance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new FloatIlluminance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**
@@ -170,9 +170,9 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
     }
 
     /**
-     * Returns a FloatIlluminance representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a FloatIlluminance representation of a textual representation of a value with a unit. The String representation
+     * that can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are
+     * allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatIlluminance
      * @return FloatIlluminance; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -209,7 +209,8 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
     public static FloatIlluminance of(final float value, final String unitString)
     {
         Throw.whenNull(unitString, "Error parsing FloatIlluminance: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatIlluminance: empty unitString");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class,
+                "Error parsing FloatIlluminance: empty unitString");
         IlluminanceUnit unit = IlluminanceUnit.BASE.getUnitByAbbreviation(unitString);
         if (unit != null)
         {
@@ -218,27 +219,24 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
         throw new IllegalArgumentException("Error parsing FloatIlluminance with unit " + unitString);
     }
 
-        /**
-         * Calculate the division of FloatIlluminance and FloatIlluminance, which results in a FloatDimensionless scalar.
-         * @param v FloatIlluminance scalar
-         * @return FloatDimensionless scalar as a division of FloatIlluminance and FloatIlluminance
-         */
-        public final FloatDimensionless divide(final FloatIlluminance v)
-        {
-            return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatIlluminance and FloatIlluminance, which results in a FloatDimensionless scalar.
+     * @param v FloatIlluminance scalar
+     * @return FloatDimensionless scalar as a division of FloatIlluminance and FloatIlluminance
+     */
+    public final FloatDimensionless divide(final FloatIlluminance v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatIlluminance and FloatArea, which results in a FloatLuminousFlux scalar.
-         * @param v FloatIlluminance scalar
-         * @return FloatLuminousFlux scalar as a multiplication of FloatIlluminance and FloatArea
-         */
-        public final FloatLuminousFlux times(final FloatArea v)
-        {
-            return new FloatLuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
-        }
-
+    /**
+     * Calculate the multiplication of FloatIlluminance and FloatArea, which results in a FloatLuminousFlux scalar.
+     * @param v FloatIlluminance scalar
+     * @return FloatLuminousFlux scalar as a multiplication of FloatIlluminance and FloatArea
+     */
+    public final FloatLuminousFlux times(final FloatArea v)
+    {
+        return new FloatLuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
+    }
 
 }
-
-

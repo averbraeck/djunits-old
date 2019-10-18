@@ -22,7 +22,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActivityUnit, FloatCatalyticActivity> 
+public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActivityUnit, FloatCatalyticActivity>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -38,16 +38,20 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
     public static final FloatCatalyticActivity NaN = new FloatCatalyticActivity(Float.NaN, CatalyticActivityUnit.SI);
 
     /** Constant with value POSITIVE_INFINITY. */
-    public static final FloatCatalyticActivity POSITIVE_INFINITY = new FloatCatalyticActivity(Float.POSITIVE_INFINITY, CatalyticActivityUnit.SI);
+    public static final FloatCatalyticActivity POSITIVE_INFINITY =
+            new FloatCatalyticActivity(Float.POSITIVE_INFINITY, CatalyticActivityUnit.SI);
 
     /** Constant with value NEGATIVE_INFINITY. */
-    public static final FloatCatalyticActivity NEGATIVE_INFINITY = new FloatCatalyticActivity(Float.NEGATIVE_INFINITY, CatalyticActivityUnit.SI);
+    public static final FloatCatalyticActivity NEGATIVE_INFINITY =
+            new FloatCatalyticActivity(Float.NEGATIVE_INFINITY, CatalyticActivityUnit.SI);
 
     /** Constant with value MAX_VALUE. */
-    public static final FloatCatalyticActivity POS_MAXVALUE = new FloatCatalyticActivity(Float.MAX_VALUE, CatalyticActivityUnit.SI);
+    public static final FloatCatalyticActivity POS_MAXVALUE =
+            new FloatCatalyticActivity(Float.MAX_VALUE, CatalyticActivityUnit.SI);
 
     /** Constant with value -MAX_VALUE. */
-    public static final FloatCatalyticActivity NEG_MAXVALUE = new FloatCatalyticActivity(-Float.MAX_VALUE, CatalyticActivityUnit.SI);
+    public static final FloatCatalyticActivity NEG_MAXVALUE =
+            new FloatCatalyticActivity(-Float.MAX_VALUE, CatalyticActivityUnit.SI);
 
     /**
      * Construct FloatCatalyticActivity scalar.
@@ -102,10 +106,11 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
      * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
-    public static FloatCatalyticActivity interpolate(final FloatCatalyticActivity zero, final FloatCatalyticActivity one, final float ratio)
+    public static FloatCatalyticActivity interpolate(final FloatCatalyticActivity zero, final FloatCatalyticActivity one,
+            final float ratio)
     {
-        return new FloatCatalyticActivity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new FloatCatalyticActivity(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**
@@ -126,7 +131,8 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
      * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
-    public static FloatCatalyticActivity max(final FloatCatalyticActivity r1, final FloatCatalyticActivity r2, final FloatCatalyticActivity... rn)
+    public static FloatCatalyticActivity max(final FloatCatalyticActivity r1, final FloatCatalyticActivity r2,
+            final FloatCatalyticActivity... rn)
     {
         FloatCatalyticActivity maxr = (r1.gt(r2)) ? r1 : r2;
         for (FloatCatalyticActivity r : rn)
@@ -157,7 +163,8 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
      * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
-    public static FloatCatalyticActivity min(final FloatCatalyticActivity r1, final FloatCatalyticActivity r2, final FloatCatalyticActivity... rn)
+    public static FloatCatalyticActivity min(final FloatCatalyticActivity r1, final FloatCatalyticActivity r2,
+            final FloatCatalyticActivity... rn)
     {
         FloatCatalyticActivity minr = (r1.lt(r2)) ? r1 : r2;
         for (FloatCatalyticActivity r : rn)
@@ -171,9 +178,9 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
     }
 
     /**
-     * Returns a FloatCatalyticActivity representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a FloatCatalyticActivity representation of a textual representation of a value with a unit. The String
+     * representation that can be parsed is the double value in the unit, followed by the official abbreviation of the unit.
+     * Spaces are allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatCatalyticActivity
      * @return FloatCatalyticActivity; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -182,7 +189,8 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
     public static FloatCatalyticActivity valueOf(final String text)
     {
         Throw.whenNull(text, "Error parsing FloatCatalyticActivity: text to parse is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing FloatCatalyticActivity: empty text to parse");
+        Throw.when(text.length() == 0, IllegalArgumentException.class,
+                "Error parsing FloatCatalyticActivity: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -210,7 +218,8 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
     public static FloatCatalyticActivity of(final float value, final String unitString)
     {
         Throw.whenNull(unitString, "Error parsing FloatCatalyticActivity: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing FloatCatalyticActivity: empty unitString");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class,
+                "Error parsing FloatCatalyticActivity: empty unitString");
         CatalyticActivityUnit unit = CatalyticActivityUnit.BASE.getUnitByAbbreviation(unitString);
         if (unit != null)
         {
@@ -219,47 +228,46 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
         throw new IllegalArgumentException("Error parsing FloatCatalyticActivity with unit " + unitString);
     }
 
-        /**
-         * Calculate the division of FloatCatalyticActivity and FloatCatalyticActivity, which results in a FloatDimensionless scalar.
-         * @param v FloatCatalyticActivity scalar
-         * @return FloatDimensionless scalar as a division of FloatCatalyticActivity and FloatCatalyticActivity
-         */
-        public final FloatDimensionless divide(final FloatCatalyticActivity v)
-        {
-            return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatCatalyticActivity and FloatCatalyticActivity, which results in a FloatDimensionless
+     * scalar.
+     * @param v FloatCatalyticActivity scalar
+     * @return FloatDimensionless scalar as a division of FloatCatalyticActivity and FloatCatalyticActivity
+     */
+    public final FloatDimensionless divide(final FloatCatalyticActivity v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatCatalyticActivity and FloatDuration, which results in a FloatAmountOfSubstance scalar.
-         * @param v FloatCatalyticActivity scalar
-         * @return FloatAmountOfSubstance scalar as a multiplication of FloatCatalyticActivity and FloatDuration
-         */
-        public final FloatAmountOfSubstance times(final FloatDuration v)
-        {
-            return new FloatAmountOfSubstance(this.si * v.si, AmountOfSubstanceUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of FloatCatalyticActivity and FloatDuration, which results in a FloatAmountOfSubstance
+     * scalar.
+     * @param v FloatCatalyticActivity scalar
+     * @return FloatAmountOfSubstance scalar as a multiplication of FloatCatalyticActivity and FloatDuration
+     */
+    public final FloatAmountOfSubstance times(final FloatDuration v)
+    {
+        return new FloatAmountOfSubstance(this.si * v.si, AmountOfSubstanceUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatCatalyticActivity and FloatAmountOfSubstance, which results in a FloatFrequency scalar.
-         * @param v FloatCatalyticActivity scalar
-         * @return FloatFrequency scalar as a division of FloatCatalyticActivity and FloatAmountOfSubstance
-         */
-        public final FloatFrequency divide(final FloatAmountOfSubstance v)
-        {
-            return new FloatFrequency(this.si / v.si, FrequencyUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatCatalyticActivity and FloatAmountOfSubstance, which results in a FloatFrequency scalar.
+     * @param v FloatCatalyticActivity scalar
+     * @return FloatFrequency scalar as a division of FloatCatalyticActivity and FloatAmountOfSubstance
+     */
+    public final FloatFrequency divide(final FloatAmountOfSubstance v)
+    {
+        return new FloatFrequency(this.si / v.si, FrequencyUnit.SI);
+    }
 
-        /**
-         * Calculate the division of FloatCatalyticActivity and FloatFrequency, which results in a FloatAmountOfSubstance scalar.
-         * @param v FloatCatalyticActivity scalar
-         * @return FloatAmountOfSubstance scalar as a division of FloatCatalyticActivity and FloatFrequency
-         */
-        public final FloatAmountOfSubstance divide(final FloatFrequency v)
-        {
-            return new FloatAmountOfSubstance(this.si / v.si, AmountOfSubstanceUnit.SI);
-        }
-
+    /**
+     * Calculate the division of FloatCatalyticActivity and FloatFrequency, which results in a FloatAmountOfSubstance scalar.
+     * @param v FloatCatalyticActivity scalar
+     * @return FloatAmountOfSubstance scalar as a division of FloatCatalyticActivity and FloatFrequency
+     */
+    public final FloatAmountOfSubstance divide(final FloatFrequency v)
+    {
+        return new FloatAmountOfSubstance(this.si / v.si, AmountOfSubstanceUnit.SI);
+    }
 
 }
-
-

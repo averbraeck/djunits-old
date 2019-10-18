@@ -22,7 +22,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class Density extends AbstractDoubleScalarRel<DensityUnit, Density> 
+public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -84,7 +84,7 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
     {
         return new Density(value, DensityUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero Density; the low value
@@ -94,9 +94,10 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
      */
     public static Density interpolate(final Density zero, final Density one, final double ratio)
     {
-        return new Density(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return new Density(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 Density; the first scalar
@@ -160,8 +161,8 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
     }
 
     /**
-     * Returns a Density representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
+     * Returns a Density representation of a textual representation of a value with a unit. The String representation that can
+     * be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
      * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Density
      * @return Density; the Scalar representation of the value in its unit
@@ -208,37 +209,34 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
         throw new IllegalArgumentException("Error parsing Density with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of Density and Density, which results in a Dimensionless scalar.
-         * @param v Density scalar
-         * @return Dimensionless scalar as a division of Density and Density
-         */
-        public final Dimensionless divide(final Density v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of Density and Density, which results in a Dimensionless scalar.
+     * @param v Density scalar
+     * @return Dimensionless scalar as a division of Density and Density
+     */
+    public final Dimensionless divide(final Density v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Density and Volume, which results in a Mass scalar.
-         * @param v Density scalar
-         * @return Mass scalar as a multiplication of Density and Volume
-         */
-        public final Mass times(final Volume v)
-        {
-            return new Mass(this.si * v.si, MassUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Density and Volume, which results in a Mass scalar.
+     * @param v Density scalar
+     * @return Mass scalar as a multiplication of Density and Volume
+     */
+    public final Mass times(final Volume v)
+    {
+        return new Mass(this.si * v.si, MassUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Density and FlowVolume, which results in a FlowMass scalar.
-         * @param v Density scalar
-         * @return FlowMass scalar as a multiplication of Density and FlowVolume
-         */
-        public final FlowMass times(final FlowVolume v)
-        {
-            return new FlowMass(this.si * v.si, FlowMassUnit.SI);
-        }
-
+    /**
+     * Calculate the multiplication of Density and FlowVolume, which results in a FlowMass scalar.
+     * @param v Density scalar
+     * @return FlowMass scalar as a multiplication of Density and FlowVolume
+     */
+    public final FlowMass times(final FlowVolume v)
+    {
+        return new FlowMass(this.si * v.si, FlowMassUnit.SI);
+    }
 
 }
-
-

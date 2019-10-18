@@ -16,7 +16,6 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarAbs;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
-
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
@@ -92,10 +91,10 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
      */
     public static FloatDirection interpolate(final FloatDirection zero, final FloatDirection one, final float ratio)
     {
-        return new FloatDirection(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new FloatDirection(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two absolute scalars.
      * @param a1 FloatDirection; the first scalar
@@ -157,11 +156,11 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
         }
         return mina;
     }
-    
+
     /**
-     * Returns a FloatDirection representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a FloatDirection representation of a textual representation of a value with a unit. The String representation
+     * that can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are
+     * allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatDirection
      * @return FloatDirection; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -207,6 +206,4 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
         throw new IllegalArgumentException("Error parsing FloatDirection with unit " + unitString);
     }
 
-
 }
-

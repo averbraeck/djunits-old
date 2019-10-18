@@ -21,7 +21,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatSolidAngle extends AbstractFloatScalarRel<SolidAngleUnit, FloatSolidAngle> 
+public class FloatSolidAngle extends AbstractFloatScalarRel<SolidAngleUnit, FloatSolidAngle>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
@@ -103,8 +103,8 @@ public class FloatSolidAngle extends AbstractFloatScalarRel<SolidAngleUnit, Floa
      */
     public static FloatSolidAngle interpolate(final FloatSolidAngle zero, final FloatSolidAngle one, final float ratio)
     {
-        return new FloatSolidAngle(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
-            .getDisplayUnit());
+        return new FloatSolidAngle(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**
@@ -170,9 +170,9 @@ public class FloatSolidAngle extends AbstractFloatScalarRel<SolidAngleUnit, Floa
     }
 
     /**
-     * Returns a FloatSolidAngle representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a FloatSolidAngle representation of a textual representation of a value with a unit. The String representation
+     * that can be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are
+     * allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatSolidAngle
      * @return FloatSolidAngle; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -218,27 +218,24 @@ public class FloatSolidAngle extends AbstractFloatScalarRel<SolidAngleUnit, Floa
         throw new IllegalArgumentException("Error parsing FloatSolidAngle with unit " + unitString);
     }
 
-        /**
-         * Calculate the division of FloatSolidAngle and FloatSolidAngle, which results in a FloatDimensionless scalar.
-         * @param v FloatSolidAngle scalar
-         * @return FloatDimensionless scalar as a division of FloatSolidAngle and FloatSolidAngle
-         */
-        public final FloatDimensionless divide(final FloatSolidAngle v)
-        {
-            return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of FloatSolidAngle and FloatSolidAngle, which results in a FloatDimensionless scalar.
+     * @param v FloatSolidAngle scalar
+     * @return FloatDimensionless scalar as a division of FloatSolidAngle and FloatSolidAngle
+     */
+    public final FloatDimensionless divide(final FloatSolidAngle v)
+    {
+        return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of FloatSolidAngle and FloatLuminousIntensity, which results in a FloatLuminousFlux scalar.
-         * @param v FloatSolidAngle scalar
-         * @return FloatLuminousFlux scalar as a multiplication of FloatSolidAngle and FloatLuminousIntensity
-         */
-        public final FloatLuminousFlux times(final FloatLuminousIntensity v)
-        {
-            return new FloatLuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
-        }
-
+    /**
+     * Calculate the multiplication of FloatSolidAngle and FloatLuminousIntensity, which results in a FloatLuminousFlux scalar.
+     * @param v FloatSolidAngle scalar
+     * @return FloatLuminousFlux scalar as a multiplication of FloatSolidAngle and FloatLuminousIntensity
+     */
+    public final FloatLuminousFlux times(final FloatLuminousIntensity v)
+    {
+        return new FloatLuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
+    }
 
 }
-
-

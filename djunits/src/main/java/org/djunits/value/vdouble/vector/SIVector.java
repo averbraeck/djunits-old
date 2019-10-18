@@ -102,8 +102,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
 
     /**
      * Construct a new Relative Double SIVector.
-     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Double
-     *            SIVector
+     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Double SIVector
      * @param length int; the size of the vector
      * @param unit SIUnit; the unit of the new Relative Sparse Double SIVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
@@ -237,7 +236,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
     {
         return new SIScalar(valueSI, unit);
     }
-    
+
     /**********************************************************************************/
     /******************************** 'CAST AS' METHODS *******************************/
     /**********************************************************************************/
@@ -259,7 +258,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         return result;
     }
 
-        /**
+    /**
      * Return the current vector as a absorbeddose vector.
      * @return AbsorbedDoseVector; the current vector as a absorbeddose vector
      */
@@ -283,6 +282,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a acceleration vector.
      * @return AccelerationVector; the current vector as a acceleration vector
@@ -307,6 +307,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a amountofsubstance vector.
      * @return AmountOfSubstanceVector; the current vector as a amountofsubstance vector
@@ -331,6 +332,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a area vector.
      * @return AreaVector; the current vector as a area vector
@@ -355,6 +357,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a catalyticactivity vector.
      * @return CatalyticActivityVector; the current vector as a catalyticactivity vector
@@ -379,6 +382,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a density vector.
      * @return DensityVector; the current vector as a density vector
@@ -403,6 +407,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a dimensionless vector.
      * @return DimensionlessVector; the current vector as a dimensionless vector
@@ -427,6 +432,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a electricalcapacitance vector.
      * @return ElectricalCapacitanceVector; the current vector as a electricalcapacitance vector
@@ -451,6 +457,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a electricalcharge vector.
      * @return ElectricalChargeVector; the current vector as a electricalcharge vector
@@ -475,6 +482,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a electricalconductance vector.
      * @return ElectricalConductanceVector; the current vector as a electricalconductance vector
@@ -499,6 +507,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a electricalcurrent vector.
      * @return ElectricalCurrentVector; the current vector as a electricalcurrent vector
@@ -523,6 +532,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a electricalinductance vector.
      * @return ElectricalInductanceVector; the current vector as a electricalinductance vector
@@ -547,6 +557,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a electricalpotential vector.
      * @return ElectricalPotentialVector; the current vector as a electricalpotential vector
@@ -571,6 +582,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a electricalresistance vector.
      * @return ElectricalResistanceVector; the current vector as a electricalresistance vector
@@ -595,6 +607,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a energy vector.
      * @return EnergyVector; the current vector as a energy vector
@@ -619,6 +632,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a equivalentdose vector.
      * @return EquivalentDoseVector; the current vector as a equivalentdose vector
@@ -643,6 +657,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a flowmass vector.
      * @return FlowMassVector; the current vector as a flowmass vector
@@ -667,6 +682,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a flowvolume vector.
      * @return FlowVolumeVector; the current vector as a flowvolume vector
@@ -691,6 +707,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a force vector.
      * @return ForceVector; the current vector as a force vector
@@ -715,6 +732,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a frequency vector.
      * @return FrequencyVector; the current vector as a frequency vector
@@ -739,6 +757,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a illuminance vector.
      * @return IlluminanceVector; the current vector as a illuminance vector
@@ -763,6 +782,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a lineardensity vector.
      * @return LinearDensityVector; the current vector as a lineardensity vector
@@ -787,6 +807,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a luminousflux vector.
      * @return LuminousFluxVector; the current vector as a luminousflux vector
@@ -811,6 +832,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a luminousintensity vector.
      * @return LuminousIntensityVector; the current vector as a luminousintensity vector
@@ -835,6 +857,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a magneticfluxdensity vector.
      * @return MagneticFluxDensityVector; the current vector as a magneticfluxdensity vector
@@ -859,6 +882,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a magneticflux vector.
      * @return MagneticFluxVector; the current vector as a magneticflux vector
@@ -883,6 +907,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a mass vector.
      * @return MassVector; the current vector as a mass vector
@@ -907,6 +932,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a power vector.
      * @return PowerVector; the current vector as a power vector
@@ -931,6 +957,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a pressure vector.
      * @return PressureVector; the current vector as a pressure vector
@@ -955,6 +982,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a radioactivity vector.
      * @return RadioActivityVector; the current vector as a radioactivity vector
@@ -979,6 +1007,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a solidangle vector.
      * @return SolidAngleVector; the current vector as a solidangle vector
@@ -1003,6 +1032,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a speed vector.
      * @return SpeedVector; the current vector as a speed vector
@@ -1027,6 +1057,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a torque vector.
      * @return TorqueVector; the current vector as a torque vector
@@ -1051,6 +1082,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a volume vector.
      * @return VolumeVector; the current vector as a volume vector
@@ -1075,6 +1107,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a angle vector.
      * @return AngleVector; the current vector as a angle vector
@@ -1099,6 +1132,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a length vector.
      * @return LengthVector; the current vector as a length vector
@@ -1123,6 +1157,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a temperature vector.
      * @return TemperatureVector; the current vector as a temperature vector
@@ -1147,6 +1182,7 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a duration vector.
      * @return DurationVector; the current vector as a duration vector

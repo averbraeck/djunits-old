@@ -10,7 +10,7 @@ import org.djunits.value.vfloat.vector.FloatLinearDensityVector;
 import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable FloatFloatLinearDensityMatrix, a matrix of values with a LinearDensityUnit. 
+ * Immutable FloatFloatLinearDensityMatrix, a matrix of values with a LinearDensityUnit.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -19,7 +19,8 @@ import org.djunits.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatLinearDensityMatrix extends AbstractFloatMatrixRel<LinearDensityUnit, FloatLinearDensity, FloatLinearDensityVector, FloatLinearDensityMatrix>
+public class FloatLinearDensityMatrix extends
+        AbstractFloatMatrixRel<LinearDensityUnit, FloatLinearDensity, FloatLinearDensityVector, FloatLinearDensityMatrix>
 
 {
     /** */
@@ -70,6 +71,5 @@ public class FloatLinearDensityMatrix extends AbstractFloatMatrixRel<LinearDensi
         result.setDisplayUnit(displayUnit);
         return result;
     }
-
+
 }
-

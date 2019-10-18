@@ -23,11 +23,11 @@ import org.djunits.value.vfloat.vector.data.FloatVectorData;
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
 public class FloatDurationMatrix extends AbstractFloatMatrixRelWithAbs<TimeUnit, FloatTime, FloatTimeVector, FloatTimeMatrix,
-DurationUnit, FloatDuration, FloatDurationVector, FloatDurationMatrix>
+        DurationUnit, FloatDuration, FloatDurationVector, FloatDurationMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
-    
+
     /**
      * @param data FloatMatrixData; an internal data object
      * @param unit DurationUnit; the unit
@@ -36,21 +36,21 @@ DurationUnit, FloatDuration, FloatDurationVector, FloatDurationMatrix>
     {
         super(data, unit);
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public Class<FloatDuration> getScalarClass()
     {
         return FloatDuration.class;
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public Class<FloatDurationVector> getVectorClass()
     {
         return FloatDurationVector.class;
     }
-        
+
     /** {@inheritDoc} */
     @Override
     public FloatDurationMatrix instantiateMatrix(final FloatMatrixData fmd, final DurationUnit displayUnit)
@@ -97,5 +97,4 @@ DurationUnit, FloatDuration, FloatDurationVector, FloatDurationMatrix>
         return result;
     }
 
-   
-}
+}

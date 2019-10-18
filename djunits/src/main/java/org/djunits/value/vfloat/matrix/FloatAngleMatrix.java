@@ -22,12 +22,12 @@ import org.djunits.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class FloatAngleMatrix extends AbstractFloatMatrixRelWithAbs<DirectionUnit, FloatDirection, FloatDirectionVector, FloatDirectionMatrix,
-AngleUnit, FloatAngle, FloatAngleVector, FloatAngleMatrix>
+public class FloatAngleMatrix extends AbstractFloatMatrixRelWithAbs<DirectionUnit, FloatDirection, FloatDirectionVector,
+        FloatDirectionMatrix, AngleUnit, FloatAngle, FloatAngleVector, FloatAngleMatrix>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
-    
+
     /**
      * @param data FloatMatrixData; an internal data object
      * @param unit AngleUnit; the unit
@@ -36,21 +36,21 @@ AngleUnit, FloatAngle, FloatAngleVector, FloatAngleMatrix>
     {
         super(data, unit);
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public Class<FloatAngle> getScalarClass()
     {
         return FloatAngle.class;
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public Class<FloatAngleVector> getVectorClass()
     {
         return FloatAngleVector.class;
     }
-        
+
     /** {@inheritDoc} */
     @Override
     public FloatAngleMatrix instantiateMatrix(final FloatMatrixData fmd, final AngleUnit displayUnit)
@@ -97,5 +97,4 @@ AngleUnit, FloatAngle, FloatAngleVector, FloatAngleMatrix>
         return result;
     }
 
-   
-}
+}

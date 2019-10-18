@@ -17,7 +17,7 @@ public abstract class AbstractStorage<T extends AbstractStorage<T>> implements C
 {
     /** ... */
     private static final long serialVersionUID = 20191018L;
-    
+
     /** the data type. */
     protected final StorageType storageType;
 

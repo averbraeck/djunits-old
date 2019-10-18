@@ -26,7 +26,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class Power extends AbstractDoubleScalarRel<PowerUnit, Power> 
+public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -88,7 +88,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
     {
         return new Power(value, PowerUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero Power; the low value
@@ -100,7 +100,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
     {
         return new Power(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 Power; the first scalar
@@ -212,87 +212,84 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
         throw new IllegalArgumentException("Error parsing Power with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of Power and Power, which results in a Dimensionless scalar.
-         * @param v Power scalar
-         * @return Dimensionless scalar as a division of Power and Power
-         */
-        public final Dimensionless divide(final Power v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of Power and Power, which results in a Dimensionless scalar.
+     * @param v Power scalar
+     * @return Dimensionless scalar as a division of Power and Power
+     */
+    public final Dimensionless divide(final Power v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of Power and Duration, which results in a Energy scalar.
-         * @param v Power scalar
-         * @return Energy scalar as a multiplication of Power and Duration
-         */
-        public final Energy times(final Duration v)
-        {
-            return new Energy(this.si * v.si, EnergyUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of Power and Duration, which results in a Energy scalar.
+     * @param v Power scalar
+     * @return Energy scalar as a multiplication of Power and Duration
+     */
+    public final Energy times(final Duration v)
+    {
+        return new Energy(this.si * v.si, EnergyUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Power and Frequency, which results in a Energy scalar.
-         * @param v Power scalar
-         * @return Energy scalar as a division of Power and Frequency
-         */
-        public final Energy divide(final Frequency v)
-        {
-            return new Energy(this.si / v.si, EnergyUnit.SI);
-        }
+    /**
+     * Calculate the division of Power and Frequency, which results in a Energy scalar.
+     * @param v Power scalar
+     * @return Energy scalar as a division of Power and Frequency
+     */
+    public final Energy divide(final Frequency v)
+    {
+        return new Energy(this.si / v.si, EnergyUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Power and Energy, which results in a Frequency scalar.
-         * @param v Power scalar
-         * @return Frequency scalar as a division of Power and Energy
-         */
-        public final Frequency divide(final Energy v)
-        {
-            return new Frequency(this.si / v.si, FrequencyUnit.SI);
-        }
+    /**
+     * Calculate the division of Power and Energy, which results in a Frequency scalar.
+     * @param v Power scalar
+     * @return Frequency scalar as a division of Power and Energy
+     */
+    public final Frequency divide(final Energy v)
+    {
+        return new Frequency(this.si / v.si, FrequencyUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Power and Speed, which results in a Force scalar.
-         * @param v Power scalar
-         * @return Force scalar as a division of Power and Speed
-         */
-        public final Force divide(final Speed v)
-        {
-            return new Force(this.si / v.si, ForceUnit.SI);
-        }
+    /**
+     * Calculate the division of Power and Speed, which results in a Force scalar.
+     * @param v Power scalar
+     * @return Force scalar as a division of Power and Speed
+     */
+    public final Force divide(final Speed v)
+    {
+        return new Force(this.si / v.si, ForceUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Power and Force, which results in a Speed scalar.
-         * @param v Power scalar
-         * @return Speed scalar as a division of Power and Force
-         */
-        public final Speed divide(final Force v)
-        {
-            return new Speed(this.si / v.si, SpeedUnit.SI);
-        }
+    /**
+     * Calculate the division of Power and Force, which results in a Speed scalar.
+     * @param v Power scalar
+     * @return Speed scalar as a division of Power and Force
+     */
+    public final Speed divide(final Force v)
+    {
+        return new Speed(this.si / v.si, SpeedUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Power and ElectricalPotential, which results in a ElectricalCurrent scalar.
-         * @param v Power scalar
-         * @return ElectricalCurrent scalar as a division of Power and ElectricalPotential
-         */
-        public final ElectricalCurrent divide(final ElectricalPotential v)
-        {
-            return new ElectricalCurrent(this.si / v.si, ElectricalCurrentUnit.SI);
-        }
+    /**
+     * Calculate the division of Power and ElectricalPotential, which results in a ElectricalCurrent scalar.
+     * @param v Power scalar
+     * @return ElectricalCurrent scalar as a division of Power and ElectricalPotential
+     */
+    public final ElectricalCurrent divide(final ElectricalPotential v)
+    {
+        return new ElectricalCurrent(this.si / v.si, ElectricalCurrentUnit.SI);
+    }
 
-        /**
-         * Calculate the division of Power and ElectricalCurrent, which results in a ElectricalPotential scalar.
-         * @param v Power scalar
-         * @return ElectricalPotential scalar as a division of Power and ElectricalCurrent
-         */
-        public final ElectricalPotential divide(final ElectricalCurrent v)
-        {
-            return new ElectricalPotential(this.si / v.si, ElectricalPotentialUnit.SI);
-        }
-
+    /**
+     * Calculate the division of Power and ElectricalCurrent, which results in a ElectricalPotential scalar.
+     * @param v Power scalar
+     * @return ElectricalPotential scalar as a division of Power and ElectricalCurrent
+     */
+    public final ElectricalPotential divide(final ElectricalCurrent v)
+    {
+        return new ElectricalPotential(this.si / v.si, ElectricalPotentialUnit.SI);
+    }
 
 }
-
-

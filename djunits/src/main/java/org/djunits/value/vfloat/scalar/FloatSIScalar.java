@@ -113,7 +113,8 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public static FloatSIScalar interpolate(final FloatSIScalar zero, final FloatSIScalar one, final float ratio)
     {
-        return new FloatSIScalar(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return new FloatSIScalar(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**
@@ -179,9 +180,9 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
     }
 
     /**
-     * Returns an FloatSIScalar representation of a textual representation of a value with a unit. The String representation that can
-     * be parsed is the float value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns an FloatSIScalar representation of a textual representation of a value with a unit. The String representation
+     * that can be parsed is the float value in the unit, followed by the official abbreviation of the unit. Spaces are allowed,
+     * but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a FloatSIScalar
      * @return FloatSIScalar; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -256,14 +257,14 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
     public final <KU extends Unit<KU>, K extends AbstractFloatScalarRel<KU, K>> K as(final KU displayUnit)
     {
         Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(displayUnit.getUnitBase().getSiDimensions())),
-                UnitRuntimeException.class, "FloatSIScalar with unit %s cannot be converted to a scalar with unit %s", getDisplayUnit(),
-                displayUnit);
+                UnitRuntimeException.class, "FloatSIScalar with unit %s cannot be converted to a scalar with unit %s",
+                getDisplayUnit(), displayUnit);
         K result = FloatScalar.instantiate(this.si, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
         return result;
     }
 
-        /**
+    /**
      * Return the current scalar as a absorbeddose.
      * @return FloatAbsorbedDose; the current scalar as a absorbeddose
      */
@@ -1212,7 +1213,5 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
         result.setDisplayUnit(displayUnit);
         return result;
     }
-
-
 
 }

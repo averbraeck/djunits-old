@@ -20,7 +20,7 @@ import org.djunits.value.vfloat.vector.data.FloatVectorData;
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
 public class FloatLengthVector extends AbstractFloatVectorRelWithAbs<PositionUnit, FloatPosition, FloatPositionVector,
-    LengthUnit, FloatLength, FloatLengthVector>
+        LengthUnit, FloatLength, FloatLengthVector>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
@@ -73,5 +73,5 @@ public class FloatLengthVector extends AbstractFloatVectorRelWithAbs<PositionUni
         result.setDisplayUnit(displayUnit);
         return result;
     }
-
-}
+
+}

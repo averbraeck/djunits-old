@@ -251,14 +251,14 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
             V extends AbstractFloatVectorRel<U, S, V>> V as(final U displayUnit)
     {
         Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(displayUnit.getUnitBase().getSiDimensions())),
-                UnitRuntimeException.class, "SIVector with unit %s cannot be converted to a FloatVector with unit %s", getDisplayUnit(),
-                displayUnit);
+                UnitRuntimeException.class, "SIVector with unit %s cannot be converted to a FloatVector with unit %s",
+                getDisplayUnit(), displayUnit);
         V result = FloatVector.instantiate(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
         return result;
     }
 
-        /**
+    /**
      * Return the current vector as a absorbeddose vector.
      * @return FloatAbsorbedDoseVector; the current vector as a absorbeddose vector
      */
@@ -282,6 +282,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a acceleration vector.
      * @return FloatAccelerationVector; the current vector as a acceleration vector
@@ -306,6 +307,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a amountofsubstance vector.
      * @return FloatAmountOfSubstanceVector; the current vector as a amountofsubstance vector
@@ -330,6 +332,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a area vector.
      * @return FloatAreaVector; the current vector as a area vector
@@ -354,6 +357,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a catalyticactivity vector.
      * @return FloatCatalyticActivityVector; the current vector as a catalyticactivity vector
@@ -378,6 +382,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a density vector.
      * @return FloatDensityVector; the current vector as a density vector
@@ -402,6 +407,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a dimensionless vector.
      * @return FloatDimensionlessVector; the current vector as a dimensionless vector
@@ -426,6 +432,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a electricalcapacitance vector.
      * @return FloatElectricalCapacitanceVector; the current vector as a electricalcapacitance vector
@@ -446,10 +453,12 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
     {
         Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalCapacitanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatElectricalCapacitanceVector", this.toString());
-        FloatElectricalCapacitanceVector result = new FloatElectricalCapacitanceVector(this.data, displayUnit.getStandardUnit());
+        FloatElectricalCapacitanceVector result =
+                new FloatElectricalCapacitanceVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a electricalcharge vector.
      * @return FloatElectricalChargeVector; the current vector as a electricalcharge vector
@@ -474,6 +483,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a electricalconductance vector.
      * @return FloatElectricalConductanceVector; the current vector as a electricalconductance vector
@@ -494,10 +504,12 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
     {
         Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalConductanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatElectricalConductanceVector", this.toString());
-        FloatElectricalConductanceVector result = new FloatElectricalConductanceVector(this.data, displayUnit.getStandardUnit());
+        FloatElectricalConductanceVector result =
+                new FloatElectricalConductanceVector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a electricalcurrent vector.
      * @return FloatElectricalCurrentVector; the current vector as a electricalcurrent vector
@@ -522,6 +534,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a electricalinductance vector.
      * @return FloatElectricalInductanceVector; the current vector as a electricalinductance vector
@@ -546,6 +559,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a electricalpotential vector.
      * @return FloatElectricalPotentialVector; the current vector as a electricalpotential vector
@@ -570,6 +584,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a electricalresistance vector.
      * @return FloatElectricalResistanceVector; the current vector as a electricalresistance vector
@@ -594,6 +609,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a energy vector.
      * @return FloatEnergyVector; the current vector as a energy vector
@@ -618,6 +634,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a equivalentdose vector.
      * @return FloatEquivalentDoseVector; the current vector as a equivalentdose vector
@@ -642,6 +659,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a flowmass vector.
      * @return FloatFlowMassVector; the current vector as a flowmass vector
@@ -666,6 +684,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a flowvolume vector.
      * @return FloatFlowVolumeVector; the current vector as a flowvolume vector
@@ -690,6 +709,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a force vector.
      * @return FloatForceVector; the current vector as a force vector
@@ -714,6 +734,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a frequency vector.
      * @return FloatFrequencyVector; the current vector as a frequency vector
@@ -738,6 +759,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a illuminance vector.
      * @return FloatIlluminanceVector; the current vector as a illuminance vector
@@ -762,6 +784,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a lineardensity vector.
      * @return FloatLinearDensityVector; the current vector as a lineardensity vector
@@ -786,6 +809,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a luminousflux vector.
      * @return FloatLuminousFluxVector; the current vector as a luminousflux vector
@@ -810,6 +834,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a luminousintensity vector.
      * @return FloatLuminousIntensityVector; the current vector as a luminousintensity vector
@@ -834,6 +859,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a magneticfluxdensity vector.
      * @return FloatMagneticFluxDensityVector; the current vector as a magneticfluxdensity vector
@@ -858,6 +884,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a magneticflux vector.
      * @return FloatMagneticFluxVector; the current vector as a magneticflux vector
@@ -882,6 +909,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a mass vector.
      * @return FloatMassVector; the current vector as a mass vector
@@ -906,6 +934,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a power vector.
      * @return FloatPowerVector; the current vector as a power vector
@@ -930,6 +959,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a pressure vector.
      * @return FloatPressureVector; the current vector as a pressure vector
@@ -954,6 +984,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a radioactivity vector.
      * @return FloatRadioActivityVector; the current vector as a radioactivity vector
@@ -978,6 +1009,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a solidangle vector.
      * @return FloatSolidAngleVector; the current vector as a solidangle vector
@@ -1002,6 +1034,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a speed vector.
      * @return FloatSpeedVector; the current vector as a speed vector
@@ -1026,6 +1059,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a torque vector.
      * @return FloatTorqueVector; the current vector as a torque vector
@@ -1050,6 +1084,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a volume vector.
      * @return FloatVolumeVector; the current vector as a volume vector
@@ -1074,6 +1109,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a angle vector.
      * @return FloatAngleVector; the current vector as a angle vector
@@ -1098,6 +1134,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a length vector.
      * @return FloatLengthVector; the current vector as a length vector
@@ -1122,6 +1159,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a temperature vector.
      * @return FloatTemperatureVector; the current vector as a temperature vector
@@ -1146,6 +1184,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
         result.setDisplayUnit(displayUnit);
         return result;
     }
+
     /**
      * Return the current vector as a duration vector.
      * @return FloatDurationVector; the current vector as a duration vector

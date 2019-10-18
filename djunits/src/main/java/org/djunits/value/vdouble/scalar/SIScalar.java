@@ -113,7 +113,8 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public static SIScalar interpolate(final SIScalar zero, final SIScalar one, final double ratio)
     {
-        return new SIScalar(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return new SIScalar(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
 
     /**
@@ -256,14 +257,14 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
     public final <KU extends Unit<KU>, K extends AbstractDoubleScalarRel<KU, K>> K as(final KU displayUnit)
     {
         Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(displayUnit.getUnitBase().getSiDimensions())),
-                UnitRuntimeException.class, "SIScalar with unit %s cannot be converted to a scalar with unit %s", getDisplayUnit(),
-                displayUnit);
+                UnitRuntimeException.class, "SIScalar with unit %s cannot be converted to a scalar with unit %s",
+                getDisplayUnit(), displayUnit);
         K result = DoubleScalar.instantiate(this.si, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
         return result;
     }
 
-        /**
+    /**
      * Return the current scalar as a absorbeddose.
      * @return AbsorbedDose; the current scalar as a absorbeddose
      */
@@ -1212,7 +1213,5 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
         result.setDisplayUnit(displayUnit);
         return result;
     }
-
-
 
 }

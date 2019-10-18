@@ -22,7 +22,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 @Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
-public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalConductanceUnit, ElectricalConductance> 
+public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalConductanceUnit, ElectricalConductance>
 {
     /** */
     private static final long serialVersionUID = 20150905L;
@@ -38,16 +38,20 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
     public static final ElectricalConductance NaN = new ElectricalConductance(Double.NaN, ElectricalConductanceUnit.SI);
 
     /** Constant with value POSITIVE_INFINITY. */
-    public static final ElectricalConductance POSITIVE_INFINITY = new ElectricalConductance(Double.POSITIVE_INFINITY, ElectricalConductanceUnit.SI);
+    public static final ElectricalConductance POSITIVE_INFINITY =
+            new ElectricalConductance(Double.POSITIVE_INFINITY, ElectricalConductanceUnit.SI);
 
     /** Constant with value NEGATIVE_INFINITY. */
-    public static final ElectricalConductance NEGATIVE_INFINITY = new ElectricalConductance(Double.NEGATIVE_INFINITY, ElectricalConductanceUnit.SI);
+    public static final ElectricalConductance NEGATIVE_INFINITY =
+            new ElectricalConductance(Double.NEGATIVE_INFINITY, ElectricalConductanceUnit.SI);
 
     /** Constant with value MAX_VALUE. */
-    public static final ElectricalConductance POS_MAXVALUE = new ElectricalConductance(Double.MAX_VALUE, ElectricalConductanceUnit.SI);
+    public static final ElectricalConductance POS_MAXVALUE =
+            new ElectricalConductance(Double.MAX_VALUE, ElectricalConductanceUnit.SI);
 
     /** Constant with value -MAX_VALUE. */
-    public static final ElectricalConductance NEG_MAXVALUE = new ElectricalConductance(-Double.MAX_VALUE, ElectricalConductanceUnit.SI);
+    public static final ElectricalConductance NEG_MAXVALUE =
+            new ElectricalConductance(-Double.MAX_VALUE, ElectricalConductanceUnit.SI);
 
     /**
      * Construct ElectricalConductance scalar.
@@ -84,7 +88,7 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
     {
         return new ElectricalConductance(value, ElectricalConductanceUnit.SI);
     }
-    
+
     /**
      * Interpolate between two values.
      * @param zero ElectricalConductance; the low value
@@ -92,11 +96,13 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
      * @param ratio double; the ratio between 0 and 1, inclusive
      * @return ElectricalConductance; a Scalar at the ratio between
      */
-    public static ElectricalConductance interpolate(final ElectricalConductance zero, final ElectricalConductance one, final double ratio)
+    public static ElectricalConductance interpolate(final ElectricalConductance zero, final ElectricalConductance one,
+            final double ratio)
     {
-        return new ElectricalConductance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero.getDisplayUnit());
+        return new ElectricalConductance(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio,
+                zero.getDisplayUnit());
     }
-    
+
     /**
      * Return the maximum value of two relative scalars.
      * @param r1 ElectricalConductance; the first scalar
@@ -115,7 +121,8 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
      * @param rn ElectricalConductance...; the other scalars
      * @return ElectricalConductance; the maximum value of more than two relative scalars
      */
-    public static ElectricalConductance max(final ElectricalConductance r1, final ElectricalConductance r2, final ElectricalConductance... rn)
+    public static ElectricalConductance max(final ElectricalConductance r1, final ElectricalConductance r2,
+            final ElectricalConductance... rn)
     {
         ElectricalConductance maxr = (r1.gt(r2)) ? r1 : r2;
         for (ElectricalConductance r : rn)
@@ -146,7 +153,8 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
      * @param rn ElectricalConductance...; the other scalars
      * @return ElectricalConductance; the minimum value of more than two relative scalars
      */
-    public static ElectricalConductance min(final ElectricalConductance r1, final ElectricalConductance r2, final ElectricalConductance... rn)
+    public static ElectricalConductance min(final ElectricalConductance r1, final ElectricalConductance r2,
+            final ElectricalConductance... rn)
     {
         ElectricalConductance minr = (r1.lt(r2)) ? r1 : r2;
         for (ElectricalConductance r : rn)
@@ -160,9 +168,9 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
     }
 
     /**
-     * Returns a ElectricalConductance representation of a textual representation of a value with a unit. The String representation that can be
-     * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * required, between the value and the unit.
+     * Returns a ElectricalConductance representation of a textual representation of a value with a unit. The String
+     * representation that can be parsed is the double value in the unit, followed by the official abbreviation of the unit.
+     * Spaces are allowed, but not required, between the value and the unit.
      * @param text String; the textual representation to parse into a ElectricalConductance
      * @return ElectricalConductance; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
@@ -171,7 +179,8 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
     public static ElectricalConductance valueOf(final String text)
     {
         Throw.whenNull(text, "Error parsing ElectricalConductance: text to parse is null");
-        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing ElectricalConductance: empty text to parse");
+        Throw.when(text.length() == 0, IllegalArgumentException.class,
+                "Error parsing ElectricalConductance: empty text to parse");
         Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
@@ -199,7 +208,8 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
     public static ElectricalConductance of(final double value, final String unitString)
     {
         Throw.whenNull(unitString, "Error parsing ElectricalConductance: unitString is null");
-        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing ElectricalConductance: empty unitString");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class,
+                "Error parsing ElectricalConductance: empty unitString");
         ElectricalConductanceUnit unit = ElectricalConductanceUnit.BASE.getUnitByAbbreviation(unitString);
         if (unit != null)
         {
@@ -208,37 +218,35 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
         throw new IllegalArgumentException("Error parsing ElectricalConductance with unit " + unitString);
     }
 
-            /**
-         * Calculate the division of ElectricalConductance and ElectricalConductance, which results in a Dimensionless scalar.
-         * @param v ElectricalConductance scalar
-         * @return Dimensionless scalar as a division of ElectricalConductance and ElectricalConductance
-         */
-        public final Dimensionless divide(final ElectricalConductance v)
-        {
-            return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
-        }
+    /**
+     * Calculate the division of ElectricalConductance and ElectricalConductance, which results in a Dimensionless scalar.
+     * @param v ElectricalConductance scalar
+     * @return Dimensionless scalar as a division of ElectricalConductance and ElectricalConductance
+     */
+    public final Dimensionless divide(final ElectricalConductance v)
+    {
+        return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of ElectricalConductance and ElectricalPotential, which results in a ElectricalCurrent scalar.
-         * @param v ElectricalConductance scalar
-         * @return ElectricalCurrent scalar as a multiplication of ElectricalConductance and ElectricalPotential
-         */
-        public final ElectricalCurrent times(final ElectricalPotential v)
-        {
-            return new ElectricalCurrent(this.si * v.si, ElectricalCurrentUnit.SI);
-        }
+    /**
+     * Calculate the multiplication of ElectricalConductance and ElectricalPotential, which results in a ElectricalCurrent
+     * scalar.
+     * @param v ElectricalConductance scalar
+     * @return ElectricalCurrent scalar as a multiplication of ElectricalConductance and ElectricalPotential
+     */
+    public final ElectricalCurrent times(final ElectricalPotential v)
+    {
+        return new ElectricalCurrent(this.si * v.si, ElectricalCurrentUnit.SI);
+    }
 
-        /**
-         * Calculate the multiplication of ElectricalConductance and Duration, which results in a ElectricalCapacitance scalar.
-         * @param v ElectricalConductance scalar
-         * @return ElectricalCapacitance scalar as a multiplication of ElectricalConductance and Duration
-         */
-        public final ElectricalCapacitance times(final Duration v)
-        {
-            return new ElectricalCapacitance(this.si * v.si, ElectricalCapacitanceUnit.SI);
-        }
-
+    /**
+     * Calculate the multiplication of ElectricalConductance and Duration, which results in a ElectricalCapacitance scalar.
+     * @param v ElectricalConductance scalar
+     * @return ElectricalCapacitance scalar as a multiplication of ElectricalConductance and Duration
+     */
+    public final ElectricalCapacitance times(final Duration v)
+    {
+        return new ElectricalCapacitance(this.si * v.si, ElectricalCapacitanceUnit.SI);
+    }
 
 }
-
-
