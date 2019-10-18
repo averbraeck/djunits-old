@@ -74,7 +74,7 @@ public abstract class AbstractFloatScalarRel<U extends Unit<U>, R extends Abstra
      * @param otherScalar AbstractFloatScalarRel&lt;?, ?&gt;; the value by which this scalar is multiplied
      * @return FloatScalar&lt;?&gt;; a new scalar instance with correct SI dimensions
      */
-    public FloatSIScalar times(AbstractFloatScalarRel<?, ?> otherScalar)
+    public FloatSIScalar times(final AbstractFloatScalarRel<?, ?> otherScalar)
     {
         return FloatScalar.multiply(this, otherScalar);
     }
@@ -93,7 +93,7 @@ public abstract class AbstractFloatScalarRel<U extends Unit<U>, R extends Abstra
      * @param otherScalar AbstractFloatScalarRel&lt;?, ?&gt;; the value by which this scalar is divided
      * @return FloatScalar&lt;?&gt;; a new scalar instance with correct SI dimensions
      */
-    public FloatSIScalar divide(AbstractFloatScalarRel<?, ?> otherScalar)
+    public FloatSIScalar divide(final AbstractFloatScalarRel<?, ?> otherScalar)
     {
         return FloatScalar.divide(this, otherScalar);
     }

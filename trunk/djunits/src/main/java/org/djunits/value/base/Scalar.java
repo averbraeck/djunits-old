@@ -23,42 +23,42 @@ public interface Scalar<U extends Unit<U>, S extends Scalar<U, S>> extends Value
      * @param o T, a relative typed DoubleScalar; the right hand side operand of the comparison
      * @return boolean; true if this is less than other; false if this is not less than other
      */
-    boolean lt(final S o);
+    boolean lt(S o);
 
     /**
      * Test if this DoubleScalar is less than or equal to another DoubleScalar.
      * @param o T, a relative typed DoubleScalar; the right hand side operand of the comparison
      * @return boolean
      */
-    boolean le(final S o);
+    boolean le(S o);
 
     /**
      * Test if this DoubleScalar is greater than or equal to a DoubleScalar.
      * @param o T, a relative typed DoubleScalar; the right hand side operand of the comparison
      * @return boolean; true if this is greater than or equal to other; false if this is not greater than or equal to other
      */
-    boolean gt(final S o);
+    boolean gt(S o);
 
     /**
      * Test if this DoubleScalar is greater than a DoubleScalar.
      * @param o T, a relative typed DoubleScalar; the right hand side operand of the comparison
      * @return boolean; true if this is greater than other; false if this is not greater than other
      */
-    boolean ge(final S o);
+    boolean ge(S o);
 
     /**
      * Test if this DoubleScalar is equal to a DoubleScalar.
      * @param o T, a relative typed DoubleScalar; the right hand side operand of the comparison
      * @return boolean; true if this is equal to other; false if this is not equal to other
      */
-    boolean eq(final S o);
+    boolean eq(S o);
 
     /**
      * Test if this DoubleScalar is not equal to a DoubleScalar.
      * @param o T, a relative typed DoubleScalar; the right hand side operand of the comparison
      * @return boolean; true if this is not equal to other; false if this is equal to other
      */
-    boolean ne(final S o);
+    boolean ne(S o);
 
     /**
      * Test if this DoubleScalar is less than 0.0.
@@ -107,7 +107,7 @@ public interface Scalar<U extends Unit<U>, S extends Scalar<U, S>> extends Value
      * @param <U> the unit
      * @param <R> the relative scalar
      */
-    public static interface Rel<U extends Unit<U>, R extends Scalar.Rel<U, R>> extends Scalar<U, R>, Relative<U, R>
+    public interface Rel<U extends Unit<U>, R extends Scalar.Rel<U, R>> extends Scalar<U, R>, Relative<U, R>
     {
         /**
          * Add a Relative value to this Relative value. A new value is returned due to immutability.
@@ -138,7 +138,7 @@ public interface Scalar<U extends Unit<U>, S extends Scalar<U, S>> extends Value
      * @param <RU> the absolute unit belonging to the relative unit
      * @param <R> the relative scalar belonging to the absolute scalar
      */
-    public static interface RelWithAbs<AU extends AbsoluteLinearUnit<AU, RU>, A extends Scalar.Abs<AU, A, RU, R>,
+    public interface RelWithAbs<AU extends AbsoluteLinearUnit<AU, RU>, A extends Scalar.Abs<AU, A, RU, R>,
             RU extends Unit<RU>, R extends Scalar.RelWithAbs<AU, A, RU, R>> extends Scalar.Rel<RU, R>
     {
         /**
@@ -163,7 +163,7 @@ public interface Scalar<U extends Unit<U>, S extends Scalar<U, S>> extends Value
      * @param <RU> the absolute unit belonging to the relative unit
      * @param <R> the relative scalar belonging to the absolute scalar
      */
-    public static interface Abs<AU extends AbsoluteLinearUnit<AU, RU>, A extends Scalar.Abs<AU, A, RU, R>, RU extends Unit<RU>,
+    public interface Abs<AU extends AbsoluteLinearUnit<AU, RU>, A extends Scalar.Abs<AU, A, RU, R>, RU extends Unit<RU>,
             R extends Scalar.RelWithAbs<AU, A, RU, R>> extends Scalar<AU, A>, Absolute
     {
         /**

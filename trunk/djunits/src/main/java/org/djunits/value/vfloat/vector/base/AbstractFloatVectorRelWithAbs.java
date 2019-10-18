@@ -49,7 +49,7 @@ public abstract class AbstractFloatVectorRelWithAbs<
 
     /** {@inheritDoc} */
     @Override
-    public AV plus(AV increment)
+    public AV plus(final AV increment)
     {
         return instantiateVectorAbs(this.getData().plus(increment.getData()), increment.getDisplayUnit().getStandardUnit());
     }

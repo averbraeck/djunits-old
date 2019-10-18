@@ -102,6 +102,8 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
      * @param storageType StorageType; the data type to use
      * @return the DoubleMatrixData with the right data type
      * @throws ValueRuntimeException when values are null, or storageType is null
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>> DoubleMatrixData instantiate(
             final Collection<DoubleSparseValue<U, S>> values, final int rows, final int cols, final StorageType storageType)
@@ -140,6 +142,8 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
      * @param storageType StorageType; the data type to use
      * @return the DoubleMatrixData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>> DoubleMatrixData instantiate(final S[][] values,
             final StorageType storageType) throws ValueRuntimeException
@@ -264,6 +268,8 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
      * @return the values in case the method is used in a constructor
      * @throws NullPointerException when <code>values</code> is null
      * @throws ValueRuntimeException when <code>values</code> is empty, or jagged
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
      */
     protected static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>> S[][] checkRectangularAndNonEmpty(
             final S[][] values) throws ValueRuntimeException
@@ -326,7 +332,7 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
      * @return the sum of this data object and the other data object
      * @throws ValueRuntimeException if matrices have different lengths
      */
-    public abstract DoubleMatrixData plus(final DoubleMatrixData right) throws ValueRuntimeException;
+    public abstract DoubleMatrixData plus(DoubleMatrixData right) throws ValueRuntimeException;
 
     /**
      * Add a matrix to this matrix on a cell-by-cell basis. The type of matrix (sparse, dense) stays the same.
@@ -339,7 +345,7 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
         return assign(new DoubleFunction2()
         {
             @Override
-            public double apply(double leftValue, double rightValue)
+            public double apply(final double leftValue, final double rightValue)
             {
                 return leftValue + rightValue;
             }
@@ -353,7 +359,7 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
      * @return the sum of this data object and the other data object
      * @throws ValueRuntimeException if matrices have different lengths
      */
-    public abstract DoubleMatrixData minus(final DoubleMatrixData right) throws ValueRuntimeException;
+    public abstract DoubleMatrixData minus(DoubleMatrixData right) throws ValueRuntimeException;
 
     /**
      * Subtract a matrix from this matrix on a cell-by-cell basis. The type of matrix (sparse, dense) stays the same.
@@ -366,7 +372,7 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
         return assign(new DoubleFunction2()
         {
             @Override
-            public double apply(double leftValue, double rightValue)
+            public double apply(final double leftValue, final double rightValue)
             {
                 return leftValue - rightValue;
             }
@@ -380,7 +386,7 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
      * @return DoubleVectorData; a new double matrix data store holding the result of the multiplications
      * @throws ValueRuntimeException if matrices have different sizes
      */
-    public abstract DoubleMatrixData times(final DoubleMatrixData right) throws ValueRuntimeException;
+    public abstract DoubleMatrixData times(DoubleMatrixData right) throws ValueRuntimeException;
 
     /**
      * Multiply a matrix with the values of another matrix on a cell-by-cell basis. The type of matrix (sparse, dense) stays the
@@ -394,7 +400,7 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
         return assign(new DoubleFunction2()
         {
             @Override
-            public double apply(double leftValue, double rightValue)
+            public double apply(final double leftValue, final double rightValue)
             {
                 return leftValue * rightValue;
             }
@@ -408,7 +414,7 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
      * @return DoubleMatrixData; the ratios of the values of this data object and the other data object
      * @throws ValueRuntimeException if matrices have different sizes
      */
-    public abstract DoubleMatrixData divide(final DoubleMatrixData right) throws ValueRuntimeException;
+    public abstract DoubleMatrixData divide(DoubleMatrixData right) throws ValueRuntimeException;
 
     /**
      * Divide the values of a matrix by the values of another matrix on a cell-by-cell basis. The type of matrix (sparse, dense)
@@ -422,7 +428,7 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
         return assign(new DoubleFunction2()
         {
             @Override
-            public double apply(double leftValue, double rightValue)
+            public double apply(final double leftValue, final double rightValue)
             {
                 return leftValue / rightValue;
             }

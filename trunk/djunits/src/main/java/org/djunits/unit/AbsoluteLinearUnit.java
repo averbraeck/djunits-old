@@ -54,7 +54,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public AU build(Unit.Builder<AU> builder) throws UnitRuntimeException
+    public AU build(final Unit.Builder<AU> builder) throws UnitRuntimeException
     {
         this.relativeUnit = ((Builder<AU, RU>) builder).getRelativeUnit();
         Throw.whenNull(this.relativeUnit, "Relative unit for unit " + builder.getId() + " cannot be null");
@@ -197,6 +197,9 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
      */
     public static class Builder<AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>> extends Unit.Builder<AU>
     {
+        /** ... */
+        private static final long serialVersionUID = 20191018L;
+        
         /** The relative unit belonging to this unit. */
         private RU relativeUnit;
 

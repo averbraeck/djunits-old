@@ -47,6 +47,8 @@ public class DoubleSparseValue<U extends Unit<U>, S extends DoubleScalarInterfac
      * Check for null pointer in constructor.
      * @param value S; the scalar to check
      * @return S; the untouched scalar value
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
      */
     private static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>> S checkNull(final S value)
     {

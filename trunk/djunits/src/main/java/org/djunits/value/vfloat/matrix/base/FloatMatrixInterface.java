@@ -147,7 +147,7 @@ public interface FloatMatrixInterface<U extends Unit<U>, S extends FloatScalarIn
      * @param floatFunction FloatFunction; the function to apply
      * @return M; this updated matrix
      */
-    M assign(final FloatFunction floatFunction);
+    M assign(FloatFunction floatFunction);
 
     /**
      * Instantiate a new matrix of the class of this matrix. This can be used instead of the FloatMatrix.instiantiate() methods

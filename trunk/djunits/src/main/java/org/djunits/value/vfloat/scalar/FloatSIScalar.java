@@ -203,10 +203,8 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
                 SIUnit unit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(unitString));
                 if (unit != null)
                 {
-                    {
-                        float d = Float.parseFloat(valueString);
-                        return new FloatSIScalar(d, unit);
-                    }
+                    float d = Float.parseFloat(valueString);
+                    return new FloatSIScalar(d, unit);
                 }
             }
             catch (Exception exception)
@@ -253,6 +251,8 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      * otherwise the scalar cannot be transformed. The compiler will check the alignment between the return value and the unit.
      * @param displayUnit KU; the unit in which the scalar needs to be expressed
      * @return K; the scalar that has been transformed into the right scalar type and unit
+     * @param <KU> the unit type
+     * @param <K> the corresponding scalar type
      */
     public final <KU extends Unit<KU>, K extends AbstractFloatScalarRel<KU, K>> K as(final KU displayUnit)
     {

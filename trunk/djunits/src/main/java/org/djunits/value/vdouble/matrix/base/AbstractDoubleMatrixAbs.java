@@ -58,21 +58,21 @@ public abstract class AbstractDoubleMatrixAbs<
 
     /** {@inheritDoc} */
     @Override
-    public AM plus(RM increment) throws ValueRuntimeException
+    public AM plus(final RM increment) throws ValueRuntimeException
     {
         return instantiateMatrix(this.getData().plus(increment.getData()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public AM minus(RM decrement) throws ValueRuntimeException
+    public AM minus(final RM decrement) throws ValueRuntimeException
     {
         return instantiateMatrix(this.getData().minus(decrement.getData()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public RM minus(AM decrement) throws ValueRuntimeException
+    public RM minus(final AM decrement) throws ValueRuntimeException
     {
         return instantiateMatrixRel(this.getData().minus(decrement.getData()), decrement.getDisplayUnit().getRelativeUnit());
     }
@@ -95,10 +95,10 @@ public abstract class AbstractDoubleMatrixAbs<
      * @param decrement RV; the matrix that contains the values by which to decrement the corresponding values
      * @return AV; this modified matrix
      * @throws ValueRuntimeException in case this matrix is immutable
-     * @Throws ValueException when the sizes of the matrices differ, or <code>decrement</code> is null
+     * @throws ValueRuntimeException when the sizes of the matrices differ, or <code>decrement</code> is null
      */
     @SuppressWarnings("unchecked")
-    public AM decrementBy(RM decrement)
+    public AM decrementBy(final RM decrement)
     {
         checkCopyOnWrite();
         this.data.decrementBy(decrement.getData());

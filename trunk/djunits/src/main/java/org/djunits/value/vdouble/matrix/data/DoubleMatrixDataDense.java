@@ -250,7 +250,7 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
     @Override
     public String toString()
     {
-        return "DoubleMatrixDataDense [storageType=" + this.storageType + ", matrixSI=" + Arrays.toString(this.matrixSI) + "]";
+        return "DoubleMatrixDataDense [storageType=" + getStorageType() + ", matrixSI=" + Arrays.toString(this.matrixSI) + "]";
     }
 
 }

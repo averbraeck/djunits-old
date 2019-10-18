@@ -72,7 +72,7 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
 
     /** {@inheritDoc} */
     @Override
-    public double getSI(int row, int column) throws ValueRuntimeException
+    public double getSI(final int row, final int column) throws ValueRuntimeException
     {
         checkIndex(row, column);
         return this.data.getSI(row, column);
@@ -80,7 +80,7 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
 
     /** {@inheritDoc} */
     @Override
-    public double getInUnit(int row, int column) throws ValueRuntimeException
+    public double getInUnit(final int row, final int column) throws ValueRuntimeException
     {
         checkIndex(row, column);
         return ValueUtil.expressAsUnit(this.data.getSI(row, column), getDisplayUnit());
@@ -88,7 +88,7 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
 
     /** {@inheritDoc} */
     @Override
-    public double getInUnit(int row, int column, U targetUnit) throws ValueRuntimeException
+    public double getInUnit(final int row, final int column, final U targetUnit) throws ValueRuntimeException
     {
         checkIndex(row, column);
         return ValueUtil.expressAsUnit(this.data.getSI(row, column), targetUnit);
@@ -266,7 +266,7 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public S[] getRowScalars(int row) throws ValueRuntimeException
+    public S[] getRowScalars(final int row) throws ValueRuntimeException
     {
         checkRowIndex(row);
         S[] array = (S[]) Array.newInstance(getScalarClass(), cols());
@@ -280,7 +280,7 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public S[] getColumnScalars(int col) throws ValueRuntimeException
+    public S[] getColumnScalars(final int col) throws ValueRuntimeException
     {
         checkColumnIndex(col);
         S[] array = (S[]) Array.newInstance(getScalarClass(), rows());

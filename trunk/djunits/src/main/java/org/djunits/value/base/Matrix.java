@@ -120,7 +120,7 @@ public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
      * @param <V> the corresponding vector type
      * @param <RM> the relative matrix type with this unit
      */
-    public static interface Rel<U extends Unit<U>, S extends Scalar<U, S>, V extends Vector<U, S, V>,
+    public interface Rel<U extends Unit<U>, S extends Scalar<U, S>, V extends Vector<U, S, V>,
             RM extends Matrix.Rel<U, S, V, RM>> extends Matrix<U, S, V, RM>, Relative<U, RM>
     {
         /**
@@ -182,7 +182,7 @@ public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
      * @param <RV> the corresponding relative vector type
      * @param <RM> the relative matrix type with this unit
      */
-    public static interface RelWithAbs<AU extends AbsoluteLinearUnit<AU, RU>, A extends Scalar<AU, A>,
+    public interface RelWithAbs<AU extends AbsoluteLinearUnit<AU, RU>, A extends Scalar<AU, A>,
             AV extends Vector.Abs<AU, A, AV, RU, R, RV>, AM extends Matrix.Abs<AU, A, AV, AM, RU, R, RV, RM>,
             RU extends Unit<RU>, R extends Scalar<RU, R>, RV extends Vector.RelWithAbs<AU, A, AV, RU, R, RV>,
             RM extends Matrix.RelWithAbs<AU, A, AV, AM, RU, R, RV, RM>> extends Rel<RU, R, RV, RM>
@@ -220,7 +220,7 @@ public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
      * @param <RV> the corresponding relative vector type
      * @param <RM> the relative matrix type with this unit
      */
-    public static interface Abs<AU extends AbsoluteLinearUnit<AU, RU>, A extends Scalar<AU, A>,
+    public interface Abs<AU extends AbsoluteLinearUnit<AU, RU>, A extends Scalar<AU, A>,
             AV extends Vector.Abs<AU, A, AV, RU, R, RV>, AM extends Matrix.Abs<AU, A, AV, AM, RU, R, RV, RM>,
             RU extends Unit<RU>, R extends Scalar<RU, R>, RV extends Vector.RelWithAbs<AU, A, AV, RU, R, RV>,
             RM extends Matrix.RelWithAbs<AU, A, AV, AM, RU, R, RV, RM>> extends Matrix<AU, A, AV, AM>, Absolute

@@ -81,8 +81,8 @@ public abstract class AbstractDoubleVectorRel<U extends Unit<U>, S extends Abstr
      * mutable.
      * @param increment RV; the vector that contains the values by which to increment the corresponding values
      * @return RV; this modified vector
-     * @throws ValueRuntimeException in case this vector is immutable
-     * @Throws ValueException when the sizes of the vectors differ, or <code>increment</code> is null
+     * @throws ValueRuntimeException in case this vector is immutable, when the sizes of the vectors differ, or
+     *             <code>increment</code> is null
      */
     @SuppressWarnings("unchecked")
     public RV incrementBy(final RV increment)
@@ -111,8 +111,8 @@ public abstract class AbstractDoubleVectorRel<U extends Unit<U>, S extends Abstr
      * mutable.
      * @param decrement RV; the vector that contains the values by which to decrement the corresponding values
      * @return RV; this modified vector
-     * @throws ValueRuntimeException in case this vector is immutable
-     * @Throws ValueException when the sizes of the vectors differ, or <code>decrement</code> is null
+     * @throws ValueRuntimeException in case this vector is immutable, when the sizes of the vectors differ, or
+     *             <code>decrement</code> is null
      */
     @SuppressWarnings("unchecked")
     public RV decrementBy(final RV decrement)

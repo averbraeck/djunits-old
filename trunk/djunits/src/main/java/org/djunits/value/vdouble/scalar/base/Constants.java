@@ -10,6 +10,7 @@ import org.djunits.value.vdouble.scalar.SIScalar;
 import org.djunits.value.vdouble.scalar.Speed;
 
 /**
+ * <p>
  * Various physical constants. For many, see
  * <a href="https://en.wikipedia.org/wiki/2019_redefinition_of_the_SI_base_units">Wikipedia 2019 redefinition of the SI base
  * units</a>

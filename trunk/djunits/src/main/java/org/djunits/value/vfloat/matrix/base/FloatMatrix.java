@@ -43,6 +43,10 @@ public final class FloatMatrix
      * @param unit U; the unit in which the values are expressed and displayed
      * @param storageType StorageType; whether the matrix is SPARSE or DENSE
      * @return M; an instantiated FloatMatrix with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the corresponding matrix type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,
             M extends FloatMatrixInterface<U, S, V, M>> M instantiate(final float[][] valuesInUnit, final U unit,
@@ -60,6 +64,10 @@ public final class FloatMatrix
      * @param storageType StorageType; whether the matrix is SPARSE or DENSE
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate
      * @return M; an instantiated FloatMatrix with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the corresponding matrix type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,
             M extends FloatMatrixInterface<U, S, V, M>> M instantiate(final float[][] valuesInUnit, final U unit,
@@ -75,6 +83,10 @@ public final class FloatMatrix
      * @param displayUnit U; the unit in which the values will be displayed
      * @param storageType StorageType; whether the matrix is SPARSE or DENSE
      * @return M; an instantiated FloatMatrix with the SI values and display unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the corresponding matrix type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,
             M extends FloatMatrixInterface<U, S, V, M>> M instantiateSI(final float[][] valuesSI, final U displayUnit,
@@ -92,6 +104,10 @@ public final class FloatMatrix
      * @param storageType StorageType; whether the matrix is SPARSE or DENSE
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate
      * @return M; an instantiated FloatMatrix with the SI values and display unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the corresponding matrix type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,
             M extends FloatMatrixInterface<U, S, V, M>> M instantiateSI(final float[][] valuesSI, final U displayUnit,
@@ -106,6 +122,10 @@ public final class FloatMatrix
      * @param values FloatMatrixData; the values
      * @param unit U; the unit in which the values are expressed
      * @return M; an instantiated mutable FloatMatrix with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the corresponding matrix type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,
             M extends FloatMatrixInterface<U, S, V, M>> M instantiate(final FloatMatrixData values, final U unit)
@@ -120,6 +140,10 @@ public final class FloatMatrix
      * @param unit U; the unit in which the values are expressed
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate
      * @return M; an instantiated mutable FloatMatrix with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the corresponding matrix type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,
             M extends FloatMatrixInterface<U, S, V, M>> M instantiate(final FloatMatrixData values, final U unit,
@@ -135,6 +159,10 @@ public final class FloatMatrix
      * @param displayUnit U; the unit in which the values will be displayed
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @return M; an instantiated mutable FloatMatrix with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the corresponding matrix type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,
             M extends FloatMatrixInterface<U, S, V, M>> M instantiate(final S[][] values, final U displayUnit,
@@ -152,6 +180,10 @@ public final class FloatMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate
      * @return M; an instantiated mutable FloatMatrix with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the corresponding matrix type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,
             M extends FloatMatrixInterface<U, S, V, M>> M instantiate(final S[][] values, final U displayUnit,
@@ -168,6 +200,10 @@ public final class FloatMatrix
      * @param displayUnit U; the unit in which the values will be displayed
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @return M; an instantiated mutable FloatMatrix with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the corresponding matrix type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,
             M extends FloatMatrixInterface<U, S, V, M>> M instantiate(final Collection<FloatSparseValue<U, S>> values,
@@ -186,6 +222,10 @@ public final class FloatMatrix
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate
      * @return M; an instantiated mutable FloatMatrix with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the corresponding matrix type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,
             M extends FloatMatrixInterface<U, S, V, M>> M instantiate(final Collection<FloatSparseValue<U, S>> values,
@@ -202,6 +242,10 @@ public final class FloatMatrix
      * @param values FloatMatrixData; the values
      * @param unit Unit&lt;?&gt;; the unit in which the values are expressed
      * @return M; an instantiated FloatMatrix with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the corresponding matrix type
      */
     @SuppressWarnings("unchecked")
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,
@@ -250,6 +294,10 @@ public final class FloatMatrix
      * @param unit Unit&lt;?&gt;; the unit in which the values are expressed
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate
      * @return M; an instantiated FloatMatrix with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
+     * @param <M> the corresponding matrix type
      */
     @SuppressWarnings("unchecked")
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>, V extends FloatVectorInterface<U, S, V>,

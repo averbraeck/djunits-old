@@ -102,6 +102,8 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      * @param storageType StorageType; the data type to use
      * @return the FloatMatrixData with the right data type
      * @throws ValueRuntimeException when values are null, or storageType is null
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> FloatMatrixData instantiate(
             final Collection<FloatSparseValue<U, S>> values, final int rows, final int cols, final StorageType storageType)
@@ -140,6 +142,8 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      * @param storageType StorageType; the data type to use
      * @return the FloatMatrixData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> FloatMatrixData instantiate(final S[][] values,
             final StorageType storageType) throws ValueRuntimeException
@@ -272,6 +276,8 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      * @return the values in case the method is used in a constructor
      * @throws NullPointerException when <code>values</code> is null
      * @throws ValueRuntimeException when <code>values</code> is empty, or jagged
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
      */
     protected static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> S[][] checkRectangularAndNonEmpty(
             final S[][] values) throws ValueRuntimeException
@@ -334,7 +340,7 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      * @return the sum of this data object and the other data object
      * @throws ValueRuntimeException if matrices have different lengths
      */
-    public abstract FloatMatrixData plus(final FloatMatrixData right) throws ValueRuntimeException;
+    public abstract FloatMatrixData plus(FloatMatrixData right) throws ValueRuntimeException;
 
     /**
      * Add a matrix to this matrix on a cell-by-cell basis. The type of matrix (sparse, dense) stays the same.
@@ -347,7 +353,7 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
         return assign(new FloatFunction2()
         {
             @Override
-            public float apply(float leftValue, float rightValue)
+            public float apply(final float leftValue, final float rightValue)
             {
                 return leftValue + rightValue;
             }
@@ -361,7 +367,7 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      * @return the sum of this data object and the other data object
      * @throws ValueRuntimeException if matrices have different lengths
      */
-    public abstract FloatMatrixData minus(final FloatMatrixData right) throws ValueRuntimeException;
+    public abstract FloatMatrixData minus(FloatMatrixData right) throws ValueRuntimeException;
 
     /**
      * Subtract a matrix from this matrix on a cell-by-cell basis. The type of matrix (sparse, dense) stays the same.
@@ -374,7 +380,7 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
         return assign(new FloatFunction2()
         {
             @Override
-            public float apply(float leftValue, float rightValue)
+            public float apply(final float leftValue, final float rightValue)
             {
                 return leftValue - rightValue;
             }
@@ -388,7 +394,7 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      * @return FloatMatrixData; a new double matrix data store holding the result of the multiplications
      * @throws ValueRuntimeException if matrices have different sizes
      */
-    public abstract FloatMatrixData times(final FloatMatrixData right) throws ValueRuntimeException;
+    public abstract FloatMatrixData times(FloatMatrixData right) throws ValueRuntimeException;
 
     /**
      * Multiply a matrix with the values of another matrix on a cell-by-cell basis. The type of matrix (sparse, dense) stays the
@@ -402,7 +408,7 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
         return assign(new FloatFunction2()
         {
             @Override
-            public float apply(float leftValue, float rightValue)
+            public float apply(final float leftValue, final float rightValue)
             {
                 return leftValue * rightValue;
             }
@@ -416,7 +422,7 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      * @return the sum of this data object and the other data object
      * @throws ValueRuntimeException if matrices have different sizes
      */
-    public abstract FloatMatrixData divide(final FloatMatrixData right) throws ValueRuntimeException;
+    public abstract FloatMatrixData divide(FloatMatrixData right) throws ValueRuntimeException;
 
     /**
      * Divide the values of a matrix by the values of another matrix on a cell-by-cell basis. The type of matrix (sparse, dense)
@@ -430,7 +436,7 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
         return assign(new FloatFunction2()
         {
             @Override
-            public float apply(float leftValue, float rightValue)
+            public float apply(final float leftValue, final float rightValue)
             {
                 return leftValue / rightValue;
             }
@@ -512,7 +518,7 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
     @Override
     public String toString()
     {
-        return "FloatMatrixData [storageType=" + this.storageType + ", matrixSI=" + Arrays.toString(this.matrixSI) + "]";
+        return "FloatMatrixData [storageType=" + getStorageType() + ", matrixSI=" + Arrays.toString(this.matrixSI) + "]";
     }
 
 }

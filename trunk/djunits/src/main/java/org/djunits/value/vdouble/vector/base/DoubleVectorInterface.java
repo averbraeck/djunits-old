@@ -104,7 +104,7 @@ public interface DoubleVectorInterface<U extends Unit<U>, S extends DoubleScalar
      * @param doubleFunction DoubleFunction; the function to apply
      * @return V; this updated vector
      */
-    V assign(final DoubleFunction doubleFunction);
+    V assign(DoubleFunction doubleFunction);
 
     /**
      * Instantiate a new vector of the class of this vector. This can be used instead of the DoubleVector.instiantiate() methods

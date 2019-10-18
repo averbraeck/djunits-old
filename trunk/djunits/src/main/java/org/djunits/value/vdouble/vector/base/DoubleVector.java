@@ -43,6 +43,9 @@ public final class DoubleVector
      * @param unit U; the unit in which the values are expressed and displayed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated DoubleVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>,
             V extends DoubleVectorInterface<U, S, V>> V instantiate(final double[] valuesInUnit, final U unit,
@@ -59,6 +62,9 @@ public final class DoubleVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated DoubleVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>,
             V extends DoubleVectorInterface<U, S, V>> V instantiate(final double[] valuesInUnit, final U unit,
@@ -74,6 +80,9 @@ public final class DoubleVector
      * @param displayUnit U; the unit in which the values will be displayed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated DoubleVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>,
             V extends DoubleVectorInterface<U, S, V>> V instantiateSI(final double[] valuesSI, final U displayUnit,
@@ -90,6 +99,9 @@ public final class DoubleVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated DoubleVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>,
             V extends DoubleVectorInterface<U, S, V>> V instantiateSI(final double[] valuesSI, final U displayUnit,
@@ -105,6 +117,9 @@ public final class DoubleVector
      * @param displayUnit U; the unit in which the values will be displayed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated DoubleVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>,
             V extends DoubleVectorInterface<U, S, V>> V instantiate(final S[] values, final U displayUnit,
@@ -121,6 +136,9 @@ public final class DoubleVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated DoubleVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>,
             V extends DoubleVectorInterface<U, S, V>> V instantiate(final S[] values, final U displayUnit,
@@ -136,6 +154,9 @@ public final class DoubleVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated DoubleVector with the values expressed in their unit
      * @throws ValueRuntimeException on vector init error
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>,
             V extends DoubleVectorInterface<U, S, V>> V instantiate(final List<Double> valueListInUnit, final U unit,
@@ -153,6 +174,9 @@ public final class DoubleVector
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated DoubleVector with the values expressed in their unit
      * @throws ValueRuntimeException on vector init error
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>,
             V extends DoubleVectorInterface<U, S, V>> V instantiate(final List<Double> valueListInUnit, final U unit,
@@ -169,6 +193,9 @@ public final class DoubleVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated DoubleVector with the values expressed in their unit
      * @throws ValueRuntimeException on vector init error
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>,
             V extends DoubleVectorInterface<U, S, V>> V instantiateSI(final List<Double> valueListSI, final U displayUnit,
@@ -186,6 +213,9 @@ public final class DoubleVector
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated DoubleVector with the values expressed in their unit
      * @throws ValueRuntimeException on vector init error
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>,
             V extends DoubleVectorInterface<U, S, V>> V instantiateSI(final List<Double> valueListSI, final U displayUnit,
@@ -201,6 +231,9 @@ public final class DoubleVector
      * @param displayUnit U; the unit in which the values will be displayed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated DoubleVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>,
             V extends DoubleVectorInterface<U, S, V>> V instantiateList(final List<S> valueList, final U displayUnit,
@@ -217,6 +250,9 @@ public final class DoubleVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated DoubleVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>,
             V extends DoubleVectorInterface<U, S, V>> V instantiateList(final List<S> valueList, final U displayUnit,
@@ -232,6 +268,9 @@ public final class DoubleVector
      * @param unit U; the unit in which the values are expressed and displayed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated DoubleVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>,
             V extends DoubleVectorInterface<U, S, V>> V instantiate(final SortedMap<Integer, Double> valueMapInUnit,
@@ -249,6 +288,9 @@ public final class DoubleVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated DoubleVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>,
             V extends DoubleVectorInterface<U, S, V>> V instantiate(final SortedMap<Integer, Double> valueMapInUnit,
@@ -265,6 +307,9 @@ public final class DoubleVector
      * @param displayUnit U; the unit in which the values are displayed
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated DoubleVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>,
             V extends DoubleVectorInterface<U, S, V>> V instantiateSI(final SortedMap<Integer, Double> valueMapSI,
@@ -283,6 +328,9 @@ public final class DoubleVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated DoubleVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>,
             V extends DoubleVectorInterface<U, S, V>> V instantiateSI(final SortedMap<Integer, Double> valueMapSI,
@@ -299,6 +347,9 @@ public final class DoubleVector
      * @param length int; the size of the vector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @return V; an instantiated DoubleVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>,
             V extends DoubleVectorInterface<U, S, V>> V instantiateMap(final SortedMap<Integer, S> valueMap, final int length,
@@ -316,6 +367,9 @@ public final class DoubleVector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated DoubleVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>,
             V extends DoubleVectorInterface<U, S, V>> V instantiateMap(final SortedMap<Integer, S> valueMap, final int length,
@@ -329,6 +383,9 @@ public final class DoubleVector
      * @param values DoubleVectorData; the values
      * @param unit U; the unit in which the values are expressed
      * @return V; an instantiated mutable DoubleVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>,
             V extends DoubleVectorInterface<U, S, V>> V instantiate(final DoubleVectorData values, final U unit)
@@ -343,6 +400,9 @@ public final class DoubleVector
      * @param unit U; the unit in which the values are expressed
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated mutable DoubleVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>,
             V extends DoubleVectorInterface<U, S, V>> V instantiate(final DoubleVectorData values, final U unit,
@@ -358,6 +418,9 @@ public final class DoubleVector
      * @param values DoubleVectorData; the values
      * @param unit Unit&lt;?&gt;; the unit in which the values are expressed
      * @return V; an instantiated DoubleVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     @SuppressWarnings("unchecked")
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>,
@@ -405,6 +468,9 @@ public final class DoubleVector
      * @param unit Unit&lt;?&gt;; the unit in which the values are expressed
      * @param vectorClass Class&lt;V&gt;; the class of the vector to instantiate
      * @return V; an instantiated DoubleVector with the values expressed in their unit
+     * @param <U> the unit type
+     * @param <S> the corresponding scalar type
+     * @param <V> the corresponding vector type
      */
     @SuppressWarnings("unchecked")
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>,

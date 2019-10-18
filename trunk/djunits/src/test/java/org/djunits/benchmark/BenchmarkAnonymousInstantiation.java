@@ -81,7 +81,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalar;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public class BenchmarkAnonymousInstantiation
+public final class BenchmarkAnonymousInstantiation
 {
     /** the cache to make the lookup of the constructor for a Scalar belonging to a unit faster. */
     private static Map<Unit<?>, Constructor<? extends AbstractDoubleScalar<?, ?>>> CACHE = new HashMap<>();

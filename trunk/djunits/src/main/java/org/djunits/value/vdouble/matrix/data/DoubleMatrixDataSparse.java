@@ -54,6 +54,8 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
      * @param rows int; the number of rows of the matrix
      * @param cols int; the number of columns of the matrix
      * @throws NullPointerException when storageType is null or dataSI is null
+     * @param <U> the unit
+     * @param <S> the corresponding scalar type
      */
     public <U extends Unit<U>, S extends DoubleScalarInterface<U, S>> DoubleMatrixDataSparse(
             final Collection<DoubleSparseValue<U, S>> dataSI, final int rows, final int cols) throws NullPointerException
@@ -534,7 +536,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     @Override
     public String toString()
     {
-        return "DoubleMatrixDataSparse [storageType=" + this.storageType + ", indices=" + Arrays.toString(this.indices)
+        return "DoubleMatrixDataSparse [storageType=" + getStorageType() + ", indices=" + Arrays.toString(this.indices)
                 + ", matrixSI=" + Arrays.toString(this.matrixSI) + "]";
     }
 

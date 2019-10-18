@@ -28,7 +28,7 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, S extends Abstract
     public final double si;
 
     /**
-     * Construct a new AbstractDoubleScalar;
+     * Construct a new AbstractDoubleScalar.
      * @param unit U; the unit
      * @param si double; the si value to store
      */

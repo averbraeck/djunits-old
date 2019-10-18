@@ -22,7 +22,7 @@ public class IlluminanceUnit extends Unit<IlluminanceUnit>
     /** The base, with "lux" as the SI signature. */
     public static final UnitBase<IlluminanceUnit> BASE = new UnitBase<>("srcd/m2");
 
-    /** The SI unit for amount of illuminance is lux */
+    /** The SI unit for amount of illuminance is lux. */
     public static final IlluminanceUnit SI =
             new IlluminanceUnit().build(new Unit.Builder<IlluminanceUnit>().setUnitBase(BASE).setId("lx").setName("lux")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));

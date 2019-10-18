@@ -13,7 +13,7 @@ package org.djunits.unit.scale;
  * <pre>
  * valueSI = (value1 + o1) * f1
  * </pre>
- * 
+ * <p>
  * So the offset is expressed in the "unit" of the value. As an example, when we transform degrees Fahrenheit to Kelvin, the
  * factor is 5/9, and the offset is 459.67 (degrees Fahrenheit of 0 degrees Fahrenheit expressed in Kelvin). The formula
  * becomes: K = (F + 459.67) * 5/9. So 0 F is 459.67 * 5/9 = 255.372 K. For Celcius to Kelvin, the scale factor is 1, and the
@@ -28,8 +28,8 @@ package org.djunits.unit.scale;
  * value1  = (value2 + o2) * f2
  * valueSI = (value1 + o1) * f1 = value2 * (f1 * f2) + (f1 * f2 * o2 + f1 * o1)
  * </pre>
- * 
- * as an example for F --2--> C --1--> K: o1 = 273.15, f1 = 1, o2 = -32, f2 = 5/9: <br>
+ * <p>
+ * as an example for F --2--&gt; C --1--&gtp K: o1 = 273.15, f1 = 1, o2 = -32, f2 = 5/9: <br>
  * 110 F = 110*5/9 -32*5/9 + 273.15 = 316.483 K.
  * </p>
  * <p>

@@ -49,7 +49,7 @@ public class DoubleVectorDataDense extends DoubleVectorData
 
     /** {@inheritDoc} */
     @Override
-    public final DoubleVectorDataDense assign(final DoubleFunction2 doubleFunction2, DoubleVectorData right)
+    public final DoubleVectorDataDense assign(final DoubleFunction2 doubleFunction2, final DoubleVectorData right)
     {
         if (right.isDense())
         {
@@ -117,7 +117,7 @@ public class DoubleVectorDataDense extends DoubleVectorData
 
     /** {@inheritDoc} */
     @Override
-    public final DoubleVectorDataDense plus(DoubleVectorData right)
+    public final DoubleVectorDataDense plus(final DoubleVectorData right)
     {
         checkSizes(right);
         return new DoubleVectorDataDense(

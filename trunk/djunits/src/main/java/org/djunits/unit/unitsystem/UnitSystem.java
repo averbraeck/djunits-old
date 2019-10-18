@@ -121,6 +121,7 @@ public abstract class UnitSystem implements Serializable
         return this.abbreviationKey;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString()
     {

@@ -51,21 +51,21 @@ public abstract class AbstractDoubleVectorAbs<
 
     /** {@inheritDoc} */
     @Override
-    public AV plus(RV increment) throws ValueRuntimeException
+    public AV plus(final RV increment) throws ValueRuntimeException
     {
         return instantiateVector(this.getData().plus(increment.getData()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public AV minus(RV decrement) throws ValueRuntimeException
+    public AV minus(final RV decrement) throws ValueRuntimeException
     {
         return instantiateVector(this.getData().minus(decrement.getData()), getDisplayUnit());
     }
 
     /** {@inheritDoc} */
     @Override
-    public RV minus(AV decrement) throws ValueRuntimeException
+    public RV minus(final AV decrement) throws ValueRuntimeException
     {
         return instantiateVectorRel(this.getData().minus(decrement.getData()), decrement.getDisplayUnit().getRelativeUnit());
     }
@@ -89,11 +89,11 @@ public abstract class AbstractDoubleVectorAbs<
      * mutable.
      * @param decrement RV; the vector that contains the values by which to decrement the corresponding values
      * @return AV; this modified vector
-     * @throws ValueRuntimeException in case this vector is immutable
-     * @Throws ValueException when the sizes of the vectors differ, or <code>decrement</code> is null
+     * @throws ValueRuntimeException in case this vector is immutable, when the sizes of the vectors differ, or
+     *             <code>decrement</code> is null
      */
     @SuppressWarnings("unchecked")
-    public AV decrementBy(RV decrement)
+    public AV decrementBy(final RV decrement)
     {
         checkCopyOnWrite();
         getData().decrementBy(decrement.getData());

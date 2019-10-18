@@ -104,7 +104,7 @@ public interface FloatVectorInterface<U extends Unit<U>, S extends FloatScalarIn
      * @param floatFunction FloatFunction; the function to apply
      * @return V; this updated vector
      */
-    V assign(final FloatFunction floatFunction);
+    V assign(FloatFunction floatFunction);
 
     /**
      * Instantiate a new vector of the class of this vector. This can be used instead of the FloatVector.instiantiate() methods

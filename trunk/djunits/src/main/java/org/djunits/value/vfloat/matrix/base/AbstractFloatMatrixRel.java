@@ -200,7 +200,7 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
 
     /** {@inheritDoc} */
     @Override
-    public final RM divide(float divisor)
+    public final RM divide(final float divisor)
     {
         RM result = clone().mutable();
         result.assign(FloatMathFunctions.DIV(divisor));

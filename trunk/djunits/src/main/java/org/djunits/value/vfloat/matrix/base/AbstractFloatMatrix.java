@@ -72,7 +72,7 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
 
     /** {@inheritDoc} */
     @Override
-    public float getSI(int row, int column) throws ValueRuntimeException
+    public float getSI(final int row, final int column) throws ValueRuntimeException
     {
         checkIndex(row, column);
         return this.data.getSI(row, column);
@@ -80,7 +80,7 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
 
     /** {@inheritDoc} */
     @Override
-    public float getInUnit(int row, int column) throws ValueRuntimeException
+    public float getInUnit(final int row, final int column) throws ValueRuntimeException
     {
         checkIndex(row, column);
         return (float) ValueUtil.expressAsUnit(this.data.getSI(row, column), getDisplayUnit());
@@ -88,7 +88,7 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
 
     /** {@inheritDoc} */
     @Override
-    public float getInUnit(int row, int column, U targetUnit) throws ValueRuntimeException
+    public float getInUnit(final int row, final int column, final U targetUnit) throws ValueRuntimeException
     {
         checkIndex(row, column);
         return (float) ValueUtil.expressAsUnit(this.data.getSI(row, column), targetUnit);
@@ -127,7 +127,7 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
 
     /** {@inheritDoc} */
     @Override
-    public float[] getRowSI(int row) throws ValueRuntimeException
+    public float[] getRowSI(final int row) throws ValueRuntimeException
     {
         checkRowIndex(row);
         float[] result = new float[this.data.cols()];
@@ -140,7 +140,7 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
 
     /** {@inheritDoc} */
     @Override
-    public float[] getColumnSI(int column) throws ValueRuntimeException
+    public float[] getColumnSI(final int column) throws ValueRuntimeException
     {
         checkColumnIndex(column);
         float[] result = new float[this.data.rows()];
@@ -267,7 +267,7 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public S[] getRowScalars(int row) throws ValueRuntimeException
+    public S[] getRowScalars(final int row) throws ValueRuntimeException
     {
         checkRowIndex(row);
         S[] array = (S[]) Array.newInstance(getScalarClass(), cols());
@@ -281,7 +281,7 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
     /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
-    public S[] getColumnScalars(int col) throws ValueRuntimeException
+    public S[] getColumnScalars(final int col) throws ValueRuntimeException
     {
         checkColumnIndex(col);
         S[] array = (S[]) Array.newInstance(getScalarClass(), rows());

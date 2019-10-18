@@ -74,7 +74,7 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
      * @param otherScalar AbstractDoubleScalarRel&lt;?, ?&gt;; the value by which this scalar is multiplied
      * @return DoubleScalar&lt;?&gt;; a new scalar instance with correct SI dimensions
      */
-    public SIScalar times(AbstractDoubleScalarRel<?, ?> otherScalar)
+    public SIScalar times(final  AbstractDoubleScalarRel<?, ?> otherScalar)
     {
         return DoubleScalar.multiply(this, otherScalar);
     }
@@ -93,7 +93,7 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
      * @param otherScalar AbstractDoubleScalarRel&lt;?, ?&gt;; the value by which this scalar is divided
      * @return DoubleScalar&lt;?&gt;; a new scalar instance with correct SI dimensions
      */
-    public SIScalar divide(AbstractDoubleScalarRel<?, ?> otherScalar)
+    public SIScalar divide(final AbstractDoubleScalarRel<?, ?> otherScalar)
     {
         return DoubleScalar.divide(this, otherScalar);
     }
