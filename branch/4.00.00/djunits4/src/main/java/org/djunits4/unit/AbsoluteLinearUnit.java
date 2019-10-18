@@ -1,5 +1,7 @@
 package org.djunits4.unit;
 
+import java.io.Serializable;
+
 import org.djunits4.Throw;
 import org.djunits4.unit.base.UnitBase;
 import org.djunits4.unit.scale.OffsetLinearScale;
@@ -20,6 +22,7 @@ import org.djunits4.unit.util.UnitRuntimeException;
  * @param <RU> the corresponding relative unit
  */
 public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, RU extends Unit<RU>> extends Unit<AU>
+        implements Serializable
 {
     /** */
     private static final long serialVersionUID = 20190826L;

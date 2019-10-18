@@ -26,13 +26,17 @@ import org.junit.Test;
 public class VerifyRequiredMethods
 {
     /**
+     * Name of the top level package.
+     */
+    static String packageName = "org.djunits4";
+
+    /**
      * Check that all classes have a toString method.
      */
     @Test
     public final void toStringTest()
     {
         int failures = 0;
-        String packageName = "org.djunits4";
         Collection<Class<?>> classList = ClassList.classList(packageName, true);
         for (Class<?> c : classList)
         {
@@ -125,7 +129,8 @@ public class VerifyRequiredMethods
     @SuppressWarnings("checkstyle:methodlength")
     public final void serializableTest()
     {
-        Collection<Class<?>> classList = ClassList.classList("org.opentrafficsim", true);
+        int failures = 0;
+        Collection<Class<?>> classList = ClassList.classList(packageName, true);
         for (Class<?> c : classList)
         {
             if (Serializable.class.isAssignableFrom(c))
@@ -138,15 +143,18 @@ public class VerifyRequiredMethods
                 {
                     System.err.println("Class " + c.getName()
                             + " does not contain non-static fields and should NOT implement Serializable");
+                    failures++;
                 }
                 else if (Thread.class.isAssignableFrom(c))
                 {
                     System.err.println("Class " + c.getName() + " is a thread and should NOT implement Serializable");
+                    failures++;
                 }
                 else if (ClassList.isAnonymousInnerClass(c))
                 {
                     System.err.println(
                             "Class " + c.getName() + " is an anonymous inner class and should NOT implement Serializable");
+                    failures++;
                 }
                 else if (Exception.class.isAssignableFrom(c))
                 {
@@ -163,6 +171,7 @@ public class VerifyRequiredMethods
                 {
                     System.err
                             .println("Class " + c.getName() + " is an enum and should (by inheritence) implement Serializable");
+                    failures++;
                 }
                 else if (!ClassList.hasNonStaticFields(c))
                 {
@@ -183,13 +192,16 @@ public class VerifyRequiredMethods
                 {
                     System.err.println(
                             "Class " + c.getName() + " is an Exception and should (but does NOT) implement Serializable");
+                    failures++;
                 }
                 else
                 {
                     System.err.println("Class " + c.getName() + " should (but does NOT) implement Serializable");
+                    failures++;
                 }
             }
         }
+        assertEquals("Failures to implement serializable", 0, failures);
     }
 
     /**
@@ -198,7 +210,8 @@ public class VerifyRequiredMethods
     @Test
     public final void equalsAndHashCodeTest()
     {
-        Collection<Class<?>> classList = ClassList.classList("org.opentrafficsim", true);
+        int failures = 0;
+        Collection<Class<?>> classList = ClassList.classList(packageName, true);
         for (Class<?> c : classList)
         {
             if (Exception.class.isAssignableFrom(c))
@@ -226,18 +239,21 @@ public class VerifyRequiredMethods
                 }
                 else
                 {
-                    System.out.println("Class " + c.getName() + " implements hashCode, but not equals");
+                    System.err.println("Class " + c.getName() + " implements hashCode, but not equals");
+                    failures++;
                 }
             }
             else if (null == hashCodeMethod)
             {
-                fail("Class " + c.getName() + " implements equals but NOT hashCode");
+                System.err.println("Class " + c.getName() + " implements equals but NOT hashCode");
+                failures++;
             }
             else
             {
                 // System.out.println("Class " + c.getName() + " implements equals and hashCode (good)");
             }
         }
+        assertEquals("Failures to implement both hashCode and equals", 0, failures);
     }
 
 }

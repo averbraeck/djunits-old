@@ -490,10 +490,12 @@ public class FloatMatrixDataSparse extends FloatMatrixData
         return this.copy().divideBy(right);
     }
 
-    /*
-     * NOTE: hashCode is not overridden on purpose. FloatMatrixData takes full care of the calculation of the hasCode, which is
-     * independent of whether the data is stored in a sparse or in a dense manner.
-     */
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode()
+    {
+        return super.hashCode();
+    }
 
     /** {@inheritDoc} */
     @Override

@@ -646,8 +646,11 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
      * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
      * @param <U> the unit for which the builder contains the information.
      */
-    public static class Builder<U extends Unit<U>>
+    public static class Builder<U extends Unit<U>> implements Serializable
     {
+        /** ... */
+        private static final long serialVersionUID = 20191018L;
+
         /** The id of the unit; has to be unique within the unit name. Used for, e.g., localization and retrieval. */
         private String id;
 

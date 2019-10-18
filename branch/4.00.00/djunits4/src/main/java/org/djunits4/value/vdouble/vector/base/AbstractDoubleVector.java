@@ -1,5 +1,6 @@
 package org.djunits4.value.vdouble.vector.base;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -363,7 +364,7 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings({"checkstyle:designforextension", "checkstyle:needbraces"})
+    @SuppressWarnings({ "checkstyle:designforextension", "checkstyle:needbraces" })
     public boolean equals(final Object obj)
     {
         if (this == obj)
@@ -401,8 +402,11 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
      * size of the vector does not change. Normal (non-mutable) vectors cannot change their size, nor their content. The only
      * thing for the MutableVector that can change is its content, not its length.
      */
-    protected class Itr implements Iterator<S>
+    protected class Itr implements Iterator<S>, Serializable
     {
+        /** ... */
+        private static final long serialVersionUID = 20191018L;
+
         /** index of next element to return. */
         private int cursor = 0;
 
@@ -446,7 +450,7 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
         {
             return "Itr [cursor=" + cursor + "]";
         }
-        
+
     }
 
 }

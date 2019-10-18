@@ -1,5 +1,7 @@
 package org.djunits4.value.storage;
 
+import java.io.Serializable;
+
 import org.djunits4.Throw;
 
 /**
@@ -11,8 +13,11 @@ import org.djunits4.Throw;
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  * @param <T> the vector or matrix data type
  */
-public abstract class AbstractStorage<T extends AbstractStorage<T>> implements Cloneable
+public abstract class AbstractStorage<T extends AbstractStorage<T>> implements Cloneable, Serializable
 {
+    /** ... */
+    private static final long serialVersionUID = 20191018L;
+    
     /** the data type. */
     protected final StorageType storageType;
 

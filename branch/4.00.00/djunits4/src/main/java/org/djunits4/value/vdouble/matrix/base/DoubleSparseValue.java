@@ -1,5 +1,7 @@
 package org.djunits4.value.vdouble.matrix.base;
 
+import java.io.Serializable;
+
 import org.djunits4.Throw;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.ValueRuntimeException;
@@ -16,8 +18,11 @@ import org.djunits4.value.vdouble.scalar.base.DoubleScalarInterface;
  * @param <U> the unit type of the value
  * @param <S> the scalar type of the value
  */
-public class DoubleSparseValue<U extends Unit<U>, S extends DoubleScalarInterface<U, S>>
+public class DoubleSparseValue<U extends Unit<U>, S extends DoubleScalarInterface<U, S>> implements Serializable
 {
+    /** ... */
+    private static final long serialVersionUID = 20191018L;
+
     /** the row in the matrix. */
     private final int row;
 

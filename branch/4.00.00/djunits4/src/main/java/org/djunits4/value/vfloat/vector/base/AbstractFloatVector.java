@@ -1,5 +1,6 @@
 package org.djunits4.value.vfloat.vector.base;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -392,8 +393,11 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
      * size of the vector does not change. Normal (non-mutable) vectors cannot change their size, nor their content. The only
      * thing for the MutableVector that can change is its content, not its length.
      */
-    protected class Itr implements Iterator<S>
+    protected class Itr implements Iterator<S>, Serializable
     {
+        /** ... */
+        private static final long serialVersionUID = 20191018L;
+
         /** index of next element to return. */
         private int cursor = 0;
 

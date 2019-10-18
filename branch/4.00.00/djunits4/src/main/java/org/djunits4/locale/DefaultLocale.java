@@ -1,6 +1,5 @@
 package org.djunits4.locale;
 
-import java.io.Serializable;
 import java.util.Locale;
 
 /**
@@ -12,11 +11,8 @@ import java.util.Locale;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public abstract class DefaultLocale implements Serializable
+public abstract class DefaultLocale
 {
-    /** */
-    private static final long serialVersionUID = 1L;
-
     /** The default locale to use in djunits. */
     private static Locale locale;
 

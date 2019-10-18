@@ -1,5 +1,7 @@
 package org.djunits4.value.vfloat.matrix.base;
 
+import java.io.Serializable;
+
 import org.djunits4.Throw;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.ValueRuntimeException;
@@ -16,8 +18,11 @@ import org.djunits4.value.vfloat.scalar.base.FloatScalarInterface;
  * @param <U> the unit type of the value
  * @param <S> the scalar type of the value
  */
-public class FloatSparseValue<U extends Unit<U>, S extends FloatScalarInterface<U, S>>
+public class FloatSparseValue<U extends Unit<U>, S extends FloatScalarInterface<U, S>> implements Serializable
 {
+    /** ... */
+    private static final long serialVersionUID = 20191018L;
+
     /** the row in the matrix. */
     private final int row;
 
