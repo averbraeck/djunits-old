@@ -126,7 +126,7 @@ public class VerifyRequiredMethods
      * Check that all classes implement the Serializable interface.
      */
     @Test
-    @SuppressWarnings("checkstyle:methodlength")
+    @SuppressWarnings({"checkstyle:methodlength", "checkstyle:emptyblock"})
     public final void serializableTest()
     {
         int failures = 0;
@@ -135,13 +135,11 @@ public class VerifyRequiredMethods
         {
             if (Serializable.class.isAssignableFrom(c))
             {
-                /*-
                 if (c.isEnum())
                 {
                     // System.out.println("Class " + c.getName() + " is an enum and (by inheritance) implements Serializable");
                 }
-                else */
-                if (!ClassList.hasNonStaticFields(c))
+                else if (!ClassList.hasNonStaticFields(c))
                 {
                     System.err.println("Class " + c.getName()
                             + " does not contain non-static fields and should NOT implement Serializable");
@@ -162,11 +160,10 @@ public class VerifyRequiredMethods
                 {
                     System.out.println("Class " + c.getName() + " is an Exception and (correctly) implements Serializable");
                 }
-                /*-
                 else
                 {
                     // System.out.println("Class " + c.getName() + " should (and does) implement Serializable");
-                } */
+                }
             }
             else
             {
@@ -176,7 +173,6 @@ public class VerifyRequiredMethods
                             .println("Class " + c.getName() + " is an enum and should (by inheritence) implement Serializable");
                     failures++;
                 }
-                /*-
                 else if (!ClassList.hasNonStaticFields(c))
                 {
                     // System.out.println("Class " + c.getName()
@@ -192,7 +188,6 @@ public class VerifyRequiredMethods
                     // System.out.println("Class " + c.getName()
                     // + " is an anonymous inner class and (correctly) does not implement Serializable");
                 }
-                */
                 else if (Exception.class.isAssignableFrom(c))
                 {
                     System.err.println(
@@ -213,6 +208,7 @@ public class VerifyRequiredMethods
      * Check that all classes that implement equals also implement hashCode.
      */
     @Test
+    @SuppressWarnings("checkstyle:emptyblock")
     public final void equalsAndHashCodeTest()
     {
         int failures = 0;
@@ -238,29 +234,25 @@ public class VerifyRequiredMethods
             }
             if (null == equalsMethod)
             {
-                /*-
                 if (null == hashCodeMethod)
                 {
                     // System.out.println("Class " + c.getName() + " implements neither equals nor hashCode");
                 }
                 else
                 {
-                */
-                System.err.println("Class " + c.getName() + " implements hashCode, but not equals");
-                failures++;
-                // }
+                    System.err.println("Class " + c.getName() + " implements hashCode, but not equals");
+                    failures++;
+                }
             }
             else if (null == hashCodeMethod)
             {
                 System.err.println("Class " + c.getName() + " implements equals but NOT hashCode");
                 failures++;
             }
-            /*-
             else
             {
                 // System.out.println("Class " + c.getName() + " implements equals and hashCode (good)");
             }
-            */
         }
         assertEquals("Failures to implement both hashCode and equals", 0, failures);
     }
