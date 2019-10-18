@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
+import org.djunits4.Throw;
 import org.djunits4.unit.Unit;
 import org.djunits4.value.ValueRuntimeException;
 import org.djunits4.value.storage.StorageType;
@@ -52,16 +53,13 @@ public class FloatMatrixDataSparse extends FloatMatrixData
      * @param dataSI Collection&lt;FloatSparseValue&lt;U, S&gt;&gt;; the sparse [X, Y, SI] values to store
      * @param rows int; the number of rows of the matrix
      * @param cols int; the number of columns of the matrix
-     * @throws ValueRuntimeException in case matrix is ragged
+     * @throws NullPointerException when storageType is null or dataSI is null
      */
     public <U extends Unit<U>, S extends FloatScalarInterface<U, S>> FloatMatrixDataSparse(
-            final Collection<FloatSparseValue<U, S>> dataSI, final int rows, final int cols) throws ValueRuntimeException
+            final Collection<FloatSparseValue<U, S>> dataSI, final int rows, final int cols) throws NullPointerException
     {
         super(StorageType.SPARSE);
-        if (dataSI == null || dataSI.size() == 0)
-        {
-            throw new ValueRuntimeException("FloatMatrixDataSparse constructor, matrixSI == null || matrixSI.length == 0");
-        }
+        Throw.whenNull(dataSI, "matrixSI is null");
 
         int length = (int) dataSI.stream().parallel().filter(d -> d.getValueSI() != 0.0).count();
         this.rows = rows;
