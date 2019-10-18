@@ -13,7 +13,7 @@ import java.util.List;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public class CLASSNAMES
+public final class CLASSNAMES
 {
     /** The classes that are absolute (name = class name). */
     private static final String[] ABS = new String[] {"AbsoluteTemperature", "Direction", "Position", "Time"};
@@ -60,6 +60,12 @@ public class CLASSNAMES
         ALL_LIST = Collections.unmodifiableList(new ArrayList<>(all));
         all.remove("Dimensionless");
         ALL_NODIM_LIST = Collections.unmodifiableList(new ArrayList<>(all));
+    }
+
+    /** */
+    private CLASSNAMES()
+    {
+        // Utility class
     }
 
 }

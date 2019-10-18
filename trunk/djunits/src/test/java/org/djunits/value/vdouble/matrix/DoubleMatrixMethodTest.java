@@ -58,6 +58,7 @@ public class DoubleMatrixMethodTest
      * @throws ValueRuntimeException on error
      */
     @Test
+    @SuppressWarnings("checkstyle:methodlength")
     public void testMatrixMethods() throws ValueRuntimeException, UnitException
     {
         double[][] denseTestData = DOUBLEMATRIX.denseRectArrays(10, 20);
@@ -375,7 +376,8 @@ public class DoubleMatrixMethodTest
                         + ", storage = " + storageType + " = " + det);
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         double detErr = am.determinant();
                         System.out.println(detErr);
@@ -494,112 +496,128 @@ public class DoubleMatrixMethodTest
                 Area fa = Area.of(10.0d, "m^2");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.assign(DoubleMathFunctions.ABS);
                     }
                 }.test("ImmutableMatrix.assign(...) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.decrementBy(fa);
                     }
                 }.test("ImmutableMatrix.decrementBy(scalar) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.decrementBy(amPtr);
                     }
                 }.test("ImmutableMatrix.decrementBy(matrix) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.incrementBy(fa);
                     }
                 }.test("ImmutableMatrix.incrementBy(scalar) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.incrementBy(amPtr);
                     }
                 }.test("ImmutableMatrix.incrementBy(matrix) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.divideBy(2.0d);
                     }
                 }.test("ImmutableMatrix.divideBy(factor) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.multiplyBy(2.0d);
                     }
                 }.test("ImmutableMatrix.multiplyBy(factor) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.set(1, 1, fa);
                     }
                 }.test("ImmutableMatrix.set() should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.setSI(1, 1, 20.1d);
                     }
                 }.test("ImmutableMatrix.setSI() should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.setInUnit(1, 1, 15.2d);
                     }
                 }.test("ImmutableMatrix.setInUnit(f) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.setInUnit(1, 1, 15.2d, AreaUnit.ARE);
                     }
                 }.test("ImmutableMatrix.setInUnit(f, u) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.abs();
                     }
                 }.test("ImmutableMatrix.abs() should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.ceil();
                     }
                 }.test("ImmutableMatrix.ceil() should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.floor();
                     }
                 }.test("ImmutableMatrix.floor() should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.neg();
                     }
                 }.test("ImmutableMatrix.neg() should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.rint();
                     }
@@ -862,7 +880,7 @@ public class DoubleMatrixMethodTest
     }
 
     /**
-     * Test the <code>as</code> method of the SIMatrix class
+     * Test the <code>as</code> method of the SIMatrix class.
      * @throws SecurityException on error
      * @throws NoSuchMethodException on error
      * @throws InvocationTargetException on error
@@ -870,6 +888,7 @@ public class DoubleMatrixMethodTest
      * @throws IllegalAccessException on error
      * @throws ClassNotFoundException on error
      * @throws UnitException on error
+     * @param <U> the unit type
      */
     @SuppressWarnings("unchecked")
     @Test

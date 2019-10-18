@@ -45,6 +45,10 @@ public class FloatSIMatrixTest
      * @throws IllegalAccessException on error
      * @throws ClassNotFoundException on error
      * @throws UnitException on error
+     * @param <U> the unit type
+     * @param <S> the scalar type
+     * @param <V> the vector type
+     * @param <M> the matrix type
      */
     @SuppressWarnings("unchecked")
     @Test
@@ -150,7 +154,7 @@ public class FloatSIMatrixTest
         verifyDimensionLessMatrix(denseTestData, new FloatFunction()
         {
             @Override
-            public float apply(float value)
+            public float apply(final float value)
             {
                 return value;
             }
@@ -189,7 +193,8 @@ public class FloatSIMatrixTest
      *            verified
      * @param got DimensionlessMatrix; the values that must be verified
      */
-    public static void verifyDimensionLessMatrix(float[][] reference, FloatFunction operation, FloatDimensionlessMatrix got)
+    public static void verifyDimensionLessMatrix(final float[][] reference, final FloatFunction operation,
+            final FloatDimensionlessMatrix got)
     {
         assertEquals("row count matches", reference.length, got.rows());
         assertEquals("column count matches", reference[0].length, got.cols());

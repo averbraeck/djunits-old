@@ -28,7 +28,7 @@ import org.djunits.value.vfloat.vector.base.FloatVectorInterface;
 public final class FloatMatrix
 {
     /** The cache to make the lookup of the constructor for a Immutable Matrix belonging to a unit faster. */
-    private static Map<Unit<?>, Constructor<? extends FloatMatrixInterface<?, ?, ?, ?>>> CACHE_DATA = new HashMap<>();
+    private static final Map<Unit<?>, Constructor<? extends FloatMatrixInterface<?, ?, ?, ?>>> CACHE_DATA = new HashMap<>();
 
     /** Do not instantiate. */
     private FloatMatrix()

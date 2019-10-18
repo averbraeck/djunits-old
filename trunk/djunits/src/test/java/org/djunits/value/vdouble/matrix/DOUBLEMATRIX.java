@@ -18,8 +18,14 @@ import org.djunits.value.vdouble.scalar.base.DoubleScalarInterface;
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
-public class DOUBLEMATRIX
+public final class DOUBLEMATRIX
 {
+    /** */
+    private DOUBLEMATRIX()
+    {
+        // Utility class
+    }
+    
     /**
      * Return a rectangular array with all values != 0.
      * @param rows the number of rows
@@ -68,6 +74,8 @@ public class DOUBLEMATRIX
      * @param cols the number of columns
      * @param scalarClass the class of scalars to use
      * @return an array with all nonzero values
+     * @param <U> the unit type
+     * @param <S> the scalar type
      */
     @SuppressWarnings("unchecked")
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>> S[][] denseRectScalarArrays(final int rows,
@@ -98,6 +106,8 @@ public class DOUBLEMATRIX
      * @param cols the number of columns
      * @param scalarClass the class of scalars to use
      * @return an array with only nonzero values on the diagonal
+     * @param <U> the unit type
+     * @param <S> the scalar type
      */
     @SuppressWarnings("unchecked")
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>> S[][] sparseRectScalarArrays(final int rows,
@@ -128,6 +138,8 @@ public class DOUBLEMATRIX
      * @param cols the number of columns
      * @param scalarClass the class of scalars to use
      * @return an array with all nonzero values
+     * @param <U> the unit type
+     * @param <S> the scalar type
      */
     @SuppressWarnings("unchecked")
     public static <U extends Unit<U>,
@@ -161,6 +173,8 @@ public class DOUBLEMATRIX
      * @param cols the number of columns
      * @param scalarClass the class of scalars to use
      * @return an array with only nonzero values on the diagonal
+     * @param <U> the unit type
+     * @param <S> the scalar type
      */
     public static <U extends Unit<U>,
             S extends DoubleScalarInterface<U, S>> Collection<DoubleSparseValue<U, S>> sparseRectTuples(final int rows,

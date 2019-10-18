@@ -95,7 +95,7 @@ public final class UnitTypes implements Serializable
     @Override
     public String toString()
     {
-        return "UnitTypes [siRegistry=" + siRegistry + ", registry=" + registry + "]";
+        return "UnitTypes [siRegistry=" + this.siRegistry + ", registry=" + this.registry + "]";
     }
 
 }

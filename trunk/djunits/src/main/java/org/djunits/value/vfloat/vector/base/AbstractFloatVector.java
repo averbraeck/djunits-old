@@ -440,7 +440,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
         @Override
         public String toString()
         {
-            return "Itr [cursor=" + cursor + "]";
+            return "Itr [cursor=" + this.cursor + "]";
         }
 
     }

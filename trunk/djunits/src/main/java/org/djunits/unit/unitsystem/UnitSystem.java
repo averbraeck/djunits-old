@@ -125,7 +125,7 @@ public abstract class UnitSystem implements Serializable
     @Override
     public String toString()
     {
-        return "UnitSystem [abbreviationKey=" + abbreviationKey + ", nameKey=" + nameKey + "]";
+        return "UnitSystem [abbreviationKey=" + this.abbreviationKey + ", nameKey=" + this.nameKey + "]";
     }
 
 }

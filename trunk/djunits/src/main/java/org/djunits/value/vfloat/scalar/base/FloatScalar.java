@@ -27,7 +27,7 @@ public abstract class FloatScalar
     /**********************************************************************************/
 
     /** The cache to make the lookup of the constructor for a Scalar belonging to a unit faster. */
-    private static Map<Unit<?>, Constructor<? extends FloatScalarInterface<?, ?>>> CACHE = new HashMap<>();
+    private static final Map<Unit<?>, Constructor<? extends FloatScalarInterface<?, ?>>> CACHE = new HashMap<>();
 
     /** Do not instantiate. */
     private FloatScalar()

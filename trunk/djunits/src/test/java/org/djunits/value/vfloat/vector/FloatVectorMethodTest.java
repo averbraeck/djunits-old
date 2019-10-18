@@ -343,112 +343,128 @@ public class FloatVectorMethodTest
                 FloatArea fa = FloatArea.of(10.0f, "m^2");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.assign(FloatMathFunctions.ABS);
                     }
                 }.test("ImmutableVector.assign(...) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.decrementBy(fa);
                     }
                 }.test("ImmutableVector.decrementBy(scalar) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.decrementBy(amPtr);
                     }
                 }.test("ImmutableVector.decrementBy(vector) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.incrementBy(fa);
                     }
                 }.test("ImmutableVector.incrementBy(scalar) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.incrementBy(amPtr);
                     }
                 }.test("ImmutableVector.incrementBy(vector) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.divideBy(2.0d);
                     }
                 }.test("ImmutableVector.divideBy(factor) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.multiplyBy(2.0d);
                     }
                 }.test("ImmutableVector.multiplyBy(factor) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.set(1, fa);
                     }
                 }.test("ImmutableVector.set() should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.setSI(1, 20.1f);
                     }
                 }.test("ImmutableVector.setSI() should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.setInUnit(1, 15.2f);
                     }
                 }.test("ImmutableVector.setInUnit(f) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.setInUnit(1, 15.2f, AreaUnit.ARE);
                     }
                 }.test("ImmutableVector.setInUnit(f, u) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.abs();
                     }
                 }.test("ImmutableVector.abs() should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.ceil();
                     }
                 }.test("ImmutableVector.ceil() should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.floor();
                     }
                 }.test("ImmutableVector.floor() should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.neg();
                     }
                 }.test("ImmutableVector.neg() should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.rint();
                     }
@@ -655,7 +671,7 @@ public class FloatVectorMethodTest
     }
 
     /**
-     * Test the <code>as</code> method of the SIVector class
+     * Test the <code>as</code> method of the SIVector class.
      * @throws SecurityException on error
      * @throws NoSuchMethodException on error
      * @throws InvocationTargetException on error
@@ -663,6 +679,7 @@ public class FloatVectorMethodTest
      * @throws IllegalAccessException on error
      * @throws ClassNotFoundException on error
      * @throws UnitException on error
+     * @param <U> the unit type
      */
     @SuppressWarnings("unchecked")
     @Test

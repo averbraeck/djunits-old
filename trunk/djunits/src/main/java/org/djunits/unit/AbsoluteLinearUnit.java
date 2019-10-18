@@ -231,13 +231,13 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
 
         /**
          * Sets the corresponding relative unit that has the same conversion factor.
-         * @param relativeUnit RU; the the corresponding relative unit with the same conversion factor
+         * @param newRelativeUnit RU; the the corresponding relative unit with the same conversion factor
          * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
-        public Builder<AU, RU> setRelativeUnit(final RU relativeUnit)
+        public Builder<AU, RU> setRelativeUnit(final RU newRelativeUnit)
         {
-            Throw.whenNull(relativeUnit, "Relative unit for unit id " + getId() + " cannot be null");
-            this.relativeUnit = relativeUnit;
+            Throw.whenNull(newRelativeUnit, "Relative unit for unit id " + getId() + " cannot be null");
+            this.relativeUnit = newRelativeUnit;
             return this;
         }
 

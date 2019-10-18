@@ -375,7 +375,8 @@ public class FloatMatrixMethodTest
                         + ", storage = " + storageType + " = " + det);
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         float detErr = am.determinant();
                         System.out.println(detErr);
@@ -484,112 +485,128 @@ public class FloatMatrixMethodTest
                 FloatArea fa = FloatArea.of(10.0f, "m^2");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.assign(FloatMathFunctions.ABS);
                     }
                 }.test("ImmutableMatrix.assign(...) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.decrementBy(fa);
                     }
                 }.test("ImmutableMatrix.decrementBy(scalar) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.decrementBy(amPtr);
                     }
                 }.test("ImmutableMatrix.decrementBy(matrix) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.incrementBy(fa);
                     }
                 }.test("ImmutableMatrix.incrementBy(scalar) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.incrementBy(amPtr);
                     }
                 }.test("ImmutableMatrix.incrementBy(matrix) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.divideBy(2.0f);
                     }
                 }.test("ImmutableMatrix.divideBy(factor) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.multiplyBy(2.0f);
                     }
                 }.test("ImmutableMatrix.multiplyBy(factor) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.set(1, 1, fa);
                     }
                 }.test("ImmutableMatrix.set() should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.setSI(1, 1, 20.1f);
                     }
                 }.test("ImmutableMatrix.setSI() should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.setInUnit(1, 1, 15.2f);
                     }
                 }.test("ImmutableMatrix.setInUnit(f) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.setInUnit(1, 1, 15.2f, AreaUnit.ARE);
                     }
                 }.test("ImmutableMatrix.setInUnit(f, u) should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.abs();
                     }
                 }.test("ImmutableMatrix.abs() should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.ceil();
                     }
                 }.test("ImmutableMatrix.ceil() should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.floor();
                     }
                 }.test("ImmutableMatrix.floor() should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.neg();
                     }
                 }.test("ImmutableMatrix.neg() should throw error");
                 new Try()
                 {
-                    public @Override void execute()
+                    @Override
+                    public void execute()
                     {
                         amPtr.rint();
                     }
@@ -852,7 +869,7 @@ public class FloatMatrixMethodTest
     }
 
     /**
-     * Test the <code>as</code> method of the FloatSIMatrix class
+     * Test the <code>as</code> method of the FloatSIMatrix class.
      * @throws SecurityException on error
      * @throws NoSuchMethodException on error
      * @throws InvocationTargetException on error
@@ -860,6 +877,7 @@ public class FloatMatrixMethodTest
      * @throws IllegalAccessException on error
      * @throws ClassNotFoundException on error
      * @throws UnitException on error
+     * @param <U> the unit type
      */
     @SuppressWarnings("unchecked")
     @Test

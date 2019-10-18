@@ -29,7 +29,7 @@ import org.djunits.value.vfloat.vector.data.FloatVectorData;
 public final class FloatVector
 {
     /** The cache to make the lookup of the constructor for a Immutable Vector belonging to a unit faster. */
-    private static Map<Unit<?>, Constructor<? extends FloatVectorInterface<?, ?, ?>>> CACHE_DATA = new HashMap<>();
+    private static final Map<Unit<?>, Constructor<? extends FloatVectorInterface<?, ?, ?>>> CACHE_DATA = new HashMap<>();
 
     /** Do not instantiate. */
     private FloatVector()

@@ -958,7 +958,7 @@ public class FloatVectorConstructorsTest
     }
 
     /**
-     * Test that parallelized operations work
+     * Test that parallelized operations work.
      */
     @Test
     public void parallelTest()

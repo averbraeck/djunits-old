@@ -100,7 +100,7 @@ public class DoubleSIScalarTest
     }
 
     /**
-     * Multiply a value for every unit with every value for every unit and test the SI dimensions
+     * Multiply a value for every unit with every value for every unit and test the SI dimensions.
      * @throws ClassNotFoundException on error finding unit
      */
     @Test
@@ -143,7 +143,7 @@ public class DoubleSIScalarTest
     }
 
     /**
-     * Divide a value for every unit by every value for every unit and test the SI dimensions
+     * Divide a value for every unit by every value for every unit and test the SI dimensions.
      * @throws ClassNotFoundException on error finding unit
      */
     @Test

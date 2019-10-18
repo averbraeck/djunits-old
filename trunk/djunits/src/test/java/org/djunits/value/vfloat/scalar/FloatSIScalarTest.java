@@ -100,7 +100,7 @@ public class FloatSIScalarTest
     }
 
     /**
-     * Multiply a value for every unit with every value for every unit and test the SI dimensions
+     * Multiply a value for every unit with every value for every unit and test the SI dimensions.
      * @throws ClassNotFoundException on error finding unit
      */
     @Test
@@ -117,7 +117,9 @@ public class FloatSIScalarTest
             Unit<?> unit1 = unitBase1.getUnitsById().values().iterator().next();
             // FLOAT -- PREVENT UNDERFLOW / OVERFLOW
             if (unit1.getScale().toStandardUnit(1.0) > 1.0E12 || 1.0 / unit1.getScale().toStandardUnit(1.0) > 1.0E12)
+            {
                 continue;
+            }
             for (String type2 : CLASSNAMES.REL_LIST)
             {
                 UnitBase<?> unitBase2 = UnitTypes.INSTANCE.getUnitBase(type2 + "Unit");
@@ -126,7 +128,9 @@ public class FloatSIScalarTest
                 {
                     // FLOAT -- PREVENT UNDERFLOW / OVERFLOW
                     if (unit2.getScale().toStandardUnit(1.0) > 1.0E12 || 1.0 / unit2.getScale().toStandardUnit(1.0) > 1.0E12)
+                    {
                         continue;
+                    }
                     AbstractFloatScalarRel<?, ?> scalar1 =
                             (AbstractFloatScalarRel<?, ?>) FloatScalar.instantiateAnonymous(12.0f, unit1);
                     AbstractFloatScalarRel<?, ?> scalar2 =
@@ -149,7 +153,7 @@ public class FloatSIScalarTest
     }
 
     /**
-     * Divide a value for every unit by every value for every unit and test the SI dimensions
+     * Divide a value for every unit by every value for every unit and test the SI dimensions.
      * @throws ClassNotFoundException on error finding unit
      */
     @Test
@@ -166,7 +170,9 @@ public class FloatSIScalarTest
             Unit<?> unit1 = unitBase1.getUnitsById().values().iterator().next();
             // FLOAT -- PREVENT UNDERFLOW / OVERFLOW
             if (unit1.getScale().toStandardUnit(1.0) > 1.0E12 || 1.0 / unit1.getScale().toStandardUnit(1.0) > 1.0E12)
+            {
                 continue;
+            }
             for (String type2 : CLASSNAMES.REL_LIST)
             {
                 UnitBase<?> unitBase2 = UnitTypes.INSTANCE.getUnitBase(type2 + "Unit");
@@ -175,7 +181,9 @@ public class FloatSIScalarTest
                 {
                     // FLOAT -- PREVENT UNDERFLOW / OVERFLOW
                     if (unit2.getScale().toStandardUnit(1.0) > 1.0E12 || 1.0 / unit2.getScale().toStandardUnit(1.0) > 1.0E12)
+                    {
                         continue;
+                    }
                     AbstractFloatScalarRel<?, ?> scalar1 =
                             (AbstractFloatScalarRel<?, ?>) FloatScalar.instantiateAnonymous(12.0f, unit1);
                     AbstractFloatScalarRel<?, ?> scalar2 =

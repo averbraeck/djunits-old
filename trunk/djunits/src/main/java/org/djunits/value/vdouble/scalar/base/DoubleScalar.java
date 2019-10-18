@@ -27,7 +27,7 @@ public abstract class DoubleScalar
     /**********************************************************************************/
 
     /** The cache to make the lookup of the constructor for a Scalar belonging to a unit faster. */
-    private static Map<Unit<?>, Constructor<? extends DoubleScalarInterface<?, ?>>> CACHE = new HashMap<>();
+    private static final Map<Unit<?>, Constructor<? extends DoubleScalarInterface<?, ?>>> CACHE = new HashMap<>();
 
     /** Do not instantiate. */
     private DoubleScalar()

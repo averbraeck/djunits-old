@@ -152,8 +152,9 @@ public class Localization implements Serializable
     @Override
     public String toString()
     {
-        return "Localization [bundleNamePrefix=" + bundleNamePrefix + ", resourceBundle=" + resourceBundle + ", currentLocale="
-                + currentLocale + ", defaultResourceBundle=" + defaultResourceBundle + ", defaultLocale=" + defaultLocale + "]";
+        return "Localization [bundleNamePrefix=" + this.bundleNamePrefix + ", resourceBundle=" + this.resourceBundle
+                + ", currentLocale=" + this.currentLocale + ", defaultResourceBundle=" + this.defaultResourceBundle
+                + ", defaultLocale=" + this.defaultLocale + "]";
     }
 
 }

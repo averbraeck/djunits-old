@@ -435,7 +435,7 @@ public class ScalarOperationsTest
      * @throws NoSuchFieldException on class or method resolving error
      * @throws ClassNotFoundException on class or method resolving error
      */
-    @SuppressWarnings("rawtypes")
+    @SuppressWarnings({"rawtypes", "unchecked"})
     private void testUnaryMethods(final Class<?> scalarClass, final boolean abs, final boolean doubleType)
             throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException,
             NoSuchFieldException, ClassNotFoundException
@@ -615,8 +615,7 @@ public class ScalarOperationsTest
             Class<?> unitClass = getUnitClass(scalarClass);
             UnitSystem unitSystem = UnitSystem.SI_DERIVED;
             // Call the getUnit method of left
-            Method getUnitMethod = ClassUtil.resolveMethod(scalarClass, "getDisplayUnit");
-            Unit referenceUnit = (Unit<?>) getUnitMethod.invoke(left);
+            // Method getUnitMethod = ClassUtil.resolveMethod(scalarClass, "getDisplayUnit");
             Constructor<?> unitConstructor = unitClass.getConstructor(); // empty constructor -- provide Builder
             Unit newUnit = (Unit) unitConstructor.newInstance();
             Method buildMethod = ClassUtil.resolveMethod(Unit.class, "build", Unit.Builder.class);
