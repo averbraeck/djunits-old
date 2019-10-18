@@ -29,6 +29,7 @@ import org.djunits.value.CLASSNAMES;
 import org.djunits.value.ValueRuntimeException;
 import org.djunits.value.storage.StorageType;
 import org.djunits.value.vdouble.matrix.AreaMatrix;
+import org.djunits.value.vdouble.matrix.Determinant;
 import org.djunits.value.vdouble.matrix.base.DoubleMatrix;
 import org.djunits.value.vfloat.function.FloatMathFunctions;
 import org.djunits.value.vfloat.matrix.base.AbstractFloatMatrixRel;
@@ -368,11 +369,14 @@ public class FloatMatrixMethodTest
                     }
                 }
 
-                // TODO: CALCULATE DETERMINANT INDEPENDENTLY AND CHECK
-                // XXX: this is clearly wrong. See console output!
-                float det = amSquare.determinant();
-                System.out.println("Determinant of square matrix with unit " + au.getDefaultTextualAbbreviation()
-                        + ", storage = " + storageType + " = " + det);
+                float[][] testData4x4 = new float[][] {{2, 3, 5, 7}, {11, 13, 17, 19}, {23, 29, 31, 37}, {41, 43, 47, 49}};
+                FloatAreaMatrix am4x4 =
+                        FloatMatrix.instantiate(FloatMatrixData.instantiate(testData4x4, au.getScale(), storageType), au);
+                float det = am4x4.determinant();
+                float detCalc = Determinant.det(am4x4.getValuesSI());
+                float err = Math.max(det, detCalc) / 1000.0f;
+                assertEquals("Determinant of square matrix with unit " + au.getDefaultTextualAbbreviation() + ", storage = "
+                        + storageType + " = " + det + " but should have been " + detCalc, detCalc, det, err);
                 new Try()
                 {
                     @Override

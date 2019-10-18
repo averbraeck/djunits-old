@@ -15,44 +15,89 @@ public final class Determinant
     }
 
     /**
-     * Compute the determinant of a matrix. Code based on
-     * <a href="https://www.mathsisfun.com/algebra/matrix-determinant.html">Determinant of a Matrix</a>.
-     * @param matrix double[][]; the matrix (better be square, minimum size is 1x1)
-     * @return double; the determinant of the matrix
+     * Method that calculates determinant of given matrix. From:
+     * https://gist.githubusercontent.com/Cellane/398372/raw/23a3e321daa52d4c6b68795aae093bf773ce2940/MatrixOperations.java
+     * @param matrix double[][]; matrix of which we need to know the determinant
+     * @return double; the determinant of given matrix
      */
     public static double det(final double[][] matrix)
     {
+        double[][] temporary;
+        double result = 0;
         if (matrix.length == 1)
         {
-            return matrix[0][0];
+            result = matrix[0][0];
+            return (result);
         }
-        double result = 0;
-        int sign = 1;
-        for (int col = 0; col < matrix[0].length; col++)
+        if (matrix.length == 2)
         {
-            result += sign * matrix[0][col] * det(subMatrix(matrix, col));
-            sign = 0 - sign;
+            result = ((matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]));
+            return (result);
         }
-        return result;
+        for (int i = 0; i < matrix[0].length; i++)
+        {
+            temporary = new double[matrix.length - 1][matrix[0].length - 1];
+
+            for (int j = 1; j < matrix.length; j++)
+            {
+                for (int k = 0; k < matrix[0].length; k++)
+                {
+                    if (k < i)
+                    {
+                        temporary[j - 1][k] = matrix[j][k];
+                    }
+                    else if (k > i)
+                    {
+                        temporary[j - 1][k - 1] = matrix[j][k];
+                    }
+                }
+            }
+            result += matrix[0][i] * Math.pow(-1, i) * det(temporary);
+        }
+        return (result);
     }
 
     /**
-     * Extract a sub matrix from a matrix leaving out row 0 and column <code>pivot</code>.
-     * @param matrix double[][]; the matrix (better be square)
-     * @param pivot int; the column to skip
-     * @return double[][]; a matrix that is one step smaller than the input <code>matrix</code>
+     * Method that calculates determinant of given matrix. From:
+     * https://gist.githubusercontent.com/Cellane/398372/raw/23a3e321daa52d4c6b68795aae093bf773ce2940/MatrixOperations.java
+     * @param matrix float[][]; matrix of which we need to know the determinant
+     * @return float; the determinant of given matrix
      */
-    public static double[][] subMatrix(final double[][] matrix, final int pivot)
+    public static float det(final float[][] matrix)
     {
-        double[][] result = new double[matrix.length - 1][matrix.length - 1];
-        for (int row = 0; row < result.length; row++)
+        float[][] temporary;
+        float result = 0;
+        if (matrix.length == 1)
         {
-            for (int col = 0; col < result.length; col++)
-            {
-                result[row][col] = matrix[row + 1][col >= pivot ? col + 1 : col];
-            }
+            result = matrix[0][0];
+            return (result);
         }
-        return result;
+        if (matrix.length == 2)
+        {
+            result = ((matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]));
+            return (result);
+        }
+        for (int i = 0; i < matrix[0].length; i++)
+        {
+            temporary = new float[matrix.length - 1][matrix[0].length - 1];
+
+            for (int j = 1; j < matrix.length; j++)
+            {
+                for (int k = 0; k < matrix[0].length; k++)
+                {
+                    if (k < i)
+                    {
+                        temporary[j - 1][k] = matrix[j][k];
+                    }
+                    else if (k > i)
+                    {
+                        temporary[j - 1][k - 1] = matrix[j][k];
+                    }
+                }
+            }
+            result += matrix[0][i] * Math.pow(-1, i) * det(temporary);
+        }
+        return (result);
     }
 
     /**
@@ -68,9 +113,6 @@ public final class Determinant
         System.out.println(Arrays.deepToString(testData1));
         System.out.println("det=" + det(testData1));
         System.out.println(Arrays.deepToString(testData2));
-        System.out.println("subMatrix(0): " + Arrays.deepToString(subMatrix(testData2, 0)));
-        System.out.println(Arrays.deepToString(testData2));
-        System.out.println("subMatrix(1): " + Arrays.deepToString(subMatrix(testData2, 1)));
         System.out.println("det=" + det(testData2));
         System.out.println(Arrays.deepToString(testData3));
         System.out.println("det=" + det(testData3));

@@ -3,6 +3,9 @@
   <body>
 
     <release version="4.00.02" date="2019-10-19" description="Small updates in site docs, javadoc, final">
+      <action dev="averbraeck" type="fix">
+        Tested and repaired the determinant() function of the FloatMatrix and DoubleMatrix.
+      </action>
       <action dev="averbraeck" type="update">
         Site documentation adapted for version 4.
       </action>
