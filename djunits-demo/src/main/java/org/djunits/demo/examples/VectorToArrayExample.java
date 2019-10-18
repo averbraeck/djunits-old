@@ -1,20 +1,23 @@
 package org.djunits.demo.examples;
 
+import java.util.Arrays;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
 import org.djunits.unit.SpeedUnit;
 import org.djunits.unit.TimeUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.ValueRuntimeException;
+import org.djunits.value.storage.StorageType;
 import org.djunits.value.vdouble.scalar.Speed;
 import org.djunits.value.vdouble.scalar.Time;
 import org.djunits.value.vdouble.vector.SpeedVector;
 import org.djunits.value.vdouble.vector.TimeVector;
+import org.djunits.value.vdouble.vector.base.DoubleVector;
 import org.djunits.value.vfloat.scalar.FloatSpeed;
 import org.djunits.value.vfloat.scalar.FloatTime;
 import org.djunits.value.vfloat.vector.FloatSpeedVector;
 import org.djunits.value.vfloat.vector.FloatTimeVector;
+import org.djunits.value.vfloat.vector.base.FloatVector;
 
 /**
  * <p>
@@ -35,9 +38,9 @@ public final class VectorToArrayExample
 
     /**
      * @param args String[]; the arguments for the main program, not used
-     * @throws ValueException on vector error
+     * @throws ValueRuntimeException on vector error
      */
-    public static void main(final String[] args) throws ValueException
+    public static void main(final String[] args) throws ValueRuntimeException
     {
         showDoubleToArray();
         showFloatToArray();
@@ -45,17 +48,17 @@ public final class VectorToArrayExample
 
     /**
      * double iterator example.
-     * @throws ValueException on error
+     * @throws ValueRuntimeException on error
      */
-    private static void showDoubleToArray() throws ValueException
+    private static void showDoubleToArray() throws ValueRuntimeException
     {
         Speed s1 = new Speed(10.0, SpeedUnit.METER_PER_SECOND);
         Speed s2 = new Speed(12.0, SpeedUnit.METER_PER_SECOND);
         Speed s3 = new Speed(8.0, SpeedUnit.METER_PER_SECOND);
         Speed s4 = new Speed(16.0, SpeedUnit.METER_PER_SECOND);
-        SpeedVector svd = new SpeedVector(new Speed[] {s1, s2, s3, s4}, StorageType.DENSE);
-        Speed[] svdArray = svd.toArray();
-        System.out.println("Speed vector (Double, Rel, Dense): " + svdArray + " of length " + svdArray.length);
+        SpeedVector svd = DoubleVector.instantiate(new Speed[] {s1, s2, s3, s4}, SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
+        Speed[] svdArray = svd.getScalars();
+        System.out.println("\nSpeed vector (Double, Rel, Dense): " + Arrays.asList(svdArray) + " of length " + svdArray.length);
         for (Speed s : svdArray)
         {
             System.out.println(s);
@@ -66,9 +69,10 @@ public final class VectorToArrayExample
         svsMap.put(3, s2);
         svsMap.put(5, s3);
         svsMap.put(7, s4);
-        SpeedVector svs = new SpeedVector(svsMap, 10, StorageType.SPARSE);
-        Speed[] svsArray = svs.toArray();
-        System.out.println("\nSpeed vector (Double, Rel, Sparse): " + svsArray + " of length " + svsArray.length);
+        SpeedVector svs = DoubleVector.instantiateMap(svsMap, 10, SpeedUnit.METER_PER_SECOND, StorageType.SPARSE);
+        Speed[] svsArray = svs.getScalars();
+        System.out
+                .println("\nSpeed vector (Double, Rel, Sparse): " + Arrays.asList(svsArray) + " of length " + svsArray.length);
         for (Speed s : svsArray)
         {
             System.out.println(s);
@@ -78,9 +82,9 @@ public final class VectorToArrayExample
         Time t2 = new Time(12.0, TimeUnit.BASE_SECOND);
         Time t3 = new Time(8.0, TimeUnit.BASE_SECOND);
         Time t4 = new Time(16.0, TimeUnit.BASE_SECOND);
-        TimeVector tvd = new TimeVector(new Time[] {t1, t2, t3, t4}, StorageType.DENSE);
-        Time[] tvdArray = tvd.toArray();
-        System.out.println("Time vector (Double, Abs, Dense): " + tvdArray + " of length " + tvdArray.length);
+        TimeVector tvd = DoubleVector.instantiate(new Time[] {t1, t2, t3, t4}, TimeUnit.BASE_SECOND, StorageType.DENSE);
+        Time[] tvdArray = tvd.getScalars();
+        System.out.println("\nTime vector (Double, Abs, Dense): " + Arrays.asList(tvdArray) + " of length " + tvdArray.length);
         for (Time t : tvdArray)
         {
             System.out.println(t);
@@ -91,9 +95,9 @@ public final class VectorToArrayExample
         tvsMap.put(3, t2);
         tvsMap.put(5, t3);
         tvsMap.put(7, t4);
-        TimeVector tvs = new TimeVector(tvsMap, 10, StorageType.SPARSE);
-        Time[] tvsArray = tvs.toArray();
-        System.out.println("Time vector (Double, Abs, Sparse): " + tvsArray + " of length " + tvsArray.length);
+        TimeVector tvs = DoubleVector.instantiateMap(tvsMap, 10, TimeUnit.BASE_SECOND, StorageType.SPARSE);
+        Time[] tvsArray = tvs.getScalars();
+        System.out.println("\nTime vector (Double, Abs, Sparse): " + Arrays.asList(tvsArray) + " of length " + tvsArray.length);
         for (Time t : tvsArray)
         {
             System.out.println(t);
@@ -102,17 +106,18 @@ public final class VectorToArrayExample
 
     /**
      * float iterator example.
-     * @throws ValueException on error
+     * @throws ValueRuntimeException on error
      */
-    private static void showFloatToArray() throws ValueException
+    private static void showFloatToArray() throws ValueRuntimeException
     {
         FloatSpeed s1 = new FloatSpeed(10.0, SpeedUnit.METER_PER_SECOND);
         FloatSpeed s2 = new FloatSpeed(12.0, SpeedUnit.METER_PER_SECOND);
         FloatSpeed s3 = new FloatSpeed(8.0, SpeedUnit.METER_PER_SECOND);
         FloatSpeed s4 = new FloatSpeed(16.0, SpeedUnit.METER_PER_SECOND);
-        FloatSpeedVector svd = new FloatSpeedVector(new FloatSpeed[] {s1, s2, s3, s4}, StorageType.DENSE);
-        FloatSpeed[] svdArray = svd.toArray();
-        System.out.println("Speed vector (Float, Rel, Dense): " + svdArray + " of length " + svdArray.length);
+        FloatSpeedVector svd =
+                FloatVector.instantiate(new FloatSpeed[] {s1, s2, s3, s4}, SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
+        FloatSpeed[] svdArray = svd.getScalars();
+        System.out.println("\nSpeed vector (Float, Rel, Dense): " + Arrays.asList(svdArray) + " of length " + svdArray.length);
         for (FloatSpeed s : svdArray)
         {
             System.out.println(s);
@@ -123,9 +128,9 @@ public final class VectorToArrayExample
         svsMap.put(3, s2);
         svsMap.put(5, s3);
         svsMap.put(7, s4);
-        FloatSpeedVector svs = new FloatSpeedVector(svsMap, 10, StorageType.SPARSE);
-        FloatSpeed[] svsArray = svs.toArray();
-        System.out.println("\nSpeed vector (Float, Rel, Sparse): " + svsArray + " of length " + svsArray.length);
+        FloatSpeedVector svs = FloatVector.instantiateMap(svsMap, 10, SpeedUnit.METER_PER_SECOND, StorageType.SPARSE);
+        FloatSpeed[] svsArray = svs.getScalars();
+        System.out.println("\nSpeed vector (Float, Rel, Sparse): " + Arrays.asList(svsArray) + " of length " + svsArray.length);
         for (FloatSpeed s : svsArray)
         {
             System.out.println(s);
@@ -135,9 +140,10 @@ public final class VectorToArrayExample
         FloatTime t2 = new FloatTime(12.0f, TimeUnit.BASE_SECOND);
         FloatTime t3 = new FloatTime(8.0f, TimeUnit.BASE_SECOND);
         FloatTime t4 = new FloatTime(16.0f, TimeUnit.BASE_SECOND);
-        FloatTimeVector tvd = new FloatTimeVector(new FloatTime[] {t1, t2, t3, t4}, StorageType.DENSE);
-        FloatTime[] tvdArray = tvd.toArray();
-        System.out.println("Time vector (Float, Abs, Dense): " + tvdArray + " of length " + tvdArray.length);
+        FloatTimeVector tvd =
+                FloatVector.instantiate(new FloatTime[] {t1, t2, t3, t4}, TimeUnit.BASE_SECOND, StorageType.DENSE);
+        FloatTime[] tvdArray = tvd.getScalars();
+        System.out.println("\nTime vector (Float, Abs, Dense): " + Arrays.asList(tvdArray) + " of length " + tvdArray.length);
         for (FloatTime t : tvdArray)
         {
             System.out.println(t);
@@ -148,9 +154,9 @@ public final class VectorToArrayExample
         tvsMap.put(3, t2);
         tvsMap.put(5, t3);
         tvsMap.put(7, t4);
-        FloatTimeVector tvs = new FloatTimeVector(tvsMap, 10, StorageType.SPARSE);
-        FloatTime[] tvsArray = tvs.toArray();
-        System.out.println("Time vector (Float, Abs, Sparse): " + tvsArray + " of length " + tvsArray.length);
+        FloatTimeVector tvs = FloatVector.instantiateMap(tvsMap, 10, TimeUnit.BASE_SECOND, StorageType.SPARSE);
+        FloatTime[] tvsArray = tvs.getScalars();
+        System.out.println("\nTime vector (Float, Abs, Sparse): " + Arrays.asList(tvsArray) + " of length " + tvsArray.length);
         for (FloatTime t : tvsArray)
         {
             System.out.println(t);

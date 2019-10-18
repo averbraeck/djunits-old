@@ -1,7 +1,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessMatrix acos()
+    public final DimensionlessMatrix acos()
     {
         assign(DoubleMathFunctions.ACOS);
         return this;
@@ -9,7 +9,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessMatrix asin()
+    public final DimensionlessMatrix asin()
     {
         assign(DoubleMathFunctions.ASIN);
         return this;
@@ -17,7 +17,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessMatrix atan()
+    public final DimensionlessMatrix atan()
     {
         assign(DoubleMathFunctions.ATAN);
         return this;
@@ -25,7 +25,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessMatrix cbrt()
+    public final DimensionlessMatrix cbrt()
     {
         assign(DoubleMathFunctions.CBRT);
         return this;
@@ -33,7 +33,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessMatrix cos()
+    public final DimensionlessMatrix cos()
     {
         assign(DoubleMathFunctions.COS);
         return this;
@@ -41,7 +41,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessMatrix cosh()
+    public final DimensionlessMatrix cosh()
     {
         assign(DoubleMathFunctions.COSH);
         return this;
@@ -49,7 +49,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessMatrix exp()
+    public final DimensionlessMatrix exp()
     {
         assign(DoubleMathFunctions.EXP);
         return this;
@@ -57,7 +57,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessMatrix expm1()
+    public final DimensionlessMatrix expm1()
     {
         assign(DoubleMathFunctions.EXPM1);
         return this;
@@ -65,7 +65,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessMatrix log()
+    public final DimensionlessMatrix log()
     {
         assign(DoubleMathFunctions.LOG);
         return this;
@@ -73,7 +73,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessMatrix log10()
+    public final DimensionlessMatrix log10()
     {
         assign(DoubleMathFunctions.LOG10);
         return this;
@@ -81,7 +81,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessMatrix log1p()
+    public final DimensionlessMatrix log1p()
     {
         assign(DoubleMathFunctions.LOG1P);
         return this;
@@ -89,7 +89,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessMatrix pow(final double x)
+    public final DimensionlessMatrix pow(final double x)
     {
         assign(DoubleMathFunctions.POW((float) x));
         return this;
@@ -97,7 +97,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessMatrix signum()
+    public final DimensionlessMatrix signum()
     {
         assign(DoubleMathFunctions.SIGNUM);
         return this;
@@ -105,7 +105,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessMatrix sin()
+    public final DimensionlessMatrix sin()
     {
         assign(DoubleMathFunctions.SIN);
         return this;
@@ -113,7 +113,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessMatrix sinh()
+    public final DimensionlessMatrix sinh()
     {
         assign(DoubleMathFunctions.SINH);
         return this;
@@ -121,7 +121,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessMatrix sqrt()
+    public final DimensionlessMatrix sqrt()
     {
         assign(DoubleMathFunctions.SQRT);
         return this;
@@ -129,7 +129,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessMatrix tan()
+    public final DimensionlessMatrix tan()
     {
         assign(DoubleMathFunctions.TAN);
         return this;
@@ -137,7 +137,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessMatrix tanh()
+    public final DimensionlessMatrix tanh()
     {
         assign(DoubleMathFunctions.TANH);
         return this;
@@ -145,7 +145,7 @@
 
     /** {@inheritDoc} */
     @Override
-    public final MutableDimensionlessMatrix inv()
+    public final DimensionlessMatrix inv()
     {
         assign(DoubleMathFunctions.INV);
         return this;

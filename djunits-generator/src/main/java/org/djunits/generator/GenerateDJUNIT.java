@@ -10,6 +10,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,8 +19,8 @@ import java.util.Map;
 /**
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
- * <p>
+ * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
@@ -27,6 +28,9 @@ public class GenerateDJUNIT
 {
     /** The output folder of the writer -- will be written in Eclipse project-root/generated-code/org/djunits folder. */
     private static final String generatedCodeRelativePath = "/generated-code/org/djunits/";
+
+    /** the generation time. */
+    private static String generationTime;
 
     /**
      * The calculated absolute output path (root of the executable or Jar file). In case of an Eclipse run, ../../ is added to
@@ -39,9 +43,6 @@ public class GenerateDJUNIT
 
     /** List of Rel types. */
     private static List<String> typesRel = new ArrayList<>();
-
-    /** List of Money types. */
-    private static List<String> typesMoney = new ArrayList<>();
 
     /** Map of types to formulas. */
     private static Map<String, List<String>> formulas = new HashMap<>();
@@ -87,26 +88,6 @@ public class GenerateDJUNIT
             if (line.length() > 0)
             {
                 typesRel.add(line);
-            }
-        }
-        bufferedReader.close();
-    }
-
-    /**
-     * Read the types from the file /TYPES_MONEY.txt.
-     * @throws IOException on I/O error
-     */
-    private static void readMoneyTypes() throws IOException
-    {
-        URL typesURL = URLResource.getResource("/TYPES_MONEY.txt");
-        FileReader fileReader = new FileReader(new File(typesURL.getPath()));
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
-        String line = null;
-        while ((line = bufferedReader.readLine()) != null)
-        {
-            if (line.length() > 0)
-            {
-                typesMoney.add(line);
             }
         }
         bufferedReader.close();
@@ -220,12 +201,11 @@ public class GenerateDJUNIT
             for (String f : formulas.get(type))
             {
                 String dm = f.startsWith("/") ? "division" : "multiplication";
-                String method = f.startsWith("/") ? "divideBy" : "multiplyBy";
+                String method = f.startsWith("/") ? "divide" : "times";
                 String mdsign = f.startsWith("/") ? "/" : "*";
                 f = f.substring(1, f.length());
                 String param = f.split("=")[0].trim();
                 String result = f.split("=")[1].trim();
-                String siOrMoney = (result.startsWith("Money")) ? ".getStandard" + result + "Unit()" : ".SI";
                 String pParam = prefix + param;
                 String pResult = prefix + result;
 
@@ -239,7 +219,7 @@ public class GenerateDJUNIT
                 fStr += "(final " + pParam + " v)\n";
                 fStr += "        {\n";
                 fStr += "            return new " + pResult + "(this.si " + mdsign + " v.si, ";
-                fStr += result + "Unit" + siOrMoney + ");\n";
+                fStr += result + "Unit.SI);\n";
                 fStr += "        }\n\n";
             }
             ret = ret.substring(0, pos - 1) + fStr + ret.substring(pos + type.length() + 1, ret.length() - 1);
@@ -264,6 +244,11 @@ public class GenerateDJUNIT
                 java = java.replace(tag, replacement);
             }
         }
+
+        // @Generated
+        java = java.replace("@Generated(value = \"GenerateDJUNIT\")",
+                "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + generationTime + "\")");
+
         return java;
     }
 
@@ -297,7 +282,7 @@ public class GenerateDJUNIT
     /**
      * Generate all Abs + Rel classes in value.vdouble.scalar.
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     private static void generateDoubleScalarAbsRel() throws IOException, URISyntaxException
     {
@@ -327,7 +312,7 @@ public class GenerateDJUNIT
     /**
      * Generate all Rel classes in value.vdouble.scalar.
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     private static void generateDoubleScalarRel() throws IOException, URISyntaxException
     {
@@ -346,7 +331,7 @@ public class GenerateDJUNIT
             java = java.replaceAll("%TYPE%", type.toUpperCase());
             if (java.contains("class Dimensionless"))
             {
-                java = java.replace("%DIMLESS%", " implements MathFunctionsDimensionless<Dimensionless>");
+                java = java.replace("%DIMLESS%", "implements DimensionlessFunctions<DimensionlessUnit, Dimensionless>");
                 URL dimlessURL = URLResource.getResource("/" + relativePath + "DimlessFunctions.java");
                 String dimlessFunctions = new String(Files.readAllBytes(Paths.get(dimlessURL.toURI())));
                 int pos = java.indexOf("%FORMULAS%");
@@ -362,38 +347,9 @@ public class GenerateDJUNIT
     }
 
     /**
-     * Generate all Money classes in value.vdouble.scalar.
-     * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
-     */
-    private static void generateDoubleScalarMoney() throws IOException, URISyntaxException
-    {
-        String relativePath = "value/vdouble/scalar/";
-        URL scalarURL = URLResource.getResource("/" + relativePath + "DOUBLE_SCALAR_MONEY.java");
-        String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
-
-        for (String type : typesMoney)
-        {
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + ".java");
-            String java = new String(scalarJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = java.replace("%DIMLESS%", "");
-            java = formulas(java, "DoubleScalar => " + type, "");
-            java = replace(java, type);
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + type + ".java");
-        }
-    }
-
-    /**
      * Generate all Abs + Rel classes in value.vfloat.scalar.
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     private static void generateFloatScalarAbsRel() throws IOException, URISyntaxException
     {
@@ -424,7 +380,7 @@ public class GenerateDJUNIT
     /**
      * Generate all Rel classes in value.vfloat.scalar.
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     private static void generateFloatScalarRel() throws IOException, URISyntaxException
     {
@@ -444,42 +400,12 @@ public class GenerateDJUNIT
             java = java.replaceAll("%TYPE%", type.toUpperCase());
             if (java.contains("class FloatDimensionless"))
             {
-                java = java.replace("%DIMLESS%", " implements MathFunctionsDimensionless<FloatDimensionless>");
+                java = java.replace("%DIMLESS%", " implements DimensionlessFunctions<DimensionlessUnit, FloatDimensionless>");
                 URL dimlessURL = URLResource.getResource("/" + relativePath + "DimlessFunctions.java");
                 String dimlessFunctions = new String(Files.readAllBytes(Paths.get(dimlessURL.toURI())));
                 int pos = java.indexOf("%FORMULAS%");
                 java = java.substring(0, pos - 1) + dimlessFunctions + java.substring(pos, java.length() - 1);
             }
-            java = java.replace("%DIMLESS%", "");
-            java = formulas(java, "FloatScalar => " + type, "Float");
-            java = replace(java, type);
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + fType + ".java");
-        }
-    }
-
-    /**
-     * Generate all Money classes in value.vfloat.scalar.
-     * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
-     */
-    private static void generateFloatScalarMoney() throws IOException, URISyntaxException
-    {
-        String relativePath = "value/vfloat/scalar/";
-        URL scalarURL = URLResource.getResource("/" + relativePath + "FLOAT_SCALAR_MONEY.java");
-        String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
-
-        for (String type : typesMoney)
-        {
-            String fType = "Float" + type;
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + fType + ".java");
-            String java = new String(scalarJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
             java = java.replace("%DIMLESS%", "");
             java = formulas(java, "FloatScalar => " + type, "Float");
             java = replace(java, type);
@@ -532,7 +458,7 @@ public class GenerateDJUNIT
     /**
      * Generate all Abs + Rel classes in value.vdouble.vector.
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     private static void generateDoubleVectorAbsRel() throws IOException, URISyntaxException
     {
@@ -556,31 +482,13 @@ public class GenerateDJUNIT
                 out.close();
                 System.out.println("built: " + absoluteRootPath + relativePath + type[i] + "Vector.java");
             }
-
-            vectorURL = URLResource.getResource("/" + relativePath
-                    + ((i == 0) ? "MUTABLE_DOUBLE_VECTOR_AR_ABS.java" : "MUTABLE_DOUBLE_VECTOR_AR_REL.java"));
-            vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
-
-            for (String type[] : typesAbsRel)
-            {
-                File outPath = new File(absoluteRootPath + relativePath);
-                outPath.mkdirs();
-                PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + type[i] + "Vector.java");
-                String java = new String(vectorJava);
-                java = replaceAbsRel(java, type);
-                java = formulasVector(java, "MutableDoubleVector => " + type[i], "Mutable");
-                java = replace(java, type[i]);
-                out.print(java);
-                out.close();
-                System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type[i] + "Vector.java");
-            }
         }
     }
 
     /**
      * Generate all Rel classes in value.vdouble.vector.
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     private static void generateDoubleVectorRel() throws IOException, URISyntaxException
     {
@@ -597,90 +505,22 @@ public class GenerateDJUNIT
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = formulasVector(java, "DoubleVector => " + type, "");
-            java = replace(java, type);
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + type + "Vector.java");
-        }
-
-        vectorURL = URLResource.getResource("/" + relativePath + "MUTABLE_DOUBLE_VECTOR_REL.java");
-        vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
-
-        for (String type : typesRel)
-        {
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + type + "Vector.java");
-            String java = new String(vectorJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            if (java.contains("class MutableDimensionlessVector"))
+            if (java.contains("class DimensionlessVector"))
             {
-                java = java.replace("%DIMLESS%", " implements MathFunctionsDimensionless<MutableDimensionlessVector>");
+                java = java.replace("%DIMLESS%",
+                        " implements DoubleMathFunctions, DimensionlessFunctions<DimensionlessUnit, DimensionlessVector>");
                 URL dimlessURL = URLResource.getResource("/" + relativePath + "DimlessFunctions.java");
                 String dimlessFunctions = new String(Files.readAllBytes(Paths.get(dimlessURL.toURI())));
                 int pos = java.indexOf("%FORMULAS%");
                 java = java.substring(0, pos - 1) + dimlessFunctions + java.substring(pos, java.length() - 1);
             }
             java = java.replace("%DIMLESS%", "");
-            java = formulasVector(java, "MutableDoubleVector => " + type, "Mutable");
-            java = replace(java, type);
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type + "Vector.java");
-        }
-    }
-
-    /**
-     * Generate all Money classes in value.vdouble.vector.
-     * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
-     */
-    private static void generateDoubleVectorMoney() throws IOException, URISyntaxException
-    {
-        String relativePath = "value/vdouble/vector/";
-        URL vectorURL = URLResource.getResource("/" + relativePath + "DOUBLE_VECTOR_REL.java");
-        String vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
-
-        for (String type : typesMoney)
-        {
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + "Vector.java");
-            String java = new String(vectorJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = java.replace("%DIMLESS%", "");
             java = formulasVector(java, "DoubleVector => " + type, "");
             java = replace(java, type);
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + type + "Vector.java");
         }
-
-        vectorURL = URLResource.getResource("/" + relativePath + "MUTABLE_DOUBLE_VECTOR_REL.java");
-        vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
-
-        for (String type : typesMoney)
-        {
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + type + "Vector.java");
-            String java = new String(vectorJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = java.replace("%DIMLESS%", "");
-            java = formulasVector(java, "MutableDoubleVector => " + type, "Mutable");
-            java = replace(java, type);
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type + "Vector.java");
-        }
-
     }
 
     /****************************************************************************************************************/
@@ -690,7 +530,7 @@ public class GenerateDJUNIT
     /**
      * Generate all Abs + Rel classes in value.vfloat.vector.
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     private static void generateFloatVectorAbsRel() throws IOException, URISyntaxException
     {
@@ -715,32 +555,13 @@ public class GenerateDJUNIT
                 out.close();
                 System.out.println("built: " + absoluteRootPath + relativePath + fType + "Vector.java");
             }
-
-            vectorURL = URLResource.getResource(
-                    "/" + relativePath + ((i == 0) ? "MUTABLE_FLOAT_VECTOR_AR_ABS.java" : "MUTABLE_FLOAT_VECTOR_AR_REL.java"));
-            vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
-
-            for (String type[] : typesAbsRel)
-            {
-                String fType = "Float" + type[i];
-                File outPath = new File(absoluteRootPath + relativePath);
-                outPath.mkdirs();
-                PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + fType + "Vector.java");
-                String java = new String(vectorJava);
-                java = replaceAbsRel(java, type);
-                java = formulasVector(java, "MutableFloatVector => " + fType, "Mutable");
-                java = replace(java, type[i]);
-                out.print(java);
-                out.close();
-                System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + fType + "Vector.java");
-            }
         }
     }
 
     /**
      * Generate all Rel classes in value.vfloat.vector.
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     private static void generateFloatVectorRel() throws IOException, URISyntaxException
     {
@@ -758,93 +579,22 @@ public class GenerateDJUNIT
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = formulasVector(java, "FloatVector => " + fType, "");
-            java = replace(java, type);
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + fType + "Vector.java");
-        }
-
-        vectorURL = URLResource.getResource("/" + relativePath + "MUTABLE_FLOAT_VECTOR_REL.java");
-        vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
-
-        for (String type : typesRel)
-        {
-            String fType = "Float" + type;
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + fType + "Vector.java");
-            String java = new String(vectorJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            if (java.contains("class MutableFloatDimensionlessVector"))
+            if (java.contains("class FloatDimensionlessVector"))
             {
-                java = java.replace("%DIMLESS%", " implements MathFunctionsDimensionless<MutableFloatDimensionlessVector>");
+                java = java.replace("%DIMLESS%",
+                        " implements DimensionlessFunctions<DimensionlessUnit, FloatDimensionlessVector>");
                 URL dimlessURL = URLResource.getResource("/" + relativePath + "DimlessFunctions.java");
                 String dimlessFunctions = new String(Files.readAllBytes(Paths.get(dimlessURL.toURI())));
                 int pos = java.indexOf("%FORMULAS%");
                 java = java.substring(0, pos - 1) + dimlessFunctions + java.substring(pos, java.length() - 1);
             }
             java = java.replace("%DIMLESS%", "");
-            java = formulasVector(java, "MutableFloatVector => " + fType, "Mutable");
-            java = replace(java, type);
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + fType + "Vector.java");
-        }
-    }
-
-    /**
-     * Generate all Money classes in value.vfloat.vector.
-     * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
-     */
-    private static void generateFloatVectorMoney() throws IOException, URISyntaxException
-    {
-        String relativePath = "value/vfloat/vector/";
-        URL vectorURL = URLResource.getResource("/" + relativePath + "FLOAT_VECTOR_REL.java");
-        String vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
-
-        for (String type : typesMoney)
-        {
-            String fType = "Float" + type;
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + fType + "Vector.java");
-            String java = new String(vectorJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = java.replace("%DIMLESS%", "");
             java = formulasVector(java, "FloatVector => " + fType, "");
             java = replace(java, type);
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + fType + "Vector.java");
         }
-
-        vectorURL = URLResource.getResource("/" + relativePath + "MUTABLE_FLOAT_VECTOR_REL.java");
-        vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
-
-        for (String type : typesMoney)
-        {
-            String fType = "Float" + type;
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + fType + "Vector.java");
-            String java = new String(vectorJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = java.replace("%DIMLESS%", "");
-            java = formulasVector(java, "MutableFloatVector => " + fType, "Mutable");
-            java = replace(java, type);
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + fType + "Vector.java");
-        }
-
     }
 
     /****************************************************************************************************************/
@@ -890,7 +640,7 @@ public class GenerateDJUNIT
     /**
      * Generate all Abs + Rel classes in value.vdouble.matrix.
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     private static void generateDoubleMatrixAbsRel() throws IOException, URISyntaxException
     {
@@ -914,31 +664,13 @@ public class GenerateDJUNIT
                 out.close();
                 System.out.println("built: " + absoluteRootPath + relativePath + type[i] + "Matrix.java");
             }
-
-            matrixURL = URLResource.getResource("/" + relativePath
-                    + ((i == 0) ? "MUTABLE_DOUBLE_MATRIX_AR_ABS.java" : "MUTABLE_DOUBLE_MATRIX_AR_REL.java"));
-            matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
-
-            for (String[] type : typesAbsRel)
-            {
-                File outPath = new File(absoluteRootPath + relativePath);
-                outPath.mkdirs();
-                PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + type[i] + "Matrix.java");
-                String java = new String(matrixJava);
-                java = replaceAbsRel(java, type);
-                java = formulasMatrix(java, "MutableDoubleMatrix => " + type[i], "Mutable");
-                java = replace(java, type[i]);
-                out.print(java);
-                out.close();
-                System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type[i] + "Matrix.java");
-            }
         }
     }
 
     /**
      * Generate all Rel classes in value.vdouble.matrix.
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     private static void generateDoubleMatrixRel() throws IOException, URISyntaxException
     {
@@ -955,90 +687,21 @@ public class GenerateDJUNIT
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = formulasMatrix(java, "DoubleMatrix => " + type, "");
-            java = replace(java, type);
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + type + "Matrix.java");
-        }
-
-        matrixURL = URLResource.getResource("/" + relativePath + "MUTABLE_DOUBLE_MATRIX_REL.java");
-        matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
-
-        for (String type : typesRel)
-        {
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + type + "Matrix.java");
-            String java = new String(matrixJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            if (java.contains("class MutableDimensionlessMatrix"))
+            if (java.contains("class DimensionlessMatrix"))
             {
-                java = java.replace("%DIMLESS%", " implements MathFunctionsDimensionless<MutableDimensionlessMatrix>");
+                java = java.replace("%DIMLESS%", " implements DimensionlessFunctions<DimensionlessUnit, DimensionlessMatrix>");
                 URL dimlessURL = URLResource.getResource("/" + relativePath + "DimlessFunctions.java");
                 String dimlessFunctions = new String(Files.readAllBytes(Paths.get(dimlessURL.toURI())));
                 int pos = java.indexOf("%FORMULAS%");
                 java = java.substring(0, pos - 1) + dimlessFunctions + java.substring(pos, java.length() - 1);
             }
             java = java.replace("%DIMLESS%", "");
-            java = formulasMatrix(java, "MutableDoubleMatrix => " + type, "Mutable");
-            java = replace(java, type);
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type + "Matrix.java");
-        }
-    }
-
-    /**
-     * Generate all Money classes in value.vdouble.matrix.
-     * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
-     */
-    private static void generateDoubleMatrixMoney() throws IOException, URISyntaxException
-    {
-        String relativePath = "value/vdouble/matrix/";
-        URL matrixURL = URLResource.getResource("/" + relativePath + "DOUBLE_MATRIX_REL.java");
-        String matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
-
-        for (String type : typesMoney)
-        {
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type + "Matrix.java");
-            String java = new String(matrixJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = java.replace("%DIMLESS%", "");
             java = formulasMatrix(java, "DoubleMatrix => " + type, "");
             java = replace(java, type);
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + type + "Matrix.java");
         }
-
-        matrixURL = URLResource.getResource("/" + relativePath + "MUTABLE_DOUBLE_MATRIX_REL.java");
-        matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
-
-        for (String type : typesMoney)
-        {
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + type + "Matrix.java");
-            String java = new String(matrixJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = java.replace("%DIMLESS%", "");
-            java = formulasMatrix(java, "MutableDoubleMatrix => " + type, "Mutable");
-            java = replace(java, type);
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + type + "Matrix.java");
-        }
-
     }
 
     /****************************************************************************************************************/
@@ -1048,7 +711,7 @@ public class GenerateDJUNIT
     /**
      * Generate all Abs + Rel classes in value.vfloat.matrix.
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     private static void generateFloatMatrixAbsRel() throws IOException, URISyntaxException
     {
@@ -1073,32 +736,13 @@ public class GenerateDJUNIT
                 out.close();
                 System.out.println("built: " + absoluteRootPath + relativePath + fType + "Matrix.java");
             }
-
-            matrixURL = URLResource.getResource(
-                    "/" + relativePath + ((i == 0) ? "MUTABLE_FLOAT_MATRIX_AR_ABS.java" : "MUTABLE_FLOAT_MATRIX_AR_REL.java"));
-            matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
-
-            for (String type[] : typesAbsRel)
-            {
-                String fType = "Float" + type[i];
-                File outPath = new File(absoluteRootPath + relativePath);
-                outPath.mkdirs();
-                PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + fType + "Matrix.java");
-                String java = new String(matrixJava);
-                java = replaceAbsRel(java, type);
-                java = formulasMatrix(java, "MutableFloatMatrix => " + fType, "Mutable");
-                java = replace(java, type[i]);
-                out.print(java);
-                out.close();
-                System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + fType + "Matrix.java");
-            }
         }
     }
 
     /**
      * Generate all Rel classes in value.vfloat.matrix.
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     private static void generateFloatMatrixRel() throws IOException, URISyntaxException
     {
@@ -1116,93 +760,256 @@ public class GenerateDJUNIT
             java = java.replaceAll("%Type%", type);
             java = java.replaceAll("%type%", type.toLowerCase());
             java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = formulasMatrix(java, "FloatMatrix => " + fType, "");
-            java = replace(java, type);
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + fType + "Matrix.java");
-        }
-
-        matrixURL = URLResource.getResource("/" + relativePath + "MUTABLE_FLOAT_MATRIX_REL.java");
-        matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
-
-        for (String type : typesRel)
-        {
-            String fType = "Float" + type;
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + fType + "Matrix.java");
-            String java = new String(matrixJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            if (java.contains("class MutableFloatDimensionlessMatrix"))
+            if (java.contains("class FloatDimensionlessMatrix"))
             {
-                java = java.replace("%DIMLESS%", " implements MathFunctionsDimensionless<MutableFloatDimensionlessMatrix>");
+                java = java.replace("%DIMLESS%",
+                        " implements DimensionlessFunctions<DimensionlessUnit, FloatDimensionlessMatrix>");
                 URL dimlessURL = URLResource.getResource("/" + relativePath + "DimlessFunctions.java");
                 String dimlessFunctions = new String(Files.readAllBytes(Paths.get(dimlessURL.toURI())));
                 int pos = java.indexOf("%FORMULAS%");
                 java = java.substring(0, pos - 1) + dimlessFunctions + java.substring(pos, java.length() - 1);
             }
             java = java.replace("%DIMLESS%", "");
-            java = formulasMatrix(java, "MutableFloatMatrix => " + fType, "Mutable");
-            java = replace(java, type);
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + fType + "Matrix.java");
-        }
-    }
-
-    /**
-     * Generate all Money classes in value.vfloat.matrix.
-     * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
-     */
-    private static void generateFloatMatrixMoney() throws IOException, URISyntaxException
-    {
-        String relativePath = "value/vfloat/matrix/";
-        URL matrixURL = URLResource.getResource("/" + relativePath + "FLOAT_MATRIX_REL.java");
-        String matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
-
-        for (String type : typesMoney)
-        {
-            String fType = "Float" + type;
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + fType + "Matrix.java");
-            String java = new String(matrixJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = java.replace("%DIMLESS%", "");
             java = formulasMatrix(java, "FloatMatrix => " + fType, "");
             java = replace(java, type);
             out.print(java);
             out.close();
             System.out.println("built: " + absoluteRootPath + relativePath + fType + "Matrix.java");
         }
+    }
 
-        matrixURL = URLResource.getResource("/" + relativePath + "MUTABLE_FLOAT_MATRIX_REL.java");
-        matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
+    /****************************************************************************************************************/
+    /********************************************* SISCALAR *********************************************************/
+    /****************************************************************************************************************/
 
-        for (String type : typesMoney)
+    /**
+     * Generate SIScalar.java in value.vdouble.scalar.
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on the file system
+     */
+    private static void generateSIScalar() throws IOException, URISyntaxException
+    {
+        String relativePath = "value/vdouble/scalar/";
+        URL siScalarURL = URLResource.getResource("/" + relativePath + "SISCALAR.java");
+        String siJava = new String(Files.readAllBytes(Paths.get(siScalarURL.toURI())));
+        siJava = siJava.replace("@Generated(value = \"GenerateDJUNIT\")",
+                "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + generationTime + "\")");
+        String asJava = new String(
+                Files.readAllBytes(Paths.get(URLResource.getResource("/" + relativePath + "SISCALAR_AS.java").toURI())));
+
+        List<String> allRelTypes = new ArrayList<>(typesRel);
+        for (String[] arType : typesAbsRel)
         {
-            String fType = "Float" + type;
-            File outPath = new File(absoluteRootPath + relativePath);
-            outPath.mkdirs();
-            PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "Mutable" + fType + "Matrix.java");
-            String java = new String(matrixJava);
-            java = java.replaceAll("%Type%", type);
-            java = java.replaceAll("%type%", type.toLowerCase());
-            java = java.replaceAll("%TYPE%", type.toUpperCase());
-            java = java.replace("%DIMLESS%", "");
-            java = formulasMatrix(java, "MutableFloatMatrix => " + fType, "Mutable");
-            java = replace(java, type);
-            out.print(java);
-            out.close();
-            System.out.println("built: " + absoluteRootPath + relativePath + "Mutable" + fType + "Matrix.java");
+            allRelTypes.add(arType[1]);
         }
 
+        String asMethods = "";
+        for (String type : allRelTypes)
+        {
+            String lc = type.toLowerCase();
+            asMethods += asJava.replaceAll("%Type%", type).replaceAll("%type%", lc);
+        }
+
+        File outPath = new File(absoluteRootPath + relativePath);
+        outPath.mkdirs();
+        PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "SIScalar.java");
+        String java = siJava.replace("%%ASMETHODS%%", asMethods);
+        out.print(java);
+        out.close();
+        System.out.println("built: " + absoluteRootPath + relativePath + "SIScalar.java");
+    }
+
+    /**
+     * Generate SIScalar.java in value.vfloat.scalar.
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on the file system
+     */
+    private static void generateFloatSIScalar() throws IOException, URISyntaxException
+    {
+        String relativePath = "value/vfloat/scalar/";
+        URL siScalarURL = URLResource.getResource("/" + relativePath + "FLOATSISCALAR.java");
+        String siJava = new String(Files.readAllBytes(Paths.get(siScalarURL.toURI())));
+        siJava = siJava.replace("@Generated(value = \"GenerateDJUNIT\")",
+                "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + generationTime + "\")");
+        String asJava = new String(
+                Files.readAllBytes(Paths.get(URLResource.getResource("/" + relativePath + "FLOATSISCALAR_AS.java").toURI())));
+
+        List<String> allRelTypes = new ArrayList<>(typesRel);
+        for (String[] arType : typesAbsRel)
+        {
+            allRelTypes.add(arType[1]);
+        }
+
+        String asMethods = "";
+        for (String type : allRelTypes)
+        {
+            String lc = type.toLowerCase();
+            asMethods += asJava.replaceAll("%Type%", type).replaceAll("%type%", lc);
+        }
+
+        File outPath = new File(absoluteRootPath + relativePath);
+        outPath.mkdirs();
+        PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "FloatSIScalar.java");
+        String java = siJava.replace("%%ASMETHODS%%", asMethods);
+        out.print(java);
+        out.close();
+        System.out.println("built: " + absoluteRootPath + relativePath + "FloatSIScalar.java");
+    }
+
+    /****************************************************************************************************************/
+    /********************************************* SIVECTOR *********************************************************/
+    /****************************************************************************************************************/
+
+    /**
+     * Generate SIVector.java in value.vdouble.vector.
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on the file system
+     */
+    private static void generateSIVector() throws IOException, URISyntaxException
+    {
+        String relativePath = "value/vdouble/vector/";
+        URL siVectorURL = URLResource.getResource("/" + relativePath + "SIVECTOR.java");
+        String siJava = new String(Files.readAllBytes(Paths.get(siVectorURL.toURI())));
+        siJava = siJava.replace("@Generated(value = \"GenerateDJUNIT\")",
+                "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + generationTime + "\")");
+        String asJava = new String(
+                Files.readAllBytes(Paths.get(URLResource.getResource("/" + relativePath + "SIVECTOR_AS.java").toURI())));
+
+        List<String> allRelTypes = new ArrayList<>(typesRel);
+        for (String[] arType : typesAbsRel)
+        {
+            allRelTypes.add(arType[1]);
+        }
+
+        String asMethods = "";
+        for (String type : allRelTypes)
+        {
+            String lc = type.toLowerCase();
+            asMethods += asJava.replaceAll("%Type%", type).replaceAll("%type%", lc);
+        }
+
+        File outPath = new File(absoluteRootPath + relativePath);
+        outPath.mkdirs();
+        PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "SIVector.java");
+        String java = siJava.replace("%%ASMETHODS%%", asMethods);
+        out.print(java);
+        out.close();
+        System.out.println("built: " + absoluteRootPath + relativePath + "SIVector.java");
+    }
+
+    /**
+     * Generate SIVector.java in value.vfloat.vector.
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on the file system
+     */
+    private static void generateFloatSIVector() throws IOException, URISyntaxException
+    {
+        String relativePath = "value/vfloat/vector/";
+        URL siVectorURL = URLResource.getResource("/" + relativePath + "FLOATSIVECTOR.java");
+        String siJava = new String(Files.readAllBytes(Paths.get(siVectorURL.toURI())));
+        siJava = siJava.replace("@Generated(value = \"GenerateDJUNIT\")",
+                "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + generationTime + "\")");
+        String asJava = new String(
+                Files.readAllBytes(Paths.get(URLResource.getResource("/" + relativePath + "FLOATSIVECTOR_AS.java").toURI())));
+
+        List<String> allRelTypes = new ArrayList<>(typesRel);
+        for (String[] arType : typesAbsRel)
+        {
+            allRelTypes.add(arType[1]);
+        }
+
+        String asMethods = "";
+        for (String type : allRelTypes)
+        {
+            String lc = type.toLowerCase();
+            asMethods += asJava.replaceAll("%Type%", type).replaceAll("%type%", lc);
+        }
+
+        File outPath = new File(absoluteRootPath + relativePath);
+        outPath.mkdirs();
+        PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "FloatSIVector.java");
+        String java = siJava.replace("%%ASMETHODS%%", asMethods);
+        out.print(java);
+        out.close();
+        System.out.println("built: " + absoluteRootPath + relativePath + "FloatSIVector.java");
+    }
+
+    /****************************************************************************************************************/
+    /********************************************* SIMATRIX *********************************************************/
+    /****************************************************************************************************************/
+
+    /**
+     * Generate SIMatrix.java in value.vdouble.matrix.
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on the file system
+     */
+    private static void generateSIMatrix() throws IOException, URISyntaxException
+    {
+        String relativePath = "value/vdouble/matrix/";
+        URL siMatrixURL = URLResource.getResource("/" + relativePath + "SIMATRIX.java");
+        String siJava = new String(Files.readAllBytes(Paths.get(siMatrixURL.toURI())));
+        siJava = siJava.replace("@Generated(value = \"GenerateDJUNIT\")",
+                "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + generationTime + "\")");
+        String asJava = new String(
+                Files.readAllBytes(Paths.get(URLResource.getResource("/" + relativePath + "SIMATRIX_AS.java").toURI())));
+
+        List<String> allRelTypes = new ArrayList<>(typesRel);
+        for (String[] arType : typesAbsRel)
+        {
+            allRelTypes.add(arType[1]);
+        }
+
+        String asMethods = "";
+        for (String type : allRelTypes)
+        {
+            String lc = type.toLowerCase();
+            asMethods += asJava.replaceAll("%Type%", type).replaceAll("%type%", lc);
+        }
+
+        File outPath = new File(absoluteRootPath + relativePath);
+        outPath.mkdirs();
+        PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "SIMatrix.java");
+        String java = siJava.replace("%%ASMETHODS%%", asMethods);
+        out.print(java);
+        out.close();
+        System.out.println("built: " + absoluteRootPath + relativePath + "SIMatrix.java");
+    }
+
+    /**
+     * Generate SIMatrix.java in value.vfloat.matrix.
+     * @throws IOException on I/O error
+     * @throws URISyntaxException when file could not be found on the file system
+     */
+    private static void generateFloatSIMatrix() throws IOException, URISyntaxException
+    {
+        String relativePath = "value/vfloat/matrix/";
+        URL siMatrixURL = URLResource.getResource("/" + relativePath + "FLOATSIMATRIX.java");
+        String siJava = new String(Files.readAllBytes(Paths.get(siMatrixURL.toURI())));
+        siJava = siJava.replace("@Generated(value = \"GenerateDJUNIT\")",
+                "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + generationTime + "\")");
+        String asJava = new String(
+                Files.readAllBytes(Paths.get(URLResource.getResource("/" + relativePath + "FLOATSIMATRIX_AS.java").toURI())));
+
+        List<String> allRelTypes = new ArrayList<>(typesRel);
+        for (String[] arType : typesAbsRel)
+        {
+            allRelTypes.add(arType[1]);
+        }
+
+        String asMethods = "";
+        for (String type : allRelTypes)
+        {
+            String lc = type.toLowerCase();
+            asMethods += asJava.replaceAll("%Type%", type).replaceAll("%type%", lc);
+        }
+
+        File outPath = new File(absoluteRootPath + relativePath);
+        outPath.mkdirs();
+        PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + "FloatSIMatrix.java");
+        String java = siJava.replace("%%ASMETHODS%%", asMethods);
+        out.print(java);
+        out.close();
+        System.out.println("built: " + absoluteRootPath + relativePath + "FloatSIMatrix.java");
     }
 
     /****************************************************************************************************************/
@@ -1252,7 +1059,7 @@ public class GenerateDJUNIT
     }
 
     /**
-     * By default File#delete fails for non-empty directories, it works like "rm". We need something a little more brutual -
+     * By default File#delete fails for non-empty directories, it works like "rm". We need something a little more brutal -
      * this does the equivalent of "rm -r". From: http://stackoverflow.com/questions/779519/delete-files-recursively-in-java.
      * Note: USE CAREFULLY.
      * @param path File; Root File Path
@@ -1279,37 +1086,41 @@ public class GenerateDJUNIT
     /**
      * @param args String[]; args, should be blank
      * @throws IOException on I/O error
-     * @throws URISyntaxException when file could not be found on thhe file system
+     * @throws URISyntaxException when file could not be found on the file system
      */
     public static void main(String[] args) throws IOException, URISyntaxException
     {
+        generationTime = Instant.now().toString();
+
         makeAndCleanAbsolutePath();
         readAbsRelTypes();
         readRelTypes();
-        readMoneyTypes();
         readFormulas();
         readReplace();
 
         generateDoubleScalarAbsRel();
         generateDoubleScalarRel();
-        generateDoubleScalarMoney();
         generateFloatScalarAbsRel();
         generateFloatScalarRel();
-        generateFloatScalarMoney();
 
         generateDoubleVectorAbsRel();
         generateDoubleVectorRel();
-        generateDoubleVectorMoney();
         generateFloatVectorAbsRel();
         generateFloatVectorRel();
-        generateFloatVectorMoney();
 
         generateDoubleMatrixAbsRel();
         generateDoubleMatrixRel();
-        generateDoubleMatrixMoney();
         generateFloatMatrixAbsRel();
         generateFloatMatrixRel();
-        generateFloatMatrixMoney();
+
+        generateSIScalar();
+        generateFloatSIScalar();
+
+        generateSIVector();
+        generateFloatSIVector();
+
+        generateSIMatrix();
+        generateFloatSIMatrix();
     }
 
 }

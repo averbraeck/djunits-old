@@ -3,97 +3,79 @@ package org.djunits.value.vfloat.matrix;
 import java.util.List;
 import java.util.SortedMap;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.*;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.function.DimensionlessFunctions;
+import org.djunits.value.vfloat.function.FloatMathFunctions;
+import org.djunits.value.vfloat.matrix.base.*;
+import org.djunits.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits.value.vfloat.scalar.*;
+import org.djunits.value.vfloat.vector.*;
+import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable Float%Type%Matrix, a matrix of values with a %Type%Unit. 
+ * Immutable FloatFloat%Type%Matrix, a matrix of values with a %Type%Unit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
-
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class Float%Type%Matrix extends
-    AbstractFloatMatrixRel<%Type%Unit, Float%Type%Matrix, MutableFloat%Type%Matrix, Float%Type%>
+@Generated(value = "GenerateDJUNIT")
+public class Float%Type%Matrix extends AbstractFloatMatrixRel<%Type%Unit, Float%Type%, Float%Type%Vector, Float%Type%Matrix>
+%DIMLESS%
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Float%Type%Matrix.
-     * @param values float[][]; the values of the entries in the new Relative Immutable Float%Type%Matrix
-     * @param unit U; the unit of the new Relative Immutable Float%Type%Matrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @param data FloatMatrixData; an internal data object
+     * @param unit %Type%Unit; the unit
      */
-    public Float%Type%Matrix(final float[][] values, final %Type%Unit unit, final StorageType storageType)
-        throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float%Type%Matrix.
-     * @param values FloatScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Float
-     *            Float%Type%Matrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public Float%Type%Matrix(final Float%Type%[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * @param data an internal data object
-     * @param unit the unit
-     */
-    Float%Type%Matrix(final FloatMatrixData data, final %Type%Unit unit)
+    public Float%Type%Matrix(final FloatMatrixData data, final %Type%Unit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final Float%Type%Matrix toDense()
+    public Class<Float%Type%> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return Float%Type%.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final Float%Type%Matrix toSparse()
+    public Class<Float%Type%Vector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+        return Float%Type%Vector.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Float%Type%Matrix instantiateType(final FloatMatrixData fmd, final %Type%Unit unit)
+    public Float%Type%Matrix instantiateMatrix(final FloatMatrixData fmd, final %Type%Unit displayUnit)
     {
-        return new Float%Type%Matrix(fmd, unit);
+        return new Float%Type%Matrix(fmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloat%Type%Matrix instantiateMutableType(final FloatMatrixData fmd, final %Type%Unit unit)
+    public Float%Type%Vector instantiateVector(final FloatVectorData fvd, final %Type%Unit displayUnit)
     {
-        return new MutableFloat%Type%Matrix(fmd, unit);
+        return new Float%Type%Vector(fvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Float%Type% instantiateScalar(final float value, final %Type%Unit unit)
+    public Float%Type% instantiateScalarSI(final float valueSI, final %Type%Unit displayUnit)
     {
-        return new Float%Type%(value, unit);
+        Float%Type% result = Float%Type%.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
-    
 %FORMULAS%%Type%%
 }
 

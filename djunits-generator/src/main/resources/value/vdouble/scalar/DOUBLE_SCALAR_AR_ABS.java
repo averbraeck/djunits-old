@@ -2,38 +2,37 @@ package org.djunits.value.vdouble.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
+import org.djunits.Throw;
 import org.djunits.unit.*;
+import org.djunits.value.util.ValueUtil;
+import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarAbs;
 
 /**
- * Easy access methods for the Absolute %TypeAbs% DoubleScalar. Instead of:
- * <pre>DoubleScalar.Abs&lt;%TypeAbsUnit%&gt; value = new DoubleScalar.Abs&lt;%TypeAbsUnit%&gt;(100.0, %TypeAbsUnit%.SI);</pre>
- * we can now write:
- * <pre>%TypeAbs% value = new %TypeAbs%(100.0, %TypeAbsUnit%.BASE);</pre>
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
- * unit used are compatible.
+ * Easy access methods for the Absolute %TypeAbs% DoubleScalar.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
 ##TIME##
- * <p>
-
-
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
+@Generated(value = "GenerateDJUNIT")
 public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%, %TypeRelUnit%, %TypeRel%>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
-    /** constant with value zero. */
-    public static final %TypeAbs% ZERO = new %TypeAbs%(0.0, %TypeAbsUnit%.BASE);
+    /** Constant with value zero. */
+    public static final %TypeAbs% ZERO = new %TypeAbs%(0.0, %TypeAbsUnit%.DEFAULT);
 
     /**
      * Construct %TypeAbs% scalar.
-     * @param value double value
-     * @param unit unit for the double value
+     * @param value double; value
+     * @param unit %TypeAbsUnit%; unit for the double value
      */
     public %TypeAbs%(final double value, final %TypeAbsUnit% unit)
     {
@@ -42,7 +41,7 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
 
     /**
      * Construct %TypeAbs% scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value %TypeAbs%; Scalar from which to construct this instance
      */
     public %TypeAbs%(final %TypeAbs% value)
     {
@@ -64,33 +63,33 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
     }
 
     /**
-     * Construct %TypeAbsl% scalar.
-     * @param value double value in SI units
-     * @return the new scalar with the SI value
+     * Construct %TypeAbs% scalar.
+     * @param value double; value in SI units
+     * @return %TypeAbs%; the new scalar with the SI value
      */
-    public static final %TypeAbs% createSI(final double value)
+    public static final %TypeAbs% instantiateSI(final double value)
     {
-        return new %TypeAbs%(value, %TypeAbsUnit%.BASE);
+        return new %TypeAbs%(value, %TypeAbsUnit%.DEFAULT);
     }
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @param zero %TypeAbs%; the low value
+     * @param one %TypeAbs%; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @return %TypeAbs%; a Scalar at the ratio between
      */
     public static %TypeAbs% interpolate(final %TypeAbs% zero, final %TypeAbs% one, final double ratio)
     {
-        return new %TypeAbs%(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
+        return new %TypeAbs%(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
+            .getDisplayUnit());
     }
 
     /**
      * Return the maximum value of two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @return the maximum value of two absolute scalars
+     * @param a1 %TypeAbs%; the first scalar
+     * @param a2 %TypeAbs%; the second scalar
+     * @return %TypeAbs%; the maximum value of two absolute scalars
      */
     public static %TypeAbs% max(final %TypeAbs% a1, final %TypeAbs% a2)
     {
@@ -99,9 +98,9 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
 
     /**
      * Return the maximum value of more than two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @param an the other scalars
+     * @param a1 %TypeAbs%; the first scalar
+     * @param a2 %TypeAbs%; the second scalar
+     * @param an %TypeAbs%...; the other scalars
      * @return the maximum value of more than two absolute scalars
      */
     public static %TypeAbs% max(final %TypeAbs% a1, final %TypeAbs% a2, final %TypeAbs%... an)
@@ -119,8 +118,8 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
 
     /**
      * Return the minimum value of two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
+     * @param a1 %TypeAbs%; the first scalar
+     * @param a2 %TypeAbs%; the second scalar
      * @return the minimum value of two absolute scalars
      */
     public static %TypeAbs% min(final %TypeAbs% a1, final %TypeAbs% a2)
@@ -130,9 +129,9 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
 
     /**
      * Return the minimum value of more than two absolute scalars.
-     * @param a1 the first scalar
-     * @param a2 the second scalar
-     * @param an the other scalars
+     * @param a1 %TypeAbs%; the first scalar
+     * @param a2 %TypeAbs%; the second scalar
+     * @param an %TypeAbs%...; the other scalars
      * @return the minimum value of more than two absolute scalars
      */
     public static %TypeAbs% min(final %TypeAbs% a1, final %TypeAbs% a2, final %TypeAbs%... an)
@@ -153,40 +152,51 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
      * required, between the value and the unit.
      * @param text String; the textual representation to parse into a %TypeAbs%
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return %TypeAbs%; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static %TypeAbs% valueOf(final String text) throws IllegalArgumentException
+    public static %TypeAbs% valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing %TypeAbs% -- null or empty argument");
-        }
-        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        Throw.whenNull(text, "Error parsing %TypeAbs%: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing %TypeAbs%: empty text to parse");
+        Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            %TypeAbsUnit% unit = %TypeAbsUnit%.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                for (%TypeAbsUnit% unit : Unit.getUnits(%TypeAbsUnit%.class))
-                {
-                    if (unit.getDefaultLocaleTextualRepresentations().contains(unitString))
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new %TypeAbs%(d, unit);
-                    }
-                }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing %TypeAbs% from " + text, exception);
+                double d = Double.parseDouble(valueString);
+                return new %TypeAbs%(d, unit);
             }
         }
         throw new IllegalArgumentException("Error parsing %TypeAbs% from " + text);
     }
 
+    /**
+     * Returns a %TypeAbs% based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return %TypeAbs%; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static %TypeAbs% of(final double value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing %TypeAbs%: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing %TypeAbs%: empty unitString");
+        %TypeAbsUnit% unit = %TypeAbsUnit%.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new %TypeAbs%(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing %TypeAbs% with unit " + unitString);
+    }
+
+    
 %FORMULAS%%TypeAbs%%
 }
 

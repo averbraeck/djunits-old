@@ -3,9 +3,14 @@ package org.djunits.value.vdouble.matrix;
 import java.util.List;
 import java.util.SortedMap;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.*;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vdouble.matrix.base.AbstractDoubleMatrixRelWithAbs;
+import org.djunits.value.vdouble.matrix.base.AbstractDoubleMatrixAbs;
+import org.djunits.value.vdouble.matrix.data.DoubleMatrixData;
+import org.djunits.value.vdouble.vector.*;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 import org.djunits.value.vdouble.scalar.*;
 
 /**
@@ -13,85 +18,85 @@ import org.djunits.value.vdouble.scalar.*;
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
-
- * version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class %TypeRel%Matrix extends AbstractDoubleMatrixRel<%TypeRelUnit%, %TypeRel%Matrix, Mutable%TypeRel%Matrix, %TypeRel%>
+@Generated(value = "GenerateDJUNIT")
+public class %TypeRel%Matrix extends AbstractDoubleMatrixRelWithAbs<%TypeAbsUnit%, %TypeAbs%, %TypeAbs%Vector, %TypeAbs%Matrix,
+    %TypeRelUnit%, %TypeRel%, %TypeRel%Vector, %TypeRel%Matrix>
 {
     /** */
     private static final long serialVersionUID = 20151006L;
 
     /**
-     * Construct a new Relative Immutable Double %TypeRel%Matrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double %TypeRel%Matrix
-     * @param unit U; the unit of the new Relative Immutable Double %TypeRel%Matrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * @param data DoubleMatrixData; an internal data object
+     * @param unit %TypeRel%Unit; the unit
      */
-    public %TypeRel%Matrix(final double[][] values, final %TypeRelUnit% unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double %TypeRel%Matrix.
-     * @param values DoubleScalar.Rel&lt;U&gt;[][]; the values of the entries in the new Relative Immutable Double %TypeRel%Matrix
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public %TypeRel%Matrix(final %TypeRel%[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double %TypeRel%Matrix.
-     * @param data an internal data object
-     * @param unit the unit
-     */
-    %TypeRel%Matrix(final DoubleMatrixData data, final %TypeRelUnit% unit)
+    public %TypeRel%Matrix(final DoubleMatrixData data, final %TypeRel%Unit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TypeRel%Matrix toDense()
+    public Class<%TypeRel%> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return %TypeRel%.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TypeRel%Matrix toSparse()
+    public Class<%TypeRel%Vector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+        return %TypeRel%Vector.class;
+    }
+    
+    /** {@inheritDoc} */
+    @Override
+    public %TypeRel%Matrix instantiateMatrix(final DoubleMatrixData dmd, final %TypeRelUnit% displayUnit)
+    {
+        return new %TypeRel%Matrix(dmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final %TypeRel%Matrix instantiateType(final DoubleMatrixData dmd, final %TypeRelUnit% unit)
+    public %TypeRel%Vector instantiateVector(final DoubleVectorData dvd, final %TypeRelUnit% displayUnit)
     {
-        return new %TypeRel%Matrix(dmd, unit);
+        return new %TypeRel%Vector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Mutable%TypeRel%Matrix
-        instantiateMutableType(final DoubleMatrixData dmd, final %TypeRelUnit% unit)
+    public %TypeRel% instantiateScalarSI(final double valueSI, final %TypeRelUnit% displayUnit)
     {
-        return new Mutable%TypeRel%Matrix(dmd, unit);
+        %TypeRel% result = %TypeRel%.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final %TypeRel% instantiateScalar(final double value, final %TypeRelUnit% unit)
+    public %TypeAbs%Matrix instantiateMatrixAbs(final DoubleMatrixData dmd, final %TypeAbsUnit% displayUnit)
     {
-        return new %TypeRel%(value, unit);
+        return new %TypeAbs%Matrix(dmd, displayUnit);
     }
-        
+
+    /** {@inheritDoc} */
+    @Override
+    public %TypeAbs%Vector instantiateVectorAbs(final DoubleVectorData dvd, final %TypeAbsUnit% displayUnit)
+    {
+        return new %TypeAbs%Vector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public %TypeAbs% instantiateScalarAbsSI(final double valueSI, final %TypeAbsUnit% displayUnit)
+    {
+        %TypeAbs% result = %TypeAbs%.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
+    }
+
 %FORMULAS%%TypeRel%%
 }

@@ -3,175 +3,79 @@ package org.djunits.value.vdouble.vector;
 import java.util.List;
 import java.util.SortedMap;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.*;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.storage.StorageType;
 import org.djunits.value.vdouble.scalar.*;
+import org.djunits.value.vdouble.vector.*;
+import org.djunits.value.vdouble.vector.base.AbstractDoubleVectorAbs;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Absolute %TypeAbs% Vector.
+ * Double %TypeAbs%Vector, a vector of values with a %TypeAbsUnit%. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
-
- * version Sep 5, 2015 <br>
+ * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class %TypeAbs%Vector extends
-    AbstractDoubleVectorAbs<%TypeAbsUnit%, %TypeRelUnit%, %TypeAbs%Vector, %TypeRel%Vector, Mutable%TypeAbs%Vector, %TypeAbs%>
+@Generated(value = "GenerateDJUNIT")
+public class %TypeAbs%Vector extends AbstractDoubleVectorAbs<%TypeAbsUnit%, %TypeAbs%, %TypeAbs%Vector, 
+        %TypeRelUnit%, %TypeRel%, %TypeRel%Vector>
 {
     /** */
-    private static final long serialVersionUID = 20151003L;
+    private static final long serialVersionUID = 20190905L;
 
     /**
-     * Construct a new Absolute Immutable Double %TypeAbs%Vector.
-     * @param values double[]; the values of the entries in the new Absolute Immutable Double %TypeAbs%Vector
-     * @param unit U; the unit of the new Absolute Immutable Double %TypeAbs%Vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * Construct an %TypeAbs%Vector from an internal data object.
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param unit %TypeAbsUnit%; the display unit of the vector data
      */
-    public %TypeAbs%Vector(final double[] values, final %TypeAbsUnit% unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable Double %TypeAbs%Vector.
-     * @param values List; the values of the entries in the new Absolute Immutable Double %TypeAbs%Vector
-     * @param unit U; the unit of the new Absolute Immutable Double %TypeAbs%Vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public %TypeAbs%Vector(final List<Double> values, final %TypeAbsUnit% unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable Double %TypeAbs%Vector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Immutable Double %TypeAbs%Vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public %TypeAbs%Vector(final %TypeAbs%[] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable Double %TypeAbs%Vector.
-     * @param values List; the values of the entries in the new Absolute Immutable Double %TypeAbs%Vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public %TypeAbs%Vector(final List<%TypeAbs%> values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable Double %TypeAbs%Vector.
-     * @param values DoubleScalar.Rel&lt;U&gt;[]; the values of the entries in the new Absolute Sparse Mutable Double %TypeAbs%Vector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public %TypeAbs%Vector(final SortedMap<Integer, %TypeAbs%> values, final int length, final StorageType storageType)
-        throws ValueException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable Double %TypeAbs%Vector.
-     * @param values Map; the map of indexes to values of the Absolute Sparse Mutable Double %TypeAbs%Vector
-     * @param unit U; the unit of the new Absolute Sparse Mutable Double %TypeAbs%Vector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public %TypeAbs%Vector(final SortedMap<Integer, Double> values, final %TypeAbsUnit% unit, final int length,
-        final StorageType storageType) throws ValueException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable Double %TypeAbs%Vector.
-     * @param data an internal data object
-     * @param unit the unit
-     */
-    %TypeAbs%Vector(final DoubleVectorData data, final %TypeAbsUnit% unit)
+    public %TypeAbs%Vector(final DoubleVectorData data, final %TypeAbsUnit% unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final %TypeAbs%Vector instantiateTypeAbs(final DoubleVectorData dvd, final %TypeAbsUnit% unit)
+    public Class<%TypeAbs%> getScalarClass()
     {
-        return new %TypeAbs%Vector(dvd, unit);
+        return %TypeAbs%.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final %TypeRel%Vector instantiateTypeRel(final DoubleVectorData dvd, final %TypeRelUnit% unit)
+    public %TypeAbs%Vector instantiateVector(final DoubleVectorData dvd, final %TypeAbsUnit% displayUnit)
     {
-        return new %TypeRel%Vector(dvd, unit);
+        return new %TypeAbs%Vector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Mutable%TypeAbs%Vector
-        instantiateMutableType(final DoubleVectorData dvd, final %TypeAbsUnit% unit)
+    public %TypeAbs% instantiateScalarSI(final double valueSI, final %TypeAbsUnit% displayUnit)
     {
-        return new Mutable%TypeAbs%Vector(dvd, unit);
+        %TypeAbs% result = %TypeAbs%.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final %TypeAbs% instantiateScalar(final double value, final %TypeAbsUnit% unit)
+    public %TypeRel%Vector instantiateVectorRel(final DoubleVectorData dvd, final %TypeRelUnit% displayUnit)
     {
-        return new %TypeAbs%(value, unit);
-    }
-    
-    /** {@inheritDoc} */
-    @Override
-    public final %TypeAbs%Vector toDense()
-    {
-        return this.data.isDense() ? (%TypeAbs%Vector) this : instantiateTypeAbs(this.data.toDense(), getUnit());
+        return new %TypeRel%Vector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final %TypeAbs%Vector toSparse()
+    public %TypeRel% instantiateScalarRelSI(final double valueSI, final %TypeRelUnit% displayUnit)
     {
-        return this.data.isSparse() ? (%TypeAbs%Vector) this : instantiateTypeAbs(this.data.toSparse(), getUnit());
-    }
-    
-    /**
-     * Return an array of %TypeAbs% Scalars from this vector.
-     * @return %TypeAbs%[]; an array of %TypeAbs% Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public %TypeAbs%[] toArray()
-    {
-        %TypeAbs%[] array = new %TypeAbs%[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
+        %TypeRel% result = %TypeRel%.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
-%FORMULAS%%TypeAbs%%
+    %FORMULAS%%TypeAbs%%
 }
