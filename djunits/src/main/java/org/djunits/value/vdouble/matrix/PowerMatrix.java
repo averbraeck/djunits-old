@@ -1,12 +1,16 @@
 package org.djunits.value.vdouble.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.PowerUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
+import org.djunits.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits.value.vdouble.scalar.Power;
+import org.djunits.value.vdouble.vector.PowerVector;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Double PowerMatrix, a matrix of values with a PowerUnit.
+ * Immutable Double PowerMatrix, a matrix of values with a PowerUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -14,76 +18,58 @@ import org.djunits.value.vdouble.scalar.Power;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class PowerMatrix extends AbstractDoubleMatrixRel<PowerUnit, PowerMatrix, MutablePowerMatrix, Power>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class PowerMatrix extends AbstractDoubleMatrixRel<PowerUnit, Power, PowerVector, PowerMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Double PowerMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double PowerMatrix
-     * @param unit PowerUnit; the unit of the new Relative Immutable Double PowerMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public PowerMatrix(final double[][] values, final PowerUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double PowerMatrix.
-     * @param values Power[][]; the values of the entries in the new Relative Immutable Double PowerMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public PowerMatrix(final Power[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data DoubleMatrixData; an internal data object
      * @param unit PowerUnit; the unit
      */
-    PowerMatrix(final DoubleMatrixData data, final PowerUnit unit)
+    public PowerMatrix(final DoubleMatrixData data, final PowerUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final PowerMatrix toDense()
+    public Class<Power> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return Power.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final PowerMatrix toSparse()
+    public Class<PowerVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+        return PowerVector.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final PowerMatrix instantiateType(final DoubleMatrixData dmd, final PowerUnit unit)
+    public PowerMatrix instantiateMatrix(final DoubleMatrixData dmd, final PowerUnit displayUnit)
     {
-        return new PowerMatrix(dmd, unit);
+        return new PowerMatrix(dmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutablePowerMatrix instantiateMutableType(final DoubleMatrixData dmd, final PowerUnit unit)
+    public PowerVector instantiateVector(final DoubleVectorData dvd, final PowerUnit displayUnit)
     {
-        return new MutablePowerMatrix(dmd, unit);
+        return new PowerVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Power instantiateScalar(final double value, final PowerUnit unit)
+    public Power instantiateScalarSI(final double valueSI, final PowerUnit displayUnit)
     {
-        return new Power(value, unit);
+        Power result = Power.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
-
+    
 }
+

@@ -1,12 +1,16 @@
 package org.djunits.value.vfloat.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.PressureUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vfloat.matrix.base.AbstractFloatMatrixRel;
+import org.djunits.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits.value.vfloat.scalar.FloatPressure;
+import org.djunits.value.vfloat.vector.FloatPressureVector;
+import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable FloatPressureMatrix, a matrix of values with a PressureUnit.
+ * Immutable FloatFloatPressureMatrix, a matrix of values with a PressureUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -14,78 +18,58 @@ import org.djunits.value.vfloat.scalar.FloatPressure;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class FloatPressureMatrix
-        extends AbstractFloatMatrixRel<PressureUnit, FloatPressureMatrix, MutableFloatPressureMatrix, FloatPressure>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class FloatPressureMatrix extends AbstractFloatMatrixRel<PressureUnit, FloatPressure, FloatPressureVector, FloatPressureMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatPressureMatrix.
-     * @param values float[][]; the values of the entries in the new Relative Immutable FloatPressureMatrix
-     * @param unit PressureUnit; the unit of the new Relative Immutable FloatPressureMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatPressureMatrix(final float[][] values, final PressureUnit unit, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatPressureMatrix.
-     * @param values FloatPressure[][]; the values of the entries in the new Relative Immutable Float FloatPressureMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatPressureMatrix(final FloatPressure[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data FloatMatrixData; an internal data object
      * @param unit PressureUnit; the unit
      */
-    FloatPressureMatrix(final FloatMatrixData data, final PressureUnit unit)
+    public FloatPressureMatrix(final FloatMatrixData data, final PressureUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatPressureMatrix toDense()
+    public Class<FloatPressure> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return FloatPressure.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatPressureMatrix toSparse()
+    public Class<FloatPressureVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+        return FloatPressureVector.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatPressureMatrix instantiateType(final FloatMatrixData fmd, final PressureUnit unit)
+    public FloatPressureMatrix instantiateMatrix(final FloatMatrixData fmd, final PressureUnit displayUnit)
     {
-        return new FloatPressureMatrix(fmd, unit);
+        return new FloatPressureMatrix(fmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatPressureMatrix instantiateMutableType(final FloatMatrixData fmd, final PressureUnit unit)
+    public FloatPressureVector instantiateVector(final FloatVectorData fvd, final PressureUnit displayUnit)
     {
-        return new MutableFloatPressureMatrix(fmd, unit);
+        return new FloatPressureVector(fvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatPressure instantiateScalar(final float value, final PressureUnit unit)
+    public FloatPressure instantiateScalarSI(final float valueSI, final PressureUnit displayUnit)
     {
-        return new FloatPressure(value, unit);
+        FloatPressure result = FloatPressure.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
-
+
 }
+

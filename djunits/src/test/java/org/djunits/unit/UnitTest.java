@@ -1,124 +1,86 @@
 package org.djunits.unit;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotEquals;
 
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+
+import org.djunits.unit.scale.LinearScale;
+import org.djunits.unit.si.SIPrefixes;
+import org.djunits.unit.unitsystem.UnitSystem;
 import org.junit.Test;
 
 /**
+ * UnitTest.java.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
+ * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>
+ * </p>
+ * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
 public class UnitTest
 {
-    /**
-     * Test the lookupUnitWithSICoefficients method.
-     */
+    /** Test the units. */
     @Test
-    public final void lookupUnitWithSICoefficients()
+    public void unitTest()
     {
-        assertTrue("ABVOLT is expressed in Volt",
-                Unit.lookupUnitWithSICoefficients(ElectricalPotentialUnit.ABVOLT.getSICoefficients().toString())
-                        .contains(ElectricalPotentialUnit.VOLT));
-        assertTrue("ABVOLT / STATAMPERE is expressed in Ohm",
-                Unit.lookupUnitWithSICoefficients(SICoefficients.divide(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
-                        ElectricalCurrentUnit.STATAMPERE.getSICoefficients()).toString())
-                        .contains(ElectricalResistanceUnit.OHM));
-        assertTrue(
-                "ABVOLT * STATAMPERE is expressed in Watt", Unit
-                        .lookupUnitWithSICoefficients(
-                                SICoefficients.multiply(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
-                                        ElectricalCurrentUnit.STATAMPERE.getSICoefficients()).toString())
-                        .contains(PowerUnit.WATT));
-        assertTrue("ABVOLT / Watt is expressed in 1/A",
-                Unit.lookupOrCreateUnitWithSICoefficients(SICoefficients
-                        .divide(ElectricalPotentialUnit.ABVOLT.getSICoefficients(), PowerUnit.WATT.getSICoefficients())
-                        .toString()).toString().contains("1/A"));
-        assertTrue("ABVOLT * KILOVOLT is expressed in kg2.m4/s6/A2", Unit
-                .lookupOrCreateUnitWithSICoefficients(
-                        SICoefficients.multiply(ElectricalPotentialUnit.ABVOLT.getSICoefficients(),
-                                ElectricalPotentialUnit.KILOVOLT.getSICoefficients()).toString())
-                .toString().contains("kg2m4/s6A2"));
+        assertEquals(LengthUnit.SI, LengthUnit.METER);
+        assertNotEquals(LengthUnit.CENTIMETER, LengthUnit.DECIMETER);
+        assertNotEquals(null, LengthUnit.SI);
+        assertNotEquals(LengthUnit.METER, LengthUnit.DECIMETER);
+        assertNotEquals(LengthUnit.METER, DurationUnit.SECOND);
+        assertEquals(0.3048, LengthUnit.FOOT.getScale().toStandardUnit(1.0), 1.0E-6);
+        assertEquals(DurationUnit.MINUTE, DurationUnit.BASE.of("m"));
+        assertEquals(DurationUnit.MINUTE, DurationUnit.BASE.of("min"));
+        assertEquals(DurationUnit.HOUR, DurationUnit.BASE.of("h"));
+        assertEquals(DurationUnit.HOUR, DurationUnit.BASE.of("hr"));
+        assertEquals(DurationUnit.HOUR, DurationUnit.BASE.of("hour"));
+
+        assertEquals(1.0, SpeedUnit.METER_PER_SECOND.getScale().toStandardUnit(1.0), 1.0E-6);
+        assertEquals(0.277777777, SpeedUnit.KM_PER_HOUR.getScale().toStandardUnit(1.0), 1.0E-6);
+        assertEquals(0.0000771604938, AccelerationUnit.KM_PER_HOUR_2.getScale().toStandardUnit(1.0), 1.0E-12);
+
+        // these two should be similar except for the abbreviations
+        LengthUnit xx1 = new LengthUnit().build(new Unit.Builder<LengthUnit>().setUnitBase(LengthUnit.METER.getUnitBase())
+                .setId("xx1Id").setName("xxName1").setDefaultDisplayAbbreviation("xx1").setDefaultTextualAbbreviation("xx11t")
+                .setUnitSystem(UnitSystem.OTHER).setSiPrefixes(SIPrefixes.NONE).setScale(new LinearScale(1.0E-13)));
+        LengthUnit xx2 = LengthUnit.METER.deriveLinear(1.0E-13, "xx2Id", "xxName2", UnitSystem.OTHER, "xx2", "xx22t");
+        assertEquals(xx1.getUnitBase(), xx2.getUnitBase());
+        assertEquals(xx1.getScale(), xx2.getScale());
+        assertEquals(xx1.getUnitSystem(), xx2.getUnitSystem());
+        assertEquals("xx1Id", xx1.getId());
+        assertEquals("xx2Id", xx2.getId());
+        assertEquals("xxName1", xx1.getName());
+        assertEquals("xxName2", xx2.getName());
+        assertEquals("xx11t", xx1.getDefaultTextualAbbreviation());
+        assertEquals("xx22t", xx2.getDefaultTextualAbbreviation());
+        assertEquals(new LinkedHashSet<String>(Arrays.asList("xx1", "xx11t")), xx1.getAbbreviations());
+        assertEquals(new LinkedHashSet<String>(Arrays.asList("xx2", "xx22t")), xx2.getAbbreviations());
+        assertNotEquals(xx1, xx2);
+        LengthUnit.BASE.unregister(xx1);
+        LengthUnit.BASE.unregister(xx2);
     }
 
-    /**
-     * Check objects returned by getAllUnitsOfType.
-     */
+    /** hashCode() and equals(). */
     @Test
-    public final void getAllUnitsOfType()
+    public void unitHashCodeEqualsTest()
     {
-        Unit<?>[] baseUnits = {MassUnit.KILOGRAM, LengthUnit.METER, ElectricalCurrentUnit.AMPERE, DurationUnit.SECOND,
-                TemperatureUnit.KELVIN, /*
-                                         * LuminousIntencity . CANDELA , ? ? ? . mol
-                                         */ };
-        for (Unit<?> u : baseUnits)
-        {
-            for (Object unitObject : u.getAllUnitsOfThisType())
-            {
-                assertTrue("getAllUnitsOfThisType returns Units", unitObject instanceof Unit);
-                Unit<?> u2 = (Unit<?>) unitObject;
-                assertEquals("Standard unit of " + u2 + " should be " + u, u, u2.getStandardUnit());
-            }
-        }
-    }
+        LengthUnit m13a = LengthUnit.METER.deriveLinear(1.0E13, "m13", "10^13 m", UnitSystem.SI_DERIVED);
+        LengthUnit.BASE.unregister(m13a);
+        LengthUnit m13b = LengthUnit.METER.deriveLinear(1.0E13, "m13", "10^13 m", UnitSystem.SI_DERIVED);
+        LengthUnit.BASE.unregister(m13b);
+        assertEquals(m13a, m13b);
+        assertEquals(m13a.hashCode(), m13b.hashCode());
 
-    /**
-     * Test all constructors for UnitException.
-     */
-    @Test
-    public final void unitExceptionTest()
-    {
-        String message = "MessageString";
-        Exception e = new UnitException(message);
-        assertTrue("Exception should not be null", null != e);
-        assertEquals("message should be our message", message, e.getMessage());
-        assertEquals("cause should be null", null, e.getCause());
-        e = new UnitException();
-        assertTrue("Exception should not be null", null != e);
-        assertEquals("cause should be null", null, e.getCause());
-        String causeString = "CauseString";
-        Throwable cause = new Throwable(causeString);
-        e = new UnitException(cause);
-        assertTrue("Exception should not be null", null != e);
-        assertEquals("cause should not be our cause", cause, e.getCause());
-        assertEquals("cause description should be our cause string", causeString, e.getCause().getMessage());
-        e = new UnitException(message, cause);
-        assertTrue("Exception should not be null", null != e);
-        assertEquals("message should be our message", message, e.getMessage());
-        assertEquals("cause should not be our cause", cause, e.getCause());
-        assertEquals("cause description should be our cause string", causeString, e.getCause().getMessage());
-        for (boolean enableSuppression : new boolean[] {true, false})
-        {
-            for (boolean writableStackTrace : new boolean[] {true, false})
-            {
-                e = new UnitException(message, cause, enableSuppression, writableStackTrace);
-                assertTrue("Exception should not be null", null != e);
-                assertEquals("message should be our message", message, e.getMessage());
-                assertEquals("cause should not be our cause", cause, e.getCause());
-                assertEquals("cause description should be our cause string", causeString, e.getCause().getMessage());
-                // Don't know how to check if suppression is enabled/disabled
-                StackTraceElement[] stackTrace = new StackTraceElement[1];
-                stackTrace[0] = new StackTraceElement("a", "b", "c", 1234);
-                try
-                {
-                    e.setStackTrace(stackTrace);
-                }
-                catch (Exception e1)
-                {
-                    assertTrue("Stack trace should be writable", writableStackTrace);
-                    continue;
-                }
-                // You wouldn't believe it, but a call to setStackTrace if non-writable is silently ignored
-                StackTraceElement[] retrievedStackTrace = e.getStackTrace();
-                if (retrievedStackTrace.length > 0)
-                {
-                    assertTrue("stack trace should be writable", writableStackTrace);
-                }
-            }
-        }
+        LengthUnit ym = LengthUnit.BASE.of("ym");
+        LengthUnit ym2 = LengthUnit.METER.deriveSI(SIPrefixes.UNIT_PREFIXES.get("y"), false);
+        LengthUnit.BASE.unregister(ym2);
+        assertNotEquals(ym, ym2); // automatically generated = t/f
+        assertNotEquals(ym.hashCode(), ym2.hashCode());
+        LengthUnit ym3 = LengthUnit.METER.deriveSI(SIPrefixes.UNIT_PREFIXES.get("y"), true);
+        assertEquals(ym, ym3); // automatically generated = t/t
+        assertEquals(ym.hashCode(), ym3.hashCode());
+        // automatically generated ym stays in registry for further tests.
     }
-
 }

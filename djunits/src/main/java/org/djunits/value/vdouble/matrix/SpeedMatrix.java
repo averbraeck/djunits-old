@@ -1,12 +1,16 @@
 package org.djunits.value.vdouble.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.SpeedUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
+import org.djunits.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits.value.vdouble.scalar.Speed;
+import org.djunits.value.vdouble.vector.SpeedVector;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Double SpeedMatrix, a matrix of values with a SpeedUnit.
+ * Immutable Double SpeedMatrix, a matrix of values with a SpeedUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -14,76 +18,58 @@ import org.djunits.value.vdouble.scalar.Speed;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class SpeedMatrix extends AbstractDoubleMatrixRel<SpeedUnit, SpeedMatrix, MutableSpeedMatrix, Speed>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class SpeedMatrix extends AbstractDoubleMatrixRel<SpeedUnit, Speed, SpeedVector, SpeedMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Double SpeedMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double SpeedMatrix
-     * @param unit SpeedUnit; the unit of the new Relative Immutable Double SpeedMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public SpeedMatrix(final double[][] values, final SpeedUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double SpeedMatrix.
-     * @param values Speed[][]; the values of the entries in the new Relative Immutable Double SpeedMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public SpeedMatrix(final Speed[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data DoubleMatrixData; an internal data object
      * @param unit SpeedUnit; the unit
      */
-    SpeedMatrix(final DoubleMatrixData data, final SpeedUnit unit)
+    public SpeedMatrix(final DoubleMatrixData data, final SpeedUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final SpeedMatrix toDense()
+    public Class<Speed> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return Speed.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final SpeedMatrix toSparse()
+    public Class<SpeedVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+        return SpeedVector.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final SpeedMatrix instantiateType(final DoubleMatrixData dmd, final SpeedUnit unit)
+    public SpeedMatrix instantiateMatrix(final DoubleMatrixData dmd, final SpeedUnit displayUnit)
     {
-        return new SpeedMatrix(dmd, unit);
+        return new SpeedMatrix(dmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableSpeedMatrix instantiateMutableType(final DoubleMatrixData dmd, final SpeedUnit unit)
+    public SpeedVector instantiateVector(final DoubleVectorData dvd, final SpeedUnit displayUnit)
     {
-        return new MutableSpeedMatrix(dmd, unit);
+        return new SpeedVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Speed instantiateScalar(final double value, final SpeedUnit unit)
+    public Speed instantiateScalarSI(final double valueSI, final SpeedUnit displayUnit)
     {
-        return new Speed(value, unit);
+        Speed result = Speed.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
-
+    
 }
+

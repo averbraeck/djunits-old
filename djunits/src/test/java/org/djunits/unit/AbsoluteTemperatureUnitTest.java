@@ -29,27 +29,19 @@ public class AbsoluteTemperatureUnitTest extends AbstractOffsetUnitTest<Absolute
     }
 
     /**
-     * Verify the result of some get*Key methods.
-     */
-    @Test
-    public final void keys()
-    {
-        checkKeys(AbsoluteTemperatureUnit.KELVIN, "AbsoluteTemperatureUnit.kelvin", "AbsoluteTemperatureUnit.K");
-    }
-
-    /**
      * Verify conversion factors, English names and abbreviations.
      */
     @Test
     public final void conversions()
     {
+        assertEquals("K", AbsoluteTemperatureUnit.DEFAULT.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioOffsetNameAndAbbreviation(AbsoluteTemperatureUnit.KELVIN, 1, 0, 0.00000001, "Kelvin", "K");
         checkUnitRatioOffsetNameAndAbbreviation(AbsoluteTemperatureUnit.DEGREE_CELSIUS, 1, 273.15, 0.000001, "degree Celsius",
                 "\u00B0C");
-        checkUnitRatioOffsetNameAndAbbreviation(AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT, 5. / 9., 459.67, 0.00001,
+        checkUnitRatioOffsetNameAndAbbreviation(AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT, 5.0 / 9.0, 459.67, 0.00001,
                 "degree Fahrenheit", "\u00B0F");
         // Check two conversions between non-standard units
-        assertEquals("one DEGREE CELSIUS is 9/5 DEGREE FAHRENHEIT", 9. / 5.,
+        assertEquals("one DEGREE CELSIUS is 9/5 DEGREE FAHRENHEIT", 9.0 / 5.0,
                 getMultiplicationFactorTo(AbsoluteTemperatureUnit.DEGREE_CELSIUS, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT),
                 0.0001);
         assertEquals("zero DEGREE CELSIUS is 32 DEGREE FAHRENHEIT", 32, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT.getScale()
@@ -72,11 +64,20 @@ public class AbsoluteTemperatureUnitTest extends AbstractOffsetUnitTest<Absolute
     @Test
     public final void createAbsoluteTempteratureUnit()
     {
-        AbsoluteTemperatureUnit myTU =
-                new AbsoluteTemperatureUnit("Newton", "N", UnitSystem.OTHER, 3.0, 273.15, TemperatureUnit.KELVIN);
+        AbsoluteTemperatureUnit myTU = AbsoluteTemperatureUnit.KELVIN.deriveLinearOffset(3.0, 273.15, TemperatureUnit.KELVIN,
+                "N", "Newton", UnitSystem.OTHER);
         assertTrue("Can create a new AbsoluteTempteratureUnit", null != myTU);
         checkUnitRatioOffsetNameAndAbbreviation(myTU, 3, 273.15, 0.0001, "Newton", "N");
-        deregisterUnit(myTU);
+        AbsoluteTemperatureUnit.BASE.unregister(myTU);
+    }
+
+    /**
+     * Verify relative base unit.
+     */
+    @Test
+    public final void testRelative()
+    {
+        assertEquals(TemperatureUnit.BASE, AbsoluteTemperatureUnit.DEFAULT.getRelativeUnitBase());
     }
 
 }

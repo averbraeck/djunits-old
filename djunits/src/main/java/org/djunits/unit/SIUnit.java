@@ -1,56 +1,86 @@
 package org.djunits.unit;
 
-import org.djunits.unit.unitsystem.UnitSystem;
+import org.djunits.unit.si.SIDimensions;
+import org.djunits.unit.util.UnitException;
 
 /**
- * Helper class to create arbitrary SI units.
+ * SIUnit describes a unit with arbitrary SI dimensions for which no predefined unit exists.
  * <p>
- * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
+ * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>
+ * </p>
+ * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  */
 public class SIUnit extends Unit<SIUnit>
 {
     /** */
-    private static final long serialVersionUID = 20140615L;
+    private static final long serialVersionUID = 20190829L;
+
+    static
+    {
+        // make sure all predefined unit types get registered before we start using SIScalars.
+        try
+        {
+            Class.forName("org.djunits.unit.util.UNITS");
+        }
+        catch (ClassNotFoundException exception)
+        {
+            exception.printStackTrace();
+        }
+    }
 
     /**
-     * Create an arbitrary SI unit based on a coefficient string, such as m3/cd2.
-     * @param siCoefficientString String; textual description of the unit.
+     * Instantiate an SI unit 'of' a String.
+     * @param siString String; the SI string, e.g., "kgm/s2"
+     * @return the SIUnit based on the SI dimensionality
+     * @throws UnitException when the SI string is not according to the rules
      */
-    public SIUnit(final String siCoefficientString)
+    public static SIUnit of(final String siString) throws UnitException
     {
-        super(siCoefficientString, siCoefficientString, UnitSystem.SI_DERIVED);
+        return Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(siString));
+    }
+
+    /**
+     * Instantiate an SI unit 'of' a SIDimensions.
+     * @param siDimensions SIDimensions; the SI dimensions
+     * @return the SIUnit based on the SI dimensionality
+     * @throws UnitException when the SI string is not according to the rules
+     */
+    public static SIUnit of(final SIDimensions siDimensions) throws UnitException
+    {
+        return Unit.lookupOrCreateUnitWithSIDimensions(siDimensions);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final SIUnit getStandardUnit()
+    public String toString()
     {
-        return this;
+        return getUnitBase().getSiDimensions().toString(true, false);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final String getSICoefficientsString()
+    @SuppressWarnings("checkstyle:designforextension")
+    public int hashCode()
     {
-        if (null == this.getAbbreviationKey())
-        {
-            return this.getAbbreviation().replace("SIUnit.", ""); // FIXME: this is horrible / PK
-            // We need a better way to determine if a unit is supposed to have localization information.
-        }
-        return this.getAbbreviationKey().replace("SIUnit.", "");
+        return getUnitBase().getSiDimensions().hashCode();
     }
 
     /** {@inheritDoc} */
-    @SuppressWarnings("checkstyle:needbraces")
     @Override
-    public boolean equalsIgnoreNaming(final Object obj)
+    @SuppressWarnings({"checkstyle:designforextension", "checkstyle:needbraces"})
+    public boolean equals(final Object obj)
     {
-        // naming is done with a normalized SI-String, which should be equal when te SI units are equal.
-        // Therefore, we can call the equals() method that compares class, name and abbreviation.
-        return equals(obj);
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        SIUnit other = (SIUnit) obj;
+        if (!getUnitBase().getSiDimensions().equals(other.getUnitBase().getSiDimensions()))
+            return false;
+        return true;
     }
 
 }

@@ -1,5 +1,8 @@
 package org.djunits.unit.scale;
 
+import org.djunits.Throw;
+import org.djunits.unit.util.UnitRuntimeException;
+
 /**
  * A Scale for linear transformations not involving a zero-offset, e.g. for Length, Time, Area. <br>
  * A linear scale is a scale that is linearly relates a unit to the underlying SI standard unit. E.g. Mile is linearly related
@@ -16,7 +19,7 @@ package org.djunits.unit.scale;
 public class LinearScale implements Scale
 {
     /** */
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 20151011L;
 
     /** multiply by this number to convert to the standard (e.g., SI) unit. */
     private final double conversionFactorToStandardUnit;
@@ -28,7 +31,8 @@ public class LinearScale implements Scale
      */
     public LinearScale(final double conversionFactorToStandardUnit)
     {
-        super();
+        Throw.when(conversionFactorToStandardUnit == 0.0, UnitRuntimeException.class,
+                "conversion factor for linear scale cannnot be 0");
         this.conversionFactorToStandardUnit = conversionFactorToStandardUnit;
     }
 
@@ -49,7 +53,8 @@ public class LinearScale implements Scale
     }
 
     /**
-     * @return conversionFactorToStandardUnit
+     * Retrieve the factor for conversion to the standard unit.
+     * @return double; the factor for conversion to the standard unit
      */
     public final double getConversionFactorToStandardUnit()
     {
@@ -58,7 +63,6 @@ public class LinearScale implements Scale
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings("checkstyle:designforextension")
     public boolean isBaseSIScale()
     {
         return this.conversionFactorToStandardUnit == 1.0;
@@ -92,6 +96,13 @@ public class LinearScale implements Scale
                 .doubleToLongBits(other.conversionFactorToStandardUnit))
             return false;
         return true;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public String toString()
+    {
+        return "LinearScale [conversionFactorToStandardUnit=" + this.conversionFactorToStandardUnit + "]";
     }
 
 }

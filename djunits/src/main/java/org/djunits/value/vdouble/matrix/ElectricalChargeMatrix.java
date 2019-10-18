@@ -1,12 +1,16 @@
 package org.djunits.value.vdouble.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.ElectricalChargeUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
+import org.djunits.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits.value.vdouble.scalar.ElectricalCharge;
+import org.djunits.value.vdouble.vector.ElectricalChargeVector;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Double ElectricalChargeMatrix, a matrix of values with a ElectricalChargeUnit.
+ * Immutable Double ElectricalChargeMatrix, a matrix of values with a ElectricalChargeUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -14,79 +18,58 @@ import org.djunits.value.vdouble.scalar.ElectricalCharge;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class ElectricalChargeMatrix extends
-        AbstractDoubleMatrixRel<ElectricalChargeUnit, ElectricalChargeMatrix, MutableElectricalChargeMatrix, ElectricalCharge>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class ElectricalChargeMatrix extends AbstractDoubleMatrixRel<ElectricalChargeUnit, ElectricalCharge, ElectricalChargeVector, ElectricalChargeMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Double ElectricalChargeMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double ElectricalChargeMatrix
-     * @param unit ElectricalChargeUnit; the unit of the new Relative Immutable Double ElectricalChargeMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public ElectricalChargeMatrix(final double[][] values, final ElectricalChargeUnit unit, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double ElectricalChargeMatrix.
-     * @param values ElectricalCharge[][]; the values of the entries in the new Relative Immutable Double ElectricalChargeMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public ElectricalChargeMatrix(final ElectricalCharge[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data DoubleMatrixData; an internal data object
      * @param unit ElectricalChargeUnit; the unit
      */
-    ElectricalChargeMatrix(final DoubleMatrixData data, final ElectricalChargeUnit unit)
+    public ElectricalChargeMatrix(final DoubleMatrixData data, final ElectricalChargeUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final ElectricalChargeMatrix toDense()
+    public Class<ElectricalCharge> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return ElectricalCharge.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final ElectricalChargeMatrix toSparse()
+    public Class<ElectricalChargeVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+        return ElectricalChargeVector.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final ElectricalChargeMatrix instantiateType(final DoubleMatrixData dmd, final ElectricalChargeUnit unit)
+    public ElectricalChargeMatrix instantiateMatrix(final DoubleMatrixData dmd, final ElectricalChargeUnit displayUnit)
     {
-        return new ElectricalChargeMatrix(dmd, unit);
+        return new ElectricalChargeMatrix(dmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableElectricalChargeMatrix instantiateMutableType(final DoubleMatrixData dmd,
-            final ElectricalChargeUnit unit)
+    public ElectricalChargeVector instantiateVector(final DoubleVectorData dvd, final ElectricalChargeUnit displayUnit)
     {
-        return new MutableElectricalChargeMatrix(dmd, unit);
+        return new ElectricalChargeVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final ElectricalCharge instantiateScalar(final double value, final ElectricalChargeUnit unit)
+    public ElectricalCharge instantiateScalarSI(final double valueSI, final ElectricalChargeUnit displayUnit)
     {
-        return new ElectricalCharge(value, unit);
+        ElectricalCharge result = ElectricalCharge.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
-
+    
 }
+

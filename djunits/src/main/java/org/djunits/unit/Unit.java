@@ -1,665 +1,565 @@
 package org.djunits.unit;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.djunits.locale.Localization;
+import org.djunits.Throw;
+import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.base.UnitTypes;
+import org.djunits.unit.scale.IdentityScale;
+import org.djunits.unit.scale.LinearScale;
+import org.djunits.unit.scale.OffsetLinearScale;
 import org.djunits.unit.scale.Scale;
-import org.djunits.unit.scale.StandardScale;
+import org.djunits.unit.si.SIDimensions;
+import org.djunits.unit.si.SIPrefix;
+import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
+import org.djunits.unit.util.UnitRuntimeException;
 
 /**
  * All units are internally <i>stored</i> relative to a standard unit with conversion factor. This means that e.g., a meter is
  * stored with conversion factor 1.0, whereas kilometer is stored with a conversion factor 1000.0. This means that if we want to
  * express a length meter in kilometers, we have to <i>divide</i> by the conversion factor.
  * <p>
- * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
- * @param <U> the unit for transformation reasons
+ * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>
+ * </p>
+ * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
+ * @param <U> the unit to reference the actual unit in return values
  */
-public abstract class Unit<U extends Unit<U>> implements Serializable
+public class Unit<U extends Unit<U>> implements Serializable, Cloneable
 {
     /** */
-    private static final long serialVersionUID = 20140607;
+    private static final long serialVersionUID = 20190818L;
 
-    /** The key to the locale file for the abbreviation of the unit, or null when it is a user-defined unit. */
-    private final String abbreviationKey;
+    /** The id of the unit; has to be unique within the unit name. Used for, e.g., localization and retrieval. */
+    private String id;
 
-    /**
-     * The long name of the unit in case it does not exist in the locale file, e.g. when defining a run-time unit. The name will
-     * be null if the locale has to be used, i.e. for standard units.
-     */
-    private final String name;
+    /** The abbreviations in the default locale. All abbreviations an be used in the valueOf() and of() methods. */
+    private Set<String> abbreviations;
 
-    /**
-     * The abbreviation of the unit in case it does not exist in the locale file, e.g. when defining a run-time unit. The
-     * abbreviation will be null if the locale has to be used, i.e. for standard units.
-     */
-    private final String abbreviation;
+    /** The default display abbreviation in the default locale for printing. Included in the abbreviations list. */
+    private String defaultDisplayAbbreviation;
+
+    /** The default textual abbreviation in the default locale for data entry. Included in the abbreviations list. */
+    private String defaultTextualAbbreviation;
+
+    /** The long name of the unit in the default locale. */
+    private String name;
+
+    /** The scale to use to convert between this unit and the standard (e.g., SI, BASE) unit. */
+    private Scale scale;
 
     /** The unit system, e.g. SI or Imperial. */
-    private final UnitSystem unitSystem;
+    private UnitSystem unitSystem;
 
-    /** The scale to use to convert between this unit and the standard (e.g., SI) unit. */
-    private final Scale scale;
+    /** Has the unit been automatically generated or not. */
+    private boolean generated;
 
-    /** SI unit information. */
-    private SICoefficients siCoefficients;
-
-    /** A static map of all defined coefficient strings, to avoid double creation and allow lookup. */
-    private static final Map<String, SICoefficients> SI_COEFFICIENTS = new HashMap<String, SICoefficients>();
-
-    /** A static map of all defined coefficient strings, mapped to the existing units. */
-    private static final Map<String, Map<Class<Unit<?>>, Unit<?>>> SI_UNITS =
-            new HashMap<String, Map<Class<Unit<?>>, Unit<?>>>();
-
-    /** A static map of all defined units. */
-    private static final Map<String, Set<Unit<?>>> UNITS = new HashMap<String, Set<Unit<?>>>();
-
-    /** Has this class been initialized? */
-    private static boolean standardUnitsInitialized = false;
-
-    /** Standard (SI) unit or not? */
+    /** Does the unit have the standard SI signature? */
     private boolean baseSIUnit;
 
-    /** The array of the names of the standard units. */
-    public static final String[] STANDARD_UNITS = new String[] {"AbsoluteTemperatureUnit", "AccelerationUnit", "AngleSolidUnit",
-            "AngleUnit", "AreaUnit", "DensityUnit", "DimensionlessUnit", "DirectionUnit", "DurationUnit",
-            "ElectricalChargeUnit", "ElectricalCurrentUnit", "ElectricalPotentialUnit", "ElectricalResistanceUnit",
-            "EnergyUnit", "FlowMassUnit", "FlowVolumeUnit", "ForceUnit", "FrequencyUnit", "LengthUnit", "LinearDensityUnit",
-            "MassUnit", "MoneyUnit", "MoneyPerAreaUnit", "MoneyPerEnergyUnit", "MoneyPerLengthUnit", "MoneyPerMassUnit",
-            "MoneyPerDurationUnit", "MoneyPerVolumeUnit", "PositionUnit", "PowerUnit", "PressureUnit", "SpeedUnit",
-            "TemperatureUnit", "TimeUnit", "TorqueUnit", "VolumeUnit"};
-
-    /** the cached hashcode. */
-    private final int cachedHashCode;
-
-    /** The default locale. */
-    private static Localization localization = new Localization("localeunit");
-
-    /** The cached default locale information. */
-    private String[] cachedDefaultLocaleInfo;
+    /**
+     * The corresponding unit base that contains all registered units for the unit as well as SI dimension information. The base
+     * unit of a unit base is null.
+     */
+    private UnitBase<U> unitBase;
 
     /**
-     * Force all units to be loaded so we can use static lookup functions for the standard units.
+     * Initialize a blank unit that can be built through reflection with several 'setter' methods followed by calling the
+     * build(...) method.
      */
-    private static void initializeStandardUnits()
+    protected Unit()
     {
-        for (String className : STANDARD_UNITS)
+        //
+    }
+
+    /**
+     * Build the unit, using the information of the provided builder class. First check rigorously if all necessary fields in
+     * the builder have been set, and whether they are consistent and valid. The behavior is as follows: the defaultAbbreviation
+     * and defaultTextualAbbreviation are added to the abbreviations set, if they are not yet already there. When the
+     * defaultAbbreviation is set and the defaultTextualAbbreviation is not set, the defaultTextualAbbreviation gets the value
+     * of defaultAbbreviation. The reverse also holds: When the defaultTextualAbbreviation is set and the defaultAbbreviation is
+     * not set, the defaultAbbreviation gets the value of defaultTextualAbbreviation. When neither the
+     * defaultTextualAbbreviation, nor the defaultAbbreviation are set, both get the value of the unitId provided in the
+     * builder.
+     * @param builder Builder&lt;U&gt;; Builder&lt;U&gt; the object that contains the information about the construction of the
+     *            class
+     * @return U; the constructed unit
+     * @throws UnitRuntimeException when not all fields have been set
+     */
+    @SuppressWarnings("unchecked")
+    public U build(final Builder<U> builder) throws UnitRuntimeException
+    {
+        // Check the validity
+        String cName = getClass().getSimpleName();
+        Throw.whenNull(builder.getId(), "Constructing unit %s: id cannot be null", cName);
+        Throw.when(builder.getId().length() == 0, UnitRuntimeException.class, "Constructing unit %s: id.length cannot be 0",
+                cName);
+        String unitId = builder.getId();
+        Throw.whenNull(builder.getUnitBase(), "Constructing unit %s.%s: baseUnit cannot be null", cName, unitId);
+        Throw.whenNull(builder.getName(), "Constructing unit %s.%s: name cannot be null", cName, unitId);
+        Throw.when(builder.getName().length() == 0, UnitRuntimeException.class,
+                "Constructing unit %s.%s: name.length cannot be 0", cName, unitId);
+        Throw.whenNull(builder.getScale(), "Constructing unit %s.%s: scale cannot be null", cName, unitId);
+        Throw.whenNull(builder.getUnitSystem(), "Constructing unit %s.%s: unitSystem cannot be null", cName, unitId);
+
+        // set the key fields
+        this.id = unitId;
+        this.name = builder.getName();
+        this.unitBase = builder.getUnitBase();
+        this.unitSystem = builder.getUnitSystem();
+        this.scale = builder.getScale();
+        this.generated = builder.isGenerated();
+        this.baseSIUnit = this.scale.isBaseSIScale();
+
+        // Set and check the abbreviations
+        if (builder.getDefaultDisplayAbbreviation() == null)
         {
-            try
+            if (builder.getDefaultTextualAbbreviation() == null)
             {
-                Class.forName("org.djunits.unit." + className);
-            }
-            catch (Exception exception)
-            {
-                // TODO professional logging of errors
-                System.err.println("Could not load class org.djunits.unit." + className);
-            }
-        }
-        standardUnitsInitialized = true;
-    }
-
-    /**
-     * Build a standard unit and create the fields for that unit. For a standard unit, a UnitException is silently ignored.
-     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
-     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     */
-    protected Unit(final String abbreviationKey, final UnitSystem unitSystem)
-    {
-        this.scale = StandardScale.SCALE;
-        this.baseSIUnit = true;
-        this.abbreviationKey = abbreviationKey;
-        this.name = null;
-        this.abbreviation = null;
-        this.cachedDefaultLocaleInfo = localization.getDefaultString(this.abbreviationKey).split("\\|");
-        this.unitSystem = unitSystem;
-        this.cachedHashCode = generateHashCode();
-        try
-        {
-            addUnit(this);
-        }
-        catch (UnitException ue)
-        {
-            // silently ignore.
-        }
-    }
-
-    /**
-     * Build a standard unit with a specific conversion scale to/from the standard unit. For a standard unit, a UnitException is
-     * silently ignored.
-     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit, otherwise the abbreviation
-     *            itself
-     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     * @param scale Scale; the conversion scale to use for this unit
-     */
-    protected Unit(final String abbreviationKey, final UnitSystem unitSystem, final Scale scale)
-    {
-        this.scale = scale;
-        this.baseSIUnit = scale.isBaseSIScale();
-        this.abbreviationKey = abbreviationKey;
-        this.name = null;
-        this.abbreviation = null;
-        this.cachedDefaultLocaleInfo = localization.getDefaultString(this.abbreviationKey).split("\\|");
-        this.unitSystem = unitSystem;
-        this.cachedHashCode = generateHashCode();
-        try
-        {
-            addUnit(this);
-        }
-        catch (UnitException ue)
-        {
-            // silently ignore
-        }
-    }
-
-    /**
-     * Build a user-defined unit and create the fields for that unit. This unit is a user-defined unit where the localization
-     * files do not have an entry. A UnitException is thrown as a RunTimeException.
-     * @param name String; the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviation String; the key to the locale file for the abbreviation of the unit, otherwise the abbreviation
-     *            itself
-     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     */
-    protected Unit(final String name, final String abbreviation, final UnitSystem unitSystem)
-    {
-        this.scale = StandardScale.SCALE;
-        this.baseSIUnit = true;
-        this.abbreviationKey = null;
-        this.name = name;
-        this.abbreviation = abbreviation;
-        this.unitSystem = unitSystem;
-        this.cachedHashCode = generateHashCode();
-        try
-        {
-            addUnit(this);
-        }
-        catch (UnitException ue)
-        {
-            throw new RuntimeException(ue);
-        }
-    }
-
-    /**
-     * Build a user-defined unit with a specific conversion scale to/from the standard unit. This unit is a user-defined unit
-     * where the localization files do not have an entry. A UnitException is thrown as a RunTimeException.
-     * @param name String; the key to the locale file for the long name of the unit, otherwise the name itself
-     * @param abbreviation String; the key to the locale file for the abbreviation of the unit, otherwise the abbreviation
-     *            itself
-     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     * @param scale Scale; the conversion scale to use for this unit
-     */
-    protected Unit(final String name, final String abbreviation, final UnitSystem unitSystem, final Scale scale)
-    {
-        this.scale = scale;
-        this.baseSIUnit = scale.isBaseSIScale();
-        this.abbreviationKey = null;
-        this.name = name;
-        this.abbreviation = abbreviation;
-        this.unitSystem = unitSystem;
-        this.cachedHashCode = generateHashCode();
-        try
-        {
-            addUnit(this);
-        }
-        catch (UnitException ue)
-        {
-            throw new RuntimeException(ue);
-        }
-    }
-
-    /**
-     * Report if this unit support localization.
-     * @return boolean; true if this unit supports localization; false if it does not
-     */
-    public final boolean isLocalizable()
-    {
-        return this.abbreviationKey != null;
-    }
-
-    /**
-     * Add a unit to the overview collection of existing units, and resolve the coefficients.
-     * @param unit Unit&lt;U&gt;; the unit to add. It will be stored in a set belonging to the simple class name String, e.g.
-     *            "ForceUnit".
-     * @throws UnitException when parsing or normalizing the SI coefficient string fails.
-     */
-    private void addUnit(final Unit<U> unit) throws UnitException
-    {
-        if (!UNITS.containsKey(unit.getClass().getSimpleName()))
-        {
-            UNITS.put(unit.getClass().getSimpleName(), new HashSet<Unit<?>>());
-        }
-        UNITS.get(unit.getClass().getSimpleName()).add(unit);
-
-        // resolve the SI coefficients, and normalize string
-        String siCoefficientsString = SICoefficients.normalize(getSICoefficientsString()).toString();
-        if (SI_COEFFICIENTS.containsKey(siCoefficientsString))
-        {
-            this.siCoefficients = SI_COEFFICIENTS.get(siCoefficientsString);
-        }
-        else
-        {
-            this.siCoefficients = new SICoefficients(SICoefficients.parse(siCoefficientsString));
-            SI_COEFFICIENTS.put(siCoefficientsString, this.siCoefficients);
-        }
-
-        // add the standard unit
-        Map<Class<Unit<?>>, Unit<?>> unitMap = SI_UNITS.get(siCoefficientsString);
-        if (unitMap == null)
-        {
-            unitMap = new HashMap<Class<Unit<?>>, Unit<?>>();
-            SI_UNITS.put(siCoefficientsString, unitMap);
-        }
-        if (!unitMap.containsKey(unit.getClass()))
-        {
-            @SuppressWarnings("unchecked")
-            Class<Unit<?>> clazz = (Class<Unit<?>>) unit.getClass();
-            if (this.getStandardUnit() == null)
-            {
-                unitMap.put(clazz, this);
+                this.defaultDisplayAbbreviation = unitId;
             }
             else
             {
-                unitMap.put(clazz, this.getStandardUnit());
+                this.defaultDisplayAbbreviation = builder.getDefaultTextualAbbreviation();
             }
+        }
+        else
+        {
+            this.defaultDisplayAbbreviation = builder.getDefaultDisplayAbbreviation();
+        }
+        if (builder.getDefaultTextualAbbreviation() == null)
+        {
+            this.defaultTextualAbbreviation = this.defaultDisplayAbbreviation;
+        }
+        else
+        {
+            this.defaultTextualAbbreviation = builder.getDefaultTextualAbbreviation();
+        }
+        this.abbreviations = new LinkedHashSet<>();
+        this.abbreviations.add(this.defaultDisplayAbbreviation);
+        this.abbreviations.add(this.defaultTextualAbbreviation);
+        this.abbreviations.addAll(builder.getAdditionalAbbreviations());
+
+        // See what SI prefixes have to be registered. If not specified: NONE.
+        SIPrefixes siPrefixes = builder.getSiPrefixes() == null ? SIPrefixes.NONE : builder.getSiPrefixes();
+
+        // Register the unit, possibly including all SI prefixes
+        this.unitBase.registerUnit((U) this, siPrefixes);
+        return (U) this;
+    }
+
+    /**
+     * Create a scaled version of this unit with the same unit system but another SI prefix and scale.
+     * @param siPrefix SIPrefix; the prefix for which to scale the unit
+     * @param automaticallyGenerated boolean; indicate whether the unit has been automatically generated
+     * @return U; a scaled instance of this unit
+     * @throws UnitRuntimeException when cloning fails
+     */
+    public U deriveSI(final SIPrefix siPrefix, final boolean automaticallyGenerated)
+    {
+        Throw.whenNull(siPrefix, "siPrefix cannot be null");
+        try
+        {
+            U clone = clone();
+
+            // Get values: combine all prefixes with all names / abbreviations
+            String cloneId = siPrefix.getDefaultTextualPrefix() + clone.getId();
+            String cloneName = siPrefix.getPrefixName() + clone.getName();
+            Set<String> cloneAbbreviations = new LinkedHashSet<>();
+            for (String abbreviation : clone.getAbbreviations())
+            {
+                cloneAbbreviations.add(siPrefix.getDefaultTextualPrefix() + abbreviation);
+            }
+            String cloneDefaultAbbreviation = siPrefix.getDefaultDisplayPrefix() + clone.getDefaultDisplayAbbreviation();
+            String cloneDefaultTextualAbbreviation = siPrefix.getDefaultTextualPrefix() + clone.getDefaultTextualAbbreviation();
+
+            // Make a builder and set values
+            Builder<U> builder = makeBuilder();
+            builder.setId(cloneId);
+            builder.setName(cloneName);
+            builder.setUnitBase(this.unitBase);
+            builder.setSiPrefixes(SIPrefixes.NONE);
+            builder.setDefaultDisplayAbbreviation(cloneDefaultAbbreviation);
+            builder.setDefaultTextualAbbreviation(cloneDefaultTextualAbbreviation);
+            builder.setAdditionalAbbreviations(cloneAbbreviations.toArray(new String[cloneAbbreviations.size()]));
+            if (getScale() instanceof OffsetLinearScale)
+            {
+                builder.setScale(new OffsetLinearScale(
+                        siPrefix.getFactor() * ((LinearScale) getScale()).getConversionFactorToStandardUnit(), 0.0));
+            }
+            else
+            {
+                builder.setScale(
+                        new LinearScale(siPrefix.getFactor() * ((LinearScale) getScale()).getConversionFactorToStandardUnit()));
+            }
+            builder.setUnitSystem(this.unitSystem); // SI_BASE stays SI_BASE with prefix
+            builder.setGenerated(automaticallyGenerated);
+
+            return clone.build(builder);
+        }
+        catch (CloneNotSupportedException exception)
+        {
+            throw new UnitRuntimeException(exception);
         }
     }
 
     /**
-     * Return a set of defined units for a given unit type.
-     * @param <V> the unit type to use in this method.
-     * @param unitClass Class&lt;V&gt;; the class for which the units are requested, e.g. ForceUnit.class
-     * @return the set of defined units belonging to the provided class. The empty set will be returned in case the unit type
-     *         does not have any units.
+     * Create a scaled version of this unit with the same unit system but another SI prefix and scale. This method is used for a
+     * unit that is explicitly scaled with an SI prefix.
+     * @param siPrefix SIPrefix; the prefix for which to scale the unit
+     * @return a scaled instance of this unit
+     * @throws UnitRuntimeException when cloning fails
+     */
+    public U deriveSI(final SIPrefix siPrefix)
+    {
+        return deriveSI(siPrefix, false);
+    }
+
+    /**
+     * Create a scaled version of this unit with the same unit system but another SI prefix and scale, where the "k" and "kilo"
+     * abbreviations at the start will be replaced by the new information from the SIPrefix.
+     * @param siPrefix SIPrefix; the prefix for which to scale the unit
+     * @param automaticallyGenerated boolean; indicate whether the unit has been automatically generated
+     * @return U; a scaled instance of this unit
+     * @throws UnitRuntimeException when cloning fails
+     */
+    public U deriveSIKilo(final SIPrefix siPrefix, final boolean automaticallyGenerated)
+    {
+        Throw.whenNull(siPrefix, "siPrefix cannot be null");
+        Throw.when(!this.id.startsWith("k"), UnitRuntimeException.class, "deriving from a kilo-unit: id should start with 'k'");
+        Throw.when(!this.defaultTextualAbbreviation.startsWith("k"), UnitRuntimeException.class,
+                "deriving from a kilo-unit: defaultTextualAbbreviation should start with 'k'");
+        Throw.when(!this.defaultDisplayAbbreviation.startsWith("k"), UnitRuntimeException.class,
+                "deriving from a kilo-unit: defaultDisplayAbbreviation should start with 'k'");
+        Throw.when(!this.name.startsWith("kilo"), UnitRuntimeException.class,
+                "deriving from a kilo-unit: name should start with 'kilo'");
+        for (String abbreviation : getAbbreviations())
+        {
+            Throw.when(!abbreviation.startsWith("k"), UnitRuntimeException.class,
+                    "deriving from a kilo-unit: each abbreviation should start with 'k'");
+        }
+
+        try
+        {
+            U clone = clone();
+
+            // get values: combine all prefixes with all names / abbreviations
+            String cloneId = siPrefix.getDefaultTextualPrefix() + clone.getId().substring(1);
+            String cloneName = siPrefix.getPrefixName() + clone.getName().substring(4);
+            Set<String> cloneAbbreviations = new LinkedHashSet<>();
+            for (String abbreviation : clone.getAbbreviations())
+            {
+                cloneAbbreviations.add(siPrefix.getDefaultTextualPrefix() + abbreviation.substring(1));
+            }
+            String cloneDefaultAbbreviation =
+                    siPrefix.getDefaultDisplayPrefix() + clone.getDefaultDisplayAbbreviation().substring(1);
+            String cloneDefaultTextualAbbreviation =
+                    siPrefix.getDefaultTextualPrefix() + clone.getDefaultTextualAbbreviation().substring(1);
+
+            // make a builder and set values
+            Builder<U> builder = makeBuilder();
+            builder.setId(cloneId);
+            builder.setName(cloneName);
+            builder.setUnitBase(this.unitBase);
+            builder.setSiPrefixes(SIPrefixes.NONE);
+            builder.setDefaultDisplayAbbreviation(cloneDefaultAbbreviation);
+            builder.setDefaultTextualAbbreviation(cloneDefaultTextualAbbreviation);
+            builder.setAdditionalAbbreviations(cloneAbbreviations.toArray(new String[cloneAbbreviations.size()]));
+            if (getScale() instanceof OffsetLinearScale)
+            {
+                builder.setScale(new OffsetLinearScale(
+                        siPrefix.getFactor() * ((LinearScale) getScale()).getConversionFactorToStandardUnit(), 0.0));
+            }
+            else
+            {
+                builder.setScale(
+                        new LinearScale(siPrefix.getFactor() * ((LinearScale) getScale()).getConversionFactorToStandardUnit()));
+            }
+
+            builder.setUnitSystem(this.unitSystem);
+            builder.setGenerated(automaticallyGenerated);
+
+            return clone.build(builder);
+        }
+        catch (CloneNotSupportedException exception)
+        {
+            throw new UnitRuntimeException(exception);
+        }
+    }
+
+    /**
+     * Create a linearly scaled version of this unit. The scale field will be filled with the correct scaleFactor. Note that the
+     * unit that is used for derivation can already have a scaleFactor.
+     * @param scaleFactor double; the linear scale factor of the unit
+     * @param derivedId String; the new id of the derived unit
+     * @param derivedName String; the new name of the derived unit
+     * @param derivedUnitSystem UnitSystem; the unit system of the derived unit
+     * @param derivedDefaultDisplayAbbreviation String; the default abbreviation to use in e.g, the toString() method. Can be
+     *            null.
+     * @param derivedDefaultTextualAbbreviation String; the default textual abbreviation to use in, e.g, typing. Can be null.
+     * @param derivedAbbreviations String...; the other valid abbreviations for the unit, e.g. {"h", "hr", "hour"}. Can be left
+     *            out.
+     * @return U; a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
+     * @throws UnitRuntimeException when cloning fails
+     */
+    public U deriveLinear(final double scaleFactor, final String derivedId, final String derivedName,
+            final UnitSystem derivedUnitSystem, final String derivedDefaultDisplayAbbreviation,
+            final String derivedDefaultTextualAbbreviation, final String... derivedAbbreviations)
+    {
+        String cName = getClass().getSimpleName();
+        Throw.whenNull(derivedId, "deriving unit from %s.%s; derivedId cannot be null", cName, this.id);
+        Throw.whenNull(derivedName, "deriving unit from %s.%s; derivedName cannot be null", cName, this.id);
+        Throw.whenNull(derivedUnitSystem, "deriving unit from %s.%s; derivedUnitSystem cannot be null", cName, this.id);
+        if (!getScale().getClass().equals(LinearScale.class) && !getScale().getClass().equals(IdentityScale.class))
+        {
+            throw new UnitRuntimeException("Cannot derive from unit " + cName + "." + getId() + " with scale "
+                    + getScale().getClass().getSimpleName() + ". Scale should be Linear");
+        }
+
+        try
+        {
+            U clone = clone();
+
+            // make a builder and set values
+            Builder<U> builder = makeBuilder();
+            builder.setId(derivedId);
+            builder.setName(derivedName);
+            builder.setUnitBase(this.unitBase);
+            builder.setSiPrefixes(SIPrefixes.NONE);
+            builder.setScale(new LinearScale(scaleFactor * ((LinearScale) getScale()).getConversionFactorToStandardUnit()));
+            builder.setUnitSystem(derivedUnitSystem);
+            builder.setDefaultDisplayAbbreviation(derivedDefaultDisplayAbbreviation);
+            builder.setDefaultTextualAbbreviation(derivedDefaultTextualAbbreviation);
+            if (derivedAbbreviations != null)
+            {
+                builder.setAdditionalAbbreviations(derivedAbbreviations);
+            }
+
+            return clone.build(builder);
+        }
+        catch (CloneNotSupportedException exception)
+        {
+            throw new UnitRuntimeException(exception);
+        }
+    }
+
+    /**
+     * Create a linearly scaled version of this unit. The scale field will be filled with the correct scaleFactor. Note that the
+     * unit that is used for derivation can already have a scaleFactor.
+     * @param scaleFactor double; the linear scale factor of the unit
+     * @param derivedId String; the new id of the derived unit
+     * @param derivedName String; the new name of the derived unit
+     * @param derivedUnitSystem UnitSystem; the unit system of the derived unit
+     * @return U; a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
+     * @throws UnitRuntimeException when cloning fails
+     */
+    public U deriveLinear(final double scaleFactor, final String derivedId, final String derivedName,
+            final UnitSystem derivedUnitSystem)
+    {
+        return deriveLinear(scaleFactor, derivedId, derivedName, derivedUnitSystem, null, null);
+    }
+
+    /**
+     * Create a linearly scaled version of this unit. The unitSystem will be copied. The scale field will be filled with the
+     * correct scaleFactor. Note that the unit that is used for derivation can already have a scaleFactor.
+     * @param scaleFactor double; the linear scale factor of the unit
+     * @param derivedId String; the new id of the derived unit
+     * @param derivedName String; the new name of the derived unit
+     * @return U; a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
+     * @throws UnitRuntimeException when cloning fails
+     */
+    public U deriveLinear(final double scaleFactor, final String derivedId, final String derivedName)
+    {
+        return deriveLinear(scaleFactor, derivedId, derivedName, getUnitSystem());
+    }
+
+    /**
+     * Create a Builder. Override at subclasses to create extended builder.
+     * @return an instance of a builder.
+     */
+    public Builder<U> makeBuilder()
+    {
+        return new Builder<U>();
+    }
+
+    /**
+     * Create or lookup a unit based on given SI dimensions. E.g., a unit with dimensions 1/s^2 or kg.m/s^2.
+     * @param siDimensions SIDimensions; the vector with the dimensionality of the unit
+     * @return SIUnit; an SIUnit object with the right dimensions
      */
     @SuppressWarnings("unchecked")
-    public static <V extends Unit<V>> Set<V> getUnits(final Class<V> unitClass)
+    public static SIUnit lookupOrCreateUnitWithSIDimensions(final SIDimensions siDimensions)
     {
-        if (!standardUnitsInitialized)
+        Throw.whenNull(siDimensions, "siDimensions cannot be null");
+
+        UnitBase<SIUnit> unitBase = null;
+        SIUnit unit = null;
+
+        Set<UnitBase<?>> baseUnitSet = UnitTypes.INSTANCE.getUnitBases(siDimensions);
+        for (UnitBase<?> bu : baseUnitSet)
         {
-            initializeStandardUnits();
-        }
-        Set<V> returnSet = new HashSet<V>();
-        if (UNITS.containsKey(unitClass.getSimpleName()))
-        {
-            for (Unit<?> unit : UNITS.get(unitClass.getSimpleName()))
+            if (bu.getStandardUnit().getClass().equals(Unit.class))
             {
-                returnSet.add((V) unit);
+                unitBase = (UnitBase<SIUnit>) bu;
             }
         }
-        return returnSet;
+
+        if (unitBase == null)
+        {
+            unitBase = new UnitBase<SIUnit>(siDimensions);
+            Builder<SIUnit> builder = new Builder<>();
+            builder.setId(siDimensions.toString(true, true));
+            builder.setName(siDimensions.toString(true, true));
+            builder.setUnitBase(unitBase);
+            builder.setScale(IdentityScale.SCALE);
+            builder.setGenerated(true);
+            builder.setUnitSystem(UnitSystem.SI_DERIVED);
+            builder.setSiPrefixes(SIPrefixes.NONE);
+            unit = new SIUnit();
+            unit.build(builder); // it will be registered at the BaseUnit
+        }
+        else
+        {
+            unit = unitBase.getStandardUnit();
+        }
+
+        return unit;
     }
 
     /**
-     * Return a copy of the set of all defined units for this unit type.
-     * @return the set of defined units belonging to this Unit class. The empty set will be returned in case the unit type does
-     *         not have any units.
+     * Retrieve the unit id.
+     * @return String; the unit id
      */
-    @SuppressWarnings("unchecked")
-    public final Set<Unit<U>> getAllUnitsOfThisType()
+    public String getId()
     {
-        if (!standardUnitsInitialized)
-        {
-            initializeStandardUnits();
-        }
-        Set<Unit<U>> returnSet = new HashSet<Unit<U>>();
-        if (UNITS.containsKey(this.getClass().getSimpleName()))
-        {
-            for (Unit<?> unit : UNITS.get(this.getClass().getSimpleName()))
-            {
-                returnSet.add((Unit<U>) unit);
-            }
-        }
-        return returnSet;
+        return this.id;
     }
 
     /**
-     * @return name, e.g. meters per second
+     * Retrieve the unit abbreviations.
+     * @return Set&lt;String&gt;; the unit abbreviations
      */
-    public final String getName()
+    public Set<String> getAbbreviations()
     {
-        if (this.name != null)
-        {
-            return this.name;
-        }
-        if (localization.isDefault())
-        {
-            return getDefaultLocaleName();
-        }
-        String[] loc = localization.getString(this.abbreviationKey).split("\\|");
-        if (loc.length >= 2)
-        {
-            return loc[1].trim();
-        }
-        if (loc.length >= 1)
-        {
-            return loc[0].trim();
-        }
-        return this.abbreviationKey;
+        return this.abbreviations;
     }
 
     /**
-     * @return the name in the default locale, e.g. meters per second
+     * Retrieve the default abbreviation.
+     * @return String; the default abbreviation
      */
-    public final String getDefaultLocaleName()
+    public String getDefaultDisplayAbbreviation()
     {
-        if (this.name != null)
-        {
-            return this.name;
-        }
-        if (this.cachedDefaultLocaleInfo.length >= 2)
-        {
-            return this.cachedDefaultLocaleInfo[1].trim();
-        }
-        if (this.cachedDefaultLocaleInfo.length >= 1)
-        {
-            return this.cachedDefaultLocaleInfo[0].trim();
-        }
-        return this.abbreviationKey;
+        return this.defaultDisplayAbbreviation;
     }
 
     /**
-     * @return abbreviation, e.g., m/s
+     * Retrieve the default textual abbreviation.
+     * @return String; the default textual abbreviation
      */
-    public final String getAbbreviation()
+    public String getDefaultTextualAbbreviation()
     {
-        if (this.abbreviation != null)
-        {
-            return this.abbreviation;
-        }
-        if (localization.isDefault())
-        {
-            return getDefaultLocaleAbbreviation();
-        }
-        String[] loc = localization.getString(this.abbreviationKey).split("\\|");
-        if (loc.length >= 1)
-        {
-            return loc[0].trim();
-        }
-        return this.abbreviationKey;
+        return this.defaultTextualAbbreviation;
     }
 
     /**
-     * @return the abbreviation in the default locale, e.g., m/s
+     * Retrieve the name of this unit.
+     * @return String; the name of this unit
      */
-    public final String getDefaultLocaleAbbreviation()
+    public String getName()
     {
-        if (this.abbreviation != null)
-        {
-            return this.abbreviation;
-        }
-        if (this.cachedDefaultLocaleInfo.length >= 1)
-        {
-            return this.cachedDefaultLocaleInfo[0].trim();
-        }
-        return this.abbreviationKey;
+        return this.name;
     }
 
     /**
-     * This method returns the abbreviation key, or null in case the abbreviation is hard coded.
-     * @return abbreviation key, e.g. DurationUnit.m/s, or null for a user-defined unit
+     * Retrieve the scale of this unit.
+     * @return Scale; the scale of this unit
      */
-    public final String getAbbreviationKey()
-    {
-        return this.abbreviationKey;
-    }
-
-    /**
-     * Return the textual display types of the unit. In case the list contains more than one abbreviation, the first one is the
-     * default one. In case none is available, the standard abbreviation is used. In case that one is also not available the
-     * abbreviation key is used. Note: the abbreviation itself is not necessarily a <b>textual</b> representation.
-     * @return the textual display types of the unit
-     */
-    public final List<String> getTextualRepresentations()
-    {
-        if (this.abbreviation != null)
-        {
-            return Arrays.asList(new String[] {this.abbreviation});
-        }
-        if (localization.isDefault())
-        {
-            return getDefaultLocaleTextualRepresentations();
-        }
-        String[] loc = localization.getString(this.abbreviationKey).split("\\|");
-        if (loc.length >= 3)
-        {
-            List<String> textList = new ArrayList<>();
-            for (int i = 2; i < loc.length; i++)
-            {
-                textList.add(loc[i].trim());
-            }
-            return textList;
-        }
-        if (loc.length >= 1)
-        {
-            return Arrays.asList(new String[] {loc[0].trim()});
-        }
-        return Arrays.asList(new String[] {this.abbreviationKey});
-    }
-
-    /**
-     * Return the textual display types of the unit in the default locale. In case the list contains more than one abbreviation,
-     * the first one is the default one. In case none is available, the standard abbreviation is used. In case that one is also
-     * not available the abbreviation key is used. Note: the abbreviation itself is not necessarily a <b>textual</b>
-     * representation.
-     * @return the textual display types of the unit in the default locale
-     */
-    public final List<String> getDefaultLocaleTextualRepresentations()
-    {
-        if (this.abbreviation != null)
-        {
-            return Arrays.asList(new String[] {this.abbreviation});
-        }
-        if (this.cachedDefaultLocaleInfo.length >= 3)
-        {
-            List<String> textList = new ArrayList<>();
-            for (int i = 2; i < this.cachedDefaultLocaleInfo.length; i++)
-            {
-                textList.add(this.cachedDefaultLocaleInfo[i].trim());
-            }
-            return textList;
-        }
-        if (this.cachedDefaultLocaleInfo.length >= 1)
-        {
-            return Arrays.asList(new String[] {this.cachedDefaultLocaleInfo[0].trim()});
-        }
-        return Arrays.asList(new String[] {this.abbreviationKey});
-    }
-
-    /**
-     * Return the default textual display representation of the unit. In case there are more textual representations, the first
-     * one is the default one. In case none is available, the standard abbreviation is used. In case that one is also not
-     * available the abbreviation key is used. Note: the abbreviation itself is not necessarily a <b>textual</b> representation.
-     * @return the default textual display representation of the unit
-     */
-    public final String getDefaultTextualRepresentation()
-    {
-        if (this.abbreviation != null)
-        {
-            return this.abbreviation;
-        }
-        if (localization.isDefault())
-        {
-            return getDefaultLocaleTextualRepresentation();
-        }
-        String[] loc = localization.getString(this.abbreviationKey).split("\\|");
-        if (loc.length >= 3)
-        {
-            return loc[2].trim();
-        }
-        if (loc.length >= 1)
-        {
-            return loc[0].trim();
-        }
-        return this.abbreviationKey;
-    }
-
-    /**
-     * Return the default textual display representation of the unit in the default locale. In case there are more textual
-     * representations, the first one is the default one. In case none is available, the standard abbreviation is used. In case
-     * that one is also not available the abbreviation key is used. Note: the abbreviation itself is not necessarily a
-     * <b>textual</b> representation.
-     * @return the default textual display representation of the unit in the default locale
-     */
-    public final String getDefaultLocaleTextualRepresentation()
-    {
-        if (this.abbreviation != null)
-        {
-            return this.abbreviation;
-        }
-        if (this.cachedDefaultLocaleInfo.length >= 3)
-        {
-            return this.cachedDefaultLocaleInfo[2].trim();
-        }
-        if (this.cachedDefaultLocaleInfo.length >= 1)
-        {
-            return this.cachedDefaultLocaleInfo[0].trim();
-        }
-        return this.abbreviationKey;
-    }
-
-    /**
-     * @return the scale to transform between this unit and the reference (e.g., SI) unit.
-     */
-    @SuppressWarnings("checkstyle:designforextension")
     public Scale getScale()
     {
         return this.scale;
     }
 
     /**
-     * @return unitSystem, e.g. SI or Imperial
+     * Retrieve the unit system of this unit.
+     * @return unitSystem the unit system of this unit
      */
-    public final UnitSystem getUnitSystem()
+    public UnitSystem getUnitSystem()
     {
         return this.unitSystem;
     }
 
     /**
-     * @return the SI standard unit for this unit, or the de facto standard unit if SI is not available
+     * Retrieve the unit base of this unit.
+     * @return BaseUnit&lt;U&gt;; the unit base of this unit. if this unit is itself a unit base; the returned value is
+     *         <code>null</code>
      */
-    public abstract U getStandardUnit();
-
-    /**
-     * @return the SI standard coefficients for this unit, e.g., kgm/s2 or m-2s2A or m^-2.s^2.A or m^-2s^2A (not necessarily
-     *         normalized)
-     */
-    public abstract String getSICoefficientsString();
-
-    /**
-     * @return the SI coefficients
-     */
-    public final SICoefficients getSICoefficients()
+    public UnitBase<U> getUnitBase()
     {
-        return this.siCoefficients;
+        return this.unitBase;
     }
 
     /**
-     * Determine whether this unit is the standard unit.
-     * @return boolean; whether this is the standard unit or not
+     * Indicate whether is unit was automatically generated.
+     * @return boolean; true if this unit has been automatically generate; false if it was not automatically generated
      */
-    public final boolean isBaseSIUnit()
+    public boolean isGenerated()
+    {
+        return this.generated;
+    }
+
+    /**
+     * Indicate whether this unit has the standard SI signature.
+     * @return boolean; true if this unit has the standard SI signature; false if this unit does not have the standard SI
+     *         signature
+     */
+    public boolean isBaseSIUnit()
     {
         return this.baseSIUnit;
     }
 
     /**
-     * @param normalizedSICoefficientsString String; the normalized string (e.g., kg.m/s2) to look up
-     * @return a set with the Units belonging to this string, or an empty set when it does not exist
+     * Retrieve the standard unit (SI Unit) belonging to this unit.
+     * @return U; the standard unit (SI unit) belonging to this unit
      */
-    public static Set<Unit<?>> lookupUnitWithSICoefficients(final String normalizedSICoefficientsString)
+    public U getStandardUnit()
     {
-        if (!standardUnitsInitialized)
-        {
-            initializeStandardUnits();
-        }
-        if (SI_UNITS.containsKey(normalizedSICoefficientsString))
-        {
-            return new HashSet<Unit<?>>(SI_UNITS.get(normalizedSICoefficientsString).values());
-        }
-        return new HashSet<Unit<?>>();
+        return getUnitBase().getStandardUnit();
     }
 
-    /**
-     * @param normalizedSICoefficientsString the normalized string (e.g., kg.m/s2) to look up
-     * @return a set of Units belonging to this string, or a set with a new unit when it does not yet exist
-     */
-    public static Set<Unit<?>> lookupOrCreateUnitWithSICoefficients(final String normalizedSICoefficientsString)
+    /** {@inheritDoc} */
+    @SuppressWarnings("unchecked")
+    @Override
+    public U clone() throws CloneNotSupportedException
     {
-        if (!standardUnitsInitialized)
-        {
-            initializeStandardUnits();
-        }
-        if (SI_UNITS.containsKey(normalizedSICoefficientsString))
-        {
-            return new HashSet<Unit<?>>(SI_UNITS.get(normalizedSICoefficientsString).values());
-        }
-        SIUnit unit = new SIUnit("SIUnit." + normalizedSICoefficientsString);
-        Set<Unit<?>> unitSet = new HashSet<Unit<?>>();
-        unitSet.add(unit);
-        return unitSet;
-    }
-
-    /**
-     * @param normalizedSICoefficientsString String; the normalized string (e.g., kg.m/s2) to look up
-     * @return the Unit belonging to this string, or a new unit when it does not yet exist
-     */
-    public static SIUnit lookupOrCreateSIUnitWithSICoefficients(final String normalizedSICoefficientsString)
-    {
-        if (!standardUnitsInitialized)
-        {
-            initializeStandardUnits();
-        }
-        if (SI_UNITS.containsKey(normalizedSICoefficientsString)
-                && SI_UNITS.get(normalizedSICoefficientsString).containsKey(SIUnit.class))
-        {
-            return (SIUnit) SI_UNITS.get(normalizedSICoefficientsString).get(SIUnit.class);
-        }
-        SIUnit unit = new SIUnit("SIUnit." + normalizedSICoefficientsString);
-        return unit;
+        return (U) super.clone();
     }
 
     /** {@inheritDoc} */
     @Override
-    public final String toString()
-    {
-        return getAbbreviation();
-    }
-
-    /**
-     * Generate a hashCode for caching.
-     * @return a hashCode that is consistent with the equals() method.
-     */
-    public final int generateHashCode()
+    public int hashCode()
     {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((this.abbreviation == null) ? 0 : this.abbreviation.hashCode());
-        result = prime * result + ((this.abbreviationKey == null) ? 0 : this.abbreviationKey.hashCode());
+        result = prime * result + ((this.abbreviations == null) ? 0 : this.abbreviations.hashCode());
+        result = prime * result + ((this.unitBase == null) ? 0 : this.unitBase.hashCode());
+        result = prime * result + ((this.defaultDisplayAbbreviation == null) ? 0 : this.defaultDisplayAbbreviation.hashCode());
+        result = prime * result + ((this.defaultTextualAbbreviation == null) ? 0 : this.defaultTextualAbbreviation.hashCode());
+        result = prime * result + (this.generated ? 1231 : 1237);
+        result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
         result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
+        result = prime * result + ((this.scale == null) ? 0 : this.scale.hashCode());
+        result = prime * result + ((this.unitSystem == null) ? 0 : this.unitSystem.hashCode());
         return result;
     }
 
     /** {@inheritDoc} */
-    @SuppressWarnings("checkstyle:designforextension")
     @Override
-    public int hashCode()
-    {
-        return this.cachedHashCode;
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings({"checkstyle:designforextension", "checkstyle:needbraces"})
-    @Override
-    public boolean equals(final Object obj)
+    public boolean equals(Object obj)
     {
         if (this == obj)
             return true;
@@ -668,19 +568,42 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
         if (getClass() != obj.getClass())
             return false;
         Unit<?> other = (Unit<?>) obj;
-        if (this.abbreviation == null)
+        if (this.abbreviations == null)
         {
-            if (other.abbreviation != null)
+            if (other.abbreviations != null)
                 return false;
         }
-        else if (!this.abbreviation.equals(other.abbreviation))
+        else if (!this.abbreviations.equals(other.abbreviations))
             return false;
-        if (this.abbreviationKey == null)
+        if (this.unitBase == null)
         {
-            if (other.abbreviationKey != null)
+            if (other.unitBase != null)
                 return false;
         }
-        else if (!this.abbreviationKey.equals(other.abbreviationKey))
+        else if (!this.unitBase.equals(other.unitBase))
+            return false;
+        if (this.defaultDisplayAbbreviation == null)
+        {
+            if (other.defaultDisplayAbbreviation != null)
+                return false;
+        }
+        else if (!this.defaultDisplayAbbreviation.equals(other.defaultDisplayAbbreviation))
+            return false;
+        if (this.defaultTextualAbbreviation == null)
+        {
+            if (other.defaultTextualAbbreviation != null)
+                return false;
+        }
+        else if (!this.defaultTextualAbbreviation.equals(other.defaultTextualAbbreviation))
+            return false;
+        if (this.generated != other.generated)
+            return false;
+        if (this.id == null)
+        {
+            if (other.id != null)
+                return false;
+        }
+        else if (!this.id.equals(other.id))
             return false;
         if (this.name == null)
         {
@@ -689,15 +612,322 @@ public abstract class Unit<U extends Unit<U>> implements Serializable
         }
         else if (!this.name.equals(other.name))
             return false;
+        if (this.scale == null)
+        {
+            if (other.scale != null)
+                return false;
+        }
+        else if (!this.scale.equals(other.scale))
+            return false;
+        if (this.unitSystem == null)
+        {
+            if (other.unitSystem != null)
+                return false;
+        }
+        else if (!this.unitSystem.equals(other.unitSystem))
+            return false;
         return true;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public String toString()
+    {
+        return this.defaultDisplayAbbreviation;
+    }
+
     /**
-     * Test if two units are the same, except for the name and abbreviation. This means for instance that for the MassUnits
-     * METRIC_TON and MEGAGRAM (both 1000 kg) equals(...) will yield false, but equalsIgnoreNaming will yield true.
-     * @param obj Object; the object to compare with
-     * @return true if the two units are the same numerically, except for the naming and/or abbreviation
+     * The class that contains the information to build a unit.
+     * <p>
+     * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved.
+     * <br>
+     * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
+     * <p>
+     * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
+     * @param <U> the unit for which the builder contains the information.
      */
-    public abstract boolean equalsIgnoreNaming(Object obj);
+    public static class Builder<U extends Unit<U>> implements Serializable
+    {
+        /** ... */
+        private static final long serialVersionUID = 20191018L;
+
+        /** The id of the unit; has to be unique within the unit name. Used for, e.g., localization and retrieval. */
+        private String id;
+
+        /** The abbreviations in the default locale. All abbreviations an be used in the valueOf() and of() methods. */
+        private Set<String> additionalAbbreviations = new LinkedHashSet<>();
+
+        /** The default abbreviation in the default locale for printing. Included in the abbreviations list. */
+        private String defaultDisplayAbbreviation;
+
+        /** The default textual abbreviation in the default locale for data entry. Included in the abbreviations list. */
+        private String defaultTextualAbbreviation;
+
+        /** The full name of the unit in the default locale. */
+        private String name;
+
+        /** The scale to use to convert between this unit and the standard (e.g., SI, BASE) unit. */
+        private Scale scale;
+
+        /** The unit system, e.g. SI or Imperial. */
+        private UnitSystem unitSystem;
+
+        /** Whether or not the unit supports SI prefixes from "yotta" (y) to "yocto" (Y). */
+        private SIPrefixes siPrefixes;
+
+        /** Whether the unit has been automatically generated or not. */
+        private boolean generated = false;
+
+        /**
+         * The corresponding unit base that contains all registered units for the unit as well as SI dimension information. The
+         * unit base should never be null.
+         */
+        private UnitBase<U> unitBase;
+
+        /**
+         * Empty constructor. Content is generated through chaining: new Unit.Builder<TypeUnit>().setId("id").setName("name");
+         */
+        public Builder()
+        {
+            // Empty constructor. Content is generated through (chaining of) method calls
+        }
+
+        /**
+         * Return whether SI prefixes, ranging from yotta (y) to yocto (Y), will be generated.
+         * @return siPrefixes, NONE (e.g., for inch), ALL (e.g., for meter) or KILO (e.g., for kilometer)
+         */
+        public SIPrefixes getSiPrefixes()
+        {
+            return this.siPrefixes;
+        }
+
+        /**
+         * Set whether SI prefixes, ranging from yotta (y) to yocto (Y), are allowed. If not set; this property defaults to
+         * <code>false</code>.
+         * @param siPrefixes SIPrefixes; SIPrefixes set siPrefixes, NONE (e.g., for inch), ALL (e.g., for meter) or KILO (e.g.,
+         *            for kilometer)
+         * @return Builder; this builder instance that is being constructed (for method call chaining)
+         */
+        public Builder<U> setSiPrefixes(final SIPrefixes siPrefixes)
+        {
+            this.siPrefixes = siPrefixes;
+            return this;
+        }
+
+        /**
+         * Retrieve the id of the unit that this builder builds.
+         * @return String; the id of the unit that this builder builds
+         */
+        public String getId()
+        {
+            return this.id;
+        }
+
+        /**
+         * Set the id of the unit that this builder builds.
+         * @param id String; set the id of the unit that this builder builds (must be set; the default is <code>null</code>
+         *            which is invalid)
+         * @return Builder; this builder instance that is being constructed (for method call chaining)
+         */
+        public Builder<U> setId(final String id)
+        {
+            this.id = id;
+            return this;
+        }
+
+        /**
+         * Retrieve the additional abbreviations.
+         * @return Set&lt;String&gt;; the additional abbreviations
+         */
+        public Set<String> getAdditionalAbbreviations()
+        {
+            return this.additionalAbbreviations;
+        }
+
+        /**
+         * Set the additional abbreviations.
+         * @param additionalAbbreviations String...; the additional abbreviations
+         * @return Builder; this builder instance that is being constructed (for method call chaining)
+         */
+        public Builder<U> setAdditionalAbbreviations(final String... additionalAbbreviations)
+        {
+            this.additionalAbbreviations = new LinkedHashSet<>(Arrays.asList(additionalAbbreviations)); // safe copy
+            return this;
+        }
+
+        /**
+         * Retrieve the default display abbreviation.
+         * @return String; the default display abbreviation
+         */
+        public String getDefaultDisplayAbbreviation()
+        {
+            return this.defaultDisplayAbbreviation;
+        }
+
+        /**
+         * Set the default display abbreviation.
+         * @param defaultDisplayAbbreviation String; the default display abbreviation
+         * @return Builder; this builder instance that is being constructed (for method call chaining)
+         */
+        public Builder<U> setDefaultDisplayAbbreviation(final String defaultDisplayAbbreviation)
+        {
+            this.defaultDisplayAbbreviation = defaultDisplayAbbreviation;
+            return this;
+        }
+
+        /**
+         * Retrieve the default textual abbreviation.
+         * @return String; the default textual abbreviation
+         */
+        public String getDefaultTextualAbbreviation()
+        {
+            return this.defaultTextualAbbreviation;
+        }
+
+        /**
+         * Set the default textual abbreviation.
+         * @param defaultTextualAbbreviation String; the default textual abbreviation
+         * @return Builder; this builder instance that is being constructed (for method call chaining)
+         */
+        public Builder<U> setDefaultTextualAbbreviation(final String defaultTextualAbbreviation)
+        {
+            this.defaultTextualAbbreviation = defaultTextualAbbreviation;
+            return this;
+        }
+
+        /**
+         * Return the name.
+         * @return String; the name
+         */
+        public String getName()
+        {
+            return this.name;
+        }
+
+        /**
+         * Set the name.
+         * @param name String; the name
+         * @return Builder; this builder instance that is being constructed (for method call chaining)
+         */
+        public Builder<U> setName(final String name)
+        {
+            this.name = name;
+            return this;
+        }
+
+        /**
+         * Retrieve the scale.
+         * @return Scale; the scale
+         */
+        public Scale getScale()
+        {
+            return this.scale;
+        }
+
+        /**
+         * Set the scale.
+         * @param scale Scale; set the scale
+         * @return Builder; this builder instance that is being constructed (for method call chaining)
+         */
+        public Builder<U> setScale(final Scale scale)
+        {
+            this.scale = scale;
+            return this;
+        }
+
+        /**
+         * Retrieve the unit system.
+         * @return unitSystem UnitSystem; the unit system
+         */
+        public UnitSystem getUnitSystem()
+        {
+            return this.unitSystem;
+        }
+
+        /**
+         * Set the unit system.
+         * @param unitSystem UnitSystem; the unit system
+         * @return Builder; this builder instance that is being constructed (for method call chaining)
+         */
+        public Builder<U> setUnitSystem(final UnitSystem unitSystem)
+        {
+            this.unitSystem = unitSystem;
+            return this;
+        }
+
+        /**
+         * Retrieve the generated flag.
+         * @return generated Boolean; the generated flag
+         */
+        public boolean isGenerated()
+        {
+            return this.generated;
+        }
+
+        /**
+         * Set the generated flag. Defaults to false. Should be set for units that are automatically generated.
+         * @param generated boolean; the value for the generated flag
+         * @return Builder; this builder instance that is being constructed (for method call chaining)
+         */
+        public Builder<U> setGenerated(final boolean generated)
+        {
+            this.generated = generated;
+            return this;
+        }
+
+        /**
+         * Retrieve the unit base.
+         * @return baseUnit BaseUnit&lt;U&gt;; the unit base
+         */
+        public UnitBase<U> getUnitBase()
+        {
+            return this.unitBase;
+        }
+
+        /**
+         * Set the unit base. Can never be null and has to be filled.
+         * @param unitBase UnitBase&lt;U&gt;; the unit base
+         * @return Builder; this builder instance that is being constructed (for method call chaining)
+         */
+        public Builder<U> setUnitBase(final UnitBase<U> unitBase)
+        {
+            this.unitBase = unitBase;
+            return this;
+        }
+
+        /** {@inheritDoc} */
+        @Override
+        public String toString()
+        {
+            return "Builder [id=" + this.id + ", name=" + this.name + ", scale=" + this.scale + "]";
+        }
+
+    }
+
+    /**
+     * Find or create a unit for the given SI dimensions.
+     * @param unitString String; the textual representation of the unit
+     * @return SIUnit; the unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static SIUnit getUnit(final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing SIVector: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing SIVector: empty unitString");
+        try
+        {
+            SIUnit unit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(unitString));
+            if (unit != null)
+            {
+                return unit;
+            }
+        }
+        catch (Exception exception)
+        {
+            throw new IllegalArgumentException("Error parsing SIUnit from " + unitString, exception);
+        }
+        throw new IllegalArgumentException("Error parsing SIVector with unit " + unitString);
+    }
 
 }

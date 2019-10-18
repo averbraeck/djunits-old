@@ -1,101 +1,100 @@
 package org.djunits.value.vdouble.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.AngleUnit;
 import org.djunits.unit.DirectionUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vdouble.matrix.base.AbstractDoubleMatrixAbs;
+import org.djunits.value.vdouble.matrix.data.DoubleMatrixData;
+import org.djunits.value.vdouble.scalar.Angle;
 import org.djunits.value.vdouble.scalar.Direction;
+import org.djunits.value.vdouble.vector.AngleVector;
+import org.djunits.value.vdouble.vector.DirectionVector;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable Direction Matrix.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class DirectionMatrix extends
-        AbstractDoubleMatrixAbs<DirectionUnit, AngleUnit, DirectionMatrix, AngleMatrix, MutableDirectionMatrix, Direction>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class DirectionMatrix extends AbstractDoubleMatrixAbs<DirectionUnit, Direction, DirectionVector, DirectionMatrix,
+    AngleUnit, Angle, AngleVector, AngleMatrix>
 {
     /** */
-    private static final long serialVersionUID = 20151003L;
+    private static final long serialVersionUID = 20151006L;
 
     /**
-     * Construct a new Absolute Immutable Double AngleMatrix.
-     * @param values double[][]; the values of the entries in the new Absolute Immutable Double AngleMatrix
-     * @param unit DirectionUnit; the unit of the new Absolute Immutable Double AngleMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public DirectionMatrix(final double[][] values, final DirectionUnit unit, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable Double AngleMatrix.
-     * @param values Direction[][]; the values of the entries in the new Absolute Immutable Double AngleMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public DirectionMatrix(final Direction[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable Double AngleMatrix.
      * @param data DoubleMatrixData; an internal data object
      * @param unit DirectionUnit; the unit
      */
-    DirectionMatrix(final DoubleMatrixData data, final DirectionUnit unit)
+    public DirectionMatrix(final DoubleMatrixData data, final DirectionUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final DirectionMatrix toDense()
+    public Class<Direction> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateTypeAbs(this.data.toDense(), getUnit());
+        return Direction.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final DirectionMatrix toSparse()
+    public Class<DirectionVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateTypeAbs(this.data.toSparse(), getUnit());
+        return DirectionVector.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final DirectionMatrix instantiateTypeAbs(final DoubleMatrixData dmd, final DirectionUnit unit)
+    public DirectionMatrix instantiateMatrix(final DoubleMatrixData dmd, final DirectionUnit displayUnit)
     {
-        return new DirectionMatrix(dmd, unit);
+        return new DirectionMatrix(dmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final AngleMatrix instantiateTypeRel(final DoubleMatrixData dmd, final AngleUnit unit)
+    public DirectionVector instantiateVector(final DoubleVectorData dvd, final DirectionUnit displayUnit)
     {
-        return new AngleMatrix(dmd, unit);
+        return new DirectionVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableDirectionMatrix instantiateMutableType(final DoubleMatrixData dmd, final DirectionUnit unit)
+    public Direction instantiateScalarSI(final double valueSI, final DirectionUnit displayUnit)
     {
-        return new MutableDirectionMatrix(dmd, unit);
+        Direction result = Direction.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Direction instantiateScalar(final double value, final DirectionUnit unit)
+    public AngleMatrix instantiateMatrixRel(final DoubleMatrixData dmd, final AngleUnit displayUnit)
     {
-        return new Direction(value, unit);
+        return new AngleMatrix(dmd, displayUnit);
     }
 
-}
+    /** {@inheritDoc} */
+    @Override
+    public AngleVector instantiateVectorRel(final DoubleVectorData dvd, final AngleUnit displayUnit)
+    {
+        return new AngleVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Angle instantiateScalarRelSI(final double valueSI, final AngleUnit displayUnit)
+    {
+        Angle result = Angle.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
+    }
+
+}

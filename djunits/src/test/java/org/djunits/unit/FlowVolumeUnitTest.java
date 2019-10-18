@@ -29,20 +29,12 @@ public class FlowVolumeUnitTest extends AbstractLinearUnitTest<FlowVolumeUnit>
     }
 
     /**
-     * Verify the result of some get*Key methods.
-     */
-    @Test
-    public final void keys()
-    {
-        checkKeys(FlowVolumeUnit.CUBIC_METER_PER_SECOND, "FlowVolumeUnit.cubic_meter_per_second", "FlowVolumeUnit.m^3/s");
-    }
-
-    /**
      * Verify conversion factors, English names and abbreviations.
      */
     @Test
     public final void conversions()
     {
+        assertEquals("m3/s", FlowVolumeUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(FlowVolumeUnit.CUBIC_METER_PER_SECOND, 1, 0.000001, "cubic meter per second",
                 "m^3/s");
         checkUnitRatioNameAndAbbreviation(FlowVolumeUnit.CUBIC_METER_PER_MINUTE, 0.0166667, 0.000001, "cubic meter per minute",
@@ -60,11 +52,10 @@ public class FlowVolumeUnitTest extends AbstractLinearUnitTest<FlowVolumeUnit>
     @Test
     public final void createFLowVolumeUnit()
     {
-        FlowVolumeUnit myFVU =
-                new FlowVolumeUnit("TrucksPerHour", "tph", UnitSystem.OTHER, FlowVolumeUnit.CUBIC_METER_PER_HOUR, 100);
+        FlowVolumeUnit myFVU = FlowVolumeUnit.CUBIC_METER_PER_HOUR.deriveLinear(100, "tph", "TrucksPerHour", UnitSystem.OTHER);
         assertTrue("Can create a new FlowMassUnit", null != myFVU);
         checkUnitRatioNameAndAbbreviation(myFVU, 100. / 3600, 0.0001, "TrucksPerHour", "tph");
-        deregisterUnit(myFVU);
+        FlowVolumeUnit.BASE.unregister(myFVU);
     }
 
 }

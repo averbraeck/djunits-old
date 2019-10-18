@@ -1,15 +1,14 @@
 package org.djunits.value.vdouble.vector;
 
-import java.util.List;
-import java.util.SortedMap;
+import javax.annotation.Generated;
 
 import org.djunits.unit.MassUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.Mass;
+import org.djunits.value.vdouble.vector.base.AbstractDoubleVectorRel;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Double MassVector, a vector of values with a MassUnit.
+ * Double MassVector, a vector of values with a MassUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -17,150 +16,46 @@ import org.djunits.value.vdouble.scalar.Mass;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class MassVector extends AbstractDoubleVectorRel<MassUnit, MassVector, MutableMassVector, Mass>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class MassVector extends AbstractDoubleVectorRel<MassUnit, Mass, MassVector>
+
 {
     /** */
-    private static final long serialVersionUID = 20151109L;
+    private static final long serialVersionUID = 20190905L;
 
     /**
-     * Construct a new Relative Immutable Double MassVector.
-     * @param values double[]; the values of the entries in the new Relative Immutable Double MassVector
-     * @param unit MassUnit; the unit of the new Relative Immutable Double MassVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * Construct an MassVector from an internal data object.
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param displayUnit MassUnit; the display unit of the vector data
      */
-    public MassVector(final double[] values, final MassUnit unit, final StorageType storageType) throws ValueException
+    public MassVector(final DoubleVectorData data, final MassUnit displayUnit)
     {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double MassVector.
-     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double MassVector
-     * @param unit MassUnit; the unit of the new Relative Immutable Double MassVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public MassVector(final List<Double> values, final MassUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double MassVector.
-     * @param values Mass[]; the values of the entries in the new Relative Immutable Double MassVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public MassVector(final Mass[] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double MassVector.
-     * @param values List&lt;Mass&gt;; the values of the entries in the new Relative Immutable Double MassVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public MassVector(final List<Mass> values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double MassVector.
-     * @param values SortedMap&lt;Integer, Mass&gt;; the values of the entries in the new Relative Sparse Mutable Double
-     *            MassVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public MassVector(final SortedMap<Integer, Mass> values, final int length, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double MassVector.
-     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
-     *            MassVector
-     * @param unit MassUnit; the unit of the new Relative Sparse Mutable Double MassVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public MassVector(final SortedMap<Integer, Double> values, final MassUnit unit, final int length,
-            final StorageType storageType) throws ValueException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
-     * @param data DoubleVectorData; an internal data object
-     * @param unit MassUnit; the unit
-     */
-    MassVector(final DoubleVectorData data, final MassUnit unit)
-    {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MassVector instantiateType(final DoubleVectorData dvd, final MassUnit unit)
+    public Class<Mass> getScalarClass()
     {
-        return new MassVector(dvd, unit);
+        return Mass.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableMassVector instantiateMutableType(final DoubleVectorData dvd, final MassUnit unit)
+    public MassVector instantiateVector(final DoubleVectorData dvd, final MassUnit displayUnit)
     {
-        return new MutableMassVector(dvd, unit);
+        return new MassVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Mass instantiateScalar(final double value, final MassUnit unit)
+    public Mass instantiateScalarSI(final double valueSI, final MassUnit displayUnit)
     {
-        return new Mass(value, unit);
+        Mass result = Mass.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public final MassVector toDense()
-    {
-        return this.data.isDense() ? (MassVector) this : instantiateType(this.data.toDense(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final MassVector toSparse()
-    {
-        return this.data.isSparse() ? (MassVector) this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Return an array of Mass Scalars from this vector.
-     * @return Mass[]; an array of Mass Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public Mass[] toArray()
-    {
-        Mass[] array = new Mass[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
-    }
-
+   
 }
+

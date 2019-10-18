@@ -1,15 +1,14 @@
 package org.djunits.value.vfloat.vector;
 
-import java.util.List;
-import java.util.SortedMap;
+import javax.annotation.Generated;
 
 import org.djunits.unit.PowerUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatPower;
+import org.djunits.value.vfloat.vector.base.AbstractFloatVectorRel;
+import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable Float FloatPowerVector, a vector of values with a PowerUnit.
+ * Immutable Float FloatPowerVector, a vector of values with a PowerUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -17,150 +16,47 @@ import org.djunits.value.vfloat.scalar.FloatPower;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class FloatPowerVector extends AbstractFloatVectorRel<PowerUnit, FloatPowerVector, MutableFloatPowerVector, FloatPower>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class FloatPowerVector extends AbstractFloatVectorRel<PowerUnit, FloatPower, FloatPowerVector>
+
 {
     /** */
-    private static final long serialVersionUID = 20151109L;
+    private static final long serialVersionUID = 20190905L;
 
     /**
-     * Construct a new Relative Immutable Float FloatPowerVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable Float FloatPowerVector
-     * @param unit PowerUnit; the unit of the new Relative Immutable Float FloatPowerVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatPowerVector(final float[] values, final PowerUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatPowerVector.
-     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float FloatPowerVector
-     * @param unit PowerUnit; the unit of the new Relative Immutable Float FloatPowerVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatPowerVector(final List<Float> values, final PowerUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatPowerVector.
-     * @param values FloatPower[]; the values of the entries in the new Relative Immutable Float FloatPowerVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatPowerVector(final FloatPower[] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatPowerVector.
-     * @param values List&lt;FloatPower&gt;; the values of the entries in the new Relative Immutable Float FloatPowerVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatPowerVector(final List<FloatPower> values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatPowerVector.
-     * @param values SortedMap&lt;Integer, FloatPower&gt;; the values of the entries in the new Relative Sparse Mutable Float
-     *            FloatPowerVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatPowerVector(final SortedMap<Integer, FloatPower> values, final int length, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatPowerVector.
-     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
-     *            FloatPowerVector
-     * @param unit PowerUnit; the unit of the new Relative Sparse Mutable Float FloatPowerVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatPowerVector(final SortedMap<Integer, Float> values, final PowerUnit unit, final int length,
-            final StorageType storageType) throws ValueException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
+     * Construct an FloatPowerVector from an internal data object.
      * @param data FloatVectorData; an internal data object
      * @param unit PowerUnit; the unit
      */
-    FloatPowerVector(final FloatVectorData data, final PowerUnit unit)
+    public FloatPowerVector(final FloatVectorData data, final PowerUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatPowerVector instantiateType(final FloatVectorData dvd, final PowerUnit unit)
+    public Class<FloatPower> getScalarClass()
     {
-        return new FloatPowerVector(dvd, unit);
+        return FloatPower.class;
+    }
+        
+    /** {@inheritDoc} */
+    @Override
+    public FloatPowerVector instantiateVector(final FloatVectorData fvd, final PowerUnit displayUnit)
+    {
+        return new FloatPowerVector(fvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatPowerVector instantiateMutableType(final FloatVectorData dvd, final PowerUnit unit)
+    public FloatPower instantiateScalarSI(final float valueSI, final PowerUnit displayUnit)
     {
-        return new MutableFloatPowerVector(dvd, unit);
+        FloatPower result = FloatPower.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatPower instantiateScalar(final float value, final PowerUnit unit)
-    {
-        return new FloatPower(value, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatPowerVector toDense()
-    {
-        return this.data.isDense() ? (FloatPowerVector) this : instantiateType(this.data.toDense(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatPowerVector toSparse()
-    {
-        return this.data.isSparse() ? (FloatPowerVector) this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Return an array of FloatPower Scalars from this vector.
-     * @return FloatPower[]; an array of FloatPower Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public FloatPower[] toArray()
-    {
-        FloatPower[] array = new FloatPower[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
-    }
-
+   
 }
+
+

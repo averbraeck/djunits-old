@@ -1,12 +1,12 @@
 package org.djunits.unit;
 
-import static org.djunits.unit.unitsystem.UnitSystem.OTHER;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Locale;
 
 import org.djunits.locale.DefaultLocale;
+import org.djunits.unit.unitsystem.UnitSystem;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,22 +29,14 @@ public class DurationUnitTest extends AbstractLinearUnitTest<DurationUnit>
     }
 
     /**
-     * Verify the result of some get*Key methods.
-     */
-    @Test
-    public final void keys()
-    {
-        checkKeys(DurationUnit.SECOND, "DurationUnit.second", "DurationUnit.s");
-    }
-
-    /**
      * Verify conversion factors, English names and abbreviations.
      */
     @Test
     public final void conversions()
     {
+        assertEquals("s", DurationUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(DurationUnit.SECOND, 1, 0.00000001, "second", "s");
-        checkUnitRatioNameAndAbbreviation(DurationUnit.HOUR, 3600, 0.0005, "hour", "h");
+        checkUnitRatioNameAndAbbreviation(DurationUnit.HOUR, 3600, 0.0005, "hour", "hr");
         checkUnitRatioNameAndAbbreviation(DurationUnit.DAY, 86400, 0.001, "day", "day");
         // Check two conversions between non-standard units
         assertEquals("one DAY is 24 HOUR", 24, getMultiplicationFactorTo(DurationUnit.DAY, DurationUnit.HOUR), 0.0001);
@@ -62,10 +54,10 @@ public class DurationUnitTest extends AbstractLinearUnitTest<DurationUnit>
     @Test
     public final void createDurationUnit()
     {
-        DurationUnit myTU = new DurationUnit("Fortnight", "fn", OTHER, DurationUnit.SECOND, 14 * 86400);
+        DurationUnit myTU = DurationUnit.SECOND.deriveLinear(14.0 * 86400, "fn", "Fortnight", UnitSystem.OTHER);
         assertTrue("Can create a new DurationUnit", null != myTU);
         checkUnitRatioNameAndAbbreviation(myTU, 14 * 86400, 1, "Fortnight", "fn");
-        deregisterUnit(myTU);
+        DurationUnit.BASE.unregister(myTU);
     }
 
 }

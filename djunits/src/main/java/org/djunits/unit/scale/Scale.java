@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * Scales for unit conversion, offers functions to and from SI units. E.g., LinearScale for Length, Area, etc. LinearOffsetScale
- * for Temperature. PercentScale for Angle. LogarithmicScale for Sound.
+ * for Temperature. PercentScale for Angle. LogarithmicScale for Sound, GradeScale for percentual angle.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -29,8 +29,11 @@ public interface Scale extends Serializable
     double fromStandardUnit(double value);
 
     /**
-     * Return whether this is a base (SI) scale.
-     * @return boolean; whether this is a base (SI) scale or not
+     * Return whether a scale is a 'standard' scale that would belong to an SI unit. For a linear scale, any scale with
+     * conversion factor 1 would be considered standard. For an offset scale, it would be considered standard if the offset is 0
+     * and the conversion factor is 1.
+     * @return boolean; whether the scale is a 'standard' scale that would belong to an SI unit.
      */
     boolean isBaseSIScale();
+
 }

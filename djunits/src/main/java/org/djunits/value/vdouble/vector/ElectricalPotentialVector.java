@@ -1,15 +1,14 @@
 package org.djunits.value.vdouble.vector;
 
-import java.util.List;
-import java.util.SortedMap;
+import javax.annotation.Generated;
 
 import org.djunits.unit.ElectricalPotentialUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.ElectricalPotential;
+import org.djunits.value.vdouble.vector.base.AbstractDoubleVectorRel;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Double ElectricalPotentialVector, a vector of values with a ElectricalPotentialUnit.
+ * Double ElectricalPotentialVector, a vector of values with a ElectricalPotentialUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -17,158 +16,46 @@ import org.djunits.value.vdouble.scalar.ElectricalPotential;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class ElectricalPotentialVector extends AbstractDoubleVectorRel<ElectricalPotentialUnit, ElectricalPotentialVector,
-        MutableElectricalPotentialVector, ElectricalPotential>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class ElectricalPotentialVector extends AbstractDoubleVectorRel<ElectricalPotentialUnit, ElectricalPotential, ElectricalPotentialVector>
+
 {
     /** */
-    private static final long serialVersionUID = 20151109L;
+    private static final long serialVersionUID = 20190905L;
 
     /**
-     * Construct a new Relative Immutable Double ElectricalPotentialVector.
-     * @param values double[]; the values of the entries in the new Relative Immutable Double ElectricalPotentialVector
-     * @param unit ElectricalPotentialUnit; the unit of the new Relative Immutable Double ElectricalPotentialVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * Construct an ElectricalPotentialVector from an internal data object.
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param displayUnit ElectricalPotentialUnit; the display unit of the vector data
      */
-    public ElectricalPotentialVector(final double[] values, final ElectricalPotentialUnit unit, final StorageType storageType)
-            throws ValueException
+    public ElectricalPotentialVector(final DoubleVectorData data, final ElectricalPotentialUnit displayUnit)
     {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double ElectricalPotentialVector.
-     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double
-     *            ElectricalPotentialVector
-     * @param unit ElectricalPotentialUnit; the unit of the new Relative Immutable Double ElectricalPotentialVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public ElectricalPotentialVector(final List<Double> values, final ElectricalPotentialUnit unit,
-            final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double ElectricalPotentialVector.
-     * @param values ElectricalPotential[]; the values of the entries in the new Relative Immutable Double
-     *            ElectricalPotentialVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public ElectricalPotentialVector(final ElectricalPotential[] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double ElectricalPotentialVector.
-     * @param values List&lt;ElectricalPotential&gt;; the values of the entries in the new Relative Immutable Double
-     *            ElectricalPotentialVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public ElectricalPotentialVector(final List<ElectricalPotential> values, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double ElectricalPotentialVector.
-     * @param values SortedMap&lt;Integer, ElectricalPotential&gt;; the values of the entries in the new Relative Sparse Mutable
-     *            Double ElectricalPotentialVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public ElectricalPotentialVector(final SortedMap<Integer, ElectricalPotential> values, final int length,
-            final StorageType storageType) throws ValueException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double ElectricalPotentialVector.
-     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
-     *            ElectricalPotentialVector
-     * @param unit ElectricalPotentialUnit; the unit of the new Relative Sparse Mutable Double ElectricalPotentialVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public ElectricalPotentialVector(final SortedMap<Integer, Double> values, final ElectricalPotentialUnit unit,
-            final int length, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
-     * @param data DoubleVectorData; an internal data object
-     * @param unit ElectricalPotentialUnit; the unit
-     */
-    ElectricalPotentialVector(final DoubleVectorData data, final ElectricalPotentialUnit unit)
-    {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final ElectricalPotentialVector instantiateType(final DoubleVectorData dvd, final ElectricalPotentialUnit unit)
+    public Class<ElectricalPotential> getScalarClass()
     {
-        return new ElectricalPotentialVector(dvd, unit);
+        return ElectricalPotential.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableElectricalPotentialVector instantiateMutableType(final DoubleVectorData dvd,
-            final ElectricalPotentialUnit unit)
+    public ElectricalPotentialVector instantiateVector(final DoubleVectorData dvd, final ElectricalPotentialUnit displayUnit)
     {
-        return new MutableElectricalPotentialVector(dvd, unit);
+        return new ElectricalPotentialVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final ElectricalPotential instantiateScalar(final double value, final ElectricalPotentialUnit unit)
+    public ElectricalPotential instantiateScalarSI(final double valueSI, final ElectricalPotentialUnit displayUnit)
     {
-        return new ElectricalPotential(value, unit);
+        ElectricalPotential result = ElectricalPotential.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalPotentialVector toDense()
-    {
-        return this.data.isDense() ? (ElectricalPotentialVector) this : instantiateType(this.data.toDense(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalPotentialVector toSparse()
-    {
-        return this.data.isSparse() ? (ElectricalPotentialVector) this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Return an array of ElectricalPotential Scalars from this vector.
-     * @return ElectricalPotential[]; an array of ElectricalPotential Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public ElectricalPotential[] toArray()
-    {
-        ElectricalPotential[] array = new ElectricalPotential[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
-    }
-
+   
 }
+

@@ -1,12 +1,16 @@
 package org.djunits.value.vfloat.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.PowerUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vfloat.matrix.base.AbstractFloatMatrixRel;
+import org.djunits.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits.value.vfloat.scalar.FloatPower;
+import org.djunits.value.vfloat.vector.FloatPowerVector;
+import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable FloatPowerMatrix, a matrix of values with a PowerUnit.
+ * Immutable FloatFloatPowerMatrix, a matrix of values with a PowerUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -14,76 +18,58 @@ import org.djunits.value.vfloat.scalar.FloatPower;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class FloatPowerMatrix extends AbstractFloatMatrixRel<PowerUnit, FloatPowerMatrix, MutableFloatPowerMatrix, FloatPower>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class FloatPowerMatrix extends AbstractFloatMatrixRel<PowerUnit, FloatPower, FloatPowerVector, FloatPowerMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatPowerMatrix.
-     * @param values float[][]; the values of the entries in the new Relative Immutable FloatPowerMatrix
-     * @param unit PowerUnit; the unit of the new Relative Immutable FloatPowerMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatPowerMatrix(final float[][] values, final PowerUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatPowerMatrix.
-     * @param values FloatPower[][]; the values of the entries in the new Relative Immutable Float FloatPowerMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatPowerMatrix(final FloatPower[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data FloatMatrixData; an internal data object
      * @param unit PowerUnit; the unit
      */
-    FloatPowerMatrix(final FloatMatrixData data, final PowerUnit unit)
+    public FloatPowerMatrix(final FloatMatrixData data, final PowerUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatPowerMatrix toDense()
+    public Class<FloatPower> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return FloatPower.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatPowerMatrix toSparse()
+    public Class<FloatPowerVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+        return FloatPowerVector.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatPowerMatrix instantiateType(final FloatMatrixData fmd, final PowerUnit unit)
+    public FloatPowerMatrix instantiateMatrix(final FloatMatrixData fmd, final PowerUnit displayUnit)
     {
-        return new FloatPowerMatrix(fmd, unit);
+        return new FloatPowerMatrix(fmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatPowerMatrix instantiateMutableType(final FloatMatrixData fmd, final PowerUnit unit)
+    public FloatPowerVector instantiateVector(final FloatVectorData fvd, final PowerUnit displayUnit)
     {
-        return new MutableFloatPowerMatrix(fmd, unit);
+        return new FloatPowerVector(fvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatPower instantiateScalar(final float value, final PowerUnit unit)
+    public FloatPower instantiateScalarSI(final float valueSI, final PowerUnit displayUnit)
     {
-        return new FloatPower(value, unit);
+        FloatPower result = FloatPower.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
-
+
 }
+

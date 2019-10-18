@@ -29,20 +29,12 @@ public class FlowMassUnitTest extends AbstractLinearUnitTest<FlowMassUnit>
     }
 
     /**
-     * Verify the result of some get*Key methods.
-     */
-    @Test
-    public final void keys()
-    {
-        checkKeys(FlowMassUnit.KILOGRAM_PER_SECOND, "FlowMassUnit.kilogram_per_second", "FlowMassUnit.kg/s");
-    }
-
-    /**
      * Verify conversion factors, English names and abbreviations.
      */
     @Test
     public final void conversions()
     {
+        assertEquals("kg/s", FlowMassUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(FlowMassUnit.KILOGRAM_PER_SECOND, 1, 0.000001, "kilogram per second", "kg/s");
         checkUnitRatioNameAndAbbreviation(FlowMassUnit.POUND_PER_SECOND, 0.453592, 0.0001, "pound per second", "lb/s");
         // Check two conversions between non-standard units
@@ -58,11 +50,10 @@ public class FlowMassUnitTest extends AbstractLinearUnitTest<FlowMassUnit>
     @Test
     public final void createFlowMassUnit()
     {
-        FlowMassUnit myFMU =
-                new FlowMassUnit("WaterDropsPerHour", "wdpu", UnitSystem.OTHER, FlowMassUnit.KILOGRAM_PER_SECOND, 1234);
+        FlowMassUnit myFMU = FlowMassUnit.KILOGRAM_PER_SECOND.deriveLinear(1234, "wdpu", "WaterDropsPerHour", UnitSystem.OTHER);
         assertTrue("Can create a new FlowMassUnit", null != myFMU);
         checkUnitRatioNameAndAbbreviation(myFMU, 1234, 0.0001, "WaterDropsPerHour", "wdpu");
-        deregisterUnit(myFMU);
+        FlowMassUnit.BASE.unregister(myFMU);
     }
 
 }

@@ -1,12 +1,16 @@
 package org.djunits.value.vfloat.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.ElectricalPotentialUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vfloat.matrix.base.AbstractFloatMatrixRel;
+import org.djunits.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits.value.vfloat.scalar.FloatElectricalPotential;
+import org.djunits.value.vfloat.vector.FloatElectricalPotentialVector;
+import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable FloatElectricalPotentialMatrix, a matrix of values with a ElectricalPotentialUnit.
+ * Immutable FloatFloatElectricalPotentialMatrix, a matrix of values with a ElectricalPotentialUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -14,82 +18,58 @@ import org.djunits.value.vfloat.scalar.FloatElectricalPotential;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class FloatElectricalPotentialMatrix extends AbstractFloatMatrixRel<ElectricalPotentialUnit,
-        FloatElectricalPotentialMatrix, MutableFloatElectricalPotentialMatrix, FloatElectricalPotential>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class FloatElectricalPotentialMatrix extends AbstractFloatMatrixRel<ElectricalPotentialUnit, FloatElectricalPotential, FloatElectricalPotentialVector, FloatElectricalPotentialMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatElectricalPotentialMatrix.
-     * @param values float[][]; the values of the entries in the new Relative Immutable FloatElectricalPotentialMatrix
-     * @param unit ElectricalPotentialUnit; the unit of the new Relative Immutable FloatElectricalPotentialMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatElectricalPotentialMatrix(final float[][] values, final ElectricalPotentialUnit unit,
-            final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatElectricalPotentialMatrix.
-     * @param values FloatElectricalPotential[][]; the values of the entries in the new Relative Immutable Float
-     *            FloatElectricalPotentialMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatElectricalPotentialMatrix(final FloatElectricalPotential[][] values, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data FloatMatrixData; an internal data object
      * @param unit ElectricalPotentialUnit; the unit
      */
-    FloatElectricalPotentialMatrix(final FloatMatrixData data, final ElectricalPotentialUnit unit)
+    public FloatElectricalPotentialMatrix(final FloatMatrixData data, final ElectricalPotentialUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatElectricalPotentialMatrix toDense()
+    public Class<FloatElectricalPotential> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return FloatElectricalPotential.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatElectricalPotentialMatrix toSparse()
+    public Class<FloatElectricalPotentialVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+        return FloatElectricalPotentialVector.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatElectricalPotentialMatrix instantiateType(final FloatMatrixData fmd,
-            final ElectricalPotentialUnit unit)
+    public FloatElectricalPotentialMatrix instantiateMatrix(final FloatMatrixData fmd, final ElectricalPotentialUnit displayUnit)
     {
-        return new FloatElectricalPotentialMatrix(fmd, unit);
+        return new FloatElectricalPotentialMatrix(fmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatElectricalPotentialMatrix instantiateMutableType(final FloatMatrixData fmd,
-            final ElectricalPotentialUnit unit)
+    public FloatElectricalPotentialVector instantiateVector(final FloatVectorData fvd, final ElectricalPotentialUnit displayUnit)
     {
-        return new MutableFloatElectricalPotentialMatrix(fmd, unit);
+        return new FloatElectricalPotentialVector(fvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatElectricalPotential instantiateScalar(final float value, final ElectricalPotentialUnit unit)
+    public FloatElectricalPotential instantiateScalarSI(final float valueSI, final ElectricalPotentialUnit displayUnit)
     {
-        return new FloatElectricalPotential(value, unit);
+        FloatElectricalPotential result = FloatElectricalPotential.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
-
+
 }
+

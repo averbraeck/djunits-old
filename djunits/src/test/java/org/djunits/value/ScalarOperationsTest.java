@@ -9,48 +9,36 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.djunits.unit.Unit;
+import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.scale.LinearScale;
+import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
 import org.djunits.util.ClassUtil;
-import org.djunits.value.vdouble.scalar.AbstractDoubleScalar;
-import org.djunits.value.vdouble.scalar.AbstractDoubleScalarAbs;
-import org.djunits.value.vdouble.scalar.AbstractDoubleScalarRel;
-import org.djunits.value.vdouble.scalar.DoubleScalar;
-import org.djunits.value.vdouble.scalar.DoubleScalarInterface;
-import org.djunits.value.vfloat.scalar.AbstractFloatScalar;
-import org.djunits.value.vfloat.scalar.AbstractFloatScalarAbs;
-import org.djunits.value.vfloat.scalar.AbstractFloatScalarRel;
-import org.djunits.value.vfloat.scalar.FloatScalar;
-import org.djunits.value.vfloat.scalar.FloatScalarInterface;
+import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalar;
+import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarAbs;
+import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
+import org.djunits.value.vdouble.scalar.base.DoubleScalarInterface;
+import org.djunits.value.vfloat.scalar.base.AbstractFloatScalar;
+import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarAbs;
+import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
+import org.djunits.value.vfloat.scalar.base.FloatScalar;
+import org.djunits.value.vfloat.scalar.base.FloatScalarInterface;
 import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Find all plus, minus, multiplyBy and divideBy operations and prove the type correctness.
+ * Find all plus, minus, times and divide operations and prove the type correctness.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
+ * version Sep 14, 2015 <br>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 public class ScalarOperationsTest
 {
-    /** The classes that are absolute (name = class name). */
-    public static final String[] CLASSNAMES_ABS = new String[] {"AbsoluteTemperature", "Direction", "Position", "Time"};
-
-    /** The relative classes that mirror the absolute ones (name = class name). */
-    public static final String[] CLASSNAMES_ABS_REL = new String[] {"Temperature", "Angle", "Length", "Duration"};
-
-    /** The classes that are just relative (name = class name). */
-    public static final String[] CLASSNAMES_REL = new String[] {"Angle", "Acceleration", "AngleSolid", "Area", "Density",
-            "Dimensionless", "Duration", "ElectricalCharge", "ElectricalCurrent", "ElectricalPotential", "ElectricalResistance",
-            "Energy", "FlowMass", "FlowVolume", "Force", "Frequency", "Length", "LinearDensity", "Mass", "Power", "Pressure",
-            "Speed", "Temperature", "Torque", "Volume"};
-
-    /** The money classes that are just relative (name = class name); these classes don't have an si field. */
-    public static final String[] CLASSNAMES_MONEY = new String[] {"Money", "MoneyPerArea", "MoneyPerEnergy", "MoneyPerLength",
-            "MoneyPerMass", "MoneyPerDuration", "MoneyPerVolume"};
-
     /**
      * Test constructor on the specified double scalar classes.
      * @throws IllegalAccessException on class or method resolving error
@@ -89,10 +77,10 @@ public class ScalarOperationsTest
         final String upperType = doubleType ? "Double" : "Float";
         final String type = upperType.toLowerCase();
         // get the interfaces such as org.djunits.value.vdouble.scalar.Time
-        for (int i = 0; i < CLASSNAMES_ABS.length; i++)
+        for (int i = 0; i < CLASSNAMES.ABS_LIST.size(); i++)
         {
-            String scalarNameAbs = CLASSNAMES_ABS[i];
-            String scalarNameRel = CLASSNAMES_ABS_REL[i];
+            String scalarNameAbs = CLASSNAMES.ABS_LIST.get(i);
+            String scalarNameRel = CLASSNAMES.REL_WITH_ABS_LIST.get(i);
             String scalarClassNameAbs = doubleType ? scalarNameAbs : "Float" + scalarNameAbs;
             String scalarClassNameRel = doubleType ? scalarNameRel : "Float" + scalarNameRel;
             Class<?> scalarClassAbs = null;
@@ -121,7 +109,7 @@ public class ScalarOperationsTest
         }
 
         // get the interfaces such as org.djunits.value.vXXXX.scalar.Area
-        for (String scalarName : CLASSNAMES_REL)
+        for (String scalarName : CLASSNAMES.REL_LIST)
         {
             String scalarClassName = doubleType ? scalarName : "Float" + scalarName;
             Class<?> scalarClassRel = null;
@@ -136,28 +124,11 @@ public class ScalarOperationsTest
             }
             testMethods(scalarClassRel, false, doubleType);
         }
-
-        // get the interfaces such as org.djunits.value.vXXXX.scalar.MoneyPerArea
-        for (String scalarName : CLASSNAMES_MONEY)
-        {
-            String scalarClassName = doubleType ? scalarName : "Float" + scalarName;
-            Class<?> scalarClassMoney = null;
-            try
-            {
-                scalarClassMoney = Class.forName("org.djunits.value.v" + type + ".scalar." + scalarClassName);
-            }
-            catch (ClassNotFoundException exception)
-            {
-                fail("Class Rel not found for " + upperType + "DoubleScalar class " + "org.djunits.value.v" + type + ".scalar."
-                        + scalarClassName);
-            }
-            testMethods(scalarClassMoney, false, doubleType);
-        }
     }
 
     /**
-     * Find the methods defined in the class itself (not in a superclass) called multiplyBy or divideBy and test the method.
-     * Also test the Unary methods of the class.
+     * Find the methods defined in the class itself (not in a superclass) called times or divide and test the method. Also test
+     * the Unary methods of the class.
      * @param scalarClassAbsRel class to test
      * @param isAbs boolean; if true; the scalarClassAbsRel must be aAsolute; if false; the scalarClassAbsRel must be Relative
      * @param doubleType boolean; if true; perform tests on DoubleScalar; if false perform tests on FloatScalar
@@ -174,13 +145,14 @@ public class ScalarOperationsTest
     {
         for (Method method : scalarClassAbsRel.getMethods())
         {
-            if (method.getName().equals("multiplyBy"))
+            if (method.getName().equals("times"))
             {
-                // note: filter out the method that multiplies by a constant...
+                // note: filter out the method that multiplies by a constant or a general scalar...
                 testMultiplyOrDivideMethodAbsRel(scalarClassAbsRel, isAbs, method, true, doubleType);
             }
-            else if (method.getName().equals("divideBy"))
+            else if (method.getName().equals("divide"))
             {
+                // note: filter out the method that divides by a constant or a general scalar...
                 testMultiplyOrDivideMethodAbsRel(scalarClassAbsRel, isAbs, method, false, doubleType);
             }
         }
@@ -192,8 +164,8 @@ public class ScalarOperationsTest
      * Test a multiplication method for an Abs or Rel scalar. Note: filter out the method that multiplies by a constant...
      * @param scalarClass the Abs or Rel class for the multiplication, e.g. Length
      * @param abs boolean; true to test the Abs sub-class; false to test the Rel sub-class
-     * @param method the method 'multiplyBy' for that class
-     * @param multiply boolean; if true; test a multiplyBy method; if false; test a divideBy method
+     * @param method the method 'times' for that class
+     * @param multiply boolean; if true; test a times method; if false; test a divide method
      * @param doubleType boolean; if true; perform tests on DoubleScalar; if false; perform tests on FloatScalar
      * @throws NoSuchMethodException on class or method resolving error
      * @throws InvocationTargetException on class or method resolving error
@@ -226,6 +198,11 @@ public class ScalarOperationsTest
             // not interested in multiplying a scalar with a double.
             return;
         }
+        if (parameterClass.getSimpleName().startsWith("Abstract"))
+        {
+            // not interested in multiplying a scalar with a generic scalar.
+            return;
+        }
         if (!relativeOrAbsoluteClass.isAssignableFrom(parameterClass))
         {
             System.out.println("abs=" + abs + ", method=" + scalarClass.getName() + "." + method.getName() + " param="
@@ -237,8 +214,8 @@ public class ScalarOperationsTest
         Class<?> returnClass = method.getReturnType();
         if (!relativeOrAbsoluteClass.isAssignableFrom(returnClass))
         {
-            Assert.fail("DoubleScalar class " + scalarClass.getName()
-                    + ".multiplyBy() has return type with non-relative class: " + returnClass.getName());
+            Assert.fail("DoubleScalar class " + scalarClass.getName() + ".times() has return type with non-relative class: "
+                    + returnClass.getName());
         }
 
         // get the SI coefficients of the unit classes, scalar type, parameter type and return type
@@ -247,7 +224,7 @@ public class ScalarOperationsTest
         String paramSI = getCoefficients(getUnitClass(parameterClass));
         // print what we just have found
         System.out.println(scalarClass.getName().replaceFirst("org.djunits.value.vdouble.scalar.", "") + "."
-                + (multiply ? "multiplyBy" : "divideBy") + "("
+                + (multiply ? "times" : "divide") + "("
                 + parameterClass.getName().replaceFirst("org.djunits.value.vdouble.scalar.", "") + ") => "
                 + returnClass.getName().replaceFirst("org.djunits.value.vdouble.scalar.", "") + ": " + scalarSI
                 + (multiply ? " * " : " : ") + paramSI + " => " + returnSI);
@@ -267,16 +244,16 @@ public class ScalarOperationsTest
 
             if (multiply)
             {
-                Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "multiplyBy", new Class[] {parameterClass});
+                Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "times", new Class[] { parameterClass });
                 Object result = multiplyMethod.invoke(left, right);
-                double resultSI = ((AbstractDoubleScalarAbs<?, ?, ?, ?>) result).si;
+                double resultSI = ((AbstractDoubleScalarAbs<?, ?, ?, ?>) result).getSI();
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
             else
             {
-                Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divideBy", new Class[] {parameterClass});
+                Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divide", new Class[] { parameterClass });
                 Object result = divideMethod.invoke(left, right);
-                double resultSI = ((AbstractDoubleScalarAbs<?, ?, ?, ?>) result).si;
+                double resultSI = ((AbstractDoubleScalarAbs<?, ?, ?, ?>) result).getSI();
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
         }
@@ -295,23 +272,26 @@ public class ScalarOperationsTest
 
                 if (multiply)
                 {
-                    Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "multiplyBy", new Class[] {parameterClass});
+                    Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "times", new Class[] { parameterClass });
                     Object result = multiplyMethod.invoke(left, right);
-                    double resultSI = ((AbstractDoubleScalarRel<?, ?>) result).si;
+                    double resultSI = ((AbstractDoubleScalarRel<?, ?>) result).getSI();
                     assertEquals("Result of operation", expectedValue, resultSI, 0.01);
                 }
                 else
                 {
-                    Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divideBy", new Class[] {parameterClass});
+                    Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divide", new Class[] { parameterClass });
                     Object result = divideMethod.invoke(left, right);
-                    double resultSI = ((AbstractDoubleScalarRel<?, ?>) result).si;
+                    double resultSI = ((AbstractDoubleScalarRel<?, ?>) result).getSI();
                     assertEquals("Result of operation", expectedValue, resultSI, 0.01);
                 }
                 AbstractDoubleScalarRel<?, ?> result =
                         multiply ? DoubleScalar.multiply(left, right) : DoubleScalar.divide(left, right);
                 // System.out.println("result is " + result);
-                String resultCoefficients = result.getUnit().getSICoefficientsString();
-                assertEquals("SI coefficients of result should match expected SI coefficients", resultCoefficients, returnSI);
+                String resultCoefficients = result.getDisplayUnit().getUnitBase().getSiDimensions().toString();
+                assertEquals(
+                        "SI coefficients of result of " + left.getClass().getSimpleName() + " x "
+                                + right.getClass().getSimpleName() + " should match expected SI coefficients",
+                        resultCoefficients, returnSI);
             }
             else
             {
@@ -326,22 +306,22 @@ public class ScalarOperationsTest
 
                 if (multiply)
                 {
-                    Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "multiplyBy", new Class[] {parameterClass});
+                    Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "times", new Class[] { parameterClass });
                     Object result = multiplyMethod.invoke(left, right);
-                    double resultSI = ((AbstractFloatScalarRel<?, ?>) result).si;
+                    double resultSI = ((AbstractFloatScalarRel<?, ?>) result).getSI();
                     assertEquals("Result of operation", expectedValue, resultSI, 0.01);
                 }
                 else
                 {
-                    Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divideBy", new Class[] {parameterClass});
+                    Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divide", new Class[] { parameterClass });
                     Object result = divideMethod.invoke(left, right);
-                    float resultSI = ((AbstractFloatScalarRel<?, ?>) result).si;
+                    float resultSI = ((AbstractFloatScalarRel<?, ?>) result).getSI();
                     assertEquals("Result of operation", expectedValue, resultSI, 0.01);
                 }
                 AbstractFloatScalarRel<?, ?> result =
                         multiply ? FloatScalar.multiply(left, right) : FloatScalar.divide(left, right);
                 // System.out.println("result is " + result);
-                String resultCoefficients = result.getUnit().getSICoefficientsString();
+                String resultCoefficients = result.getDisplayUnit().getUnitBase().getSiDimensions().toString();
                 assertEquals("SI coefficients of result should match expected SI coefficients", resultCoefficients, returnSI);
             }
         }
@@ -356,23 +336,10 @@ public class ScalarOperationsTest
      */
     private String getCoefficients(final Class<?> clas) throws IllegalAccessException, NoSuchFieldException
     {
-        if (clas.getName().contains("Money"))
-        {
-            // get any static field of the type itself
-            for (Field field : clas.getDeclaredFields())
-            {
-                if (field.getType().equals(clas))
-                {
-                    return ((Unit<?>) field.get(clas)).getSICoefficientsString();
-                }
-            }
-            return "1";
-        }
         Field si = clas.getField("SI");
         Unit<?> u = ((Unit<?>) si.get(clas));
-        String r = u.getSICoefficientsString();
+        String r = u.getUnitBase().getSiDimensions().toString();
         return r;
-        // return ((Unit<?>) si.get(clas)).getSICoefficientsString();
     }
 
     /**
@@ -386,19 +353,7 @@ public class ScalarOperationsTest
     private Unit<?> getSIUnitInstance(final Class<?> clas, final boolean isAbs)
             throws NoSuchFieldException, IllegalAccessException
     {
-        if (clas.getName().contains("Money"))
-        {
-            // get any static field of the type itself
-            for (Field field : clas.getDeclaredFields())
-            {
-                if (field.getType().equals(clas))
-                {
-                    return ((Unit<?>) field.get(clas));
-                }
-            }
-            return null;
-        }
-        Field si = isAbs ? clas.getField("BASE") : clas.getField("SI");
+        Field si = isAbs ? clas.getField("DEFAULT") : clas.getField("SI");
         return ((Unit<?>) si.get(clas));
     }
 
@@ -480,6 +435,7 @@ public class ScalarOperationsTest
      * @throws NoSuchFieldException on class or method resolving error
      * @throws ClassNotFoundException on class or method resolving error
      */
+    @SuppressWarnings("rawtypes")
     private void testUnaryMethods(final Class<?> scalarClass, final boolean abs, final boolean doubleType)
             throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException,
             NoSuchFieldException, ClassNotFoundException
@@ -543,11 +499,6 @@ public class ScalarOperationsTest
         Method rint = ClassUtil.resolveMethod(scalarClass, "rint", new Class[] {});
         result = rint.invoke(left);
         assertEquals("Result of operation", Math.rint(value), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result), 0.01);
-
-        Method round = ClassUtil.resolveMethod(scalarClass, "round", new Class[] {});
-        result = round.invoke(left);
-        assertEquals("Result of operation", Math.round(value), verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
-                0.01);
 
         if (!abs)
         {
@@ -648,7 +599,7 @@ public class ScalarOperationsTest
             result = inv.invoke(left);
             assertEquals("Result of operation", 1 / value, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result), 0.01);
 
-            Method pow = ClassUtil.resolveMethod(scalarClass, "pow", new Class[] {double.class});
+            Method pow = ClassUtil.resolveMethod(scalarClass, "pow", new Class[] { double.class });
             result = pow.invoke(left, Math.PI);
             assertEquals("Result of operation", Math.pow(value, Math.PI),
                     verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result), 0.01);
@@ -656,20 +607,29 @@ public class ScalarOperationsTest
 
         Object compatibleRight = null;
         // TODO: Probably we exclude too much here for the tests...
-        if (!scalarClass.getName().contains("Money") && !scalarClass.getName().contains("Dimensionless")
-                && !scalarClass.getName().contains("Temperature") && !scalarClass.getName().contains("Position")
-                && !scalarClass.getName().contains("Time") && !scalarClass.getName().contains("Direction"))
+        if (!scalarClass.getName().contains("Dimensionless") && !scalarClass.getName().contains("AbsoluteTemperature")
+                && !scalarClass.getName().contains("Position") && !scalarClass.getName().contains("Time")
+                && !scalarClass.getName().contains("Direction"))
         {
             // Construct a new unit to test mixed unit plus and minus
             Class<?> unitClass = getUnitClass(scalarClass);
             UnitSystem unitSystem = UnitSystem.SI_DERIVED;
-            Unit<?> referenceUnit;
             // Call the getUnit method of left
-            Method getUnitMethod = ClassUtil.resolveMethod(scalarClass, "getUnit");
-            referenceUnit = (Unit<?>) getUnitMethod.invoke(left);
-            Constructor<?> unitConstructor =
-                    unitClass.getConstructor(String.class, String.class, UnitSystem.class, unitClass, double.class);
-            Object newUnit = unitConstructor.newInstance("7fullName", "7abbr", unitSystem, referenceUnit, 7d);
+            Method getUnitMethod = ClassUtil.resolveMethod(scalarClass, "getDisplayUnit");
+            Unit referenceUnit = (Unit<?>) getUnitMethod.invoke(left);
+            Constructor<?> unitConstructor = unitClass.getConstructor(); // empty constructor -- provide Builder
+            Unit newUnit = (Unit) unitConstructor.newInstance();
+            Method buildMethod = ClassUtil.resolveMethod(Unit.class, "build", Unit.Builder.class);
+            Unit.Builder<?> builder = new Unit.Builder<>();
+            builder.setId("7abbr");
+            builder.setName("7fullName");
+            builder.setUnitSystem(unitSystem);
+            builder.setScale(new LinearScale(7));
+            builder.setUnitBase((UnitBase) getSIUnitInstance(unitClass, false).getUnitBase());
+            builder.setSiPrefixes(SIPrefixes.NONE);
+            buildMethod.setAccessible(true);
+            buildMethod.invoke(newUnit, builder);
+
             // System.out.println("new unit prints like " + newUnit);
             if (doubleType)
             {
@@ -682,22 +642,35 @@ public class ScalarOperationsTest
                         : (AbstractFloatScalarRel<?, ?>) constructor.newInstance((float) value, newUnit);
             }
             // System.out.println("compatibleRight prints like \"" + compatibleRight + "\"");
+            newUnit.getUnitBase().unregister(newUnit);
         }
         if (!abs)
         {
-            Method multiplyBy =
-                    ClassUtil.resolveMethod(scalarClass, "multiplyBy", new Class[] {doubleType ? double.class : float.class});
-            result = doubleType ? multiplyBy.invoke(left, Math.PI) : multiplyBy.invoke(left, (float) Math.PI);
+            Method times = ClassUtil.resolveMethod(scalarClass, "times", new Class[] { double.class });
+            result = doubleType ? times.invoke(left, Math.PI) : times.invoke(left, (float) Math.PI);
             assertEquals("Result of operation", Math.PI * value, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                     0.01);
+            if (!doubleType)
+            {
+                times = ClassUtil.resolveMethod(scalarClass, "times", new Class[] { float.class });
+                result = doubleType ? times.invoke(left, Math.PI) : times.invoke(left, (float) Math.PI);
+                assertEquals("Result of operation", Math.PI * value, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
+                        0.01);
+            }
 
-            Method divideBy =
-                    ClassUtil.resolveMethod(scalarClass, "divideBy", new Class[] {doubleType ? double.class : float.class});
-            result = doubleType ? divideBy.invoke(left, Math.PI) : divideBy.invoke(left, (float) Math.PI);
+            Method divide = ClassUtil.resolveMethod(scalarClass, "divide", new Class[] { double.class });
+            result = doubleType ? divide.invoke(left, Math.PI) : divide.invoke(left, (float) Math.PI);
             assertEquals("Result of operation", value / Math.PI, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                     0.01);
+            if (!doubleType)
+            {
+                divide = ClassUtil.resolveMethod(scalarClass, "divide", new Class[] { float.class });
+                result = doubleType ? divide.invoke(left, Math.PI) : divide.invoke(left, (float) Math.PI);
+                assertEquals("Result of operation", value / Math.PI, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
+                        0.01);
+            }
 
-            Method plus = ClassUtil.resolveMethod(scalarClass, "plus", new Class[] {scalarClass});
+            Method plus = ClassUtil.resolveMethod(scalarClass, "plus", new Class[] { scalarClass });
             result = plus.invoke(left, left);
             assertEquals("Result of operation", value + value, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                     0.01);
@@ -710,7 +683,7 @@ public class ScalarOperationsTest
                 // Swap the operands
                 // System.out.println("finding plus method for " + compatibleRight.getClass().getName() + " left type is "
                 // + left.getClass().getName());
-                plus = ClassUtil.resolveMethod(scalarClass, "plus", new Class[] {compatibleRight.getClass().getSuperclass()});
+                plus = ClassUtil.resolveMethod(scalarClass, "plus", new Class[] { compatibleRight.getClass().getSuperclass() });
                 result = plus.invoke(compatibleRight, left);
                 assertEquals("Result of mixed operation", 8 * value, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                         0.01);
@@ -755,7 +728,7 @@ public class ScalarOperationsTest
             }
         }
 
-        Method minus = ClassUtil.resolveMethod(scalarClass, "minus", new Class[] {scalarClass});
+        Method minus = ClassUtil.resolveMethod(scalarClass, "minus", new Class[] { scalarClass });
         result = minus.invoke(left, left);
         assertEquals("Result of minus", 0, verifyAbsRelPrecisionAndExtractSI(false, doubleType, result), 0.01);
         if (null != compatibleRight)
@@ -794,6 +767,7 @@ public class ScalarOperationsTest
                 assertEquals("Result of compatible abs or rel minus rel", 6 * value,
                         verifyAbsRelPrecisionAndExtractSI(!abs, doubleType, result), 0.01);
             }
+
         }
     }
 
@@ -829,7 +803,7 @@ public class ScalarOperationsTest
                                     getSIUnitInstance(getUnitClass(scalarClass), abs))
                             : (AbstractDoubleScalarRel<?, ?>) constructor.newInstance(oneValue,
                                     getSIUnitInstance(getUnitClass(scalarClass), abs));
-            for (double ratio : new double[] {-5, -1, 0, 0.3, 1, 2, 10})
+            for (double ratio : new double[] { -5, -1, 0, 0.3, 1, 2, 10 })
             {
                 double expectedResult = (1.0 - ratio) * zeroValue + ratio * oneValue;
                 Method interpolate =
@@ -879,48 +853,44 @@ public class ScalarOperationsTest
             result = (AbstractDoubleScalar<?, ?>) min.invoke(null, zero, one, additionalArguments);
             assertEquals("min return object with minimum value", zero, result);
 
-            if ((!scalarClass.getName().contains(".ElectricalResistance")) && (!scalarClass.getName().contains(".Money")))
+            Method valueOf = ClassUtil.resolveMethod(scalarClass, "valueOf", String.class);
+            String string = zero.toString();
+            result = (AbstractDoubleScalar<?, ?>) valueOf.invoke(null, string);
+            assertEquals("valueOf toString returns a decent approximation of the input", zeroValue, result.getSI(), 0.001);
+            try
             {
-                Method valueOf = ClassUtil.resolveMethod(scalarClass, "valueOf", String.class);
-                String string = zero.toString();
-                result = (AbstractDoubleScalar<?, ?>) valueOf.invoke(null, string);
-                assertEquals("valueOf toString returns a decent approximation of the input", zeroValue, result.getSI(), 0.001);
-                try
-                {
-                    valueOf.invoke(null, (String) null);
-                    fail("Null string in valueOf should have thrown an IllegalArgumentException (which may have been converted "
-                            + "into an InvocationTargetException)");
-                }
-                catch (IllegalArgumentException | InvocationTargetException iae)
-                {
-                    // Ignore expected exception
-                }
-                try
-                {
-                    valueOf.invoke(null, "");
-                    fail("Empty string in valueOf should have thrown an IllegalArgumentException");
-                }
-                catch (IllegalArgumentException | InvocationTargetException iae)
-                {
-                    // Ignore expected exception
-                }
-                try
-                {
-                    valueOf.invoke(null, "NONSENSEVALUE");
-                    fail("Nonsense string in valueOf should have thrown an IllegalArgumentException");
-                }
-                catch (IllegalArgumentException | InvocationTargetException iae)
-                {
-                    // Ignore expected exception
-                }
+                valueOf.invoke(null, (String) null);
+                fail("Null string in valueOf should have thrown an IllegalArgumentException (which may have been converted "
+                        + "into an InvocationTargetException)");
+            }
+            catch (IllegalArgumentException | InvocationTargetException iae)
+            {
+                // Ignore expected exception
             }
 
-            if (!scalarClass.getName().contains(".Money"))
+            try
             {
-                Method createSI = ClassUtil.resolveMethod(scalarClass, "createSI", double.class);
-                result = (AbstractDoubleScalar<?, ?>) createSI.invoke(null, zeroValue);
-                assertEquals("SI value was correctly set", zeroValue, result.getSI(), 0.0001);
+                valueOf.invoke(null, "");
+                fail("Empty string in valueOf should have thrown an IllegalArgumentException");
             }
+            catch (IllegalArgumentException | InvocationTargetException iae)
+            {
+                // Ignore expected exception
+            }
+
+            try
+            {
+                valueOf.invoke(null, "NONSENSEVALUE");
+                fail("Nonsense string in valueOf should have thrown an IllegalArgumentException");
+            }
+            catch (IllegalArgumentException | InvocationTargetException iae)
+            {
+                // Ignore expected exception
+            }
+
+            Method instantiateSI = ClassUtil.resolveMethod(scalarClass, "instantiateSI", double.class);
+            result = (AbstractDoubleScalar<?, ?>) instantiateSI.invoke(null, zeroValue);
+            assertEquals("SI value was correctly set", zeroValue, result.getSI(), 0.0001);
         }
         else
         {
@@ -938,7 +908,7 @@ public class ScalarOperationsTest
                                     getSIUnitInstance(getUnitClass(scalarClass), abs))
                             : (AbstractFloatScalarRel<?, ?>) constructor.newInstance(oneValue,
                                     getSIUnitInstance(getUnitClass(scalarClass), abs));
-            for (float ratio : new float[] {-5, -1, 0, 0.3f, 1, 2, 10})
+            for (float ratio : new float[] { -5, -1, 0, 0.3f, 1, 2, 10 })
             {
                 float expectedResult = (1.0f - ratio) * zeroValue + ratio * oneValue;
                 Method interpolate = ClassUtil.resolveMethod(scalarClass, "interpolate", scalarClass, scalarClass, float.class);
@@ -987,48 +957,41 @@ public class ScalarOperationsTest
             result = (AbstractFloatScalar<?, ?>) min.invoke(null, zero, one, additionalArguments);
             assertEquals("min return object with minimum value", zero, result);
 
-            if ((!scalarClass.getName().contains(".FloatElectricalResistance"))
-                    && (!scalarClass.getName().contains(".FloatMoney")))
+            Method valueOf = ClassUtil.resolveMethod(scalarClass, "valueOf", String.class);
+            String string = zero.toString();
+            result = (AbstractFloatScalar<?, ?>) valueOf.invoke(null, string);
+            assertEquals("valueOf toString returns a decent approximation of the input", zeroValue, result.getSI(), 0.001);
+            try
             {
-                Method valueOf = ClassUtil.resolveMethod(scalarClass, "valueOf", String.class);
-                String string = zero.toString();
-                result = (AbstractFloatScalar<?, ?>) valueOf.invoke(null, string);
-                assertEquals("valueOf toString returns a decent approximation of the input", zeroValue, result.getSI(), 0.001);
-                try
-                {
-                    valueOf.invoke(null, (String) null);
-                    fail("Null string in valueOf should have thrown an IllegalArgumentException (which may have been converted "
-                            + "into an InvocationTargetException)");
-                }
-                catch (IllegalArgumentException | InvocationTargetException iae)
-                {
-                    // Ignore expected exception
-                }
-                try
-                {
-                    valueOf.invoke(null, "");
-                    fail("Empty string in valueOf should have thrown an IllegalArgumentException");
-                }
-                catch (IllegalArgumentException | InvocationTargetException iae)
-                {
-                    // Ignore expected exception
-                }
-                try
-                {
-                    valueOf.invoke(null, "NONSENSEVALUE");
-                    fail("Nonsense string in valueOf should have thrown an IllegalArgumentException");
-                }
-                catch (IllegalArgumentException | InvocationTargetException iae)
-                {
-                    // Ignore expected exception
-                }
+                valueOf.invoke(null, (String) null);
+                fail("Null string in valueOf should have thrown an IllegalArgumentException (which may have been converted "
+                        + "into an InvocationTargetException)");
             }
-            if (!scalarClass.getName().contains(".FloatMoney"))
+            catch (IllegalArgumentException | InvocationTargetException iae)
             {
-                Method createSI = ClassUtil.resolveMethod(scalarClass, "createSI", float.class);
-                result = (AbstractFloatScalar<?, ?>) createSI.invoke(null, zeroValue);
-                assertEquals("SI value was correctly set", zeroValue, result.getSI(), 0.0001);
+                // Ignore expected exception
             }
+            try
+            {
+                valueOf.invoke(null, "");
+                fail("Empty string in valueOf should have thrown an IllegalArgumentException");
+            }
+            catch (IllegalArgumentException | InvocationTargetException iae)
+            {
+                // Ignore expected exception
+            }
+            try
+            {
+                valueOf.invoke(null, "NONSENSEVALUE");
+                fail("Nonsense string in valueOf should have thrown an IllegalArgumentException");
+            }
+            catch (IllegalArgumentException | InvocationTargetException iae)
+            {
+                // Ignore expected exception
+            }
+            Method instantiateSI = ClassUtil.resolveMethod(scalarClass, "instantiateSI", float.class);
+            result = (AbstractFloatScalar<?, ?>) instantiateSI.invoke(null, zeroValue);
+            assertEquals("SI value was correctly set", zeroValue, result.getSI(), 0.0001);
         }
     }
 

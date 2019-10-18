@@ -1,15 +1,14 @@
 package org.djunits.value.vfloat.vector;
 
-import java.util.List;
-import java.util.SortedMap;
+import javax.annotation.Generated;
 
 import org.djunits.unit.TorqueUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatTorque;
+import org.djunits.value.vfloat.vector.base.AbstractFloatVectorRel;
+import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable Float FloatTorqueVector, a vector of values with a TorqueUnit.
+ * Immutable Float FloatTorqueVector, a vector of values with a TorqueUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -17,152 +16,47 @@ import org.djunits.value.vfloat.scalar.FloatTorque;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class FloatTorqueVector
-        extends AbstractFloatVectorRel<TorqueUnit, FloatTorqueVector, MutableFloatTorqueVector, FloatTorque>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class FloatTorqueVector extends AbstractFloatVectorRel<TorqueUnit, FloatTorque, FloatTorqueVector>
+
 {
     /** */
-    private static final long serialVersionUID = 20151109L;
+    private static final long serialVersionUID = 20190905L;
 
     /**
-     * Construct a new Relative Immutable Float FloatTorqueVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable Float FloatTorqueVector
-     * @param unit TorqueUnit; the unit of the new Relative Immutable Float FloatTorqueVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatTorqueVector(final float[] values, final TorqueUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatTorqueVector.
-     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float FloatTorqueVector
-     * @param unit TorqueUnit; the unit of the new Relative Immutable Float FloatTorqueVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatTorqueVector(final List<Float> values, final TorqueUnit unit, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatTorqueVector.
-     * @param values FloatTorque[]; the values of the entries in the new Relative Immutable Float FloatTorqueVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatTorqueVector(final FloatTorque[] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatTorqueVector.
-     * @param values List&lt;FloatTorque&gt;; the values of the entries in the new Relative Immutable Float FloatTorqueVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatTorqueVector(final List<FloatTorque> values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatTorqueVector.
-     * @param values SortedMap&lt;Integer, FloatTorque&gt;; the values of the entries in the new Relative Sparse Mutable Float
-     *            FloatTorqueVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatTorqueVector(final SortedMap<Integer, FloatTorque> values, final int length, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatTorqueVector.
-     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
-     *            FloatTorqueVector
-     * @param unit TorqueUnit; the unit of the new Relative Sparse Mutable Float FloatTorqueVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatTorqueVector(final SortedMap<Integer, Float> values, final TorqueUnit unit, final int length,
-            final StorageType storageType) throws ValueException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
+     * Construct an FloatTorqueVector from an internal data object.
      * @param data FloatVectorData; an internal data object
      * @param unit TorqueUnit; the unit
      */
-    FloatTorqueVector(final FloatVectorData data, final TorqueUnit unit)
+    public FloatTorqueVector(final FloatVectorData data, final TorqueUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatTorqueVector instantiateType(final FloatVectorData dvd, final TorqueUnit unit)
+    public Class<FloatTorque> getScalarClass()
     {
-        return new FloatTorqueVector(dvd, unit);
+        return FloatTorque.class;
+    }
+        
+    /** {@inheritDoc} */
+    @Override
+    public FloatTorqueVector instantiateVector(final FloatVectorData fvd, final TorqueUnit displayUnit)
+    {
+        return new FloatTorqueVector(fvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatTorqueVector instantiateMutableType(final FloatVectorData dvd, final TorqueUnit unit)
+    public FloatTorque instantiateScalarSI(final float valueSI, final TorqueUnit displayUnit)
     {
-        return new MutableFloatTorqueVector(dvd, unit);
+        FloatTorque result = FloatTorque.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatTorque instantiateScalar(final float value, final TorqueUnit unit)
-    {
-        return new FloatTorque(value, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatTorqueVector toDense()
-    {
-        return this.data.isDense() ? (FloatTorqueVector) this : instantiateType(this.data.toDense(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatTorqueVector toSparse()
-    {
-        return this.data.isSparse() ? (FloatTorqueVector) this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Return an array of FloatTorque Scalars from this vector.
-     * @return FloatTorque[]; an array of FloatTorque Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public FloatTorque[] toArray()
-    {
-        FloatTorque[] array = new FloatTorque[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
-    }
-
+   
 }
+
+

@@ -1,15 +1,14 @@
 package org.djunits.value.vfloat.vector;
 
-import java.util.List;
-import java.util.SortedMap;
+import javax.annotation.Generated;
 
 import org.djunits.unit.ElectricalResistanceUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
 import org.djunits.value.vfloat.scalar.FloatElectricalResistance;
+import org.djunits.value.vfloat.vector.base.AbstractFloatVectorRel;
+import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable Float FloatElectricalResistanceVector, a vector of values with a ElectricalResistanceUnit.
+ * Immutable Float FloatElectricalResistanceVector, a vector of values with a ElectricalResistanceUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -17,160 +16,47 @@ import org.djunits.value.vfloat.scalar.FloatElectricalResistance;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class FloatElectricalResistanceVector extends AbstractFloatVectorRel<ElectricalResistanceUnit,
-        FloatElectricalResistanceVector, MutableFloatElectricalResistanceVector, FloatElectricalResistance>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class FloatElectricalResistanceVector extends AbstractFloatVectorRel<ElectricalResistanceUnit, FloatElectricalResistance, FloatElectricalResistanceVector>
+
 {
     /** */
-    private static final long serialVersionUID = 20151109L;
+    private static final long serialVersionUID = 20190905L;
 
     /**
-     * Construct a new Relative Immutable Float FloatElectricalResistanceVector.
-     * @param values float[]; the values of the entries in the new Relative Immutable Float FloatElectricalResistanceVector
-     * @param unit ElectricalResistanceUnit; the unit of the new Relative Immutable Float FloatElectricalResistanceVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatElectricalResistanceVector(final float[] values, final ElectricalResistanceUnit unit,
-            final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatElectricalResistanceVector.
-     * @param values List&lt;Float&gt;; the values of the entries in the new Relative Immutable Float
-     *            FloatElectricalResistanceVector
-     * @param unit ElectricalResistanceUnit; the unit of the new Relative Immutable Float FloatElectricalResistanceVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatElectricalResistanceVector(final List<Float> values, final ElectricalResistanceUnit unit,
-            final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatElectricalResistanceVector.
-     * @param values FloatElectricalResistance[]; the values of the entries in the new Relative Immutable Float
-     *            FloatElectricalResistanceVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatElectricalResistanceVector(final FloatElectricalResistance[] values, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatElectricalResistanceVector.
-     * @param values List&lt;FloatElectricalResistance&gt;; the values of the entries in the new Relative Immutable Float
-     *            FloatElectricalResistanceVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatElectricalResistanceVector(final List<FloatElectricalResistance> values, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatElectricalResistanceVector.
-     * @param values SortedMap&lt;Integer, FloatElectricalResistance&gt;; the values of the entries in the new Relative Sparse
-     *            Mutable Float FloatElectricalResistanceVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatElectricalResistanceVector(final SortedMap<Integer, FloatElectricalResistance> values, final int length,
-            final StorageType storageType) throws ValueException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float FloatElectricalResistanceVector.
-     * @param values SortedMap&lt;Integer, Float&gt;; the map of indexes to values of the Relative Sparse Mutable Float
-     *            FloatElectricalResistanceVector
-     * @param unit ElectricalResistanceUnit; the unit of the new Relative Sparse Mutable Float FloatElectricalResistanceVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatElectricalResistanceVector(final SortedMap<Integer, Float> values, final ElectricalResistanceUnit unit,
-            final int length, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
+     * Construct an FloatElectricalResistanceVector from an internal data object.
      * @param data FloatVectorData; an internal data object
      * @param unit ElectricalResistanceUnit; the unit
      */
-    FloatElectricalResistanceVector(final FloatVectorData data, final ElectricalResistanceUnit unit)
+    public FloatElectricalResistanceVector(final FloatVectorData data, final ElectricalResistanceUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatElectricalResistanceVector instantiateType(final FloatVectorData dvd,
-            final ElectricalResistanceUnit unit)
+    public Class<FloatElectricalResistance> getScalarClass()
     {
-        return new FloatElectricalResistanceVector(dvd, unit);
+        return FloatElectricalResistance.class;
+    }
+        
+    /** {@inheritDoc} */
+    @Override
+    public FloatElectricalResistanceVector instantiateVector(final FloatVectorData fvd, final ElectricalResistanceUnit displayUnit)
+    {
+        return new FloatElectricalResistanceVector(fvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatElectricalResistanceVector instantiateMutableType(final FloatVectorData dvd,
-            final ElectricalResistanceUnit unit)
+    public FloatElectricalResistance instantiateScalarSI(final float valueSI, final ElectricalResistanceUnit displayUnit)
     {
-        return new MutableFloatElectricalResistanceVector(dvd, unit);
+        FloatElectricalResistance result = FloatElectricalResistance.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    protected final FloatElectricalResistance instantiateScalar(final float value, final ElectricalResistanceUnit unit)
-    {
-        return new FloatElectricalResistance(value, unit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatElectricalResistanceVector toDense()
-    {
-        return this.data.isDense() ? (FloatElectricalResistanceVector) this : instantiateType(this.data.toDense(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FloatElectricalResistanceVector toSparse()
-    {
-        return this.data.isSparse() ? (FloatElectricalResistanceVector) this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Return an array of FloatElectricalResistance Scalars from this vector.
-     * @return FloatElectricalResistance[]; an array of FloatElectricalResistance Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public FloatElectricalResistance[] toArray()
-    {
-        FloatElectricalResistance[] array = new FloatElectricalResistance[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
-    }
-
+   
 }
+
+

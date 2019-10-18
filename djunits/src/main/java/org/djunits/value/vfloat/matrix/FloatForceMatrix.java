@@ -1,12 +1,16 @@
 package org.djunits.value.vfloat.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.ForceUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vfloat.matrix.base.AbstractFloatMatrixRel;
+import org.djunits.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits.value.vfloat.scalar.FloatForce;
+import org.djunits.value.vfloat.vector.FloatForceVector;
+import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable FloatForceMatrix, a matrix of values with a ForceUnit.
+ * Immutable FloatFloatForceMatrix, a matrix of values with a ForceUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -14,76 +18,58 @@ import org.djunits.value.vfloat.scalar.FloatForce;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class FloatForceMatrix extends AbstractFloatMatrixRel<ForceUnit, FloatForceMatrix, MutableFloatForceMatrix, FloatForce>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class FloatForceMatrix extends AbstractFloatMatrixRel<ForceUnit, FloatForce, FloatForceVector, FloatForceMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatForceMatrix.
-     * @param values float[][]; the values of the entries in the new Relative Immutable FloatForceMatrix
-     * @param unit ForceUnit; the unit of the new Relative Immutable FloatForceMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatForceMatrix(final float[][] values, final ForceUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatForceMatrix.
-     * @param values FloatForce[][]; the values of the entries in the new Relative Immutable Float FloatForceMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatForceMatrix(final FloatForce[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data FloatMatrixData; an internal data object
      * @param unit ForceUnit; the unit
      */
-    FloatForceMatrix(final FloatMatrixData data, final ForceUnit unit)
+    public FloatForceMatrix(final FloatMatrixData data, final ForceUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatForceMatrix toDense()
+    public Class<FloatForce> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return FloatForce.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatForceMatrix toSparse()
+    public Class<FloatForceVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+        return FloatForceVector.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatForceMatrix instantiateType(final FloatMatrixData fmd, final ForceUnit unit)
+    public FloatForceMatrix instantiateMatrix(final FloatMatrixData fmd, final ForceUnit displayUnit)
     {
-        return new FloatForceMatrix(fmd, unit);
+        return new FloatForceMatrix(fmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatForceMatrix instantiateMutableType(final FloatMatrixData fmd, final ForceUnit unit)
+    public FloatForceVector instantiateVector(final FloatVectorData fvd, final ForceUnit displayUnit)
     {
-        return new MutableFloatForceMatrix(fmd, unit);
+        return new FloatForceVector(fvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatForce instantiateScalar(final float value, final ForceUnit unit)
+    public FloatForce instantiateScalarSI(final float valueSI, final ForceUnit displayUnit)
     {
-        return new FloatForce(value, unit);
+        FloatForce result = FloatForce.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
-
+
 }
+

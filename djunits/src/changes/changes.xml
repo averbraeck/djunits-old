@@ -2,7 +2,18 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
-    <release version="3.01.05" date="2019-08-XX" description="Inverse units, new Money handling">
+    <release version="4.00.00" date="2019-10.XX" description="MAJOR NEW RELEASE, MANY METHODS CHANGED">
+      <action dev="averbraeck" type="update">
+        create(...) methods renamed to instantiate(...) methods.
+        createSI(value) in scalar is now instantiateSI(value) to make it consistent with matrices and vectors.
+        create() methods in SIScalar, SIVector, SIScalar renamed to instantiate()
+        instantiate methods for scalars are now all instantiateSI methods to make it consistent with the 
+        SI values in the data storage of matrices and vectors.
+        Added instantiate methods in all classes to deal with user-defined units, scalars, vectors and matrices.
+        Changed getUnit() to getDisplayUnit() for all values.
+        Repaired imports for new locations of classes.
+        Changed the SI classes to use instantiate(...) instead of create(...).       
+      </action>
       <action dev="averbraeck" type="update">
         ojalgo and joda-money have been updated to new versions. Code has been slightly adapted
         to handle new matrix handling algorithms in ojalgo.

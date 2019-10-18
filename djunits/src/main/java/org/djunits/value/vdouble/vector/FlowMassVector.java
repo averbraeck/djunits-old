@@ -1,15 +1,14 @@
 package org.djunits.value.vdouble.vector;
 
-import java.util.List;
-import java.util.SortedMap;
+import javax.annotation.Generated;
 
 import org.djunits.unit.FlowMassUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.FlowMass;
+import org.djunits.value.vdouble.vector.base.AbstractDoubleVectorRel;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Double FlowMassVector, a vector of values with a FlowMassUnit.
+ * Double FlowMassVector, a vector of values with a FlowMassUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -17,151 +16,46 @@ import org.djunits.value.vdouble.scalar.FlowMass;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class FlowMassVector extends AbstractDoubleVectorRel<FlowMassUnit, FlowMassVector, MutableFlowMassVector, FlowMass>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class FlowMassVector extends AbstractDoubleVectorRel<FlowMassUnit, FlowMass, FlowMassVector>
+
 {
     /** */
-    private static final long serialVersionUID = 20151109L;
+    private static final long serialVersionUID = 20190905L;
 
     /**
-     * Construct a new Relative Immutable Double FlowMassVector.
-     * @param values double[]; the values of the entries in the new Relative Immutable Double FlowMassVector
-     * @param unit FlowMassUnit; the unit of the new Relative Immutable Double FlowMassVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * Construct an FlowMassVector from an internal data object.
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param displayUnit FlowMassUnit; the display unit of the vector data
      */
-    public FlowMassVector(final double[] values, final FlowMassUnit unit, final StorageType storageType) throws ValueException
+    public FlowMassVector(final DoubleVectorData data, final FlowMassUnit displayUnit)
     {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double FlowMassVector.
-     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double FlowMassVector
-     * @param unit FlowMassUnit; the unit of the new Relative Immutable Double FlowMassVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FlowMassVector(final List<Double> values, final FlowMassUnit unit, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double FlowMassVector.
-     * @param values FlowMass[]; the values of the entries in the new Relative Immutable Double FlowMassVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FlowMassVector(final FlowMass[] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double FlowMassVector.
-     * @param values List&lt;FlowMass&gt;; the values of the entries in the new Relative Immutable Double FlowMassVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FlowMassVector(final List<FlowMass> values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double FlowMassVector.
-     * @param values SortedMap&lt;Integer, FlowMass&gt;; the values of the entries in the new Relative Sparse Mutable Double
-     *            FlowMassVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FlowMassVector(final SortedMap<Integer, FlowMass> values, final int length, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double FlowMassVector.
-     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
-     *            FlowMassVector
-     * @param unit FlowMassUnit; the unit of the new Relative Sparse Mutable Double FlowMassVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FlowMassVector(final SortedMap<Integer, Double> values, final FlowMassUnit unit, final int length,
-            final StorageType storageType) throws ValueException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
-     * @param data DoubleVectorData; an internal data object
-     * @param unit FlowMassUnit; the unit
-     */
-    FlowMassVector(final DoubleVectorData data, final FlowMassUnit unit)
-    {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FlowMassVector instantiateType(final DoubleVectorData dvd, final FlowMassUnit unit)
+    public Class<FlowMass> getScalarClass()
     {
-        return new FlowMassVector(dvd, unit);
+        return FlowMass.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFlowMassVector instantiateMutableType(final DoubleVectorData dvd, final FlowMassUnit unit)
+    public FlowMassVector instantiateVector(final DoubleVectorData dvd, final FlowMassUnit displayUnit)
     {
-        return new MutableFlowMassVector(dvd, unit);
+        return new FlowMassVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FlowMass instantiateScalar(final double value, final FlowMassUnit unit)
+    public FlowMass instantiateScalarSI(final double valueSI, final FlowMassUnit displayUnit)
     {
-        return new FlowMass(value, unit);
+        FlowMass result = FlowMass.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public final FlowMassVector toDense()
-    {
-        return this.data.isDense() ? (FlowMassVector) this : instantiateType(this.data.toDense(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final FlowMassVector toSparse()
-    {
-        return this.data.isSparse() ? (FlowMassVector) this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Return an array of FlowMass Scalars from this vector.
-     * @return FlowMass[]; an array of FlowMass Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public FlowMass[] toArray()
-    {
-        FlowMass[] array = new FlowMass[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
-    }
-
+   
 }
+

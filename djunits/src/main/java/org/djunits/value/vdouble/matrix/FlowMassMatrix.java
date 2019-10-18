@@ -1,12 +1,16 @@
 package org.djunits.value.vdouble.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.FlowMassUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
+import org.djunits.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits.value.vdouble.scalar.FlowMass;
+import org.djunits.value.vdouble.vector.FlowMassVector;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Double FlowMassMatrix, a matrix of values with a FlowMassUnit.
+ * Immutable Double FlowMassMatrix, a matrix of values with a FlowMassUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -14,76 +18,58 @@ import org.djunits.value.vdouble.scalar.FlowMass;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class FlowMassMatrix extends AbstractDoubleMatrixRel<FlowMassUnit, FlowMassMatrix, MutableFlowMassMatrix, FlowMass>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class FlowMassMatrix extends AbstractDoubleMatrixRel<FlowMassUnit, FlowMass, FlowMassVector, FlowMassMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Double FlowMassMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double FlowMassMatrix
-     * @param unit FlowMassUnit; the unit of the new Relative Immutable Double FlowMassMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FlowMassMatrix(final double[][] values, final FlowMassUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double FlowMassMatrix.
-     * @param values FlowMass[][]; the values of the entries in the new Relative Immutable Double FlowMassMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FlowMassMatrix(final FlowMass[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data DoubleMatrixData; an internal data object
      * @param unit FlowMassUnit; the unit
      */
-    FlowMassMatrix(final DoubleMatrixData data, final FlowMassUnit unit)
+    public FlowMassMatrix(final DoubleMatrixData data, final FlowMassUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FlowMassMatrix toDense()
+    public Class<FlowMass> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return FlowMass.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FlowMassMatrix toSparse()
+    public Class<FlowMassVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+        return FlowMassVector.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FlowMassMatrix instantiateType(final DoubleMatrixData dmd, final FlowMassUnit unit)
+    public FlowMassMatrix instantiateMatrix(final DoubleMatrixData dmd, final FlowMassUnit displayUnit)
     {
-        return new FlowMassMatrix(dmd, unit);
+        return new FlowMassMatrix(dmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFlowMassMatrix instantiateMutableType(final DoubleMatrixData dmd, final FlowMassUnit unit)
+    public FlowMassVector instantiateVector(final DoubleVectorData dvd, final FlowMassUnit displayUnit)
     {
-        return new MutableFlowMassMatrix(dmd, unit);
+        return new FlowMassVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FlowMass instantiateScalar(final double value, final FlowMassUnit unit)
+    public FlowMass instantiateScalarSI(final double valueSI, final FlowMassUnit displayUnit)
     {
-        return new FlowMass(value, unit);
+        FlowMass result = FlowMass.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
-
+    
 }
+

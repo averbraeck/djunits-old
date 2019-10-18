@@ -1,6 +1,5 @@
 package org.djunits.unit;
 
-import static org.djunits.unit.unitsystem.UnitSystem.SI_DERIVED;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -30,20 +29,12 @@ public class ElectricalPotentialUnitTest extends AbstractLinearUnitTest<Electric
     }
 
     /**
-     * Verify the result of some get*Key methods.
-     */
-    @Test
-    public final void keys()
-    {
-        checkKeys(ElectricalPotentialUnit.VOLT, "ElectricalPotentialUnit.volt", "ElectricalPotentialUnit.V");
-    }
-
-    /**
      * Verify conversion factors, English names and abbreviations.
      */
     @Test
     public final void conversions()
     {
+        assertEquals("kgm2/s3A", ElectricalPotentialUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(ElectricalPotentialUnit.VOLT, 1, 0.00000001, "volt", "V");
         checkUnitRatioNameAndAbbreviation(ElectricalPotentialUnit.MILLIVOLT, 0.001, 0.00000000001, "millivolt", "mV");
         checkUnitRatioNameAndAbbreviation(ElectricalPotentialUnit.KILOVOLT, 1000, 0.005, "kilovolt", "kV");
@@ -58,17 +49,18 @@ public class ElectricalPotentialUnitTest extends AbstractLinearUnitTest<Electric
     @Test
     public final void createElectricalPotentialUnit()
     {
-        ElectricalPotentialUnit myEPU =
-                new ElectricalPotentialUnit("NanoVolt", "nV", SI_DERIVED, ElectricalPotentialUnit.VOLT, 1e-9);
+        ElectricalPotentialUnit myEPU = ElectricalPotentialUnit.VOLT.deriveLinear(1e-9, "nanoV", "NanoVolt");
         assertTrue("Can create a new ElectricalPotentialUnit", null != myEPU);
-        checkUnitRatioNameAndAbbreviation(myEPU, 1e-9, 0.1, "NanoVolt", "nV");
-        deregisterUnit(myEPU);
+        checkUnitRatioNameAndAbbreviation(myEPU, 1e-9, 0.1, "NanoVolt", "nanoV");
+        ElectricalPotentialUnit.BASE.unregister(myEPU);
 
-        myEPU = new ElectricalPotentialUnit(PowerUnit.FOOT_POUND_FORCE_PER_HOUR, ElectricalCurrentUnit.MICROAMPERE,
-                "fpfph/microA", "fpfph/uA", UnitSystem.IMPERIAL);
+        myEPU = ElectricalPotentialUnit.SI.deriveLinear(
+                PowerUnit.FOOT_POUND_FORCE_PER_HOUR.getScale().toStandardUnit(1.0)
+                        / ElectricalCurrentUnit.MICROAMPERE.getScale().toStandardUnit(1.0),
+                "ft.lbfph/uA", "foot pound-force per hour per microA", UnitSystem.IMPERIAL);
         assertTrue("Can create a new ElectricalPotentialUnit", null != myEPU);
-        checkUnitRatioNameAndAbbreviation(myEPU, 376.6, 0.1, "fpfph/microA", "fpfph/uA");
-        deregisterUnit(myEPU);
+        checkUnitRatioNameAndAbbreviation(myEPU, 376.6, 0.1, "foot pound-force per hour per microA", "ft.lbfph/uA");
+        ElectricalPotentialUnit.BASE.unregister(myEPU);
     }
 
 }

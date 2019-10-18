@@ -1,9 +1,8 @@
 package org.djunits.unit;
 
-import static org.djunits.unit.unitsystem.UnitSystem.CGS_EMU;
-import static org.djunits.unit.unitsystem.UnitSystem.CGS_ESU;
-import static org.djunits.unit.unitsystem.UnitSystem.SI_BASE;
-
+import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.scale.IdentityScale;
+import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
 
 /**
@@ -14,101 +13,39 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class ElectricalCurrentUnit extends LinearUnit<ElectricalCurrentUnit>
+public class ElectricalCurrentUnit extends Unit<ElectricalCurrentUnit>
 {
     /** */
     private static final long serialVersionUID = 20140607L;
 
+    /** The base, with "A" as the SI signature. */
+    public static final UnitBase<ElectricalCurrentUnit> BASE = new UnitBase<>("A");
+
     /** The SI unit for electrical current is Ampere. */
-    public static final ElectricalCurrentUnit SI;
+    public static final ElectricalCurrentUnit SI = new ElectricalCurrentUnit()
+            .build(new Unit.Builder<ElectricalCurrentUnit>().setUnitBase(BASE).setId("A").setName("ampere")
+                    .setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** Ampere. */
-    public static final ElectricalCurrentUnit AMPERE;
-
-    /** nanoampere. */
-    public static final ElectricalCurrentUnit NANOAMPERE;
+    public static final ElectricalCurrentUnit AMPERE = SI;
 
     /** microampere. */
-    public static final ElectricalCurrentUnit MICROAMPERE;
+    public static final ElectricalCurrentUnit MICROAMPERE = AMPERE.deriveSI(SIPrefixes.getUnit("mu"));
 
     /** milliampere. */
-    public static final ElectricalCurrentUnit MILLIAMPERE;
+    public static final ElectricalCurrentUnit MILLIAMPERE = AMPERE.deriveSI(SIPrefixes.getUnit("m"));
 
     /** kiloampere. */
-    public static final ElectricalCurrentUnit KILOAMPERE;
+    public static final ElectricalCurrentUnit KILOAMPERE = AMPERE.deriveSI(SIPrefixes.getUnit("k"));
 
     /** megaampere. */
-    public static final ElectricalCurrentUnit MEGAAMPERE;
+    public static final ElectricalCurrentUnit MEGAAMPERE = AMPERE.deriveSI(SIPrefixes.getUnit("M"));
 
     /** statampere (GCS ESU). */
-    public static final ElectricalCurrentUnit STATAMPERE;
+    public static final ElectricalCurrentUnit STATAMPERE =
+            AMPERE.deriveLinear(3.335641E-10, "statA", "statampere", UnitSystem.CGS_ESU);
 
     /** abampere (GCS EMU). */
-    public static final ElectricalCurrentUnit ABAMPERE;
-
-    static
-    {
-        SI = new ElectricalCurrentUnit("ElectricalCurrentUnit.A", SI_BASE);
-        AMPERE = SI;
-        NANOAMPERE = new ElectricalCurrentUnit("ElectricalCurrentUnit.nA", SI_BASE, AMPERE, 1.0E-9);
-        MICROAMPERE = new ElectricalCurrentUnit("ElectricalCurrentUnit.muA", SI_BASE, AMPERE, 1.0E-6);
-        MILLIAMPERE = new ElectricalCurrentUnit("ElectricalCurrentUnit.mA", SI_BASE, AMPERE, 0.001);
-        KILOAMPERE = new ElectricalCurrentUnit("ElectricalCurrentUnit.kA", SI_BASE, AMPERE, 1000.0);
-        MEGAAMPERE = new ElectricalCurrentUnit("ElectricalCurrentUnit.MA", SI_BASE, AMPERE, 1.0E6);
-        STATAMPERE = new ElectricalCurrentUnit("ElectricalCurrentUnit.statA", CGS_ESU, AMPERE, 3.335641E-10);
-        ABAMPERE = new ElectricalCurrentUnit("ElectricalCurrentUnit.abA", CGS_EMU, AMPERE, 10.0);
-    }
-
-    /**
-     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
-     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     */
-    private ElectricalCurrentUnit(final String abbreviationKey, final UnitSystem unitSystem)
-    {
-        super(abbreviationKey, unitSystem);
-    }
-
-    /**
-     * Build a unit with a conversion factor to another unit, e.g., a milli Ampere is 0.001 Ampere.
-     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
-     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     * @param referenceUnit ElectricalCurrentUnit; the unit to convert to
-     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
-     *            unit
-     */
-    private ElectricalCurrentUnit(final String abbreviationKey, final UnitSystem unitSystem,
-            final ElectricalCurrentUnit referenceUnit, final double scaleFactorToReferenceUnit)
-    {
-        super(abbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
-    }
-
-    /**
-     * Build a user-defined unit with a conversion factor to another unit.
-     * @param name String; the long name of the unit
-     * @param abbreviation String; the abbreviation of the unit
-     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     * @param referenceUnit ElectricalCurrentUnit; the unit to convert to
-     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
-     *            unit
-     */
-    public ElectricalCurrentUnit(final String name, final String abbreviation, final UnitSystem unitSystem,
-            final ElectricalCurrentUnit referenceUnit, final double scaleFactorToReferenceUnit)
-    {
-        super(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final ElectricalCurrentUnit getStandardUnit()
-    {
-        return AMPERE;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final String getSICoefficientsString()
-    {
-        return "A";
-    }
+    public static final ElectricalCurrentUnit ABAMPERE = AMPERE.deriveLinear(10.0, "abA", "abampere", UnitSystem.CGS_EMU);
 
 }

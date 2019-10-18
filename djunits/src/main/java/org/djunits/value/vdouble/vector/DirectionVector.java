@@ -1,178 +1,78 @@
 package org.djunits.value.vdouble.vector;
 
-import java.util.List;
-import java.util.SortedMap;
+import javax.annotation.Generated;
 
 import org.djunits.unit.AngleUnit;
 import org.djunits.unit.DirectionUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vdouble.scalar.Angle;
 import org.djunits.value.vdouble.scalar.Direction;
+import org.djunits.value.vdouble.vector.base.AbstractDoubleVectorAbs;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Absolute Direction Vector.
+ * Double DirectionVector, a vector of values with a DirectionUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * version Sep 5, 2015 <br>
+ * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class DirectionVector extends
-        AbstractDoubleVectorAbs<DirectionUnit, AngleUnit, DirectionVector, AngleVector, MutableDirectionVector, Direction>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class DirectionVector extends AbstractDoubleVectorAbs<DirectionUnit, Direction, DirectionVector, 
+        AngleUnit, Angle, AngleVector>
 {
     /** */
-    private static final long serialVersionUID = 20151003L;
+    private static final long serialVersionUID = 20190905L;
 
     /**
-     * Construct a new Absolute Immutable Double DirectionVector.
-     * @param values double[]; the values of the entries in the new Absolute Immutable Double DirectionVector
-     * @param unit DirectionUnit; the unit of the new Absolute Immutable Double DirectionVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * Construct an DirectionVector from an internal data object.
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param unit DirectionUnit; the display unit of the vector data
      */
-    public DirectionVector(final double[] values, final DirectionUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable Double DirectionVector.
-     * @param values List&lt;Double&gt;; the values of the entries in the new Absolute Immutable Double DirectionVector
-     * @param unit DirectionUnit; the unit of the new Absolute Immutable Double DirectionVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public DirectionVector(final List<Double> values, final DirectionUnit unit, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable Double DirectionVector.
-     * @param values Direction[]; the values of the entries in the new Absolute Immutable Double DirectionVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public DirectionVector(final Direction[] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable Double DirectionVector.
-     * @param values List&lt;Direction&gt;; the values of the entries in the new Absolute Immutable Double DirectionVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public DirectionVector(final List<Direction> values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable Double DirectionVector.
-     * @param values SortedMap&lt;Integer, Direction&gt;; the values of the entries in the new Absolute Sparse Mutable Double
-     *            DirectionVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public DirectionVector(final SortedMap<Integer, Direction> values, final int length, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable Double DirectionVector.
-     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Absolute Sparse Mutable Double
-     *            DirectionVector
-     * @param unit DirectionUnit; the unit of the new Absolute Sparse Mutable Double DirectionVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public DirectionVector(final SortedMap<Integer, Double> values, final DirectionUnit unit, final int length,
-            final StorageType storageType) throws ValueException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable Double DirectionVector.
-     * @param data DoubleVectorData; an internal data object
-     * @param unit DirectionUnit; the unit
-     */
-    DirectionVector(final DoubleVectorData data, final DirectionUnit unit)
+    public DirectionVector(final DoubleVectorData data, final DirectionUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final DirectionVector instantiateTypeAbs(final DoubleVectorData dvd, final DirectionUnit unit)
+    public Class<Direction> getScalarClass()
     {
-        return new DirectionVector(dvd, unit);
+        return Direction.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final AngleVector instantiateTypeRel(final DoubleVectorData dvd, final AngleUnit unit)
+    public DirectionVector instantiateVector(final DoubleVectorData dvd, final DirectionUnit displayUnit)
     {
-        return new AngleVector(dvd, unit);
+        return new DirectionVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableDirectionVector instantiateMutableType(final DoubleVectorData dvd, final DirectionUnit unit)
+    public Direction instantiateScalarSI(final double valueSI, final DirectionUnit displayUnit)
     {
-        return new MutableDirectionVector(dvd, unit);
+        Direction result = Direction.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Direction instantiateScalar(final double value, final DirectionUnit unit)
+    public AngleVector instantiateVectorRel(final DoubleVectorData dvd, final AngleUnit displayUnit)
     {
-        return new Direction(value, unit);
+        return new AngleVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final DirectionVector toDense()
+    public Angle instantiateScalarRelSI(final double valueSI, final AngleUnit displayUnit)
     {
-        return this.data.isDense() ? (DirectionVector) this : instantiateTypeAbs(this.data.toDense(), getUnit());
+        Angle result = Angle.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public final DirectionVector toSparse()
-    {
-        return this.data.isSparse() ? (DirectionVector) this : instantiateTypeAbs(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Return an array of Direction Scalars from this vector.
-     * @return Direction[]; an array of Direction Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public Direction[] toArray()
-    {
-        Direction[] array = new Direction[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
-    }
-
-}
+   
+}

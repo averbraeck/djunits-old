@@ -1,15 +1,14 @@
 package org.djunits.value.vdouble.vector;
 
-import java.util.List;
-import java.util.SortedMap;
+import javax.annotation.Generated;
 
 import org.djunits.unit.PowerUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
 import org.djunits.value.vdouble.scalar.Power;
+import org.djunits.value.vdouble.vector.base.AbstractDoubleVectorRel;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Double PowerVector, a vector of values with a PowerUnit.
+ * Double PowerVector, a vector of values with a PowerUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -17,150 +16,46 @@ import org.djunits.value.vdouble.scalar.Power;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class PowerVector extends AbstractDoubleVectorRel<PowerUnit, PowerVector, MutablePowerVector, Power>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class PowerVector extends AbstractDoubleVectorRel<PowerUnit, Power, PowerVector>
+
 {
     /** */
-    private static final long serialVersionUID = 20151109L;
+    private static final long serialVersionUID = 20190905L;
 
     /**
-     * Construct a new Relative Immutable Double PowerVector.
-     * @param values double[]; the values of the entries in the new Relative Immutable Double PowerVector
-     * @param unit PowerUnit; the unit of the new Relative Immutable Double PowerVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * Construct an PowerVector from an internal data object.
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param displayUnit PowerUnit; the display unit of the vector data
      */
-    public PowerVector(final double[] values, final PowerUnit unit, final StorageType storageType) throws ValueException
+    public PowerVector(final DoubleVectorData data, final PowerUnit displayUnit)
     {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double PowerVector.
-     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double PowerVector
-     * @param unit PowerUnit; the unit of the new Relative Immutable Double PowerVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public PowerVector(final List<Double> values, final PowerUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double PowerVector.
-     * @param values Power[]; the values of the entries in the new Relative Immutable Double PowerVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public PowerVector(final Power[] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double PowerVector.
-     * @param values List&lt;Power&gt;; the values of the entries in the new Relative Immutable Double PowerVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public PowerVector(final List<Power> values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double PowerVector.
-     * @param values SortedMap&lt;Integer, Power&gt;; the values of the entries in the new Relative Sparse Mutable Double
-     *            PowerVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public PowerVector(final SortedMap<Integer, Power> values, final int length, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double PowerVector.
-     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
-     *            PowerVector
-     * @param unit PowerUnit; the unit of the new Relative Sparse Mutable Double PowerVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public PowerVector(final SortedMap<Integer, Double> values, final PowerUnit unit, final int length,
-            final StorageType storageType) throws ValueException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
-     * @param data DoubleVectorData; an internal data object
-     * @param unit PowerUnit; the unit
-     */
-    PowerVector(final DoubleVectorData data, final PowerUnit unit)
-    {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final PowerVector instantiateType(final DoubleVectorData dvd, final PowerUnit unit)
+    public Class<Power> getScalarClass()
     {
-        return new PowerVector(dvd, unit);
+        return Power.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutablePowerVector instantiateMutableType(final DoubleVectorData dvd, final PowerUnit unit)
+    public PowerVector instantiateVector(final DoubleVectorData dvd, final PowerUnit displayUnit)
     {
-        return new MutablePowerVector(dvd, unit);
+        return new PowerVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Power instantiateScalar(final double value, final PowerUnit unit)
+    public Power instantiateScalarSI(final double valueSI, final PowerUnit displayUnit)
     {
-        return new Power(value, unit);
+        Power result = Power.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public final PowerVector toDense()
-    {
-        return this.data.isDense() ? (PowerVector) this : instantiateType(this.data.toDense(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final PowerVector toSparse()
-    {
-        return this.data.isSparse() ? (PowerVector) this : instantiateType(this.data.toSparse(), getUnit());
-    }
-
-    /**
-     * Return an array of Power Scalars from this vector.
-     * @return Power[]; an array of Power Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public Power[] toArray()
-    {
-        Power[] array = new Power[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
-    }
-
+   
 }
+

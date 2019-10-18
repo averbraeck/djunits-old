@@ -1,7 +1,8 @@
 package org.djunits.unit;
 
-import static org.djunits.unit.unitsystem.UnitSystem.OTHER;
-
+import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.scale.IdentityScale;
+import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
 
 /**
@@ -17,47 +18,12 @@ public final class DimensionlessUnit extends Unit<DimensionlessUnit>
     /** */
     private static final long serialVersionUID = 20150830L;
 
-    /** The SI unit for a dimensionless unit is "1" or N/A. */
-    public static final DimensionlessUnit SI;
+    /** The base, with the empty SI signature. */
+    public static final UnitBase<DimensionlessUnit> BASE = new UnitBase<>("");
 
-    static
-    {
-        SI = new DimensionlessUnit("DimensionlessUnit.si", OTHER);
-    }
+    /** The SI unit for a dimension less unit is "1" or N/A. */
+    public static final DimensionlessUnit SI =
+            new DimensionlessUnit().build(new Unit.Builder<DimensionlessUnit>().setUnitBase(BASE).setId("unit").setName("unit")
+                    .setUnitSystem(UnitSystem.OTHER).setSiPrefixes(SIPrefixes.NONE).setScale(IdentityScale.SCALE));
 
-    /**
-     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
-     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     */
-    private DimensionlessUnit(final String abbreviationKey, final UnitSystem unitSystem)
-    {
-        super(abbreviationKey, unitSystem);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public DimensionlessUnit getStandardUnit()
-    {
-        return SI;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public String getSICoefficientsString()
-    {
-        return "1";
-    }
-
-    /** {@inheritDoc} */
-    @SuppressWarnings("checkstyle:needbraces")
-    @Override
-    public boolean equalsIgnoreNaming(final Object obj)
-    {
-        // Two DimensionlessUnit instances are always the same numerically, as they are unscaled.
-        if (this == obj)
-            return true;
-        if (getClass() != obj.getClass())
-            return false;
-        return true;
-    }
 }

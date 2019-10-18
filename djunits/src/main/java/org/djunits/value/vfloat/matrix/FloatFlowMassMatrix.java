@@ -1,12 +1,16 @@
 package org.djunits.value.vfloat.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.FlowMassUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vfloat.matrix.base.AbstractFloatMatrixRel;
+import org.djunits.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits.value.vfloat.scalar.FloatFlowMass;
+import org.djunits.value.vfloat.vector.FloatFlowMassVector;
+import org.djunits.value.vfloat.vector.data.FloatVectorData;
 
 /**
- * Immutable FloatFlowMassMatrix, a matrix of values with a FlowMassUnit.
+ * Immutable FloatFloatFlowMassMatrix, a matrix of values with a FlowMassUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -14,78 +18,58 @@ import org.djunits.value.vfloat.scalar.FloatFlowMass;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class FloatFlowMassMatrix
-        extends AbstractFloatMatrixRel<FlowMassUnit, FloatFlowMassMatrix, MutableFloatFlowMassMatrix, FloatFlowMass>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class FloatFlowMassMatrix extends AbstractFloatMatrixRel<FlowMassUnit, FloatFlowMass, FloatFlowMassVector, FloatFlowMassMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable FloatFlowMassMatrix.
-     * @param values float[][]; the values of the entries in the new Relative Immutable FloatFlowMassMatrix
-     * @param unit FlowMassUnit; the unit of the new Relative Immutable FloatFlowMassMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public FloatFlowMassMatrix(final float[][] values, final FlowMassUnit unit, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable FloatFlowMassMatrix.
-     * @param values FloatFlowMass[][]; the values of the entries in the new Relative Immutable Float FloatFlowMassMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public FloatFlowMassMatrix(final FloatFlowMass[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data FloatMatrixData; an internal data object
      * @param unit FlowMassUnit; the unit
      */
-    FloatFlowMassMatrix(final FloatMatrixData data, final FlowMassUnit unit)
+    public FloatFlowMassMatrix(final FloatMatrixData data, final FlowMassUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatFlowMassMatrix toDense()
+    public Class<FloatFlowMass> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return FloatFlowMass.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final FloatFlowMassMatrix toSparse()
+    public Class<FloatFlowMassVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+        return FloatFlowMassVector.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatFlowMassMatrix instantiateType(final FloatMatrixData fmd, final FlowMassUnit unit)
+    public FloatFlowMassMatrix instantiateMatrix(final FloatMatrixData fmd, final FlowMassUnit displayUnit)
     {
-        return new FloatFlowMassMatrix(fmd, unit);
+        return new FloatFlowMassMatrix(fmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloatFlowMassMatrix instantiateMutableType(final FloatMatrixData fmd, final FlowMassUnit unit)
+    public FloatFlowMassVector instantiateVector(final FloatVectorData fvd, final FlowMassUnit displayUnit)
     {
-        return new MutableFloatFlowMassMatrix(fmd, unit);
+        return new FloatFlowMassVector(fvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final FloatFlowMass instantiateScalar(final float value, final FlowMassUnit unit)
+    public FloatFlowMass instantiateScalarSI(final float valueSI, final FlowMassUnit displayUnit)
     {
-        return new FloatFlowMass(value, unit);
+        FloatFlowMass result = FloatFlowMass.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
-
+
 }
+

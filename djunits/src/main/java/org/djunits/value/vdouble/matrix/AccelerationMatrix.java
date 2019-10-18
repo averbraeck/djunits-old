@@ -1,12 +1,16 @@
 package org.djunits.value.vdouble.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.AccelerationUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
+import org.djunits.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits.value.vdouble.scalar.Acceleration;
+import org.djunits.value.vdouble.vector.AccelerationVector;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Double AccelerationMatrix, a matrix of values with a AccelerationUnit.
+ * Immutable Double AccelerationMatrix, a matrix of values with a AccelerationUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -14,78 +18,58 @@ import org.djunits.value.vdouble.scalar.Acceleration;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class AccelerationMatrix
-        extends AbstractDoubleMatrixRel<AccelerationUnit, AccelerationMatrix, MutableAccelerationMatrix, Acceleration>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class AccelerationMatrix extends AbstractDoubleMatrixRel<AccelerationUnit, Acceleration, AccelerationVector, AccelerationMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Double AccelerationMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double AccelerationMatrix
-     * @param unit AccelerationUnit; the unit of the new Relative Immutable Double AccelerationMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public AccelerationMatrix(final double[][] values, final AccelerationUnit unit, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double AccelerationMatrix.
-     * @param values Acceleration[][]; the values of the entries in the new Relative Immutable Double AccelerationMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public AccelerationMatrix(final Acceleration[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data DoubleMatrixData; an internal data object
      * @param unit AccelerationUnit; the unit
      */
-    AccelerationMatrix(final DoubleMatrixData data, final AccelerationUnit unit)
+    public AccelerationMatrix(final DoubleMatrixData data, final AccelerationUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final AccelerationMatrix toDense()
+    public Class<Acceleration> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return Acceleration.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final AccelerationMatrix toSparse()
+    public Class<AccelerationVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+        return AccelerationVector.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final AccelerationMatrix instantiateType(final DoubleMatrixData dmd, final AccelerationUnit unit)
+    public AccelerationMatrix instantiateMatrix(final DoubleMatrixData dmd, final AccelerationUnit displayUnit)
     {
-        return new AccelerationMatrix(dmd, unit);
+        return new AccelerationMatrix(dmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableAccelerationMatrix instantiateMutableType(final DoubleMatrixData dmd, final AccelerationUnit unit)
+    public AccelerationVector instantiateVector(final DoubleVectorData dvd, final AccelerationUnit displayUnit)
     {
-        return new MutableAccelerationMatrix(dmd, unit);
+        return new AccelerationVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Acceleration instantiateScalar(final double value, final AccelerationUnit unit)
+    public Acceleration instantiateScalarSI(final double valueSI, final AccelerationUnit displayUnit)
     {
-        return new Acceleration(value, unit);
+        Acceleration result = Acceleration.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
-
+    
 }
+

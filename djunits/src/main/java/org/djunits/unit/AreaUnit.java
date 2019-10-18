@@ -1,9 +1,8 @@
 package org.djunits.unit;
 
-import static org.djunits.unit.unitsystem.UnitSystem.IMPERIAL;
-import static org.djunits.unit.unitsystem.UnitSystem.OTHER;
-import static org.djunits.unit.unitsystem.UnitSystem.SI_DERIVED;
-
+import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.scale.IdentityScale;
+import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
 
 /**
@@ -14,186 +13,81 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  */
-public class AreaUnit extends LinearUnit<AreaUnit>
+public class AreaUnit extends Unit<AreaUnit>
 {
     /** */
     private static final long serialVersionUID = 20140607L;
 
-    /** The unit of length for the area unit, e.g., meter. */
-    private final LengthUnit lengthUnit;
+    /** The base, with "m2" as the SI signature. */
+    public static final UnitBase<AreaUnit> BASE = new UnitBase<>("m2");
 
     /** The SI unit for area is m^2. */
-    public static final AreaUnit SI;
-
-    /** am^2. */
-    public static final AreaUnit SQUARE_ATTOMETER;
-
-    /** fm^2. */
-    public static final AreaUnit SQUARE_FEMTOMETER;
-
-    /** pm^2. */
-    public static final AreaUnit SQUARE_PICOMETER;
-
-    /** nm^2. */
-    public static final AreaUnit SQUARE_NANOMETER;
-
-    /** &#181;m^2. */
-    public static final AreaUnit SQUARE_MICROMETER;
-
-    /** mm^2. */
-    public static final AreaUnit SQUARE_MILLIMETER;
+    public static final AreaUnit SI =
+            new AreaUnit().build(new Unit.Builder<AreaUnit>().setUnitBase(BASE).setId("m^2").setName("square meter")
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
 
     /** m^2. */
-    public static final AreaUnit SQUARE_METER;
+    public static final AreaUnit SQUARE_METER = SI;
+
+    /** mm^2. */
+    public static final AreaUnit SQUARE_MILLIMETER = SQUARE_METER.deriveLinear(1.0E-6, "mm^2", "square millimeter");
 
     /** cm^2. */
-    public static final AreaUnit SQUARE_CENTIMETER;
+    public static final AreaUnit SQUARE_CENTIMETER = SQUARE_METER.deriveLinear(1.0E-4, "cm^2", "square centimeter");
 
     /** dm^2. */
-    public static final AreaUnit SQUARE_DECIMETER;
+    public static final AreaUnit SQUARE_DECIMETER = SQUARE_METER.deriveLinear(1.0E-2, "dm^2", "square decimeter");
 
     /** dam^2. */
-    public static final AreaUnit SQUARE_DEKAMETER;
+    public static final AreaUnit SQUARE_DECAMETER = SQUARE_METER.deriveLinear(1.0E2, "dam^2", "square decameter");
 
     /** hm^2. */
-    public static final AreaUnit SQUARE_HECTOMETER;
+    public static final AreaUnit SQUARE_HECTOMETER = SQUARE_METER.deriveLinear(1.0E4, "hm^2", "square hectometer");
 
     /** km^2. */
-    public static final AreaUnit SQUARE_KILOMETER;
-
-    /** Mm^2. */
-    public static final AreaUnit SQUARE_MEGAMETER;
+    public static final AreaUnit SQUARE_KILOMETER = SQUARE_METER.deriveLinear(1.0E6, "km^2", "square kilometer");
 
     /** centiare. */
-    public static final AreaUnit CENTIARE;
+    public static final AreaUnit CENTIARE = SQUARE_METER.deriveLinear(1.0, "ca", "centiare", UnitSystem.OTHER);
 
     /** are. */
-    public static final AreaUnit ARE;
+    public static final AreaUnit ARE = CENTIARE.deriveLinear(100.0, "a", "are");
 
     /** hectare. */
-    public static final AreaUnit HECTARE;
+    public static final AreaUnit HECTARE = ARE.deriveLinear(100.0, "ha", "hectare");
 
     /** mile^2. */
-    public static final AreaUnit SQUARE_MILE;
+    public static final AreaUnit SQUARE_MILE =
+            SQUARE_METER.deriveLinear(sqLength(LengthUnit.MILE), "mi^2", "square mile", UnitSystem.IMPERIAL);
 
     /** Nautical mile^2. */
-    public static final AreaUnit SQUARE_NAUTICAL_MILE;
+    public static final AreaUnit SQUARE_NAUTICAL_MILE =
+            SQUARE_METER.deriveLinear(sqLength(LengthUnit.NAUTICAL_MILE), "NM^2", "square Nautical Mile", UnitSystem.OTHER);
 
     /** ft^2. */
-    public static final AreaUnit SQUARE_FOOT;
+    public static final AreaUnit SQUARE_FOOT =
+            SQUARE_METER.deriveLinear(sqLength(LengthUnit.FOOT), "ft^2", "square foot", UnitSystem.IMPERIAL);
 
     /** in^2. */
-    public static final AreaUnit SQUARE_INCH;
+    public static final AreaUnit SQUARE_INCH =
+            SQUARE_METER.deriveLinear(sqLength(LengthUnit.INCH), "in^2", "square inch", UnitSystem.IMPERIAL);
 
     /** yd^2. */
-    public static final AreaUnit SQUARE_YARD;
+    public static final AreaUnit SQUARE_YARD =
+            SQUARE_METER.deriveLinear(sqLength(LengthUnit.YARD), "yd^2", "square yard", UnitSystem.IMPERIAL);
 
-    /** acre (international). */
-    public static final AreaUnit ACRE;
-
-    static
-    {
-        SI = new AreaUnit(LengthUnit.METER, "AreaUnit.m^2", SI_DERIVED);
-        SQUARE_METER = SI;
-        SQUARE_ATTOMETER = new AreaUnit(LengthUnit.ATTOMETER, "AreaUnit.am^2", SI_DERIVED);
-        SQUARE_FEMTOMETER = new AreaUnit(LengthUnit.FEMTOMETER, "AreaUnit.fm^2", SI_DERIVED);
-        SQUARE_PICOMETER = new AreaUnit(LengthUnit.PICOMETER, "AreaUnit.pm^2", SI_DERIVED);
-        SQUARE_NANOMETER = new AreaUnit(LengthUnit.NANOMETER, "AreaUnit.nm^2", SI_DERIVED);
-        SQUARE_MICROMETER = new AreaUnit(LengthUnit.MICROMETER, "AreaUnit.mum^2", SI_DERIVED);
-        SQUARE_MILLIMETER = new AreaUnit(LengthUnit.MILLIMETER, "AreaUnit.mm^2", SI_DERIVED);
-        SQUARE_CENTIMETER = new AreaUnit(LengthUnit.CENTIMETER, "AreaUnit.cm^2", SI_DERIVED);
-        SQUARE_DECIMETER = new AreaUnit(LengthUnit.DECIMETER, "AreaUnit.dm^2", SI_DERIVED);
-        SQUARE_DEKAMETER = new AreaUnit(LengthUnit.DEKAMETER, "AreaUnit.dam^2", SI_DERIVED);
-        SQUARE_HECTOMETER = new AreaUnit(LengthUnit.HECTOMETER, "AreaUnit.hm^2", SI_DERIVED);
-        SQUARE_KILOMETER = new AreaUnit(LengthUnit.KILOMETER, "AreaUnit.km^2", SI_DERIVED);
-        SQUARE_MEGAMETER = new AreaUnit(LengthUnit.MEGAMETER, "AreaUnit.Mm^2", SI_DERIVED);
-        CENTIARE = new AreaUnit("AreaUnit.ca", OTHER, SQUARE_METER, 1.0);
-        ARE = new AreaUnit("AreaUnit.a", OTHER, SQUARE_METER, 100.0);
-        HECTARE = new AreaUnit("AreaUnit.ha", OTHER, ARE, 100.0);
-        SQUARE_NAUTICAL_MILE = new AreaUnit(LengthUnit.NAUTICAL_MILE, "AreaUnit.Nmi^2", OTHER);
-        SQUARE_MILE = new AreaUnit(LengthUnit.MILE, "AreaUnit.mi^2", IMPERIAL);
-        SQUARE_FOOT = new AreaUnit(LengthUnit.FOOT, "AreaUnit.ft^2", IMPERIAL);
-        SQUARE_INCH = new AreaUnit(LengthUnit.INCH, "AreaUnit.in^2", IMPERIAL);
-        SQUARE_YARD = new AreaUnit(LengthUnit.YARD, "AreaUnit.yd^2", IMPERIAL);
-        ACRE = new AreaUnit("AreaUnit.ac", IMPERIAL, SQUARE_YARD, 4840.0);
-    }
+    /** acre (international) defined as 1/640 square mile or 4840 square yards. */
+    public static final AreaUnit ACRE = SQUARE_MILE.deriveLinear(1.0 / 640.0, "ac", "acre", UnitSystem.IMPERIAL);
 
     /**
-     * Define area unit based on length.
-     * @param lengthUnit LengthUnit; the unit of length for the area unit, e.g., meter
-     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
-     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
+     * Calculate the conversion factor for a "squared" length.
+     * @param lu LengthUnit; the LengthUnit to use as the base
+     * @return double; the conversion factor
      */
-    private AreaUnit(final LengthUnit lengthUnit, final String abbreviationKey, final UnitSystem unitSystem)
+    private static double sqLength(final LengthUnit lu)
     {
-        super(abbreviationKey, unitSystem, SQUARE_METER, lengthUnit.getScaleFactor() * lengthUnit.getScaleFactor());
-        this.lengthUnit = lengthUnit;
-    }
-
-    /**
-     * Create a user-defined area unit based on length.
-     * @param lengthUnit LengthUnit; the unit of length for the area unit, e.g., meter
-     * @param name String; the long name of the unit
-     * @param abbreviation String; the abbreviation of the unit
-     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     */
-    public AreaUnit(final LengthUnit lengthUnit, final String name, final String abbreviation, final UnitSystem unitSystem)
-    {
-        super(name, abbreviation, unitSystem, SQUARE_METER, lengthUnit.getScaleFactor() * lengthUnit.getScaleFactor());
-        this.lengthUnit = lengthUnit;
-    }
-
-    /**
-     * This constructor constructs a unit out of another defined unit, e.g. an are is 100 m^2.
-     * @param abbreviationKey String; the key to the locale file for the abbreviation of the unit
-     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     * @param referenceUnit AreaUnit; the unit to convert to
-     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
-     *            unit
-     */
-    private AreaUnit(final String abbreviationKey, final UnitSystem unitSystem, final AreaUnit referenceUnit,
-            final double scaleFactorToReferenceUnit)
-    {
-        super(abbreviationKey, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
-        this.lengthUnit = referenceUnit.getLengthUnit();
-    }
-
-    /**
-     * Build a user-defined unit with a conversion factor to another unit, e.g. an are is 100 m^2.
-     * @param name String; the long name of the unit
-     * @param abbreviation String; the abbreviation of the unit
-     * @param unitSystem UnitSystem; the unit system, e.g. SI or Imperial
-     * @param referenceUnit AreaUnit; the unit to convert to
-     * @param scaleFactorToReferenceUnit double; multiply a value in this unit by the factor to convert to the given reference
-     *            unit
-     */
-    public AreaUnit(final String name, final String abbreviation, final UnitSystem unitSystem, final AreaUnit referenceUnit,
-            final double scaleFactorToReferenceUnit)
-    {
-        super(name, abbreviation, unitSystem, referenceUnit, scaleFactorToReferenceUnit);
-        this.lengthUnit = referenceUnit.getLengthUnit();
-    }
-
-    /**
-     * @return lengthUnit
-     */
-    public final LengthUnit getLengthUnit()
-    {
-        return this.lengthUnit;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final AreaUnit getStandardUnit()
-    {
-        return SQUARE_METER;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final String getSICoefficientsString()
-    {
-        return "m2";
+        double factor = lu.getScale().toStandardUnit(1.0);
+        return factor * factor;
     }
 
 }

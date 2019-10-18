@@ -1,168 +1,78 @@
 package org.djunits.value.vdouble.vector;
 
-import java.util.List;
-import java.util.SortedMap;
+import javax.annotation.Generated;
 
 import org.djunits.unit.LengthUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.unit.PositionUnit;
 import org.djunits.value.vdouble.scalar.Length;
+import org.djunits.value.vdouble.scalar.Position;
+import org.djunits.value.vdouble.vector.base.AbstractDoubleVectorRelWithAbs;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Relative Length Vector.
+ * Double LengthVector, a vector of values with a LengthUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
- * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * version Sep 5, 2015 <br>
+ * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class LengthVector extends AbstractDoubleVectorRel<LengthUnit, LengthVector, MutableLengthVector, Length>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class LengthVector extends AbstractDoubleVectorRelWithAbs<PositionUnit, Position, PositionVector, 
+        LengthUnit, Length, LengthVector>
 {
     /** */
-    private static final long serialVersionUID = 20151006L;
+    private static final long serialVersionUID = 20190905L;
 
     /**
-     * Construct a new Relative Immutable Double LengthVector.
-     * @param values double[]; the values of the entries in the new Relative Immutable Double LengthVector
-     * @param unit LengthUnit; the unit of the new Relative Immutable Double LengthVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * Construct an LengthVector from an internal data object.
+     * @param data DoubleVectorData; the internal data object for the vector data
+     * @param displayUnit LengthUnit; the display unit of the vector data
      */
-    public LengthVector(final double[] values, final LengthUnit unit, final StorageType storageType) throws ValueException
+    public LengthVector(final DoubleVectorData data, final LengthUnit displayUnit)
     {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double LengthVector.
-     * @param values List&lt;Double&gt;; the values of the entries in the new Relative Immutable Double LengthVector
-     * @param unit LengthUnit; the unit of the new Relative Immutable Double LengthVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public LengthVector(final List<Double> values, final LengthUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double LengthVector.
-     * @param values Length[]; the values of the entries in the new Relative Immutable Double LengthVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public LengthVector(final Length[] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double LengthVector.
-     * @param values List&lt;Length&gt;; the values of the entries in the new Relative Immutable Double LengthVector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public LengthVector(final List<Length> values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double LengthVector.
-     * @param values SortedMap&lt;Integer, Length&gt;; the values of the entries in the new Relative Sparse Mutable Double
-     *            LengthVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public LengthVector(final SortedMap<Integer, Length> values, final int length, final StorageType storageType)
-            throws ValueException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double LengthVector.
-     * @param values SortedMap&lt;Integer, Double&gt;; the map of indexes to values of the Relative Sparse Mutable Double
-     *            LengthVector
-     * @param unit LengthUnit; the unit of the new Relative Sparse Mutable Double LengthVector
-     * @param length int; the size of the vector
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public LengthVector(final SortedMap<Integer, Double> values, final LengthUnit unit, final int length,
-            final StorageType storageType) throws ValueException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double LengthVector.
-     * @param data DoubleVectorData; an internal data object
-     * @param unit LengthUnit; the unit
-     */
-    LengthVector(final DoubleVectorData data, final LengthUnit unit)
-    {
-        super(data, unit);
+        super(data, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final LengthVector instantiateType(final DoubleVectorData dvd, final LengthUnit unit)
+    public Class<Length> getScalarClass()
     {
-        return new LengthVector(dvd, unit);
+        return Length.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableLengthVector instantiateMutableType(final DoubleVectorData dvd, final LengthUnit unit)
+    public LengthVector instantiateVector(final DoubleVectorData dvd, final LengthUnit displayUnit)
     {
-        return new MutableLengthVector(dvd, unit);
+        return new LengthVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Length instantiateScalar(final double value, final LengthUnit unit)
+    public Length instantiateScalarSI(final double valueSI, final LengthUnit displayUnit)
     {
-        return new Length(value, unit);
+        Length result = Length.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final LengthVector toDense()
+    public PositionVector instantiateVectorAbs(final DoubleVectorData dvd, final PositionUnit displayUnit)
     {
-        return this.data.isDense() ? (LengthVector) this : instantiateType(this.data.toDense(), getUnit());
+        return new PositionVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final LengthVector toSparse()
+    public Position instantiateScalarAbsSI(final double valueSI, final PositionUnit displayUnit)
     {
-        return this.data.isSparse() ? (LengthVector) this : instantiateType(this.data.toSparse(), getUnit());
+        Position result = Position.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
-    /**
-     * Return an array of Length Scalars from this vector.
-     * @return Length[]; an array of Length Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public Length[] toArray()
-    {
-        Length[] array = new Length[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
-    }
-
-}
+   
+}

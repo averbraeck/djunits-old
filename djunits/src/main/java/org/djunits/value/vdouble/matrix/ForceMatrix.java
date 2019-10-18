@@ -1,12 +1,16 @@
 package org.djunits.value.vdouble.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.ForceUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vdouble.matrix.base.AbstractDoubleMatrixRel;
+import org.djunits.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits.value.vdouble.scalar.Force;
+import org.djunits.value.vdouble.vector.ForceVector;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
- * Immutable Double ForceMatrix, a matrix of values with a ForceUnit.
+ * Immutable Double ForceMatrix, a matrix of values with a ForceUnit. 
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
@@ -14,76 +18,58 @@ import org.djunits.value.vdouble.scalar.Force;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class ForceMatrix extends AbstractDoubleMatrixRel<ForceUnit, ForceMatrix, MutableForceMatrix, Force>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class ForceMatrix extends AbstractDoubleMatrixRel<ForceUnit, Force, ForceVector, ForceMatrix>
+
 {
     /** */
     private static final long serialVersionUID = 20151109L;
 
     /**
-     * Construct a new Relative Immutable Double ForceMatrix.
-     * @param values double[][]; the values of the entries in the new Relative Immutable Double ForceMatrix
-     * @param unit ForceUnit; the unit of the new Relative Immutable Double ForceMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public ForceMatrix(final double[][] values, final ForceUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Double ForceMatrix.
-     * @param values Force[][]; the values of the entries in the new Relative Immutable Double ForceMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public ForceMatrix(final Force[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
      * @param data DoubleMatrixData; an internal data object
      * @param unit ForceUnit; the unit
      */
-    ForceMatrix(final DoubleMatrixData data, final ForceUnit unit)
+    public ForceMatrix(final DoubleMatrixData data, final ForceUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final ForceMatrix toDense()
+    public Class<Force> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateType(this.data.toDense(), getUnit());
+        return Force.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final ForceMatrix toSparse()
+    public Class<ForceVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateType(this.data.toSparse(), getUnit());
+        return ForceVector.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final ForceMatrix instantiateType(final DoubleMatrixData dmd, final ForceUnit unit)
+    public ForceMatrix instantiateMatrix(final DoubleMatrixData dmd, final ForceUnit displayUnit)
     {
-        return new ForceMatrix(dmd, unit);
+        return new ForceMatrix(dmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableForceMatrix instantiateMutableType(final DoubleMatrixData dmd, final ForceUnit unit)
+    public ForceVector instantiateVector(final DoubleVectorData dvd, final ForceUnit displayUnit)
     {
-        return new MutableForceMatrix(dmd, unit);
+        return new ForceVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Force instantiateScalar(final double value, final ForceUnit unit)
+    public Force instantiateScalarSI(final double valueSI, final ForceUnit displayUnit)
     {
-        return new Force(value, unit);
+        Force result = Force.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
-
+    
 }
+

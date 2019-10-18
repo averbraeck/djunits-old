@@ -1,106 +1,100 @@
 package org.djunits.value.vdouble.matrix;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.DurationUnit;
 import org.djunits.unit.TimeUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.vdouble.matrix.base.AbstractDoubleMatrixAbs;
+import org.djunits.value.vdouble.matrix.data.DoubleMatrixData;
+import org.djunits.value.vdouble.scalar.Duration;
 import org.djunits.value.vdouble.scalar.Time;
+import org.djunits.value.vdouble.vector.DurationVector;
+import org.djunits.value.vdouble.vector.TimeVector;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 
 /**
  * Immutable Time Matrix.
  * <p>
- * Note that when the offset of a stored absolute Time becomes large, precision of a double might not be enough for the required
- * resolution of a Time. A double has around 16 significant digits (52 bit mantissa). This means that when we need to have a
- * double Time with TimeUnit.BASE as its unit, the largest value where the ms precision is reached is 2^51 = 2.3E15, which is
- * around 71000 years. This is sufficient to store a date in the 21st Century with a BASE or an Epoch offset precise to a
- * microsecond.
- * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
- * <p>
- * version Sep 5, 2015 <br>
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class TimeMatrix
-        extends AbstractDoubleMatrixAbs<TimeUnit, DurationUnit, TimeMatrix, DurationMatrix, MutableTimeMatrix, Time>
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+public class TimeMatrix extends AbstractDoubleMatrixAbs<TimeUnit, Time, TimeVector, TimeMatrix,
+    DurationUnit, Duration, DurationVector, DurationMatrix>
 {
     /** */
-    private static final long serialVersionUID = 20151003L;
+    private static final long serialVersionUID = 20151006L;
 
     /**
-     * Construct a new Absolute Immutable Double DurationMatrix.
-     * @param values double[][]; the values of the entries in the new Absolute Immutable Double DurationMatrix
-     * @param unit TimeUnit; the unit of the new Absolute Immutable Double DurationMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public TimeMatrix(final double[][] values, final TimeUnit unit, final StorageType storageType) throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable Double DurationMatrix.
-     * @param values Time[][]; the values of the entries in the new Absolute Immutable Double DurationMatrix
-     * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public TimeMatrix(final Time[][] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Absolute Immutable Double DurationMatrix.
      * @param data DoubleMatrixData; an internal data object
      * @param unit TimeUnit; the unit
      */
-    TimeMatrix(final DoubleMatrixData data, final TimeUnit unit)
+    public TimeMatrix(final DoubleMatrixData data, final TimeUnit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final TimeMatrix toDense()
+    public Class<Time> getScalarClass()
     {
-        return this.data.isDense() ? this : instantiateTypeAbs(this.data.toDense(), getUnit());
+        return Time.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    public final TimeMatrix toSparse()
+    public Class<TimeVector> getVectorClass()
     {
-        return this.data.isSparse() ? this : instantiateTypeAbs(this.data.toSparse(), getUnit());
+        return TimeVector.class;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final TimeMatrix instantiateTypeAbs(final DoubleMatrixData dmd, final TimeUnit unit)
+    public TimeMatrix instantiateMatrix(final DoubleMatrixData dmd, final TimeUnit displayUnit)
     {
-        return new TimeMatrix(dmd, unit);
+        return new TimeMatrix(dmd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final DurationMatrix instantiateTypeRel(final DoubleMatrixData dmd, final DurationUnit unit)
+    public TimeVector instantiateVector(final DoubleVectorData dvd, final TimeUnit displayUnit)
     {
-        return new DurationMatrix(dmd, unit);
+        return new TimeVector(dvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableTimeMatrix instantiateMutableType(final DoubleMatrixData dmd, final TimeUnit unit)
+    public Time instantiateScalarSI(final double valueSI, final TimeUnit displayUnit)
     {
-        return new MutableTimeMatrix(dmd, unit);
+        Time result = Time.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Time instantiateScalar(final double value, final TimeUnit unit)
+    public DurationMatrix instantiateMatrixRel(final DoubleMatrixData dmd, final DurationUnit displayUnit)
     {
-        return new Time(value, unit);
+        return new DurationMatrix(dmd, displayUnit);
     }
 
-}
+    /** {@inheritDoc} */
+    @Override
+    public DurationVector instantiateVectorRel(final DoubleVectorData dvd, final DurationUnit displayUnit)
+    {
+        return new DurationVector(dvd, displayUnit);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public Duration instantiateScalarRelSI(final double valueSI, final DurationUnit displayUnit)
+    {
+        Duration result = Duration.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
+    }
+
+}
