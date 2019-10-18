@@ -730,6 +730,8 @@ public class DoubleVectorMethodTest
             assertTrue("Double vector data is equal to itself", dvd.equals(dvd));
             assertFalse("Double vector data is not equal to null", dvd.equals(null));
             assertFalse("Double vector data is not equal to some string", dvd.equals("some string"));
+            assertTrue("Double vector is equal to sparse version of itself", dvd.equals(dvd.toSparse()));
+            assertTrue("Double vector is equal to dense version of itself", dvd.equals(dvd.toDense()));
             for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
             {
                 DoubleVectorData dvd2 = DoubleVectorData.instantiate(testData, TemperatureUnit.KELVIN.getScale(), storageType2);

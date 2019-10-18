@@ -726,6 +726,8 @@ public class FloatVectorMethodTest
             assertTrue("Float vector data is equal to itself", fvd.equals(fvd));
             assertFalse("Float vector data is not equal to null", fvd.equals(null));
             assertFalse("Float vector data is not equal to some string", fvd.equals("some string"));
+            assertTrue("Float vector is equal to sparse version of itself", fvd.equals(fvd.toSparse()));
+            assertTrue("Float vector is equal to dense version of itself", fvd.equals(fvd.toDense()));
             for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
             {
                 FloatVectorData dvd2 = FloatVectorData.instantiate(testData, TemperatureUnit.KELVIN.getScale(), storageType2);

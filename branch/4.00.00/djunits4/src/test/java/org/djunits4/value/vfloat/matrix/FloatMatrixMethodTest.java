@@ -921,6 +921,8 @@ public class FloatMatrixMethodTest
             assertTrue("Float matrix is equal to itself", fmd.equals(fmd));
             assertFalse("Float matrix is not equal to null", fmd.equals(null));
             assertFalse("Float matrix data is not equal to some string", fmd.equals("some string"));
+            assertTrue("Float matrix is equal to sparse version of itself", fmd.equals(fmd.toSparse()));
+            assertTrue("Float matrix is equal to dense version of itself", fmd.equals(fmd.toDense()));
             for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
             {
                 FloatMatrixData dvd2 = FloatMatrixData.instantiate(testData, TemperatureUnit.KELVIN.getScale(), storageType2);

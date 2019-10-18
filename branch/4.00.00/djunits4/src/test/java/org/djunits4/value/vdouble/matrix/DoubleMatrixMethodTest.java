@@ -927,29 +927,31 @@ public class DoubleMatrixMethodTest
         testData[2][2] = 0;
         for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
-            DoubleMatrixData fmd = DoubleMatrixData.instantiate(testData, TemperatureUnit.KELVIN.getScale(), storageType);
-            assertTrue("Double matrix is equal to itself", fmd.equals(fmd));
-            assertFalse("Double matrix is not equal to null", fmd.equals(null));
-            assertFalse("Double matrix data is not equal to some string", fmd.equals("some string"));
+            DoubleMatrixData dmd = DoubleMatrixData.instantiate(testData, TemperatureUnit.KELVIN.getScale(), storageType);
+            assertTrue("Double matrix is equal to itself", dmd.equals(dmd));
+            assertFalse("Double matrix is not equal to null", dmd.equals(null));
+            assertFalse("Double matrix data is not equal to some string", dmd.equals("some string"));
+            assertTrue("Double matrix is equal to sparse version of itself", dmd.equals(dmd.toSparse()));
+            assertTrue("Double matrix is equal to dense version of itself", dmd.equals(dmd.toDense()));
             for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
             {
                 DoubleMatrixData dvd2 = DoubleMatrixData.instantiate(testData, TemperatureUnit.KELVIN.getScale(), storageType2);
                 assertEquals("Double matrix data is equal to other double vector containing same values regardless of storage type",
-                        fmd, dvd2);
+                        dmd, dvd2);
                 double[][] testData2 = DOUBLEMATRIX.denseRectArrays(12, 33);
                 testData2[2][2] = 0;
                 dvd2 = DoubleMatrixData.instantiate(testData2, TemperatureUnit.KELVIN.getScale(), storageType2);
                 assertFalse("Double matrix data is not equal to other double vector containing same values except last one",
-                        fmd.equals(dvd2));
+                        dmd.equals(dvd2));
                 testData2 = DOUBLEMATRIX.denseRectArrays(13, 34);
                 testData2[2][2] = 0;
                 dvd2 = DoubleMatrixData.instantiate(testData2, TemperatureUnit.KELVIN.getScale(), storageType2);
                 assertFalse("Double matrix data is not equal to other double vector containing same values except last one",
-                        fmd.equals(dvd2));
+                        dmd.equals(dvd2));
                 testData2 = DOUBLEMATRIX.denseRectArrays(12, 34);
                 dvd2 = DoubleMatrixData.instantiate(testData2, TemperatureUnit.KELVIN.getScale(), storageType2);
                 assertFalse("Double matrix data is not equal to other double vector containing same values except for one zero",
-                        fmd.equals(dvd2));
+                        dmd.equals(dvd2));
             }
         }
     }
