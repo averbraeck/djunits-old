@@ -9,7 +9,9 @@ import org.djunits.value.base.Matrix;
 import org.djunits.value.vfloat.function.FloatMathFunctions;
 import org.djunits.value.vfloat.matrix.FloatSIMatrix;
 import org.djunits.value.vfloat.matrix.data.FloatMatrixData;
+import org.djunits.value.vfloat.scalar.base.AbstractFloatScalar;
 import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
+import org.djunits.value.vfloat.vector.base.AbstractFloatVector;
 import org.djunits.value.vfloat.vector.base.AbstractFloatVectorRel;
 
 /**
@@ -87,7 +89,7 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
      * @Throws ValueException when the sizes of the matrices differ, or <code>increment</code> is null
      */
     @SuppressWarnings("unchecked")
-    public RM incrementBy(RM increment)
+    public RM incrementBy(final RM increment)
     {
         checkCopyOnWrite();
         this.data.incrementBy(increment.getData());
@@ -117,7 +119,7 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
      * @Throws ValueException when the sizes of the matrices differ, or <code>decrement</code> is null
      */
     @SuppressWarnings("unchecked")
-    public final RM decrementBy(RM decrement)
+    public final RM decrementBy(final RM decrement)
     {
         checkCopyOnWrite();
         this.data.decrementBy(decrement.getData());
@@ -132,8 +134,13 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
      * @return FloatSIMatrix; the multiplication of this matrix and the operand
      * @throws ValueRuntimeException in case this matrix or matrix and the operand have a different size
      * @throws UnitException on unit error
+     * @param <UT> the unit type of the multiplier
+     * @param <ST> the scalar type of the multiplier
+     * @param <VT> the vector type of the multiplier
+     * @param <MT> the matrix type of the multiplier
      */
-    public final <VT extends AbstractFloatMatrix<?, ?, ?, ?> & Relative<?, ?>> FloatSIMatrix times(final VT rel)
+    public final <UT extends Unit<UT>, ST extends AbstractFloatScalar<UT, ST>, VT extends AbstractFloatVector<UT, ST, VT>,
+    MT extends AbstractFloatMatrix<UT, ST, VT, MT> & Relative<UT, MT>>  FloatSIMatrix times(final MT rel)
             throws ValueRuntimeException, UnitException
     {
         return new FloatSIMatrix(this.getData().times(rel.getData()), SIUnit.of(
@@ -171,8 +178,13 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
      * @return FloatSIMatrix; the division of this matrix and the operand
      * @throws ValueRuntimeException in case this matrix or matrix and the operand have a different size
      * @throws UnitException on unit error
+     * @param <UT> the unit type of the multiplier
+     * @param <ST> the scalar type of the multiplier
+     * @param <VT> the vector type of the multiplier
+     * @param <MT> the matrix type of the multiplier
      */
-    public final <VT extends AbstractFloatMatrix<?, ?, ?, ?> & Relative<?, ?>> FloatSIMatrix divide(final VT rel)
+    public final <UT extends Unit<UT>, ST extends AbstractFloatScalar<UT, ST>, VT extends AbstractFloatVector<UT, ST, VT>,
+    MT extends AbstractFloatMatrix<UT, ST, VT, MT> & Relative<UT, MT>>  FloatSIMatrix divide(final MT rel)
             throws ValueRuntimeException, UnitException
     {
         return new FloatSIMatrix(this.getData().divide(rel.getData()), SIUnit.of(

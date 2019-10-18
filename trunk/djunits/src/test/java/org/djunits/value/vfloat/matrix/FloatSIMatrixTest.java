@@ -21,9 +21,7 @@ import org.djunits.value.vfloat.function.FloatMathFunctions;
 import org.djunits.value.vfloat.matrix.base.AbstractFloatMatrixRel;
 import org.djunits.value.vfloat.matrix.base.FloatMatrix;
 import org.djunits.value.vfloat.matrix.data.FloatMatrixData;
-import org.djunits.value.vfloat.scalar.FloatDimensionless;
 import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
-import org.djunits.value.vfloat.vector.FloatDimensionlessVector;
 import org.djunits.value.vfloat.vector.base.AbstractFloatVectorRel;
 import org.junit.Test;
 
@@ -59,10 +57,9 @@ public class FloatSIMatrixTest
         assertEquals("m", UNITS.METER.getId());
 
         float[][] denseTestData = FLOATMATRIX.denseRectArrays(5, 10);
-        AbstractFloatMatrixRel<DimensionlessUnit, FloatDimensionless, FloatDimensionlessVector,
-                FloatDimensionlessMatrix> dimlessMatrix = FloatMatrix.instantiate(
-                        FloatMatrixData.instantiate(denseTestData, DimensionlessUnit.SI.getScale(), StorageType.DENSE),
-                        DimensionlessUnit.SI);
+        FloatDimensionlessMatrix dimlessMatrix = FloatMatrix.instantiate(
+                FloatMatrixData.instantiate(denseTestData, DimensionlessUnit.SI.getScale(), StorageType.DENSE),
+                DimensionlessUnit.SI);
         dimlessMatrix = dimlessMatrix.mutable().divide(dimlessMatrix).asDimensionless(); // unit matrix
         for (String type : CLASSNAMES.REL_ALL_LIST)
         {
