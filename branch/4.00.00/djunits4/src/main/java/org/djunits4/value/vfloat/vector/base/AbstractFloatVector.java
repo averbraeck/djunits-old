@@ -431,6 +431,13 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
         {
             throw new RuntimeException("Remove function cannot be applied on fixed-size DJUNITS Vector");
         }
+
+        @Override
+        public String toString()
+        {
+            return "Itr [cursor=" + cursor + "]";
+        }
+        
     }
 
 }

@@ -100,4 +100,10 @@ public class DoubleSparseValue<U extends Unit<U>, S extends DoubleScalarInterfac
         return this.valueSI;
     }
 
+    @Override
+    public String toString()
+    {
+        return "DoubleSparseValue [row=" + row + ", column=" + column + ", valueSI=" + valueSI + "]";
+    }
+
 }

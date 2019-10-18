@@ -92,4 +92,10 @@ public final class UnitTypes implements Serializable
         return this.registry.get(unitClassName);
     }
 
+    @Override
+    public String toString()
+    {
+        return "UnitTypes [siRegistry=" + siRegistry + ", registry=" + registry + "]";
+    }
+
 }
