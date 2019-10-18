@@ -685,7 +685,8 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
         private UnitBase<U> unitBase;
 
         /**
-         * Empty constructor. Content is generated through chaining: new Unit.Builder<TypeUnit>().setId("id").setName("name");
+         * Empty constructor. Content is generated through chaining: new
+         * Unit.Builder&lt;TypeUnit&gt;().setId("id").setName("name");
          */
         public Builder()
         {

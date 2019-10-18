@@ -96,8 +96,7 @@ public abstract class AbstractFloatMatrixAbs<
      * mutable.
      * @param decrement RV; the matrix that contains the values by which to decrement the corresponding values
      * @return AV; this modified matrix
-     * @throws ValueRuntimeException in case this matrix is immutable
-     * @Throws ValueException when the sizes of the matrices differ, or <code>decrement</code> is null
+     * @throws ValueRuntimeException in case this matrix is immutable or when the sizes of the matrices differ
      */
     @SuppressWarnings("unchecked")
     public AM decrementBy(final RM decrement)

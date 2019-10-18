@@ -89,8 +89,7 @@ public abstract class AbstractFloatVectorAbs<
      * mutable.
      * @param decrement RV; the vector that contains the values by which to decrement the corresponding values
      * @return AV; this modified vector
-     * @throws ValueRuntimeException in case this vector is immutable
-     * @Throws ValueException when the sizes of the vectors differ, or <code>decrement</code> is null
+     * @throws ValueRuntimeException in case this vector is immutable or when the sizes of the vectors differ
      */
     @SuppressWarnings("unchecked")
     public AV decrementBy(final RV decrement)
