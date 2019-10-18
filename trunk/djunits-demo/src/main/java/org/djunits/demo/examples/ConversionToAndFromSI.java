@@ -2,7 +2,7 @@ package org.djunits.demo.examples;
 
 import java.util.Locale;
 
-import org.djunits.unit.UNITS;
+import org.djunits.unit.util.UNITS;
 import org.djunits.value.vdouble.scalar.Length;
 
 /**

@@ -1,8 +1,8 @@
 package org.djunits.demo.examples;
 
 import org.djunits.unit.AngleUnit;
-import org.djunits.value.AngleUtil;
-import org.djunits.value.ValueException;
+import org.djunits.value.ValueRuntimeException;
+import org.djunits.value.util.AngleUtil;
 import org.djunits.value.vdouble.scalar.Angle;
 
 /**
@@ -20,9 +20,9 @@ public class Angles
     /**
      * Create some Angle values to demonstrate conversion from and to related units, including the non-linear AngleUnit.PERCENT.
      * @param args String[]; the command line arguments; not used
-     * @throws ValueException in case of error
+     * @throws ValueRuntimeException in case of error
      */
-    public static void main(final String[] args) throws ValueException
+    public static void main(final String[] args) throws ValueRuntimeException
     {
         System.out.println("Normalization of an angle adds or subtracts a multiple of 2\u03c0. For linear angle units "
                 + "the result is a value between 0 and +2\u03c0.");

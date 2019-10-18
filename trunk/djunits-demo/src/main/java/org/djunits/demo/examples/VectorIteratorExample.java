@@ -5,16 +5,18 @@ import java.util.TreeMap;
 
 import org.djunits.unit.SpeedUnit;
 import org.djunits.unit.TimeUnit;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.ValueRuntimeException;
+import org.djunits.value.storage.StorageType;
 import org.djunits.value.vdouble.scalar.Speed;
 import org.djunits.value.vdouble.scalar.Time;
 import org.djunits.value.vdouble.vector.SpeedVector;
 import org.djunits.value.vdouble.vector.TimeVector;
+import org.djunits.value.vdouble.vector.base.DoubleVector;
 import org.djunits.value.vfloat.scalar.FloatSpeed;
 import org.djunits.value.vfloat.scalar.FloatTime;
 import org.djunits.value.vfloat.vector.FloatSpeedVector;
 import org.djunits.value.vfloat.vector.FloatTimeVector;
+import org.djunits.value.vfloat.vector.base.FloatVector;
 
 /**
  * <p>
@@ -35,9 +37,9 @@ public final class VectorIteratorExample
 
     /**
      * @param args String[]; the arguments for the main program, not used
-     * @throws ValueException on vector error
+     * @throws ValueRuntimeException on vector error
      */
-    public static void main(final String[] args) throws ValueException
+    public static void main(final String[] args) throws ValueRuntimeException
     {
         showDoubleIterator();
         showFloatIterator();
@@ -45,17 +47,17 @@ public final class VectorIteratorExample
 
     /**
      * double iterator example.
-     * @throws ValueException on error
+     * @throws ValueRuntimeException on error
      */
-    private static void showDoubleIterator() throws ValueException
+    private static void showDoubleIterator() throws ValueRuntimeException
     {
         Speed s1 = new Speed(10.0, SpeedUnit.METER_PER_SECOND);
         Speed s2 = new Speed(12.0, SpeedUnit.METER_PER_SECOND);
         Speed s3 = new Speed(8.0, SpeedUnit.METER_PER_SECOND);
         Speed s4 = new Speed(16.0, SpeedUnit.METER_PER_SECOND);
-        SpeedVector svd = new SpeedVector(new Speed[] {s1, s2, s3, s4}, StorageType.DENSE);
+        SpeedVector svd = DoubleVector.instantiate(new Speed[] {s1, s2, s3, s4}, SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
         System.out.println("Speed vector (Double, Rel, Dense)");
-        for (Speed s : svd)
+        for (Speed s : svd.getScalars())
         {
             System.out.println(s);
         }
@@ -65,9 +67,9 @@ public final class VectorIteratorExample
         svsMap.put(3, s2);
         svsMap.put(5, s3);
         svsMap.put(7, s4);
-        SpeedVector svs = new SpeedVector(svsMap, 10, StorageType.SPARSE);
+        SpeedVector svs = DoubleVector.instantiateMap(svsMap, 10, SpeedUnit.METER_PER_SECOND, StorageType.SPARSE);
         System.out.println("\nSpeed vector (Double, Rel, Sparse)");
-        for (Speed s : svs)
+        for (Speed s : svs.getScalars())
         {
             System.out.println(s);
         }
@@ -76,9 +78,9 @@ public final class VectorIteratorExample
         Time t2 = new Time(12.0, TimeUnit.BASE_SECOND);
         Time t3 = new Time(8.0, TimeUnit.BASE_SECOND);
         Time t4 = new Time(16.0, TimeUnit.BASE_SECOND);
-        TimeVector tvd = new TimeVector(new Time[] {t1, t2, t3, t4}, StorageType.DENSE);
+        TimeVector tvd = DoubleVector.instantiate(new Time[] {t1, t2, t3, t4}, TimeUnit.BASE_SECOND, StorageType.DENSE);
         System.out.println("\nTime vector (Double, Abs, Dense)");
-        for (Time t : tvd)
+        for (Time t : tvd.getScalars())
         {
             System.out.println(t);
         }
@@ -88,9 +90,9 @@ public final class VectorIteratorExample
         tvsMap.put(3, t2);
         tvsMap.put(5, t3);
         tvsMap.put(7, t4);
-        TimeVector tvs = new TimeVector(tvsMap, 10, StorageType.SPARSE);
+        TimeVector tvs = DoubleVector.instantiateMap(tvsMap, 10, TimeUnit.BASE_SECOND, StorageType.SPARSE);
         System.out.println("\nTime vector (Double, Abs, Sparse)");
-        for (Time t : tvs)
+        for (Time t : tvs.getScalars())
         {
             System.out.println(t);
         }
@@ -98,17 +100,18 @@ public final class VectorIteratorExample
 
     /**
      * float iterator example.
-     * @throws ValueException on error
+     * @throws ValueRuntimeException on error
      */
-    private static void showFloatIterator() throws ValueException
+    private static void showFloatIterator() throws ValueRuntimeException
     {
         FloatSpeed s1 = new FloatSpeed(10.0, SpeedUnit.METER_PER_SECOND);
         FloatSpeed s2 = new FloatSpeed(12.0, SpeedUnit.METER_PER_SECOND);
         FloatSpeed s3 = new FloatSpeed(8.0, SpeedUnit.METER_PER_SECOND);
         FloatSpeed s4 = new FloatSpeed(16.0, SpeedUnit.METER_PER_SECOND);
-        FloatSpeedVector svd = new FloatSpeedVector(new FloatSpeed[] {s1, s2, s3, s4}, StorageType.DENSE);
+        FloatSpeedVector svd =
+                FloatVector.instantiate(new FloatSpeed[] {s1, s2, s3, s4}, SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
         System.out.println("\nFloatSpeed vector (Float, Rel, Dense)");
-        for (FloatSpeed s : svd)
+        for (FloatSpeed s : svd.getScalars())
         {
             System.out.println(s);
         }
@@ -118,9 +121,9 @@ public final class VectorIteratorExample
         svsMap.put(3, s2);
         svsMap.put(5, s3);
         svsMap.put(7, s4);
-        FloatSpeedVector svs = new FloatSpeedVector(svsMap, 10, StorageType.SPARSE);
+        FloatSpeedVector svs = FloatVector.instantiateMap(svsMap, 10, SpeedUnit.METER_PER_SECOND, StorageType.SPARSE);
         System.out.println("\nSpeed vector (Float, Rel, Sparse)");
-        for (FloatSpeed s : svs)
+        for (FloatSpeed s : svs.getScalars())
         {
             System.out.println(s);
         }
@@ -129,9 +132,10 @@ public final class VectorIteratorExample
         FloatTime t2 = new FloatTime(12.0f, TimeUnit.BASE_SECOND);
         FloatTime t3 = new FloatTime(8.0f, TimeUnit.BASE_SECOND);
         FloatTime t4 = new FloatTime(16.0f, TimeUnit.BASE_SECOND);
-        FloatTimeVector tvd = new FloatTimeVector(new FloatTime[] {t1, t2, t3, t4}, StorageType.DENSE);
+        FloatTimeVector tvd =
+                FloatVector.instantiate(new FloatTime[] {t1, t2, t3, t4}, TimeUnit.BASE_SECOND, StorageType.DENSE);
         System.out.println("\nFloatTime vector (Float, Abs, Dense)");
-        for (FloatTime t : tvd)
+        for (FloatTime t : tvd.getScalars())
         {
             System.out.println(t);
         }
@@ -141,9 +145,9 @@ public final class VectorIteratorExample
         tvsMap.put(3, t2);
         tvsMap.put(5, t3);
         tvsMap.put(7, t4);
-        FloatTimeVector tvs = new FloatTimeVector(tvsMap, 10, StorageType.SPARSE);
+        FloatTimeVector tvs = FloatVector.instantiateMap(tvsMap, 10, TimeUnit.BASE_SECOND, StorageType.SPARSE);
         System.out.println("\nFloatTime vector (Float, Abs, Sparse)");
-        for (FloatTime t : tvs)
+        for (FloatTime t : tvs.getScalars())
         {
             System.out.println(t);
         }

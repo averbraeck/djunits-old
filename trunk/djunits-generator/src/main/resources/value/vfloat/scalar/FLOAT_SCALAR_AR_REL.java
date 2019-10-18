@@ -2,53 +2,55 @@ package org.djunits.value.vfloat.scalar;
 
 import java.util.regex.Matcher;
 
+import javax.annotation.Generated;
+
+import org.djunits.Throw;
 import org.djunits.unit.*;
+import org.djunits.value.util.ValueUtil;
+import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
 
 /**
- * Easy access methods for the %Type% FloatScalar. Instead of:
- * <pre>FloatScalar.Rel&lt;%TypeRelUnit%&gt; value = new FloatScalar.Rel&lt;%TypeRelUnit%&gt;(100.0, %TypeRelUnit%.SI);</pre>
- * we can now write:
- * <pre>Float%TypeRel% value = new Float%TypeRel%(100.0, %TypeRelUnit%.SI);</pre>
- * The compiler will automatically recognize which units belong to which quantity, and whether the quantity type and the
- * unit used are compatible.
+ * Easy access methods for the Float%TypeRel% FloatScalar.
  * <p>
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
- * <p>
-
-
+ * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%TypeRel%>
+@Generated(value = "GenerateDJUNIT")
+public class Float%TypeRel% extends AbstractFloatScalarRelWithAbs<%TypeAbsUnit%, Float%TypeAbs%, %TypeRelUnit%, Float%TypeRel%>
 {
     /** */
     private static final long serialVersionUID = 20150901L;
 
-    /** constant with value zero. */
+    /** Constant with value zero. */
     public static final Float%TypeRel% ZERO = new Float%TypeRel%(0.0f, %TypeRelUnit%.SI);
 
-    /** constant with value NaN. */
+    /** Constant with value one. */
+    public static final Float%TypeRel% ONE = new Float%TypeRel%(1.0f, %TypeRelUnit%.SI);
+
+    /** Constant with value NaN. */
     @SuppressWarnings("checkstyle:constantname")
     public static final Float%TypeRel% NaN = new Float%TypeRel%(Float.NaN, %TypeRelUnit%.SI);
 
-    /** constant with value POSITIVE_INFINITY. */
+    /** Constant with value POSITIVE_INFINITY. */
     public static final Float%TypeRel% POSITIVE_INFINITY = new Float%TypeRel%(Float.POSITIVE_INFINITY, %TypeRelUnit%.SI);
 
-    /** constant with value NEGATIVE_INFINITY. */
+    /** Constant with value NEGATIVE_INFINITY. */
     public static final Float%TypeRel% NEGATIVE_INFINITY = new Float%TypeRel%(Float.NEGATIVE_INFINITY, %TypeRelUnit%.SI);
 
-    /** constant with value MAX_VALUE. */
+    /** Constant with value MAX_VALUE. */
     public static final Float%TypeRel% POS_MAXVALUE = new Float%TypeRel%(Float.MAX_VALUE, %TypeRelUnit%.SI);
 
-    /** constant with value -MAX_VALUE. */
+    /** Constant with value -MAX_VALUE. */
     public static final Float%TypeRel% NEG_MAXVALUE = new Float%TypeRel%(-Float.MAX_VALUE, %TypeRelUnit%.SI);
 
     /**
      * Construct Float%TypeRel% scalar.
-     * @param value float value
-     * @param unit unit for the float value
+     * @param value float; the float value
+     * @param unit %TypeRelUnit%; unit for the float value
      */
     public Float%TypeRel%(final float value, final %TypeRelUnit% unit)
     {
@@ -57,7 +59,7 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%
 
     /**
      * Construct Float%TypeRel% scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value Float%TypeRel%; Scalar from which to construct this instance
      */
     public Float%TypeRel%(final Float%TypeRel% value)
     {
@@ -66,8 +68,8 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%
 
     /**
      * Construct Float%TypeRel% scalar using a double value.
-     * @param value double value
-     * @param unit unit for the resulting float value
+     * @param value double; the double value
+     * @param unit %TypeRelUnit%; unit for the resulting float value
      */
     public Float%TypeRel%(final double value, final %TypeRelUnit% unit)
     {
@@ -83,20 +85,16 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%
 
     /**
      * Construct Float%TypeRel% scalar.
-     * @param value float value in SI units
-     * @return the new scalar with the SI value
+     * @param value float; the float value in SI units
+     * @return Float%TypeRel%; the new scalar with the SI value
      */
-    public static final Float%TypeRel% createSI(final float value)
+    public static final Float%TypeRel% instantiateSI(final float value)
     {
         return new Float%TypeRel%(value, %TypeRelUnit%.SI);
     }
 
-    /**
-     * Construct a new Absolute Immutable FloatScalar of the right type. Each extending class must implement this method.
-     * @param value the float value
-     * @param unit the unit
-     * @return A a new absolute instance of the FloatScalar of the right type
-     */
+    /** {@inheritDoc} */
+    @Override
     public final Float%TypeAbs% instantiateAbs(final float value, final %TypeAbsUnit% unit)
     {
         return new Float%TypeAbs%(value, unit);
@@ -104,33 +102,22 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio the ratio between 0 and 1, inclusive
-     * @return a Scalar at the ratio between
+     * @param zero Float%TypeRel%; the low value
+     * @param one Float%TypeRel%; the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @return Float%TypeRel%; a Scalar at the ratio between
      */
     public static Float%TypeRel% interpolate(final Float%TypeRel% zero, final Float%TypeRel% one, final float ratio)
     {
-        return new Float%TypeRel%(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getUnit()) * ratio, zero
-            .getUnit());
-    }
-    
-    /**
-     * Relative scalar plus Absolute scalar = Absolute scalar.
-     * @param v the value to add
-     * @return sum of this value and v as a new object
-     */
-    public final Float%TypeAbs% plus(final Float%TypeAbs% v)
-    {
-        %TypeAbsUnit% targetUnit = v.getUnit();
-        return instantiateAbs(v.getInUnit() + getInUnit(targetUnit.getRelativeUnit()), targetUnit);
+        return new Float%TypeRel%(zero.getInUnit() * (1 - ratio) + one.getInUnit(zero.getDisplayUnit()) * ratio, zero
+            .getDisplayUnit());
     }
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the maximum value of two relative scalars
+     * @param r1 Float%TypeRel%; the first scalar
+     * @param r2 Float%TypeRel%; the second scalar
+     * @return Float%TypeRel%; the maximum value of two relative scalars
      */
     public static Float%TypeRel% max(final Float%TypeRel% r1, final Float%TypeRel% r2)
     {
@@ -139,10 +126,10 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the maximum value of more than two relative scalars
+     * @param r1 Float%TypeRel%; the first scalar
+     * @param r2 Float%TypeRel%; the second scalar
+     * @param rn Float%TypeRel%...; the other scalars
+     * @return Float%TypeRel%; the maximum value of more than two relative scalars
      */
     public static Float%TypeRel% max(final Float%TypeRel% r1, final Float%TypeRel% r2, final Float%TypeRel%... rn)
     {
@@ -159,9 +146,9 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @return the minimum value of two relative scalars
+     * @param r1 Float%TypeRel%; the first scalar
+     * @param r2 Float%TypeRel%; the second scalar
+     * @return Float%TypeRel%; the minimum value of two relative scalars
      */
     public static Float%TypeRel% min(final Float%TypeRel% r1, final Float%TypeRel% r2)
     {
@@ -170,10 +157,10 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
-     * @return the minimum value of more than two relative scalars
+     * @param r1 Float%TypeRel%; the first scalar
+     * @param r2 Float%TypeRel%; the second scalar
+     * @param rn Float%TypeRel%...; the other scalars
+     * @return Float%TypeRel%; the minimum value of more than two relative scalars
      */
     public static Float%TypeRel% min(final Float%TypeRel% r1, final Float%TypeRel% r2, final Float%TypeRel%... rn)
     {
@@ -191,41 +178,52 @@ public class Float%TypeRel% extends AbstractFloatScalarRel<%TypeRelUnit%, Float%
     /**
      * Returns a Float%TypeRel% representation of a textual representation of a value with a unit. The String representation that can be
      * parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not
-     * necessary, between the value and the unit.
+     * required, between the value and the unit.
      * @param text String; the textual representation to parse into a Float%TypeRel%
-     * @return the String representation of the value in its unit, followed by the official abbreviation of the unit
+     * @return Float%TypeRel%; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the text cannot be parsed
+     * @throws NullPointerException when the text argument is null
      */
-    public static Float%TypeRel% valueOf(final String text) throws IllegalArgumentException
+    public static Float%TypeRel% valueOf(final String text)
     {
-        if (text == null || text.length() == 0)
-        {
-            throw new IllegalArgumentException("Error parsing Float%TypeRel% -- null or empty argument");
-        }
-        Matcher matcher = NUMBER_PATTERN.matcher(text);
+        Throw.whenNull(text, "Error parsing Float%TypeRel%: text to parse is null");
+        Throw.when(text.length() == 0, IllegalArgumentException.class, "Error parsing Float%TypeRel%: empty text to parse");
+        Matcher matcher = ValueUtil.NUMBER_PATTERN.matcher(text);
         if (matcher.find())
         {
             int index = matcher.end();
-            try
+            String unitString = text.substring(index).trim();
+            String valueString = text.substring(0, index).trim();
+            %TypeRelUnit% unit = %TypeRelUnit%.BASE.getUnitByAbbreviation(unitString);
+            if (unit != null)
             {
-                String unitString = text.substring(index).trim();
-                String valueString = text.substring(0, index).trim();
-                for (%TypeRelUnit% unit : Unit.getUnits(%TypeRelUnit%.class))
-                {
-                    if (unit.getDefaultLocaleTextualRepresentations().contains(unitString))
-                    {
-                        float f = Float.parseFloat(valueString);
-                        return new Float%TypeRel%(f, unit);
-                    }
-                }
-            }
-            catch (Exception exception)
-            {
-                throw new IllegalArgumentException("Error parsing Float%TypeRel% from " + text, exception);
+                float f = Float.parseFloat(valueString);
+                return new Float%TypeRel%(f, unit);
             }
         }
         throw new IllegalArgumentException("Error parsing Float%TypeRel% from " + text);
     }
+
+    /**
+     * Returns a Float%TypeRel% based on a value and the textual representation of the unit.
+     * @param value double; the value to use
+     * @param unitString String; the textual representation of the unit
+     * @return Float%TypeRel%; the Scalar representation of the value in its unit
+     * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
+     * @throws NullPointerException when the unitString argument is null
+     */
+    public static Float%TypeRel% of(final float value, final String unitString)
+    {
+        Throw.whenNull(unitString, "Error parsing Float%TypeRel%: unitString is null");
+        Throw.when(unitString.length() == 0, IllegalArgumentException.class, "Error parsing Float%TypeRel%: empty unitString");
+        %TypeRelUnit% unit = %TypeRelUnit%.BASE.getUnitByAbbreviation(unitString);
+        if (unit != null)
+        {
+            return new Float%TypeRel%(value, unit);
+        }
+        throw new IllegalArgumentException("Error parsing Float%TypeRel% with unit " + unitString);
+    }
+
 
 %FORMULAS%%TypeRel%%
 }

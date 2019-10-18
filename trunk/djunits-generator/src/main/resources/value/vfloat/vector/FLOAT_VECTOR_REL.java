@@ -3,10 +3,14 @@ package org.djunits.value.vfloat.vector;
 import java.util.List;
 import java.util.SortedMap;
 
+import javax.annotation.Generated;
+
 import org.djunits.unit.*;
-import org.djunits.value.StorageType;
-import org.djunits.value.ValueException;
+import org.djunits.value.function.DimensionlessFunctions;
+import org.djunits.value.vfloat.function.FloatMathFunctions;
 import org.djunits.value.vfloat.scalar.*;
+import org.djunits.value.vfloat.vector.data.FloatVectorData;
+import org.djunits.value.vfloat.vector.base.*;
 
 /**
  * Immutable Float Float%Type%Vector, a vector of values with a %Type%Unit. 
@@ -14,160 +18,50 @@ import org.djunits.value.vfloat.scalar.*;
  * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
-
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class Float%Type%Vector extends
-    AbstractFloatVectorRel<%Type%Unit, Float%Type%Vector, MutableFloat%Type%Vector, Float%Type%>
+@Generated(value = "GenerateDJUNIT")
+public class Float%Type%Vector extends AbstractFloatVectorRel<%Type%Unit, Float%Type%, Float%Type%Vector>
+%DIMLESS%
 {
     /** */
-    private static final long serialVersionUID = 20151109L;
+    private static final long serialVersionUID = 20190905L;
 
     /**
-     * Construct a new Relative Immutable Float Float%Type%Vector.
-     * @param values float[]; the values of the entries in the new Relative Immutable Float Float%Type%Vector
-     * @param unit U; the unit of the new Relative Immutable Float Float%Type%Vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
+     * Construct an Float%Type%Vector from an internal data object.
+     * @param data FloatVectorData; an internal data object
+     * @param unit %Type%Unit; the unit
      */
-    public Float%Type%Vector(final float[] values, final %Type%Unit unit, final StorageType storageType)
-        throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float Float%Type%Vector.
-     * @param values List; the values of the entries in the new Relative Immutable Float Float%Type%Vector
-     * @param unit U; the unit of the new Relative Immutable Float Float%Type%Vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public Float%Type%Vector(final List<Float> values, final %Type%Unit unit, final StorageType storageType)
-        throws ValueException
-    {
-        super(values, unit, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float Float%Type%Vector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Immutable Float
-     *            Float%Type%Vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public Float%Type%Vector(final Float%Type%[] values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float Float%Type%Vector.
-     * @param values List; the values of the entries in the new Relative Immutable Float Float%Type%Vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public Float%Type%Vector(final List<Float%Type%> values, final StorageType storageType) throws ValueException
-    {
-        super(values, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float Float%Type%Vector.
-     * @param values FloatScalar.Rel&lt;U&gt;[]; the values of the entries in the new Relative Sparse Mutable Float
-     *            Float%Type%Vector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values has zero entries
-     */
-    public Float%Type%Vector(final SortedMap<Integer, Float%Type%> values, final int length, final StorageType storageType)
-        throws ValueException
-    {
-        super(values, length, storageType);
-    }
-
-    /**
-     * Construct a new Relative Immutable Float Float%Type%Vector.
-     * @param values Map; the map of indexes to values of the Relative Sparse Mutable Float Float%Type%Vector
-     * @param unit U; the unit of the new Relative Sparse Mutable Float Float%Type%Vector
-     * @param length the size of the vector
-     * @param storageType the data type to use (e.g., DENSE or SPARSE)
-     * @throws ValueException when values is null
-     */
-    public Float%Type%Vector(final SortedMap<Integer, Float> values, final %Type%Unit unit, final int length,
-        final StorageType storageType) throws ValueException
-    {
-        super(values, unit, length, storageType);
-    }
-
-    /**
-     * @param data an internal data object
-     * @param unit the unit
-     */
-    Float%Type%Vector(final FloatVectorData data, final %Type%Unit unit)
+    public Float%Type%Vector(final FloatVectorData data, final %Type%Unit unit)
     {
         super(data, unit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final Float%Type%Vector instantiateType(final FloatVectorData dvd, final %Type%Unit unit)
+    public Class<Float%Type%> getScalarClass()
     {
-        return new Float%Type%Vector(dvd, unit);
+        return Float%Type%.class;
+    }
+        
+    /** {@inheritDoc} */
+    @Override
+    public Float%Type%Vector instantiateVector(final FloatVectorData fvd, final %Type%Unit displayUnit)
+    {
+        return new Float%Type%Vector(fvd, displayUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    protected final MutableFloat%Type%Vector instantiateMutableType(final FloatVectorData dvd, final %Type%Unit unit)
+    public Float%Type% instantiateScalarSI(final float valueSI, final %Type%Unit displayUnit)
     {
-        return new MutableFloat%Type%Vector(dvd, unit);
+        Float%Type% result = Float%Type%.instantiateSI(valueSI);
+        result.setDisplayUnit(displayUnit);
+        return result;
     }
 
-    /** {@inheritDoc} */
-    @Override
-    protected final Float%Type% instantiateScalar(final float value, final %Type%Unit unit)
-    {
-        return new Float%Type%(value, unit);
-    }
-    
-    /** {@inheritDoc} */
-    @Override
-    public final Float%Type%Vector toDense()
-    {
-        return this.data.isDense() ? (Float%Type%Vector) this : instantiateType(this.data.toDense(), getUnit());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final Float%Type%Vector toSparse()
-    {
-        return this.data.isSparse() ? (Float%Type%Vector) this : instantiateType(this.data.toSparse(), getUnit());
-    }
-    
-    /**
-     * Return an array of Float%Type% Scalars from this vector.
-     * @return Float%Type%[]; an array of Float%Type% Scalars from this vector
-     * @throws RuntimeException wrapping a ValueException on error getting one of the values
-     */
-    public Float%Type%[] toArray()
-    {
-        Float%Type%[] array = new Float%Type%[size()];
-        for (int i = 0; i < size(); i++)
-        {
-            try
-            {
-                array[i] = get(i);
-            }
-            catch (ValueException exception)
-            {
-                throw new RuntimeException(exception);
-            }
-        }
-        return array;
-    }
-
-%FORMULAS%%Type%%
+    %FORMULAS%%Type%%
 }
 
 
