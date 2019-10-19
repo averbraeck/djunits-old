@@ -292,6 +292,68 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
     }
 
     /**
+     * Create a scaled version of this unit with the same unit system but another SI prefix and scale. The "per" units scale in
+     * the opposite direction as the normally scaled units. It will yield units like "/ms", "/mus", "/ns", etc.
+     * @param siPrefix SIPrefix; the prefix for which to scale the unit
+     * @param automaticallyGenerated boolean; indicate whether the unit has been automatically generated
+     * @return U; a scaled instance of this unit
+     * @throws UnitRuntimeException when cloning fails
+     */
+    public U derivePerSI(final SIPrefix siPrefix, final boolean automaticallyGenerated)
+    {
+        Throw.whenNull(siPrefix, "siPrefix cannot be null");
+        try
+        {
+            U clone = clone();
+
+            // Get values: combine all prefixes with all names / abbreviations
+            String cloneId = siPrefix.getDefaultTextualPrefix() + clone.getId().replace("1/", "").replace("/", "").trim();
+            String cloneName =
+                    siPrefix.getPrefixName() + clone.getName().replace("per", "").replace("1/", "").replace("/", "").trim();
+            Set<String> cloneAbbreviations = new LinkedHashSet<>();
+            for (String abbreviation : clone.getAbbreviations())
+            {
+                cloneAbbreviations
+                        .add(siPrefix.getDefaultTextualPrefix() + abbreviation.replace("1/", "").replace("/", "").trim());
+                cloneAbbreviations
+                        .add("1" + siPrefix.getDefaultTextualPrefix() + abbreviation.replace("1/", "").replace("/", "").trim());
+            }
+            String cloneDefaultAbbreviation = siPrefix.getDefaultDisplayPrefix()
+                    + clone.getDefaultDisplayAbbreviation().replace("1/", "").replace("/", "").trim();
+            String cloneDefaultTextualAbbreviation = siPrefix.getDefaultTextualPrefix()
+                    + clone.getDefaultTextualAbbreviation().replace("1/", "").replace("/", "").trim();
+
+            // Make a builder and set values
+            Builder<U> builder = makeBuilder();
+            builder.setId(cloneId);
+            builder.setName(cloneName);
+            builder.setUnitBase(this.unitBase);
+            builder.setSiPrefixes(SIPrefixes.NONE);
+            builder.setDefaultDisplayAbbreviation(cloneDefaultAbbreviation);
+            builder.setDefaultTextualAbbreviation(cloneDefaultTextualAbbreviation);
+            builder.setAdditionalAbbreviations(cloneAbbreviations.toArray(new String[cloneAbbreviations.size()]));
+            if (getScale() instanceof OffsetLinearScale)
+            {
+                builder.setScale(new OffsetLinearScale(
+                        siPrefix.getFactor() * ((LinearScale) getScale()).getConversionFactorToStandardUnit(), 0.0));
+            }
+            else
+            {
+                builder.setScale(
+                        new LinearScale(siPrefix.getFactor() * ((LinearScale) getScale()).getConversionFactorToStandardUnit()));
+            }
+            builder.setUnitSystem(this.unitSystem); // SI_BASE stays SI_BASE with prefix
+            builder.setGenerated(automaticallyGenerated);
+
+            return clone.build(builder);
+        }
+        catch (CloneNotSupportedException exception)
+        {
+            throw new UnitRuntimeException(exception);
+        }
+    }
+
+    /**
      * Create a linearly scaled version of this unit. The scale field will be filled with the correct scaleFactor. Note that the
      * unit that is used for derivation can already have a scaleFactor.
      * @param scaleFactor double; the linear scale factor of the unit
@@ -706,8 +768,8 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
         /**
          * Set whether SI prefixes, ranging from yotta (y) to yocto (Y), are allowed. If not set; this property defaults to
          * <code>false</code>.
-         * @param newSiPrefixes SIPrefixes; SIPrefixes set siPrefixes, NONE (e.g., for inch), ALL (e.g., for meter) or KILO (e.g.,
-         *            for kilometer)
+         * @param newSiPrefixes SIPrefixes; SIPrefixes set siPrefixes, NONE (e.g., for inch), ALL (e.g., for meter) or KILO
+         *            (e.g., for kilometer)
          * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
         public Builder<U> setSiPrefixes(final SIPrefixes newSiPrefixes)

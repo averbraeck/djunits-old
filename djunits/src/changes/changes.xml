@@ -2,6 +2,16 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="4.00.03" date="2019-10-19" description="Per-units updated to reflect correct name and abbreviation">
+      <action dev="averbraeck" type="fix">
+        The "per" units such as FrequencyUnit (per second) and LinearDensityUnit (per meter) were receiving
+        incorrect names ("nano per second" instead of "per nanosecond"), abbreviations (n/s instead of /ns) 
+        and scales (per millisecond was scaled as 1.0E-3 per-second instead of 1.0E3 per-second). The "PER_UNIT"
+        has been added to the SIPrefixes, and a method derivePerSI(...) has been added to Unit to take care of
+        proper generation of "per" units.
+      </action>
+    </release>
+    
     <release version="4.00.02" date="2019-10-19" description="Small updates in site docs, javadoc, final">
       <action dev="averbraeck" type="fix">
         Tested and repaired the determinant() function of the FloatMatrix and DoubleMatrix.
