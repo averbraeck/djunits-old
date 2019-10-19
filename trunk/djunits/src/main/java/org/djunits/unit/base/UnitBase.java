@@ -116,6 +116,13 @@ public class UnitBase<U extends Unit<U>> implements Serializable
                 unit.deriveSIKilo(siPrefix, true); // true = automatically generated
             }
         }
+        else if (siPrefixes.equals(SIPrefixes.PER_UNIT))
+        {
+            for (SIPrefix siPrefix : SIPrefixes.PER_UNIT_PREFIXES.values())
+            {
+                unit.derivePerSI(siPrefix, true); // true = automatically generated
+            }
+        }
 
         // register the (generated) unit
         if (this.unitsById.containsKey(unit.getId()))
@@ -289,7 +296,7 @@ public class UnitBase<U extends Unit<U>> implements Serializable
     {
         // the hashCode of the standardUnit is not evaluated because of a loop to UnitBase
         // the hashCode of the unitByAbbreviation.values() is not evaluated because of a loop to UnitBase
-        // the hashCode of the unitById.values()is not evaluated because of a loop to UnitBase
+        // the hashCode of the unitById.values() is not evaluated because of a loop to UnitBase
         final int prime = 31;
         int result = 1;
         result = prime * result + ((this.siDimensions == null) ? 0 : this.siDimensions.hashCode());

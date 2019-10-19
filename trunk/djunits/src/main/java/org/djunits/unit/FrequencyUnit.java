@@ -44,29 +44,33 @@ public class FrequencyUnit extends Unit<FrequencyUnit>
     /** Revolutions per minute = 1/60 Hz. */
     public static final FrequencyUnit RPM = HERTZ.deriveLinear(1.0 / 60.0, "rpm", "revolutions per minute", UnitSystem.OTHER);
 
-    /** 1/s. */
-    public static final FrequencyUnit PER_SECOND = HERTZ.deriveLinear(1.0, "1/s", "per second");
+    /** 1/s and all derived units. */
+    public static final FrequencyUnit PER_SECOND = new FrequencyUnit().build(new Unit.Builder<FrequencyUnit>().setUnitBase(BASE)
+            .setId("/s").setName("per second").setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.PER_UNIT)
+            .setScale(IdentityScale.SCALE).setAdditionalAbbreviations("/s", "1/s"));
 
     /** 1/microsecond. */
-    public static final FrequencyUnit PER_MICROSECOND =
-            PER_SECOND.deriveLinear(1.0E6, "1/mus", "per microsecond", UnitSystem.SI_DERIVED, "1/mus", "1/\u03BCs");
+    public static final FrequencyUnit PER_MICROSECOND = PER_SECOND.deriveLinear(1.0E6, "/mus", "per microsecond",
+            UnitSystem.SI_DERIVED, "/mus", "/\u03BCs", "1/mus", "1/\u03BCs");
 
     /** 1/millisecond. */
     public static final FrequencyUnit PER_MILLISECOND =
-            PER_SECOND.deriveLinear(1.0E3, "1/ms", "per millisecond", UnitSystem.SI_DERIVED);
+            PER_SECOND.deriveLinear(1.0E3, "/ms", "per millisecond", UnitSystem.SI_DERIVED, "/ms", "1/ms");
 
     /** 1/min. */
     public static final FrequencyUnit PER_MINUTE =
-            PER_SECOND.deriveLinear(1.0 / 60.0, "1/min", "per minute", UnitSystem.SI_ACCEPTED);
+            PER_SECOND.deriveLinear(1.0 / 60.0, "/min", "per minute", UnitSystem.SI_ACCEPTED, "/min", "1/min");
 
     /** 1/hour. */
     public static final FrequencyUnit PER_HOUR =
-            PER_SECOND.deriveLinear(1.0 / 3600.0, "1/hr", "per hour", UnitSystem.SI_ACCEPTED);
+            PER_SECOND.deriveLinear(1.0 / 3600.0, "/hr", "per hour", UnitSystem.SI_ACCEPTED, "/hr", "1/hr");
 
     /** 1/day. */
-    public static final FrequencyUnit PER_DAY = PER_HOUR.deriveLinear(1.0 / 24.0, "1/day", "per day", UnitSystem.SI_ACCEPTED);
+    public static final FrequencyUnit PER_DAY =
+            PER_HOUR.deriveLinear(1.0 / 24.0, "/day", "per day", UnitSystem.SI_ACCEPTED, "/day", "1/day");
 
     /** 1/week. */
-    public static final FrequencyUnit PER_WEEK = PER_DAY.deriveLinear(1.0 / 7.0, "1/wk", "per week", UnitSystem.OTHER);
+    public static final FrequencyUnit PER_WEEK =
+            PER_DAY.deriveLinear(1.0 / 7.0, "/wk", "per week", UnitSystem.OTHER, "/wk", "1/wk");
 
 }
