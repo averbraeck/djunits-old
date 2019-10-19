@@ -24,7 +24,7 @@ public class ForceUnit extends Unit<ForceUnit>
     /** The SI unit for force is Newton. */
     public static final ForceUnit SI =
             new ForceUnit().build(new Unit.Builder<ForceUnit>().setUnitBase(BASE).setId("N").setName("newton")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(IdentityScale.SCALE));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(IdentityScale.SCALE));
 
     /** Newton. */
     public static final ForceUnit NEWTON = SI;

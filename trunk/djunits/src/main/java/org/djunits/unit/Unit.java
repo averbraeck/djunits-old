@@ -148,18 +148,19 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
         SIPrefixes siPrefixes = builder.getSiPrefixes() == null ? SIPrefixes.NONE : builder.getSiPrefixes();
 
         // Register the unit, possibly including all SI prefixes
-        this.unitBase.registerUnit((U) this, siPrefixes);
+        this.unitBase.registerUnit((U) this, siPrefixes, builder.getSiPrefixPowerFactor());
         return (U) this;
     }
 
     /**
      * Create a scaled version of this unit with the same unit system but another SI prefix and scale.
      * @param siPrefix SIPrefix; the prefix for which to scale the unit
+     * @param siPrefixPower the power factor of the SI prefixes, e.g. 2.0 for square meters and 3.0 for cubic meters.
      * @param automaticallyGenerated boolean; indicate whether the unit has been automatically generated
      * @return U; a scaled instance of this unit
      * @throws UnitRuntimeException when cloning fails
      */
-    public U deriveSI(final SIPrefix siPrefix, final boolean automaticallyGenerated)
+    public U deriveSI(final SIPrefix siPrefix, final double siPrefixPower, final boolean automaticallyGenerated)
     {
         Throw.whenNull(siPrefix, "siPrefix cannot be null");
         try
@@ -168,7 +169,19 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
 
             // Get values: combine all prefixes with all names / abbreviations
             String cloneId = siPrefix.getDefaultTextualPrefix() + clone.getId();
-            String cloneName = siPrefix.getPrefixName() + clone.getName();
+            String cloneName = clone.getName();
+            if (cloneName.startsWith("square "))
+            {
+                cloneName = "square " + siPrefix.getPrefixName() + cloneName.substring(6);
+            }
+            else if (clone.getName().startsWith("cubic "))
+            {
+                cloneName = "cubic " + siPrefix.getPrefixName() + cloneName.substring(5);
+            }
+            else
+            {
+                cloneName = siPrefix.getPrefixName() + cloneName;
+            }
             Set<String> cloneAbbreviations = new LinkedHashSet<>();
             for (String abbreviation : clone.getAbbreviations())
             {
@@ -182,19 +195,22 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
             builder.setId(cloneId);
             builder.setName(cloneName);
             builder.setUnitBase(this.unitBase);
-            builder.setSiPrefixes(SIPrefixes.NONE);
+            builder.setSiPrefixes(SIPrefixes.NONE, 1.0);
             builder.setDefaultDisplayAbbreviation(cloneDefaultAbbreviation);
             builder.setDefaultTextualAbbreviation(cloneDefaultTextualAbbreviation);
             builder.setAdditionalAbbreviations(cloneAbbreviations.toArray(new String[cloneAbbreviations.size()]));
             if (getScale() instanceof OffsetLinearScale)
             {
                 builder.setScale(new OffsetLinearScale(
-                        siPrefix.getFactor() * ((LinearScale) getScale()).getConversionFactorToStandardUnit(), 0.0));
+                        (siPrefixPower == 1.0 ? siPrefix.getFactor() : Math.pow(siPrefix.getFactor(), siPrefixPower))
+                                * ((LinearScale) getScale()).getConversionFactorToStandardUnit(),
+                        0.0));
             }
             else
             {
-                builder.setScale(
-                        new LinearScale(siPrefix.getFactor() * ((LinearScale) getScale()).getConversionFactorToStandardUnit()));
+                builder.setScale(new LinearScale(
+                        (siPrefixPower == 1.0 ? siPrefix.getFactor() : Math.pow(siPrefix.getFactor(), siPrefixPower))
+                                * ((LinearScale) getScale()).getConversionFactorToStandardUnit()));
             }
             builder.setUnitSystem(this.unitSystem); // SI_BASE stays SI_BASE with prefix
             builder.setGenerated(automaticallyGenerated);
@@ -211,23 +227,25 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
      * Create a scaled version of this unit with the same unit system but another SI prefix and scale. This method is used for a
      * unit that is explicitly scaled with an SI prefix.
      * @param siPrefix SIPrefix; the prefix for which to scale the unit
+     * @param siPrefixPower the power factor of the SI prefixes, e.g. 2.0 for square meters and 3.0 for cubic meters.
      * @return a scaled instance of this unit
      * @throws UnitRuntimeException when cloning fails
      */
-    public U deriveSI(final SIPrefix siPrefix)
+    public U deriveSI(final SIPrefix siPrefix, final double siPrefixPower)
     {
-        return deriveSI(siPrefix, false);
+        return deriveSI(siPrefix, siPrefixPower, false);
     }
 
     /**
      * Create a scaled version of this unit with the same unit system but another SI prefix and scale, where the "k" and "kilo"
      * abbreviations at the start will be replaced by the new information from the SIPrefix.
      * @param siPrefix SIPrefix; the prefix for which to scale the unit
+     * @param siPrefixPower the power factor of the SI prefixes, e.g. 2.0 for square meters and 3.0 for cubic meters.
      * @param automaticallyGenerated boolean; indicate whether the unit has been automatically generated
      * @return U; a scaled instance of this unit
      * @throws UnitRuntimeException when cloning fails
      */
-    public U deriveSIKilo(final SIPrefix siPrefix, final boolean automaticallyGenerated)
+    public U deriveSIKilo(final SIPrefix siPrefix, final double siPrefixPower, final boolean automaticallyGenerated)
     {
         Throw.whenNull(siPrefix, "siPrefix cannot be null");
         Throw.when(!this.id.startsWith("k"), UnitRuntimeException.class, "deriving from a kilo-unit: id should start with 'k'");
@@ -265,19 +283,22 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
             builder.setId(cloneId);
             builder.setName(cloneName);
             builder.setUnitBase(this.unitBase);
-            builder.setSiPrefixes(SIPrefixes.NONE);
+            builder.setSiPrefixes(SIPrefixes.NONE, 1.0);
             builder.setDefaultDisplayAbbreviation(cloneDefaultAbbreviation);
             builder.setDefaultTextualAbbreviation(cloneDefaultTextualAbbreviation);
             builder.setAdditionalAbbreviations(cloneAbbreviations.toArray(new String[cloneAbbreviations.size()]));
             if (getScale() instanceof OffsetLinearScale)
             {
                 builder.setScale(new OffsetLinearScale(
-                        siPrefix.getFactor() * ((LinearScale) getScale()).getConversionFactorToStandardUnit(), 0.0));
+                        (siPrefixPower == 1.0 ? siPrefix.getFactor() : Math.pow(siPrefix.getFactor(), siPrefixPower))
+                                * ((LinearScale) getScale()).getConversionFactorToStandardUnit(),
+                        0.0));
             }
             else
             {
-                builder.setScale(
-                        new LinearScale(siPrefix.getFactor() * ((LinearScale) getScale()).getConversionFactorToStandardUnit()));
+                builder.setScale(new LinearScale(
+                        (siPrefixPower == 1.0 ? siPrefix.getFactor() : Math.pow(siPrefix.getFactor(), siPrefixPower))
+                                * ((LinearScale) getScale()).getConversionFactorToStandardUnit()));
             }
 
             builder.setUnitSystem(this.unitSystem);
@@ -295,11 +316,12 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
      * Create a scaled version of this unit with the same unit system but another SI prefix and scale. The "per" units scale in
      * the opposite direction as the normally scaled units. It will yield units like "/ms", "/mus", "/ns", etc.
      * @param siPrefix SIPrefix; the prefix for which to scale the unit
+     * @param siPrefixPower the power factor of the SI prefixes, e.g. 2.0 for square meters and 3.0 for cubic meters.
      * @param automaticallyGenerated boolean; indicate whether the unit has been automatically generated
      * @return U; a scaled instance of this unit
      * @throws UnitRuntimeException when cloning fails
      */
-    public U derivePerSI(final SIPrefix siPrefix, final boolean automaticallyGenerated)
+    public U derivePerSI(final SIPrefix siPrefix, final double siPrefixPower, final boolean automaticallyGenerated)
     {
         Throw.whenNull(siPrefix, "siPrefix cannot be null");
         try
@@ -328,19 +350,22 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
             builder.setId(cloneId);
             builder.setName(cloneName);
             builder.setUnitBase(this.unitBase);
-            builder.setSiPrefixes(SIPrefixes.NONE);
+            builder.setSiPrefixes(SIPrefixes.NONE, 1.0);
             builder.setDefaultDisplayAbbreviation(cloneDefaultAbbreviation);
             builder.setDefaultTextualAbbreviation(cloneDefaultTextualAbbreviation);
             builder.setAdditionalAbbreviations(cloneAbbreviations.toArray(new String[cloneAbbreviations.size()]));
             if (getScale() instanceof OffsetLinearScale)
             {
                 builder.setScale(new OffsetLinearScale(
-                        siPrefix.getFactor() * ((LinearScale) getScale()).getConversionFactorToStandardUnit(), 0.0));
+                        (siPrefixPower == 1.0 ? siPrefix.getFactor() : Math.pow(siPrefix.getFactor(), siPrefixPower))
+                                * ((LinearScale) getScale()).getConversionFactorToStandardUnit(),
+                        0.0));
             }
             else
             {
-                builder.setScale(
-                        new LinearScale(siPrefix.getFactor() * ((LinearScale) getScale()).getConversionFactorToStandardUnit()));
+                builder.setScale(new LinearScale(
+                        (siPrefixPower == 1.0 ? siPrefix.getFactor() : Math.pow(siPrefix.getFactor(), siPrefixPower))
+                                * ((LinearScale) getScale()).getConversionFactorToStandardUnit()));
             }
             builder.setUnitSystem(this.unitSystem); // SI_BASE stays SI_BASE with prefix
             builder.setGenerated(automaticallyGenerated);
@@ -391,7 +416,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
             builder.setId(derivedId);
             builder.setName(derivedName);
             builder.setUnitBase(this.unitBase);
-            builder.setSiPrefixes(SIPrefixes.NONE);
+            builder.setSiPrefixes(SIPrefixes.NONE, 1.0);
             builder.setScale(new LinearScale(scaleFactor * ((LinearScale) getScale()).getConversionFactorToStandardUnit()));
             builder.setUnitSystem(derivedUnitSystem);
             builder.setDefaultDisplayAbbreviation(derivedDefaultDisplayAbbreviation);
@@ -480,7 +505,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
             builder.setScale(IdentityScale.SCALE);
             builder.setGenerated(true);
             builder.setUnitSystem(UnitSystem.SI_DERIVED);
-            builder.setSiPrefixes(SIPrefixes.NONE);
+            builder.setSiPrefixes(SIPrefixes.NONE, 1.0);
             unit = new SIUnit();
             unit.build(builder); // it will be registered at the BaseUnit
         }
@@ -738,6 +763,9 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
         /** Whether or not the unit supports SI prefixes from "yotta" (y) to "yocto" (Y). */
         private SIPrefixes siPrefixes;
 
+        /** The power factor of the SI prefixes, e.g. 2.0 for square meters and 3.0 for cubic meters. */
+        private double siPrefixPower = 1.0;
+
         /** Whether the unit has been automatically generated or not. */
         private boolean generated = false;
 
@@ -766,15 +794,26 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
         }
 
         /**
+         * Return the power factor of the SI prefixes, e.g. 2.0 for square meters and 3.0 for cubic meters.
+         * @return siPrefixPower double; power factor of the SI prefixes, e.g. 2.0 for square meters and 3.0 for cubic meters
+         */
+        public double getSiPrefixPowerFactor()
+        {
+            return this.siPrefixPower;
+        }
+
+        /**
          * Set whether SI prefixes, ranging from yotta (y) to yocto (Y), are allowed. If not set; this property defaults to
          * <code>false</code>.
          * @param newSiPrefixes SIPrefixes; SIPrefixes set siPrefixes, NONE (e.g., for inch), ALL (e.g., for meter) or KILO
          *            (e.g., for kilometer)
+         * @param power double; power factor of the SI prefixes, e.g. 2.0 for square meters and 3.0 for cubic meters
          * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
-        public Builder<U> setSiPrefixes(final SIPrefixes newSiPrefixes)
+        public Builder<U> setSiPrefixes(final SIPrefixes newSiPrefixes, final double power)
         {
             this.siPrefixes = newSiPrefixes;
+            this.siPrefixPower = power;
             return this;
         }
 

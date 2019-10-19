@@ -88,6 +88,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
      * @return AU; a linearly scaled instance of this unit with new id, abbreviation, name, and unit system
      * @throws UnitRuntimeException when cloning fails
      */
+    @SuppressWarnings("checkstyle:parameternumber")
     public AU deriveLinearOffset(final double scaleFactor, final double offset, final RU derivedRelativeUnit,
             final String derivedId, final String derivedName, final UnitSystem derivedUnitSystem,
             final String derivedDefaultDisplayAbbreviation, final String derivedDefaultTextualAbbreviation,
@@ -113,7 +114,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
             builder.setName(derivedName);
             builder.setRelativeUnit(derivedRelativeUnit);
             builder.setUnitBase(getUnitBase());
-            builder.setSiPrefixes(SIPrefixes.NONE);
+            builder.setSiPrefixes(SIPrefixes.NONE, 1.0);
             builder.setScale(new OffsetLinearScale(scaleFactor, offset));
             builder.setUnitSystem(derivedUnitSystem);
             builder.setDefaultDisplayAbbreviation(derivedDefaultDisplayAbbreviation);
@@ -199,7 +200,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
     {
         /** ... */
         private static final long serialVersionUID = 20191018L;
-        
+
         /** The relative unit belonging to this unit. */
         private RU relativeUnit;
 
@@ -245,9 +246,9 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
 
         /** {@inheritDoc} */
         @Override
-        public Builder<AU, RU> setSiPrefixes(final SIPrefixes siPrefixes)
+        public Builder<AU, RU> setSiPrefixes(final SIPrefixes siPrefixes, final double power)
         {
-            super.setSiPrefixes(siPrefixes);
+            super.setSiPrefixes(siPrefixes, power);
             return this;
         }
 

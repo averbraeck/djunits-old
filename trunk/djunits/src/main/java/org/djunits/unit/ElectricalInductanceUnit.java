@@ -26,7 +26,7 @@ public class ElectricalInductanceUnit extends Unit<ElectricalInductanceUnit>
     /** The SI unit for electrical inductance is Henry. */
     public static final ElectricalInductanceUnit SI = new ElectricalInductanceUnit()
             .build(new Unit.Builder<ElectricalInductanceUnit>().setUnitBase(BASE).setId("H").setName("henry")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** Henry. */
     public static final ElectricalInductanceUnit HENRY = SI;

@@ -625,7 +625,7 @@ public class ScalarOperationsTest
             builder.setUnitSystem(unitSystem);
             builder.setScale(new LinearScale(7));
             builder.setUnitBase((UnitBase) getSIUnitInstance(unitClass, false).getUnitBase());
-            builder.setSiPrefixes(SIPrefixes.NONE);
+            builder.setSiPrefixes(SIPrefixes.NONE, 1.0);
             buildMethod.setAccessible(true);
             buildMethod.invoke(newUnit, builder);
 

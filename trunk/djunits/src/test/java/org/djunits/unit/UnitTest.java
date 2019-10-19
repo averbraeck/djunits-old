@@ -44,7 +44,7 @@ public class UnitTest
         // these two should be similar except for the abbreviations
         LengthUnit xx1 = new LengthUnit().build(new Unit.Builder<LengthUnit>().setUnitBase(LengthUnit.METER.getUnitBase())
                 .setId("xx1Id").setName("xxName1").setDefaultDisplayAbbreviation("xx1").setDefaultTextualAbbreviation("xx11t")
-                .setUnitSystem(UnitSystem.OTHER).setSiPrefixes(SIPrefixes.NONE).setScale(new LinearScale(1.0E-13)));
+                .setUnitSystem(UnitSystem.OTHER).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(new LinearScale(1.0E-13)));
         LengthUnit xx2 = LengthUnit.METER.deriveLinear(1.0E-13, "xx2Id", "xxName2", UnitSystem.OTHER, "xx2", "xx22t");
         assertEquals(xx1.getUnitBase(), xx2.getUnitBase());
         assertEquals(xx1.getScale(), xx2.getScale());
@@ -74,11 +74,11 @@ public class UnitTest
         assertEquals(m13a.hashCode(), m13b.hashCode());
 
         LengthUnit ym = LengthUnit.BASE.of("ym");
-        LengthUnit ym2 = LengthUnit.METER.deriveSI(SIPrefixes.UNIT_PREFIXES.get("y"), false);
+        LengthUnit ym2 = LengthUnit.METER.deriveSI(SIPrefixes.UNIT_PREFIXES.get("y"), 1.0, false);
         LengthUnit.BASE.unregister(ym2);
         assertNotEquals(ym, ym2); // automatically generated = t/f
         assertNotEquals(ym.hashCode(), ym2.hashCode());
-        LengthUnit ym3 = LengthUnit.METER.deriveSI(SIPrefixes.UNIT_PREFIXES.get("y"), true);
+        LengthUnit ym3 = LengthUnit.METER.deriveSI(SIPrefixes.UNIT_PREFIXES.get("y"), 1.0, true);
         assertEquals(ym, ym3); // automatically generated = t/t
         assertEquals(ym.hashCode(), ym3.hashCode());
         // automatically generated ym stays in registry for further tests.

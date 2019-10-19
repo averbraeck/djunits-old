@@ -145,7 +145,7 @@ public class UnitBaseTest
         /** */
         public static final QUnit SI =
                 new QUnit().build(new Unit.Builder<QUnit>().setId("Q").setName("queez").setScale(IdentityScale.SCALE)
-                        .setSiPrefixes(SIPrefixes.UNIT).setUnitBase(BASE).setUnitSystem(UnitSystem.OTHER));
+                        .setSiPrefixes(SIPrefixes.UNIT, 1.0).setUnitBase(BASE).setUnitSystem(UnitSystem.OTHER));
 
         /** */
         public static final QUnit QUEEZ = SI;
@@ -153,17 +153,17 @@ public class UnitBaseTest
         /** */
         public static final QUnit KILOQUEEZ =
                 new QUnit().build(new Unit.Builder<QUnit>().setId("kQ").setName("kiloqueez").setScale(new LinearScale(1000.0))
-                        .setSiPrefixes(SIPrefixes.NONE).setUnitBase(BASE).setUnitSystem(UnitSystem.OTHER));
+                        .setSiPrefixes(SIPrefixes.NONE, 1.0).setUnitBase(BASE).setUnitSystem(UnitSystem.OTHER));
 
         /** */
         public static final QUnit MEGAQUEEZ = new QUnit()
                 .build(new Unit.Builder<QUnit>().setId("MQ").setName("megaqueez").setScale(new LinearScale(1_000_000.0))
-                        .setSiPrefixes(SIPrefixes.NONE).setUnitBase(BASE).setUnitSystem(UnitSystem.OTHER));
+                        .setSiPrefixes(SIPrefixes.NONE, 1.0).setUnitBase(BASE).setUnitSystem(UnitSystem.OTHER));
 
         /** */
         public static final QUnit QQQ =
                 new QUnit().build(new Unit.Builder<QUnit>().setId("QQQ").setName("qqqeezz").setScale(new LinearScale(86400.0))
-                        .setSiPrefixes(SIPrefixes.NONE).setUnitBase(BASE).setUnitSystem(UnitSystem.OTHER));
+                        .setSiPrefixes(SIPrefixes.NONE, 1.0).setUnitBase(BASE).setUnitSystem(UnitSystem.OTHER));
     }
 
 }

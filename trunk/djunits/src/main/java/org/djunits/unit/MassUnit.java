@@ -26,7 +26,7 @@ public class MassUnit extends Unit<MassUnit>
     /** The SI unit for mass is kilogram. */
     public static final MassUnit SI =
             new MassUnit().build(new Unit.Builder<MassUnit>().setUnitBase(BASE).setId("kg").setName("kilogram")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.KILO).setScale(IdentityScale.SCALE));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.KILO, 1.0).setScale(IdentityScale.SCALE));
 
     /** kilogram. */
     public static final MassUnit KILOGRAM = SI;
@@ -35,10 +35,10 @@ public class MassUnit extends Unit<MassUnit>
     public static final MassUnit GRAM = KILOGRAM.deriveLinear(1.0E-3, "g", "gram", UnitSystem.SI_BASE);
 
     /** microgram. */
-    public static final MassUnit MICROGRAM = GRAM.deriveSI(SIPrefixes.getUnit("mu"));
+    public static final MassUnit MICROGRAM = GRAM.deriveSI(SIPrefixes.getUnit("mu"), 1.0);
 
     /** milligram. */
-    public static final MassUnit MILLIGRAM = GRAM.deriveSI(SIPrefixes.getUnit("m"));
+    public static final MassUnit MILLIGRAM = GRAM.deriveSI(SIPrefixes.getUnit("m"), 1.0);
 
     /** pound. */
     public static final MassUnit POUND = KILOGRAM.deriveLinear(0.45359237, "lb", "pound", UnitSystem.IMPERIAL);
@@ -64,21 +64,21 @@ public class MassUnit extends Unit<MassUnit>
     /** electronvolt = 1.782661907E-36 kg. See http://physics.nist.gov/cuu/Constants/Table/allascii.txt. */
     public static final MassUnit ELECTRONVOLT = new MassUnit().build(
             new Unit.Builder<MassUnit>().setUnitBase(BASE).setId("eV").setName("electronvolt").setUnitSystem(UnitSystem.OTHER)
-                    .setSiPrefixes(SIPrefixes.UNIT_POS).setScale(new LinearScale(1.782661907E-36)));
+                    .setSiPrefixes(SIPrefixes.UNIT_POS, 1.0).setScale(new LinearScale(1.782661907E-36)));
 
     /** microelectronvolt. */
-    public static final MassUnit MICROELECTRONVOLT = ELECTRONVOLT.deriveSI(SIPrefixes.getUnit("mu"));
+    public static final MassUnit MICROELECTRONVOLT = ELECTRONVOLT.deriveSI(SIPrefixes.getUnit("mu"), 1.0);
 
     /** millielectronvolt. */
-    public static final MassUnit MILLIELECTRONVOLT = ELECTRONVOLT.deriveSI(SIPrefixes.getUnit("m"));
+    public static final MassUnit MILLIELECTRONVOLT = ELECTRONVOLT.deriveSI(SIPrefixes.getUnit("m"), 1.0);
 
     /** kiloelectronvolt. */
-    public static final MassUnit KILOELECTRONVOLT = ELECTRONVOLT.deriveSI(SIPrefixes.getUnit("k"));
+    public static final MassUnit KILOELECTRONVOLT = ELECTRONVOLT.deriveSI(SIPrefixes.getUnit("k"), 1.0);
 
     /** megaelectronvolt. */
-    public static final MassUnit MEGAELECTRONVOLT = ELECTRONVOLT.deriveSI(SIPrefixes.getUnit("M"));
+    public static final MassUnit MEGAELECTRONVOLT = ELECTRONVOLT.deriveSI(SIPrefixes.getUnit("M"), 1.0);
 
     /** gigaelectronvolt. */
-    public static final MassUnit GIGAELECTRONVOLT = ELECTRONVOLT.deriveSI(SIPrefixes.getUnit("G"));
+    public static final MassUnit GIGAELECTRONVOLT = ELECTRONVOLT.deriveSI(SIPrefixes.getUnit("G"), 1.0);
 
 }

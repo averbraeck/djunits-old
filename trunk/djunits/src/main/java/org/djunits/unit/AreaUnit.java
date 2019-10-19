@@ -24,7 +24,7 @@ public class AreaUnit extends Unit<AreaUnit>
     /** The SI unit for area is m^2. */
     public static final AreaUnit SI =
             new AreaUnit().build(new Unit.Builder<AreaUnit>().setUnitBase(BASE).setId("m^2").setName("square meter")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 2.0).setScale(IdentityScale.SCALE));
 
     /** m^2. */
     public static final AreaUnit SQUARE_METER = SI;

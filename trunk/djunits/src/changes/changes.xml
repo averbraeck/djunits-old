@@ -10,6 +10,12 @@
         has been added to the SIPrefixes, and a method derivePerSI(...) has been added to Unit to take care of
         proper generation of "per" units.
       </action>
+      <action dev="averbraeck" type="fix">
+        The derived units of a higher power such as AreaUnit (square second) and VolumeUnit (cubic meter) were 
+        receiving incorrect names ("kilosquared meter" instead of "squared kilometer"), and scale factors 
+        (1000 for square kilometer instead of 1E6). This has been repaired by introducing a power factor in
+        all derived units using an SI prefix. This unit can, of course, be 1.0.
+      </action>
     </release>
     
     <release version="4.00.02" date="2019-10-19" description="Small updates in site docs, javadoc, final">

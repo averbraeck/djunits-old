@@ -129,10 +129,11 @@ public class FloatScalarTest
                 {
                     AbstractFloatScalar<?, ?> scalar =
                             (AbstractFloatScalar<?, ?>) ofMethod.invoke(null, testValue, unitAbbreviation);
-                    assertEquals("unit was parsed correctly", scalar.getDisplayUnit().getId(), unit.getId());
-                    if (Float.isFinite(scalar.getInUnit()) && (!unitAbbreviation.contains("s(Y")))
+                    assertEquals("unit was not parsed correctly", scalar.getDisplayUnit().getId(), unit.getId());
+                    if (Float.isFinite(scalar.getInUnit()) && scalar.getInUnit() != 0.0f && scalar.getInUnit() != -0.0f
+                            && (!unitAbbreviation.contains("s(Y")))
                     {
-                        assertEquals("value was parsed correctly", scalar.getInUnit(), testValue, 0.01);
+                        assertEquals("value was not parsed correctly", testValue, scalar.getInUnit(), 0.5);
                     }
                 }
                 try

@@ -24,25 +24,25 @@ public class ElectricalPotentialUnit extends Unit<ElectricalPotentialUnit>
     /** The SI unit for electrical potential is Volt. */
     public static final ElectricalPotentialUnit SI = new ElectricalPotentialUnit()
             .build(new Unit.Builder<ElectricalPotentialUnit>().setUnitBase(BASE).setId("V").setName("volt")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** Volt. */
     public static final ElectricalPotentialUnit VOLT = SI;
 
     /** microvolt. */
-    public static final ElectricalPotentialUnit MICROVOLT = VOLT.deriveSI(SIPrefixes.getUnit("mu"));
+    public static final ElectricalPotentialUnit MICROVOLT = VOLT.deriveSI(SIPrefixes.getUnit("mu"), 1.0);
 
     /** millivolt. */
-    public static final ElectricalPotentialUnit MILLIVOLT = VOLT.deriveSI(SIPrefixes.getUnit("m"));
+    public static final ElectricalPotentialUnit MILLIVOLT = VOLT.deriveSI(SIPrefixes.getUnit("m"), 1.0);
 
     /** kilovolt. */
-    public static final ElectricalPotentialUnit KILOVOLT = VOLT.deriveSI(SIPrefixes.getUnit("k"));
+    public static final ElectricalPotentialUnit KILOVOLT = VOLT.deriveSI(SIPrefixes.getUnit("k"), 1.0);
 
     /** megavolt. */
-    public static final ElectricalPotentialUnit MEGAVOLT = VOLT.deriveSI(SIPrefixes.getUnit("M"));
+    public static final ElectricalPotentialUnit MEGAVOLT = VOLT.deriveSI(SIPrefixes.getUnit("M"), 1.0);
 
     /** gigavolt. */
-    public static final ElectricalPotentialUnit GIGAVOLT = VOLT.deriveSI(SIPrefixes.getUnit("G"));
+    public static final ElectricalPotentialUnit GIGAVOLT = VOLT.deriveSI(SIPrefixes.getUnit("G"), 1.0);
 
     /** statvolt. */
     public static final ElectricalPotentialUnit STATVOLT = VOLT.deriveLinear(299.792458, "stV", "statvolt", UnitSystem.CGS_ESU);

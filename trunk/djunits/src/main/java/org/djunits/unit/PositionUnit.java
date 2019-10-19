@@ -24,35 +24,35 @@ public class PositionUnit extends AbsoluteLinearUnit<PositionUnit, LengthUnit>
     /** The SI unit for position is meter. */
     public static final PositionUnit DEFAULT =
             new PositionUnit().build(new AbsoluteLinearUnit.Builder<PositionUnit, LengthUnit>().setUnitBase(BASE).setId("m")
-                    .setName("meter").setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT)
+                    .setName("meter").setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT, 1.0)
                     .setScale(new OffsetLinearScale(1.0, 0.0)).setRelativeUnit(LengthUnit.METER));
 
     /** meter. */
     public static final PositionUnit METER = DEFAULT;
 
     /** nm. */
-    public static final PositionUnit NANOMETER = METER.deriveSI(SIPrefixes.getUnit("n"));
+    public static final PositionUnit NANOMETER = METER.deriveSI(SIPrefixes.getUnit("n"), 1.0);
 
     /** &#181;m. */
-    public static final PositionUnit MICROMETER = METER.deriveSI(SIPrefixes.getUnit("mu"));
+    public static final PositionUnit MICROMETER = METER.deriveSI(SIPrefixes.getUnit("mu"), 1.0);
 
     /** mm. */
-    public static final PositionUnit MILLIMETER = METER.deriveSI(SIPrefixes.getUnit("m"));
+    public static final PositionUnit MILLIMETER = METER.deriveSI(SIPrefixes.getUnit("m"), 1.0);
 
     /** cm. */
-    public static final PositionUnit CENTIMETER = METER.deriveSI(SIPrefixes.getUnit("c"));
+    public static final PositionUnit CENTIMETER = METER.deriveSI(SIPrefixes.getUnit("c"), 1.0);
 
     /** dm. */
-    public static final PositionUnit DECIMETER = METER.deriveSI(SIPrefixes.getUnit("d"));
+    public static final PositionUnit DECIMETER = METER.deriveSI(SIPrefixes.getUnit("d"), 1.0);
 
     /** dam. */
-    public static final PositionUnit DECAMETER = METER.deriveSI(SIPrefixes.getUnit("da"));
+    public static final PositionUnit DECAMETER = METER.deriveSI(SIPrefixes.getUnit("da"), 1.0);
 
     /** hm. */
-    public static final PositionUnit HECTOMETER = METER.deriveSI(SIPrefixes.getUnit("h"));
+    public static final PositionUnit HECTOMETER = METER.deriveSI(SIPrefixes.getUnit("h"), 1.0);
 
     /** km. */
-    public static final PositionUnit KILOMETER = METER.deriveSI(SIPrefixes.getUnit("k"));
+    public static final PositionUnit KILOMETER = METER.deriveSI(SIPrefixes.getUnit("k"), 1.0);
 
     /** foot (international) = 0.3048 m = 1/3 yd = 12 inches. */
     public static final PositionUnit FOOT =

@@ -24,7 +24,7 @@ public class VolumeUnit extends Unit<VolumeUnit>
     /** The SI unit for area is m^3. */
     public static final VolumeUnit SI =
             new VolumeUnit().build(new Unit.Builder<VolumeUnit>().setUnitBase(BASE).setId("m^3").setName("cubic meter")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 3.0).setScale(IdentityScale.SCALE));
 
     /** m^3. */
     public static final VolumeUnit CUBIC_METER = SI;

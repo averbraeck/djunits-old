@@ -25,7 +25,7 @@ public class AmountOfSubstanceUnit extends Unit<AmountOfSubstanceUnit>
     /** The SI unit for amount of substance is mole. */
     public static final AmountOfSubstanceUnit SI = new AmountOfSubstanceUnit()
             .build(new Unit.Builder<AmountOfSubstanceUnit>().setUnitBase(BASE).setId("mol").setName("mole")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** Mole. */
     public static final AmountOfSubstanceUnit MOLE = SI;

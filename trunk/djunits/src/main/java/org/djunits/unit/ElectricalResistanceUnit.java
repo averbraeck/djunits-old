@@ -24,26 +24,26 @@ public class ElectricalResistanceUnit extends Unit<ElectricalResistanceUnit>
     /** The SI unit for electrical resistance is Ohm. */
     public static final ElectricalResistanceUnit SI = new ElectricalResistanceUnit()
             .build(new Unit.Builder<ElectricalResistanceUnit>().setUnitBase(BASE).setId("ohm").setName("ohm")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE)
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE)
                     .setDefaultDisplayAbbreviation("\u03A9").setDefaultTextualAbbreviation("ohm"));
 
     /** Ohm. */
     public static final ElectricalResistanceUnit OHM = SI;
 
     /** micro-ohm. */
-    public static final ElectricalResistanceUnit MICROOHM = OHM.deriveSI(SIPrefixes.getUnit("mu"));
+    public static final ElectricalResistanceUnit MICROOHM = OHM.deriveSI(SIPrefixes.getUnit("mu"), 1.0);
 
     /** milli-ohm. */
-    public static final ElectricalResistanceUnit MILLIOHM = OHM.deriveSI(SIPrefixes.getUnit("m"));
+    public static final ElectricalResistanceUnit MILLIOHM = OHM.deriveSI(SIPrefixes.getUnit("m"), 1.0);
 
     /** kilo-ohm. */
-    public static final ElectricalResistanceUnit KILOOHM = OHM.deriveSI(SIPrefixes.getUnit("k"));
+    public static final ElectricalResistanceUnit KILOOHM = OHM.deriveSI(SIPrefixes.getUnit("k"), 1.0);
 
     /** mega-ohm. */
-    public static final ElectricalResistanceUnit MEGAOHM = OHM.deriveSI(SIPrefixes.getUnit("M"));
+    public static final ElectricalResistanceUnit MEGAOHM = OHM.deriveSI(SIPrefixes.getUnit("M"), 1.0);
 
     /** giga-ohm. */
-    public static final ElectricalResistanceUnit GIGAOHM = OHM.deriveSI(SIPrefixes.getUnit("G"));
+    public static final ElectricalResistanceUnit GIGAOHM = OHM.deriveSI(SIPrefixes.getUnit("G"), 1.0);
 
     /** ab-ohm. */
     public static final ElectricalResistanceUnit ABOHM =

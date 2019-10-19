@@ -24,7 +24,7 @@ public class FlowMassUnit extends Unit<FlowMassUnit>
     /** The SI unit for mass flow rate is kg/s. */
     public static final FlowMassUnit SI = new FlowMassUnit()
             .build(new Unit.Builder<FlowMassUnit>().setUnitBase(BASE).setId("kg/s").setName("kilogram per second")
-                    .setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.NONE).setScale(IdentityScale.SCALE));
+                    .setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(IdentityScale.SCALE));
 
     /** kg/s. */
     public static final FlowMassUnit KILOGRAM_PER_SECOND = SI;

@@ -23,35 +23,36 @@ public class LengthUnit extends Unit<LengthUnit>
     public static final UnitBase<LengthUnit> BASE = new UnitBase<>("m");
 
     /** The SI unit for length is meter. */
-    public static final LengthUnit SI = new LengthUnit().build(new Unit.Builder<LengthUnit>().setUnitBase(BASE).setId("m")
-            .setName("meter").setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
+    public static final LengthUnit SI =
+            new LengthUnit().build(new Unit.Builder<LengthUnit>().setUnitBase(BASE).setId("m").setName("meter")
+                    .setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** meter. */
     public static final LengthUnit METER = SI;
 
     /** nm. */
-    public static final LengthUnit NANOMETER = METER.deriveSI(SIPrefixes.getUnit("n"));
+    public static final LengthUnit NANOMETER = METER.deriveSI(SIPrefixes.getUnit("n"), 1.0);
 
     /** &#181;m. */
-    public static final LengthUnit MICROMETER = METER.deriveSI(SIPrefixes.getUnit("mu"));
+    public static final LengthUnit MICROMETER = METER.deriveSI(SIPrefixes.getUnit("mu"), 1.0);
 
     /** mm. */
-    public static final LengthUnit MILLIMETER = METER.deriveSI(SIPrefixes.getUnit("m"));
+    public static final LengthUnit MILLIMETER = METER.deriveSI(SIPrefixes.getUnit("m"), 1.0);
 
     /** cm. */
-    public static final LengthUnit CENTIMETER = METER.deriveSI(SIPrefixes.getUnit("c"));
+    public static final LengthUnit CENTIMETER = METER.deriveSI(SIPrefixes.getUnit("c"), 1.0);
 
     /** dm. */
-    public static final LengthUnit DECIMETER = METER.deriveSI(SIPrefixes.getUnit("d"));
+    public static final LengthUnit DECIMETER = METER.deriveSI(SIPrefixes.getUnit("d"), 1.0);
 
     /** dam. */
-    public static final LengthUnit DECAMETER = METER.deriveSI(SIPrefixes.getUnit("da"));
+    public static final LengthUnit DECAMETER = METER.deriveSI(SIPrefixes.getUnit("da"), 1.0);
 
     /** hm. */
-    public static final LengthUnit HECTOMETER = METER.deriveSI(SIPrefixes.getUnit("h"));
+    public static final LengthUnit HECTOMETER = METER.deriveSI(SIPrefixes.getUnit("h"), 1.0);
 
     /** km. */
-    public static final LengthUnit KILOMETER = METER.deriveSI(SIPrefixes.getUnit("k"));
+    public static final LengthUnit KILOMETER = METER.deriveSI(SIPrefixes.getUnit("k"), 1.0);
 
     /** foot (international) = 0.3048 m = 1/3 yd = 12 inches. */
     public static final LengthUnit FOOT = METER.deriveLinear(0.3048, "ft", "foot", UnitSystem.IMPERIAL);

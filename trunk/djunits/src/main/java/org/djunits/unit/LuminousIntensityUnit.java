@@ -25,7 +25,7 @@ public class LuminousIntensityUnit extends Unit<LuminousIntensityUnit>
     /** The SI unit for luminous intensity is cd. */
     public static final LuminousIntensityUnit SI = new LuminousIntensityUnit()
             .build(new Unit.Builder<LuminousIntensityUnit>().setUnitBase(BASE).setId("cd").setName("candela")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** Candela. */
     public static final LuminousIntensityUnit CANDELA = SI;

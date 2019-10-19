@@ -26,7 +26,7 @@ public class EquivalentDoseUnit extends Unit<EquivalentDoseUnit>
     /** The SI unit for equivalent dose of ionizing radiation is Sievert. */
     public static final EquivalentDoseUnit SI = new EquivalentDoseUnit()
             .build(new Unit.Builder<EquivalentDoseUnit>().setUnitBase(BASE).setId("Sv").setName("sievert")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** Sievert. */
     public static final EquivalentDoseUnit SIEVERT = SI;

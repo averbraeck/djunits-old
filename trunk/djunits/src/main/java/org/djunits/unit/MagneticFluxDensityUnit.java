@@ -25,7 +25,7 @@ public class MagneticFluxDensityUnit extends Unit<MagneticFluxDensityUnit>
     /** The SI unit for magnetic flux density is Tesla. */
     public static final MagneticFluxDensityUnit SI = new MagneticFluxDensityUnit()
             .build(new Unit.Builder<MagneticFluxDensityUnit>().setUnitBase(BASE).setId("T").setName("tesla")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** Tesla. */
     public static final MagneticFluxDensityUnit TESLA = SI;

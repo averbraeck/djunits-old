@@ -24,7 +24,7 @@ public class AccelerationUnit extends Unit<AccelerationUnit>
     /** The SI unit for acceleration is m/s^2. */
     public static final AccelerationUnit SI = new AccelerationUnit()
             .build(new Unit.Builder<AccelerationUnit>().setUnitBase(BASE).setId("m/s2").setName("meter per second squared")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(IdentityScale.SCALE));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(IdentityScale.SCALE));
 
     /** m/s2. */
     public static final AccelerationUnit METER_PER_SECOND_2 = SI;

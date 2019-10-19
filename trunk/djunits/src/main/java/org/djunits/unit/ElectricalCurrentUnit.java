@@ -24,22 +24,22 @@ public class ElectricalCurrentUnit extends Unit<ElectricalCurrentUnit>
     /** The SI unit for electrical current is Ampere. */
     public static final ElectricalCurrentUnit SI = new ElectricalCurrentUnit()
             .build(new Unit.Builder<ElectricalCurrentUnit>().setUnitBase(BASE).setId("A").setName("ampere")
-                    .setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
+                    .setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** Ampere. */
     public static final ElectricalCurrentUnit AMPERE = SI;
 
     /** microampere. */
-    public static final ElectricalCurrentUnit MICROAMPERE = AMPERE.deriveSI(SIPrefixes.getUnit("mu"));
+    public static final ElectricalCurrentUnit MICROAMPERE = AMPERE.deriveSI(SIPrefixes.getUnit("mu"), 1.0);
 
     /** milliampere. */
-    public static final ElectricalCurrentUnit MILLIAMPERE = AMPERE.deriveSI(SIPrefixes.getUnit("m"));
+    public static final ElectricalCurrentUnit MILLIAMPERE = AMPERE.deriveSI(SIPrefixes.getUnit("m"), 1.0);
 
     /** kiloampere. */
-    public static final ElectricalCurrentUnit KILOAMPERE = AMPERE.deriveSI(SIPrefixes.getUnit("k"));
+    public static final ElectricalCurrentUnit KILOAMPERE = AMPERE.deriveSI(SIPrefixes.getUnit("k"), 1.0);
 
     /** megaampere. */
-    public static final ElectricalCurrentUnit MEGAAMPERE = AMPERE.deriveSI(SIPrefixes.getUnit("M"));
+    public static final ElectricalCurrentUnit MEGAAMPERE = AMPERE.deriveSI(SIPrefixes.getUnit("M"), 1.0);
 
     /** statampere (GCS ESU). */
     public static final ElectricalCurrentUnit STATAMPERE =
