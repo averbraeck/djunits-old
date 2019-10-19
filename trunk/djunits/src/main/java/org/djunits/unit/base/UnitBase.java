@@ -109,6 +109,13 @@ public class UnitBase<U extends Unit<U>> implements Serializable
                 // the unit will register itself as a generated unit
             }
         }
+        else if (siPrefixes.equals(SIPrefixes.UNIT_POS))
+        {
+            for (SIPrefix siPrefix : SIPrefixes.UNIT_POS_PREFIXES.values())
+            {
+                unit.deriveSI(siPrefix, true); // true = automatically generated
+            }
+        }
         else if (siPrefixes.equals(SIPrefixes.KILO))
         {
             for (SIPrefix siPrefix : SIPrefixes.KILO_PREFIXES.values())
