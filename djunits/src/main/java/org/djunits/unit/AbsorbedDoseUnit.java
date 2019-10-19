@@ -26,7 +26,7 @@ public class AbsorbedDoseUnit extends Unit<AbsorbedDoseUnit>
     /** The SI unit for absorbed dose of ionizing radiation is Gray. */
     public static final AbsorbedDoseUnit SI =
             new AbsorbedDoseUnit().build(new Unit.Builder<AbsorbedDoseUnit>().setUnitBase(BASE).setId("Gy").setName("gray")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** Gray. */
     public static final AbsorbedDoseUnit GRAY = SI;

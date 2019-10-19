@@ -111,5 +111,5 @@ class BadUnitClass extends Unit<BadUnitClass>
     /** The SI unit for acceleration is m/s^2. */
     public static final BadUnitClass SI = new BadUnitClass()
             .build(new Unit.Builder<BadUnitClass>().setUnitBase(BASE).setId("m/s2").setName("meter per second squared")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(IdentityScale.SCALE));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(IdentityScale.SCALE));
 }

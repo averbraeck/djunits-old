@@ -24,29 +24,29 @@ public class FrequencyUnit extends Unit<FrequencyUnit>
     /** The SI unit for frequency is Hertz. */
     public static final FrequencyUnit SI =
             new FrequencyUnit().build(new Unit.Builder<FrequencyUnit>().setUnitBase(BASE).setId("Hz").setName("hertz")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** Hertz. */
     public static final FrequencyUnit HERTZ = SI;
 
     /** kiloHertz. */
-    public static final FrequencyUnit KILOHERTZ = HERTZ.deriveSI(SIPrefixes.getUnit("k"));
+    public static final FrequencyUnit KILOHERTZ = HERTZ.deriveSI(SIPrefixes.getUnit("k"), 1.0);
 
     /** megaHertz. */
-    public static final FrequencyUnit MEGAHERTZ = HERTZ.deriveSI(SIPrefixes.getUnit("M"));
+    public static final FrequencyUnit MEGAHERTZ = HERTZ.deriveSI(SIPrefixes.getUnit("M"), 1.0);
 
     /** gigaHertz. */
-    public static final FrequencyUnit GIGAHERTZ = HERTZ.deriveSI(SIPrefixes.getUnit("G"));
+    public static final FrequencyUnit GIGAHERTZ = HERTZ.deriveSI(SIPrefixes.getUnit("G"), 1.0);
 
     /** teraHertz. */
-    public static final FrequencyUnit TERAHERTZ = HERTZ.deriveSI(SIPrefixes.getUnit("T"));
+    public static final FrequencyUnit TERAHERTZ = HERTZ.deriveSI(SIPrefixes.getUnit("T"), 1.0);
 
     /** Revolutions per minute = 1/60 Hz. */
     public static final FrequencyUnit RPM = HERTZ.deriveLinear(1.0 / 60.0, "rpm", "revolutions per minute", UnitSystem.OTHER);
 
     /** 1/s and all derived units. */
     public static final FrequencyUnit PER_SECOND = new FrequencyUnit().build(new Unit.Builder<FrequencyUnit>().setUnitBase(BASE)
-            .setId("/s").setName("per second").setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.PER_UNIT)
+            .setId("/s").setName("per second").setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.PER_UNIT, 1.0)
             .setScale(IdentityScale.SCALE).setAdditionalAbbreviations("/s", "1/s"));
 
     /** 1/microsecond. */

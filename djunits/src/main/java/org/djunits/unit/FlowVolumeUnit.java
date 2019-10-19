@@ -24,7 +24,7 @@ public class FlowVolumeUnit extends Unit<FlowVolumeUnit>
     /** The SI unit for volume flow rate is m^3/s. */
     public static final FlowVolumeUnit SI = new FlowVolumeUnit()
             .build(new Unit.Builder<FlowVolumeUnit>().setUnitBase(BASE).setId("m^3/s").setName("cubic meter per second")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(IdentityScale.SCALE));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(IdentityScale.SCALE));
 
     /** m^3/s. */
     public static final FlowVolumeUnit CUBIC_METER_PER_SECOND = SI;

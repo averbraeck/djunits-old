@@ -24,7 +24,7 @@ public class SolidAngleUnit extends Unit<SolidAngleUnit>
     /** The SI unit for solid angle is steradian. */
     public static final SolidAngleUnit SI =
             new SolidAngleUnit().build(new Unit.Builder<SolidAngleUnit>().setUnitBase(BASE).setId("sr").setName("steradian")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(IdentityScale.SCALE));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(IdentityScale.SCALE));
 
     /** steradian. */
     public static final SolidAngleUnit STERADIAN = SI;

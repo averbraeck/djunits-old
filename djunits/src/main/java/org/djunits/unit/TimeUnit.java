@@ -40,7 +40,7 @@ public class TimeUnit extends AbsoluteLinearUnit<TimeUnit, DurationUnit>
      * Epoch level precise to a ms.
      */
     public static final TimeUnit BASE_SECOND = new TimeUnit().build(new AbsoluteLinearUnit.Builder<TimeUnit, DurationUnit>()
-            .setUnitBase(BASE).setId("s").setName("second").setUnitSystem(UnitSystem.OTHER).setSiPrefixes(SIPrefixes.UNIT)
+            .setUnitBase(BASE).setId("s").setName("second").setUnitSystem(UnitSystem.OTHER).setSiPrefixes(SIPrefixes.UNIT, 1.0)
             .setRelativeUnit(DurationUnit.SECOND).setScale(new OffsetLinearScale(1.0, 0.0)).setDefaultDisplayAbbreviation("s")
             .setDefaultTextualAbbreviation("s").setAdditionalAbbreviations("sec"));
 

@@ -29,14 +29,15 @@ public class AngleUnit extends Unit<AngleUnit>
     /** The SI unit for angle is radian. */
     public static final AngleUnit SI =
             new AngleUnit().build(new Unit.Builder<AngleUnit>().setUnitBase(BASE).setId("rad").setName("radians")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(IdentityScale.SCALE));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(IdentityScale.SCALE));
 
     /** radian. */
     public static final AngleUnit RADIAN = SI;
 
     /** percent (non-linear, 100% is 45 degrees; 90 degrees is infinite). */
-    public static final AngleUnit PERCENT = new AngleUnit().build(new Unit.Builder<AngleUnit>().setUnitBase(BASE).setId("%")
-            .setName("percent").setUnitSystem(UnitSystem.OTHER).setSiPrefixes(SIPrefixes.NONE).setScale(new GradeScale(0.01)));
+    public static final AngleUnit PERCENT =
+            new AngleUnit().build(new Unit.Builder<AngleUnit>().setUnitBase(BASE).setId("%").setName("percent")
+                    .setUnitSystem(UnitSystem.OTHER).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(new GradeScale(0.01)));
 
     /** degree. */
     public static final AngleUnit DEGREE =

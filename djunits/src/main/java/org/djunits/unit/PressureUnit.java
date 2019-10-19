@@ -24,7 +24,7 @@ public class PressureUnit extends Unit<PressureUnit>
     /** The SI unit for pressure is Pascal = kgm/s2. */
     public static final PressureUnit SI =
             new PressureUnit().build(new Unit.Builder<PressureUnit>().setUnitBase(BASE).setId("Pa").setName("pascal")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** Pascal. */
     public static final PressureUnit PASCAL = SI;

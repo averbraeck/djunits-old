@@ -24,7 +24,7 @@ public class AbsoluteTemperatureUnit extends AbsoluteLinearUnit<AbsoluteTemperat
     /** The default unit for temperature is Kelvin. */
     public static final AbsoluteTemperatureUnit KELVIN = new AbsoluteTemperatureUnit()
             .build(new AbsoluteLinearUnit.Builder<AbsoluteTemperatureUnit, TemperatureUnit>().setUnitBase(BASE).setId("K")
-                    .setName("Kelvin").setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT)
+                    .setName("Kelvin").setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT, 1.0)
                     .setRelativeUnit(TemperatureUnit.KELVIN).setScale(new OffsetLinearScale(1.0, 0.0)));
 
     /** The default unit for temperature is Kelvin. */

@@ -23,10 +23,10 @@ public class ElectricalCapacitanceUnit extends Unit<ElectricalCapacitanceUnit>
     /** The base, with "s3A2/kgm2" as the SI signature. */
     public static final UnitBase<ElectricalCapacitanceUnit> BASE = new UnitBase<>("s4A2/kgm2");
 
-    /** The SI unit for electrical conductance is Siemens. */
+    /** The SI unit for electrical capacitance is Farad. */
     public static final ElectricalCapacitanceUnit SI = new ElectricalCapacitanceUnit()
             .build(new Unit.Builder<ElectricalCapacitanceUnit>().setUnitBase(BASE).setId("F").setName("farad")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** Farad. */
     public static final ElectricalCapacitanceUnit FARAD = SI;

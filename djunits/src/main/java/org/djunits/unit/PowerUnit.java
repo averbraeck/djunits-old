@@ -23,31 +23,31 @@ public class PowerUnit extends Unit<PowerUnit>
 
     /** The SI unit for power is watt. */
     public static final PowerUnit SI = new PowerUnit().build(new Unit.Builder<PowerUnit>().setUnitBase(BASE).setId("W")
-            .setName("watt").setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT).setScale(IdentityScale.SCALE));
+            .setName("watt").setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** watt. */
     public static final PowerUnit WATT = SI;
 
     /** microwatt. */
-    public static final PowerUnit MICROWATT = WATT.deriveSI(SIPrefixes.getUnit("mu"));
+    public static final PowerUnit MICROWATT = WATT.deriveSI(SIPrefixes.getUnit("mu"), 1.0);
 
     /** milliwatt. */
-    public static final PowerUnit MILLIWATT = WATT.deriveSI(SIPrefixes.getUnit("m"));
+    public static final PowerUnit MILLIWATT = WATT.deriveSI(SIPrefixes.getUnit("m"), 1.0);
 
     /** kiloawatt. */
-    public static final PowerUnit KILOWATT = WATT.deriveSI(SIPrefixes.getUnit("k"));
+    public static final PowerUnit KILOWATT = WATT.deriveSI(SIPrefixes.getUnit("k"), 1.0);
 
     /** megawatt. */
-    public static final PowerUnit MEGAWATT = WATT.deriveSI(SIPrefixes.getUnit("M"));
+    public static final PowerUnit MEGAWATT = WATT.deriveSI(SIPrefixes.getUnit("M"), 1.0);
 
     /** gigawatt. */
-    public static final PowerUnit GIGAWATT = WATT.deriveSI(SIPrefixes.getUnit("G"));
+    public static final PowerUnit GIGAWATT = WATT.deriveSI(SIPrefixes.getUnit("G"), 1.0);
 
     /** terawatt. */
-    public static final PowerUnit TERAWATT = WATT.deriveSI(SIPrefixes.getUnit("T"));
+    public static final PowerUnit TERAWATT = WATT.deriveSI(SIPrefixes.getUnit("T"), 1.0);
 
     /** petawatt. */
-    public static final PowerUnit PETAWATT = WATT.deriveSI(SIPrefixes.getUnit("P"));
+    public static final PowerUnit PETAWATT = WATT.deriveSI(SIPrefixes.getUnit("P"), 1.0);
 
     /** foot-pound-force per hour. */
     public static final PowerUnit FOOT_POUND_FORCE_PER_HOUR =

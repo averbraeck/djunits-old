@@ -24,7 +24,7 @@ public class TorqueUnit extends Unit<TorqueUnit>
     /** The SI unit for torque is Newton meter = kgm2/s2. */
     public static final TorqueUnit SI =
             new TorqueUnit().build(new Unit.Builder<TorqueUnit>().setUnitBase(BASE).setId("N.m").setName("Newton meter")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE).setScale(IdentityScale.SCALE));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(IdentityScale.SCALE));
 
     /** Newton meter. */
     public static final TorqueUnit NEWTON_METER = SI;

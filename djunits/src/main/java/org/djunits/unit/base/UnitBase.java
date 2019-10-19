@@ -92,8 +92,9 @@ public class UnitBase<U extends Unit<U>> implements Serializable
      * factor of 1000.
      * @param unit U; the unit to register in the map.
      * @param siPrefixes SIPrefixes; indicates whether and which SI prefixes should be generated.
+     * @param siPrefixPower the power factor of the SI prefixes, e.g. 2.0 for square meters and 3.0 for cubic meters.
      */
-    public void registerUnit(final U unit, final SIPrefixes siPrefixes)
+    public void registerUnit(final U unit, final SIPrefixes siPrefixes, final double siPrefixPower)
     {
         Throw.whenNull(unit, "unit cannot be null");
         if (this.standardUnit == null)
@@ -105,7 +106,7 @@ public class UnitBase<U extends Unit<U>> implements Serializable
         {
             for (SIPrefix siPrefix : SIPrefixes.UNIT_PREFIXES.values())
             {
-                unit.deriveSI(siPrefix, true); // true = automatically generated
+                unit.deriveSI(siPrefix, siPrefixPower, true); // true = automatically generated
                 // the unit will register itself as a generated unit
             }
         }
@@ -113,21 +114,21 @@ public class UnitBase<U extends Unit<U>> implements Serializable
         {
             for (SIPrefix siPrefix : SIPrefixes.UNIT_POS_PREFIXES.values())
             {
-                unit.deriveSI(siPrefix, true); // true = automatically generated
+                unit.deriveSI(siPrefix, siPrefixPower, true); // true = automatically generated
             }
         }
         else if (siPrefixes.equals(SIPrefixes.KILO))
         {
             for (SIPrefix siPrefix : SIPrefixes.KILO_PREFIXES.values())
             {
-                unit.deriveSIKilo(siPrefix, true); // true = automatically generated
+                unit.deriveSIKilo(siPrefix, siPrefixPower, true); // true = automatically generated
             }
         }
         else if (siPrefixes.equals(SIPrefixes.PER_UNIT))
         {
             for (SIPrefix siPrefix : SIPrefixes.PER_UNIT_PREFIXES.values())
             {
-                unit.derivePerSI(siPrefix, true); // true = automatically generated
+                unit.derivePerSI(siPrefix, siPrefixPower, true); // true = automatically generated
             }
         }
 

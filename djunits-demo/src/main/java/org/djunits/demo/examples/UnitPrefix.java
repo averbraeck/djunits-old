@@ -2,11 +2,14 @@ package org.djunits.demo.examples;
 
 import java.util.Map;
 
+import org.djunits.unit.AreaUnit;
+import org.djunits.unit.ElectricalChargeUnit;
 import org.djunits.unit.FrequencyUnit;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.LinearDensityUnit;
 import org.djunits.unit.MassUnit;
 import org.djunits.unit.Unit;
+import org.djunits.unit.VolumeUnit;
 
 /**
  * UnitPrefix.java.
@@ -30,6 +33,9 @@ public final class UnitPrefix
     public static void main(final String[] args)
     {
         print(LengthUnit.BASE.getUnitsByAbbreviation());
+        print(AreaUnit.BASE.getUnitsByAbbreviation());
+        print(VolumeUnit.BASE.getUnitsByAbbreviation());
+        print(ElectricalChargeUnit.BASE.getUnitsByAbbreviation());
         print(MassUnit.BASE.getUnitsByAbbreviation());
         print(LinearDensityUnit.BASE.getUnitsByAbbreviation());
         print(FrequencyUnit.BASE.getUnitsByAbbreviation());
