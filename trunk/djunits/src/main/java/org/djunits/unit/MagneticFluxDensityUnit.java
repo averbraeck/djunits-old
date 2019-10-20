@@ -30,4 +30,16 @@ public class MagneticFluxDensityUnit extends Unit<MagneticFluxDensityUnit>
     /** Tesla. */
     public static final MagneticFluxDensityUnit TESLA = SI;
 
+    /** mT. */
+    public static final MagneticFluxDensityUnit MILLITESLA = TESLA.deriveLinear(1.0E-3, "mT", "millitesla");
+
+    /** muT. */
+    public static final MagneticFluxDensityUnit MICROTESLA =
+            TESLA.deriveLinear(1.0E-6, "muT", "microtesla", UnitSystem.SI_DERIVED, "muT", "muT", "\u03BCT");
+
+    /** nT. */
+    public static final MagneticFluxDensityUnit NANOTESLA = TESLA.deriveLinear(1.0E-9, "nT", "nanotesla");
+
+    /** Gauss. */
+    public static final MagneticFluxDensityUnit GAUSS = TESLA.deriveLinear(1.0E-4, "G", "Gauss", UnitSystem.CGS);
 }

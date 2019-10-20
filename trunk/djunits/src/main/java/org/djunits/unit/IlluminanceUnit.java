@@ -30,4 +30,20 @@ public class IlluminanceUnit extends Unit<IlluminanceUnit>
     /** Lux. */
     public static final IlluminanceUnit LUX = SI;
 
+    /** mlux. */
+    public static final IlluminanceUnit MILLILUX = LUX.deriveLinear(1.0E-3, "mlx", "millilux");
+
+    /** mulux. */
+    public static final IlluminanceUnit MICROLUX =
+            LUX.deriveLinear(1.0E-6, "mulx", "microlux", UnitSystem.SI_DERIVED, "mulx", "mulx", "\u03BClx");
+
+    /** klux. */
+    public static final IlluminanceUnit KILOLUX = LUX.deriveLinear(1.0E3, "klx", "kilolux");
+
+    /** phot. */
+    public static final IlluminanceUnit PHOT = KILOLUX.deriveLinear(10.0, "ph", "phot");
+
+    /** nox. */
+    public static final IlluminanceUnit NOX = MILLILUX.deriveLinear(1.0, "nx", "nox");
+
 }

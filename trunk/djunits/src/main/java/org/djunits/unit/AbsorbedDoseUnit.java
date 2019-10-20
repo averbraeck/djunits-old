@@ -16,7 +16,6 @@ import org.djunits.unit.unitsystem.UnitSystem;
  */
 public class AbsorbedDoseUnit extends Unit<AbsorbedDoseUnit>
 {
-
     /** */
     private static final long serialVersionUID = 20190830;
 
@@ -30,5 +29,16 @@ public class AbsorbedDoseUnit extends Unit<AbsorbedDoseUnit>
 
     /** Gray. */
     public static final AbsorbedDoseUnit GRAY = SI;
+    
+    /** mGy. */
+    public static final AbsorbedDoseUnit MILLIGRAY = GRAY.deriveSI(SIPrefixes.getUnit("m"), 1.0);
 
+    /** &#181;Gy. */
+    public static final AbsorbedDoseUnit MICROGRAY = GRAY.deriveSI(SIPrefixes.getUnit("mu"), 1.0);
+    
+    /** erg/g. */
+    public static final AbsorbedDoseUnit ERG_PER_GRAM = GRAY.deriveLinear(1.0E-4, "erg/g", "erg per gram", UnitSystem.CGS);
+
+    /** rad. */
+    public static final AbsorbedDoseUnit RAD = GRAY.deriveLinear(0.01, "rad", "rad", UnitSystem.CGS);
 }

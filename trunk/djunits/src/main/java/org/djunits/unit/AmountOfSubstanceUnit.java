@@ -30,4 +30,12 @@ public class AmountOfSubstanceUnit extends Unit<AmountOfSubstanceUnit>
     /** Mole. */
     public static final AmountOfSubstanceUnit MOLE = SI;
 
+    /** mmol. */
+    public static final AmountOfSubstanceUnit MILLIMOLE = MOLE.deriveSI(SIPrefixes.getUnit("m"), 1.0);
+
+    /** &#181;mol. */
+    public static final AmountOfSubstanceUnit MICROMOLE = MOLE.deriveSI(SIPrefixes.getUnit("mu"), 1.0);
+
+    /** nmol. */
+    public static final AmountOfSubstanceUnit NANOMOLE = MOLE.deriveSI(SIPrefixes.getUnit("n"), 1.0);
 }

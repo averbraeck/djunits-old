@@ -77,7 +77,11 @@ public interface UNITS
     /*********************************** ABSORBED DOSE (OF IONIZING RADIATION) **************************************/
     /****************************************************************************************************************/
 
-    AbsorbedDoseUnit GRAY                 = AbsorbedDoseUnit.GRAY;
+    AbsorbedDoseUnit GRAY                       = AbsorbedDoseUnit.GRAY;
+    AbsorbedDoseUnit MILLIGRAY                  = AbsorbedDoseUnit.MILLIGRAY;
+    AbsorbedDoseUnit MICROGRAY                  = AbsorbedDoseUnit.MICROGRAY;
+    AbsorbedDoseUnit ERG_PER_GRAM               = AbsorbedDoseUnit.ERG_PER_GRAM;
+    AbsorbedDoseUnit RAD                        = AbsorbedDoseUnit.RAD;
 
     /****************************************************************************************************************/
     /************************************************ ACCELERATION **************************************************/
@@ -99,6 +103,9 @@ public interface UNITS
     /****************************************************************************************************************/
 
     AmountOfSubstanceUnit MOLE                  = AmountOfSubstanceUnit.MOLE;
+    AmountOfSubstanceUnit MILLIMOLE             = AmountOfSubstanceUnit.MILLIMOLE;
+    AmountOfSubstanceUnit MICROMOLE             = AmountOfSubstanceUnit.MICROMOLE;
+    AmountOfSubstanceUnit NANOMOLE              = AmountOfSubstanceUnit.NANOMOLE;
 
     /****************************************************************************************************************/
     /************************************************* SOLIDANGLE ***************************************************/
@@ -146,13 +153,16 @@ public interface UNITS
     /****************************************************************************************************************/
 
     CatalyticActivityUnit KATAL                 = CatalyticActivityUnit.KATAL;
+    CatalyticActivityUnit MILLIKATAL            = CatalyticActivityUnit.MILLIKATAL;
+    CatalyticActivityUnit MICROKATAL            = CatalyticActivityUnit.MICROKATAL;
+    CatalyticActivityUnit NANOKATAL             = CatalyticActivityUnit.NANOKATAL;
 
     /****************************************************************************************************************/
     /************************************************** DENSITY  ****************************************************/
     /****************************************************************************************************************/
 
-    DensityUnit KG_PER_METER_3            = DensityUnit.KG_PER_METER_3;
-    DensityUnit GRAM_PER_CENTIMETER_3     = DensityUnit.GRAM_PER_CENTIMETER_3;
+    DensityUnit KG_PER_METER_3                  = DensityUnit.KG_PER_METER_3;
+    DensityUnit GRAM_PER_CENTIMETER_3           = DensityUnit.GRAM_PER_CENTIMETER_3;
 
     /****************************************************************************************************************/
     /************************************************ DIMENSIONLESS *************************************************/
@@ -186,6 +196,7 @@ public interface UNITS
     ElectricalCapacitanceUnit MILLIFARAD        = ElectricalCapacitanceUnit.MILLIFARAD;
     ElectricalCapacitanceUnit MICROFARAD        = ElectricalCapacitanceUnit.MICROFARAD;
     ElectricalCapacitanceUnit NANOFARAD         = ElectricalCapacitanceUnit.NANOFARAD;
+    ElectricalCapacitanceUnit PICOFARAD         = ElectricalCapacitanceUnit.PICOFARAD;
 
     /****************************************************************************************************************/
     /********************************************** ELECTRICALCHARGE ************************************************/
@@ -212,6 +223,9 @@ public interface UNITS
     /****************************************************************************************************************/
 
     ElectricalConductanceUnit SIEMENS           = ElectricalConductanceUnit.SIEMENS;
+    ElectricalConductanceUnit MILLISIEMENS      = ElectricalConductanceUnit.MILLISIEMENS;
+    ElectricalConductanceUnit MICROSIEMENS      = ElectricalConductanceUnit.MICROSIEMENS;
+    ElectricalConductanceUnit NANOSIEMENS       = ElectricalConductanceUnit.NANOSIEMENS;
     
     /****************************************************************************************************************/
     /********************************************* ELECTRICALCURRENT  ***********************************************/
@@ -230,6 +244,9 @@ public interface UNITS
     /****************************************************************************************************************/
 
     ElectricalInductanceUnit HENRY              = ElectricalInductanceUnit.HENRY;
+    ElectricalInductanceUnit MILLIHENRY         = ElectricalInductanceUnit.MILLIHENRY;
+    ElectricalInductanceUnit MICROHENRY         = ElectricalInductanceUnit.MICROHENRY;
+    ElectricalInductanceUnit NANOHENRY          = ElectricalInductanceUnit.NANOHENRY;
 
     /****************************************************************************************************************/
     /******************************************** ELECTRICALPOTENTIAL  **********************************************/
@@ -298,6 +315,9 @@ public interface UNITS
     /****************************************************************************************************************/
 
     EquivalentDoseUnit SIEVERT                  = EquivalentDoseUnit.SIEVERT;
+    EquivalentDoseUnit MILLISIEVERT             = EquivalentDoseUnit.MILLISIEVERT;
+    EquivalentDoseUnit MICROSIEVERT             = EquivalentDoseUnit.MICROSIEVERT;
+    EquivalentDoseUnit REM                      = EquivalentDoseUnit.REM;
 
     /****************************************************************************************************************/
     /************************************************** FLOWMASS ****************************************************/
@@ -362,6 +382,9 @@ public interface UNITS
     /****************************************************************************************************************/
 
     IlluminanceUnit LUX                         = IlluminanceUnit.LUX;
+    IlluminanceUnit MILLILUX                    = IlluminanceUnit.MILLILUX;
+    IlluminanceUnit MICROLUX                    = IlluminanceUnit.MICROLUX;
+    IlluminanceUnit KILOLUX                     = IlluminanceUnit.KILOLUX;
 
     /****************************************************************************************************************/
     /*************************************************** LENGTH *****************************************************/
@@ -425,12 +448,20 @@ public interface UNITS
     /****************************************************************************************************************/
 
     MagneticFluxUnit WEBER                      = MagneticFluxUnit.WEBER;
+    MagneticFluxUnit MILLIWEBER                 = MagneticFluxUnit.MILLIWEBER;
+    MagneticFluxUnit MICROWEBER                 = MagneticFluxUnit.MICROWEBER;
+    MagneticFluxUnit NANOWEBER                  = MagneticFluxUnit.NANOWEBER;
+    MagneticFluxUnit MAXWELL                    = MagneticFluxUnit.MAXWELL;
 
     /****************************************************************************************************************/
     /******************************************* MAGNETIC FLUX DENSITY **********************************************/
     /****************************************************************************************************************/
 
     MagneticFluxDensityUnit TESLA               = MagneticFluxDensityUnit.TESLA;
+    MagneticFluxDensityUnit MILLITESLA          = MagneticFluxDensityUnit.MILLITESLA;
+    MagneticFluxDensityUnit MICROTESLA          = MagneticFluxDensityUnit.MICROTESLA;
+    MagneticFluxDensityUnit NANOTESLA           = MagneticFluxDensityUnit.NANOTESLA;
+    MagneticFluxDensityUnit GAUSS               = MagneticFluxDensityUnit.GAUSS;
 
     /****************************************************************************************************************/
     /**************************************************** MASS ******************************************************/
@@ -506,6 +537,15 @@ public interface UNITS
     /****************************************************************************************************************/
 
     RadioActivityUnit BECQUEREL                 = RadioActivityUnit.BECQUEREL;
+    RadioActivityUnit KILOBECQUEREL             = RadioActivityUnit.KILOBECQUEREL;
+    RadioActivityUnit MEGABECQUEREL             = RadioActivityUnit.MEGABECQUEREL;
+    RadioActivityUnit TERABECQUEREL             = RadioActivityUnit.TERABECQUEREL;
+    RadioActivityUnit PETABECQUEREL             = RadioActivityUnit.PETABECQUEREL;
+    RadioActivityUnit CURIE                     = RadioActivityUnit.CURIE;
+    RadioActivityUnit MILLICURIE                = RadioActivityUnit.MILLICURIE;
+    RadioActivityUnit MICROCURIE                = RadioActivityUnit.MICROCURIE;
+    RadioActivityUnit NANOCURIE                 = RadioActivityUnit.NANOCURIE;
+    RadioActivityUnit RUTHERFORD                = RadioActivityUnit.RUTHERFORD;
 
     /****************************************************************************************************************/
     /*************************************************** SPEED  *****************************************************/
