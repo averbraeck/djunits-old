@@ -8,6 +8,10 @@
         CatalyticActivity, ElectricalCapacitance, ElectricalConductance, ElectricalInductance, EquivalentDose,
         Illuminance, LuminousFlux, LuminousIntensity, MagneticFluxDensity, MagneticFlux, and RadioActivity.
       </action>
+      <action dev="averbraeck" type="add">
+        DoubleScalars and FloatScalars again extend Number to be able to seamlessly exchange Double, Float, Long,
+        Duration and Time for simulation times and durations in DSOL.
+      </action>
     </release>
     
     <release version="4.00.03" date="2019-10-19" description="Per-units updated to reflect correct name and abbreviation">
