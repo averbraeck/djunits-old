@@ -2,7 +2,7 @@ package org.djunits.value.vdouble.scalar.base;
 
 import org.djunits.unit.Unit;
 import org.djunits.value.Absolute;
-import org.djunits.value.AbstractValue;
+import org.djunits.value.AbstractScalar;
 import org.djunits.value.formatter.Format;
 import org.djunits.value.util.ValueUtil;
 
@@ -17,7 +17,7 @@ import org.djunits.value.util.ValueUtil;
  * @param <U> the unit
  * @param <S> the type
  */
-public abstract class AbstractDoubleScalar<U extends Unit<U>, S extends AbstractDoubleScalar<U, S>> extends AbstractValue<U, S>
+public abstract class AbstractDoubleScalar<U extends Unit<U>, S extends AbstractDoubleScalar<U, S>> extends AbstractScalar<U, S>
         implements DoubleScalarInterface<U, S>
 {
     /** */
@@ -150,9 +150,44 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, S extends Abstract
         return Double.compare(this.getSI(), o.getSI());
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public int intValue()
+    {
+        return (int) this.getSI();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public long longValue()
+    {
+        return (long) this.getSI();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public float floatValue()
+    {
+        return (float) this.getSI();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public double doubleValue()
+    {
+        return this.getSI();
+    }
+
     /**********************************************************************************/
     /********************************* GENERIC METHODS ********************************/
     /**********************************************************************************/
+
+    /** {@inheritDoc} */
+    @Override
+    protected Object clone() throws CloneNotSupportedException
+    {
+        return super.clone();
+    }
 
     /** {@inheritDoc} */
     @Override

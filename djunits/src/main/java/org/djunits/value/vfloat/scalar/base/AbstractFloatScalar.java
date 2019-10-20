@@ -2,7 +2,7 @@ package org.djunits.value.vfloat.scalar.base;
 
 import org.djunits.unit.Unit;
 import org.djunits.value.Absolute;
-import org.djunits.value.AbstractValue;
+import org.djunits.value.AbstractScalar;
 import org.djunits.value.formatter.Format;
 import org.djunits.value.util.ValueUtil;
 
@@ -17,7 +17,7 @@ import org.djunits.value.util.ValueUtil;
  * @param <U> the unit
  * @param <S> the type
  */
-public abstract class AbstractFloatScalar<U extends Unit<U>, S extends AbstractFloatScalar<U, S>> extends AbstractValue<U, S>
+public abstract class AbstractFloatScalar<U extends Unit<U>, S extends AbstractFloatScalar<U, S>> extends AbstractScalar<U, S>
         implements FloatScalarInterface<U, S>
 {
     /** */
@@ -148,6 +148,34 @@ public abstract class AbstractFloatScalar<U extends Unit<U>, S extends AbstractF
     public final int compareTo(final S o)
     {
         return Float.compare(this.getSI(), o.getSI());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public int intValue()
+    {
+        return (int) this.getSI();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public long longValue()
+    {
+        return (long) this.getSI();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public float floatValue()
+    {
+        return this.getSI();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public double doubleValue()
+    {
+        return this.getSI();
     }
 
     /**********************************************************************************/
