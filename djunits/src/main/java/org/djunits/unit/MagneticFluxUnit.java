@@ -30,4 +30,17 @@ public class MagneticFluxUnit extends Unit<MagneticFluxUnit>
     /** Weber. */
     public static final MagneticFluxUnit WEBER = SI;
 
+    /** mWb. */
+    public static final MagneticFluxUnit MILLIWEBER = WEBER.deriveLinear(1.0E-3, "mWb", "milliweber");
+
+    /** muWb. */
+    public static final MagneticFluxUnit MICROWEBER =
+            WEBER.deriveLinear(1.0E-6, "muWb", "microweber", UnitSystem.SI_DERIVED, "muWb", "muWb", "\u03BCWb");
+
+    /** nWb. */
+    public static final MagneticFluxUnit NANOWEBER = WEBER.deriveLinear(1.0E-9, "nWb", "nanoweber");
+
+    /** Maxwell. */
+    public static final MagneticFluxUnit MAXWELL = WEBER.deriveLinear(1.0E-8, "Mx", "Maxwell", UnitSystem.CGS);
+
 }

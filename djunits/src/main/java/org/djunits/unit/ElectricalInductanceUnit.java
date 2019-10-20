@@ -31,4 +31,13 @@ public class ElectricalInductanceUnit extends Unit<ElectricalInductanceUnit>
     /** Henry. */
     public static final ElectricalInductanceUnit HENRY = SI;
 
+    /** mH. */
+    public static final ElectricalInductanceUnit MILLIHENRY = HENRY.deriveLinear(1.0E-3, "mH", "millihenry");
+
+    /** muH. */
+    public static final ElectricalInductanceUnit MICROHENRY =
+            HENRY.deriveLinear(1.0E-6, "muH", "microhenry", UnitSystem.SI_DERIVED, "muH", "muH", "\u03BCH");
+
+    /** nH. */
+    public static final ElectricalInductanceUnit NANOHENRY = HENRY.deriveLinear(1.0E-9, "nH", "nanohenry");
 }

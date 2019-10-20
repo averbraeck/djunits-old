@@ -30,4 +30,13 @@ public class ElectricalConductanceUnit extends Unit<ElectricalConductanceUnit>
     /** Siemens. */
     public static final ElectricalConductanceUnit SIEMENS = SI;
 
+    /** mS. */
+    public static final ElectricalConductanceUnit MILLISIEMENS = SIEMENS.deriveLinear(1.0E-3, "mS", "millisiemens");
+
+    /** muS. */
+    public static final ElectricalConductanceUnit MICROSIEMENS =
+            SIEMENS.deriveLinear(1.0E-6, "muS", "microsiemens", UnitSystem.SI_DERIVED, "muS", "muS", "\u03BCS");
+
+    /** nS. */
+    public static final ElectricalConductanceUnit NANOSIEMENS = SIEMENS.deriveLinear(1.0E-9, "nS", "nanosiemens");
 }

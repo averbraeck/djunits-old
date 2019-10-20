@@ -26,9 +26,18 @@ public class CatalyticActivityUnit extends Unit<CatalyticActivityUnit>
     /** The SI unit for catalytic activity is Katal. */
     public static final CatalyticActivityUnit SI = new CatalyticActivityUnit()
             .build(new Unit.Builder<CatalyticActivityUnit>().setUnitBase(BASE).setId("kat").setName("katal")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(IdentityScale.SCALE));
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** KATAL. */
     public static final CatalyticActivityUnit KATAL = SI;
+
+    /** mkat. */
+    public static final CatalyticActivityUnit MILLIKATAL = KATAL.deriveSI(SIPrefixes.getUnit("m"), 1.0);
+
+    /** &#181;kat. */
+    public static final CatalyticActivityUnit MICROKATAL = KATAL.deriveSI(SIPrefixes.getUnit("mu"), 1.0);
+
+    /** nkat. */
+    public static final CatalyticActivityUnit NANOKATAL = KATAL.deriveSI(SIPrefixes.getUnit("n"), 1.0);
 
 }
