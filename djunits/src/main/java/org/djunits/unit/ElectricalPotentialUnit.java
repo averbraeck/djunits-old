@@ -19,7 +19,7 @@ public class ElectricalPotentialUnit extends Unit<ElectricalPotentialUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "kgm2/s3A" as the SI signature. */
-    public static final UnitBase<ElectricalPotentialUnit> BASE = new UnitBase<>("kgm2/s3A");
+    public static final UnitBase<ElectricalPotentialUnit> BASE = new UnitBase<>("ElectricalPotential", "kgm2/s3A");
 
     /** The SI unit for electrical potential is Volt. */
     public static final ElectricalPotentialUnit SI = new ElectricalPotentialUnit()

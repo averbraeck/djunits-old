@@ -20,7 +20,7 @@ public class AmountOfSubstanceUnit extends Unit<AmountOfSubstanceUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "mol" as the SI signature. */
-    public static final UnitBase<AmountOfSubstanceUnit> BASE = new UnitBase<>("mol");
+    public static final UnitBase<AmountOfSubstanceUnit> BASE = new UnitBase<>("AmountOfSubstance", "mol");
 
     /** The SI unit for amount of substance is mole. */
     public static final AmountOfSubstanceUnit SI = new AmountOfSubstanceUnit()

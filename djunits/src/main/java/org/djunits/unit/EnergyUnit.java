@@ -20,7 +20,7 @@ public class EnergyUnit extends Unit<EnergyUnit>
     private static final long serialVersionUID = 20140604L;
 
     /** The base, with "kgm2/s2" as the SI signature. */
-    public static final UnitBase<EnergyUnit> BASE = new UnitBase<>("kgm2/s2");
+    public static final UnitBase<EnergyUnit> BASE = new UnitBase<>("Energy", "kgm2/s2");
 
     /** The SI unit for energy is Joule (J) = kgm2/s2. */
     public static final EnergyUnit SI =

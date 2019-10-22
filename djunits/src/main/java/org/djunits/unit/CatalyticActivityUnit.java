@@ -21,7 +21,7 @@ public class CatalyticActivityUnit extends Unit<CatalyticActivityUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "mol/s" as the SI signature. */
-    public static final UnitBase<CatalyticActivityUnit> BASE = new UnitBase<>("mol/s");
+    public static final UnitBase<CatalyticActivityUnit> BASE = new UnitBase<>("CatalyticActivity", "mol/s");
 
     /** The SI unit for catalytic activity is Katal. */
     public static final CatalyticActivityUnit SI = new CatalyticActivityUnit()

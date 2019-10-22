@@ -19,7 +19,7 @@ public final class DimensionlessUnit extends Unit<DimensionlessUnit>
     private static final long serialVersionUID = 20150830L;
 
     /** The base, with the empty SI signature. */
-    public static final UnitBase<DimensionlessUnit> BASE = new UnitBase<>("");
+    public static final UnitBase<DimensionlessUnit> BASE = new UnitBase<>("Dimensionless", "");
 
     /** The SI unit for a dimension less unit is "1" or N/A. */
     public static final DimensionlessUnit SI =

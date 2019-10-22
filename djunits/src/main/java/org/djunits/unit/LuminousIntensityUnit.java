@@ -20,7 +20,7 @@ public class LuminousIntensityUnit extends Unit<LuminousIntensityUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "cd" as the SI signature. */
-    public static final UnitBase<LuminousIntensityUnit> BASE = new UnitBase<>("cd");
+    public static final UnitBase<LuminousIntensityUnit> BASE = new UnitBase<>("LuminousIntensity", "cd");
 
     /** The SI unit for luminous intensity is cd. */
     public static final LuminousIntensityUnit SI = new LuminousIntensityUnit()

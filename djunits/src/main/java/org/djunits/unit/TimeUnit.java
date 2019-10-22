@@ -27,7 +27,7 @@ public class TimeUnit extends AbsoluteLinearUnit<TimeUnit, DurationUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "m2" as the SI signature. */
-    public static final UnitBase<TimeUnit> BASE = new UnitBase<>("s");
+    public static final UnitBase<TimeUnit> BASE = new UnitBase<>("Time", "s");
 
     /**
      * The base unit for time with an artifical "zero" point with a calculation in seconds. Note that when the offset becomes

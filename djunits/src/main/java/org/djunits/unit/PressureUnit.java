@@ -19,7 +19,7 @@ public class PressureUnit extends Unit<PressureUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "kg/ms2" as the SI signature. */
-    public static final UnitBase<PressureUnit> BASE = new UnitBase<>("kg/ms2");
+    public static final UnitBase<PressureUnit> BASE = new UnitBase<>("Pressure", "kg/ms2");
 
     /** The SI unit for pressure is Pascal = kgm/s2. */
     public static final PressureUnit SI =

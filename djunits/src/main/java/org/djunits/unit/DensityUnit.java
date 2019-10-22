@@ -19,7 +19,7 @@ public class DensityUnit extends Unit<DensityUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "kg/m3" as the SI signature. */
-    public static final UnitBase<DensityUnit> BASE = new UnitBase<>("kg/m3");
+    public static final UnitBase<DensityUnit> BASE = new UnitBase<>("Density", "kg/m3");
 
     /** The SI unit for standard density is kg/m^3. */
     public static final DensityUnit SI = new DensityUnit()

@@ -19,7 +19,7 @@ public class FrequencyUnit extends Unit<FrequencyUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The SI unit for frequency is Hertz or 1/s. */
-    public static final UnitBase<FrequencyUnit> BASE = new UnitBase<>("/s");
+    public static final UnitBase<FrequencyUnit> BASE = new UnitBase<>("Frequency", "/s");
 
     /** The SI unit for frequency is Hertz. */
     public static final FrequencyUnit SI =

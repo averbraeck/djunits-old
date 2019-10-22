@@ -20,7 +20,7 @@ public class ElectricalConductanceUnit extends Unit<ElectricalConductanceUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "s3A2/kgm2" as the SI signature. */
-    public static final UnitBase<ElectricalConductanceUnit> BASE = new UnitBase<>("s3A2/kgm2");
+    public static final UnitBase<ElectricalConductanceUnit> BASE = new UnitBase<>("ElectricalConductance", "s3A2/kgm2");
 
     /** The SI unit for electrical conductance is Siemens. */
     public static final ElectricalConductanceUnit SI = new ElectricalConductanceUnit()

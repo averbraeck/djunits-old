@@ -19,7 +19,7 @@ public class TorqueUnit extends Unit<TorqueUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "kgm2/s2" as the SI signature. */
-    public static final UnitBase<TorqueUnit> BASE = new UnitBase<>("kgm2/s2");
+    public static final UnitBase<TorqueUnit> BASE = new UnitBase<>("Torque", "kgm2/s2");
 
     /** The SI unit for torque is Newton meter = kgm2/s2. */
     public static final TorqueUnit SI =

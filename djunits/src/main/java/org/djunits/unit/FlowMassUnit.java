@@ -19,7 +19,7 @@ public class FlowMassUnit extends Unit<FlowMassUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "kg/s" as the SI signature. */
-    public static final UnitBase<FlowMassUnit> BASE = new UnitBase<>("kg/s");
+    public static final UnitBase<FlowMassUnit> BASE = new UnitBase<>("FlowMass", "kg/s");
 
     /** The SI unit for mass flow rate is kg/s. */
     public static final FlowMassUnit SI = new FlowMassUnit()

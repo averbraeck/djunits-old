@@ -19,7 +19,7 @@ public class SolidAngleUnit extends Unit<SolidAngleUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "sr" as the SI signature. */
-    public static final UnitBase<SolidAngleUnit> BASE = new UnitBase<>("sr");
+    public static final UnitBase<SolidAngleUnit> BASE = new UnitBase<>("SolidAngle", "sr");
 
     /** The SI unit for solid angle is steradian. */
     public static final SolidAngleUnit SI =

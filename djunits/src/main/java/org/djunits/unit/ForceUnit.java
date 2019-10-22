@@ -19,7 +19,7 @@ public class ForceUnit extends Unit<ForceUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "kgm/s2" as the SI signature. */
-    public static final UnitBase<ForceUnit> BASE = new UnitBase<>("kgm/s2");
+    public static final UnitBase<ForceUnit> BASE = new UnitBase<>("Force", "kgm/s2");
 
     /** The SI unit for force is Newton. */
     public static final ForceUnit SI =

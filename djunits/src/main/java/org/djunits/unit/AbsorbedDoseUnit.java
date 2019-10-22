@@ -20,7 +20,7 @@ public class AbsorbedDoseUnit extends Unit<AbsorbedDoseUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "m2/s2" as the SI signature. */
-    public static final UnitBase<AbsorbedDoseUnit> BASE = new UnitBase<>("m2/s2");
+    public static final UnitBase<AbsorbedDoseUnit> BASE = new UnitBase<>("AbsorbedDose", "m2/s2");
 
     /** The SI unit for absorbed dose of ionizing radiation is Gray. */
     public static final AbsorbedDoseUnit SI =

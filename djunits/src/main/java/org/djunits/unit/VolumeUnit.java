@@ -19,7 +19,7 @@ public class VolumeUnit extends Unit<VolumeUnit>
     private static final long serialVersionUID = 20140604L;
 
     /** The base, with "m2" as the SI signature. */
-    public static final UnitBase<VolumeUnit> BASE = new UnitBase<>("m3");
+    public static final UnitBase<VolumeUnit> BASE = new UnitBase<>("Volume", "m3");
 
     /** The SI unit for area is m^3. */
     public static final VolumeUnit SI =

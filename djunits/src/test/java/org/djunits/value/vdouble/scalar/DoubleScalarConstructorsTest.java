@@ -106,7 +106,7 @@ class BadUnitClass extends Unit<BadUnitClass>
     private static final long serialVersionUID = 1L;
 
     /** The base, with "m/s2" as the SI signature. */
-    public static final UnitBase<BadUnitClass> BASE = new UnitBase<>("m/s2");
+    public static final UnitBase<BadUnitClass> BASE = new UnitBase<>("m/s2", "m/s2");
 
     /** The SI unit for acceleration is m/s^2. */
     public static final BadUnitClass SI = new BadUnitClass()

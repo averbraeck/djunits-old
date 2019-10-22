@@ -19,7 +19,7 @@ public class ElectricalCurrentUnit extends Unit<ElectricalCurrentUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "A" as the SI signature. */
-    public static final UnitBase<ElectricalCurrentUnit> BASE = new UnitBase<>("A");
+    public static final UnitBase<ElectricalCurrentUnit> BASE = new UnitBase<>("ElectricalCurrent", "A");
 
     /** The SI unit for electrical current is Ampere. */
     public static final ElectricalCurrentUnit SI = new ElectricalCurrentUnit()

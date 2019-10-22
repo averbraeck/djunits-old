@@ -19,7 +19,7 @@ public class LinearDensityUnit extends Unit<LinearDensityUnit>
     private static final long serialVersionUID = 20141111L;
 
     /** The base, with "/m" as the SI signature. */
-    public static final UnitBase<LinearDensityUnit> BASE = new UnitBase<>("m-1");
+    public static final UnitBase<LinearDensityUnit> BASE = new UnitBase<>("LinearDensity", "m-1");
 
     /** The SI unit for objects per unit of distance is 1/meter. */
     public static final LinearDensityUnit SI = new LinearDensityUnit().build(new Unit.Builder<LinearDensityUnit>()

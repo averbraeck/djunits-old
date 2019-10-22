@@ -19,7 +19,7 @@ public class PowerUnit extends Unit<PowerUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "kgm2/s3" as the SI signature. */
-    public static final UnitBase<PowerUnit> BASE = new UnitBase<>("kgm2/s3");
+    public static final UnitBase<PowerUnit> BASE = new UnitBase<>("Power", "kgm2/s3");
 
     /** The SI unit for power is watt. */
     public static final PowerUnit SI =

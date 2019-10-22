@@ -21,7 +21,7 @@ public class ElectricalCapacitanceUnit extends Unit<ElectricalCapacitanceUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "s3A2/kgm2" as the SI signature. */
-    public static final UnitBase<ElectricalCapacitanceUnit> BASE = new UnitBase<>("s4A2/kgm2");
+    public static final UnitBase<ElectricalCapacitanceUnit> BASE = new UnitBase<>("ElectricalCapacitance", "s4A2/kgm2");
 
     /** The SI unit for electrical capacitance is Farad. */
     public static final ElectricalCapacitanceUnit SI = new ElectricalCapacitanceUnit()

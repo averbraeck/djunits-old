@@ -19,7 +19,7 @@ public class AccelerationUnit extends Unit<AccelerationUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "m/s2" as the SI signature. */
-    public static final UnitBase<AccelerationUnit> BASE = new UnitBase<>("m/s2");
+    public static final UnitBase<AccelerationUnit> BASE = new UnitBase<>("Acceleration", "m/s2");
 
     /** The SI unit for acceleration is m/s^2. */
     public static final AccelerationUnit SI = new AccelerationUnit()

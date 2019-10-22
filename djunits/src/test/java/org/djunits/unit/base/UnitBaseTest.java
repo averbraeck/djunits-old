@@ -39,21 +39,21 @@ public class UnitBaseTest
         assertEquals(QUnit.BASE, QUnit.BASE);
         assertNotEquals(QUnit.BASE, null);
         assertNotEquals(QUnit.BASE, new Object());
-        UnitBase<QUnit> unitBase1 = new UnitBase<>(SIDimensions.of("kgm4/s5A3"));
-        UnitBase<QUnit> unitBase2 = new UnitBase<>(new SIDimensions(0, 0, 1, 4, -5, -3, 0, 0, 0));
-        UnitBase<QUnit> unitBase3 = new UnitBase<>(new byte[] {0, 0, 1, 4, -5, -3, 0, 0, 0});
+        UnitBase<QUnit> unitBase1 = new UnitBase<>("kgm4/s5A3", SIDimensions.of("kgm4/s5A3"));
+        UnitBase<QUnit> unitBase2 = new UnitBase<>("Test2", new SIDimensions(0, 0, 1, 4, -5, -3, 0, 0, 0));
+        UnitBase<QUnit> unitBase3 = new UnitBase<>("Test3", new byte[] {0, 0, 1, 4, -5, -3, 0, 0, 0});
         assertEquals(unitBase1, unitBase2);
         assertEquals(unitBase1, unitBase3);
         assertNotEquals(unitBase1, QUnit.BASE); // QUnit has a standard base; unitBase1 not (yet)
         assertNotEquals(unitBase1.hashCode(), QUnit.BASE.hashCode()); // QUnit has a standard base; unitBase1 not (yet)
         assertEquals(new SIDimensions(0, 0, 1, 4, -5, -3, 0, 0, 0), unitBase1.getSiDimensions());
-        UnitBase<QUnit> unitBase4 = new UnitBase<>(SIDimensions.of("kg2m4/s5A3"));
+        UnitBase<QUnit> unitBase4 = new UnitBase<>("kg2m4/s5A3", SIDimensions.of("kg2m4/s5A3"));
         assertNotEquals(unitBase1, unitBase4);
 
         try
         {
             SIDimensions si = null;
-            UnitBase<QUnit> unitBase5 = new UnitBase<>(si);
+            UnitBase<QUnit> unitBase5 = new UnitBase<>("Test4", si);
             fail("Should not have been able to create " + unitBase5 + " with argument null");
         }
         catch (NullPointerException | UnitRuntimeException e)
@@ -63,9 +63,18 @@ public class UnitBaseTest
 
         try
         {
-            String si = null;
-            UnitBase<QUnit> unitBase6 = new UnitBase<>(si);
-            fail("Should not have been able to create " + unitBase6 + " with argument null");
+            UnitBase<QUnit> unitBase5 = new UnitBase<>("", SIDimensions.of("kg2m4/s5A3"));
+            fail("Should not have been able to create " + unitBase5 + " with empty name");
+        }
+        catch (NullPointerException | UnitRuntimeException e)
+        {
+            // ok
+        }
+
+        try
+        {
+            UnitBase<QUnit> unitBase5 = new UnitBase<>(null, SIDimensions.of("kg2m4/s5A3"));
+            fail("Should not have been able to create " + unitBase5 + " with null name");
         }
         catch (NullPointerException | UnitRuntimeException e)
         {
@@ -116,7 +125,7 @@ public class UnitBaseTest
         }
         try
         {
-            new UnitBase("m/m/m/m");
+            new UnitBase("m/m/m/m", "m/m/m/m");
             fail("constructing UnitBase from string with multiple slashes should have thrown a UnitRuntimeException");
         }
         catch (UnitRuntimeException urt)
@@ -140,7 +149,7 @@ public class UnitBaseTest
         private static final long serialVersionUID = 1L;
 
         /** */
-        public static final UnitBase<QUnit> BASE = new UnitBase<>("kgm4/s5A3");
+        public static final UnitBase<QUnit> BASE = new UnitBase<>("kgm4/s5A3", "kgm4/s5A3");
 
         /** */
         public static final QUnit SI =
