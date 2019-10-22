@@ -7,6 +7,12 @@
       <action dev="averbraeck" type="fix">
         UNITS.java has been regenerated including the new units.
       </action>
+      <action dev="averbraeck" type="add">
+        UnitTypes.getRegistry() method added.
+      </action>
+      <action dev="averbraeck" type="fix">
+        Unit.getAbbreviations() now returns a safe copy.
+      </action>
     </release>
 
     <release version="4.00.04" date="2019-10-20" description="Standard units for new additions added">

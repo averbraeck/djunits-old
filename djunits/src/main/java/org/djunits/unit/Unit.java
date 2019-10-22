@@ -527,12 +527,12 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
     }
 
     /**
-     * Retrieve the unit abbreviations.
+     * Retrieve a safe copy of the unit abbreviations.
      * @return Set&lt;String&gt;; the unit abbreviations
      */
     public Set<String> getAbbreviations()
     {
-        return this.abbreviations;
+        return new LinkedHashSet<>(this.abbreviations);
     }
 
     /**
