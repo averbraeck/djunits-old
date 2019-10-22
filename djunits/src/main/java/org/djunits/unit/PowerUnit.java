@@ -22,8 +22,9 @@ public class PowerUnit extends Unit<PowerUnit>
     public static final UnitBase<PowerUnit> BASE = new UnitBase<>("kgm2/s3");
 
     /** The SI unit for power is watt. */
-    public static final PowerUnit SI = new PowerUnit().build(new Unit.Builder<PowerUnit>().setUnitBase(BASE).setId("W")
-            .setName("watt").setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
+    public static final PowerUnit SI =
+            new PowerUnit().build(new Unit.Builder<PowerUnit>().setUnitBase(BASE).setId("W").setName("watt")
+                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** watt. */
     public static final PowerUnit WATT = SI;
