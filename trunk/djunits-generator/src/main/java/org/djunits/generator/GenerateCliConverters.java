@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Instant;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class GenerateCliConverters
      */
     public static void main(String[] args) throws IOException, URISyntaxException
     {
+        String generationTime = Instant.now().toString();
         List<String> types = Files.readAllLines(Paths.get(URLResource.getResource("/TYPES_REL.txt").toURI()));
         List<String> absRelTypes = Files.readAllLines(Paths.get(URLResource.getResource("/TYPES_ABS_REL.txt").toURI()));
         for (String ar : absRelTypes)
@@ -40,6 +42,7 @@ public class GenerateCliConverters
             "     * Register all DJUNITS converters for a CommandLine.\n" + 
             "     * @param cmd String; the CommandLine for which the DJUNITS converters should be registered\n" + 
             "     */\n" + 
+            "    @Generated(value = \"" + GenerateCliConverters.class.getName() + "\", date = \"" + generationTime + "\")\n" +
             "    public static void registerAll(final CommandLine cmd)\n" + 
             "    {"); 
         // @formatter:on
@@ -77,6 +80,7 @@ public class GenerateCliConverters
                     "    {\n" + 
                     "        /** {@inheritDoc} */\n" + 
                     "        @Override\n" + 
+                    "        @Generated(value = \"" + GenerateCliConverters.class.getName() + "\", date = \"" + generationTime + "\")\n" +
                     "        public " + type + " convert(final String value) throws Exception\n" + 
                     "        {\n" + 
                     "            return " + type + ".valueOf(value);\n" + 

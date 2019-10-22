@@ -15,12 +15,14 @@ import java.lang.reflect.Modifier;
 public final class GenerateStaticUNITS
 {
     /** the standard units. */
-    private static final String[] STANDARD_UNITS = new String[] {"AbsoluteTemperatureUnit", "AccelerationUnit",
-            "AngleSolidUnit", "AngleUnit", "AreaUnit", "DensityUnit", "DimensionlessUnit", "DirectionUnit", "DurationUnit",
-            "ElectricalChargeUnit", "ElectricalCurrentUnit", "ElectricalPotentialUnit", "ElectricalResistanceUnit",
-            "EnergyUnit", "FlowMassUnit", "FlowVolumeUnit", "ForceUnit", "FrequencyUnit", "LengthUnit", "LinearDensityUnit",
-            "MassUnit", "PositionUnit", "PowerUnit", "PressureUnit", "SpeedUnit", "TemperatureUnit", "TimeUnit", "TorqueUnit",
-            "VolumeUnit"};
+    private static final String[] STANDARD_UNITS = new String[] {"AbsoluteTemperatureUnit", "AccelerationUnit", "AngleUnit",
+            "AreaUnit", "DensityUnit", "DimensionlessUnit", "DirectionUnit", "DurationUnit", "ElectricalChargeUnit",
+            "ElectricalCurrentUnit", "ElectricalPotentialUnit", "ElectricalResistanceUnit", "EnergyUnit", "FlowMassUnit",
+            "FlowVolumeUnit", "ForceUnit", "FrequencyUnit", "LengthUnit", "LinearDensityUnit", "MassUnit", "PositionUnit",
+            "PowerUnit", "PressureUnit", "SolidAngleUnit", "SpeedUnit", "TemperatureUnit", "TimeUnit", "TorqueUnit",
+            "VolumeUnit", "AbsorbedDoseUnit", "AmountOfSubstanceUnit", "CatalyticActivityUnit", "ElectricalCapacitanceUnit",
+            "ElectricalConductanceUnit", "ElectricalInductanceUnit", "EquivalentDoseUnit", "IlluminanceUnit",
+            "LuminousFluxUnit", "LuminousIntensityUnit", "MagneticFluxDensityUnit", "MagneticFluxUnit", "RadioActivityUnit"};
 
     /**
      * 
@@ -64,6 +66,7 @@ public final class GenerateStaticUNITS
                 }
                 catch (Exception exception)
                 {
+                    System.err.println("Could not find unit " + className);
                     System.exit(-1);
                     return;
                 }
@@ -96,9 +99,13 @@ public final class GenerateStaticUNITS
                             n = cs.trim() + "_" + n;
                         }
 
-                        String un = (n + "                                    ").substring(0, l);
-                        System.out.println(
-                                "    " + c.getSimpleName() + " " + un + " = " + c.getSimpleName() + "." + f.getName() + ";");
+                        if (!n.equals("BASE") && !n.equals("DEFAULT"))
+                        {
+                            if (c.getSimpleName().equals("AbsoluteTemperatureUnit") || c.getSimpleName().equals("PositionUnit"))
+                                n = n + "_ABS";
+                            System.out.println(String.format("    %-45s = %s;", c.getSimpleName() + " " + n,
+                                    c.getSimpleName() + "." + f.getName()));
+                        }
                     }
                 }
             }

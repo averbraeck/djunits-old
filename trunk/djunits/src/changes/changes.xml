@@ -2,6 +2,13 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
+
+    <release version="4.00.05" date="2019-10-22" description="Code generation for new units">
+      <action dev="averbraeck" type="fix">
+        UNITS.java has been regenerated including the new units.
+      </action>
+    </release>
+
     <release version="4.00.04" date="2019-10-20" description="Standard units for new additions added">
       <action dev="averbraeck" type="add">
         Standard units such as the rad, rem, Gauss, Maxwell and others added for: AbsorbedDose, AmountOfSubstance,

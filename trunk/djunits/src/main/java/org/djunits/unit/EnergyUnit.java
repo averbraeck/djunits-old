@@ -78,9 +78,9 @@ public class EnergyUnit extends Unit<EnergyUnit>
     public static final EnergyUnit KILOCALORIE = CALORIE.deriveLinear(1000.0, "kcal", "kilocalorie");
 
     /** watt-hour. */
-    public static final EnergyUnit WATT_HOUR =
-            new EnergyUnit().build(new Unit.Builder<EnergyUnit>().setUnitBase(BASE).setId("Wh").setName("watt-hour")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(new LinearScale(3600.0)));
+    public static final EnergyUnit WATT_HOUR = new EnergyUnit().build(new Unit.Builder<EnergyUnit>().setUnitBase(BASE)
+            .setId("Wh").setName("watt-hour").setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0)
+            .setScale(new LinearScale(3600.0)));
 
     /** microwatt-hour. */
     public static final EnergyUnit MICROWATT_HOUR = WATT_HOUR.deriveSI(SIPrefixes.getUnit("mu"), 1.0);

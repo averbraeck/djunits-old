@@ -27,12 +27,6 @@ public class GenerateXSD
      */
     private static String absoluteRootPath;
 
-    /*-
-     * DurationUnit.ms = ms  | millisecond
-       DurationUnit.s  = s   | second
-       DurationUnit.m  = min | minute | min | m
-     */
-
     /**
      * @param args String[]; not used
      * @throws FileNotFoundException in case we cannot find the djunits project
@@ -41,7 +35,7 @@ public class GenerateXSD
     {
         makeAbsolutePath();
         makeXsd();
-        // makeAdapters();
+        // TODO: makeAdapters();
     }
 
     /** */

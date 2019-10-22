@@ -36,7 +36,7 @@ public class EquivalentDoseUnit extends Unit<EquivalentDoseUnit>
 
     /** &#181;Sv. */
     public static final EquivalentDoseUnit MICROSIEVERT = SIEVERT.deriveSI(SIPrefixes.getUnit("mu"), 1.0);
-    
+
     /** rem. (stands for röntgen equivalent man). */
     public static final EquivalentDoseUnit REM = SIEVERT.deriveLinear(0.01, "rem", "rem", UnitSystem.CGS);
 
