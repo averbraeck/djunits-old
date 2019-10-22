@@ -33,6 +33,9 @@ public class UnitBase<U extends Unit<U>> implements Serializable
      */
     private final SIDimensions siDimensions;
 
+    /** Name of the quantity. */
+    private final String name;
+
     /** Derived units for this unit base, retrievable by id. The key is the unit id (e.g., "m"). */
     private final Map<String, U> unitsById = new LinkedHashMap<String, U>();
 
@@ -44,24 +47,32 @@ public class UnitBase<U extends Unit<U>> implements Serializable
 
     /**
      * Create a unit base with the SI dimensions.
+     * @param name String; the quantity name (CamelCase)
      * @param siDimensions SIDimensions; the 9 dimensions of the unit, wrapped in an SIDimensions object
      * @throws NullPointerException when one of the arguments is null
      */
-    public UnitBase(final SIDimensions siDimensions)
+    public UnitBase(final String name, final SIDimensions siDimensions)
     {
+        Throw.whenNull(name, "name cannot be null");
+        Throw.when(name.length() == 0, UnitRuntimeException.class, "name of unit cannot be empty");
         Throw.whenNull(siDimensions, "siDimensions cannot be null");
+        this.name = name;
         this.siDimensions = siDimensions;
     }
 
     /**
      * Create a unit base with the SI dimensions as a String.
+     * @param name String; the quantity name (CamelCase)
      * @param siString String; the 9 dimensions of the unit, represented as an SI string
      * @throws UnitRuntimeException when the String cannot be translated into an SIDimensions object
      * @throws NullPointerException when one of the arguments is null
      */
-    public UnitBase(final String siString) throws UnitRuntimeException
+    public UnitBase(final String name, final String siString) throws UnitRuntimeException
     {
+        Throw.whenNull(name, "name cannot be null");
+        Throw.when(name.length() == 1, UnitRuntimeException.class, "name of unit cannot be empty");
         Throw.whenNull(siString, "siString cannot be null");
+        this.name = name;
         try
         {
             this.siDimensions = SIDimensions.of(siString);
@@ -74,13 +85,13 @@ public class UnitBase<U extends Unit<U>> implements Serializable
 
     /**
      * Create a unit base with the SI dimensions, provided as a byte array.
+     * @param name String; the quantity name (CamelCase)
      * @param siSignature byte[]; the 9 dimensions of the unit
      * @throws NullPointerException when one of the arguments is null
      */
-    public UnitBase(final byte[] siSignature)
+    public UnitBase(final String name, final byte[] siSignature)
     {
-        Throw.whenNull(siSignature, "siSignature cannot be null");
-        this.siDimensions = new SIDimensions(siSignature);
+        this(name, new SIDimensions(siSignature));
     }
 
     /**
@@ -210,9 +221,18 @@ public class UnitBase<U extends Unit<U>> implements Serializable
     }
 
     /**
+     * Retrieve the name of the quantity.
+     * @return String; the name of the quantity
+     */
+    public final String getName()
+    {
+        return this.name;
+    }
+    
+    /**
      * @return the siDimensions
      */
-    public SIDimensions getSiDimensions()
+    public final SIDimensions getSiDimensions()
     {
         return this.siDimensions;
     }
@@ -364,7 +384,8 @@ public class UnitBase<U extends Unit<U>> implements Serializable
     @Override
     public String toString()
     {
-        return "UnitBase [standardUnit=" + this.standardUnit + ", siDimensions=" + this.siDimensions + "]";
+        return "UnitBase [standardUnit=" + this.standardUnit + ", name=" + this.name + ", siDimensions=" + this.siDimensions
+                + "]";
     }
 
 }

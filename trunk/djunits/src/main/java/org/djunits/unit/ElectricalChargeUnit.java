@@ -20,7 +20,7 @@ public class ElectricalChargeUnit extends Unit<ElectricalChargeUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "sA" as the SI signature. */
-    public static final UnitBase<ElectricalChargeUnit> BASE = new UnitBase<>("sA");
+    public static final UnitBase<ElectricalChargeUnit> BASE = new UnitBase<>("ElectricalCharge", "sA");
 
     /** The SI unit for electrical charge is Coulomb = A.s. */
     public static final ElectricalChargeUnit SI = new ElectricalChargeUnit()

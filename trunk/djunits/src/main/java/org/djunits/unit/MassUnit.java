@@ -21,7 +21,7 @@ public class MassUnit extends Unit<MassUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "kg" as the SI signature. */
-    public static final UnitBase<MassUnit> BASE = new UnitBase<>("kg");
+    public static final UnitBase<MassUnit> BASE = new UnitBase<>("Mass", "kg");
 
     /** The SI unit for mass is kilogram. */
     public static final MassUnit SI =

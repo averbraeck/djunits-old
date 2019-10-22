@@ -19,7 +19,7 @@ public class ElectricalResistanceUnit extends Unit<ElectricalResistanceUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "kgm2/s3A2" as the SI signature. */
-    public static final UnitBase<ElectricalResistanceUnit> BASE = new UnitBase<>("kgm2/s3A2");
+    public static final UnitBase<ElectricalResistanceUnit> BASE = new UnitBase<>("ElectricalResistance", "kgm2/s3A2");
 
     /** The SI unit for electrical resistance is Ohm. */
     public static final ElectricalResistanceUnit SI = new ElectricalResistanceUnit()

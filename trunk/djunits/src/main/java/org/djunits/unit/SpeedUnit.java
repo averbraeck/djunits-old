@@ -20,7 +20,7 @@ public class SpeedUnit extends Unit<SpeedUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "m/s" as the SI signature. */
-    public static final UnitBase<SpeedUnit> BASE = new UnitBase<>("m/s");
+    public static final UnitBase<SpeedUnit> BASE = new UnitBase<>("Speed", "m/s");
 
     /** The SI unit for speed is m/s. */
     public static final SpeedUnit SI =

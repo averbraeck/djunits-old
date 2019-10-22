@@ -19,7 +19,7 @@ public class AreaUnit extends Unit<AreaUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "m2" as the SI signature. */
-    public static final UnitBase<AreaUnit> BASE = new UnitBase<>("m2");
+    public static final UnitBase<AreaUnit> BASE = new UnitBase<>("Area", "m2");
 
     /** The SI unit for area is m^2. */
     public static final AreaUnit SI =

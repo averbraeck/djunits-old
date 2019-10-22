@@ -21,7 +21,7 @@ public class ElectricalInductanceUnit extends Unit<ElectricalInductanceUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "kgm2/s2/A2" as the SI signature. */
-    public static final UnitBase<ElectricalInductanceUnit> BASE = new UnitBase<>("kgm2/s2A2");
+    public static final UnitBase<ElectricalInductanceUnit> BASE = new UnitBase<>("ElectricalInductance", "kgm2/s2A2");
 
     /** The SI unit for electrical inductance is Henry. */
     public static final ElectricalInductanceUnit SI = new ElectricalInductanceUnit()

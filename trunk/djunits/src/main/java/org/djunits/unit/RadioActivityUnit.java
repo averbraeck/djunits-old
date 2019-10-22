@@ -21,7 +21,7 @@ public class RadioActivityUnit extends Unit<RadioActivityUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "/s" as the SI signature. */
-    public static final UnitBase<RadioActivityUnit> BASE = new UnitBase<>("/s");
+    public static final UnitBase<RadioActivityUnit> BASE = new UnitBase<>("RadioActivity", "/s");
 
     /** The SI unit for radio activity is Becquerel. */
     public static final RadioActivityUnit SI = new RadioActivityUnit().build(new Unit.Builder<RadioActivityUnit>()

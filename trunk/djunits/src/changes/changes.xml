@@ -4,6 +4,9 @@
 
 
     <release version="4.00.05" date="2019-10-22" description="Code generation for new units">
+      <action dev="pknoppers" type="add">
+        Added quantity name field to UnitBase.
+      </action>
       <action dev="averbraeck" type="fix">
         UNITS.java has been regenerated including the new units.
       </action>

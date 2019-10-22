@@ -19,7 +19,7 @@ public class TemperatureUnit extends Unit<TemperatureUnit>
     private static final long serialVersionUID = 20140605L;
 
     /** The base, with "m2" as the SI signature. */
-    public static final UnitBase<TemperatureUnit> BASE = new UnitBase<>("K");
+    public static final UnitBase<TemperatureUnit> BASE = new UnitBase<>("Temperature", "K");
 
     /** The SI unit for temperature is Kelvin. */
     public static final TemperatureUnit SI =

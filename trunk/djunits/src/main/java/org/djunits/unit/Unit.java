@@ -497,7 +497,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
 
         if (unitBase == null)
         {
-            unitBase = new UnitBase<SIUnit>(siDimensions);
+            unitBase = new UnitBase<SIUnit>(siDimensions.toString(), siDimensions);
             Builder<SIUnit> builder = new Builder<>();
             builder.setId(siDimensions.toString(true, true));
             builder.setName(siDimensions.toString(true, true));

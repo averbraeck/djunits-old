@@ -21,7 +21,7 @@ public class EquivalentDoseUnit extends Unit<EquivalentDoseUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "m2/s2" as the SI signature. */
-    public static final UnitBase<EquivalentDoseUnit> BASE = new UnitBase<>("m2/s2");
+    public static final UnitBase<EquivalentDoseUnit> BASE = new UnitBase<>("EquivalentDose", "m2/s2");
 
     /** The SI unit for equivalent dose of ionizing radiation is Sievert. */
     public static final EquivalentDoseUnit SI = new EquivalentDoseUnit()

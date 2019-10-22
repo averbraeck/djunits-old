@@ -20,7 +20,7 @@ public class JerkUnit extends Unit<JerkUnit>
     private static final long serialVersionUID = 1L;
 
     /** The base, with "m/s3" as the SI signature. */
-    public static final UnitBase<JerkUnit> BASE = new UnitBase<>("m/s3");
+    public static final UnitBase<JerkUnit> BASE = new UnitBase<>("Jerk", "m/s3");
 
     /** The SI unit for area is m/s3. */
     public static final JerkUnit SI =

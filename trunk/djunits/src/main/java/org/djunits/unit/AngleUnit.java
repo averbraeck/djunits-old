@@ -24,7 +24,7 @@ public class AngleUnit extends Unit<AngleUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "rad" as the SI signature. */
-    public static final UnitBase<AngleUnit> BASE = new UnitBase<>("rad");
+    public static final UnitBase<AngleUnit> BASE = new UnitBase<>("Angle", "rad");
 
     /** The SI unit for angle is radian. */
     public static final AngleUnit SI =

@@ -19,7 +19,7 @@ public class DurationUnit extends Unit<DurationUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "s" as the SI signature. */
-    public static final UnitBase<DurationUnit> BASE = new UnitBase<>("s");
+    public static final UnitBase<DurationUnit> BASE = new UnitBase<>("Duration", "s");
 
     /** The SI unit for duration is second. */
     public static final DurationUnit SI =

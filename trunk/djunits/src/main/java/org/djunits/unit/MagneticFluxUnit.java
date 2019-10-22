@@ -20,7 +20,7 @@ public class MagneticFluxUnit extends Unit<MagneticFluxUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "kgm2/s2A" as the SI signature. */
-    public static final UnitBase<MagneticFluxUnit> BASE = new UnitBase<>("kgm2/s2A");
+    public static final UnitBase<MagneticFluxUnit> BASE = new UnitBase<>("MagneticFlux", "kgm2/s2A");
 
     /** The SI unit for magnetic flux is Weber. */
     public static final MagneticFluxUnit SI =

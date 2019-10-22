@@ -20,7 +20,7 @@ public class LengthUnit extends Unit<LengthUnit>
     private static final long serialVersionUID = 20190818L;
 
     /** The base, with "m" as the SI signature. */
-    public static final UnitBase<LengthUnit> BASE = new UnitBase<>("m");
+    public static final UnitBase<LengthUnit> BASE = new UnitBase<>("Length", "m");
 
     /** The SI unit for length is meter. */
     public static final LengthUnit SI =

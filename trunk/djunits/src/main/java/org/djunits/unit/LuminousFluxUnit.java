@@ -20,7 +20,7 @@ public class LuminousFluxUnit extends Unit<LuminousFluxUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "lumen" as the SI signature. */
-    public static final UnitBase<LuminousFluxUnit> BASE = new UnitBase<>("srcd");
+    public static final UnitBase<LuminousFluxUnit> BASE = new UnitBase<>("LuminousFlux", "srcd");
 
     /** The SI unit for amount of luminous flux is Lumen. */
     public static final LuminousFluxUnit SI =

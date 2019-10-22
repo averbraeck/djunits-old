@@ -19,7 +19,7 @@ public class FlowVolumeUnit extends Unit<FlowVolumeUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "kg/s" as the SI signature. */
-    public static final UnitBase<FlowVolumeUnit> BASE = new UnitBase<>("m3/s");
+    public static final UnitBase<FlowVolumeUnit> BASE = new UnitBase<>("FlowVolume", "m3/s");
 
     /** The SI unit for volume flow rate is m^3/s. */
     public static final FlowVolumeUnit SI = new FlowVolumeUnit()
