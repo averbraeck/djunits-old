@@ -92,6 +92,14 @@ public final class UnitTypes implements Serializable
         return this.registry.get(unitClassName);
     }
 
+    /**
+     * @return a defensive copy of the registry
+     */
+    public Map<String, UnitBase<?>> getRegistry()
+    {
+        return new LinkedHashMap<>(this.registry);
+    }
+
     @Override
     public String toString()
     {
