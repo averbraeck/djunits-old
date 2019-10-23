@@ -30,19 +30,19 @@ public class TemperatureUnit extends Unit<TemperatureUnit>
     public static final TemperatureUnit KELVIN = SI;
 
     /** Degree Celsius. */
-    public static final TemperatureUnit DEGREE_CELSIUS =
-            KELVIN.deriveLinear(1.0, "dgC", "degree Celcius", UnitSystem.SI_DERIVED, "\u00B0C", "degC", new String[] {"C"});
+    public static final TemperatureUnit DEGREE_CELSIUS = KELVIN.deriveLinear(1.0, "dgC", "degree Celcius",
+            UnitSystem.SI_DERIVED, "\u00B0C", "degC", new String[] { "C" });
 
     /** Degree Fahrenheit. */
     public static final TemperatureUnit DEGREE_FAHRENHEIT = KELVIN.deriveLinear(5.0 / 9.0, "dgF", "degree Fahrenheit",
-            UnitSystem.SI_DERIVED, "\u00B0F", "degF", new String[] {"F"});
+            UnitSystem.SI_DERIVED, "\u00B0F", "degF", new String[] { "F" });
 
     /** Degree Rankine. */
     public static final TemperatureUnit DEGREE_RANKINE = KELVIN.deriveLinear(5.0 / 9.0, "dgR", "degree Rankine",
-            UnitSystem.SI_DERIVED, "\u00B0R", "degR", new String[] {"R"});
+            UnitSystem.SI_DERIVED, "\u00B0R", "degR", new String[] { "R" });
 
     /** Degree Reaumur. */
     public static final TemperatureUnit DEGREE_REAUMUR = KELVIN.deriveLinear(4.0 / 5.0, "dgRe", "degree Reaumur",
-            UnitSystem.SI_DERIVED, "\u00B0R\u00E9", "degRe", new String[] {"Re", "R\u00E9"});
+            UnitSystem.SI_DERIVED, "\u00B0R\u00E9", "degRe", new String[] { "Re", "R\u00E9" });
 
 }
