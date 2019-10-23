@@ -5,9 +5,11 @@ import java.util.Comparator;
 import java.util.TreeMap;
 
 import org.djunits.unit.AreaUnit;
+import org.djunits.unit.TimeUnit;
 import org.djunits.unit.Unit;
 import org.djunits.unit.base.UnitBase;
 import org.djunits.unit.base.UnitTypes;
+import org.djunits.unit.unitsystem.UnitSystem;
 import org.djunits.unit.util.UNITS;
 
 /**
@@ -52,6 +54,17 @@ public class GenerateUSLocale
     }
 
     /**
+     * Indicate if a unit is SI.
+     * @param unit Unit&lt;?&gt;; the unit
+     * @return boolean; true if the unit is SI; false otherwise
+     */
+    static boolean isSI(final Unit<?> unit)
+    {
+        return unit.getUnitSystem().equals(UnitSystem.SI_ACCEPTED) || unit.getUnitSystem().equals(UnitSystem.SI_BASE)
+                || unit.getUnitSystem().equals(UnitSystem.SI_DERIVED);
+    }
+
+    /**
      * Generate the localeunit.properties file.
      * @param args String[]; the command line arguments; not used (yet)
      */
@@ -82,15 +95,27 @@ public class GenerateUSLocale
                     // System.out.println("Comparing " + o1 + " to " + o2);
                     Unit<?> left = unitBase.getUnitById(o1);
                     Unit<?> right = unitBase.getUnitById(o2);
+                    // if (left.equals(TimeUnit.EPOCH_SECOND) || right.equals(TimeUnit.EPOCH_SECOND))
+                    // {
+                    // System.out.println("Comparing " + o1 + " to " + o2);
+                    // }
                     if (left.equals(right))
                     {
                         return o1.compareTo(o2);
                     }
-                    if (left.isBaseSIUnit())
+                    if (left.equals(left.getUnitBase().getStandardUnit()))
                     {
                         return -1;
                     }
-                    if (right.isBaseSIUnit())
+                    if (right.equals(right.getUnitBase().getStandardUnit()))
+                    {
+                        return 1;
+                    }
+                    if (isSI(left) && (!isSI(right)))
+                    {
+                        return -1;
+                    }
+                    if ((!isSI(left) && isSI(right)))
                     {
                         return 1;
                     }

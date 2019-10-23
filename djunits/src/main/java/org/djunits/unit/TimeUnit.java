@@ -40,16 +40,16 @@ public class TimeUnit extends AbsoluteLinearUnit<TimeUnit, DurationUnit>
      * Epoch level precise to a ms.
      */
     public static final TimeUnit BASE_SECOND = new TimeUnit().build(new AbsoluteLinearUnit.Builder<TimeUnit, DurationUnit>()
-            .setUnitBase(BASE).setId("s").setName("second").setUnitSystem(UnitSystem.OTHER).setSiPrefixes(SIPrefixes.UNIT, 1.0)
-            .setRelativeUnit(DurationUnit.SECOND).setScale(new OffsetLinearScale(1.0, 0.0)).setDefaultDisplayAbbreviation("s")
-            .setDefaultTextualAbbreviation("s").setAdditionalAbbreviations("sec"));
+            .setUnitBase(BASE).setId("s").setName("second").setUnitSystem(UnitSystem.SI_DERIVED)
+            .setSiPrefixes(SIPrefixes.UNIT, 1.0).setRelativeUnit(DurationUnit.SECOND).setScale(new OffsetLinearScale(1.0, 0.0))
+            .setDefaultDisplayAbbreviation("s").setDefaultTextualAbbreviation("s").setAdditionalAbbreviations("sec"));
 
     /** The default unit for time is BASE_SECOND. */
     public static final TimeUnit DEFAULT = BASE_SECOND;
 
     /** The base unit for time with an artificial "zero" point with a calculation in microseconds. */
     public static final TimeUnit BASE_MICROSECOND = BASE_SECOND.deriveLinearOffset(1.0E-6, 0.0, DurationUnit.MICROSECOND, "mus",
-            "microsecond", UnitSystem.OTHER, "\u03BCs", "mus");
+            "microsecond", UnitSystem.SI_DERIVED, "\u03BCs", "mus");
 
     /** The base unit for time with an artificial "zero" point with a calculation in milliseconds. */
     public static final TimeUnit BASE_MILLISECOND =
@@ -57,19 +57,19 @@ public class TimeUnit extends AbsoluteLinearUnit<TimeUnit, DurationUnit>
 
     /** The base unit for time with an artificial "zero" point with a calculation in minutes. */
     public static final TimeUnit BASE_MINUTE = BASE_SECOND.deriveLinearOffset(60.0, 0.0, DurationUnit.MINUTE, "min", "minute",
-            UnitSystem.OTHER, "min", "min", "m");
+            UnitSystem.SI_DERIVED, "min", "min", "m");
 
     /** The base unit for time with an artificial "zero" point with a calculation in hours. */
     public static final TimeUnit BASE_HOUR = BASE_SECOND.deriveLinearOffset(3600.0, 0.0, DurationUnit.HOUR, "hr", "hour",
-            UnitSystem.OTHER, "hr", "hr", "h", "hour");
+            UnitSystem.SI_DERIVED, "hr", "hr", "h", "hour");
 
     /** The base unit for time with an artificial "zero" point with a calculation in days. */
     public static final TimeUnit BASE_DAY = BASE_SECOND.deriveLinearOffset(24.0 * 3600.0, 0.0, DurationUnit.DAY, "day", "day",
-            UnitSystem.OTHER, "day", "day", "d");
+            UnitSystem.SI_DERIVED, "day", "day", "d");
 
     /** The base unit for time with an artificial "zero" point with a calculation in weeks. */
     public static final TimeUnit BASE_WEEK = BASE_SECOND.deriveLinearOffset(7.0 * 24.0 * 3600.0, 0.0, DurationUnit.WEEK, "wk",
-            "week", UnitSystem.OTHER, "wk", "wk", "w", "week");
+            "week", UnitSystem.SI_DERIVED, "wk", "wk", "w", "week");
 
     /**
      * The POSIX and Gregorian Epoch: January 1, 1970 at 00:00 UTC with a calculation in seconds. The base should be taken in
@@ -87,8 +87,8 @@ public class TimeUnit extends AbsoluteLinearUnit<TimeUnit, DurationUnit>
             "mus(Y1970)", "microseconds since 1/1/70", UnitSystem.OTHER, "\u03BCs(Y1970)", "mus(Y1970)");
 
     /** The POSIX and Gregorian Epoch: January 1, 1970 at 00:00 UTC with a calculation in milliseconds. */
-    public static final TimeUnit EPOCH_MILLISECOND =
-            BASE_SECOND.deriveLinearOffset(1.0E-3, 0.0, DurationUnit.MILLISECOND, "ms(Y1970)", "milliseconds since 1/1/70");
+    public static final TimeUnit EPOCH_MILLISECOND = BASE_SECOND.deriveLinearOffset(1.0E-3, 0.0, DurationUnit.MILLISECOND,
+            "ms(Y1970)", "milliseconds since 1/1/70", UnitSystem.OTHER);
 
     /** The POSIX and Gregorian Epoch: January 1, 1970 at 00:00 UTC with a calculation in minutes. */
     public static final TimeUnit EPOCH_MINUTE = BASE_SECOND.deriveLinearOffset(60.0, 0.0, DurationUnit.MINUTE, "min(Y1970)",
