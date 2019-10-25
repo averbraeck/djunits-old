@@ -3,7 +3,7 @@ package org.djunits.demo.website;
 import org.djunits.unit.DurationUnit;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.Unit;
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -24,11 +24,11 @@ public class JerkUnit extends Unit<JerkUnit>
     private static final long serialVersionUID = 20191003L;
 
     /** The base, with "m/s3" as the SI signature. */
-    public static final UnitBase<JerkUnit> BASE = new UnitBase<>("Jerk", "m/s3");
+    public static final Quantity<JerkUnit> BASE = new Quantity<>("Jerk", "m/s3");
 
     /** The SI unit for acceleration is m/s^3. */
     public static final JerkUnit SI =
-            new JerkUnit().build(new Unit.Builder<JerkUnit>().setUnitBase(BASE).setId("m/s3").setName("meter per second cubed")
+            new JerkUnit().build(new Unit.Builder<JerkUnit>().setQuantity(BASE).setId("m/s3").setName("meter per second cubed")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(IdentityScale.SCALE));
 
     /** m/s3. */
