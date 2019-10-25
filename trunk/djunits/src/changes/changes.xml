@@ -2,10 +2,9 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
-
-    <release version="4.00.05" date="2019-10-22" description="Code generation for new units">
+    <release version="4.01.00" date="2019-10-25" description="Code generation for new units; BaseUnit renamed to Quantity">
       <action dev="pknoppers" type="update">
-        renamed unitbase to quantity (which should be more descriptive)
+        Renamed UnitBase to Quantity (which should be more descriptive); UnitTypes renamed to Quantities.
       </action>
       <action dev="pknoppers" type="add">
         Added quantity name field to UnitBase.
