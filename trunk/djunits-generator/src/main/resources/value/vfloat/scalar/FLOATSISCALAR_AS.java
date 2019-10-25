@@ -4,7 +4,7 @@
      */
     public final Float%Type% as%Type%()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(%Type%Unit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(%Type%Unit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Float%Type%", this.toString());
         return new Float%Type%(getSI(), %Type%Unit.SI);
     }
@@ -16,7 +16,7 @@
      */
     public final Float%Type% as%Type%(final %Type%Unit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(%Type%Unit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(%Type%Unit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Float%Type%", this.toString());
         Float%Type% result = new Float%Type%(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);

@@ -5,10 +5,9 @@ import java.util.Comparator;
 import java.util.TreeMap;
 
 import org.djunits.unit.AreaUnit;
-import org.djunits.unit.FrequencyUnit;
 import org.djunits.unit.Unit;
-import org.djunits.unit.base.UnitBase;
-import org.djunits.unit.base.UnitTypes;
+import org.djunits.unit.quantity.Quantities;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.unitsystem.UnitSystem;
 import org.djunits.unit.util.UNITS;
 
@@ -77,15 +76,15 @@ public class GenerateUSLocale
         System.out.println("# UnitType.unitname = abbreviation | description");
         System.out.println("# UnitType.unitname = abbreviation | description | text_abbreviation1 | text_abbreviation2 | ...");
 
-        TreeMap<String, UnitBase<?>> unitTypes = new TreeMap<>(UnitTypes.INSTANCE.getRegistry());
-        for (String unitBaseName : unitTypes.keySet())
+        TreeMap<String, Quantity<?>> unitTypes = new TreeMap<>(Quantities.INSTANCE.getRegistry());
+        for (String quantityName : unitTypes.keySet())
         {
-            UnitBase<?> unitBase = unitTypes.get(unitBaseName);
+            Quantity<?> quantity = unitTypes.get(quantityName);
             System.out.println("#");
-            System.out.println("# " + unitBase.getName());
+            System.out.println("# " + quantity.getName());
             System.out.println("#");
-            System.out.println(unitBase.getName() + " = " + unitBase.getName());
-            TreeMap<String, Unit<?>> ids = new TreeMap<>(unitBase.getUnitsById());
+            System.out.println(quantity.getName() + " = " + quantity.getName());
+            TreeMap<String, Unit<?>> ids = new TreeMap<>(quantity.getUnitsById());
             String[] idArray = ids.keySet().toArray(new String[0]);
             Arrays.sort(idArray, new Comparator<String>()
             {
@@ -93,8 +92,8 @@ public class GenerateUSLocale
                 public int compare(String o1, String o2)
                 {
                     // System.out.println("Comparing " + o1 + " to " + o2);
-                    Unit<?> left = unitBase.getUnitById(o1);
-                    Unit<?> right = unitBase.getUnitById(o2);
+                    Unit<?> left = quantity.getUnitById(o1);
+                    Unit<?> right = quantity.getUnitById(o2);
                     // if (left.equals(FrequencyUnit.PER_DAY) || right.equals(FrequencyUnit.PER_DAY))
                     // {
                     // System.out.println("Comparing " + o1 + " to " + o2);
@@ -103,11 +102,11 @@ public class GenerateUSLocale
                     {
                         return o1.compareTo(o2);
                     }
-                    if (left.equals(left.getUnitBase().getStandardUnit()))
+                    if (left.equals(left.getQuantity().getStandardUnit()))
                     {
                         return -1;
                     }
-                    if (right.equals(right.getUnitBase().getStandardUnit()))
+                    if (right.equals(right.getQuantity().getStandardUnit()))
                     {
                         return 1;
                     }
@@ -162,8 +161,8 @@ public class GenerateUSLocale
             });
             for (String unitId : idArray)
             {
-                Unit<?> u = unitBase.getUnitById(unitId);
-                System.out.print(unitBase.getName() + "." + u.getId() + " = "
+                Unit<?> u = quantity.getUnitById(unitId);
+                System.out.print(quantity.getName() + "." + u.getId() + " = "
                         + u.getDefaultDisplayAbbreviation() + " | " + u.getName());
                 if (u.getAbbreviations().size() > 1)
                 {

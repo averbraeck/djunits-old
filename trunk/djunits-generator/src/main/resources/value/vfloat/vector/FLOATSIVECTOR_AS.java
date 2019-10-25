@@ -4,7 +4,7 @@
      */
     public final Float%Type%Vector as%Type%()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(%Type%Unit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(%Type%Unit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Float%Type%Vector", this.toString());
         return new Float%Type%Vector(this.data, %Type%Unit.SI);
     }
@@ -16,7 +16,7 @@
      */
     public final Float%Type%Vector as%Type%(final %Type%Unit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(%Type%Unit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(%Type%Unit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to Float%Type%Vector", this.toString());
         Float%Type%Vector result = new Float%Type%Vector(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);

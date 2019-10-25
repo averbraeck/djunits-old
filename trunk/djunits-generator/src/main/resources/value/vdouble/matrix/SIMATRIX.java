@@ -140,7 +140,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
     public final <U extends Unit<U>, S extends AbstractDoubleScalarRel<U, S>,
             V extends AbstractDoubleVectorRel<U, S, V>, M extends AbstractDoubleMatrixRel<U, S, V, M>> M as(final U displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(displayUnit.getUnitBase().getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(displayUnit.getQuantity().getSiDimensions())),
                 UnitRuntimeException.class, "SIMatrix with unit %s cannot be converted to a matrix with unit %s",
                 getDisplayUnit(), displayUnit);
         M result = DoubleMatrix.instantiate(this.data, displayUnit.getStandardUnit());
