@@ -46,17 +46,17 @@ public class TestUNITS
             {
                 continue;
             }
-            if (constant.getUnitBase().getStandardUnit().getName().equals("Kelvin")
+            if (constant.getQuantity().getStandardUnit().getName().equals("Kelvin")
                     && constant instanceof AbsoluteLinearUnit<?, ?>)
             {
                 continue;
             }
-            if (constant.getUnitBase().getStandardUnit().getName().equals("meter")
+            if (constant.getQuantity().getStandardUnit().getName().equals("meter")
                     && constant instanceof AbsoluteLinearUnit<?, ?>)
             {
                 continue;
             }
-            if (constant.getUnitBase().getStandardUnit().getName().equals("second")
+            if (constant.getQuantity().getStandardUnit().getName().equals("second")
                     && constant instanceof AbsoluteLinearUnit<?, ?>)
             {
                 continue;
