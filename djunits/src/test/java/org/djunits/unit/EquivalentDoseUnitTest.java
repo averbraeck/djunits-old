@@ -34,7 +34,7 @@ public class EquivalentDoseUnitTest extends AbstractLinearUnitTest<EquivalentDos
     @Test
     public final void conversions()
     {
-        assertEquals("m2/s2", EquivalentDoseUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
+        assertEquals("m2/s2", EquivalentDoseUnit.SI.getQuantity().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(EquivalentDoseUnit.SIEVERT, 1, 0.000001, "sievert", "Sv");
     }
 

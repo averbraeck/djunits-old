@@ -34,7 +34,7 @@ public class MagneticFluxDensityUnitTest extends AbstractLinearUnitTest<Magnetic
     @Test
     public final void conversions()
     {
-        assertEquals("kg/s2A", MagneticFluxDensityUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
+        assertEquals("kg/s2A", MagneticFluxDensityUnit.SI.getQuantity().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(MagneticFluxDensityUnit.TESLA, 1, 0.000001, "tesla", "T");
     }
 

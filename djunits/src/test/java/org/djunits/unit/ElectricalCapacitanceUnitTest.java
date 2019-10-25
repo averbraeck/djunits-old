@@ -34,7 +34,7 @@ public class ElectricalCapacitanceUnitTest extends AbstractLinearUnitTest<Electr
     @Test
     public final void conversions()
     {
-        assertEquals("s4A2/kgm2", ElectricalCapacitanceUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
+        assertEquals("s4A2/kgm2", ElectricalCapacitanceUnit.SI.getQuantity().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(ElectricalCapacitanceUnit.FARAD, 1, 0.000001, "farad", "F");
         checkUnitRatioNameAndAbbreviation(ElectricalCapacitanceUnit.MICROFARAD, 1E-6, 1E-9, "microfarad", "uF");
     }

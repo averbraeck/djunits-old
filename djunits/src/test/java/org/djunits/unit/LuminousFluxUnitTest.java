@@ -34,7 +34,7 @@ public class LuminousFluxUnitTest extends AbstractLinearUnitTest<LuminousFluxUni
     @Test
     public final void conversions()
     {
-        assertEquals("srcd", LuminousFluxUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
+        assertEquals("srcd", LuminousFluxUnit.SI.getQuantity().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(LuminousFluxUnit.LUMEN, 1, 0.000001, "lumen", "lm");
     }
 

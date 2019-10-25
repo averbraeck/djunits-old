@@ -34,7 +34,7 @@ public class PressureUnitTest extends AbstractLinearUnitTest<PressureUnit>
     @Test
     public final void conversions()
     {
-        assertEquals("kg/ms2", PressureUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
+        assertEquals("kg/ms2", PressureUnit.SI.getQuantity().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(PressureUnit.PASCAL, 1, 0.00000001, "pascal", "Pa");
         checkUnitRatioNameAndAbbreviation(PressureUnit.ATMOSPHERE_STANDARD, 101325, 0.5, "atmosphere (standard)", "atm");
         checkUnitRatioNameAndAbbreviation(PressureUnit.ATMOSPHERE_TECHNICAL, 98066.5, 0.1, "atmosphere (technical)", "at");

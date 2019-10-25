@@ -34,7 +34,7 @@ public class AmountOfSubstanceUnitTest extends AbstractLinearUnitTest<AmountOfSu
     @Test
     public final void conversions()
     {
-        assertEquals("mol", AmountOfSubstanceUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
+        assertEquals("mol", AmountOfSubstanceUnit.SI.getQuantity().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(AmountOfSubstanceUnit.MOLE, 1, 0.000001, "mole", "mol");
     }
 

@@ -39,7 +39,7 @@ public class AngleUnitTest extends AbstractLinearUnitTest<AngleUnit>
     protected final void checkUnitValueNameAndAbbreviation(final AngleUnit au, final double expectedValue,
             final double precision, final String expectedName, final String expectedAbbreviation)
     {
-        assertEquals("rad", AngleUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
+        assertEquals("rad", AngleUnit.SI.getQuantity().getSiDimensions().toString(true, false));
         assertEquals(String.format("one %s is about %f reference unit", au.getId(), expectedValue), expectedValue,
                 au.getScale().toStandardUnit(1.0), precision);
         assertEquals(String.format("Name of %s is %s", au.getId(), expectedName), expectedName, au.getName());

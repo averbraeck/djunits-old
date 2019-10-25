@@ -34,7 +34,7 @@ public class PositionUnitTest extends AbstractOffsetUnitTest<PositionUnit>
     @Test
     public final void conversions()
     {
-        assertEquals("m", PositionUnit.DEFAULT.getUnitBase().getSiDimensions().toString(true, false));
+        assertEquals("m", PositionUnit.DEFAULT.getQuantity().getSiDimensions().toString(true, false));
         checkUnitRatioOffsetNameAndAbbreviation(PositionUnit.METER, 1, 0.0, 0.00000001, "meter", "m");
         checkUnitRatioOffsetNameAndAbbreviation(PositionUnit.MILE, 1609.34, 0.0, 0.05, "mile", "mi");
         checkUnitRatioOffsetNameAndAbbreviation(PositionUnit.FOOT, 0.3048, 0.0, 0.001, "foot", "ft");
@@ -66,7 +66,7 @@ public class PositionUnitTest extends AbstractOffsetUnitTest<PositionUnit>
     @Test
     public final void testRelative()
     {
-        assertEquals(LengthUnit.BASE, PositionUnit.DEFAULT.getRelativeUnitBase());
+        assertEquals(LengthUnit.BASE, PositionUnit.DEFAULT.getRelativeQuantity());
     }
 
 }

@@ -34,7 +34,7 @@ public class MagneticFluxUnitTest extends AbstractLinearUnitTest<MagneticFluxUni
     @Test
     public final void conversions()
     {
-        assertEquals("kgm2/s2A", MagneticFluxUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
+        assertEquals("kgm2/s2A", MagneticFluxUnit.SI.getQuantity().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(MagneticFluxUnit.WEBER, 1, 0.000001, "weber", "Wb");
     }
 

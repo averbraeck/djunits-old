@@ -34,7 +34,7 @@ public class TorqueUnitTest extends AbstractLinearUnitTest<TorqueUnit>
     @Test
     public final void conversions()
     {
-        assertEquals("kgm2/s2", TorqueUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
+        assertEquals("kgm2/s2", TorqueUnit.SI.getQuantity().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(TorqueUnit.NEWTON_METER, 1, 0.00000001, "Newton meter", "N.m");
         checkUnitRatioNameAndAbbreviation(TorqueUnit.METER_KILOGRAM_FORCE, 9.80665, 0.000005, "meter kilogram-force", "m.kgf");
         checkUnitRatioNameAndAbbreviation(TorqueUnit.POUND_FOOT, 1.35581794833, 0.0000001, "pound-foot", "lbf.ft");

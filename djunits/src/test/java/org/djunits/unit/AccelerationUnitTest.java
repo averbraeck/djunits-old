@@ -34,7 +34,7 @@ public class AccelerationUnitTest extends AbstractLinearUnitTest<AccelerationUni
     @Test
     public final void conversions()
     {
-        assertEquals("m/s2", AccelerationUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
+        assertEquals("m/s2", AccelerationUnit.SI.getQuantity().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(AccelerationUnit.METER_PER_SECOND_2, 1, 0.00000001, "meter per second squared",
                 "m/s2");
         checkUnitRatioNameAndAbbreviation(AccelerationUnit.KM_PER_HOUR_2, 1 / 3.6 / 3600, 0.0005, "kilometer per hour squared",

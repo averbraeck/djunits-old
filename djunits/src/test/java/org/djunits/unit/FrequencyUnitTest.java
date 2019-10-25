@@ -34,7 +34,7 @@ public class FrequencyUnitTest extends AbstractLinearUnitTest<FrequencyUnit>
     @Test
     public final void conversions()
     {
-        assertEquals("1/s", FrequencyUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
+        assertEquals("1/s", FrequencyUnit.SI.getQuantity().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(FrequencyUnit.HERTZ, 1, 0.000001, "hertz", "Hz");
         checkUnitRatioNameAndAbbreviation(FrequencyUnit.KILOHERTZ, 1000, 0.0001, "kilohertz", "kHz");
         // Check two conversions between non-standard units
