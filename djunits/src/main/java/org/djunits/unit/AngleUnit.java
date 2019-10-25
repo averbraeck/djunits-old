@@ -35,9 +35,9 @@ public class AngleUnit extends Unit<AngleUnit>
     public static final AngleUnit RADIAN = SI;
 
     /** percent (non-linear, 100% is 45 degrees; 90 degrees is infinite). */
-    public static final AngleUnit PERCENT =
-            new AngleUnit().build(new Unit.Builder<AngleUnit>().setUnitBase(BASE).setId("%").setName("percent")
-                    .setUnitSystem(UnitSystem.OTHER).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(new GradeScale(0.01)));
+    public static final AngleUnit PERCENT = new AngleUnit().build(new Unit.Builder<AngleUnit>().setUnitBase(BASE).setId("perc")
+            .setName("percent").setUnitSystem(UnitSystem.OTHER).setSiPrefixes(SIPrefixes.NONE, 1.0)
+            .setScale(new GradeScale(0.01)).setDefaultDisplayAbbreviation("%").setDefaultTextualAbbreviation("%"));
 
     /** degree. */
     public static final AngleUnit DEGREE =
@@ -49,15 +49,17 @@ public class AngleUnit extends Unit<AngleUnit>
 
     /** arcsecond. */
     public static final AngleUnit ARCSECOND = DEGREE.deriveLinear(1.0 / 3600.0, "arcsec", "arcsecond", UnitSystem.SI_ACCEPTED,
-            "\"", "\"", new String[] {"arcsec"});
+            "\"", "\"", new String[] { "arcsec" });
 
     /** grad. */
     public static final AngleUnit GRAD = RADIAN.deriveLinear(2.0 * Math.PI / 400.0, "grad", "gradian", UnitSystem.OTHER);
 
     /** centesimal arcminute. */
-    public static final AngleUnit CENTESIMAL_ARCMINUTE = GRAD.deriveLinear(1.0 / 100.0, "c'", "centesimal arcminute");
+    public static final AngleUnit CENTESIMAL_ARCMINUTE =
+            GRAD.deriveLinear(1.0 / 100.0, "cdm", "centesimal arcminute", UnitSystem.OTHER, "c'", "c'");
 
     /** centesimal arcsecond. */
-    public static final AngleUnit CENTESIMAL_ARCSECOND = GRAD.deriveLinear(1.0 / 10000.0, "c\"", "centesimal arcsecond");
+    public static final AngleUnit CENTESIMAL_ARCSECOND =
+            GRAD.deriveLinear(1.0 / 10000.0, "cds", "centesimal arcsecond", UnitSystem.OTHER, "c\"", "c\"");
 
 }
