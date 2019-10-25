@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.TreeMap;
 
 import org.djunits.unit.AreaUnit;
-import org.djunits.unit.TimeUnit;
+import org.djunits.unit.FrequencyUnit;
 import org.djunits.unit.Unit;
 import org.djunits.unit.base.UnitBase;
 import org.djunits.unit.base.UnitTypes;
@@ -95,7 +95,7 @@ public class GenerateUSLocale
                     // System.out.println("Comparing " + o1 + " to " + o2);
                     Unit<?> left = unitBase.getUnitById(o1);
                     Unit<?> right = unitBase.getUnitById(o2);
-                    // if (left.equals(TimeUnit.EPOCH_SECOND) || right.equals(TimeUnit.EPOCH_SECOND))
+                    // if (left.equals(FrequencyUnit.PER_DAY) || right.equals(FrequencyUnit.PER_DAY))
                     // {
                     // System.out.println("Comparing " + o1 + " to " + o2);
                     // }
@@ -163,7 +163,7 @@ public class GenerateUSLocale
             for (String unitId : idArray)
             {
                 Unit<?> u = unitBase.getUnitById(unitId);
-                System.out.print(unitBase.getName() + "." + u.getDefaultTextualAbbreviation() + " = "
+                System.out.print(unitBase.getName() + "." + u.getId() + " = "
                         + u.getDefaultDisplayAbbreviation() + " | " + u.getName());
                 if (u.getAbbreviations().size() > 1)
                 {
