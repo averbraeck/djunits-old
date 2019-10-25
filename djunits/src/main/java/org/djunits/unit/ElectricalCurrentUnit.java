@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -19,11 +19,11 @@ public class ElectricalCurrentUnit extends Unit<ElectricalCurrentUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "A" as the SI signature. */
-    public static final UnitBase<ElectricalCurrentUnit> BASE = new UnitBase<>("ElectricalCurrent", "A");
+    public static final Quantity<ElectricalCurrentUnit> BASE = new Quantity<>("ElectricalCurrent", "A");
 
     /** The SI unit for electrical current is Ampere. */
     public static final ElectricalCurrentUnit SI = new ElectricalCurrentUnit()
-            .build(new Unit.Builder<ElectricalCurrentUnit>().setUnitBase(BASE).setId("A").setName("ampere")
+            .build(new Unit.Builder<ElectricalCurrentUnit>().setQuantity(BASE).setId("A").setName("ampere")
                     .setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** Ampere. */

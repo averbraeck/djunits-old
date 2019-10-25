@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.scale.LinearScale;
 import org.djunits.unit.si.SIPrefixes;
@@ -20,11 +20,11 @@ public class EnergyUnit extends Unit<EnergyUnit>
     private static final long serialVersionUID = 20140604L;
 
     /** The base, with "kgm2/s2" as the SI signature. */
-    public static final UnitBase<EnergyUnit> BASE = new UnitBase<>("Energy", "kgm2/s2");
+    public static final Quantity<EnergyUnit> BASE = new Quantity<>("Energy", "kgm2/s2");
 
     /** The SI unit for energy is Joule (J) = kgm2/s2. */
     public static final EnergyUnit SI =
-            new EnergyUnit().build(new Unit.Builder<EnergyUnit>().setUnitBase(BASE).setId("J").setName("joule")
+            new EnergyUnit().build(new Unit.Builder<EnergyUnit>().setQuantity(BASE).setId("J").setName("joule")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** Joule. */
@@ -78,7 +78,7 @@ public class EnergyUnit extends Unit<EnergyUnit>
     public static final EnergyUnit KILOCALORIE = CALORIE.deriveLinear(1000.0, "kcal", "kilocalorie");
 
     /** watt-hour. */
-    public static final EnergyUnit WATT_HOUR = new EnergyUnit().build(new Unit.Builder<EnergyUnit>().setUnitBase(BASE)
+    public static final EnergyUnit WATT_HOUR = new EnergyUnit().build(new Unit.Builder<EnergyUnit>().setQuantity(BASE)
             .setId("Wh").setName("watt-hour").setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0)
             .setScale(new LinearScale(3600.0)));
 
@@ -104,7 +104,7 @@ public class EnergyUnit extends Unit<EnergyUnit>
     public static final EnergyUnit PETAWATT_HOUR = WATT_HOUR.deriveSI(SIPrefixes.getUnit("P"), 1.0);
 
     /** electronvolt. */
-    public static final EnergyUnit ELECTRONVOLT = new EnergyUnit().build(new Unit.Builder<EnergyUnit>().setUnitBase(BASE)
+    public static final EnergyUnit ELECTRONVOLT = new EnergyUnit().build(new Unit.Builder<EnergyUnit>().setQuantity(BASE)
             .setId("eV").setName("electronvolt").setUnitSystem(UnitSystem.SI_ACCEPTED).setSiPrefixes(SIPrefixes.UNIT, 1.0)
             .setScale(new LinearScale(1.602176634E-19)));
 

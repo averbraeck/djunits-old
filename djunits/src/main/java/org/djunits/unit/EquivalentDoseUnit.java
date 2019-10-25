@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -21,11 +21,11 @@ public class EquivalentDoseUnit extends Unit<EquivalentDoseUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "m2/s2" as the SI signature. */
-    public static final UnitBase<EquivalentDoseUnit> BASE = new UnitBase<>("EquivalentDose", "m2/s2");
+    public static final Quantity<EquivalentDoseUnit> BASE = new Quantity<>("EquivalentDose", "m2/s2");
 
     /** The SI unit for equivalent dose of ionizing radiation is Sievert. */
     public static final EquivalentDoseUnit SI = new EquivalentDoseUnit()
-            .build(new Unit.Builder<EquivalentDoseUnit>().setUnitBase(BASE).setId("Sv").setName("sievert")
+            .build(new Unit.Builder<EquivalentDoseUnit>().setQuantity(BASE).setId("Sv").setName("sievert")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** Sievert. */

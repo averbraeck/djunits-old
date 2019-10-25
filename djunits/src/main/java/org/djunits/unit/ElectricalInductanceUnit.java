@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -21,11 +21,11 @@ public class ElectricalInductanceUnit extends Unit<ElectricalInductanceUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "kgm2/s2/A2" as the SI signature. */
-    public static final UnitBase<ElectricalInductanceUnit> BASE = new UnitBase<>("ElectricalInductance", "kgm2/s2A2");
+    public static final Quantity<ElectricalInductanceUnit> BASE = new Quantity<>("ElectricalInductance", "kgm2/s2A2");
 
     /** The SI unit for electrical inductance is Henry. */
     public static final ElectricalInductanceUnit SI = new ElectricalInductanceUnit()
-            .build(new Unit.Builder<ElectricalInductanceUnit>().setUnitBase(BASE).setId("H").setName("henry")
+            .build(new Unit.Builder<ElectricalInductanceUnit>().setQuantity(BASE).setId("H").setName("henry")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** Henry. */

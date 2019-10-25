@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -19,11 +19,11 @@ public class PressureUnit extends Unit<PressureUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "kg/ms2" as the SI signature. */
-    public static final UnitBase<PressureUnit> BASE = new UnitBase<>("Pressure", "kg/ms2");
+    public static final Quantity<PressureUnit> BASE = new Quantity<>("Pressure", "kg/ms2");
 
     /** The SI unit for pressure is Pascal = kgm/s2. */
     public static final PressureUnit SI =
-            new PressureUnit().build(new Unit.Builder<PressureUnit>().setUnitBase(BASE).setId("Pa").setName("pascal")
+            new PressureUnit().build(new Unit.Builder<PressureUnit>().setQuantity(BASE).setId("Pa").setName("pascal")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** Pascal. */

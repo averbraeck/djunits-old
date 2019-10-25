@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -19,11 +19,11 @@ public class FrequencyUnit extends Unit<FrequencyUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The SI unit for frequency is Hertz or 1/s. */
-    public static final UnitBase<FrequencyUnit> BASE = new UnitBase<>("Frequency", "/s");
+    public static final Quantity<FrequencyUnit> BASE = new Quantity<>("Frequency", "/s");
 
     /** The SI unit for frequency is Hertz. */
     public static final FrequencyUnit SI =
-            new FrequencyUnit().build(new Unit.Builder<FrequencyUnit>().setUnitBase(BASE).setId("Hz").setName("hertz")
+            new FrequencyUnit().build(new Unit.Builder<FrequencyUnit>().setQuantity(BASE).setId("Hz").setName("hertz")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** Hertz. */
@@ -45,7 +45,7 @@ public class FrequencyUnit extends Unit<FrequencyUnit>
     public static final FrequencyUnit RPM = HERTZ.deriveLinear(1.0 / 60.0, "rpm", "revolutions per minute", UnitSystem.OTHER);
 
     /** 1/s and all derived units. */
-    public static final FrequencyUnit PER_SECOND = new FrequencyUnit().build(new Unit.Builder<FrequencyUnit>().setUnitBase(BASE)
+    public static final FrequencyUnit PER_SECOND = new FrequencyUnit().build(new Unit.Builder<FrequencyUnit>().setQuantity(BASE)
             .setId("/s").setName("per second").setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.PER_UNIT, 1.0)
             .setScale(IdentityScale.SCALE).setAdditionalAbbreviations("/s", "1/s"));
 

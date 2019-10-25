@@ -2,7 +2,7 @@ package org.djunits.unit;
 
 import java.util.GregorianCalendar;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.OffsetLinearScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -27,7 +27,7 @@ public class TimeUnit extends AbsoluteLinearUnit<TimeUnit, DurationUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "m2" as the SI signature. */
-    public static final UnitBase<TimeUnit> BASE = new UnitBase<>("Time", "s");
+    public static final Quantity<TimeUnit> BASE = new Quantity<>("Time", "s");
 
     /**
      * The base unit for time with an artifical "zero" point with a calculation in seconds. Note that when the offset becomes
@@ -40,7 +40,7 @@ public class TimeUnit extends AbsoluteLinearUnit<TimeUnit, DurationUnit>
      * Epoch level precise to a ms.
      */
     public static final TimeUnit BASE_SECOND = new TimeUnit().build(new AbsoluteLinearUnit.Builder<TimeUnit, DurationUnit>()
-            .setUnitBase(BASE).setId("s").setName("second").setUnitSystem(UnitSystem.SI_DERIVED)
+            .setQuantity(BASE).setId("s").setName("second").setUnitSystem(UnitSystem.SI_DERIVED)
             .setSiPrefixes(SIPrefixes.UNIT, 1.0).setRelativeUnit(DurationUnit.SECOND).setScale(new OffsetLinearScale(1.0, 0.0))
             .setDefaultDisplayAbbreviation("s").setDefaultTextualAbbreviation("s").setAdditionalAbbreviations("sec"));
 

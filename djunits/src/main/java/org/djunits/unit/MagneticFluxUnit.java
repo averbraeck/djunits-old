@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -20,11 +20,11 @@ public class MagneticFluxUnit extends Unit<MagneticFluxUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "kgm2/s2A" as the SI signature. */
-    public static final UnitBase<MagneticFluxUnit> BASE = new UnitBase<>("MagneticFlux", "kgm2/s2A");
+    public static final Quantity<MagneticFluxUnit> BASE = new Quantity<>("MagneticFlux", "kgm2/s2A");
 
     /** The SI unit for magnetic flux is Weber. */
     public static final MagneticFluxUnit SI =
-            new MagneticFluxUnit().build(new Unit.Builder<MagneticFluxUnit>().setUnitBase(BASE).setId("Wb").setName("weber")
+            new MagneticFluxUnit().build(new Unit.Builder<MagneticFluxUnit>().setQuantity(BASE).setId("Wb").setName("weber")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** Weber. */

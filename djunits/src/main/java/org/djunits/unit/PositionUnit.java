@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.OffsetLinearScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -19,11 +19,11 @@ public class PositionUnit extends AbsoluteLinearUnit<PositionUnit, LengthUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "m" as the SI signature. */
-    public static final UnitBase<PositionUnit> BASE = new UnitBase<>("Position", "m");
+    public static final Quantity<PositionUnit> BASE = new Quantity<>("Position", "m");
 
     /** The SI unit for position is meter. */
     public static final PositionUnit DEFAULT =
-            new PositionUnit().build(new AbsoluteLinearUnit.Builder<PositionUnit, LengthUnit>().setUnitBase(BASE).setId("m")
+            new PositionUnit().build(new AbsoluteLinearUnit.Builder<PositionUnit, LengthUnit>().setQuantity(BASE).setId("m")
                     .setName("meter").setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT, 1.0)
                     .setScale(new OffsetLinearScale(1.0, 0.0)).setRelativeUnit(LengthUnit.METER));
 

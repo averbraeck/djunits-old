@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -19,11 +19,11 @@ public class AreaUnit extends Unit<AreaUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "m2" as the SI signature. */
-    public static final UnitBase<AreaUnit> BASE = new UnitBase<>("Area", "m2");
+    public static final Quantity<AreaUnit> BASE = new Quantity<>("Area", "m2");
 
     /** The SI unit for area is m^2. */
     public static final AreaUnit SI =
-            new AreaUnit().build(new Unit.Builder<AreaUnit>().setUnitBase(BASE).setId("m^2").setName("square meter")
+            new AreaUnit().build(new Unit.Builder<AreaUnit>().setQuantity(BASE).setId("m^2").setName("square meter")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 2.0).setScale(IdentityScale.SCALE));
 
     /** m^2. */

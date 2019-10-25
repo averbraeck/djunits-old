@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -20,11 +20,11 @@ public class MagneticFluxDensityUnit extends Unit<MagneticFluxDensityUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "kg/m2s2A" as the SI signature. */
-    public static final UnitBase<MagneticFluxDensityUnit> BASE = new UnitBase<>("MagneticFluxDensity", "kg/s2A");
+    public static final Quantity<MagneticFluxDensityUnit> BASE = new Quantity<>("MagneticFluxDensity", "kg/s2A");
 
     /** The SI unit for magnetic flux density is Tesla. */
     public static final MagneticFluxDensityUnit SI = new MagneticFluxDensityUnit()
-            .build(new Unit.Builder<MagneticFluxDensityUnit>().setUnitBase(BASE).setId("T").setName("tesla")
+            .build(new Unit.Builder<MagneticFluxDensityUnit>().setQuantity(BASE).setId("T").setName("tesla")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** Tesla. */

@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.scale.LinearScale;
 import org.djunits.unit.si.SIPrefixes;
@@ -20,11 +20,11 @@ public class ElectricalChargeUnit extends Unit<ElectricalChargeUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "sA" as the SI signature. */
-    public static final UnitBase<ElectricalChargeUnit> BASE = new UnitBase<>("ElectricalCharge", "sA");
+    public static final Quantity<ElectricalChargeUnit> BASE = new Quantity<>("ElectricalCharge", "sA");
 
     /** The SI unit for electrical charge is Coulomb = A.s. */
     public static final ElectricalChargeUnit SI = new ElectricalChargeUnit()
-            .build(new Unit.Builder<ElectricalChargeUnit>().setUnitBase(BASE).setId("C").setName("coulomb")
+            .build(new Unit.Builder<ElectricalChargeUnit>().setQuantity(BASE).setId("C").setName("coulomb")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** Coulomb = A.s. */
@@ -38,7 +38,7 @@ public class ElectricalChargeUnit extends Unit<ElectricalChargeUnit>
 
     /** ampere hour. */
     public static final ElectricalChargeUnit AMPERE_HOUR =
-            new ElectricalChargeUnit().build(new Unit.Builder<ElectricalChargeUnit>().setUnitBase(BASE).setId("Ah")
+            new ElectricalChargeUnit().build(new Unit.Builder<ElectricalChargeUnit>().setQuantity(BASE).setId("Ah")
                     .setName("ampere hour").setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0)
                     .setScale(new LinearScale(3600.0)));
 

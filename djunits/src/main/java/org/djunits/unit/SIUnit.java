@@ -55,7 +55,7 @@ public class SIUnit extends Unit<SIUnit>
     @Override
     public String toString()
     {
-        return getUnitBase().getSiDimensions().toString(true, false);
+        return getQuantity().getSiDimensions().toString(true, false);
     }
 
     /** {@inheritDoc} */
@@ -63,7 +63,7 @@ public class SIUnit extends Unit<SIUnit>
     @SuppressWarnings("checkstyle:designforextension")
     public int hashCode()
     {
-        return getUnitBase().getSiDimensions().hashCode();
+        return getQuantity().getSiDimensions().hashCode();
     }
 
     /** {@inheritDoc} */
@@ -78,7 +78,7 @@ public class SIUnit extends Unit<SIUnit>
         if (getClass() != obj.getClass())
             return false;
         SIUnit other = (SIUnit) obj;
-        if (!getUnitBase().getSiDimensions().equals(other.getUnitBase().getSiDimensions()))
+        if (!getQuantity().getSiDimensions().equals(other.getQuantity().getSiDimensions()))
             return false;
         return true;
     }

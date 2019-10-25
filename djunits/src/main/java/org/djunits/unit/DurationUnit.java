@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -19,11 +19,11 @@ public class DurationUnit extends Unit<DurationUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "s" as the SI signature. */
-    public static final UnitBase<DurationUnit> BASE = new UnitBase<>("Duration", "s");
+    public static final Quantity<DurationUnit> BASE = new Quantity<>("Duration", "s");
 
     /** The SI unit for duration is second. */
     public static final DurationUnit SI =
-            new DurationUnit().build(new Unit.Builder<DurationUnit>().setUnitBase(BASE).setId("s").setName("second")
+            new DurationUnit().build(new Unit.Builder<DurationUnit>().setQuantity(BASE).setId("s").setName("second")
                     .setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** second. */

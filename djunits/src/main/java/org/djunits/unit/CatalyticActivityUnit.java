@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -21,11 +21,11 @@ public class CatalyticActivityUnit extends Unit<CatalyticActivityUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "mol/s" as the SI signature. */
-    public static final UnitBase<CatalyticActivityUnit> BASE = new UnitBase<>("CatalyticActivity", "mol/s");
+    public static final Quantity<CatalyticActivityUnit> BASE = new Quantity<>("CatalyticActivity", "mol/s");
 
     /** The SI unit for catalytic activity is Katal. */
     public static final CatalyticActivityUnit SI = new CatalyticActivityUnit()
-            .build(new Unit.Builder<CatalyticActivityUnit>().setUnitBase(BASE).setId("kat").setName("katal")
+            .build(new Unit.Builder<CatalyticActivityUnit>().setQuantity(BASE).setId("kat").setName("katal")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** KATAL. */

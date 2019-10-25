@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.OffsetLinearScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -19,11 +19,11 @@ public class AbsoluteTemperatureUnit extends AbsoluteLinearUnit<AbsoluteTemperat
     private static final long serialVersionUID = 20140605L;
 
     /** The base, with "K" as the SI signature. */
-    public static final UnitBase<AbsoluteTemperatureUnit> BASE = new UnitBase<>("AbsoluteTemperature", "K");
+    public static final Quantity<AbsoluteTemperatureUnit> BASE = new Quantity<>("AbsoluteTemperature", "K");
 
     /** The default unit for temperature is Kelvin. */
     public static final AbsoluteTemperatureUnit KELVIN = new AbsoluteTemperatureUnit()
-            .build(new AbsoluteLinearUnit.Builder<AbsoluteTemperatureUnit, TemperatureUnit>().setUnitBase(BASE).setId("K")
+            .build(new AbsoluteLinearUnit.Builder<AbsoluteTemperatureUnit, TemperatureUnit>().setQuantity(BASE).setId("K")
                     .setName("Kelvin").setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT, 1.0)
                     .setRelativeUnit(TemperatureUnit.KELVIN).setScale(new OffsetLinearScale(1.0, 0.0)));
 

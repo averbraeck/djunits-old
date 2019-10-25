@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -19,11 +19,11 @@ public class DensityUnit extends Unit<DensityUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "kg/m3" as the SI signature. */
-    public static final UnitBase<DensityUnit> BASE = new UnitBase<>("Density", "kg/m3");
+    public static final Quantity<DensityUnit> BASE = new Quantity<>("Density", "kg/m3");
 
     /** The SI unit for standard density is kg/m^3. */
     public static final DensityUnit SI = new DensityUnit()
-            .build(new Unit.Builder<DensityUnit>().setUnitBase(BASE).setId("kg/m^3").setName("kilogram per cubic meter")
+            .build(new Unit.Builder<DensityUnit>().setQuantity(BASE).setId("kg/m^3").setName("kilogram per cubic meter")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(IdentityScale.SCALE));
 
     /** kg/m^3. */

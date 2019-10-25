@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -19,11 +19,11 @@ public class ForceUnit extends Unit<ForceUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "kgm/s2" as the SI signature. */
-    public static final UnitBase<ForceUnit> BASE = new UnitBase<>("Force", "kgm/s2");
+    public static final Quantity<ForceUnit> BASE = new Quantity<>("Force", "kgm/s2");
 
     /** The SI unit for force is Newton. */
     public static final ForceUnit SI =
-            new ForceUnit().build(new Unit.Builder<ForceUnit>().setUnitBase(BASE).setId("N").setName("newton")
+            new ForceUnit().build(new Unit.Builder<ForceUnit>().setQuantity(BASE).setId("N").setName("newton")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(IdentityScale.SCALE));
 
     /** Newton. */

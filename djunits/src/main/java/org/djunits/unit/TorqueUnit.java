@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -19,11 +19,11 @@ public class TorqueUnit extends Unit<TorqueUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "kgm2/s2" as the SI signature. */
-    public static final UnitBase<TorqueUnit> BASE = new UnitBase<>("Torque", "kgm2/s2");
+    public static final Quantity<TorqueUnit> BASE = new Quantity<>("Torque", "kgm2/s2");
 
     /** The SI unit for torque is Newton meter = kgm2/s2. */
     public static final TorqueUnit SI =
-            new TorqueUnit().build(new Unit.Builder<TorqueUnit>().setUnitBase(BASE).setId("N.m").setName("Newton meter")
+            new TorqueUnit().build(new Unit.Builder<TorqueUnit>().setQuantity(BASE).setId("N.m").setName("Newton meter")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(IdentityScale.SCALE));
 
     /** Newton meter. */

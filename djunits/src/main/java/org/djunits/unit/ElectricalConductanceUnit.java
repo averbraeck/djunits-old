@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -20,11 +20,11 @@ public class ElectricalConductanceUnit extends Unit<ElectricalConductanceUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "s3A2/kgm2" as the SI signature. */
-    public static final UnitBase<ElectricalConductanceUnit> BASE = new UnitBase<>("ElectricalConductance", "s3A2/kgm2");
+    public static final Quantity<ElectricalConductanceUnit> BASE = new Quantity<>("ElectricalConductance", "s3A2/kgm2");
 
     /** The SI unit for electrical conductance is Siemens. */
     public static final ElectricalConductanceUnit SI = new ElectricalConductanceUnit()
-            .build(new Unit.Builder<ElectricalConductanceUnit>().setUnitBase(BASE).setId("S").setName("siemens")
+            .build(new Unit.Builder<ElectricalConductanceUnit>().setQuantity(BASE).setId("S").setName("siemens")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** Siemens. */
