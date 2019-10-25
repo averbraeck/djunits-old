@@ -140,7 +140,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
     public final <U extends Unit<U>, S extends AbstractFloatScalarRel<U, S>,
             V extends AbstractFloatVectorRel<U, S, V>, M extends AbstractFloatMatrixRel<U, S, V, M>> M as(final U displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(displayUnit.getUnitBase().getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(displayUnit.getQuantity().getSiDimensions())),
                 UnitRuntimeException.class, "FloatSIMatrix with unit %s cannot be converted to a FloatMatrix with unit %s",
                 getDisplayUnit(), displayUnit);
         M result = FloatMatrix.instantiate(this.data, displayUnit.getStandardUnit());

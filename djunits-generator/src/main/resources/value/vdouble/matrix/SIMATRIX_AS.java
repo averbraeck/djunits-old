@@ -4,7 +4,7 @@
      */
     public final %Type%Matrix as%Type%()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(%Type%Unit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(%Type%Unit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to %Type%Matrix", this.toString());
         return new %Type%Matrix(this.data, %Type%Unit.SI);
     }
@@ -16,7 +16,7 @@
      */
     public final %Type%Matrix as%Type%(final %Type%Unit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(%Type%Unit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(%Type%Unit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to %Type%Matrix", this.toString());
         %Type%Matrix result = new %Type%Matrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
