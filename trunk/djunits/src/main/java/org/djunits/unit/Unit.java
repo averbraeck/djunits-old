@@ -66,6 +66,8 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
      * unit of a unit base is null.
      */
     private UnitBase<U> unitBase;
+    
+    // TODO create a static that loads all unit classes in the registry
 
     /**
      * Initialize a blank unit that can be built through reflection with several 'setter' methods followed by calling the

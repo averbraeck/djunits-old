@@ -10,6 +10,7 @@ import org.djunits.unit.AngleUnit;
 import org.djunits.unit.AreaUnit;
 import org.djunits.unit.CatalyticActivityUnit;
 import org.djunits.unit.DensityUnit;
+import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.DirectionUnit;
 import org.djunits.unit.DurationUnit;
 import org.djunits.unit.ElectricalCapacitanceUnit;
@@ -134,6 +135,12 @@ public interface UNITS
 
     DensityUnit KG_PER_METER_3                    = DensityUnit.KG_PER_METER_3;
     DensityUnit GRAM_PER_CENTIMETER_3             = DensityUnit.GRAM_PER_CENTIMETER_3;
+
+    /****************************************************************************************************************/
+    /*********************************************** DIMENSIONLESS  *************************************************/
+    /****************************************************************************************************************/
+
+    DimensionlessUnit UNIT                        = DimensionlessUnit.SI;
 
     /****************************************************************************************************************/
     /************************************************* DIRECTION  ***************************************************/
@@ -656,7 +663,7 @@ public interface UNITS
     RadioActivityUnit MICROCURIE                  = RadioActivityUnit.MICROCURIE;
     RadioActivityUnit NANOCURIE                   = RadioActivityUnit.NANOCURIE;
     RadioActivityUnit RUTHERFORD                  = RadioActivityUnit.RUTHERFORD;
-
+    
     // @formatter:on
 
 }
