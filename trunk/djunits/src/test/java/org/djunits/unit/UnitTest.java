@@ -42,11 +42,11 @@ public class UnitTest
         assertEquals(0.0000771604938, AccelerationUnit.KM_PER_HOUR_2.getScale().toStandardUnit(1.0), 1.0E-12);
 
         // these two should be similar except for the abbreviations
-        LengthUnit xx1 = new LengthUnit().build(new Unit.Builder<LengthUnit>().setUnitBase(LengthUnit.METER.getUnitBase())
+        LengthUnit xx1 = new LengthUnit().build(new Unit.Builder<LengthUnit>().setQuantity(LengthUnit.METER.getQuantity())
                 .setId("xx1Id").setName("xxName1").setDefaultDisplayAbbreviation("xx1").setDefaultTextualAbbreviation("xx11t")
                 .setUnitSystem(UnitSystem.OTHER).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(new LinearScale(1.0E-13)));
         LengthUnit xx2 = LengthUnit.METER.deriveLinear(1.0E-13, "xx2Id", "xxName2", UnitSystem.OTHER, "xx2", "xx22t");
-        assertEquals(xx1.getUnitBase(), xx2.getUnitBase());
+        assertEquals(xx1.getQuantity(), xx2.getQuantity());
         assertEquals(xx1.getScale(), xx2.getScale());
         assertEquals(xx1.getUnitSystem(), xx2.getUnitSystem());
         assertEquals("xx1Id", xx1.getId());

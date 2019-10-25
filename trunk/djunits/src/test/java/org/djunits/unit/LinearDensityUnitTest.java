@@ -34,7 +34,7 @@ public class LinearDensityUnitTest extends AbstractLinearUnitTest<LinearDensityU
     @Test
     public final void conversions()
     {
-        assertEquals("1/m", LinearDensityUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
+        assertEquals("1/m", LinearDensityUnit.SI.getQuantity().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(LinearDensityUnit.PER_METER, 1, 0.000001, "per meter", "/m");
         checkUnitRatioNameAndAbbreviation(LinearDensityUnit.PER_KILOMETER, 0.001, 0.0000001, "per kilometer", "/km");
         checkUnitRatioNameAndAbbreviation(LinearDensityUnit.PER_MILLIMETER, 1000, 0.01, "per millimeter", "/mm");

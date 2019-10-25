@@ -34,7 +34,7 @@ public class DurationUnitTest extends AbstractLinearUnitTest<DurationUnit>
     @Test
     public final void conversions()
     {
-        assertEquals("s", DurationUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
+        assertEquals("s", DurationUnit.SI.getQuantity().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(DurationUnit.SECOND, 1, 0.00000001, "second", "s");
         checkUnitRatioNameAndAbbreviation(DurationUnit.HOUR, 3600, 0.0005, "hour", "hr");
         checkUnitRatioNameAndAbbreviation(DurationUnit.DAY, 86400, 0.001, "day", "day");

@@ -34,7 +34,7 @@ public class MassUnitTest extends AbstractLinearUnitTest<MassUnit>
     @Test
     public final void conversions()
     {
-        assertEquals("kg", MassUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
+        assertEquals("kg", MassUnit.SI.getQuantity().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(MassUnit.KILOGRAM, 1, 0.00000001, "kilogram", "kg");
         checkUnitRatioNameAndAbbreviation(MassUnit.GRAM, 0.001, 0.000000001, "gram", "g");
         checkUnitRatioNameAndAbbreviation(MassUnit.POUND, 0.453592, 0.000001, "pound", "lb");

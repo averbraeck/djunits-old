@@ -34,7 +34,7 @@ public class ElectricalCurrentUnitTest extends AbstractLinearUnitTest<Electrical
     @Test
     public final void conversions()
     {
-        assertEquals("A", ElectricalCurrentUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
+        assertEquals("A", ElectricalCurrentUnit.SI.getQuantity().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(ElectricalCurrentUnit.AMPERE, 1, 0.00000001, "ampere", "A");
         checkUnitRatioNameAndAbbreviation(ElectricalCurrentUnit.MILLIAMPERE, 0.001, 0.000000001, "milliampere", "mA");
         // Check two conversions between two units

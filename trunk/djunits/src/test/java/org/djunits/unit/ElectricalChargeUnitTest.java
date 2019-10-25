@@ -34,7 +34,7 @@ public class ElectricalChargeUnitTest extends AbstractLinearUnitTest<ElectricalC
     @Test
     public final void conversions()
     {
-        assertEquals("sA", ElectricalChargeUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
+        assertEquals("sA", ElectricalChargeUnit.SI.getQuantity().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(ElectricalChargeUnit.COULOMB, 1, 0.00000001, "coulomb", "C");
         checkUnitRatioNameAndAbbreviation(ElectricalChargeUnit.MILLIAMPERE_HOUR, 3.6, 0.000000005, "milliampere hour", "mAh");
         checkUnitRatioNameAndAbbreviation(ElectricalChargeUnit.FARADAY, 96485.3365, 0.005, "faraday", "F");

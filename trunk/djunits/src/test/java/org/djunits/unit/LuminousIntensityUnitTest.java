@@ -34,7 +34,7 @@ public class LuminousIntensityUnitTest extends AbstractLinearUnitTest<LuminousIn
     @Test
     public final void conversions()
     {
-        assertEquals("cd", LuminousIntensityUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
+        assertEquals("cd", LuminousIntensityUnit.SI.getQuantity().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(LuminousIntensityUnit.CANDELA, 1, 0.000001, "candela", "cd");
     }
 

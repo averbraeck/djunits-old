@@ -34,7 +34,7 @@ public class DimensionlessUnitTest extends AbstractLinearUnitTest<DimensionlessU
     @Test
     public final void conversions()
     {
-        assertEquals("1", DimensionlessUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
+        assertEquals("1", DimensionlessUnit.SI.getQuantity().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(DimensionlessUnit.SI, 1, 0.000001, "unit", "unit");
     }
 

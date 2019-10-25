@@ -34,7 +34,7 @@ public class AbsoluteTemperatureUnitTest extends AbstractOffsetUnitTest<Absolute
     @Test
     public final void conversions()
     {
-        assertEquals("K", AbsoluteTemperatureUnit.DEFAULT.getUnitBase().getSiDimensions().toString(true, false));
+        assertEquals("K", AbsoluteTemperatureUnit.DEFAULT.getQuantity().getSiDimensions().toString(true, false));
         checkUnitRatioOffsetNameAndAbbreviation(AbsoluteTemperatureUnit.KELVIN, 1, 0, 0.00000001, "Kelvin", "K");
         checkUnitRatioOffsetNameAndAbbreviation(AbsoluteTemperatureUnit.DEGREE_CELSIUS, 1, 273.15, 0.000001, "degree Celsius",
                 "\u00B0C");
@@ -77,7 +77,7 @@ public class AbsoluteTemperatureUnitTest extends AbstractOffsetUnitTest<Absolute
     @Test
     public final void testRelative()
     {
-        assertEquals(TemperatureUnit.BASE, AbsoluteTemperatureUnit.DEFAULT.getRelativeUnitBase());
+        assertEquals(TemperatureUnit.BASE, AbsoluteTemperatureUnit.DEFAULT.getRelativeQuantity());
     }
 
 }

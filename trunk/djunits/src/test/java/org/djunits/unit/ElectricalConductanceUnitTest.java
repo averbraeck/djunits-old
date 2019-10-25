@@ -34,7 +34,7 @@ public class ElectricalConductanceUnitTest extends AbstractLinearUnitTest<Electr
     @Test
     public final void conversions()
     {
-        assertEquals("s3A2/kgm2", ElectricalConductanceUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
+        assertEquals("s3A2/kgm2", ElectricalConductanceUnit.SI.getQuantity().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(ElectricalConductanceUnit.SIEMENS, 1, 0.000001, "siemens", "S");
     }
 

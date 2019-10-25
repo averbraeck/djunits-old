@@ -34,7 +34,7 @@ public class SolidAngleUnitTest extends AbstractLinearUnitTest<SolidAngleUnit>
     @Test
     public final void conversions()
     {
-        assertEquals("sr", SolidAngleUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
+        assertEquals("sr", SolidAngleUnit.SI.getQuantity().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(SolidAngleUnit.STERADIAN, 1, 0.0000001, "steradian", "sr");
         checkUnitRatioNameAndAbbreviation(SolidAngleUnit.SQUARE_DEGREE, 1.0 / 3283, 0.0005, "square degree", "sq.deg");
         // Check two conversions between units

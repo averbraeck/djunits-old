@@ -34,7 +34,7 @@ public class LengthUnitTest extends AbstractLinearUnitTest<LengthUnit>
     @Test
     public final void conversions()
     {
-        assertEquals("m", LengthUnit.SI.getUnitBase().getSiDimensions().toString(true, false));
+        assertEquals("m", LengthUnit.SI.getQuantity().getSiDimensions().toString(true, false));
         checkUnitRatioNameAndAbbreviation(LengthUnit.METER, 1, 0.00000001, "meter", "m");
         checkUnitRatioNameAndAbbreviation(LengthUnit.MILE, 1609, 0.5, "mile", "mi");
         checkUnitRatioNameAndAbbreviation(LengthUnit.CENTIMETER, 0.01, 0.000000001, "centimeter", "cm");
