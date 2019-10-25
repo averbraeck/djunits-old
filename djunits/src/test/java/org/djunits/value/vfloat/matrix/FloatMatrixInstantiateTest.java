@@ -13,8 +13,8 @@ import org.djunits.unit.LengthUnit;
 import org.djunits.unit.SIUnit;
 import org.djunits.unit.SpeedUnit;
 import org.djunits.unit.Unit;
-import org.djunits.unit.base.UnitBase;
-import org.djunits.unit.base.UnitTypes;
+import org.djunits.unit.quantity.Quantities;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.util.UNITS;
 import org.djunits.unit.util.UnitException;
 import org.djunits.value.CLASSNAMES;
@@ -69,8 +69,8 @@ public class FloatMatrixInstantiateTest
         for (String scalarName : CLASSNAMES.ALL_LIST)
         {
             @SuppressWarnings("unchecked")
-            UnitBase<U> unitBase = (UnitBase<U>) UnitTypes.INSTANCE.getUnitBase(scalarName + "Unit");
-            U standardUnit = unitBase.getStandardUnit();
+            Quantity<U> quantity = (Quantity<U>) Quantities.INSTANCE.getQuantity(scalarName + "Unit");
+            U standardUnit = quantity.getStandardUnit();
             for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
             {
                 float[][] testValues = FLOATMATRIX.denseRectArrays(5, 10);
@@ -117,10 +117,10 @@ public class FloatMatrixInstantiateTest
         {
             String relScalarName = CLASSNAMES.REL_WITH_ABS_LIST.get(classIndex);
             String absScalarName = CLASSNAMES.ABS_LIST.get(classIndex);
-            UnitBase<RU> relUnitBase = (UnitBase<RU>) UnitTypes.INSTANCE.getUnitBase(relScalarName + "Unit");
-            UnitBase<AU> absUnitBase = (UnitBase<AU>) UnitTypes.INSTANCE.getUnitBase(absScalarName + "Unit");
-            RU relStandardUnit = relUnitBase.getStandardUnit();
-            AU absStandardUnit = absUnitBase.getStandardUnit();
+            Quantity<RU> relQuantity = (Quantity<RU>) Quantities.INSTANCE.getQuantity(relScalarName + "Unit");
+            Quantity<AU> absQuantity = (Quantity<AU>) Quantities.INSTANCE.getQuantity(absScalarName + "Unit");
+            RU relStandardUnit = relQuantity.getStandardUnit();
+            AU absStandardUnit = absQuantity.getStandardUnit();
             for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
             {
                 float[][] testValues = FLOATMATRIX.denseRectArrays(5, 10);
@@ -489,7 +489,7 @@ public class FloatMatrixInstantiateTest
         assertEquals(10, si10dd.cols());
         assertEquals(100, si10dd.cardinality());
         assertEquals(50 * 101, si10dd.zSum().getSI(), 0.001);
-        assertEquals("m2/s3", si10dd.getDisplayUnit().getUnitBase().getSiDimensions().toString(true, false, false));
+        assertEquals("m2/s3", si10dd.getDisplayUnit().getQuantity().getSiDimensions().toString(true, false, false));
 
         FloatSIMatrix si10ds =
                 FloatMatrix.instantiate(FLOATMATRIX.denseRectArrays(10, 10), SIUnit.of("m2/s3"), StorageType.SPARSE);
@@ -497,7 +497,7 @@ public class FloatMatrixInstantiateTest
         assertEquals(10, si10ds.cols());
         assertEquals(100, si10ds.cardinality());
         assertEquals(50 * 101, si10ds.zSum().getSI(), 0.001);
-        assertEquals("m2/s3", si10ds.getDisplayUnit().getUnitBase().getSiDimensions().toString(true, false, false));
+        assertEquals("m2/s3", si10ds.getDisplayUnit().getQuantity().getSiDimensions().toString(true, false, false));
 
         FloatSIMatrix si10sd =
                 FloatMatrix.instantiate(FLOATMATRIX.sparseRectArrays(10, 10), SIUnit.of("m2/s3"), StorageType.DENSE);
@@ -505,7 +505,7 @@ public class FloatMatrixInstantiateTest
         assertEquals(10, si10sd.cols());
         assertEquals(10, si10sd.cardinality());
         assertEquals(5 * 11, si10sd.zSum().getSI(), 0.001);
-        assertEquals("m2/s3", si10sd.getDisplayUnit().getUnitBase().getSiDimensions().toString(true, false, false));
+        assertEquals("m2/s3", si10sd.getDisplayUnit().getQuantity().getSiDimensions().toString(true, false, false));
 
         FloatSIMatrix si10ss =
                 FloatMatrix.instantiate(FLOATMATRIX.sparseRectArrays(10, 10), SIUnit.of("m2/s3"), StorageType.SPARSE);
@@ -513,7 +513,7 @@ public class FloatMatrixInstantiateTest
         assertEquals(10, si10ss.cols());
         assertEquals(10, si10ss.cardinality());
         assertEquals(5 * 11, si10ss.zSum().getSI(), 0.001);
-        assertEquals("m2/s3", si10ss.getDisplayUnit().getUnitBase().getSiDimensions().toString(true, false, false));
+        assertEquals("m2/s3", si10ss.getDisplayUnit().getQuantity().getSiDimensions().toString(true, false, false));
 
         assertEquals(si10dd, si10ds.toDense());
         assertEquals(si10ds, si10dd.toSparse());
@@ -902,7 +902,7 @@ public class FloatMatrixInstantiateTest
         assertEquals(10, si10dd.cols());
         assertEquals(200, si10dd.cardinality());
         assertEquals(100 * 201, si10dd.zSum().getSI(), 0.001);
-        assertEquals("m2/s3", si10dd.getDisplayUnit().getUnitBase().getSiDimensions().toString(true, false, false));
+        assertEquals("m2/s3", si10dd.getDisplayUnit().getQuantity().getSiDimensions().toString(true, false, false));
         assertEquals("getScalarClass returns FloatSIScalar", FloatSIScalar.class, si10dd.getScalarClass());
         assertEquals("getVectorClass returns FloatSIVector", FloatSIVector.class, si10dd.getVectorClass());
 
@@ -912,7 +912,7 @@ public class FloatMatrixInstantiateTest
         assertEquals(10, si10ds.cols());
         assertEquals(200, si10ds.cardinality());
         assertEquals(100 * 201, si10ds.zSum().getSI(), 0.001);
-        assertEquals("m2/s3", si10ds.getDisplayUnit().getUnitBase().getSiDimensions().toString(true, false, false));
+        assertEquals("m2/s3", si10ds.getDisplayUnit().getQuantity().getSiDimensions().toString(true, false, false));
 
         FloatSIMatrix si10sd =
                 FloatMatrix.instantiate(FLOATMATRIX.sparseRectArrays(20, 10), SIUnit.of("m2/s3"), StorageType.DENSE);
@@ -920,7 +920,7 @@ public class FloatMatrixInstantiateTest
         assertEquals(10, si10sd.cols());
         assertEquals(10, si10sd.cardinality());
         assertEquals(5 * 11, si10sd.zSum().getSI(), 0.001);
-        assertEquals("m2/s3", si10sd.getDisplayUnit().getUnitBase().getSiDimensions().toString(true, false, false));
+        assertEquals("m2/s3", si10sd.getDisplayUnit().getQuantity().getSiDimensions().toString(true, false, false));
 
         FloatSIMatrix si10ss =
                 FloatMatrix.instantiate(FLOATMATRIX.sparseRectArrays(20, 10), SIUnit.of("m2/s3"), StorageType.SPARSE);
@@ -928,7 +928,7 @@ public class FloatMatrixInstantiateTest
         assertEquals(10, si10ss.cols());
         assertEquals(10, si10ss.cardinality());
         assertEquals(5 * 11, si10ss.zSum().getSI(), 0.001);
-        assertEquals("m2/s3", si10ss.getDisplayUnit().getUnitBase().getSiDimensions().toString(true, false, false));
+        assertEquals("m2/s3", si10ss.getDisplayUnit().getQuantity().getSiDimensions().toString(true, false, false));
 
         assertEquals(si10dd, si10ds.toDense());
         assertEquals(si10ds, si10dd.toSparse());

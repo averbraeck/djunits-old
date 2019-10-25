@@ -9,7 +9,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.djunits.unit.Unit;
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.LinearScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -287,7 +287,7 @@ public class ScalarOperationsTest
                 AbstractDoubleScalarRel<?, ?> result =
                         multiply ? DoubleScalar.multiply(left, right) : DoubleScalar.divide(left, right);
                 // System.out.println("result is " + result);
-                String resultCoefficients = result.getDisplayUnit().getUnitBase().getSiDimensions().toString();
+                String resultCoefficients = result.getDisplayUnit().getQuantity().getSiDimensions().toString();
                 assertEquals(
                         "SI coefficients of result of " + left.getClass().getSimpleName() + " x "
                                 + right.getClass().getSimpleName() + " should match expected SI coefficients",
@@ -321,7 +321,7 @@ public class ScalarOperationsTest
                 AbstractFloatScalarRel<?, ?> result =
                         multiply ? FloatScalar.multiply(left, right) : FloatScalar.divide(left, right);
                 // System.out.println("result is " + result);
-                String resultCoefficients = result.getDisplayUnit().getUnitBase().getSiDimensions().toString();
+                String resultCoefficients = result.getDisplayUnit().getQuantity().getSiDimensions().toString();
                 assertEquals("SI coefficients of result should match expected SI coefficients", resultCoefficients, returnSI);
             }
         }
@@ -338,7 +338,7 @@ public class ScalarOperationsTest
     {
         Field si = clas.getField("SI");
         Unit<?> u = ((Unit<?>) si.get(clas));
-        String r = u.getUnitBase().getSiDimensions().toString();
+        String r = u.getQuantity().getSiDimensions().toString();
         return r;
     }
 
@@ -624,7 +624,7 @@ public class ScalarOperationsTest
             builder.setName("7fullName");
             builder.setUnitSystem(unitSystem);
             builder.setScale(new LinearScale(7));
-            builder.setUnitBase((UnitBase) getSIUnitInstance(unitClass, false).getUnitBase());
+            builder.setQuantity((Quantity) getSIUnitInstance(unitClass, false).getQuantity());
             builder.setSiPrefixes(SIPrefixes.NONE, 1.0);
             buildMethod.setAccessible(true);
             buildMethod.invoke(newUnit, builder);
@@ -641,7 +641,7 @@ public class ScalarOperationsTest
                         : (AbstractFloatScalarRel<?, ?>) constructor.newInstance((float) value, newUnit);
             }
             // System.out.println("compatibleRight prints like \"" + compatibleRight + "\"");
-            newUnit.getUnitBase().unregister(newUnit);
+            newUnit.getQuantity().unregister(newUnit);
         }
         if (!abs)
         {

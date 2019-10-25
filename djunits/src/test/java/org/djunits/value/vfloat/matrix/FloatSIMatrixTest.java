@@ -9,8 +9,8 @@ import java.lang.reflect.Method;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.SIUnit;
 import org.djunits.unit.Unit;
-import org.djunits.unit.base.UnitBase;
-import org.djunits.unit.base.UnitTypes;
+import org.djunits.unit.quantity.Quantities;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.util.UNITS;
 import org.djunits.unit.util.UnitException;
 import org.djunits.unit.util.UnitRuntimeException;
@@ -68,8 +68,8 @@ public class FloatSIMatrixTest
         for (String type : CLASSNAMES.REL_ALL_LIST)
         {
             Class.forName("org.djunits.unit." + type + "Unit");
-            UnitBase<U> unitBase = (UnitBase<U>) UnitTypes.INSTANCE.getUnitBase(type + "Unit");
-            for (U unit : unitBase.getUnitsById().values())
+            Quantity<U> quantity = (Quantity<U>) Quantities.INSTANCE.getQuantity(type + "Unit");
+            for (U unit : quantity.getUnitsById().values())
             {
                 AbstractFloatMatrixRel<U, S, V, M> matrix = (AbstractFloatMatrixRel<U, S, V, M>) FloatMatrix
                         .instantiate(FloatMatrixData.instantiate(denseTestData, unit.getScale(), StorageType.DENSE), unit);
@@ -123,7 +123,7 @@ public class FloatSIMatrixTest
                 {
                     // ok
                 }
-                FloatSIMatrix sim = FloatSIMatrix.of(denseTestData, unitBase.getSiDimensions().toString(true, true, true),
+                FloatSIMatrix sim = FloatSIMatrix.of(denseTestData, quantity.getSiDimensions().toString(true, true, true),
                         StorageType.DENSE);
                 for (int row = 0; row < denseTestData.length; row++)
                 {

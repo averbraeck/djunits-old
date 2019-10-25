@@ -160,7 +160,7 @@ public abstract class AbstractDoubleVectorRel<U extends Unit<U>, S extends Abstr
     {
         checkSize(rel);
         return new SIVector(this.getData().times(rel.getData()), SIUnit.of(
-                getDisplayUnit().getUnitBase().getSiDimensions().plus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
+                getDisplayUnit().getQuantity().getSiDimensions().plus(rel.getDisplayUnit().getQuantity().getSiDimensions())));
     }
 
     /**
@@ -181,7 +181,7 @@ public abstract class AbstractDoubleVectorRel<U extends Unit<U>, S extends Abstr
     {
         checkSize(rel);
         return new SIVector(this.getData().divide(rel.getData()), SIUnit.of(
-                getDisplayUnit().getUnitBase().getSiDimensions().minus(rel.getDisplayUnit().getUnitBase().getSiDimensions())));
+                getDisplayUnit().getQuantity().getSiDimensions().minus(rel.getDisplayUnit().getQuantity().getSiDimensions())));
     }
 
     /** {@inheritDoc} */

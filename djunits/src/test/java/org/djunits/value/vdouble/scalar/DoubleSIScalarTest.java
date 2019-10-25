@@ -14,8 +14,8 @@ import org.djunits.unit.ElectricalResistanceUnit;
 import org.djunits.unit.SIUnit;
 import org.djunits.unit.SpeedUnit;
 import org.djunits.unit.Unit;
-import org.djunits.unit.base.UnitBase;
-import org.djunits.unit.base.UnitTypes;
+import org.djunits.unit.quantity.Quantities;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.si.SIDimensions;
 import org.djunits.unit.util.UNITS;
 import org.djunits.unit.util.UnitException;
@@ -111,15 +111,15 @@ public class DoubleSIScalarTest
 
         for (String type1 : CLASSNAMES.REL_LIST)
         {
-            UnitBase<?> unitBase1 = UnitTypes.INSTANCE.getUnitBase(type1 + "Unit");
+            Quantity<?> quantity1 = Quantities.INSTANCE.getQuantity(type1 + "Unit");
             System.out.println("multiply: " + type1 + "Unit");
-            SIDimensions siDim1 = unitBase1.getSiDimensions();
-            Unit<?> unit1 = unitBase1.getUnitsById().values().iterator().next();
+            SIDimensions siDim1 = quantity1.getSiDimensions();
+            Unit<?> unit1 = quantity1.getUnitsById().values().iterator().next();
             for (String type2 : CLASSNAMES.REL_LIST)
             {
-                UnitBase<?> unitBase2 = UnitTypes.INSTANCE.getUnitBase(type2 + "Unit");
-                SIDimensions siDim2 = unitBase2.getSiDimensions();
-                for (Unit<?> unit2 : unitBase2.getUnitsById().values())
+                Quantity<?> quantity2 = Quantities.INSTANCE.getQuantity(type2 + "Unit");
+                SIDimensions siDim2 = quantity2.getSiDimensions();
+                for (Unit<?> unit2 : quantity2.getUnitsById().values())
                 {
                     AbstractDoubleScalarRel<?, ?> scalar1 =
                             (AbstractDoubleScalarRel<?, ?>) DoubleScalar.instantiateAnonymous(12.0, unit1);
@@ -133,7 +133,7 @@ public class DoubleSIScalarTest
                             + scalar12b.getDisplayUnit() + "]", scalar12a.getDisplayUnit(), scalar12b.getDisplayUnit());
                     assertEquals(scalar12a.si, scalar12c.si, scalar12a.si / 10000.0);
                     assertEquals(scalar12a.getDisplayUnit(), scalar12c.getDisplayUnit());
-                    assertEquals(siDim1.plus(siDim2), scalar12a.getDisplayUnit().getUnitBase().getSiDimensions());
+                    assertEquals(siDim1.plus(siDim2), scalar12a.getDisplayUnit().getQuantity().getSiDimensions());
                     assertFalse(scalar12a.si == 0.0);
                     assertFalse(Double.isInfinite(scalar12a.si));
                     assertFalse(Double.isNaN(scalar12a.si));
@@ -154,15 +154,15 @@ public class DoubleSIScalarTest
 
         for (String type1 : CLASSNAMES.REL_LIST)
         {
-            UnitBase<?> unitBase1 = UnitTypes.INSTANCE.getUnitBase(type1 + "Unit");
+            Quantity<?> quantity1 = Quantities.INSTANCE.getQuantity(type1 + "Unit");
             System.out.println("divide: " + type1 + "Unit");
-            SIDimensions siDim1 = unitBase1.getSiDimensions();
-            Unit<?> unit1 = unitBase1.getUnitsById().values().iterator().next();
+            SIDimensions siDim1 = quantity1.getSiDimensions();
+            Unit<?> unit1 = quantity1.getUnitsById().values().iterator().next();
             for (String type2 : CLASSNAMES.REL_LIST)
             {
-                UnitBase<?> unitBase2 = UnitTypes.INSTANCE.getUnitBase(type2 + "Unit");
-                SIDimensions siDim2 = unitBase2.getSiDimensions();
-                for (Unit<?> unit2 : unitBase2.getUnitsById().values())
+                Quantity<?> quantity2 = Quantities.INSTANCE.getQuantity(type2 + "Unit");
+                SIDimensions siDim2 = quantity2.getSiDimensions();
+                for (Unit<?> unit2 : quantity2.getUnitsById().values())
                 {
                     AbstractDoubleScalarRel<?, ?> scalar1 =
                             (AbstractDoubleScalarRel<?, ?>) DoubleScalar.instantiateAnonymous(12.0, unit1);
@@ -174,8 +174,8 @@ public class DoubleSIScalarTest
                     assertEquals(scalar12a.si, scalar12b.si, scalar12a.si / 10000.0);
                     assertEquals("scalar12a.getUnit(): [" + scalar12a.getDisplayUnit() + "] != scalar12b.getUnit(): ["
                             + scalar12b.getDisplayUnit() + "]", scalar12a.getDisplayUnit(), scalar12b.getDisplayUnit());
-                    assertEquals(siDim1.minus(siDim2), scalar12b.getDisplayUnit().getUnitBase().getSiDimensions());
-                    assertEquals(siDim2.minus(siDim1), scalar12c.getDisplayUnit().getUnitBase().getSiDimensions());
+                    assertEquals(siDim1.minus(siDim2), scalar12b.getDisplayUnit().getQuantity().getSiDimensions());
+                    assertEquals(siDim2.minus(siDim1), scalar12c.getDisplayUnit().getQuantity().getSiDimensions());
                     assertFalse(scalar12a.si == 0.0);
                     assertFalse(Double.isInfinite(scalar12a.si));
                     assertFalse(Double.isNaN(scalar12a.si));
@@ -205,8 +205,8 @@ public class DoubleSIScalarTest
         for (String type : CLASSNAMES.REL_ALL_LIST)
         {
             Class.forName("org.djunits.unit." + type + "Unit");
-            UnitBase<?> unitBase = UnitTypes.INSTANCE.getUnitBase(type + "Unit");
-            for (Unit<?> unit : unitBase.getUnitsById().values())
+            Quantity<?> quantity = Quantities.INSTANCE.getQuantity(type + "Unit");
+            for (Unit<?> unit : quantity.getUnitsById().values())
             {
                 AbstractDoubleScalarRel<?, ?> scalar =
                         (AbstractDoubleScalarRel<?, ?>) DoubleScalar.instantiateAnonymous(12.0, unit);

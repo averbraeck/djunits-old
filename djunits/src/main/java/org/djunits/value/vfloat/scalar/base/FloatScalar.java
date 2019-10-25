@@ -217,8 +217,8 @@ public abstract class FloatScalar
      */
     public static FloatSIScalar multiply(final FloatScalarInterface.Rel<?, ?> left, final FloatScalarInterface.Rel<?, ?> right)
     {
-        SIUnit targetUnit = Unit.lookupOrCreateUnitWithSIDimensions(left.getDisplayUnit().getUnitBase().getSiDimensions()
-                .plus(right.getDisplayUnit().getUnitBase().getSiDimensions()));
+        SIUnit targetUnit = Unit.lookupOrCreateUnitWithSIDimensions(left.getDisplayUnit().getQuantity().getSiDimensions()
+                .plus(right.getDisplayUnit().getQuantity().getSiDimensions()));
         return new FloatSIScalar(left.getSI() * right.getSI(), targetUnit);
     }
 
@@ -230,8 +230,8 @@ public abstract class FloatScalar
      */
     public static FloatSIScalar divide(final FloatScalarInterface.Rel<?, ?> left, final FloatScalarInterface.Rel<?, ?> right)
     {
-        SIUnit targetUnit = Unit.lookupOrCreateUnitWithSIDimensions(left.getDisplayUnit().getUnitBase().getSiDimensions()
-                .minus(right.getDisplayUnit().getUnitBase().getSiDimensions()));
+        SIUnit targetUnit = Unit.lookupOrCreateUnitWithSIDimensions(left.getDisplayUnit().getQuantity().getSiDimensions()
+                .minus(right.getDisplayUnit().getQuantity().getSiDimensions()));
         return new FloatSIScalar(left.getSI() / right.getSI(), targetUnit);
     }
 

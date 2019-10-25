@@ -177,7 +177,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
     public final <U extends Unit<U>, S extends AbstractDoubleScalarRel<U, S>, V extends AbstractDoubleVectorRel<U, S, V>,
             M extends AbstractDoubleMatrixRel<U, S, V, M>> M as(final U displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(displayUnit.getUnitBase().getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(displayUnit.getQuantity().getSiDimensions())),
                 UnitRuntimeException.class, "SIMatrix with unit %s cannot be converted to a matrix with unit %s",
                 getDisplayUnit(), displayUnit);
         M result = DoubleMatrix.instantiate(this.data, displayUnit.getStandardUnit());
@@ -191,7 +191,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final AbsorbedDoseMatrix asAbsorbedDose()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AbsorbedDoseUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(AbsorbedDoseUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AbsorbedDoseMatrix", this.toString());
         return new AbsorbedDoseMatrix(this.data, AbsorbedDoseUnit.SI);
     }
@@ -203,7 +203,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final AbsorbedDoseMatrix asAbsorbedDose(final AbsorbedDoseUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AbsorbedDoseUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(AbsorbedDoseUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AbsorbedDoseMatrix", this.toString());
         AbsorbedDoseMatrix result = new AbsorbedDoseMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -216,7 +216,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final AccelerationMatrix asAcceleration()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AccelerationUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(AccelerationUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AccelerationMatrix", this.toString());
         return new AccelerationMatrix(this.data, AccelerationUnit.SI);
     }
@@ -228,7 +228,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final AccelerationMatrix asAcceleration(final AccelerationUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AccelerationUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(AccelerationUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AccelerationMatrix", this.toString());
         AccelerationMatrix result = new AccelerationMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -241,7 +241,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final AmountOfSubstanceMatrix asAmountOfSubstance()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AmountOfSubstanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(AmountOfSubstanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AmountOfSubstanceMatrix", this.toString());
         return new AmountOfSubstanceMatrix(this.data, AmountOfSubstanceUnit.SI);
     }
@@ -253,7 +253,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final AmountOfSubstanceMatrix asAmountOfSubstance(final AmountOfSubstanceUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AmountOfSubstanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(AmountOfSubstanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AmountOfSubstanceMatrix", this.toString());
         AmountOfSubstanceMatrix result = new AmountOfSubstanceMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -266,7 +266,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final AreaMatrix asArea()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AreaUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(AreaUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AreaMatrix", this.toString());
         return new AreaMatrix(this.data, AreaUnit.SI);
     }
@@ -278,7 +278,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final AreaMatrix asArea(final AreaUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AreaUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(AreaUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AreaMatrix", this.toString());
         AreaMatrix result = new AreaMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -291,7 +291,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final CatalyticActivityMatrix asCatalyticActivity()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(CatalyticActivityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(CatalyticActivityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to CatalyticActivityMatrix", this.toString());
         return new CatalyticActivityMatrix(this.data, CatalyticActivityUnit.SI);
     }
@@ -303,7 +303,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final CatalyticActivityMatrix asCatalyticActivity(final CatalyticActivityUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(CatalyticActivityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(CatalyticActivityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to CatalyticActivityMatrix", this.toString());
         CatalyticActivityMatrix result = new CatalyticActivityMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -316,7 +316,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final DensityMatrix asDensity()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(DensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(DensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to DensityMatrix", this.toString());
         return new DensityMatrix(this.data, DensityUnit.SI);
     }
@@ -328,7 +328,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final DensityMatrix asDensity(final DensityUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(DensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(DensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to DensityMatrix", this.toString());
         DensityMatrix result = new DensityMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -341,7 +341,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final DimensionlessMatrix asDimensionless()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(DimensionlessUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(DimensionlessUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to DimensionlessMatrix", this.toString());
         return new DimensionlessMatrix(this.data, DimensionlessUnit.SI);
     }
@@ -353,7 +353,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final DimensionlessMatrix asDimensionless(final DimensionlessUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(DimensionlessUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(DimensionlessUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to DimensionlessMatrix", this.toString());
         DimensionlessMatrix result = new DimensionlessMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -366,7 +366,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalCapacitanceMatrix asElectricalCapacitance()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalCapacitanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalCapacitanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalCapacitanceMatrix", this.toString());
         return new ElectricalCapacitanceMatrix(this.data, ElectricalCapacitanceUnit.SI);
     }
@@ -378,7 +378,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalCapacitanceMatrix asElectricalCapacitance(final ElectricalCapacitanceUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalCapacitanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalCapacitanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalCapacitanceMatrix", this.toString());
         ElectricalCapacitanceMatrix result = new ElectricalCapacitanceMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -391,7 +391,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalChargeMatrix asElectricalCharge()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalChargeUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalChargeUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalChargeMatrix", this.toString());
         return new ElectricalChargeMatrix(this.data, ElectricalChargeUnit.SI);
     }
@@ -403,7 +403,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalChargeMatrix asElectricalCharge(final ElectricalChargeUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalChargeUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalChargeUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalChargeMatrix", this.toString());
         ElectricalChargeMatrix result = new ElectricalChargeMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -416,7 +416,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalConductanceMatrix asElectricalConductance()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalConductanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalConductanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalConductanceMatrix", this.toString());
         return new ElectricalConductanceMatrix(this.data, ElectricalConductanceUnit.SI);
     }
@@ -428,7 +428,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalConductanceMatrix asElectricalConductance(final ElectricalConductanceUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalConductanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalConductanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalConductanceMatrix", this.toString());
         ElectricalConductanceMatrix result = new ElectricalConductanceMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -441,7 +441,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalCurrentMatrix asElectricalCurrent()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalCurrentUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalCurrentUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalCurrentMatrix", this.toString());
         return new ElectricalCurrentMatrix(this.data, ElectricalCurrentUnit.SI);
     }
@@ -453,7 +453,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalCurrentMatrix asElectricalCurrent(final ElectricalCurrentUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalCurrentUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalCurrentUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalCurrentMatrix", this.toString());
         ElectricalCurrentMatrix result = new ElectricalCurrentMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -466,7 +466,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalInductanceMatrix asElectricalInductance()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalInductanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalInductanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalInductanceMatrix", this.toString());
         return new ElectricalInductanceMatrix(this.data, ElectricalInductanceUnit.SI);
     }
@@ -478,7 +478,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalInductanceMatrix asElectricalInductance(final ElectricalInductanceUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalInductanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalInductanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalInductanceMatrix", this.toString());
         ElectricalInductanceMatrix result = new ElectricalInductanceMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -491,7 +491,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalPotentialMatrix asElectricalPotential()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalPotentialUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalPotentialUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalPotentialMatrix", this.toString());
         return new ElectricalPotentialMatrix(this.data, ElectricalPotentialUnit.SI);
     }
@@ -503,7 +503,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalPotentialMatrix asElectricalPotential(final ElectricalPotentialUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalPotentialUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalPotentialUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalPotentialMatrix", this.toString());
         ElectricalPotentialMatrix result = new ElectricalPotentialMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -516,7 +516,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalResistanceMatrix asElectricalResistance()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalResistanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalResistanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalResistanceMatrix", this.toString());
         return new ElectricalResistanceMatrix(this.data, ElectricalResistanceUnit.SI);
     }
@@ -528,7 +528,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final ElectricalResistanceMatrix asElectricalResistance(final ElectricalResistanceUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalResistanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalResistanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ElectricalResistanceMatrix", this.toString());
         ElectricalResistanceMatrix result = new ElectricalResistanceMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -541,7 +541,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final EnergyMatrix asEnergy()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(EnergyUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(EnergyUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to EnergyMatrix", this.toString());
         return new EnergyMatrix(this.data, EnergyUnit.SI);
     }
@@ -553,7 +553,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final EnergyMatrix asEnergy(final EnergyUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(EnergyUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(EnergyUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to EnergyMatrix", this.toString());
         EnergyMatrix result = new EnergyMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -566,7 +566,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final EquivalentDoseMatrix asEquivalentDose()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(EquivalentDoseUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(EquivalentDoseUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to EquivalentDoseMatrix", this.toString());
         return new EquivalentDoseMatrix(this.data, EquivalentDoseUnit.SI);
     }
@@ -578,7 +578,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final EquivalentDoseMatrix asEquivalentDose(final EquivalentDoseUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(EquivalentDoseUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(EquivalentDoseUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to EquivalentDoseMatrix", this.toString());
         EquivalentDoseMatrix result = new EquivalentDoseMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -591,7 +591,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final FlowMassMatrix asFlowMass()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(FlowMassUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(FlowMassUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FlowMassMatrix", this.toString());
         return new FlowMassMatrix(this.data, FlowMassUnit.SI);
     }
@@ -603,7 +603,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final FlowMassMatrix asFlowMass(final FlowMassUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(FlowMassUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(FlowMassUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FlowMassMatrix", this.toString());
         FlowMassMatrix result = new FlowMassMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -616,7 +616,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final FlowVolumeMatrix asFlowVolume()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(FlowVolumeUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(FlowVolumeUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FlowVolumeMatrix", this.toString());
         return new FlowVolumeMatrix(this.data, FlowVolumeUnit.SI);
     }
@@ -628,7 +628,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final FlowVolumeMatrix asFlowVolume(final FlowVolumeUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(FlowVolumeUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(FlowVolumeUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FlowVolumeMatrix", this.toString());
         FlowVolumeMatrix result = new FlowVolumeMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -641,7 +641,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final ForceMatrix asForce()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ForceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ForceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ForceMatrix", this.toString());
         return new ForceMatrix(this.data, ForceUnit.SI);
     }
@@ -653,7 +653,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final ForceMatrix asForce(final ForceUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ForceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ForceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to ForceMatrix", this.toString());
         ForceMatrix result = new ForceMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -666,7 +666,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final FrequencyMatrix asFrequency()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(FrequencyUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(FrequencyUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FrequencyMatrix", this.toString());
         return new FrequencyMatrix(this.data, FrequencyUnit.SI);
     }
@@ -678,7 +678,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final FrequencyMatrix asFrequency(final FrequencyUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(FrequencyUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(FrequencyUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FrequencyMatrix", this.toString());
         FrequencyMatrix result = new FrequencyMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -691,7 +691,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final IlluminanceMatrix asIlluminance()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(IlluminanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(IlluminanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to IlluminanceMatrix", this.toString());
         return new IlluminanceMatrix(this.data, IlluminanceUnit.SI);
     }
@@ -703,7 +703,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final IlluminanceMatrix asIlluminance(final IlluminanceUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(IlluminanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(IlluminanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to IlluminanceMatrix", this.toString());
         IlluminanceMatrix result = new IlluminanceMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -716,7 +716,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final LinearDensityMatrix asLinearDensity()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(LinearDensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(LinearDensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to LinearDensityMatrix", this.toString());
         return new LinearDensityMatrix(this.data, LinearDensityUnit.SI);
     }
@@ -728,7 +728,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final LinearDensityMatrix asLinearDensity(final LinearDensityUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(LinearDensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(LinearDensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to LinearDensityMatrix", this.toString());
         LinearDensityMatrix result = new LinearDensityMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -741,7 +741,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final LuminousFluxMatrix asLuminousFlux()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(LuminousFluxUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(LuminousFluxUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to LuminousFluxMatrix", this.toString());
         return new LuminousFluxMatrix(this.data, LuminousFluxUnit.SI);
     }
@@ -753,7 +753,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final LuminousFluxMatrix asLuminousFlux(final LuminousFluxUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(LuminousFluxUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(LuminousFluxUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to LuminousFluxMatrix", this.toString());
         LuminousFluxMatrix result = new LuminousFluxMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -766,7 +766,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final LuminousIntensityMatrix asLuminousIntensity()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(LuminousIntensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(LuminousIntensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to LuminousIntensityMatrix", this.toString());
         return new LuminousIntensityMatrix(this.data, LuminousIntensityUnit.SI);
     }
@@ -778,7 +778,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final LuminousIntensityMatrix asLuminousIntensity(final LuminousIntensityUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(LuminousIntensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(LuminousIntensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to LuminousIntensityMatrix", this.toString());
         LuminousIntensityMatrix result = new LuminousIntensityMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -791,7 +791,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final MagneticFluxDensityMatrix asMagneticFluxDensity()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(MagneticFluxDensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(MagneticFluxDensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to MagneticFluxDensityMatrix", this.toString());
         return new MagneticFluxDensityMatrix(this.data, MagneticFluxDensityUnit.SI);
     }
@@ -803,7 +803,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final MagneticFluxDensityMatrix asMagneticFluxDensity(final MagneticFluxDensityUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(MagneticFluxDensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(MagneticFluxDensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to MagneticFluxDensityMatrix", this.toString());
         MagneticFluxDensityMatrix result = new MagneticFluxDensityMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -816,7 +816,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final MagneticFluxMatrix asMagneticFlux()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(MagneticFluxUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(MagneticFluxUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to MagneticFluxMatrix", this.toString());
         return new MagneticFluxMatrix(this.data, MagneticFluxUnit.SI);
     }
@@ -828,7 +828,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final MagneticFluxMatrix asMagneticFlux(final MagneticFluxUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(MagneticFluxUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(MagneticFluxUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to MagneticFluxMatrix", this.toString());
         MagneticFluxMatrix result = new MagneticFluxMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -841,7 +841,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final MassMatrix asMass()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(MassUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(MassUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to MassMatrix", this.toString());
         return new MassMatrix(this.data, MassUnit.SI);
     }
@@ -853,7 +853,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final MassMatrix asMass(final MassUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(MassUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(MassUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to MassMatrix", this.toString());
         MassMatrix result = new MassMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -866,7 +866,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final PowerMatrix asPower()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(PowerUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(PowerUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to PowerMatrix", this.toString());
         return new PowerMatrix(this.data, PowerUnit.SI);
     }
@@ -878,7 +878,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final PowerMatrix asPower(final PowerUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(PowerUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(PowerUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to PowerMatrix", this.toString());
         PowerMatrix result = new PowerMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -891,7 +891,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final PressureMatrix asPressure()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(PressureUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(PressureUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to PressureMatrix", this.toString());
         return new PressureMatrix(this.data, PressureUnit.SI);
     }
@@ -903,7 +903,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final PressureMatrix asPressure(final PressureUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(PressureUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(PressureUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to PressureMatrix", this.toString());
         PressureMatrix result = new PressureMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -916,7 +916,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final RadioActivityMatrix asRadioActivity()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(RadioActivityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(RadioActivityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to RadioActivityMatrix", this.toString());
         return new RadioActivityMatrix(this.data, RadioActivityUnit.SI);
     }
@@ -928,7 +928,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final RadioActivityMatrix asRadioActivity(final RadioActivityUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(RadioActivityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(RadioActivityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to RadioActivityMatrix", this.toString());
         RadioActivityMatrix result = new RadioActivityMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -941,7 +941,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final SolidAngleMatrix asSolidAngle()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(SolidAngleUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(SolidAngleUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to SolidAngleMatrix", this.toString());
         return new SolidAngleMatrix(this.data, SolidAngleUnit.SI);
     }
@@ -953,7 +953,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final SolidAngleMatrix asSolidAngle(final SolidAngleUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(SolidAngleUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(SolidAngleUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to SolidAngleMatrix", this.toString());
         SolidAngleMatrix result = new SolidAngleMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -966,7 +966,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final SpeedMatrix asSpeed()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(SpeedUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(SpeedUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to SpeedMatrix", this.toString());
         return new SpeedMatrix(this.data, SpeedUnit.SI);
     }
@@ -978,7 +978,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final SpeedMatrix asSpeed(final SpeedUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(SpeedUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(SpeedUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to SpeedMatrix", this.toString());
         SpeedMatrix result = new SpeedMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -991,7 +991,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final TorqueMatrix asTorque()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(TorqueUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(TorqueUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to TorqueMatrix", this.toString());
         return new TorqueMatrix(this.data, TorqueUnit.SI);
     }
@@ -1003,7 +1003,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final TorqueMatrix asTorque(final TorqueUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(TorqueUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(TorqueUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to TorqueMatrix", this.toString());
         TorqueMatrix result = new TorqueMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -1016,7 +1016,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final VolumeMatrix asVolume()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(VolumeUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(VolumeUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to VolumeMatrix", this.toString());
         return new VolumeMatrix(this.data, VolumeUnit.SI);
     }
@@ -1028,7 +1028,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final VolumeMatrix asVolume(final VolumeUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(VolumeUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(VolumeUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to VolumeMatrix", this.toString());
         VolumeMatrix result = new VolumeMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -1041,7 +1041,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final AngleMatrix asAngle()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AngleUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(AngleUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AngleMatrix", this.toString());
         return new AngleMatrix(this.data, AngleUnit.SI);
     }
@@ -1053,7 +1053,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final AngleMatrix asAngle(final AngleUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AngleUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(AngleUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to AngleMatrix", this.toString());
         AngleMatrix result = new AngleMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -1066,7 +1066,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final LengthMatrix asLength()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(LengthUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(LengthUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to LengthMatrix", this.toString());
         return new LengthMatrix(this.data, LengthUnit.SI);
     }
@@ -1078,7 +1078,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final LengthMatrix asLength(final LengthUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(LengthUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(LengthUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to LengthMatrix", this.toString());
         LengthMatrix result = new LengthMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -1091,7 +1091,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final TemperatureMatrix asTemperature()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(TemperatureUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(TemperatureUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to TemperatureMatrix", this.toString());
         return new TemperatureMatrix(this.data, TemperatureUnit.SI);
     }
@@ -1103,7 +1103,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final TemperatureMatrix asTemperature(final TemperatureUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(TemperatureUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(TemperatureUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to TemperatureMatrix", this.toString());
         TemperatureMatrix result = new TemperatureMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -1116,7 +1116,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final DurationMatrix asDuration()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(DurationUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(DurationUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to DurationMatrix", this.toString());
         return new DurationMatrix(this.data, DurationUnit.SI);
     }
@@ -1128,7 +1128,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
      */
     public final DurationMatrix asDuration(final DurationUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(DurationUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(DurationUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to DurationMatrix", this.toString());
         DurationMatrix result = new DurationMatrix(this.data, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
