@@ -15,14 +15,14 @@ import java.lang.reflect.Modifier;
 public final class GenerateStaticUNITS
 {
     /** the standard units. */
-    private static final String[] STANDARD_UNITS = new String[] {"AbsoluteTemperatureUnit", "AccelerationUnit", "AngleUnit",
+    private static final String[] STANDARD_UNITS = new String[] { "AbsoluteTemperatureUnit", "AccelerationUnit", "AngleUnit",
             "AreaUnit", "DensityUnit", "DimensionlessUnit", "DirectionUnit", "DurationUnit", "ElectricalChargeUnit",
             "ElectricalCurrentUnit", "ElectricalPotentialUnit", "ElectricalResistanceUnit", "EnergyUnit", "FlowMassUnit",
             "FlowVolumeUnit", "ForceUnit", "FrequencyUnit", "LengthUnit", "LinearDensityUnit", "MassUnit", "PositionUnit",
             "PowerUnit", "PressureUnit", "SolidAngleUnit", "SpeedUnit", "TemperatureUnit", "TimeUnit", "TorqueUnit",
             "VolumeUnit", "AbsorbedDoseUnit", "AmountOfSubstanceUnit", "CatalyticActivityUnit", "ElectricalCapacitanceUnit",
             "ElectricalConductanceUnit", "ElectricalInductanceUnit", "EquivalentDoseUnit", "IlluminanceUnit",
-            "LuminousFluxUnit", "LuminousIntensityUnit", "MagneticFluxDensityUnit", "MagneticFluxUnit", "RadioActivityUnit"};
+            "LuminousFluxUnit", "LuminousIntensityUnit", "MagneticFluxDensityUnit", "MagneticFluxUnit", "RadioActivityUnit" };
 
     /**
      * 
@@ -39,75 +39,77 @@ public final class GenerateStaticUNITS
     {
         for (String className : STANDARD_UNITS)
         {
-            if (!className.contains("Dimensionless"))
+            System.out.println();
+            System.out.println(
+                    "    /****************************************************************************************************************/");
+            String s =
+                    "    /******************************************************XX********************************************************/";
+            String cs = className.toUpperCase().replace("UNIT", "");
+            int i = cs.length() + 2;
+            cs = (i % 2 == 1) ? cs + " " : cs;
+            i = (i % 2 == 1) ? i + 2 : i;
+            i = i / 2;
+            s = s.replace("********************".substring(0, i - 1) + "X", " " + cs + " ");
+            s = s.replace("X********************".substring(0, i), "");
+            System.out.println(s);
+            System.out.println(
+                    "    /****************************************************************************************************************/");
+            System.out.println();
+
+            @SuppressWarnings("rawtypes")
+            Class c;
+            try
             {
-                System.out.println();
-                System.out.println(
-                        "    /****************************************************************************************************************/");
-                String s =
-                        "    /******************************************************XX********************************************************/";
-                String cs = className.toUpperCase().replace("UNIT", "");
-                int i = cs.length() + 2;
-                cs = (i % 2 == 1) ? cs + " " : cs;
-                i = (i % 2 == 1) ? i + 2 : i;
-                i = i / 2;
-                s = s.replace("********************".substring(0, i - 1) + "X", " " + cs + " ");
-                s = s.replace("X********************".substring(0, i), "");
-                System.out.println(s);
-                System.out.println(
-                        "    /****************************************************************************************************************/");
-                System.out.println();
+                c = Class.forName("org.djunits.unit." + className);
+            }
+            catch (Exception exception)
+            {
+                System.err.println("Could not find unit " + className);
+                System.exit(-1);
+                return;
+            }
 
-                @SuppressWarnings("rawtypes")
-                Class c;
-                try
+            int l = 0;
+            for (Field f : c.getFields())
+            {
+                if (Modifier.isPublic(f.getModifiers()) && Modifier.isStatic(f.getModifiers())
+                        && Modifier.isFinal(f.getModifiers()) && !f.getName().equals("SI")
+                        && !f.getName().equals("STANDARD_UNITS"))
                 {
-                    c = Class.forName("org.djunits.unit." + className);
-                }
-                catch (Exception exception)
-                {
-                    System.err.println("Could not find unit " + className);
-                    System.exit(-1);
-                    return;
-                }
-
-                int l = 0;
-                for (Field f : c.getFields())
-                {
-                    if (Modifier.isPublic(f.getModifiers()) && Modifier.isStatic(f.getModifiers())
-                            && Modifier.isFinal(f.getModifiers()) && !f.getName().equals("SI")
-                            && !f.getName().equals("STANDARD_UNITS"))
+                    String n = f.getName();
+                    if (f.getName().contains("ELECTRONVOLT"))
                     {
-                        String n = f.getName();
-                        if (f.getName().contains("ELECTRONVOLT"))
-                        {
-                            n = cs.trim() + "_" + n;
-                        }
-                        l = Math.max(l, n.length());
+                        n = cs.trim() + "_" + n;
+                    }
+                    l = Math.max(l, n.length());
+                }
+            }
+
+            for (Field f : c.getFields())
+            {
+                if (Modifier.isPublic(f.getModifiers()) && Modifier.isStatic(f.getModifiers())
+                        && Modifier.isFinal(f.getModifiers()) && !f.getName().equals("SI")
+                        && !f.getName().equals("STANDARD_UNITS"))
+                {
+                    String n = f.getName();
+                    if (f.getName().contains("ELECTRONVOLT"))
+                    {
+                        n = cs.trim() + "_" + n;
+                    }
+
+                    if (!n.equals("BASE") && !n.equals("DEFAULT"))
+                    {
+                        if (c.getSimpleName().equals("AbsoluteTemperatureUnit") || c.getSimpleName().equals("PositionUnit"))
+                            n = n + "_ABS";
+                        System.out.println(String.format("    %-45s = %s;", c.getSimpleName() + " " + n,
+                                c.getSimpleName() + "." + f.getName()));
                     }
                 }
-
-                for (Field f : c.getFields())
-                {
-                    if (Modifier.isPublic(f.getModifiers()) && Modifier.isStatic(f.getModifiers())
-                            && Modifier.isFinal(f.getModifiers()) && !f.getName().equals("SI")
-                            && !f.getName().equals("STANDARD_UNITS"))
-                    {
-                        String n = f.getName();
-                        if (f.getName().contains("ELECTRONVOLT"))
-                        {
-                            n = cs.trim() + "_" + n;
-                        }
-
-                        if (!n.equals("BASE") && !n.equals("DEFAULT"))
-                        {
-                            if (c.getSimpleName().equals("AbsoluteTemperatureUnit") || c.getSimpleName().equals("PositionUnit"))
-                                n = n + "_ABS";
-                            System.out.println(String.format("    %-45s = %s;", c.getSimpleName() + " " + n,
-                                    c.getSimpleName() + "." + f.getName()));
-                        }
-                    }
-                }
+            }
+            if (className.contains("Dimensionless"))
+            {
+                System.out.println(String.format("    %-45s = %s;", c.getSimpleName() + " UNIT",
+                        c.getSimpleName() + ".SI"));
             }
         }
     }
