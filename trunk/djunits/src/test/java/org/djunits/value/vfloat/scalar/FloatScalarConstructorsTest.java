@@ -8,8 +8,8 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.Unit;
-import org.djunits.unit.base.UnitBase;
-import org.djunits.unit.base.UnitTypes;
+import org.djunits.unit.quantity.Quantities;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.util.UNITS;
 import org.djunits.value.CLASSNAMES;
 import org.djunits.value.vfloat.scalar.base.FloatScalarInterface;
@@ -44,10 +44,10 @@ public class FloatScalarConstructorsTest implements UNITS
 
         for (String className : CLASSNAMES.ALL_NODIM_LIST)
         {
-            UnitBase<?> unitBase = UnitTypes.INSTANCE.getUnitBase(className + "Unit");
+            Quantity<?> quantity = Quantities.INSTANCE.getQuantity(className + "Unit");
             String scalarClassName = "org.djunits.value.vfloat.scalar.Float" + className;
             Class<?> scalarClass = Class.forName(scalarClassName);
-            Unit<?> standardUnit = unitBase.getStandardUnit();
+            Unit<?> standardUnit = quantity.getStandardUnit();
             Constructor<?> constructor = scalarClass.getConstructor(float.class, standardUnit.getClass());
             float testValue = 123.456f;
             Object[] args = new Object[] {testValue, standardUnit};

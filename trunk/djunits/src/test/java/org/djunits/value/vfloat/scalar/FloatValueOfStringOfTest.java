@@ -94,7 +94,7 @@ public class FloatValueOfStringOfTest
             }
 
             // loop over all the unit types
-            for (Unit<?> unit : unitSI.getUnitBase().getUnitsById().values())
+            for (Unit<?> unit : unitSI.getQuantity().getUnitsById().values())
             {
                 // FLOAT -- PREVENT UNDERFLOW / OVERFLOW
                 if (unit.getScale().toStandardUnit(1.0) > 1.0E30 || 1.0 / unit.getScale().toStandardUnit(1.0) > 1.0E30)

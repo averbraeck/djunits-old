@@ -20,8 +20,8 @@ import org.djunits.unit.LengthUnit;
 import org.djunits.unit.SIUnit;
 import org.djunits.unit.TemperatureUnit;
 import org.djunits.unit.Unit;
-import org.djunits.unit.base.UnitBase;
-import org.djunits.unit.base.UnitTypes;
+import org.djunits.unit.quantity.Quantities;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.GradeScale;
 import org.djunits.unit.scale.Scale;
 import org.djunits.unit.util.UNITS;
@@ -70,10 +70,10 @@ public class DoubleVectorConstructorsTest
 
         for (String scalarName : CLASSNAMES.ALL_NODIM_LIST)
         {
-            UnitBase<?> unitBase = UnitTypes.INSTANCE.getUnitBase(scalarName + "Unit");
+            Quantity<?> quantity = Quantities.INSTANCE.getQuantity(scalarName + "Unit");
             // double
             @SuppressWarnings("rawtypes")
-            Unit standardUnit = unitBase.getStandardUnit();
+            Unit standardUnit = quantity.getStandardUnit();
             double[] testValues = new double[] {0, 123.456d, 0, 0, 234.567d, 0, 0};
             int cardinality = 0;
             double zSum = 0;
@@ -595,10 +595,10 @@ public class DoubleVectorConstructorsTest
         for (String className : CLASSNAMES.ALL_NODIM_LIST)
         {
             // System.out.println("class name is " + className);
-            UnitBase<?> unitBase = UnitTypes.INSTANCE.getUnitBase(className + "Unit");
+            Quantity<?> quantity = Quantities.INSTANCE.getQuantity(className + "Unit");
             // double
             @SuppressWarnings("rawtypes")
-            Unit standardUnit = unitBase.getStandardUnit();
+            Unit standardUnit = quantity.getStandardUnit();
             double[] testValues = new double[] {0, 123.456d, 0, 0, -234.567d, 0};
             int cardinality = 0;
             double zSum = 0;
@@ -617,7 +617,7 @@ public class DoubleVectorConstructorsTest
             }
             for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
             {
-                SIVector siv = SIVector.instantiate(testValues, SIUnit.of(unitBase.getSiDimensions()), storageType);
+                SIVector siv = SIVector.instantiate(testValues, SIUnit.of(quantity.getSiDimensions()), storageType);
                 System.out.println(siv);
                 compareValues(testValues, siv.getValuesSI());
                 // assertEquals("Underlying standardUnit must match", standardUnit, siv.getUnit());
@@ -726,8 +726,8 @@ public class DoubleVectorConstructorsTest
                 for (iterator = siv.iterator(); iterator.hasNext();)
                 {
                     AbstractDoubleScalar<?, ?> s = (AbstractDoubleScalar<?, ?>) iterator.next();
-                    assertEquals("SIDimensions match", s.getDisplayUnit().getUnitBase().getSiDimensions(),
-                            unitBase.getSiDimensions());
+                    assertEquals("SIDimensions match", s.getDisplayUnit().getQuantity().getSiDimensions(),
+                            quantity.getSiDimensions());
                     assertEquals("value of scalar matches", s.getInUnit(), testValues[nextIndex], 0.001);
                     nextIndex++;
                     try
@@ -749,16 +749,16 @@ public class DoubleVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
-                siv = SIVector.instantiate(map, testValues.length, SIUnit.of(unitBase.getSiDimensions()), storageType);
+                siv = SIVector.instantiate(map, testValues.length, SIUnit.of(quantity.getSiDimensions()), storageType);
                 compareValues(testValues, siv.getValuesSI());
-                siv = SIVector.instantiate(list, SIUnit.of(unitBase.getSiDimensions()), storageType);
+                siv = SIVector.instantiate(list, SIUnit.of(quantity.getSiDimensions()), storageType);
                 compareValues(testValues, siv.getValuesSI());
-                siv = SIVector.of(testValues, standardUnit.getUnitBase().getSiDimensions().toString(true, true, true),
+                siv = SIVector.of(testValues, standardUnit.getQuantity().getSiDimensions().toString(true, true, true),
                         storageType);
                 compareValues(testValues, siv.getValuesSI());
-                siv = SIVector.of(list, unitBase.getSiDimensions().toString(true, true, true), storageType);
+                siv = SIVector.of(list, quantity.getSiDimensions().toString(true, true, true), storageType);
                 compareValues(testValues, siv.getValuesSI());
-                siv = SIVector.of(map, unitBase.getSiDimensions().toString(true, true, true), testValues.length, storageType);
+                siv = SIVector.of(map, quantity.getSiDimensions().toString(true, true, true), testValues.length, storageType);
                 compareValues(testValues, siv.getValuesSI());
             }
         }
@@ -943,11 +943,11 @@ public class DoubleVectorConstructorsTest
         }
 
         map.remove(-1); // Remove the offending entry
-        UnitBase<?> unitBase = UnitTypes.INSTANCE.getUnitBase("AbsoluteTemperature" + "Unit");
-        SIVector.instantiate(testValues, SIUnit.of(unitBase.getSiDimensions()), StorageType.DENSE);
+        Quantity<?> quantity = Quantities.INSTANCE.getQuantity("AbsoluteTemperature" + "Unit");
+        SIVector.instantiate(testValues, SIUnit.of(quantity.getSiDimensions()), StorageType.DENSE);
         try
         {
-            SIVector.instantiate((double[]) null, SIUnit.of(unitBase.getSiDimensions()), StorageType.DENSE);
+            SIVector.instantiate((double[]) null, SIUnit.of(quantity.getSiDimensions()), StorageType.DENSE);
             fail("null pointer should have thrown an exception");
         }
         catch (NullPointerException npe)
@@ -957,7 +957,7 @@ public class DoubleVectorConstructorsTest
 
         try
         {
-            SIVector.instantiate((List<Double>) null, SIUnit.of(unitBase.getSiDimensions()), StorageType.DENSE);
+            SIVector.instantiate((List<Double>) null, SIUnit.of(quantity.getSiDimensions()), StorageType.DENSE);
             fail("null pointer should have thrown an exception");
         }
         catch (NullPointerException npe)
@@ -977,7 +977,7 @@ public class DoubleVectorConstructorsTest
 
         try
         {
-            SIVector.instantiate(testValues, SIUnit.of(unitBase.getSiDimensions()), null);
+            SIVector.instantiate(testValues, SIUnit.of(quantity.getSiDimensions()), null);
             fail("null pointer should have thrown an exception");
         }
         catch (NullPointerException npe)
@@ -1060,8 +1060,8 @@ public class DoubleVectorConstructorsTest
             for (String type : CLASSNAMES.REL_LIST)
             {
                 Class.forName("org.djunits.unit." + type + "Unit");
-                UnitBase<U> unitBase = (UnitBase<U>) UnitTypes.INSTANCE.getUnitBase(type + "Unit");
-                for (U unit : unitBase.getUnitsById().values())
+                Quantity<U> quantity = (Quantity<U>) Quantities.INSTANCE.getQuantity(type + "Unit");
+                for (U unit : quantity.getUnitsById().values())
                 {
                     for (StorageType storageType2 : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
                     {
@@ -1137,8 +1137,8 @@ public class DoubleVectorConstructorsTest
             for (String type : CLASSNAMES.REL_WITH_ABS_LIST)
             {
                 Class.forName("org.djunits.unit." + type + "Unit");
-                UnitBase<U> unitBase = (UnitBase<U>) UnitTypes.INSTANCE.getUnitBase(type + "Unit");
-                for (U unit : unitBase.getUnitsById().values())
+                Quantity<U> quantity = (Quantity<U>) Quantities.INSTANCE.getQuantity(type + "Unit");
+                for (U unit : quantity.getUnitsById().values())
                 {
                     for (StorageType storageType2 : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
                     {
@@ -1208,18 +1208,18 @@ public class DoubleVectorConstructorsTest
             for (String type : CLASSNAMES.REL_LIST)
             {
                 Class.forName("org.djunits.unit." + type + "Unit");
-                UnitBase<U> unitBase = (UnitBase<U>) UnitTypes.INSTANCE.getUnitBase(type + "Unit");
-                for (U unit : unitBase.getUnitsById().values())
+                Quantity<U> quantity = (Quantity<U>) Quantities.INSTANCE.getQuantity(type + "Unit");
+                for (U unit : quantity.getUnitsById().values())
                 {
                     for (StorageType storageType2 : new StorageType[] {StorageType.DENSE, storageType})
                     {
-                        SIUnit siUnit = SIUnit.of(unit.getUnitBase().getSiDimensions());
+                        SIUnit siUnit = SIUnit.of(unit.getQuantity().getSiDimensions());
                         SIVector vector = SIVector.instantiate(testValues, siUnit, storageType2);
                         Method asMethod = SIVector.class.getDeclaredMethod("as", Unit.class);
                         AbstractDoubleVectorRel<U, ?, ?> asVector =
                                 (AbstractDoubleVectorRel<U, ?, ?>) asMethod.invoke(vector, siUnit);
                         assertEquals(vector.getDisplayUnit().getStandardUnit(), asVector.getDisplayUnit());
-                        siUnit = SIUnit.of(AbsoluteTemperatureUnit.KELVIN.getUnitBase().getSiDimensions());
+                        siUnit = SIUnit.of(AbsoluteTemperatureUnit.KELVIN.getQuantity().getSiDimensions());
                         compareValues(testValues, asVector.getValuesSI());
                         try
                         {

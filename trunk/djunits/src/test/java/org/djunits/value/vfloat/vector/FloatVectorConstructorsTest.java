@@ -17,8 +17,8 @@ import org.djunits.unit.AbsoluteTemperatureUnit;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.SIUnit;
 import org.djunits.unit.Unit;
-import org.djunits.unit.base.UnitBase;
-import org.djunits.unit.base.UnitTypes;
+import org.djunits.unit.quantity.Quantities;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.GradeScale;
 import org.djunits.unit.scale.Scale;
 import org.djunits.unit.util.UNITS;
@@ -65,10 +65,10 @@ public class FloatVectorConstructorsTest
 
         for (String className : CLASSNAMES.ALL_NODIM_LIST)
         {
-            UnitBase<?> unitBase = UnitTypes.INSTANCE.getUnitBase(className + "Unit");
+            Quantity<?> quantity = Quantities.INSTANCE.getQuantity(className + "Unit");
             // float
             @SuppressWarnings("rawtypes")
-            Unit standardUnit = unitBase.getStandardUnit();
+            Unit standardUnit = quantity.getStandardUnit();
             float[] testValues = new float[] {0, 123.456f, 0, 0, 234.567f, 0, 0};
             int cardinality = 0;
             double zSum = 0;
@@ -590,10 +590,10 @@ public class FloatVectorConstructorsTest
         for (String className : CLASSNAMES.ALL_NODIM_LIST)
         {
             System.out.println("class name is " + className);
-            UnitBase<?> unitBase = UnitTypes.INSTANCE.getUnitBase(className + "Unit");
+            Quantity<?> quantity = Quantities.INSTANCE.getQuantity(className + "Unit");
             // float
             @SuppressWarnings("rawtypes")
-            Unit standardUnit = unitBase.getStandardUnit();
+            Unit standardUnit = quantity.getStandardUnit();
             float[] testValues = new float[] {0, 123.456f, 0, 0, 234.567f, 0};
             int cardinality = 0;
             double zSum = 0;
@@ -612,7 +612,7 @@ public class FloatVectorConstructorsTest
             }
             for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
             {
-                FloatSIVector siv = FloatVector.instantiate(testValues, SIUnit.of(unitBase.getSiDimensions()), storageType);
+                FloatSIVector siv = FloatVector.instantiate(testValues, SIUnit.of(quantity.getSiDimensions()), storageType);
                 System.out.println(siv);
                 compareValues(testValues, siv.getValuesSI());
                 // assertEquals("Underlying standardUnit must match", standardUnit, siv.getUnit());
@@ -721,8 +721,8 @@ public class FloatVectorConstructorsTest
                 for (iterator = siv.iterator(); iterator.hasNext();)
                 {
                     AbstractFloatScalar<?, ?> s = (AbstractFloatScalar<?, ?>) iterator.next();
-                    assertEquals("SIDimensions match", s.getDisplayUnit().getUnitBase().getSiDimensions(),
-                            unitBase.getSiDimensions());
+                    assertEquals("SIDimensions match", s.getDisplayUnit().getQuantity().getSiDimensions(),
+                            quantity.getSiDimensions());
                     assertEquals("value of scalar matches", s.getInUnit(), testValues[nextIndex], 0.001);
                     nextIndex++;
                     try
@@ -744,16 +744,16 @@ public class FloatVectorConstructorsTest
                 {
                     // Ignore expected exception
                 }
-                siv = FloatSIVector.instantiate(map, testValues.length, SIUnit.of(unitBase.getSiDimensions()), storageType);
+                siv = FloatSIVector.instantiate(map, testValues.length, SIUnit.of(quantity.getSiDimensions()), storageType);
                 compareValues(testValues, siv.getValuesSI());
-                siv = FloatVector.instantiate(list, SIUnit.of(unitBase.getSiDimensions()), storageType);
+                siv = FloatVector.instantiate(list, SIUnit.of(quantity.getSiDimensions()), storageType);
                 compareValues(testValues, siv.getValuesSI());
-                siv = FloatSIVector.of(testValues, standardUnit.getUnitBase().getSiDimensions().toString(true, true, true),
+                siv = FloatSIVector.of(testValues, standardUnit.getQuantity().getSiDimensions().toString(true, true, true),
                         storageType);
                 compareValues(testValues, siv.getValuesSI());
-                siv = FloatSIVector.of(list, unitBase.getSiDimensions().toString(true, true, true), storageType);
+                siv = FloatSIVector.of(list, quantity.getSiDimensions().toString(true, true, true), storageType);
                 compareValues(testValues, siv.getValuesSI());
-                siv = FloatSIVector.of(map, unitBase.getSiDimensions().toString(true, true, true), testValues.length,
+                siv = FloatSIVector.of(map, quantity.getSiDimensions().toString(true, true, true), testValues.length,
                         storageType);
                 compareValues(testValues, siv.getValuesSI());
             }
@@ -926,11 +926,11 @@ public class FloatVectorConstructorsTest
             // Ignore expected exception
         }
         map.remove(-1); // Remove the offending entry
-        UnitBase<?> unitBase = UnitTypes.INSTANCE.getUnitBase("AbsoluteTemperature" + "Unit");
-        FloatVector.instantiate(testValues, SIUnit.of(unitBase.getSiDimensions()), StorageType.DENSE);
+        Quantity<?> quantity = Quantities.INSTANCE.getQuantity("AbsoluteTemperature" + "Unit");
+        FloatVector.instantiate(testValues, SIUnit.of(quantity.getSiDimensions()), StorageType.DENSE);
         try
         {
-            FloatVector.instantiate((float[]) null, SIUnit.of(unitBase.getSiDimensions()), StorageType.DENSE);
+            FloatVector.instantiate((float[]) null, SIUnit.of(quantity.getSiDimensions()), StorageType.DENSE);
             fail("null pointer should have thrown an exception");
         }
         catch (NullPointerException vre)
@@ -948,7 +948,7 @@ public class FloatVectorConstructorsTest
         }
         try
         {
-            FloatVector.instantiate(testValues, SIUnit.of(unitBase.getSiDimensions()), null);
+            FloatVector.instantiate(testValues, SIUnit.of(quantity.getSiDimensions()), null);
             fail("null pointer should have thrown an exception");
         }
         catch (NullPointerException npe)

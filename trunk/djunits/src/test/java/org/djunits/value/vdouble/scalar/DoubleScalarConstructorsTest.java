@@ -8,8 +8,8 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.Unit;
-import org.djunits.unit.base.UnitBase;
-import org.djunits.unit.base.UnitTypes;
+import org.djunits.unit.quantity.Quantities;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -50,10 +50,10 @@ public class DoubleScalarConstructorsTest implements UNITS
 
         for (String className : CLASSNAMES.ALL_NODIM_LIST)
         {
-            UnitBase<?> unitBase = UnitTypes.INSTANCE.getUnitBase(className + "Unit");
+            Quantity<?> quantity = Quantities.INSTANCE.getQuantity(className + "Unit");
             String scalarClassName = "org.djunits.value.vdouble.scalar." + className;
             Class<?> scalarClass = Class.forName(scalarClassName);
-            Unit<?> standardUnit = unitBase.getStandardUnit();
+            Unit<?> standardUnit = quantity.getStandardUnit();
             Constructor<?> constructor = scalarClass.getConstructor(double.class, standardUnit.getClass());
             double testValue = 123.456d;
             Object[] args = new Object[] {testValue, standardUnit};
@@ -106,10 +106,10 @@ class BadUnitClass extends Unit<BadUnitClass>
     private static final long serialVersionUID = 1L;
 
     /** The base, with "m/s2" as the SI signature. */
-    public static final UnitBase<BadUnitClass> BASE = new UnitBase<>("m/s2", "m/s2");
+    public static final Quantity<BadUnitClass> BASE = new Quantity<>("m/s2", "m/s2");
 
     /** The SI unit for acceleration is m/s^2. */
     public static final BadUnitClass SI = new BadUnitClass()
-            .build(new Unit.Builder<BadUnitClass>().setUnitBase(BASE).setId("m/s2").setName("meter per second squared")
+            .build(new Unit.Builder<BadUnitClass>().setQuantity(BASE).setId("m/s2").setName("meter per second squared")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(IdentityScale.SCALE));
 }

@@ -13,8 +13,8 @@ import org.djunits.unit.LengthUnit;
 import org.djunits.unit.PositionUnit;
 import org.djunits.unit.TemperatureUnit;
 import org.djunits.unit.Unit;
-import org.djunits.unit.base.UnitBase;
-import org.djunits.unit.base.UnitTypes;
+import org.djunits.unit.quantity.Quantities;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.util.UNITS;
 import org.djunits.unit.util.UnitException;
 import org.djunits.value.CLASSNAMES;
@@ -125,8 +125,8 @@ public class DoubleScalarTest
         {
             String className = "org.djunits.value.vdouble.scalar." + type;
             Class<?> scalarClass = Class.forName(className);
-            UnitBase<?> unitBase = UnitTypes.INSTANCE.getUnitBase(type + "Unit");
-            for (Unit<?> unit : unitBase.getUnitsById().values())
+            Quantity<?> quantity = Quantities.INSTANCE.getQuantity(type + "Unit");
+            for (Unit<?> unit : quantity.getUnitsById().values())
             {
                 Method ofMethod = scalarClass.getDeclaredMethod("of", double.class, String.class);
                 for (String unitAbbreviation : unit.getAbbreviations())
@@ -177,14 +177,14 @@ public class DoubleScalarTest
                     (Class<? extends AbstractDoubleScalarRelWithAbs<?, ?, ?, ?>>) Class
                             .forName("org.djunits.value.vdouble.scalar." + relativeType);
             double relValue = 123.456;
-            for (Unit<?> relativeUnit : UnitTypes.INSTANCE.getUnitBase(relativeType + "Unit").getUnitsById().values())
+            for (Unit<?> relativeUnit : Quantities.INSTANCE.getQuantity(relativeType + "Unit").getUnitsById().values())
             {
                 Constructor<?> relConstructor = scalarClass.getConstructor(double.class, relativeUnit.getClass());
                 AbstractDoubleScalarRel<?, ?> relScalar =
                         (AbstractDoubleScalarRel<?, ?>) relConstructor.newInstance(relValue, relativeUnit);
                 double absValue = 234.567;
-                UnitBase<?> unitBase = UnitTypes.INSTANCE.getUnitBase(absoluteType + "Unit");
-                for (Unit<?> absoluteUnit : unitBase.getUnitsById().values())
+                Quantity<?> quantity = Quantities.INSTANCE.getQuantity(absoluteType + "Unit");
+                for (Unit<?> absoluteUnit : quantity.getUnitsById().values())
                 {
                     // Create an abs
                     Method instantiateAbsMethod =

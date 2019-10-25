@@ -93,7 +93,7 @@ public class DoubleValueOfStringOfTest
             }
 
             // loop over all the unit types
-            for (Unit<?> unit : unitSI.getUnitBase().getUnitsById().values())
+            for (Unit<?> unit : unitSI.getQuantity().getUnitsById().values())
             {
                 DoubleScalarInterface<?, ?> scalar = null;
                 try

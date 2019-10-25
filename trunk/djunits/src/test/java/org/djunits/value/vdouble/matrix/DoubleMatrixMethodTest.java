@@ -21,8 +21,8 @@ import org.djunits.unit.SIUnit;
 import org.djunits.unit.TemperatureUnit;
 import org.djunits.unit.TimeUnit;
 import org.djunits.unit.Unit;
-import org.djunits.unit.base.UnitBase;
-import org.djunits.unit.base.UnitTypes;
+import org.djunits.unit.quantity.Quantities;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.util.UnitException;
 import org.djunits.unit.util.UnitRuntimeException;
 import org.djunits.value.CLASSNAMES;
@@ -441,9 +441,9 @@ public class DoubleMatrixMethodTest
                         SIMatrix amTim = am.times(am2);
                         SIMatrix amDiv = am.divide(am2);
                         assertEquals("unit of m2 * m2 should be m4", "m4",
-                                amTim.getDisplayUnit().getUnitBase().getSiDimensions().toString(false, false, false));
+                                amTim.getDisplayUnit().getQuantity().getSiDimensions().toString(false, false, false));
                         assertEquals("unit of m2 / m2 should be 1", "1",
-                                amDiv.getDisplayUnit().getUnitBase().getSiDimensions().toString(false, false, false));
+                                amDiv.getDisplayUnit().getQuantity().getSiDimensions().toString(false, false, false));
                         for (int row = 0; row < testData.length; row++)
                         {
                             for (int col = 0; col < testData[0].length; col++)
@@ -904,18 +904,18 @@ public class DoubleMatrixMethodTest
             for (String type : CLASSNAMES.REL_LIST)
             {
                 Class.forName("org.djunits.unit." + type + "Unit");
-                UnitBase<U> unitBase = (UnitBase<U>) UnitTypes.INSTANCE.getUnitBase(type + "Unit");
-                for (U unit : unitBase.getUnitsById().values())
+                Quantity<U> quantity = (Quantity<U>) Quantities.INSTANCE.getQuantity(type + "Unit");
+                for (U unit : quantity.getUnitsById().values())
                 {
                     for (StorageType storageType2 : new StorageType[] {StorageType.DENSE, storageType})
                     {
-                        SIUnit siUnit = SIUnit.of(unit.getUnitBase().getSiDimensions());
+                        SIUnit siUnit = SIUnit.of(unit.getQuantity().getSiDimensions());
                         SIMatrix matrix = SIMatrix.instantiate(testValues, siUnit, storageType2);
                         Method asMethod = SIMatrix.class.getDeclaredMethod("as", Unit.class);
                         AbstractDoubleMatrixRel<U, ?, ?, ?> asMatrix =
                                 (AbstractDoubleMatrixRel<U, ?, ?, ?>) asMethod.invoke(matrix, siUnit);
                         assertEquals(matrix.getDisplayUnit().getStandardUnit(), asMatrix.getDisplayUnit());
-                        siUnit = SIUnit.of(AbsoluteTemperatureUnit.KELVIN.getUnitBase().getSiDimensions());
+                        siUnit = SIUnit.of(AbsoluteTemperatureUnit.KELVIN.getQuantity().getSiDimensions());
                         for (int row = 0; row < testValues.length; row++)
                         {
                             for (int col = 0; col < testValues[0].length; col++)

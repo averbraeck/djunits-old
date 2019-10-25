@@ -217,8 +217,8 @@ public abstract class DoubleScalar
      */
     public static SIScalar multiply(final DoubleScalarInterface.Rel<?, ?> left, final DoubleScalarInterface.Rel<?, ?> right)
     {
-        SIUnit targetUnit = Unit.lookupOrCreateUnitWithSIDimensions(left.getDisplayUnit().getUnitBase().getSiDimensions()
-                .plus(right.getDisplayUnit().getUnitBase().getSiDimensions()));
+        SIUnit targetUnit = Unit.lookupOrCreateUnitWithSIDimensions(left.getDisplayUnit().getQuantity().getSiDimensions()
+                .plus(right.getDisplayUnit().getQuantity().getSiDimensions()));
         return new SIScalar(left.getSI() * right.getSI(), targetUnit);
     }
 
@@ -230,8 +230,8 @@ public abstract class DoubleScalar
      */
     public static SIScalar divide(final DoubleScalarInterface.Rel<?, ?> left, final DoubleScalarInterface.Rel<?, ?> right)
     {
-        SIUnit targetUnit = Unit.lookupOrCreateUnitWithSIDimensions(left.getDisplayUnit().getUnitBase().getSiDimensions()
-                .minus(right.getDisplayUnit().getUnitBase().getSiDimensions()));
+        SIUnit targetUnit = Unit.lookupOrCreateUnitWithSIDimensions(left.getDisplayUnit().getQuantity().getSiDimensions()
+                .minus(right.getDisplayUnit().getQuantity().getSiDimensions()));
         return new SIScalar(left.getSI() / right.getSI(), targetUnit);
     }
 

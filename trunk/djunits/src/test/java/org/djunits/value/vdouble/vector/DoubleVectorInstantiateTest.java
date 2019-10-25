@@ -378,26 +378,26 @@ public class DoubleVectorInstantiateTest
         assertEquals(100, si10dd.size());
         assertEquals(100, si10dd.cardinality());
         assertEquals(50 * 101, si10dd.zSum().getSI(), 0.001);
-        assertEquals("m2/s3", si10dd.getDisplayUnit().getUnitBase().getSiDimensions().toString(true, false, false));
+        assertEquals("m2/s3", si10dd.getDisplayUnit().getQuantity().getSiDimensions().toString(true, false, false));
         assertEquals("getScalarClass returns SIScalar", SIScalar.class, si10dd.getScalarClass());
 
         SIVector si10ds = DoubleVector.instantiate(DOUBLEVECTOR.denseArray(100), SIUnit.of("m2/s3"), StorageType.SPARSE);
         assertEquals(100, si10ds.size());
         assertEquals(100, si10ds.cardinality());
         assertEquals(50 * 101, si10ds.zSum().getSI(), 0.001);
-        assertEquals("m2/s3", si10ds.getDisplayUnit().getUnitBase().getSiDimensions().toString(true, false, false));
+        assertEquals("m2/s3", si10ds.getDisplayUnit().getQuantity().getSiDimensions().toString(true, false, false));
 
         SIVector si10sd = DoubleVector.instantiate(DOUBLEVECTOR.sparseArray(100), SIUnit.of("m2/s3"), StorageType.DENSE);
         assertEquals(100, si10sd.size());
         assertEquals(10, si10sd.cardinality());
         assertEquals(5 * 11, si10sd.zSum().getSI(), 0.001);
-        assertEquals("m2/s3", si10sd.getDisplayUnit().getUnitBase().getSiDimensions().toString(true, false, false));
+        assertEquals("m2/s3", si10sd.getDisplayUnit().getQuantity().getSiDimensions().toString(true, false, false));
 
         SIVector si10ss = DoubleVector.instantiate(DOUBLEVECTOR.sparseArray(100), SIUnit.of("m2/s3"), StorageType.SPARSE);
         assertEquals(100, si10ss.size());
         assertEquals(10, si10ss.cardinality());
         assertEquals(5 * 11, si10ss.zSum().getSI(), 0.001);
-        assertEquals("m2/s3", si10ss.getDisplayUnit().getUnitBase().getSiDimensions().toString(true, false, false));
+        assertEquals("m2/s3", si10ss.getDisplayUnit().getQuantity().getSiDimensions().toString(true, false, false));
 
         assertEquals(si10dd, si10ds.toDense());
         assertEquals(si10ds, si10dd.toSparse());

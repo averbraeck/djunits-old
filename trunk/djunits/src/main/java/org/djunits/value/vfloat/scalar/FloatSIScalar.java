@@ -256,7 +256,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final <KU extends Unit<KU>, K extends AbstractFloatScalarRel<KU, K>> K as(final KU displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(displayUnit.getUnitBase().getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(displayUnit.getQuantity().getSiDimensions())),
                 UnitRuntimeException.class, "FloatSIScalar with unit %s cannot be converted to a scalar with unit %s",
                 getDisplayUnit(), displayUnit);
         K result = FloatScalar.instantiate(this.si, displayUnit.getStandardUnit());
@@ -270,7 +270,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatAbsorbedDose asAbsorbedDose()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AbsorbedDoseUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(AbsorbedDoseUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatAbsorbedDose", this.toString());
         return new FloatAbsorbedDose(getSI(), AbsorbedDoseUnit.SI);
     }
@@ -282,7 +282,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatAbsorbedDose asAbsorbedDose(final AbsorbedDoseUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AbsorbedDoseUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(AbsorbedDoseUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatAbsorbedDose", this.toString());
         FloatAbsorbedDose result = new FloatAbsorbedDose(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -295,7 +295,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatAcceleration asAcceleration()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AccelerationUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(AccelerationUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatAcceleration", this.toString());
         return new FloatAcceleration(getSI(), AccelerationUnit.SI);
     }
@@ -307,7 +307,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatAcceleration asAcceleration(final AccelerationUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AccelerationUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(AccelerationUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatAcceleration", this.toString());
         FloatAcceleration result = new FloatAcceleration(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -320,7 +320,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatAmountOfSubstance asAmountOfSubstance()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AmountOfSubstanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(AmountOfSubstanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatAmountOfSubstance", this.toString());
         return new FloatAmountOfSubstance(getSI(), AmountOfSubstanceUnit.SI);
     }
@@ -332,7 +332,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatAmountOfSubstance asAmountOfSubstance(final AmountOfSubstanceUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AmountOfSubstanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(AmountOfSubstanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatAmountOfSubstance", this.toString());
         FloatAmountOfSubstance result = new FloatAmountOfSubstance(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -345,7 +345,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatArea asArea()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AreaUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(AreaUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatArea", this.toString());
         return new FloatArea(getSI(), AreaUnit.SI);
     }
@@ -357,7 +357,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatArea asArea(final AreaUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AreaUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(AreaUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatArea", this.toString());
         FloatArea result = new FloatArea(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -370,7 +370,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatCatalyticActivity asCatalyticActivity()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(CatalyticActivityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(CatalyticActivityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatCatalyticActivity", this.toString());
         return new FloatCatalyticActivity(getSI(), CatalyticActivityUnit.SI);
     }
@@ -382,7 +382,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatCatalyticActivity asCatalyticActivity(final CatalyticActivityUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(CatalyticActivityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(CatalyticActivityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatCatalyticActivity", this.toString());
         FloatCatalyticActivity result = new FloatCatalyticActivity(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -395,7 +395,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatDensity asDensity()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(DensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(DensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatDensity", this.toString());
         return new FloatDensity(getSI(), DensityUnit.SI);
     }
@@ -407,7 +407,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatDensity asDensity(final DensityUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(DensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(DensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatDensity", this.toString());
         FloatDensity result = new FloatDensity(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -420,7 +420,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatDimensionless asDimensionless()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(DimensionlessUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(DimensionlessUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatDimensionless", this.toString());
         return new FloatDimensionless(getSI(), DimensionlessUnit.SI);
     }
@@ -432,7 +432,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatDimensionless asDimensionless(final DimensionlessUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(DimensionlessUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(DimensionlessUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatDimensionless", this.toString());
         FloatDimensionless result = new FloatDimensionless(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -445,7 +445,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatElectricalCapacitance asElectricalCapacitance()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalCapacitanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalCapacitanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatElectricalCapacitance", this.toString());
         return new FloatElectricalCapacitance(getSI(), ElectricalCapacitanceUnit.SI);
     }
@@ -457,7 +457,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatElectricalCapacitance asElectricalCapacitance(final ElectricalCapacitanceUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalCapacitanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalCapacitanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatElectricalCapacitance", this.toString());
         FloatElectricalCapacitance result = new FloatElectricalCapacitance(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -470,7 +470,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatElectricalCharge asElectricalCharge()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalChargeUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalChargeUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatElectricalCharge", this.toString());
         return new FloatElectricalCharge(getSI(), ElectricalChargeUnit.SI);
     }
@@ -482,7 +482,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatElectricalCharge asElectricalCharge(final ElectricalChargeUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalChargeUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalChargeUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatElectricalCharge", this.toString());
         FloatElectricalCharge result = new FloatElectricalCharge(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -495,7 +495,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatElectricalConductance asElectricalConductance()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalConductanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalConductanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatElectricalConductance", this.toString());
         return new FloatElectricalConductance(getSI(), ElectricalConductanceUnit.SI);
     }
@@ -507,7 +507,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatElectricalConductance asElectricalConductance(final ElectricalConductanceUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalConductanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalConductanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatElectricalConductance", this.toString());
         FloatElectricalConductance result = new FloatElectricalConductance(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -520,7 +520,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatElectricalCurrent asElectricalCurrent()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalCurrentUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalCurrentUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatElectricalCurrent", this.toString());
         return new FloatElectricalCurrent(getSI(), ElectricalCurrentUnit.SI);
     }
@@ -532,7 +532,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatElectricalCurrent asElectricalCurrent(final ElectricalCurrentUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalCurrentUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalCurrentUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatElectricalCurrent", this.toString());
         FloatElectricalCurrent result = new FloatElectricalCurrent(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -545,7 +545,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatElectricalInductance asElectricalInductance()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalInductanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalInductanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatElectricalInductance", this.toString());
         return new FloatElectricalInductance(getSI(), ElectricalInductanceUnit.SI);
     }
@@ -557,7 +557,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatElectricalInductance asElectricalInductance(final ElectricalInductanceUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalInductanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalInductanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatElectricalInductance", this.toString());
         FloatElectricalInductance result = new FloatElectricalInductance(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -570,7 +570,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatElectricalPotential asElectricalPotential()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalPotentialUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalPotentialUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatElectricalPotential", this.toString());
         return new FloatElectricalPotential(getSI(), ElectricalPotentialUnit.SI);
     }
@@ -582,7 +582,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatElectricalPotential asElectricalPotential(final ElectricalPotentialUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalPotentialUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalPotentialUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatElectricalPotential", this.toString());
         FloatElectricalPotential result = new FloatElectricalPotential(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -595,7 +595,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatElectricalResistance asElectricalResistance()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalResistanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalResistanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatElectricalResistance", this.toString());
         return new FloatElectricalResistance(getSI(), ElectricalResistanceUnit.SI);
     }
@@ -607,7 +607,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatElectricalResistance asElectricalResistance(final ElectricalResistanceUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ElectricalResistanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ElectricalResistanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatElectricalResistance", this.toString());
         FloatElectricalResistance result = new FloatElectricalResistance(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -620,7 +620,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatEnergy asEnergy()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(EnergyUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(EnergyUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatEnergy", this.toString());
         return new FloatEnergy(getSI(), EnergyUnit.SI);
     }
@@ -632,7 +632,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatEnergy asEnergy(final EnergyUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(EnergyUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(EnergyUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatEnergy", this.toString());
         FloatEnergy result = new FloatEnergy(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -645,7 +645,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatEquivalentDose asEquivalentDose()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(EquivalentDoseUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(EquivalentDoseUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatEquivalentDose", this.toString());
         return new FloatEquivalentDose(getSI(), EquivalentDoseUnit.SI);
     }
@@ -657,7 +657,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatEquivalentDose asEquivalentDose(final EquivalentDoseUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(EquivalentDoseUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(EquivalentDoseUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatEquivalentDose", this.toString());
         FloatEquivalentDose result = new FloatEquivalentDose(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -670,7 +670,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatFlowMass asFlowMass()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(FlowMassUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(FlowMassUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatFlowMass", this.toString());
         return new FloatFlowMass(getSI(), FlowMassUnit.SI);
     }
@@ -682,7 +682,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatFlowMass asFlowMass(final FlowMassUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(FlowMassUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(FlowMassUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatFlowMass", this.toString());
         FloatFlowMass result = new FloatFlowMass(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -695,7 +695,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatFlowVolume asFlowVolume()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(FlowVolumeUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(FlowVolumeUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatFlowVolume", this.toString());
         return new FloatFlowVolume(getSI(), FlowVolumeUnit.SI);
     }
@@ -707,7 +707,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatFlowVolume asFlowVolume(final FlowVolumeUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(FlowVolumeUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(FlowVolumeUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatFlowVolume", this.toString());
         FloatFlowVolume result = new FloatFlowVolume(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -720,7 +720,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatForce asForce()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ForceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ForceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatForce", this.toString());
         return new FloatForce(getSI(), ForceUnit.SI);
     }
@@ -732,7 +732,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatForce asForce(final ForceUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(ForceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(ForceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatForce", this.toString());
         FloatForce result = new FloatForce(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -745,7 +745,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatFrequency asFrequency()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(FrequencyUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(FrequencyUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatFrequency", this.toString());
         return new FloatFrequency(getSI(), FrequencyUnit.SI);
     }
@@ -757,7 +757,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatFrequency asFrequency(final FrequencyUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(FrequencyUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(FrequencyUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatFrequency", this.toString());
         FloatFrequency result = new FloatFrequency(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -770,7 +770,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatIlluminance asIlluminance()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(IlluminanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(IlluminanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatIlluminance", this.toString());
         return new FloatIlluminance(getSI(), IlluminanceUnit.SI);
     }
@@ -782,7 +782,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatIlluminance asIlluminance(final IlluminanceUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(IlluminanceUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(IlluminanceUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatIlluminance", this.toString());
         FloatIlluminance result = new FloatIlluminance(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -795,7 +795,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatLinearDensity asLinearDensity()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(LinearDensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(LinearDensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatLinearDensity", this.toString());
         return new FloatLinearDensity(getSI(), LinearDensityUnit.SI);
     }
@@ -807,7 +807,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatLinearDensity asLinearDensity(final LinearDensityUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(LinearDensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(LinearDensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatLinearDensity", this.toString());
         FloatLinearDensity result = new FloatLinearDensity(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -820,7 +820,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatLuminousFlux asLuminousFlux()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(LuminousFluxUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(LuminousFluxUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatLuminousFlux", this.toString());
         return new FloatLuminousFlux(getSI(), LuminousFluxUnit.SI);
     }
@@ -832,7 +832,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatLuminousFlux asLuminousFlux(final LuminousFluxUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(LuminousFluxUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(LuminousFluxUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatLuminousFlux", this.toString());
         FloatLuminousFlux result = new FloatLuminousFlux(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -845,7 +845,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatLuminousIntensity asLuminousIntensity()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(LuminousIntensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(LuminousIntensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatLuminousIntensity", this.toString());
         return new FloatLuminousIntensity(getSI(), LuminousIntensityUnit.SI);
     }
@@ -857,7 +857,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatLuminousIntensity asLuminousIntensity(final LuminousIntensityUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(LuminousIntensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(LuminousIntensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatLuminousIntensity", this.toString());
         FloatLuminousIntensity result = new FloatLuminousIntensity(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -870,7 +870,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatMagneticFluxDensity asMagneticFluxDensity()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(MagneticFluxDensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(MagneticFluxDensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatMagneticFluxDensity", this.toString());
         return new FloatMagneticFluxDensity(getSI(), MagneticFluxDensityUnit.SI);
     }
@@ -882,7 +882,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatMagneticFluxDensity asMagneticFluxDensity(final MagneticFluxDensityUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(MagneticFluxDensityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(MagneticFluxDensityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatMagneticFluxDensity", this.toString());
         FloatMagneticFluxDensity result = new FloatMagneticFluxDensity(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -895,7 +895,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatMagneticFlux asMagneticFlux()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(MagneticFluxUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(MagneticFluxUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatMagneticFlux", this.toString());
         return new FloatMagneticFlux(getSI(), MagneticFluxUnit.SI);
     }
@@ -907,7 +907,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatMagneticFlux asMagneticFlux(final MagneticFluxUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(MagneticFluxUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(MagneticFluxUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatMagneticFlux", this.toString());
         FloatMagneticFlux result = new FloatMagneticFlux(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -920,7 +920,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatMass asMass()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(MassUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(MassUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatMass", this.toString());
         return new FloatMass(getSI(), MassUnit.SI);
     }
@@ -932,7 +932,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatMass asMass(final MassUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(MassUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(MassUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatMass", this.toString());
         FloatMass result = new FloatMass(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -945,7 +945,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatPower asPower()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(PowerUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(PowerUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatPower", this.toString());
         return new FloatPower(getSI(), PowerUnit.SI);
     }
@@ -957,7 +957,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatPower asPower(final PowerUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(PowerUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(PowerUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatPower", this.toString());
         FloatPower result = new FloatPower(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -970,7 +970,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatPressure asPressure()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(PressureUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(PressureUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatPressure", this.toString());
         return new FloatPressure(getSI(), PressureUnit.SI);
     }
@@ -982,7 +982,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatPressure asPressure(final PressureUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(PressureUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(PressureUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatPressure", this.toString());
         FloatPressure result = new FloatPressure(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -995,7 +995,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatRadioActivity asRadioActivity()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(RadioActivityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(RadioActivityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatRadioActivity", this.toString());
         return new FloatRadioActivity(getSI(), RadioActivityUnit.SI);
     }
@@ -1007,7 +1007,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatRadioActivity asRadioActivity(final RadioActivityUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(RadioActivityUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(RadioActivityUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatRadioActivity", this.toString());
         FloatRadioActivity result = new FloatRadioActivity(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -1020,7 +1020,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatSolidAngle asSolidAngle()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(SolidAngleUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(SolidAngleUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatSolidAngle", this.toString());
         return new FloatSolidAngle(getSI(), SolidAngleUnit.SI);
     }
@@ -1032,7 +1032,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatSolidAngle asSolidAngle(final SolidAngleUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(SolidAngleUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(SolidAngleUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatSolidAngle", this.toString());
         FloatSolidAngle result = new FloatSolidAngle(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -1045,7 +1045,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatSpeed asSpeed()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(SpeedUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(SpeedUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatSpeed", this.toString());
         return new FloatSpeed(getSI(), SpeedUnit.SI);
     }
@@ -1057,7 +1057,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatSpeed asSpeed(final SpeedUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(SpeedUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(SpeedUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatSpeed", this.toString());
         FloatSpeed result = new FloatSpeed(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -1070,7 +1070,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatTorque asTorque()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(TorqueUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(TorqueUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatTorque", this.toString());
         return new FloatTorque(getSI(), TorqueUnit.SI);
     }
@@ -1082,7 +1082,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatTorque asTorque(final TorqueUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(TorqueUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(TorqueUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatTorque", this.toString());
         FloatTorque result = new FloatTorque(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -1095,7 +1095,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatVolume asVolume()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(VolumeUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(VolumeUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatVolume", this.toString());
         return new FloatVolume(getSI(), VolumeUnit.SI);
     }
@@ -1107,7 +1107,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatVolume asVolume(final VolumeUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(VolumeUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(VolumeUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatVolume", this.toString());
         FloatVolume result = new FloatVolume(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -1120,7 +1120,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatAngle asAngle()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AngleUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(AngleUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatAngle", this.toString());
         return new FloatAngle(getSI(), AngleUnit.SI);
     }
@@ -1132,7 +1132,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatAngle asAngle(final AngleUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(AngleUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(AngleUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatAngle", this.toString());
         FloatAngle result = new FloatAngle(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -1145,7 +1145,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatLength asLength()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(LengthUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(LengthUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatLength", this.toString());
         return new FloatLength(getSI(), LengthUnit.SI);
     }
@@ -1157,7 +1157,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatLength asLength(final LengthUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(LengthUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(LengthUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatLength", this.toString());
         FloatLength result = new FloatLength(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -1170,7 +1170,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatTemperature asTemperature()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(TemperatureUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(TemperatureUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatTemperature", this.toString());
         return new FloatTemperature(getSI(), TemperatureUnit.SI);
     }
@@ -1182,7 +1182,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatTemperature asTemperature(final TemperatureUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(TemperatureUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(TemperatureUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatTemperature", this.toString());
         FloatTemperature result = new FloatTemperature(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
@@ -1195,7 +1195,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatDuration asDuration()
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(DurationUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(DurationUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatDuration", this.toString());
         return new FloatDuration(getSI(), DurationUnit.SI);
     }
@@ -1207,7 +1207,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public final FloatDuration asDuration(final DurationUnit displayUnit)
     {
-        Throw.when(!(getDisplayUnit().getUnitBase().getSiDimensions().equals(DurationUnit.BASE.getSiDimensions())),
+        Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(DurationUnit.BASE.getSiDimensions())),
                 UnitRuntimeException.class, "cannot cast %s to FloatDuration", this.toString());
         FloatDuration result = new FloatDuration(getSI(), displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);

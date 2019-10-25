@@ -11,8 +11,8 @@ import org.djunits.unit.AbsoluteLinearUnit;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.SIUnit;
 import org.djunits.unit.Unit;
-import org.djunits.unit.base.UnitBase;
-import org.djunits.unit.base.UnitTypes;
+import org.djunits.unit.quantity.Quantities;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.util.UNITS;
 import org.djunits.unit.util.UnitException;
 import org.djunits.unit.util.UnitRuntimeException;
@@ -76,8 +76,8 @@ public class FloatSIVectorTest
         for (String type : CLASSNAMES.REL_ALL_LIST)
         {
             Class.forName("org.djunits.unit." + type + "Unit");
-            UnitBase<RU> unitBase = (UnitBase<RU>) UnitTypes.INSTANCE.getUnitBase(type + "Unit");
-            for (RU unit : unitBase.getUnitsById().values())
+            Quantity<RU> quantity = (Quantity<RU>) Quantities.INSTANCE.getQuantity(type + "Unit");
+            for (RU unit : quantity.getUnitsById().values())
             {
                 AbstractFloatVectorRel<RU, R, RV> vector = (AbstractFloatVectorRel<RU, R, RV>) FloatVector
                         .instantiate(FloatVectorData.instantiate(denseTestData, unit.getScale(), StorageType.DENSE), unit);
@@ -135,8 +135,8 @@ public class FloatSIVectorTest
         for (String type : CLASSNAMES.ABS_LIST)
         {
             Class.forName("org.djunits.unit." + type + "Unit");
-            UnitBase<AU> unitBase = (UnitBase<AU>) UnitTypes.INSTANCE.getUnitBase(type + "Unit");
-            for (AU unit : unitBase.getUnitsById().values())
+            Quantity<AU> quantity = (Quantity<AU>) Quantities.INSTANCE.getQuantity(type + "Unit");
+            for (AU unit : quantity.getUnitsById().values())
             {
                 AbstractFloatVectorAbs<AU, A, AV, RU, R, RV> vector = (AbstractFloatVectorAbs<AU, A, AV, RU, R, RV>) FloatVector
                         .instantiate(FloatVectorData.instantiate(denseTestData, unit.getScale(), StorageType.DENSE), unit);
@@ -152,9 +152,9 @@ public class FloatSIVectorTest
                 A scalarAbs = vector.instantiateScalarSI(testValue, unit);
                 assertEquals("Scalar has correct value", testValue, scalarAbs.getSI(), 0.001);
                 assertEquals("Scalar ahs correct displayUnit", unit, scalarAbs.getDisplayUnit());
-                UnitBase<RU> relativeUnitBase = (UnitBase<RU>) UnitTypes.INSTANCE
-                        .getUnitBase(CLASSNAMES.REL_WITH_ABS_LIST.get(CLASSNAMES.ABS_LIST.indexOf(type)) + "Unit");
-                for (RU relativeUnit : relativeUnitBase.getUnitsById().values())
+                Quantity<RU> relativeQuantity = (Quantity<RU>) Quantities.INSTANCE
+                        .getQuantity(CLASSNAMES.REL_WITH_ABS_LIST.get(CLASSNAMES.ABS_LIST.indexOf(type)) + "Unit");
+                for (RU relativeUnit : relativeQuantity.getUnitsById().values())
                 {
                     R scalarRel = vector.instantiateScalarRelSI(testValue, relativeUnit);
                     assertEquals("display unit of scalarRel matches", relativeUnit, scalarRel.getDisplayUnit());
