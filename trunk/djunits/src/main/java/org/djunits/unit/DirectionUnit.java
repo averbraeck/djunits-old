@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.OffsetLinearScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -22,11 +22,11 @@ public class DirectionUnit extends AbsoluteLinearUnit<DirectionUnit, AngleUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "rad" as the SI signature. */
-    public static final UnitBase<DirectionUnit> BASE = new UnitBase<>("Direction", "rad");
+    public static final Quantity<DirectionUnit> BASE = new Quantity<>("Direction", "rad");
 
     /** The unit for direction with East as the origin and radians as the displacement. */
     public static final DirectionUnit EAST_RADIAN =
-            new DirectionUnit().build(new AbsoluteLinearUnit.Builder<DirectionUnit, AngleUnit>().setUnitBase(BASE)
+            new DirectionUnit().build(new AbsoluteLinearUnit.Builder<DirectionUnit, AngleUnit>().setQuantity(BASE)
                     .setId("rad(E)").setName("radians (East)").setDefaultDisplayAbbreviation("rad(E)")
                     .setDefaultTextualAbbreviation("rad(E)").setUnitSystem(UnitSystem.OTHER).setSiPrefixes(SIPrefixes.NONE, 1.0)
                     .setScale(new OffsetLinearScale(1.0, 0.0)).setRelativeUnit(AngleUnit.RADIAN));
@@ -36,21 +36,21 @@ public class DirectionUnit extends AbsoluteLinearUnit<DirectionUnit, AngleUnit>
 
     /** The unit for direction with East as the origin and degrees as the displacement. */
     public static final DirectionUnit EAST_DEGREE =
-            new DirectionUnit().build(new AbsoluteLinearUnit.Builder<DirectionUnit, AngleUnit>().setUnitBase(BASE)
+            new DirectionUnit().build(new AbsoluteLinearUnit.Builder<DirectionUnit, AngleUnit>().setQuantity(BASE)
                     .setId("deg(E)").setName("degrees (East)").setDefaultDisplayAbbreviation("\u00b0(E)")
                     .setDefaultTextualAbbreviation("deg(E)").setUnitSystem(UnitSystem.OTHER).setSiPrefixes(SIPrefixes.NONE, 1.0)
                     .setScale(new OffsetLinearScale(Math.PI / 180.0, 0.0)).setRelativeUnit(AngleUnit.DEGREE));
 
     /** The unit for direction with North as the origin and radians as the displacement. */
     public static final DirectionUnit NORTH_RADIAN =
-            new DirectionUnit().build(new AbsoluteLinearUnit.Builder<DirectionUnit, AngleUnit>().setUnitBase(BASE)
+            new DirectionUnit().build(new AbsoluteLinearUnit.Builder<DirectionUnit, AngleUnit>().setQuantity(BASE)
                     .setId("rad(N)").setName("radians (North)").setDefaultDisplayAbbreviation("rad(N)")
                     .setDefaultTextualAbbreviation("rad(N)").setUnitSystem(UnitSystem.OTHER).setSiPrefixes(SIPrefixes.NONE, 1.0)
                     .setScale(new OffsetLinearScale(1.0, Math.PI / 2.0)).setRelativeUnit(AngleUnit.RADIAN));
 
     /** The unit for direction with North as the origin and degrees as the displacement. */
     public static final DirectionUnit NORTH_DEGREE =
-            new DirectionUnit().build(new AbsoluteLinearUnit.Builder<DirectionUnit, AngleUnit>().setUnitBase(BASE)
+            new DirectionUnit().build(new AbsoluteLinearUnit.Builder<DirectionUnit, AngleUnit>().setQuantity(BASE)
                     .setId("deg(N)").setName("degrees (North)").setDefaultDisplayAbbreviation("\u00b0(N)")
                     .setDefaultTextualAbbreviation("deg(N)").setUnitSystem(UnitSystem.OTHER).setSiPrefixes(SIPrefixes.NONE, 1.0)
                     .setScale(new OffsetLinearScale(Math.PI / 180.0, 90.0)).setRelativeUnit(AngleUnit.DEGREE));

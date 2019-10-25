@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -19,11 +19,11 @@ public class AccelerationUnit extends Unit<AccelerationUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "m/s2" as the SI signature. */
-    public static final UnitBase<AccelerationUnit> BASE = new UnitBase<>("Acceleration", "m/s2");
+    public static final Quantity<AccelerationUnit> BASE = new Quantity<>("Acceleration", "m/s2");
 
     /** The SI unit for acceleration is m/s^2. */
     public static final AccelerationUnit SI = new AccelerationUnit()
-            .build(new Unit.Builder<AccelerationUnit>().setUnitBase(BASE).setId("m/s2").setName("meter per second squared")
+            .build(new Unit.Builder<AccelerationUnit>().setQuantity(BASE).setId("m/s2").setName("meter per second squared")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(IdentityScale.SCALE));
 
     /** m/s2. */

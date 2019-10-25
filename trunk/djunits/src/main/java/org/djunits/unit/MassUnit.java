@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.scale.LinearScale;
 import org.djunits.unit.si.SIPrefixes;
@@ -21,11 +21,11 @@ public class MassUnit extends Unit<MassUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "kg" as the SI signature. */
-    public static final UnitBase<MassUnit> BASE = new UnitBase<>("Mass", "kg");
+    public static final Quantity<MassUnit> BASE = new Quantity<>("Mass", "kg");
 
     /** The SI unit for mass is kilogram. */
     public static final MassUnit SI =
-            new MassUnit().build(new Unit.Builder<MassUnit>().setUnitBase(BASE).setId("kg").setName("kilogram")
+            new MassUnit().build(new Unit.Builder<MassUnit>().setQuantity(BASE).setId("kg").setName("kilogram")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.KILO, 1.0).setScale(IdentityScale.SCALE));
 
     /** kilogram. */
@@ -63,7 +63,7 @@ public class MassUnit extends Unit<MassUnit>
 
     /** electronvolt = 1.782661907E-36 kg. See http://physics.nist.gov/cuu/Constants/Table/allascii.txt. */
     public static final MassUnit ELECTRONVOLT = new MassUnit().build(
-            new Unit.Builder<MassUnit>().setUnitBase(BASE).setId("eV").setName("electronvolt").setUnitSystem(UnitSystem.OTHER)
+            new Unit.Builder<MassUnit>().setQuantity(BASE).setId("eV").setName("electronvolt").setUnitSystem(UnitSystem.OTHER)
                     .setSiPrefixes(SIPrefixes.UNIT_POS, 1.0).setScale(new LinearScale(1.782661907E-36)));
 
     /** microelectronvolt. */

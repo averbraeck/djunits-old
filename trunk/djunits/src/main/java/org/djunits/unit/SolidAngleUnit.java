@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -19,11 +19,11 @@ public class SolidAngleUnit extends Unit<SolidAngleUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "sr" as the SI signature. */
-    public static final UnitBase<SolidAngleUnit> BASE = new UnitBase<>("SolidAngle", "sr");
+    public static final Quantity<SolidAngleUnit> BASE = new Quantity<>("SolidAngle", "sr");
 
     /** The SI unit for solid angle is steradian. */
     public static final SolidAngleUnit SI =
-            new SolidAngleUnit().build(new Unit.Builder<SolidAngleUnit>().setUnitBase(BASE).setId("sr").setName("steradian")
+            new SolidAngleUnit().build(new Unit.Builder<SolidAngleUnit>().setQuantity(BASE).setId("sr").setName("steradian")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(IdentityScale.SCALE));
 
     /** steradian. */

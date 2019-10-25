@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.GradeScale;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.si.SIPrefixes;
@@ -24,18 +24,18 @@ public class AngleUnit extends Unit<AngleUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "rad" as the SI signature. */
-    public static final UnitBase<AngleUnit> BASE = new UnitBase<>("Angle", "rad");
+    public static final Quantity<AngleUnit> BASE = new Quantity<>("Angle", "rad");
 
     /** The SI unit for angle is radian. */
     public static final AngleUnit SI =
-            new AngleUnit().build(new Unit.Builder<AngleUnit>().setUnitBase(BASE).setId("rad").setName("radians")
+            new AngleUnit().build(new Unit.Builder<AngleUnit>().setQuantity(BASE).setId("rad").setName("radians")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(IdentityScale.SCALE));
 
     /** radian. */
     public static final AngleUnit RADIAN = SI;
 
     /** percent (non-linear, 100% is 45 degrees; 90 degrees is infinite). */
-    public static final AngleUnit PERCENT = new AngleUnit().build(new Unit.Builder<AngleUnit>().setUnitBase(BASE).setId("perc")
+    public static final AngleUnit PERCENT = new AngleUnit().build(new Unit.Builder<AngleUnit>().setQuantity(BASE).setId("perc")
             .setName("percent").setUnitSystem(UnitSystem.OTHER).setSiPrefixes(SIPrefixes.NONE, 1.0)
             .setScale(new GradeScale(0.01)).setDefaultDisplayAbbreviation("%").setDefaultTextualAbbreviation("%"));
 

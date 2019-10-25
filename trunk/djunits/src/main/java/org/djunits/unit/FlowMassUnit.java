@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -19,11 +19,11 @@ public class FlowMassUnit extends Unit<FlowMassUnit>
     private static final long serialVersionUID = 20140607L;
 
     /** The base, with "kg/s" as the SI signature. */
-    public static final UnitBase<FlowMassUnit> BASE = new UnitBase<>("FlowMass", "kg/s");
+    public static final Quantity<FlowMassUnit> BASE = new Quantity<>("FlowMass", "kg/s");
 
     /** The SI unit for mass flow rate is kg/s. */
     public static final FlowMassUnit SI = new FlowMassUnit()
-            .build(new Unit.Builder<FlowMassUnit>().setUnitBase(BASE).setId("kg/s").setName("kilogram per second")
+            .build(new Unit.Builder<FlowMassUnit>().setQuantity(BASE).setId("kg/s").setName("kilogram per second")
                     .setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(IdentityScale.SCALE));
 
     /** kg/s. */

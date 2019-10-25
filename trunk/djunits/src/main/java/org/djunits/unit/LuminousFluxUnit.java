@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -20,11 +20,11 @@ public class LuminousFluxUnit extends Unit<LuminousFluxUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "lumen" as the SI signature. */
-    public static final UnitBase<LuminousFluxUnit> BASE = new UnitBase<>("LuminousFlux", "srcd");
+    public static final Quantity<LuminousFluxUnit> BASE = new Quantity<>("LuminousFlux", "srcd");
 
     /** The SI unit for amount of luminous flux is Lumen. */
     public static final LuminousFluxUnit SI =
-            new LuminousFluxUnit().build(new Unit.Builder<LuminousFluxUnit>().setUnitBase(BASE).setId("lm").setName("lumen")
+            new LuminousFluxUnit().build(new Unit.Builder<LuminousFluxUnit>().setQuantity(BASE).setId("lm").setName("lumen")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** Mole. */

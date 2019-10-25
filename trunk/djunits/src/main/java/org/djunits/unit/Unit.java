@@ -6,8 +6,8 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.djunits.Throw;
-import org.djunits.unit.base.UnitBase;
-import org.djunits.unit.base.UnitTypes;
+import org.djunits.unit.quantity.Quantities;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.scale.LinearScale;
 import org.djunits.unit.scale.OffsetLinearScale;
@@ -65,7 +65,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
      * The corresponding unit base that contains all registered units for the unit as well as SI dimension information. The base
      * unit of a unit base is null.
      */
-    private UnitBase<U> unitBase;
+    private Quantity<U> quantity;
     
     // TODO create a static that loads all unit classes in the registry
 
@@ -101,7 +101,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
         Throw.when(builder.getId().length() == 0, UnitRuntimeException.class, "Constructing unit %s: id.length cannot be 0",
                 cName);
         String unitId = builder.getId();
-        Throw.whenNull(builder.getUnitBase(), "Constructing unit %s.%s: baseUnit cannot be null", cName, unitId);
+        Throw.whenNull(builder.getQuantity(), "Constructing unit %s.%s: baseUnit cannot be null", cName, unitId);
         Throw.whenNull(builder.getName(), "Constructing unit %s.%s: name cannot be null", cName, unitId);
         Throw.when(builder.getName().length() == 0, UnitRuntimeException.class,
                 "Constructing unit %s.%s: name.length cannot be 0", cName, unitId);
@@ -111,7 +111,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
         // set the key fields
         this.id = unitId;
         this.name = builder.getName();
-        this.unitBase = builder.getUnitBase();
+        this.quantity = builder.getQuantity();
         this.unitSystem = builder.getUnitSystem();
         this.scale = builder.getScale();
         this.generated = builder.isGenerated();
@@ -150,7 +150,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
         SIPrefixes siPrefixes = builder.getSiPrefixes() == null ? SIPrefixes.NONE : builder.getSiPrefixes();
 
         // Register the unit, possibly including all SI prefixes
-        this.unitBase.registerUnit((U) this, siPrefixes, builder.getSiPrefixPowerFactor());
+        this.quantity.registerUnit((U) this, siPrefixes, builder.getSiPrefixPowerFactor());
         return (U) this;
     }
 
@@ -196,7 +196,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
             Builder<U> builder = makeBuilder();
             builder.setId(cloneId);
             builder.setName(cloneName);
-            builder.setUnitBase(this.unitBase);
+            builder.setQuantity(this.quantity);
             builder.setSiPrefixes(SIPrefixes.NONE, 1.0);
             builder.setDefaultDisplayAbbreviation(cloneDefaultAbbreviation);
             builder.setDefaultTextualAbbreviation(cloneDefaultTextualAbbreviation);
@@ -284,7 +284,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
             Builder<U> builder = makeBuilder();
             builder.setId(cloneId);
             builder.setName(cloneName);
-            builder.setUnitBase(this.unitBase);
+            builder.setQuantity(this.quantity);
             builder.setSiPrefixes(SIPrefixes.NONE, 1.0);
             builder.setDefaultDisplayAbbreviation(cloneDefaultAbbreviation);
             builder.setDefaultTextualAbbreviation(cloneDefaultTextualAbbreviation);
@@ -351,7 +351,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
             Builder<U> builder = makeBuilder();
             builder.setId(cloneId);
             builder.setName(cloneName);
-            builder.setUnitBase(this.unitBase);
+            builder.setQuantity(this.quantity);
             builder.setSiPrefixes(SIPrefixes.NONE, 1.0);
             builder.setDefaultDisplayAbbreviation(cloneDefaultAbbreviation);
             builder.setDefaultTextualAbbreviation(cloneDefaultTextualAbbreviation);
@@ -417,7 +417,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
             Builder<U> builder = makeBuilder();
             builder.setId(derivedId);
             builder.setName(derivedName);
-            builder.setUnitBase(this.unitBase);
+            builder.setQuantity(this.quantity);
             builder.setSiPrefixes(SIPrefixes.NONE, 1.0);
             builder.setScale(new LinearScale(scaleFactor * ((LinearScale) getScale()).getConversionFactorToStandardUnit()));
             builder.setUnitSystem(derivedUnitSystem);
@@ -485,25 +485,25 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
     {
         Throw.whenNull(siDimensions, "siDimensions cannot be null");
 
-        UnitBase<SIUnit> unitBase = null;
+        Quantity<SIUnit> quantity = null;
         SIUnit unit = null;
 
-        Set<UnitBase<?>> baseUnitSet = UnitTypes.INSTANCE.getUnitBases(siDimensions);
-        for (UnitBase<?> bu : baseUnitSet)
+        Set<Quantity<?>> baseUnitSet = Quantities.INSTANCE.getQuantities(siDimensions);
+        for (Quantity<?> bu : baseUnitSet)
         {
             if (bu.getStandardUnit().getClass().equals(Unit.class))
             {
-                unitBase = (UnitBase<SIUnit>) bu;
+                quantity = (Quantity<SIUnit>) bu;
             }
         }
 
-        if (unitBase == null)
+        if (quantity == null)
         {
-            unitBase = new UnitBase<SIUnit>(siDimensions.toString(), siDimensions);
+            quantity = new Quantity<SIUnit>(siDimensions.toString(), siDimensions);
             Builder<SIUnit> builder = new Builder<>();
             builder.setId(siDimensions.toString(true, true));
             builder.setName(siDimensions.toString(true, true));
-            builder.setUnitBase(unitBase);
+            builder.setQuantity(quantity);
             builder.setScale(IdentityScale.SCALE);
             builder.setGenerated(true);
             builder.setUnitSystem(UnitSystem.SI_DERIVED);
@@ -513,7 +513,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
         }
         else
         {
-            unit = unitBase.getStandardUnit();
+            unit = quantity.getStandardUnit();
         }
 
         return unit;
@@ -587,9 +587,9 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
      * @return BaseUnit&lt;U&gt;; the unit base of this unit. if this unit is itself a unit base; the returned value is
      *         <code>null</code>
      */
-    public UnitBase<U> getUnitBase()
+    public Quantity<U> getQuantity()
     {
-        return this.unitBase;
+        return this.quantity;
     }
 
     /**
@@ -617,7 +617,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
      */
     public U getStandardUnit()
     {
-        return getUnitBase().getStandardUnit();
+        return getQuantity().getStandardUnit();
     }
 
     /** {@inheritDoc} */
@@ -635,7 +635,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
         final int prime = 31;
         int result = 1;
         result = prime * result + ((this.abbreviations == null) ? 0 : this.abbreviations.hashCode());
-        result = prime * result + ((this.unitBase == null) ? 0 : this.unitBase.hashCode());
+        result = prime * result + ((this.quantity == null) ? 0 : this.quantity.hashCode());
         result = prime * result + ((this.defaultDisplayAbbreviation == null) ? 0 : this.defaultDisplayAbbreviation.hashCode());
         result = prime * result + ((this.defaultTextualAbbreviation == null) ? 0 : this.defaultTextualAbbreviation.hashCode());
         result = prime * result + (this.generated ? 1231 : 1237);
@@ -665,12 +665,12 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
         }
         else if (!this.abbreviations.equals(other.abbreviations))
             return false;
-        if (this.unitBase == null)
+        if (this.quantity == null)
         {
-            if (other.unitBase != null)
+            if (other.quantity != null)
                 return false;
         }
-        else if (!this.unitBase.equals(other.unitBase))
+        else if (!this.quantity.equals(other.quantity))
             return false;
         if (this.defaultDisplayAbbreviation == null)
         {
@@ -775,7 +775,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
          * The corresponding unit base that contains all registered units for the unit as well as SI dimension information. The
          * unit base should never be null.
          */
-        private UnitBase<U> unitBase;
+        private Quantity<U> quantity;
 
         /**
          * Empty constructor. Content is generated through chaining: new
@@ -984,19 +984,19 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
          * Retrieve the unit base.
          * @return baseUnit BaseUnit&lt;U&gt;; the unit base
          */
-        public UnitBase<U> getUnitBase()
+        public Quantity<U> getQuantity()
         {
-            return this.unitBase;
+            return this.quantity;
         }
 
         /**
          * Set the unit base. Can never be null and has to be filled.
-         * @param newUnitBase UnitBase&lt;U&gt;; the unit base
+         * @param newQuantity Quantity&lt;U&gt;; the unit base
          * @return Builder; this builder instance that is being constructed (for method call chaining)
          */
-        public Builder<U> setUnitBase(final UnitBase<U> newUnitBase)
+        public Builder<U> setQuantity(final Quantity<U> newQuantity)
         {
-            this.unitBase = newUnitBase;
+            this.quantity = newQuantity;
             return this;
         }
 

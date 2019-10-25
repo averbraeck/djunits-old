@@ -3,7 +3,7 @@ package org.djunits.unit;
 import java.io.Serializable;
 
 import org.djunits.Throw;
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.OffsetLinearScale;
 import org.djunits.unit.scale.Scale;
 import org.djunits.unit.si.SIPrefixes;
@@ -28,7 +28,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
     private static final long serialVersionUID = 20190826L;
 
     /** The relative unit belonging to this unit. */
-    private UnitBase<RU> relativeUnitBase;
+    private Quantity<RU> relativeQuantity;
 
     /** The corresponding relative unit with the same unit scale factor. */
     private RU relativeUnit;
@@ -37,9 +37,9 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
      * Return the corresponding relative unit base.
      * @return Unit&lt;RU&gt;; the the corresponding relative unit base
      */
-    public UnitBase<RU> getRelativeUnitBase()
+    public Quantity<RU> getRelativeQuantity()
     {
-        return this.relativeUnitBase;
+        return this.relativeQuantity;
     }
 
     /**
@@ -58,7 +58,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
     {
         this.relativeUnit = ((Builder<AU, RU>) builder).getRelativeUnit();
         Throw.whenNull(this.relativeUnit, "Relative unit for unit " + builder.getId() + " cannot be null");
-        this.relativeUnitBase = this.relativeUnit.getUnitBase();
+        this.relativeQuantity = this.relativeUnit.getQuantity();
         AU unit = super.build(builder);
         return unit;
     }
@@ -113,7 +113,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
             builder.setId(derivedId);
             builder.setName(derivedName);
             builder.setRelativeUnit(derivedRelativeUnit);
-            builder.setUnitBase(getUnitBase());
+            builder.setQuantity(getQuantity());
             builder.setSiPrefixes(SIPrefixes.NONE, 1.0);
             builder.setScale(new OffsetLinearScale(scaleFactor, offset));
             builder.setUnitSystem(derivedUnitSystem);
@@ -310,9 +310,9 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
 
         /** {@inheritDoc} */
         @Override
-        public Builder<AU, RU> setUnitBase(final UnitBase<AU> baseUnit)
+        public Builder<AU, RU> setQuantity(final Quantity<AU> baseUnit)
         {
-            super.setUnitBase(baseUnit);
+            super.setQuantity(baseUnit);
             return this;
         }
 
@@ -321,7 +321,7 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
         public String toString()
         {
             return "Builder [relativeUnit=" + this.relativeUnit + ", getId()=" + this.getId() + ", getName()=" + this.getName()
-                    + ", getUnitBase()=" + this.getUnitBase() + "]";
+                    + ", getQuantity()=" + this.getQuantity() + "]";
         }
 
     }

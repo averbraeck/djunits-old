@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -19,11 +19,11 @@ public class TemperatureUnit extends Unit<TemperatureUnit>
     private static final long serialVersionUID = 20140605L;
 
     /** The base, with "m2" as the SI signature. */
-    public static final UnitBase<TemperatureUnit> BASE = new UnitBase<>("Temperature", "K");
+    public static final Quantity<TemperatureUnit> BASE = new Quantity<>("Temperature", "K");
 
     /** The SI unit for temperature is Kelvin. */
     public static final TemperatureUnit SI =
-            new TemperatureUnit().build(new Unit.Builder<TemperatureUnit>().setUnitBase(BASE).setId("K").setName("Kelvin")
+            new TemperatureUnit().build(new Unit.Builder<TemperatureUnit>().setQuantity(BASE).setId("K").setName("Kelvin")
                     .setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.UNIT, 1.0).setScale(IdentityScale.SCALE));
 
     /** Kelvin. */

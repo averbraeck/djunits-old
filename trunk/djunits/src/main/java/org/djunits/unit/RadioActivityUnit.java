@@ -1,6 +1,6 @@
 package org.djunits.unit;
 
-import org.djunits.unit.base.UnitBase;
+import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.unit.unitsystem.UnitSystem;
@@ -21,11 +21,11 @@ public class RadioActivityUnit extends Unit<RadioActivityUnit>
     private static final long serialVersionUID = 20190830;
 
     /** The base, with "/s" as the SI signature. */
-    public static final UnitBase<RadioActivityUnit> BASE = new UnitBase<>("RadioActivity", "/s");
+    public static final Quantity<RadioActivityUnit> BASE = new Quantity<>("RadioActivity", "/s");
 
     /** The SI unit for radio activity is Becquerel. */
     public static final RadioActivityUnit SI = new RadioActivityUnit().build(new Unit.Builder<RadioActivityUnit>()
-            .setUnitBase(BASE).setId("Bq").setName("becquerel").setUnitSystem(UnitSystem.SI_DERIVED)
+            .setQuantity(BASE).setId("Bq").setName("becquerel").setUnitSystem(UnitSystem.SI_DERIVED)
             .setSiPrefixes(SIPrefixes.UNIT_POS, 1.0).setScale(IdentityScale.SCALE));
 
     /** Becquerel. */
