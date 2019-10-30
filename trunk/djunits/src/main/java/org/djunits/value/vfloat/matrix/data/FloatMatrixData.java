@@ -83,11 +83,7 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
                 return new FloatMatrixDataDense(valuesSI, rows, cols);
 
             case SPARSE:
-                // TODO: too expensive, another copy of a probably already large matrix
-                float[][] matrixSI = new float[rows][cols];
-                IntStream.range(0, values.length).parallel().forEach(r -> IntStream.range(0, cols)
-                        .forEach(c -> matrixSI[r][c] = (float) scale.toStandardUnit(values[r][c])));
-                return FloatMatrixDataSparse.instantiate(matrixSI);
+                return FloatMatrixDataSparse.instantiate(values, scale);
 
             default:
                 throw new ValueRuntimeException("Unknown storage type in FloatMatrixData.instantiate: " + storageType);

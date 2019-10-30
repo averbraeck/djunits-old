@@ -83,11 +83,7 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
                 return new DoubleMatrixDataDense(valuesSI, rows, cols);
 
             case SPARSE:
-                // TODO: too expensive, another copy of a probably already large matrix
-                double[][] matrixSI = new double[rows][cols];
-                IntStream.range(0, values.length).parallel().forEach(
-                        r -> IntStream.range(0, cols).forEach(c -> matrixSI[r][c] = scale.toStandardUnit(values[r][c])));
-                return DoubleMatrixDataSparse.instantiate(matrixSI);
+                return DoubleMatrixDataSparse.instantiate(values, scale);
 
             default:
                 throw new ValueRuntimeException("Unknown storage type in DoubleMatrixData.instantiate: " + storageType);
