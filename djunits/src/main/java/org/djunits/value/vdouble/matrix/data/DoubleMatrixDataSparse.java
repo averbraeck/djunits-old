@@ -7,6 +7,7 @@ import java.util.stream.IntStream;
 
 import org.djunits.Throw;
 import org.djunits.unit.Unit;
+import org.djunits.unit.scale.Scale;
 import org.djunits.value.ValueRuntimeException;
 import org.djunits.value.storage.StorageType;
 import org.djunits.value.vdouble.function.DoubleFunction;
@@ -111,6 +112,40 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
                 if (row[c] != 0.0)
                 {
                     matrixSI[count] = row[c];
+                    indices[count] = index;
+                    count++;
+                }
+            }
+        }
+    }
+
+    /**
+     * Fill the sparse data structures matrixSI[] and indices[]. Note: output vectors have to be initialized at the right size.
+     * Cannot be parallelized because of stateful and sequence-sensitive count.
+     * @param data double[][]; the input data
+     * @param matrixSI double[]; the matrix data to write
+     * @param indices long[]; the indices to write
+     * @param scale Scale, the scale that will convert the data to SI
+     * @throws ValueRuntimeException in case matrix is ragged
+     */
+    @SuppressWarnings("checkstyle:finalparameters")
+    private static void fill(final double[][] data, double[] matrixSI, long[] indices, final Scale scale)
+            throws ValueRuntimeException
+    {
+        int rows = data.length;
+        int cols = data[0].length;
+        int count = 0;
+        for (int r = 0; r < rows; r++)
+        {
+            double[] row = data[r];
+            // Row length check has been done by checkRectangularAndNonEmpty
+            for (int c = 0; c < cols; c++)
+            {
+                int index = r * cols + c;
+                double value = scale.toStandardUnit(row[c]);
+                if (value != 0.0)
+                {
+                    matrixSI[count] = value;
                     indices[count] = index;
                     count++;
                 }
@@ -430,6 +465,25 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
         double[] sparseSI = new double[length];
         long[] indices = new long[length];
         fill(valuesSI, sparseSI, indices);
+        return new DoubleMatrixDataSparse(sparseSI, indices, rows, cols);
+    }
+
+    /**
+     * Instantiate a DoubleMatrixDataSparse from an array.
+     * @param values double[][]; the values to store
+     * @param scale Scale; the scale that will convert values to SI
+     * @return the DoubleMatrixDataSparse
+     * @throws ValueRuntimeException in case matrix is ragged
+     */
+    public static DoubleMatrixDataSparse instantiate(final double[][] values, final Scale scale) throws ValueRuntimeException
+    {
+        checkRectangularAndNonEmpty(values);
+        int length = nonZero(values);
+        final int rows = values.length;
+        final int cols = values[0].length;
+        double[] sparseSI = new double[length];
+        long[] indices = new long[length];
+        fill(values, sparseSI, indices, scale);
         return new DoubleMatrixDataSparse(sparseSI, indices, rows, cols);
     }
 
