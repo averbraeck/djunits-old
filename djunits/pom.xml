@@ -221,7 +221,7 @@
           <source>8</source>
           <links>
             <link>https://download.oracle.com/javase/8/docs/api/</link>
-            <link>https://www.joda.org/joda-money/apidocs/</link>
+            <!-- link>https://www.joda.org/joda-money/apidocs/</link FAILS BECAUSE OF MODULES -->
             <link>http://www.ojalgo.org/generated/</link>
           </links>
           <additionalJOption>-J-Xmx1024m</additionalJOption>
