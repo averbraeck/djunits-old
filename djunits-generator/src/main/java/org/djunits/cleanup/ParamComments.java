@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import com.github.javaparser.JavaParser;
+import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.CallableDeclaration;
 import com.github.javaparser.ast.body.ConstructorDeclaration;
@@ -99,7 +100,7 @@ public class ParamComments
         this.changed = false;
         this.lines = Files.readAllLines(Paths.get(javaFile.toURI()), StandardCharsets.UTF_8);
         FileInputStream in = new FileInputStream(javaFile.toURI().getPath());
-        CompilationUnit cu = JavaParser.parse(in);
+        CompilationUnit cu = StaticJavaParser.parse(in);
         cu.accept(new CodeVisitor(this), null);
         if (this.changed)
         {

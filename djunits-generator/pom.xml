@@ -24,6 +24,7 @@
     <sonar.scm.disabled>true</sonar.scm.disabled>
 
     <djunits.version>${project.version}</djunits.version>
+    <jakarta.annotation.version>1.3.5</jakarta.annotation.version>
 
     <maven.compiler.version>3.8.1</maven.compiler.version>
     <maven.site.version>3.7.1</maven.site.version>
@@ -346,7 +347,12 @@
     <dependency>
       <groupId>com.github.javaparser</groupId>
       <artifactId>javaparser-core</artifactId>
-      <version>3.6.25</version>
+      <version>3.15.3</version>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.annotation</groupId>
+      <artifactId>jakarta.annotation-api</artifactId>
+      <version>${jakarta.annotation.version}</version>
     </dependency>
   </dependencies>
 

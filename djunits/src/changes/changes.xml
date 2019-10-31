@@ -10,6 +10,12 @@
         Replaced FindBugs (which already had a problem supporting Java 8) with SpotBugs 
         (supporting later Java versions as well).
       </action>
+      <action dev="averbraeck" type="update">
+        Updated JavaParser to latest version in djunits-generator to be compatible with Java 11+.
+      </action>
+      <action dev="averbraeck" type="update">
+        Included jakarta.annotation-api to be compatible with Java 11+.
+      </action>
     </release>
 
     <release version="4.01.00" date="2019-10-25" description="Code generation for new units; BaseUnit renamed to Quantity">
