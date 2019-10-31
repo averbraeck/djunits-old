@@ -169,6 +169,7 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>${maven.javadoc.version}</version>
         <configuration>
+          <source>8</source>
           <links>
             <link>https://download.oracle.com/javase/7/docs/api/</link>
             <link>https://simulation.tudelft.nl/parallelcolt/apidocs/</link>
@@ -228,6 +229,7 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>${maven.javadoc.version}</version>
         <configuration>
+          <source>8</source>
           <detectLinks>false</detectLinks>
           <detectOfflineLinks>true</detectOfflineLinks>
         </configuration>
