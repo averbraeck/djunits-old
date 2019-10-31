@@ -14,7 +14,7 @@ package org.djunits.value.vfloat.function;
 public interface FloatMathFunctions
 {
     /**
-     * Function that returns <tt>Math.abs(a)</tt>.
+     * Function that returns <code>Math.abs(a)</code>.
      */
     FloatFunction ABS = new FloatFunction()
     {
@@ -26,7 +26,7 @@ public interface FloatMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.acos(a)</tt>.
+     * Function that returns <code>Math.acos(a)</code>.
      */
     FloatFunction ACOS = new FloatFunction()
     {
@@ -38,7 +38,7 @@ public interface FloatMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.asin(a)</tt>.
+     * Function that returns <code>Math.asin(a)</code>.
      */
     FloatFunction ASIN = new FloatFunction()
     {
@@ -50,7 +50,7 @@ public interface FloatMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.atan(a)</tt>.
+     * Function that returns <code>Math.atan(a)</code>.
      */
     FloatFunction ATAN = new FloatFunction()
     {
@@ -62,7 +62,7 @@ public interface FloatMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.cbrt(a)</tt>.
+     * Function that returns <code>Math.cbrt(a)</code>.
      */
     FloatFunction CBRT = new FloatFunction()
     {
@@ -74,7 +74,7 @@ public interface FloatMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.ceil(a)</tt>.
+     * Function that returns <code>Math.ceil(a)</code>.
      */
     FloatFunction CEIL = new FloatFunction()
     {
@@ -86,7 +86,7 @@ public interface FloatMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.cos(a)</tt>.
+     * Function that returns <code>Math.cos(a)</code>.
      */
     FloatFunction COS = new FloatFunction()
     {
@@ -98,7 +98,7 @@ public interface FloatMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.cosh(a)</tt>.
+     * Function that returns <code>Math.cosh(a)</code>.
      */
     FloatFunction COSH = new FloatFunction()
     {
@@ -110,7 +110,7 @@ public interface FloatMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.exp(a)</tt>.
+     * Function that returns <code>Math.exp(a)</code>.
      */
     FloatFunction EXP = new FloatFunction()
     {
@@ -122,7 +122,7 @@ public interface FloatMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.expm1(a)</tt>.
+     * Function that returns <code>Math.expm1(a)</code>.
      */
     FloatFunction EXPM1 = new FloatFunction()
     {
@@ -134,7 +134,7 @@ public interface FloatMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.floor(a)</tt>.
+     * Function that returns <code>Math.floor(a)</code>.
      */
     FloatFunction FLOOR = new FloatFunction()
     {
@@ -146,7 +146,7 @@ public interface FloatMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.log(a)</tt>.
+     * Function that returns <code>Math.log(a)</code>.
      */
     FloatFunction LOG = new FloatFunction()
     {
@@ -158,7 +158,7 @@ public interface FloatMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.log10(a)</tt>.
+     * Function that returns <code>Math.log10(a)</code>.
      */
     FloatFunction LOG10 = new FloatFunction()
     {
@@ -170,7 +170,7 @@ public interface FloatMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.log1p(a)</tt>.
+     * Function that returns <code>Math.log1p(a)</code>.
      */
     FloatFunction LOG1P = new FloatFunction()
     {
@@ -182,7 +182,7 @@ public interface FloatMathFunctions
     };
 
     /**
-     * Function that returns <tt>-a</tt>.
+     * Function that returns <code>-a</code>.
      */
     FloatFunction NEG = new FloatFunction()
     {
@@ -194,7 +194,7 @@ public interface FloatMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.pow(a, b)</tt>.
+     * Function that returns <code>Math.pow(a, b)</code>.
      * @param b float; power parameter
      * @return power function
      */
@@ -212,7 +212,7 @@ public interface FloatMathFunctions
     }
 
     /**
-     * Function that returns <tt>Math.rint(a)</tt>.
+     * Function that returns <code>Math.rint(a)</code>.
      */
     FloatFunction RINT = new FloatFunction()
     {
@@ -224,7 +224,7 @@ public interface FloatMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.signum(a)</tt>.
+     * Function that returns <code>Math.signum(a)</code>.
      */
     FloatFunction SIGNUM = new FloatFunction()
     {
@@ -236,7 +236,7 @@ public interface FloatMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.sin(a)</tt>.
+     * Function that returns <code>Math.sin(a)</code>.
      */
     FloatFunction SIN = new FloatFunction()
     {
@@ -248,7 +248,7 @@ public interface FloatMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.sinh(a)</tt>.
+     * Function that returns <code>Math.sinh(a)</code>.
      */
     FloatFunction SINH = new FloatFunction()
     {
@@ -260,7 +260,7 @@ public interface FloatMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.sqrt(a)</tt>.
+     * Function that returns <code>Math.sqrt(a)</code>.
      */
     FloatFunction SQRT = new FloatFunction()
     {
@@ -272,7 +272,7 @@ public interface FloatMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.tan(a)</tt>.
+     * Function that returns <code>Math.tan(a)</code>.
      */
     FloatFunction TAN = new FloatFunction()
     {
@@ -284,7 +284,7 @@ public interface FloatMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.tanh(a)</tt>.
+     * Function that returns <code>Math.tanh(a)</code>.
      */
     FloatFunction TANH = new FloatFunction()
     {
@@ -296,7 +296,7 @@ public interface FloatMathFunctions
     };
 
     /**
-     * Function that returns <tt>1/a</tt>.
+     * Function that returns <code>1/a</code>.
      */
     FloatFunction INV = new FloatFunction()
     {
@@ -308,7 +308,7 @@ public interface FloatMathFunctions
     };
 
     /**
-     * Function that returns <tt>a + b</tt>.
+     * Function that returns <code>a + b</code>.
      * @param b float; increment
      * @return power function
      */
@@ -326,7 +326,7 @@ public interface FloatMathFunctions
     }
 
     /**
-     * Function that returns <tt>a - b</tt>.
+     * Function that returns <code>a - b</code>.
      * @param b float; decrement
      * @return power function
      */
@@ -344,7 +344,7 @@ public interface FloatMathFunctions
     }
 
     /**
-     * Function that returns <tt>a * b</tt>.
+     * Function that returns <code>a * b</code>.
      * @param b float; multiplier
      * @return power function
      */
@@ -362,7 +362,7 @@ public interface FloatMathFunctions
     }
 
     /**
-     * Function that returns <tt>a / b</tt>.
+     * Function that returns <code>a / b</code>.
      * @param b float; divisor
      * @return power function
      */

@@ -14,7 +14,7 @@ package org.djunits.value.vdouble.function;
 public interface DoubleMathFunctions
 {
     /**
-     * Function that returns <tt>Math.abs(a)</tt>.
+     * Function that returns <code>Math.abs(a)</code>.
      */
     DoubleFunction ABS = new DoubleFunction()
     {
@@ -26,7 +26,7 @@ public interface DoubleMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.acos(a)</tt>.
+     * Function that returns <code>Math.acos(a)</code>.
      */
     DoubleFunction ACOS = new DoubleFunction()
     {
@@ -38,7 +38,7 @@ public interface DoubleMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.asin(a)</tt>.
+     * Function that returns <code>Math.asin(a)</code>.
      */
     DoubleFunction ASIN = new DoubleFunction()
     {
@@ -50,7 +50,7 @@ public interface DoubleMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.atan(a)</tt>.
+     * Function that returns <code>Math.atan(a)</code>.
      */
     DoubleFunction ATAN = new DoubleFunction()
     {
@@ -62,7 +62,7 @@ public interface DoubleMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.cbrt(a)</tt>.
+     * Function that returns <code>Math.cbrt(a)</code>.
      */
     DoubleFunction CBRT = new DoubleFunction()
     {
@@ -74,7 +74,7 @@ public interface DoubleMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.ceil(a)</tt>.
+     * Function that returns <code>Math.ceil(a)</code>.
      */
     DoubleFunction CEIL = new DoubleFunction()
     {
@@ -86,7 +86,7 @@ public interface DoubleMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.cos(a)</tt>.
+     * Function that returns <code>Math.cos(a)</code>.
      */
     DoubleFunction COS = new DoubleFunction()
     {
@@ -98,7 +98,7 @@ public interface DoubleMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.cosh(a)</tt>.
+     * Function that returns <code>Math.cosh(a)</code>.
      */
     DoubleFunction COSH = new DoubleFunction()
     {
@@ -110,7 +110,7 @@ public interface DoubleMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.exp(a)</tt>.
+     * Function that returns <code>Math.exp(a)</code>.
      */
     DoubleFunction EXP = new DoubleFunction()
     {
@@ -122,7 +122,7 @@ public interface DoubleMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.expm1(a)</tt>.
+     * Function that returns <code>Math.expm1(a)</code>.
      */
     DoubleFunction EXPM1 = new DoubleFunction()
     {
@@ -134,7 +134,7 @@ public interface DoubleMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.floor(a)</tt>.
+     * Function that returns <code>Math.floor(a)</code>.
      */
     DoubleFunction FLOOR = new DoubleFunction()
     {
@@ -146,7 +146,7 @@ public interface DoubleMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.log(a)</tt>.
+     * Function that returns <code>Math.log(a)</code>.
      */
     DoubleFunction LOG = new DoubleFunction()
     {
@@ -158,7 +158,7 @@ public interface DoubleMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.log10(a)</tt>.
+     * Function that returns <code>Math.log10(a)</code>.
      */
     DoubleFunction LOG10 = new DoubleFunction()
     {
@@ -170,7 +170,7 @@ public interface DoubleMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.log1p(a)</tt>.
+     * Function that returns <code>Math.log1p(a)</code>.
      */
     DoubleFunction LOG1P = new DoubleFunction()
     {
@@ -182,7 +182,7 @@ public interface DoubleMathFunctions
     };
 
     /**
-     * Function that returns <tt>-a</tt>.
+     * Function that returns <code>-a</code>.
      */
     DoubleFunction NEG = new DoubleFunction()
     {
@@ -194,7 +194,7 @@ public interface DoubleMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.pow(a, b)</tt>.
+     * Function that returns <code>Math.pow(a, b)</code>.
      * @param b double; power parameter
      * @return power function
      */
@@ -212,7 +212,7 @@ public interface DoubleMathFunctions
     }
 
     /**
-     * Function that returns <tt>Math.rint(a)</tt>.
+     * Function that returns <code>Math.rint(a)</code>.
      */
     DoubleFunction RINT = new DoubleFunction()
     {
@@ -224,7 +224,7 @@ public interface DoubleMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.signum(a)</tt>.
+     * Function that returns <code>Math.signum(a)</code>.
      */
     DoubleFunction SIGNUM = new DoubleFunction()
     {
@@ -236,7 +236,7 @@ public interface DoubleMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.sin(a)</tt>.
+     * Function that returns <code>Math.sin(a)</code>.
      */
     DoubleFunction SIN = new DoubleFunction()
     {
@@ -248,7 +248,7 @@ public interface DoubleMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.sinh(a)</tt>.
+     * Function that returns <code>Math.sinh(a)</code>.
      */
     DoubleFunction SINH = new DoubleFunction()
     {
@@ -260,7 +260,7 @@ public interface DoubleMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.sqrt(a)</tt>.
+     * Function that returns <code>Math.sqrt(a)</code>.
      */
     DoubleFunction SQRT = new DoubleFunction()
     {
@@ -272,7 +272,7 @@ public interface DoubleMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.tan(a)</tt>.
+     * Function that returns <code>Math.tan(a)</code>.
      */
     DoubleFunction TAN = new DoubleFunction()
     {
@@ -284,7 +284,7 @@ public interface DoubleMathFunctions
     };
 
     /**
-     * Function that returns <tt>Math.tanh(a)</tt>.
+     * Function that returns <code>Math.tanh(a)</code>.
      */
     DoubleFunction TANH = new DoubleFunction()
     {
@@ -296,7 +296,7 @@ public interface DoubleMathFunctions
     };
 
     /**
-     * Function that returns <tt>1/a</tt>.
+     * Function that returns <code>1/a</code>.
      */
     DoubleFunction INV = new DoubleFunction()
     {
@@ -308,7 +308,7 @@ public interface DoubleMathFunctions
     };
 
     /**
-     * Function that returns <tt>a + b</tt>.
+     * Function that returns <code>a + b</code>.
      * @param b double; increment
      * @return power function
      */
@@ -326,7 +326,7 @@ public interface DoubleMathFunctions
     }
 
     /**
-     * Function that returns <tt>a - b</tt>.
+     * Function that returns <code>a - b</code>.
      * @param b double; decrement
      * @return power function
      */
@@ -344,7 +344,7 @@ public interface DoubleMathFunctions
     }
 
     /**
-     * Function that returns <tt>a * b</tt>.
+     * Function that returns <code>a * b</code>.
      * @param b double; multiplier
      * @return power function
      */
@@ -362,7 +362,7 @@ public interface DoubleMathFunctions
     }
 
     /**
-     * Function that returns <tt>a / b</tt>.
+     * Function that returns <code>a / b</code>.
      * @param b double; divisor
      * @return power function
      */
