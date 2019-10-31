@@ -2,6 +2,16 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="4.01.01" date="2019-10-31" description="SpotBus instead of FindBugs in Maven">
+      <action dev="pknoppers" type="update">
+        Fixed TODO regarding memory use for temporary matrix to convert the values to SI.
+      </action>
+      <action dev="averbraeck" type="fix">
+        Replaced FindBugs (which already had a problem supporting Java 8) with SpotBugs 
+        (supporting later Java versions as well).
+      </action>
+    </release>
+
     <release version="4.01.00" date="2019-10-25" description="Code generation for new units; BaseUnit renamed to Quantity">
       <action dev="pknoppers" type="update">
         Renamed UnitBase to Quantity (which should be more descriptive); UnitTypes renamed to Quantities.
