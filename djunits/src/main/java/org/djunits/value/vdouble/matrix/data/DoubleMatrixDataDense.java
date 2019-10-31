@@ -27,7 +27,7 @@ public class DoubleMatrixDataDense extends DoubleMatrixData
      * @param matrixSI double[]; the data to store
      * @param rows int; the number of rows
      * @param cols int; the number of columns
-     * @throws ValueRuntimeException in case <tt>rows * cols != matrixSI.length</tt>
+     * @throws ValueRuntimeException in case <code>rows * cols != matrixSI.length</code>
      */
     public DoubleMatrixDataDense(final double[] matrixSI, final int rows, final int cols) throws ValueRuntimeException
     {
