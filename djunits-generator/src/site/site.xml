@@ -25,7 +25,7 @@
       <item name="Source Xref" href="xref/index.html" target="_blank" />
       <item name="Checkstyle" href="checkstyle.html" />
       <item name="Tag List" href="taglist.html" />
-      <item name="FindBugs" href="findbugs.html" />
+      <item name="SpotBugs" href="spotbugs.html" />
       <item name="CPD" href="cpd.html" />
       <item name="PMD" href="pmd.html" />
     </menu>
