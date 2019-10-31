@@ -216,6 +216,7 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>${maven.javadoc.version}</version>
         <configuration>
+          <source>8</source>
           <links>
             <link>https://download.oracle.com/javase/8/docs/api/</link>
             <link>https://www.joda.org/joda-money/apidocs/</link>
@@ -359,6 +360,7 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>${maven.javadoc.version}</version>
         <configuration>
+          <source>8</source>
           <detectLinks>false</detectLinks>
           <detectOfflineLinks>true</detectOfflineLinks>
           <show>package</show>
