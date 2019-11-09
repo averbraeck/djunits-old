@@ -129,6 +129,7 @@
         <artifactId>wagon-maven-plugin</artifactId>
         <version>${wagon.maven.version}</version>
         <executions>
+        
           <execution>
             <id>upload-current-site</id>
             <phase>site-deploy</phase>
@@ -143,6 +144,22 @@
               <serverId>djunits-deployment</serverId>
             </configuration>
           </execution>
+          
+          <execution>
+            <id>package-list</id>
+            <phase>site-deploy</phase>
+            <goals>
+              <goal>sshexec</goal>
+            </goals>
+            <configuration>
+              <url>scp://djunits.org/home/web/djunits.org/docs/${project.version}</url>
+              <serverId>djunits-deployment</serverId>
+              <commands>
+                <command>cp -f djunits-demo/apidocs/element-list djunits-demo/apidocs/package-list</command>
+              </commands>
+            </configuration>
+          </execution>
+          
         </executions>
       </plugin>
 

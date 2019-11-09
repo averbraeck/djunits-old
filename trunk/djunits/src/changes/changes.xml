@@ -3,6 +3,9 @@
   <body>
 
     <release version="4.01.01" date="2019-10-31" description="SpotBus instead of FindBugs in Maven">
+      <action dev="averbraeck" type="fix">
+        Ensured that "package-list" exists in apidocs for backward compatibility of javadoc linking.
+      </action>
       <action dev="pknoppers" type="update">
         Fixed TODO regarding memory use for temporary matrix to convert the values to SI.
       </action>
