@@ -152,10 +152,10 @@
               <goal>sshexec</goal>
             </goals>
             <configuration>
-              <url>scp://djunits.org/home/web/djunits.org/docs/${project.version}</url>
+              <url>scp://djunits.org/home/web/djunits.org</url>
               <serverId>djunits-deployment</serverId>
               <commands>
-                <command>cp -f djunits-generator/apidocs/element-list djunits-generator/apidocs/package-list</command>
+                <command>cp -f /home/web/djunits.org/docs/${project.version}/djunits-generator/apidocs/element-list /home/web/djunits.org/docs/${project.version}/djunits-generator/apidocs/package-list</command>
               </commands>
             </configuration>
           </execution>
