@@ -179,12 +179,12 @@
               <goal>sshexec</goal>
             </goals>
             <configuration>
-              <url>scp://djunits.org/home/web/djunits.org/docs/${project.version}</url>
+              <url>scp://djunits.org/home/web/djunits.org</url>
               <serverId>djunits-deployment</serverId>
               <commands>
                 <command>rm -r -f /home/web/djunits.org/docs/current</command>
                 <command>mkdir -p /home/web/djunits.org/docs/current</command>
-                <command>cp -f apidocs/element-list apidocs/package-list</command>
+                <command>cp -f /home/web/djunits.org/docs/${project.version}/apidocs/element-list /home/web/djunits.org/docs/${project.version}/apidocs/package-list</command>
                 <command>cp -r -f /home/web/djunits.org/docs/${project.version}/. /home/web/djunits.org/docs/current</command>
               </commands>
             </configuration>
