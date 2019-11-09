@@ -25,7 +25,6 @@
     <sonar.scm.disabled>true</sonar.scm.disabled>
 
     <djunits.version>${project.version}</djunits.version>
-    <joda-money.version>1.0.1</joda-money.version>
     <junit.version>4.12</junit.version>
     <ojalgo.version>47.3.1</ojalgo.version>
     <jakarta.annotation.version>1.3.5</jakarta.annotation.version>
@@ -221,7 +220,6 @@
           <source>8</source>
           <links>
             <link>https://download.oracle.com/javase/8/docs/api/</link>
-            <!-- link>https://www.joda.org/joda-money/apidocs/</link FAILS BECAUSE OF MODULES -->
             <link>http://www.ojalgo.org/generated/</link>
           </links>
           <additionalJOption>-J-Xmx1024m</additionalJOption>
@@ -536,12 +534,6 @@
       <version>${junit.version}</version>
       <scope>test</scope>
       <optional>true</optional>
-    </dependency>
-
-    <dependency>
-      <groupId>org.joda</groupId>
-      <artifactId>joda-money</artifactId>
-      <version>${joda-money.version}</version>
     </dependency>
 
     <dependency>
