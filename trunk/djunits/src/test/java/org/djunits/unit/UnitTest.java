@@ -31,7 +31,6 @@ public class UnitTest
         assertNotEquals(LengthUnit.METER, LengthUnit.DECIMETER);
         assertNotEquals(LengthUnit.METER, DurationUnit.SECOND);
         assertEquals(0.3048, LengthUnit.FOOT.getScale().toStandardUnit(1.0), 1.0E-6);
-        assertEquals(DurationUnit.MINUTE, DurationUnit.BASE.of("m"));
         assertEquals(DurationUnit.MINUTE, DurationUnit.BASE.of("min"));
         assertEquals(DurationUnit.HOUR, DurationUnit.BASE.of("h"));
         assertEquals(DurationUnit.HOUR, DurationUnit.BASE.of("hr"));

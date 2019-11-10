@@ -36,7 +36,7 @@ public class TimeUnitTest extends AbstractOffsetUnitTest<TimeUnit>
     {
         assertEquals("s", TimeUnit.DEFAULT.getQuantity().getSiDimensions().toString(true, false));
         checkUnitRatioOffsetNameAndAbbreviation(TimeUnit.BASE_SECOND, 1, 0.0, 0.00000001, "second", "s");
-        checkUnitRatioOffsetNameAndAbbreviation(TimeUnit.BASE_HOUR, 3600, 0.0, 0.0005, "hour", "hr");
+        checkUnitRatioOffsetNameAndAbbreviation(TimeUnit.BASE_HOUR, 3600, 0.0, 0.0005, "hour", "h");
         checkUnitRatioOffsetNameAndAbbreviation(TimeUnit.BASE_DAY, 86400, 0.0, 0.001, "day", "day");
         // Check two conversions between non-standard units
         assertEquals("one DAY is 24 HOUR", 24, getMultiplicationFactorTo(TimeUnit.BASE_DAY, TimeUnit.BASE_HOUR), 0.0001);
