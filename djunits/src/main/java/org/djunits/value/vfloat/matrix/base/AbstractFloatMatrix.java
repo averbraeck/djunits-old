@@ -390,28 +390,28 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
 
     /** {@inheritDoc} */
     @Override
-    public final String toString()
+    public String toString()
     {
         return toString(getDisplayUnit(), false, true);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final String toString(final U displayUnit)
+    public String toString(final U displayUnit)
     {
         return toString(displayUnit, false, true);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final String toString(final boolean verbose, final boolean withUnit)
+    public String toString(final boolean verbose, final boolean withUnit)
     {
         return toString(getDisplayUnit(), verbose, withUnit);
     }
 
     /** {@inheritDoc} */
     @Override
-    public final String toString(final U displayUnit, final boolean verbose, final boolean withUnit)
+    public String toString(final U displayUnit, final boolean verbose, final boolean withUnit)
     {
         StringBuffer buf = new StringBuffer();
         if (verbose)
