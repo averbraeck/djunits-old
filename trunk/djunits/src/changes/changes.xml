@@ -6,6 +6,9 @@
       <action dev="averbraeck" type="add">
         Vectors and FloatVectors are now Iterable again.
       </action>
+      <action dev="averbraeck" type="update">
+        toString(...) functions of Scalar, Vector and Matrix are non-final and can be overridden.
+      </action>
       <action dev="averbraeck" type="add">
         Scalars could only be printed in engineering format. A method toTextualString() has been added 
         to allow printing without trailing zeroes in the number, and using the default textual unit.
