@@ -49,27 +49,27 @@ public class TimeUnit extends AbsoluteLinearUnit<TimeUnit, DurationUnit>
 
     /** The base unit for time with an artificial "zero" point with a calculation in microseconds. */
     public static final TimeUnit BASE_MICROSECOND = BASE_SECOND.deriveLinearOffset(1.0E-6, 0.0, DurationUnit.MICROSECOND, "mus",
-            "microsecond", UnitSystem.SI_DERIVED, "\u03BCs", "mus");
+            "microsecond", UnitSystem.SI_DERIVED, "\u03BCs", "mus", "\u03BCsec", "musec");
 
     /** The base unit for time with an artificial "zero" point with a calculation in milliseconds. */
-    public static final TimeUnit BASE_MILLISECOND =
-            BASE_SECOND.deriveLinearOffset(1.0E-3, 0.0, DurationUnit.MILLISECOND, "ms", "millisecond");
+    public static final TimeUnit BASE_MILLISECOND = BASE_SECOND.deriveLinearOffset(1.0E-3, 0.0, DurationUnit.MILLISECOND, "ms",
+            "millisecond", UnitSystem.SI_DERIVED, "ms", "ms", "msec");
 
     /** The base unit for time with an artificial "zero" point with a calculation in minutes. */
     public static final TimeUnit BASE_MINUTE = BASE_SECOND.deriveLinearOffset(60.0, 0.0, DurationUnit.MINUTE, "min", "minute",
-            UnitSystem.SI_DERIVED, "min", "min", "m");
+            UnitSystem.SI_DERIVED, "min", "min");
 
     /** The base unit for time with an artificial "zero" point with a calculation in hours. */
-    public static final TimeUnit BASE_HOUR = BASE_SECOND.deriveLinearOffset(3600.0, 0.0, DurationUnit.HOUR, "hr", "hour",
-            UnitSystem.SI_DERIVED, "hr", "hr", "h", "hour");
+    public static final TimeUnit BASE_HOUR = BASE_SECOND.deriveLinearOffset(3600.0, 0.0, DurationUnit.HOUR, "h", "hour",
+            UnitSystem.SI_DERIVED, "h", "h", "hr", "hour");
 
     /** The base unit for time with an artificial "zero" point with a calculation in days. */
     public static final TimeUnit BASE_DAY = BASE_SECOND.deriveLinearOffset(24.0 * 3600.0, 0.0, DurationUnit.DAY, "day", "day",
-            UnitSystem.SI_DERIVED, "day", "day", "d");
+            UnitSystem.SI_DERIVED, "day", "day");
 
     /** The base unit for time with an artificial "zero" point with a calculation in weeks. */
     public static final TimeUnit BASE_WEEK = BASE_SECOND.deriveLinearOffset(7.0 * 24.0 * 3600.0, 0.0, DurationUnit.WEEK, "wk",
-            "week", UnitSystem.SI_DERIVED, "wk", "wk", "w", "week");
+            "week", UnitSystem.SI_DERIVED, "wk", "wk", "week");
 
     /**
      * The POSIX and Gregorian Epoch: January 1, 1970 at 00:00 UTC with a calculation in seconds. The base should be taken in
@@ -83,28 +83,29 @@ public class TimeUnit extends AbsoluteLinearUnit<TimeUnit, DurationUnit>
             "seconds since 1/1/70", UnitSystem.OTHER, "s(Y1970)", "s(Y1970)", "sec(Y1970)");
 
     /** The POSIX and Gregorian Epoch: January 1, 1970 at 00:00 UTC with a calculation in microseconds. */
-    public static final TimeUnit EPOCH_MICROSECOND = BASE_SECOND.deriveLinearOffset(1.0E-6, 0.0, DurationUnit.MICROSECOND,
-            "mus(Y1970)", "microseconds since 1/1/70", UnitSystem.OTHER, "\u03BCs(Y1970)", "mus(Y1970)");
+    public static final TimeUnit EPOCH_MICROSECOND =
+            BASE_SECOND.deriveLinearOffset(1.0E-6, 0.0, DurationUnit.MICROSECOND, "mus(Y1970)", "microseconds since 1/1/70",
+                    UnitSystem.OTHER, "\u03BCs(Y1970)", "mus(Y1970)", "\u03BCsec(Y1970)", "musec(Y1970)");
 
     /** The POSIX and Gregorian Epoch: January 1, 1970 at 00:00 UTC with a calculation in milliseconds. */
     public static final TimeUnit EPOCH_MILLISECOND = BASE_SECOND.deriveLinearOffset(1.0E-3, 0.0, DurationUnit.MILLISECOND,
-            "ms(Y1970)", "milliseconds since 1/1/70", UnitSystem.OTHER);
+            "ms(Y1970)", "milliseconds since 1/1/70", UnitSystem.OTHER, "ms(Y1970)", "ms(Y1970)", "msec(Y1970)");
 
     /** The POSIX and Gregorian Epoch: January 1, 1970 at 00:00 UTC with a calculation in minutes. */
     public static final TimeUnit EPOCH_MINUTE = BASE_SECOND.deriveLinearOffset(60.0, 0.0, DurationUnit.MINUTE, "min(Y1970)",
-            "minutes since 1/1/70", UnitSystem.OTHER, "min(Y1970)", "min(Y1970)", "m(Y1970)");
+            "minutes since 1/1/70", UnitSystem.OTHER, "min(Y1970)", "min(Y1970)");
 
     /** The POSIX and Gregorian Epoch: January 1, 1970 at 00:00 UTC with a calculation in hours. */
-    public static final TimeUnit EPOCH_HOUR = BASE_SECOND.deriveLinearOffset(3600.0, 0.0, DurationUnit.HOUR, "hr(Y1970)",
-            "hours since 1/1/70", UnitSystem.OTHER, "hr(Y1970)", "hr(Y1970)", "hour(Y1970)", "h(Y1970)");
+    public static final TimeUnit EPOCH_HOUR = BASE_SECOND.deriveLinearOffset(3600.0, 0.0, DurationUnit.HOUR, "h(Y1970)",
+            "hours since 1/1/70", UnitSystem.OTHER, "h(Y1970)", "h(Y1970)", "hour(Y1970)", "hr(Y1970)");
 
     /** The POSIX and Gregorian Epoch: January 1, 1970 at 00:00 UTC with a calculation in days. */
     public static final TimeUnit EPOCH_DAY = BASE_SECOND.deriveLinearOffset(24.0 * 3600.0, 0.0, DurationUnit.DAY, "day(Y1970)",
-            "days since 1/1/70", UnitSystem.OTHER, "day(Y1970)", "day(Y1970)", "d(Y1970)");
+            "days since 1/1/70", UnitSystem.OTHER, "day(Y1970)", "day(Y1970)");
 
     /** The POSIX and Gregorian Epoch: January 1, 1970 at 00:00 UTC with a calculation in weeks. */
     public static final TimeUnit EPOCH_WEEK = BASE_SECOND.deriveLinearOffset(7.0 * 24.0 * 3600.0, 0.0, DurationUnit.WEEK,
-            "wk(Y1970)", "weeks since 1/1/70", UnitSystem.OTHER, "wk(Y1970)", "wk(Y1970)", "week(Y1970)", "w(Y1970)");
+            "wk(Y1970)", "weeks since 1/1/70", UnitSystem.OTHER, "wk(Y1970)", "wk(Y1970)", "week(Y1970)");
 
     /**
      * The Epoch with 0001-01-01 AD at 00:00 as the origin with a calculation in seconds. When 1-1-0001 is used as the origin,
@@ -113,9 +114,9 @@ public class TimeUnit extends AbsoluteLinearUnit<TimeUnit, DurationUnit>
      * mantissa). This means that a float time with an offset of 1-1-0001 is at best precise to an hour level. A double time is
      * precise to microseconds. Therefore, avoid using float times that use the EPOCH_YEAR1_SECOND.
      */
-    public static final TimeUnit EPOCH_YEAR1_SECOND =
-            EPOCH_SECOND.deriveLinearOffset(1.0, new GregorianCalendar(1, 0, 1, 0, 0, 0).getTimeInMillis() / 1000.0,
-                    DurationUnit.SECOND, "s(Y1)", "seconds since 1-1-0001 00:00");
+    public static final TimeUnit EPOCH_YEAR1_SECOND = EPOCH_SECOND.deriveLinearOffset(1.0,
+            new GregorianCalendar(1, 0, 1, 0, 0, 0).getTimeInMillis() / 1000.0, DurationUnit.SECOND, "s(Y1)",
+            "seconds since 1-1-0001 00:00", UnitSystem.OTHER, "s(Y1)", "s(Y1)", "sec(Y1)");
 
     /**
      * The Epoch with J2000.0 as the origin, which is The Gregorian date January 1, 2000 at 12:00 GMT (noon) with a calculation
@@ -125,8 +126,8 @@ public class TimeUnit extends AbsoluteLinearUnit<TimeUnit, DurationUnit>
      * precise to a minute level. A double time is precise to fractions of microseconds. Therefore, avoid using float times that
      * use the EPOCH_J2000_SECOND.
      */
-    public static final TimeUnit EPOCH_J2000_SECOND =
-            EPOCH_SECOND.deriveLinearOffset(1.0, new GregorianCalendar(2000, 0, 1, 12, 0, 0).getTimeInMillis() / 1000.0,
-                    DurationUnit.SECOND, "s(Y2000)", "seconds since 1-1-2000 12:00 GMT");
+    public static final TimeUnit EPOCH_J2000_SECOND = EPOCH_SECOND.deriveLinearOffset(1.0,
+            new GregorianCalendar(2000, 0, 1, 12, 0, 0).getTimeInMillis() / 1000.0, DurationUnit.SECOND, "s(Y2000)",
+            "seconds since 1-1-2000 12:00 GMT", UnitSystem.OTHER, "s(Y2000)", "s(Y2000)", "sec(Y2000)");
 
 }

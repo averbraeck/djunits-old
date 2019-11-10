@@ -22,9 +22,9 @@ public class FlowVolumeUnit extends Unit<FlowVolumeUnit>
     public static final Quantity<FlowVolumeUnit> BASE = new Quantity<>("FlowVolume", "m3/s");
 
     /** The SI unit for volume flow rate is m^3/s. */
-    public static final FlowVolumeUnit SI = new FlowVolumeUnit()
-            .build(new Unit.Builder<FlowVolumeUnit>().setQuantity(BASE).setId("m^3/s").setName("cubic meter per second")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(IdentityScale.SCALE));
+    public static final FlowVolumeUnit SI = new FlowVolumeUnit().build(new Unit.Builder<FlowVolumeUnit>().setQuantity(BASE)
+            .setId("m^3/s").setName("cubic meter per second").setUnitSystem(UnitSystem.SI_DERIVED)
+            .setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(IdentityScale.SCALE).setAdditionalAbbreviations("m^3/sec"));
 
     /** m^3/s. */
     public static final FlowVolumeUnit CUBIC_METER_PER_SECOND = SI;
@@ -34,8 +34,9 @@ public class FlowVolumeUnit extends Unit<FlowVolumeUnit>
             factorVD(VolumeUnit.CUBIC_METER, DurationUnit.MINUTE), "m^3/min", "cubic meter per minute", UnitSystem.SI_ACCEPTED);
 
     /** m^3/hour. */
-    public static final FlowVolumeUnit CUBIC_METER_PER_HOUR = SI.deriveLinear(
-            factorVD(VolumeUnit.CUBIC_METER, DurationUnit.HOUR), "m^3/h", "cubic meter per hour", UnitSystem.SI_ACCEPTED);
+    public static final FlowVolumeUnit CUBIC_METER_PER_HOUR =
+            SI.deriveLinear(factorVD(VolumeUnit.CUBIC_METER, DurationUnit.HOUR), "m^3/h", "cubic meter per hour",
+                    UnitSystem.SI_ACCEPTED, "m^3/h", "m^3/h", "m^3/hr", "m^3/hour");
 
     /** m^3/day. */
     public static final FlowVolumeUnit CUBIC_METER_PER_DAY = SI.deriveLinear(factorVD(VolumeUnit.CUBIC_METER, DurationUnit.DAY),
@@ -43,31 +44,33 @@ public class FlowVolumeUnit extends Unit<FlowVolumeUnit>
 
     /** L/s. */
     public static final FlowVolumeUnit LITER_PER_SECOND = SI.deriveLinear(factorVD(VolumeUnit.LITER, DurationUnit.SECOND),
-            "L/sec", "liter per second", UnitSystem.SI_ACCEPTED);
+            "L/s", "liter per second", UnitSystem.SI_ACCEPTED, "L/s", "L/s", "L/sec");
 
     /** L/min. */
     public static final FlowVolumeUnit LITER_PER_MINUTE = SI.deriveLinear(factorVD(VolumeUnit.LITER, DurationUnit.MINUTE),
             "L/min", "liter per minute", UnitSystem.SI_ACCEPTED);
 
     /** L/hour. */
-    public static final FlowVolumeUnit LITER_PER_HOUR =
-            SI.deriveLinear(factorVD(VolumeUnit.LITER, DurationUnit.HOUR), "L/h", "liter per hour", UnitSystem.SI_ACCEPTED);
+    public static final FlowVolumeUnit LITER_PER_HOUR = SI.deriveLinear(factorVD(VolumeUnit.LITER, DurationUnit.HOUR), "L/h",
+            "liter per hour", UnitSystem.SI_ACCEPTED, "L/h", "L/h", "L/hr", "L/hour");
 
     /** L/day. */
     public static final FlowVolumeUnit LITER_PER_DAY =
             SI.deriveLinear(factorVD(VolumeUnit.LITER, DurationUnit.DAY), "L/day", "liter per day", UnitSystem.SI_ACCEPTED);
 
     /** ft^3/s. */
-    public static final FlowVolumeUnit CUBIC_FEET_PER_SECOND = SI.deriveLinear(
-            factorVD(VolumeUnit.CUBIC_FOOT, DurationUnit.SECOND), "ft^3/sec", "cubic foot per second", UnitSystem.IMPERIAL);
+    public static final FlowVolumeUnit CUBIC_FEET_PER_SECOND =
+            SI.deriveLinear(factorVD(VolumeUnit.CUBIC_FOOT, DurationUnit.SECOND), "ft^3/s", "cubic foot per second",
+                    UnitSystem.IMPERIAL, "ft^3/s", "ft^3/s", "ft^3/sec");
 
     /** ft^3/min. */
     public static final FlowVolumeUnit CUBIC_FEET_PER_MINUTE = SI.deriveLinear(
             factorVD(VolumeUnit.CUBIC_FOOT, DurationUnit.MINUTE), "ft^3/min", "cubic foot per minute", UnitSystem.IMPERIAL);
 
     /** in^3/s. */
-    public static final FlowVolumeUnit CUBIC_INCH_PER_SECOND = SI.deriveLinear(
-            factorVD(VolumeUnit.CUBIC_INCH, DurationUnit.SECOND), "in^3/sec", "cubic inch per second", UnitSystem.IMPERIAL);
+    public static final FlowVolumeUnit CUBIC_INCH_PER_SECOND =
+            SI.deriveLinear(factorVD(VolumeUnit.CUBIC_INCH, DurationUnit.SECOND), "in^3/s", "cubic inch per second",
+                    UnitSystem.IMPERIAL, "in^3/s", "in^3/s", "in^3/sec");
 
     /** in^3/min. */
     public static final FlowVolumeUnit CUBIC_INCH_PER_MINUTE = SI.deriveLinear(
@@ -75,8 +78,8 @@ public class FlowVolumeUnit extends Unit<FlowVolumeUnit>
 
     /** gallon/s (US). */
     public static final FlowVolumeUnit GALLON_US_PER_SECOND =
-            SI.deriveLinear(factorVD(VolumeUnit.GALLON_US, DurationUnit.SECOND), "gal(US)/sec", "US gallon per second",
-                    UnitSystem.US_CUSTOMARY);
+            SI.deriveLinear(factorVD(VolumeUnit.GALLON_US, DurationUnit.SECOND), "gal(US)/s", "US gallon per second",
+                    UnitSystem.US_CUSTOMARY, "gal(US)/s", "gal(US)/s", "gal(US)/sec");
 
     /** gallon/min (US). */
     public static final FlowVolumeUnit GALLON_US_PER_MINUTE =
@@ -84,8 +87,9 @@ public class FlowVolumeUnit extends Unit<FlowVolumeUnit>
                     UnitSystem.US_CUSTOMARY);
 
     /** gallon/hour (US). */
-    public static final FlowVolumeUnit GALLON_US_PER_HOUR = SI.deriveLinear(factorVD(VolumeUnit.GALLON_US, DurationUnit.HOUR),
-            "gal(US)/hr", "US gallon per hour", UnitSystem.US_CUSTOMARY);
+    public static final FlowVolumeUnit GALLON_US_PER_HOUR =
+            SI.deriveLinear(factorVD(VolumeUnit.GALLON_US, DurationUnit.HOUR), "gal(US)/h", "US gallon per hour",
+                    UnitSystem.US_CUSTOMARY, "gal(US)/h", "gal(US)/h", "gal(US)/hr", "gal(US)/hour");
 
     /** gallon/day (US). */
     public static final FlowVolumeUnit GALLON_US_PER_DAY = SI.deriveLinear(factorVD(VolumeUnit.GALLON_US, DurationUnit.DAY),

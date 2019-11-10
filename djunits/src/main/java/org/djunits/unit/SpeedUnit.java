@@ -23,60 +23,60 @@ public class SpeedUnit extends Unit<SpeedUnit>
     public static final Quantity<SpeedUnit> BASE = new Quantity<>("Speed", "m/s");
 
     /** The SI unit for speed is m/s. */
-    public static final SpeedUnit SI =
-            new SpeedUnit().build(new Unit.Builder<SpeedUnit>().setQuantity(BASE).setId("m/s").setName("meter per second")
-                    .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(IdentityScale.SCALE));
+    public static final SpeedUnit SI = new SpeedUnit().build(new Unit.Builder<SpeedUnit>().setQuantity(BASE).setId("m/s")
+            .setName("meter per second").setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE, 1.0)
+            .setScale(IdentityScale.SCALE).setAdditionalAbbreviations("m/sec"));
 
     /** m/s. */
     public static final SpeedUnit METER_PER_SECOND = SI;
 
     /** m/h. */
-    public static final SpeedUnit METER_PER_HOUR =
-            SI.deriveLinear(factorLD(LengthUnit.METER, DurationUnit.HOUR), "m/h", "meter per hour");
+    public static final SpeedUnit METER_PER_HOUR = SI.deriveLinear(factorLD(LengthUnit.METER, DurationUnit.HOUR), "m/h",
+            "meter per hour", UnitSystem.SI_ACCEPTED, "m/h", "m/h", "m/hr", "m/hour");
 
     /** km/s. */
-    public static final SpeedUnit KM_PER_SECOND =
-            SI.deriveLinear(factorLD(LengthUnit.KILOMETER, DurationUnit.SECOND), "km/s", "kilometer per second");
+    public static final SpeedUnit KM_PER_SECOND = SI.deriveLinear(factorLD(LengthUnit.KILOMETER, DurationUnit.SECOND), "km/s",
+            "kilometer per second", UnitSystem.SI_DERIVED, "km/s", "km/s", "km/sec");
 
     /** km/h. */
-    public static final SpeedUnit KM_PER_HOUR =
-            SI.deriveLinear(factorLD(LengthUnit.KILOMETER, DurationUnit.HOUR), "km/h", "kilometer per hour");
+    public static final SpeedUnit KM_PER_HOUR = SI.deriveLinear(factorLD(LengthUnit.KILOMETER, DurationUnit.HOUR), "km/h",
+            "kilometer per hour", UnitSystem.SI_ACCEPTED, "km/h", "km/h", "km/hr", "km/hour");
 
     /** in/s. */
-    public static final SpeedUnit INCH_PER_SECOND =
-            SI.deriveLinear(factorLD(LengthUnit.INCH, DurationUnit.SECOND), "in/s", "inch per second", UnitSystem.IMPERIAL);
+    public static final SpeedUnit INCH_PER_SECOND = SI.deriveLinear(factorLD(LengthUnit.INCH, DurationUnit.SECOND), "in/s",
+            "inch per second", UnitSystem.IMPERIAL, "in/s", "in/s", "in/sec");
 
     /** in/min. */
     public static final SpeedUnit INCH_PER_MINUTE =
             SI.deriveLinear(factorLD(LengthUnit.INCH, DurationUnit.MINUTE), "in/min", "inch per minute", UnitSystem.IMPERIAL);
 
     /** in/h. */
-    public static final SpeedUnit INCH_PER_HOUR =
-            SI.deriveLinear(factorLD(LengthUnit.INCH, DurationUnit.HOUR), "in/h", "inch per hour", UnitSystem.IMPERIAL);
+    public static final SpeedUnit INCH_PER_HOUR = SI.deriveLinear(factorLD(LengthUnit.INCH, DurationUnit.HOUR), "in/h",
+            "inch per hour", UnitSystem.IMPERIAL, "in/h", "in/h", "in/hr", "in/hour");
 
     /** ft/s. */
-    public static final SpeedUnit FOOT_PER_SECOND =
-            SI.deriveLinear(factorLD(LengthUnit.FOOT, DurationUnit.SECOND), "ft/s", "foot per second", UnitSystem.IMPERIAL);
+    public static final SpeedUnit FOOT_PER_SECOND = SI.deriveLinear(factorLD(LengthUnit.FOOT, DurationUnit.SECOND), "ft/s",
+            "foot per second", UnitSystem.IMPERIAL, "ft/s", "ft/s", "ft/sec");
 
     /** ft/min. */
     public static final SpeedUnit FOOT_PER_MINUTE =
             SI.deriveLinear(factorLD(LengthUnit.FOOT, DurationUnit.MINUTE), "ft/min", "inch per minute", UnitSystem.IMPERIAL);
 
     /** ft/h. */
-    public static final SpeedUnit FOOT_PER_HOUR =
-            SI.deriveLinear(factorLD(LengthUnit.FOOT, DurationUnit.HOUR), "ft/h", "foot per hour", UnitSystem.IMPERIAL);
+    public static final SpeedUnit FOOT_PER_HOUR = SI.deriveLinear(factorLD(LengthUnit.FOOT, DurationUnit.HOUR), "ft/h",
+            "foot per hour", UnitSystem.IMPERIAL, "ft/h", "ft/h", "ft/hr", "ft/hour");
 
     /** mile/s. */
-    public static final SpeedUnit MILE_PER_SECOND =
-            SI.deriveLinear(factorLD(LengthUnit.MILE, DurationUnit.SECOND), "mi/s", "mile per second", UnitSystem.IMPERIAL);
+    public static final SpeedUnit MILE_PER_SECOND = SI.deriveLinear(factorLD(LengthUnit.MILE, DurationUnit.SECOND), "mi/s",
+            "mile per second", UnitSystem.IMPERIAL, "mi/s", "mi/s", "mi/sec");
 
     /** mile/min. */
     public static final SpeedUnit MILE_PER_MINUTE =
             SI.deriveLinear(factorLD(LengthUnit.MILE, DurationUnit.MINUTE), "mi/min", "mile per minute", UnitSystem.IMPERIAL);
 
     /** mile/h. */
-    public static final SpeedUnit MILE_PER_HOUR =
-            SI.deriveLinear(factorLD(LengthUnit.MILE, DurationUnit.HOUR), "mi/h", "mile per hour", UnitSystem.IMPERIAL);
+    public static final SpeedUnit MILE_PER_HOUR = SI.deriveLinear(factorLD(LengthUnit.MILE, DurationUnit.HOUR), "mi/h",
+            "mile per hour", UnitSystem.IMPERIAL, "mi/h", "mi/h", "mi/hr", "mi/hour");
 
     /** knot = Nautical Mile per hour. */
     public static final SpeedUnit KNOT =

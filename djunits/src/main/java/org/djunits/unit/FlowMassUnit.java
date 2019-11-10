@@ -22,16 +22,17 @@ public class FlowMassUnit extends Unit<FlowMassUnit>
     public static final Quantity<FlowMassUnit> BASE = new Quantity<>("FlowMass", "kg/s");
 
     /** The SI unit for mass flow rate is kg/s. */
-    public static final FlowMassUnit SI = new FlowMassUnit()
-            .build(new Unit.Builder<FlowMassUnit>().setQuantity(BASE).setId("kg/s").setName("kilogram per second")
-                    .setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(IdentityScale.SCALE));
+    public static final FlowMassUnit SI = new FlowMassUnit().build(new Unit.Builder<FlowMassUnit>().setQuantity(BASE)
+            .setId("kg/s").setName("kilogram per second").setUnitSystem(UnitSystem.SI_BASE).setSiPrefixes(SIPrefixes.NONE, 1.0)
+            .setScale(IdentityScale.SCALE).setAdditionalAbbreviations("kg/sec"));
 
     /** kg/s. */
     public static final FlowMassUnit KILOGRAM_PER_SECOND = SI;
 
     /** lb/s. */
-    public static final FlowMassUnit POUND_PER_SECOND = KILOGRAM_PER_SECOND
-            .deriveLinear(factorMD(MassUnit.POUND, DurationUnit.SECOND), "lb/s", "pound per second", UnitSystem.IMPERIAL);
+    public static final FlowMassUnit POUND_PER_SECOND =
+            KILOGRAM_PER_SECOND.deriveLinear(factorMD(MassUnit.POUND, DurationUnit.SECOND), "lb/s", "pound per second",
+                    UnitSystem.IMPERIAL, "lb/s", "lb/s", "lb/sec");
 
     /**
      * Determine the conversion factor to the base flow mass unit, given a mass unit and a duration unit.
