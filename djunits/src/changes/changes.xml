@@ -2,7 +2,21 @@
   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
-    <release version="4.01.01" date="2019-10-31" description="SpotBus instead of FindBugs in Maven">
+    <release version="4.01.02" date="2019-11-10" description="Iterable Vector; scalar toString methods">
+      <action dev="averbraeck" type="add">
+        Vectors and FloatVectors are now Iterable again.
+      </action>
+      <action dev="averbraeck" type="add">
+        Scalars could only be printed in engineering format. A method toTextualString() has been added 
+        to allow printing without trailing zeroes in the number, and using the default textual unit.
+      </action>
+      <action dev="averbraeck" type="add">
+        Scalars could only be printed in engineering format. A method toDisplayString() has been added 
+        to allow printing without trailing zeroes in the number, and using the default display unit.
+      </action>
+    </release>
+    
+    <release version="4.01.01" date="2019-10-31" description="SpotBugs instead of FindBugs in Maven; Java 9+">
       <action dev="averbraeck" type="fix">
         Ensured that "package-list" exists in apidocs for backward compatibility of javadoc linking.
       </action>

@@ -97,6 +97,36 @@ public interface Scalar<U extends Unit<U>, S extends Scalar<U, S>> extends Value
     boolean ne0();
 
     /**
+     * Concise textual representation of this value, without the engineering formatting, so without trailing zeroes. A space is
+     * added between the number and the unit.
+     * @return a String with the value with the default textual representation of the unit attached.
+     */
+    String toTextualString();
+
+    /**
+     * Concise textual representation of this value, without the engineering formatting, so without trailing zeroes. A space is
+     * added between the number and the unit.
+     * @param displayUnit U; the display unit for the value
+     * @return a String with the value with the default textual representation of the provided unit attached.
+     */
+    String toTextualString(U displayUnit);
+
+    /**
+     * Concise display description of this value, without the engineering formatting, so without trailing zeroes. A space is
+     * added between the number and the unit.
+     * @return a String with the value with the default display representation of the unit attached.
+     */
+    String toDisplayString();
+
+    /**
+     * Concise display description of this value, without the engineering formatting, so without trailing zeroes. A space is
+     * added between the number and the unit.
+     * @param displayUnit U; the display unit for the value
+     * @return a String with the value with the default display representation of the provided unit attached.
+     */
+    String toDisplayString(U displayUnit);
+
+    /**
      * Methods for Relative Scalar.
      * <p>
      * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved.
@@ -138,8 +168,8 @@ public interface Scalar<U extends Unit<U>, S extends Scalar<U, S>> extends Value
      * @param <RU> the absolute unit belonging to the relative unit
      * @param <R> the relative scalar belonging to the absolute scalar
      */
-    public interface RelWithAbs<AU extends AbsoluteLinearUnit<AU, RU>, A extends Scalar.Abs<AU, A, RU, R>,
-            RU extends Unit<RU>, R extends Scalar.RelWithAbs<AU, A, RU, R>> extends Scalar.Rel<RU, R>
+    public interface RelWithAbs<AU extends AbsoluteLinearUnit<AU, RU>, A extends Scalar.Abs<AU, A, RU, R>, RU extends Unit<RU>,
+            R extends Scalar.RelWithAbs<AU, A, RU, R>> extends Scalar.Rel<RU, R>
     {
         /**
          * Add an Absolute value to this relative value. A new value is returned due to immutability. The unit of the result is

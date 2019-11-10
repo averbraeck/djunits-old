@@ -224,6 +224,36 @@ public abstract class AbstractFloatScalar<U extends Unit<U>, S extends AbstractF
 
     /** {@inheritDoc} */
     @Override
+    public String toTextualString()
+    {
+        return toTextualString(getDisplayUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public String toTextualString(final U displayUnit)
+    {
+        float f = (float) ValueUtil.expressAsUnit(getSI(), displayUnit);
+        return f + " " + displayUnit.getDefaultTextualAbbreviation();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public String toDisplayString()
+    {
+        return toDisplayString(getDisplayUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public String toDisplayString(final U displayUnit)
+    {
+        float f = (float) ValueUtil.expressAsUnit(getSI(), displayUnit);
+        return f + " " + displayUnit.getDefaultDisplayAbbreviation();
+    }
+
+    /** {@inheritDoc} */
+    @Override
     @SuppressWarnings("checkstyle:designforextension")
     public int hashCode()
     {

@@ -231,6 +231,36 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, S extends Abstract
 
     /** {@inheritDoc} */
     @Override
+    public String toTextualString()
+    {
+        return toTextualString(getDisplayUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public String toTextualString(final U displayUnit)
+    {
+        double d = ValueUtil.expressAsUnit(getSI(), displayUnit);
+        return d + " " + displayUnit.getDefaultTextualAbbreviation();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public String toDisplayString()
+    {
+        return toDisplayString(getDisplayUnit());
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public String toDisplayString(final U displayUnit)
+    {
+        double d = ValueUtil.expressAsUnit(getSI(), displayUnit);
+        return d + " " + displayUnit.getDefaultDisplayAbbreviation();
+    }
+
+    /** {@inheritDoc} */
+    @Override
     @SuppressWarnings("checkstyle:designforextension")
     public int hashCode()
     {
