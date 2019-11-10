@@ -23,7 +23,8 @@ import org.djunits.value.ValueRuntimeException;
  * @param <S> the scalar type belonging to the vector type
  * @param <V> the vector type with the given unit
  */
-public interface Vector<U extends Unit<U>, S extends Scalar<U, S>, V extends Vector<U, S, V>> extends IndexedValue<U, S, V>
+public interface Vector<U extends Unit<U>, S extends Scalar<U, S>, V extends Vector<U, S, V>>
+        extends IndexedValue<U, S, V>, Iterable<S>
 {
     /**
      * Retrieve the size of the vector.
@@ -49,6 +50,7 @@ public interface Vector<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
      * Create and return an iterator over the scalars in this vector in proper sequence.
      * @return Iterator&lt;S&gt;; an iterator over the scalars in this vector in proper sequence
      */
+    @Override
     Iterator<S> iterator();
 
     /**
