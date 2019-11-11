@@ -4,7 +4,7 @@
 
   <groupId>org.djunits</groupId>
   <artifactId>djunits-generator</artifactId>
-  <version>4.01.02</version>
+  <version>4.01.03</version>
 
   <name>Generators for DJUNITS classes</name>
   <description>Generators for DJUNITS classes based on easy to change templates</description>
