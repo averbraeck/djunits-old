@@ -155,6 +155,9 @@ public class GenerateXSD
         }
     }
 
+    /** indicate first unit, so no |. */
+    static boolean first;
+     
     /**
      * Write a scalar with unit to the file, with or without [+-]?
      * @param pw PrintWriter; the file to write to
@@ -193,7 +196,7 @@ public class GenerateXSD
                     pw.write(")\"></xsd:pattern>\n" + "    </xsd:restriction>\n" + "  </xsd:simpleType>\n\n");
             }
             typeStr = key;
-            String type = key.replace("Unit", "TYPE").toUpperCase();
+            String type = key.toUpperCase() + "TYPE";
             if (plus)
             {
                 type = "POSITIVE" + type;
@@ -204,31 +207,17 @@ public class GenerateXSD
             if (type.contains("DIMENSIONLESS"))
                 pw.write("      <xsd:pattern value=\"" + plusmin + "[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?\\s*");
             else
-            {
                 pw.write("      <xsd:pattern value=\"" + plusmin + "[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?\\s*(");
-                if (vals.length > 2)
-                {
-                    pw.write(escape(vals[2]));
-                    for (int i = 3; i < vals.length; i++)
-                        pw.write("|" + escape(vals[i]));
-                }
-                else
-                {
-                    pw.write(escape(vals[0]));
-                }
-            }
+            first = true;
         }
         else
         {
-            if (vals.length > 2)
-            {
-                for (int i = 2; i < vals.length; i++)
-                    pw.write("|" + escape(vals[i]));
-            }
-            else
-            {
-                pw.write("|" + escape(vals[0]));
-            }
+            if (!first)
+                pw.write("|");
+            first = false;
+            pw.write(escape(vals[0]));
+            for (int i = 2; i < vals.length; i++)
+                pw.write("|" + escape(vals[i]));
         }
         System.out.println(vals[0]);
         return typeStr;
@@ -268,32 +257,20 @@ public class GenerateXSD
                 pw.write(")\"></xsd:pattern>\n" + "    </xsd:restriction>\n" + "  </xsd:simpleType>\n\n");
             }
             typeStr = key;
-            String type = key.replace("Unit", "UNITTYPE").toUpperCase();
+            String type = key.toUpperCase() + "UNITTYPE";
             pw.write("  <xsd:simpleType name=\"" + type + "\">\n");
             pw.write("     <xsd:restriction base=\"xsd:string\">\n");
             pw.write("      <xsd:pattern value=\"(");
-            if (vals.length > 2)
-            {
-                pw.write(escape(vals[2]));
-                for (int i = 3; i < vals.length; i++)
-                    pw.write("|" + escape(vals[i]));
-            }
-            else
-            {
-                pw.write(escape(vals[0]));
-            }
+            first = true;
         }
         else
         {
-            if (vals.length > 2)
-            {
-                for (int i = 2; i < vals.length; i++)
-                    pw.write("|" + escape(vals[i]));
-            }
-            else
-            {
-                pw.write("|" + escape(vals[0]));
-            }
+            if (!first)
+                pw.write("|");
+            first = false;
+            pw.write(escape(vals[0]));
+            for (int i = 2; i < vals.length; i++)
+                pw.write("|" + escape(vals[i]));
         }
         System.out.println(vals[0]);
         return typeStr;

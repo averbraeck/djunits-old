@@ -14,6 +14,9 @@
       <action dev="averbraeck" type="add">
         Unit tests and properties files for the units have been updated accordingly.
       </action>
+      <action dev="averbraeck" type="fix">
+        The GenerateXSD utility in djunits-generator has been repaired to be compliant with OTS.
+      </action>
     </release>
 
     <release version="4.01.02" date="2019-11-10" description="Iterable Vector; scalar toString methods">
