@@ -4,30 +4,31 @@ import java.io.Serializable;
 
 import org.djunits.Throw;
 import org.djunits.unit.Unit;
+import org.djunits.value.base.Scalar;
 
 /**
- * AbstractScalar is a class to help construct Scalar classes. In contrast with AbstractValue, it extends Number.
+ * AbstractScalar is a class to help construct Scalar classes. In contrast with AbstractScalar, it extends Number.
  * <p>
  * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
- * @param <U> the Unit of the value(s) in this AbstractValue. Used for setting, getting and displaying the value(s)
- * @param <T> the value type for this unit
+ * @param <U> the Unit of the value(s) in this AbstractScalar. Used for setting, getting and displaying the value(s)
+ * @param <S> the scalar type for this unit
  */
-public abstract class AbstractScalar<U extends Unit<U>, T extends Value<U, T>> extends Number
-        implements Value<U, T>, Serializable
+public abstract class AbstractScalar<U extends Unit<U>, S extends Scalar<U, S>> extends Number
+        implements Scalar<U, S>, Serializable
 {
     /**  */
     private static final long serialVersionUID = 20150626L;
 
-    /** The display unit of this AbstractValue. */
+    /** The display unit of this AbstractScalar. */
     private U displayUnit;
 
     /**
-     * Construct a new AbstractValue.
-     * @param displayUnit U; the unit of the new AbstractValue
+     * Construct a new AbstractScalar.
+     * @param displayUnit U; the unit of the new AbstractScalar
      */
     protected AbstractScalar(final U displayUnit)
     {

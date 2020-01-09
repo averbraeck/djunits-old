@@ -76,16 +76,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </interface>  
-  <class id="9" language="java" name="org.djunits.value.AbstractScalar" project="djunits" 
-    file="/djunits/src/main/java/org/djunits/value/AbstractScalar.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="198" y="451"/>    
-    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
-      <operations public="false" package="false" protected="false" private="false" static="false"/>    
-    </display>  
-  </class>  
-  <class id="10" language="java" name="org.djunits.value.vdouble.scalar.Angle" project="djunits" 
+  <class id="9" language="java" name="org.djunits.value.vdouble.scalar.Angle" project="djunits" 
     file="/djunits/src/main/java/org/djunits/value/vdouble/scalar/Angle.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="623" y="640"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
@@ -94,7 +85,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="org.djunits.value.vdouble.scalar.Length" project="djunits" 
+  <class id="10" language="java" name="org.djunits.value.vdouble.scalar.Length" project="djunits" 
     file="/djunits/src/main/java/org/djunits/value/vdouble/scalar/Length.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="797" y="640"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
@@ -103,7 +94,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="org.djunits.value.vdouble.scalar.Direction" project="djunits" 
+  <class id="11" language="java" name="org.djunits.value.vdouble.scalar.Direction" project="djunits" 
     file="/djunits/src/main/java/org/djunits/value/vdouble/scalar/Direction.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="230" y="640"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
@@ -112,7 +103,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="org.djunits.value.vdouble.scalar.Position" project="djunits" 
+  <class id="12" language="java" name="org.djunits.value.vdouble.scalar.Position" project="djunits" 
     file="/djunits/src/main/java/org/djunits/value/vdouble/scalar/Position.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="441" y="640"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
@@ -121,7 +112,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarAbs" project="djunits" 
+  <class id="13" language="java" name="org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarAbs" project="djunits" 
     file="/djunits/src/main/java/org/djunits/value/vdouble/scalar/base/AbstractDoubleScalarAbs.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="348" y="540"/>    
@@ -131,37 +122,37 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs" 
+  <class id="14" language="java" name="org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs" 
     project="djunits" 
     file="/djunits/src/main/java/org/djunits/value/vdouble/scalar/base/AbstractDoubleScalarRelWithAbs.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="706" y="539"/>    
+    <position height="-1" width="-1" x="706" y="540"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="16" language="java" name="org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel" project="djunits" 
+  <class id="15" language="java" name="org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel" project="djunits" 
     file="/djunits/src/main/java/org/djunits/value/vdouble/scalar/base/AbstractDoubleScalarRel.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="872" y="452"/>    
+    <position height="-1" width="-1" x="872" y="451"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <interface id="17" language="java" name="org.djunits.value.Absolute" project="djunits" 
+  <interface id="16" language="java" name="org.djunits.value.Absolute" project="djunits" 
     file="/djunits/src/main/java/org/djunits/value/Absolute.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="420" y="157"/>    
+    <position height="-1" width="-1" x="152" y="120"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </interface>  
-  <interface id="18" language="java" name="org.djunits.value.base.Scalar.RelWithAbs" project="djunits" 
+  <interface id="17" language="java" name="org.djunits.value.base.Scalar.RelWithAbs" project="djunits" 
     file="/djunits/src/main/java/org/djunits/value/base/Scalar.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="706" y="154"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
@@ -170,26 +161,26 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </interface>  
-  <interface id="19" language="java" name="org.djunits.value.base.Scalar.Abs" project="djunits" 
+  <interface id="18" language="java" name="org.djunits.value.base.Scalar.Abs" project="djunits" 
     file="/djunits/src/main/java/org/djunits/value/base/Scalar.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="295" y="210"/>    
+    <position height="-1" width="-1" x="152" y="210"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </interface>  
-  <interface id="20" language="java" name="org.djunits.value.vdouble.scalar.base.DoubleScalarInterface.Abs" 
+  <interface id="19" language="java" name="org.djunits.value.vdouble.scalar.base.DoubleScalarInterface.Abs" 
     project="djunits" file="/djunits/src/main/java/org/djunits/value/vdouble/scalar/base/DoubleScalarInterface.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="295" y="356"/>    
+    <position height="-1" width="-1" x="152" y="356"/>    
     <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </interface>  
-  <interface id="21" language="java" name="org.djunits.value.vdouble.scalar.base.DoubleScalarInterface.RelWithAbs" 
+  <interface id="20" language="java" name="org.djunits.value.vdouble.scalar.base.DoubleScalarInterface.RelWithAbs" 
     project="djunits" file="/djunits/src/main/java/org/djunits/value/vdouble/scalar/base/DoubleScalarInterface.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="706" y="281"/>    
@@ -199,141 +190,164 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </interface>  
-  <generalization id="22">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <generalization id="23">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <generalization id="24">    
+  <class id="21" language="java" name="java.lang.Number" project="djunits" file="C:/app/jdk-13/lib/jrt-fs.jar" 
+    binary="true" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="204" y="451"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="org.djunits.value.AbstractScalar" project="djunits" 
+    file="/djunits/src/main/java/org/djunits/value/AbstractScalar.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="345" y="451"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <realization id="23">    
     <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="16"/>  
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="24">    
+    <bendpoint x="152" y="540"/>    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="19"/>  
+  </realization>  
+  <generalization id="25">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="1"/>  
   </generalization>  
-  <realization id="25">    
+  <generalization id="26">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <generalization id="27">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
+  <generalization id="28">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
+  <realization id="29">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <generalization id="30">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <generalization id="31">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <realization id="32">    
     <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="1"/>  
   </realization>  
-  <generalization id="26">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="15"/>  
-  </generalization>  
-  <generalization id="27">    
-    <end type="SOURCE" refId="19"/>    
+  <generalization id="33">    
+    <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="3"/>  
   </generalization>  
-  <nesting id="28">    
-    <end type="SOURCE" refId="3"/>    
+  <nesting id="34">    
+    <bendpoint x="672" y="332"/>    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="20"/>  
+  </nesting>  
+  <generalization id="35">    
+    <end type="SOURCE" refId="19"/>    
     <end type="TARGET" refId="18"/>  
-  </nesting>  
-  <generalization id="29">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="7"/>  
   </generalization>  
-  <nesting id="30">    
+  <realization id="36">    
+    <bendpoint x="346" y="314"/>    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <generalization id="37">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <nesting id="38">    
     <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="19"/>  
+    <end type="TARGET" refId="17"/>  
   </nesting>  
-  <generalization id="31">    
+  <generalization id="39">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <generalization id="40">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="5"/>  
   </generalization>  
-  <generalization id="32">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="4"/>  
+  <generalization id="41">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="3"/>  
   </generalization>  
-  <generalization id="33">    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="17"/>  
+  <generalization id="42">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="22"/>  
   </generalization>  
-  <realization id="34">    
-    <bendpoint x="198" y="123"/>    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="4"/>  
-  </realization>  
-  <generalization id="35">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="7"/>  
+  <generalization id="43">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="16"/>  
   </generalization>  
-  <generalization id="36">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="15"/>  
+  <generalization id="44">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="3"/>  
   </generalization>  
-  <realization id="37">    
-    <end type="SOURCE" refId="16"/>    
+  <nesting id="45">    
+    <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="2"/>  
-  </realization>  
-  <nesting id="38">    
+  </nesting>  
+  <generalization id="46">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <generalization id="47">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <generalization id="48">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <nesting id="49">    
     <bendpoint x="710" y="243"/>    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="6"/>  
   </nesting>  
-  <generalization id="39">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="19"/>  
-  </generalization>  
-  <nesting id="40">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="20"/>  
-  </nesting>  
-  <generalization id="41">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="18"/>  
-  </generalization>  
-  <generalization id="42">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="14"/>  
-  </generalization>  
-  <generalization id="43">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="14"/>  
-  </generalization>  
-  <realization id="44">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="20"/>  
-  </realization>  
-  <generalization id="45">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <generalization id="46">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <generalization id="47">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="6"/>  
-  </generalization>  
-  <realization id="48">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="21"/>  
-  </realization>  
-  <generalization id="49">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="9"/>  
-  </generalization>  
   <nesting id="50">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="2"/>  
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="18"/>  
   </nesting>  
-  <nesting id="51">    
-    <bendpoint x="672" y="332"/>    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="21"/>  
-  </nesting>  
+  <generalization id="51">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="17"/>  
+  </generalization>  
   <generalization id="52">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="8"/>  
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="6"/>  
   </generalization>  
   <generalization id="53">    
-    <end type="SOURCE" refId="18"/>    
-    <end type="TARGET" refId="6"/>  
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="14"/>  
   </generalization>  
   <generalization id="54">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="3"/>  
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="7"/>  
   </generalization>  
+  <generalization id="55">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="21"/>  
+  </generalization>  
+  <nesting id="56">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="19"/>  
+  </nesting>  
   <classifier-display autosize="true" stereotype="false" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="false" package="false" protected="false" private="false" static="false"/>    
