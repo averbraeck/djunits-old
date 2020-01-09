@@ -39,7 +39,7 @@ package org.djunits.unit.scale;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class OffsetLinearScale extends LinearScale implements Scale
+public class OffsetLinearScale extends LinearScale
 {
     /** */
     private static final long serialVersionUID = 20151011L;
