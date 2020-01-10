@@ -83,6 +83,7 @@ public class FloatSIMatrix extends AbstractFloatMatrixRel<SIUnit, FloatSIScalar,
     public static FloatSIMatrix instantiate(final float[][] values, final SIUnit unit, final StorageType storageType)
             throws ValueRuntimeException
     {
+        Throw.whenNull(unit, "unit may not be null");
         return new FloatSIMatrix(FloatMatrixData.instantiate(values, unit.getScale(), storageType), unit);
     }
 

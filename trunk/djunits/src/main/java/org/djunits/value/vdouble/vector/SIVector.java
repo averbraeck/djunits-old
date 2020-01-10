@@ -79,10 +79,12 @@ public class SIVector extends AbstractDoubleVectorRel<SIUnit, SIScalar, SIVector
      * @param storageType StorageType; the data type to use (e.g., DENSE or SPARSE)
      * @return SIVector; the SIVector of the given unit
      * @throws ValueRuntimeException when values is null
+     * @throws NullPointerException when unit is null
      */
     public static SIVector instantiate(final double[] values, final SIUnit unit, final StorageType storageType)
             throws ValueRuntimeException
     {
+        Throw.whenNull(unit, "unit may not be null");
         return new SIVector(DoubleVectorData.instantiate(values, unit.getScale(), storageType), unit);
     }
 

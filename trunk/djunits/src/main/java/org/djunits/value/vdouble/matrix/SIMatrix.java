@@ -83,6 +83,7 @@ public class SIMatrix extends AbstractDoubleMatrixRel<SIUnit, SIScalar, SIVector
     public static SIMatrix instantiate(final double[][] values, final SIUnit unit, final StorageType storageType)
             throws ValueRuntimeException
     {
+        Throw.whenNull(unit, "unit may not be null");
         return new SIMatrix(DoubleMatrixData.instantiate(values, unit.getScale(), storageType), unit);
     }
 
