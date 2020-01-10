@@ -54,9 +54,9 @@ public final class Test
         Jerk jerk1 = new Jerk(1.2, JerkUnit.SI);
         System.out.println("jerk1 = Jerk(1.2, JerkUnit.SI) : " + jerk1);
         Jerk jerk2 = jerk1.times(2.0);
-        System.out.println("jerk2 = jerk1.multiplyBy(2.0)                    : " + jerk2);
+        System.out.println("jerk2 = jerk1.multiplyBy(2.0)  : " + jerk2);
         double[] sv = new double[] {1, 2, 3, 4, 5};
-        JerkVector jerkVector = DoubleVector.instantiate(sv, JerkUnit.SI, StorageType.DENSE);
+        JerkVector jerkVector = DoubleVector.instantiate(sv, JerkUnit.SI, StorageType.DENSE, JerkVector.class);
         System.out.println("jerkVector: : " + jerkVector);
 
         Jerk jjerk1 = new Jerk(1.2, JerkUnit.SI);
