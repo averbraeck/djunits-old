@@ -83,6 +83,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
     public static FloatSIVector instantiate(final float[] values, final SIUnit unit, final StorageType storageType)
             throws ValueRuntimeException
     {
+        Throw.whenNull(unit, "unit may not be null");
         return new FloatSIVector(FloatVectorData.instantiate(values, unit.getScale(), storageType), unit);
     }
 
