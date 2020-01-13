@@ -19,21 +19,10 @@ import org.djunits.value.vdouble.vector.base.DoubleVector;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  * @author <a href="https://www.transport.citg.tudelft.nl">Wouter Schakel</a>
  */
-public final class Test
+public final class JerkDemo
 {
-    /** Furlong example. */
-    public static final LengthUnit FURLONG = LengthUnit.FOOT.deriveLinear(660.0, "fr", "Furlong");
-
-    /** Fortnight example. */
-    public static final DurationUnit FORTNIGHT = DurationUnit.DAY.deriveLinear(14.0, "fn", "Fortnight");
-
-    /** fr/fn example. */
-    public static final SpeedUnit FURLONGS_PER_FORTNIGHT =
-            SpeedUnit.SI.deriveLinear(FURLONG.getScale().toStandardUnit(1.0) / FORTNIGHT.getScale().toStandardUnit(1.0),
-                    "fr/fn", "Furlongs per Fortnight");
-
     /** */
-    private Test()
+    private JerkDemo()
     {
         // utility class
     }
@@ -44,25 +33,20 @@ public final class Test
      */
     public static void main(final String[] args) throws ValueRuntimeException
     {
-        Length fr1000 = new Length(1000.0, FURLONG);
-        Duration twoWeeks = new Duration(1.0, FORTNIGHT);
-        Speed speed = fr1000.divide(twoWeeks);
-        System.out.println(speed);
-        System.out.println(speed.toString(FURLONGS_PER_FORTNIGHT));
-        System.out.println();
-
         Jerk jerk1 = new Jerk(1.2, JerkUnit.SI);
-        System.out.println("jerk1 = Jerk(1.2, JerkUnit.SI) : " + jerk1);
+        System.out.println("jerk1 = Jerk(1.2, JerkUnit.SI)       : " + jerk1);
         Jerk jerk2 = jerk1.times(2.0);
-        System.out.println("jerk2 = jerk1.multiplyBy(2.0)  : " + jerk2);
+        System.out.println("jerk2 = jerk1.multiplyBy(2.0)        : " + jerk2);
+        Jerk jerk3 = new Jerk(4.0, JerkUnit.IN_PER_S3);
+        System.out.println("jerk3 = Jerk(4.0, JerkUnit.IN_PER_S3 : " + jerk3);
+        System.out.println("jerk3 expressed in JerkUnit.SI       : " + jerk3.toString(JerkUnit.SI));
+        System.out.println("jerk3 expressed in JerkUnit.FT_PER_S3: " + jerk3.toString(JerkUnit.FT_PER_S3));
+        
+        System.out.println();
+        
         double[] sv = new double[] {1, 2, 3, 4, 5};
         JerkVector jerkVector = DoubleVector.instantiate(sv, JerkUnit.SI, StorageType.DENSE, JerkVector.class);
         System.out.println("jerkVector: : " + jerkVector);
-
-        Jerk jjerk1 = new Jerk(1.2, JerkUnit.SI);
-        System.out.println("jerk1 = new Jerk(1.2, JerkUnit.SI) : " + jjerk1);
-        Jerk jjerk2 = jjerk1.times(2.0);
-        System.out.println("jerk2 = jerk1.multiplyBy(2.0)      : " + jjerk2);
 
         double[][] data = new double[1000][1000];
         for (int i = 0; i < 1000; i++)
@@ -72,6 +56,7 @@ public final class Test
                 data[i][j] = 9 * i + 2 * j * 0.364;
             }
         }
+        // XXX Is this supposed to fill a JerkMatrix???
     }
 
 }
