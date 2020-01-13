@@ -23,10 +23,10 @@ public class JerkUnit extends Unit<JerkUnit>
     /** */
     private static final long serialVersionUID = 20191003L;
 
-    /** The base, with "m/s3" as the SI signature. */
+    /** The base quantity, with "m/s3" as the SI signature. */
     public static final Quantity<JerkUnit> BASE = new Quantity<>("Jerk", "m/s3");
 
-    /** The SI unit for acceleration is m/s^3. */
+    /** The SI unit for jerk is m/s^3. */
     public static final JerkUnit SI =
             new JerkUnit().build(new Unit.Builder<JerkUnit>().setQuantity(BASE).setId("m/s3").setName("meter per second cubed")
                     .setUnitSystem(UnitSystem.SI_DERIVED).setSiPrefixes(SIPrefixes.NONE, 1.0).setScale(IdentityScale.SCALE));
