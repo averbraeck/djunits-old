@@ -3,14 +3,12 @@ package org.djunits.demo.examples;
 import org.djunits.unit.AbsoluteTemperatureUnit;
 import org.djunits.unit.AreaUnit;
 import org.djunits.unit.LengthUnit;
-import org.djunits.unit.SIUnit;
 import org.djunits.unit.util.UnitException;
 import org.djunits.value.ValueRuntimeException;
 import org.djunits.value.storage.StorageType;
 import org.djunits.value.vdouble.scalar.Length;
 import org.djunits.value.vdouble.scalar.SIScalar;
 import org.djunits.value.vdouble.vector.AbsoluteTemperatureVector;
-import org.djunits.value.vdouble.vector.SIVector;
 import org.djunits.value.vdouble.vector.base.DoubleVector;
 import org.djunits.value.vfloat.scalar.FloatLength;
 import org.djunits.value.vfloat.scalar.FloatSIScalar;
@@ -32,8 +30,8 @@ public final class ExamplesInPackageDescription
     /**
      * Demo code for the package list page.
      * @param args String[]; not used
-     * @throws UnitException
-     * @throws ValueRuntimeException
+     * @throws UnitException on error creating unit
+     * @throws ValueRuntimeException when instantiate of a Value fails
      */
     public static void main(final String[] args) throws ValueRuntimeException, UnitException
     {
