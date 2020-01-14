@@ -28,11 +28,11 @@ public final class NewTypes
      */
     public static void main(final String[] args) throws UnitException
     {
-        SIScalar jerk = new SIScalar(2.0, SIUnit.of("m/s3"));
+        SIScalar jerkScalar = new SIScalar(2.0, SIUnit.of("m/s3"));
         SIVector jerkVector = new SIVector(new DoubleVectorDataDense(new double[] {1.0, 2.0, 3.0}), SIUnit.of("ms-3"));
         SIScalar jerk2 = jerkVector.get(1);
-        System.out.println("jerkVector = " + jerkVector);
-        System.out.println("jerk " + jerk + " ?= " + jerk2 + ": " + jerk.eq(jerk2));
+        System.out.println("jerkVector: " + jerkVector);
+        System.out.println("jerkScalar: " + jerkScalar + " ?= " + jerk2 + ": " + jerkScalar.eq(jerk2));
     }
 
 }

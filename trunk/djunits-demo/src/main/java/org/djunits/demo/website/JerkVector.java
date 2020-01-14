@@ -13,7 +13,6 @@ import org.djunits.value.vdouble.vector.data.DoubleVectorData;
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
 public class JerkVector extends AbstractDoubleVectorRel<JerkUnit, Jerk, JerkVector>
-
 {
     /** */
     private static final long serialVersionUID = 20190905L;
