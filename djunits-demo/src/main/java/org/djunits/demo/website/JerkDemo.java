@@ -8,6 +8,7 @@ import org.djunits.value.storage.StorageType;
 import org.djunits.value.vdouble.scalar.Duration;
 import org.djunits.value.vdouble.scalar.Length;
 import org.djunits.value.vdouble.scalar.Speed;
+import org.djunits.value.vdouble.vector.AccelerationVector;
 import org.djunits.value.vdouble.vector.base.DoubleVector;
 
 /**
@@ -46,7 +47,8 @@ public final class JerkDemo
         
         double[] sv = new double[] {1, 2, 3, 4, 5};
         JerkVector jerkVector = DoubleVector.instantiate(sv, JerkUnit.SI, StorageType.DENSE, JerkVector.class);
-        System.out.println("jerkVector: : " + jerkVector);
+        System.out.println("jerkVector: " + jerkVector);
+        // FIXME why can't we multiply a JerkVector by a scalar Duration and get an AccelerationVector 
 
         double[][] data = new double[1000][1000];
         for (int i = 0; i < 1000; i++)
