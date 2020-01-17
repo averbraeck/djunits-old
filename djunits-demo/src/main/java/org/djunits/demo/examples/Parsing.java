@@ -21,7 +21,7 @@ public final class Parsing
     }
     
     /**
-     * @param args not used
+ * @param args String[]; not used
      */
     public static void main(final String[] args)
     {
