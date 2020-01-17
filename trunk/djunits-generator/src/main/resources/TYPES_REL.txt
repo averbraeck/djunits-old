@@ -1,6 +1,8 @@
 AbsorbedDose
 Acceleration
 AmountOfSubstance
+AngularAcceleration
+AngularVelocity
 Area
 CatalyticActivity
 Density
@@ -25,6 +27,7 @@ LuminousIntensity
 MagneticFluxDensity
 MagneticFlux
 Mass
+Momentum
 Power
 Pressure
 RadioActivity
