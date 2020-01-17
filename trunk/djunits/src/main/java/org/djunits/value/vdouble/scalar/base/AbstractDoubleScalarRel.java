@@ -9,7 +9,7 @@ import org.djunits.value.vdouble.scalar.SIScalar;
  * The typed, abstract DoubleScalarRel class that forms the basis of all DoubleScalar definitions and extensions.<br>
  * Note: A relative scalar class can implement the toAbs() method if it has an absolute equivalent.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
@@ -74,7 +74,7 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
      * @param otherScalar AbstractDoubleScalarRel&lt;?, ?&gt;; the value by which this scalar is multiplied
      * @return DoubleScalar&lt;?&gt;; a new scalar instance with correct SI dimensions
      */
-    public SIScalar times(final  AbstractDoubleScalarRel<?, ?> otherScalar)
+    public SIScalar times(final AbstractDoubleScalarRel<?, ?> otherScalar)
     {
         return DoubleScalar.multiply(this, otherScalar);
     }

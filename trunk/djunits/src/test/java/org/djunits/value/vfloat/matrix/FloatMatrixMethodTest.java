@@ -79,18 +79,18 @@ public class FloatMatrixMethodTest
             }
         }
 
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
-            for (AreaUnit au : new AreaUnit[] {AreaUnit.SQUARE_METER, AreaUnit.ACRE})
+            for (AreaUnit au : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
             {
                 float[][] testData = storageType.equals(StorageType.DENSE) ? denseTestData : sparseTestData;
                 FloatAreaMatrix am =
                         FloatMatrix.instantiate(FloatMatrixData.instantiate(testData, au.getScale(), storageType), au);
 
                 // INDEX CHECKING
-                for (int row : new int[] {-1, 0, denseTestData.length - 1, denseTestData.length})
+                for (int row : new int[] { -1, 0, denseTestData.length - 1, denseTestData.length })
                 {
-                    for (int col : new int[] {-1, 0, denseTestData[0].length - 1, denseTestData[0].length})
+                    for (int col : new int[] { -1, 0, denseTestData[0].length - 1, denseTestData[0].length })
                     {
                         if (row < 0 || col < 0 || row >= denseTestData.length || col >= denseTestData[0].length)
                         {
@@ -122,7 +122,7 @@ public class FloatMatrixMethodTest
                         }
                     }
                 }
-                for (int col : new int[] {-1, 0, denseTestData[0].length - 1, denseTestData[0].length})
+                for (int col : new int[] { -1, 0, denseTestData[0].length - 1, denseTestData[0].length })
                 {
                     if (col < 0 || col >= denseTestData[0].length)
                     {
@@ -369,7 +369,8 @@ public class FloatMatrixMethodTest
                     }
                 }
 
-                float[][] testData4x4 = new float[][] {{2, 3, 5, 7}, {11, 13, 17, 19}, {23, 29, 31, 37}, {41, 43, 47, 49}};
+                float[][] testData4x4 =
+                        new float[][] { { 2, 3, 5, 7 }, { 11, 13, 17, 19 }, { 23, 29, 31, 37 }, { 41, 43, 47, 49 } };
                 FloatAreaMatrix am4x4 =
                         FloatMatrix.instantiate(FloatMatrixData.instantiate(testData4x4, au.getScale(), storageType), au);
                 float det = am4x4.determinant();
@@ -389,10 +390,10 @@ public class FloatMatrixMethodTest
 
                 // TEST METHODS THAT INVOLVE TWO MATRIX INSTANCES
 
-                for (StorageType storageType2 : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+                for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
                 {
                     float[][] testData2 = storageType2.equals(StorageType.DENSE) ? denseTestData : reverseSparseTestData;
-                    for (AreaUnit au2 : new AreaUnit[] {AreaUnit.SQUARE_METER, AreaUnit.ACRE})
+                    for (AreaUnit au2 : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
                     {
 
                         // PLUS and INCREMENTBY(MATRIX)
@@ -477,9 +478,9 @@ public class FloatMatrixMethodTest
         float[][] denseTestData = FLOATMATRIX.denseRectArrays(5, 10);
         float[][] sparseTestData = FLOATMATRIX.sparseRectArrays(5, 10);
 
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
-            for (AreaUnit au : new AreaUnit[] {AreaUnit.SQUARE_METER, AreaUnit.ACRE})
+            for (AreaUnit au : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
             {
                 float[][] testData = storageType.equals(StorageType.DENSE) ? denseTestData : sparseTestData;
                 FloatAreaMatrix am =
@@ -628,9 +629,9 @@ public class FloatMatrixMethodTest
         float[][] denseTestData = FLOATMATRIX.denseRectArrays(5, 10);
         float[][] sparseTestData = FLOATMATRIX.sparseRectArrays(5, 10);
 
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
-            for (AreaUnit au : new AreaUnit[] {AreaUnit.SQUARE_METER, AreaUnit.ACRE})
+            for (AreaUnit au : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
             {
                 float[][] testData = storageType.equals(StorageType.DENSE) ? denseTestData : sparseTestData;
                 FloatAreaMatrix am =
@@ -724,9 +725,9 @@ public class FloatMatrixMethodTest
                 assertEquals("relPlusAbs", 61.0 * denseTestData[row][col], relPlusAbs.getSI(row, col), 0.01);
             }
         }
-        for (int dRows : new int[] {-1, 0, 1})
+        for (int dRows : new int[] { -1, 0, 1 })
         {
-            for (int dCols : new int[] {-1, 0, 1})
+            for (int dCols : new int[] { -1, 0, 1 })
             {
                 if (dRows == 0 && dCols == 0)
                 {
@@ -889,7 +890,7 @@ public class FloatMatrixMethodTest
             IllegalAccessException, IllegalArgumentException, InvocationTargetException, UnitException
     {
         float[][] testValues = FLOATMATRIX.denseRectArrays(10, 20);
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
             for (String type : CLASSNAMES.REL_LIST)
             {
@@ -897,7 +898,7 @@ public class FloatMatrixMethodTest
                 Quantity<U> quantity = (Quantity<U>) Quantities.INSTANCE.getQuantity(type + "Unit");
                 for (U unit : quantity.getUnitsById().values())
                 {
-                    for (StorageType storageType2 : new StorageType[] {StorageType.DENSE, storageType})
+                    for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, storageType })
                     {
                         SIUnit siUnit = SIUnit.of(unit.getQuantity().getSiDimensions());
                         FloatSIMatrix matrix = FloatSIMatrix.instantiate(testValues, siUnit, storageType2);
@@ -939,7 +940,7 @@ public class FloatMatrixMethodTest
     {
         float[][] testData = FLOATMATRIX.denseRectArrays(12, 34);
         testData[2][2] = 0;
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
             FloatMatrixData fmd = FloatMatrixData.instantiate(testData, TemperatureUnit.KELVIN.getScale(), storageType);
             assertTrue("Float matrix is equal to itself", fmd.equals(fmd));
@@ -947,7 +948,7 @@ public class FloatMatrixMethodTest
             assertFalse("Float matrix data is not equal to some string", fmd.equals("some string"));
             assertTrue("Float matrix is equal to sparse version of itself", fmd.equals(fmd.toSparse()));
             assertTrue("Float matrix is equal to dense version of itself", fmd.equals(fmd.toDense()));
-            for (StorageType storageType2 : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+            for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
             {
                 FloatMatrixData dvd2 = FloatMatrixData.instantiate(testData, TemperatureUnit.KELVIN.getScale(), storageType2);
                 assertEquals(
@@ -974,7 +975,7 @@ public class FloatMatrixMethodTest
     /**
      * Test the sparse value class.
      */
-    @SuppressWarnings({"rawtypes", "unchecked"})
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Test
     public void sparseValueTest()
     {

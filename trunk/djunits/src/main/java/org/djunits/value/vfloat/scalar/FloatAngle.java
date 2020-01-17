@@ -6,22 +6,24 @@ import javax.annotation.Generated;
 
 import org.djunits.Throw;
 import org.djunits.unit.AngleUnit;
+import org.djunits.unit.AngularVelocityUnit;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.DirectionUnit;
+import org.djunits.unit.DurationUnit;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
 
 /**
  * Easy access methods for the FloatAngle FloatScalar.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
 public class FloatAngle extends AbstractFloatScalarRelWithAbs<DirectionUnit, FloatDirection, AngleUnit, FloatAngle>
 {
     /** */
@@ -106,7 +108,7 @@ public class FloatAngle extends AbstractFloatScalarRelWithAbs<DirectionUnit, Flo
      * Interpolate between two values.
      * @param zero FloatAngle; the low value
      * @param one FloatAngle; the high value
-     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return FloatAngle; a Scalar at the ratio between
      */
     public static FloatAngle interpolate(final FloatAngle zero, final FloatAngle one, final float ratio)
@@ -208,7 +210,7 @@ public class FloatAngle extends AbstractFloatScalarRelWithAbs<DirectionUnit, Flo
 
     /**
      * Returns a FloatAngle based on a value and the textual representation of the unit.
-     * @param value double; the value to use
+     * @param value float; the value to use
      * @param unitString String; the textual representation of the unit
      * @return FloatAngle; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
@@ -228,12 +230,42 @@ public class FloatAngle extends AbstractFloatScalarRelWithAbs<DirectionUnit, Flo
 
     /**
      * Calculate the division of FloatAngle and FloatAngle, which results in a FloatDimensionless scalar.
-     * @param v FloatAngle scalar
+     * @param v FloatAngle; FloatAngle scalar
      * @return FloatDimensionless scalar as a division of FloatAngle and FloatAngle
      */
     public final FloatDimensionless divide(final FloatAngle v)
     {
         return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of FloatAngle and FloatFrequency, which results in a FloatAngularVelocity scalar.
+     * @param v FloatFrequency; FloatAngle scalar
+     * @return FloatAngularVelocity scalar as a multiplication of FloatAngle and FloatFrequency
+     */
+    public final FloatAngularVelocity times(final FloatFrequency v)
+    {
+        return new FloatAngularVelocity(this.si * v.si, AngularVelocityUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FloatAngle and FloatDuration, which results in a FloatAngularVelocity scalar.
+     * @param v FloatDuration; FloatAngle scalar
+     * @return FloatAngularVelocity scalar as a division of FloatAngle and FloatDuration
+     */
+    public final FloatAngularVelocity divide(final FloatDuration v)
+    {
+        return new FloatAngularVelocity(this.si / v.si, AngularVelocityUnit.SI);
+    }
+
+    /**
+     * Calculate the division of FloatAngle and FloatAngularVelocity, which results in a FloatDuration scalar.
+     * @param v FloatAngularVelocity; FloatAngle scalar
+     * @return FloatDuration scalar as a division of FloatAngle and FloatAngularVelocity
+     */
+    public final FloatDuration divide(final FloatAngularVelocity v)
+    {
+        return new FloatDuration(this.si / v.si, DurationUnit.SI);
     }
 
 }

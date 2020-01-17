@@ -19,7 +19,7 @@ import org.djunits.value.vfloat.scalar.base.FloatScalarInterface;
 /**
  * Stores the data for a FloatMatrix and carries out basic operations.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
@@ -134,7 +134,7 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
     /**
      * Instantiate a FloatMatrixData with the right data type. The FloatScalar array is of the form fs[rows][columns] so each
      * value can be found with fs[row][column].
-     * @param values FloatScalarInterface[][]; the values to store
+     * @param values S[][]; the values to store
      * @param storageType StorageType; the data type to use
      * @return the FloatMatrixData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null
@@ -315,7 +315,7 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
 
     /**
      * Apply an operation to each cell.
-     * @param doubleFunction DoubleFunction; the operation to apply
+     * @param doubleFunction FloatFunction; the operation to apply
      * @return FloatMatrixData; this (modified) double vector data object
      */
     public abstract FloatMatrixData assign(FloatFunction doubleFunction);

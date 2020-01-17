@@ -13,7 +13,7 @@ import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 /**
  * AbstractMutableDoubleMatrixRelWithAbs.java.
  * <p>
- * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2019-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
@@ -46,7 +46,7 @@ public abstract class AbstractDoubleMatrixRelWithAbs<
     /**
      * Construct a new Relative Mutable DoubleMatrix.
      * @param data DoubleMatrixData; an internal data object
-     * @param unit U; the unit
+     * @param unit RU; the unit
      */
     protected AbstractDoubleMatrixRelWithAbs(final DoubleMatrixData data, final RU unit)
     {

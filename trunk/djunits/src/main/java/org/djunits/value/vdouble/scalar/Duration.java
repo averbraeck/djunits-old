@@ -5,6 +5,8 @@ import java.util.regex.Matcher;
 import javax.annotation.Generated;
 
 import org.djunits.Throw;
+import org.djunits.unit.AngleUnit;
+import org.djunits.unit.AngularVelocityUnit;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.DurationUnit;
 import org.djunits.unit.ElectricalCapacitanceUnit;
@@ -23,14 +25,14 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
 /**
  * Easy access methods for the Relative Duration DoubleScalar.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
 public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, DurationUnit, Duration>
 {
     /** */
@@ -227,7 +229,7 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
 
     /**
      * Calculate the division of Duration and Duration, which results in a Dimensionless scalar.
-     * @param v Duration scalar
+     * @param v Duration; Duration scalar
      * @return Dimensionless scalar as a division of Duration and Duration
      */
     public final Dimensionless divide(final Duration v)
@@ -237,7 +239,7 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
 
     /**
      * Calculate the multiplication of Duration and Frequency, which results in a Dimensionless scalar.
-     * @param v Duration scalar
+     * @param v Frequency; Duration scalar
      * @return Dimensionless scalar as a multiplication of Duration and Frequency
      */
     public final Dimensionless times(final Frequency v)
@@ -247,7 +249,7 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
 
     /**
      * Calculate the multiplication of Duration and ElectricalCurrent, which results in a ElectricalCharge scalar.
-     * @param v Duration scalar
+     * @param v ElectricalCurrent; Duration scalar
      * @return ElectricalCharge scalar as a multiplication of Duration and ElectricalCurrent
      */
     public final ElectricalCharge times(final ElectricalCurrent v)
@@ -257,7 +259,7 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
 
     /**
      * Calculate the multiplication of Duration and FlowMass, which results in a Mass scalar.
-     * @param v Duration scalar
+     * @param v FlowMass; Duration scalar
      * @return Mass scalar as a multiplication of Duration and FlowMass
      */
     public final Mass times(final FlowMass v)
@@ -267,7 +269,7 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
 
     /**
      * Calculate the multiplication of Duration and FlowVolume, which results in a Volume scalar.
-     * @param v Duration scalar
+     * @param v FlowVolume; Duration scalar
      * @return Volume scalar as a multiplication of Duration and FlowVolume
      */
     public final Volume times(final FlowVolume v)
@@ -277,7 +279,7 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
 
     /**
      * Calculate the multiplication of Duration and Acceleration, which results in a Speed scalar.
-     * @param v Duration scalar
+     * @param v Acceleration; Duration scalar
      * @return Speed scalar as a multiplication of Duration and Acceleration
      */
     public final Speed times(final Acceleration v)
@@ -287,7 +289,7 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
 
     /**
      * Calculate the multiplication of Duration and Power, which results in a Energy scalar.
-     * @param v Duration scalar
+     * @param v Power; Duration scalar
      * @return Energy scalar as a multiplication of Duration and Power
      */
     public final Energy times(final Power v)
@@ -297,7 +299,7 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
 
     /**
      * Calculate the multiplication of Duration and Speed, which results in a Length scalar.
-     * @param v Duration scalar
+     * @param v Speed; Duration scalar
      * @return Length scalar as a multiplication of Duration and Speed
      */
     public final Length times(final Speed v)
@@ -307,7 +309,7 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
 
     /**
      * Calculate the multiplication of Duration and ElectricalPotential, which results in a MagneticFlux scalar.
-     * @param v Duration scalar
+     * @param v ElectricalPotential; Duration scalar
      * @return MagneticFlux scalar as a multiplication of Duration and ElectricalPotential
      */
     public final MagneticFlux times(final ElectricalPotential v)
@@ -317,7 +319,7 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
 
     /**
      * Calculate the multiplication of Duration and ElectricalResistance, which results in a ElectricalInductance scalar.
-     * @param v Duration scalar
+     * @param v ElectricalResistance; Duration scalar
      * @return ElectricalInductance scalar as a multiplication of Duration and ElectricalResistance
      */
     public final ElectricalInductance times(final ElectricalResistance v)
@@ -327,12 +329,32 @@ public class Duration extends AbstractDoubleScalarRelWithAbs<TimeUnit, Time, Dur
 
     /**
      * Calculate the multiplication of Duration and ElectricalConductance, which results in a ElectricalCapacitance scalar.
-     * @param v Duration scalar
+     * @param v ElectricalConductance; Duration scalar
      * @return ElectricalCapacitance scalar as a multiplication of Duration and ElectricalConductance
      */
     public final ElectricalCapacitance times(final ElectricalConductance v)
     {
         return new ElectricalCapacitance(this.si * v.si, ElectricalCapacitanceUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of Duration and AngularVelocity, which results in a Angle scalar.
+     * @param v AngularVelocity; Duration scalar
+     * @return Angle scalar as a multiplication of Duration and AngularVelocity
+     */
+    public final Angle times(final AngularVelocity v)
+    {
+        return new Angle(this.si * v.si, AngleUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of Duration and AngularAcceleration, which results in a AngularVelocity scalar.
+     * @param v AngularAcceleration; Duration scalar
+     * @return AngularVelocity scalar as a multiplication of Duration and AngularAcceleration
+     */
+    public final AngularVelocity times(final AngularAcceleration v)
+    {
+        return new AngularVelocity(this.si * v.si, AngularVelocityUnit.SI);
     }
 
 }

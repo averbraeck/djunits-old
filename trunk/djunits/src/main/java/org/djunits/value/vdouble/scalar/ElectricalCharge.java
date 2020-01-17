@@ -17,13 +17,13 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 /**
  * Easy access methods for the ElectricalCharge DoubleScalar, which is relative by definition.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
 public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUnit, ElectricalCharge>
 {
     /** */
@@ -216,7 +216,7 @@ public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUn
 
     /**
      * Calculate the division of ElectricalCharge and ElectricalCharge, which results in a Dimensionless scalar.
-     * @param v ElectricalCharge scalar
+     * @param v ElectricalCharge; ElectricalCharge scalar
      * @return Dimensionless scalar as a division of ElectricalCharge and ElectricalCharge
      */
     public final Dimensionless divide(final ElectricalCharge v)
@@ -226,7 +226,7 @@ public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUn
 
     /**
      * Calculate the division of ElectricalCharge and Duration, which results in a ElectricalCurrent scalar.
-     * @param v ElectricalCharge scalar
+     * @param v Duration; ElectricalCharge scalar
      * @return ElectricalCurrent scalar as a division of ElectricalCharge and Duration
      */
     public final ElectricalCurrent divide(final Duration v)
@@ -236,7 +236,7 @@ public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUn
 
     /**
      * Calculate the division of ElectricalCharge and ElectricalCurrent, which results in a Duration scalar.
-     * @param v ElectricalCharge scalar
+     * @param v ElectricalCurrent; ElectricalCharge scalar
      * @return Duration scalar as a division of ElectricalCharge and ElectricalCurrent
      */
     public final Duration divide(final ElectricalCurrent v)
@@ -246,7 +246,7 @@ public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUn
 
     /**
      * Calculate the division of ElectricalCharge and ElectricalPotential, which results in a ElectricalCapacitance scalar.
-     * @param v ElectricalCharge scalar
+     * @param v ElectricalPotential; ElectricalCharge scalar
      * @return ElectricalCapacitance scalar as a division of ElectricalCharge and ElectricalPotential
      */
     public final ElectricalCapacitance divide(final ElectricalPotential v)
@@ -256,7 +256,7 @@ public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUn
 
     /**
      * Calculate the division of ElectricalCharge and ElectricalCapacitance, which results in a ElectricalPotential scalar.
-     * @param v ElectricalCharge scalar
+     * @param v ElectricalCapacitance; ElectricalCharge scalar
      * @return ElectricalPotential scalar as a division of ElectricalCharge and ElectricalCapacitance
      */
     public final ElectricalPotential divide(final ElectricalCapacitance v)

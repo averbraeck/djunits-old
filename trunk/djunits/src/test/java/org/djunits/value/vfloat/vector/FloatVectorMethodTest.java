@@ -45,7 +45,7 @@ import org.junit.Test;
 /**
  * Test the incrementBy, etc. methods.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
@@ -73,9 +73,9 @@ public class FloatVectorMethodTest
         sparseTestData[10] = 123.456f;
         reverseSparseTestData[10] = sparseTestData[10];
 
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
-            for (AreaUnit au : new AreaUnit[] {AreaUnit.SQUARE_METER, AreaUnit.ACRE})
+            for (AreaUnit au : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
             {
                 float[] testData = storageType.equals(StorageType.DENSE) ? denseTestData : sparseTestData;
                 FloatAreaVector am =
@@ -253,10 +253,10 @@ public class FloatVectorMethodTest
 
                 // TEST METHODS THAT INVOLVE TWO VECTOR INSTANCES
 
-                for (StorageType storageType2 : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+                for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
                 {
                     float[] testData2 = storageType2.equals(StorageType.DENSE) ? denseTestData : reverseSparseTestData;
-                    for (AreaUnit au2 : new AreaUnit[] {AreaUnit.SQUARE_METER, AreaUnit.ACRE})
+                    for (AreaUnit au2 : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
                     {
 
                         // PLUS and INCREMENTBY(VECTOR)
@@ -331,9 +331,9 @@ public class FloatVectorMethodTest
         float[] denseTestData = FLOATVECTOR.denseArray(105);
         float[] sparseTestData = FLOATVECTOR.sparseArray(105);
 
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
-            for (AreaUnit au : new AreaUnit[] {AreaUnit.SQUARE_METER, AreaUnit.ACRE})
+            for (AreaUnit au : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
             {
                 float[] testData = storageType.equals(StorageType.DENSE) ? denseTestData : sparseTestData;
                 FloatAreaVector am =
@@ -482,9 +482,9 @@ public class FloatVectorMethodTest
         float[] denseTestData = FLOATVECTOR.denseArray(105);
         float[] sparseTestData = FLOATVECTOR.sparseArray(105);
 
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
-            for (AreaUnit au : new AreaUnit[] {AreaUnit.SQUARE_METER, AreaUnit.ACRE})
+            for (AreaUnit au : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
             {
                 float[] testData = storageType.equals(StorageType.DENSE) ? denseTestData : sparseTestData;
                 FloatAreaVector am =
@@ -572,7 +572,7 @@ public class FloatVectorMethodTest
             assertEquals("absDecByRelM", -29.0 * denseTestData[index], absDecByRelM.getSI(index), 0.01);
             assertEquals("relPlusAbs", 61.0 * denseTestData[index], relPlusAbs.getSI(index), 0.01);
         }
-        for (int dLength : new int[] {-1, 1})
+        for (int dLength : new int[] { -1, 1 })
         {
             float[] other = FLOATVECTOR.denseArray(denseTestData.length + dLength);
             FloatTimeVector wrongTimeVector = FloatVector.instantiate(
@@ -687,7 +687,7 @@ public class FloatVectorMethodTest
             IllegalAccessException, IllegalArgumentException, InvocationTargetException, UnitException
     {
         float[][] testValues = FLOATMATRIX.denseRectArrays(10, 20);
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
             for (String type : CLASSNAMES.REL_LIST)
             {
@@ -695,7 +695,7 @@ public class FloatVectorMethodTest
                 Quantity<U> quantity = (Quantity<U>) Quantities.INSTANCE.getQuantity(type + "Unit");
                 for (U unit : quantity.getUnitsById().values())
                 {
-                    for (StorageType storageType2 : new StorageType[] {StorageType.DENSE, storageType})
+                    for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, storageType })
                     {
                         SIUnit siUnit = SIUnit.of(unit.getQuantity().getSiDimensions());
                         FloatSIMatrix matrix = FloatSIMatrix.instantiate(testValues, siUnit, storageType2);
@@ -737,7 +737,7 @@ public class FloatVectorMethodTest
     {
         float[] testData = FLOATVECTOR.denseArray(123);
         testData[2] = 0;
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
             FloatVectorData fvd = FloatVectorData.instantiate(testData, TemperatureUnit.KELVIN.getScale(), storageType);
             assertTrue("Float vector data is equal to itself", fvd.equals(fvd));
@@ -745,7 +745,7 @@ public class FloatVectorMethodTest
             assertFalse("Float vector data is not equal to some string", fvd.equals("some string"));
             assertTrue("Float vector is equal to sparse version of itself", fvd.equals(fvd.toSparse()));
             assertTrue("Float vector is equal to dense version of itself", fvd.equals(fvd.toDense()));
-            for (StorageType storageType2 : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+            for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
             {
                 FloatVectorData dvd2 = FloatVectorData.instantiate(testData, TemperatureUnit.KELVIN.getScale(), storageType2);
                 assertEquals(

@@ -41,7 +41,7 @@ import org.junit.Test;
 /**
  * DoubleMatrixInstantiateTest.java.
  * <p>
- * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2019-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
@@ -67,7 +67,7 @@ public class DoubleMatrixInstantiateTest
             @SuppressWarnings("unchecked")
             Quantity<U> quantity = (Quantity<U>) Quantities.INSTANCE.getQuantity(scalarName + "Unit");
             U standardUnit = quantity.getStandardUnit();
-            for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+            for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
             {
                 double[][] testValues = DOUBLEMATRIX.denseRectArrays(5, 10);
                 DoubleMatrixData dmd = DoubleMatrixData.instantiate(testValues, standardUnit.getScale(), storageType);
@@ -83,7 +83,7 @@ public class DoubleMatrixInstantiateTest
                 DoubleVectorData dvd =
                         DoubleVectorData.instantiate(doubleMatrix.getRowSI(0), standardUnit.getScale(), storageType);
                 DoubleVectorInterface<U, ?, ?> doubleVector = doubleMatrix.instantiateVector(dvd, standardUnit);
-                assertArrayEquals("Double vector contains values from row 0", new double[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
+                assertArrayEquals("Double vector contains values from row 0", new double[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
                         doubleVector.getValuesSI(), 0.001);
                 DoubleScalarInterface<U, ?> doubleScalar = doubleMatrix.instantiateScalarSI(1.234, standardUnit);
                 assertEquals("Constructed scalar has correct value", 1.234, doubleScalar.getSI(), 0.001);
@@ -116,7 +116,7 @@ public class DoubleMatrixInstantiateTest
             Quantity<AU> absQuantity = (Quantity<AU>) Quantities.INSTANCE.getQuantity(absScalarName + "Unit");
             RU relStandardUnit = relQuantity.getStandardUnit();
             AU absStandardUnit = absQuantity.getStandardUnit();
-            for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+            for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
             {
                 double[][] testValues = DOUBLEMATRIX.denseRectArrays(5, 10);
                 DoubleMatrixData dmd = DoubleMatrixData.instantiate(testValues, relStandardUnit.getScale(), storageType);
@@ -133,7 +133,7 @@ public class DoubleMatrixInstantiateTest
                         DoubleVectorData.instantiate(relDoubleMatrix.getRowSI(0), relStandardUnit.getScale(), storageType);
                 AbstractDoubleVectorAbs<AU, ?, ?, RU, ?, ?> absDoubleVector =
                         relDoubleMatrix.instantiateVectorAbs(dvd, absStandardUnit);
-                assertArrayEquals("Double vector contains values from row 0", new double[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
+                assertArrayEquals("Double vector contains values from row 0", new double[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
                         absDoubleVector.getValuesSI(), 0.001);
                 AbstractDoubleScalarAbs<AU, ?, RU, ?> absDoubleScalar =
                         relDoubleMatrix.instantiateScalarAbsSI(1.234, absStandardUnit);
@@ -147,7 +147,7 @@ public class DoubleMatrixInstantiateTest
                 dvd = DoubleVectorData.instantiate(absDoubleMatrix.getRowSI(0), absStandardUnit.getScale(), storageType);
                 AbstractDoubleVectorRelWithAbs<AU, ?, ?, RU, ?, ?> relDoubleVector =
                         absDoubleMatrix.instantiateVectorRel(dvd, relStandardUnit);
-                assertArrayEquals("Double vector contains values from row 0", new double[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
+                assertArrayEquals("Double vector contains values from row 0", new double[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
                         relDoubleVector.getValuesSI(), 0.001);
                 AbstractDoubleScalarRelWithAbs<AU, ?, RU, ?> relDoubleScalar =
                         absDoubleMatrix.instantiateScalarRelSI(1.234, relStandardUnit);
@@ -979,7 +979,7 @@ public class DoubleMatrixInstantiateTest
      * zero rows/columns.
      */
     @Test
-    @SuppressWarnings({"checkstyle:localvariablename", "checkstyle:methodlength"})
+    @SuppressWarnings({ "checkstyle:localvariablename", "checkstyle:methodlength" })
     public void testInstantiateEdgeCases()
     {
         // DENSE DATA

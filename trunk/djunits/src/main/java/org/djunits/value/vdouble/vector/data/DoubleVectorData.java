@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.base.DoubleScalarInterface;
 /**
  * Stores the data for a DoubleVector and carries out basic operations.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
@@ -192,7 +192,7 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
 
     /**
      * Instantiate a DoubleVectorData with the right data type.
-     * @param values DoubleScalarInterface[]; the values to store
+     * @param values S[]; the values to store
      * @param storageType StorageType; the data type to use
      * @return DoubleVectorData; the DoubleVectorData with the right data type
      * @throws ValueRuntimeException when values is null, or storageType is null

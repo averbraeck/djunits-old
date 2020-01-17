@@ -13,7 +13,7 @@ import org.djunits.value.vdouble.scalar.base.DoubleScalarInterface;
 /**
  * DOUBLEMATRIX for creating different test matrices. Matrix values from a double array are stored as m[row][column].
  * <p>
- * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2019-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
@@ -25,7 +25,7 @@ public final class DOUBLEMATRIX
     {
         // Utility class
     }
-    
+
     /**
      * Return a rectangular array with all values != 0.
      * @param rows the number of rows
@@ -84,7 +84,7 @@ public final class DOUBLEMATRIX
         try
         {
             S[][] array = (S[][]) Array.newInstance(scalarClass, rows, cols);
-            Method instantiateSI = scalarClass.getMethod("instantiateSI", new Class<?>[] {double.class});
+            Method instantiateSI = scalarClass.getMethod("instantiateSI", new Class<?>[] { double.class });
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < cols; j++)
@@ -116,7 +116,7 @@ public final class DOUBLEMATRIX
         try
         {
             S[][] array = (S[][]) Array.newInstance(scalarClass, rows, cols);
-            Method instantiateSI = scalarClass.getMethod("instantiateSI", new Class<?>[] {double.class});
+            Method instantiateSI = scalarClass.getMethod("instantiateSI", new Class<?>[] { double.class });
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < cols; j++)
@@ -149,7 +149,7 @@ public final class DOUBLEMATRIX
         try
         {
             List<DoubleSparseValue<U, S>> matrixList = new ArrayList<>();
-            Method instantiateSI = scalarClass.getMethod("instantiateSI", new Class<?>[] {double.class});
+            Method instantiateSI = scalarClass.getMethod("instantiateSI", new Class<?>[] { double.class });
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < cols; j++)

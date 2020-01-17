@@ -12,7 +12,7 @@ import org.junit.Test;
 /**
  * Test the math functions.
  * <p>
- * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
@@ -25,7 +25,7 @@ public class MathFunctionsTest
     @Test
     public void mathFunctionsTest()
     {
-        double[] testValues = {-100, -10, -1, -0.1, 0, 0.1, 1, 10, 100, -Math.PI, Math.PI};
+        double[] testValues = { -100, -10, -1, -0.1, 0, 0.1, 1, 10, 100, -Math.PI, Math.PI };
         for (double testValue : testValues)
         {
             // System.out.println("Testing math functions with test value " + testValue);

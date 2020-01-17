@@ -30,7 +30,7 @@ import org.junit.Test;
 /**
  * Find all plus, minus, times and divide operations and prove the type correctness.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
  * version Sep 14, 2015 <br>
@@ -244,14 +244,14 @@ public class ScalarOperationsTest
 
             if (multiply)
             {
-                Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "times", new Class[] {parameterClass});
+                Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "times", new Class[] { parameterClass });
                 Object result = multiplyMethod.invoke(left, right);
                 double resultSI = ((AbstractDoubleScalarAbs<?, ?, ?, ?>) result).getSI();
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
             }
             else
             {
-                Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divide", new Class[] {parameterClass});
+                Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divide", new Class[] { parameterClass });
                 Object result = divideMethod.invoke(left, right);
                 double resultSI = ((AbstractDoubleScalarAbs<?, ?, ?, ?>) result).getSI();
                 assertEquals("Result of operation", expectedValue, resultSI, 0.01);
@@ -272,14 +272,14 @@ public class ScalarOperationsTest
 
                 if (multiply)
                 {
-                    Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "times", new Class[] {parameterClass});
+                    Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "times", new Class[] { parameterClass });
                     Object result = multiplyMethod.invoke(left, right);
                     double resultSI = ((AbstractDoubleScalarRel<?, ?>) result).getSI();
                     assertEquals("Result of operation", expectedValue, resultSI, 0.01);
                 }
                 else
                 {
-                    Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divide", new Class[] {parameterClass});
+                    Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divide", new Class[] { parameterClass });
                     Object result = divideMethod.invoke(left, right);
                     double resultSI = ((AbstractDoubleScalarRel<?, ?>) result).getSI();
                     assertEquals("Result of operation", expectedValue, resultSI, 0.01);
@@ -306,14 +306,14 @@ public class ScalarOperationsTest
 
                 if (multiply)
                 {
-                    Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "times", new Class[] {parameterClass});
+                    Method multiplyMethod = ClassUtil.resolveMethod(scalarClass, "times", new Class[] { parameterClass });
                     Object result = multiplyMethod.invoke(left, right);
                     double resultSI = ((AbstractFloatScalarRel<?, ?>) result).getSI();
                     assertEquals("Result of operation", expectedValue, resultSI, 0.01);
                 }
                 else
                 {
-                    Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divide", new Class[] {parameterClass});
+                    Method divideMethod = ClassUtil.resolveMethod(scalarClass, "divide", new Class[] { parameterClass });
                     Object result = divideMethod.invoke(left, right);
                     float resultSI = ((AbstractFloatScalarRel<?, ?>) result).getSI();
                     assertEquals("Result of operation", expectedValue, resultSI, 0.01);
@@ -435,7 +435,7 @@ public class ScalarOperationsTest
      * @throws NoSuchFieldException on class or method resolving error
      * @throws ClassNotFoundException on class or method resolving error
      */
-    @SuppressWarnings({"rawtypes", "unchecked"})
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     private void testUnaryMethods(final Class<?> scalarClass, final boolean abs, final boolean doubleType)
             throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException,
             NoSuchFieldException, ClassNotFoundException
@@ -599,7 +599,7 @@ public class ScalarOperationsTest
             result = inv.invoke(left);
             assertEquals("Result of operation", 1 / value, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result), 0.01);
 
-            Method pow = ClassUtil.resolveMethod(scalarClass, "pow", new Class[] {double.class});
+            Method pow = ClassUtil.resolveMethod(scalarClass, "pow", new Class[] { double.class });
             result = pow.invoke(left, Math.PI);
             assertEquals("Result of operation", Math.pow(value, Math.PI),
                     verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result), 0.01);
@@ -645,31 +645,31 @@ public class ScalarOperationsTest
         }
         if (!abs)
         {
-            Method times = ClassUtil.resolveMethod(scalarClass, "times", new Class[] {double.class});
+            Method times = ClassUtil.resolveMethod(scalarClass, "times", new Class[] { double.class });
             result = doubleType ? times.invoke(left, Math.PI) : times.invoke(left, (float) Math.PI);
             assertEquals("Result of operation", Math.PI * value, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                     0.01);
             if (!doubleType)
             {
-                times = ClassUtil.resolveMethod(scalarClass, "times", new Class[] {float.class});
+                times = ClassUtil.resolveMethod(scalarClass, "times", new Class[] { float.class });
                 result = doubleType ? times.invoke(left, Math.PI) : times.invoke(left, (float) Math.PI);
                 assertEquals("Result of operation", Math.PI * value, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                         0.01);
             }
 
-            Method divide = ClassUtil.resolveMethod(scalarClass, "divide", new Class[] {double.class});
+            Method divide = ClassUtil.resolveMethod(scalarClass, "divide", new Class[] { double.class });
             result = doubleType ? divide.invoke(left, Math.PI) : divide.invoke(left, (float) Math.PI);
             assertEquals("Result of operation", value / Math.PI, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                     0.01);
             if (!doubleType)
             {
-                divide = ClassUtil.resolveMethod(scalarClass, "divide", new Class[] {float.class});
+                divide = ClassUtil.resolveMethod(scalarClass, "divide", new Class[] { float.class });
                 result = doubleType ? divide.invoke(left, Math.PI) : divide.invoke(left, (float) Math.PI);
                 assertEquals("Result of operation", value / Math.PI, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                         0.01);
             }
 
-            Method plus = ClassUtil.resolveMethod(scalarClass, "plus", new Class[] {scalarClass});
+            Method plus = ClassUtil.resolveMethod(scalarClass, "plus", new Class[] { scalarClass });
             result = plus.invoke(left, left);
             assertEquals("Result of operation", value + value, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                     0.01);
@@ -682,7 +682,7 @@ public class ScalarOperationsTest
                 // Swap the operands
                 // System.out.println("finding plus method for " + compatibleRight.getClass().getName() + " left type is "
                 // + left.getClass().getName());
-                plus = ClassUtil.resolveMethod(scalarClass, "plus", new Class[] {compatibleRight.getClass().getSuperclass()});
+                plus = ClassUtil.resolveMethod(scalarClass, "plus", new Class[] { compatibleRight.getClass().getSuperclass() });
                 result = plus.invoke(compatibleRight, left);
                 assertEquals("Result of mixed operation", 8 * value, verifyAbsRelPrecisionAndExtractSI(abs, doubleType, result),
                         0.01);
@@ -727,7 +727,7 @@ public class ScalarOperationsTest
             }
         }
 
-        Method minus = ClassUtil.resolveMethod(scalarClass, "minus", new Class[] {scalarClass});
+        Method minus = ClassUtil.resolveMethod(scalarClass, "minus", new Class[] { scalarClass });
         result = minus.invoke(left, left);
         assertEquals("Result of minus", 0, verifyAbsRelPrecisionAndExtractSI(false, doubleType, result), 0.01);
         if (null != compatibleRight)
@@ -802,7 +802,7 @@ public class ScalarOperationsTest
                                     getSIUnitInstance(getUnitClass(scalarClass), abs))
                             : (AbstractDoubleScalarRel<?, ?>) constructor.newInstance(oneValue,
                                     getSIUnitInstance(getUnitClass(scalarClass), abs));
-            for (double ratio : new double[] {-5, -1, 0, 0.3, 1, 2, 10})
+            for (double ratio : new double[] { -5, -1, 0, 0.3, 1, 2, 10 })
             {
                 double expectedResult = (1.0 - ratio) * zeroValue + ratio * oneValue;
                 Method interpolate =
@@ -907,7 +907,7 @@ public class ScalarOperationsTest
                                     getSIUnitInstance(getUnitClass(scalarClass), abs))
                             : (AbstractFloatScalarRel<?, ?>) constructor.newInstance(oneValue,
                                     getSIUnitInstance(getUnitClass(scalarClass), abs));
-            for (float ratio : new float[] {-5, -1, 0, 0.3f, 1, 2, 10})
+            for (float ratio : new float[] { -5, -1, 0, 0.3f, 1, 2, 10 })
             {
                 float expectedResult = (1.0f - ratio) * zeroValue + ratio * oneValue;
                 Method interpolate = ClassUtil.resolveMethod(scalarClass, "interpolate", scalarClass, scalarClass, float.class);

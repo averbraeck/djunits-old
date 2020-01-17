@@ -12,7 +12,7 @@ import org.junit.Test;
 /**
  * SIDimensionsTest tests the construction, addition, subtraction, and parsing of SI dimensions. <br>
  * <p>
- * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2019-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
@@ -28,7 +28,7 @@ public class SIDimensionsTest
     {
         // all kgm/s2
         SIDimensions si1 = new SIDimensions(0, 0, 1, 1, -2, 0, 0, 0, 0);
-        SIDimensions si2 = new SIDimensions(new byte[] {0, 0, 1, 1, -2, 0, 0, 0, 0});
+        SIDimensions si2 = new SIDimensions(new byte[] { 0, 0, 1, 1, -2, 0, 0, 0, 0 });
         SIDimensions si3 = SIDimensions.of("kgm/s2");
         SIDimensions si4 = SIDimensions.of("kgms-2");
         assertEquals(si1 + "!= " + si2, si1, si2);
@@ -143,7 +143,8 @@ public class SIDimensionsTest
         assertEquals("kg.m<sup>2</sup>.s<sup>-3</sup>.A<sup>-1</sup>", si12.toHTMLString(false, true));
 
         // fractional
-        SIDimensions sif = new SIDimensions(new byte[] {0, 0, 1, 1, -2, 0, 0, 0, 0}, new byte[] {1, 1, 1, 1, 1, 1, 1, 1, 1});
+        SIDimensions sif =
+                new SIDimensions(new byte[] { 0, 0, 1, 1, -2, 0, 0, 0, 0 }, new byte[] { 1, 1, 1, 1, 1, 1, 1, 1, 1 });
         assertEquals(sif, si1);
         assertEquals(sif, si2);
         assertEquals(sif, si3);
@@ -154,14 +155,15 @@ public class SIDimensionsTest
         assertFalse(sif.isFractional()); // unit denominator
         assertFalse(si2.isFractional());
 
-        SIDimensions sif2 = new SIDimensions(new byte[] {0, 0, 1, 1, -2, -1, 0, 0, 0}, new byte[] {1, 1, 2, 2, 1, 3, 1, 1, 1});
+        SIDimensions sif2 =
+                new SIDimensions(new byte[] { 0, 0, 1, 1, -2, -1, 0, 0, 0 }, new byte[] { 1, 1, 2, 2, 1, 3, 1, 1, 1 });
         assertNotEquals(sif, sif2);
         assertNotEquals(sif.hashCode(), sif2.hashCode());
         assertEquals("[0, 0, 1/2, 1/2, -2, -1/3, 0, 0, 0]", sif2.toString());
 
         try
         {
-            SIDimensions siw1 = new SIDimensions(new byte[] {0, 0, 1, 1, -2, 0, 0, 0}); // 8 long
+            SIDimensions siw1 = new SIDimensions(new byte[] { 0, 0, 1, 1, -2, 0, 0, 0 }); // 8 long
             fail("SIDimensions.of(" + siw1 + ") should have triggered a UnitException");
         }
         catch (SIRuntimeException e)
@@ -171,7 +173,7 @@ public class SIDimensionsTest
 
         try
         {
-            SIDimensions siw2 = new SIDimensions(new byte[] {0, 0, 1, 1, -2, 0, 0, 0, 0, 0}); // 6 long
+            SIDimensions siw2 = new SIDimensions(new byte[] { 0, 0, 1, 1, -2, 0, 0, 0, 0, 0 }); // 6 long
             fail("SIDimensions.of(" + siw2 + ") should have triggered a UnitException");
         }
         catch (SIRuntimeException e)
@@ -181,7 +183,8 @@ public class SIDimensionsTest
 
         try
         {
-            SIDimensions siw3 = new SIDimensions(new byte[] {0, 0, 1, 1, -2, 0, 0, 0}, new byte[] {1, 1, 2, 2, 1, 3, 1, 1, 1});
+            SIDimensions siw3 =
+                    new SIDimensions(new byte[] { 0, 0, 1, 1, -2, 0, 0, 0 }, new byte[] { 1, 1, 2, 2, 1, 3, 1, 1, 1 });
             fail("SIDimensions.of(" + siw3 + ") should have triggered a UnitException");
         }
         catch (SIRuntimeException e)
@@ -192,7 +195,7 @@ public class SIDimensionsTest
         try
         {
             SIDimensions siw4 =
-                    new SIDimensions(new byte[] {0, 0, 1, 1, -2, 0, 0, 0, 0}, new byte[] {1, 1, 2, 2, 1, 3, 1, 1, 1, 1});
+                    new SIDimensions(new byte[] { 0, 0, 1, 1, -2, 0, 0, 0, 0 }, new byte[] { 1, 1, 2, 2, 1, 3, 1, 1, 1, 1 });
             fail("SIDimensions.of(" + siw4 + ") should have triggered a UnitException");
         }
         catch (SIRuntimeException e)

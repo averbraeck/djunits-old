@@ -76,7 +76,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalar;
 /**
  * BenschmarkAnonymousInstantiation.java.
  * <p>
- * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2019-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
@@ -118,7 +118,7 @@ public final class BenchmarkAnonymousInstantiation
      * @return an instantiated DoubleScalar with the value expressed in the unit
      * @param <S> the return type
      */
-    @SuppressWarnings({"unchecked", "checkstyle:needbraces"})
+    @SuppressWarnings({ "unchecked", "checkstyle:needbraces" })
     public static <S extends AbstractDoubleScalar<?, S>> S instantiateAnonymousCached(final double value, final Unit<?> unit)
     {
         try
@@ -177,7 +177,7 @@ public final class BenchmarkAnonymousInstantiation
      * @return an instantiated DoubleScalar with the value expressed in the unit
      * @param <S> the return type
      */
-    @SuppressWarnings({"unchecked", "checkstyle:needbraces"})
+    @SuppressWarnings({ "unchecked", "checkstyle:needbraces" })
     public static <S extends AbstractDoubleScalar<?, S>> S instantiateAnonymousCascade(final double value, final Unit<?> unit)
     {
         if (unit instanceof DimensionlessUnit)
@@ -265,7 +265,7 @@ public final class BenchmarkAnonymousInstantiation
      * @return an instantiated DoubleScalar with the value expressed in the unit
      * @param <S> the return type
      */
-    @SuppressWarnings({"unchecked", "checkstyle:needbraces"})
+    @SuppressWarnings({ "unchecked", "checkstyle:needbraces" })
     public static <S extends AbstractDoubleScalar<?, S>> S instantiateAnonymousNonCached(final double value, final Unit<?> unit)
     {
         try
@@ -307,7 +307,7 @@ public final class BenchmarkAnonymousInstantiation
      * @return an instantiated DoubleScalar with the value expressed in the unit
      * @param <S> the return type
      */
-    @SuppressWarnings({"unchecked", "checkstyle:needbraces"})
+    @SuppressWarnings({ "unchecked", "checkstyle:needbraces" })
     public static <S extends AbstractDoubleScalar<?, S>> S instantiateAnonymousMethodHandle(final double value,
             final Unit<?> unit)
     {

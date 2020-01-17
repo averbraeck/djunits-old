@@ -16,13 +16,13 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 /**
  * Easy access methods for the LinearDensity DoubleScalar, which is relative by definition.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
 public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, LinearDensity>
 {
     /** */
@@ -212,7 +212,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Calculate the division of LinearDensity and LinearDensity, which results in a Dimensionless scalar.
-     * @param v LinearDensity scalar
+     * @param v LinearDensity; LinearDensity scalar
      * @return Dimensionless scalar as a division of LinearDensity and LinearDensity
      */
     public final Dimensionless divide(final LinearDensity v)
@@ -222,7 +222,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Calculate the multiplication of LinearDensity and Area, which results in a Length scalar.
-     * @param v LinearDensity scalar
+     * @param v Area; LinearDensity scalar
      * @return Length scalar as a multiplication of LinearDensity and Area
      */
     public final Length times(final Area v)
@@ -232,7 +232,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Calculate the multiplication of LinearDensity and Energy, which results in a Force scalar.
-     * @param v LinearDensity scalar
+     * @param v Energy; LinearDensity scalar
      * @return Force scalar as a multiplication of LinearDensity and Energy
      */
     public final Force times(final Energy v)
@@ -242,7 +242,7 @@ public class LinearDensity extends AbstractDoubleScalarRel<LinearDensityUnit, Li
 
     /**
      * Calculate the multiplication of LinearDensity and Speed, which results in a Frequency scalar.
-     * @param v LinearDensity scalar
+     * @param v Speed; LinearDensity scalar
      * @return Frequency scalar as a multiplication of LinearDensity and Speed
      */
     public final Frequency times(final Speed v)

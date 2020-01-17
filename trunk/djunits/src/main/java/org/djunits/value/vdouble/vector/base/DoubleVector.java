@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 /**
  * DoubleVector utility methods, e.g., for creating DoubleVectors from different types of data.
  * <p>
- * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
@@ -342,7 +342,7 @@ public final class DoubleVector
 
     /**
      * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler.
-     * @param valueMap Map&lt;Integer, S&gt;; the value map
+     * @param valueMap SortedMap&lt;Integer, S&gt;; the value map
      * @param displayUnit U; the unit in which the values will be displayed
      * @param length int; the size of the vector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE
@@ -361,7 +361,7 @@ public final class DoubleVector
     /**
      * Instantiate the DoubleVector based on its unit. Rigid check on types for the compiler. The class for the vector is
      * explicitly provided, e.g., for user-defined vector classes.
-     * @param valueMap Map&lt;Integer, S&gt;; the value map
+     * @param valueMap SortedMap&lt;Integer, S&gt;; the value map
      * @param displayUnit U; the unit in which the values will be displayed
      * @param length int; the size of the vector
      * @param storageType StorageType; whether the vector is SPARSE or DENSE

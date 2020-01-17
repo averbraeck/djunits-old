@@ -11,6 +11,7 @@ import org.djunits.unit.DurationUnit;
 import org.djunits.unit.EnergyUnit;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.LinearDensityUnit;
+import org.djunits.unit.MomentumUnit;
 import org.djunits.unit.PositionUnit;
 import org.djunits.unit.SpeedUnit;
 import org.djunits.unit.VolumeUnit;
@@ -20,14 +21,14 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
 /**
  * Easy access methods for the FloatLength FloatScalar.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
 public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, FloatPosition, LengthUnit, FloatLength>
 {
     /** */
@@ -112,7 +113,7 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
      * Interpolate between two values.
      * @param zero FloatLength; the low value
      * @param one FloatLength; the high value
-     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return FloatLength; a Scalar at the ratio between
      */
     public static FloatLength interpolate(final FloatLength zero, final FloatLength one, final float ratio)
@@ -214,7 +215,7 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
 
     /**
      * Returns a FloatLength based on a value and the textual representation of the unit.
-     * @param value double; the value to use
+     * @param value float; the value to use
      * @param unitString String; the textual representation of the unit
      * @return FloatLength; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
@@ -234,7 +235,7 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
 
     /**
      * Calculate the division of FloatLength and FloatLength, which results in a FloatDimensionless scalar.
-     * @param v FloatLength scalar
+     * @param v FloatLength; FloatLength scalar
      * @return FloatDimensionless scalar as a division of FloatLength and FloatLength
      */
     public final FloatDimensionless divide(final FloatLength v)
@@ -244,7 +245,7 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
 
     /**
      * Calculate the multiplication of FloatLength and FloatLength, which results in a FloatArea scalar.
-     * @param v FloatLength scalar
+     * @param v FloatLength; FloatLength scalar
      * @return FloatArea scalar as a multiplication of FloatLength and FloatLength
      */
     public final FloatArea times(final FloatLength v)
@@ -254,7 +255,7 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
 
     /**
      * Calculate the division of FloatLength and FloatLinearDensity, which results in a FloatArea scalar.
-     * @param v FloatLength scalar
+     * @param v FloatLinearDensity; FloatLength scalar
      * @return FloatArea scalar as a division of FloatLength and FloatLinearDensity
      */
     public final FloatArea divide(final FloatLinearDensity v)
@@ -264,7 +265,7 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
 
     /**
      * Calculate the division of FloatLength and FloatArea, which results in a FloatLinearDensity scalar.
-     * @param v FloatLength scalar
+     * @param v FloatArea; FloatLength scalar
      * @return FloatLinearDensity scalar as a division of FloatLength and FloatArea
      */
     public final FloatLinearDensity divide(final FloatArea v)
@@ -274,7 +275,7 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
 
     /**
      * Calculate the multiplication of FloatLength and FloatArea, which results in a FloatVolume scalar.
-     * @param v FloatLength scalar
+     * @param v FloatArea; FloatLength scalar
      * @return FloatVolume scalar as a multiplication of FloatLength and FloatArea
      */
     public final FloatVolume times(final FloatArea v)
@@ -284,7 +285,7 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
 
     /**
      * Calculate the multiplication of FloatLength and FloatForce, which results in a FloatEnergy scalar.
-     * @param v FloatLength scalar
+     * @param v FloatForce; FloatLength scalar
      * @return FloatEnergy scalar as a multiplication of FloatLength and FloatForce
      */
     public final FloatEnergy times(final FloatForce v)
@@ -294,7 +295,7 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
 
     /**
      * Calculate the multiplication of FloatLength and FloatFrequency, which results in a FloatSpeed scalar.
-     * @param v FloatLength scalar
+     * @param v FloatFrequency; FloatLength scalar
      * @return FloatSpeed scalar as a multiplication of FloatLength and FloatFrequency
      */
     public final FloatSpeed times(final FloatFrequency v)
@@ -304,7 +305,7 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
 
     /**
      * Calculate the division of FloatLength and FloatDuration, which results in a FloatSpeed scalar.
-     * @param v FloatLength scalar
+     * @param v FloatDuration; FloatLength scalar
      * @return FloatSpeed scalar as a division of FloatLength and FloatDuration
      */
     public final FloatSpeed divide(final FloatDuration v)
@@ -314,12 +315,22 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
 
     /**
      * Calculate the division of FloatLength and FloatSpeed, which results in a FloatDuration scalar.
-     * @param v FloatLength scalar
+     * @param v FloatSpeed; FloatLength scalar
      * @return FloatDuration scalar as a division of FloatLength and FloatSpeed
      */
     public final FloatDuration divide(final FloatSpeed v)
     {
         return new FloatDuration(this.si / v.si, DurationUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of FloatLength and FloatFlowMass, which results in a FloatMomentum scalar.
+     * @param v FloatFlowMass; FloatLength scalar
+     * @return FloatMomentum scalar as a multiplication of FloatLength and FloatFlowMass
+     */
+    public final FloatMomentum times(final FloatFlowMass v)
+    {
+        return new FloatMomentum(this.si * v.si, MomentumUnit.SI);
     }
 
 }

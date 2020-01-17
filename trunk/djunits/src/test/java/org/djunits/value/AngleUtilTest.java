@@ -11,7 +11,7 @@ import org.junit.Test;
 /**
  * Test the AngleUtil class.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
@@ -24,8 +24,8 @@ public class AngleUtilTest
     @Test
     public void angleUtilTest()
     {
-        double[] testValues = {0, 1, -1, -Math.ulp(0), 0 + Math.ulp(0), Math.PI, 2 * Math.PI + 0.0001, 2 * Math.PI - 0.0001,
-                10 * Math.PI + 0.0001, -Math.PI, -2 * Math.PI + 0.0001, -2 * Math.PI - 0.0001};
+        double[] testValues = { 0, 1, -1, -Math.ulp(0), 0 + Math.ulp(0), Math.PI, 2 * Math.PI + 0.0001, 2 * Math.PI - 0.0001,
+                10 * Math.PI + 0.0001, -Math.PI, -2 * Math.PI + 0.0001, -2 * Math.PI - 0.0001 };
         for (double testValue : testValues)
         {
             double expected = testValue;

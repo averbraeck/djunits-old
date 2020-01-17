@@ -20,13 +20,13 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 /**
  * Easy access methods for the Force DoubleScalar, which is relative by definition.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
 public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 {
     /** */
@@ -215,7 +215,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Calculate the division of Force and Force, which results in a Dimensionless scalar.
-     * @param v Force scalar
+     * @param v Force; Force scalar
      * @return Dimensionless scalar as a division of Force and Force
      */
     public final Dimensionless divide(final Force v)
@@ -225,7 +225,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Calculate the multiplication of Force and Length, which results in a Energy scalar.
-     * @param v Force scalar
+     * @param v Length; Force scalar
      * @return Energy scalar as a multiplication of Force and Length
      */
     public final Energy times(final Length v)
@@ -235,7 +235,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Calculate the division of Force and LinearDensity, which results in a Energy scalar.
-     * @param v Force scalar
+     * @param v LinearDensity; Force scalar
      * @return Energy scalar as a division of Force and LinearDensity
      */
     public final Energy divide(final LinearDensity v)
@@ -245,7 +245,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Calculate the division of Force and Energy, which results in a LinearDensity scalar.
-     * @param v Force scalar
+     * @param v Energy; Force scalar
      * @return LinearDensity scalar as a division of Force and Energy
      */
     public final LinearDensity divide(final Energy v)
@@ -255,7 +255,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Calculate the multiplication of Force and Speed, which results in a Power scalar.
-     * @param v Force scalar
+     * @param v Speed; Force scalar
      * @return Power scalar as a multiplication of Force and Speed
      */
     public final Power times(final Speed v)
@@ -265,7 +265,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Calculate the division of Force and Mass, which results in a Acceleration scalar.
-     * @param v Force scalar
+     * @param v Mass; Force scalar
      * @return Acceleration scalar as a division of Force and Mass
      */
     public final Acceleration divide(final Mass v)
@@ -275,7 +275,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Calculate the division of Force and Acceleration, which results in a Mass scalar.
-     * @param v Force scalar
+     * @param v Acceleration; Force scalar
      * @return Mass scalar as a division of Force and Acceleration
      */
     public final Mass divide(final Acceleration v)
@@ -285,7 +285,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Calculate the division of Force and Area, which results in a Pressure scalar.
-     * @param v Force scalar
+     * @param v Area; Force scalar
      * @return Pressure scalar as a division of Force and Area
      */
     public final Pressure divide(final Area v)
@@ -295,7 +295,7 @@ public class Force extends AbstractDoubleScalarRel<ForceUnit, Force>
 
     /**
      * Calculate the division of Force and Pressure, which results in a Area scalar.
-     * @param v Force scalar
+     * @param v Pressure; Force scalar
      * @return Area scalar as a division of Force and Pressure
      */
     public final Area divide(final Pressure v)

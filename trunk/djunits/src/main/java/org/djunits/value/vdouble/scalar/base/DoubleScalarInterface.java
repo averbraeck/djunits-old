@@ -7,7 +7,7 @@ import org.djunits.value.base.Scalar;
 /**
  * Double scalar functions.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
@@ -40,7 +40,7 @@ public interface DoubleScalarInterface<U extends Unit<U>, S extends DoubleScalar
     /**
      * Methods for Relative DoubleScalar.
      * <p>
-     * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved.
+     * Copyright (c) 2019-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved.
      * <br>
      * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
      * <p>
@@ -64,7 +64,7 @@ public interface DoubleScalarInterface<U extends Unit<U>, S extends DoubleScalar
      * Additional methods for Relative Scalar that has a corresponding Absolute Scalar. An example is the relative scalar Length
      * that has a corresponding absolute scalar Position.
      * <p>
-     * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved.
+     * Copyright (c) 2019-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved.
      * <br>
      * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
      * <p>
@@ -81,7 +81,7 @@ public interface DoubleScalarInterface<U extends Unit<U>, S extends DoubleScalar
         /**
          * Construct a new Relative Immutable DoubleScalar of the right type. Each extending class must implement this method.
          * @param value double; the double value
-         * @param unit U; the unit
+         * @param unit RU; the unit
          * @return R a new relative instance of the DoubleScalar of the right type
          */
         R instantiateRel(double value, RU unit);
@@ -98,7 +98,7 @@ public interface DoubleScalarInterface<U extends Unit<U>, S extends DoubleScalar
     /**
      * Methods for Absolute Scalar.
      * <p>
-     * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved.
+     * Copyright (c) 2019-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved.
      * <br>
      * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
      * <p>
@@ -115,7 +115,7 @@ public interface DoubleScalarInterface<U extends Unit<U>, S extends DoubleScalar
         /**
          * Construct a new Relative Immutable DoubleScalar of the right type. Each extending class must implement this method.
          * @param value double; the double value
-         * @param unit U; the unit
+         * @param unit RU; the unit
          * @return R a new relative instance of the DoubleScalar of the right type
          */
         R instantiateRel(double value, RU unit);

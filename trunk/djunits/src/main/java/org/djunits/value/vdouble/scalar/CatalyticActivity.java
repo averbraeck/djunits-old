@@ -15,13 +15,13 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 /**
  * Easy access methods for the CatalyticActivity DoubleScalar, which is relative by definition.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
 public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivityUnit, CatalyticActivity>
 {
     /** */
@@ -214,7 +214,7 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
 
     /**
      * Calculate the division of CatalyticActivity and CatalyticActivity, which results in a Dimensionless scalar.
-     * @param v CatalyticActivity scalar
+     * @param v CatalyticActivity; CatalyticActivity scalar
      * @return Dimensionless scalar as a division of CatalyticActivity and CatalyticActivity
      */
     public final Dimensionless divide(final CatalyticActivity v)
@@ -224,7 +224,7 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
 
     /**
      * Calculate the multiplication of CatalyticActivity and Duration, which results in a AmountOfSubstance scalar.
-     * @param v CatalyticActivity scalar
+     * @param v Duration; CatalyticActivity scalar
      * @return AmountOfSubstance scalar as a multiplication of CatalyticActivity and Duration
      */
     public final AmountOfSubstance times(final Duration v)
@@ -234,7 +234,7 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
 
     /**
      * Calculate the division of CatalyticActivity and AmountOfSubstance, which results in a Frequency scalar.
-     * @param v CatalyticActivity scalar
+     * @param v AmountOfSubstance; CatalyticActivity scalar
      * @return Frequency scalar as a division of CatalyticActivity and AmountOfSubstance
      */
     public final Frequency divide(final AmountOfSubstance v)
@@ -244,7 +244,7 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
 
     /**
      * Calculate the division of CatalyticActivity and Frequency, which results in a AmountOfSubstance scalar.
-     * @param v CatalyticActivity scalar
+     * @param v Frequency; CatalyticActivity scalar
      * @return AmountOfSubstance scalar as a division of CatalyticActivity and Frequency
      */
     public final AmountOfSubstance divide(final Frequency v)
