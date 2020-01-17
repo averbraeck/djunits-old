@@ -140,7 +140,7 @@ public class Localization implements Serializable
      */
     public boolean isDefault()
     {
-        if (this.currentLocale == null || this.defaultLocale == null | !this.currentLocale.equals(this.defaultLocale)
+        if (this.currentLocale == null || this.defaultLocale == null || !this.currentLocale.equals(this.defaultLocale)
                 || !this.currentLocale.equals(DefaultLocale.getLocale()))
         {
             return false;
