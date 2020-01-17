@@ -74,7 +74,7 @@ public class DoubleVectorConstructorsTest
             // double
             @SuppressWarnings("rawtypes")
             Unit standardUnit = quantity.getStandardUnit();
-            double[] testValues = new double[] {0, 123.456d, 0, 0, 234.567d, 0, 0};
+            double[] testValues = new double[] { 0, 123.456d, 0, 0, 234.567d, 0, 0 };
             int cardinality = 0;
             double zSum = 0;
             List<Double> list = new ArrayList<>();
@@ -96,7 +96,7 @@ public class DoubleVectorConstructorsTest
                 }
                 list.add(value);
             }
-            for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+            for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
             {
                 DoubleVectorInterface<?, ?, ?> doubleVector = DoubleVector.instantiate(testValues, standardUnit, storageType);
                 // System.out.println(doubleVector);
@@ -266,7 +266,7 @@ public class DoubleVectorConstructorsTest
     @Test
     public void instantiateListTest()
     {
-        double[] testValues = new double[] {0, 123.456d, 0, -273.15, -273.15, 0, -273.15, 234.567d, 0, 0};
+        double[] testValues = new double[] { 0, 123.456d, 0, -273.15, -273.15, 0, -273.15, 234.567d, 0, 0 };
         int cardinality = 0;
         int offsetCardinality = testValues.length;
         AbsoluteTemperature[] at = new AbsoluteTemperature[testValues.length];
@@ -297,10 +297,10 @@ public class DoubleVectorConstructorsTest
                 offsetCardinality--;
             }
         }
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
-            for (AbsoluteTemperatureUnit temperatureUnit : new AbsoluteTemperatureUnit[] {AbsoluteTemperatureUnit.KELVIN,
-                    AbsoluteTemperatureUnit.DEGREE_CELSIUS})
+            for (AbsoluteTemperatureUnit temperatureUnit : new AbsoluteTemperatureUnit[] { AbsoluteTemperatureUnit.KELVIN,
+                    AbsoluteTemperatureUnit.DEGREE_CELSIUS })
             {
                 double offset = temperatureUnit.equals(AbsoluteTemperatureUnit.KELVIN) ? 0 : 273.15;
 
@@ -599,7 +599,7 @@ public class DoubleVectorConstructorsTest
             // double
             @SuppressWarnings("rawtypes")
             Unit standardUnit = quantity.getStandardUnit();
-            double[] testValues = new double[] {0, 123.456d, 0, 0, -234.567d, 0};
+            double[] testValues = new double[] { 0, 123.456d, 0, 0, -234.567d, 0 };
             int cardinality = 0;
             double zSum = 0;
             List<Double> list = new ArrayList<>();
@@ -615,7 +615,7 @@ public class DoubleVectorConstructorsTest
                 }
                 list.add(value);
             }
-            for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+            for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
             {
                 SIVector siv = SIVector.instantiate(testValues, SIUnit.of(quantity.getSiDimensions()), storageType);
                 System.out.println(siv);
@@ -772,7 +772,7 @@ public class DoubleVectorConstructorsTest
     @Test
     public void exceptionsTest() throws ValueRuntimeException, UnitException
     {
-        double[] testValues = new double[] {0, 123.456d, 0, -273.15, -273.15, 0, -273.15, 234.567d, 0, 0};
+        double[] testValues = new double[] { 0, 123.456d, 0, -273.15, -273.15, 0, -273.15, 234.567d, 0, 0 };
         AbsoluteTemperature[] at = new AbsoluteTemperature[testValues.length];
         List<AbsoluteTemperature> al = new ArrayList<>();
         SortedMap<Integer, AbsoluteTemperature> map = new TreeMap<>();
@@ -1013,10 +1013,10 @@ public class DoubleVectorConstructorsTest
             value = new AbsoluteTemperature(testValues[i], AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT);
             at[i] = value;
         }
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
-            for (AbsoluteTemperatureUnit temperatureUnit : new AbsoluteTemperatureUnit[] {AbsoluteTemperatureUnit.KELVIN,
-                    AbsoluteTemperatureUnit.DEGREE_CELSIUS})
+            for (AbsoluteTemperatureUnit temperatureUnit : new AbsoluteTemperatureUnit[] { AbsoluteTemperatureUnit.KELVIN,
+                    AbsoluteTemperatureUnit.DEGREE_CELSIUS })
             {
                 AbsoluteTemperatureVector atv = DoubleVector.instantiate(testValues, temperatureUnit, storageType);
                 compareValuesWithScale(temperatureUnit.getScale(), testValues, atv.getValuesSI());
@@ -1043,7 +1043,7 @@ public class DoubleVectorConstructorsTest
      * @throws UnitException on error
      * @param <U> the unit type
      */
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Test
     public <U extends Unit<U>> void testAsMost() throws NoSuchMethodException, SecurityException, IllegalAccessException,
             IllegalArgumentException, InvocationTargetException, ClassNotFoundException, UnitException
@@ -1051,11 +1051,11 @@ public class DoubleVectorConstructorsTest
         // load all classes
         assertEquals("m", UNITS.METER.getId());
 
-        double[] testValues = new double[] {0, 123.456d, 0, -273.15, -273.15, 0, -273.15, 234.567d, 0, 0};
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        double[] testValues = new double[] { 0, 123.456d, 0, -273.15, -273.15, 0, -273.15, 234.567d, 0, 0 };
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
             AbstractDoubleVectorRel allVector =
-                    (AbstractDoubleVectorRel) DoubleVector.instantiate(new double[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                    (AbstractDoubleVectorRel) DoubleVector.instantiate(new double[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
                             DimensionlessUnit.SI.getStandardUnit(), storageType);
             for (String type : CLASSNAMES.REL_LIST)
             {
@@ -1063,7 +1063,7 @@ public class DoubleVectorConstructorsTest
                 Quantity<U> quantity = (Quantity<U>) Quantities.INSTANCE.getQuantity(type + "Unit");
                 for (U unit : quantity.getUnitsById().values())
                 {
-                    for (StorageType storageType2 : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+                    for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
                     {
                         AbstractDoubleVectorRel vector =
                                 (AbstractDoubleVectorRel) DoubleVector.instantiate(testValues, unit, storageType2);
@@ -1120,7 +1120,7 @@ public class DoubleVectorConstructorsTest
      * @throws UnitException on error
      * @param <U> the unit type
      */
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Test
     public <U extends Unit<U>> void testAsRemaining() throws NoSuchMethodException, SecurityException, IllegalAccessException,
             IllegalArgumentException, InvocationTargetException, ClassNotFoundException, UnitException
@@ -1128,11 +1128,11 @@ public class DoubleVectorConstructorsTest
         // load all classes
         assertEquals("m", UNITS.METER.getId());
 
-        double[] testValues = new double[] {0, 123.456d, 0, -273.15, -273.15, 0, -273.15, 234.567d, 0, 0};
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        double[] testValues = new double[] { 0, 123.456d, 0, -273.15, -273.15, 0, -273.15, 234.567d, 0, 0 };
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
             AbstractDoubleVectorRel<?, ?, ?> dimless =
-                    (AbstractDoubleVectorRel<?, ?, ?>) DoubleVector.instantiate(new double[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                    (AbstractDoubleVectorRel<?, ?, ?>) DoubleVector.instantiate(new double[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
                             DimensionlessUnit.SI.getStandardUnit(), storageType);
             for (String type : CLASSNAMES.REL_WITH_ABS_LIST)
             {
@@ -1140,7 +1140,7 @@ public class DoubleVectorConstructorsTest
                 Quantity<U> quantity = (Quantity<U>) Quantities.INSTANCE.getQuantity(type + "Unit");
                 for (U unit : quantity.getUnitsById().values())
                 {
-                    for (StorageType storageType2 : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+                    for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
                     {
                         AbstractDoubleVectorRel vector =
                                 (AbstractDoubleVectorRel) DoubleVector.instantiate(testValues, unit, storageType2);
@@ -1202,8 +1202,8 @@ public class DoubleVectorConstructorsTest
     public <U extends Unit<U>> void testAsUnit() throws ClassNotFoundException, NoSuchMethodException, SecurityException,
             IllegalAccessException, IllegalArgumentException, InvocationTargetException, UnitException
     {
-        double[] testValues = new double[] {0, 123.456d, 0, -273.15, -273.15, 0, -273.15, 234.567d, 0, 0};
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        double[] testValues = new double[] { 0, 123.456d, 0, -273.15, -273.15, 0, -273.15, 234.567d, 0, 0 };
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
             for (String type : CLASSNAMES.REL_LIST)
             {
@@ -1211,7 +1211,7 @@ public class DoubleVectorConstructorsTest
                 Quantity<U> quantity = (Quantity<U>) Quantities.INSTANCE.getQuantity(type + "Unit");
                 for (U unit : quantity.getUnitsById().values())
                 {
-                    for (StorageType storageType2 : new StorageType[] {StorageType.DENSE, storageType})
+                    for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, storageType })
                     {
                         SIUnit siUnit = SIUnit.of(unit.getQuantity().getSiDimensions());
                         SIVector vector = SIVector.instantiate(testValues, siUnit, storageType2);
@@ -1244,18 +1244,18 @@ public class DoubleVectorConstructorsTest
     @Test
     public void operationTest()
     {
-        double[] testValues = new double[] {0, 123.456d, 0, -273.15, -273.15, 0, -273.15, 234.567d, 0, 0};
-        double[] testValues2 = new double[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        for (AbsoluteTemperatureUnit temperatureUnit : new AbsoluteTemperatureUnit[] {AbsoluteTemperatureUnit.KELVIN,
-                AbsoluteTemperatureUnit.DEGREE_CELSIUS, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT})
+        double[] testValues = new double[] { 0, 123.456d, 0, -273.15, -273.15, 0, -273.15, 234.567d, 0, 0 };
+        double[] testValues2 = new double[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        for (AbsoluteTemperatureUnit temperatureUnit : new AbsoluteTemperatureUnit[] { AbsoluteTemperatureUnit.KELVIN,
+                AbsoluteTemperatureUnit.DEGREE_CELSIUS, AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT })
         {
-            for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+            for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
             {
                 AbsoluteTemperatureVector atv = DoubleVector.instantiate(testValues, temperatureUnit, storageType);
-                for (TemperatureUnit relativeTemperatureUnit : new TemperatureUnit[] {TemperatureUnit.KELVIN,
-                        TemperatureUnit.DEGREE_CELSIUS, TemperatureUnit.DEGREE_FAHRENHEIT})
+                for (TemperatureUnit relativeTemperatureUnit : new TemperatureUnit[] { TemperatureUnit.KELVIN,
+                        TemperatureUnit.DEGREE_CELSIUS, TemperatureUnit.DEGREE_FAHRENHEIT })
                 {
-                    for (StorageType storageType2 : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+                    for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
                     {
                         TemperatureVector rtv = DoubleVector.instantiate(testValues2, relativeTemperatureUnit, storageType2);
                         AbsoluteTemperatureVector sumtv = atv.plus(rtv);

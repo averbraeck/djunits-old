@@ -7,6 +7,8 @@ import org.djunits.unit.AbsorbedDoseUnit;
 import org.djunits.unit.AccelerationUnit;
 import org.djunits.unit.AmountOfSubstanceUnit;
 import org.djunits.unit.AngleUnit;
+import org.djunits.unit.AngularAccelerationUnit;
+import org.djunits.unit.AngularVelocityUnit;
 import org.djunits.unit.AreaUnit;
 import org.djunits.unit.CatalyticActivityUnit;
 import org.djunits.unit.DensityUnit;
@@ -34,6 +36,7 @@ import org.djunits.unit.LuminousIntensityUnit;
 import org.djunits.unit.MagneticFluxDensityUnit;
 import org.djunits.unit.MagneticFluxUnit;
 import org.djunits.unit.MassUnit;
+import org.djunits.unit.MomentumUnit;
 import org.djunits.unit.PositionUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.unit.PressureUnit;
@@ -57,14 +60,14 @@ import org.djunits.unit.VolumeUnit;
  * To use these easy access methods, put a <code><b>implements</b> UNITS</code> at the end of your <code><b>class</b></code>
  * line.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@SuppressWarnings({"checkstyle:interfaceistype", "checkstyle:javadocmethod", "checkstyle:javadoctype",
-        "checkstyle:javadocvariable", "checkstyle:linelength", "checkstyle:leftcurly", "checkstyle:rightcurly", "javadoc"})
+@SuppressWarnings({ "checkstyle:interfaceistype", "checkstyle:javadocmethod", "checkstyle:javadoctype",
+        "checkstyle:javadocvariable", "checkstyle:linelength", "checkstyle:leftcurly", "checkstyle:rightcurly", "javadoc" })
 @Generated(value = "org.djunits.generator.GenerateStaticUNITS", date = "2019-10-22T09:30:00.000+0200")
 public interface UNITS
 {
@@ -107,6 +110,30 @@ public interface UNITS
     AngleUnit GRAD                                = AngleUnit.GRAD;
     AngleUnit CENTESIMAL_ARCMINUTE                = AngleUnit.CENTESIMAL_ARCMINUTE;
     AngleUnit CENTESIMAL_ARCSECOND                = AngleUnit.CENTESIMAL_ARCSECOND;
+
+    /****************************************************************************************************************/
+    /******************************************** ANGULARACCELERATION  **********************************************/
+    /****************************************************************************************************************/
+
+    AngularAccelerationUnit RADIAN_PER_SECOND_SQUARED = AngularAccelerationUnit.RADIAN_PER_SECOND_SQUARED;
+    AngularAccelerationUnit DEGREE_PER_SECOND_SQUARED = AngularAccelerationUnit.DEGREE_PER_SECOND_SQUARED;
+    AngularAccelerationUnit ARCMINUTE_PER_SECOND_SQUARED = AngularAccelerationUnit.ARCMINUTE_PER_SECOND_SQUARED;
+    AngularAccelerationUnit ARCSECOND_PER_SECOND_SQUARED = AngularAccelerationUnit.ARCSECOND_PER_SECOND_SQUARED;
+    AngularAccelerationUnit GRAD_PER_SECOND_SQUARED = AngularAccelerationUnit.GRAD_PER_SECOND_SQUARED;
+    AngularAccelerationUnit CENTESIMAL_ARCMINUTE_SQUARED = AngularAccelerationUnit.CENTESIMAL_ARCMINUTE_SQUARED;
+    AngularAccelerationUnit CENTESIMAL_ARCSECOND_PER_SECOND_SQUARED = AngularAccelerationUnit.CENTESIMAL_ARCSECOND_PER_SECOND_SQUARED;
+
+    /****************************************************************************************************************/
+    /********************************************** ANGULARVELOCITY  ************************************************/
+    /****************************************************************************************************************/
+
+    AngularVelocityUnit RADIAN_PER_SECOND         = AngularVelocityUnit.RADIAN_PER_SECOND;
+    AngularVelocityUnit DEGREE_PER_SECOND         = AngularVelocityUnit.DEGREE_PER_SECOND;
+    AngularVelocityUnit ARCMINUTE_PER_SECOND      = AngularVelocityUnit.ARCMINUTE_PER_SECOND;
+    AngularVelocityUnit ARCSECOND_PER_SECOND      = AngularVelocityUnit.ARCSECOND_PER_SECOND;
+    AngularVelocityUnit GRAD_PER_SECOND           = AngularVelocityUnit.GRAD_PER_SECOND;
+    AngularVelocityUnit CENTESIMAL_ARCMINUTE_PER_SECOND = AngularVelocityUnit.CENTESIMAL_ARCMINUTE_PER_SECOND;
+    AngularVelocityUnit CENTESIMAL_ARCSECOND_PER_SECOND = AngularVelocityUnit.CENTESIMAL_ARCSECOND_PER_SECOND;
 
     /****************************************************************************************************************/
     /**************************************************** AREA ******************************************************/
@@ -381,6 +408,12 @@ public interface UNITS
     MassUnit MASS_KILOELECTRONVOLT                = MassUnit.KILOELECTRONVOLT;
     MassUnit MASS_MEGAELECTRONVOLT                = MassUnit.MEGAELECTRONVOLT;
     MassUnit MASS_GIGAELECTRONVOLT                = MassUnit.GIGAELECTRONVOLT;
+
+    /****************************************************************************************************************/
+    /************************************************** MOMENTUM ****************************************************/
+    /****************************************************************************************************************/
+
+    MomentumUnit KILOGRAM_METER_PER_SECOND        = MomentumUnit.KILOGRAM_METER_PER_SECOND;
 
     /****************************************************************************************************************/
     /************************************************** POSITION ****************************************************/

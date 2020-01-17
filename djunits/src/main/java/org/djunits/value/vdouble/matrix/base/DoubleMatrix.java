@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.vector.base.DoubleVectorInterface;
 /**
  * DoubleMatrix utility methods, e.g., for creating DoubleMatrixs from different types of data.
  * <p>
- * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
@@ -60,7 +60,7 @@ public final class DoubleMatrix
      * Instantiate the DoubleMatrix based on its unit. Rigid check on types for the compiler. The class for the matrix is
      * explicitly provided, e.g., for user-defined matrix classes. The double array is of the form d[rows][columns] so each
      * value can be found with d[row][column].
-     * @param valuesInUnit double[]; the values in the given unit
+     * @param valuesInUnit double[][]; the values in the given unit
      * @param unit U; the unit in which the values are expressed and displayed
      * @param storageType StorageType; whether the matrix is SPARSE or DENSE
      * @param matrixClass Class&lt;M&gt;; the class of the matrix to instantiate

@@ -15,13 +15,13 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
 /**
  * Easy access methods for the FloatPressure FloatScalar, which is relative by definition.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
 public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPressure>
 {
     /** */
@@ -52,7 +52,7 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
     /**
      * Construct FloatPressure scalar.
      * @param value float; the float value
-     * @param unit unit for the float value
+     * @param unit PressureUnit; unit for the float value
      */
     public FloatPressure(final float value, final PressureUnit unit)
     {
@@ -61,7 +61,7 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
 
     /**
      * Construct FloatPressure scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatPressure; Scalar from which to construct this instance
      */
     public FloatPressure(final FloatPressure value)
     {
@@ -71,7 +71,7 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
     /**
      * Construct FloatPressure scalar using a double value.
      * @param value double; the double value
-     * @param unit unit for the resulting float value
+     * @param unit PressureUnit; unit for the resulting float value
      */
     public FloatPressure(final double value, final PressureUnit unit)
     {
@@ -97,9 +97,9 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @param zero FloatPressure; the low value
+     * @param one FloatPressure; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatPressure interpolate(final FloatPressure zero, final FloatPressure one, final float ratio)
@@ -110,8 +110,8 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatPressure; the first scalar
+     * @param r2 FloatPressure; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatPressure max(final FloatPressure r1, final FloatPressure r2)
@@ -121,9 +121,9 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatPressure; the first scalar
+     * @param r2 FloatPressure; the second scalar
+     * @param rn FloatPressure...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatPressure max(final FloatPressure r1, final FloatPressure r2, final FloatPressure... rn)
@@ -141,8 +141,8 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatPressure; the first scalar
+     * @param r2 FloatPressure; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatPressure min(final FloatPressure r1, final FloatPressure r2)
@@ -152,9 +152,9 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatPressure; the first scalar
+     * @param r2 FloatPressure; the second scalar
+     * @param rn FloatPressure...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatPressure min(final FloatPressure r1, final FloatPressure r2, final FloatPressure... rn)
@@ -201,7 +201,7 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
 
     /**
      * Returns a FloatPressure based on a value and the textual representation of the unit.
-     * @param value double; the value to use
+     * @param value float; the value to use
      * @param unitString String; the textual representation of the unit
      * @return FloatPressure; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
@@ -221,7 +221,7 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
 
     /**
      * Calculate the division of FloatPressure and FloatPressure, which results in a FloatDimensionless scalar.
-     * @param v FloatPressure scalar
+     * @param v FloatPressure; FloatPressure scalar
      * @return FloatDimensionless scalar as a division of FloatPressure and FloatPressure
      */
     public final FloatDimensionless divide(final FloatPressure v)
@@ -231,7 +231,7 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
 
     /**
      * Calculate the multiplication of FloatPressure and FloatArea, which results in a FloatForce scalar.
-     * @param v FloatPressure scalar
+     * @param v FloatArea; FloatPressure scalar
      * @return FloatForce scalar as a multiplication of FloatPressure and FloatArea
      */
     public final FloatForce times(final FloatArea v)
@@ -241,7 +241,7 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
 
     /**
      * Calculate the multiplication of FloatPressure and FloatVolume, which results in a FloatEnergy scalar.
-     * @param v FloatPressure scalar
+     * @param v FloatVolume; FloatPressure scalar
      * @return FloatEnergy scalar as a multiplication of FloatPressure and FloatVolume
      */
     public final FloatEnergy times(final FloatVolume v)

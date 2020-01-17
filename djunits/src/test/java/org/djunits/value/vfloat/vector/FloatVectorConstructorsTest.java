@@ -69,7 +69,7 @@ public class FloatVectorConstructorsTest
             // float
             @SuppressWarnings("rawtypes")
             Unit standardUnit = quantity.getStandardUnit();
-            float[] testValues = new float[] {0, 123.456f, 0, 0, 234.567f, 0, 0};
+            float[] testValues = new float[] { 0, 123.456f, 0, 0, 234.567f, 0, 0 };
             int cardinality = 0;
             double zSum = 0;
             List<Float> list = new ArrayList<>();
@@ -91,7 +91,7 @@ public class FloatVectorConstructorsTest
                 }
                 list.add(value);
             }
-            for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+            for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
             {
                 FloatVectorInterface<?, ?, ?> floatVector = FloatVector.instantiate(testValues, standardUnit, storageType);
                 // System.out.println(floatVector);
@@ -261,7 +261,7 @@ public class FloatVectorConstructorsTest
     @Test
     public void instantiateListTest()
     {
-        float[] testValues = new float[] {0, 123.456f, 0, -273.15f, -273.15f, 0, -273.15f, 234.567f, 0, 0};
+        float[] testValues = new float[] { 0, 123.456f, 0, -273.15f, -273.15f, 0, -273.15f, 234.567f, 0, 0 };
         int cardinality = 0;
         int offsetCardinality = testValues.length;
         FloatAbsoluteTemperature[] at = new FloatAbsoluteTemperature[testValues.length];
@@ -292,10 +292,10 @@ public class FloatVectorConstructorsTest
                 offsetCardinality--;
             }
         }
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
-            for (AbsoluteTemperatureUnit temperatureUnit : new AbsoluteTemperatureUnit[] {AbsoluteTemperatureUnit.KELVIN,
-                    AbsoluteTemperatureUnit.DEGREE_CELSIUS})
+            for (AbsoluteTemperatureUnit temperatureUnit : new AbsoluteTemperatureUnit[] { AbsoluteTemperatureUnit.KELVIN,
+                    AbsoluteTemperatureUnit.DEGREE_CELSIUS })
             {
                 float offset = temperatureUnit.equals(AbsoluteTemperatureUnit.KELVIN) ? 0f : 273.15f;
 
@@ -594,7 +594,7 @@ public class FloatVectorConstructorsTest
             // float
             @SuppressWarnings("rawtypes")
             Unit standardUnit = quantity.getStandardUnit();
-            float[] testValues = new float[] {0, 123.456f, 0, 0, 234.567f, 0};
+            float[] testValues = new float[] { 0, 123.456f, 0, 0, 234.567f, 0 };
             int cardinality = 0;
             double zSum = 0;
             List<Float> list = new ArrayList<>();
@@ -610,7 +610,7 @@ public class FloatVectorConstructorsTest
                 }
                 list.add(value);
             }
-            for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+            for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
             {
                 FloatSIVector siv = FloatVector.instantiate(testValues, SIUnit.of(quantity.getSiDimensions()), storageType);
                 System.out.println(siv);
@@ -768,7 +768,7 @@ public class FloatVectorConstructorsTest
     @Test
     public void exceptionsTest() throws ValueRuntimeException, UnitException
     {
-        float[] testValues = new float[] {0f, 123.456f, 0f, 0f, 234.567f, 0f, 0f};
+        float[] testValues = new float[] { 0f, 123.456f, 0f, 0f, 234.567f, 0f, 0f };
         FloatAbsoluteTemperature[] at = new FloatAbsoluteTemperature[testValues.length];
         List<FloatAbsoluteTemperature> al = new ArrayList<>();
         SortedMap<Integer, FloatAbsoluteTemperature> map = new TreeMap<>();
@@ -984,10 +984,10 @@ public class FloatVectorConstructorsTest
             value = new FloatAbsoluteTemperature(testValues[i], AbsoluteTemperatureUnit.DEGREE_FAHRENHEIT);
             at[i] = value;
         }
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
-            for (AbsoluteTemperatureUnit temperatureUnit : new AbsoluteTemperatureUnit[] {AbsoluteTemperatureUnit.KELVIN,
-                    AbsoluteTemperatureUnit.DEGREE_CELSIUS})
+            for (AbsoluteTemperatureUnit temperatureUnit : new AbsoluteTemperatureUnit[] { AbsoluteTemperatureUnit.KELVIN,
+                    AbsoluteTemperatureUnit.DEGREE_CELSIUS })
             {
                 FloatAbsoluteTemperatureVector atv = FloatVector.instantiate(testValues, temperatureUnit, storageType);
                 compareValuesWithScale(temperatureUnit.getScale(), testValues, atv.getValuesSI());

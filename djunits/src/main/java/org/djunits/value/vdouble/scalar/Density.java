@@ -15,13 +15,13 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 /**
  * Easy access methods for the Density DoubleScalar, which is relative by definition.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
 public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
 {
     /** */
@@ -211,7 +211,7 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
 
     /**
      * Calculate the division of Density and Density, which results in a Dimensionless scalar.
-     * @param v Density scalar
+     * @param v Density; Density scalar
      * @return Dimensionless scalar as a division of Density and Density
      */
     public final Dimensionless divide(final Density v)
@@ -221,7 +221,7 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
 
     /**
      * Calculate the multiplication of Density and Volume, which results in a Mass scalar.
-     * @param v Density scalar
+     * @param v Volume; Density scalar
      * @return Mass scalar as a multiplication of Density and Volume
      */
     public final Mass times(final Volume v)
@@ -231,7 +231,7 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
 
     /**
      * Calculate the multiplication of Density and FlowVolume, which results in a FlowMass scalar.
-     * @param v Density scalar
+     * @param v FlowVolume; Density scalar
      * @return FlowMass scalar as a multiplication of Density and FlowVolume
      */
     public final FlowMass times(final FlowVolume v)

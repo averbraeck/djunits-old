@@ -7,7 +7,7 @@ import org.djunits.unit.Unit;
  * The typed, abstract DoubleScalarRelWithAbs class that forms the basis of the relative DoubleScalars suck as Duration that
  * have an absolute equivalent such as Time.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
@@ -29,7 +29,7 @@ public abstract class AbstractDoubleScalarRelWithAbs<AU extends AbsoluteLinearUn
     /**
      * Construct a new Relative Immutable DoubleScalar.
      * @param value double; the value of the new Relative Immutable DoubleScalar
-     * @param unit U; the unit of the new Relative Immutable DoubleScalar
+     * @param unit RU; the unit of the new Relative Immutable DoubleScalar
      */
     public AbstractDoubleScalarRelWithAbs(final double value, final RU unit)
     {

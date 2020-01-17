@@ -16,7 +16,7 @@ import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 /**
  * AbstractMutableDoubleMatrixRelWithAbs.java.
  * <p>
- * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2019-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
@@ -49,7 +49,7 @@ public abstract class AbstractDoubleMatrixAbs<
     /**
      * Construct a new Relative Mutable DoubleMatrix.
      * @param data DoubleMatrixData; an internal data object
-     * @param unit U; the unit
+     * @param unit AU; the unit
      */
     protected AbstractDoubleMatrixAbs(final DoubleMatrixData data, final AU unit)
     {
@@ -92,7 +92,7 @@ public abstract class AbstractDoubleMatrixAbs<
     /**
      * Decrement all values of this matrix by the decrement on a value by value basis. This only works if this matrix is
      * mutable.
-     * @param decrement RV; the matrix that contains the values by which to decrement the corresponding values
+     * @param decrement RM; the matrix that contains the values by which to decrement the corresponding values
      * @return AV; this modified matrix
      * @throws ValueRuntimeException in case this matrix is immutable
      * @throws ValueRuntimeException when the sizes of the matrices differ, or <code>decrement</code> is null

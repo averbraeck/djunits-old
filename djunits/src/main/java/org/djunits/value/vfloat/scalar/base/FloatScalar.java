@@ -14,7 +14,7 @@ import org.djunits.value.vfloat.scalar.FloatSIScalar;
 /**
  * Static methods to create and operate on FloatScalars.
  * <p>
- * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
@@ -211,8 +211,8 @@ public abstract class FloatScalar
 
     /**
      * Multiply two values; the result is a new instance with a different (existing or generated) SI unit.
-     * @param left FloatScalarInterfaceRel&lt;?, ?&gt;; the left operand
-     * @param right FloatScalarInterfaceRel&lt;?, ?&gt;; the right operand
+     * @param left FloatScalarInterface.Rel&lt;?, ?&gt;; the left operand
+     * @param right FloatScalarInterface.Rel&lt;?, ?&gt;; the right operand
      * @return FloatScalar.Rel&lt;SIUnit&gt;; the product of the two values
      */
     public static FloatSIScalar multiply(final FloatScalarInterface.Rel<?, ?> left, final FloatScalarInterface.Rel<?, ?> right)
@@ -224,8 +224,8 @@ public abstract class FloatScalar
 
     /**
      * Divide two values; the result is a new instance with a different (existing or generated) SI unit.
-     * @param left FloatScalarInterfaceRel&lt;?, ?&gt;; the left operand
-     * @param right FloatScalarInterfaceRel&lt;?, ?&gt;; the right operand
+     * @param left FloatScalarInterface.Rel&lt;?, ?&gt;; the left operand
+     * @param right FloatScalarInterface.Rel&lt;?, ?&gt;; the right operand
      * @return FloatScalar.Rel&lt;SIUnit&gt;; the ratio of the two values
      */
     public static FloatSIScalar divide(final FloatScalarInterface.Rel<?, ?> left, final FloatScalarInterface.Rel<?, ?> right)

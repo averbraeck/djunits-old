@@ -15,13 +15,13 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 /**
  * Easy access methods for the Pressure DoubleScalar, which is relative by definition.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
 public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 {
     /** */
@@ -211,7 +211,7 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Calculate the division of Pressure and Pressure, which results in a Dimensionless scalar.
-     * @param v Pressure scalar
+     * @param v Pressure; Pressure scalar
      * @return Dimensionless scalar as a division of Pressure and Pressure
      */
     public final Dimensionless divide(final Pressure v)
@@ -221,7 +221,7 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Calculate the multiplication of Pressure and Area, which results in a Force scalar.
-     * @param v Pressure scalar
+     * @param v Area; Pressure scalar
      * @return Force scalar as a multiplication of Pressure and Area
      */
     public final Force times(final Area v)
@@ -231,7 +231,7 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Calculate the multiplication of Pressure and Volume, which results in a Energy scalar.
-     * @param v Pressure scalar
+     * @param v Volume; Pressure scalar
      * @return Energy scalar as a multiplication of Pressure and Volume
      */
     public final Energy times(final Volume v)

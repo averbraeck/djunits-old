@@ -13,13 +13,13 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
 /**
  * Easy access methods for the FloatEquivalentDose FloatScalar, which is relative by definition.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
 public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUnit, FloatEquivalentDose>
 {
     /** */
@@ -52,7 +52,7 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
     /**
      * Construct FloatEquivalentDose scalar.
      * @param value float; the float value
-     * @param unit unit for the float value
+     * @param unit EquivalentDoseUnit; unit for the float value
      */
     public FloatEquivalentDose(final float value, final EquivalentDoseUnit unit)
     {
@@ -61,7 +61,7 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
 
     /**
      * Construct FloatEquivalentDose scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatEquivalentDose; Scalar from which to construct this instance
      */
     public FloatEquivalentDose(final FloatEquivalentDose value)
     {
@@ -71,7 +71,7 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
     /**
      * Construct FloatEquivalentDose scalar using a double value.
      * @param value double; the double value
-     * @param unit unit for the resulting float value
+     * @param unit EquivalentDoseUnit; unit for the resulting float value
      */
     public FloatEquivalentDose(final double value, final EquivalentDoseUnit unit)
     {
@@ -97,9 +97,9 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @param zero FloatEquivalentDose; the low value
+     * @param one FloatEquivalentDose; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatEquivalentDose interpolate(final FloatEquivalentDose zero, final FloatEquivalentDose one,
@@ -111,8 +111,8 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatEquivalentDose; the first scalar
+     * @param r2 FloatEquivalentDose; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatEquivalentDose max(final FloatEquivalentDose r1, final FloatEquivalentDose r2)
@@ -122,9 +122,9 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatEquivalentDose; the first scalar
+     * @param r2 FloatEquivalentDose; the second scalar
+     * @param rn FloatEquivalentDose...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatEquivalentDose max(final FloatEquivalentDose r1, final FloatEquivalentDose r2,
@@ -143,8 +143,8 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatEquivalentDose; the first scalar
+     * @param r2 FloatEquivalentDose; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatEquivalentDose min(final FloatEquivalentDose r1, final FloatEquivalentDose r2)
@@ -154,9 +154,9 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatEquivalentDose; the first scalar
+     * @param r2 FloatEquivalentDose; the second scalar
+     * @param rn FloatEquivalentDose...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatEquivalentDose min(final FloatEquivalentDose r1, final FloatEquivalentDose r2,
@@ -205,7 +205,7 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
 
     /**
      * Returns a FloatEquivalentDose based on a value and the textual representation of the unit.
-     * @param value double; the value to use
+     * @param value float; the value to use
      * @param unitString String; the textual representation of the unit
      * @return FloatEquivalentDose; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
@@ -226,7 +226,7 @@ public class FloatEquivalentDose extends AbstractFloatScalarRel<EquivalentDoseUn
 
     /**
      * Calculate the division of FloatEquivalentDose and FloatEquivalentDose, which results in a FloatDimensionless scalar.
-     * @param v FloatEquivalentDose scalar
+     * @param v FloatEquivalentDose; FloatEquivalentDose scalar
      * @return FloatDimensionless scalar as a division of FloatEquivalentDose and FloatEquivalentDose
      */
     public final FloatDimensionless divide(final FloatEquivalentDose v)

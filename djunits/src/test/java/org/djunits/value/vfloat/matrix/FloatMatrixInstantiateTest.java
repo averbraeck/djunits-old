@@ -41,7 +41,7 @@ import org.junit.Test;
 /**
  * FloatMatrixInstantiateTest.java.
  * <p>
- * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2019-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
@@ -71,7 +71,7 @@ public class FloatMatrixInstantiateTest
             @SuppressWarnings("unchecked")
             Quantity<U> quantity = (Quantity<U>) Quantities.INSTANCE.getQuantity(scalarName + "Unit");
             U standardUnit = quantity.getStandardUnit();
-            for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+            for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
             {
                 float[][] testValues = FLOATMATRIX.denseRectArrays(5, 10);
                 FloatMatrixData dmd = FloatMatrixData.instantiate(testValues, standardUnit.getScale(), storageType);
@@ -87,7 +87,7 @@ public class FloatMatrixInstantiateTest
                 FloatVectorData dvd =
                         FloatVectorData.instantiate(floatMatrix.getRowSI(0), standardUnit.getScale(), storageType);
                 FloatVectorInterface<U, S, V> floatVector = floatMatrix.instantiateVector(dvd, standardUnit);
-                assertArrayEquals("Float vector contains values from row 0", new float[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
+                assertArrayEquals("Float vector contains values from row 0", new float[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
                         floatVector.getValuesSI(), 0.001f);
                 // TODO next cast should be unnecessary
                 FloatScalarInterface<U, S> floatScalar = floatMatrix.instantiateScalarSI(1.234f, standardUnit);
@@ -121,7 +121,7 @@ public class FloatMatrixInstantiateTest
             Quantity<AU> absQuantity = (Quantity<AU>) Quantities.INSTANCE.getQuantity(absScalarName + "Unit");
             RU relStandardUnit = relQuantity.getStandardUnit();
             AU absStandardUnit = absQuantity.getStandardUnit();
-            for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+            for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
             {
                 float[][] testValues = FLOATMATRIX.denseRectArrays(5, 10);
                 FloatMatrixData dmd = FloatMatrixData.instantiate(testValues, relStandardUnit.getScale(), storageType);
@@ -137,7 +137,7 @@ public class FloatMatrixInstantiateTest
                         FloatVectorData.instantiate(relFloatMatrix.getRowSI(0), relStandardUnit.getScale(), storageType);
                 AbstractFloatVectorAbs<AU, ?, ?, RU, ?, ?> absFloatVector =
                         relFloatMatrix.instantiateVectorAbs(dvd, absStandardUnit);
-                assertArrayEquals("Float vector contains values from row 0", new float[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
+                assertArrayEquals("Float vector contains values from row 0", new float[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
                         absFloatVector.getValuesSI(), 0.001f);
                 AbstractFloatScalarAbs<AU, ?, RU, ?> absFloatScalar =
                         relFloatMatrix.instantiateScalarAbsSI(1.234f, absStandardUnit);
@@ -150,7 +150,7 @@ public class FloatMatrixInstantiateTest
                 dvd = FloatVectorData.instantiate(absFloatMatrix.getRowSI(0), absStandardUnit.getScale(), storageType);
                 AbstractFloatVectorRelWithAbs<AU, ?, ?, RU, ?, ?> relFloatVector =
                         absFloatMatrix.instantiateVectorRel(dvd, relStandardUnit);
-                assertArrayEquals("Float vector contains values from row 0", new float[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
+                assertArrayEquals("Float vector contains values from row 0", new float[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
                         relFloatVector.getValuesSI(), 0.001f);
                 AbstractFloatScalarRelWithAbs<AU, ?, RU, ?> relFloatScalar =
                         absFloatMatrix.instantiateScalarRelSI(1.234f, relStandardUnit);
@@ -968,7 +968,7 @@ public class FloatMatrixInstantiateTest
      * zero rows/columns.
      */
     @Test
-    @SuppressWarnings({"checkstyle:methodlength", "checkstyle:localvariablename"})
+    @SuppressWarnings({ "checkstyle:methodlength", "checkstyle:localvariablename" })
     public void testInstantiateEdgeCases()
     {
         // DENSE DATA

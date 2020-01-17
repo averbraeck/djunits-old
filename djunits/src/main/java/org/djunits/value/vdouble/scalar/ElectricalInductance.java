@@ -14,13 +14,13 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 /**
  * Easy access methods for the ElectricalInductance DoubleScalar, which is relative by definition.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
 public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalInductanceUnit, ElectricalInductance>
 {
     /** */
@@ -219,7 +219,7 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
 
     /**
      * Calculate the division of ElectricalInductance and ElectricalInductance, which results in a Dimensionless scalar.
-     * @param v ElectricalInductance scalar
+     * @param v ElectricalInductance; ElectricalInductance scalar
      * @return Dimensionless scalar as a division of ElectricalInductance and ElectricalInductance
      */
     public final Dimensionless divide(final ElectricalInductance v)
@@ -229,7 +229,7 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
 
     /**
      * Calculate the multiplication of ElectricalInductance and ElectricalCurrent, which results in a MagneticFlux scalar.
-     * @param v ElectricalInductance scalar
+     * @param v ElectricalCurrent; ElectricalInductance scalar
      * @return MagneticFlux scalar as a multiplication of ElectricalInductance and ElectricalCurrent
      */
     public final MagneticFlux times(final ElectricalCurrent v)

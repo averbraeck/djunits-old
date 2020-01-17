@@ -8,7 +8,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
 /**
  * Standard frequency unit based on time.
  * <p>
- * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
@@ -62,8 +62,8 @@ public class FrequencyUnit extends Unit<FrequencyUnit>
             PER_SECOND.deriveLinear(1.0 / 60.0, "/min", "per minute", UnitSystem.SI_ACCEPTED, "/min", "1/min");
 
     /** 1/hour. */
-    public static final FrequencyUnit PER_HOUR = PER_SECOND.deriveLinear(1.0 / 3600.0, "/h", "per hour",
-            UnitSystem.SI_ACCEPTED, "/h", "/h", "1/h", "/hr", "1/hr", "/hour", "1/hour");
+    public static final FrequencyUnit PER_HOUR = PER_SECOND.deriveLinear(1.0 / 3600.0, "/h", "per hour", UnitSystem.SI_ACCEPTED,
+            "/h", "/h", "1/h", "/hr", "1/hr", "/hour", "1/hour");
 
     /** 1/day. */
     public static final FrequencyUnit PER_DAY =

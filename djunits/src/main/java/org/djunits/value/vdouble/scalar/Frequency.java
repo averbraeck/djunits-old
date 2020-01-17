@@ -6,6 +6,8 @@ import javax.annotation.Generated;
 
 import org.djunits.Throw;
 import org.djunits.unit.AccelerationUnit;
+import org.djunits.unit.AngularAccelerationUnit;
+import org.djunits.unit.AngularVelocityUnit;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.FrequencyUnit;
 import org.djunits.unit.PowerUnit;
@@ -16,13 +18,13 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 /**
  * Easy access methods for the Frequency DoubleScalar, which is relative by definition.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
 public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 {
     /** */
@@ -212,7 +214,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Calculate the division of Frequency and Frequency, which results in a Dimensionless scalar.
-     * @param v Frequency scalar
+     * @param v Frequency; Frequency scalar
      * @return Dimensionless scalar as a division of Frequency and Frequency
      */
     public final Dimensionless divide(final Frequency v)
@@ -222,7 +224,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Calculate the multiplication of Frequency and Duration, which results in a Dimensionless scalar.
-     * @param v Frequency scalar
+     * @param v Duration; Frequency scalar
      * @return Dimensionless scalar as a multiplication of Frequency and Duration
      */
     public final Dimensionless times(final Duration v)
@@ -232,7 +234,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Calculate the multiplication of Frequency and Length, which results in a Speed scalar.
-     * @param v Frequency scalar
+     * @param v Length; Frequency scalar
      * @return Speed scalar as a multiplication of Frequency and Length
      */
     public final Speed times(final Length v)
@@ -242,7 +244,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Calculate the multiplication of Frequency and Speed, which results in a Acceleration scalar.
-     * @param v Frequency scalar
+     * @param v Speed; Frequency scalar
      * @return Acceleration scalar as a multiplication of Frequency and Speed
      */
     public final Acceleration times(final Speed v)
@@ -252,12 +254,32 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Calculate the multiplication of Frequency and Energy, which results in a Power scalar.
-     * @param v Frequency scalar
+     * @param v Energy; Frequency scalar
      * @return Power scalar as a multiplication of Frequency and Energy
      */
     public final Power times(final Energy v)
     {
         return new Power(this.si * v.si, PowerUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of Frequency and Angle, which results in a AngularVelocity scalar.
+     * @param v Angle; Frequency scalar
+     * @return AngularVelocity scalar as a multiplication of Frequency and Angle
+     */
+    public final AngularVelocity times(final Angle v)
+    {
+        return new AngularVelocity(this.si * v.si, AngularVelocityUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of Frequency and AngularVelocity, which results in a AngularAcceleration scalar.
+     * @param v AngularVelocity; Frequency scalar
+     * @return AngularAcceleration scalar as a multiplication of Frequency and AngularVelocity
+     */
+    public final AngularAcceleration times(final AngularVelocity v)
+    {
+        return new AngularAcceleration(this.si * v.si, AngularAccelerationUnit.SI);
     }
 
 }

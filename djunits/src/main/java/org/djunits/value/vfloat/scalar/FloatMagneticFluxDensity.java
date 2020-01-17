@@ -14,13 +14,13 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
 /**
  * Easy access methods for the FloatMagneticFluxDensity FloatScalar, which is relative by definition.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
 public class FloatMagneticFluxDensity extends AbstractFloatScalarRel<MagneticFluxDensityUnit, FloatMagneticFluxDensity>
 {
     /** */
@@ -55,7 +55,7 @@ public class FloatMagneticFluxDensity extends AbstractFloatScalarRel<MagneticFlu
     /**
      * Construct FloatMagneticFluxDensity scalar.
      * @param value float; the float value
-     * @param unit unit for the float value
+     * @param unit MagneticFluxDensityUnit; unit for the float value
      */
     public FloatMagneticFluxDensity(final float value, final MagneticFluxDensityUnit unit)
     {
@@ -64,7 +64,7 @@ public class FloatMagneticFluxDensity extends AbstractFloatScalarRel<MagneticFlu
 
     /**
      * Construct FloatMagneticFluxDensity scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatMagneticFluxDensity; Scalar from which to construct this instance
      */
     public FloatMagneticFluxDensity(final FloatMagneticFluxDensity value)
     {
@@ -74,7 +74,7 @@ public class FloatMagneticFluxDensity extends AbstractFloatScalarRel<MagneticFlu
     /**
      * Construct FloatMagneticFluxDensity scalar using a double value.
      * @param value double; the double value
-     * @param unit unit for the resulting float value
+     * @param unit MagneticFluxDensityUnit; unit for the resulting float value
      */
     public FloatMagneticFluxDensity(final double value, final MagneticFluxDensityUnit unit)
     {
@@ -100,9 +100,9 @@ public class FloatMagneticFluxDensity extends AbstractFloatScalarRel<MagneticFlu
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @param zero FloatMagneticFluxDensity; the low value
+     * @param one FloatMagneticFluxDensity; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatMagneticFluxDensity interpolate(final FloatMagneticFluxDensity zero, final FloatMagneticFluxDensity one,
@@ -114,8 +114,8 @@ public class FloatMagneticFluxDensity extends AbstractFloatScalarRel<MagneticFlu
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatMagneticFluxDensity; the first scalar
+     * @param r2 FloatMagneticFluxDensity; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatMagneticFluxDensity max(final FloatMagneticFluxDensity r1, final FloatMagneticFluxDensity r2)
@@ -125,9 +125,9 @@ public class FloatMagneticFluxDensity extends AbstractFloatScalarRel<MagneticFlu
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatMagneticFluxDensity; the first scalar
+     * @param r2 FloatMagneticFluxDensity; the second scalar
+     * @param rn FloatMagneticFluxDensity...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatMagneticFluxDensity max(final FloatMagneticFluxDensity r1, final FloatMagneticFluxDensity r2,
@@ -146,8 +146,8 @@ public class FloatMagneticFluxDensity extends AbstractFloatScalarRel<MagneticFlu
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatMagneticFluxDensity; the first scalar
+     * @param r2 FloatMagneticFluxDensity; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatMagneticFluxDensity min(final FloatMagneticFluxDensity r1, final FloatMagneticFluxDensity r2)
@@ -157,9 +157,9 @@ public class FloatMagneticFluxDensity extends AbstractFloatScalarRel<MagneticFlu
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatMagneticFluxDensity; the first scalar
+     * @param r2 FloatMagneticFluxDensity; the second scalar
+     * @param rn FloatMagneticFluxDensity...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatMagneticFluxDensity min(final FloatMagneticFluxDensity r1, final FloatMagneticFluxDensity r2,
@@ -208,7 +208,7 @@ public class FloatMagneticFluxDensity extends AbstractFloatScalarRel<MagneticFlu
 
     /**
      * Returns a FloatMagneticFluxDensity based on a value and the textual representation of the unit.
-     * @param value double; the value to use
+     * @param value float; the value to use
      * @param unitString String; the textual representation of the unit
      * @return FloatMagneticFluxDensity; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
@@ -230,7 +230,7 @@ public class FloatMagneticFluxDensity extends AbstractFloatScalarRel<MagneticFlu
     /**
      * Calculate the division of FloatMagneticFluxDensity and FloatMagneticFluxDensity, which results in a FloatDimensionless
      * scalar.
-     * @param v FloatMagneticFluxDensity scalar
+     * @param v FloatMagneticFluxDensity; FloatMagneticFluxDensity scalar
      * @return FloatDimensionless scalar as a division of FloatMagneticFluxDensity and FloatMagneticFluxDensity
      */
     public final FloatDimensionless divide(final FloatMagneticFluxDensity v)
@@ -240,7 +240,7 @@ public class FloatMagneticFluxDensity extends AbstractFloatScalarRel<MagneticFlu
 
     /**
      * Calculate the multiplication of FloatMagneticFluxDensity and FloatArea, which results in a FloatMagneticFlux scalar.
-     * @param v FloatMagneticFluxDensity scalar
+     * @param v FloatArea; FloatMagneticFluxDensity scalar
      * @return FloatMagneticFlux scalar as a multiplication of FloatMagneticFluxDensity and FloatArea
      */
     public final FloatMagneticFlux times(final FloatArea v)

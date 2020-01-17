@@ -17,7 +17,7 @@ import org.djunits.value.vfloat.vector.base.AbstractFloatVectorRel;
 /**
  * AbstractFloatMatrixRel.java.
  * <p>
- * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2019-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
@@ -128,7 +128,7 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
      * Multiply a Relative value with this Relative value for a matrix or matrix. The multiplication is done value by value and
      * store the result in a new Relative value. If both operands are dense, the result is a dense matrix or matrix, otherwise
      * the result is a sparse matrix or matrix.
-     * @param rel VT; the right operand, which can be any matrix type
+     * @param rel MT; the right operand, which can be any matrix type
      * @return FloatSIMatrix; the multiplication of this matrix and the operand
      * @throws ValueRuntimeException in case this matrix or matrix and the operand have a different size
      * @throws UnitException on unit error
@@ -138,8 +138,8 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
      * @param <MT> the matrix type of the multiplier
      */
     public final <UT extends Unit<UT>, ST extends AbstractFloatScalar<UT, ST>, VT extends AbstractFloatVector<UT, ST, VT>,
-    MT extends AbstractFloatMatrix<UT, ST, VT, MT> & Relative<UT, MT>>  FloatSIMatrix times(final MT rel)
-            throws ValueRuntimeException, UnitException
+            MT extends AbstractFloatMatrix<UT, ST, VT, MT> & Relative<UT, MT>> FloatSIMatrix times(final MT rel)
+                    throws ValueRuntimeException, UnitException
     {
         return new FloatSIMatrix(this.getData().times(rel.getData()), SIUnit.of(
                 getDisplayUnit().getQuantity().getSiDimensions().plus(rel.getDisplayUnit().getQuantity().getSiDimensions())));
@@ -172,7 +172,7 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
      * Divide this Relative matrix by another Relative matrix. The operation is done value by value and store the result is
      * stored in a new Relative matrix. If both operands are dense, the result is a dense matrix, otherwise the result is a
      * sparse matrix. TODO discuss dense or sparseness of result.
-     * @param rel VT; the right operand, which can be any matrix type
+     * @param rel MT; the right operand, which can be any matrix type
      * @return FloatSIMatrix; the division of this matrix and the operand
      * @throws ValueRuntimeException in case this matrix or matrix and the operand have a different size
      * @throws UnitException on unit error
@@ -182,8 +182,8 @@ public abstract class AbstractFloatMatrixRel<U extends Unit<U>, S extends Abstra
      * @param <MT> the matrix type of the multiplier
      */
     public final <UT extends Unit<UT>, ST extends AbstractFloatScalar<UT, ST>, VT extends AbstractFloatVector<UT, ST, VT>,
-    MT extends AbstractFloatMatrix<UT, ST, VT, MT> & Relative<UT, MT>>  FloatSIMatrix divide(final MT rel)
-            throws ValueRuntimeException, UnitException
+            MT extends AbstractFloatMatrix<UT, ST, VT, MT> & Relative<UT, MT>> FloatSIMatrix divide(final MT rel)
+                    throws ValueRuntimeException, UnitException
     {
         return new FloatSIMatrix(this.getData().divide(rel.getData()), SIUnit.of(
                 getDisplayUnit().getQuantity().getSiDimensions().minus(rel.getDisplayUnit().getQuantity().getSiDimensions())));

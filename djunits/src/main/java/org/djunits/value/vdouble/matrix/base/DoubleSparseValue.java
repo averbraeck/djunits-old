@@ -11,7 +11,7 @@ import org.djunits.value.vdouble.scalar.base.DoubleScalarInterface;
 /**
  * Data point for a matrix that can be used for constructing sparse matrices.
  * <p>
- * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2019-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
@@ -34,9 +34,9 @@ public class DoubleSparseValue<U extends Unit<U>, S extends DoubleScalarInterfac
 
     /**
      * Create a data point for a sparse matrix.
-     * @param row the row of the sparse data point in the matrix
-     * @param column the column of the sparse data point in the matrix
-     * @param value the value in the given unit of the data point in the matrix
+     * @param row int; the row of the sparse data point in the matrix
+     * @param column int; the column of the sparse data point in the matrix
+     * @param value S; the value in the given unit of the data point in the matrix
      */
     public DoubleSparseValue(final int row, final int column, final S value)
     {
@@ -58,10 +58,10 @@ public class DoubleSparseValue<U extends Unit<U>, S extends DoubleScalarInterfac
 
     /**
      * Create a data point for a sparse matrix.
-     * @param row the row of the sparse data point in the matrix
-     * @param column the column of the sparse data point in the matrix
-     * @param valueInUnit the value in the given unit of the data point in the matrix
-     * @param unit the unit of the value
+     * @param row int; the row of the sparse data point in the matrix
+     * @param column int; the column of the sparse data point in the matrix
+     * @param valueInUnit double; the value in the given unit of the data point in the matrix
+     * @param unit U; the unit of the value
      */
     public DoubleSparseValue(final int row, final int column, final double valueInUnit, final U unit)
     {
@@ -70,9 +70,9 @@ public class DoubleSparseValue<U extends Unit<U>, S extends DoubleScalarInterfac
 
     /**
      * Create a data point for a sparse matrix.
-     * @param row the row of the sparse data point in the matrix
-     * @param column the column of the sparse data point in the matrix
-     * @param valueSI the SI value of the data point in the matrix
+     * @param row int; the row of the sparse data point in the matrix
+     * @param column int; the column of the sparse data point in the matrix
+     * @param valueSI double; the SI value of the data point in the matrix
      */
     public DoubleSparseValue(final int row, final int column, final double valueSI)
     {

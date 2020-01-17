@@ -22,7 +22,7 @@ import org.djunits.value.vfloat.vector.data.FloatVectorData;
 /**
  * The most basic abstract class for the FloatVector.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
@@ -331,7 +331,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
 
     /**
      * Centralized size equality check.
-     * @param other AbstractFloatVector&lt;U, ?&gt;; other FloatVector
+     * @param other FloatVectorInterface&lt;?, ?, ?&gt;; other FloatVector
      * @throws NullPointerException when other vector is null
      * @throws ValueRuntimeException when vectors have unequal size
      */
@@ -355,7 +355,7 @@ public abstract class AbstractFloatVector<U extends Unit<U>, S extends AbstractF
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings({"checkstyle:designforextension", "checkstyle:needbraces"})
+    @SuppressWarnings({ "checkstyle:designforextension", "checkstyle:needbraces" })
     public boolean equals(final Object obj)
     {
         if (this == obj)

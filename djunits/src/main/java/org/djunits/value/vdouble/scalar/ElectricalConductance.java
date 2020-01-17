@@ -15,13 +15,13 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 /**
  * Easy access methods for the ElectricalConductance DoubleScalar, which is relative by definition.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
 public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalConductanceUnit, ElectricalConductance>
 {
     /** */
@@ -220,7 +220,7 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
 
     /**
      * Calculate the division of ElectricalConductance and ElectricalConductance, which results in a Dimensionless scalar.
-     * @param v ElectricalConductance scalar
+     * @param v ElectricalConductance; ElectricalConductance scalar
      * @return Dimensionless scalar as a division of ElectricalConductance and ElectricalConductance
      */
     public final Dimensionless divide(final ElectricalConductance v)
@@ -231,7 +231,7 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
     /**
      * Calculate the multiplication of ElectricalConductance and ElectricalPotential, which results in a ElectricalCurrent
      * scalar.
-     * @param v ElectricalConductance scalar
+     * @param v ElectricalPotential; ElectricalConductance scalar
      * @return ElectricalCurrent scalar as a multiplication of ElectricalConductance and ElectricalPotential
      */
     public final ElectricalCurrent times(final ElectricalPotential v)
@@ -241,7 +241,7 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
 
     /**
      * Calculate the multiplication of ElectricalConductance and Duration, which results in a ElectricalCapacitance scalar.
-     * @param v ElectricalConductance scalar
+     * @param v Duration; ElectricalConductance scalar
      * @return ElectricalCapacitance scalar as a multiplication of ElectricalConductance and Duration
      */
     public final ElectricalCapacitance times(final Duration v)

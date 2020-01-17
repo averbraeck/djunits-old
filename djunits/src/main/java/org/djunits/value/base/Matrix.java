@@ -14,7 +14,7 @@ import org.djunits.value.ValueRuntimeException;
  * class LengthMatrix implements Matrix&lt;LengthUnit, Length, LengthMatrix&gt;
  * </pre>
  * 
- * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2019-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>. <br>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
  * @param <U> the unit
@@ -111,7 +111,7 @@ public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
      *   class AreaMatrix implements Matrix.Rel&lt;AreaUnit, Area, AreaMatrix&gt;
      * </pre>
      * 
-     * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved.
+     * Copyright (c) 2019-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved.
      * <br>
      * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>. <br>
      * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
@@ -127,7 +127,7 @@ public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
          * Add a relative matrix to this relative mutable matrix. A new matrix is returned. The display unit of the result is
          * the display unit of this relative matrix. The addition is done value by value and the result is stored in a new
          * matrix. If both operands are sparse, the result is a sparse matrix, otherwise the result is a dense matrix.
-         * @param increment RV; the relative matrix (mutable or immutable, sparse or dense) to add
+         * @param increment RM; the relative matrix (mutable or immutable, sparse or dense) to add
          * @return RMV; the sum of this matrix and the operand as a new relative, mutable matrix
          * @throws ValueRuntimeException in case this matrix and the operand have a different size
          */
@@ -137,7 +137,7 @@ public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
          * Subtract a relative matrix from this relative mutable matrix. The display unit of the result is the display unit of
          * this relative matrix. The subtraction is done value by value and the result is stored in a new matrix. If both
          * operands are sparse, the result is a sparse matrix, otherwise the result is a dense matrix.
-         * @param decrement RV; the value to subtract
+         * @param decrement RM; the value to subtract
          * @return RMV; the difference of this matrix and the operand as a new relative, mutable matrix
          * @throws ValueRuntimeException in case this matrix and the operand have a different size
          */
@@ -169,7 +169,7 @@ public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
      *     PositionUnit, Position, PositionMatrix, LengthUnit, Length, LengthMatrix&gt;
      * </pre>
      * 
-     * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved.
+     * Copyright (c) 2019-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved.
      * <br>
      * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>. <br>
      * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
@@ -191,7 +191,7 @@ public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
          * Add an absolute matrix to this relative matrix. A new matrix is returned. When the matrix itself needs to be changed,
          * use the increaseBy(V) method instead. The addition is done value by value and the result is stored in a new matrix.
          * If both operands are sparse, the result is a sparse matrix, otherwise the result is a dense matrix.
-         * @param increment AV; the absolute matrix (mutable or immutable, sparse or dense) to add to this relative matrix
+         * @param increment AM; the absolute matrix (mutable or immutable, sparse or dense) to add to this relative matrix
          * @return AMV; the sum of this matrix and the operand as a new absolute, mutable matrix
          * @throws ValueRuntimeException in case this matrix and the operand have a different size
          */
@@ -207,7 +207,7 @@ public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
      *     PositionUnit, Position, PositionMatrix, LengthUnit, Length, LengthMatrix&gt;
      * </pre>
      * 
-     * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved.
+     * Copyright (c) 2019-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved.
      * <br>
      * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>. <br>
      * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
@@ -229,7 +229,7 @@ public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
          * Add a relative matrix to this absolute matrix. A new absolute matrix is returned. The display unit of the new matrix
          * is the display unit of this absolute matrix. The addition is done value by value and the result is stored in a new
          * matrix. If both operands are sparse, the result is a sparse matrix, otherwise the result is a dense matrix.
-         * @param increment RV; the relative matrix (mutable or immutable, sparse or dense) to add to this absolute matrix
+         * @param increment RM; the relative matrix (mutable or immutable, sparse or dense) to add to this absolute matrix
          * @return AIV; the sum of this value and the operand as a new absolute, immutable matrix
          * @throws ValueRuntimeException in case this matrix and the operand have a different size
          */
@@ -239,7 +239,7 @@ public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
          * Subtract a relative matrix from this absolute matrix. A new absolute matrix is returned. The display unit of the new
          * matrix is the display unit of this absolute matrix. The subtraction is done value by value and the result is stored
          * in a new matrix. If both operands are sparse, the result is a sparse matrix, otherwise the result is a dense matrix.
-         * @param decrement RV; the relative matrix (mutable or immutable, sparse or dense) to subtract from this absolute
+         * @param decrement RM; the relative matrix (mutable or immutable, sparse or dense) to subtract from this absolute
          *            matrix
          * @return AIV; the difference of this value and the operand as a new absolute, immutable matrix
          * @throws ValueRuntimeException in case this matrix and the operand have a different size
@@ -251,7 +251,7 @@ public interface Matrix<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
          * matrix is the relative counterpart of the display unit of this absolute matrix. The subtraction is done value by
          * value and the result is stored in a new matrix. If both operands are sparse, the result is a sparse matrix, otherwise
          * the result is a dense matrix.
-         * @param decrement AV; the absolute matrix (mutable or immutable, sparse or dense) to subtract from this absolute
+         * @param decrement AM; the absolute matrix (mutable or immutable, sparse or dense) to subtract from this absolute
          *            matrix
          * @return RIV; the difference of this value and the operand as a new relative, immutable matrix
          * @throws ValueRuntimeException in case this matrix and the operand have a different size

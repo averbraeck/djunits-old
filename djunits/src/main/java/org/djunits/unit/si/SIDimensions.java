@@ -10,7 +10,7 @@ import org.djunits.unit.util.UnitException;
  * SIDimensions stores the dimensionality of a unit using the SI standards. Angle (rad) and solid angle (sr) have been added to
  * be able to specify often used units regarding rotation.
  * <p>
- * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2019-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
@@ -24,13 +24,13 @@ public class SIDimensions implements Serializable
     public static final int NUMBER_DIMENSIONS = 9;
 
     /** The default denominator which consists of all "1"s. */
-    private static final byte[] UNIT_DENOMINATOR = new byte[] {1, 1, 1, 1, 1, 1, 1, 1, 1};
+    private static final byte[] UNIT_DENOMINATOR = new byte[] { 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 
     /** The abbreviations of the SI units we use in SIDimensions. */
-    public static final String[] SI_ABBREVIATIONS = new String[] {"rad", "sr", "kg", "m", "s", "A", "K", "mol", "cd"};
+    public static final String[] SI_ABBREVIATIONS = new String[] { "rad", "sr", "kg", "m", "s", "A", "K", "mol", "cd" };
 
     /** For parsing, the mol has to be parsed before the m, otherwise the "m" from "mol" is eaten; same for "s" and "sr". */
-    private static final int[] PARSE_ORDER = new int[] {0, 1, 2, 7, 3, 4, 5, 6, 8};
+    private static final int[] PARSE_ORDER = new int[] { 0, 1, 2, 7, 3, 4, 5, 6, 8 };
 
     /**
      * The (currently) 9 dimensions of the SI unit we distinguish: 0: angle (rad), 1: solid angle (sr), 2: mass (kg), 3: length

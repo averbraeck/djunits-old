@@ -7,8 +7,6 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
 import org.djunits.unit.Unit;
-import org.djunits.unit.quantity.Quantities;
-import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.scale.IdentityScale;
 import org.djunits.unit.scale.LinearScale;
 import org.djunits.unit.si.SIDimensions;
@@ -21,7 +19,7 @@ import org.junit.Test;
 /**
  * QuantityTest.java.
  * <p>
- * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2019-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
@@ -43,7 +41,7 @@ public class QuantityTest
         assertNotEquals(QUnit.BASE, new Object());
         Quantity<QUnit> quantity1 = new Quantity<>("kgm4/s5A3", SIDimensions.of("kgm4/s5A3"));
         Quantity<QUnit> quantity2 = new Quantity<>("Test2", new SIDimensions(0, 0, 1, 4, -5, -3, 0, 0, 0));
-        Quantity<QUnit> quantity3 = new Quantity<>("Test3", new byte[] {0, 0, 1, 4, -5, -3, 0, 0, 0});
+        Quantity<QUnit> quantity3 = new Quantity<>("Test3", new byte[] { 0, 0, 1, 4, -5, -3, 0, 0, 0 });
         assertEquals(quantity1, quantity2);
         assertEquals(quantity1, quantity3);
         assertNotEquals(quantity1, QUnit.BASE); // QUnit has a standard base; quantity1 not (yet)

@@ -19,7 +19,7 @@ import org.djunits.value.vdouble.scalar.base.DoubleScalarInterface;
  * Stores sparse data for a DoubleMatrix and carries out basic operations. The index in the sparse matrix data is calculated as
  * <code>r * columns + c</code>, where r is the row number, cols is the total number of columns, and c is the column number.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
@@ -125,7 +125,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
      * @param data double[][]; the input data
      * @param matrixSI double[]; the matrix data to write
      * @param indices long[]; the indices to write
-     * @param scale Scale, the scale that will convert the data to SI
+     * @param scale Scale; Scale, the scale that will convert the data to SI
      * @throws ValueRuntimeException in case matrix is ragged
      */
     @SuppressWarnings("checkstyle:finalparameters")
@@ -496,8 +496,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
     {
         // determine number of non-null cells
         AtomicInteger atomicLength = new AtomicInteger(0);
-        IntStream.range(0, valuesSI.length).parallel().forEach(r -> IntStream.range(0, valuesSI[0].length).forEach(c ->
-        {
+        IntStream.range(0, valuesSI.length).parallel().forEach(r -> IntStream.range(0, valuesSI[0].length).forEach(c -> {
             if (valuesSI[r][c] != 0.0)
             {
                 atomicLength.incrementAndGet();
@@ -562,7 +561,7 @@ public class DoubleMatrixDataSparse extends DoubleMatrixData
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings({"checkstyle:needbraces", "checkstyle:designforextension"})
+    @SuppressWarnings({ "checkstyle:needbraces", "checkstyle:designforextension" })
     public boolean equals(final Object obj)
     {
         if (this == obj)

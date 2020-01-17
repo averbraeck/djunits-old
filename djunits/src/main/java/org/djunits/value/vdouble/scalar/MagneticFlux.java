@@ -19,13 +19,13 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 /**
  * Easy access methods for the MagneticFlux DoubleScalar, which is relative by definition.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
 public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, MagneticFlux>
 {
     /** */
@@ -215,7 +215,7 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
 
     /**
      * Calculate the division of MagneticFlux and MagneticFlux, which results in a Dimensionless scalar.
-     * @param v MagneticFlux scalar
+     * @param v MagneticFlux; MagneticFlux scalar
      * @return Dimensionless scalar as a division of MagneticFlux and MagneticFlux
      */
     public final Dimensionless divide(final MagneticFlux v)
@@ -225,7 +225,7 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
 
     /**
      * Calculate the division of MagneticFlux and ElectricalPotential, which results in a Duration scalar.
-     * @param v MagneticFlux scalar
+     * @param v ElectricalPotential; MagneticFlux scalar
      * @return Duration scalar as a division of MagneticFlux and ElectricalPotential
      */
     public final Duration divide(final ElectricalPotential v)
@@ -235,7 +235,7 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
 
     /**
      * Calculate the division of MagneticFlux and Duration, which results in a ElectricalPotential scalar.
-     * @param v MagneticFlux scalar
+     * @param v Duration; MagneticFlux scalar
      * @return ElectricalPotential scalar as a division of MagneticFlux and Duration
      */
     public final ElectricalPotential divide(final Duration v)
@@ -245,7 +245,7 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
 
     /**
      * Calculate the division of MagneticFlux and Area, which results in a MagneticFluxDensity scalar.
-     * @param v MagneticFlux scalar
+     * @param v Area; MagneticFlux scalar
      * @return MagneticFluxDensity scalar as a division of MagneticFlux and Area
      */
     public final MagneticFluxDensity divide(final Area v)
@@ -255,7 +255,7 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
 
     /**
      * Calculate the division of MagneticFlux and MagneticFluxDensity, which results in a Area scalar.
-     * @param v MagneticFlux scalar
+     * @param v MagneticFluxDensity; MagneticFlux scalar
      * @return Area scalar as a division of MagneticFlux and MagneticFluxDensity
      */
     public final Area divide(final MagneticFluxDensity v)
@@ -265,7 +265,7 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
 
     /**
      * Calculate the division of MagneticFlux and ElectricalCurrent, which results in a ElectricalInductance scalar.
-     * @param v MagneticFlux scalar
+     * @param v ElectricalCurrent; MagneticFlux scalar
      * @return ElectricalInductance scalar as a division of MagneticFlux and ElectricalCurrent
      */
     public final ElectricalInductance divide(final ElectricalCurrent v)
@@ -275,7 +275,7 @@ public class MagneticFlux extends AbstractDoubleScalarRel<MagneticFluxUnit, Magn
 
     /**
      * Calculate the division of MagneticFlux and ElectricalInductance, which results in a ElectricalCurrent scalar.
-     * @param v MagneticFlux scalar
+     * @param v ElectricalInductance; MagneticFlux scalar
      * @return ElectricalCurrent scalar as a division of MagneticFlux and ElectricalInductance
      */
     public final ElectricalCurrent divide(final ElectricalInductance v)

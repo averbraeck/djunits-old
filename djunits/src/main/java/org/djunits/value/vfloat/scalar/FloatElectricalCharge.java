@@ -17,13 +17,13 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
 /**
  * Easy access methods for the FloatElectricalCharge FloatScalar, which is relative by definition.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
 public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChargeUnit, FloatElectricalCharge>
 {
     /** */
@@ -58,7 +58,7 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
     /**
      * Construct FloatElectricalCharge scalar.
      * @param value float; the float value
-     * @param unit unit for the float value
+     * @param unit ElectricalChargeUnit; unit for the float value
      */
     public FloatElectricalCharge(final float value, final ElectricalChargeUnit unit)
     {
@@ -67,7 +67,7 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
 
     /**
      * Construct FloatElectricalCharge scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatElectricalCharge; Scalar from which to construct this instance
      */
     public FloatElectricalCharge(final FloatElectricalCharge value)
     {
@@ -77,7 +77,7 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
     /**
      * Construct FloatElectricalCharge scalar using a double value.
      * @param value double; the double value
-     * @param unit unit for the resulting float value
+     * @param unit ElectricalChargeUnit; unit for the resulting float value
      */
     public FloatElectricalCharge(final double value, final ElectricalChargeUnit unit)
     {
@@ -103,9 +103,9 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @param zero FloatElectricalCharge; the low value
+     * @param one FloatElectricalCharge; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatElectricalCharge interpolate(final FloatElectricalCharge zero, final FloatElectricalCharge one,
@@ -117,8 +117,8 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatElectricalCharge; the first scalar
+     * @param r2 FloatElectricalCharge; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatElectricalCharge max(final FloatElectricalCharge r1, final FloatElectricalCharge r2)
@@ -128,9 +128,9 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatElectricalCharge; the first scalar
+     * @param r2 FloatElectricalCharge; the second scalar
+     * @param rn FloatElectricalCharge...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatElectricalCharge max(final FloatElectricalCharge r1, final FloatElectricalCharge r2,
@@ -149,8 +149,8 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatElectricalCharge; the first scalar
+     * @param r2 FloatElectricalCharge; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatElectricalCharge min(final FloatElectricalCharge r1, final FloatElectricalCharge r2)
@@ -160,9 +160,9 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatElectricalCharge; the first scalar
+     * @param r2 FloatElectricalCharge; the second scalar
+     * @param rn FloatElectricalCharge...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatElectricalCharge min(final FloatElectricalCharge r1, final FloatElectricalCharge r2,
@@ -211,7 +211,7 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
 
     /**
      * Returns a FloatElectricalCharge based on a value and the textual representation of the unit.
-     * @param value double; the value to use
+     * @param value float; the value to use
      * @param unitString String; the textual representation of the unit
      * @return FloatElectricalCharge; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
@@ -232,7 +232,7 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
 
     /**
      * Calculate the division of FloatElectricalCharge and FloatElectricalCharge, which results in a FloatDimensionless scalar.
-     * @param v FloatElectricalCharge scalar
+     * @param v FloatElectricalCharge; FloatElectricalCharge scalar
      * @return FloatDimensionless scalar as a division of FloatElectricalCharge and FloatElectricalCharge
      */
     public final FloatDimensionless divide(final FloatElectricalCharge v)
@@ -242,7 +242,7 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
 
     /**
      * Calculate the division of FloatElectricalCharge and FloatDuration, which results in a FloatElectricalCurrent scalar.
-     * @param v FloatElectricalCharge scalar
+     * @param v FloatDuration; FloatElectricalCharge scalar
      * @return FloatElectricalCurrent scalar as a division of FloatElectricalCharge and FloatDuration
      */
     public final FloatElectricalCurrent divide(final FloatDuration v)
@@ -252,7 +252,7 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
 
     /**
      * Calculate the division of FloatElectricalCharge and FloatElectricalCurrent, which results in a FloatDuration scalar.
-     * @param v FloatElectricalCharge scalar
+     * @param v FloatElectricalCurrent; FloatElectricalCharge scalar
      * @return FloatDuration scalar as a division of FloatElectricalCharge and FloatElectricalCurrent
      */
     public final FloatDuration divide(final FloatElectricalCurrent v)
@@ -263,7 +263,7 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
     /**
      * Calculate the division of FloatElectricalCharge and FloatElectricalPotential, which results in a
      * FloatElectricalCapacitance scalar.
-     * @param v FloatElectricalCharge scalar
+     * @param v FloatElectricalPotential; FloatElectricalCharge scalar
      * @return FloatElectricalCapacitance scalar as a division of FloatElectricalCharge and FloatElectricalPotential
      */
     public final FloatElectricalCapacitance divide(final FloatElectricalPotential v)
@@ -274,7 +274,7 @@ public class FloatElectricalCharge extends AbstractFloatScalarRel<ElectricalChar
     /**
      * Calculate the division of FloatElectricalCharge and FloatElectricalCapacitance, which results in a
      * FloatElectricalPotential scalar.
-     * @param v FloatElectricalCharge scalar
+     * @param v FloatElectricalCapacitance; FloatElectricalCharge scalar
      * @return FloatElectricalPotential scalar as a division of FloatElectricalCharge and FloatElectricalCapacitance
      */
     public final FloatElectricalPotential divide(final FloatElectricalCapacitance v)

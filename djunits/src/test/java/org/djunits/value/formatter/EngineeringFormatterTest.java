@@ -12,7 +12,7 @@ import org.junit.Test;
 /**
  * Test the Engineering formatter
  * <p>
- * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * @version $Revision$, $LastChangedDate$, by $Author$,
@@ -72,9 +72,9 @@ public class EngineeringFormatterTest
         values.add(Double.MIN_VALUE);
         values.add(Double.MAX_VALUE);
         values.add(Double.POSITIVE_INFINITY);
-        int[] powers = {-100, -99, 98, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 99,
-                100, 101, 102};
-        double[] bases = {1.0 / 3, 2.0 / 3, 1};
+        int[] powers = { -100, -99, 98, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 99,
+                100, 101, 102 };
+        double[] bases = { 1.0 / 3, 2.0 / 3, 1 };
         for (int power : powers)
         {
             for (double base : bases)
@@ -122,9 +122,9 @@ public class EngineeringFormatterTest
         {
             double d = 5.0 / 9 * Math.pow(10, exp);
             System.out.print(String.format("%30.30s: ", d));
-            for (int sign : new int[] {1, -1})
+            for (int sign : new int[] { 1, -1 })
             {
-                for (int digits : new int[] {10, 12, 14, 24})
+                for (int digits : new int[] { 10, 12, 14, 24 })
                 {
                     System.out.print("   |" + convertAndVerify(d * sign, digits) + "|");
                 }

@@ -16,7 +16,7 @@ import org.djunits.unit.util.UnitRuntimeException;
  * Quantity contains a map of all registered units belonging to this base. It also contains the SI 'fingerprint' of the unit.
  * The fingerprint is registered in the UnitTypes singleton where are unit types are registered.
  * <p>
- * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2019-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
@@ -103,7 +103,7 @@ public class Quantity<U extends Unit<U>> implements Serializable
      * factor of 1000.
      * @param unit U; the unit to register in the map.
      * @param siPrefixes SIPrefixes; indicates whether and which SI prefixes should be generated.
-     * @param siPrefixPower the power factor of the SI prefixes, e.g. 2.0 for square meters and 3.0 for cubic meters.
+     * @param siPrefixPower double; the power factor of the SI prefixes, e.g. 2.0 for square meters and 3.0 for cubic meters.
      */
     public void registerUnit(final U unit, final SIPrefixes siPrefixes, final double siPrefixPower)
     {
@@ -228,7 +228,7 @@ public class Quantity<U extends Unit<U>> implements Serializable
     {
         return this.name;
     }
-    
+
     /**
      * @return the siDimensions
      */

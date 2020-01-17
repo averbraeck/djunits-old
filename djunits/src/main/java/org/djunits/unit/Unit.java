@@ -23,7 +23,7 @@ import org.djunits.unit.util.UnitRuntimeException;
  * stored with conversion factor 1.0, whereas kilometer is stored with a conversion factor 1000.0. This means that if we want to
  * express a length meter in kilometers, we have to <i>divide</i> by the conversion factor.
  * <p>
- * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2019-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
@@ -66,7 +66,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
      * unit of a unit base is null.
      */
     private Quantity<U> quantity;
-    
+
     // TODO create a static that loads all unit classes in the registry
 
     /**
@@ -157,7 +157,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
     /**
      * Create a scaled version of this unit with the same unit system but another SI prefix and scale.
      * @param siPrefix SIPrefix; the prefix for which to scale the unit
-     * @param siPrefixPower the power factor of the SI prefixes, e.g. 2.0 for square meters and 3.0 for cubic meters.
+     * @param siPrefixPower double; the power factor of the SI prefixes, e.g. 2.0 for square meters and 3.0 for cubic meters.
      * @param automaticallyGenerated boolean; indicate whether the unit has been automatically generated
      * @return U; a scaled instance of this unit
      * @throws UnitRuntimeException when cloning fails
@@ -229,7 +229,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
      * Create a scaled version of this unit with the same unit system but another SI prefix and scale. This method is used for a
      * unit that is explicitly scaled with an SI prefix.
      * @param siPrefix SIPrefix; the prefix for which to scale the unit
-     * @param siPrefixPower the power factor of the SI prefixes, e.g. 2.0 for square meters and 3.0 for cubic meters.
+     * @param siPrefixPower double; the power factor of the SI prefixes, e.g. 2.0 for square meters and 3.0 for cubic meters.
      * @return a scaled instance of this unit
      * @throws UnitRuntimeException when cloning fails
      */
@@ -242,7 +242,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
      * Create a scaled version of this unit with the same unit system but another SI prefix and scale, where the "k" and "kilo"
      * abbreviations at the start will be replaced by the new information from the SIPrefix.
      * @param siPrefix SIPrefix; the prefix for which to scale the unit
-     * @param siPrefixPower the power factor of the SI prefixes, e.g. 2.0 for square meters and 3.0 for cubic meters.
+     * @param siPrefixPower double; the power factor of the SI prefixes, e.g. 2.0 for square meters and 3.0 for cubic meters.
      * @param automaticallyGenerated boolean; indicate whether the unit has been automatically generated
      * @return U; a scaled instance of this unit
      * @throws UnitRuntimeException when cloning fails
@@ -318,7 +318,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
      * Create a scaled version of this unit with the same unit system but another SI prefix and scale. The "per" units scale in
      * the opposite direction as the normally scaled units. It will yield units like "/ms", "/mus", "/ns", etc.
      * @param siPrefix SIPrefix; the prefix for which to scale the unit
-     * @param siPrefixPower the power factor of the SI prefixes, e.g. 2.0 for square meters and 3.0 for cubic meters.
+     * @param siPrefixPower double; the power factor of the SI prefixes, e.g. 2.0 for square meters and 3.0 for cubic meters.
      * @param automaticallyGenerated boolean; indicate whether the unit has been automatically generated
      * @return U; a scaled instance of this unit
      * @throws UnitRuntimeException when cloning fails
@@ -729,7 +729,7 @@ public class Unit<U extends Unit<U>> implements Serializable, Cloneable
     /**
      * The class that contains the information to build a unit.
      * <p>
-     * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved.
+     * Copyright (c) 2019-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved.
      * <br>
      * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
      * <p>

@@ -6,22 +6,24 @@ import javax.annotation.Generated;
 
 import org.djunits.Throw;
 import org.djunits.unit.AngleUnit;
+import org.djunits.unit.AngularVelocityUnit;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.DirectionUnit;
+import org.djunits.unit.DurationUnit;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
 
 /**
  * Easy access methods for the Relative Angle DoubleScalar.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
 public class Angle extends AbstractDoubleScalarRelWithAbs<DirectionUnit, Direction, AngleUnit, Angle>
 {
     /** */
@@ -217,12 +219,42 @@ public class Angle extends AbstractDoubleScalarRelWithAbs<DirectionUnit, Directi
 
     /**
      * Calculate the division of Angle and Angle, which results in a Dimensionless scalar.
-     * @param v Angle scalar
+     * @param v Angle; Angle scalar
      * @return Dimensionless scalar as a division of Angle and Angle
      */
     public final Dimensionless divide(final Angle v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of Angle and Frequency, which results in a AngularVelocity scalar.
+     * @param v Frequency; Angle scalar
+     * @return AngularVelocity scalar as a multiplication of Angle and Frequency
+     */
+    public final AngularVelocity times(final Frequency v)
+    {
+        return new AngularVelocity(this.si * v.si, AngularVelocityUnit.SI);
+    }
+
+    /**
+     * Calculate the division of Angle and Duration, which results in a AngularVelocity scalar.
+     * @param v Duration; Angle scalar
+     * @return AngularVelocity scalar as a division of Angle and Duration
+     */
+    public final AngularVelocity divide(final Duration v)
+    {
+        return new AngularVelocity(this.si / v.si, AngularVelocityUnit.SI);
+    }
+
+    /**
+     * Calculate the division of Angle and AngularVelocity, which results in a Duration scalar.
+     * @param v AngularVelocity; Angle scalar
+     * @return Duration scalar as a division of Angle and AngularVelocity
+     */
+    public final Duration divide(final AngularVelocity v)
+    {
+        return new Duration(this.si / v.si, DurationUnit.SI);
     }
 
 }

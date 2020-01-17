@@ -9,7 +9,7 @@ import org.djunits.value.vfloat.scalar.base.FloatScalarInterface;
 /**
  * DOUBLEVECTOR for creating different test vectors.
  * <p>
- * Copyright (c) 2019-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2019-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck" target="_blank">Alexander Verbraeck</a>
@@ -68,7 +68,7 @@ public final class FLOATVECTOR
         try
         {
             S[] array = (S[]) Array.newInstance(scalarClass, size);
-            Method instantiateSI = scalarClass.getMethod("instantiateSI", new Class<?>[] {float.class});
+            Method instantiateSI = scalarClass.getMethod("instantiateSI", new Class<?>[] { float.class });
             for (int i = 0; i < size; i++)
             {
                 array[i] = (S) instantiateSI.invoke(null, i + 1.0f);
@@ -96,7 +96,7 @@ public final class FLOATVECTOR
         try
         {
             S[] array = (S[]) Array.newInstance(scalarClass, size);
-            Method instantiateSI = scalarClass.getMethod("instantiateSI", new Class<?>[] {float.class});
+            Method instantiateSI = scalarClass.getMethod("instantiateSI", new Class<?>[] { float.class });
             float v = 1.0f;
             for (int i = 0; i < size; i++)
             {

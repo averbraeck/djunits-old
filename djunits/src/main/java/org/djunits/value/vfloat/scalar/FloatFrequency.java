@@ -6,6 +6,8 @@ import javax.annotation.Generated;
 
 import org.djunits.Throw;
 import org.djunits.unit.AccelerationUnit;
+import org.djunits.unit.AngularAccelerationUnit;
+import org.djunits.unit.AngularVelocityUnit;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.FrequencyUnit;
 import org.djunits.unit.PowerUnit;
@@ -16,13 +18,13 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
 /**
  * Easy access methods for the FloatFrequency FloatScalar, which is relative by definition.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
 public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatFrequency>
 {
     /** */
@@ -53,7 +55,7 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
     /**
      * Construct FloatFrequency scalar.
      * @param value float; the float value
-     * @param unit unit for the float value
+     * @param unit FrequencyUnit; unit for the float value
      */
     public FloatFrequency(final float value, final FrequencyUnit unit)
     {
@@ -62,7 +64,7 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Construct FloatFrequency scalar.
-     * @param value Scalar from which to construct this instance
+     * @param value FloatFrequency; Scalar from which to construct this instance
      */
     public FloatFrequency(final FloatFrequency value)
     {
@@ -72,7 +74,7 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
     /**
      * Construct FloatFrequency scalar using a double value.
      * @param value double; the double value
-     * @param unit unit for the resulting float value
+     * @param unit FrequencyUnit; unit for the resulting float value
      */
     public FloatFrequency(final double value, final FrequencyUnit unit)
     {
@@ -98,9 +100,9 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio double; the ratio between 0 and 1, inclusive
+     * @param zero FloatFrequency; the low value
+     * @param one FloatFrequency; the high value
+     * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatFrequency interpolate(final FloatFrequency zero, final FloatFrequency one, final float ratio)
@@ -111,8 +113,8 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatFrequency; the first scalar
+     * @param r2 FloatFrequency; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatFrequency max(final FloatFrequency r1, final FloatFrequency r2)
@@ -122,9 +124,9 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatFrequency; the first scalar
+     * @param r2 FloatFrequency; the second scalar
+     * @param rn FloatFrequency...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatFrequency max(final FloatFrequency r1, final FloatFrequency r2, final FloatFrequency... rn)
@@ -142,8 +144,8 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+     * @param r1 FloatFrequency; the first scalar
+     * @param r2 FloatFrequency; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatFrequency min(final FloatFrequency r1, final FloatFrequency r2)
@@ -153,9 +155,9 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+     * @param r1 FloatFrequency; the first scalar
+     * @param r2 FloatFrequency; the second scalar
+     * @param rn FloatFrequency...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatFrequency min(final FloatFrequency r1, final FloatFrequency r2, final FloatFrequency... rn)
@@ -202,7 +204,7 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Returns a FloatFrequency based on a value and the textual representation of the unit.
-     * @param value double; the value to use
+     * @param value float; the value to use
      * @param unitString String; the textual representation of the unit
      * @return FloatFrequency; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
@@ -222,7 +224,7 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Calculate the division of FloatFrequency and FloatFrequency, which results in a FloatDimensionless scalar.
-     * @param v FloatFrequency scalar
+     * @param v FloatFrequency; FloatFrequency scalar
      * @return FloatDimensionless scalar as a division of FloatFrequency and FloatFrequency
      */
     public final FloatDimensionless divide(final FloatFrequency v)
@@ -232,7 +234,7 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Calculate the multiplication of FloatFrequency and FloatDuration, which results in a FloatDimensionless scalar.
-     * @param v FloatFrequency scalar
+     * @param v FloatDuration; FloatFrequency scalar
      * @return FloatDimensionless scalar as a multiplication of FloatFrequency and FloatDuration
      */
     public final FloatDimensionless times(final FloatDuration v)
@@ -242,7 +244,7 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Calculate the multiplication of FloatFrequency and FloatLength, which results in a FloatSpeed scalar.
-     * @param v FloatFrequency scalar
+     * @param v FloatLength; FloatFrequency scalar
      * @return FloatSpeed scalar as a multiplication of FloatFrequency and FloatLength
      */
     public final FloatSpeed times(final FloatLength v)
@@ -252,7 +254,7 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Calculate the multiplication of FloatFrequency and FloatSpeed, which results in a FloatAcceleration scalar.
-     * @param v FloatFrequency scalar
+     * @param v FloatSpeed; FloatFrequency scalar
      * @return FloatAcceleration scalar as a multiplication of FloatFrequency and FloatSpeed
      */
     public final FloatAcceleration times(final FloatSpeed v)
@@ -262,12 +264,33 @@ public class FloatFrequency extends AbstractFloatScalarRel<FrequencyUnit, FloatF
 
     /**
      * Calculate the multiplication of FloatFrequency and FloatEnergy, which results in a FloatPower scalar.
-     * @param v FloatFrequency scalar
+     * @param v FloatEnergy; FloatFrequency scalar
      * @return FloatPower scalar as a multiplication of FloatFrequency and FloatEnergy
      */
     public final FloatPower times(final FloatEnergy v)
     {
         return new FloatPower(this.si * v.si, PowerUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of FloatFrequency and FloatAngle, which results in a FloatAngularVelocity scalar.
+     * @param v FloatAngle; FloatFrequency scalar
+     * @return FloatAngularVelocity scalar as a multiplication of FloatFrequency and FloatAngle
+     */
+    public final FloatAngularVelocity times(final FloatAngle v)
+    {
+        return new FloatAngularVelocity(this.si * v.si, AngularVelocityUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of FloatFrequency and FloatAngularVelocity, which results in a FloatAngularAcceleration
+     * scalar.
+     * @param v FloatAngularVelocity; FloatFrequency scalar
+     * @return FloatAngularAcceleration scalar as a multiplication of FloatFrequency and FloatAngularVelocity
+     */
+    public final FloatAngularAcceleration times(final FloatAngularVelocity v)
+    {
+        return new FloatAngularAcceleration(this.si * v.si, AngularAccelerationUnit.SI);
     }
 
 }

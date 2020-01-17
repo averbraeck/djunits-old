@@ -9,6 +9,7 @@ import org.djunits.unit.AccelerationUnit;
 import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.ForceUnit;
 import org.djunits.unit.FrequencyUnit;
+import org.djunits.unit.PowerUnit;
 import org.djunits.unit.SpeedUnit;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
@@ -16,13 +17,13 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 /**
  * Easy access methods for the Acceleration DoubleScalar, which is relative by definition.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
 public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acceleration>
 {
     /** */
@@ -212,7 +213,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Calculate the division of Acceleration and Acceleration, which results in a Dimensionless scalar.
-     * @param v Acceleration scalar
+     * @param v Acceleration; Acceleration scalar
      * @return Dimensionless scalar as a division of Acceleration and Acceleration
      */
     public final Dimensionless divide(final Acceleration v)
@@ -222,7 +223,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Calculate the multiplication of Acceleration and Mass, which results in a Force scalar.
-     * @param v Acceleration scalar
+     * @param v Mass; Acceleration scalar
      * @return Force scalar as a multiplication of Acceleration and Mass
      */
     public final Force times(final Mass v)
@@ -232,7 +233,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Calculate the multiplication of Acceleration and Duration, which results in a Speed scalar.
-     * @param v Acceleration scalar
+     * @param v Duration; Acceleration scalar
      * @return Speed scalar as a multiplication of Acceleration and Duration
      */
     public final Speed times(final Duration v)
@@ -242,7 +243,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Calculate the division of Acceleration and Frequency, which results in a Speed scalar.
-     * @param v Acceleration scalar
+     * @param v Frequency; Acceleration scalar
      * @return Speed scalar as a division of Acceleration and Frequency
      */
     public final Speed divide(final Frequency v)
@@ -252,12 +253,22 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Calculate the division of Acceleration and Speed, which results in a Frequency scalar.
-     * @param v Acceleration scalar
+     * @param v Speed; Acceleration scalar
      * @return Frequency scalar as a division of Acceleration and Speed
      */
     public final Frequency divide(final Speed v)
     {
         return new Frequency(this.si / v.si, FrequencyUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of Acceleration and Momentum, which results in a Power scalar.
+     * @param v Momentum; Acceleration scalar
+     * @return Power scalar as a multiplication of Acceleration and Momentum
+     */
+    public final Power times(final Momentum v)
+    {
+        return new Power(this.si * v.si, PowerUnit.SI);
     }
 
 }

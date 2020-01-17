@@ -8,7 +8,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
 /**
  * Temperature units.
  * <p>
- * Copyright (c) 2015-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
@@ -30,8 +30,8 @@ public class TemperatureUnit extends Unit<TemperatureUnit>
     public static final TemperatureUnit KELVIN = SI;
 
     /** Degree Celsius. */
-    public static final TemperatureUnit DEGREE_CELSIUS = KELVIN.deriveLinear(1.0, "dgC", "degree Celcius",
-            UnitSystem.SI_DERIVED, "\u00B0C", "degC", new String[] { "C" });
+    public static final TemperatureUnit DEGREE_CELSIUS =
+            KELVIN.deriveLinear(1.0, "dgC", "degree Celcius", UnitSystem.SI_DERIVED, "\u00B0C", "degC", new String[] { "C" });
 
     /** Degree Fahrenheit. */
     public static final TemperatureUnit DEGREE_FAHRENHEIT = KELVIN.deriveLinear(5.0 / 9.0, "dgF", "degree Fahrenheit",

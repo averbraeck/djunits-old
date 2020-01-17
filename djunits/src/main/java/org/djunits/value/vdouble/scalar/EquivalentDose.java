@@ -13,13 +13,13 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 /**
  * Easy access methods for the EquivalentDose DoubleScalar, which is relative by definition.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
 public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, EquivalentDose>
 {
     /** */
@@ -209,7 +209,7 @@ public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, 
 
     /**
      * Calculate the division of EquivalentDose and EquivalentDose, which results in a Dimensionless scalar.
-     * @param v EquivalentDose scalar
+     * @param v EquivalentDose; EquivalentDose scalar
      * @return Dimensionless scalar as a division of EquivalentDose and EquivalentDose
      */
     public final Dimensionless divide(final EquivalentDose v)

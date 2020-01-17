@@ -11,6 +11,7 @@ import org.djunits.unit.DurationUnit;
 import org.djunits.unit.EnergyUnit;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.LinearDensityUnit;
+import org.djunits.unit.MomentumUnit;
 import org.djunits.unit.PositionUnit;
 import org.djunits.unit.SpeedUnit;
 import org.djunits.unit.VolumeUnit;
@@ -20,14 +21,14 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
 /**
  * Easy access methods for the Relative Length DoubleScalar.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2019-10-18T12:12:25.568Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
 public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Position, LengthUnit, Length>
 {
     /** */
@@ -223,7 +224,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the division of Length and Length, which results in a Dimensionless scalar.
-     * @param v Length scalar
+     * @param v Length; Length scalar
      * @return Dimensionless scalar as a division of Length and Length
      */
     public final Dimensionless divide(final Length v)
@@ -233,7 +234,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the multiplication of Length and Length, which results in a Area scalar.
-     * @param v Length scalar
+     * @param v Length; Length scalar
      * @return Area scalar as a multiplication of Length and Length
      */
     public final Area times(final Length v)
@@ -243,7 +244,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the division of Length and LinearDensity, which results in a Area scalar.
-     * @param v Length scalar
+     * @param v LinearDensity; Length scalar
      * @return Area scalar as a division of Length and LinearDensity
      */
     public final Area divide(final LinearDensity v)
@@ -253,7 +254,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the division of Length and Area, which results in a LinearDensity scalar.
-     * @param v Length scalar
+     * @param v Area; Length scalar
      * @return LinearDensity scalar as a division of Length and Area
      */
     public final LinearDensity divide(final Area v)
@@ -263,7 +264,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the multiplication of Length and Area, which results in a Volume scalar.
-     * @param v Length scalar
+     * @param v Area; Length scalar
      * @return Volume scalar as a multiplication of Length and Area
      */
     public final Volume times(final Area v)
@@ -273,7 +274,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the multiplication of Length and Force, which results in a Energy scalar.
-     * @param v Length scalar
+     * @param v Force; Length scalar
      * @return Energy scalar as a multiplication of Length and Force
      */
     public final Energy times(final Force v)
@@ -283,7 +284,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the multiplication of Length and Frequency, which results in a Speed scalar.
-     * @param v Length scalar
+     * @param v Frequency; Length scalar
      * @return Speed scalar as a multiplication of Length and Frequency
      */
     public final Speed times(final Frequency v)
@@ -293,7 +294,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the division of Length and Duration, which results in a Speed scalar.
-     * @param v Length scalar
+     * @param v Duration; Length scalar
      * @return Speed scalar as a division of Length and Duration
      */
     public final Speed divide(final Duration v)
@@ -303,12 +304,22 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the division of Length and Speed, which results in a Duration scalar.
-     * @param v Length scalar
+     * @param v Speed; Length scalar
      * @return Duration scalar as a division of Length and Speed
      */
     public final Duration divide(final Speed v)
     {
         return new Duration(this.si / v.si, DurationUnit.SI);
+    }
+
+    /**
+     * Calculate the multiplication of Length and FlowMass, which results in a Momentum scalar.
+     * @param v FlowMass; Length scalar
+     * @return Momentum scalar as a multiplication of Length and FlowMass
+     */
+    public final Momentum times(final FlowMass v)
+    {
+        return new Momentum(this.si * v.si, MomentumUnit.SI);
     }
 
 }

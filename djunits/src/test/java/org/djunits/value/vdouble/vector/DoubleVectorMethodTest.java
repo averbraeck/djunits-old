@@ -45,7 +45,7 @@ import org.junit.Test;
 /**
  * Test the incrementBy, etc. methods.
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
@@ -78,9 +78,9 @@ public class DoubleVectorMethodTest
             sparseTestData[index] = 10000.456 + index;
             reverseSparseTestData[index] = 20000.567 + index;
         }
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
-            for (AreaUnit au : new AreaUnit[] {AreaUnit.SQUARE_METER, AreaUnit.ACRE})
+            for (AreaUnit au : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
             {
                 double[] testData = storageType.equals(StorageType.DENSE) ? denseTestData : sparseTestData;
                 AreaVector am =
@@ -259,10 +259,10 @@ public class DoubleVectorMethodTest
 
                 // TEST METHODS THAT INVOLVE TWO VECTOR INSTANCES
 
-                for (StorageType storageType2 : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+                for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
                 {
                     double[] testData2 = storageType2.equals(StorageType.DENSE) ? denseTestData : reverseSparseTestData;
-                    for (AreaUnit au2 : new AreaUnit[] {AreaUnit.SQUARE_METER, AreaUnit.ACRE})
+                    for (AreaUnit au2 : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
                     {
                         // PLUS and INCREMENTBY(VECTOR)
                         AreaVector am2 = DoubleVector
@@ -335,9 +335,9 @@ public class DoubleVectorMethodTest
         double[] denseTestData = DOUBLEVECTOR.denseArray(105);
         double[] sparseTestData = DOUBLEVECTOR.sparseArray(105);
 
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
-            for (AreaUnit au : new AreaUnit[] {AreaUnit.SQUARE_METER, AreaUnit.ACRE})
+            for (AreaUnit au : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
             {
                 double[] testData = storageType.equals(StorageType.DENSE) ? denseTestData : sparseTestData;
                 AreaVector am =
@@ -486,9 +486,9 @@ public class DoubleVectorMethodTest
         double[] denseTestData = DOUBLEVECTOR.denseArray(105);
         double[] sparseTestData = DOUBLEVECTOR.sparseArray(105);
 
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
-            for (AreaUnit au : new AreaUnit[] {AreaUnit.SQUARE_METER, AreaUnit.ACRE})
+            for (AreaUnit au : new AreaUnit[] { AreaUnit.SQUARE_METER, AreaUnit.ACRE })
             {
                 double[] testData = storageType.equals(StorageType.DENSE) ? denseTestData : sparseTestData;
                 AreaVector am =
@@ -576,7 +576,7 @@ public class DoubleVectorMethodTest
             assertEquals("absDecByRelM", -29.0 * denseTestData[index], absDecByRelM.getSI(index), 0.01);
             assertEquals("relPlusAbs", 61.0 * denseTestData[index], relPlusAbs.getSI(index), 0.01);
         }
-        for (int dLength : new int[] {-1, 1})
+        for (int dLength : new int[] { -1, 1 })
         {
             double[] other = DOUBLEVECTOR.denseArray(denseTestData.length + dLength);
             TimeVector wrongTimeVector = DoubleVector.instantiate(
@@ -691,7 +691,7 @@ public class DoubleVectorMethodTest
             IllegalAccessException, IllegalArgumentException, InvocationTargetException, UnitException
     {
         double[][] testValues = DOUBLEMATRIX.denseRectArrays(10, 20);
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
             for (String type : CLASSNAMES.REL_LIST)
             {
@@ -699,7 +699,7 @@ public class DoubleVectorMethodTest
                 Quantity<U> quantity = (Quantity<U>) Quantities.INSTANCE.getQuantity(type + "Unit");
                 for (U unit : quantity.getUnitsById().values())
                 {
-                    for (StorageType storageType2 : new StorageType[] {StorageType.DENSE, storageType})
+                    for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, storageType })
                     {
                         SIUnit siUnit = SIUnit.of(unit.getQuantity().getSiDimensions());
                         SIMatrix matrix = SIMatrix.instantiate(testValues, siUnit, storageType2);
@@ -741,7 +741,7 @@ public class DoubleVectorMethodTest
     {
         double[] testData = DOUBLEVECTOR.denseArray(123);
         testData[2] = 0;
-        for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+        for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
         {
             DoubleVectorData dvd = DoubleVectorData.instantiate(testData, TemperatureUnit.KELVIN.getScale(), storageType);
             assertTrue("Double vector data is equal to itself", dvd.equals(dvd));
@@ -749,7 +749,7 @@ public class DoubleVectorMethodTest
             assertFalse("Double vector data is not equal to some string", dvd.equals("some string"));
             assertTrue("Double vector is equal to sparse version of itself", dvd.equals(dvd.toSparse()));
             assertTrue("Double vector is equal to dense version of itself", dvd.equals(dvd.toDense()));
-            for (StorageType storageType2 : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
+            for (StorageType storageType2 : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
             {
                 DoubleVectorData dvd2 = DoubleVectorData.instantiate(testData, TemperatureUnit.KELVIN.getScale(), storageType2);
                 assertEquals(
