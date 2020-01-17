@@ -15,7 +15,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 
 /**
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
@@ -188,7 +188,7 @@ public class Jerk extends AbstractDoubleScalarRel<JerkUnit, Jerk>
 
     /**
      * Calculate the division of Jerk and Jerk, which results in a Dimensionless scalar.
-     * @param v Jerk scalar
+ * @param v Jerk; Jerk scalar
      * @return Dimensionless scalar as a division of Jerk and Jerk
      */
     public final Dimensionless divide(final Jerk v)
@@ -198,7 +198,7 @@ public class Jerk extends AbstractDoubleScalarRel<JerkUnit, Jerk>
 
     /**
      * Calculate the multiplication of Jerk and Duration, which results in an Acceleration scalar.
-     * @param v Duration scalar
+ * @param v Duration; Duration scalar
      * @return Acceleration scalar as a multiplication of Jerk and Duration
      */
     public final Acceleration times(final Duration v)
@@ -208,7 +208,7 @@ public class Jerk extends AbstractDoubleScalarRel<JerkUnit, Jerk>
 
     /**
      * Calculate the division of Jerk and Acceleration, which results in a Frequency scalar.
-     * @param v Acceleration scalar
+ * @param v Acceleration; Acceleration scalar
      * @return Frequency scalar as a division of Jerk and Accelration
      */
     public final Frequency times(final Acceleration v)

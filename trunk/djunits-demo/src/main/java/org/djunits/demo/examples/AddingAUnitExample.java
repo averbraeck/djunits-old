@@ -20,9 +20,11 @@ public class AddingAUnitExample
     public static void main(final String[] args)
     {
         Length oneThousandFurlong = new Length(1000.0, FURLONG);
-        Duration oneFortNight = new Duration(1.0, FORTNIGHT);
-        Speed speed = oneThousandFurlong.divide(oneFortNight);
-        System.out.println(speed);
+        System.out.println(oneThousandFurlong);
+        Duration twoFortNight = new Duration(2.0, FORTNIGHT);
+        System.out.println(twoFortNight);
+        Speed speed = oneThousandFurlong.divide(twoFortNight);
+        System.out.println(speed); // Uses SpeedUnit.SI; m/s
         System.out.println(speed.toString(FURLONGS_PER_FORTNIGHT));
     }
     
