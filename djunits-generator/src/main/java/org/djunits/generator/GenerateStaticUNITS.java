@@ -5,7 +5,7 @@ import java.lang.reflect.Modifier;
 
 /**
  * <p>
- * Copyright (c) 2013-2019 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
@@ -16,13 +16,14 @@ public final class GenerateStaticUNITS
 {
     /** the standard units. */
     private static final String[] STANDARD_UNITS = new String[] { "AbsoluteTemperatureUnit", "AccelerationUnit", "AngleUnit",
-            "AreaUnit", "DensityUnit", "DimensionlessUnit", "DirectionUnit", "DurationUnit", "ElectricalChargeUnit",
-            "ElectricalCurrentUnit", "ElectricalPotentialUnit", "ElectricalResistanceUnit", "EnergyUnit", "FlowMassUnit",
-            "FlowVolumeUnit", "ForceUnit", "FrequencyUnit", "LengthUnit", "LinearDensityUnit", "MassUnit", "PositionUnit",
-            "PowerUnit", "PressureUnit", "SolidAngleUnit", "SpeedUnit", "TemperatureUnit", "TimeUnit", "TorqueUnit",
-            "VolumeUnit", "AbsorbedDoseUnit", "AmountOfSubstanceUnit", "CatalyticActivityUnit", "ElectricalCapacitanceUnit",
-            "ElectricalConductanceUnit", "ElectricalInductanceUnit", "EquivalentDoseUnit", "IlluminanceUnit",
-            "LuminousFluxUnit", "LuminousIntensityUnit", "MagneticFluxDensityUnit", "MagneticFluxUnit", "RadioActivityUnit" };
+            "AngularAccelerationUnit", "AngularVelocityUnit", "AreaUnit", "DensityUnit", "DimensionlessUnit", "DirectionUnit",
+            "DurationUnit", "ElectricalChargeUnit", "ElectricalCurrentUnit", "ElectricalPotentialUnit",
+            "ElectricalResistanceUnit", "EnergyUnit", "FlowMassUnit", "FlowVolumeUnit", "ForceUnit", "FrequencyUnit",
+            "LengthUnit", "LinearDensityUnit", "MassUnit", "MomentumUnit", "PositionUnit", "PowerUnit", "PressureUnit",
+            "SolidAngleUnit", "SpeedUnit", "TemperatureUnit", "TimeUnit", "TorqueUnit", "VolumeUnit", "AbsorbedDoseUnit",
+            "AmountOfSubstanceUnit", "CatalyticActivityUnit", "ElectricalCapacitanceUnit", "ElectricalConductanceUnit",
+            "ElectricalInductanceUnit", "EquivalentDoseUnit", "IlluminanceUnit", "LuminousFluxUnit", "LuminousIntensityUnit",
+            "MagneticFluxDensityUnit", "MagneticFluxUnit", "RadioActivityUnit" };
 
     /**
      * 
@@ -108,8 +109,7 @@ public final class GenerateStaticUNITS
             }
             if (className.contains("Dimensionless"))
             {
-                System.out.println(String.format("    %-45s = %s;", c.getSimpleName() + " UNIT",
-                        c.getSimpleName() + ".SI"));
+                System.out.println(String.format("    %-45s = %s;", c.getSimpleName() + " UNIT", c.getSimpleName() + ".SI"));
             }
         }
     }

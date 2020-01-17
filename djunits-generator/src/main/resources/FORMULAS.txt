@@ -9,6 +9,22 @@
 *Duration=Speed
 /Frequency=Speed
 /Speed=Frequency
+*Momentum=Power
+
+%AngularVelocity
+/AngularVelocity=Dimensionless
+/Angle=Frequency
+/Frequency=Angle
+*Duration=Angle
+/Duration=AngularAcceleration
+/AngularAcceleration=Duration
+*Frequency=AngularAcceleration
+
+%AngularAcceleration
+/AngularAcceleration=Dimensionless
+*Duration=AngularVelocity
+/Frequency=AngularVelocity
+/AngularVelocity=Frequency
 
 %AmountOfSubstance
 /AmountOfSubstance=Dimensionless
@@ -17,6 +33,9 @@
 
 %Angle
 /Angle=Dimensionless
+*Frequency=AngularVelocity
+/Duration=AngularVelocity
+/AngularVelocity=Duration
 
 %SolidAngle
 /SolidAngle=Dimensionless
@@ -58,6 +77,8 @@
 *ElectricalPotential=MagneticFlux
 *ElectricalResistance=ElectricalInductance
 *ElectricalConductance=ElectricalCapacitance
+*AngularVelocity=Angle
+*AngularAcceleration=AngularVelocity
 
 %ElectricalCapacitance
 /ElectricalCapacitance=Dimensionless
@@ -111,6 +132,8 @@
 /Volume=Pressure
 /Pressure=Volume
 *Frequency=Power
+/Speed=Momentum
+/Momentum=Speed
 
 %EquivalentDose
 /EquivalentDose=Dimensionless
@@ -123,6 +146,7 @@
 *Speed=Force
 /FlowVolume=Density
 /Density=FlowVolume
+*Length=Momentum
 
 %FlowVolume
 /FlowVolume=Dimensionless
@@ -150,6 +174,8 @@
 *Length=Speed
 *Speed=Acceleration
 *Energy=Power
+*Angle=AngularVelocity
+*AngularVelocity=AngularAcceleration
 
 %Illuminance
 /Illuminance=Dimensionless
@@ -165,6 +191,7 @@
 *Frequency=Speed
 /Duration=Speed
 /Speed=Duration
+*FlowMass=Momentum
 
 %LinearDensity
 /LinearDensity=Dimensionless
@@ -204,6 +231,16 @@
 *Frequency=FlowMass
 /Density=Volume
 /Volume=Density
+*Speed=Momentum
+
+%Momentum
+/Momentum=Dimensionless
+/Speed=Mass
+/Mass=Speed
+/Length=FlowMass
+/FlowMass=Length
+*Speed=Energy
+*Acceleration=Power
 
 %Position
 
@@ -216,6 +253,8 @@
 /Force=Speed
 /ElectricalPotential=ElectricalCurrent
 /ElectricalCurrent=ElectricalPotential
+/Acceleration=Momentum
+/Momentum=Acceleration
 
 %Pressure
 /Pressure=Dimensionless
@@ -237,6 +276,8 @@
 /Duration=Acceleration
 /Acceleration=Duration
 *FlowMass=Force
+*Mass=Momentum
+*Momentum=Energy
 
 %Temperature
 /Temperature=Dimensionless
