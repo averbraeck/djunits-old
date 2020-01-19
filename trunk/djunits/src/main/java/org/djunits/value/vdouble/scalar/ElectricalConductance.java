@@ -21,7 +21,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
 public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalConductanceUnit, ElectricalConductance>
 {
     /** */
@@ -220,7 +220,7 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
 
     /**
      * Calculate the division of ElectricalConductance and ElectricalConductance, which results in a Dimensionless scalar.
-     * @param v ElectricalConductance; ElectricalConductance scalar
+     * @param v ElectricalConductance scalar
      * @return Dimensionless scalar as a division of ElectricalConductance and ElectricalConductance
      */
     public final Dimensionless divide(final ElectricalConductance v)
@@ -231,7 +231,7 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
     /**
      * Calculate the multiplication of ElectricalConductance and ElectricalPotential, which results in a ElectricalCurrent
      * scalar.
-     * @param v ElectricalPotential; ElectricalConductance scalar
+     * @param v ElectricalConductance scalar
      * @return ElectricalCurrent scalar as a multiplication of ElectricalConductance and ElectricalPotential
      */
     public final ElectricalCurrent times(final ElectricalPotential v)
@@ -241,7 +241,7 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
 
     /**
      * Calculate the multiplication of ElectricalConductance and Duration, which results in a ElectricalCapacitance scalar.
-     * @param v Duration; ElectricalConductance scalar
+     * @param v ElectricalConductance scalar
      * @return ElectricalCapacitance scalar as a multiplication of ElectricalConductance and Duration
      */
     public final ElectricalCapacitance times(final Duration v)

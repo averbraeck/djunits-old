@@ -56,7 +56,14 @@ public abstract class AbsoluteLinearUnit<AU extends AbsoluteLinearUnit<AU, RU>, 
     @Override
     public AU build(final Unit.Builder<AU> builder) throws UnitRuntimeException
     {
-        this.relativeUnit = ((Builder<AU, RU>) builder).getRelativeUnit();
+        if (builder instanceof Builder)
+        {
+            this.relativeUnit = ((Builder<AU, RU>) builder).getRelativeUnit();
+        }
+        else
+        {
+            throw new UnitRuntimeException("Trying to build an absolute unit with a non-absolute builder");
+        }
         Throw.whenNull(this.relativeUnit, "Relative unit for unit " + builder.getId() + " cannot be null");
         this.relativeQuantity = this.relativeUnit.getQuantity();
         AU unit = super.build(builder);

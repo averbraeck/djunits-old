@@ -25,7 +25,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
 public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlowMass>
 {
     /** */
@@ -56,7 +56,7 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
     /**
      * Construct FloatFlowMass scalar.
      * @param value float; the float value
-     * @param unit FlowMassUnit; unit for the float value
+     * @param unit unit for the float value
      */
     public FloatFlowMass(final float value, final FlowMassUnit unit)
     {
@@ -65,7 +65,7 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
 
     /**
      * Construct FloatFlowMass scalar.
-     * @param value FloatFlowMass; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatFlowMass(final FloatFlowMass value)
     {
@@ -75,7 +75,7 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
     /**
      * Construct FloatFlowMass scalar using a double value.
      * @param value double; the double value
-     * @param unit FlowMassUnit; unit for the resulting float value
+     * @param unit unit for the resulting float value
      */
     public FloatFlowMass(final double value, final FlowMassUnit unit)
     {
@@ -101,9 +101,9 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
 
     /**
      * Interpolate between two values.
-     * @param zero FloatFlowMass; the low value
-     * @param one FloatFlowMass; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatFlowMass interpolate(final FloatFlowMass zero, final FloatFlowMass one, final float ratio)
@@ -114,8 +114,8 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 FloatFlowMass; the first scalar
-     * @param r2 FloatFlowMass; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatFlowMass max(final FloatFlowMass r1, final FloatFlowMass r2)
@@ -125,9 +125,9 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 FloatFlowMass; the first scalar
-     * @param r2 FloatFlowMass; the second scalar
-     * @param rn FloatFlowMass...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatFlowMass max(final FloatFlowMass r1, final FloatFlowMass r2, final FloatFlowMass... rn)
@@ -145,8 +145,8 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 FloatFlowMass; the first scalar
-     * @param r2 FloatFlowMass; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatFlowMass min(final FloatFlowMass r1, final FloatFlowMass r2)
@@ -156,9 +156,9 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 FloatFlowMass; the first scalar
-     * @param r2 FloatFlowMass; the second scalar
-     * @param rn FloatFlowMass...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatFlowMass min(final FloatFlowMass r1, final FloatFlowMass r2, final FloatFlowMass... rn)
@@ -205,7 +205,7 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
 
     /**
      * Returns a FloatFlowMass based on a value and the textual representation of the unit.
-     * @param value float; the value to use
+     * @param value double; the value to use
      * @param unitString String; the textual representation of the unit
      * @return FloatFlowMass; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
@@ -225,7 +225,7 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
 
     /**
      * Calculate the division of FloatFlowMass and FloatFlowMass, which results in a FloatDimensionless scalar.
-     * @param v FloatFlowMass; FloatFlowMass scalar
+     * @param v FloatFlowMass scalar
      * @return FloatDimensionless scalar as a division of FloatFlowMass and FloatFlowMass
      */
     public final FloatDimensionless divide(final FloatFlowMass v)
@@ -235,7 +235,7 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
 
     /**
      * Calculate the multiplication of FloatFlowMass and FloatDuration, which results in a FloatMass scalar.
-     * @param v FloatDuration; FloatFlowMass scalar
+     * @param v FloatFlowMass scalar
      * @return FloatMass scalar as a multiplication of FloatFlowMass and FloatDuration
      */
     public final FloatMass times(final FloatDuration v)
@@ -245,7 +245,7 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
 
     /**
      * Calculate the division of FloatFlowMass and FloatFrequency, which results in a FloatMass scalar.
-     * @param v FloatFrequency; FloatFlowMass scalar
+     * @param v FloatFlowMass scalar
      * @return FloatMass scalar as a division of FloatFlowMass and FloatFrequency
      */
     public final FloatMass divide(final FloatFrequency v)
@@ -255,7 +255,7 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
 
     /**
      * Calculate the division of FloatFlowMass and FloatMass, which results in a FloatFrequency scalar.
-     * @param v FloatMass; FloatFlowMass scalar
+     * @param v FloatFlowMass scalar
      * @return FloatFrequency scalar as a division of FloatFlowMass and FloatMass
      */
     public final FloatFrequency divide(final FloatMass v)
@@ -265,7 +265,7 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
 
     /**
      * Calculate the multiplication of FloatFlowMass and FloatSpeed, which results in a FloatForce scalar.
-     * @param v FloatSpeed; FloatFlowMass scalar
+     * @param v FloatFlowMass scalar
      * @return FloatForce scalar as a multiplication of FloatFlowMass and FloatSpeed
      */
     public final FloatForce times(final FloatSpeed v)
@@ -275,7 +275,7 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
 
     /**
      * Calculate the division of FloatFlowMass and FloatFlowVolume, which results in a FloatDensity scalar.
-     * @param v FloatFlowVolume; FloatFlowMass scalar
+     * @param v FloatFlowMass scalar
      * @return FloatDensity scalar as a division of FloatFlowMass and FloatFlowVolume
      */
     public final FloatDensity divide(final FloatFlowVolume v)
@@ -285,7 +285,7 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
 
     /**
      * Calculate the division of FloatFlowMass and FloatDensity, which results in a FloatFlowVolume scalar.
-     * @param v FloatDensity; FloatFlowMass scalar
+     * @param v FloatFlowMass scalar
      * @return FloatFlowVolume scalar as a division of FloatFlowMass and FloatDensity
      */
     public final FloatFlowVolume divide(final FloatDensity v)
@@ -295,7 +295,7 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
 
     /**
      * Calculate the multiplication of FloatFlowMass and FloatLength, which results in a FloatMomentum scalar.
-     * @param v FloatLength; FloatFlowMass scalar
+     * @param v FloatFlowMass scalar
      * @return FloatMomentum scalar as a multiplication of FloatFlowMass and FloatLength
      */
     public final FloatMomentum times(final FloatLength v)

@@ -21,7 +21,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
 public class AngularAcceleration extends AbstractDoubleScalarRel<AngularAccelerationUnit, AngularAcceleration>
 {
     /** */
@@ -220,7 +220,7 @@ public class AngularAcceleration extends AbstractDoubleScalarRel<AngularAccelera
 
     /**
      * Calculate the division of AngularAcceleration and AngularAcceleration, which results in a Dimensionless scalar.
-     * @param v AngularAcceleration; AngularAcceleration scalar
+     * @param v AngularAcceleration scalar
      * @return Dimensionless scalar as a division of AngularAcceleration and AngularAcceleration
      */
     public final Dimensionless divide(final AngularAcceleration v)
@@ -230,7 +230,7 @@ public class AngularAcceleration extends AbstractDoubleScalarRel<AngularAccelera
 
     /**
      * Calculate the multiplication of AngularAcceleration and Duration, which results in a AngularVelocity scalar.
-     * @param v Duration; AngularAcceleration scalar
+     * @param v AngularAcceleration scalar
      * @return AngularVelocity scalar as a multiplication of AngularAcceleration and Duration
      */
     public final AngularVelocity times(final Duration v)
@@ -240,7 +240,7 @@ public class AngularAcceleration extends AbstractDoubleScalarRel<AngularAccelera
 
     /**
      * Calculate the division of AngularAcceleration and Frequency, which results in a AngularVelocity scalar.
-     * @param v Frequency; AngularAcceleration scalar
+     * @param v AngularAcceleration scalar
      * @return AngularVelocity scalar as a division of AngularAcceleration and Frequency
      */
     public final AngularVelocity divide(final Frequency v)
@@ -250,7 +250,7 @@ public class AngularAcceleration extends AbstractDoubleScalarRel<AngularAccelera
 
     /**
      * Calculate the division of AngularAcceleration and AngularVelocity, which results in a Frequency scalar.
-     * @param v AngularVelocity; AngularAcceleration scalar
+     * @param v AngularAcceleration scalar
      * @return Frequency scalar as a division of AngularAcceleration and AngularVelocity
      */
     public final Frequency divide(final AngularVelocity v)

@@ -21,7 +21,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
 public class FloatAngularAcceleration extends AbstractFloatScalarRel<AngularAccelerationUnit, FloatAngularAcceleration>
 {
     /** */
@@ -56,7 +56,7 @@ public class FloatAngularAcceleration extends AbstractFloatScalarRel<AngularAcce
     /**
      * Construct FloatAngularAcceleration scalar.
      * @param value float; the float value
-     * @param unit AngularAccelerationUnit; unit for the float value
+     * @param unit unit for the float value
      */
     public FloatAngularAcceleration(final float value, final AngularAccelerationUnit unit)
     {
@@ -65,7 +65,7 @@ public class FloatAngularAcceleration extends AbstractFloatScalarRel<AngularAcce
 
     /**
      * Construct FloatAngularAcceleration scalar.
-     * @param value FloatAngularAcceleration; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatAngularAcceleration(final FloatAngularAcceleration value)
     {
@@ -75,7 +75,7 @@ public class FloatAngularAcceleration extends AbstractFloatScalarRel<AngularAcce
     /**
      * Construct FloatAngularAcceleration scalar using a double value.
      * @param value double; the double value
-     * @param unit AngularAccelerationUnit; unit for the resulting float value
+     * @param unit unit for the resulting float value
      */
     public FloatAngularAcceleration(final double value, final AngularAccelerationUnit unit)
     {
@@ -101,9 +101,9 @@ public class FloatAngularAcceleration extends AbstractFloatScalarRel<AngularAcce
 
     /**
      * Interpolate between two values.
-     * @param zero FloatAngularAcceleration; the low value
-     * @param one FloatAngularAcceleration; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatAngularAcceleration interpolate(final FloatAngularAcceleration zero, final FloatAngularAcceleration one,
@@ -115,8 +115,8 @@ public class FloatAngularAcceleration extends AbstractFloatScalarRel<AngularAcce
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 FloatAngularAcceleration; the first scalar
-     * @param r2 FloatAngularAcceleration; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatAngularAcceleration max(final FloatAngularAcceleration r1, final FloatAngularAcceleration r2)
@@ -126,9 +126,9 @@ public class FloatAngularAcceleration extends AbstractFloatScalarRel<AngularAcce
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 FloatAngularAcceleration; the first scalar
-     * @param r2 FloatAngularAcceleration; the second scalar
-     * @param rn FloatAngularAcceleration...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatAngularAcceleration max(final FloatAngularAcceleration r1, final FloatAngularAcceleration r2,
@@ -147,8 +147,8 @@ public class FloatAngularAcceleration extends AbstractFloatScalarRel<AngularAcce
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 FloatAngularAcceleration; the first scalar
-     * @param r2 FloatAngularAcceleration; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatAngularAcceleration min(final FloatAngularAcceleration r1, final FloatAngularAcceleration r2)
@@ -158,9 +158,9 @@ public class FloatAngularAcceleration extends AbstractFloatScalarRel<AngularAcce
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 FloatAngularAcceleration; the first scalar
-     * @param r2 FloatAngularAcceleration; the second scalar
-     * @param rn FloatAngularAcceleration...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatAngularAcceleration min(final FloatAngularAcceleration r1, final FloatAngularAcceleration r2,
@@ -209,7 +209,7 @@ public class FloatAngularAcceleration extends AbstractFloatScalarRel<AngularAcce
 
     /**
      * Returns a FloatAngularAcceleration based on a value and the textual representation of the unit.
-     * @param value float; the value to use
+     * @param value double; the value to use
      * @param unitString String; the textual representation of the unit
      * @return FloatAngularAcceleration; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
@@ -231,7 +231,7 @@ public class FloatAngularAcceleration extends AbstractFloatScalarRel<AngularAcce
     /**
      * Calculate the division of FloatAngularAcceleration and FloatAngularAcceleration, which results in a FloatDimensionless
      * scalar.
-     * @param v FloatAngularAcceleration; FloatAngularAcceleration scalar
+     * @param v FloatAngularAcceleration scalar
      * @return FloatDimensionless scalar as a division of FloatAngularAcceleration and FloatAngularAcceleration
      */
     public final FloatDimensionless divide(final FloatAngularAcceleration v)
@@ -242,7 +242,7 @@ public class FloatAngularAcceleration extends AbstractFloatScalarRel<AngularAcce
     /**
      * Calculate the multiplication of FloatAngularAcceleration and FloatDuration, which results in a FloatAngularVelocity
      * scalar.
-     * @param v FloatDuration; FloatAngularAcceleration scalar
+     * @param v FloatAngularAcceleration scalar
      * @return FloatAngularVelocity scalar as a multiplication of FloatAngularAcceleration and FloatDuration
      */
     public final FloatAngularVelocity times(final FloatDuration v)
@@ -252,7 +252,7 @@ public class FloatAngularAcceleration extends AbstractFloatScalarRel<AngularAcce
 
     /**
      * Calculate the division of FloatAngularAcceleration and FloatFrequency, which results in a FloatAngularVelocity scalar.
-     * @param v FloatFrequency; FloatAngularAcceleration scalar
+     * @param v FloatAngularAcceleration scalar
      * @return FloatAngularVelocity scalar as a division of FloatAngularAcceleration and FloatFrequency
      */
     public final FloatAngularVelocity divide(final FloatFrequency v)
@@ -262,7 +262,7 @@ public class FloatAngularAcceleration extends AbstractFloatScalarRel<AngularAcce
 
     /**
      * Calculate the division of FloatAngularAcceleration and FloatAngularVelocity, which results in a FloatFrequency scalar.
-     * @param v FloatAngularVelocity; FloatAngularAcceleration scalar
+     * @param v FloatAngularAcceleration scalar
      * @return FloatFrequency scalar as a division of FloatAngularAcceleration and FloatAngularVelocity
      */
     public final FloatFrequency divide(final FloatAngularVelocity v)

@@ -168,10 +168,8 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
                 SIUnit unit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(unitString));
                 if (unit != null)
                 {
-                    {
-                        double d = Double.parseDouble(valueString);
-                        return new SIScalar(d, unit);
-                    }
+                    double d = Double.parseDouble(valueString);
+                    return new SIScalar(d, unit);
                 }
             }
             catch (Exception exception)
@@ -217,14 +215,16 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      * Return the current scalar transformed to a scalar in the given unit. Of course the SI dimensionality has to match,
      * otherwise the scalar cannot be transformed. The compiler will check the alignment between the return value and the unit.
      * @param displayUnit KU; the unit in which the scalar needs to be expressed
-     * @return K; the scalar that has been transformed into the right scalar type and unit
+     * @return S; the scalar that has been transformed into the right scalar type and unit
+     * @param <U> the unit type
+     * @param <S> the scalar type
      */
-    public final <KU extends Unit<KU>, K extends AbstractDoubleScalarRel<KU, K>> K as(final KU displayUnit)
+    public final <U extends Unit<U>, S extends AbstractDoubleScalarRel<U, S>> S as(final U displayUnit)
     {
         Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(displayUnit.getQuantity().getSiDimensions())),
                 UnitRuntimeException.class, "SIScalar with unit %s cannot be converted to a scalar with unit %s", getDisplayUnit(),
                 displayUnit);
-        K result = DoubleScalar.instantiate(this.si, displayUnit.getStandardUnit());
+        S result = DoubleScalar.instantiate(this.si, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
         return result;
     }

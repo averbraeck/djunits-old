@@ -24,7 +24,7 @@ public class ThrowTest
         Object object = new Object();
         Object objectNull = null;
         int i = 10;
-        Double d = new Double(20.0);
+        Double d = Double.valueOf(20.0);
         String s = "argument";
         int hex = 26; // 1A
 

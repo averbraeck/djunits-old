@@ -22,7 +22,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
 public class FloatElectricalCapacitance extends AbstractFloatScalarRel<ElectricalCapacitanceUnit, FloatElectricalCapacitance>
 {
     /** */
@@ -58,7 +58,7 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
     /**
      * Construct FloatElectricalCapacitance scalar.
      * @param value float; the float value
-     * @param unit ElectricalCapacitanceUnit; unit for the float value
+     * @param unit unit for the float value
      */
     public FloatElectricalCapacitance(final float value, final ElectricalCapacitanceUnit unit)
     {
@@ -67,7 +67,7 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
 
     /**
      * Construct FloatElectricalCapacitance scalar.
-     * @param value FloatElectricalCapacitance; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatElectricalCapacitance(final FloatElectricalCapacitance value)
     {
@@ -77,7 +77,7 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
     /**
      * Construct FloatElectricalCapacitance scalar using a double value.
      * @param value double; the double value
-     * @param unit ElectricalCapacitanceUnit; unit for the resulting float value
+     * @param unit unit for the resulting float value
      */
     public FloatElectricalCapacitance(final double value, final ElectricalCapacitanceUnit unit)
     {
@@ -103,9 +103,9 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
 
     /**
      * Interpolate between two values.
-     * @param zero FloatElectricalCapacitance; the low value
-     * @param one FloatElectricalCapacitance; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatElectricalCapacitance interpolate(final FloatElectricalCapacitance zero,
@@ -117,8 +117,8 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 FloatElectricalCapacitance; the first scalar
-     * @param r2 FloatElectricalCapacitance; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatElectricalCapacitance max(final FloatElectricalCapacitance r1, final FloatElectricalCapacitance r2)
@@ -128,9 +128,9 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 FloatElectricalCapacitance; the first scalar
-     * @param r2 FloatElectricalCapacitance; the second scalar
-     * @param rn FloatElectricalCapacitance...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatElectricalCapacitance max(final FloatElectricalCapacitance r1, final FloatElectricalCapacitance r2,
@@ -149,8 +149,8 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 FloatElectricalCapacitance; the first scalar
-     * @param r2 FloatElectricalCapacitance; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatElectricalCapacitance min(final FloatElectricalCapacitance r1, final FloatElectricalCapacitance r2)
@@ -160,9 +160,9 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 FloatElectricalCapacitance; the first scalar
-     * @param r2 FloatElectricalCapacitance; the second scalar
-     * @param rn FloatElectricalCapacitance...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatElectricalCapacitance min(final FloatElectricalCapacitance r1, final FloatElectricalCapacitance r2,
@@ -211,7 +211,7 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
 
     /**
      * Returns a FloatElectricalCapacitance based on a value and the textual representation of the unit.
-     * @param value float; the value to use
+     * @param value double; the value to use
      * @param unitString String; the textual representation of the unit
      * @return FloatElectricalCapacitance; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
@@ -233,7 +233,7 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
     /**
      * Calculate the division of FloatElectricalCapacitance and FloatElectricalCapacitance, which results in a
      * FloatDimensionless scalar.
-     * @param v FloatElectricalCapacitance; FloatElectricalCapacitance scalar
+     * @param v FloatElectricalCapacitance scalar
      * @return FloatDimensionless scalar as a division of FloatElectricalCapacitance and FloatElectricalCapacitance
      */
     public final FloatDimensionless divide(final FloatElectricalCapacitance v)
@@ -244,7 +244,7 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
     /**
      * Calculate the multiplication of FloatElectricalCapacitance and FloatElectricalPotential, which results in a
      * FloatElectricalCharge scalar.
-     * @param v FloatElectricalPotential; FloatElectricalCapacitance scalar
+     * @param v FloatElectricalCapacitance scalar
      * @return FloatElectricalCharge scalar as a multiplication of FloatElectricalCapacitance and FloatElectricalPotential
      */
     public final FloatElectricalCharge times(final FloatElectricalPotential v)
@@ -255,7 +255,7 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
     /**
      * Calculate the division of FloatElectricalCapacitance and FloatDuration, which results in a FloatElectricalConductance
      * scalar.
-     * @param v FloatDuration; FloatElectricalCapacitance scalar
+     * @param v FloatElectricalCapacitance scalar
      * @return FloatElectricalConductance scalar as a division of FloatElectricalCapacitance and FloatDuration
      */
     public final FloatElectricalConductance divide(final FloatDuration v)
@@ -266,7 +266,7 @@ public class FloatElectricalCapacitance extends AbstractFloatScalarRel<Electrica
     /**
      * Calculate the division of FloatElectricalCapacitance and FloatElectricalConductance, which results in a FloatDuration
      * scalar.
-     * @param v FloatElectricalConductance; FloatElectricalCapacitance scalar
+     * @param v FloatElectricalCapacitance scalar
      * @return FloatDuration scalar as a division of FloatElectricalCapacitance and FloatElectricalConductance
      */
     public final FloatDuration divide(final FloatElectricalConductance v)

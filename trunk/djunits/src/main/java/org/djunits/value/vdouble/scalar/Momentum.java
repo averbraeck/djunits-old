@@ -25,7 +25,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
 public class Momentum extends AbstractDoubleScalarRel<MomentumUnit, Momentum>
 {
     /** */
@@ -215,7 +215,7 @@ public class Momentum extends AbstractDoubleScalarRel<MomentumUnit, Momentum>
 
     /**
      * Calculate the division of Momentum and Momentum, which results in a Dimensionless scalar.
-     * @param v Momentum; Momentum scalar
+     * @param v Momentum scalar
      * @return Dimensionless scalar as a division of Momentum and Momentum
      */
     public final Dimensionless divide(final Momentum v)
@@ -225,7 +225,7 @@ public class Momentum extends AbstractDoubleScalarRel<MomentumUnit, Momentum>
 
     /**
      * Calculate the division of Momentum and Speed, which results in a Mass scalar.
-     * @param v Speed; Momentum scalar
+     * @param v Momentum scalar
      * @return Mass scalar as a division of Momentum and Speed
      */
     public final Mass divide(final Speed v)
@@ -235,7 +235,7 @@ public class Momentum extends AbstractDoubleScalarRel<MomentumUnit, Momentum>
 
     /**
      * Calculate the division of Momentum and Mass, which results in a Speed scalar.
-     * @param v Mass; Momentum scalar
+     * @param v Momentum scalar
      * @return Speed scalar as a division of Momentum and Mass
      */
     public final Speed divide(final Mass v)
@@ -245,7 +245,7 @@ public class Momentum extends AbstractDoubleScalarRel<MomentumUnit, Momentum>
 
     /**
      * Calculate the division of Momentum and Length, which results in a FlowMass scalar.
-     * @param v Length; Momentum scalar
+     * @param v Momentum scalar
      * @return FlowMass scalar as a division of Momentum and Length
      */
     public final FlowMass divide(final Length v)
@@ -255,7 +255,7 @@ public class Momentum extends AbstractDoubleScalarRel<MomentumUnit, Momentum>
 
     /**
      * Calculate the division of Momentum and FlowMass, which results in a Length scalar.
-     * @param v FlowMass; Momentum scalar
+     * @param v Momentum scalar
      * @return Length scalar as a division of Momentum and FlowMass
      */
     public final Length divide(final FlowMass v)
@@ -265,7 +265,7 @@ public class Momentum extends AbstractDoubleScalarRel<MomentumUnit, Momentum>
 
     /**
      * Calculate the multiplication of Momentum and Speed, which results in a Energy scalar.
-     * @param v Speed; Momentum scalar
+     * @param v Momentum scalar
      * @return Energy scalar as a multiplication of Momentum and Speed
      */
     public final Energy times(final Speed v)
@@ -275,7 +275,7 @@ public class Momentum extends AbstractDoubleScalarRel<MomentumUnit, Momentum>
 
     /**
      * Calculate the multiplication of Momentum and Acceleration, which results in a Power scalar.
-     * @param v Acceleration; Momentum scalar
+     * @param v Momentum scalar
      * @return Power scalar as a multiplication of Momentum and Acceleration
      */
     public final Power times(final Acceleration v)

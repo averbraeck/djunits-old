@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
 public class SolidAngle extends AbstractDoubleScalarRel<SolidAngleUnit, SolidAngle>
 {
     /** */
@@ -210,7 +210,7 @@ public class SolidAngle extends AbstractDoubleScalarRel<SolidAngleUnit, SolidAng
 
     /**
      * Calculate the division of SolidAngle and SolidAngle, which results in a Dimensionless scalar.
-     * @param v SolidAngle; SolidAngle scalar
+     * @param v SolidAngle scalar
      * @return Dimensionless scalar as a division of SolidAngle and SolidAngle
      */
     public final Dimensionless divide(final SolidAngle v)
@@ -220,7 +220,7 @@ public class SolidAngle extends AbstractDoubleScalarRel<SolidAngleUnit, SolidAng
 
     /**
      * Calculate the multiplication of SolidAngle and LuminousIntensity, which results in a LuminousFlux scalar.
-     * @param v LuminousIntensity; SolidAngle scalar
+     * @param v SolidAngle scalar
      * @return LuminousFlux scalar as a multiplication of SolidAngle and LuminousIntensity
      */
     public final LuminousFlux times(final LuminousIntensity v)

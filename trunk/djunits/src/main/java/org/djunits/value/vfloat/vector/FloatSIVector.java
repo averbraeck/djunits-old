@@ -69,7 +69,7 @@ import org.djunits.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
 public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar, FloatSIVector>
 {
     /** */
@@ -247,8 +247,11 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
     /**
      * Return the current vector transformed to a vector in the given unit. Of course the SI dimensionality has to match,
      * otherwise the vector cannot be transformed. The compiler will check the alignment between the return value and the unit.
-     * @param displayUnit U; the unit in which the vector needs to be expressed
-     * @return K; the vector that has been transformed into the right vector type and unit
+     * @param displayUnit KU; the unit in which the vector needs to be expressed
+     * @return V; the vector that has been transformed into the right vector type and unit
+     * @param <U> the unit type
+     * @param <S> the scalar type
+     * @param <V> the vector type
      */
     public final <U extends Unit<U>, S extends AbstractFloatScalarRel<U, S>,
             V extends AbstractFloatVectorRel<U, S, V>> V as(final U displayUnit)
@@ -274,7 +277,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a absorbeddose vector, and provide a display unit.
-     * @param displayUnit AbsorbedDoseUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatAbsorbedDoseVector; the current vector as a absorbeddose vector
      */
     public final FloatAbsorbedDoseVector asAbsorbedDose(final AbsorbedDoseUnit displayUnit)
@@ -299,7 +302,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a acceleration vector, and provide a display unit.
-     * @param displayUnit AccelerationUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatAccelerationVector; the current vector as a acceleration vector
      */
     public final FloatAccelerationVector asAcceleration(final AccelerationUnit displayUnit)
@@ -324,7 +327,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a amountofsubstance vector, and provide a display unit.
-     * @param displayUnit AmountOfSubstanceUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatAmountOfSubstanceVector; the current vector as a amountofsubstance vector
      */
     public final FloatAmountOfSubstanceVector asAmountOfSubstance(final AmountOfSubstanceUnit displayUnit)
@@ -349,7 +352,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a angularacceleration vector, and provide a display unit.
-     * @param displayUnit AngularAccelerationUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatAngularAccelerationVector; the current vector as a angularacceleration vector
      */
     public final FloatAngularAccelerationVector asAngularAcceleration(final AngularAccelerationUnit displayUnit)
@@ -374,7 +377,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a angularvelocity vector, and provide a display unit.
-     * @param displayUnit AngularVelocityUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatAngularVelocityVector; the current vector as a angularvelocity vector
      */
     public final FloatAngularVelocityVector asAngularVelocity(final AngularVelocityUnit displayUnit)
@@ -399,7 +402,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a area vector, and provide a display unit.
-     * @param displayUnit AreaUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatAreaVector; the current vector as a area vector
      */
     public final FloatAreaVector asArea(final AreaUnit displayUnit)
@@ -424,7 +427,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a catalyticactivity vector, and provide a display unit.
-     * @param displayUnit CatalyticActivityUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatCatalyticActivityVector; the current vector as a catalyticactivity vector
      */
     public final FloatCatalyticActivityVector asCatalyticActivity(final CatalyticActivityUnit displayUnit)
@@ -449,7 +452,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a density vector, and provide a display unit.
-     * @param displayUnit DensityUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatDensityVector; the current vector as a density vector
      */
     public final FloatDensityVector asDensity(final DensityUnit displayUnit)
@@ -474,7 +477,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a dimensionless vector, and provide a display unit.
-     * @param displayUnit DimensionlessUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatDimensionlessVector; the current vector as a dimensionless vector
      */
     public final FloatDimensionlessVector asDimensionless(final DimensionlessUnit displayUnit)
@@ -499,7 +502,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a electricalcapacitance vector, and provide a display unit.
-     * @param displayUnit ElectricalCapacitanceUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatElectricalCapacitanceVector; the current vector as a electricalcapacitance vector
      */
     public final FloatElectricalCapacitanceVector asElectricalCapacitance(final ElectricalCapacitanceUnit displayUnit)
@@ -525,7 +528,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a electricalcharge vector, and provide a display unit.
-     * @param displayUnit ElectricalChargeUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatElectricalChargeVector; the current vector as a electricalcharge vector
      */
     public final FloatElectricalChargeVector asElectricalCharge(final ElectricalChargeUnit displayUnit)
@@ -550,7 +553,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a electricalconductance vector, and provide a display unit.
-     * @param displayUnit ElectricalConductanceUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatElectricalConductanceVector; the current vector as a electricalconductance vector
      */
     public final FloatElectricalConductanceVector asElectricalConductance(final ElectricalConductanceUnit displayUnit)
@@ -576,7 +579,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a electricalcurrent vector, and provide a display unit.
-     * @param displayUnit ElectricalCurrentUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatElectricalCurrentVector; the current vector as a electricalcurrent vector
      */
     public final FloatElectricalCurrentVector asElectricalCurrent(final ElectricalCurrentUnit displayUnit)
@@ -601,7 +604,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a electricalinductance vector, and provide a display unit.
-     * @param displayUnit ElectricalInductanceUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatElectricalInductanceVector; the current vector as a electricalinductance vector
      */
     public final FloatElectricalInductanceVector asElectricalInductance(final ElectricalInductanceUnit displayUnit)
@@ -626,7 +629,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a electricalpotential vector, and provide a display unit.
-     * @param displayUnit ElectricalPotentialUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatElectricalPotentialVector; the current vector as a electricalpotential vector
      */
     public final FloatElectricalPotentialVector asElectricalPotential(final ElectricalPotentialUnit displayUnit)
@@ -651,7 +654,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a electricalresistance vector, and provide a display unit.
-     * @param displayUnit ElectricalResistanceUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatElectricalResistanceVector; the current vector as a electricalresistance vector
      */
     public final FloatElectricalResistanceVector asElectricalResistance(final ElectricalResistanceUnit displayUnit)
@@ -676,7 +679,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a energy vector, and provide a display unit.
-     * @param displayUnit EnergyUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatEnergyVector; the current vector as a energy vector
      */
     public final FloatEnergyVector asEnergy(final EnergyUnit displayUnit)
@@ -701,7 +704,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a equivalentdose vector, and provide a display unit.
-     * @param displayUnit EquivalentDoseUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatEquivalentDoseVector; the current vector as a equivalentdose vector
      */
     public final FloatEquivalentDoseVector asEquivalentDose(final EquivalentDoseUnit displayUnit)
@@ -726,7 +729,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a flowmass vector, and provide a display unit.
-     * @param displayUnit FlowMassUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatFlowMassVector; the current vector as a flowmass vector
      */
     public final FloatFlowMassVector asFlowMass(final FlowMassUnit displayUnit)
@@ -751,7 +754,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a flowvolume vector, and provide a display unit.
-     * @param displayUnit FlowVolumeUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatFlowVolumeVector; the current vector as a flowvolume vector
      */
     public final FloatFlowVolumeVector asFlowVolume(final FlowVolumeUnit displayUnit)
@@ -776,7 +779,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a force vector, and provide a display unit.
-     * @param displayUnit ForceUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatForceVector; the current vector as a force vector
      */
     public final FloatForceVector asForce(final ForceUnit displayUnit)
@@ -801,7 +804,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a frequency vector, and provide a display unit.
-     * @param displayUnit FrequencyUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatFrequencyVector; the current vector as a frequency vector
      */
     public final FloatFrequencyVector asFrequency(final FrequencyUnit displayUnit)
@@ -826,7 +829,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a illuminance vector, and provide a display unit.
-     * @param displayUnit IlluminanceUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatIlluminanceVector; the current vector as a illuminance vector
      */
     public final FloatIlluminanceVector asIlluminance(final IlluminanceUnit displayUnit)
@@ -851,7 +854,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a lineardensity vector, and provide a display unit.
-     * @param displayUnit LinearDensityUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatLinearDensityVector; the current vector as a lineardensity vector
      */
     public final FloatLinearDensityVector asLinearDensity(final LinearDensityUnit displayUnit)
@@ -876,7 +879,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a luminousflux vector, and provide a display unit.
-     * @param displayUnit LuminousFluxUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatLuminousFluxVector; the current vector as a luminousflux vector
      */
     public final FloatLuminousFluxVector asLuminousFlux(final LuminousFluxUnit displayUnit)
@@ -901,7 +904,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a luminousintensity vector, and provide a display unit.
-     * @param displayUnit LuminousIntensityUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatLuminousIntensityVector; the current vector as a luminousintensity vector
      */
     public final FloatLuminousIntensityVector asLuminousIntensity(final LuminousIntensityUnit displayUnit)
@@ -926,7 +929,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a magneticfluxdensity vector, and provide a display unit.
-     * @param displayUnit MagneticFluxDensityUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatMagneticFluxDensityVector; the current vector as a magneticfluxdensity vector
      */
     public final FloatMagneticFluxDensityVector asMagneticFluxDensity(final MagneticFluxDensityUnit displayUnit)
@@ -951,7 +954,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a magneticflux vector, and provide a display unit.
-     * @param displayUnit MagneticFluxUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatMagneticFluxVector; the current vector as a magneticflux vector
      */
     public final FloatMagneticFluxVector asMagneticFlux(final MagneticFluxUnit displayUnit)
@@ -976,7 +979,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a mass vector, and provide a display unit.
-     * @param displayUnit MassUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatMassVector; the current vector as a mass vector
      */
     public final FloatMassVector asMass(final MassUnit displayUnit)
@@ -1001,7 +1004,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a momentum vector, and provide a display unit.
-     * @param displayUnit MomentumUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatMomentumVector; the current vector as a momentum vector
      */
     public final FloatMomentumVector asMomentum(final MomentumUnit displayUnit)
@@ -1026,7 +1029,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a power vector, and provide a display unit.
-     * @param displayUnit PowerUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatPowerVector; the current vector as a power vector
      */
     public final FloatPowerVector asPower(final PowerUnit displayUnit)
@@ -1051,7 +1054,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a pressure vector, and provide a display unit.
-     * @param displayUnit PressureUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatPressureVector; the current vector as a pressure vector
      */
     public final FloatPressureVector asPressure(final PressureUnit displayUnit)
@@ -1076,7 +1079,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a radioactivity vector, and provide a display unit.
-     * @param displayUnit RadioActivityUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatRadioActivityVector; the current vector as a radioactivity vector
      */
     public final FloatRadioActivityVector asRadioActivity(final RadioActivityUnit displayUnit)
@@ -1101,7 +1104,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a solidangle vector, and provide a display unit.
-     * @param displayUnit SolidAngleUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatSolidAngleVector; the current vector as a solidangle vector
      */
     public final FloatSolidAngleVector asSolidAngle(final SolidAngleUnit displayUnit)
@@ -1126,7 +1129,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a speed vector, and provide a display unit.
-     * @param displayUnit SpeedUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatSpeedVector; the current vector as a speed vector
      */
     public final FloatSpeedVector asSpeed(final SpeedUnit displayUnit)
@@ -1151,7 +1154,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a torque vector, and provide a display unit.
-     * @param displayUnit TorqueUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatTorqueVector; the current vector as a torque vector
      */
     public final FloatTorqueVector asTorque(final TorqueUnit displayUnit)
@@ -1176,7 +1179,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a volume vector, and provide a display unit.
-     * @param displayUnit VolumeUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatVolumeVector; the current vector as a volume vector
      */
     public final FloatVolumeVector asVolume(final VolumeUnit displayUnit)
@@ -1201,7 +1204,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a angle vector, and provide a display unit.
-     * @param displayUnit AngleUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatAngleVector; the current vector as a angle vector
      */
     public final FloatAngleVector asAngle(final AngleUnit displayUnit)
@@ -1226,7 +1229,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a length vector, and provide a display unit.
-     * @param displayUnit LengthUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatLengthVector; the current vector as a length vector
      */
     public final FloatLengthVector asLength(final LengthUnit displayUnit)
@@ -1251,7 +1254,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a temperature vector, and provide a display unit.
-     * @param displayUnit TemperatureUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatTemperatureVector; the current vector as a temperature vector
      */
     public final FloatTemperatureVector asTemperature(final TemperatureUnit displayUnit)
@@ -1276,7 +1279,7 @@ public class FloatSIVector extends AbstractFloatVectorRel<SIUnit, FloatSIScalar,
 
     /**
      * Return the current vector as a duration vector, and provide a display unit.
-     * @param displayUnit DurationUnit; the unit in which the value will be displayed
+     * @param displayUnit the unit in which the value will be displayed
      * @return FloatDurationVector; the current vector as a duration vector
      */
     public final FloatDurationVector asDuration(final DurationUnit displayUnit)

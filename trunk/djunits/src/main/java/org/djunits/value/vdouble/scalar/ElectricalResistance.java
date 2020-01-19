@@ -21,7 +21,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
 public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResistanceUnit, ElectricalResistance>
 {
     /** */
@@ -220,7 +220,7 @@ public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResi
 
     /**
      * Calculate the division of ElectricalResistance and ElectricalResistance, which results in a Dimensionless scalar.
-     * @param v ElectricalResistance; ElectricalResistance scalar
+     * @param v ElectricalResistance scalar
      * @return Dimensionless scalar as a division of ElectricalResistance and ElectricalResistance
      */
     public final Dimensionless divide(final ElectricalResistance v)
@@ -231,7 +231,7 @@ public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResi
     /**
      * Calculate the multiplication of ElectricalResistance and ElectricalCurrent, which results in a ElectricalPotential
      * scalar.
-     * @param v ElectricalCurrent; ElectricalResistance scalar
+     * @param v ElectricalResistance scalar
      * @return ElectricalPotential scalar as a multiplication of ElectricalResistance and ElectricalCurrent
      */
     public final ElectricalPotential times(final ElectricalCurrent v)
@@ -241,7 +241,7 @@ public class ElectricalResistance extends AbstractDoubleScalarRel<ElectricalResi
 
     /**
      * Calculate the multiplication of ElectricalResistance and Duration, which results in a ElectricalInductance scalar.
-     * @param v Duration; ElectricalResistance scalar
+     * @param v ElectricalResistance scalar
      * @return ElectricalInductance scalar as a multiplication of ElectricalResistance and Duration
      */
     public final ElectricalInductance times(final Duration v)

@@ -24,13 +24,13 @@ public class SIDimensions implements Serializable
     public static final int NUMBER_DIMENSIONS = 9;
 
     /** The default denominator which consists of all "1"s. */
-    private static final byte[] UNIT_DENOMINATOR = new byte[] { 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+    private static final byte[] UNIT_DENOMINATOR = new byte[] {1, 1, 1, 1, 1, 1, 1, 1, 1};
 
     /** The abbreviations of the SI units we use in SIDimensions. */
-    public static final String[] SI_ABBREVIATIONS = new String[] { "rad", "sr", "kg", "m", "s", "A", "K", "mol", "cd" };
+    private static final String[] SI_ABBREVIATIONS = new String[] {"rad", "sr", "kg", "m", "s", "A", "K", "mol", "cd"};
 
     /** For parsing, the mol has to be parsed before the m, otherwise the "m" from "mol" is eaten; same for "s" and "sr". */
-    private static final int[] PARSE_ORDER = new int[] { 0, 1, 2, 7, 3, 4, 5, 6, 8 };
+    private static final int[] PARSE_ORDER = new int[] {0, 1, 2, 7, 3, 4, 5, 6, 8};
 
     /**
      * The (currently) 9 dimensions of the SI unit we distinguish: 0: angle (rad), 1: solid angle (sr), 2: mass (kg), 3: length
@@ -73,7 +73,7 @@ public class SIDimensions implements Serializable
      */
     protected SIDimensions(final byte[] numerator, final byte[] denominator)
     {
-        // TODO: all operators on fractional dimensions
+        // TODO all operators on fractional dimensions
         Throw.whenNull(numerator, "numerator cannot be null");
         Throw.whenNull(denominator, "denominator cannot be null");
         Throw.when(numerator.length != NUMBER_DIMENSIONS, SIRuntimeException.class, "numerator has wrong dimensionality");
@@ -128,7 +128,7 @@ public class SIDimensions implements Serializable
     {
         Throw.whenNull(siString, "siString cannot be null");
         String dimString = siString.replaceAll("[ .^]", "");
-        // TODO: fractional: ^(-1/2)
+        // TODO fractional: ^(-1/2)
         if (dimString.contains("/"))
         {
             String[] parts = dimString.split("\\/");
@@ -225,6 +225,15 @@ public class SIDimensions implements Serializable
             throw new UnitException("Trailing information in SI string " + siString);
         }
         return result;
+    }
+
+    /**
+     * Returns a safe copy of the SI abbreviations (a public static final String[] is mutable).
+     * @return String[]; a safe copy of the SI abbreviations
+     */
+    public String[] siAbbreviations()
+    {
+        return SI_ABBREVIATIONS.clone();
     }
 
     /**

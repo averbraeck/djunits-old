@@ -440,7 +440,7 @@ public class DoubleVectorDataSparse extends DoubleVectorData
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings({ "checkstyle:needbraces", "checkstyle:designforextension" })
+    @SuppressWarnings({"checkstyle:needbraces", "checkstyle:designforextension"})
     public boolean equals(final Object obj)
     {
         if (this == obj)

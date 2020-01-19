@@ -21,7 +21,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
 public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
 {
     /** */
@@ -211,7 +211,7 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
 
     /**
      * Calculate the division of Density and Density, which results in a Dimensionless scalar.
-     * @param v Density; Density scalar
+     * @param v Density scalar
      * @return Dimensionless scalar as a division of Density and Density
      */
     public final Dimensionless divide(final Density v)
@@ -221,7 +221,7 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
 
     /**
      * Calculate the multiplication of Density and Volume, which results in a Mass scalar.
-     * @param v Volume; Density scalar
+     * @param v Density scalar
      * @return Mass scalar as a multiplication of Density and Volume
      */
     public final Mass times(final Volume v)
@@ -231,7 +231,7 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
 
     /**
      * Calculate the multiplication of Density and FlowVolume, which results in a FlowMass scalar.
-     * @param v FlowVolume; Density scalar
+     * @param v Density scalar
      * @return FlowMass scalar as a multiplication of Density and FlowVolume
      */
     public final FlowMass times(final FlowVolume v)

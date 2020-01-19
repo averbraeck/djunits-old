@@ -21,7 +21,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
 public class FloatElectricalResistance extends AbstractFloatScalarRel<ElectricalResistanceUnit, FloatElectricalResistance>
 {
     /** */
@@ -56,7 +56,7 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
     /**
      * Construct FloatElectricalResistance scalar.
      * @param value float; the float value
-     * @param unit ElectricalResistanceUnit; unit for the float value
+     * @param unit unit for the float value
      */
     public FloatElectricalResistance(final float value, final ElectricalResistanceUnit unit)
     {
@@ -65,7 +65,7 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
 
     /**
      * Construct FloatElectricalResistance scalar.
-     * @param value FloatElectricalResistance; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatElectricalResistance(final FloatElectricalResistance value)
     {
@@ -75,7 +75,7 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
     /**
      * Construct FloatElectricalResistance scalar using a double value.
      * @param value double; the double value
-     * @param unit ElectricalResistanceUnit; unit for the resulting float value
+     * @param unit unit for the resulting float value
      */
     public FloatElectricalResistance(final double value, final ElectricalResistanceUnit unit)
     {
@@ -101,9 +101,9 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
 
     /**
      * Interpolate between two values.
-     * @param zero FloatElectricalResistance; the low value
-     * @param one FloatElectricalResistance; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatElectricalResistance interpolate(final FloatElectricalResistance zero,
@@ -115,8 +115,8 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 FloatElectricalResistance; the first scalar
-     * @param r2 FloatElectricalResistance; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatElectricalResistance max(final FloatElectricalResistance r1, final FloatElectricalResistance r2)
@@ -126,9 +126,9 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 FloatElectricalResistance; the first scalar
-     * @param r2 FloatElectricalResistance; the second scalar
-     * @param rn FloatElectricalResistance...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatElectricalResistance max(final FloatElectricalResistance r1, final FloatElectricalResistance r2,
@@ -147,8 +147,8 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 FloatElectricalResistance; the first scalar
-     * @param r2 FloatElectricalResistance; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatElectricalResistance min(final FloatElectricalResistance r1, final FloatElectricalResistance r2)
@@ -158,9 +158,9 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 FloatElectricalResistance; the first scalar
-     * @param r2 FloatElectricalResistance; the second scalar
-     * @param rn FloatElectricalResistance...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatElectricalResistance min(final FloatElectricalResistance r1, final FloatElectricalResistance r2,
@@ -209,7 +209,7 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
 
     /**
      * Returns a FloatElectricalResistance based on a value and the textual representation of the unit.
-     * @param value float; the value to use
+     * @param value double; the value to use
      * @param unitString String; the textual representation of the unit
      * @return FloatElectricalResistance; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
@@ -231,7 +231,7 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
     /**
      * Calculate the division of FloatElectricalResistance and FloatElectricalResistance, which results in a FloatDimensionless
      * scalar.
-     * @param v FloatElectricalResistance; FloatElectricalResistance scalar
+     * @param v FloatElectricalResistance scalar
      * @return FloatDimensionless scalar as a division of FloatElectricalResistance and FloatElectricalResistance
      */
     public final FloatDimensionless divide(final FloatElectricalResistance v)
@@ -242,7 +242,7 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
     /**
      * Calculate the multiplication of FloatElectricalResistance and FloatElectricalCurrent, which results in a
      * FloatElectricalPotential scalar.
-     * @param v FloatElectricalCurrent; FloatElectricalResistance scalar
+     * @param v FloatElectricalResistance scalar
      * @return FloatElectricalPotential scalar as a multiplication of FloatElectricalResistance and FloatElectricalCurrent
      */
     public final FloatElectricalPotential times(final FloatElectricalCurrent v)
@@ -253,7 +253,7 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
     /**
      * Calculate the multiplication of FloatElectricalResistance and FloatDuration, which results in a FloatElectricalInductance
      * scalar.
-     * @param v FloatDuration; FloatElectricalResistance scalar
+     * @param v FloatElectricalResistance scalar
      * @return FloatElectricalInductance scalar as a multiplication of FloatElectricalResistance and FloatDuration
      */
     public final FloatElectricalInductance times(final FloatDuration v)

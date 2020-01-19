@@ -21,7 +21,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
 public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstanceUnit, AmountOfSubstance>
 {
     /** */
@@ -214,7 +214,7 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
 
     /**
      * Calculate the division of AmountOfSubstance and AmountOfSubstance, which results in a Dimensionless scalar.
-     * @param v AmountOfSubstance; AmountOfSubstance scalar
+     * @param v AmountOfSubstance scalar
      * @return Dimensionless scalar as a division of AmountOfSubstance and AmountOfSubstance
      */
     public final Dimensionless divide(final AmountOfSubstance v)
@@ -224,7 +224,7 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
 
     /**
      * Calculate the division of AmountOfSubstance and CatalyticActivity, which results in a Duration scalar.
-     * @param v CatalyticActivity; AmountOfSubstance scalar
+     * @param v AmountOfSubstance scalar
      * @return Duration scalar as a division of AmountOfSubstance and CatalyticActivity
      */
     public final Duration divide(final CatalyticActivity v)
@@ -234,7 +234,7 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
 
     /**
      * Calculate the division of AmountOfSubstance and Duration, which results in a CatalyticActivity scalar.
-     * @param v Duration; AmountOfSubstance scalar
+     * @param v AmountOfSubstance scalar
      * @return CatalyticActivity scalar as a division of AmountOfSubstance and Duration
      */
     public final CatalyticActivity divide(final Duration v)
