@@ -93,7 +93,7 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
      */
     public static Position max(final Position a1, final Position a2)
     {
-        return (a1.gt(a2)) ? a1 : a2;
+        return a1.gt(a2) ? a1 : a2;
     }
 
     /**
@@ -105,7 +105,7 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
      */
     public static Position max(final Position a1, final Position a2, final Position... an)
     {
-        Position maxa = (a1.gt(a2)) ? a1 : a2;
+        Position maxa = a1.gt(a2) ? a1 : a2;
         for (Position a : an)
         {
             if (a.gt(maxa))
@@ -124,7 +124,7 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
      */
     public static Position min(final Position a1, final Position a2)
     {
-        return (a1.lt(a2)) ? a1 : a2;
+        return a1.lt(a2) ? a1 : a2;
     }
 
     /**
@@ -136,7 +136,7 @@ public class Position extends AbstractDoubleScalarAbs<PositionUnit, Position, Le
      */
     public static Position min(final Position a1, final Position a2, final Position... an)
     {
-        Position mina = (a1.lt(a2)) ? a1 : a2;
+        Position mina = a1.lt(a2) ? a1 : a2;
         for (Position a : an)
         {
             if (a.lt(mina))

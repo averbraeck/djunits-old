@@ -98,7 +98,7 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
      */
     public static Time max(final Time a1, final Time a2)
     {
-        return (a1.gt(a2)) ? a1 : a2;
+        return a1.gt(a2) ? a1 : a2;
     }
 
     /**
@@ -110,7 +110,7 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
      */
     public static Time max(final Time a1, final Time a2, final Time... an)
     {
-        Time maxa = (a1.gt(a2)) ? a1 : a2;
+        Time maxa = a1.gt(a2) ? a1 : a2;
         for (Time a : an)
         {
             if (a.gt(maxa))
@@ -129,7 +129,7 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
      */
     public static Time min(final Time a1, final Time a2)
     {
-        return (a1.lt(a2)) ? a1 : a2;
+        return a1.lt(a2) ? a1 : a2;
     }
 
     /**
@@ -141,7 +141,7 @@ public class Time extends AbstractDoubleScalarAbs<TimeUnit, Time, DurationUnit, 
      */
     public static Time min(final Time a1, final Time a2, final Time... an)
     {
-        Time mina = (a1.lt(a2)) ? a1 : a2;
+        Time mina = a1.lt(a2) ? a1 : a2;
         for (Time a : an)
         {
             if (a.lt(mina))

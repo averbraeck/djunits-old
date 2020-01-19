@@ -103,7 +103,7 @@ public class FloatTime extends AbstractFloatScalarAbs<TimeUnit, FloatTime, Durat
      */
     public static FloatTime max(final FloatTime a1, final FloatTime a2)
     {
-        return (a1.gt(a2)) ? a1 : a2;
+        return a1.gt(a2) ? a1 : a2;
     }
 
     /**
@@ -115,7 +115,7 @@ public class FloatTime extends AbstractFloatScalarAbs<TimeUnit, FloatTime, Durat
      */
     public static FloatTime max(final FloatTime a1, final FloatTime a2, final FloatTime... an)
     {
-        FloatTime maxa = (a1.gt(a2)) ? a1 : a2;
+        FloatTime maxa = a1.gt(a2) ? a1 : a2;
         for (FloatTime a : an)
         {
             if (a.gt(maxa))
@@ -134,7 +134,7 @@ public class FloatTime extends AbstractFloatScalarAbs<TimeUnit, FloatTime, Durat
      */
     public static FloatTime min(final FloatTime a1, final FloatTime a2)
     {
-        return (a1.lt(a2)) ? a1 : a2;
+        return a1.lt(a2) ? a1 : a2;
     }
 
     /**
@@ -146,7 +146,7 @@ public class FloatTime extends AbstractFloatScalarAbs<TimeUnit, FloatTime, Durat
      */
     public static FloatTime min(final FloatTime a1, final FloatTime a2, final FloatTime... an)
     {
-        FloatTime mina = (a1.lt(a2)) ? a1 : a2;
+        FloatTime mina = a1.lt(a2) ? a1 : a2;
         for (FloatTime a : an)
         {
             if (a.lt(mina))

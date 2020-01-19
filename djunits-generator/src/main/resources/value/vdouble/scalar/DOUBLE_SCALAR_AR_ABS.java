@@ -93,7 +93,7 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
      */
     public static %TypeAbs% max(final %TypeAbs% a1, final %TypeAbs% a2)
     {
-        return (a1.gt(a2)) ? a1 : a2;
+        return a1.gt(a2) ? a1 : a2;
     }
 
     /**
@@ -105,7 +105,7 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
      */
     public static %TypeAbs% max(final %TypeAbs% a1, final %TypeAbs% a2, final %TypeAbs%... an)
     {
-        %TypeAbs% maxa = (a1.gt(a2)) ? a1 : a2;
+        %TypeAbs% maxa = a1.gt(a2) ? a1 : a2;
         for (%TypeAbs% a : an)
         {
             if (a.gt(maxa))
@@ -124,7 +124,7 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
      */
     public static %TypeAbs% min(final %TypeAbs% a1, final %TypeAbs% a2)
     {
-        return (a1.lt(a2)) ? a1 : a2;
+        return a1.lt(a2) ? a1 : a2;
     }
 
     /**
@@ -136,7 +136,7 @@ public class %TypeAbs% extends AbstractDoubleScalarAbs<%TypeAbsUnit%, %TypeAbs%,
      */
     public static %TypeAbs% min(final %TypeAbs% a1, final %TypeAbs% a2, final %TypeAbs%... an)
     {
-        %TypeAbs% mina = (a1.lt(a2)) ? a1 : a2;
+        %TypeAbs% mina = a1.lt(a2) ? a1 : a2;
         for (%TypeAbs% a : an)
         {
             if (a.lt(mina))
