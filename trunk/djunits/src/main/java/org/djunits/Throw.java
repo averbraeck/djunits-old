@@ -13,19 +13,19 @@ import java.util.List;
  * <pre>
  * if (car == null)
  * {
- *     throw new NullPointerException(&quot;Car may not be null.&quot;);
+ *     throw new NullPointerException("Car may not be null.");
  * }
  * if (Double.isNaN(car.getPosition()))
  * {
- *     throw new IllegalArgumentException(&quot;Position of car &quot; + car + &quot; is NaN.&quot;);
+ *     throw new IllegalArgumentException("Position of car " + car + " is NaN.");
  * }
  * </pre>
  * 
  * we can write:
  * 
  * <pre>
- * Throw.whenNull(car, &quot;Car may not be null.&quot;);
- * Throw.when(Double.isNaN(car.getPosition()), IllegalArgumentException.class, &quot;Position of car %s is NaN.&quot;, car);
+ * Throw.whenNull(car, "Car may not be null.");
+ * Throw.when(Double.isNaN(car.getPosition()), IllegalArgumentException.class, "Position of car %s is NaN.", car);
  * </pre>
  * 
  * The exception message can be formatted with additional arguments, such that the overhead of building the exception message
@@ -54,7 +54,7 @@ public final class Throw
      * follows: <br>
      * 
      * <pre>
-     * Throw.when(Double.isNan(object.getValue()), IllegalArgumentException.class, &quot;Value may not be NaN.&quot;);
+     * Throw.when(Double.isNan(object.getValue()), IllegalArgumentException.class, "Value may not be NaN.");
      * </pre>
      * 
      * @param condition boolean; the condition to check; an exception will be thrown if this is <b>true</b>
@@ -77,7 +77,8 @@ public final class Throw
      * follows: <br>
      * 
      * <pre>
-     * Throw.when(Double.isNan(object.getValue()), IllegalArgumentException.class, &quot;Value may not be NaN for object %s.&quot;, object);
+     * Throw.when(Double.isNaN(object.getValue()), IllegalArgumentException.class, <br>
+     *     "Value may not be NaN for object %s.", object);
      * </pre>
      * 
      * @param condition boolean; the condition to check; an exception will be thrown if this is <b>true</b>
@@ -104,7 +105,7 @@ public final class Throw
      * 
      * <pre>
      * Throw.when(Double.isNan(object.getValue()), IllegalArgumentException.class,
-     *         &quot;Value may not be NaN for object %s with name %s.&quot;, object, name);
+     *         "Value may not be NaN for object %s with name %s.", object, name);
      * </pre>
      * 
      * @param condition boolean; the condition to check; an exception will be thrown if this is <b>true</b>
@@ -133,7 +134,7 @@ public final class Throw
      * 
      * <pre>
      * Throw.when(Double.isNan(object.getValue()), IllegalArgumentException.class,
-     *         &quot;Value may not be NaN for object %s with name %s and id %s.&quot;, object, name, id);
+     *         "Value may not be NaN for object %s with name %s and id %s.", object, name, id);
      * </pre>
      * 
      * @param condition boolean; the condition to check; an exception will be thrown if this is <b>true</b>
@@ -164,7 +165,7 @@ public final class Throw
      * 
      * <pre>
      * Throw.when(Double.isNan(object.getValue()), IllegalArgumentException.class,
-     *         &quot;Value may not be NaN for object %s with name %s, id %s and parent %s.&quot;, object, name, id, parent);
+     *         "Value may not be NaN for object %s with name %s, id %s and parent %s.", object, name, id, parent);
      * </pre>
      * 
      * @param condition boolean; the condition to check; an exception will be thrown if this is <b>true</b>
@@ -241,7 +242,7 @@ public final class Throw
      * version of the method returns its first parameter, so it can be used inside a constructor. Use e.g., as follows:
      * 
      * <pre>
-     * super(Throw.when(object, Double.isNan(object.getValue()), IllegalArgumentException.class, &quot;Value may not be NaN.&quot;));
+     * super(Throw.when(object, Double.isNan(object.getValue()), IllegalArgumentException.class, "Value may not be NaN."));
      * </pre>
      * 
      * @param object O; the object to return by this static method
@@ -269,7 +270,7 @@ public final class Throw
      * 
      * <pre>
      * super(Throw.when(object, Double.isNan(object.getValue()), IllegalArgumentException.class,
-     *         &quot;Value may not be NaN for object %s.&quot;, object));
+     *         "Value may not be NaN for object %s.", object));
      * </pre>
      * 
      * @param object O; the object to return by this static method
@@ -300,7 +301,7 @@ public final class Throw
      * 
      * <pre>
      * super(Throw.when(object, Double.isNan(object.getValue()), IllegalArgumentException.class,
-     *         &quot;Value may not be NaN for object %s with name %s.&quot;, object, name));
+     *         "Value may not be NaN for object %s with name %s.", object, name));
      * </pre>
      * 
      * @param object O; the object to return by this static method
@@ -333,7 +334,7 @@ public final class Throw
      * 
      * <pre>
      * super(Throw.when(object, Double.isNan(object.getValue()), IllegalArgumentException.class,
-     *         &quot;Value may not be NaN for object %s with name %s and id %s.&quot;, object, name, id));
+     *         "Value may not be NaN for object %s with name %s and id %s.", object, name, id));
      * </pre>
      * 
      * @param object O; the object to return by this static method
@@ -369,7 +370,7 @@ public final class Throw
      * 
      * <pre>
      * super(Throw.when(object, Double.isNan(object.getValue()), IllegalArgumentException.class,
-     *         &quot;Value may not be NaN for object %s with name %s, id %s and parent %s.&quot;, object, name, id, parent));
+     *         "Value may not be NaN for object %s with name %s, id %s and parent %s.", object, name, id, parent));
      * </pre>
      * 
      * @param object O; the object to return by this static method
@@ -385,6 +386,7 @@ public final class Throw
      * @param <O> the Object type to return
      * @return the object that was passed as the first parameter
      */
+    @SuppressWarnings("checkstyle:parameternumber")
     public static <T extends Throwable, O extends Object> O when(final O object, final boolean condition,
             final Class<T> throwableClass, final String message, final Object arg1, final Object arg2, final Object arg3,
             final Object... args) throws T
@@ -405,7 +407,7 @@ public final class Throw
      * Throw a NullPointerException if object is null, e.g. for pre- and postcondition checking. Use as follows: <br>
      * 
      * <pre>
-     * Throw.when(object.getValue(), &quot;Value may not be null.&quot;);
+     * Throw.when(object.getValue(), "Value may not be null.");
      * </pre>
      * 
      * @param object object to check; an exception will be thrown if this is <b>null</b>
@@ -427,7 +429,7 @@ public final class Throw
      * Throw a NullPointerException if object is null, e.g. for pre- and postcondition checking. Use as follows: <br>
      * 
      * <pre>
-     * Throw.whenNull(object.getValue(), &quot;Value may not be null for object %s.&quot;, object);
+     * Throw.whenNull(object.getValue(), "Value may not be null for object %s.", object);
      * </pre>
      * 
      * @param object object to check; an exception will be thrown if this is <b>null</b>
@@ -453,7 +455,7 @@ public final class Throw
      * Throw a NullPointerException if object is null, e.g. for pre- and postcondition checking. Use as follows: <br>
      * 
      * <pre>
-     * Throw.whenNull(object.getValue(), &quot;Value may not be null for object %s with name %s.&quot;, object, name);
+     * Throw.whenNull(object.getValue(), "Value may not be null for object %s with name %s.", object, name);
      * </pre>
      * 
      * @param object object to check; an exception will be thrown if this is <b>null</b>
@@ -481,7 +483,7 @@ public final class Throw
      * Throw a NullPointerException if object is null, e.g. for pre- and postcondition checking. Use as follows: <br>
      * 
      * <pre>
-     * Throw.whenNull(object.getValue(), &quot;Value may not be null for object %s with name %s and id %s.&quot;, object, name, id);
+     * Throw.whenNull(object.getValue(), "Value may not be null for object %s with name %s and id %s.", object, name, id);
      * </pre>
      * 
      * @param object object to check; an exception will be thrown if this is <b>null</b>
@@ -511,8 +513,8 @@ public final class Throw
      * Throw a NullPointerException if object is null, e.g. for pre- and postcondition checking. Use as follows: <br>
      * 
      * <pre>
-     * Throw.whenNull(object.getValue(), &quot;Value may not be null for object %s with name %s, id %s and parent %s.&quot;, object, name, id,
-     *         parent);
+     * Throw.whenNull(object.getValue(), "Value may not be null for object %s with name %s, id %s and parent %s.", <br>
+     *     object, name, id, parent);
      * </pre>
      * 
      * @param object object to check; an exception will be thrown if this is <b>null</b>
