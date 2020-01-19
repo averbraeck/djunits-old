@@ -23,7 +23,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCurrentUnit, FloatElectricalCurrent>
 {
     /** */
@@ -123,7 +123,7 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
      */
     public static FloatElectricalCurrent max(final FloatElectricalCurrent r1, final FloatElectricalCurrent r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -136,7 +136,7 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
     public static FloatElectricalCurrent max(final FloatElectricalCurrent r1, final FloatElectricalCurrent r2,
             final FloatElectricalCurrent... rn)
     {
-        FloatElectricalCurrent maxr = (r1.gt(r2)) ? r1 : r2;
+        FloatElectricalCurrent maxr = r1.gt(r2) ? r1 : r2;
         for (FloatElectricalCurrent r : rn)
         {
             if (r.gt(maxr))
@@ -155,7 +155,7 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
      */
     public static FloatElectricalCurrent min(final FloatElectricalCurrent r1, final FloatElectricalCurrent r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -168,7 +168,7 @@ public class FloatElectricalCurrent extends AbstractFloatScalarRel<ElectricalCur
     public static FloatElectricalCurrent min(final FloatElectricalCurrent r1, final FloatElectricalCurrent r2,
             final FloatElectricalCurrent... rn)
     {
-        FloatElectricalCurrent minr = (r1.lt(r2)) ? r1 : r2;
+        FloatElectricalCurrent minr = r1.lt(r2) ? r1 : r2;
         for (FloatElectricalCurrent r : rn)
         {
             if (r.lt(minr))

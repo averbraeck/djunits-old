@@ -28,7 +28,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Position, LengthUnit, Length>
 {
     /** */
@@ -119,7 +119,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
      */
     public static Length max(final Length r1, final Length r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -131,7 +131,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
      */
     public static Length max(final Length r1, final Length r2, final Length... rn)
     {
-        Length maxr = (r1.gt(r2)) ? r1 : r2;
+        Length maxr = r1.gt(r2) ? r1 : r2;
         for (Length r : rn)
         {
             if (r.gt(maxr))
@@ -150,7 +150,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
      */
     public static Length min(final Length r1, final Length r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -162,7 +162,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
      */
     public static Length min(final Length r1, final Length r2, final Length... rn)
     {
-        Length minr = (r1.lt(r2)) ? r1 : r2;
+        Length minr = r1.lt(r2) ? r1 : r2;
         for (Length r : rn)
         {
             if (r.lt(minr))

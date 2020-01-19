@@ -25,7 +25,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 {
     /** */
@@ -109,7 +109,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
      */
     public static Mass max(final Mass r1, final Mass r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -121,7 +121,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
      */
     public static Mass max(final Mass r1, final Mass r2, final Mass... rn)
     {
-        Mass maxr = (r1.gt(r2)) ? r1 : r2;
+        Mass maxr = r1.gt(r2) ? r1 : r2;
         for (Mass r : rn)
         {
             if (r.gt(maxr))
@@ -140,7 +140,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
      */
     public static Mass min(final Mass r1, final Mass r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -152,7 +152,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
      */
     public static Mass min(final Mass r1, final Mass r2, final Mass... rn)
     {
-        Mass minr = (r1.lt(r2)) ? r1 : r2;
+        Mass minr = r1.lt(r2) ? r1 : r2;
         for (Mass r : rn)
         {
             if (r.lt(minr))

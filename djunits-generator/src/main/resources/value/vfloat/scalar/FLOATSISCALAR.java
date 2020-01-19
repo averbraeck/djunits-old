@@ -86,7 +86,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public static FloatSIScalar max(final FloatSIScalar r1, final FloatSIScalar r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -98,7 +98,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public static FloatSIScalar max(final FloatSIScalar r1, final FloatSIScalar r2, final FloatSIScalar... rn)
     {
-        FloatSIScalar maxr = (r1.gt(r2)) ? r1 : r2;
+        FloatSIScalar maxr = r1.gt(r2) ? r1 : r2;
         for (FloatSIScalar r : rn)
         {
             if (r.gt(maxr))
@@ -117,7 +117,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public static FloatSIScalar min(final FloatSIScalar r1, final FloatSIScalar r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -129,7 +129,7 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      */
     public static FloatSIScalar min(final FloatSIScalar r1, final FloatSIScalar r2, final FloatSIScalar... rn)
     {
-        FloatSIScalar minr = (r1.lt(r2)) ? r1 : r2;
+        FloatSIScalar minr = r1.lt(r2) ? r1 : r2;
         for (FloatSIScalar r : rn)
         {
             if (r.lt(minr))

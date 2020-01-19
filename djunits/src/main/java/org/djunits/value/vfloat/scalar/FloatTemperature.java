@@ -21,7 +21,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class FloatTemperature extends
         AbstractFloatScalarRelWithAbs<AbsoluteTemperatureUnit, FloatAbsoluteTemperature, TemperatureUnit, FloatTemperature>
 {
@@ -124,7 +124,7 @@ public class FloatTemperature extends
      */
     public static FloatTemperature max(final FloatTemperature r1, final FloatTemperature r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -136,7 +136,7 @@ public class FloatTemperature extends
      */
     public static FloatTemperature max(final FloatTemperature r1, final FloatTemperature r2, final FloatTemperature... rn)
     {
-        FloatTemperature maxr = (r1.gt(r2)) ? r1 : r2;
+        FloatTemperature maxr = r1.gt(r2) ? r1 : r2;
         for (FloatTemperature r : rn)
         {
             if (r.gt(maxr))
@@ -155,7 +155,7 @@ public class FloatTemperature extends
      */
     public static FloatTemperature min(final FloatTemperature r1, final FloatTemperature r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -167,7 +167,7 @@ public class FloatTemperature extends
      */
     public static FloatTemperature min(final FloatTemperature r1, final FloatTemperature r2, final FloatTemperature... rn)
     {
-        FloatTemperature minr = (r1.lt(r2)) ? r1 : r2;
+        FloatTemperature minr = r1.lt(r2) ? r1 : r2;
         for (FloatTemperature r : rn)
         {
             if (r.lt(minr))

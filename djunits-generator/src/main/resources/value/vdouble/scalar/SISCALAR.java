@@ -90,7 +90,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public static SIScalar max(final SIScalar r1, final SIScalar r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -102,7 +102,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public static SIScalar max(final SIScalar r1, final SIScalar r2, final SIScalar... rn)
     {
-        SIScalar maxr = (r1.gt(r2)) ? r1 : r2;
+        SIScalar maxr = r1.gt(r2) ? r1 : r2;
         for (SIScalar r : rn)
         {
             if (r.gt(maxr))
@@ -121,7 +121,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public static SIScalar min(final SIScalar r1, final SIScalar r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -133,7 +133,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public static SIScalar min(final SIScalar r1, final SIScalar r2, final SIScalar... rn)
     {
-        SIScalar minr = (r1.lt(r2)) ? r1 : r2;
+        SIScalar minr = r1.lt(r2) ? r1 : r2;
         for (SIScalar r : rn)
         {
             if (r.lt(minr))

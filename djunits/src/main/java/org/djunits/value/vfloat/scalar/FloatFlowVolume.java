@@ -24,7 +24,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class FloatFlowVolume extends AbstractFloatScalarRel<FlowVolumeUnit, FloatFlowVolume>
 {
     /** */
@@ -119,7 +119,7 @@ public class FloatFlowVolume extends AbstractFloatScalarRel<FlowVolumeUnit, Floa
      */
     public static FloatFlowVolume max(final FloatFlowVolume r1, final FloatFlowVolume r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -131,7 +131,7 @@ public class FloatFlowVolume extends AbstractFloatScalarRel<FlowVolumeUnit, Floa
      */
     public static FloatFlowVolume max(final FloatFlowVolume r1, final FloatFlowVolume r2, final FloatFlowVolume... rn)
     {
-        FloatFlowVolume maxr = (r1.gt(r2)) ? r1 : r2;
+        FloatFlowVolume maxr = r1.gt(r2) ? r1 : r2;
         for (FloatFlowVolume r : rn)
         {
             if (r.gt(maxr))
@@ -150,7 +150,7 @@ public class FloatFlowVolume extends AbstractFloatScalarRel<FlowVolumeUnit, Floa
      */
     public static FloatFlowVolume min(final FloatFlowVolume r1, final FloatFlowVolume r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -162,7 +162,7 @@ public class FloatFlowVolume extends AbstractFloatScalarRel<FlowVolumeUnit, Floa
      */
     public static FloatFlowVolume min(final FloatFlowVolume r1, final FloatFlowVolume r2, final FloatFlowVolume... rn)
     {
-        FloatFlowVolume minr = (r1.lt(r2)) ? r1 : r2;
+        FloatFlowVolume minr = r1.lt(r2) ? r1 : r2;
         for (FloatFlowVolume r : rn)
         {
             if (r.lt(minr))

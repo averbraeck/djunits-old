@@ -19,7 +19,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit, FloatRadioActivity>
 {
     /** */
@@ -116,7 +116,7 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
      */
     public static FloatRadioActivity max(final FloatRadioActivity r1, final FloatRadioActivity r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -129,7 +129,7 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
     public static FloatRadioActivity max(final FloatRadioActivity r1, final FloatRadioActivity r2,
             final FloatRadioActivity... rn)
     {
-        FloatRadioActivity maxr = (r1.gt(r2)) ? r1 : r2;
+        FloatRadioActivity maxr = r1.gt(r2) ? r1 : r2;
         for (FloatRadioActivity r : rn)
         {
             if (r.gt(maxr))
@@ -148,7 +148,7 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
      */
     public static FloatRadioActivity min(final FloatRadioActivity r1, final FloatRadioActivity r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -161,7 +161,7 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
     public static FloatRadioActivity min(final FloatRadioActivity r1, final FloatRadioActivity r2,
             final FloatRadioActivity... rn)
     {
-        FloatRadioActivity minr = (r1.lt(r2)) ? r1 : r2;
+        FloatRadioActivity minr = r1.lt(r2) ? r1 : r2;
         for (FloatRadioActivity r : rn)
         {
             if (r.lt(minr))

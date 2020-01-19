@@ -117,7 +117,7 @@ public class Float%Type% extends AbstractFloatScalarRel<%Type%Unit, Float%Type%>
      */
     public static Float%Type% max(final Float%Type% r1, final Float%Type% r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -129,7 +129,7 @@ public class Float%Type% extends AbstractFloatScalarRel<%Type%Unit, Float%Type%>
      */
     public static Float%Type% max(final Float%Type% r1, final Float%Type% r2, final Float%Type%... rn)
     {
-        Float%Type% maxr = (r1.gt(r2)) ? r1 : r2;
+        Float%Type% maxr = r1.gt(r2) ? r1 : r2;
         for (Float%Type% r : rn)
         {
             if (r.gt(maxr))
@@ -148,7 +148,7 @@ public class Float%Type% extends AbstractFloatScalarRel<%Type%Unit, Float%Type%>
      */
     public static Float%Type% min(final Float%Type% r1, final Float%Type% r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -160,7 +160,7 @@ public class Float%Type% extends AbstractFloatScalarRel<%Type%Unit, Float%Type%>
      */
     public static Float%Type% min(final Float%Type% r1, final Float%Type% r2, final Float%Type%... rn)
     {
-        Float%Type% minr = (r1.lt(r2)) ? r1 : r2;
+        Float%Type% minr = r1.lt(r2) ? r1 : r2;
         for (Float%Type% r : rn)
         {
             if (r.lt(minr))

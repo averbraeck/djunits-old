@@ -111,7 +111,7 @@ public class %TypeRel% extends AbstractDoubleScalarRelWithAbs<%TypeAbsUnit%, %Ty
      */
     public static %TypeRel% max(final %TypeRel% r1, final %TypeRel% r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -123,7 +123,7 @@ public class %TypeRel% extends AbstractDoubleScalarRelWithAbs<%TypeAbsUnit%, %Ty
      */
     public static %TypeRel% max(final %TypeRel% r1, final %TypeRel% r2, final %TypeRel%... rn)
     {
-        %TypeRel% maxr = (r1.gt(r2)) ? r1 : r2;
+        %TypeRel% maxr = r1.gt(r2) ? r1 : r2;
         for (%TypeRel% r : rn)
         {
             if (r.gt(maxr))
@@ -142,7 +142,7 @@ public class %TypeRel% extends AbstractDoubleScalarRelWithAbs<%TypeAbsUnit%, %Ty
      */
     public static %TypeRel% min(final %TypeRel% r1, final %TypeRel% r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -154,7 +154,7 @@ public class %TypeRel% extends AbstractDoubleScalarRelWithAbs<%TypeAbsUnit%, %Ty
      */
     public static %TypeRel% min(final %TypeRel% r1, final %TypeRel% r2, final %TypeRel%... rn)
     {
-        %TypeRel% minr = (r1.lt(r2)) ? r1 : r2;
+        %TypeRel% minr = r1.lt(r2) ? r1 : r2;
         for (%TypeRel% r : rn)
         {
             if (r.lt(minr))

@@ -26,7 +26,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
 {
     /** */
@@ -121,7 +121,7 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
      */
     public static FloatForce max(final FloatForce r1, final FloatForce r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -133,7 +133,7 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
      */
     public static FloatForce max(final FloatForce r1, final FloatForce r2, final FloatForce... rn)
     {
-        FloatForce maxr = (r1.gt(r2)) ? r1 : r2;
+        FloatForce maxr = r1.gt(r2) ? r1 : r2;
         for (FloatForce r : rn)
         {
             if (r.gt(maxr))
@@ -152,7 +152,7 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
      */
     public static FloatForce min(final FloatForce r1, final FloatForce r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -164,7 +164,7 @@ public class FloatForce extends AbstractFloatScalarRel<ForceUnit, FloatForce>
      */
     public static FloatForce min(final FloatForce r1, final FloatForce r2, final FloatForce... rn)
     {
-        FloatForce minr = (r1.lt(r2)) ? r1 : r2;
+        FloatForce minr = r1.lt(r2) ? r1 : r2;
         for (FloatForce r : rn)
         {
             if (r.lt(minr))

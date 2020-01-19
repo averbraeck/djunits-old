@@ -114,7 +114,7 @@ public class Jerk extends AbstractDoubleScalarRel<JerkUnit, Jerk>
      */
     public static Jerk min(final Jerk r1, final Jerk r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -126,7 +126,7 @@ public class Jerk extends AbstractDoubleScalarRel<JerkUnit, Jerk>
      */
     public static Jerk min(final Jerk r1, final Jerk r2, final Jerk... rn)
     {
-        Jerk minr = (r1.lt(r2)) ? r1 : r2;
+        Jerk minr = r1.lt(r2) ? r1 : r2;
         for (Jerk r : rn)
         {
             if (r.lt(minr))

@@ -23,7 +23,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class AngularVelocity extends AbstractDoubleScalarRel<AngularVelocityUnit, AngularVelocity>
 {
     /** */
@@ -110,7 +110,7 @@ public class AngularVelocity extends AbstractDoubleScalarRel<AngularVelocityUnit
      */
     public static AngularVelocity max(final AngularVelocity r1, final AngularVelocity r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -122,7 +122,7 @@ public class AngularVelocity extends AbstractDoubleScalarRel<AngularVelocityUnit
      */
     public static AngularVelocity max(final AngularVelocity r1, final AngularVelocity r2, final AngularVelocity... rn)
     {
-        AngularVelocity maxr = (r1.gt(r2)) ? r1 : r2;
+        AngularVelocity maxr = r1.gt(r2) ? r1 : r2;
         for (AngularVelocity r : rn)
         {
             if (r.gt(maxr))
@@ -141,7 +141,7 @@ public class AngularVelocity extends AbstractDoubleScalarRel<AngularVelocityUnit
      */
     public static AngularVelocity min(final AngularVelocity r1, final AngularVelocity r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -153,7 +153,7 @@ public class AngularVelocity extends AbstractDoubleScalarRel<AngularVelocityUnit
      */
     public static AngularVelocity min(final AngularVelocity r1, final AngularVelocity r2, final AngularVelocity... rn)
     {
-        AngularVelocity minr = (r1.lt(r2)) ? r1 : r2;
+        AngularVelocity minr = r1.lt(r2) ? r1 : r2;
         for (AngularVelocity r : rn)
         {
             if (r.lt(minr))

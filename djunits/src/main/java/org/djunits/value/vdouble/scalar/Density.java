@@ -21,7 +21,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
 {
     /** */
@@ -106,7 +106,7 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
      */
     public static Density max(final Density r1, final Density r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -118,7 +118,7 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
      */
     public static Density max(final Density r1, final Density r2, final Density... rn)
     {
-        Density maxr = (r1.gt(r2)) ? r1 : r2;
+        Density maxr = r1.gt(r2) ? r1 : r2;
         for (Density r : rn)
         {
             if (r.gt(maxr))
@@ -137,7 +137,7 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
      */
     public static Density min(final Density r1, final Density r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -149,7 +149,7 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
      */
     public static Density min(final Density r1, final Density r2, final Density... rn)
     {
-        Density minr = (r1.lt(r2)) ? r1 : r2;
+        Density minr = r1.lt(r2) ? r1 : r2;
         for (Density r : rn)
         {
             if (r.lt(minr))

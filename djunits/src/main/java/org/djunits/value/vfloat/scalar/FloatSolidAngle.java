@@ -20,7 +20,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class FloatSolidAngle extends AbstractFloatScalarRel<SolidAngleUnit, FloatSolidAngle>
 {
     /** */
@@ -115,7 +115,7 @@ public class FloatSolidAngle extends AbstractFloatScalarRel<SolidAngleUnit, Floa
      */
     public static FloatSolidAngle max(final FloatSolidAngle r1, final FloatSolidAngle r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -127,7 +127,7 @@ public class FloatSolidAngle extends AbstractFloatScalarRel<SolidAngleUnit, Floa
      */
     public static FloatSolidAngle max(final FloatSolidAngle r1, final FloatSolidAngle r2, final FloatSolidAngle... rn)
     {
-        FloatSolidAngle maxr = (r1.gt(r2)) ? r1 : r2;
+        FloatSolidAngle maxr = r1.gt(r2) ? r1 : r2;
         for (FloatSolidAngle r : rn)
         {
             if (r.gt(maxr))
@@ -146,7 +146,7 @@ public class FloatSolidAngle extends AbstractFloatScalarRel<SolidAngleUnit, Floa
      */
     public static FloatSolidAngle min(final FloatSolidAngle r1, final FloatSolidAngle r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -158,7 +158,7 @@ public class FloatSolidAngle extends AbstractFloatScalarRel<SolidAngleUnit, Floa
      */
     public static FloatSolidAngle min(final FloatSolidAngle r1, final FloatSolidAngle r2, final FloatSolidAngle... rn)
     {
-        FloatSolidAngle minr = (r1.lt(r2)) ? r1 : r2;
+        FloatSolidAngle minr = r1.lt(r2) ? r1 : r2;
         for (FloatSolidAngle r : rn)
         {
             if (r.lt(minr))

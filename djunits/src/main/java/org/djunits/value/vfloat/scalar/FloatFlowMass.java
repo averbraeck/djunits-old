@@ -25,7 +25,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlowMass>
 {
     /** */
@@ -120,7 +120,7 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
      */
     public static FloatFlowMass max(final FloatFlowMass r1, final FloatFlowMass r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -132,7 +132,7 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
      */
     public static FloatFlowMass max(final FloatFlowMass r1, final FloatFlowMass r2, final FloatFlowMass... rn)
     {
-        FloatFlowMass maxr = (r1.gt(r2)) ? r1 : r2;
+        FloatFlowMass maxr = r1.gt(r2) ? r1 : r2;
         for (FloatFlowMass r : rn)
         {
             if (r.gt(maxr))
@@ -151,7 +151,7 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
      */
     public static FloatFlowMass min(final FloatFlowMass r1, final FloatFlowMass r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -163,7 +163,7 @@ public class FloatFlowMass extends AbstractFloatScalarRel<FlowMassUnit, FloatFlo
      */
     public static FloatFlowMass min(final FloatFlowMass r1, final FloatFlowMass r2, final FloatFlowMass... rn)
     {
-        FloatFlowMass minr = (r1.lt(r2)) ? r1 : r2;
+        FloatFlowMass minr = r1.lt(r2) ? r1 : r2;
         for (FloatFlowMass r : rn)
         {
             if (r.lt(minr))

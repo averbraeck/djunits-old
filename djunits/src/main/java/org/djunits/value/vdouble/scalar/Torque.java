@@ -25,7 +25,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
 {
     /** */
@@ -109,7 +109,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
      */
     public static Torque max(final Torque r1, final Torque r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -121,7 +121,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
      */
     public static Torque max(final Torque r1, final Torque r2, final Torque... rn)
     {
-        Torque maxr = (r1.gt(r2)) ? r1 : r2;
+        Torque maxr = r1.gt(r2) ? r1 : r2;
         for (Torque r : rn)
         {
             if (r.gt(maxr))
@@ -140,7 +140,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
      */
     public static Torque min(final Torque r1, final Torque r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -152,7 +152,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
      */
     public static Torque min(final Torque r1, final Torque r2, final Torque... rn)
     {
-        Torque minr = (r1.lt(r2)) ? r1 : r2;
+        Torque minr = r1.lt(r2) ? r1 : r2;
         for (Torque r : rn)
         {
             if (r.lt(minr))

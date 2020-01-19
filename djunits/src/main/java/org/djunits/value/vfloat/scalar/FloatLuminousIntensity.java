@@ -20,7 +20,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousIntensityUnit, FloatLuminousIntensity>
 {
     /** */
@@ -120,7 +120,7 @@ public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousInten
      */
     public static FloatLuminousIntensity max(final FloatLuminousIntensity r1, final FloatLuminousIntensity r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -133,7 +133,7 @@ public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousInten
     public static FloatLuminousIntensity max(final FloatLuminousIntensity r1, final FloatLuminousIntensity r2,
             final FloatLuminousIntensity... rn)
     {
-        FloatLuminousIntensity maxr = (r1.gt(r2)) ? r1 : r2;
+        FloatLuminousIntensity maxr = r1.gt(r2) ? r1 : r2;
         for (FloatLuminousIntensity r : rn)
         {
             if (r.gt(maxr))
@@ -152,7 +152,7 @@ public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousInten
      */
     public static FloatLuminousIntensity min(final FloatLuminousIntensity r1, final FloatLuminousIntensity r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -165,7 +165,7 @@ public class FloatLuminousIntensity extends AbstractFloatScalarRel<LuminousInten
     public static FloatLuminousIntensity min(final FloatLuminousIntensity r1, final FloatLuminousIntensity r2,
             final FloatLuminousIntensity... rn)
     {
-        FloatLuminousIntensity minr = (r1.lt(r2)) ? r1 : r2;
+        FloatLuminousIntensity minr = r1.lt(r2) ? r1 : r2;
         for (FloatLuminousIntensity r : rn)
         {
             if (r.lt(minr))

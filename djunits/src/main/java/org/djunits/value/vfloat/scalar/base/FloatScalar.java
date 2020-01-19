@@ -316,7 +316,7 @@ public abstract class FloatScalar
      */
     public static <U extends Unit<U>, T extends FloatScalarInterface<U, T>> T min(final T r1, final T r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -331,7 +331,7 @@ public abstract class FloatScalar
     @SafeVarargs
     public static <U extends Unit<U>, T extends FloatScalarInterface<U, T>> T min(final T r1, final T r2, final T... rn)
     {
-        T minr = (r1.lt(r2)) ? r1 : r2;
+        T minr = r1.lt(r2) ? r1 : r2;
         for (T r : rn)
         {
             if (r.lt(minr))

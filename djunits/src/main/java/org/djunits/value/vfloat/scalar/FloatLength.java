@@ -28,7 +28,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, FloatPosition, LengthUnit, FloatLength>
 {
     /** */
@@ -130,7 +130,7 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
      */
     public static FloatLength max(final FloatLength r1, final FloatLength r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -142,7 +142,7 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
      */
     public static FloatLength max(final FloatLength r1, final FloatLength r2, final FloatLength... rn)
     {
-        FloatLength maxr = (r1.gt(r2)) ? r1 : r2;
+        FloatLength maxr = r1.gt(r2) ? r1 : r2;
         for (FloatLength r : rn)
         {
             if (r.gt(maxr))
@@ -161,7 +161,7 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
      */
     public static FloatLength min(final FloatLength r1, final FloatLength r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -173,7 +173,7 @@ public class FloatLength extends AbstractFloatScalarRelWithAbs<PositionUnit, Flo
      */
     public static FloatLength min(final FloatLength r1, final FloatLength r2, final FloatLength... rn)
     {
-        FloatLength minr = (r1.lt(r2)) ? r1 : r2;
+        FloatLength minr = r1.lt(r2) ? r1 : r2;
         for (FloatLength r : rn)
         {
             if (r.lt(minr))

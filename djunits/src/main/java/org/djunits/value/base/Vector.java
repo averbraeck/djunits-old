@@ -68,7 +68,7 @@ public interface Vector<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
      * @param <S> the scalar type belonging to the vector type
      * @param <RV> the relative vector type with this unit
      */
-    public interface Rel<U extends Unit<U>, S extends Scalar<U, S>, RV extends Vector.Rel<U, S, RV>>
+    interface Rel<U extends Unit<U>, S extends Scalar<U, S>, RV extends Vector.Rel<U, S, RV>>
             extends Vector<U, S, RV>, Relative<U, RV>
     {
         /**
@@ -128,7 +128,7 @@ public interface Vector<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
      * @param <R> the relative scalar type belonging to the relative vector type
      * @param <RV> the relative vector type with this unit
      */
-    public interface RelWithAbs<AU extends AbsoluteLinearUnit<AU, RU>, A extends Scalar<AU, A>,
+    interface RelWithAbs<AU extends AbsoluteLinearUnit<AU, RU>, A extends Scalar<AU, A>,
             AV extends Vector.Abs<AU, A, AV, RU, R, RV>, RU extends Unit<RU>, R extends Scalar<RU, R>,
             RV extends Vector.RelWithAbs<AU, A, AV, RU, R, RV>> extends Rel<RU, R, RV>
     {
@@ -163,9 +163,9 @@ public interface Vector<U extends Unit<U>, S extends Scalar<U, S>, V extends Vec
      * @param <R> the relative scalar type belonging to the relative vector type
      * @param <RV> the relative vector type with this unit
      */
-    public interface Abs<AU extends AbsoluteLinearUnit<AU, RU>, A extends Scalar<AU, A>,
-            AV extends Vector.Abs<AU, A, AV, RU, R, RV>, RU extends Unit<RU>, R extends Scalar<RU, R>,
-            RV extends Vector.RelWithAbs<AU, A, AV, RU, R, RV>> extends Vector<AU, A, AV>, Absolute
+    interface Abs<AU extends AbsoluteLinearUnit<AU, RU>, A extends Scalar<AU, A>, AV extends Vector.Abs<AU, A, AV, RU, R, RV>,
+            RU extends Unit<RU>, R extends Scalar<RU, R>, RV extends Vector.RelWithAbs<AU, A, AV, RU, R, RV>>
+            extends Vector<AU, A, AV>, Absolute
     {
         /**
          * Add a relative vector to this absolute vector. A new absolute vector is returned. The display unit of the new vector

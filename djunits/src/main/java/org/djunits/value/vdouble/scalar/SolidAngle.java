@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class SolidAngle extends AbstractDoubleScalarRel<SolidAngleUnit, SolidAngle>
 {
     /** */
@@ -105,7 +105,7 @@ public class SolidAngle extends AbstractDoubleScalarRel<SolidAngleUnit, SolidAng
      */
     public static SolidAngle max(final SolidAngle r1, final SolidAngle r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -117,7 +117,7 @@ public class SolidAngle extends AbstractDoubleScalarRel<SolidAngleUnit, SolidAng
      */
     public static SolidAngle max(final SolidAngle r1, final SolidAngle r2, final SolidAngle... rn)
     {
-        SolidAngle maxr = (r1.gt(r2)) ? r1 : r2;
+        SolidAngle maxr = r1.gt(r2) ? r1 : r2;
         for (SolidAngle r : rn)
         {
             if (r.gt(maxr))
@@ -136,7 +136,7 @@ public class SolidAngle extends AbstractDoubleScalarRel<SolidAngleUnit, SolidAng
      */
     public static SolidAngle min(final SolidAngle r1, final SolidAngle r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -148,7 +148,7 @@ public class SolidAngle extends AbstractDoubleScalarRel<SolidAngleUnit, SolidAng
      */
     public static SolidAngle min(final SolidAngle r1, final SolidAngle r2, final SolidAngle... rn)
     {
-        SolidAngle minr = (r1.lt(r2)) ? r1 : r2;
+        SolidAngle minr = r1.lt(r2) ? r1 : r2;
         for (SolidAngle r : rn)
         {
             if (r.lt(minr))
