@@ -72,7 +72,7 @@ public class FloatValueOfStringOfTest
             Scalar<?, ?> scalarSI = null;
             try
             {
-                scalarSI = (Scalar<?, ?>) instantiateSIMethod.invoke(scalarClass, new Float(10.0f));
+                scalarSI = (Scalar<?, ?>) instantiateSIMethod.invoke(scalarClass, Float.valueOf(10.0f));
             }
             catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
             {
@@ -109,7 +109,7 @@ public class FloatValueOfStringOfTest
                     {
                         continue;
                     }
-                    scalar = (FloatScalarInterface<?, ?>) constructScalar.newInstance(new Float(1.0f), unit);
+                    scalar = (FloatScalarInterface<?, ?>) constructScalar.newInstance(Float.valueOf(1.0f), unit);
                     assertEquals("Float construction with unit + get in unit failed for " + unit.toString(), 1.0,
                             scalar.getInUnit(), 0.01);
                 }

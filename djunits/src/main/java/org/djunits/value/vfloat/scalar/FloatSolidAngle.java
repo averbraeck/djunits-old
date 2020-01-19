@@ -20,7 +20,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
 public class FloatSolidAngle extends AbstractFloatScalarRel<SolidAngleUnit, FloatSolidAngle>
 {
     /** */
@@ -51,7 +51,7 @@ public class FloatSolidAngle extends AbstractFloatScalarRel<SolidAngleUnit, Floa
     /**
      * Construct FloatSolidAngle scalar.
      * @param value float; the float value
-     * @param unit SolidAngleUnit; unit for the float value
+     * @param unit unit for the float value
      */
     public FloatSolidAngle(final float value, final SolidAngleUnit unit)
     {
@@ -60,7 +60,7 @@ public class FloatSolidAngle extends AbstractFloatScalarRel<SolidAngleUnit, Floa
 
     /**
      * Construct FloatSolidAngle scalar.
-     * @param value FloatSolidAngle; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatSolidAngle(final FloatSolidAngle value)
     {
@@ -70,7 +70,7 @@ public class FloatSolidAngle extends AbstractFloatScalarRel<SolidAngleUnit, Floa
     /**
      * Construct FloatSolidAngle scalar using a double value.
      * @param value double; the double value
-     * @param unit SolidAngleUnit; unit for the resulting float value
+     * @param unit unit for the resulting float value
      */
     public FloatSolidAngle(final double value, final SolidAngleUnit unit)
     {
@@ -96,9 +96,9 @@ public class FloatSolidAngle extends AbstractFloatScalarRel<SolidAngleUnit, Floa
 
     /**
      * Interpolate between two values.
-     * @param zero FloatSolidAngle; the low value
-     * @param one FloatSolidAngle; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatSolidAngle interpolate(final FloatSolidAngle zero, final FloatSolidAngle one, final float ratio)
@@ -109,8 +109,8 @@ public class FloatSolidAngle extends AbstractFloatScalarRel<SolidAngleUnit, Floa
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 FloatSolidAngle; the first scalar
-     * @param r2 FloatSolidAngle; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatSolidAngle max(final FloatSolidAngle r1, final FloatSolidAngle r2)
@@ -120,9 +120,9 @@ public class FloatSolidAngle extends AbstractFloatScalarRel<SolidAngleUnit, Floa
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 FloatSolidAngle; the first scalar
-     * @param r2 FloatSolidAngle; the second scalar
-     * @param rn FloatSolidAngle...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatSolidAngle max(final FloatSolidAngle r1, final FloatSolidAngle r2, final FloatSolidAngle... rn)
@@ -140,8 +140,8 @@ public class FloatSolidAngle extends AbstractFloatScalarRel<SolidAngleUnit, Floa
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 FloatSolidAngle; the first scalar
-     * @param r2 FloatSolidAngle; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatSolidAngle min(final FloatSolidAngle r1, final FloatSolidAngle r2)
@@ -151,9 +151,9 @@ public class FloatSolidAngle extends AbstractFloatScalarRel<SolidAngleUnit, Floa
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 FloatSolidAngle; the first scalar
-     * @param r2 FloatSolidAngle; the second scalar
-     * @param rn FloatSolidAngle...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatSolidAngle min(final FloatSolidAngle r1, final FloatSolidAngle r2, final FloatSolidAngle... rn)
@@ -200,7 +200,7 @@ public class FloatSolidAngle extends AbstractFloatScalarRel<SolidAngleUnit, Floa
 
     /**
      * Returns a FloatSolidAngle based on a value and the textual representation of the unit.
-     * @param value float; the value to use
+     * @param value double; the value to use
      * @param unitString String; the textual representation of the unit
      * @return FloatSolidAngle; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
@@ -220,7 +220,7 @@ public class FloatSolidAngle extends AbstractFloatScalarRel<SolidAngleUnit, Floa
 
     /**
      * Calculate the division of FloatSolidAngle and FloatSolidAngle, which results in a FloatDimensionless scalar.
-     * @param v FloatSolidAngle; FloatSolidAngle scalar
+     * @param v FloatSolidAngle scalar
      * @return FloatDimensionless scalar as a division of FloatSolidAngle and FloatSolidAngle
      */
     public final FloatDimensionless divide(final FloatSolidAngle v)
@@ -230,7 +230,7 @@ public class FloatSolidAngle extends AbstractFloatScalarRel<SolidAngleUnit, Floa
 
     /**
      * Calculate the multiplication of FloatSolidAngle and FloatLuminousIntensity, which results in a FloatLuminousFlux scalar.
-     * @param v FloatLuminousIntensity; FloatSolidAngle scalar
+     * @param v FloatSolidAngle scalar
      * @return FloatLuminousFlux scalar as a multiplication of FloatSolidAngle and FloatLuminousIntensity
      */
     public final FloatLuminousFlux times(final FloatLuminousIntensity v)

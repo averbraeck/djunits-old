@@ -364,7 +364,7 @@ public abstract class AbstractDoubleVector<U extends Unit<U>, S extends Abstract
 
     /** {@inheritDoc} */
     @Override
-    @SuppressWarnings({ "checkstyle:designforextension", "checkstyle:needbraces" })
+    @SuppressWarnings({"checkstyle:designforextension", "checkstyle:needbraces"})
     public boolean equals(final Object obj)
     {
         if (this == obj)

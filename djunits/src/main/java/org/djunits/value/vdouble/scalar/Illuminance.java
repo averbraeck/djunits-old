@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
 public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illuminance>
 {
     /** */
@@ -210,7 +210,7 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
 
     /**
      * Calculate the division of Illuminance and Illuminance, which results in a Dimensionless scalar.
-     * @param v Illuminance; Illuminance scalar
+     * @param v Illuminance scalar
      * @return Dimensionless scalar as a division of Illuminance and Illuminance
      */
     public final Dimensionless divide(final Illuminance v)
@@ -220,7 +220,7 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
 
     /**
      * Calculate the multiplication of Illuminance and Area, which results in a LuminousFlux scalar.
-     * @param v Area; Illuminance scalar
+     * @param v Illuminance scalar
      * @return LuminousFlux scalar as a multiplication of Illuminance and Area
      */
     public final LuminousFlux times(final Area v)

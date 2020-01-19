@@ -19,7 +19,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
 public class FloatAbsorbedDose extends AbstractFloatScalarRel<AbsorbedDoseUnit, FloatAbsorbedDose>
 {
     /** */
@@ -52,7 +52,7 @@ public class FloatAbsorbedDose extends AbstractFloatScalarRel<AbsorbedDoseUnit, 
     /**
      * Construct FloatAbsorbedDose scalar.
      * @param value float; the float value
-     * @param unit AbsorbedDoseUnit; unit for the float value
+     * @param unit unit for the float value
      */
     public FloatAbsorbedDose(final float value, final AbsorbedDoseUnit unit)
     {
@@ -61,7 +61,7 @@ public class FloatAbsorbedDose extends AbstractFloatScalarRel<AbsorbedDoseUnit, 
 
     /**
      * Construct FloatAbsorbedDose scalar.
-     * @param value FloatAbsorbedDose; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatAbsorbedDose(final FloatAbsorbedDose value)
     {
@@ -71,7 +71,7 @@ public class FloatAbsorbedDose extends AbstractFloatScalarRel<AbsorbedDoseUnit, 
     /**
      * Construct FloatAbsorbedDose scalar using a double value.
      * @param value double; the double value
-     * @param unit AbsorbedDoseUnit; unit for the resulting float value
+     * @param unit unit for the resulting float value
      */
     public FloatAbsorbedDose(final double value, final AbsorbedDoseUnit unit)
     {
@@ -97,9 +97,9 @@ public class FloatAbsorbedDose extends AbstractFloatScalarRel<AbsorbedDoseUnit, 
 
     /**
      * Interpolate between two values.
-     * @param zero FloatAbsorbedDose; the low value
-     * @param one FloatAbsorbedDose; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatAbsorbedDose interpolate(final FloatAbsorbedDose zero, final FloatAbsorbedDose one, final float ratio)
@@ -110,8 +110,8 @@ public class FloatAbsorbedDose extends AbstractFloatScalarRel<AbsorbedDoseUnit, 
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 FloatAbsorbedDose; the first scalar
-     * @param r2 FloatAbsorbedDose; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatAbsorbedDose max(final FloatAbsorbedDose r1, final FloatAbsorbedDose r2)
@@ -121,9 +121,9 @@ public class FloatAbsorbedDose extends AbstractFloatScalarRel<AbsorbedDoseUnit, 
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 FloatAbsorbedDose; the first scalar
-     * @param r2 FloatAbsorbedDose; the second scalar
-     * @param rn FloatAbsorbedDose...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatAbsorbedDose max(final FloatAbsorbedDose r1, final FloatAbsorbedDose r2, final FloatAbsorbedDose... rn)
@@ -141,8 +141,8 @@ public class FloatAbsorbedDose extends AbstractFloatScalarRel<AbsorbedDoseUnit, 
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 FloatAbsorbedDose; the first scalar
-     * @param r2 FloatAbsorbedDose; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatAbsorbedDose min(final FloatAbsorbedDose r1, final FloatAbsorbedDose r2)
@@ -152,9 +152,9 @@ public class FloatAbsorbedDose extends AbstractFloatScalarRel<AbsorbedDoseUnit, 
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 FloatAbsorbedDose; the first scalar
-     * @param r2 FloatAbsorbedDose; the second scalar
-     * @param rn FloatAbsorbedDose...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatAbsorbedDose min(final FloatAbsorbedDose r1, final FloatAbsorbedDose r2, final FloatAbsorbedDose... rn)
@@ -201,7 +201,7 @@ public class FloatAbsorbedDose extends AbstractFloatScalarRel<AbsorbedDoseUnit, 
 
     /**
      * Returns a FloatAbsorbedDose based on a value and the textual representation of the unit.
-     * @param value float; the value to use
+     * @param value double; the value to use
      * @param unitString String; the textual representation of the unit
      * @return FloatAbsorbedDose; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
@@ -222,7 +222,7 @@ public class FloatAbsorbedDose extends AbstractFloatScalarRel<AbsorbedDoseUnit, 
 
     /**
      * Calculate the division of FloatAbsorbedDose and FloatAbsorbedDose, which results in a FloatDimensionless scalar.
-     * @param v FloatAbsorbedDose; FloatAbsorbedDose scalar
+     * @param v FloatAbsorbedDose scalar
      * @return FloatDimensionless scalar as a division of FloatAbsorbedDose and FloatAbsorbedDose
      */
     public final FloatDimensionless divide(final FloatAbsorbedDose v)

@@ -1,5 +1,6 @@
 package org.djunits.unit.si;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -29,95 +30,103 @@ public enum SIPrefixes
     KILO;
 
     /** The SI prefixes and their values for the "UNIT" settings. */
-    public static final Map<String, SIPrefix> UNIT_PREFIXES = new LinkedHashMap<>();
+    public static final Map<String, SIPrefix> UNIT_PREFIXES;
 
     /** The SI prefixes and their values for the "PER_UNIT" settings. */
-    public static final Map<String, SIPrefix> PER_UNIT_PREFIXES = new LinkedHashMap<>();
+    public static final Map<String, SIPrefix> PER_UNIT_PREFIXES;
 
     /** The larger than 1 SI prefixes and their values for the "UNIT_POS" settings. */
-    public static final Map<String, SIPrefix> UNIT_POS_PREFIXES = new LinkedHashMap<>();
+    public static final Map<String, SIPrefix> UNIT_POS_PREFIXES;
 
     /** The SI prefixes and their values for the "KILO" settings. */
-    public static final Map<String, SIPrefix> KILO_PREFIXES = new LinkedHashMap<>();
+    public static final Map<String, SIPrefix> KILO_PREFIXES;
 
     static
     {
-        UNIT_PREFIXES.put("y", new SIPrefix("y", "yocto", 1.0E-24));
-        UNIT_PREFIXES.put("z", new SIPrefix("z", "zepto", 1.0E-21));
-        UNIT_PREFIXES.put("a", new SIPrefix("a", "atto", 1.0E-18));
-        UNIT_PREFIXES.put("f", new SIPrefix("f", "femto", 1.0E-15));
-        UNIT_PREFIXES.put("p", new SIPrefix("p", "pico", 1.0E-12));
-        UNIT_PREFIXES.put("n", new SIPrefix("n", "nano", 1.0E-9));
-        UNIT_PREFIXES.put("mu", new SIPrefix("mu", "micro", 1.0E-6, "\u03BC"));
-        UNIT_PREFIXES.put("m", new SIPrefix("m", "milli", 1.0E-3));
-        UNIT_PREFIXES.put("c", new SIPrefix("c", "centi", 1.0E-2));
-        UNIT_PREFIXES.put("d", new SIPrefix("d", "deci", 1.0E-1));
+        Map<String, SIPrefix> unitPrefixes = new LinkedHashMap<>();
+        unitPrefixes.put("y", new SIPrefix("y", "yocto", 1.0E-24));
+        unitPrefixes.put("z", new SIPrefix("z", "zepto", 1.0E-21));
+        unitPrefixes.put("a", new SIPrefix("a", "atto", 1.0E-18));
+        unitPrefixes.put("f", new SIPrefix("f", "femto", 1.0E-15));
+        unitPrefixes.put("p", new SIPrefix("p", "pico", 1.0E-12));
+        unitPrefixes.put("n", new SIPrefix("n", "nano", 1.0E-9));
+        unitPrefixes.put("mu", new SIPrefix("mu", "micro", 1.0E-6, "\u03BC"));
+        unitPrefixes.put("m", new SIPrefix("m", "milli", 1.0E-3));
+        unitPrefixes.put("c", new SIPrefix("c", "centi", 1.0E-2));
+        unitPrefixes.put("d", new SIPrefix("d", "deci", 1.0E-1));
 
-        UNIT_PREFIXES.put("da", new SIPrefix("da", "deca", 1.0E1));
-        UNIT_PREFIXES.put("h", new SIPrefix("h", "hecto", 1.0E2));
-        UNIT_PREFIXES.put("k", new SIPrefix("k", "kilo", 1.0E3));
-        UNIT_PREFIXES.put("M", new SIPrefix("M", "mega", 1.0E6));
-        UNIT_PREFIXES.put("G", new SIPrefix("G", "giga", 1.0E9));
-        UNIT_PREFIXES.put("T", new SIPrefix("T", "tera", 1.0E12));
-        UNIT_PREFIXES.put("P", new SIPrefix("P", "peta", 1.0E15));
-        UNIT_PREFIXES.put("E", new SIPrefix("E", "exa", 1.0E18));
-        UNIT_PREFIXES.put("Z", new SIPrefix("Z", "zetta", 1.0E21));
-        UNIT_PREFIXES.put("Y", new SIPrefix("Y", "yotta", 1.0E24));
+        unitPrefixes.put("da", new SIPrefix("da", "deca", 1.0E1));
+        unitPrefixes.put("h", new SIPrefix("h", "hecto", 1.0E2));
+        unitPrefixes.put("k", new SIPrefix("k", "kilo", 1.0E3));
+        unitPrefixes.put("M", new SIPrefix("M", "mega", 1.0E6));
+        unitPrefixes.put("G", new SIPrefix("G", "giga", 1.0E9));
+        unitPrefixes.put("T", new SIPrefix("T", "tera", 1.0E12));
+        unitPrefixes.put("P", new SIPrefix("P", "peta", 1.0E15));
+        unitPrefixes.put("E", new SIPrefix("E", "exa", 1.0E18));
+        unitPrefixes.put("Z", new SIPrefix("Z", "zetta", 1.0E21));
+        unitPrefixes.put("Y", new SIPrefix("Y", "yotta", 1.0E24));
+        UNIT_PREFIXES = Collections.unmodifiableMap(unitPrefixes);
+        
+        Map<String, SIPrefix> perUnitPrefixes = new LinkedHashMap<>();
+        perUnitPrefixes.put("/y", new SIPrefix("/y", "per yocto", 1.0E24));
+        perUnitPrefixes.put("/z", new SIPrefix("/z", "per zepto", 1.0E21));
+        perUnitPrefixes.put("/a", new SIPrefix("/a", "per atto", 1.0E18));
+        perUnitPrefixes.put("/f", new SIPrefix("/f", "per femto", 1.0E15));
+        perUnitPrefixes.put("/p", new SIPrefix("/p", "per pico", 1.0E12));
+        perUnitPrefixes.put("/n", new SIPrefix("/n", "per nano", 1.0E9));
+        perUnitPrefixes.put("/mu", new SIPrefix("/mu", "per micro", 1.0E6, "/\u03BC"));
+        perUnitPrefixes.put("/m", new SIPrefix("/m", "per milli", 1.0E3));
+        perUnitPrefixes.put("/c", new SIPrefix("/c", "per centi", 1.0E2));
+        perUnitPrefixes.put("/d", new SIPrefix("/d", "per deci", 1.0E1));
 
-        PER_UNIT_PREFIXES.put("/y", new SIPrefix("/y", "per yocto", 1.0E24));
-        PER_UNIT_PREFIXES.put("/z", new SIPrefix("/z", "per zepto", 1.0E21));
-        PER_UNIT_PREFIXES.put("/a", new SIPrefix("/a", "per atto", 1.0E18));
-        PER_UNIT_PREFIXES.put("/f", new SIPrefix("/f", "per femto", 1.0E15));
-        PER_UNIT_PREFIXES.put("/p", new SIPrefix("/p", "per pico", 1.0E12));
-        PER_UNIT_PREFIXES.put("/n", new SIPrefix("/n", "per nano", 1.0E9));
-        PER_UNIT_PREFIXES.put("/mu", new SIPrefix("/mu", "per micro", 1.0E6, "/\u03BC"));
-        PER_UNIT_PREFIXES.put("/m", new SIPrefix("/m", "per milli", 1.0E3));
-        PER_UNIT_PREFIXES.put("/c", new SIPrefix("/c", "per centi", 1.0E2));
-        PER_UNIT_PREFIXES.put("/d", new SIPrefix("/d", "per deci", 1.0E1));
+        perUnitPrefixes.put("/da", new SIPrefix("/da", "per deca", 1.0E-1));
+        perUnitPrefixes.put("/h", new SIPrefix("/h", "per hecto", 1.0E-2));
+        perUnitPrefixes.put("/k", new SIPrefix("/k", "per kilo", 1.0E-3));
+        perUnitPrefixes.put("/M", new SIPrefix("/M", "per mega", 1.0E-6));
+        perUnitPrefixes.put("/G", new SIPrefix("/G", "per giga", 1.0E-9));
+        perUnitPrefixes.put("/T", new SIPrefix("/T", "per tera", 1.0E-12));
+        perUnitPrefixes.put("/P", new SIPrefix("/P", "per peta", 1.0E-15));
+        perUnitPrefixes.put("/E", new SIPrefix("/E", "per exa", 1.0E-18));
+        perUnitPrefixes.put("/Z", new SIPrefix("/Z", "per zetta", 1.0E-21));
+        perUnitPrefixes.put("/Y", new SIPrefix("/Y", "per yotta", 1.0E-24));
+        PER_UNIT_PREFIXES = Collections.unmodifiableMap(perUnitPrefixes);
 
-        PER_UNIT_PREFIXES.put("/da", new SIPrefix("/da", "per deca", 1.0E-1));
-        PER_UNIT_PREFIXES.put("/h", new SIPrefix("/h", "per hecto", 1.0E-2));
-        PER_UNIT_PREFIXES.put("/k", new SIPrefix("/k", "per kilo", 1.0E-3));
-        PER_UNIT_PREFIXES.put("/M", new SIPrefix("/M", "per mega", 1.0E-6));
-        PER_UNIT_PREFIXES.put("/G", new SIPrefix("/G", "per giga", 1.0E-9));
-        PER_UNIT_PREFIXES.put("/T", new SIPrefix("/T", "per tera", 1.0E-12));
-        PER_UNIT_PREFIXES.put("/P", new SIPrefix("/P", "per peta", 1.0E-15));
-        PER_UNIT_PREFIXES.put("/E", new SIPrefix("/E", "per exa", 1.0E-18));
-        PER_UNIT_PREFIXES.put("/Z", new SIPrefix("/Z", "per zetta", 1.0E-21));
-        PER_UNIT_PREFIXES.put("/Y", new SIPrefix("/Y", "per yotta", 1.0E-24));
+        Map<String, SIPrefix> unitPosPrefixes = new LinkedHashMap<>();
+        unitPosPrefixes.put("da", new SIPrefix("da", "deca", 1.0E1));
+        unitPosPrefixes.put("h", new SIPrefix("h", "hecto", 1.0E2));
+        unitPosPrefixes.put("k", new SIPrefix("k", "kilo", 1.0E3));
+        unitPosPrefixes.put("M", new SIPrefix("M", "mega", 1.0E6));
+        unitPosPrefixes.put("G", new SIPrefix("G", "giga", 1.0E9));
+        unitPosPrefixes.put("T", new SIPrefix("T", "tera", 1.0E12));
+        unitPosPrefixes.put("P", new SIPrefix("P", "peta", 1.0E15));
+        unitPosPrefixes.put("E", new SIPrefix("E", "exa", 1.0E18));
+        unitPosPrefixes.put("Z", new SIPrefix("Z", "zetta", 1.0E21));
+        unitPosPrefixes.put("Y", new SIPrefix("Y", "yotta", 1.0E24));
+        UNIT_POS_PREFIXES = Collections.unmodifiableMap(unitPosPrefixes);
 
-        UNIT_POS_PREFIXES.put("da", new SIPrefix("da", "deca", 1.0E1));
-        UNIT_POS_PREFIXES.put("h", new SIPrefix("h", "hecto", 1.0E2));
-        UNIT_POS_PREFIXES.put("k", new SIPrefix("k", "kilo", 1.0E3));
-        UNIT_POS_PREFIXES.put("M", new SIPrefix("M", "mega", 1.0E6));
-        UNIT_POS_PREFIXES.put("G", new SIPrefix("G", "giga", 1.0E9));
-        UNIT_POS_PREFIXES.put("T", new SIPrefix("T", "tera", 1.0E12));
-        UNIT_POS_PREFIXES.put("P", new SIPrefix("P", "peta", 1.0E15));
-        UNIT_POS_PREFIXES.put("E", new SIPrefix("E", "exa", 1.0E18));
-        UNIT_POS_PREFIXES.put("Z", new SIPrefix("Z", "zetta", 1.0E21));
-        UNIT_POS_PREFIXES.put("Y", new SIPrefix("Y", "yotta", 1.0E24));
+        Map<String, SIPrefix> kiloPrefixes = new LinkedHashMap<>();
+        kiloPrefixes.put("y", new SIPrefix("y", "yocto", 1.0E-27));
+        kiloPrefixes.put("z", new SIPrefix("z", "zepto", 1.0E-24));
+        kiloPrefixes.put("a", new SIPrefix("a", "atto", 1.0E-21));
+        kiloPrefixes.put("f", new SIPrefix("f", "femto", 1.0E-18));
+        kiloPrefixes.put("p", new SIPrefix("p", "pico", 1.0E-15));
+        kiloPrefixes.put("n", new SIPrefix("n", "nano", 1.0E-12));
+        kiloPrefixes.put("mu", new SIPrefix("mu", "micro", 1.0E-9, "\u03BC"));
+        kiloPrefixes.put("m", new SIPrefix("m", "milli", 1.0E-6));
+        kiloPrefixes.put("c", new SIPrefix("c", "centi", 1.0E-5));
+        kiloPrefixes.put("d", new SIPrefix("d", "deci", 1.0E-4));
+        kiloPrefixes.put("", new SIPrefix("", "", 1.0E-3));
+        kiloPrefixes.put("da", new SIPrefix("da", "deca", 1.0E-2));
+        kiloPrefixes.put("h", new SIPrefix("h", "hecto", 1.0E-1));
 
-        KILO_PREFIXES.put("y", new SIPrefix("y", "yocto", 1.0E-27));
-        KILO_PREFIXES.put("z", new SIPrefix("z", "zepto", 1.0E-24));
-        KILO_PREFIXES.put("a", new SIPrefix("a", "atto", 1.0E-21));
-        KILO_PREFIXES.put("f", new SIPrefix("f", "femto", 1.0E-18));
-        KILO_PREFIXES.put("p", new SIPrefix("p", "pico", 1.0E-15));
-        KILO_PREFIXES.put("n", new SIPrefix("n", "nano", 1.0E-12));
-        KILO_PREFIXES.put("mu", new SIPrefix("mu", "micro", 1.0E-9, "\u03BC"));
-        KILO_PREFIXES.put("m", new SIPrefix("m", "milli", 1.0E-6));
-        KILO_PREFIXES.put("c", new SIPrefix("c", "centi", 1.0E-5));
-        KILO_PREFIXES.put("d", new SIPrefix("d", "deci", 1.0E-4));
-        KILO_PREFIXES.put("", new SIPrefix("", "", 1.0E-3));
-        KILO_PREFIXES.put("da", new SIPrefix("da", "deca", 1.0E-2));
-        KILO_PREFIXES.put("h", new SIPrefix("h", "hecto", 1.0E-1));
-
-        KILO_PREFIXES.put("M", new SIPrefix("M", "mega", 1.0E3));
-        KILO_PREFIXES.put("G", new SIPrefix("G", "giga", 1.0E6));
-        KILO_PREFIXES.put("T", new SIPrefix("T", "tera", 1.0E9));
-        KILO_PREFIXES.put("P", new SIPrefix("P", "peta", 1.0E12));
-        KILO_PREFIXES.put("E", new SIPrefix("E", "exa", 1.0E15));
-        KILO_PREFIXES.put("Z", new SIPrefix("Z", "zetta", 1.0E18));
-        KILO_PREFIXES.put("Y", new SIPrefix("Y", "yotta", 1.0E21));
+        kiloPrefixes.put("M", new SIPrefix("M", "mega", 1.0E3));
+        kiloPrefixes.put("G", new SIPrefix("G", "giga", 1.0E6));
+        kiloPrefixes.put("T", new SIPrefix("T", "tera", 1.0E9));
+        kiloPrefixes.put("P", new SIPrefix("P", "peta", 1.0E12));
+        kiloPrefixes.put("E", new SIPrefix("E", "exa", 1.0E15));
+        kiloPrefixes.put("Z", new SIPrefix("Z", "zetta", 1.0E18));
+        kiloPrefixes.put("Y", new SIPrefix("Y", "yotta", 1.0E21));
+        KILO_PREFIXES = Collections.unmodifiableMap(kiloPrefixes);
     }
 
     /**

@@ -25,7 +25,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
 public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
 {
     /** */
@@ -214,7 +214,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
 
     /**
      * Calculate the division of Torque and Torque, which results in a Dimensionless scalar.
-     * @param v Torque; Torque scalar
+     * @param v Torque scalar
      * @return Dimensionless scalar as a division of Torque and Torque
      */
     public final Dimensionless divide(final Torque v)
@@ -224,7 +224,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
 
     /**
      * Calculate the division of Torque and Force, which results in a Length scalar.
-     * @param v Force; Torque scalar
+     * @param v Torque scalar
      * @return Length scalar as a division of Torque and Force
      */
     public final Length divide(final Force v)
@@ -234,7 +234,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
 
     /**
      * Calculate the division of Torque and Length, which results in a Force scalar.
-     * @param v Length; Torque scalar
+     * @param v Torque scalar
      * @return Force scalar as a division of Torque and Length
      */
     public final Force divide(final Length v)
@@ -244,7 +244,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
 
     /**
      * Calculate the multiplication of Torque and LinearDensity, which results in a Force scalar.
-     * @param v LinearDensity; Torque scalar
+     * @param v Torque scalar
      * @return Force scalar as a multiplication of Torque and LinearDensity
      */
     public final Force times(final LinearDensity v)
@@ -254,7 +254,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
 
     /**
      * Calculate the division of Torque and Duration, which results in a Power scalar.
-     * @param v Duration; Torque scalar
+     * @param v Torque scalar
      * @return Power scalar as a division of Torque and Duration
      */
     public final Power divide(final Duration v)
@@ -264,7 +264,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
 
     /**
      * Calculate the division of Torque and Power, which results in a Duration scalar.
-     * @param v Power; Torque scalar
+     * @param v Torque scalar
      * @return Duration scalar as a division of Torque and Power
      */
     public final Duration divide(final Power v)
@@ -274,7 +274,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
 
     /**
      * Calculate the multiplication of Torque and Frequency, which results in a Power scalar.
-     * @param v Frequency; Torque scalar
+     * @param v Torque scalar
      * @return Power scalar as a multiplication of Torque and Frequency
      */
     public final Power times(final Frequency v)
@@ -284,7 +284,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
 
     /**
      * Calculate the division of Torque and Volume, which results in a Pressure scalar.
-     * @param v Volume; Torque scalar
+     * @param v Torque scalar
      * @return Pressure scalar as a division of Torque and Volume
      */
     public final Pressure divide(final Volume v)
@@ -294,7 +294,7 @@ public class Torque extends AbstractDoubleScalarRel<TorqueUnit, Torque>
 
     /**
      * Calculate the division of Torque and Pressure, which results in a Volume scalar.
-     * @param v Pressure; Torque scalar
+     * @param v Torque scalar
      * @return Volume scalar as a division of Torque and Pressure
      */
     public final Volume divide(final Pressure v)

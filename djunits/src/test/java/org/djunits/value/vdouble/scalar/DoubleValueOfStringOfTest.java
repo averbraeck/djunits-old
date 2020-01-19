@@ -71,7 +71,7 @@ public class DoubleValueOfStringOfTest
             Scalar<?, ?> scalarSI = null;
             try
             {
-                scalarSI = (Scalar<?, ?>) instantiateSIMethod.invoke(scalarClass, new Double(10.0));
+                scalarSI = (Scalar<?, ?>) instantiateSIMethod.invoke(scalarClass, Double.valueOf(10.0));
             }
             catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException exception)
             {
@@ -98,7 +98,7 @@ public class DoubleValueOfStringOfTest
                 DoubleScalarInterface<?, ?> scalar = null;
                 try
                 {
-                    scalar = (DoubleScalarInterface<?, ?>) constructScalar.newInstance(new Double(1.0), unit);
+                    scalar = (DoubleScalarInterface<?, ?>) constructScalar.newInstance(Double.valueOf(1.0), unit);
                     assertEquals(1.0, scalar.getInUnit(), 0.01);
                 }
                 catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException

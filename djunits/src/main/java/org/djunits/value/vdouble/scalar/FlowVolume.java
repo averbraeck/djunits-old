@@ -24,7 +24,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
 public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolume>
 {
     /** */
@@ -214,7 +214,7 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
 
     /**
      * Calculate the division of FlowVolume and FlowVolume, which results in a Dimensionless scalar.
-     * @param v FlowVolume; FlowVolume scalar
+     * @param v FlowVolume scalar
      * @return Dimensionless scalar as a division of FlowVolume and FlowVolume
      */
     public final Dimensionless divide(final FlowVolume v)
@@ -224,7 +224,7 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
 
     /**
      * Calculate the multiplication of FlowVolume and Duration, which results in a Volume scalar.
-     * @param v Duration; FlowVolume scalar
+     * @param v FlowVolume scalar
      * @return Volume scalar as a multiplication of FlowVolume and Duration
      */
     public final Volume times(final Duration v)
@@ -234,7 +234,7 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
 
     /**
      * Calculate the division of FlowVolume and Frequency, which results in a Volume scalar.
-     * @param v Frequency; FlowVolume scalar
+     * @param v FlowVolume scalar
      * @return Volume scalar as a division of FlowVolume and Frequency
      */
     public final Volume divide(final Frequency v)
@@ -244,7 +244,7 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
 
     /**
      * Calculate the division of FlowVolume and Volume, which results in a Frequency scalar.
-     * @param v Volume; FlowVolume scalar
+     * @param v FlowVolume scalar
      * @return Frequency scalar as a division of FlowVolume and Volume
      */
     public final Frequency divide(final Volume v)
@@ -254,7 +254,7 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
 
     /**
      * Calculate the division of FlowVolume and Area, which results in a Speed scalar.
-     * @param v Area; FlowVolume scalar
+     * @param v FlowVolume scalar
      * @return Speed scalar as a division of FlowVolume and Area
      */
     public final Speed divide(final Area v)
@@ -264,7 +264,7 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
 
     /**
      * Calculate the division of FlowVolume and Speed, which results in a Area scalar.
-     * @param v Speed; FlowVolume scalar
+     * @param v FlowVolume scalar
      * @return Area scalar as a division of FlowVolume and Speed
      */
     public final Area divide(final Speed v)
@@ -274,7 +274,7 @@ public class FlowVolume extends AbstractDoubleScalarRel<FlowVolumeUnit, FlowVolu
 
     /**
      * Calculate the multiplication of FlowVolume and Density, which results in a FlowMass scalar.
-     * @param v Density; FlowVolume scalar
+     * @param v FlowVolume scalar
      * @return FlowMass scalar as a multiplication of FlowVolume and Density
      */
     public final FlowMass times(final Density v)

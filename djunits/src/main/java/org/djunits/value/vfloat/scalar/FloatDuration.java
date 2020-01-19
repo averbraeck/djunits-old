@@ -32,7 +32,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-17T10:29:24.905971300Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
 public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, FloatTime, DurationUnit, FloatDuration>
 {
     /** */
@@ -117,7 +117,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
      * Interpolate between two values.
      * @param zero FloatDuration; the low value
      * @param one FloatDuration; the high value
-     * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return FloatDuration; a Scalar at the ratio between
      */
     public static FloatDuration interpolate(final FloatDuration zero, final FloatDuration one, final float ratio)
@@ -219,7 +219,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
 
     /**
      * Returns a FloatDuration based on a value and the textual representation of the unit.
-     * @param value float; the value to use
+     * @param value double; the value to use
      * @param unitString String; the textual representation of the unit
      * @return FloatDuration; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
@@ -239,7 +239,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
 
     /**
      * Calculate the division of FloatDuration and FloatDuration, which results in a FloatDimensionless scalar.
-     * @param v FloatDuration; FloatDuration scalar
+     * @param v FloatDuration scalar
      * @return FloatDimensionless scalar as a division of FloatDuration and FloatDuration
      */
     public final FloatDimensionless divide(final FloatDuration v)
@@ -249,7 +249,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
 
     /**
      * Calculate the multiplication of FloatDuration and FloatFrequency, which results in a FloatDimensionless scalar.
-     * @param v FloatFrequency; FloatDuration scalar
+     * @param v FloatDuration scalar
      * @return FloatDimensionless scalar as a multiplication of FloatDuration and FloatFrequency
      */
     public final FloatDimensionless times(final FloatFrequency v)
@@ -260,7 +260,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
     /**
      * Calculate the multiplication of FloatDuration and FloatElectricalCurrent, which results in a FloatElectricalCharge
      * scalar.
-     * @param v FloatElectricalCurrent; FloatDuration scalar
+     * @param v FloatDuration scalar
      * @return FloatElectricalCharge scalar as a multiplication of FloatDuration and FloatElectricalCurrent
      */
     public final FloatElectricalCharge times(final FloatElectricalCurrent v)
@@ -270,7 +270,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
 
     /**
      * Calculate the multiplication of FloatDuration and FloatFlowMass, which results in a FloatMass scalar.
-     * @param v FloatFlowMass; FloatDuration scalar
+     * @param v FloatDuration scalar
      * @return FloatMass scalar as a multiplication of FloatDuration and FloatFlowMass
      */
     public final FloatMass times(final FloatFlowMass v)
@@ -280,7 +280,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
 
     /**
      * Calculate the multiplication of FloatDuration and FloatFlowVolume, which results in a FloatVolume scalar.
-     * @param v FloatFlowVolume; FloatDuration scalar
+     * @param v FloatDuration scalar
      * @return FloatVolume scalar as a multiplication of FloatDuration and FloatFlowVolume
      */
     public final FloatVolume times(final FloatFlowVolume v)
@@ -290,7 +290,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
 
     /**
      * Calculate the multiplication of FloatDuration and FloatAcceleration, which results in a FloatSpeed scalar.
-     * @param v FloatAcceleration; FloatDuration scalar
+     * @param v FloatDuration scalar
      * @return FloatSpeed scalar as a multiplication of FloatDuration and FloatAcceleration
      */
     public final FloatSpeed times(final FloatAcceleration v)
@@ -300,7 +300,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
 
     /**
      * Calculate the multiplication of FloatDuration and FloatPower, which results in a FloatEnergy scalar.
-     * @param v FloatPower; FloatDuration scalar
+     * @param v FloatDuration scalar
      * @return FloatEnergy scalar as a multiplication of FloatDuration and FloatPower
      */
     public final FloatEnergy times(final FloatPower v)
@@ -310,7 +310,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
 
     /**
      * Calculate the multiplication of FloatDuration and FloatSpeed, which results in a FloatLength scalar.
-     * @param v FloatSpeed; FloatDuration scalar
+     * @param v FloatDuration scalar
      * @return FloatLength scalar as a multiplication of FloatDuration and FloatSpeed
      */
     public final FloatLength times(final FloatSpeed v)
@@ -320,7 +320,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
 
     /**
      * Calculate the multiplication of FloatDuration and FloatElectricalPotential, which results in a FloatMagneticFlux scalar.
-     * @param v FloatElectricalPotential; FloatDuration scalar
+     * @param v FloatDuration scalar
      * @return FloatMagneticFlux scalar as a multiplication of FloatDuration and FloatElectricalPotential
      */
     public final FloatMagneticFlux times(final FloatElectricalPotential v)
@@ -331,7 +331,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
     /**
      * Calculate the multiplication of FloatDuration and FloatElectricalResistance, which results in a FloatElectricalInductance
      * scalar.
-     * @param v FloatElectricalResistance; FloatDuration scalar
+     * @param v FloatDuration scalar
      * @return FloatElectricalInductance scalar as a multiplication of FloatDuration and FloatElectricalResistance
      */
     public final FloatElectricalInductance times(final FloatElectricalResistance v)
@@ -342,7 +342,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
     /**
      * Calculate the multiplication of FloatDuration and FloatElectricalConductance, which results in a
      * FloatElectricalCapacitance scalar.
-     * @param v FloatElectricalConductance; FloatDuration scalar
+     * @param v FloatDuration scalar
      * @return FloatElectricalCapacitance scalar as a multiplication of FloatDuration and FloatElectricalConductance
      */
     public final FloatElectricalCapacitance times(final FloatElectricalConductance v)
@@ -352,7 +352,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
 
     /**
      * Calculate the multiplication of FloatDuration and FloatAngularVelocity, which results in a FloatAngle scalar.
-     * @param v FloatAngularVelocity; FloatDuration scalar
+     * @param v FloatDuration scalar
      * @return FloatAngle scalar as a multiplication of FloatDuration and FloatAngularVelocity
      */
     public final FloatAngle times(final FloatAngularVelocity v)
@@ -363,7 +363,7 @@ public class FloatDuration extends AbstractFloatScalarRelWithAbs<TimeUnit, Float
     /**
      * Calculate the multiplication of FloatDuration and FloatAngularAcceleration, which results in a FloatAngularVelocity
      * scalar.
-     * @param v FloatAngularAcceleration; FloatDuration scalar
+     * @param v FloatDuration scalar
      * @return FloatAngularVelocity scalar as a multiplication of FloatDuration and FloatAngularAcceleration
      */
     public final FloatAngularVelocity times(final FloatAngularAcceleration v)

@@ -17,19 +17,19 @@ import java.util.ResourceBundle;
 public class Localization implements Serializable
 {
     /** */
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 20200118L;
 
     /** filename without .properties, to be found in src/main/resources folder. */
     private final String bundleNamePrefix;
 
     /** the resource bundle. */
-    private ResourceBundle resourceBundle;
+    private transient ResourceBundle resourceBundle;
 
     /** current locale. */
     private Locale currentLocale = null;
 
     /** the default resource bundle. */
-    private ResourceBundle defaultResourceBundle;
+    private transient ResourceBundle defaultResourceBundle;
 
     /** default locale. */
     private Locale defaultLocale = null;

@@ -9,6 +9,7 @@ import org.djunits.unit.*;
 import org.djunits.unit.si.SIDimensions;
 import org.djunits.unit.util.UnitRuntimeException;
 import org.djunits.value.util.ValueUtil;
+import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
 import org.djunits.value.vfloat.scalar.base.FloatScalar;
 
@@ -163,10 +164,8 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
                 SIUnit unit = Unit.lookupOrCreateUnitWithSIDimensions(SIDimensions.of(unitString));
                 if (unit != null)
                 {
-                    {
-                        float d = Float.parseFloat(valueString);
-                        return new FloatSIScalar(d, unit);
-                    }
+                    float d = Float.parseFloat(valueString);
+                    return new FloatSIScalar(d, unit);
                 }
             }
             catch (Exception exception)
@@ -212,14 +211,16 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
      * Return the current scalar transformed to a scalar in the given unit. Of course the SI dimensionality has to match,
      * otherwise the scalar cannot be transformed. The compiler will check the alignment between the return value and the unit.
      * @param displayUnit KU; the unit in which the scalar needs to be expressed
-     * @return K; the scalar that has been transformed into the right scalar type and unit
+     * @return S; the scalar that has been transformed into the right scalar type and unit
+     * @param <U> the unit type
+     * @param <S> the scalar type
      */
-    public final <KU extends Unit<KU>, K extends AbstractFloatScalarRel<KU, K>> K as(final KU displayUnit)
+    public final <U extends Unit<U>, S extends AbstractFloatScalarRel<U, S>> S as(final U displayUnit)
     {
         Throw.when(!(getDisplayUnit().getQuantity().getSiDimensions().equals(displayUnit.getQuantity().getSiDimensions())),
                 UnitRuntimeException.class, "FloatSIScalar with unit %s cannot be converted to a scalar with unit %s", getDisplayUnit(),
                 displayUnit);
-        K result = FloatScalar.instantiate(this.si, displayUnit.getStandardUnit());
+        S result = FloatScalar.instantiate(this.si, displayUnit.getStandardUnit());
         result.setDisplayUnit(displayUnit);
         return result;
     }
