@@ -49,7 +49,7 @@ public class AngleUnit extends Unit<AngleUnit>
 
     /** arcsecond. */
     public static final AngleUnit ARCSECOND = DEGREE.deriveLinear(1.0 / 3600.0, "arcsec", "arcsecond", UnitSystem.SI_ACCEPTED,
-            "\"", "\"", new String[] { "arcsec" });
+            "\"", "\"", new String[] {"arcsec"});
 
     /** grad. */
     public static final AngleUnit GRAD = RADIAN.deriveLinear(2.0 * Math.PI / 400.0, "grad", "gradian", UnitSystem.OTHER);

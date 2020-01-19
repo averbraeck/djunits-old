@@ -40,7 +40,7 @@ public class AngularVelocityUnit extends Unit<AngularVelocityUnit>
 
     /** arcsecond per second. */
     public static final AngularVelocityUnit ARCSECOND_PER_SECOND = DEGREE_PER_SECOND.deriveLinear(1.0 / 3600.0, "arcsec/s",
-            "arcsecond per second", UnitSystem.SI_ACCEPTED, "\"/s", "\"/sec", new String[] { "arcsec/sec" });
+            "arcsecond per second", UnitSystem.SI_ACCEPTED, "\"/s", "\"/sec", new String[] {"arcsec/sec"});
 
     /** grad per second. */
     public static final AngularVelocityUnit GRAD_PER_SECOND =

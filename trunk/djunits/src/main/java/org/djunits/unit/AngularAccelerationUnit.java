@@ -43,7 +43,7 @@ public class AngularAccelerationUnit extends Unit<AngularAccelerationUnit>
     /** arcsecond per second squared. */
     public static final AngularAccelerationUnit ARCSECOND_PER_SECOND_SQUARED =
             DEGREE_PER_SECOND_SQUARED.deriveLinear(1.0 / 3600.0, "arcsec/s2", "arcsecond per second squared",
-                    UnitSystem.SI_ACCEPTED, "\"/s2", "\"/sec2", new String[] { "arcsec/sec2" });
+                    UnitSystem.SI_ACCEPTED, "\"/s2", "\"/sec2", new String[] {"arcsec/sec2"});
 
     /** grad per second squared. */
     public static final AngularAccelerationUnit GRAD_PER_SECOND_SQUARED = RADIAN_PER_SECOND_SQUARED

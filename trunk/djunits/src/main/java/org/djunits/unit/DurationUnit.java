@@ -42,13 +42,13 @@ public class DurationUnit extends Unit<DurationUnit>
 
     /** hour. */
     public static final DurationUnit HOUR =
-            MINUTE.deriveLinear(60.0, "h", "hour", UnitSystem.SI_ACCEPTED, "h", "h", new String[] { "hr", "hour" });
+            MINUTE.deriveLinear(60.0, "h", "hour", UnitSystem.SI_ACCEPTED, "h", "h", new String[] {"hr", "hour"});
 
     /** day. */
     public static final DurationUnit DAY = HOUR.deriveLinear(24.0, "day", "day", UnitSystem.SI_ACCEPTED, "day", "day");
 
     /** week. */
     public static final DurationUnit WEEK =
-            DAY.deriveLinear(7.0, "wk", "week", UnitSystem.OTHER, "wk", "wk", new String[] { "week" });
+            DAY.deriveLinear(7.0, "wk", "week", UnitSystem.OTHER, "wk", "wk", new String[] {"week"});
 
 }
