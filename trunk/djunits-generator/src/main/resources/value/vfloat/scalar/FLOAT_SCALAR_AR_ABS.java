@@ -103,7 +103,7 @@ public class Float%TypeAbs% extends AbstractFloatScalarAbs<%TypeAbsUnit%, Float%
      */
     public static Float%TypeAbs% max(final Float%TypeAbs% a1, final Float%TypeAbs% a2)
     {
-        return (a1.gt(a2)) ? a1 : a2;
+        return a1.gt(a2) ? a1 : a2;
     }
 
     /**
@@ -115,7 +115,7 @@ public class Float%TypeAbs% extends AbstractFloatScalarAbs<%TypeAbsUnit%, Float%
      */
     public static Float%TypeAbs% max(final Float%TypeAbs% a1, final Float%TypeAbs% a2, final Float%TypeAbs%... an)
     {
-        Float%TypeAbs% maxa = (a1.gt(a2)) ? a1 : a2;
+        Float%TypeAbs% maxa = a1.gt(a2) ? a1 : a2;
         for (Float%TypeAbs% a : an)
         {
             if (a.gt(maxa))
@@ -134,7 +134,7 @@ public class Float%TypeAbs% extends AbstractFloatScalarAbs<%TypeAbsUnit%, Float%
      */
     public static Float%TypeAbs% min(final Float%TypeAbs% a1, final Float%TypeAbs% a2)
     {
-        return (a1.lt(a2)) ? a1 : a2;
+        return a1.lt(a2) ? a1 : a2;
     }
 
     /**
@@ -146,7 +146,7 @@ public class Float%TypeAbs% extends AbstractFloatScalarAbs<%TypeAbsUnit%, Float%
      */
     public static Float%TypeAbs% min(final Float%TypeAbs% a1, final Float%TypeAbs% a2, final Float%TypeAbs%... an)
     {
-        Float%TypeAbs% mina = (a1.lt(a2)) ? a1 : a2;
+        Float%TypeAbs% mina = a1.lt(a2) ? a1 : a2;
         for (Float%TypeAbs% a : an)
         {
             if (a.lt(mina))

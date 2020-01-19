@@ -105,7 +105,7 @@ public class FloatAbsoluteTemperature
      */
     public static FloatAbsoluteTemperature max(final FloatAbsoluteTemperature a1, final FloatAbsoluteTemperature a2)
     {
-        return (a1.gt(a2)) ? a1 : a2;
+        return a1.gt(a2) ? a1 : a2;
     }
 
     /**
@@ -118,7 +118,7 @@ public class FloatAbsoluteTemperature
     public static FloatAbsoluteTemperature max(final FloatAbsoluteTemperature a1, final FloatAbsoluteTemperature a2,
             final FloatAbsoluteTemperature... an)
     {
-        FloatAbsoluteTemperature maxa = (a1.gt(a2)) ? a1 : a2;
+        FloatAbsoluteTemperature maxa = a1.gt(a2) ? a1 : a2;
         for (FloatAbsoluteTemperature a : an)
         {
             if (a.gt(maxa))
@@ -137,7 +137,7 @@ public class FloatAbsoluteTemperature
      */
     public static FloatAbsoluteTemperature min(final FloatAbsoluteTemperature a1, final FloatAbsoluteTemperature a2)
     {
-        return (a1.lt(a2)) ? a1 : a2;
+        return a1.lt(a2) ? a1 : a2;
     }
 
     /**
@@ -150,7 +150,7 @@ public class FloatAbsoluteTemperature
     public static FloatAbsoluteTemperature min(final FloatAbsoluteTemperature a1, final FloatAbsoluteTemperature a2,
             final FloatAbsoluteTemperature... an)
     {
-        FloatAbsoluteTemperature mina = (a1.lt(a2)) ? a1 : a2;
+        FloatAbsoluteTemperature mina = a1.lt(a2) ? a1 : a2;
         for (FloatAbsoluteTemperature a : an)
         {
             if (a.lt(mina))

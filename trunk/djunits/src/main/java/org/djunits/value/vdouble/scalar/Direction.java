@@ -93,7 +93,7 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
      */
     public static Direction max(final Direction a1, final Direction a2)
     {
-        return (a1.gt(a2)) ? a1 : a2;
+        return a1.gt(a2) ? a1 : a2;
     }
 
     /**
@@ -105,7 +105,7 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
      */
     public static Direction max(final Direction a1, final Direction a2, final Direction... an)
     {
-        Direction maxa = (a1.gt(a2)) ? a1 : a2;
+        Direction maxa = a1.gt(a2) ? a1 : a2;
         for (Direction a : an)
         {
             if (a.gt(maxa))
@@ -124,7 +124,7 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
      */
     public static Direction min(final Direction a1, final Direction a2)
     {
-        return (a1.lt(a2)) ? a1 : a2;
+        return a1.lt(a2) ? a1 : a2;
     }
 
     /**
@@ -136,7 +136,7 @@ public class Direction extends AbstractDoubleScalarAbs<DirectionUnit, Direction,
      */
     public static Direction min(final Direction a1, final Direction a2, final Direction... an)
     {
-        Direction mina = (a1.lt(a2)) ? a1 : a2;
+        Direction mina = a1.lt(a2) ? a1 : a2;
         for (Direction a : an)
         {
             if (a.lt(mina))

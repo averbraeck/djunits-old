@@ -103,7 +103,7 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
      */
     public static FloatDirection max(final FloatDirection a1, final FloatDirection a2)
     {
-        return (a1.gt(a2)) ? a1 : a2;
+        return a1.gt(a2) ? a1 : a2;
     }
 
     /**
@@ -115,7 +115,7 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
      */
     public static FloatDirection max(final FloatDirection a1, final FloatDirection a2, final FloatDirection... an)
     {
-        FloatDirection maxa = (a1.gt(a2)) ? a1 : a2;
+        FloatDirection maxa = a1.gt(a2) ? a1 : a2;
         for (FloatDirection a : an)
         {
             if (a.gt(maxa))
@@ -134,7 +134,7 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
      */
     public static FloatDirection min(final FloatDirection a1, final FloatDirection a2)
     {
-        return (a1.lt(a2)) ? a1 : a2;
+        return a1.lt(a2) ? a1 : a2;
     }
 
     /**
@@ -146,7 +146,7 @@ public class FloatDirection extends AbstractFloatScalarAbs<DirectionUnit, FloatD
      */
     public static FloatDirection min(final FloatDirection a1, final FloatDirection a2, final FloatDirection... an)
     {
-        FloatDirection mina = (a1.lt(a2)) ? a1 : a2;
+        FloatDirection mina = a1.lt(a2) ? a1 : a2;
         for (FloatDirection a : an)
         {
             if (a.lt(mina))

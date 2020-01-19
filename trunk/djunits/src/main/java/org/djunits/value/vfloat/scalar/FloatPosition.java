@@ -103,7 +103,7 @@ public class FloatPosition extends AbstractFloatScalarAbs<PositionUnit, FloatPos
      */
     public static FloatPosition max(final FloatPosition a1, final FloatPosition a2)
     {
-        return (a1.gt(a2)) ? a1 : a2;
+        return a1.gt(a2) ? a1 : a2;
     }
 
     /**
@@ -115,7 +115,7 @@ public class FloatPosition extends AbstractFloatScalarAbs<PositionUnit, FloatPos
      */
     public static FloatPosition max(final FloatPosition a1, final FloatPosition a2, final FloatPosition... an)
     {
-        FloatPosition maxa = (a1.gt(a2)) ? a1 : a2;
+        FloatPosition maxa = a1.gt(a2) ? a1 : a2;
         for (FloatPosition a : an)
         {
             if (a.gt(maxa))
@@ -134,7 +134,7 @@ public class FloatPosition extends AbstractFloatScalarAbs<PositionUnit, FloatPos
      */
     public static FloatPosition min(final FloatPosition a1, final FloatPosition a2)
     {
-        return (a1.lt(a2)) ? a1 : a2;
+        return a1.lt(a2) ? a1 : a2;
     }
 
     /**
@@ -146,7 +146,7 @@ public class FloatPosition extends AbstractFloatScalarAbs<PositionUnit, FloatPos
      */
     public static FloatPosition min(final FloatPosition a1, final FloatPosition a2, final FloatPosition... an)
     {
-        FloatPosition mina = (a1.lt(a2)) ? a1 : a2;
+        FloatPosition mina = a1.lt(a2) ? a1 : a2;
         for (FloatPosition a : an)
         {
             if (a.lt(mina))

@@ -95,7 +95,7 @@ public class AbsoluteTemperature
      */
     public static AbsoluteTemperature max(final AbsoluteTemperature a1, final AbsoluteTemperature a2)
     {
-        return (a1.gt(a2)) ? a1 : a2;
+        return a1.gt(a2) ? a1 : a2;
     }
 
     /**
@@ -108,7 +108,7 @@ public class AbsoluteTemperature
     public static AbsoluteTemperature max(final AbsoluteTemperature a1, final AbsoluteTemperature a2,
             final AbsoluteTemperature... an)
     {
-        AbsoluteTemperature maxa = (a1.gt(a2)) ? a1 : a2;
+        AbsoluteTemperature maxa = a1.gt(a2) ? a1 : a2;
         for (AbsoluteTemperature a : an)
         {
             if (a.gt(maxa))
@@ -127,7 +127,7 @@ public class AbsoluteTemperature
      */
     public static AbsoluteTemperature min(final AbsoluteTemperature a1, final AbsoluteTemperature a2)
     {
-        return (a1.lt(a2)) ? a1 : a2;
+        return a1.lt(a2) ? a1 : a2;
     }
 
     /**
@@ -140,7 +140,7 @@ public class AbsoluteTemperature
     public static AbsoluteTemperature min(final AbsoluteTemperature a1, final AbsoluteTemperature a2,
             final AbsoluteTemperature... an)
     {
-        AbsoluteTemperature mina = (a1.lt(a2)) ? a1 : a2;
+        AbsoluteTemperature mina = a1.lt(a2) ? a1 : a2;
         for (AbsoluteTemperature a : an)
         {
             if (a.lt(mina))

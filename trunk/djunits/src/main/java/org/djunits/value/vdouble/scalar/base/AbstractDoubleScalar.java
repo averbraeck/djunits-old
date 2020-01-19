@@ -184,13 +184,6 @@ public abstract class AbstractDoubleScalar<U extends Unit<U>, S extends Abstract
 
     /** {@inheritDoc} */
     @Override
-    protected Object clone() throws CloneNotSupportedException
-    {
-        return super.clone();
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public String toString()
     {
         return toString(getDisplayUnit(), false, true);
