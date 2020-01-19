@@ -21,7 +21,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPressure>
 {
     /** */
@@ -116,7 +116,7 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
      */
     public static FloatPressure max(final FloatPressure r1, final FloatPressure r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -128,7 +128,7 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
      */
     public static FloatPressure max(final FloatPressure r1, final FloatPressure r2, final FloatPressure... rn)
     {
-        FloatPressure maxr = (r1.gt(r2)) ? r1 : r2;
+        FloatPressure maxr = r1.gt(r2) ? r1 : r2;
         for (FloatPressure r : rn)
         {
             if (r.gt(maxr))
@@ -147,7 +147,7 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
      */
     public static FloatPressure min(final FloatPressure r1, final FloatPressure r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -159,7 +159,7 @@ public class FloatPressure extends AbstractFloatScalarRel<PressureUnit, FloatPre
      */
     public static FloatPressure min(final FloatPressure r1, final FloatPressure r2, final FloatPressure... rn)
     {
-        FloatPressure minr = (r1.lt(r2)) ? r1 : r2;
+        FloatPressure minr = r1.lt(r2) ? r1 : r2;
         for (FloatPressure r : rn)
         {
             if (r.lt(minr))

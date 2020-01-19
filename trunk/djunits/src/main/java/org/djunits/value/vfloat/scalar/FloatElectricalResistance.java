@@ -21,7 +21,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class FloatElectricalResistance extends AbstractFloatScalarRel<ElectricalResistanceUnit, FloatElectricalResistance>
 {
     /** */
@@ -121,7 +121,7 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
      */
     public static FloatElectricalResistance max(final FloatElectricalResistance r1, final FloatElectricalResistance r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -134,7 +134,7 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
     public static FloatElectricalResistance max(final FloatElectricalResistance r1, final FloatElectricalResistance r2,
             final FloatElectricalResistance... rn)
     {
-        FloatElectricalResistance maxr = (r1.gt(r2)) ? r1 : r2;
+        FloatElectricalResistance maxr = r1.gt(r2) ? r1 : r2;
         for (FloatElectricalResistance r : rn)
         {
             if (r.gt(maxr))
@@ -153,7 +153,7 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
      */
     public static FloatElectricalResistance min(final FloatElectricalResistance r1, final FloatElectricalResistance r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -166,7 +166,7 @@ public class FloatElectricalResistance extends AbstractFloatScalarRel<Electrical
     public static FloatElectricalResistance min(final FloatElectricalResistance r1, final FloatElectricalResistance r2,
             final FloatElectricalResistance... rn)
     {
-        FloatElectricalResistance minr = (r1.lt(r2)) ? r1 : r2;
+        FloatElectricalResistance minr = r1.lt(r2) ? r1 : r2;
         for (FloatElectricalResistance r : rn)
         {
             if (r.lt(minr))

@@ -28,7 +28,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
 {
     /** */
@@ -123,7 +123,7 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
      */
     public static FloatSpeed max(final FloatSpeed r1, final FloatSpeed r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -135,7 +135,7 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
      */
     public static FloatSpeed max(final FloatSpeed r1, final FloatSpeed r2, final FloatSpeed... rn)
     {
-        FloatSpeed maxr = (r1.gt(r2)) ? r1 : r2;
+        FloatSpeed maxr = r1.gt(r2) ? r1 : r2;
         for (FloatSpeed r : rn)
         {
             if (r.gt(maxr))
@@ -154,7 +154,7 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
      */
     public static FloatSpeed min(final FloatSpeed r1, final FloatSpeed r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -166,7 +166,7 @@ public class FloatSpeed extends AbstractFloatScalarRel<SpeedUnit, FloatSpeed>
      */
     public static FloatSpeed min(final FloatSpeed r1, final FloatSpeed r2, final FloatSpeed... rn)
     {
-        FloatSpeed minr = (r1.lt(r2)) ? r1 : r2;
+        FloatSpeed minr = r1.lt(r2) ? r1 : r2;
         for (FloatSpeed r : rn)
         {
             if (r.lt(minr))

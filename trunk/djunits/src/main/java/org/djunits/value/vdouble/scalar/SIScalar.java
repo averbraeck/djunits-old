@@ -64,7 +64,7 @@ import org.djunits.value.vdouble.scalar.base.DoubleScalar;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
 {
     /** */
@@ -128,7 +128,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public static SIScalar max(final SIScalar r1, final SIScalar r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -140,7 +140,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public static SIScalar max(final SIScalar r1, final SIScalar r2, final SIScalar... rn)
     {
-        SIScalar maxr = (r1.gt(r2)) ? r1 : r2;
+        SIScalar maxr = r1.gt(r2) ? r1 : r2;
         for (SIScalar r : rn)
         {
             if (r.gt(maxr))
@@ -159,7 +159,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public static SIScalar min(final SIScalar r1, final SIScalar r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -171,7 +171,7 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
      */
     public static SIScalar min(final SIScalar r1, final SIScalar r2, final SIScalar... rn)
     {
-        SIScalar minr = (r1.lt(r2)) ? r1 : r2;
+        SIScalar minr = r1.lt(r2) ? r1 : r2;
         for (SIScalar r : rn)
         {
             if (r.lt(minr))

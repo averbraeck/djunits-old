@@ -21,7 +21,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class FloatAngularAcceleration extends AbstractFloatScalarRel<AngularAccelerationUnit, FloatAngularAcceleration>
 {
     /** */
@@ -121,7 +121,7 @@ public class FloatAngularAcceleration extends AbstractFloatScalarRel<AngularAcce
      */
     public static FloatAngularAcceleration max(final FloatAngularAcceleration r1, final FloatAngularAcceleration r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -134,7 +134,7 @@ public class FloatAngularAcceleration extends AbstractFloatScalarRel<AngularAcce
     public static FloatAngularAcceleration max(final FloatAngularAcceleration r1, final FloatAngularAcceleration r2,
             final FloatAngularAcceleration... rn)
     {
-        FloatAngularAcceleration maxr = (r1.gt(r2)) ? r1 : r2;
+        FloatAngularAcceleration maxr = r1.gt(r2) ? r1 : r2;
         for (FloatAngularAcceleration r : rn)
         {
             if (r.gt(maxr))
@@ -153,7 +153,7 @@ public class FloatAngularAcceleration extends AbstractFloatScalarRel<AngularAcce
      */
     public static FloatAngularAcceleration min(final FloatAngularAcceleration r1, final FloatAngularAcceleration r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -166,7 +166,7 @@ public class FloatAngularAcceleration extends AbstractFloatScalarRel<AngularAcce
     public static FloatAngularAcceleration min(final FloatAngularAcceleration r1, final FloatAngularAcceleration r2,
             final FloatAngularAcceleration... rn)
     {
-        FloatAngularAcceleration minr = (r1.lt(r2)) ? r1 : r2;
+        FloatAngularAcceleration minr = r1.lt(r2) ? r1 : r2;
         for (FloatAngularAcceleration r : rn)
         {
             if (r.lt(minr))

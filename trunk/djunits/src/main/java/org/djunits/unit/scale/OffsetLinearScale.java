@@ -71,7 +71,7 @@ public class OffsetLinearScale extends LinearScale
     @Override
     public final double fromStandardUnit(final double value)
     {
-        return (value / getConversionFactorToStandardUnit()) - this.offsetToStandardUnit;
+        return value / getConversionFactorToStandardUnit() - this.offsetToStandardUnit;
     }
 
     /**

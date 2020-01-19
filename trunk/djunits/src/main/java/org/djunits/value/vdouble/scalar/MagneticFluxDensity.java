@@ -20,7 +20,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class MagneticFluxDensity extends AbstractDoubleScalarRel<MagneticFluxDensityUnit, MagneticFluxDensity>
 {
     /** */
@@ -110,7 +110,7 @@ public class MagneticFluxDensity extends AbstractDoubleScalarRel<MagneticFluxDen
      */
     public static MagneticFluxDensity max(final MagneticFluxDensity r1, final MagneticFluxDensity r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -123,7 +123,7 @@ public class MagneticFluxDensity extends AbstractDoubleScalarRel<MagneticFluxDen
     public static MagneticFluxDensity max(final MagneticFluxDensity r1, final MagneticFluxDensity r2,
             final MagneticFluxDensity... rn)
     {
-        MagneticFluxDensity maxr = (r1.gt(r2)) ? r1 : r2;
+        MagneticFluxDensity maxr = r1.gt(r2) ? r1 : r2;
         for (MagneticFluxDensity r : rn)
         {
             if (r.gt(maxr))
@@ -142,7 +142,7 @@ public class MagneticFluxDensity extends AbstractDoubleScalarRel<MagneticFluxDen
      */
     public static MagneticFluxDensity min(final MagneticFluxDensity r1, final MagneticFluxDensity r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -155,7 +155,7 @@ public class MagneticFluxDensity extends AbstractDoubleScalarRel<MagneticFluxDen
     public static MagneticFluxDensity min(final MagneticFluxDensity r1, final MagneticFluxDensity r2,
             final MagneticFluxDensity... rn)
     {
-        MagneticFluxDensity minr = (r1.lt(r2)) ? r1 : r2;
+        MagneticFluxDensity minr = r1.lt(r2) ? r1 : r2;
         for (MagneticFluxDensity r : rn)
         {
             if (r.lt(minr))

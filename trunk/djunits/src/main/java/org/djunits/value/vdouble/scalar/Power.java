@@ -27,7 +27,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 {
     /** */
@@ -111,7 +111,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
      */
     public static Power max(final Power r1, final Power r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -123,7 +123,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
      */
     public static Power max(final Power r1, final Power r2, final Power... rn)
     {
-        Power maxr = (r1.gt(r2)) ? r1 : r2;
+        Power maxr = r1.gt(r2) ? r1 : r2;
         for (Power r : rn)
         {
             if (r.gt(maxr))
@@ -142,7 +142,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
      */
     public static Power min(final Power r1, final Power r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -154,7 +154,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
      */
     public static Power min(final Power r1, final Power r2, final Power... rn)
     {
-        Power minr = (r1.lt(r2)) ? r1 : r2;
+        Power minr = r1.lt(r2) ? r1 : r2;
         for (Power r : rn)
         {
             if (r.lt(minr))

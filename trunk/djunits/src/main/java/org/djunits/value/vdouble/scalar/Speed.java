@@ -28,7 +28,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 {
     /** */
@@ -112,7 +112,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
      */
     public static Speed max(final Speed r1, final Speed r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -124,7 +124,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
      */
     public static Speed max(final Speed r1, final Speed r2, final Speed... rn)
     {
-        Speed maxr = (r1.gt(r2)) ? r1 : r2;
+        Speed maxr = r1.gt(r2) ? r1 : r2;
         for (Speed r : rn)
         {
             if (r.gt(maxr))
@@ -143,7 +143,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
      */
     public static Speed min(final Speed r1, final Speed r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -155,7 +155,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
      */
     public static Speed min(final Speed r1, final Speed r2, final Speed... rn)
     {
-        Speed minr = (r1.lt(r2)) ? r1 : r2;
+        Speed minr = r1.lt(r2) ? r1 : r2;
         for (Speed r : rn)
         {
             if (r.lt(minr))

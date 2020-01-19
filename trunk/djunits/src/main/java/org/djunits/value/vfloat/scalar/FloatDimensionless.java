@@ -56,7 +56,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit, FloatDimensionless>
         implements DimensionlessFunctions<DimensionlessUnit, FloatDimensionless>
 {
@@ -154,7 +154,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      */
     public static FloatDimensionless max(final FloatDimensionless r1, final FloatDimensionless r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -167,7 +167,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
     public static FloatDimensionless max(final FloatDimensionless r1, final FloatDimensionless r2,
             final FloatDimensionless... rn)
     {
-        FloatDimensionless maxr = (r1.gt(r2)) ? r1 : r2;
+        FloatDimensionless maxr = r1.gt(r2) ? r1 : r2;
         for (FloatDimensionless r : rn)
         {
             if (r.gt(maxr))
@@ -186,7 +186,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
      */
     public static FloatDimensionless min(final FloatDimensionless r1, final FloatDimensionless r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -199,7 +199,7 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
     public static FloatDimensionless min(final FloatDimensionless r1, final FloatDimensionless r2,
             final FloatDimensionless... rn)
     {
-        FloatDimensionless minr = (r1.lt(r2)) ? r1 : r2;
+        FloatDimensionless minr = r1.lt(r2) ? r1 : r2;
         for (FloatDimensionless r : rn)
         {
             if (r.lt(minr))

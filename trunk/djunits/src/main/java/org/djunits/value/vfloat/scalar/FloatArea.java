@@ -25,7 +25,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class FloatArea extends AbstractFloatScalarRel<AreaUnit, FloatArea>
 {
     /** */
@@ -120,7 +120,7 @@ public class FloatArea extends AbstractFloatScalarRel<AreaUnit, FloatArea>
      */
     public static FloatArea max(final FloatArea r1, final FloatArea r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -132,7 +132,7 @@ public class FloatArea extends AbstractFloatScalarRel<AreaUnit, FloatArea>
      */
     public static FloatArea max(final FloatArea r1, final FloatArea r2, final FloatArea... rn)
     {
-        FloatArea maxr = (r1.gt(r2)) ? r1 : r2;
+        FloatArea maxr = r1.gt(r2) ? r1 : r2;
         for (FloatArea r : rn)
         {
             if (r.gt(maxr))
@@ -151,7 +151,7 @@ public class FloatArea extends AbstractFloatScalarRel<AreaUnit, FloatArea>
      */
     public static FloatArea min(final FloatArea r1, final FloatArea r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -163,7 +163,7 @@ public class FloatArea extends AbstractFloatScalarRel<AreaUnit, FloatArea>
      */
     public static FloatArea min(final FloatArea r1, final FloatArea r2, final FloatArea... rn)
     {
-        FloatArea minr = (r1.lt(r2)) ? r1 : r2;
+        FloatArea minr = r1.lt(r2) ? r1 : r2;
         for (FloatArea r : rn)
         {
             if (r.lt(minr))

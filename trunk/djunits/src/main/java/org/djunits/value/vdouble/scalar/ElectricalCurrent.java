@@ -23,7 +23,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrentUnit, ElectricalCurrent>
 {
     /** */
@@ -110,7 +110,7 @@ public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrent
      */
     public static ElectricalCurrent max(final ElectricalCurrent r1, final ElectricalCurrent r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -122,7 +122,7 @@ public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrent
      */
     public static ElectricalCurrent max(final ElectricalCurrent r1, final ElectricalCurrent r2, final ElectricalCurrent... rn)
     {
-        ElectricalCurrent maxr = (r1.gt(r2)) ? r1 : r2;
+        ElectricalCurrent maxr = r1.gt(r2) ? r1 : r2;
         for (ElectricalCurrent r : rn)
         {
             if (r.gt(maxr))
@@ -141,7 +141,7 @@ public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrent
      */
     public static ElectricalCurrent min(final ElectricalCurrent r1, final ElectricalCurrent r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -153,7 +153,7 @@ public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrent
      */
     public static ElectricalCurrent min(final ElectricalCurrent r1, final ElectricalCurrent r2, final ElectricalCurrent... rn)
     {
-        ElectricalCurrent minr = (r1.lt(r2)) ? r1 : r2;
+        ElectricalCurrent minr = r1.lt(r2) ? r1 : r2;
         for (ElectricalCurrent r : rn)
         {
             if (r.lt(minr))

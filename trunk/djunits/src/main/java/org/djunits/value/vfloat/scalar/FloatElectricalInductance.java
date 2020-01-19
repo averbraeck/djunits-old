@@ -20,7 +20,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class FloatElectricalInductance extends AbstractFloatScalarRel<ElectricalInductanceUnit, FloatElectricalInductance>
 {
     /** */
@@ -120,7 +120,7 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
      */
     public static FloatElectricalInductance max(final FloatElectricalInductance r1, final FloatElectricalInductance r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -133,7 +133,7 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
     public static FloatElectricalInductance max(final FloatElectricalInductance r1, final FloatElectricalInductance r2,
             final FloatElectricalInductance... rn)
     {
-        FloatElectricalInductance maxr = (r1.gt(r2)) ? r1 : r2;
+        FloatElectricalInductance maxr = r1.gt(r2) ? r1 : r2;
         for (FloatElectricalInductance r : rn)
         {
             if (r.gt(maxr))
@@ -152,7 +152,7 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
      */
     public static FloatElectricalInductance min(final FloatElectricalInductance r1, final FloatElectricalInductance r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -165,7 +165,7 @@ public class FloatElectricalInductance extends AbstractFloatScalarRel<Electrical
     public static FloatElectricalInductance min(final FloatElectricalInductance r1, final FloatElectricalInductance r2,
             final FloatElectricalInductance... rn)
     {
-        FloatElectricalInductance minr = (r1.lt(r2)) ? r1 : r2;
+        FloatElectricalInductance minr = r1.lt(r2) ? r1 : r2;
         for (FloatElectricalInductance r : rn)
         {
             if (r.lt(minr))

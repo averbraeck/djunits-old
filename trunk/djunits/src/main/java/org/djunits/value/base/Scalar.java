@@ -137,7 +137,7 @@ public interface Scalar<U extends Unit<U>, S extends Scalar<U, S>> extends Value
      * @param <U> the unit
      * @param <R> the relative scalar
      */
-    public interface Rel<U extends Unit<U>, R extends Scalar.Rel<U, R>> extends Scalar<U, R>, Relative<U, R>
+    interface Rel<U extends Unit<U>, R extends Scalar.Rel<U, R>> extends Scalar<U, R>, Relative<U, R>
     {
         /**
          * Add a Relative value to this Relative value. A new value is returned due to immutability.
@@ -168,7 +168,7 @@ public interface Scalar<U extends Unit<U>, S extends Scalar<U, S>> extends Value
      * @param <RU> the absolute unit belonging to the relative unit
      * @param <R> the relative scalar belonging to the absolute scalar
      */
-    public interface RelWithAbs<AU extends AbsoluteLinearUnit<AU, RU>, A extends Scalar.Abs<AU, A, RU, R>, RU extends Unit<RU>,
+    interface RelWithAbs<AU extends AbsoluteLinearUnit<AU, RU>, A extends Scalar.Abs<AU, A, RU, R>, RU extends Unit<RU>,
             R extends Scalar.RelWithAbs<AU, A, RU, R>> extends Scalar.Rel<RU, R>
     {
         /**
@@ -193,7 +193,7 @@ public interface Scalar<U extends Unit<U>, S extends Scalar<U, S>> extends Value
      * @param <RU> the absolute unit belonging to the relative unit
      * @param <R> the relative scalar belonging to the absolute scalar
      */
-    public interface Abs<AU extends AbsoluteLinearUnit<AU, RU>, A extends Scalar.Abs<AU, A, RU, R>, RU extends Unit<RU>,
+    interface Abs<AU extends AbsoluteLinearUnit<AU, RU>, A extends Scalar.Abs<AU, A, RU, R>, RU extends Unit<RU>,
             R extends Scalar.RelWithAbs<AU, A, RU, R>> extends Scalar<AU, A>, Absolute
     {
         /**

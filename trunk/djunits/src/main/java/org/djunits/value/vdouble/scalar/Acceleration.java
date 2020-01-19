@@ -23,7 +23,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acceleration>
 {
     /** */
@@ -108,7 +108,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
      */
     public static Acceleration max(final Acceleration r1, final Acceleration r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -120,7 +120,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
      */
     public static Acceleration max(final Acceleration r1, final Acceleration r2, final Acceleration... rn)
     {
-        Acceleration maxr = (r1.gt(r2)) ? r1 : r2;
+        Acceleration maxr = r1.gt(r2) ? r1 : r2;
         for (Acceleration r : rn)
         {
             if (r.gt(maxr))
@@ -139,7 +139,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
      */
     public static Acceleration min(final Acceleration r1, final Acceleration r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -151,7 +151,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
      */
     public static Acceleration min(final Acceleration r1, final Acceleration r2, final Acceleration... rn)
     {
-        Acceleration minr = (r1.lt(r2)) ? r1 : r2;
+        Acceleration minr = r1.lt(r2) ? r1 : r2;
         for (Acceleration r : rn)
         {
             if (r.lt(minr))

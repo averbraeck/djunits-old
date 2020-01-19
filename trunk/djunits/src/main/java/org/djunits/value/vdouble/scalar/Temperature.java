@@ -21,7 +21,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class Temperature
         extends AbstractDoubleScalarRelWithAbs<AbsoluteTemperatureUnit, AbsoluteTemperature, TemperatureUnit, Temperature>
 {
@@ -114,7 +114,7 @@ public class Temperature
      */
     public static Temperature max(final Temperature r1, final Temperature r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -126,7 +126,7 @@ public class Temperature
      */
     public static Temperature max(final Temperature r1, final Temperature r2, final Temperature... rn)
     {
-        Temperature maxr = (r1.gt(r2)) ? r1 : r2;
+        Temperature maxr = r1.gt(r2) ? r1 : r2;
         for (Temperature r : rn)
         {
             if (r.gt(maxr))
@@ -145,7 +145,7 @@ public class Temperature
      */
     public static Temperature min(final Temperature r1, final Temperature r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -157,7 +157,7 @@ public class Temperature
      */
     public static Temperature min(final Temperature r1, final Temperature r2, final Temperature... rn)
     {
-        Temperature minr = (r1.lt(r2)) ? r1 : r2;
+        Temperature minr = r1.lt(r2) ? r1 : r2;
         for (Temperature r : rn)
         {
             if (r.lt(minr))

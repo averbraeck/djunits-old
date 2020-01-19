@@ -23,7 +23,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class FloatAngularVelocity extends AbstractFloatScalarRel<AngularVelocityUnit, FloatAngularVelocity>
 {
     /** */
@@ -121,7 +121,7 @@ public class FloatAngularVelocity extends AbstractFloatScalarRel<AngularVelocity
      */
     public static FloatAngularVelocity max(final FloatAngularVelocity r1, final FloatAngularVelocity r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -134,7 +134,7 @@ public class FloatAngularVelocity extends AbstractFloatScalarRel<AngularVelocity
     public static FloatAngularVelocity max(final FloatAngularVelocity r1, final FloatAngularVelocity r2,
             final FloatAngularVelocity... rn)
     {
-        FloatAngularVelocity maxr = (r1.gt(r2)) ? r1 : r2;
+        FloatAngularVelocity maxr = r1.gt(r2) ? r1 : r2;
         for (FloatAngularVelocity r : rn)
         {
             if (r.gt(maxr))
@@ -153,7 +153,7 @@ public class FloatAngularVelocity extends AbstractFloatScalarRel<AngularVelocity
      */
     public static FloatAngularVelocity min(final FloatAngularVelocity r1, final FloatAngularVelocity r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -166,7 +166,7 @@ public class FloatAngularVelocity extends AbstractFloatScalarRel<AngularVelocity
     public static FloatAngularVelocity min(final FloatAngularVelocity r1, final FloatAngularVelocity r2,
             final FloatAngularVelocity... rn)
     {
-        FloatAngularVelocity minr = (r1.lt(r2)) ? r1 : r2;
+        FloatAngularVelocity minr = r1.lt(r2) ? r1 : r2;
         for (FloatAngularVelocity r : rn)
         {
             if (r.lt(minr))

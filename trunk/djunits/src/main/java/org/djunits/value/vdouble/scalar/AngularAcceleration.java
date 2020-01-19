@@ -21,7 +21,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class AngularAcceleration extends AbstractDoubleScalarRel<AngularAccelerationUnit, AngularAcceleration>
 {
     /** */
@@ -111,7 +111,7 @@ public class AngularAcceleration extends AbstractDoubleScalarRel<AngularAccelera
      */
     public static AngularAcceleration max(final AngularAcceleration r1, final AngularAcceleration r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -124,7 +124,7 @@ public class AngularAcceleration extends AbstractDoubleScalarRel<AngularAccelera
     public static AngularAcceleration max(final AngularAcceleration r1, final AngularAcceleration r2,
             final AngularAcceleration... rn)
     {
-        AngularAcceleration maxr = (r1.gt(r2)) ? r1 : r2;
+        AngularAcceleration maxr = r1.gt(r2) ? r1 : r2;
         for (AngularAcceleration r : rn)
         {
             if (r.gt(maxr))
@@ -143,7 +143,7 @@ public class AngularAcceleration extends AbstractDoubleScalarRel<AngularAccelera
      */
     public static AngularAcceleration min(final AngularAcceleration r1, final AngularAcceleration r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -156,7 +156,7 @@ public class AngularAcceleration extends AbstractDoubleScalarRel<AngularAccelera
     public static AngularAcceleration min(final AngularAcceleration r1, final AngularAcceleration r2,
             final AngularAcceleration... rn)
     {
-        AngularAcceleration minr = (r1.lt(r2)) ? r1 : r2;
+        AngularAcceleration minr = r1.lt(r2) ? r1 : r2;
         for (AngularAcceleration r : rn)
         {
             if (r.lt(minr))

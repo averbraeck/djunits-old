@@ -56,7 +56,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T12:14:59.979383800Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
 public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Dimensionless>
         implements DimensionlessFunctions<DimensionlessUnit, Dimensionless>
 {
@@ -142,7 +142,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      */
     public static Dimensionless max(final Dimensionless r1, final Dimensionless r2)
     {
-        return (r1.gt(r2)) ? r1 : r2;
+        return r1.gt(r2) ? r1 : r2;
     }
 
     /**
@@ -154,7 +154,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      */
     public static Dimensionless max(final Dimensionless r1, final Dimensionless r2, final Dimensionless... rn)
     {
-        Dimensionless maxr = (r1.gt(r2)) ? r1 : r2;
+        Dimensionless maxr = r1.gt(r2) ? r1 : r2;
         for (Dimensionless r : rn)
         {
             if (r.gt(maxr))
@@ -173,7 +173,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      */
     public static Dimensionless min(final Dimensionless r1, final Dimensionless r2)
     {
-        return (r1.lt(r2)) ? r1 : r2;
+        return r1.lt(r2) ? r1 : r2;
     }
 
     /**
@@ -185,7 +185,7 @@ public class Dimensionless extends AbstractDoubleScalarRel<DimensionlessUnit, Di
      */
     public static Dimensionless min(final Dimensionless r1, final Dimensionless r2, final Dimensionless... rn)
     {
-        Dimensionless minr = (r1.lt(r2)) ? r1 : r2;
+        Dimensionless minr = r1.lt(r2) ? r1 : r2;
         for (Dimensionless r : rn)
         {
             if (r.lt(minr))
