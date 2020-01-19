@@ -223,7 +223,7 @@ public final class Throw
         T exception;
         try
         {
-            Constructor<T> constructor = throwableClass.getConstructor(new Class<?>[] { String.class });
+            Constructor<T> constructor = throwableClass.getConstructor(new Class<?>[] {String.class});
             exception = constructor.newInstance(formattedMessage);
             exception.setStackTrace(ste);
         }

@@ -66,7 +66,7 @@ public enum SIPrefixes
         unitPrefixes.put("Z", new SIPrefix("Z", "zetta", 1.0E21));
         unitPrefixes.put("Y", new SIPrefix("Y", "yotta", 1.0E24));
         UNIT_PREFIXES = Collections.unmodifiableMap(unitPrefixes);
-        
+
         Map<String, SIPrefix> perUnitPrefixes = new LinkedHashMap<>();
         perUnitPrefixes.put("/y", new SIPrefix("/y", "per yocto", 1.0E24));
         perUnitPrefixes.put("/z", new SIPrefix("/z", "per zepto", 1.0E21));

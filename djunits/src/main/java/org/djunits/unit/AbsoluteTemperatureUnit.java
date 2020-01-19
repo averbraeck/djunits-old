@@ -33,20 +33,20 @@ public class AbsoluteTemperatureUnit extends AbsoluteLinearUnit<AbsoluteTemperat
     /** Degree Celsius. */
     public static final AbsoluteTemperatureUnit DEGREE_CELSIUS =
             KELVIN.deriveLinearOffset(1.0, 273.15, TemperatureUnit.DEGREE_CELSIUS, "dgC", "degree Celsius",
-                    UnitSystem.SI_DERIVED, "\u00B0C", "degC", new String[] { "C" });
+                    UnitSystem.SI_DERIVED, "\u00B0C", "degC", new String[] {"C"});
 
     /** Degree Fahrenheit. */
     public static final AbsoluteTemperatureUnit DEGREE_FAHRENHEIT =
             KELVIN.deriveLinearOffset(5.0 / 9.0, 459.67, TemperatureUnit.DEGREE_FAHRENHEIT, "dgF", "degree Fahrenheit",
-                    UnitSystem.SI_DERIVED, "\u00B0F", "degF", new String[] { "F" });
+                    UnitSystem.SI_DERIVED, "\u00B0F", "degF", new String[] {"F"});
 
     /** Degree Rankine. */
     public static final AbsoluteTemperatureUnit DEGREE_RANKINE =
             KELVIN.deriveLinearOffset(5.0 / 9.0, 0.0, TemperatureUnit.DEGREE_RANKINE, "dgR", "degree Rankine",
-                    UnitSystem.SI_DERIVED, "\u00B0R", "degR", new String[] { "R" });
+                    UnitSystem.SI_DERIVED, "\u00B0R", "degR", new String[] {"R"});
 
     /** Degree Reaumur. */
     public static final AbsoluteTemperatureUnit DEGREE_REAUMUR =
             KELVIN.deriveLinearOffset(4.0 / 5.0, 273.15, TemperatureUnit.DEGREE_REAUMUR, "dgRe", "degree Reaumur",
-                    UnitSystem.SI_DERIVED, "\u00B0R\u00E9", "degRe", new String[] { "Re", "R\u00E9" });
+                    UnitSystem.SI_DERIVED, "\u00B0R\u00E9", "degRe", new String[] {"Re", "R\u00E9"});
 }

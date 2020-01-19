@@ -66,8 +66,8 @@ import org.djunits.unit.VolumeUnit;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@SuppressWarnings({ "checkstyle:interfaceistype", "checkstyle:javadocmethod", "checkstyle:javadoctype",
-        "checkstyle:javadocvariable", "checkstyle:linelength", "checkstyle:leftcurly", "checkstyle:rightcurly", "javadoc" })
+@SuppressWarnings({"checkstyle:interfaceistype", "checkstyle:javadocmethod", "checkstyle:javadoctype",
+        "checkstyle:javadocvariable", "checkstyle:linelength", "checkstyle:leftcurly", "checkstyle:rightcurly", "javadoc"})
 @Generated(value = "org.djunits.generator.GenerateStaticUNITS", date = "2019-10-22T09:30:00.000+0200")
 public interface UNITS
 {
