@@ -887,6 +887,16 @@ public class ScalarOperationsTest
                 // Ignore expected exception
             }
 
+            try
+            {
+                valueOf.invoke(null, "1.0 xyzuwv");
+                fail("Nonsense unit string in valueOf argument should have thrown an IllegalArgumentException");
+            }
+            catch (IllegalArgumentException | InvocationTargetException iae)
+            {
+                // Ignore expected exception
+            }
+
             Method instantiateSI = ClassUtil.resolveMethod(scalarClass, "instantiateSI", double.class);
             result = (AbstractDoubleScalar<?, ?>) instantiateSI.invoke(null, zeroValue);
             assertEquals("SI value was correctly set", zeroValue, result.getSI(), 0.0001);
@@ -970,6 +980,7 @@ public class ScalarOperationsTest
             {
                 // Ignore expected exception
             }
+            
             try
             {
                 valueOf.invoke(null, "");
@@ -979,6 +990,7 @@ public class ScalarOperationsTest
             {
                 // Ignore expected exception
             }
+            
             try
             {
                 valueOf.invoke(null, "NONSENSEVALUE");
@@ -988,6 +1000,17 @@ public class ScalarOperationsTest
             {
                 // Ignore expected exception
             }
+            
+            try
+            {
+                valueOf.invoke(null, "1.0 xyzuwv");
+                fail("Nonsense string in valueOf should have thrown an IllegalArgumentException");
+            }
+            catch (IllegalArgumentException | InvocationTargetException iae)
+            {
+                // Ignore expected exception
+            }
+            
             Method instantiateSI = ClassUtil.resolveMethod(scalarClass, "instantiateSI", float.class);
             result = (AbstractFloatScalar<?, ?>) instantiateSI.invoke(null, zeroValue);
             assertEquals("SI value was correctly set", zeroValue, result.getSI(), 0.0001);

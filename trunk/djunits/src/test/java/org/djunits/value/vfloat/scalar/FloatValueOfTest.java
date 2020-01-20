@@ -132,6 +132,25 @@ public class FloatValueOfTest
         illegal(FloatSIScalar.class, "1.0.0 m2");
         illegal(FloatSIScalar.class, 10.0f, "xyz");
         illegal(FloatSIScalar.class, "10.0 xyz");
+        try
+        {
+            FloatSIScalar.valueOf("10.0 xyzuwv");
+            fail("valueOf of nonexistent unit should have thrown an IllegalArgumentException");
+        }
+        catch (IllegalArgumentException iae)
+        {
+            // Ignore expected exception
+        }
+        
+        try
+        {
+            FloatSIScalar.valueOf("xyzuvw");
+            fail("valueOf of empty string should have thrown an IllegalArgumentException");
+        }
+        catch (IllegalArgumentException iae)
+        {
+            // Ignore expected exception
+        }
     }
 
     /** test the valueOf and the of methods. */
