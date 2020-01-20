@@ -145,6 +145,16 @@ public class DoubleScalarTest
                     assertTrue("Exception is an IllegalArgumentException",
                             ite.getCause().toString().startsWith("java.lang.IllegalArgumentException"));
                 }
+                
+                try
+                {
+                    ofMethod.invoke(null, testValue, "");
+                }
+                catch (InvocationTargetException ite)
+                {
+                    assertTrue("Exception is an IllegalArgumentException",
+                            ite.getCause().toString().startsWith("java.lang.IllegalArgumentException"));
+                }
             }
         }
     }
