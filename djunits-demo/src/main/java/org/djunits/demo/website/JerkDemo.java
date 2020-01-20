@@ -1,14 +1,7 @@
 package org.djunits.demo.website;
 
-import org.djunits.unit.DurationUnit;
-import org.djunits.unit.LengthUnit;
-import org.djunits.unit.SpeedUnit;
 import org.djunits.value.ValueRuntimeException;
 import org.djunits.value.storage.StorageType;
-import org.djunits.value.vdouble.scalar.Duration;
-import org.djunits.value.vdouble.scalar.Length;
-import org.djunits.value.vdouble.scalar.Speed;
-import org.djunits.value.vdouble.vector.AccelerationVector;
 import org.djunits.value.vdouble.vector.base.DoubleVector;
 
 /**

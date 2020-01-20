@@ -7,9 +7,18 @@ import org.djunits.value.vdouble.function.DoubleFunction;
 import org.djunits.value.vdouble.vector.LengthVector;
 import org.djunits.value.vdouble.vector.base.DoubleVector;
 
-public class VectorExample
+/** Demo for Vector. */
+public final class VectorExample
 {
+    /** */
+    private VectorExample()
+    {
+        // just a main method
+    }
 
+    /**
+     * @param args not used
+     */
     public static void main(final String[] args)
     {
         double[] data = new double[10];
@@ -22,7 +31,7 @@ public class VectorExample
         System.out.println(lengthVector);
         lengthVector.rint();
         System.out.println(lengthVector);
-        
+
         lengthVector = DoubleVector.instantiate(data, LengthUnit.FOOT, StorageType.DENSE);
         lengthVector = lengthVector.mutable();
         final Scale scale = lengthVector.getDisplayUnit().getScale();
