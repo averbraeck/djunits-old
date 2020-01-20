@@ -15,8 +15,14 @@ import org.djunits.value.vdouble.scalar.Angle;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-public class Angles
+public final class Angles
 {
+    /** */
+    private Angles()
+    {
+        // utility class
+    }
+    
     /**
      * Create some Angle values to demonstrate conversion from and to related units, including the non-linear AngleUnit.PERCENT.
      * @param args String[]; the command line arguments; not used

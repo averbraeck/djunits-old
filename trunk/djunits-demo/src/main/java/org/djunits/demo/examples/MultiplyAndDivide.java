@@ -53,9 +53,12 @@ public final class MultiplyAndDivide implements UNITS
                 + requiredSpeed.toString(KM_PER_HOUR));
         Speed speed1 = new Speed(1.2, SpeedUnit.SI);
         Speed speed2 = speed1.times(2.0);
+        System.out.println("speed times 2 = " + speed2);
         Speed speed3 = speed1.times(3.0);
+        System.out.println("speed times 3 = " + speed3);
         double[] sv = new double[] {1, 2, 3, 4, 5};
         SpeedVector speedVector = DoubleVector.instantiate(sv, SpeedUnit.SI, StorageType.DENSE);
+        System.out.println("speed vector = " + speedVector);
     }
 
 }

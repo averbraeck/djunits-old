@@ -4,16 +4,21 @@ package org.djunits.demo.examples;
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.MassUnit;
 import org.djunits.unit.SpeedUnit;
-import org.djunits.value.vdouble.scalar.Acceleration;
 import org.djunits.value.vdouble.scalar.Duration;
 import org.djunits.value.vdouble.scalar.Energy;
 import org.djunits.value.vdouble.scalar.Length;
 import org.djunits.value.vdouble.scalar.Mass;
 import org.djunits.value.vdouble.scalar.Speed;
 
-public class ExamplesSpeedConversions
+/** demo for conversions. */
+public final class ExamplesSpeedConversions
 {
-
+    /** */
+    private ExamplesSpeedConversions()
+    {
+        // utility constructor.
+    }
+    
     /**
      * @param args String[]; args
      */
@@ -24,6 +29,7 @@ public class ExamplesSpeedConversions
         example2();
     }
     
+    /** example 1. */
     public static void example1()
     {
         Speed speed1 = new Speed(30, SpeedUnit.MILE_PER_HOUR);
@@ -42,14 +48,16 @@ public class ExamplesSpeedConversions
         System.out.println("difference: " + diff.toString(SpeedUnit.KM_PER_HOUR));
     }
     
+    /** example 2. */
     public static void example2()
     {
         Speed speed = new Speed(12, SpeedUnit.KM_PER_HOUR);
         Length length = new Length(4, LengthUnit.MILE);
-        //Duration howLongOK = length.divide(speed); // Good
-        //Duration howLongWrong = speed.divide(length); // Does not compile; result would be a frequency
-        //Speed other = speed.minus(length); // Does not compile; subtracting a length from a speed make no sense
-        //Acceleration acceleration = speed.times(speed).asAcceleration(); // Throws a UnitRuntimeException
+        Duration howLongOK = length.divide(speed); // Good
+        System.out.println(howLongOK);
+        // Duration howLongWrong = speed.divide(length); // Does not compile; result would be a frequency
+        // Speed other = speed.minus(length); // Does not compile; subtracting a length from a speed make no sense
+        // Acceleration acceleration = speed.times(speed).asAcceleration(); // Throws a UnitRuntimeException
         Energy kineticEnergy = speed.times(speed).times(new Mass(3, MassUnit.KILOGRAM).times(0.5)).asEnergy(); // OK
         System.out.println(kineticEnergy);
     }
