@@ -1,6 +1,9 @@
 <document xmlns="http://maven.apache.org/changes/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="4.01.06" date="2020-XX-XX" description="...">
+    </release>
+    
     <release version="4.01.05" date="2020-01-19" description="Javadoc, spotbugs warnings, Localization">
       <action dev="averbraeck" type="update">
         Solved a few spotbugs warnings. Improved Javadoc in a few places. Updated copyright notice to 2020.
