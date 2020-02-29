@@ -33,9 +33,9 @@ import java.util.List;
  * Throw can be used as part of a <b>super</b>(...) call in a constructor.
  * <p>
  * Copyright (c) 2016-2020 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved. See
- * for project information <a href="https://djutils.org" target="_blank"> https://djutils.org</a>. The DJUTILS project is
+ * for project information <a href="https://djunits.org" target="_blank"> https://djunits.org</a>. The DJUNITS project is
  * distributed under a three-clause BSD-style license, which can be found at
- * <a href="https://djutils.org/docs/license.html" target="_blank"> https://djutils.org/docs/license.html</a>.
+ * <a href="https://djunits.org/docs/license.html" target="_blank"> https://djunits.org/docs/license.html</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
