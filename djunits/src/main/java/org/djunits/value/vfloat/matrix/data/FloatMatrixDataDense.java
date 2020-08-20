@@ -2,6 +2,7 @@ package org.djunits.value.vfloat.matrix.data;
 
 import java.util.stream.IntStream;
 
+import org.djunits.Throw;
 import org.djunits.value.ValueRuntimeException;
 import org.djunits.value.storage.StorageType;
 import org.djunits.value.vfloat.function.FloatFunction;
@@ -45,17 +46,15 @@ public class FloatMatrixDataDense extends FloatMatrixData
      * Create a matrix with dense data. The float array is of the form d[rows][columns] so each value can be found with
      * f[row][column].
      * @param matrixSI float[][]; the data to store
+     * @throws NullPointerException when matrixSI is null
      * @throws ValueRuntimeException in case matrix is ragged
      */
     public FloatMatrixDataDense(final float[][] matrixSI) throws ValueRuntimeException
     {
         super(StorageType.DENSE);
-        if (matrixSI == null || matrixSI.length == 0)
-        {
-            throw new ValueRuntimeException("FloatMatrixDataDense constructor, matrixSI == null || matrixSI.length == 0");
-        }
+        Throw.whenNull(matrixSI, "DoubleMatrixDataDense constructor, matrixSI == null");
         this.rows = matrixSI.length;
-        this.cols = matrixSI[0].length;
+        this.cols =  this.rows == 0 ? 0 : matrixSI[0].length;
         this.matrixSI = new float[this.rows * this.cols];
         for (int r = 0; r < this.rows; r++)
         {

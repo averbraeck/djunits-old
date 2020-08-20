@@ -17,7 +17,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalar;
 import org.djunits.value.vfloat.scalar.base.FloatScalar;
 import org.djunits.value.vfloat.vector.base.AbstractFloatVector;
 import org.djunits.value.vfloat.vector.data.FloatVectorData;
-import org.ojalgo.matrix.PrimitiveMatrix;
+import org.ojalgo.matrix.Primitive32Matrix;
 
 /**
  * The most basic abstract class for the FloatMatrix.
@@ -508,8 +508,8 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
     {
         try
         {
-            final PrimitiveMatrix.Factory matrixFactory = PrimitiveMatrix.FACTORY;
-            final PrimitiveMatrix m = matrixFactory.rows(this.data.getDoubleDenseMatrixSI());
+            final Primitive32Matrix.Factory matrixFactory = Primitive32Matrix.FACTORY;
+            final Primitive32Matrix m = matrixFactory.rows(this.data.getDoubleDenseMatrixSI());
             if (!m.isSquare())
             {
                 throw new IllegalArgumentException("Matrix is not square -- determinant cannot be calculated.");

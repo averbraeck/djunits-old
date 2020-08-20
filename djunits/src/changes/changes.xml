@@ -1,7 +1,16 @@
 <document xmlns="http://maven.apache.org/changes/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
-    <release version="4.01.06" date="2020-XX-XX" description="...">
+    <release version="4.01.06" date="2020-08-20" description="Zero length vectors and matrices allowed">
+      <action dev="averbraeck" type="update">
+        Zero length vectors and matrices were not allowed. As a corner case, e.g., when no data is available, a zero
+        length vector or zero-column or zero-row matrix, can be useful to have. From this version onward, these zero-length
+        vectors and matrices are allowed.
+      </action>
+      <action dev="averbraeck" type="update">
+        For linking to the newest ojAlgo version, PrimitiveMatrix has been replaced with Primitive32Matrix for float and
+        Primitive64Matrix for double matrices.
+      </action>
     </release>
     
     <release version="4.01.05" date="2020-01-19" description="Javadoc, spotbugs warnings, Localization">

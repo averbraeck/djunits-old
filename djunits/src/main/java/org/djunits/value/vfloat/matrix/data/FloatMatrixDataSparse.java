@@ -100,7 +100,11 @@ public class FloatMatrixDataSparse extends FloatMatrixData
     private static void fill(final float[][] data, float[] matrixSI, long[] indices) throws ValueRuntimeException
     {
         int rows = data.length;
-        int cols = data[0].length;
+        int cols =  rows == 0 ? 0 : data[0].length;
+        if (cols == 0)
+        {
+            rows = 0;
+        }
         int count = 0;
         for (int r = 0; r < rows; r++)
         {
@@ -133,7 +137,11 @@ public class FloatMatrixDataSparse extends FloatMatrixData
             throws ValueRuntimeException
     {
         int rows = data.length;
-        int cols = data[0].length;
+        int cols = rows == 0 ? 0 : data[0].length;
+        if (cols == 0)
+        {
+            rows = 0;
+        }
         int count = 0;
         for (int r = 0; r < rows; r++)
         {
@@ -456,10 +464,14 @@ public class FloatMatrixDataSparse extends FloatMatrixData
      */
     public static FloatMatrixDataSparse instantiate(final float[][] valuesSI) throws ValueRuntimeException
     {
-        checkRectangularAndNonEmpty(valuesSI);
+        checkRectangularAndNonNull(valuesSI);
         int length = nonZero(valuesSI);
-        final int rows = valuesSI.length;
-        final int cols = valuesSI[0].length;
+        int rows = valuesSI.length;
+        final int cols = rows == 0 ? 0 : valuesSI[0].length;
+        if (cols == 0)
+        {
+            rows = 0;
+        }
         float[] sparseSI = new float[length];
         long[] indices = new long[length];
         fill(valuesSI, sparseSI, indices);
@@ -475,10 +487,14 @@ public class FloatMatrixDataSparse extends FloatMatrixData
      */
     public static FloatMatrixDataSparse instantiate(final float[][] values, final Scale scale) throws ValueRuntimeException
     {
-        checkRectangularAndNonEmpty(values);
+        checkRectangularAndNonNull(values);
         int length = nonZero(values);
-        final int rows = values.length;
-        final int cols = values[0].length;
+        int rows = values.length;
+        final int cols = rows == 0 ? 0 : values[0].length;
+        if (cols == 0)
+        {
+            rows = 0;
+        }
         float[] sparseSI = new float[length];
         long[] indices = new long[length];
         fill(values, sparseSI, indices, scale);
