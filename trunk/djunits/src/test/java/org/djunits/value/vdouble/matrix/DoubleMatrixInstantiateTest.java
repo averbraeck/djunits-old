@@ -2,9 +2,16 @@ package org.djunits.value.vdouble.matrix;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import org.djunits.Try;
 import org.djunits.unit.AbsoluteLinearUnit;
@@ -18,16 +25,17 @@ import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.util.UNITS;
 import org.djunits.unit.util.UnitException;
 import org.djunits.value.CLASSNAMES;
-import org.djunits.value.ValueRuntimeException;
 import org.djunits.value.storage.StorageType;
 import org.djunits.value.vdouble.matrix.base.AbstractDoubleMatrixAbs;
 import org.djunits.value.vdouble.matrix.base.AbstractDoubleMatrixRelWithAbs;
 import org.djunits.value.vdouble.matrix.base.DoubleMatrix;
 import org.djunits.value.vdouble.matrix.base.DoubleMatrixInterface;
+import org.djunits.value.vdouble.matrix.base.DoubleSparseValue;
 import org.djunits.value.vdouble.matrix.data.DoubleMatrixData;
 import org.djunits.value.vdouble.scalar.Area;
 import org.djunits.value.vdouble.scalar.Length;
 import org.djunits.value.vdouble.scalar.SIScalar;
+import org.djunits.value.vdouble.scalar.Speed;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarAbs;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
 import org.djunits.value.vdouble.scalar.base.DoubleScalarInterface;
@@ -67,7 +75,7 @@ public class DoubleMatrixInstantiateTest
             @SuppressWarnings("unchecked")
             Quantity<U> quantity = (Quantity<U>) Quantities.INSTANCE.getQuantity(scalarName + "Unit");
             U standardUnit = quantity.getStandardUnit();
-            for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+            for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
             {
                 double[][] testValues = DOUBLEMATRIX.denseRectArrays(5, 10);
                 DoubleMatrixData dmd = DoubleMatrixData.instantiate(testValues, standardUnit.getScale(), storageType);
@@ -83,7 +91,7 @@ public class DoubleMatrixInstantiateTest
                 DoubleVectorData dvd =
                         DoubleVectorData.instantiate(doubleMatrix.getRowSI(0), standardUnit.getScale(), storageType);
                 DoubleVectorInterface<U, ?, ?> doubleVector = doubleMatrix.instantiateVector(dvd, standardUnit);
-                assertArrayEquals("Double vector contains values from row 0", new double[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+                assertArrayEquals("Double vector contains values from row 0", new double[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
                         doubleVector.getValuesSI(), 0.001);
                 DoubleScalarInterface<U, ?> doubleScalar = doubleMatrix.instantiateScalarSI(1.234, standardUnit);
                 assertEquals("Constructed scalar has correct value", 1.234, doubleScalar.getSI(), 0.001);
@@ -116,7 +124,7 @@ public class DoubleMatrixInstantiateTest
             Quantity<AU> absQuantity = (Quantity<AU>) Quantities.INSTANCE.getQuantity(absScalarName + "Unit");
             RU relStandardUnit = relQuantity.getStandardUnit();
             AU absStandardUnit = absQuantity.getStandardUnit();
-            for (StorageType storageType : new StorageType[] { StorageType.DENSE, StorageType.SPARSE })
+            for (StorageType storageType : new StorageType[] {StorageType.DENSE, StorageType.SPARSE})
             {
                 double[][] testValues = DOUBLEMATRIX.denseRectArrays(5, 10);
                 DoubleMatrixData dmd = DoubleMatrixData.instantiate(testValues, relStandardUnit.getScale(), storageType);
@@ -133,7 +141,7 @@ public class DoubleMatrixInstantiateTest
                         DoubleVectorData.instantiate(relDoubleMatrix.getRowSI(0), relStandardUnit.getScale(), storageType);
                 AbstractDoubleVectorAbs<AU, ?, ?, RU, ?, ?> absDoubleVector =
                         relDoubleMatrix.instantiateVectorAbs(dvd, absStandardUnit);
-                assertArrayEquals("Double vector contains values from row 0", new double[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+                assertArrayEquals("Double vector contains values from row 0", new double[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
                         absDoubleVector.getValuesSI(), 0.001);
                 AbstractDoubleScalarAbs<AU, ?, RU, ?> absDoubleScalar =
                         relDoubleMatrix.instantiateScalarAbsSI(1.234, absStandardUnit);
@@ -147,7 +155,7 @@ public class DoubleMatrixInstantiateTest
                 dvd = DoubleVectorData.instantiate(absDoubleMatrix.getRowSI(0), absStandardUnit.getScale(), storageType);
                 AbstractDoubleVectorRelWithAbs<AU, ?, ?, RU, ?, ?> relDoubleVector =
                         absDoubleMatrix.instantiateVectorRel(dvd, relStandardUnit);
-                assertArrayEquals("Double vector contains values from row 0", new double[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+                assertArrayEquals("Double vector contains values from row 0", new double[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
                         relDoubleVector.getValuesSI(), 0.001);
                 AbstractDoubleScalarRelWithAbs<AU, ?, RU, ?> relDoubleScalar =
                         absDoubleMatrix.instantiateScalarRelSI(1.234, relStandardUnit);
@@ -975,11 +983,10 @@ public class DoubleMatrixInstantiateTest
     // =============================================== EDGE CASE MATRICES ===================================================
 
     /**
-     * Test the instantiation of dense and sparse matrix types with one row or one column, and errors with null pointers and/or
-     * zero rows/columns.
+     * Test the instantiation of dense and sparse matrix types with one row or one column, and errors with null pointers.
      */
     @Test
-    @SuppressWarnings({ "checkstyle:localvariablename", "checkstyle:methodlength" })
+    @SuppressWarnings({"checkstyle:localvariablename", "checkstyle:methodlength"})
     public void testInstantiateEdgeCases()
     {
         // DENSE DATA
@@ -1139,41 +1146,10 @@ public class DoubleMatrixInstantiateTest
         assertEquals(1, col11ss.zSum().getSI(), 0.001);
         assertEquals(SpeedUnit.METER_PER_SECOND, col11ss.getDisplayUnit());
 
-        // NULL / ZERO ROWS / ZERO COLS
+        // NULL
 
-        double[][] d0_1 = new double[0][1];
-        double[][] d1_0 = new double[1][];
-        d1_0[0] = new double[0];
-        double[][] d0_0 = new double[0][0];
         double[][] d1_1 = new double[1][];
         d1_1[0] = new double[1];
-
-        new Try()
-        {
-            @Override
-            public void execute()
-            {
-                DoubleMatrix.instantiate(d0_1, SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
-            }
-        }.test("constructing matrix with zero rows should have thrown an exception", ValueRuntimeException.class);
-
-        new Try()
-        {
-            @Override
-            public void execute()
-            {
-                DoubleMatrix.instantiate(d1_0, SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
-            }
-        }.test("constructing matrix with zero columns should have thrown an exception", ValueRuntimeException.class);
-
-        new Try()
-        {
-            @Override
-            public void execute()
-            {
-                DoubleMatrix.instantiate(d0_0, SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
-            }
-        }.test("constructing matrix with zero rows and cols should have thrown an exception", ValueRuntimeException.class);
 
         new Try()
         {
@@ -1202,4 +1178,101 @@ public class DoubleMatrixInstantiateTest
             }
         }.test("constructing matrix with null storage type should have thrown an exception", NullPointerException.class);
     }
+
+    /**
+     * Test matrix construction and operations with zero length.
+     */
+    @Test
+    public void testInstantiateZero()
+    {
+        double[][] doubleMatrix00 = new double[0][0];
+        double[][] doubleMatrix10 = new double[1][];
+        doubleMatrix10[0] = new double[] {};
+        Speed[][] speedMatrix00 = new Speed[0][0];
+        Speed[][] speedMatrix10 = new Speed[1][];
+        speedMatrix10[0] = new Speed[] {};
+        Collection<DoubleSparseValue<SpeedUnit, Speed>> speedList = new ArrayList<>();
+        SortedMap<Integer, SpeedMatrix> smMap = new TreeMap<>();
+        smMap.put(0,
+                DoubleMatrix.instantiate(
+                        DoubleMatrixData.instantiate(doubleMatrix00, SpeedUnit.KM_PER_HOUR.getScale(), StorageType.DENSE),
+                        SpeedUnit.KM_PER_HOUR));
+        smMap.put(1,
+                DoubleMatrix.instantiate(
+                        DoubleMatrixData.instantiate(doubleMatrix00, SpeedUnit.KM_PER_HOUR.getScale(), StorageType.SPARSE),
+                        SpeedUnit.KM_PER_HOUR));
+        smMap.put(2, DoubleMatrix.instantiate(DoubleMatrixData.instantiate(speedMatrix00, StorageType.DENSE),
+                SpeedUnit.KM_PER_HOUR));
+        smMap.put(3, DoubleMatrix.instantiate(DoubleMatrixData.instantiate(speedMatrix00, StorageType.SPARSE),
+                SpeedUnit.KM_PER_HOUR));
+        smMap.put(4, DoubleMatrix.instantiate(DoubleMatrixData.instantiate(speedList, 0, 0, StorageType.DENSE),
+                SpeedUnit.KM_PER_HOUR));
+        smMap.put(5, DoubleMatrix.instantiate(DoubleMatrixData.instantiate(speedList, 0, 0, StorageType.SPARSE),
+                SpeedUnit.KM_PER_HOUR));
+        smMap.put(6,
+                DoubleMatrix.instantiate(
+                        DoubleMatrixData.instantiate(doubleMatrix10, SpeedUnit.KM_PER_HOUR.getScale(), StorageType.DENSE),
+                        SpeedUnit.KM_PER_HOUR));
+        smMap.put(7,
+                DoubleMatrix.instantiate(
+                        DoubleMatrixData.instantiate(doubleMatrix10, SpeedUnit.KM_PER_HOUR.getScale(), StorageType.SPARSE),
+                        SpeedUnit.KM_PER_HOUR));
+        smMap.put(8, DoubleMatrix.instantiate(DoubleMatrixData.instantiate(speedMatrix10, StorageType.DENSE),
+                SpeedUnit.KM_PER_HOUR));
+        smMap.put(9, DoubleMatrix.instantiate(DoubleMatrixData.instantiate(speedMatrix10, StorageType.SPARSE),
+                SpeedUnit.KM_PER_HOUR));
+
+        for (Map.Entry<Integer, SpeedMatrix> entry : smMap.entrySet())
+        {
+            int key = entry.getKey();
+            SpeedMatrix sv = entry.getValue();
+            assertEquals("key=" + key, 0, sv.rows());
+            assertEquals("key=" + key, 0, sv.cols());
+            assertEquals("key=" + key, 0, sv.cardinality());
+            assertEquals("key=" + key, 0, sv.getScalars().length);
+            assertEquals("key=" + key, SpeedUnit.KM_PER_HOUR, sv.getDisplayUnit());
+            assertEquals("DENSE/SPARSE: key = " + key, sv.getStorageType(),
+                    key % 2 == 0 ? StorageType.DENSE : StorageType.SPARSE);
+            assertFalse("key=" + key, sv.isMutable());
+            SpeedMatrix svm = sv.mutable();
+            assertTrue("key=" + key, svm.isMutable());
+            assertEquals(SpeedUnit.KM_PER_HOUR, svm.getDisplayUnit());
+            assertEquals("DENSE/SPARSE: key = " + key, svm.getStorageType(),
+                    key % 2 == 0 ? StorageType.DENSE : StorageType.SPARSE);
+            SpeedMatrix svr = svm.abs();
+            assertEquals("key=" + key, 0, sv.rows());
+            assertEquals("key=" + key, 0, sv.cols());
+            assertEquals(SpeedUnit.KM_PER_HOUR, svr.getDisplayUnit());
+            svm = svm.ceil();
+            assertEquals("key=" + key, 0, sv.rows());
+            assertEquals("key=" + key, 0, sv.cols());
+            assertEquals("key=" + key, SpeedUnit.KM_PER_HOUR, svr.getDisplayUnit());
+            svr = svm.decrementBy(Speed.ONE);
+            assertEquals("key=" + key, 0, sv.rows());
+            assertEquals("key=" + key, 0, sv.cols());
+            assertEquals("key=" + key, SpeedUnit.KM_PER_HOUR, svr.getDisplayUnit());
+            svr = svm.incrementBy(Speed.ONE);
+            assertEquals("key=" + key, 0, sv.rows());
+            assertEquals("key=" + key, 0, sv.cols());
+            assertEquals(SpeedUnit.KM_PER_HOUR, svr.getDisplayUnit());
+            svr = svm.plus(sv);
+            assertEquals("key=" + key, 0, sv.rows());
+            assertEquals("key=" + key, 0, sv.cols());
+            assertEquals("key=" + key, SpeedUnit.KM_PER_HOUR, svr.getDisplayUnit());
+            assertEquals("DENSE/SPARSE: key = " + key, svr.getStorageType(),
+                    key % 2 == 0 ? StorageType.DENSE : StorageType.SPARSE);
+            svr = sv.toDense();
+            assertEquals("key=" + key, StorageType.DENSE, svr.getStorageType());
+            svr = sv.toSparse();
+            assertEquals("key=" + key, StorageType.SPARSE, svr.getStorageType());
+            assertEquals("key=" + key, 0, sv.getValuesSI().length);
+            assertEquals("key=" + key, 0, sv.getValuesInUnit().length);
+            assertEquals("key=" + key, 0, sv.getValuesInUnit(SpeedUnit.KNOT).length);
+            svr = sv.times(2.0);
+            assertEquals("key=" + key, 0, sv.rows());
+            assertEquals("key=" + key, 0, sv.cols());
+            assertEquals("key=" + key, SpeedUnit.KM_PER_HOUR, svr.getDisplayUnit());
+        }
+    }
+
 }

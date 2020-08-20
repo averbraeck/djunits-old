@@ -62,18 +62,23 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      * @param scale Scale; the scale of the unit to use for conversion to SI
      * @param storageType StorageType; the data type to use
      * @return the FloatMatrixData with the right data type
-     * @throws ValueRuntimeException when values are null, or storageType is null
+     * @throws ValueRuntimeException when values is ragged
+     * @throws NullPointerException when values are null, or storageType is null
      */
     public static FloatMatrixData instantiate(final float[][] values, final Scale scale, final StorageType storageType)
             throws ValueRuntimeException
     {
         Throw.whenNull(scale, "FloatMatrixData.instantiate: scale is null");
         Throw.whenNull(storageType, "FloatMatrixData.instantiate: storageType is null");
-        checkRectangularAndNonEmpty(values);
+        checkRectangularAndNonNull(values);
 
-        final int rows = values.length;
-        final int cols = values[0].length;
-
+        int rows = values.length;
+        final int cols = rows == 0 ? 0 : values[0].length;
+        if (cols == 0)
+        {
+            rows = 0;
+        }
+        
         switch (storageType)
         {
             case DENSE:
@@ -97,18 +102,19 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      * @param cols int; the number of columns of the matrix
      * @param storageType StorageType; the data type to use
      * @return the FloatMatrixData with the right data type
-     * @throws ValueRuntimeException when values are null, or storageType is null
+     * @throws NullPointerException when values are null, or storageType is null
+     * @throws ValueRuntimeException when rows &lt; 0 or cols &lt; 0
      * @param <U> the unit type
      * @param <S> the corresponding scalar type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> FloatMatrixData instantiate(
             final Collection<FloatSparseValue<U, S>> values, final int rows, final int cols, final StorageType storageType)
-            throws ValueRuntimeException
+            throws NullPointerException
     {
         Throw.whenNull(values, "FloatMatrixData.instantiate: values is null");
         Throw.whenNull(storageType, "FloatMatrixData.instantiate: storageType is null");
-        Throw.when(cols <= 0, ValueRuntimeException.class, "cols must be > 0");
-        Throw.when(rows <= 0, ValueRuntimeException.class, "rows must be > 0");
+        Throw.when(cols < 0, ValueRuntimeException.class, "cols must be >= 0");
+        Throw.when(rows < 0, ValueRuntimeException.class, "rows must be >= 0");
         for (FloatSparseValue<U, S> fsp : values)
         {
             Throw.whenNull(fsp, "null value in values");
@@ -137,7 +143,8 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      * @param values S[][]; the values to store
      * @param storageType StorageType; the data type to use
      * @return the FloatMatrixData with the right data type
-     * @throws ValueRuntimeException when values is null, or storageType is null
+     * @throws NullPointerException when values is null, or storageType is null
+     * @throws ValueRuntimeException when values is ragged
      * @param <U> the unit type
      * @param <S> the corresponding scalar type
      */
@@ -145,11 +152,15 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
             final StorageType storageType) throws ValueRuntimeException
     {
         Throw.whenNull(storageType, "FloatMatrixData.instantiate: storageType is null");
-        checkRectangularAndNonEmpty(values);
+        checkRectangularAndNonNull(values);
 
-        final int rows = values.length;
-        final int cols = values[0].length;
-
+        int rows = values.length;
+        final int cols = rows == 0 ? 0 : values[0].length;
+        if (cols == 0)
+        {
+            rows = 0;
+        }
+        
         switch (storageType)
         {
             case DENSE:
@@ -248,12 +259,11 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      * @param values float[][]; the 2D array to check
      * @return the values in case the method is used in a constructor
      * @throws NullPointerException when <code>values</code> is null
-     * @throws ValueRuntimeException when <code>values</code> is empty, or jagged
+     * @throws ValueRuntimeException when <code>values</code> is jagged
      */
-    protected static float[][] checkRectangularAndNonEmpty(final float[][] values) throws ValueRuntimeException
+    protected static float[][] checkRectangularAndNonNull(final float[][] values) throws ValueRuntimeException
     {
         Throw.when(null == values, NullPointerException.class, "Cannot create a matrix from a null float[][]");
-        Throw.when(0 == values.length, ValueRuntimeException.class, "Cannot create a matrix from zero length float[][]");
         for (int row = 0; row < values.length; row++)
         {
             Throw.when(null == values[row], ValueRuntimeException.class,
@@ -261,8 +271,6 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
             Throw.when(values[row].length != values[0].length, ValueRuntimeException.class,
                     "Cannot create a matrix from a jagged float[][]");
         }
-        Throw.when(0 == values[0].length, ValueRuntimeException.class,
-                "Cannot create a matrix from a float[][] with zero values");
         return values;
     }
 
@@ -271,15 +279,14 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
      * @param values S[][]; the 2D array to check
      * @return the values in case the method is used in a constructor
      * @throws NullPointerException when <code>values</code> is null
-     * @throws ValueRuntimeException when <code>values</code> is empty, or jagged
+     * @throws ValueRuntimeException when <code>values</code> is jagged
      * @param <U> the unit type
      * @param <S> the corresponding scalar type
      */
-    protected static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> S[][] checkRectangularAndNonEmpty(
+    protected static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> S[][] checkRectangularAndNonNull(
             final S[][] values) throws ValueRuntimeException
     {
         Throw.when(null == values, NullPointerException.class, "Cannot create a matrix from a null Scalar[][]");
-        Throw.when(0 == values.length, ValueRuntimeException.class, "Cannot create a matrix from zero length Scalar[][]");
         for (int row = 0; row < values.length; row++)
         {
             Throw.when(null == values[row], ValueRuntimeException.class,
@@ -291,8 +298,6 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
                 Throw.whenNull(values[row][col], "Cannot create a matrix from Scalar[][] containing null(s)");
             }
         }
-        Throw.when(0 == values[0].length, ValueRuntimeException.class,
-                "Cannot create a matrix from a Scalar[][] with zero values");
         return values;
     }
 

@@ -54,16 +54,13 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @param scale Scale; the scale of the unit to use for conversion to SI
      * @param storageType StorageType; the data type to use
      * @return FloatVectorData; the FloatVectorData with the right data type
-     * @throws ValueRuntimeException when values are null, or storageType is null
+     * @throws NullPointerException when values are null, or storageType is null
      */
     public static FloatVectorData instantiate(final float[] values, final Scale scale, final StorageType storageType)
-            throws ValueRuntimeException
     {
         Throw.whenNull(values, "FloatVectorData.instantiate: float[] values is null");
         Throw.whenNull(scale, "FloatVectorData.instantiate: scale is null");
         Throw.whenNull(storageType, "FloatVectorData.instantiate: storageType is null");
-        Throw.when(values.length == 0, ValueRuntimeException.class,
-                "FloatVectorData.instantiate: float[] values wrong: values.length == 0");
 
         float[] valuesSI = new float[values.length];
         IntStream.range(0, values.length).parallel().forEach(i -> valuesSI[i] = (float) scale.toStandardUnit(values[i]));
@@ -87,15 +84,13 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @param scale Scale; the scale of the unit to use for conversion to SI
      * @param storageType StorageType; the data type to use
      * @return FloatVectorData; the FloatVectorData with the right data type
-     * @throws ValueRuntimeException when list is null, or storageType is null
+     * @throws NullPointerException when list is null, or storageType is null
      */
     public static FloatVectorData instantiate(final List<Float> values, final Scale scale, final StorageType storageType)
-            throws ValueRuntimeException
     {
         Throw.whenNull(values, "FloatVectorData.instantiate: float[] values is null");
         Throw.whenNull(scale, "FloatVectorData.instantiate: scale is null");
         Throw.whenNull(storageType, "FloatVectorData.instantiate: storageType is null");
-        Throw.when(values.size() == 0, ValueRuntimeException.class, "FloatVectorData.instantiate: values.size() == 0");
         Throw.when(values.parallelStream().filter(d -> d == null).count() > 0, NullPointerException.class,
                 "values contains one or more null values");
 
@@ -120,17 +115,16 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @param values S[]; the values to store
      * @param storageType StorageType; the data type to use
      * @return FloatVectorData; the FloatVectorData with the right data type
-     * @throws ValueRuntimeException when values is null, or storageType is null
+     * @throws NullPointerException when values is null, or storageType is null
      * @param <U> the unit type
      * @param <S> the corresponding scalar type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> FloatVectorData instantiate(final S[] values,
-            final StorageType storageType) throws ValueRuntimeException
+            final StorageType storageType)
     {
         Throw.whenNull(values, "FloatVectorData.instantiate: double[] values is null");
         Throw.whenNull(storageType, "FloatVectorData.instantiate: storageType is null");
-        Throw.when(values.length == 0, ValueRuntimeException.class,
-                "FloatVectorData.instantiate: FloatScalar[] values wrong: values.length == 0");
+
         for (S s : values)
         {
             Throw.whenNull(s, "null value in values");
@@ -157,16 +151,16 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @param valueList List&lt;? extends FloatScalarInterface&gt;; the FloatScalar values to store
      * @param storageType StorageType; the data type to use
      * @return FloatVectorData; the FloatVectorData with the right data type
-     * @throws ValueRuntimeException when values is null, or storageType is null
+     * @throws NullPointerException when values is null, or storageType is null
      * @param <U> the unit type
      * @param <S> the corresponding scalar type
      */
     public static <U extends Unit<U>, S extends FloatScalarInterface<U, S>> FloatVectorData instantiateList(
-            final List<S> valueList, final StorageType storageType) throws ValueRuntimeException
+            final List<S> valueList, final StorageType storageType)
     {
         Throw.whenNull(valueList, "FloatVectorData.instantiate: valueList is null");
         Throw.whenNull(storageType, "FloatVectorData.instantiate: storageType is null");
-        Throw.when(valueList.size() == 0, ValueRuntimeException.class, "FloatVectorData.instantiate: valueList.size() == 0");
+
         for (S s : valueList)
         {
             Throw.whenNull(s, "null value in valueList");
@@ -195,13 +189,14 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @param scale Scale; the scale of the unit to use for conversion to SI
      * @param storageType StorageType; the data type to use
      * @return FloatVectorData; the FloatVectorData with the right data type
-     * @throws ValueRuntimeException when values is null, or storageType is null
+     * @throws ValueRuntimeException when length &lt; 0
+     * @throws NullPointerException when values is null, or storageType is null
      */
     public static FloatVectorData instantiate(final SortedMap<Integer, Float> valueMap, final int length, final Scale scale,
             final StorageType storageType) throws ValueRuntimeException
     {
         Throw.whenNull(valueMap, "FloatVectorData.instantiate: values is null");
-        Throw.when(length < 1, ValueRuntimeException.class, "Length must be > 0");
+        Throw.when(length < 0, ValueRuntimeException.class, "Length must be >= 0");
         Throw.whenNull(scale, "FloatVectorData.instantiate: scale is null");
         Throw.whenNull(storageType, "FloatVectorData.instantiate: storageType is null");
         for (Integer key : valueMap.keySet())
@@ -296,7 +291,8 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @param length int; the length of the vector to pad with 0 after last entry in map
      * @param storageType StorageType; the data type to use
      * @return FloatVectorData; the FloatVectorData with the right data type
-     * @throws ValueRuntimeException when values is null, or storageType is null
+     * @throws NullPointerException when values is null, or storageType is null
+     * @throws ValueRuntimeException when length &lt; 0 
      * @param <U> the unit type
      * @param <S> the scalar type to use
      */
@@ -304,7 +300,7 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
             final SortedMap<Integer, S> values, final int length, final StorageType storageType) throws ValueRuntimeException
     {
         Throw.whenNull(values, "FloatVectorData.instantiate: values is null");
-        Throw.when(length < 1, ValueRuntimeException.class, "Length must be > 0");
+        Throw.when(length < 0, ValueRuntimeException.class, "Length must be >= 0");
         Throw.whenNull(storageType, "FloatVectorData.instantiate: storageType is null");
         for (Entry<Integer, S> e : values.entrySet())
         {

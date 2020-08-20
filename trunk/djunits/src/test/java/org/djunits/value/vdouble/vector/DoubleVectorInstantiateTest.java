@@ -1,7 +1,15 @@
 package org.djunits.value.vdouble.vector;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import org.djunits.Try;
 import org.djunits.unit.AreaUnit;
@@ -12,12 +20,13 @@ import org.djunits.unit.util.UnitException;
 import org.djunits.userdefined.Jerk;
 import org.djunits.userdefined.JerkUnit;
 import org.djunits.userdefined.JerkVector;
-import org.djunits.value.ValueRuntimeException;
 import org.djunits.value.storage.StorageType;
 import org.djunits.value.vdouble.scalar.Area;
 import org.djunits.value.vdouble.scalar.Length;
 import org.djunits.value.vdouble.scalar.SIScalar;
+import org.djunits.value.vdouble.scalar.Speed;
 import org.djunits.value.vdouble.vector.base.DoubleVector;
+import org.djunits.value.vdouble.vector.data.DoubleVectorData;
 import org.junit.Test;
 
 /**
@@ -417,8 +426,7 @@ public class DoubleVectorInstantiateTest
     // =============================================== EDGE CASE MATRICES ===================================================
 
     /**
-     * Test the instantiation of dense and sparse vector types with one vect or one column, and errors with null pointers and/or
-     * zero vects/columns.
+     * Test the instantiation of dense and sparse vector types with one vector or one column, and errors with null pointers.
      */
     @Test
     public void testInstantiateEdgeCases()
@@ -455,19 +463,9 @@ public class DoubleVectorInstantiateTest
         assertEquals(1, vect1ss.zSum().getSI(), 0.001);
         assertEquals(SpeedUnit.METER_PER_SECOND, vect1ss.getDisplayUnit());
 
-        // NULL / ZERO ROWS / ZERO COLS
+        // NULL
 
-        double[] d0 = new double[0];
         double[] d1 = new double[1];
-
-        new Try()
-        {
-            @Override
-            public void execute()
-            {
-                DoubleVector.instantiate(d0, SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
-            }
-        }.test("constructing vector with zero length should have thrown an exception", ValueRuntimeException.class);
 
         new Try()
         {
@@ -495,5 +493,103 @@ public class DoubleVectorInstantiateTest
                 DoubleVector.instantiate(d1, SpeedUnit.METER_PER_SECOND, null);
             }
         }.test("constructing vector with null storage type should have thrown an exception", NullPointerException.class);
+    }
+
+    /**
+     * Test vector construction and operations with zero length.
+     */
+    @Test
+    public void testInstantiateZero()
+    {
+        double[] doubleArray = new double[] {};
+        Speed[] speedArray = new Speed[] {};
+        List<Double> doubleList = new ArrayList<>();
+        List<Speed> speedList = new ArrayList<>();
+        SortedMap<Integer, Double> doubleMap = new TreeMap<>();
+        SortedMap<Integer, Speed> speedMap = new TreeMap<>();
+        SortedMap<Integer, SpeedVector> svMap = new TreeMap<>();
+        svMap.put(0,
+                DoubleVector.instantiate(
+                        DoubleVectorData.instantiate(doubleArray, SpeedUnit.KM_PER_HOUR.getScale(), StorageType.DENSE),
+                        SpeedUnit.KM_PER_HOUR));
+        svMap.put(1,
+                DoubleVector.instantiate(
+                        DoubleVectorData.instantiate(doubleArray, SpeedUnit.KM_PER_HOUR.getScale(), StorageType.SPARSE),
+                        SpeedUnit.KM_PER_HOUR));
+        svMap.put(2,
+                DoubleVector.instantiate(DoubleVectorData.instantiate(speedArray, StorageType.DENSE), SpeedUnit.KM_PER_HOUR));
+        svMap.put(3,
+                DoubleVector.instantiate(DoubleVectorData.instantiate(speedArray, StorageType.SPARSE), SpeedUnit.KM_PER_HOUR));
+        svMap.put(4,
+                DoubleVector.instantiate(
+                        DoubleVectorData.instantiate(doubleList, SpeedUnit.KM_PER_HOUR.getScale(), StorageType.DENSE),
+                        SpeedUnit.KM_PER_HOUR));
+        svMap.put(5,
+                DoubleVector.instantiate(
+                        DoubleVectorData.instantiate(doubleList, SpeedUnit.KM_PER_HOUR.getScale(), StorageType.SPARSE),
+                        SpeedUnit.KM_PER_HOUR));
+        svMap.put(6,
+                DoubleVector.instantiate(
+                        DoubleVectorData.instantiate(doubleMap, 0, SpeedUnit.KM_PER_HOUR.getScale(), StorageType.DENSE),
+                        SpeedUnit.KM_PER_HOUR));
+        svMap.put(7,
+                DoubleVector.instantiate(
+                        DoubleVectorData.instantiate(doubleMap, 0, SpeedUnit.KM_PER_HOUR.getScale(), StorageType.SPARSE),
+                        SpeedUnit.KM_PER_HOUR));
+        svMap.put(8, DoubleVector.instantiate(DoubleVectorData.instantiateList(speedList, StorageType.DENSE),
+                SpeedUnit.KM_PER_HOUR));
+        svMap.put(9, DoubleVector.instantiate(DoubleVectorData.instantiateList(speedList, StorageType.SPARSE),
+                SpeedUnit.KM_PER_HOUR));
+        svMap.put(10, DoubleVector.instantiate(DoubleVectorData.instantiateMap(speedMap, 0, StorageType.DENSE),
+                SpeedUnit.KM_PER_HOUR));
+        svMap.put(11, DoubleVector.instantiate(DoubleVectorData.instantiateMap(speedMap, 0, StorageType.SPARSE),
+                SpeedUnit.KM_PER_HOUR));
+        svMap.put(12, new SpeedVector(DoubleVectorData.instantiateList(speedList, StorageType.DENSE), SpeedUnit.KM_PER_HOUR));
+        svMap.put(13, new SpeedVector(DoubleVectorData.instantiateList(speedList, StorageType.SPARSE), SpeedUnit.KM_PER_HOUR));
+
+        for (Map.Entry<Integer, SpeedVector> entry : svMap.entrySet())
+        {
+            int key = entry.getKey();
+            SpeedVector sv = entry.getValue();
+            assertEquals(0, sv.size());
+            assertEquals(0, sv.cardinality());
+            assertEquals(0, sv.getScalars().length);
+            assertEquals(SpeedUnit.KM_PER_HOUR, sv.getDisplayUnit());
+            assertEquals("DENSE/SPARSE: key = " + key, sv.getStorageType(),
+                    key % 2 == 0 ? StorageType.DENSE : StorageType.SPARSE);
+            assertFalse(sv.isMutable());
+            SpeedVector svm = sv.mutable();
+            assertTrue(svm.isMutable());
+            assertEquals(SpeedUnit.KM_PER_HOUR, svm.getDisplayUnit());
+            assertEquals("DENSE/SPARSE: key = " + key, svm.getStorageType(),
+                    key % 2 == 0 ? StorageType.DENSE : StorageType.SPARSE);
+            SpeedVector svr = svm.abs();
+            assertEquals(0, svr.size());
+            assertEquals(SpeedUnit.KM_PER_HOUR, svr.getDisplayUnit());
+            svm = svm.ceil();
+            assertEquals(0, svr.size());
+            assertEquals(SpeedUnit.KM_PER_HOUR, svr.getDisplayUnit());
+            svr = svm.decrementBy(Speed.ONE);
+            assertEquals(0, svr.size());
+            assertEquals(SpeedUnit.KM_PER_HOUR, svr.getDisplayUnit());
+            svr = svm.incrementBy(Speed.ONE);
+            assertEquals(0, svr.size());
+            assertEquals(SpeedUnit.KM_PER_HOUR, svr.getDisplayUnit());
+            svr = svm.plus(sv);
+            assertEquals(0, svr.size());
+            assertEquals(SpeedUnit.KM_PER_HOUR, svr.getDisplayUnit());
+            assertEquals("DENSE/SPARSE: key = " + key, svr.getStorageType(),
+                    key % 2 == 0 ? StorageType.DENSE : StorageType.SPARSE);
+            svr = sv.toDense();
+            assertEquals(StorageType.DENSE, svr.getStorageType());
+            svr = sv.toSparse();
+            assertEquals(StorageType.SPARSE, svr.getStorageType());
+            assertArrayEquals(new double[] {}, sv.getValuesSI(), 0.0001);
+            assertArrayEquals(new double[] {}, sv.getValuesInUnit(), 0.0001);
+            assertArrayEquals(new double[] {}, sv.getValuesInUnit(SpeedUnit.KNOT), 0.0001);
+            svr = sv.times(2.0);
+            assertEquals(0, svr.size());
+            assertEquals(SpeedUnit.KM_PER_HOUR, svr.getDisplayUnit());
+        }
     }
 }

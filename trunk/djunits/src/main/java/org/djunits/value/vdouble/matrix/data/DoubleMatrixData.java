@@ -62,17 +62,22 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
      * @param scale Scale; the scale of the unit to use for conversion to SI
      * @param storageType StorageType; the data type to use
      * @return the DoubleMatrixData with the right data type
-     * @throws ValueRuntimeException when values are null, or storageType is null
+     * @throws NullPointerException when values are null, or storageType is null
+     * @throws ValueRuntimeException when values is ragged
      */
     public static DoubleMatrixData instantiate(final double[][] values, final Scale scale, final StorageType storageType)
             throws ValueRuntimeException
     {
         Throw.whenNull(scale, "DoubleMatrixData.instantiate: scale is null");
         Throw.whenNull(storageType, "DoubleMatrixData.instantiate: storageType is null");
-        checkRectangularAndNonEmpty(values);
+        checkRectangularAndNonNull(values);
 
-        final int rows = values.length;
-        final int cols = values[0].length;
+        int rows = values.length;
+        final int cols = rows == 0 ? 0 : values[0].length;
+        if (cols == 0)
+        {
+            rows = 0;
+        }
 
         switch (storageType)
         {
@@ -97,7 +102,8 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
      * @param cols int; the number of columns of the matrix
      * @param storageType StorageType; the data type to use
      * @return the DoubleMatrixData with the right data type
-     * @throws ValueRuntimeException when values are null, or storageType is null
+     * @throws NullPointerException when values are null, or storageType is null
+     * @throws ValueRuntimeException when rows &lt; 0 or cols &lt; 0
      * @param <U> the unit type
      * @param <S> the corresponding scalar type
      */
@@ -107,8 +113,8 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
     {
         Throw.whenNull(values, "DoubleMatrixData.instantiate: values is null");
         Throw.whenNull(storageType, "DoubleMatrixData.instantiate: storageType is null");
-        Throw.when(cols <= 0, ValueRuntimeException.class, "cols must be > 0");
-        Throw.when(rows <= 0, ValueRuntimeException.class, "rows must be > 0");
+        Throw.when(cols < 0, ValueRuntimeException.class, "cols must be >= 0");
+        Throw.when(rows < 0, ValueRuntimeException.class, "rows must be >= 0");
         for (DoubleSparseValue<U, S> dsp : values)
         {
             Throw.whenNull(dsp, "null value in values");
@@ -137,7 +143,8 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
      * @param values S[][]; the values to store
      * @param storageType StorageType; the data type to use
      * @return the DoubleMatrixData with the right data type
-     * @throws ValueRuntimeException when values is null, or storageType is null
+     * @throws NullPointerException when values is null, or storageType is null
+     * @throws ValueRuntimeException when values is ragged
      * @param <U> the unit type
      * @param <S> the corresponding scalar type
      */
@@ -145,11 +152,15 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
             final StorageType storageType) throws ValueRuntimeException
     {
         Throw.whenNull(storageType, "DoubleMatrixData.instantiate: storageType is null");
-        checkRectangularAndNonEmpty(values);
+        checkRectangularAndNonNull(values);
 
-        final int rows = values.length;
-        final int cols = values[0].length;
-
+        int rows = values.length;
+        final int cols = rows == 0 ? 0 : values[0].length;
+        if (cols == 0)
+        {
+            rows = 0;
+        }
+        
         switch (storageType)
         {
             case DENSE:
@@ -240,12 +251,11 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
      * @param values double[][]; the 2D array to check
      * @return the values in case the method is used in a constructor
      * @throws NullPointerException when <code>values</code> is null
-     * @throws ValueRuntimeException when <code>values</code> is empty, or jagged
+     * @throws ValueRuntimeException when <code>values</code> is jagged
      */
-    protected static double[][] checkRectangularAndNonEmpty(final double[][] values) throws ValueRuntimeException
+    protected static double[][] checkRectangularAndNonNull(final double[][] values) throws ValueRuntimeException
     {
         Throw.when(null == values, NullPointerException.class, "Cannot create a matrix from a null double[][]");
-        Throw.when(0 == values.length, ValueRuntimeException.class, "Cannot create a matrix from zero length double[][]");
         for (int row = 0; row < values.length; row++)
         {
             Throw.when(null == values[row], ValueRuntimeException.class,
@@ -253,8 +263,6 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
             Throw.when(values[row].length != values[0].length, ValueRuntimeException.class,
                     "Cannot create a matrix from a jagged double[][]");
         }
-        Throw.when(0 == values[0].length, ValueRuntimeException.class,
-                "Cannot create a matrix from a double[][] with zero values");
         return values;
     }
 
@@ -263,15 +271,14 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
      * @param values S[][]; the 2D array to check
      * @return the values in case the method is used in a constructor
      * @throws NullPointerException when <code>values</code> is null
-     * @throws ValueRuntimeException when <code>values</code> is empty, or jagged
+     * @throws ValueRuntimeException when <code>values</code> is jagged
      * @param <U> the unit type
      * @param <S> the corresponding scalar type
      */
-    protected static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>> S[][] checkRectangularAndNonEmpty(
+    protected static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>> S[][] checkRectangularAndNonNull(
             final S[][] values) throws ValueRuntimeException
     {
         Throw.when(null == values, NullPointerException.class, "Cannot create a matrix from a null Scalar[][]");
-        Throw.when(0 == values.length, ValueRuntimeException.class, "Cannot create a matrix from zero length Scalar[][]");
         for (int row = 0; row < values.length; row++)
         {
             Throw.when(null == values[row], ValueRuntimeException.class,
@@ -283,8 +290,6 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
                 Throw.whenNull(values[row][col], "Cannot create a matrix from Scalar[][] containing null(s)");
             }
         }
-        Throw.when(0 == values[0].length, ValueRuntimeException.class,
-                "Cannot create a matrix from a Scalar[][] with zero values");
         return values;
     }
 

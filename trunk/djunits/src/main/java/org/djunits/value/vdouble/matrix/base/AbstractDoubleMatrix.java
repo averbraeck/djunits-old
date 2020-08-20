@@ -17,7 +17,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalar;
 import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 import org.djunits.value.vdouble.vector.base.AbstractDoubleVector;
 import org.djunits.value.vdouble.vector.data.DoubleVectorData;
-import org.ojalgo.matrix.PrimitiveMatrix;
+import org.ojalgo.matrix.Primitive64Matrix;
 
 /**
  * The most basic abstract class for the DoubleMatrix.
@@ -507,8 +507,8 @@ public abstract class AbstractDoubleMatrix<U extends Unit<U>, S extends Abstract
     {
         try
         {
-            final PrimitiveMatrix.Factory matrixFactory = PrimitiveMatrix.FACTORY;
-            final PrimitiveMatrix m = matrixFactory.rows(this.data.getDenseMatrixSI());
+            final Primitive64Matrix.Factory matrixFactory = Primitive64Matrix.FACTORY;
+            final Primitive64Matrix m = matrixFactory.rows(this.data.getDenseMatrixSI());
             if (!m.isSquare())
             {
                 throw new IllegalArgumentException("Matrix is not square -- determinant cannot be calculated.");

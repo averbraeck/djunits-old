@@ -57,16 +57,13 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @param scale Scale; the scale of the unit to use for conversion to SI
      * @param storageType StorageType; the data type to use
      * @return DoubleVectorData; the DoubleVectorData with the right data type
-     * @throws ValueRuntimeException when values are null, or storageType is null
+     * @throws NullPointerException when values are null, or storageType is null
      */
     public static DoubleVectorData instantiate(final double[] values, final Scale scale, final StorageType storageType)
-            throws ValueRuntimeException
     {
         Throw.whenNull(values, "DoubleVectorData.instantiate: double[] values is null");
         Throw.whenNull(scale, "DoubleVectorData.instantiate: scale is null");
         Throw.whenNull(storageType, "DoubleVectorData.instantiate: storageType is null");
-        Throw.when(values.length == 0, ValueRuntimeException.class,
-                "DoubleVectorData.instantiate: double[] values wrong: values.length == 0");
 
         double[] valuesSI = scale.isBaseSIScale() ? values : new double[values.length];
         if (!scale.isBaseSIScale())
@@ -100,15 +97,13 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @param scale Scale; the scale of the unit to use for conversion to SI
      * @param storageType StorageType; the data type to use
      * @return DoubleVectorData; the DoubleVectorData with the right data type
-     * @throws ValueRuntimeException when list is null, or storageType is null
+     * @throws NullPointerException when list is null, or storageType is null
      */
     public static DoubleVectorData instantiate(final List<Double> values, final Scale scale, final StorageType storageType)
-            throws ValueRuntimeException
     {
         Throw.whenNull(values, "DoubleVectorData.instantiate: double[] values is null");
         Throw.whenNull(scale, "DoubleVectorData.instantiate: scale is null");
         Throw.whenNull(storageType, "DoubleVectorData.instantiate: storageType is null");
-        Throw.when(values.size() == 0, ValueRuntimeException.class, "DoubleVectorData.instantiate: values.size() == 0");
         Throw.when(values.parallelStream().filter(d -> d == null).count() > 0, NullPointerException.class,
                 "values contains one or more null values");
 
@@ -195,17 +190,15 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @param values S[]; the values to store
      * @param storageType StorageType; the data type to use
      * @return DoubleVectorData; the DoubleVectorData with the right data type
-     * @throws ValueRuntimeException when values is null, or storageType is null
+     * @throws NullPointerException when values is null, or storageType is null
      * @param <U> the unit type
      * @param <S> the corresponding scalar type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>> DoubleVectorData instantiate(final S[] values,
-            final StorageType storageType) throws ValueRuntimeException
+            final StorageType storageType)
     {
         Throw.whenNull(values, "DoubleVectorData.instantiate: double[] values is null");
         Throw.whenNull(storageType, "DoubleVectorData.instantiate: storageType is null");
-        Throw.when(values.length == 0, ValueRuntimeException.class,
-                "DoubleVectorData.instantiate: DoubleScalar[] values wrong: values.length == 0");
         for (S s : values)
         {
             Throw.whenNull(s, "null value in values");
@@ -265,16 +258,15 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @param valueList List&lt;S&gt;; the values to store
      * @param storageType StorageType; the data type to use
      * @return DoubleVectorData; the DoubleVectorData with the right data type
-     * @throws ValueRuntimeException when values is null, or storageType is null
+     * @throws NullPointerException when values is null, or storageType is null
      * @param <U> the unit type
      * @param <S> the corresponding scalar type
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>> DoubleVectorData instantiateList(
-            final List<S> valueList, final StorageType storageType) throws ValueRuntimeException
+            final List<S> valueList, final StorageType storageType)
     {
         Throw.whenNull(valueList, "DoubleVectorData.instantiate: valueList is null");
         Throw.whenNull(storageType, "DoubleVectorData.instantiate: storageType is null");
-        Throw.when(valueList.size() == 0, ValueRuntimeException.class, "DoubleVectorData.instantiate: valueList.size() == 0");
         for (S s : valueList)
         {
             Throw.whenNull(s, "null value in valueList");
@@ -328,13 +320,14 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @param scale Scale; the scale of the unit to use for conversion to SI
      * @param storageType StorageType; the data type to use
      * @return DoubleVectorData; the DoubleVectorData with the right data type
-     * @throws ValueRuntimeException when values is null, or storageType is null
+     * @throws ValueRuntimeException when length &lt; 0
+     * @throws NullPointerException when values is null, or storageType is null
      */
     public static DoubleVectorData instantiate(final SortedMap<Integer, Double> valueMap, final int length, final Scale scale,
             final StorageType storageType) throws ValueRuntimeException
     {
         Throw.whenNull(valueMap, "DoubleVectorData.instantiate: values is null");
-        Throw.when(length < 1, ValueRuntimeException.class, "Length must be > 0");
+        Throw.when(length < 0, ValueRuntimeException.class, "Length must be >= 0");
         Throw.whenNull(scale, "DoubleVectorData.instantiate: scale is null");
         Throw.whenNull(storageType, "DoubleVectorData.instantiate: storageType is null");
         for (Integer key : valueMap.keySet())
@@ -429,15 +422,16 @@ public abstract class DoubleVectorData extends AbstractStorage<DoubleVectorData>
      * @param length int; the length of the vector to pad with 0 after last entry in map
      * @param storageType StorageType; the data type to use
      * @return DoubleVectorData; the DoubleVectorData with the right data type
-     * @throws ValueRuntimeException when values is null, or storageType is null
+     * @throws NullPointerException when values is null, or storageType is null
      * @param <U> the unit
      * @param <S> the corresponding scalar type
+     * @throws ValueRuntimeException when length &lt; 0
      */
     public static <U extends Unit<U>, S extends DoubleScalarInterface<U, S>> DoubleVectorData instantiateMap(
             final SortedMap<Integer, S> values, final int length, final StorageType storageType) throws ValueRuntimeException
     {
         Throw.whenNull(values, "DoubleVectorData.instantiate: values is null");
-        Throw.when(length < 1, ValueRuntimeException.class, "Length must be > 0");
+        Throw.when(length < 0, ValueRuntimeException.class, "Length must be >= 0");
         Throw.whenNull(storageType, "DoubleVectorData.instantiate: storageType is null");
         for (Entry<Integer, S> e : values.entrySet())
         {

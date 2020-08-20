@@ -2,9 +2,16 @@ package org.djunits.value.vfloat.matrix;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import org.djunits.Try;
 import org.djunits.unit.AbsoluteLinearUnit;
@@ -18,16 +25,17 @@ import org.djunits.unit.quantity.Quantity;
 import org.djunits.unit.util.UNITS;
 import org.djunits.unit.util.UnitException;
 import org.djunits.value.CLASSNAMES;
-import org.djunits.value.ValueRuntimeException;
 import org.djunits.value.storage.StorageType;
 import org.djunits.value.vfloat.matrix.base.AbstractFloatMatrixAbs;
 import org.djunits.value.vfloat.matrix.base.AbstractFloatMatrixRelWithAbs;
 import org.djunits.value.vfloat.matrix.base.FloatMatrix;
 import org.djunits.value.vfloat.matrix.base.FloatMatrixInterface;
+import org.djunits.value.vfloat.matrix.base.FloatSparseValue;
 import org.djunits.value.vfloat.matrix.data.FloatMatrixData;
 import org.djunits.value.vfloat.scalar.FloatArea;
 import org.djunits.value.vfloat.scalar.FloatLength;
 import org.djunits.value.vfloat.scalar.FloatSIScalar;
+import org.djunits.value.vfloat.scalar.FloatSpeed;
 import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarAbs;
 import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
 import org.djunits.value.vfloat.scalar.base.FloatScalarInterface;
@@ -964,8 +972,7 @@ public class FloatMatrixInstantiateTest
     // =============================================== EDGE CASE MATRICES ===================================================
 
     /**
-     * Test the instantiation of dense and sparse matrix types with one row or one column, and errors with null pointers and/or
-     * zero rows/columns.
+     * Test the instantiation of dense and sparse matrix types with one row or one column, and errors with null pointers.
      */
     @Test
     @SuppressWarnings({ "checkstyle:methodlength", "checkstyle:localvariablename" })
@@ -1147,41 +1154,10 @@ public class FloatMatrixInstantiateTest
         assertEquals(1, col11ss.zSum().getSI(), 0.001);
         assertEquals(SpeedUnit.METER_PER_SECOND, col11ss.getDisplayUnit());
 
-        // NULL / ZERO ROWS / ZERO COLS
+        // NULL
 
-        float[][] d0_1 = new float[0][1];
-        float[][] d1_0 = new float[1][];
-        d1_0[0] = new float[0];
-        float[][] d0_0 = new float[0][0];
         float[][] d1_1 = new float[1][];
         d1_1[0] = new float[1];
-
-        new Try()
-        {
-            @Override
-            public void execute()
-            {
-                FloatMatrix.instantiate(d0_1, SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
-            }
-        }.test("constructing matrix with zero rows should have thrown an exception", ValueRuntimeException.class);
-
-        new Try()
-        {
-            @Override
-            public void execute()
-            {
-                FloatMatrix.instantiate(d1_0, SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
-            }
-        }.test("constructing matrix with zero columns should have thrown an exception", ValueRuntimeException.class);
-
-        new Try()
-        {
-            @Override
-            public void execute()
-            {
-                FloatMatrix.instantiate(d0_0, SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
-            }
-        }.test("constructing matrix with zero rows and cols should have thrown an exception", ValueRuntimeException.class);
 
         new Try()
         {
@@ -1210,4 +1186,101 @@ public class FloatMatrixInstantiateTest
             }
         }.test("constructing matrix with null storage type should have thrown an exception", NullPointerException.class);
     }
+    
+    /**
+     * Test matrix construction and operations with zero length.
+     */
+    @Test
+    public void testInstantiateZero()
+    {
+        float[][] floatMatrix00 = new float[0][0];
+        float[][] floatMatrix10 = new float[1][];
+        floatMatrix10[0] = new float[] {};
+        FloatSpeed[][] speedMatrix00 = new FloatSpeed[0][0];
+        FloatSpeed[][] speedMatrix10 = new FloatSpeed[1][];
+        speedMatrix10[0] = new FloatSpeed[] {};
+        Collection<FloatSparseValue<SpeedUnit, FloatSpeed>> speedList = new ArrayList<>();
+        SortedMap<Integer, FloatSpeedMatrix> smMap = new TreeMap<>();
+        smMap.put(0,
+                FloatMatrix.instantiate(
+                        FloatMatrixData.instantiate(floatMatrix00, SpeedUnit.KM_PER_HOUR.getScale(), StorageType.DENSE),
+                        SpeedUnit.KM_PER_HOUR));
+        smMap.put(1,
+                FloatMatrix.instantiate(
+                        FloatMatrixData.instantiate(floatMatrix00, SpeedUnit.KM_PER_HOUR.getScale(), StorageType.SPARSE),
+                        SpeedUnit.KM_PER_HOUR));
+        smMap.put(2, FloatMatrix.instantiate(FloatMatrixData.instantiate(speedMatrix00, StorageType.DENSE),
+                SpeedUnit.KM_PER_HOUR));
+        smMap.put(3, FloatMatrix.instantiate(FloatMatrixData.instantiate(speedMatrix00, StorageType.SPARSE),
+                SpeedUnit.KM_PER_HOUR));
+        smMap.put(4, FloatMatrix.instantiate(FloatMatrixData.instantiate(speedList, 0, 0, StorageType.DENSE),
+                SpeedUnit.KM_PER_HOUR));
+        smMap.put(5, FloatMatrix.instantiate(FloatMatrixData.instantiate(speedList, 0, 0, StorageType.SPARSE),
+                SpeedUnit.KM_PER_HOUR));
+        smMap.put(6,
+                FloatMatrix.instantiate(
+                        FloatMatrixData.instantiate(floatMatrix10, SpeedUnit.KM_PER_HOUR.getScale(), StorageType.DENSE),
+                        SpeedUnit.KM_PER_HOUR));
+        smMap.put(7,
+                FloatMatrix.instantiate(
+                        FloatMatrixData.instantiate(floatMatrix10, SpeedUnit.KM_PER_HOUR.getScale(), StorageType.SPARSE),
+                        SpeedUnit.KM_PER_HOUR));
+        smMap.put(8, FloatMatrix.instantiate(FloatMatrixData.instantiate(speedMatrix10, StorageType.DENSE),
+                SpeedUnit.KM_PER_HOUR));
+        smMap.put(9, FloatMatrix.instantiate(FloatMatrixData.instantiate(speedMatrix10, StorageType.SPARSE),
+                SpeedUnit.KM_PER_HOUR));
+
+        for (Map.Entry<Integer, FloatSpeedMatrix> entry : smMap.entrySet())
+        {
+            int key = entry.getKey();
+            FloatSpeedMatrix sv = entry.getValue();
+            assertEquals("key=" + key, 0, sv.rows());
+            assertEquals("key=" + key, 0, sv.cols());
+            assertEquals("key=" + key, 0, sv.cardinality());
+            assertEquals("key=" + key, 0, sv.getScalars().length);
+            assertEquals("key=" + key, SpeedUnit.KM_PER_HOUR, sv.getDisplayUnit());
+            assertEquals("DENSE/SPARSE: key = " + key, sv.getStorageType(),
+                    key % 2 == 0 ? StorageType.DENSE : StorageType.SPARSE);
+            assertFalse("key=" + key, sv.isMutable());
+            FloatSpeedMatrix svm = sv.mutable();
+            assertTrue("key=" + key, svm.isMutable());
+            assertEquals(SpeedUnit.KM_PER_HOUR, svm.getDisplayUnit());
+            assertEquals("DENSE/SPARSE: key = " + key, svm.getStorageType(),
+                    key % 2 == 0 ? StorageType.DENSE : StorageType.SPARSE);
+            FloatSpeedMatrix svr = svm.abs();
+            assertEquals("key=" + key, 0, sv.rows());
+            assertEquals("key=" + key, 0, sv.cols());
+            assertEquals(SpeedUnit.KM_PER_HOUR, svr.getDisplayUnit());
+            svm = svm.ceil();
+            assertEquals("key=" + key, 0, sv.rows());
+            assertEquals("key=" + key, 0, sv.cols());
+            assertEquals("key=" + key, SpeedUnit.KM_PER_HOUR, svr.getDisplayUnit());
+            svr = svm.decrementBy(FloatSpeed.ONE);
+            assertEquals("key=" + key, 0, sv.rows());
+            assertEquals("key=" + key, 0, sv.cols());
+            assertEquals("key=" + key, SpeedUnit.KM_PER_HOUR, svr.getDisplayUnit());
+            svr = svm.incrementBy(FloatSpeed.ONE);
+            assertEquals("key=" + key, 0, sv.rows());
+            assertEquals("key=" + key, 0, sv.cols());
+            assertEquals(SpeedUnit.KM_PER_HOUR, svr.getDisplayUnit());
+            svr = svm.plus(sv);
+            assertEquals("key=" + key, 0, sv.rows());
+            assertEquals("key=" + key, 0, sv.cols());
+            assertEquals("key=" + key, SpeedUnit.KM_PER_HOUR, svr.getDisplayUnit());
+            assertEquals("DENSE/SPARSE: key = " + key, svr.getStorageType(),
+                    key % 2 == 0 ? StorageType.DENSE : StorageType.SPARSE);
+            svr = sv.toDense();
+            assertEquals("key=" + key, StorageType.DENSE, svr.getStorageType());
+            svr = sv.toSparse();
+            assertEquals("key=" + key, StorageType.SPARSE, svr.getStorageType());
+            assertEquals("key=" + key, 0, sv.getValuesSI().length);
+            assertEquals("key=" + key, 0, sv.getValuesInUnit().length);
+            assertEquals("key=" + key, 0, sv.getValuesInUnit(SpeedUnit.KNOT).length);
+            svr = sv.times(2.0);
+            assertEquals("key=" + key, 0, sv.rows());
+            assertEquals("key=" + key, 0, sv.cols());
+            assertEquals("key=" + key, SpeedUnit.KM_PER_HOUR, svr.getDisplayUnit());
+        }
+    }
+
 }

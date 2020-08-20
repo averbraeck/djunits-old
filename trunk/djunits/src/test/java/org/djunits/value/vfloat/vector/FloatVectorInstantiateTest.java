@@ -1,7 +1,15 @@
 package org.djunits.value.vfloat.vector;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import org.djunits.Try;
 import org.djunits.unit.AreaUnit;
@@ -12,12 +20,13 @@ import org.djunits.unit.util.UnitException;
 import org.djunits.userdefined.FloatJerk;
 import org.djunits.userdefined.FloatJerkVector;
 import org.djunits.userdefined.JerkUnit;
-import org.djunits.value.ValueRuntimeException;
 import org.djunits.value.storage.StorageType;
 import org.djunits.value.vfloat.scalar.FloatArea;
 import org.djunits.value.vfloat.scalar.FloatLength;
 import org.djunits.value.vfloat.scalar.FloatSIScalar;
+import org.djunits.value.vfloat.scalar.FloatSpeed;
 import org.djunits.value.vfloat.vector.base.FloatVector;
+import org.djunits.value.vfloat.vector.data.FloatVectorData;
 import org.junit.Test;
 
 /**
@@ -420,8 +429,7 @@ public class FloatVectorInstantiateTest
     // =============================================== EDGE CASE MATRICES ===================================================
 
     /**
-     * Test the instantiation of dense and sparse vector types with one vect or one column, and errors with null pointers and/or
-     * zero vects/columns.
+     * Test the instantiation of dense and sparse vector types with one vector or one column, and errors with null pointers.
      */
     @Test
     public void testInstantiateEdgeCases()
@@ -458,19 +466,9 @@ public class FloatVectorInstantiateTest
         assertEquals(1, vect1ss.zSum().getSI(), 0.001);
         assertEquals(SpeedUnit.METER_PER_SECOND, vect1ss.getDisplayUnit());
 
-        // NULL / ZERO ROWS / ZERO COLS
+        // NULL
 
-        float[] d0 = new float[0];
         float[] d1 = new float[1];
-
-        new Try()
-        {
-            @Override
-            public void execute()
-            {
-                FloatVector.instantiate(d0, SpeedUnit.METER_PER_SECOND, StorageType.DENSE);
-            }
-        }.test("constructing vector with zero length should have thrown an exception", ValueRuntimeException.class);
 
         new Try()
         {
@@ -499,4 +497,105 @@ public class FloatVectorInstantiateTest
             }
         }.test("constructing vector with null storage type should have thrown an exception", NullPointerException.class);
     }
+
+    /**
+     * Test vector construction and operations with zero length.
+     */
+    @Test
+    public void testInstantiateZero()
+    {
+        float[] floatArray = new float[] {};
+        FloatSpeed[] speedArray = new FloatSpeed[] {};
+        List<Float> floatList = new ArrayList<>();
+        List<FloatSpeed> speedList = new ArrayList<>();
+        SortedMap<Integer, Float> floatMap = new TreeMap<>();
+        SortedMap<Integer, FloatSpeed> speedMap = new TreeMap<>();
+        SortedMap<Integer, FloatSpeedVector> svMap = new TreeMap<>();
+        svMap.put(0,
+                FloatVector.instantiate(
+                        FloatVectorData.instantiate(floatArray, SpeedUnit.KM_PER_HOUR.getScale(), StorageType.DENSE),
+                        SpeedUnit.KM_PER_HOUR));
+        svMap.put(1,
+                FloatVector.instantiate(
+                        FloatVectorData.instantiate(floatArray, SpeedUnit.KM_PER_HOUR.getScale(), StorageType.SPARSE),
+                        SpeedUnit.KM_PER_HOUR));
+        svMap.put(2,
+                FloatVector.instantiate(FloatVectorData.instantiate(speedArray, StorageType.DENSE), SpeedUnit.KM_PER_HOUR));
+        svMap.put(3,
+                FloatVector.instantiate(FloatVectorData.instantiate(speedArray, StorageType.SPARSE), SpeedUnit.KM_PER_HOUR));
+        svMap.put(4,
+                FloatVector.instantiate(
+                        FloatVectorData.instantiate(floatList, SpeedUnit.KM_PER_HOUR.getScale(), StorageType.DENSE),
+                        SpeedUnit.KM_PER_HOUR));
+        svMap.put(5,
+                FloatVector.instantiate(
+                        FloatVectorData.instantiate(floatList, SpeedUnit.KM_PER_HOUR.getScale(), StorageType.SPARSE),
+                        SpeedUnit.KM_PER_HOUR));
+        svMap.put(6,
+                FloatVector.instantiate(
+                        FloatVectorData.instantiate(floatMap, 0, SpeedUnit.KM_PER_HOUR.getScale(), StorageType.DENSE),
+                        SpeedUnit.KM_PER_HOUR));
+        svMap.put(7,
+                FloatVector.instantiate(
+                        FloatVectorData.instantiate(floatMap, 0, SpeedUnit.KM_PER_HOUR.getScale(), StorageType.SPARSE),
+                        SpeedUnit.KM_PER_HOUR));
+        svMap.put(8,
+                FloatVector.instantiate(FloatVectorData.instantiateList(speedList, StorageType.DENSE), SpeedUnit.KM_PER_HOUR));
+        svMap.put(9,
+                FloatVector.instantiate(FloatVectorData.instantiateList(speedList, StorageType.SPARSE), SpeedUnit.KM_PER_HOUR));
+        svMap.put(10,
+                FloatVector.instantiate(FloatVectorData.instantiateMap(speedMap, 0, StorageType.DENSE), SpeedUnit.KM_PER_HOUR));
+        svMap.put(11, FloatVector.instantiate(FloatVectorData.instantiateMap(speedMap, 0, StorageType.SPARSE),
+                SpeedUnit.KM_PER_HOUR));
+        svMap.put(12,
+                new FloatSpeedVector(FloatVectorData.instantiateList(speedList, StorageType.DENSE), SpeedUnit.KM_PER_HOUR));
+        svMap.put(13,
+                new FloatSpeedVector(FloatVectorData.instantiateList(speedList, StorageType.SPARSE), SpeedUnit.KM_PER_HOUR));
+
+        for (Map.Entry<Integer, FloatSpeedVector> entry : svMap.entrySet())
+        {
+            int key = entry.getKey();
+            FloatSpeedVector sv = entry.getValue();
+            assertEquals(0, sv.size());
+            assertEquals(0, sv.cardinality());
+            assertEquals(0, sv.getScalars().length);
+            assertEquals(SpeedUnit.KM_PER_HOUR, sv.getDisplayUnit());
+            assertEquals("DENSE/SPARSE: key = " + key, sv.getStorageType(),
+                    key % 2 == 0 ? StorageType.DENSE : StorageType.SPARSE);
+            assertFalse(sv.isMutable());
+            FloatSpeedVector svm = sv.mutable();
+            assertTrue(svm.isMutable());
+            assertEquals(SpeedUnit.KM_PER_HOUR, svm.getDisplayUnit());
+            assertEquals("DENSE/SPARSE: key = " + key, svm.getStorageType(),
+                    key % 2 == 0 ? StorageType.DENSE : StorageType.SPARSE);
+            FloatSpeedVector svr = svm.abs();
+            assertEquals(0, svr.size());
+            assertEquals(SpeedUnit.KM_PER_HOUR, svr.getDisplayUnit());
+            svm = svm.ceil();
+            assertEquals(0, svr.size());
+            assertEquals(SpeedUnit.KM_PER_HOUR, svr.getDisplayUnit());
+            svr = svm.decrementBy(FloatSpeed.ONE);
+            assertEquals(0, svr.size());
+            assertEquals(SpeedUnit.KM_PER_HOUR, svr.getDisplayUnit());
+            svr = svm.incrementBy(FloatSpeed.ONE);
+            assertEquals(0, svr.size());
+            assertEquals(SpeedUnit.KM_PER_HOUR, svr.getDisplayUnit());
+            svr = svm.plus(sv);
+            assertEquals(0, svr.size());
+            assertEquals(SpeedUnit.KM_PER_HOUR, svr.getDisplayUnit());
+            assertEquals("DENSE/SPARSE: key = " + key, svr.getStorageType(),
+                    key % 2 == 0 ? StorageType.DENSE : StorageType.SPARSE);
+            svr = sv.toDense();
+            assertEquals(StorageType.DENSE, svr.getStorageType());
+            svr = sv.toSparse();
+            assertEquals(StorageType.SPARSE, svr.getStorageType());
+            assertArrayEquals(new float[] {}, sv.getValuesSI(), 0.0001f);
+            assertArrayEquals(new float[] {}, sv.getValuesInUnit(), 0.0001f);
+            assertArrayEquals(new float[] {}, sv.getValuesInUnit(SpeedUnit.KNOT), 0.0001f);
+            svr = sv.times(2.0);
+            assertEquals(0, svr.size());
+            assertEquals(SpeedUnit.KM_PER_HOUR, svr.getDisplayUnit());
+        }
+    }
+
 }
