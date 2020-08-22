@@ -213,7 +213,7 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
 
     /**
      * Calculate the division of LuminousIntensity and LuminousIntensity, which results in a Dimensionless scalar.
-     * @param v LuminousIntensity scalar
+ * @param v LuminousIntensity; LuminousIntensity scalar
      * @return Dimensionless scalar as a division of LuminousIntensity and LuminousIntensity
      */
     public final Dimensionless divide(final LuminousIntensity v)
@@ -223,7 +223,7 @@ public class LuminousIntensity extends AbstractDoubleScalarRel<LuminousIntensity
 
     /**
      * Calculate the multiplication of LuminousIntensity and SolidAngle, which results in a LuminousFlux scalar.
-     * @param v LuminousIntensity scalar
+ * @param v SolidAngle; LuminousIntensity scalar
      * @return LuminousFlux scalar as a multiplication of LuminousIntensity and SolidAngle
      */
     public final LuminousFlux times(final SolidAngle v)

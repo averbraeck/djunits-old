@@ -188,7 +188,7 @@ public class FloatTime extends AbstractFloatScalarAbs<TimeUnit, FloatTime, Durat
 
     /**
      * Returns a FloatTime based on a value and the textual representation of the unit.
-     * @param value double; the value to use
+ * @param value float; the value to use
      * @param unitString String; the textual representation of the unit
      * @return FloatTime; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect

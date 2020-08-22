@@ -56,7 +56,7 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
     /**
      * Construct FloatAcceleration scalar.
      * @param value float; the float value
-     * @param unit unit for the float value
+ * @param unit AccelerationUnit; unit for the float value
      */
     public FloatAcceleration(final float value, final AccelerationUnit unit)
     {
@@ -65,7 +65,7 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
 
     /**
      * Construct FloatAcceleration scalar.
-     * @param value Scalar from which to construct this instance
+ * @param value FloatAcceleration; Scalar from which to construct this instance
      */
     public FloatAcceleration(final FloatAcceleration value)
     {
@@ -75,7 +75,7 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
     /**
      * Construct FloatAcceleration scalar using a double value.
      * @param value double; the double value
-     * @param unit unit for the resulting float value
+ * @param unit AccelerationUnit; unit for the resulting float value
      */
     public FloatAcceleration(final double value, final AccelerationUnit unit)
     {
@@ -101,9 +101,9 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio double; the ratio between 0 and 1, inclusive
+ * @param zero FloatAcceleration; the low value
+ * @param one FloatAcceleration; the high value
+ * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatAcceleration interpolate(final FloatAcceleration zero, final FloatAcceleration one, final float ratio)
@@ -114,8 +114,8 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+ * @param r1 FloatAcceleration; the first scalar
+ * @param r2 FloatAcceleration; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatAcceleration max(final FloatAcceleration r1, final FloatAcceleration r2)
@@ -125,9 +125,9 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+ * @param r1 FloatAcceleration; the first scalar
+ * @param r2 FloatAcceleration; the second scalar
+ * @param rn FloatAcceleration...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatAcceleration max(final FloatAcceleration r1, final FloatAcceleration r2, final FloatAcceleration... rn)
@@ -145,8 +145,8 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+ * @param r1 FloatAcceleration; the first scalar
+ * @param r2 FloatAcceleration; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatAcceleration min(final FloatAcceleration r1, final FloatAcceleration r2)
@@ -156,9 +156,9 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+ * @param r1 FloatAcceleration; the first scalar
+ * @param r2 FloatAcceleration; the second scalar
+ * @param rn FloatAcceleration...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatAcceleration min(final FloatAcceleration r1, final FloatAcceleration r2, final FloatAcceleration... rn)
@@ -205,7 +205,7 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
 
     /**
      * Returns a FloatAcceleration based on a value and the textual representation of the unit.
-     * @param value double; the value to use
+ * @param value float; the value to use
      * @param unitString String; the textual representation of the unit
      * @return FloatAcceleration; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
@@ -226,7 +226,7 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
 
     /**
      * Calculate the division of FloatAcceleration and FloatAcceleration, which results in a FloatDimensionless scalar.
-     * @param v FloatAcceleration scalar
+ * @param v FloatAcceleration; FloatAcceleration scalar
      * @return FloatDimensionless scalar as a division of FloatAcceleration and FloatAcceleration
      */
     public final FloatDimensionless divide(final FloatAcceleration v)
@@ -236,7 +236,7 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
 
     /**
      * Calculate the multiplication of FloatAcceleration and FloatMass, which results in a FloatForce scalar.
-     * @param v FloatAcceleration scalar
+ * @param v FloatMass; FloatAcceleration scalar
      * @return FloatForce scalar as a multiplication of FloatAcceleration and FloatMass
      */
     public final FloatForce times(final FloatMass v)
@@ -246,7 +246,7 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
 
     /**
      * Calculate the multiplication of FloatAcceleration and FloatDuration, which results in a FloatSpeed scalar.
-     * @param v FloatAcceleration scalar
+ * @param v FloatDuration; FloatAcceleration scalar
      * @return FloatSpeed scalar as a multiplication of FloatAcceleration and FloatDuration
      */
     public final FloatSpeed times(final FloatDuration v)
@@ -256,7 +256,7 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
 
     /**
      * Calculate the division of FloatAcceleration and FloatFrequency, which results in a FloatSpeed scalar.
-     * @param v FloatAcceleration scalar
+ * @param v FloatFrequency; FloatAcceleration scalar
      * @return FloatSpeed scalar as a division of FloatAcceleration and FloatFrequency
      */
     public final FloatSpeed divide(final FloatFrequency v)
@@ -266,7 +266,7 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
 
     /**
      * Calculate the division of FloatAcceleration and FloatSpeed, which results in a FloatFrequency scalar.
-     * @param v FloatAcceleration scalar
+ * @param v FloatSpeed; FloatAcceleration scalar
      * @return FloatFrequency scalar as a division of FloatAcceleration and FloatSpeed
      */
     public final FloatFrequency divide(final FloatSpeed v)
@@ -276,7 +276,7 @@ public class FloatAcceleration extends AbstractFloatScalarRel<AccelerationUnit, 
 
     /**
      * Calculate the multiplication of FloatAcceleration and FloatMomentum, which results in a FloatPower scalar.
-     * @param v FloatAcceleration scalar
+ * @param v FloatMomentum; FloatAcceleration scalar
      * @return FloatPower scalar as a multiplication of FloatAcceleration and FloatMomentum
      */
     public final FloatPower times(final FloatMomentum v)

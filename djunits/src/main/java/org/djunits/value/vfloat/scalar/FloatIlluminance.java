@@ -51,7 +51,7 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
     /**
      * Construct FloatIlluminance scalar.
      * @param value float; the float value
-     * @param unit unit for the float value
+ * @param unit IlluminanceUnit; unit for the float value
      */
     public FloatIlluminance(final float value, final IlluminanceUnit unit)
     {
@@ -60,7 +60,7 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Construct FloatIlluminance scalar.
-     * @param value Scalar from which to construct this instance
+ * @param value FloatIlluminance; Scalar from which to construct this instance
      */
     public FloatIlluminance(final FloatIlluminance value)
     {
@@ -70,7 +70,7 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
     /**
      * Construct FloatIlluminance scalar using a double value.
      * @param value double; the double value
-     * @param unit unit for the resulting float value
+ * @param unit IlluminanceUnit; unit for the resulting float value
      */
     public FloatIlluminance(final double value, final IlluminanceUnit unit)
     {
@@ -96,9 +96,9 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Interpolate between two values.
-     * @param zero the low value
-     * @param one the high value
-     * @param ratio double; the ratio between 0 and 1, inclusive
+ * @param zero FloatIlluminance; the low value
+ * @param one FloatIlluminance; the high value
+ * @param ratio float; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatIlluminance interpolate(final FloatIlluminance zero, final FloatIlluminance one, final float ratio)
@@ -109,8 +109,8 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Return the maximum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+ * @param r1 FloatIlluminance; the first scalar
+ * @param r2 FloatIlluminance; the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatIlluminance max(final FloatIlluminance r1, final FloatIlluminance r2)
@@ -120,9 +120,9 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Return the maximum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+ * @param r1 FloatIlluminance; the first scalar
+ * @param r2 FloatIlluminance; the second scalar
+ * @param rn FloatIlluminance...; the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatIlluminance max(final FloatIlluminance r1, final FloatIlluminance r2, final FloatIlluminance... rn)
@@ -140,8 +140,8 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Return the minimum value of two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
+ * @param r1 FloatIlluminance; the first scalar
+ * @param r2 FloatIlluminance; the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatIlluminance min(final FloatIlluminance r1, final FloatIlluminance r2)
@@ -151,9 +151,9 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Return the minimum value of more than two relative scalars.
-     * @param r1 the first scalar
-     * @param r2 the second scalar
-     * @param rn the other scalars
+ * @param r1 FloatIlluminance; the first scalar
+ * @param r2 FloatIlluminance; the second scalar
+ * @param rn FloatIlluminance...; the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatIlluminance min(final FloatIlluminance r1, final FloatIlluminance r2, final FloatIlluminance... rn)
@@ -200,7 +200,7 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Returns a FloatIlluminance based on a value and the textual representation of the unit.
-     * @param value double; the value to use
+ * @param value float; the value to use
      * @param unitString String; the textual representation of the unit
      * @return FloatIlluminance; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
@@ -221,7 +221,7 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Calculate the division of FloatIlluminance and FloatIlluminance, which results in a FloatDimensionless scalar.
-     * @param v FloatIlluminance scalar
+ * @param v FloatIlluminance; FloatIlluminance scalar
      * @return FloatDimensionless scalar as a division of FloatIlluminance and FloatIlluminance
      */
     public final FloatDimensionless divide(final FloatIlluminance v)
@@ -231,7 +231,7 @@ public class FloatIlluminance extends AbstractFloatScalarRel<IlluminanceUnit, Fl
 
     /**
      * Calculate the multiplication of FloatIlluminance and FloatArea, which results in a FloatLuminousFlux scalar.
-     * @param v FloatIlluminance scalar
+ * @param v FloatArea; FloatIlluminance scalar
      * @return FloatLuminousFlux scalar as a multiplication of FloatIlluminance and FloatArea
      */
     public final FloatLuminousFlux times(final FloatArea v)

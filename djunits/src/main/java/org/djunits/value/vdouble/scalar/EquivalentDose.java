@@ -209,7 +209,7 @@ public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, 
 
     /**
      * Calculate the division of EquivalentDose and EquivalentDose, which results in a Dimensionless scalar.
-     * @param v EquivalentDose scalar
+ * @param v EquivalentDose; EquivalentDose scalar
      * @return Dimensionless scalar as a division of EquivalentDose and EquivalentDose
      */
     public final Dimensionless divide(final EquivalentDose v)

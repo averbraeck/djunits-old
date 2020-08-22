@@ -219,7 +219,7 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
 
     /**
      * Calculate the division of ElectricalInductance and ElectricalInductance, which results in a Dimensionless scalar.
-     * @param v ElectricalInductance scalar
+ * @param v ElectricalInductance; ElectricalInductance scalar
      * @return Dimensionless scalar as a division of ElectricalInductance and ElectricalInductance
      */
     public final Dimensionless divide(final ElectricalInductance v)
@@ -229,7 +229,7 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
 
     /**
      * Calculate the multiplication of ElectricalInductance and ElectricalCurrent, which results in a MagneticFlux scalar.
-     * @param v ElectricalInductance scalar
+ * @param v ElectricalCurrent; ElectricalInductance scalar
      * @return MagneticFlux scalar as a multiplication of ElectricalInductance and ElectricalCurrent
      */
     public final MagneticFlux times(final ElectricalCurrent v)

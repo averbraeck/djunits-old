@@ -214,7 +214,7 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
 
     /**
      * Calculate the division of AmountOfSubstance and AmountOfSubstance, which results in a Dimensionless scalar.
-     * @param v AmountOfSubstance scalar
+ * @param v AmountOfSubstance; AmountOfSubstance scalar
      * @return Dimensionless scalar as a division of AmountOfSubstance and AmountOfSubstance
      */
     public final Dimensionless divide(final AmountOfSubstance v)
@@ -224,7 +224,7 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
 
     /**
      * Calculate the division of AmountOfSubstance and CatalyticActivity, which results in a Duration scalar.
-     * @param v AmountOfSubstance scalar
+ * @param v CatalyticActivity; AmountOfSubstance scalar
      * @return Duration scalar as a division of AmountOfSubstance and CatalyticActivity
      */
     public final Duration divide(final CatalyticActivity v)
@@ -234,7 +234,7 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
 
     /**
      * Calculate the division of AmountOfSubstance and Duration, which results in a CatalyticActivity scalar.
-     * @param v AmountOfSubstance scalar
+ * @param v Duration; AmountOfSubstance scalar
      * @return CatalyticActivity scalar as a division of AmountOfSubstance and Duration
      */
     public final CatalyticActivity divide(final Duration v)

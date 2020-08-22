@@ -222,7 +222,7 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Calculate the division of ElectricalPotential and ElectricalPotential, which results in a Dimensionless scalar.
-     * @param v ElectricalPotential scalar
+ * @param v ElectricalPotential; ElectricalPotential scalar
      * @return Dimensionless scalar as a division of ElectricalPotential and ElectricalPotential
      */
     public final Dimensionless divide(final ElectricalPotential v)
@@ -232,7 +232,7 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Calculate the multiplication of ElectricalPotential and ElectricalCurrent, which results in a Power scalar.
-     * @param v ElectricalPotential scalar
+ * @param v ElectricalCurrent; ElectricalPotential scalar
      * @return Power scalar as a multiplication of ElectricalPotential and ElectricalCurrent
      */
     public final Power times(final ElectricalCurrent v)
@@ -242,7 +242,7 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Calculate the division of ElectricalPotential and ElectricalCurrent, which results in a ElectricalResistance scalar.
-     * @param v ElectricalPotential scalar
+ * @param v ElectricalCurrent; ElectricalPotential scalar
      * @return ElectricalResistance scalar as a division of ElectricalPotential and ElectricalCurrent
      */
     public final ElectricalResistance divide(final ElectricalCurrent v)
@@ -252,7 +252,7 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Calculate the division of ElectricalPotential and ElectricalResistance, which results in a ElectricalCurrent scalar.
-     * @param v ElectricalPotential scalar
+ * @param v ElectricalResistance; ElectricalPotential scalar
      * @return ElectricalCurrent scalar as a division of ElectricalPotential and ElectricalResistance
      */
     public final ElectricalCurrent divide(final ElectricalResistance v)
@@ -262,7 +262,7 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Calculate the multiplication of ElectricalPotential and Duration, which results in a MagneticFlux scalar.
-     * @param v ElectricalPotential scalar
+ * @param v Duration; ElectricalPotential scalar
      * @return MagneticFlux scalar as a multiplication of ElectricalPotential and Duration
      */
     public final MagneticFlux times(final Duration v)

@@ -210,7 +210,7 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
 
     /**
      * Calculate the division of Illuminance and Illuminance, which results in a Dimensionless scalar.
-     * @param v Illuminance scalar
+ * @param v Illuminance; Illuminance scalar
      * @return Dimensionless scalar as a division of Illuminance and Illuminance
      */
     public final Dimensionless divide(final Illuminance v)
@@ -220,7 +220,7 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
 
     /**
      * Calculate the multiplication of Illuminance and Area, which results in a LuminousFlux scalar.
-     * @param v Illuminance scalar
+ * @param v Area; Illuminance scalar
      * @return LuminousFlux scalar as a multiplication of Illuminance and Area
      */
     public final LuminousFlux times(final Area v)

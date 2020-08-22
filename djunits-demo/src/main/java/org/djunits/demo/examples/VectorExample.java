@@ -17,7 +17,7 @@ public final class VectorExample
     }
 
     /**
-     * @param args not used
+ * @param args String[]; not used
      */
     public static void main(final String[] args)
     {

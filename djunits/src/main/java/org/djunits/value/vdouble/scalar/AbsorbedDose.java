@@ -209,7 +209,7 @@ public class AbsorbedDose extends AbstractDoubleScalarRel<AbsorbedDoseUnit, Abso
 
     /**
      * Calculate the division of AbsorbedDose and AbsorbedDose, which results in a Dimensionless scalar.
-     * @param v AbsorbedDose scalar
+ * @param v AbsorbedDose; AbsorbedDose scalar
      * @return Dimensionless scalar as a division of AbsorbedDose and AbsorbedDose
      */
     public final Dimensionless divide(final AbsorbedDose v)
