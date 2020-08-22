@@ -211,7 +211,7 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
 
     /**
      * Calculate the division of Density and Density, which results in a Dimensionless scalar.
-     * @param v Density scalar
+ * @param v Density; Density scalar
      * @return Dimensionless scalar as a division of Density and Density
      */
     public final Dimensionless divide(final Density v)
@@ -221,7 +221,7 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
 
     /**
      * Calculate the multiplication of Density and Volume, which results in a Mass scalar.
-     * @param v Density scalar
+ * @param v Volume; Density scalar
      * @return Mass scalar as a multiplication of Density and Volume
      */
     public final Mass times(final Volume v)
@@ -231,7 +231,7 @@ public class Density extends AbstractDoubleScalarRel<DensityUnit, Density>
 
     /**
      * Calculate the multiplication of Density and FlowVolume, which results in a FlowMass scalar.
-     * @param v Density scalar
+ * @param v FlowVolume; Density scalar
      * @return FlowMass scalar as a multiplication of Density and FlowVolume
      */
     public final FlowMass times(final FlowVolume v)

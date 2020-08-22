@@ -210,7 +210,7 @@ public class SolidAngle extends AbstractDoubleScalarRel<SolidAngleUnit, SolidAng
 
     /**
      * Calculate the division of SolidAngle and SolidAngle, which results in a Dimensionless scalar.
-     * @param v SolidAngle scalar
+ * @param v SolidAngle; SolidAngle scalar
      * @return Dimensionless scalar as a division of SolidAngle and SolidAngle
      */
     public final Dimensionless divide(final SolidAngle v)
@@ -220,7 +220,7 @@ public class SolidAngle extends AbstractDoubleScalarRel<SolidAngleUnit, SolidAng
 
     /**
      * Calculate the multiplication of SolidAngle and LuminousIntensity, which results in a LuminousFlux scalar.
-     * @param v SolidAngle scalar
+ * @param v LuminousIntensity; SolidAngle scalar
      * @return LuminousFlux scalar as a multiplication of SolidAngle and LuminousIntensity
      */
     public final LuminousFlux times(final LuminousIntensity v)

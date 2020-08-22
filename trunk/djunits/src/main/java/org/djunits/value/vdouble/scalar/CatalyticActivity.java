@@ -214,7 +214,7 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
 
     /**
      * Calculate the division of CatalyticActivity and CatalyticActivity, which results in a Dimensionless scalar.
-     * @param v CatalyticActivity scalar
+ * @param v CatalyticActivity; CatalyticActivity scalar
      * @return Dimensionless scalar as a division of CatalyticActivity and CatalyticActivity
      */
     public final Dimensionless divide(final CatalyticActivity v)
@@ -224,7 +224,7 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
 
     /**
      * Calculate the multiplication of CatalyticActivity and Duration, which results in a AmountOfSubstance scalar.
-     * @param v CatalyticActivity scalar
+ * @param v Duration; CatalyticActivity scalar
      * @return AmountOfSubstance scalar as a multiplication of CatalyticActivity and Duration
      */
     public final AmountOfSubstance times(final Duration v)
@@ -234,7 +234,7 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
 
     /**
      * Calculate the division of CatalyticActivity and AmountOfSubstance, which results in a Frequency scalar.
-     * @param v CatalyticActivity scalar
+ * @param v AmountOfSubstance; CatalyticActivity scalar
      * @return Frequency scalar as a division of CatalyticActivity and AmountOfSubstance
      */
     public final Frequency divide(final AmountOfSubstance v)
@@ -244,7 +244,7 @@ public class CatalyticActivity extends AbstractDoubleScalarRel<CatalyticActivity
 
     /**
      * Calculate the division of CatalyticActivity and Frequency, which results in a AmountOfSubstance scalar.
-     * @param v CatalyticActivity scalar
+ * @param v Frequency; CatalyticActivity scalar
      * @return AmountOfSubstance scalar as a division of CatalyticActivity and Frequency
      */
     public final AmountOfSubstance divide(final Frequency v)

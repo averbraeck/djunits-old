@@ -219,7 +219,7 @@ public class Angle extends AbstractDoubleScalarRelWithAbs<DirectionUnit, Directi
 
     /**
      * Calculate the division of Angle and Angle, which results in a Dimensionless scalar.
-     * @param v Angle scalar
+ * @param v Angle; Angle scalar
      * @return Dimensionless scalar as a division of Angle and Angle
      */
     public final Dimensionless divide(final Angle v)
@@ -229,7 +229,7 @@ public class Angle extends AbstractDoubleScalarRelWithAbs<DirectionUnit, Directi
 
     /**
      * Calculate the multiplication of Angle and Frequency, which results in a AngularVelocity scalar.
-     * @param v Angle scalar
+ * @param v Frequency; Angle scalar
      * @return AngularVelocity scalar as a multiplication of Angle and Frequency
      */
     public final AngularVelocity times(final Frequency v)
@@ -239,7 +239,7 @@ public class Angle extends AbstractDoubleScalarRelWithAbs<DirectionUnit, Directi
 
     /**
      * Calculate the division of Angle and Duration, which results in a AngularVelocity scalar.
-     * @param v Angle scalar
+ * @param v Duration; Angle scalar
      * @return AngularVelocity scalar as a division of Angle and Duration
      */
     public final AngularVelocity divide(final Duration v)
@@ -249,7 +249,7 @@ public class Angle extends AbstractDoubleScalarRelWithAbs<DirectionUnit, Directi
 
     /**
      * Calculate the division of Angle and AngularVelocity, which results in a Duration scalar.
-     * @param v Angle scalar
+ * @param v AngularVelocity; Angle scalar
      * @return Duration scalar as a division of Angle and AngularVelocity
      */
     public final Duration divide(final AngularVelocity v)

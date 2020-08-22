@@ -213,7 +213,7 @@ public class LuminousFlux extends AbstractDoubleScalarRel<LuminousFluxUnit, Lumi
 
     /**
      * Calculate the division of LuminousFlux and LuminousFlux, which results in a Dimensionless scalar.
-     * @param v LuminousFlux scalar
+ * @param v LuminousFlux; LuminousFlux scalar
      * @return Dimensionless scalar as a division of LuminousFlux and LuminousFlux
      */
     public final Dimensionless divide(final LuminousFlux v)
@@ -223,7 +223,7 @@ public class LuminousFlux extends AbstractDoubleScalarRel<LuminousFluxUnit, Lumi
 
     /**
      * Calculate the division of LuminousFlux and Area, which results in a Illuminance scalar.
-     * @param v LuminousFlux scalar
+ * @param v Area; LuminousFlux scalar
      * @return Illuminance scalar as a division of LuminousFlux and Area
      */
     public final Illuminance divide(final Area v)
@@ -233,7 +233,7 @@ public class LuminousFlux extends AbstractDoubleScalarRel<LuminousFluxUnit, Lumi
 
     /**
      * Calculate the division of LuminousFlux and Illuminance, which results in a Area scalar.
-     * @param v LuminousFlux scalar
+ * @param v Illuminance; LuminousFlux scalar
      * @return Area scalar as a division of LuminousFlux and Illuminance
      */
     public final Area divide(final Illuminance v)
@@ -243,7 +243,7 @@ public class LuminousFlux extends AbstractDoubleScalarRel<LuminousFluxUnit, Lumi
 
     /**
      * Calculate the division of LuminousFlux and LuminousIntensity, which results in a SolidAngle scalar.
-     * @param v LuminousFlux scalar
+ * @param v LuminousIntensity; LuminousFlux scalar
      * @return SolidAngle scalar as a division of LuminousFlux and LuminousIntensity
      */
     public final SolidAngle divide(final LuminousIntensity v)
@@ -253,7 +253,7 @@ public class LuminousFlux extends AbstractDoubleScalarRel<LuminousFluxUnit, Lumi
 
     /**
      * Calculate the division of LuminousFlux and SolidAngle, which results in a LuminousIntensity scalar.
-     * @param v LuminousFlux scalar
+ * @param v SolidAngle; LuminousFlux scalar
      * @return LuminousIntensity scalar as a division of LuminousFlux and SolidAngle
      */
     public final LuminousIntensity divide(final SolidAngle v)

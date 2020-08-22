@@ -220,7 +220,7 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
 
     /**
      * Calculate the division of ElectricalConductance and ElectricalConductance, which results in a Dimensionless scalar.
-     * @param v ElectricalConductance scalar
+ * @param v ElectricalConductance; ElectricalConductance scalar
      * @return Dimensionless scalar as a division of ElectricalConductance and ElectricalConductance
      */
     public final Dimensionless divide(final ElectricalConductance v)
@@ -231,7 +231,7 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
     /**
      * Calculate the multiplication of ElectricalConductance and ElectricalPotential, which results in a ElectricalCurrent
      * scalar.
-     * @param v ElectricalConductance scalar
+ * @param v ElectricalPotential; ElectricalConductance scalar
      * @return ElectricalCurrent scalar as a multiplication of ElectricalConductance and ElectricalPotential
      */
     public final ElectricalCurrent times(final ElectricalPotential v)
@@ -241,7 +241,7 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
 
     /**
      * Calculate the multiplication of ElectricalConductance and Duration, which results in a ElectricalCapacitance scalar.
-     * @param v ElectricalConductance scalar
+ * @param v Duration; ElectricalConductance scalar
      * @return ElectricalCapacitance scalar as a multiplication of ElectricalConductance and Duration
      */
     public final ElectricalCapacitance times(final Duration v)

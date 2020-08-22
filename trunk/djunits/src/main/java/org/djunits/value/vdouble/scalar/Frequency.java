@@ -214,7 +214,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Calculate the division of Frequency and Frequency, which results in a Dimensionless scalar.
-     * @param v Frequency scalar
+ * @param v Frequency; Frequency scalar
      * @return Dimensionless scalar as a division of Frequency and Frequency
      */
     public final Dimensionless divide(final Frequency v)
@@ -224,7 +224,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Calculate the multiplication of Frequency and Duration, which results in a Dimensionless scalar.
-     * @param v Frequency scalar
+ * @param v Duration; Frequency scalar
      * @return Dimensionless scalar as a multiplication of Frequency and Duration
      */
     public final Dimensionless times(final Duration v)
@@ -234,7 +234,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Calculate the multiplication of Frequency and Length, which results in a Speed scalar.
-     * @param v Frequency scalar
+ * @param v Length; Frequency scalar
      * @return Speed scalar as a multiplication of Frequency and Length
      */
     public final Speed times(final Length v)
@@ -244,7 +244,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Calculate the multiplication of Frequency and Speed, which results in a Acceleration scalar.
-     * @param v Frequency scalar
+ * @param v Speed; Frequency scalar
      * @return Acceleration scalar as a multiplication of Frequency and Speed
      */
     public final Acceleration times(final Speed v)
@@ -254,7 +254,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Calculate the multiplication of Frequency and Energy, which results in a Power scalar.
-     * @param v Frequency scalar
+ * @param v Energy; Frequency scalar
      * @return Power scalar as a multiplication of Frequency and Energy
      */
     public final Power times(final Energy v)
@@ -264,7 +264,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Calculate the multiplication of Frequency and Angle, which results in a AngularVelocity scalar.
-     * @param v Frequency scalar
+ * @param v Angle; Frequency scalar
      * @return AngularVelocity scalar as a multiplication of Frequency and Angle
      */
     public final AngularVelocity times(final Angle v)
@@ -274,7 +274,7 @@ public class Frequency extends AbstractDoubleScalarRel<FrequencyUnit, Frequency>
 
     /**
      * Calculate the multiplication of Frequency and AngularVelocity, which results in a AngularAcceleration scalar.
-     * @param v Frequency scalar
+ * @param v AngularVelocity; Frequency scalar
      * @return AngularAcceleration scalar as a multiplication of Frequency and AngularVelocity
      */
     public final AngularAcceleration times(final AngularVelocity v)

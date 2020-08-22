@@ -55,7 +55,7 @@ public class ParamComments
         File workspaceFolder = classFolder.getParentFile().getParentFile().getParentFile();
         for (File projectFolder : workspaceFolder.listFiles())
         {
-            if (projectFolder.isDirectory() && projectFolder.getName().startsWith("djunits")
+            if (projectFolder.isDirectory() && projectFolder.getName().startsWith("dju")
                     && new File(projectFolder, "src/main/java").exists())
             {
                 File sourcePathFile = new File(projectFolder, "src/main/java");

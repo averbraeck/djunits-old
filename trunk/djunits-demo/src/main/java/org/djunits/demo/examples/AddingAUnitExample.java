@@ -28,7 +28,7 @@ public final class AddingAUnitExample
                     "fr/fn", "Furlongs per Fortnight");
 
     /**
-     * @param args can be blank
+ * @param args String[]; can be blank
      */
     public static void main(final String[] args)
     {

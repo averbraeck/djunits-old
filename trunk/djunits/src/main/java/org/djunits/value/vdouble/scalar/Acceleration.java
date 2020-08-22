@@ -213,7 +213,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Calculate the division of Acceleration and Acceleration, which results in a Dimensionless scalar.
-     * @param v Acceleration scalar
+ * @param v Acceleration; Acceleration scalar
      * @return Dimensionless scalar as a division of Acceleration and Acceleration
      */
     public final Dimensionless divide(final Acceleration v)
@@ -223,7 +223,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Calculate the multiplication of Acceleration and Mass, which results in a Force scalar.
-     * @param v Acceleration scalar
+ * @param v Mass; Acceleration scalar
      * @return Force scalar as a multiplication of Acceleration and Mass
      */
     public final Force times(final Mass v)
@@ -233,7 +233,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Calculate the multiplication of Acceleration and Duration, which results in a Speed scalar.
-     * @param v Acceleration scalar
+ * @param v Duration; Acceleration scalar
      * @return Speed scalar as a multiplication of Acceleration and Duration
      */
     public final Speed times(final Duration v)
@@ -243,7 +243,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Calculate the division of Acceleration and Frequency, which results in a Speed scalar.
-     * @param v Acceleration scalar
+ * @param v Frequency; Acceleration scalar
      * @return Speed scalar as a division of Acceleration and Frequency
      */
     public final Speed divide(final Frequency v)
@@ -253,7 +253,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Calculate the division of Acceleration and Speed, which results in a Frequency scalar.
-     * @param v Acceleration scalar
+ * @param v Speed; Acceleration scalar
      * @return Frequency scalar as a division of Acceleration and Speed
      */
     public final Frequency divide(final Speed v)
@@ -263,7 +263,7 @@ public class Acceleration extends AbstractDoubleScalarRel<AccelerationUnit, Acce
 
     /**
      * Calculate the multiplication of Acceleration and Momentum, which results in a Power scalar.
-     * @param v Acceleration scalar
+ * @param v Momentum; Acceleration scalar
      * @return Power scalar as a multiplication of Acceleration and Momentum
      */
     public final Power times(final Momentum v)

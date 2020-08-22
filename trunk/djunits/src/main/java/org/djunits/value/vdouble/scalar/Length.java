@@ -224,7 +224,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the division of Length and Length, which results in a Dimensionless scalar.
-     * @param v Length scalar
+ * @param v Length; Length scalar
      * @return Dimensionless scalar as a division of Length and Length
      */
     public final Dimensionless divide(final Length v)
@@ -234,7 +234,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the multiplication of Length and Length, which results in a Area scalar.
-     * @param v Length scalar
+ * @param v Length; Length scalar
      * @return Area scalar as a multiplication of Length and Length
      */
     public final Area times(final Length v)
@@ -244,7 +244,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the division of Length and LinearDensity, which results in a Area scalar.
-     * @param v Length scalar
+ * @param v LinearDensity; Length scalar
      * @return Area scalar as a division of Length and LinearDensity
      */
     public final Area divide(final LinearDensity v)
@@ -254,7 +254,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the division of Length and Area, which results in a LinearDensity scalar.
-     * @param v Length scalar
+ * @param v Area; Length scalar
      * @return LinearDensity scalar as a division of Length and Area
      */
     public final LinearDensity divide(final Area v)
@@ -264,7 +264,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the multiplication of Length and Area, which results in a Volume scalar.
-     * @param v Length scalar
+ * @param v Area; Length scalar
      * @return Volume scalar as a multiplication of Length and Area
      */
     public final Volume times(final Area v)
@@ -274,7 +274,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the multiplication of Length and Force, which results in a Energy scalar.
-     * @param v Length scalar
+ * @param v Force; Length scalar
      * @return Energy scalar as a multiplication of Length and Force
      */
     public final Energy times(final Force v)
@@ -284,7 +284,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the multiplication of Length and Frequency, which results in a Speed scalar.
-     * @param v Length scalar
+ * @param v Frequency; Length scalar
      * @return Speed scalar as a multiplication of Length and Frequency
      */
     public final Speed times(final Frequency v)
@@ -294,7 +294,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the division of Length and Duration, which results in a Speed scalar.
-     * @param v Length scalar
+ * @param v Duration; Length scalar
      * @return Speed scalar as a division of Length and Duration
      */
     public final Speed divide(final Duration v)
@@ -304,7 +304,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the division of Length and Speed, which results in a Duration scalar.
-     * @param v Length scalar
+ * @param v Speed; Length scalar
      * @return Duration scalar as a division of Length and Speed
      */
     public final Duration divide(final Speed v)
@@ -314,7 +314,7 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the multiplication of Length and FlowMass, which results in a Momentum scalar.
-     * @param v Length scalar
+ * @param v FlowMass; Length scalar
      * @return Momentum scalar as a multiplication of Length and FlowMass
      */
     public final Momentum times(final FlowMass v)

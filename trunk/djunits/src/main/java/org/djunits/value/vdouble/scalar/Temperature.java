@@ -219,7 +219,7 @@ public class Temperature
 
     /**
      * Calculate the division of Temperature and Temperature, which results in a Dimensionless scalar.
-     * @param v Temperature scalar
+ * @param v Temperature; Temperature scalar
      * @return Dimensionless scalar as a division of Temperature and Temperature
      */
     public final Dimensionless divide(final Temperature v)

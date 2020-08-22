@@ -217,7 +217,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Calculate the division of Speed and Speed, which results in a Dimensionless scalar.
-     * @param v Speed scalar
+ * @param v Speed; Speed scalar
      * @return Dimensionless scalar as a division of Speed and Speed
      */
     public final Dimensionless divide(final Speed v)
@@ -227,7 +227,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Calculate the multiplication of Speed and Area, which results in a FlowVolume scalar.
-     * @param v Speed scalar
+ * @param v Area; Speed scalar
      * @return FlowVolume scalar as a multiplication of Speed and Area
      */
     public final FlowVolume times(final Area v)
@@ -237,7 +237,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Calculate the multiplication of Speed and Force, which results in a Power scalar.
-     * @param v Speed scalar
+ * @param v Force; Speed scalar
      * @return Power scalar as a multiplication of Speed and Force
      */
     public final Power times(final Force v)
@@ -247,7 +247,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Calculate the multiplication of Speed and Frequency, which results in a Acceleration scalar.
-     * @param v Speed scalar
+ * @param v Frequency; Speed scalar
      * @return Acceleration scalar as a multiplication of Speed and Frequency
      */
     public final Acceleration times(final Frequency v)
@@ -257,7 +257,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Calculate the division of Speed and Length, which results in a Frequency scalar.
-     * @param v Speed scalar
+ * @param v Length; Speed scalar
      * @return Frequency scalar as a division of Speed and Length
      */
     public final Frequency divide(final Length v)
@@ -267,7 +267,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Calculate the division of Speed and Frequency, which results in a Length scalar.
-     * @param v Speed scalar
+ * @param v Frequency; Speed scalar
      * @return Length scalar as a division of Speed and Frequency
      */
     public final Length divide(final Frequency v)
@@ -277,7 +277,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Calculate the multiplication of Speed and LinearDensity, which results in a Frequency scalar.
-     * @param v Speed scalar
+ * @param v LinearDensity; Speed scalar
      * @return Frequency scalar as a multiplication of Speed and LinearDensity
      */
     public final Frequency times(final LinearDensity v)
@@ -287,7 +287,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Calculate the multiplication of Speed and Duration, which results in a Length scalar.
-     * @param v Speed scalar
+ * @param v Duration; Speed scalar
      * @return Length scalar as a multiplication of Speed and Duration
      */
     public final Length times(final Duration v)
@@ -297,7 +297,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Calculate the division of Speed and Duration, which results in a Acceleration scalar.
-     * @param v Speed scalar
+ * @param v Duration; Speed scalar
      * @return Acceleration scalar as a division of Speed and Duration
      */
     public final Acceleration divide(final Duration v)
@@ -307,7 +307,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Calculate the division of Speed and Acceleration, which results in a Duration scalar.
-     * @param v Speed scalar
+ * @param v Acceleration; Speed scalar
      * @return Duration scalar as a division of Speed and Acceleration
      */
     public final Duration divide(final Acceleration v)
@@ -317,7 +317,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Calculate the multiplication of Speed and FlowMass, which results in a Force scalar.
-     * @param v Speed scalar
+ * @param v FlowMass; Speed scalar
      * @return Force scalar as a multiplication of Speed and FlowMass
      */
     public final Force times(final FlowMass v)
@@ -327,7 +327,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Calculate the multiplication of Speed and Mass, which results in a Momentum scalar.
-     * @param v Speed scalar
+ * @param v Mass; Speed scalar
      * @return Momentum scalar as a multiplication of Speed and Mass
      */
     public final Momentum times(final Mass v)
@@ -337,7 +337,7 @@ public class Speed extends AbstractDoubleScalarRel<SpeedUnit, Speed>
 
     /**
      * Calculate the multiplication of Speed and Momentum, which results in a Energy scalar.
-     * @param v Speed scalar
+ * @param v Momentum; Speed scalar
      * @return Energy scalar as a multiplication of Speed and Momentum
      */
     public final Energy times(final Momentum v)

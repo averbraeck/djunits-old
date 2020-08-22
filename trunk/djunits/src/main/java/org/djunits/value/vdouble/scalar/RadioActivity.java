@@ -209,7 +209,7 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
 
     /**
      * Calculate the division of RadioActivity and RadioActivity, which results in a Dimensionless scalar.
-     * @param v RadioActivity scalar
+ * @param v RadioActivity; RadioActivity scalar
      * @return Dimensionless scalar as a division of RadioActivity and RadioActivity
      */
     public final Dimensionless divide(final RadioActivity v)

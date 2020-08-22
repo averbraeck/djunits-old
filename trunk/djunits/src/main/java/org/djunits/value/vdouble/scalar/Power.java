@@ -216,7 +216,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Calculate the division of Power and Power, which results in a Dimensionless scalar.
-     * @param v Power scalar
+ * @param v Power; Power scalar
      * @return Dimensionless scalar as a division of Power and Power
      */
     public final Dimensionless divide(final Power v)
@@ -226,7 +226,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Calculate the multiplication of Power and Duration, which results in a Energy scalar.
-     * @param v Power scalar
+ * @param v Duration; Power scalar
      * @return Energy scalar as a multiplication of Power and Duration
      */
     public final Energy times(final Duration v)
@@ -236,7 +236,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Calculate the division of Power and Frequency, which results in a Energy scalar.
-     * @param v Power scalar
+ * @param v Frequency; Power scalar
      * @return Energy scalar as a division of Power and Frequency
      */
     public final Energy divide(final Frequency v)
@@ -246,7 +246,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Calculate the division of Power and Energy, which results in a Frequency scalar.
-     * @param v Power scalar
+ * @param v Energy; Power scalar
      * @return Frequency scalar as a division of Power and Energy
      */
     public final Frequency divide(final Energy v)
@@ -256,7 +256,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Calculate the division of Power and Speed, which results in a Force scalar.
-     * @param v Power scalar
+ * @param v Speed; Power scalar
      * @return Force scalar as a division of Power and Speed
      */
     public final Force divide(final Speed v)
@@ -266,7 +266,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Calculate the division of Power and Force, which results in a Speed scalar.
-     * @param v Power scalar
+ * @param v Force; Power scalar
      * @return Speed scalar as a division of Power and Force
      */
     public final Speed divide(final Force v)
@@ -276,7 +276,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Calculate the division of Power and ElectricalPotential, which results in a ElectricalCurrent scalar.
-     * @param v Power scalar
+ * @param v ElectricalPotential; Power scalar
      * @return ElectricalCurrent scalar as a division of Power and ElectricalPotential
      */
     public final ElectricalCurrent divide(final ElectricalPotential v)
@@ -286,7 +286,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Calculate the division of Power and ElectricalCurrent, which results in a ElectricalPotential scalar.
-     * @param v Power scalar
+ * @param v ElectricalCurrent; Power scalar
      * @return ElectricalPotential scalar as a division of Power and ElectricalCurrent
      */
     public final ElectricalPotential divide(final ElectricalCurrent v)
@@ -296,7 +296,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Calculate the division of Power and Acceleration, which results in a Momentum scalar.
-     * @param v Power scalar
+ * @param v Acceleration; Power scalar
      * @return Momentum scalar as a division of Power and Acceleration
      */
     public final Momentum divide(final Acceleration v)
@@ -306,7 +306,7 @@ public class Power extends AbstractDoubleScalarRel<PowerUnit, Power>
 
     /**
      * Calculate the division of Power and Momentum, which results in a Acceleration scalar.
-     * @param v Power scalar
+ * @param v Momentum; Power scalar
      * @return Acceleration scalar as a division of Power and Momentum
      */
     public final Acceleration divide(final Momentum v)

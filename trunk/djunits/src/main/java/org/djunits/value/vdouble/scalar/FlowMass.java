@@ -215,7 +215,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 
     /**
      * Calculate the division of FlowMass and FlowMass, which results in a Dimensionless scalar.
-     * @param v FlowMass scalar
+ * @param v FlowMass; FlowMass scalar
      * @return Dimensionless scalar as a division of FlowMass and FlowMass
      */
     public final Dimensionless divide(final FlowMass v)
@@ -225,7 +225,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 
     /**
      * Calculate the multiplication of FlowMass and Duration, which results in a Mass scalar.
-     * @param v FlowMass scalar
+ * @param v Duration; FlowMass scalar
      * @return Mass scalar as a multiplication of FlowMass and Duration
      */
     public final Mass times(final Duration v)
@@ -235,7 +235,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 
     /**
      * Calculate the division of FlowMass and Frequency, which results in a Mass scalar.
-     * @param v FlowMass scalar
+ * @param v Frequency; FlowMass scalar
      * @return Mass scalar as a division of FlowMass and Frequency
      */
     public final Mass divide(final Frequency v)
@@ -245,7 +245,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 
     /**
      * Calculate the division of FlowMass and Mass, which results in a Frequency scalar.
-     * @param v FlowMass scalar
+ * @param v Mass; FlowMass scalar
      * @return Frequency scalar as a division of FlowMass and Mass
      */
     public final Frequency divide(final Mass v)
@@ -255,7 +255,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 
     /**
      * Calculate the multiplication of FlowMass and Speed, which results in a Force scalar.
-     * @param v FlowMass scalar
+ * @param v Speed; FlowMass scalar
      * @return Force scalar as a multiplication of FlowMass and Speed
      */
     public final Force times(final Speed v)
@@ -265,7 +265,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 
     /**
      * Calculate the division of FlowMass and FlowVolume, which results in a Density scalar.
-     * @param v FlowMass scalar
+ * @param v FlowVolume; FlowMass scalar
      * @return Density scalar as a division of FlowMass and FlowVolume
      */
     public final Density divide(final FlowVolume v)
@@ -275,7 +275,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 
     /**
      * Calculate the division of FlowMass and Density, which results in a FlowVolume scalar.
-     * @param v FlowMass scalar
+ * @param v Density; FlowMass scalar
      * @return FlowVolume scalar as a division of FlowMass and Density
      */
     public final FlowVolume divide(final Density v)
@@ -285,7 +285,7 @@ public class FlowMass extends AbstractDoubleScalarRel<FlowMassUnit, FlowMass>
 
     /**
      * Calculate the multiplication of FlowMass and Length, which results in a Momentum scalar.
-     * @param v FlowMass scalar
+ * @param v Length; FlowMass scalar
      * @return Momentum scalar as a multiplication of FlowMass and Length
      */
     public final Momentum times(final Length v)
