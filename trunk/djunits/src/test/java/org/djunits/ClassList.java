@@ -274,7 +274,7 @@ public final class ClassList
         Pattern pattern;
         if (args.length < 1)
         {
-            pattern = Pattern.compile(".*[^-]classes.org.opentrafficsim.*\\.class");
+            pattern = Pattern.compile(".*[^-]classes.org.djunits.*\\.class");
         }
         else
         {

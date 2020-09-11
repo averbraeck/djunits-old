@@ -14,7 +14,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarAbs;
  * <p>
  * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
- * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
+ * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
 ##FLOATTIME##
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
