@@ -15,7 +15,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarAbs;
  * <p>
  * Copyright (c) 2013-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
- * BSD-style license. See <a href="https://opentrafficsim.org/docs/license.html">OpenTrafficSim License</a>.
+ * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * Note that when the offset of a stored absolute Time becomes large, precision of a double might not be enough for the required
  * resolution of a Time. A double has around 16 significant digits (52 bit mantissa). This means that when we need to have a
