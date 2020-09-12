@@ -27,7 +27,6 @@ import org.ojalgo.matrix.Primitive64Matrix;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
- * @author <a href="https://www.transport.citg.tudelft.nl">Wouter Schakel</a>
  * @param <U> the unit
  * @param <S> the scalar with unit U
  * @param <V> the vector type belonging to the matrix type

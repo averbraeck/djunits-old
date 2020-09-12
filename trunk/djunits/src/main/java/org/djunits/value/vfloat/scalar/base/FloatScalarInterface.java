@@ -12,7 +12,6 @@ import org.djunits.value.base.Scalar;
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
- * @author <a href="https://www.transport.citg.tudelft.nl">Wouter Schakel</a>
  * @param <U> the unit for which this is the interface
  * @param <S> the scalar type belonging to the unit
  */
