@@ -16,7 +16,7 @@ import org.djunits.unit.unitsystem.UnitSystem;
  * (double) Time with TimeUnit.BASE as its unit, the largest value where the ms precision is reached is 2^51 = 2.3E15, which is
  * around 71000 years. This is sufficient to store a date on an Epoch level precise to a ms.
  * <p>
- * Copyright (c) 2015-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2021 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
@@ -74,7 +74,7 @@ public class TimeUnit extends AbsoluteLinearUnit<TimeUnit, DurationUnit>
     /**
      * The POSIX and Gregorian Epoch: January 1, 1970 at 00:00 UTC with a calculation in seconds. The base should be taken in
      * such a way that a resolution of a millisecond is still 'visible' on a date in, say, 2020. When 1-1-1970 is used as the
-     * origin, 1-1-2020 has a value of 1,577,836,800,000 milliseconds = 1.6E12 ms. If we want to be precise on the ms level, we
+     * origin, 1-1-2021 has a value of 1,577,836,800,000 milliseconds = 1.6E12 ms. If we want to be precise on the ms level, we
      * need 12 significant digits. A float has around 7 significant digits (23 bit mantissa), whereas a double has around 16
      * significant digits (52 bit mantissa). This means that a float time with an offset of 1-1-1970 is at best precise to a
      * minute level. A double time is precise to microseconds. Therefore, avoid using float times that use the EPOCH.
@@ -109,7 +109,7 @@ public class TimeUnit extends AbsoluteLinearUnit<TimeUnit, DurationUnit>
 
     /**
      * The Epoch with 0001-01-01 AD at 00:00 as the origin with a calculation in seconds. When 1-1-0001 is used as the origin,
-     * 1-1-2020 has a value of around 6.4E13 ms. If we want to be precise on the ms level, we need 13 significant digits. A
+     * 1-1-2021 has a value of around 6.4E13 ms. If we want to be precise on the ms level, we need 13 significant digits. A
      * float has around 7 significant digits (23 bit mantissa), whereas a double has around 16 significant digits (52 bit
      * mantissa). This means that a float time with an offset of 1-1-0001 is at best precise to an hour level. A double time is
      * precise to microseconds. Therefore, avoid using float times that use the EPOCH_YEAR1_SECOND.
@@ -120,7 +120,7 @@ public class TimeUnit extends AbsoluteLinearUnit<TimeUnit, DurationUnit>
 
     /**
      * The Epoch with J2000.0 as the origin, which is The Gregorian date January 1, 2000 at 12:00 GMT (noon) with a calculation
-     * in seconds. When 1-1-2000 is used as the origin, 1-1-2020 has a value of around 6.3E11 ms. If we want to be precise on
+     * in seconds. When 1-1-2000 is used as the origin, 1-1-2021 has a value of around 6.3E11 ms. If we want to be precise on
      * the ms level, we need 11 significant digits. A float has around 7 significant digits (23 bit mantissa), whereas a double
      * has around 16 significant digits (52 bit mantissa). This means that a float time with an offset of 1-1-2000 is at best
      * precise to a minute level. A double time is precise to fractions of microseconds. Therefore, avoid using float times that
