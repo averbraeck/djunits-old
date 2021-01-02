@@ -22,7 +22,7 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
  * Utility to add or update the type foe each parameter in the javadoc of all java files in /src/main/java in all or in selected
  * projects in the workspace. Run this utility only from Eclipse!<br>
  * <p>
- * Copyright (c) 2003-2020 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.<br>
+ * Copyright (c) 2003-2021 Delft University of Technology, Jaffalaan 5, 2628 BX Delft, the Netherlands. All rights reserved.<br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>

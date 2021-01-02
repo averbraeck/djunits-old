@@ -15,7 +15,7 @@ import org.djunits.value.vdouble.vector.base.DoubleVector;
 /**
  * This Java code demonstrates multiplication and division using DJUNITS.
  * <p>
- * Copyright (c) 2015-2020 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
+ * Copyright (c) 2015-2021 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
  * <p>
  * @version $Revision$, $LastChangedDate$, by $Author$,
