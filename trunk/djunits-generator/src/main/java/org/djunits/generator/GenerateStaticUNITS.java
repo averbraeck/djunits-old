@@ -101,14 +101,14 @@ public final class GenerateStaticUNITS
                     {
                         if (c.getSimpleName().equals("AbsoluteTemperatureUnit") || c.getSimpleName().equals("PositionUnit"))
                             n = n + "_ABS";
-                        System.out.println(String.format("    %-45s = %s;", c.getSimpleName() + " " + n,
+                        System.out.println(String.format("    /** */ %-45s = %s;", c.getSimpleName() + " " + n,
                                 c.getSimpleName() + "." + f.getName()));
                     }
                 }
             }
             if (className.contains("Dimensionless"))
             {
-                System.out.println(String.format("    %-45s = %s;", c.getSimpleName() + " UNIT", c.getSimpleName() + ".SI"));
+                System.out.println(String.format("    /** */ %-45s = %s;", c.getSimpleName() + " UNIT", c.getSimpleName() + ".SI"));
             }
         }
     }
