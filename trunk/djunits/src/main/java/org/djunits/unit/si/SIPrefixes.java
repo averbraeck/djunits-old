@@ -40,6 +40,9 @@ public enum SIPrefixes
 
     /** The SI prefixes and their values for the "KILO" settings. */
     public static final Map<String, SIPrefix> KILO_PREFIXES;
+    
+    /** The map that translates an SI prefix power to the SI Prefix. */
+    public static final Map<Integer, SIPrefix> FACTORS;
 
     static
     {
@@ -66,6 +69,17 @@ public enum SIPrefixes
         unitPrefixes.put("Z", new SIPrefix("Z", "zetta", 1.0E21));
         unitPrefixes.put("Y", new SIPrefix("Y", "yotta", 1.0E24));
         UNIT_PREFIXES = Collections.unmodifiableMap(unitPrefixes);
+        
+        Map<Integer, SIPrefix> factorMap = new LinkedHashMap<>();
+        for (SIPrefix siPrefix : UNIT_PREFIXES.values())
+        {
+            String s = String.format("%e", siPrefix.getFactor());
+            //System.out.println(String.format("%s gets formatted as %s", siPrefix.getFactor(), s));
+            Integer key = Integer.parseInt(s.substring(s.indexOf("e") + 1));
+            factorMap.put(key, siPrefix);
+        }
+        factorMap.put(0, new SIPrefix("", "", 1.0));
+        FACTORS = factorMap;
 
         Map<String, SIPrefix> perUnitPrefixes = new LinkedHashMap<>();
         perUnitPrefixes.put("/y", new SIPrefix("/y", "per yocto", 1.0E24));
