@@ -13,6 +13,7 @@ import org.djunits.unit.ForceUnit;
 import org.djunits.unit.MassUnit;
 import org.djunits.unit.MomentumUnit;
 import org.djunits.unit.VolumeUnit;
+import org.djunits.unit.si.SIPrefixes;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
 
@@ -212,9 +213,34 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
         throw new IllegalArgumentException("Error parsing Mass with unit " + unitString);
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public String toStringSIPrefixed(final int smallestPower, final int biggestPower)
+    {
+        if (!Double.isFinite(this.si))
+        {
+            return toString(getDisplayUnit().getStandardUnit());
+        }
+        // PK: I can't think of an easier way to figure out what the exponent will be; rounding of the mantissa to the available
+        // width makes this hard; This feels like an expensive way.
+        String check = String.format(this.si >= 0 ? "%10.8E" : "%10.7E", this.si);
+        int exponent = Integer.parseInt(check.substring(check.indexOf("E") + 1));
+        if (exponent < -27 || exponent < smallestPower || exponent > 21 + 2 || exponent > biggestPower)
+        {
+            // Out of SI prefix range; do not scale.
+            return String.format(this.si >= 0 ? "%10.4E" : "%10.3E", this.si) + " "
+                    + getDisplayUnit().getStandardUnit().getId();
+        }
+        Integer roundedExponent = (int) Math.ceil((exponent - 2.0) / 3) * 3 + 3;
+        // System.out.print(String.format("exponent=%d; roundedExponent=%d ", exponent, roundedExponent));
+        String key = SIPrefixes.FACTORS.get(roundedExponent).getDefaultTextualPrefix() + "g";
+        MassUnit displayUnit = getDisplayUnit().getQuantity().getUnitByAbbreviation(key);
+        return toString(displayUnit);
+    }
+
     /**
      * Calculate the division of Mass and Mass, which results in a Dimensionless scalar.
- * @param v Mass; Mass scalar
+     * @param v Mass; Mass scalar
      * @return Dimensionless scalar as a division of Mass and Mass
      */
     public final Dimensionless divide(final Mass v)
@@ -224,7 +250,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Calculate the division of Mass and FlowMass, which results in a Duration scalar.
- * @param v FlowMass; Mass scalar
+     * @param v FlowMass; Mass scalar
      * @return Duration scalar as a division of Mass and FlowMass
      */
     public final Duration divide(final FlowMass v)
@@ -234,7 +260,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Calculate the division of Mass and Duration, which results in a FlowMass scalar.
- * @param v Duration; Mass scalar
+     * @param v Duration; Mass scalar
      * @return FlowMass scalar as a division of Mass and Duration
      */
     public final FlowMass divide(final Duration v)
@@ -244,7 +270,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Calculate the multiplication of Mass and Acceleration, which results in a Force scalar.
- * @param v Acceleration; Mass scalar
+     * @param v Acceleration; Mass scalar
      * @return Force scalar as a multiplication of Mass and Acceleration
      */
     public final Force times(final Acceleration v)
@@ -254,7 +280,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Calculate the multiplication of Mass and Frequency, which results in a FlowMass scalar.
- * @param v Frequency; Mass scalar
+     * @param v Frequency; Mass scalar
      * @return FlowMass scalar as a multiplication of Mass and Frequency
      */
     public final FlowMass times(final Frequency v)
@@ -264,7 +290,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Calculate the division of Mass and Density, which results in a Volume scalar.
- * @param v Density; Mass scalar
+     * @param v Density; Mass scalar
      * @return Volume scalar as a division of Mass and Density
      */
     public final Volume divide(final Density v)
@@ -274,7 +300,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Calculate the division of Mass and Volume, which results in a Density scalar.
- * @param v Volume; Mass scalar
+     * @param v Volume; Mass scalar
      * @return Density scalar as a division of Mass and Volume
      */
     public final Density divide(final Volume v)
@@ -284,7 +310,7 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Calculate the multiplication of Mass and Speed, which results in a Momentum scalar.
- * @param v Speed; Mass scalar
+     * @param v Speed; Mass scalar
      * @return Momentum scalar as a multiplication of Mass and Speed
      */
     public final Momentum times(final Speed v)

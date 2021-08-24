@@ -13,6 +13,7 @@ import org.djunits.unit.ForceUnit;
 import org.djunits.unit.MassUnit;
 import org.djunits.unit.MomentumUnit;
 import org.djunits.unit.VolumeUnit;
+import org.djunits.unit.si.SIPrefixes;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
 
@@ -221,6 +222,30 @@ public class FloatMass extends AbstractFloatScalarRel<MassUnit, FloatMass>
             return new FloatMass(value, unit);
         }
         throw new IllegalArgumentException("Error parsing FloatMass with unit " + unitString);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public String toStringSIPrefixed(final int smallestPower, final int biggestPower)
+    {
+        if (!Float.isFinite(this.si))
+        {
+            return toString(getDisplayUnit().getStandardUnit());
+        }
+        // PK: I can't think of an easier way to figure out what the exponent will be; rounding of the mantissa to the available
+        // width makes this hard; This feels like an expensive way.
+        String check = String.format(this.si >= 0 ? "%10.8E" : "%10.7E", this.si);
+        int exponent = Integer.parseInt(check.substring(check.indexOf("E") + 1));
+        if (exponent < -27 || exponent < smallestPower || exponent > 21 + 2 || exponent > biggestPower)
+        {
+            // Out of SI prefix range; do not scale.
+            return String.format(this.si >= 0 ? "%10.4E" : "%10.3E", this.si) + " " + getDisplayUnit().getStandardUnit().getId();
+        }
+        Integer roundedExponent = (int) Math.ceil((exponent - 2.0) / 3) * 3 + 3;
+        // System.out.print(String.format("exponent=%d; roundedExponent=%d ", exponent, roundedExponent));
+        String key = SIPrefixes.FACTORS.get(roundedExponent).getDefaultTextualPrefix() + "g";
+        MassUnit displayUnit = getDisplayUnit().getQuantity().getUnitByAbbreviation(key);
+        return toString(displayUnit);
     }
 
     /**

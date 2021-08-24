@@ -262,6 +262,13 @@ public class FloatDimensionless extends AbstractFloatScalarRel<DimensionlessUnit
 
     /** {@inheritDoc} */
     @Override
+    public String toStringSIPrefixed(final int smallestPower, final int biggestPower)
+    {
+        return toString();
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public final FloatDimensionless acos()
     {
         return instantiateRel((float) Math.acos(getInUnit()), getDisplayUnit());
