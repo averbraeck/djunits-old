@@ -17,7 +17,6 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalar;
 import org.djunits.value.vfloat.scalar.base.FloatScalar;
 import org.djunits.value.vfloat.vector.base.AbstractFloatVector;
 import org.djunits.value.vfloat.vector.data.FloatVectorData;
-import org.ojalgo.matrix.Primitive32Matrix;
 
 /**
  * The most basic abstract class for the FloatMatrix.
@@ -503,22 +502,48 @@ public abstract class AbstractFloatMatrix<U extends Unit<U>, S extends AbstractF
 
     /** {@inheritDoc} */
     @Override
-    public final float determinant() throws ValueRuntimeException
+    public final float determinantSI() throws ValueRuntimeException
     {
-        try
+        checkSquare();
+        return det(getValuesSI());
+    }
+
+    /**
+     * Calculate the determinant of an n x n matrix.
+     * @param mat the matrix
+     * @return the determinant using the co-factor formula
+     */
+    private static float det(final float[][] mat)
+    {
+        if (mat.length == 1)
         {
-            final Primitive32Matrix.Factory matrixFactory = Primitive32Matrix.FACTORY;
-            final Primitive32Matrix m = matrixFactory.rows(this.data.getDoubleDenseMatrixSI());
-            if (!m.isSquare())
+            return mat[0][0];
+        }
+        // det(A) = sum(j=1:n) (-1)^(i+j).a_ij.A_ij where A_ij is the matrix with row i and column j removed
+        float det = 0.0f;
+        // possible optimization: pick the row or column with most zeros; here: pick row 0
+        for (int col = 0; col < mat.length; col++)
+        {
+            float sgn = (col % 2 == 0) ? 1 : -1;
+            float aij = mat[0][col];
+            float[][] matAij = new float[mat.length - 1][];
+            int r = 0;
+            for (int row = 1; row < mat.length; row++)
             {
-                throw new IllegalArgumentException("Matrix is not square -- determinant cannot be calculated.");
+                matAij[r] = new float[matAij.length];
+                int c = 0;
+                for (int j = 0; j < mat.length; j++)
+                {
+                    if (j != col)
+                    {
+                        matAij[r][c++] = mat[row][j];
+                    }
+                }
+                r++;
             }
-            return m.getDeterminant().floatValue();
+            det += sgn * aij * det(matAij);
         }
-        catch (IllegalArgumentException exception)
-        {
-            throw new ValueRuntimeException(exception); // Matrix must be square
-        }
+        return det;
     }
 
     /** {@inheritDoc} */

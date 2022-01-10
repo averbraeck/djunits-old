@@ -373,7 +373,7 @@ public class FloatMatrixMethodTest
                         new float[][] { { 2, 3, 5, 7 }, { 11, 13, 17, 19 }, { 23, 29, 31, 37 }, { 41, 43, 47, 49 } };
                 FloatAreaMatrix am4x4 =
                         FloatMatrix.instantiate(FloatMatrixData.instantiate(testData4x4, au.getScale(), storageType), au);
-                float det = am4x4.determinant();
+                float det = am4x4.determinantSI();
                 float detCalc = Determinant.det(am4x4.getValuesSI());
                 float err = Math.max(det, detCalc) / 1000.0f;
                 assertEquals("Determinant of square matrix with unit " + au.getDefaultTextualAbbreviation() + ", storage = "
@@ -383,7 +383,7 @@ public class FloatMatrixMethodTest
                     @Override
                     public void execute()
                     {
-                        float detErr = am.determinant();
+                        float detErr = am.determinantSI();
                         System.out.println(detErr);
                     }
                 }.test("Determinant of non-square matrix should have thrown exception");

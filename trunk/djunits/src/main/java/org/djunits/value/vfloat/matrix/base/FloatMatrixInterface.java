@@ -99,11 +99,11 @@ public interface FloatMatrixInterface<U extends Unit<U>, S extends FloatScalarIn
     float[][] getValuesInUnit(U targetUnit);
 
     /**
-     * Compute the determinant of the matrix.
+     * Compute the determinant of the matrix, based on the SI values. 
      * @return float; the determinant of the matrix
      * @throws ValueRuntimeException when matrix is neither sparse, nor dense, or not square
      */
-    float determinant() throws ValueRuntimeException;
+    float determinantSI() throws ValueRuntimeException;
 
     /**
      * Set the value, specified in the standard SI unit, at the specified position.

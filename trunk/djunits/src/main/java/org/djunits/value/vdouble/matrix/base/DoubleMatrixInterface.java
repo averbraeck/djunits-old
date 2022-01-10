@@ -99,11 +99,11 @@ public interface DoubleMatrixInterface<U extends Unit<U>, S extends DoubleScalar
     double[][] getValuesInUnit(U targetUnit);
 
     /**
-     * Compute the determinant of the matrix.
+     * Compute the determinant of the matrix, based on the SI values in the matrix.
      * @return double; the determinant of the matrix
      * @throws ValueRuntimeException when matrix is neither sparse, nor dense, or not square
      */
-    double determinant() throws ValueRuntimeException;
+    double determinantSI() throws ValueRuntimeException;
 
     /**
      * Set the value, specified in the standard SI unit, at the specified position.
