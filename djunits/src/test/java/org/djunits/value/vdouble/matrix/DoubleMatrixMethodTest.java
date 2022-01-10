@@ -373,7 +373,7 @@ public class DoubleMatrixMethodTest
                         new double[][] { { 2, 3, 5, 7 }, { 11, 13, 17, 19 }, { 23, 29, 31, 37 }, { 41, 43, 47, 49 } };
                 AreaMatrix am4x4 =
                         DoubleMatrix.instantiate(DoubleMatrixData.instantiate(testData4x4, au.getScale(), storageType), au);
-                double det = am4x4.determinant();
+                double det = am4x4.determinantSI();
                 double detCalc = Determinant.det(am4x4.getValuesSI());
                 double err = Math.max(det, detCalc) / 10000.0;
                 assertEquals("Determinant of square matrix with unit " + au.getDefaultTextualAbbreviation() + ", storage = "
@@ -383,7 +383,7 @@ public class DoubleMatrixMethodTest
                     @Override
                     public void execute()
                     {
-                        double detErr = am.determinant();
+                        double detErr = am.determinantSI();
                         System.out.println(detErr);
                     }
                 }.test("Determinant of non-square matrix should have thrown exception");
