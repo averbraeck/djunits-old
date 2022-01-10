@@ -121,8 +121,7 @@
           <chmod>true</chmod>
           <inputEncoding>UTF-8</inputEncoding>
           <outputEncoding>UTF-8</outputEncoding>
-          <templateDirectory>src/site</templateDirectory>
-          <template>site.vm</template>
+          <templateFile>src/site/site.vm</templateFile>
         </configuration>
         <executions>
           <execution>
@@ -609,6 +608,19 @@
     </repository>
   </repositories>
 
+  <pluginRepositories>
+    <pluginRepository>
+      <id>central</id>
+      <url>https://repo1.maven.org/maven2</url>
+      <releases>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+  
   <licenses>
     <license>
       <name>BSD-style license</name>
