@@ -202,7 +202,6 @@
           <links>
             <link>https://docs.oracle.com/en/java/javase/11/docs/api/</link>
             <link>https://djunits.org/docs/current/apidocs/</link>
-            <link>https://javadoc.io/doc/org.ojalgo/ojalgo/48.2.0/</link>
             <link>https://junit.org/junit4/javadoc/4.12/</link>
           </links>
           <additionalJOption>-J-Xmx1024m</additionalJOption>
@@ -270,7 +269,6 @@
           <links>
             <link>https://docs.oracle.com/en/java/javase/11/docs/api/</link>
             <link>https://djunits.org/docs/current/apidocs/</link>
-            <link>https://javadoc.io/doc/org.ojalgo/ojalgo/48.2.0/</link>
             <link>https://junit.org/junit4/javadoc/4.12/</link>
           </links>
           <detectJavaApiLink>false</detectJavaApiLink>
