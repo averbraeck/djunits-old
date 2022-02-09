@@ -63,15 +63,13 @@
     <testSourceDirectory>${basedir}/src/test/java</testSourceDirectory>
     <outputDirectory>${basedir}/target/classes</outputDirectory>
     <testOutputDirectory> ${basedir}/target/test-classes</testOutputDirectory>
+
     <resources>
       <resource>
         <directory>${basedir}/src/main/resources</directory>
       </resource>
     </resources>
     <testResources>
-      <testResource>
-        <directory>${basedir}/src/main/resources</directory>
-      </testResource>
       <testResource>
         <directory>${basedir}/src/test/resources</directory>
       </testResource>
@@ -107,11 +105,55 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
         <version>${maven.resources.version}</version>
-        <configuration>
-          <encoding>${project.encoding}</encoding>
-        </configuration>
+        <executions>
+          <execution>
+            <id>default-resources</id> <!-- replace the default -->
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>resources</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${basedir}/src/main/resources</directory>
+                </resource>
+              </resources>
+              <outputDirectory>${basedir}/target/classes/resources</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>default-testResources</id> <!-- replace the default -->
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>resources</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${basedir}/src/test/resources</directory>
+                </resource>
+              </resources>
+              <outputDirectory>${basedir}/target/test-classes/resources</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>testResources main</id> <!-- also add the normal resources to test-->
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>resources</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${basedir}/src/main/resources</directory>
+                </resource>
+              </resources>
+              <outputDirectory>${basedir}/target/test-classes/resources</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
-
+      
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>

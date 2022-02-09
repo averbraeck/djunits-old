@@ -16,6 +16,11 @@ public abstract class DefaultLocale
     /** The default locale to use in djunits. */
     private static Locale locale;
 
+    static
+    {
+        setLocale(new Locale("en"));
+    }
+    
     /**
      * @return locale
      */

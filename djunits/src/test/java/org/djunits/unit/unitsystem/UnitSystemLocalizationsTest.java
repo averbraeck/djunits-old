@@ -2,7 +2,9 @@ package org.djunits.unit.unitsystem;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.lang.reflect.Field;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +23,10 @@ public class UnitSystemLocalizationsTest
     /**
      * Check that all UnitSystems have valid a nameKey and a valid abbreviationKey and test those keys in all available
      * localizations.
+     * @throws URISyntaxException on error
      */
     @Test
-    public final void checkDefinedUnitSystems()
+    public final void checkDefinedUnitSystems() throws URISyntaxException
     {
         List<UnitSystem> unitSystems = new ArrayList<UnitSystem>();
         Field[] fields = UnitSystem.class.getDeclaredFields();
@@ -44,7 +47,7 @@ public class UnitSystemLocalizationsTest
         }
         ArrayList<String> errors = new ArrayList<String>();
         for (String localeName : AvailableLocalizations.availableLocalizations("localeunitsystem",
-                this.getClass().getResource("").getPath() + "../../../../../"))
+                new File(getClass().getResource("/resources").toURI().getPath()).getAbsolutePath()))
         {
             for (UnitSystem us : unitSystems)
             {
@@ -72,4 +75,5 @@ public class UnitSystemLocalizationsTest
         }
         assertTrue("Errors in UnitSystemLocalizations: " + errors, errors.isEmpty());
     }
+
 }
