@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,10 +16,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.djunits.unit.DurationUnit;
 import org.junit.Test;
 
 /**
@@ -63,14 +66,15 @@ public class VerifyLocalizations
      * @throws InvocationTargetException ...
      * @throws IllegalArgumentException ...
      * @throws IllegalAccessException ...
+     * @throws URISyntaxException ...
      */
     @Test
     public void verifyLocalizations() throws IOException, ClassNotFoundException, NoSuchMethodException, SecurityException,
-            IllegalAccessException, IllegalArgumentException, InvocationTargetException
+            IllegalAccessException, IllegalArgumentException, InvocationTargetException, URISyntaxException
     {
-        // TODO The way that this code finds the files may need fixing to work in the deploy environment.
-        String pathToResources = "src/main/resources";
+        String pathToResources = new File(getClass().getResource("/resources").toURI().getPath()).getAbsolutePath();
         String referenceFileName = "localeunit.properties";
+        System.out.println(pathToResources + "/" + referenceFileName);
         // Parse the localeunit.properties file and store all the keys
         List<String> reference =
                 Files.readAllLines(Paths.get(pathToResources + "/" + referenceFileName), StandardCharsets.ISO_8859_1);
@@ -174,6 +178,22 @@ public class VerifyLocalizations
                 assertEquals("No errors in file " + path.getFileName(), 0, errors);
             }
         }
+    }
+
+    
+    /**
+     * Check that all UnitSystems have valid a nameKey and a valid abbreviationKey and test those keys in all available
+     * localizations.
+     * @throws URISyntaxException on error
+     */
+    // @Test
+    // TODO: this does not yet work. We really have to rethink the use of Locales in djunits...
+    public final void checkUnitSystemsLocale() throws URISyntaxException
+    {
+        DefaultLocale.setLocale(Locale.US);
+        assertEquals("hour", DurationUnit.HOUR.getName());
+        DefaultLocale.setLocale(Locale.forLanguageTag("nl-NL"));
+        assertEquals("uur", DurationUnit.HOUR.getName());
     }
 
 }

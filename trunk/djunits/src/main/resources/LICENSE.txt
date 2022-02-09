@@ -1,7 +1,7 @@
-Copyright (c) 2015-2018 Delft University of Technology, PO Box 5, 2600 AA, 
+Copyright (c) 2015-2022 Delft University of Technology, PO Box 5, 2600 AA, 
 Delft, the Netherlands. All rights reserved.
 
-See for project information <a href="http://djunits.org/">djunits.org</a>.
+See for project information <a href="httpa://djunits.org/">djunits.org</a>.
 
 The DJUNITS project is distributed under the following BSD-style license:
 

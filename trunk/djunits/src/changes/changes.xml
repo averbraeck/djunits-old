@@ -1,6 +1,21 @@
 <document xmlns="http://maven.apache.org/changes/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="4.01.08" date="2022-02-08" description="Resources stored in subfolder resources">
+      <action dev="averbraeck" type="update">
+        When using DJUNITS in Eclipse, the resources from src/main/resources are placed in /target/classes.
+        When building a Runnable JAR file from Eclipse from the same project, the resources are placed within the jar
+        in the /resources folder, and therefore cannot be found. This disconnect between Eclipse and Maven has existed 
+        for over 10 years and is seen as a 'feature' and not as a bug. Two solutions exist: remove the Exluded: ** in
+        all project properties, Java Build Path, under the source directories of /src/main/resources (then the resource
+        files will be placed in the root in the runnable jar file), but this reverts after a Maven Update of the project.
+        Therefore, we have chosen the opposite solution: all resources are copied to the /target/classes/resources folder
+        in Eclipse, and to the /resources folder within the runnable jar file. Thereby they are always found at the same 
+        location. This holds in djunits for the resource bundle properties files.
+        An additional advantage is that the Jar files look less cluttered without all the resources in the root folder. 
+      </action>
+    </release>
+    
     <release version="4.01.07" date="2022-01-10" description="Javadoc, copyright notice, no dependency on ojAlgo">
       <action dev="averbraeck" type="update">
         Dependency on ojAlgo has been removed. The package was only used to calculate the determinant of a matrix. 

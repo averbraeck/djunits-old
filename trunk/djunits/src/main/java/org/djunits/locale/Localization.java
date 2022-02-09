@@ -19,7 +19,7 @@ public class Localization implements Serializable
     /** */
     private static final long serialVersionUID = 20200118L;
 
-    /** filename without .properties, to be found in src/main/resources folder. */
+    /** filename without .properties, to be found in the /resources folder. */
     private final String bundleNamePrefix;
 
     /** the resource bundle. */
@@ -62,18 +62,11 @@ public class Localization implements Serializable
             Locale.setDefault(this.currentLocale);
             try
             {
-                this.resourceBundle = ResourceBundle.getBundle(this.bundleNamePrefix, this.currentLocale);
+                this.resourceBundle = ResourceBundle.getBundle("resources/" + this.bundleNamePrefix, this.currentLocale);
             }
             catch (MissingResourceException e)
             {
-                try
-                {
-                    this.resourceBundle = ResourceBundle.getBundle("resources/" + this.bundleNamePrefix, this.currentLocale);
-                }
-                catch (MissingResourceException e2)
-                {
-                    return '!' + key.substring(key.indexOf('.') + 1) + '!';
-                }
+                return '!' + key.substring(key.indexOf('.') + 1) + '!';
             }
         }
         if (null == this.resourceBundle)
@@ -104,19 +97,12 @@ public class Localization implements Serializable
             this.defaultLocale = new Locale("en");
             try
             {
-                this.defaultResourceBundle = ResourceBundle.getBundle(this.bundleNamePrefix, this.defaultLocale);
+                this.defaultResourceBundle =
+                        ResourceBundle.getBundle("resources/" + this.bundleNamePrefix, this.defaultLocale);
             }
             catch (MissingResourceException e)
             {
-                try
-                {
-                    this.defaultResourceBundle =
-                            ResourceBundle.getBundle("resources/" + this.bundleNamePrefix, this.defaultLocale);
-                }
-                catch (MissingResourceException e2)
-                {
-                    return '!' + key.substring(key.indexOf('.') + 1) + '!';
-                }
+                return '!' + key.substring(key.indexOf('.') + 1) + '!';
             }
         }
         if (null == this.defaultResourceBundle)
