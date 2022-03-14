@@ -292,7 +292,7 @@ public abstract class FloatVectorData extends AbstractStorage<FloatVectorData> i
      * @param storageType StorageType; the data type to use
      * @return FloatVectorData; the FloatVectorData with the right data type
      * @throws NullPointerException when values is null, or storageType is null
-     * @throws ValueRuntimeException when length &lt; 0 
+     * @throws ValueRuntimeException when length &lt; 0
      * @param <U> the unit type
      * @param <S> the scalar type to use
      */

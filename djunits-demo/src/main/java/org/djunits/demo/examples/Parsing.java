@@ -19,9 +19,9 @@ public final class Parsing
     {
         // utility method
     }
-    
+
     /**
- * @param args String[]; not used
+     * @param args String[]; not used
      */
     public static void main(final String[] args)
     {

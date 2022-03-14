@@ -10,6 +10,7 @@ import org.djunits.unit.LuminousFluxUnit;
 import org.djunits.unit.SolidAngleUnit;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 
 /**
  * Easy access methods for the SolidAngle DoubleScalar, which is relative by definition.
@@ -20,7 +21,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class SolidAngle extends AbstractDoubleScalarRel<SolidAngleUnit, SolidAngle>
 {
     /** */
@@ -210,8 +211,8 @@ public class SolidAngle extends AbstractDoubleScalarRel<SolidAngleUnit, SolidAng
 
     /**
      * Calculate the division of SolidAngle and SolidAngle, which results in a Dimensionless scalar.
- * @param v SolidAngle; SolidAngle scalar
-     * @return Dimensionless scalar as a division of SolidAngle and SolidAngle
+     * @param v SolidAngle; scalar
+     * @return Dimensionless; scalar as a division of SolidAngle and SolidAngle
      */
     public final Dimensionless divide(final SolidAngle v)
     {
@@ -220,12 +221,19 @@ public class SolidAngle extends AbstractDoubleScalarRel<SolidAngleUnit, SolidAng
 
     /**
      * Calculate the multiplication of SolidAngle and LuminousIntensity, which results in a LuminousFlux scalar.
- * @param v LuminousIntensity; SolidAngle scalar
-     * @return LuminousFlux scalar as a multiplication of SolidAngle and LuminousIntensity
+     * @param v SolidAngle; scalar
+     * @return LuminousFlux; scalar as a multiplication of SolidAngle and LuminousIntensity
      */
     public final LuminousFlux times(final LuminousIntensity v)
     {
         return new LuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SIScalar reciprocal()
+    {
+        return DoubleScalar.divide(Dimensionless.ONE, this);
     }
 
 }

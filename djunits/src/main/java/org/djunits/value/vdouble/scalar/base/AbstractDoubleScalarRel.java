@@ -2,7 +2,6 @@ package org.djunits.value.vdouble.scalar.base;
 
 import org.djunits.unit.Unit;
 import org.djunits.value.util.ValueUtil;
-import org.djunits.value.vdouble.scalar.Dimensionless;
 import org.djunits.value.vdouble.scalar.SIScalar;
 
 /**
@@ -82,10 +81,7 @@ public abstract class AbstractDoubleScalarRel<U extends Unit<U>, R extends Abstr
      * Create the reciprocal of this scalar with the correct dimensions.
      * @return DoubleScalar&lt;?&gt;; a new scalar instance with correct SI dimensions
      */
-    public SIScalar reciprocal()
-    {
-        return DoubleScalar.divide(Dimensionless.ONE, this);
-    }
+    public abstract AbstractDoubleScalarRel<?, ?> reciprocal();
 
     /**
      * Divide this scalar by another scalar and create a new scalar.

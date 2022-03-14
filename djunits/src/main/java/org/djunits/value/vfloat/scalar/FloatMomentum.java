@@ -15,6 +15,7 @@ import org.djunits.unit.PowerUnit;
 import org.djunits.unit.SpeedUnit;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
+import org.djunits.value.vfloat.scalar.base.FloatScalar;
 
 /**
  * Easy access methods for the FloatMomentum FloatScalar, which is relative by definition.
@@ -25,7 +26,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class FloatMomentum extends AbstractFloatScalarRel<MomentumUnit, FloatMomentum>
 {
     /** */
@@ -56,7 +57,7 @@ public class FloatMomentum extends AbstractFloatScalarRel<MomentumUnit, FloatMom
     /**
      * Construct FloatMomentum scalar.
      * @param value float; the float value
- * @param unit MomentumUnit; unit for the float value
+     * @param unit unit for the float value
      */
     public FloatMomentum(final float value, final MomentumUnit unit)
     {
@@ -65,7 +66,7 @@ public class FloatMomentum extends AbstractFloatScalarRel<MomentumUnit, FloatMom
 
     /**
      * Construct FloatMomentum scalar.
- * @param value FloatMomentum; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatMomentum(final FloatMomentum value)
     {
@@ -75,7 +76,7 @@ public class FloatMomentum extends AbstractFloatScalarRel<MomentumUnit, FloatMom
     /**
      * Construct FloatMomentum scalar using a double value.
      * @param value double; the double value
- * @param unit MomentumUnit; unit for the resulting float value
+     * @param unit unit for the resulting float value
      */
     public FloatMomentum(final double value, final MomentumUnit unit)
     {
@@ -101,9 +102,9 @@ public class FloatMomentum extends AbstractFloatScalarRel<MomentumUnit, FloatMom
 
     /**
      * Interpolate between two values.
- * @param zero FloatMomentum; the low value
- * @param one FloatMomentum; the high value
- * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatMomentum interpolate(final FloatMomentum zero, final FloatMomentum one, final float ratio)
@@ -114,8 +115,8 @@ public class FloatMomentum extends AbstractFloatScalarRel<MomentumUnit, FloatMom
 
     /**
      * Return the maximum value of two relative scalars.
- * @param r1 FloatMomentum; the first scalar
- * @param r2 FloatMomentum; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatMomentum max(final FloatMomentum r1, final FloatMomentum r2)
@@ -125,9 +126,9 @@ public class FloatMomentum extends AbstractFloatScalarRel<MomentumUnit, FloatMom
 
     /**
      * Return the maximum value of more than two relative scalars.
- * @param r1 FloatMomentum; the first scalar
- * @param r2 FloatMomentum; the second scalar
- * @param rn FloatMomentum...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatMomentum max(final FloatMomentum r1, final FloatMomentum r2, final FloatMomentum... rn)
@@ -145,8 +146,8 @@ public class FloatMomentum extends AbstractFloatScalarRel<MomentumUnit, FloatMom
 
     /**
      * Return the minimum value of two relative scalars.
- * @param r1 FloatMomentum; the first scalar
- * @param r2 FloatMomentum; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatMomentum min(final FloatMomentum r1, final FloatMomentum r2)
@@ -156,9 +157,9 @@ public class FloatMomentum extends AbstractFloatScalarRel<MomentumUnit, FloatMom
 
     /**
      * Return the minimum value of more than two relative scalars.
- * @param r1 FloatMomentum; the first scalar
- * @param r2 FloatMomentum; the second scalar
- * @param rn FloatMomentum...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatMomentum min(final FloatMomentum r1, final FloatMomentum r2, final FloatMomentum... rn)
@@ -205,7 +206,7 @@ public class FloatMomentum extends AbstractFloatScalarRel<MomentumUnit, FloatMom
 
     /**
      * Returns a FloatMomentum based on a value and the textual representation of the unit.
- * @param value float; the value to use
+     * @param value double; the value to use
      * @param unitString String; the textual representation of the unit
      * @return FloatMomentum; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
@@ -225,8 +226,8 @@ public class FloatMomentum extends AbstractFloatScalarRel<MomentumUnit, FloatMom
 
     /**
      * Calculate the division of FloatMomentum and FloatMomentum, which results in a FloatDimensionless scalar.
- * @param v FloatMomentum; FloatMomentum scalar
-     * @return FloatDimensionless scalar as a division of FloatMomentum and FloatMomentum
+     * @param v FloatMomentum; scalar
+     * @return FloatDimensionless; scalar as a division of FloatMomentum and FloatMomentum
      */
     public final FloatDimensionless divide(final FloatMomentum v)
     {
@@ -235,8 +236,8 @@ public class FloatMomentum extends AbstractFloatScalarRel<MomentumUnit, FloatMom
 
     /**
      * Calculate the division of FloatMomentum and FloatSpeed, which results in a FloatMass scalar.
- * @param v FloatSpeed; FloatMomentum scalar
-     * @return FloatMass scalar as a division of FloatMomentum and FloatSpeed
+     * @param v FloatMomentum; scalar
+     * @return FloatMass; scalar as a division of FloatMomentum and FloatSpeed
      */
     public final FloatMass divide(final FloatSpeed v)
     {
@@ -245,8 +246,8 @@ public class FloatMomentum extends AbstractFloatScalarRel<MomentumUnit, FloatMom
 
     /**
      * Calculate the division of FloatMomentum and FloatMass, which results in a FloatSpeed scalar.
- * @param v FloatMass; FloatMomentum scalar
-     * @return FloatSpeed scalar as a division of FloatMomentum and FloatMass
+     * @param v FloatMomentum; scalar
+     * @return FloatSpeed; scalar as a division of FloatMomentum and FloatMass
      */
     public final FloatSpeed divide(final FloatMass v)
     {
@@ -255,8 +256,8 @@ public class FloatMomentum extends AbstractFloatScalarRel<MomentumUnit, FloatMom
 
     /**
      * Calculate the division of FloatMomentum and FloatLength, which results in a FloatFlowMass scalar.
- * @param v FloatLength; FloatMomentum scalar
-     * @return FloatFlowMass scalar as a division of FloatMomentum and FloatLength
+     * @param v FloatMomentum; scalar
+     * @return FloatFlowMass; scalar as a division of FloatMomentum and FloatLength
      */
     public final FloatFlowMass divide(final FloatLength v)
     {
@@ -265,8 +266,8 @@ public class FloatMomentum extends AbstractFloatScalarRel<MomentumUnit, FloatMom
 
     /**
      * Calculate the division of FloatMomentum and FloatFlowMass, which results in a FloatLength scalar.
- * @param v FloatFlowMass; FloatMomentum scalar
-     * @return FloatLength scalar as a division of FloatMomentum and FloatFlowMass
+     * @param v FloatMomentum; scalar
+     * @return FloatLength; scalar as a division of FloatMomentum and FloatFlowMass
      */
     public final FloatLength divide(final FloatFlowMass v)
     {
@@ -275,8 +276,8 @@ public class FloatMomentum extends AbstractFloatScalarRel<MomentumUnit, FloatMom
 
     /**
      * Calculate the multiplication of FloatMomentum and FloatSpeed, which results in a FloatEnergy scalar.
- * @param v FloatSpeed; FloatMomentum scalar
-     * @return FloatEnergy scalar as a multiplication of FloatMomentum and FloatSpeed
+     * @param v FloatMomentum; scalar
+     * @return FloatEnergy; scalar as a multiplication of FloatMomentum and FloatSpeed
      */
     public final FloatEnergy times(final FloatSpeed v)
     {
@@ -285,12 +286,19 @@ public class FloatMomentum extends AbstractFloatScalarRel<MomentumUnit, FloatMom
 
     /**
      * Calculate the multiplication of FloatMomentum and FloatAcceleration, which results in a FloatPower scalar.
- * @param v FloatAcceleration; FloatMomentum scalar
-     * @return FloatPower scalar as a multiplication of FloatMomentum and FloatAcceleration
+     * @param v FloatMomentum; scalar
+     * @return FloatPower; scalar as a multiplication of FloatMomentum and FloatAcceleration
      */
     public final FloatPower times(final FloatAcceleration v)
     {
         return new FloatPower(this.si * v.si, PowerUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatSIScalar reciprocal()
+    {
+        return FloatScalar.divide(FloatDimensionless.ONE, this);
     }
 
 }

@@ -95,6 +95,7 @@
 
 %ElectricalConductance
 /ElectricalConductance=Dimensionless
+*ElectricalResistance=Dimensionless
 *ElectricalPotential=ElectricalCurrent
 *Duration=ElectricalCapacitance
 
@@ -119,6 +120,7 @@
 
 %ElectricalResistance
 /ElectricalResistance=Dimensionless
+*ElectricalConductance=Dimensionless
 *ElectricalCurrent=ElectricalPotential
 *Duration=ElectricalInductance
 
@@ -183,6 +185,7 @@
 
 %Length
 /Length=Dimensionless
+*LinearDensity=Dimensionless
 *Length=Area
 /LinearDensity=Area
 /Area=LinearDensity
@@ -195,6 +198,7 @@
 
 %LinearDensity
 /LinearDensity=Dimensionless
+*Length=Dimensionless
 *Area=Length
 *Energy=Force
 *Speed=Frequency
@@ -349,3 +353,5 @@
 /LinearDensity=Length
 /Duration=Frequency
 /Frequency=Duration
+/ElectricalConductance=ElectricalResistance
+/ElectricalResistance=ElectricalConductance

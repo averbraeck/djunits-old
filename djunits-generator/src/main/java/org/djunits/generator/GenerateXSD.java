@@ -283,7 +283,7 @@ public class GenerateXSD
      * @param s String; the String to escape
      * @return the String with \ before escaped chars
      */
-    private static String escape(String s)
+    private static String escape(final String s)
     {
         String out = "";
         for (char c : s.toCharArray())

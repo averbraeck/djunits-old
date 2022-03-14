@@ -15,7 +15,7 @@ public final class AddingAUnitExample
     {
         // utility constructor.
     }
-    
+
     /** a new LengthUnit. */
     public static final LengthUnit FURLONG = LengthUnit.FOOT.deriveLinear(660.0, "fr", "Furlong");
 
@@ -28,7 +28,7 @@ public final class AddingAUnitExample
                     "fr/fn", "Furlongs per Fortnight");
 
     /**
- * @param args String[]; can be blank
+     * @param args String[]; can be blank
      */
     public static void main(final String[] args)
     {
@@ -40,5 +40,5 @@ public final class AddingAUnitExample
         System.out.println(speed); // Uses SpeedUnit.SI; m/s
         System.out.println(speed.toString(FURLONGS_PER_FORTNIGHT));
     }
-    
+
 }

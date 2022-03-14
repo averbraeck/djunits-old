@@ -22,7 +22,7 @@ public final class Angles
     {
         // utility class
     }
-    
+
     /**
      * Create some Angle values to demonstrate conversion from and to related units, including the non-linear AngleUnit.PERCENT.
      * @param args String[]; the command line arguments; not used

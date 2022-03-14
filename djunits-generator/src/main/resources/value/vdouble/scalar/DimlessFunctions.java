@@ -1,5 +1,12 @@
     /** {@inheritDoc} */
     @Override
+    public String toStringSIPrefixed(final int smallestPower, final int biggestPower)
+    {
+        return toString();
+    }
+    
+    /** {@inheritDoc} */
+    @Override
     public final Dimensionless acos()
     {
         return instantiateRel(Math.acos(getInUnit()), getDisplayUnit());

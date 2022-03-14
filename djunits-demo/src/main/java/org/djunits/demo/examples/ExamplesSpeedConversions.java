@@ -1,6 +1,5 @@
 package org.djunits.demo.examples;
 
-
 import org.djunits.unit.LengthUnit;
 import org.djunits.unit.MassUnit;
 import org.djunits.unit.SpeedUnit;
@@ -18,7 +17,7 @@ public final class ExamplesSpeedConversions
     {
         // utility constructor.
     }
-    
+
     /**
      * @param args String[]; args
      */
@@ -28,7 +27,7 @@ public final class ExamplesSpeedConversions
         System.out.println();
         example2();
     }
-    
+
     /** example 1. */
     public static void example1()
     {
@@ -47,7 +46,7 @@ public final class ExamplesSpeedConversions
         System.out.println("difference: " + diff.toString(SpeedUnit.SI) + " (si)"); // Safer
         System.out.println("difference: " + diff.toString(SpeedUnit.KM_PER_HOUR));
     }
-    
+
     /** example 2. */
     public static void example2()
     {
@@ -61,5 +60,5 @@ public final class ExamplesSpeedConversions
         Energy kineticEnergy = speed.times(speed).times(new Mass(3, MassUnit.KILOGRAM).times(0.5)).asEnergy(); // OK
         System.out.println(kineticEnergy);
     }
-    
+
 }

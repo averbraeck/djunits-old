@@ -13,6 +13,7 @@ import org.djunits.unit.DurationUnit;
 import org.djunits.unit.FrequencyUnit;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
+import org.djunits.value.vfloat.scalar.base.FloatScalar;
 
 /**
  * Easy access methods for the FloatAngularVelocity FloatScalar, which is relative by definition.
@@ -23,7 +24,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class FloatAngularVelocity extends AbstractFloatScalarRel<AngularVelocityUnit, FloatAngularVelocity>
 {
     /** */
@@ -56,7 +57,7 @@ public class FloatAngularVelocity extends AbstractFloatScalarRel<AngularVelocity
     /**
      * Construct FloatAngularVelocity scalar.
      * @param value float; the float value
- * @param unit AngularVelocityUnit; unit for the float value
+     * @param unit unit for the float value
      */
     public FloatAngularVelocity(final float value, final AngularVelocityUnit unit)
     {
@@ -65,7 +66,7 @@ public class FloatAngularVelocity extends AbstractFloatScalarRel<AngularVelocity
 
     /**
      * Construct FloatAngularVelocity scalar.
- * @param value FloatAngularVelocity; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatAngularVelocity(final FloatAngularVelocity value)
     {
@@ -75,7 +76,7 @@ public class FloatAngularVelocity extends AbstractFloatScalarRel<AngularVelocity
     /**
      * Construct FloatAngularVelocity scalar using a double value.
      * @param value double; the double value
- * @param unit AngularVelocityUnit; unit for the resulting float value
+     * @param unit unit for the resulting float value
      */
     public FloatAngularVelocity(final double value, final AngularVelocityUnit unit)
     {
@@ -101,9 +102,9 @@ public class FloatAngularVelocity extends AbstractFloatScalarRel<AngularVelocity
 
     /**
      * Interpolate between two values.
- * @param zero FloatAngularVelocity; the low value
- * @param one FloatAngularVelocity; the high value
- * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatAngularVelocity interpolate(final FloatAngularVelocity zero, final FloatAngularVelocity one,
@@ -115,8 +116,8 @@ public class FloatAngularVelocity extends AbstractFloatScalarRel<AngularVelocity
 
     /**
      * Return the maximum value of two relative scalars.
- * @param r1 FloatAngularVelocity; the first scalar
- * @param r2 FloatAngularVelocity; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatAngularVelocity max(final FloatAngularVelocity r1, final FloatAngularVelocity r2)
@@ -126,9 +127,9 @@ public class FloatAngularVelocity extends AbstractFloatScalarRel<AngularVelocity
 
     /**
      * Return the maximum value of more than two relative scalars.
- * @param r1 FloatAngularVelocity; the first scalar
- * @param r2 FloatAngularVelocity; the second scalar
- * @param rn FloatAngularVelocity...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatAngularVelocity max(final FloatAngularVelocity r1, final FloatAngularVelocity r2,
@@ -147,8 +148,8 @@ public class FloatAngularVelocity extends AbstractFloatScalarRel<AngularVelocity
 
     /**
      * Return the minimum value of two relative scalars.
- * @param r1 FloatAngularVelocity; the first scalar
- * @param r2 FloatAngularVelocity; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatAngularVelocity min(final FloatAngularVelocity r1, final FloatAngularVelocity r2)
@@ -158,9 +159,9 @@ public class FloatAngularVelocity extends AbstractFloatScalarRel<AngularVelocity
 
     /**
      * Return the minimum value of more than two relative scalars.
- * @param r1 FloatAngularVelocity; the first scalar
- * @param r2 FloatAngularVelocity; the second scalar
- * @param rn FloatAngularVelocity...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatAngularVelocity min(final FloatAngularVelocity r1, final FloatAngularVelocity r2,
@@ -209,7 +210,7 @@ public class FloatAngularVelocity extends AbstractFloatScalarRel<AngularVelocity
 
     /**
      * Returns a FloatAngularVelocity based on a value and the textual representation of the unit.
- * @param value float; the value to use
+     * @param value double; the value to use
      * @param unitString String; the textual representation of the unit
      * @return FloatAngularVelocity; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
@@ -230,8 +231,8 @@ public class FloatAngularVelocity extends AbstractFloatScalarRel<AngularVelocity
 
     /**
      * Calculate the division of FloatAngularVelocity and FloatAngularVelocity, which results in a FloatDimensionless scalar.
- * @param v FloatAngularVelocity; FloatAngularVelocity scalar
-     * @return FloatDimensionless scalar as a division of FloatAngularVelocity and FloatAngularVelocity
+     * @param v FloatAngularVelocity; scalar
+     * @return FloatDimensionless; scalar as a division of FloatAngularVelocity and FloatAngularVelocity
      */
     public final FloatDimensionless divide(final FloatAngularVelocity v)
     {
@@ -240,8 +241,8 @@ public class FloatAngularVelocity extends AbstractFloatScalarRel<AngularVelocity
 
     /**
      * Calculate the division of FloatAngularVelocity and FloatAngle, which results in a FloatFrequency scalar.
- * @param v FloatAngle; FloatAngularVelocity scalar
-     * @return FloatFrequency scalar as a division of FloatAngularVelocity and FloatAngle
+     * @param v FloatAngularVelocity; scalar
+     * @return FloatFrequency; scalar as a division of FloatAngularVelocity and FloatAngle
      */
     public final FloatFrequency divide(final FloatAngle v)
     {
@@ -250,8 +251,8 @@ public class FloatAngularVelocity extends AbstractFloatScalarRel<AngularVelocity
 
     /**
      * Calculate the division of FloatAngularVelocity and FloatFrequency, which results in a FloatAngle scalar.
- * @param v FloatFrequency; FloatAngularVelocity scalar
-     * @return FloatAngle scalar as a division of FloatAngularVelocity and FloatFrequency
+     * @param v FloatAngularVelocity; scalar
+     * @return FloatAngle; scalar as a division of FloatAngularVelocity and FloatFrequency
      */
     public final FloatAngle divide(final FloatFrequency v)
     {
@@ -260,8 +261,8 @@ public class FloatAngularVelocity extends AbstractFloatScalarRel<AngularVelocity
 
     /**
      * Calculate the multiplication of FloatAngularVelocity and FloatDuration, which results in a FloatAngle scalar.
- * @param v FloatDuration; FloatAngularVelocity scalar
-     * @return FloatAngle scalar as a multiplication of FloatAngularVelocity and FloatDuration
+     * @param v FloatAngularVelocity; scalar
+     * @return FloatAngle; scalar as a multiplication of FloatAngularVelocity and FloatDuration
      */
     public final FloatAngle times(final FloatDuration v)
     {
@@ -270,8 +271,8 @@ public class FloatAngularVelocity extends AbstractFloatScalarRel<AngularVelocity
 
     /**
      * Calculate the division of FloatAngularVelocity and FloatDuration, which results in a FloatAngularAcceleration scalar.
- * @param v FloatDuration; FloatAngularVelocity scalar
-     * @return FloatAngularAcceleration scalar as a division of FloatAngularVelocity and FloatDuration
+     * @param v FloatAngularVelocity; scalar
+     * @return FloatAngularAcceleration; scalar as a division of FloatAngularVelocity and FloatDuration
      */
     public final FloatAngularAcceleration divide(final FloatDuration v)
     {
@@ -280,8 +281,8 @@ public class FloatAngularVelocity extends AbstractFloatScalarRel<AngularVelocity
 
     /**
      * Calculate the division of FloatAngularVelocity and FloatAngularAcceleration, which results in a FloatDuration scalar.
- * @param v FloatAngularAcceleration; FloatAngularVelocity scalar
-     * @return FloatDuration scalar as a division of FloatAngularVelocity and FloatAngularAcceleration
+     * @param v FloatAngularVelocity; scalar
+     * @return FloatDuration; scalar as a division of FloatAngularVelocity and FloatAngularAcceleration
      */
     public final FloatDuration divide(final FloatAngularAcceleration v)
     {
@@ -291,12 +292,19 @@ public class FloatAngularVelocity extends AbstractFloatScalarRel<AngularVelocity
     /**
      * Calculate the multiplication of FloatAngularVelocity and FloatFrequency, which results in a FloatAngularAcceleration
      * scalar.
- * @param v FloatFrequency; FloatAngularVelocity scalar
-     * @return FloatAngularAcceleration scalar as a multiplication of FloatAngularVelocity and FloatFrequency
+     * @param v FloatAngularVelocity; scalar
+     * @return FloatAngularAcceleration; scalar as a multiplication of FloatAngularVelocity and FloatFrequency
      */
     public final FloatAngularAcceleration times(final FloatFrequency v)
     {
         return new FloatAngularAcceleration(this.si * v.si, AngularAccelerationUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatSIScalar reciprocal()
+    {
+        return FloatScalar.divide(FloatDimensionless.ONE, this);
     }
 
 }

@@ -10,6 +10,7 @@ import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.TemperatureUnit;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
+import org.djunits.value.vfloat.scalar.base.FloatScalar;
 
 /**
  * Easy access methods for the FloatTemperature FloatScalar.
@@ -21,7 +22,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRelWithAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class FloatTemperature extends
         AbstractFloatScalarRelWithAbs<AbsoluteTemperatureUnit, FloatAbsoluteTemperature, TemperatureUnit, FloatTemperature>
 {
@@ -107,7 +108,7 @@ public class FloatTemperature extends
      * Interpolate between two values.
      * @param zero FloatTemperature; the low value
      * @param one FloatTemperature; the high value
- * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return FloatTemperature; a Scalar at the ratio between
      */
     public static FloatTemperature interpolate(final FloatTemperature zero, final FloatTemperature one, final float ratio)
@@ -209,7 +210,7 @@ public class FloatTemperature extends
 
     /**
      * Returns a FloatTemperature based on a value and the textual representation of the unit.
- * @param value float; the value to use
+     * @param value double; the value to use
      * @param unitString String; the textual representation of the unit
      * @return FloatTemperature; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
@@ -230,12 +231,19 @@ public class FloatTemperature extends
 
     /**
      * Calculate the division of FloatTemperature and FloatTemperature, which results in a FloatDimensionless scalar.
- * @param v FloatTemperature; FloatTemperature scalar
-     * @return FloatDimensionless scalar as a division of FloatTemperature and FloatTemperature
+     * @param v FloatTemperature; scalar
+     * @return FloatDimensionless; scalar as a division of FloatTemperature and FloatTemperature
      */
     public final FloatDimensionless divide(final FloatTemperature v)
     {
         return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatSIScalar reciprocal()
+    {
+        return FloatScalar.divide(FloatDimensionless.ONE, this);
     }
 
 }

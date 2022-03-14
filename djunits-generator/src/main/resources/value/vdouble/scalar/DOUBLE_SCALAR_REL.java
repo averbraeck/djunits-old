@@ -206,6 +206,7 @@ public class %Type% extends AbstractDoubleScalarRel<%Type%Unit, %Type%> %DIMLESS
         throw new IllegalArgumentException("Error parsing %Type% with unit " + unitString);
     }
 
+##MASS##
     
 %FORMULAS%%Type%%
 }

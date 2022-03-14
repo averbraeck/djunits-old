@@ -11,7 +11,9 @@ import org.djunits.value.vdouble.scalar.Acceleration;
 import org.djunits.value.vdouble.scalar.Dimensionless;
 import org.djunits.value.vdouble.scalar.Duration;
 import org.djunits.value.vdouble.scalar.Frequency;
+import org.djunits.value.vdouble.scalar.SIScalar;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 
 /**
  * <p>
@@ -187,7 +189,7 @@ public class Jerk extends AbstractDoubleScalarRel<JerkUnit, Jerk>
 
     /**
      * Calculate the division of Jerk and Jerk, which results in a Dimensionless scalar.
- * @param v Jerk; Jerk scalar
+     * @param v Jerk; Jerk scalar
      * @return Dimensionless scalar as a division of Jerk and Jerk
      */
     public final Dimensionless divide(final Jerk v)
@@ -197,7 +199,7 @@ public class Jerk extends AbstractDoubleScalarRel<JerkUnit, Jerk>
 
     /**
      * Calculate the multiplication of Jerk and Duration, which results in an Acceleration scalar.
- * @param v Duration; Duration scalar
+     * @param v Duration; Duration scalar
      * @return Acceleration scalar as a multiplication of Jerk and Duration
      */
     public final Acceleration times(final Duration v)
@@ -207,12 +209,19 @@ public class Jerk extends AbstractDoubleScalarRel<JerkUnit, Jerk>
 
     /**
      * Calculate the division of Jerk and Acceleration, which results in a Frequency scalar.
- * @param v Acceleration; Acceleration scalar
+     * @param v Acceleration; Acceleration scalar
      * @return Frequency scalar as a division of Jerk and Accelration
      */
     public final Frequency times(final Acceleration v)
     {
         return new Frequency(this.si * v.si, FrequencyUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SIScalar reciprocal()
+    {
+        return DoubleScalar.divide(Dimensionless.ONE, this);
     }
 
 }

@@ -13,6 +13,7 @@ import org.djunits.unit.ElectricalCurrentUnit;
 import org.djunits.unit.ElectricalPotentialUnit;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 
 /**
  * Easy access methods for the ElectricalCharge DoubleScalar, which is relative by definition.
@@ -23,7 +24,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUnit, ElectricalCharge>
 {
     /** */
@@ -216,8 +217,8 @@ public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUn
 
     /**
      * Calculate the division of ElectricalCharge and ElectricalCharge, which results in a Dimensionless scalar.
- * @param v ElectricalCharge; ElectricalCharge scalar
-     * @return Dimensionless scalar as a division of ElectricalCharge and ElectricalCharge
+     * @param v ElectricalCharge; scalar
+     * @return Dimensionless; scalar as a division of ElectricalCharge and ElectricalCharge
      */
     public final Dimensionless divide(final ElectricalCharge v)
     {
@@ -226,8 +227,8 @@ public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUn
 
     /**
      * Calculate the division of ElectricalCharge and Duration, which results in a ElectricalCurrent scalar.
- * @param v Duration; ElectricalCharge scalar
-     * @return ElectricalCurrent scalar as a division of ElectricalCharge and Duration
+     * @param v ElectricalCharge; scalar
+     * @return ElectricalCurrent; scalar as a division of ElectricalCharge and Duration
      */
     public final ElectricalCurrent divide(final Duration v)
     {
@@ -236,8 +237,8 @@ public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUn
 
     /**
      * Calculate the division of ElectricalCharge and ElectricalCurrent, which results in a Duration scalar.
- * @param v ElectricalCurrent; ElectricalCharge scalar
-     * @return Duration scalar as a division of ElectricalCharge and ElectricalCurrent
+     * @param v ElectricalCharge; scalar
+     * @return Duration; scalar as a division of ElectricalCharge and ElectricalCurrent
      */
     public final Duration divide(final ElectricalCurrent v)
     {
@@ -246,8 +247,8 @@ public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUn
 
     /**
      * Calculate the division of ElectricalCharge and ElectricalPotential, which results in a ElectricalCapacitance scalar.
- * @param v ElectricalPotential; ElectricalCharge scalar
-     * @return ElectricalCapacitance scalar as a division of ElectricalCharge and ElectricalPotential
+     * @param v ElectricalCharge; scalar
+     * @return ElectricalCapacitance; scalar as a division of ElectricalCharge and ElectricalPotential
      */
     public final ElectricalCapacitance divide(final ElectricalPotential v)
     {
@@ -256,12 +257,19 @@ public class ElectricalCharge extends AbstractDoubleScalarRel<ElectricalChargeUn
 
     /**
      * Calculate the division of ElectricalCharge and ElectricalCapacitance, which results in a ElectricalPotential scalar.
- * @param v ElectricalCapacitance; ElectricalCharge scalar
-     * @return ElectricalPotential scalar as a division of ElectricalCharge and ElectricalCapacitance
+     * @param v ElectricalCharge; scalar
+     * @return ElectricalPotential; scalar as a division of ElectricalCharge and ElectricalCapacitance
      */
     public final ElectricalPotential divide(final ElectricalCapacitance v)
     {
         return new ElectricalPotential(this.si / v.si, ElectricalPotentialUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SIScalar reciprocal()
+    {
+        return DoubleScalar.divide(Dimensionless.ONE, this);
     }
 
 }

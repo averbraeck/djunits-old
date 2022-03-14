@@ -21,9 +21,9 @@ public final class NewTypes
     {
         // utility class
     }
-    
+
     /**
- * @param args String[]; empty
+     * @param args String[]; empty
      * @throws UnitException when unit cannot be created
      */
     public static void main(final String[] args) throws UnitException
@@ -36,4 +36,3 @@ public final class NewTypes
     }
 
 }
-

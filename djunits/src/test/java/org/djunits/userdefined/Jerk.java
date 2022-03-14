@@ -1,6 +1,9 @@
 package org.djunits.userdefined;
 
+import org.djunits.value.vdouble.scalar.Dimensionless;
+import org.djunits.value.vdouble.scalar.SIScalar;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 
 /**
  * JerkScalar as a test of a user-defined scalar.
@@ -48,4 +51,12 @@ public class Jerk extends AbstractDoubleScalarRel<JerkUnit, Jerk>
     {
         return new Jerk(valueSI, JerkUnit.SI);
     }
+    
+    /** {@inheritDoc} */
+    @Override
+    public SIScalar reciprocal()
+    {
+        return DoubleScalar.divide(Dimensionless.ONE, this);
+    }
+ 
 }

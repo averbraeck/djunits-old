@@ -11,6 +11,7 @@ import org.djunits.unit.ForceUnit;
 import org.djunits.unit.PressureUnit;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 
 /**
  * Easy access methods for the Pressure DoubleScalar, which is relative by definition.
@@ -21,7 +22,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 {
     /** */
@@ -211,8 +212,8 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Calculate the division of Pressure and Pressure, which results in a Dimensionless scalar.
- * @param v Pressure; Pressure scalar
-     * @return Dimensionless scalar as a division of Pressure and Pressure
+     * @param v Pressure; scalar
+     * @return Dimensionless; scalar as a division of Pressure and Pressure
      */
     public final Dimensionless divide(final Pressure v)
     {
@@ -221,8 +222,8 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Calculate the multiplication of Pressure and Area, which results in a Force scalar.
- * @param v Area; Pressure scalar
-     * @return Force scalar as a multiplication of Pressure and Area
+     * @param v Pressure; scalar
+     * @return Force; scalar as a multiplication of Pressure and Area
      */
     public final Force times(final Area v)
     {
@@ -231,12 +232,19 @@ public class Pressure extends AbstractDoubleScalarRel<PressureUnit, Pressure>
 
     /**
      * Calculate the multiplication of Pressure and Volume, which results in a Energy scalar.
- * @param v Volume; Pressure scalar
-     * @return Energy scalar as a multiplication of Pressure and Volume
+     * @param v Pressure; scalar
+     * @return Energy; scalar as a multiplication of Pressure and Volume
      */
     public final Energy times(final Volume v)
     {
         return new Energy(this.si * v.si, EnergyUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SIScalar reciprocal()
+    {
+        return DoubleScalar.divide(Dimensionless.ONE, this);
     }
 
 }

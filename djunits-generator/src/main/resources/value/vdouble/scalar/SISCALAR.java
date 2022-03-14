@@ -144,6 +144,13 @@ public class SIScalar extends AbstractDoubleScalarRel<SIUnit, SIScalar>
         return minr;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public SIScalar reciprocal()
+    {
+        return DoubleScalar.divide(Dimensionless.ONE, this);
+    }
+
     /**
      * Returns an SIScalar representation of a textual representation of a value with a unit. The String representation that can
      * be parsed is the double value in the unit, followed by the official abbreviation of the unit. Spaces are allowed, but not

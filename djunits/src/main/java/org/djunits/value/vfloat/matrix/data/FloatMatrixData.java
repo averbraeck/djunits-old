@@ -78,7 +78,7 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
         {
             rows = 0;
         }
-        
+
         switch (storageType)
         {
             case DENSE:
@@ -160,7 +160,7 @@ public abstract class FloatMatrixData extends AbstractStorage<FloatMatrixData> i
         {
             rows = 0;
         }
-        
+
         switch (storageType)
         {
             case DENSE:

@@ -11,6 +11,7 @@ import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.DurationUnit;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 
 /**
  * Easy access methods for the AmountOfSubstance DoubleScalar, which is relative by definition.
@@ -21,7 +22,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstanceUnit, AmountOfSubstance>
 {
     /** */
@@ -214,8 +215,8 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
 
     /**
      * Calculate the division of AmountOfSubstance and AmountOfSubstance, which results in a Dimensionless scalar.
- * @param v AmountOfSubstance; AmountOfSubstance scalar
-     * @return Dimensionless scalar as a division of AmountOfSubstance and AmountOfSubstance
+     * @param v AmountOfSubstance; scalar
+     * @return Dimensionless; scalar as a division of AmountOfSubstance and AmountOfSubstance
      */
     public final Dimensionless divide(final AmountOfSubstance v)
     {
@@ -224,8 +225,8 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
 
     /**
      * Calculate the division of AmountOfSubstance and CatalyticActivity, which results in a Duration scalar.
- * @param v CatalyticActivity; AmountOfSubstance scalar
-     * @return Duration scalar as a division of AmountOfSubstance and CatalyticActivity
+     * @param v AmountOfSubstance; scalar
+     * @return Duration; scalar as a division of AmountOfSubstance and CatalyticActivity
      */
     public final Duration divide(final CatalyticActivity v)
     {
@@ -234,12 +235,19 @@ public class AmountOfSubstance extends AbstractDoubleScalarRel<AmountOfSubstance
 
     /**
      * Calculate the division of AmountOfSubstance and Duration, which results in a CatalyticActivity scalar.
- * @param v Duration; AmountOfSubstance scalar
-     * @return CatalyticActivity scalar as a division of AmountOfSubstance and Duration
+     * @param v AmountOfSubstance; scalar
+     * @return CatalyticActivity; scalar as a division of AmountOfSubstance and Duration
      */
     public final CatalyticActivity divide(final Duration v)
     {
         return new CatalyticActivity(this.si / v.si, CatalyticActivityUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SIScalar reciprocal()
+    {
+        return DoubleScalar.divide(Dimensionless.ONE, this);
     }
 
 }

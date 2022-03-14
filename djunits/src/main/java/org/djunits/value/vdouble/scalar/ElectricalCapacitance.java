@@ -12,6 +12,7 @@ import org.djunits.unit.ElectricalChargeUnit;
 import org.djunits.unit.ElectricalConductanceUnit;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 
 /**
  * Easy access methods for the ElectricalCapacitance DoubleScalar, which is relative by definition.
@@ -22,7 +23,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCapacitanceUnit, ElectricalCapacitance>
 {
     /** */
@@ -221,8 +222,8 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
 
     /**
      * Calculate the division of ElectricalCapacitance and ElectricalCapacitance, which results in a Dimensionless scalar.
- * @param v ElectricalCapacitance; ElectricalCapacitance scalar
-     * @return Dimensionless scalar as a division of ElectricalCapacitance and ElectricalCapacitance
+     * @param v ElectricalCapacitance; scalar
+     * @return Dimensionless; scalar as a division of ElectricalCapacitance and ElectricalCapacitance
      */
     public final Dimensionless divide(final ElectricalCapacitance v)
     {
@@ -232,8 +233,8 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
     /**
      * Calculate the multiplication of ElectricalCapacitance and ElectricalPotential, which results in a ElectricalCharge
      * scalar.
- * @param v ElectricalPotential; ElectricalCapacitance scalar
-     * @return ElectricalCharge scalar as a multiplication of ElectricalCapacitance and ElectricalPotential
+     * @param v ElectricalCapacitance; scalar
+     * @return ElectricalCharge; scalar as a multiplication of ElectricalCapacitance and ElectricalPotential
      */
     public final ElectricalCharge times(final ElectricalPotential v)
     {
@@ -242,8 +243,8 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
 
     /**
      * Calculate the division of ElectricalCapacitance and Duration, which results in a ElectricalConductance scalar.
- * @param v Duration; ElectricalCapacitance scalar
-     * @return ElectricalConductance scalar as a division of ElectricalCapacitance and Duration
+     * @param v ElectricalCapacitance; scalar
+     * @return ElectricalConductance; scalar as a division of ElectricalCapacitance and Duration
      */
     public final ElectricalConductance divide(final Duration v)
     {
@@ -252,12 +253,19 @@ public class ElectricalCapacitance extends AbstractDoubleScalarRel<ElectricalCap
 
     /**
      * Calculate the division of ElectricalCapacitance and ElectricalConductance, which results in a Duration scalar.
- * @param v ElectricalConductance; ElectricalCapacitance scalar
-     * @return Duration scalar as a division of ElectricalCapacitance and ElectricalConductance
+     * @param v ElectricalCapacitance; scalar
+     * @return Duration; scalar as a division of ElectricalCapacitance and ElectricalConductance
      */
     public final Duration divide(final ElectricalConductance v)
     {
         return new Duration(this.si / v.si, DurationUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SIScalar reciprocal()
+    {
+        return DoubleScalar.divide(Dimensionless.ONE, this);
     }
 
 }

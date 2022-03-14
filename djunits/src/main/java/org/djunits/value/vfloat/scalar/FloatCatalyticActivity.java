@@ -11,6 +11,7 @@ import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.FrequencyUnit;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
+import org.djunits.value.vfloat.scalar.base.FloatScalar;
 
 /**
  * Easy access methods for the FloatCatalyticActivity FloatScalar, which is relative by definition.
@@ -21,7 +22,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActivityUnit, FloatCatalyticActivity>
 {
     /** */
@@ -56,7 +57,7 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
     /**
      * Construct FloatCatalyticActivity scalar.
      * @param value float; the float value
- * @param unit CatalyticActivityUnit; unit for the float value
+     * @param unit unit for the float value
      */
     public FloatCatalyticActivity(final float value, final CatalyticActivityUnit unit)
     {
@@ -65,7 +66,7 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
 
     /**
      * Construct FloatCatalyticActivity scalar.
- * @param value FloatCatalyticActivity; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatCatalyticActivity(final FloatCatalyticActivity value)
     {
@@ -75,7 +76,7 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
     /**
      * Construct FloatCatalyticActivity scalar using a double value.
      * @param value double; the double value
- * @param unit CatalyticActivityUnit; unit for the resulting float value
+     * @param unit unit for the resulting float value
      */
     public FloatCatalyticActivity(final double value, final CatalyticActivityUnit unit)
     {
@@ -101,9 +102,9 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
 
     /**
      * Interpolate between two values.
- * @param zero FloatCatalyticActivity; the low value
- * @param one FloatCatalyticActivity; the high value
- * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatCatalyticActivity interpolate(final FloatCatalyticActivity zero, final FloatCatalyticActivity one,
@@ -115,8 +116,8 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
 
     /**
      * Return the maximum value of two relative scalars.
- * @param r1 FloatCatalyticActivity; the first scalar
- * @param r2 FloatCatalyticActivity; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatCatalyticActivity max(final FloatCatalyticActivity r1, final FloatCatalyticActivity r2)
@@ -126,9 +127,9 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
 
     /**
      * Return the maximum value of more than two relative scalars.
- * @param r1 FloatCatalyticActivity; the first scalar
- * @param r2 FloatCatalyticActivity; the second scalar
- * @param rn FloatCatalyticActivity...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatCatalyticActivity max(final FloatCatalyticActivity r1, final FloatCatalyticActivity r2,
@@ -147,8 +148,8 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
 
     /**
      * Return the minimum value of two relative scalars.
- * @param r1 FloatCatalyticActivity; the first scalar
- * @param r2 FloatCatalyticActivity; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatCatalyticActivity min(final FloatCatalyticActivity r1, final FloatCatalyticActivity r2)
@@ -158,9 +159,9 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
 
     /**
      * Return the minimum value of more than two relative scalars.
- * @param r1 FloatCatalyticActivity; the first scalar
- * @param r2 FloatCatalyticActivity; the second scalar
- * @param rn FloatCatalyticActivity...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatCatalyticActivity min(final FloatCatalyticActivity r1, final FloatCatalyticActivity r2,
@@ -209,7 +210,7 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
 
     /**
      * Returns a FloatCatalyticActivity based on a value and the textual representation of the unit.
- * @param value float; the value to use
+     * @param value double; the value to use
      * @param unitString String; the textual representation of the unit
      * @return FloatCatalyticActivity; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
@@ -231,8 +232,8 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
     /**
      * Calculate the division of FloatCatalyticActivity and FloatCatalyticActivity, which results in a FloatDimensionless
      * scalar.
- * @param v FloatCatalyticActivity; FloatCatalyticActivity scalar
-     * @return FloatDimensionless scalar as a division of FloatCatalyticActivity and FloatCatalyticActivity
+     * @param v FloatCatalyticActivity; scalar
+     * @return FloatDimensionless; scalar as a division of FloatCatalyticActivity and FloatCatalyticActivity
      */
     public final FloatDimensionless divide(final FloatCatalyticActivity v)
     {
@@ -242,8 +243,8 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
     /**
      * Calculate the multiplication of FloatCatalyticActivity and FloatDuration, which results in a FloatAmountOfSubstance
      * scalar.
- * @param v FloatDuration; FloatCatalyticActivity scalar
-     * @return FloatAmountOfSubstance scalar as a multiplication of FloatCatalyticActivity and FloatDuration
+     * @param v FloatCatalyticActivity; scalar
+     * @return FloatAmountOfSubstance; scalar as a multiplication of FloatCatalyticActivity and FloatDuration
      */
     public final FloatAmountOfSubstance times(final FloatDuration v)
     {
@@ -252,8 +253,8 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
 
     /**
      * Calculate the division of FloatCatalyticActivity and FloatAmountOfSubstance, which results in a FloatFrequency scalar.
- * @param v FloatAmountOfSubstance; FloatCatalyticActivity scalar
-     * @return FloatFrequency scalar as a division of FloatCatalyticActivity and FloatAmountOfSubstance
+     * @param v FloatCatalyticActivity; scalar
+     * @return FloatFrequency; scalar as a division of FloatCatalyticActivity and FloatAmountOfSubstance
      */
     public final FloatFrequency divide(final FloatAmountOfSubstance v)
     {
@@ -262,12 +263,19 @@ public class FloatCatalyticActivity extends AbstractFloatScalarRel<CatalyticActi
 
     /**
      * Calculate the division of FloatCatalyticActivity and FloatFrequency, which results in a FloatAmountOfSubstance scalar.
- * @param v FloatFrequency; FloatCatalyticActivity scalar
-     * @return FloatAmountOfSubstance scalar as a division of FloatCatalyticActivity and FloatFrequency
+     * @param v FloatCatalyticActivity; scalar
+     * @return FloatAmountOfSubstance; scalar as a division of FloatCatalyticActivity and FloatFrequency
      */
     public final FloatAmountOfSubstance divide(final FloatFrequency v)
     {
         return new FloatAmountOfSubstance(this.si / v.si, AmountOfSubstanceUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatSIScalar reciprocal()
+    {
+        return FloatScalar.divide(FloatDimensionless.ONE, this);
     }
 
 }
