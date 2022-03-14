@@ -13,6 +13,7 @@ import org.djunits.unit.ElectricalPotentialUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 
 /**
  * Easy access methods for the ElectricalCurrent DoubleScalar, which is relative by definition.
@@ -23,7 +24,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrentUnit, ElectricalCurrent>
 {
     /** */
@@ -216,8 +217,8 @@ public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrent
 
     /**
      * Calculate the division of ElectricalCurrent and ElectricalCurrent, which results in a Dimensionless scalar.
- * @param v ElectricalCurrent; ElectricalCurrent scalar
-     * @return Dimensionless scalar as a division of ElectricalCurrent and ElectricalCurrent
+     * @param v ElectricalCurrent; scalar
+     * @return Dimensionless; scalar as a division of ElectricalCurrent and ElectricalCurrent
      */
     public final Dimensionless divide(final ElectricalCurrent v)
     {
@@ -226,8 +227,8 @@ public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrent
 
     /**
      * Calculate the multiplication of ElectricalCurrent and ElectricalPotential, which results in a Power scalar.
- * @param v ElectricalPotential; ElectricalCurrent scalar
-     * @return Power scalar as a multiplication of ElectricalCurrent and ElectricalPotential
+     * @param v ElectricalCurrent; scalar
+     * @return Power; scalar as a multiplication of ElectricalCurrent and ElectricalPotential
      */
     public final Power times(final ElectricalPotential v)
     {
@@ -236,8 +237,8 @@ public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrent
 
     /**
      * Calculate the multiplication of ElectricalCurrent and Duration, which results in a ElectricalCharge scalar.
- * @param v Duration; ElectricalCurrent scalar
-     * @return ElectricalCharge scalar as a multiplication of ElectricalCurrent and Duration
+     * @param v ElectricalCurrent; scalar
+     * @return ElectricalCharge; scalar as a multiplication of ElectricalCurrent and Duration
      */
     public final ElectricalCharge times(final Duration v)
     {
@@ -247,8 +248,8 @@ public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrent
     /**
      * Calculate the multiplication of ElectricalCurrent and ElectricalResistance, which results in a ElectricalPotential
      * scalar.
- * @param v ElectricalResistance; ElectricalCurrent scalar
-     * @return ElectricalPotential scalar as a multiplication of ElectricalCurrent and ElectricalResistance
+     * @param v ElectricalCurrent; scalar
+     * @return ElectricalPotential; scalar as a multiplication of ElectricalCurrent and ElectricalResistance
      */
     public final ElectricalPotential times(final ElectricalResistance v)
     {
@@ -257,8 +258,8 @@ public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrent
 
     /**
      * Calculate the division of ElectricalCurrent and ElectricalPotential, which results in a ElectricalConductance scalar.
- * @param v ElectricalPotential; ElectricalCurrent scalar
-     * @return ElectricalConductance scalar as a division of ElectricalCurrent and ElectricalPotential
+     * @param v ElectricalCurrent; scalar
+     * @return ElectricalConductance; scalar as a division of ElectricalCurrent and ElectricalPotential
      */
     public final ElectricalConductance divide(final ElectricalPotential v)
     {
@@ -267,12 +268,19 @@ public class ElectricalCurrent extends AbstractDoubleScalarRel<ElectricalCurrent
 
     /**
      * Calculate the division of ElectricalCurrent and ElectricalConductance, which results in a ElectricalPotential scalar.
- * @param v ElectricalConductance; ElectricalCurrent scalar
-     * @return ElectricalPotential scalar as a division of ElectricalCurrent and ElectricalConductance
+     * @param v ElectricalCurrent; scalar
+     * @return ElectricalPotential; scalar as a division of ElectricalCurrent and ElectricalConductance
      */
     public final ElectricalPotential divide(final ElectricalConductance v)
     {
         return new ElectricalPotential(this.si / v.si, ElectricalPotentialUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SIScalar reciprocal()
+    {
+        return DoubleScalar.divide(Dimensionless.ONE, this);
     }
 
 }

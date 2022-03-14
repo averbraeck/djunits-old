@@ -17,6 +17,7 @@ import org.djunits.unit.SpeedUnit;
 import org.djunits.unit.VolumeUnit;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 
 /**
  * Easy access methods for the Energy DoubleScalar, which is relative by definition.
@@ -27,7 +28,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 {
     /** */
@@ -216,8 +217,8 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the division of Energy and Energy, which results in a Dimensionless scalar.
- * @param v Energy; Energy scalar
-     * @return Dimensionless scalar as a division of Energy and Energy
+     * @param v Energy; scalar
+     * @return Dimensionless; scalar as a division of Energy and Energy
      */
     public final Dimensionless divide(final Energy v)
     {
@@ -226,8 +227,8 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the division of Energy and Force, which results in a Length scalar.
- * @param v Force; Energy scalar
-     * @return Length scalar as a division of Energy and Force
+     * @param v Energy; scalar
+     * @return Length; scalar as a division of Energy and Force
      */
     public final Length divide(final Force v)
     {
@@ -236,8 +237,8 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the division of Energy and Length, which results in a Force scalar.
- * @param v Length; Energy scalar
-     * @return Force scalar as a division of Energy and Length
+     * @param v Energy; scalar
+     * @return Force; scalar as a division of Energy and Length
      */
     public final Force divide(final Length v)
     {
@@ -246,8 +247,8 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the multiplication of Energy and LinearDensity, which results in a Force scalar.
- * @param v LinearDensity; Energy scalar
-     * @return Force scalar as a multiplication of Energy and LinearDensity
+     * @param v Energy; scalar
+     * @return Force; scalar as a multiplication of Energy and LinearDensity
      */
     public final Force times(final LinearDensity v)
     {
@@ -256,8 +257,8 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the division of Energy and Duration, which results in a Power scalar.
- * @param v Duration; Energy scalar
-     * @return Power scalar as a division of Energy and Duration
+     * @param v Energy; scalar
+     * @return Power; scalar as a division of Energy and Duration
      */
     public final Power divide(final Duration v)
     {
@@ -266,8 +267,8 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the division of Energy and Power, which results in a Duration scalar.
- * @param v Power; Energy scalar
-     * @return Duration scalar as a division of Energy and Power
+     * @param v Energy; scalar
+     * @return Duration; scalar as a division of Energy and Power
      */
     public final Duration divide(final Power v)
     {
@@ -276,8 +277,8 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the division of Energy and Volume, which results in a Pressure scalar.
- * @param v Volume; Energy scalar
-     * @return Pressure scalar as a division of Energy and Volume
+     * @param v Energy; scalar
+     * @return Pressure; scalar as a division of Energy and Volume
      */
     public final Pressure divide(final Volume v)
     {
@@ -286,8 +287,8 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the division of Energy and Pressure, which results in a Volume scalar.
- * @param v Pressure; Energy scalar
-     * @return Volume scalar as a division of Energy and Pressure
+     * @param v Energy; scalar
+     * @return Volume; scalar as a division of Energy and Pressure
      */
     public final Volume divide(final Pressure v)
     {
@@ -296,8 +297,8 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the multiplication of Energy and Frequency, which results in a Power scalar.
- * @param v Frequency; Energy scalar
-     * @return Power scalar as a multiplication of Energy and Frequency
+     * @param v Energy; scalar
+     * @return Power; scalar as a multiplication of Energy and Frequency
      */
     public final Power times(final Frequency v)
     {
@@ -306,8 +307,8 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the division of Energy and Speed, which results in a Momentum scalar.
- * @param v Speed; Energy scalar
-     * @return Momentum scalar as a division of Energy and Speed
+     * @param v Energy; scalar
+     * @return Momentum; scalar as a division of Energy and Speed
      */
     public final Momentum divide(final Speed v)
     {
@@ -316,12 +317,19 @@ public class Energy extends AbstractDoubleScalarRel<EnergyUnit, Energy>
 
     /**
      * Calculate the division of Energy and Momentum, which results in a Speed scalar.
- * @param v Momentum; Energy scalar
-     * @return Speed scalar as a division of Energy and Momentum
+     * @param v Energy; scalar
+     * @return Speed; scalar as a division of Energy and Momentum
      */
     public final Speed divide(final Momentum v)
     {
         return new Speed(this.si / v.si, SpeedUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SIScalar reciprocal()
+    {
+        return DoubleScalar.divide(Dimensionless.ONE, this);
     }
 
 }

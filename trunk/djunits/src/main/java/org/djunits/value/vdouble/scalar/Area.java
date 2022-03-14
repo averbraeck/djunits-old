@@ -15,6 +15,7 @@ import org.djunits.unit.LuminousFluxUnit;
 import org.djunits.unit.VolumeUnit;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 
 /**
  * Easy access methods for the Area DoubleScalar, which is relative by definition.
@@ -25,7 +26,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 {
     /** */
@@ -214,8 +215,8 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the division of Area and Area, which results in a Dimensionless scalar.
- * @param v Area; Area scalar
-     * @return Dimensionless scalar as a division of Area and Area
+     * @param v Area; scalar
+     * @return Dimensionless; scalar as a division of Area and Area
      */
     public final Dimensionless divide(final Area v)
     {
@@ -224,8 +225,8 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the multiplication of Area and Length, which results in a Volume scalar.
- * @param v Length; Area scalar
-     * @return Volume scalar as a multiplication of Area and Length
+     * @param v Area; scalar
+     * @return Volume; scalar as a multiplication of Area and Length
      */
     public final Volume times(final Length v)
     {
@@ -234,8 +235,8 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the division of Area and LinearDensity, which results in a Volume scalar.
- * @param v LinearDensity; Area scalar
-     * @return Volume scalar as a division of Area and LinearDensity
+     * @param v Area; scalar
+     * @return Volume; scalar as a division of Area and LinearDensity
      */
     public final Volume divide(final LinearDensity v)
     {
@@ -244,8 +245,8 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the division of Area and Volume, which results in a LinearDensity scalar.
- * @param v Volume; Area scalar
-     * @return LinearDensity scalar as a division of Area and Volume
+     * @param v Area; scalar
+     * @return LinearDensity; scalar as a division of Area and Volume
      */
     public final LinearDensity divide(final Volume v)
     {
@@ -254,8 +255,8 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the division of Area and Length, which results in a Length scalar.
- * @param v Length; Area scalar
-     * @return Length scalar as a division of Area and Length
+     * @param v Area; scalar
+     * @return Length; scalar as a division of Area and Length
      */
     public final Length divide(final Length v)
     {
@@ -264,8 +265,8 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the multiplication of Area and LinearDensity, which results in a Length scalar.
- * @param v LinearDensity; Area scalar
-     * @return Length scalar as a multiplication of Area and LinearDensity
+     * @param v Area; scalar
+     * @return Length; scalar as a multiplication of Area and LinearDensity
      */
     public final Length times(final LinearDensity v)
     {
@@ -274,8 +275,8 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the multiplication of Area and Speed, which results in a FlowVolume scalar.
- * @param v Speed; Area scalar
-     * @return FlowVolume scalar as a multiplication of Area and Speed
+     * @param v Area; scalar
+     * @return FlowVolume; scalar as a multiplication of Area and Speed
      */
     public final FlowVolume times(final Speed v)
     {
@@ -284,8 +285,8 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the multiplication of Area and Pressure, which results in a Force scalar.
- * @param v Pressure; Area scalar
-     * @return Force scalar as a multiplication of Area and Pressure
+     * @param v Area; scalar
+     * @return Force; scalar as a multiplication of Area and Pressure
      */
     public final Force times(final Pressure v)
     {
@@ -294,12 +295,19 @@ public class Area extends AbstractDoubleScalarRel<AreaUnit, Area>
 
     /**
      * Calculate the multiplication of Area and Illuminance, which results in a LuminousFlux scalar.
- * @param v Illuminance; Area scalar
-     * @return LuminousFlux scalar as a multiplication of Area and Illuminance
+     * @param v Area; scalar
+     * @return LuminousFlux; scalar as a multiplication of Area and Illuminance
      */
     public final LuminousFlux times(final Illuminance v)
     {
         return new LuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SIScalar reciprocal()
+    {
+        return DoubleScalar.divide(Dimensionless.ONE, this);
     }
 
 }

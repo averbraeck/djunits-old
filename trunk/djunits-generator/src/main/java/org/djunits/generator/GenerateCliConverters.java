@@ -27,8 +27,8 @@ public class GenerateCliConverters
     public static void main(String[] args) throws IOException, URISyntaxException
     {
         String generationTime = Instant.now().toString();
-        List<String> types = Files.readAllLines(Paths.get(URLResource.getResource("/TYPES_REL.txt").toURI()));
-        List<String> absRelTypes = Files.readAllLines(Paths.get(URLResource.getResource("/TYPES_ABS_REL.txt").toURI()));
+        List<String> types = Files.readAllLines(Paths.get(URLResource.getResource("/resources/TYPES_REL.txt").toURI()));
+        List<String> absRelTypes = Files.readAllLines(Paths.get(URLResource.getResource("/resources/TYPES_ABS_REL.txt").toURI()));
         for (String ar : absRelTypes)
         {
             String[] arParts = ar.split(",");

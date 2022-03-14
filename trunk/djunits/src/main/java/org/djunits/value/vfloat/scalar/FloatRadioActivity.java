@@ -9,6 +9,7 @@ import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.RadioActivityUnit;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
+import org.djunits.value.vfloat.scalar.base.FloatScalar;
 
 /**
  * Easy access methods for the FloatRadioActivity FloatScalar, which is relative by definition.
@@ -19,7 +20,7 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit, FloatRadioActivity>
 {
     /** */
@@ -52,7 +53,7 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
     /**
      * Construct FloatRadioActivity scalar.
      * @param value float; the float value
- * @param unit RadioActivityUnit; unit for the float value
+     * @param unit unit for the float value
      */
     public FloatRadioActivity(final float value, final RadioActivityUnit unit)
     {
@@ -61,7 +62,7 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
 
     /**
      * Construct FloatRadioActivity scalar.
- * @param value FloatRadioActivity; Scalar from which to construct this instance
+     * @param value Scalar from which to construct this instance
      */
     public FloatRadioActivity(final FloatRadioActivity value)
     {
@@ -71,7 +72,7 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
     /**
      * Construct FloatRadioActivity scalar using a double value.
      * @param value double; the double value
- * @param unit RadioActivityUnit; unit for the resulting float value
+     * @param unit unit for the resulting float value
      */
     public FloatRadioActivity(final double value, final RadioActivityUnit unit)
     {
@@ -97,9 +98,9 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
 
     /**
      * Interpolate between two values.
- * @param zero FloatRadioActivity; the low value
- * @param one FloatRadioActivity; the high value
- * @param ratio float; the ratio between 0 and 1, inclusive
+     * @param zero the low value
+     * @param one the high value
+     * @param ratio double; the ratio between 0 and 1, inclusive
      * @return a Scalar at the ratio between
      */
     public static FloatRadioActivity interpolate(final FloatRadioActivity zero, final FloatRadioActivity one, final float ratio)
@@ -110,8 +111,8 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
 
     /**
      * Return the maximum value of two relative scalars.
- * @param r1 FloatRadioActivity; the first scalar
- * @param r2 FloatRadioActivity; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the maximum value of two relative scalars
      */
     public static FloatRadioActivity max(final FloatRadioActivity r1, final FloatRadioActivity r2)
@@ -121,9 +122,9 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
 
     /**
      * Return the maximum value of more than two relative scalars.
- * @param r1 FloatRadioActivity; the first scalar
- * @param r2 FloatRadioActivity; the second scalar
- * @param rn FloatRadioActivity...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the maximum value of more than two relative scalars
      */
     public static FloatRadioActivity max(final FloatRadioActivity r1, final FloatRadioActivity r2,
@@ -142,8 +143,8 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
 
     /**
      * Return the minimum value of two relative scalars.
- * @param r1 FloatRadioActivity; the first scalar
- * @param r2 FloatRadioActivity; the second scalar
+     * @param r1 the first scalar
+     * @param r2 the second scalar
      * @return the minimum value of two relative scalars
      */
     public static FloatRadioActivity min(final FloatRadioActivity r1, final FloatRadioActivity r2)
@@ -153,9 +154,9 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
 
     /**
      * Return the minimum value of more than two relative scalars.
- * @param r1 FloatRadioActivity; the first scalar
- * @param r2 FloatRadioActivity; the second scalar
- * @param rn FloatRadioActivity...; the other scalars
+     * @param r1 the first scalar
+     * @param r2 the second scalar
+     * @param rn the other scalars
      * @return the minimum value of more than two relative scalars
      */
     public static FloatRadioActivity min(final FloatRadioActivity r1, final FloatRadioActivity r2,
@@ -203,7 +204,7 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
 
     /**
      * Returns a FloatRadioActivity based on a value and the textual representation of the unit.
- * @param value float; the value to use
+     * @param value double; the value to use
      * @param unitString String; the textual representation of the unit
      * @return FloatRadioActivity; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect
@@ -224,12 +225,19 @@ public class FloatRadioActivity extends AbstractFloatScalarRel<RadioActivityUnit
 
     /**
      * Calculate the division of FloatRadioActivity and FloatRadioActivity, which results in a FloatDimensionless scalar.
- * @param v FloatRadioActivity; FloatRadioActivity scalar
-     * @return FloatDimensionless scalar as a division of FloatRadioActivity and FloatRadioActivity
+     * @param v FloatRadioActivity; scalar
+     * @return FloatDimensionless; scalar as a division of FloatRadioActivity and FloatRadioActivity
      */
     public final FloatDimensionless divide(final FloatRadioActivity v)
     {
         return new FloatDimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatSIScalar reciprocal()
+    {
+        return FloatScalar.divide(FloatDimensionless.ONE, this);
     }
 
 }

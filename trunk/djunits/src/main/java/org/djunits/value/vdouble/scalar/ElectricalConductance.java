@@ -21,7 +21,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalConductanceUnit, ElectricalConductance>
 {
     /** */
@@ -220,8 +220,8 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
 
     /**
      * Calculate the division of ElectricalConductance and ElectricalConductance, which results in a Dimensionless scalar.
- * @param v ElectricalConductance; ElectricalConductance scalar
-     * @return Dimensionless scalar as a division of ElectricalConductance and ElectricalConductance
+     * @param v ElectricalConductance; scalar
+     * @return Dimensionless; scalar as a division of ElectricalConductance and ElectricalConductance
      */
     public final Dimensionless divide(final ElectricalConductance v)
     {
@@ -229,10 +229,20 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
     }
 
     /**
+     * Calculate the multiplication of ElectricalConductance and ElectricalResistance, which results in a Dimensionless scalar.
+     * @param v ElectricalConductance; scalar
+     * @return Dimensionless; scalar as a multiplication of ElectricalConductance and ElectricalResistance
+     */
+    public final Dimensionless times(final ElectricalResistance v)
+    {
+        return new Dimensionless(this.si * v.si, DimensionlessUnit.SI);
+    }
+
+    /**
      * Calculate the multiplication of ElectricalConductance and ElectricalPotential, which results in a ElectricalCurrent
      * scalar.
- * @param v ElectricalPotential; ElectricalConductance scalar
-     * @return ElectricalCurrent scalar as a multiplication of ElectricalConductance and ElectricalPotential
+     * @param v ElectricalConductance; scalar
+     * @return ElectricalCurrent; scalar as a multiplication of ElectricalConductance and ElectricalPotential
      */
     public final ElectricalCurrent times(final ElectricalPotential v)
     {
@@ -241,12 +251,19 @@ public class ElectricalConductance extends AbstractDoubleScalarRel<ElectricalCon
 
     /**
      * Calculate the multiplication of ElectricalConductance and Duration, which results in a ElectricalCapacitance scalar.
- * @param v Duration; ElectricalConductance scalar
-     * @return ElectricalCapacitance scalar as a multiplication of ElectricalConductance and Duration
+     * @param v ElectricalConductance; scalar
+     * @return ElectricalCapacitance; scalar as a multiplication of ElectricalConductance and Duration
      */
     public final ElectricalCapacitance times(final Duration v)
     {
         return new ElectricalCapacitance(this.si * v.si, ElectricalCapacitanceUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public ElectricalResistance reciprocal()
+    {
+        return ElectricalResistance.instantiateSI(1.0 / this.si);
     }
 
 }

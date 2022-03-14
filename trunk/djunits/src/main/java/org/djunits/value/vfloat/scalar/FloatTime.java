@@ -16,11 +16,18 @@ import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarAbs;
  * Copyright (c) 2013-2022 Delft University of Technology, PO Box 5, 2600 AA, Delft, the Netherlands. <br>
  * All rights reserved. <br>
  * BSD-style license. See <a href="https://djunits.org/docs/license.html">DJUNITS License</a>.
+ * <p>
+ * Note that when the offset of a stored absolute Time becomes large, precision of a float might not be enough for the required
+ * resolution of a Time. A float has around 7 significant digits (23 bit mantissa). This means that when we need to have a float
+ * time that is precise to microseconds, the Time value should not go above 2^22 = 4.0E6. This is <b>not</b> enough to store
+ * Epoch values that are in the order of magnitude of 2E12 ms! So feeding System.TimeInMillis() to a FloatTime with
+ * TimeUnit.BASE as its unit is not having the required precision. At best, a FloatTime can store TimeUnit.BASE or
+ * TimeUnit.EPOCH values with real calendar values with a precision of several minutes.
  * </p>
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class FloatTime extends AbstractFloatScalarAbs<TimeUnit, FloatTime, DurationUnit, FloatDuration>
 {
     /** */
@@ -188,7 +195,7 @@ public class FloatTime extends AbstractFloatScalarAbs<TimeUnit, FloatTime, Durat
 
     /**
      * Returns a FloatTime based on a value and the textual representation of the unit.
- * @param value float; the value to use
+     * @param value double; the value to use
      * @param unitString String; the textual representation of the unit
      * @return FloatTime; the Scalar representation of the value in its unit
      * @throws IllegalArgumentException when the unit cannot be parsed or is incorrect

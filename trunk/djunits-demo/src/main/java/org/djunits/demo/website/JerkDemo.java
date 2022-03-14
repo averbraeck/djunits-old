@@ -34,13 +34,13 @@ public final class JerkDemo
         System.out.println("jerk3 = Jerk(4.0, JerkUnit.IN_PER_S3 : " + jerk3);
         System.out.println("jerk3 expressed in JerkUnit.SI       : " + jerk3.toString(JerkUnit.SI));
         System.out.println("jerk3 expressed in JerkUnit.FT_PER_S3: " + jerk3.toString(JerkUnit.FT_PER_S3));
-        
+
         System.out.println();
-        
+
         double[] sv = new double[] {1, 2, 3, 4, 5};
         JerkVector jerkVector = DoubleVector.instantiate(sv, JerkUnit.SI, StorageType.DENSE, JerkVector.class);
         System.out.println("jerkVector: " + jerkVector);
-        // FIXME why can't we multiply a JerkVector by a scalar Duration and get an AccelerationVector 
+        // FIXME why can't we multiply a JerkVector by a scalar Duration and get an AccelerationVector
 
         double[][] data = new double[1000][1000];
         for (int i = 0; i < 1000; i++)

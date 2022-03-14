@@ -20,7 +20,7 @@ public abstract class DefaultLocale
     {
         setLocale(new Locale("en"));
     }
-    
+
     /**
      * @return locale
      */

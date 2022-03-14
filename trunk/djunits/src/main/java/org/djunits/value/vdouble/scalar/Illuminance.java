@@ -10,6 +10,7 @@ import org.djunits.unit.IlluminanceUnit;
 import org.djunits.unit.LuminousFluxUnit;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 
 /**
  * Easy access methods for the Illuminance DoubleScalar, which is relative by definition.
@@ -20,7 +21,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illuminance>
 {
     /** */
@@ -210,8 +211,8 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
 
     /**
      * Calculate the division of Illuminance and Illuminance, which results in a Dimensionless scalar.
- * @param v Illuminance; Illuminance scalar
-     * @return Dimensionless scalar as a division of Illuminance and Illuminance
+     * @param v Illuminance; scalar
+     * @return Dimensionless; scalar as a division of Illuminance and Illuminance
      */
     public final Dimensionless divide(final Illuminance v)
     {
@@ -220,12 +221,19 @@ public class Illuminance extends AbstractDoubleScalarRel<IlluminanceUnit, Illumi
 
     /**
      * Calculate the multiplication of Illuminance and Area, which results in a LuminousFlux scalar.
- * @param v Area; Illuminance scalar
-     * @return LuminousFlux scalar as a multiplication of Illuminance and Area
+     * @param v Illuminance; scalar
+     * @return LuminousFlux; scalar as a multiplication of Illuminance and Area
      */
     public final LuminousFlux times(final Area v)
     {
         return new LuminousFlux(this.si * v.si, LuminousFluxUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SIScalar reciprocal()
+    {
+        return DoubleScalar.divide(Dimensionless.ONE, this);
     }
 
 }

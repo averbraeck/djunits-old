@@ -54,7 +54,7 @@ public class FloatMatrixDataDense extends FloatMatrixData
         super(StorageType.DENSE);
         Throw.whenNull(matrixSI, "DoubleMatrixDataDense constructor, matrixSI == null");
         this.rows = matrixSI.length;
-        this.cols =  this.rows == 0 ? 0 : matrixSI[0].length;
+        this.cols = this.rows == 0 ? 0 : matrixSI[0].length;
         this.matrixSI = new float[this.rows * this.cols];
         for (int r = 0; r < this.rows; r++)
         {

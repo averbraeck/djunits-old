@@ -18,7 +18,7 @@ import org.djunits.value.vfloat.vector.data.FloatVectorData;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class FloatAngularVelocityMatrix extends AbstractFloatMatrixRel<AngularVelocityUnit, FloatAngularVelocity,
         FloatAngularVelocityVector, FloatAngularVelocityMatrix>
 

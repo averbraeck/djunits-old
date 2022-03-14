@@ -9,7 +9,10 @@ import org.djunits.unit.*;
 import org.djunits.unit.si.SIDimensions;
 import org.djunits.unit.util.UnitRuntimeException;
 import org.djunits.value.util.ValueUtil;
+import org.djunits.value.vdouble.scalar.Dimensionless;
+import org.djunits.value.vdouble.scalar.SIScalar;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 import org.djunits.value.vfloat.scalar.base.AbstractFloatScalarRel;
 import org.djunits.value.vfloat.scalar.base.FloatScalar;
 
@@ -138,6 +141,13 @@ public class FloatSIScalar extends AbstractFloatScalarRel<SIUnit, FloatSIScalar>
             }
         }
         return minr;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public FloatSIScalar reciprocal()
+    {
+        return FloatScalar.divide(FloatDimensionless.ONE, this);
     }
 
     /**

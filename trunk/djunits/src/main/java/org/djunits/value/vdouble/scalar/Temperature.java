@@ -10,6 +10,7 @@ import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.TemperatureUnit;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 
 /**
  * Easy access methods for the Relative Temperature DoubleScalar.
@@ -21,7 +22,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class Temperature
         extends AbstractDoubleScalarRelWithAbs<AbsoluteTemperatureUnit, AbsoluteTemperature, TemperatureUnit, Temperature>
 {
@@ -219,12 +220,19 @@ public class Temperature
 
     /**
      * Calculate the division of Temperature and Temperature, which results in a Dimensionless scalar.
- * @param v Temperature; Temperature scalar
-     * @return Dimensionless scalar as a division of Temperature and Temperature
+     * @param v Temperature; scalar
+     * @return Dimensionless; scalar as a division of Temperature and Temperature
      */
     public final Dimensionless divide(final Temperature v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SIScalar reciprocal()
+    {
+        return DoubleScalar.divide(Dimensionless.ONE, this);
     }
 
 }

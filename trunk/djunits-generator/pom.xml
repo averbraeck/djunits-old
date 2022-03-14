@@ -99,13 +99,28 @@
         </configuration>
       </plugin>
 
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
         <version>${maven.resources.version}</version>
-        <configuration>
-          <encoding>${project.encoding}</encoding>
-        </configuration>
+        <executions>
+          <execution>
+            <id>copy-resource-one</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${basedir}/src/main/resources</directory>
+                </resource>
+              </resources>
+              <outputDirectory>${basedir}/target/classes/resources</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
 
       <plugin>

@@ -16,6 +16,7 @@ import org.djunits.unit.VolumeUnit;
 import org.djunits.unit.si.SIPrefixes;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 
 /**
  * Easy access methods for the Mass DoubleScalar, which is relative by definition.
@@ -26,7 +27,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 {
     /** */
@@ -240,8 +241,8 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Calculate the division of Mass and Mass, which results in a Dimensionless scalar.
-     * @param v Mass; Mass scalar
-     * @return Dimensionless scalar as a division of Mass and Mass
+     * @param v Mass; scalar
+     * @return Dimensionless; scalar as a division of Mass and Mass
      */
     public final Dimensionless divide(final Mass v)
     {
@@ -250,8 +251,8 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Calculate the division of Mass and FlowMass, which results in a Duration scalar.
-     * @param v FlowMass; Mass scalar
-     * @return Duration scalar as a division of Mass and FlowMass
+     * @param v Mass; scalar
+     * @return Duration; scalar as a division of Mass and FlowMass
      */
     public final Duration divide(final FlowMass v)
     {
@@ -260,8 +261,8 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Calculate the division of Mass and Duration, which results in a FlowMass scalar.
-     * @param v Duration; Mass scalar
-     * @return FlowMass scalar as a division of Mass and Duration
+     * @param v Mass; scalar
+     * @return FlowMass; scalar as a division of Mass and Duration
      */
     public final FlowMass divide(final Duration v)
     {
@@ -270,8 +271,8 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Calculate the multiplication of Mass and Acceleration, which results in a Force scalar.
-     * @param v Acceleration; Mass scalar
-     * @return Force scalar as a multiplication of Mass and Acceleration
+     * @param v Mass; scalar
+     * @return Force; scalar as a multiplication of Mass and Acceleration
      */
     public final Force times(final Acceleration v)
     {
@@ -280,8 +281,8 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Calculate the multiplication of Mass and Frequency, which results in a FlowMass scalar.
-     * @param v Frequency; Mass scalar
-     * @return FlowMass scalar as a multiplication of Mass and Frequency
+     * @param v Mass; scalar
+     * @return FlowMass; scalar as a multiplication of Mass and Frequency
      */
     public final FlowMass times(final Frequency v)
     {
@@ -290,8 +291,8 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Calculate the division of Mass and Density, which results in a Volume scalar.
-     * @param v Density; Mass scalar
-     * @return Volume scalar as a division of Mass and Density
+     * @param v Mass; scalar
+     * @return Volume; scalar as a division of Mass and Density
      */
     public final Volume divide(final Density v)
     {
@@ -300,8 +301,8 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Calculate the division of Mass and Volume, which results in a Density scalar.
-     * @param v Volume; Mass scalar
-     * @return Density scalar as a division of Mass and Volume
+     * @param v Mass; scalar
+     * @return Density; scalar as a division of Mass and Volume
      */
     public final Density divide(final Volume v)
     {
@@ -310,12 +311,19 @@ public class Mass extends AbstractDoubleScalarRel<MassUnit, Mass>
 
     /**
      * Calculate the multiplication of Mass and Speed, which results in a Momentum scalar.
-     * @param v Speed; Mass scalar
-     * @return Momentum scalar as a multiplication of Mass and Speed
+     * @param v Mass; scalar
+     * @return Momentum; scalar as a multiplication of Mass and Speed
      */
     public final Momentum times(final Speed v)
     {
         return new Momentum(this.si * v.si, MomentumUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SIScalar reciprocal()
+    {
+        return DoubleScalar.divide(Dimensionless.ONE, this);
     }
 
 }

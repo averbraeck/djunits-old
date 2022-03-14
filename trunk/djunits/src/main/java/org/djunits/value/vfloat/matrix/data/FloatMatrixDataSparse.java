@@ -100,7 +100,7 @@ public class FloatMatrixDataSparse extends FloatMatrixData
     private static void fill(final float[][] data, float[] matrixSI, long[] indices) throws ValueRuntimeException
     {
         int rows = data.length;
-        int cols =  rows == 0 ? 0 : data[0].length;
+        int cols = rows == 0 ? 0 : data[0].length;
         if (cols == 0)
         {
             rows = 0;

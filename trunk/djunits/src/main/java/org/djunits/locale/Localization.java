@@ -97,8 +97,7 @@ public class Localization implements Serializable
             this.defaultLocale = new Locale("en");
             try
             {
-                this.defaultResourceBundle =
-                        ResourceBundle.getBundle("resources/" + this.bundleNamePrefix, this.defaultLocale);
+                this.defaultResourceBundle = ResourceBundle.getBundle("resources/" + this.bundleNamePrefix, this.defaultLocale);
             }
             catch (MissingResourceException e)
             {

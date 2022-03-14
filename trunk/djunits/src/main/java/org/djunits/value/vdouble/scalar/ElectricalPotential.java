@@ -13,6 +13,7 @@ import org.djunits.unit.MagneticFluxUnit;
 import org.djunits.unit.PowerUnit;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 
 /**
  * Easy access methods for the ElectricalPotential DoubleScalar, which is relative by definition.
@@ -23,7 +24,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPotentialUnit, ElectricalPotential>
 {
     /** */
@@ -222,8 +223,8 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Calculate the division of ElectricalPotential and ElectricalPotential, which results in a Dimensionless scalar.
- * @param v ElectricalPotential; ElectricalPotential scalar
-     * @return Dimensionless scalar as a division of ElectricalPotential and ElectricalPotential
+     * @param v ElectricalPotential; scalar
+     * @return Dimensionless; scalar as a division of ElectricalPotential and ElectricalPotential
      */
     public final Dimensionless divide(final ElectricalPotential v)
     {
@@ -232,8 +233,8 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Calculate the multiplication of ElectricalPotential and ElectricalCurrent, which results in a Power scalar.
- * @param v ElectricalCurrent; ElectricalPotential scalar
-     * @return Power scalar as a multiplication of ElectricalPotential and ElectricalCurrent
+     * @param v ElectricalPotential; scalar
+     * @return Power; scalar as a multiplication of ElectricalPotential and ElectricalCurrent
      */
     public final Power times(final ElectricalCurrent v)
     {
@@ -242,8 +243,8 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Calculate the division of ElectricalPotential and ElectricalCurrent, which results in a ElectricalResistance scalar.
- * @param v ElectricalCurrent; ElectricalPotential scalar
-     * @return ElectricalResistance scalar as a division of ElectricalPotential and ElectricalCurrent
+     * @param v ElectricalPotential; scalar
+     * @return ElectricalResistance; scalar as a division of ElectricalPotential and ElectricalCurrent
      */
     public final ElectricalResistance divide(final ElectricalCurrent v)
     {
@@ -252,8 +253,8 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Calculate the division of ElectricalPotential and ElectricalResistance, which results in a ElectricalCurrent scalar.
- * @param v ElectricalResistance; ElectricalPotential scalar
-     * @return ElectricalCurrent scalar as a division of ElectricalPotential and ElectricalResistance
+     * @param v ElectricalPotential; scalar
+     * @return ElectricalCurrent; scalar as a division of ElectricalPotential and ElectricalResistance
      */
     public final ElectricalCurrent divide(final ElectricalResistance v)
     {
@@ -262,12 +263,19 @@ public class ElectricalPotential extends AbstractDoubleScalarRel<ElectricalPoten
 
     /**
      * Calculate the multiplication of ElectricalPotential and Duration, which results in a MagneticFlux scalar.
- * @param v Duration; ElectricalPotential scalar
-     * @return MagneticFlux scalar as a multiplication of ElectricalPotential and Duration
+     * @param v ElectricalPotential; scalar
+     * @return MagneticFlux; scalar as a multiplication of ElectricalPotential and Duration
      */
     public final MagneticFlux times(final Duration v)
     {
         return new MagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SIScalar reciprocal()
+    {
+        return DoubleScalar.divide(Dimensionless.ONE, this);
     }
 
 }

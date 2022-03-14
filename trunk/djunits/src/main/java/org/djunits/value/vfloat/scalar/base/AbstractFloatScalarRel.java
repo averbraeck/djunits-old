@@ -2,7 +2,6 @@ package org.djunits.value.vfloat.scalar.base;
 
 import org.djunits.unit.Unit;
 import org.djunits.value.util.ValueUtil;
-import org.djunits.value.vfloat.scalar.FloatDimensionless;
 import org.djunits.value.vfloat.scalar.FloatSIScalar;
 
 /**
@@ -82,10 +81,7 @@ public abstract class AbstractFloatScalarRel<U extends Unit<U>, R extends Abstra
      * Create the reciprocal of this scalar with the correct dimensions.
      * @return FloatScalar&lt;?&gt;; a new scalar instance with correct SI dimensions
      */
-    public FloatSIScalar reciprocal()
-    {
-        return FloatScalar.divide(FloatDimensionless.ONE, this);
-    }
+    public abstract AbstractFloatScalarRel<?, ?> reciprocal();
 
     /**
      * Divide this scalar by another scalar and create a new scalar.

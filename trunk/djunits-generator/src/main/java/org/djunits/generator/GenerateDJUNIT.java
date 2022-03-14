@@ -59,7 +59,7 @@ public class GenerateDJUNIT
      */
     private static void readAbsRelTypes() throws IOException
     {
-        URL typesURL = URLResource.getResource("/TYPES_ABS_REL.txt");
+        URL typesURL = URLResource.getResource("/resources/TYPES_ABS_REL.txt");
         FileReader fileReader = new FileReader(new File(typesURL.getPath()));
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String line = null;
@@ -79,7 +79,7 @@ public class GenerateDJUNIT
      */
     private static void readRelTypes() throws IOException
     {
-        URL typesURL = URLResource.getResource("/TYPES_REL.txt");
+        URL typesURL = URLResource.getResource("/resources/TYPES_REL.txt");
         FileReader fileReader = new FileReader(new File(typesURL.getPath()));
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String line = null;
@@ -99,7 +99,7 @@ public class GenerateDJUNIT
      */
     private static void readFormulas() throws IOException
     {
-        URL typesURL = URLResource.getResource("/FORMULAS.txt");
+        URL typesURL = URLResource.getResource("/resources/FORMULAS.txt");
         FileReader fileReader = new FileReader(new File(typesURL.getPath()));
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String type = null;
@@ -134,7 +134,7 @@ public class GenerateDJUNIT
      */
     private static void readReplace() throws IOException
     {
-        URL typesURL = URLResource.getResource("/REPLACE.txt");
+        URL typesURL = URLResource.getResource("/resources/REPLACE.txt");
         FileReader fileReader = new FileReader(new File(typesURL.getPath()));
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String tag = null;
@@ -175,9 +175,10 @@ public class GenerateDJUNIT
      * @param java String; the java file
      * @param errorType String; the type for error messaging
      * @param prefix String; e.g., Float for Float types, or blank for Double types
+     * @param absolute boolean; to indicate it is an absolute type
      * @return the file with replacements
      */
-    private static String formulas(String java, String errorType, String prefix)
+    private static String formulas(final String java, final String errorType, final String prefix, final boolean absolute)
     {
         String ret = java;
         while (ret.contains("%FORMULAS%"))
@@ -198,6 +199,7 @@ public class GenerateDJUNIT
                 return ret.substring(0, pos - 1) + ret.substring(pos + type.length() + 2, ret.length() - 1);
             }
             String fStr = "";
+            String reciprocalType = null;
             for (String f : formulas.get(type))
             {
                 String dm = f.startsWith("/") ? "division" : "multiplication";
@@ -212,8 +214,8 @@ public class GenerateDJUNIT
                 fStr += "        /**\n";
                 fStr += "         * Calculate the " + dm + " of " + pType + " and " + pParam + ", which results in a ";
                 fStr += pResult + " scalar.\n";
-                fStr += "         * @param v " + pType + " scalar\n";
-                fStr += "         * @return " + pResult + " scalar as a " + dm + " of " + pType + " and " + pParam + "\n";
+                fStr += "         * @param v " + pType + "; scalar\n";
+                fStr += "         * @return " + pResult + "; scalar as a " + dm + " of " + pType + " and " + pParam + "\n";
                 fStr += "         */\n";
                 fStr += "        public final " + pResult + " " + method;
                 fStr += "(final " + pParam + " v)\n";
@@ -221,7 +223,33 @@ public class GenerateDJUNIT
                 fStr += "            return new " + pResult + "(this.si " + mdsign + " v.si, ";
                 fStr += result + "Unit.SI);\n";
                 fStr += "        }\n\n";
+
+                if (result.equals("Dimensionless") && mdsign.equals("*"))
+                    reciprocalType = param;
             }
+
+            // reciprocal function
+            if (!absolute)
+            {
+                fStr += "        /** {@inheritDoc} */\n";
+                fStr += "        @Override\n";
+                if (reciprocalType == null)
+                {
+                    fStr += "        public " + prefix + "SIScalar reciprocal()\n";
+                    fStr += "        {\n";
+                    String df = prefix.length() == 0 ? "Double" : "Float";
+                    fStr += "            return " + df + "Scalar.divide(" + prefix + "Dimensionless.ONE, this);\n";
+                }
+                else
+                {
+                    fStr += "        public " + prefix + reciprocalType + " reciprocal()\n";
+                    fStr += "        {\n";
+                    String f = prefix.length() == 0 ? "" : "f";
+                    fStr += "            return " + prefix + reciprocalType + ".instantiateSI(1.0" + f + " / this.si);\n";
+                }
+                fStr += "        }\n\n";
+            }
+
             ret = ret.substring(0, pos - 1) + fStr + ret.substring(pos + type.length() + 1, ret.length() - 1);
         }
         return ret;
@@ -233,7 +261,7 @@ public class GenerateDJUNIT
      * @param type String; the type
      * @return the file with replacements
      */
-    private static String replace(String java, String type)
+    private static String replace(String java, final String type)
     {
         // replace the "replacement" tags
         for (String tag : replaceMap.keySet())
@@ -289,8 +317,8 @@ public class GenerateDJUNIT
         for (int i = 0; i <= 1; i++)
         {
             String relativePath = "value/vdouble/scalar/";
-            URL scalarURL = URLResource
-                    .getResource("/" + relativePath + ((i == 0) ? "DOUBLE_SCALAR_AR_ABS.java" : "DOUBLE_SCALAR_AR_REL.java"));
+            URL scalarURL = URLResource.getResource(
+                    "/resources/" + relativePath + ((i == 0) ? "DOUBLE_SCALAR_AR_ABS.java" : "DOUBLE_SCALAR_AR_REL.java"));
             String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
 
             for (String[] type : typesAbsRel)
@@ -300,7 +328,7 @@ public class GenerateDJUNIT
                 PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + type[i] + ".java");
                 String java = new String(scalarJava);
                 java = replaceAbsRel(java, type);
-                java = formulas(java, "DoubleScalar => " + type[i], "");
+                java = formulas(java, "DoubleScalar => " + type[i], "", i == 0);
                 java = replace(java, type[i]);
                 out.print(java);
                 out.close();
@@ -317,7 +345,7 @@ public class GenerateDJUNIT
     private static void generateDoubleScalarRel() throws IOException, URISyntaxException
     {
         String relativePath = "value/vdouble/scalar/";
-        URL scalarURL = URLResource.getResource("/" + relativePath + "DOUBLE_SCALAR_REL.java");
+        URL scalarURL = URLResource.getResource("/resources/" + relativePath + "DOUBLE_SCALAR_REL.java");
         String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
 
         for (String type : typesRel)
@@ -332,13 +360,13 @@ public class GenerateDJUNIT
             if (java.contains("class Dimensionless"))
             {
                 java = java.replace("%DIMLESS%", "implements DimensionlessFunctions<DimensionlessUnit, Dimensionless>");
-                URL dimlessURL = URLResource.getResource("/" + relativePath + "DimlessFunctions.java");
+                URL dimlessURL = URLResource.getResource("/resources/" + relativePath + "DimlessFunctions.java");
                 String dimlessFunctions = new String(Files.readAllBytes(Paths.get(dimlessURL.toURI())));
                 int pos = java.indexOf("%FORMULAS%");
                 java = java.substring(0, pos - 1) + dimlessFunctions + java.substring(pos, java.length() - 1);
             }
             java = java.replace("%DIMLESS%", "");
-            java = formulas(java, "DoubleScalar => " + type, "");
+            java = formulas(java, "DoubleScalar => " + type, "", false);
             java = replace(java, type);
             out.print(java);
             out.close();
@@ -356,8 +384,8 @@ public class GenerateDJUNIT
         for (int i = 0; i <= 1; i++)
         {
             String relativePath = "value/vfloat/scalar/";
-            URL scalarURL = URLResource
-                    .getResource("/" + relativePath + ((i == 0) ? "FLOAT_SCALAR_AR_ABS.java" : "FLOAT_SCALAR_AR_REL.java"));
+            URL scalarURL = URLResource.getResource(
+                    "/resources/" + relativePath + ((i == 0) ? "FLOAT_SCALAR_AR_ABS.java" : "FLOAT_SCALAR_AR_REL.java"));
             String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
 
             for (String type[] : typesAbsRel)
@@ -368,7 +396,7 @@ public class GenerateDJUNIT
                 PrintWriter out = new PrintWriter(absoluteRootPath + relativePath + fType + ".java");
                 String java = new String(scalarJava);
                 java = replaceAbsRel(java, type);
-                java = formulas(java, "FloatScalar => " + type[i], "Float");
+                java = formulas(java, "FloatScalar => " + type[i], "Float", i == 0);
                 java = replace(java, type[i]);
                 out.print(java);
                 out.close();
@@ -385,7 +413,7 @@ public class GenerateDJUNIT
     private static void generateFloatScalarRel() throws IOException, URISyntaxException
     {
         String relativePath = "value/vfloat/scalar/";
-        URL scalarURL = URLResource.getResource("/" + relativePath + "FLOAT_SCALAR_REL.java");
+        URL scalarURL = URLResource.getResource("/resources/" + relativePath + "FLOAT_SCALAR_REL.java");
         String scalarJava = new String(Files.readAllBytes(Paths.get(scalarURL.toURI())));
 
         for (String type : typesRel)
@@ -401,13 +429,13 @@ public class GenerateDJUNIT
             if (java.contains("class FloatDimensionless"))
             {
                 java = java.replace("%DIMLESS%", " implements DimensionlessFunctions<DimensionlessUnit, FloatDimensionless>");
-                URL dimlessURL = URLResource.getResource("/" + relativePath + "DimlessFunctions.java");
+                URL dimlessURL = URLResource.getResource("/resources/" + relativePath + "DimlessFunctions.java");
                 String dimlessFunctions = new String(Files.readAllBytes(Paths.get(dimlessURL.toURI())));
                 int pos = java.indexOf("%FORMULAS%");
                 java = java.substring(0, pos - 1) + dimlessFunctions + java.substring(pos, java.length() - 1);
             }
             java = java.replace("%DIMLESS%", "");
-            java = formulas(java, "FloatScalar => " + type, "Float");
+            java = formulas(java, "FloatScalar => " + type, "Float", false);
             java = replace(java, type);
             out.print(java);
             out.close();
@@ -426,7 +454,7 @@ public class GenerateDJUNIT
      * @param prefix String; e.g., Float for Float types, or blank for Double types
      * @return the file with replacements
      */
-    private static String formulasVector(String java, String errorType, String prefix)
+    private static String formulasVector(final String java, final String errorType, final String prefix)
     {
         String ret = java;
         while (ret.contains("%FORMULAS%"))
@@ -465,8 +493,8 @@ public class GenerateDJUNIT
         for (int i = 0; i <= 1; i++)
         {
             String relativePath = "value/vdouble/vector/";
-            URL vectorURL = URLResource
-                    .getResource("/" + relativePath + ((i == 0) ? "DOUBLE_VECTOR_AR_ABS.java" : "DOUBLE_VECTOR_AR_REL.java"));
+            URL vectorURL = URLResource.getResource(
+                    "/resources/" + relativePath + ((i == 0) ? "DOUBLE_VECTOR_AR_ABS.java" : "DOUBLE_VECTOR_AR_REL.java"));
             String vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
 
             for (String type[] : typesAbsRel)
@@ -493,7 +521,7 @@ public class GenerateDJUNIT
     private static void generateDoubleVectorRel() throws IOException, URISyntaxException
     {
         String relativePath = "value/vdouble/vector/";
-        URL vectorURL = URLResource.getResource("/" + relativePath + "DOUBLE_VECTOR_REL.java");
+        URL vectorURL = URLResource.getResource("/resources/" + relativePath + "DOUBLE_VECTOR_REL.java");
         String vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
 
         for (String type : typesRel)
@@ -509,7 +537,7 @@ public class GenerateDJUNIT
             {
                 java = java.replace("%DIMLESS%",
                         " implements DoubleMathFunctions, DimensionlessFunctions<DimensionlessUnit, DimensionlessVector>");
-                URL dimlessURL = URLResource.getResource("/" + relativePath + "DimlessFunctions.java");
+                URL dimlessURL = URLResource.getResource("/resources/" + relativePath + "DimlessFunctions.java");
                 String dimlessFunctions = new String(Files.readAllBytes(Paths.get(dimlessURL.toURI())));
                 int pos = java.indexOf("%FORMULAS%");
                 java = java.substring(0, pos - 1) + dimlessFunctions + java.substring(pos, java.length() - 1);
@@ -537,8 +565,8 @@ public class GenerateDJUNIT
         for (int i = 0; i <= 1; i++)
         {
             String relativePath = "value/vfloat/vector/";
-            URL vectorURL = URLResource
-                    .getResource("/" + relativePath + ((i == 0) ? "FLOAT_VECTOR_AR_ABS.java" : "FLOAT_VECTOR_AR_REL.java"));
+            URL vectorURL = URLResource.getResource(
+                    "/resources/" + relativePath + ((i == 0) ? "FLOAT_VECTOR_AR_ABS.java" : "FLOAT_VECTOR_AR_REL.java"));
             String vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
 
             for (String type[] : typesAbsRel)
@@ -566,7 +594,7 @@ public class GenerateDJUNIT
     private static void generateFloatVectorRel() throws IOException, URISyntaxException
     {
         String relativePath = "value/vfloat/vector/";
-        URL vectorURL = URLResource.getResource("/" + relativePath + "FLOAT_VECTOR_REL.java");
+        URL vectorURL = URLResource.getResource("/resources/" + relativePath + "FLOAT_VECTOR_REL.java");
         String vectorJava = new String(Files.readAllBytes(Paths.get(vectorURL.toURI())));
 
         for (String type : typesRel)
@@ -583,7 +611,7 @@ public class GenerateDJUNIT
             {
                 java = java.replace("%DIMLESS%",
                         " implements DimensionlessFunctions<DimensionlessUnit, FloatDimensionlessVector>");
-                URL dimlessURL = URLResource.getResource("/" + relativePath + "DimlessFunctions.java");
+                URL dimlessURL = URLResource.getResource("/resources/" + relativePath + "DimlessFunctions.java");
                 String dimlessFunctions = new String(Files.readAllBytes(Paths.get(dimlessURL.toURI())));
                 int pos = java.indexOf("%FORMULAS%");
                 java = java.substring(0, pos - 1) + dimlessFunctions + java.substring(pos, java.length() - 1);
@@ -608,7 +636,7 @@ public class GenerateDJUNIT
      * @param prefix String; e.g., Float for Float types, or blank for Double types
      * @return the file with replacements
      */
-    private static String formulasMatrix(String java, String errorType, String prefix)
+    private static String formulasMatrix(final String java, final String errorType, final String prefix)
     {
         String ret = java;
         while (ret.contains("%FORMULAS%"))
@@ -647,8 +675,8 @@ public class GenerateDJUNIT
         for (int i = 0; i <= 1; i++)
         {
             String relativePath = "value/vdouble/matrix/";
-            URL matrixURL = URLResource
-                    .getResource("/" + relativePath + ((i == 0) ? "DOUBLE_MATRIX_AR_ABS.java" : "DOUBLE_MATRIX_AR_REL.java"));
+            URL matrixURL = URLResource.getResource(
+                    "/resources/" + relativePath + ((i == 0) ? "DOUBLE_MATRIX_AR_ABS.java" : "DOUBLE_MATRIX_AR_REL.java"));
             String matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
 
             for (String[] type : typesAbsRel)
@@ -675,7 +703,7 @@ public class GenerateDJUNIT
     private static void generateDoubleMatrixRel() throws IOException, URISyntaxException
     {
         String relativePath = "value/vdouble/matrix/";
-        URL matrixURL = URLResource.getResource("/" + relativePath + "DOUBLE_MATRIX_REL.java");
+        URL matrixURL = URLResource.getResource("/resources/" + relativePath + "DOUBLE_MATRIX_REL.java");
         String matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
 
         for (String type : typesRel)
@@ -690,7 +718,7 @@ public class GenerateDJUNIT
             if (java.contains("class DimensionlessMatrix"))
             {
                 java = java.replace("%DIMLESS%", " implements DimensionlessFunctions<DimensionlessUnit, DimensionlessMatrix>");
-                URL dimlessURL = URLResource.getResource("/" + relativePath + "DimlessFunctions.java");
+                URL dimlessURL = URLResource.getResource("/resources/" + relativePath + "DimlessFunctions.java");
                 String dimlessFunctions = new String(Files.readAllBytes(Paths.get(dimlessURL.toURI())));
                 int pos = java.indexOf("%FORMULAS%");
                 java = java.substring(0, pos - 1) + dimlessFunctions + java.substring(pos, java.length() - 1);
@@ -718,8 +746,8 @@ public class GenerateDJUNIT
         for (int i = 0; i <= 1; i++)
         {
             String relativePath = "value/vfloat/matrix/";
-            URL matrixURL = URLResource
-                    .getResource("/" + relativePath + ((i == 0) ? "FLOAT_MATRIX_AR_ABS.java" : "FLOAT_MATRIX_AR_REL.java"));
+            URL matrixURL = URLResource.getResource(
+                    "/resources/" + relativePath + ((i == 0) ? "FLOAT_MATRIX_AR_ABS.java" : "FLOAT_MATRIX_AR_REL.java"));
             String matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
 
             for (String type[] : typesAbsRel)
@@ -747,7 +775,7 @@ public class GenerateDJUNIT
     private static void generateFloatMatrixRel() throws IOException, URISyntaxException
     {
         String relativePath = "value/vfloat/matrix/";
-        URL matrixURL = URLResource.getResource("/" + relativePath + "FLOAT_MATRIX_REL.java");
+        URL matrixURL = URLResource.getResource("/resources/" + relativePath + "FLOAT_MATRIX_REL.java");
         String matrixJava = new String(Files.readAllBytes(Paths.get(matrixURL.toURI())));
 
         for (String type : typesRel)
@@ -764,7 +792,7 @@ public class GenerateDJUNIT
             {
                 java = java.replace("%DIMLESS%",
                         " implements DimensionlessFunctions<DimensionlessUnit, FloatDimensionlessMatrix>");
-                URL dimlessURL = URLResource.getResource("/" + relativePath + "DimlessFunctions.java");
+                URL dimlessURL = URLResource.getResource("/resources/" + relativePath + "DimlessFunctions.java");
                 String dimlessFunctions = new String(Files.readAllBytes(Paths.get(dimlessURL.toURI())));
                 int pos = java.indexOf("%FORMULAS%");
                 java = java.substring(0, pos - 1) + dimlessFunctions + java.substring(pos, java.length() - 1);
@@ -790,12 +818,12 @@ public class GenerateDJUNIT
     private static void generateSIScalar() throws IOException, URISyntaxException
     {
         String relativePath = "value/vdouble/scalar/";
-        URL siScalarURL = URLResource.getResource("/" + relativePath + "SISCALAR.java");
+        URL siScalarURL = URLResource.getResource("/resources/" + relativePath + "SISCALAR.java");
         String siJava = new String(Files.readAllBytes(Paths.get(siScalarURL.toURI())));
         siJava = siJava.replace("@Generated(value = \"GenerateDJUNIT\")",
                 "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + generationTime + "\")");
-        String asJava = new String(
-                Files.readAllBytes(Paths.get(URLResource.getResource("/" + relativePath + "SISCALAR_AS.java").toURI())));
+        String asJava = new String(Files
+                .readAllBytes(Paths.get(URLResource.getResource("/resources/" + relativePath + "SISCALAR_AS.java").toURI())));
 
         List<String> allRelTypes = new ArrayList<>(typesRel);
         for (String[] arType : typesAbsRel)
@@ -827,12 +855,12 @@ public class GenerateDJUNIT
     private static void generateFloatSIScalar() throws IOException, URISyntaxException
     {
         String relativePath = "value/vfloat/scalar/";
-        URL siScalarURL = URLResource.getResource("/" + relativePath + "FLOATSISCALAR.java");
+        URL siScalarURL = URLResource.getResource("/resources/" + relativePath + "FLOATSISCALAR.java");
         String siJava = new String(Files.readAllBytes(Paths.get(siScalarURL.toURI())));
         siJava = siJava.replace("@Generated(value = \"GenerateDJUNIT\")",
                 "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + generationTime + "\")");
-        String asJava = new String(
-                Files.readAllBytes(Paths.get(URLResource.getResource("/" + relativePath + "FLOATSISCALAR_AS.java").toURI())));
+        String asJava = new String(Files.readAllBytes(
+                Paths.get(URLResource.getResource("/resources/" + relativePath + "FLOATSISCALAR_AS.java").toURI())));
 
         List<String> allRelTypes = new ArrayList<>(typesRel);
         for (String[] arType : typesAbsRel)
@@ -868,12 +896,12 @@ public class GenerateDJUNIT
     private static void generateSIVector() throws IOException, URISyntaxException
     {
         String relativePath = "value/vdouble/vector/";
-        URL siVectorURL = URLResource.getResource("/" + relativePath + "SIVECTOR.java");
+        URL siVectorURL = URLResource.getResource("/resources/" + relativePath + "SIVECTOR.java");
         String siJava = new String(Files.readAllBytes(Paths.get(siVectorURL.toURI())));
         siJava = siJava.replace("@Generated(value = \"GenerateDJUNIT\")",
                 "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + generationTime + "\")");
-        String asJava = new String(
-                Files.readAllBytes(Paths.get(URLResource.getResource("/" + relativePath + "SIVECTOR_AS.java").toURI())));
+        String asJava = new String(Files
+                .readAllBytes(Paths.get(URLResource.getResource("/resources/" + relativePath + "SIVECTOR_AS.java").toURI())));
 
         List<String> allRelTypes = new ArrayList<>(typesRel);
         for (String[] arType : typesAbsRel)
@@ -905,12 +933,12 @@ public class GenerateDJUNIT
     private static void generateFloatSIVector() throws IOException, URISyntaxException
     {
         String relativePath = "value/vfloat/vector/";
-        URL siVectorURL = URLResource.getResource("/" + relativePath + "FLOATSIVECTOR.java");
+        URL siVectorURL = URLResource.getResource("/resources/" + relativePath + "FLOATSIVECTOR.java");
         String siJava = new String(Files.readAllBytes(Paths.get(siVectorURL.toURI())));
         siJava = siJava.replace("@Generated(value = \"GenerateDJUNIT\")",
                 "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + generationTime + "\")");
-        String asJava = new String(
-                Files.readAllBytes(Paths.get(URLResource.getResource("/" + relativePath + "FLOATSIVECTOR_AS.java").toURI())));
+        String asJava = new String(Files.readAllBytes(
+                Paths.get(URLResource.getResource("/resources/" + relativePath + "FLOATSIVECTOR_AS.java").toURI())));
 
         List<String> allRelTypes = new ArrayList<>(typesRel);
         for (String[] arType : typesAbsRel)
@@ -946,12 +974,12 @@ public class GenerateDJUNIT
     private static void generateSIMatrix() throws IOException, URISyntaxException
     {
         String relativePath = "value/vdouble/matrix/";
-        URL siMatrixURL = URLResource.getResource("/" + relativePath + "SIMATRIX.java");
+        URL siMatrixURL = URLResource.getResource("/resources/" + relativePath + "SIMATRIX.java");
         String siJava = new String(Files.readAllBytes(Paths.get(siMatrixURL.toURI())));
         siJava = siJava.replace("@Generated(value = \"GenerateDJUNIT\")",
                 "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + generationTime + "\")");
-        String asJava = new String(
-                Files.readAllBytes(Paths.get(URLResource.getResource("/" + relativePath + "SIMATRIX_AS.java").toURI())));
+        String asJava = new String(Files
+                .readAllBytes(Paths.get(URLResource.getResource("/resources/" + relativePath + "SIMATRIX_AS.java").toURI())));
 
         List<String> allRelTypes = new ArrayList<>(typesRel);
         for (String[] arType : typesAbsRel)
@@ -983,12 +1011,12 @@ public class GenerateDJUNIT
     private static void generateFloatSIMatrix() throws IOException, URISyntaxException
     {
         String relativePath = "value/vfloat/matrix/";
-        URL siMatrixURL = URLResource.getResource("/" + relativePath + "FLOATSIMATRIX.java");
+        URL siMatrixURL = URLResource.getResource("/resources/" + relativePath + "FLOATSIMATRIX.java");
         String siJava = new String(Files.readAllBytes(Paths.get(siMatrixURL.toURI())));
         siJava = siJava.replace("@Generated(value = \"GenerateDJUNIT\")",
                 "@Generated(value = \"" + GenerateDJUNIT.class.getName() + "\", date = \"" + generationTime + "\")");
-        String asJava = new String(
-                Files.readAllBytes(Paths.get(URLResource.getResource("/" + relativePath + "FLOATSIMATRIX_AS.java").toURI())));
+        String asJava = new String(Files.readAllBytes(
+                Paths.get(URLResource.getResource("/resources/" + relativePath + "FLOATSIMATRIX_AS.java").toURI())));
 
         List<String> allRelTypes = new ArrayList<>(typesRel);
         for (String[] arType : typesAbsRel)
@@ -1059,14 +1087,14 @@ public class GenerateDJUNIT
     }
 
     /**
-     * By default File#delete fails for non-empty directories, it works like "rm". We need something a little more brutal -
-     * this does the equivalent of "rm -r". From: http://stackoverflow.com/questions/779519/delete-files-recursively-in-java.
-     * Note: USE CAREFULLY.
+     * By default File#delete fails for non-empty directories, it works like "rm". We need something a little more brutal - this
+     * does the equivalent of "rm -r". From: http://stackoverflow.com/questions/779519/delete-files-recursively-in-java. Note:
+     * USE CAREFULLY.
      * @param path File; Root File Path
      * @return true iff the file and all sub files/directories have been removed
      * @throws FileNotFoundException on error (e.g., locked file)
      */
-    public static boolean deleteRecursive(File path) throws FileNotFoundException
+    public static boolean deleteRecursive(final File path) throws FileNotFoundException
     {
         if (!path.exists())
         {
@@ -1088,7 +1116,7 @@ public class GenerateDJUNIT
      * @throws IOException on I/O error
      * @throws URISyntaxException when file could not be found on the file system
      */
-    public static void main(String[] args) throws IOException, URISyntaxException
+    public static void main(final String[] args) throws IOException, URISyntaxException
     {
         generationTime = Instant.now().toString();
 

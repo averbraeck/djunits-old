@@ -1,6 +1,17 @@
 <document xmlns="http://maven.apache.org/changes/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <body>
 
+    <release version="4.01.09" date="2022-03-14" description="reciprocal() function more specific">
+      <action dev="averbraeck" type="update">
+        The reciprocal() function was not specific for quantities that have a reciprocal within djunits, such as the 
+        Duration (Frequency) and the Length (LinearDensity). The reciprocal() function has been made more specific,
+        and returns an SIScalar when there is no known reciprocal quantity. 
+      </action>
+      <action dev="pknoppers" type="add">
+        Added toStringSIPrefixed method to display quantities with the nearest SI unit (e.g., 6 km instead of 6000 m).
+      </action>
+    </release>
+
     <release version="4.01.08" date="2022-02-08" description="Resources stored in subfolder resources">
       <action dev="averbraeck" type="update">
         When using DJUNITS in Eclipse, the resources from src/main/resources are placed in /target/classes.

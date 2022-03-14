@@ -81,15 +81,15 @@ public final class ExamplesInPackageDescription
         System.out.println(fl1.equals(fl6));
         System.out.println(fl1.equals(fl7));
 
-        AbsoluteTemperatureVector tv1 = DoubleVector.instantiate(new double[] { 273.15, 290.4, 280.5, 279.1 },
+        AbsoluteTemperatureVector tv1 = DoubleVector.instantiate(new double[] {273.15, 290.4, 280.5, 279.1},
                 AbsoluteTemperatureUnit.KELVIN, StorageType.DENSE);
         System.out.println(tv1);
         // AbsoluteTemperatureVector tv2 = SIVector.instantiate(new double[] { 273.15, 290.4, 280.5, 279.1 },
         // SIUnit.of("K"), StorageType.DENSE).asAbsoluteTemperature());
         // System.out.println(tv2);
-        
+
         System.out.println();
-        float[] values = new float[] { 10.0f, 0.0f, 10.0f, 0.0f, 0.0f, 20.0f, 0.0f };
+        float[] values = new float[] {10.0f, 0.0f, 10.0f, 0.0f, 0.0f, 20.0f, 0.0f};
         FloatAreaVector fv = FloatVector.instantiate(values, AreaUnit.SQUARE_KILOMETER, StorageType.SPARSE);
         FloatAreaVector fv2 = fv.mutable().neg();
         System.out.println(fv);

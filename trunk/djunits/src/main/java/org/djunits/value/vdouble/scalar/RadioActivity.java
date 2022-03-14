@@ -9,6 +9,7 @@ import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.RadioActivityUnit;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 
 /**
  * Easy access methods for the RadioActivity DoubleScalar, which is relative by definition.
@@ -19,7 +20,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, RadioActivity>
 {
     /** */
@@ -209,12 +210,19 @@ public class RadioActivity extends AbstractDoubleScalarRel<RadioActivityUnit, Ra
 
     /**
      * Calculate the division of RadioActivity and RadioActivity, which results in a Dimensionless scalar.
- * @param v RadioActivity; RadioActivity scalar
-     * @return Dimensionless scalar as a division of RadioActivity and RadioActivity
+     * @param v RadioActivity; scalar
+     * @return Dimensionless; scalar as a division of RadioActivity and RadioActivity
      */
     public final Dimensionless divide(final RadioActivity v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SIScalar reciprocal()
+    {
+        return DoubleScalar.divide(Dimensionless.ONE, this);
     }
 
 }

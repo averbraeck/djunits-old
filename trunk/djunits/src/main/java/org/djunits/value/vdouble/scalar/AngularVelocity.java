@@ -13,6 +13,7 @@ import org.djunits.unit.DurationUnit;
 import org.djunits.unit.FrequencyUnit;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 
 /**
  * Easy access methods for the AngularVelocity DoubleScalar, which is relative by definition.
@@ -23,7 +24,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class AngularVelocity extends AbstractDoubleScalarRel<AngularVelocityUnit, AngularVelocity>
 {
     /** */
@@ -215,8 +216,8 @@ public class AngularVelocity extends AbstractDoubleScalarRel<AngularVelocityUnit
 
     /**
      * Calculate the division of AngularVelocity and AngularVelocity, which results in a Dimensionless scalar.
- * @param v AngularVelocity; AngularVelocity scalar
-     * @return Dimensionless scalar as a division of AngularVelocity and AngularVelocity
+     * @param v AngularVelocity; scalar
+     * @return Dimensionless; scalar as a division of AngularVelocity and AngularVelocity
      */
     public final Dimensionless divide(final AngularVelocity v)
     {
@@ -225,8 +226,8 @@ public class AngularVelocity extends AbstractDoubleScalarRel<AngularVelocityUnit
 
     /**
      * Calculate the division of AngularVelocity and Angle, which results in a Frequency scalar.
- * @param v Angle; AngularVelocity scalar
-     * @return Frequency scalar as a division of AngularVelocity and Angle
+     * @param v AngularVelocity; scalar
+     * @return Frequency; scalar as a division of AngularVelocity and Angle
      */
     public final Frequency divide(final Angle v)
     {
@@ -235,8 +236,8 @@ public class AngularVelocity extends AbstractDoubleScalarRel<AngularVelocityUnit
 
     /**
      * Calculate the division of AngularVelocity and Frequency, which results in a Angle scalar.
- * @param v Frequency; AngularVelocity scalar
-     * @return Angle scalar as a division of AngularVelocity and Frequency
+     * @param v AngularVelocity; scalar
+     * @return Angle; scalar as a division of AngularVelocity and Frequency
      */
     public final Angle divide(final Frequency v)
     {
@@ -245,8 +246,8 @@ public class AngularVelocity extends AbstractDoubleScalarRel<AngularVelocityUnit
 
     /**
      * Calculate the multiplication of AngularVelocity and Duration, which results in a Angle scalar.
- * @param v Duration; AngularVelocity scalar
-     * @return Angle scalar as a multiplication of AngularVelocity and Duration
+     * @param v AngularVelocity; scalar
+     * @return Angle; scalar as a multiplication of AngularVelocity and Duration
      */
     public final Angle times(final Duration v)
     {
@@ -255,8 +256,8 @@ public class AngularVelocity extends AbstractDoubleScalarRel<AngularVelocityUnit
 
     /**
      * Calculate the division of AngularVelocity and Duration, which results in a AngularAcceleration scalar.
- * @param v Duration; AngularVelocity scalar
-     * @return AngularAcceleration scalar as a division of AngularVelocity and Duration
+     * @param v AngularVelocity; scalar
+     * @return AngularAcceleration; scalar as a division of AngularVelocity and Duration
      */
     public final AngularAcceleration divide(final Duration v)
     {
@@ -265,8 +266,8 @@ public class AngularVelocity extends AbstractDoubleScalarRel<AngularVelocityUnit
 
     /**
      * Calculate the division of AngularVelocity and AngularAcceleration, which results in a Duration scalar.
- * @param v AngularAcceleration; AngularVelocity scalar
-     * @return Duration scalar as a division of AngularVelocity and AngularAcceleration
+     * @param v AngularVelocity; scalar
+     * @return Duration; scalar as a division of AngularVelocity and AngularAcceleration
      */
     public final Duration divide(final AngularAcceleration v)
     {
@@ -275,12 +276,19 @@ public class AngularVelocity extends AbstractDoubleScalarRel<AngularVelocityUnit
 
     /**
      * Calculate the multiplication of AngularVelocity and Frequency, which results in a AngularAcceleration scalar.
- * @param v Frequency; AngularVelocity scalar
-     * @return AngularAcceleration scalar as a multiplication of AngularVelocity and Frequency
+     * @param v AngularVelocity; scalar
+     * @return AngularAcceleration; scalar as a multiplication of AngularVelocity and Frequency
      */
     public final AngularAcceleration times(final Frequency v)
     {
         return new AngularAcceleration(this.si * v.si, AngularAccelerationUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SIScalar reciprocal()
+    {
+        return DoubleScalar.divide(Dimensionless.ONE, this);
     }
 
 }

@@ -11,6 +11,7 @@ import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.FrequencyUnit;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 
 /**
  * Easy access methods for the AngularAcceleration DoubleScalar, which is relative by definition.
@@ -21,7 +22,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class AngularAcceleration extends AbstractDoubleScalarRel<AngularAccelerationUnit, AngularAcceleration>
 {
     /** */
@@ -220,8 +221,8 @@ public class AngularAcceleration extends AbstractDoubleScalarRel<AngularAccelera
 
     /**
      * Calculate the division of AngularAcceleration and AngularAcceleration, which results in a Dimensionless scalar.
- * @param v AngularAcceleration; AngularAcceleration scalar
-     * @return Dimensionless scalar as a division of AngularAcceleration and AngularAcceleration
+     * @param v AngularAcceleration; scalar
+     * @return Dimensionless; scalar as a division of AngularAcceleration and AngularAcceleration
      */
     public final Dimensionless divide(final AngularAcceleration v)
     {
@@ -230,8 +231,8 @@ public class AngularAcceleration extends AbstractDoubleScalarRel<AngularAccelera
 
     /**
      * Calculate the multiplication of AngularAcceleration and Duration, which results in a AngularVelocity scalar.
- * @param v Duration; AngularAcceleration scalar
-     * @return AngularVelocity scalar as a multiplication of AngularAcceleration and Duration
+     * @param v AngularAcceleration; scalar
+     * @return AngularVelocity; scalar as a multiplication of AngularAcceleration and Duration
      */
     public final AngularVelocity times(final Duration v)
     {
@@ -240,8 +241,8 @@ public class AngularAcceleration extends AbstractDoubleScalarRel<AngularAccelera
 
     /**
      * Calculate the division of AngularAcceleration and Frequency, which results in a AngularVelocity scalar.
- * @param v Frequency; AngularAcceleration scalar
-     * @return AngularVelocity scalar as a division of AngularAcceleration and Frequency
+     * @param v AngularAcceleration; scalar
+     * @return AngularVelocity; scalar as a division of AngularAcceleration and Frequency
      */
     public final AngularVelocity divide(final Frequency v)
     {
@@ -250,12 +251,19 @@ public class AngularAcceleration extends AbstractDoubleScalarRel<AngularAccelera
 
     /**
      * Calculate the division of AngularAcceleration and AngularVelocity, which results in a Frequency scalar.
- * @param v AngularVelocity; AngularAcceleration scalar
-     * @return Frequency scalar as a division of AngularAcceleration and AngularVelocity
+     * @param v AngularAcceleration; scalar
+     * @return Frequency; scalar as a division of AngularAcceleration and AngularVelocity
      */
     public final Frequency divide(final AngularVelocity v)
     {
         return new Frequency(this.si / v.si, FrequencyUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SIScalar reciprocal()
+    {
+        return DoubleScalar.divide(Dimensionless.ONE, this);
     }
 
 }

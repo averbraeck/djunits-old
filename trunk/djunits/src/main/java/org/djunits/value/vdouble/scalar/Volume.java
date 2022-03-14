@@ -15,6 +15,7 @@ import org.djunits.unit.MassUnit;
 import org.djunits.unit.VolumeUnit;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 
 /**
  * Easy access methods for the Volume DoubleScalar, which is relative by definition.
@@ -25,7 +26,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 {
     /** */
@@ -214,8 +215,8 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 
     /**
      * Calculate the division of Volume and Volume, which results in a Dimensionless scalar.
- * @param v Volume; Volume scalar
-     * @return Dimensionless scalar as a division of Volume and Volume
+     * @param v Volume; scalar
+     * @return Dimensionless; scalar as a division of Volume and Volume
      */
     public final Dimensionless divide(final Volume v)
     {
@@ -224,8 +225,8 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 
     /**
      * Calculate the multiplication of Volume and Density, which results in a Mass scalar.
- * @param v Density; Volume scalar
-     * @return Mass scalar as a multiplication of Volume and Density
+     * @param v Volume; scalar
+     * @return Mass; scalar as a multiplication of Volume and Density
      */
     public final Mass times(final Density v)
     {
@@ -234,8 +235,8 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 
     /**
      * Calculate the multiplication of Volume and Pressure, which results in a Energy scalar.
- * @param v Pressure; Volume scalar
-     * @return Energy scalar as a multiplication of Volume and Pressure
+     * @param v Volume; scalar
+     * @return Energy; scalar as a multiplication of Volume and Pressure
      */
     public final Energy times(final Pressure v)
     {
@@ -244,8 +245,8 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 
     /**
      * Calculate the division of Volume and Length, which results in a Area scalar.
- * @param v Length; Volume scalar
-     * @return Area scalar as a division of Volume and Length
+     * @param v Volume; scalar
+     * @return Area; scalar as a division of Volume and Length
      */
     public final Area divide(final Length v)
     {
@@ -254,8 +255,8 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 
     /**
      * Calculate the division of Volume and Area, which results in a Length scalar.
- * @param v Area; Volume scalar
-     * @return Length scalar as a division of Volume and Area
+     * @param v Volume; scalar
+     * @return Length; scalar as a division of Volume and Area
      */
     public final Length divide(final Area v)
     {
@@ -264,8 +265,8 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 
     /**
      * Calculate the multiplication of Volume and LinearDensity, which results in a Area scalar.
- * @param v LinearDensity; Volume scalar
-     * @return Area scalar as a multiplication of Volume and LinearDensity
+     * @param v Volume; scalar
+     * @return Area; scalar as a multiplication of Volume and LinearDensity
      */
     public final Area times(final LinearDensity v)
     {
@@ -274,8 +275,8 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 
     /**
      * Calculate the division of Volume and Duration, which results in a FlowVolume scalar.
- * @param v Duration; Volume scalar
-     * @return FlowVolume scalar as a division of Volume and Duration
+     * @param v Volume; scalar
+     * @return FlowVolume; scalar as a division of Volume and Duration
      */
     public final FlowVolume divide(final Duration v)
     {
@@ -284,12 +285,19 @@ public class Volume extends AbstractDoubleScalarRel<VolumeUnit, Volume>
 
     /**
      * Calculate the division of Volume and FlowVolume, which results in a Duration scalar.
- * @param v FlowVolume; Volume scalar
-     * @return Duration scalar as a division of Volume and FlowVolume
+     * @param v Volume; scalar
+     * @return Duration; scalar as a division of Volume and FlowVolume
      */
     public final Duration divide(final FlowVolume v)
     {
         return new Duration(this.si / v.si, DurationUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SIScalar reciprocal()
+    {
+        return DoubleScalar.divide(Dimensionless.ONE, this);
     }
 
 }

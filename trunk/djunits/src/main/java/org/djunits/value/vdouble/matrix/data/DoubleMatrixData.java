@@ -160,7 +160,7 @@ public abstract class DoubleMatrixData extends AbstractStorage<DoubleMatrixData>
         {
             rows = 0;
         }
-        
+
         switch (storageType)
         {
             case DENSE:

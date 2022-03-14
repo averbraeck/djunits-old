@@ -28,7 +28,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRelWithAbs;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Position, LengthUnit, Length>
 {
     /** */
@@ -224,8 +224,8 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the division of Length and Length, which results in a Dimensionless scalar.
- * @param v Length; Length scalar
-     * @return Dimensionless scalar as a division of Length and Length
+     * @param v Length; scalar
+     * @return Dimensionless; scalar as a division of Length and Length
      */
     public final Dimensionless divide(final Length v)
     {
@@ -233,9 +233,19 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
     }
 
     /**
+     * Calculate the multiplication of Length and LinearDensity, which results in a Dimensionless scalar.
+     * @param v Length; scalar
+     * @return Dimensionless; scalar as a multiplication of Length and LinearDensity
+     */
+    public final Dimensionless times(final LinearDensity v)
+    {
+        return new Dimensionless(this.si * v.si, DimensionlessUnit.SI);
+    }
+
+    /**
      * Calculate the multiplication of Length and Length, which results in a Area scalar.
- * @param v Length; Length scalar
-     * @return Area scalar as a multiplication of Length and Length
+     * @param v Length; scalar
+     * @return Area; scalar as a multiplication of Length and Length
      */
     public final Area times(final Length v)
     {
@@ -244,8 +254,8 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the division of Length and LinearDensity, which results in a Area scalar.
- * @param v LinearDensity; Length scalar
-     * @return Area scalar as a division of Length and LinearDensity
+     * @param v Length; scalar
+     * @return Area; scalar as a division of Length and LinearDensity
      */
     public final Area divide(final LinearDensity v)
     {
@@ -254,8 +264,8 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the division of Length and Area, which results in a LinearDensity scalar.
- * @param v Area; Length scalar
-     * @return LinearDensity scalar as a division of Length and Area
+     * @param v Length; scalar
+     * @return LinearDensity; scalar as a division of Length and Area
      */
     public final LinearDensity divide(final Area v)
     {
@@ -264,8 +274,8 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the multiplication of Length and Area, which results in a Volume scalar.
- * @param v Area; Length scalar
-     * @return Volume scalar as a multiplication of Length and Area
+     * @param v Length; scalar
+     * @return Volume; scalar as a multiplication of Length and Area
      */
     public final Volume times(final Area v)
     {
@@ -274,8 +284,8 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the multiplication of Length and Force, which results in a Energy scalar.
- * @param v Force; Length scalar
-     * @return Energy scalar as a multiplication of Length and Force
+     * @param v Length; scalar
+     * @return Energy; scalar as a multiplication of Length and Force
      */
     public final Energy times(final Force v)
     {
@@ -284,8 +294,8 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the multiplication of Length and Frequency, which results in a Speed scalar.
- * @param v Frequency; Length scalar
-     * @return Speed scalar as a multiplication of Length and Frequency
+     * @param v Length; scalar
+     * @return Speed; scalar as a multiplication of Length and Frequency
      */
     public final Speed times(final Frequency v)
     {
@@ -294,8 +304,8 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the division of Length and Duration, which results in a Speed scalar.
- * @param v Duration; Length scalar
-     * @return Speed scalar as a division of Length and Duration
+     * @param v Length; scalar
+     * @return Speed; scalar as a division of Length and Duration
      */
     public final Speed divide(final Duration v)
     {
@@ -304,8 +314,8 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the division of Length and Speed, which results in a Duration scalar.
- * @param v Speed; Length scalar
-     * @return Duration scalar as a division of Length and Speed
+     * @param v Length; scalar
+     * @return Duration; scalar as a division of Length and Speed
      */
     public final Duration divide(final Speed v)
     {
@@ -314,12 +324,19 @@ public class Length extends AbstractDoubleScalarRelWithAbs<PositionUnit, Positio
 
     /**
      * Calculate the multiplication of Length and FlowMass, which results in a Momentum scalar.
- * @param v FlowMass; Length scalar
-     * @return Momentum scalar as a multiplication of Length and FlowMass
+     * @param v Length; scalar
+     * @return Momentum; scalar as a multiplication of Length and FlowMass
      */
     public final Momentum times(final FlowMass v)
     {
         return new Momentum(this.si * v.si, MomentumUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public LinearDensity reciprocal()
+    {
+        return LinearDensity.instantiateSI(1.0 / this.si);
     }
 
 }

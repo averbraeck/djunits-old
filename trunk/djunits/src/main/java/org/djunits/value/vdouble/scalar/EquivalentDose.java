@@ -9,6 +9,7 @@ import org.djunits.unit.DimensionlessUnit;
 import org.djunits.unit.EquivalentDoseUnit;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 
 /**
  * Easy access methods for the EquivalentDose DoubleScalar, which is relative by definition.
@@ -19,7 +20,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, EquivalentDose>
 {
     /** */
@@ -209,12 +210,19 @@ public class EquivalentDose extends AbstractDoubleScalarRel<EquivalentDoseUnit, 
 
     /**
      * Calculate the division of EquivalentDose and EquivalentDose, which results in a Dimensionless scalar.
- * @param v EquivalentDose; EquivalentDose scalar
-     * @return Dimensionless scalar as a division of EquivalentDose and EquivalentDose
+     * @param v EquivalentDose; scalar
+     * @return Dimensionless; scalar as a division of EquivalentDose and EquivalentDose
      */
     public final Dimensionless divide(final EquivalentDose v)
     {
         return new Dimensionless(this.si / v.si, DimensionlessUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SIScalar reciprocal()
+    {
+        return DoubleScalar.divide(Dimensionless.ONE, this);
     }
 
 }

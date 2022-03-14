@@ -28,7 +28,7 @@ public final class UnitPrefix
     }
 
     /**
- * @param args String[]; not used
+     * @param args String[]; not used
      */
     public static void main(final String[] args)
     {
@@ -42,7 +42,7 @@ public final class UnitPrefix
     }
 
     /**
- * @param unitMap Map&lt;String,? extends Unit&lt;?&gt;&gt;; the map to print
+     * @param unitMap Map&lt;String,? extends Unit&lt;?&gt;&gt;; the map to print
      */
     private static void print(final Map<String, ? extends Unit<?>> unitMap)
     {

@@ -220,6 +220,7 @@ public class Float%Type% extends AbstractFloatScalarRel<%Type%Unit, Float%Type%>
         throw new IllegalArgumentException("Error parsing Float%Type% with unit " + unitString);
     }
 
+##FLOATMASS##
 
 %FORMULAS%%Type%%
 }

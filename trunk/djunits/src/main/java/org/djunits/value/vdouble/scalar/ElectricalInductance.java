@@ -10,6 +10,7 @@ import org.djunits.unit.ElectricalInductanceUnit;
 import org.djunits.unit.MagneticFluxUnit;
 import org.djunits.value.util.ValueUtil;
 import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
+import org.djunits.value.vdouble.scalar.base.DoubleScalar;
 
 /**
  * Easy access methods for the ElectricalInductance DoubleScalar, which is relative by definition.
@@ -20,7 +21,7 @@ import org.djunits.value.vdouble.scalar.base.AbstractDoubleScalarRel;
  * @author <a href="https://www.tudelft.nl/averbraeck">Alexander Verbraeck</a>
  * @author <a href="https://www.tudelft.nl/staff/p.knoppers/">Peter Knoppers</a>
  */
-@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2020-01-19T15:21:24.964166400Z")
+@Generated(value = "org.djunits.generator.GenerateDJUNIT", date = "2022-03-14T11:14:15.180987200Z")
 public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalInductanceUnit, ElectricalInductance>
 {
     /** */
@@ -219,8 +220,8 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
 
     /**
      * Calculate the division of ElectricalInductance and ElectricalInductance, which results in a Dimensionless scalar.
- * @param v ElectricalInductance; ElectricalInductance scalar
-     * @return Dimensionless scalar as a division of ElectricalInductance and ElectricalInductance
+     * @param v ElectricalInductance; scalar
+     * @return Dimensionless; scalar as a division of ElectricalInductance and ElectricalInductance
      */
     public final Dimensionless divide(final ElectricalInductance v)
     {
@@ -229,12 +230,19 @@ public class ElectricalInductance extends AbstractDoubleScalarRel<ElectricalIndu
 
     /**
      * Calculate the multiplication of ElectricalInductance and ElectricalCurrent, which results in a MagneticFlux scalar.
- * @param v ElectricalCurrent; ElectricalInductance scalar
-     * @return MagneticFlux scalar as a multiplication of ElectricalInductance and ElectricalCurrent
+     * @param v ElectricalInductance; scalar
+     * @return MagneticFlux; scalar as a multiplication of ElectricalInductance and ElectricalCurrent
      */
     public final MagneticFlux times(final ElectricalCurrent v)
     {
         return new MagneticFlux(this.si * v.si, MagneticFluxUnit.SI);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public SIScalar reciprocal()
+    {
+        return DoubleScalar.divide(Dimensionless.ONE, this);
     }
 
 }
